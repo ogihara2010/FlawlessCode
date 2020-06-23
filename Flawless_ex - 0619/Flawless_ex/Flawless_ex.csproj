@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0D0AB02A-D83C-49DA-9833-A42FB8430CEB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Flawless_ex</RootNamespace>
+    <AssemblyName>Flawless_ex</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.1.3.1, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.1.3.1\lib\net461\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddMainCategoryMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddMainCategoryMenu.Designer.cs">
+      <DependentUpon>AddMainCategoryMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddSubCategoryMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddSubCategoryMenu.Designer.cs">
+      <DependentUpon>AddSubCategoryMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Client_search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Client_search.Designer.cs">
+      <DependentUpon>Client_search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerHistory.Designer.cs">
+      <DependentUpon>CustomerHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataSearchResults.Designer.cs">
+      <DependentUpon>DataSearchResults.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoice.Designer.cs">
+      <DependentUpon>Invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MonResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MonResult.Designer.cs">
+      <DependentUpon>MonResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainCategoryMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainCategoryMaster.Designer.cs">
+      <DependentUpon>MainCategoryMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MasterMaintenanceMenu_BC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterMaintenanceMenu_BC.Designer.cs">
+      <DependentUpon>MasterMaintenanceMenu_BC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MonResultInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MonResultInput.Designer.cs">
+      <DependentUpon>MonResultInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NextMonth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NextMonth.Designer.cs">
+      <DependentUpon>NextMonth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operatelog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operatelog.Designer.cs">
+      <DependentUpon>Operatelog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StaffUpdateMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffUpdateMenu.Designer.cs">
+      <DependentUpon>StaffUpdateMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MasterMaintenanceMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterMaintenanceMenu.Designer.cs">
+      <DependentUpon>MasterMaintenanceMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StaffMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffMaster.Designer.cs">
+      <DependentUpon>StaffMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductAddMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductAddMenu.Designer.cs">
+      <DependentUpon>ProductAddMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductChangeDeleteMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductChangeDeleteMenu.Designer.cs">
+      <DependentUpon>ProductChangeDeleteMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemMaster.Designer.cs">
+      <DependentUpon>ItemMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StaffAddStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffAddStaff.Designer.cs">
+      <DependentUpon>StaffAddStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Statement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Statement.Designer.cs">
+      <DependentUpon>Statement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubCategoryMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubCategoryMaster.Designer.cs">
+      <DependentUpon>SubCategoryMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TaxMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaxMaster.Designer.cs">
+      <DependentUpon>TaxMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopMenu.Designer.cs">
+      <DependentUpon>TopMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UpdateMainCategoryMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateMainCategoryMenu.Designer.cs">
+      <DependentUpon>UpdateMainCategoryMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateSubCategoryMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateSubCategoryMenu.Designer.cs">
+      <DependentUpon>UpdateSubCategoryMenu.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AddMainCategoryMenu.resx">
+      <DependentUpon>AddMainCategoryMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddSubCategoryMenu.resx">
+      <DependentUpon>AddSubCategoryMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Client_search.resx">
+      <DependentUpon>Client_search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerHistory.resx">
+      <DependentUpon>CustomerHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataSearchResults.resx">
+      <DependentUpon>DataSearchResults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoice.resx">
+      <DependentUpon>Invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonResult.resx">
+      <DependentUpon>MonResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainCategoryMaster.resx">
+      <DependentUpon>MainCategoryMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterMaintenanceMenu_BC.resx">
+      <DependentUpon>MasterMaintenanceMenu_BC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonResultInput.resx">
+      <DependentUpon>MonResultInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NextMonth.resx">
+      <DependentUpon>NextMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operatelog.resx">
+      <DependentUpon>Operatelog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffUpdateMenu.resx">
+      <DependentUpon>StaffUpdateMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterMaintenanceMenu.resx">
+      <DependentUpon>MasterMaintenanceMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffMaster.resx">
+      <DependentUpon>StaffMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductAddMenu.resx">
+      <DependentUpon>ProductAddMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductChangeDeleteMenu.resx">
+      <DependentUpon>ProductChangeDeleteMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemMaster.resx">
+      <DependentUpon>ItemMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffAddStaff.resx">
+      <DependentUpon>StaffAddStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Statement.resx">
+      <DependentUpon>Statement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubCategoryMaster.resx">
+      <DependentUpon>SubCategoryMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaxMaster.resx">
+      <DependentUpon>TaxMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopMenu.resx">
+      <DependentUpon>TopMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UpdateMainCategoryMenu.resx">
+      <DependentUpon>UpdateMainCategoryMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateSubCategoryMenu.resx">
+      <DependentUpon>UpdateSubCategoryMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
