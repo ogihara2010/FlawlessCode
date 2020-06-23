@@ -274,7 +274,7 @@
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(96, 34);
             this.removeButton.TabIndex = 12;
-            this.removeButton.Text = "削除";
+            this.removeButton.Text = "無効";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
@@ -289,7 +289,7 @@
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
-            // UpdateMenu
+            // StaffUpdateMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -298,7 +298,7 @@
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.groupBox1);
-            this.Name = "UpdateMenu";
+            this.Name = "StaffUpdateMenu";
             this.Text = "担当者マスタメンテナンス　更新";
             this.Load += new System.EventHandler(this.UpdateMenu_Load);
             this.groupBox1.ResumeLayout(false);

@@ -14,12 +14,13 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu masterMenu;
         DataTable dt = new DataTable();
-
-        public StaffMaster(MasterMaintenanceMenu mster)
+        int staff_code;
+        public StaffMaster(MasterMaintenanceMenu mster, int staff_code)
         {
             InitializeComponent();
 
             masterMenu = mster;
+            this.staff_code = staff_code;
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
@@ -67,7 +68,7 @@ namespace Flawless_ex
 
         private void addButtonClick(object sender, EventArgs e)//登録画面に遷移
         {
-            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu);
+            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu,staff_code);
             this.Close();
             addStaff.Show();
         }

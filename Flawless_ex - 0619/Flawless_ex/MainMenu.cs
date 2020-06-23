@@ -53,21 +53,12 @@ namespace Flawless_ex
 
         private void MasterMainte_Click(object sender, EventArgs e)//権限によって
         {
-            if(access_auth == "A")
-            {
-                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this);
+           
+           
+                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this,staff_id);
 
                 this.Hide();
                 masterMenu.Show();
-            }
-            else
-            {
-                MasterMaintenanceMenu_BC masterMenuBC = new MasterMaintenanceMenu_BC(this);
-
-                this.Hide();
-                masterMenuBC.Show();
-            }
-
             
         }
 

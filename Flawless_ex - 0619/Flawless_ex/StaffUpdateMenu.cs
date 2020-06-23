@@ -35,7 +35,7 @@ namespace Flawless_ex
 
         private void ReturnButton(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(master);
+            StaffMaster personMaster = new StaffMaster(master, staffCode);
 
             this.Close();
             personMaster.Show();
@@ -74,7 +74,7 @@ namespace Flawless_ex
             
             conn.Close();
 
-            StaffMaster staffMaster = new StaffMaster(master);
+            StaffMaster staffMaster = new StaffMaster(master,staffCode);
             this.Close();
             staffMaster.Show();
         }
@@ -124,7 +124,7 @@ namespace Flawless_ex
             }
 
 
-            StaffMaster staffMaster = new StaffMaster(master);
+            StaffMaster staffMaster = new StaffMaster(master,staffCode);
 
             this.Close();
             staffMaster.Show();
