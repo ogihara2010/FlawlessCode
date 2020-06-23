@@ -37,6 +37,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.mainCategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.parsonCodeText = new System.Windows.Forms.TextBox();
             this.accessButton = new System.Windows.Forms.ComboBox();
             this.passwordReText = new System.Windows.Forms.TextBox();
@@ -50,9 +53,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.parsonNameText = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.mainCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -169,11 +169,38 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
+            // mainCategoryComboBox
+            // 
+            this.mainCategoryComboBox.FormattingEnabled = true;
+            this.mainCategoryComboBox.Location = new System.Drawing.Point(299, 147);
+            this.mainCategoryComboBox.Name = "mainCategoryComboBox";
+            this.mainCategoryComboBox.Size = new System.Drawing.Size(161, 32);
+            this.mainCategoryComboBox.TabIndex = 25;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(259, 147);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(22, 24);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 147);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(236, 24);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "大分類(初期値の設定)";
+            // 
             // parsonCodeText
             // 
             this.parsonCodeText.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.parsonCodeText.Location = new System.Drawing.Point(299, 30);
             this.parsonCodeText.Name = "parsonCodeText";
+            this.parsonCodeText.ReadOnly = true;
             this.parsonCodeText.Size = new System.Drawing.Size(161, 31);
             this.parsonCodeText.TabIndex = 10;
             // 
@@ -288,32 +315,6 @@
             this.label13.Size = new System.Drawing.Size(168, 24);
             this.label13.TabIndex = 2;
             this.label13.Text = "　担当者コード　";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 147);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(236, 24);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "大分類(初期値の設定)";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(259, 147);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(22, 24);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "：";
-            // 
-            // mainCategoryComboBox
-            // 
-            this.mainCategoryComboBox.FormattingEnabled = true;
-            this.mainCategoryComboBox.Location = new System.Drawing.Point(299, 147);
-            this.mainCategoryComboBox.Name = "mainCategoryComboBox";
-            this.mainCategoryComboBox.Size = new System.Drawing.Size(161, 32);
-            this.mainCategoryComboBox.TabIndex = 25;
             // 
             // StaffAddStaff
             // 

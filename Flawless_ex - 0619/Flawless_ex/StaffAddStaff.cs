@@ -53,7 +53,7 @@ namespace Flawless_ex
                 DateTime dat = DateTime.Now;
                 string d = dat.ToString();
 
-                string sql_str = "insert into staff_m values(" + staffCode + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "," +  d + "," + 0 + "')";
+                string sql_str = "insert into staff_m values(" + staffCode + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "','" +  d + "'," + 0 + ")";
                 
 
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -90,11 +90,24 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt2);
 
+            //担当者コード取得
+            string staffCode_sql = "select staff_code from staff_m order by staff_code desc";
+            DataTable staffCode = new DataTable();
+            adapter = new NpgsqlDataAdapter(staffCode_sql, conn);
+            adapter.Fill(staffCode);
+
             conn.Close();
 
             mainCategoryComboBox.DataSource = dt2;
             mainCategoryComboBox.DisplayMember = "main_category_name";
             mainCategoryComboBox.ValueMember = "main_category_code";
+
+            //担当者コード最大値取得＆新規番号作成
+            DataRow row;
+            row = staffCode.Rows[0];
+            int code = (int)row["staff_code"]; 
+            code++; 
+            parsonCodeText.Text = code.ToString();
         }
     }
 }
