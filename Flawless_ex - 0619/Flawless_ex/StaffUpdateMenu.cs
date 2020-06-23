@@ -83,12 +83,14 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             NpgsqlCommandBuilder builder;
             DataTable dt = new DataTable();
-            string name; //担当者名
+            string name; //担当者名　履歴
+            string pass;//パスワード　履歴
 
             name = staffName;
             staffName = this.parsonNameText.Text;//担当者名
             staffNameKana = this.parsonNamt2Text.Text;//担当者名カナ
             main_category = (int)this.mainCategoryComboBox.SelectedValue;//大分類初期値
+            pass = password;
             password = this.passwordText.Text;//パスワード
             rePassword = this.passwordReText.Text;//パスワード再入力
             access_auth = this.accessButton.Text;//アクセス権限
@@ -123,6 +125,12 @@ namespace Flawless_ex
             {
                 string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + staffName + "', '" + staffNameKana + "'," + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_staffNameRevisions, conn);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+            }
+            else if(this.passwordText.Text != pass)
+            {
+                string sql_passwordRevisions = "insert into staff_password_revisions values('" + dateTime + "', " + staffCode + ", '" + password + "', '" + code + "')";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql_passwordRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
             else { }
