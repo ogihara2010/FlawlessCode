@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class AddSubCategoryMenu : Form//小分類マスタメンテナンス　新規登録
@@ -80,7 +74,7 @@ namespace Flawless_ex
                 this.Close();
                 subCategory.Show();
 
-                
+
             }
             else { }
         }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace Flawless_ex
 {
@@ -42,7 +36,7 @@ namespace Flawless_ex
 
         private void addButton(object sender, EventArgs e)
         {
-            AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt,master);
+            AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt, master);
             this.Close();
             addMainCategory.Show();
         }

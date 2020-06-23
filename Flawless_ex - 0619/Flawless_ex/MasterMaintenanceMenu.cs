@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -36,10 +29,10 @@ namespace Flawless_ex
 
 
 
-        
+
         private void staffMasterButtonClick(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(this,staff_code);
+            StaffMaster personMaster = new StaffMaster(this, staff_code);
             this.Hide();
             personMaster.Show();
         }

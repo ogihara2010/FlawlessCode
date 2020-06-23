@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace Flawless_ex
 {
@@ -39,7 +33,7 @@ namespace Flawless_ex
             string sql_str = "select* from staff_m where staff_code = " + id + " and password = '" + password + "' ";
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
-            
+
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
