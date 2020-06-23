@@ -52,7 +52,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select staff_code, staff_name from staff_m";
+            string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -60,6 +60,7 @@ namespace Flawless_ex
             dataGridView1.DataSource = dt;
             dataGridView1.Columns[0].HeaderText = "担当者コード";
             dataGridView1.Columns[1].HeaderText = "担当者名";
+            dataGridView1.Columns[2].HeaderText = "大分類";
 
             conn.Close();
         }
