@@ -83,16 +83,23 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             NpgsqlCommandBuilder builder;
             DataTable dt = new DataTable();
+
             string name; //担当者名　履歴
+            string name_kana;//担当者名カナ履歴
             string pass;//パスワード　履歴
+            int main_code;//大分類　履歴
+            string access;//アクセス権限履歴
 
             name = staffName;
             staffName = this.parsonNameText.Text;//担当者名
+            name_kana = staffNameKana;
             staffNameKana = this.parsonNamt2Text.Text;//担当者名カナ
+            main_code = main_category;
             main_category = (int)this.mainCategoryComboBox.SelectedValue;//大分類初期値
             pass = password;
             password = this.passwordText.Text;//パスワード
             rePassword = this.passwordReText.Text;//パスワード再入力
+            access = access_auth;
             access_auth = this.accessButton.Text;//アクセス権限
 
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -106,6 +113,7 @@ namespace Flawless_ex
                 if (string.IsNullOrEmpty(rePassword))
                 {
                     MessageBox.Show("パスワードを入力してください");
+                    conn.Close();
                     return;
                 }
             }
@@ -121,19 +129,33 @@ namespace Flawless_ex
             //履歴
             DateTime dateTime = DateTime.Now;
             //担当者名
-            if(this.parsonNameText.Text != name)
+            if (this.parsonNameText.Text != name)
             {
-                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + staffName + "', '" + staffNameKana + "'," + code + ")";
+                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + name +"','" + name_kana + "','" + staffName +"', '" + staffNameKana + "'," + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_staffNameRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
-            else if(this.passwordText.Text != pass)
+            //パスワード
+            else if (this.passwordText.Text != pass)
             {
-                string sql_passwordRevisions = "insert into staff_password_revisions values('" + dateTime + "', " + staffCode + ", '" + password + "', '" + code + "')";
+                string sql_passwordRevisions = "insert into staff_password_revisions values('" + dateTime + "', " + staffCode + ",'"+ pass +"','" + password + "', " + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_passwordRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
-            else { }
+            //大分類コード
+            else if(main_category != main_code)
+            {
+                string sql_main_category_code_revisions = "insert into staff_main_category_code_revisions values('" + dateTime + "'," + staffCode + "," + main_code + ", " + main_category + ", " + code + ")";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql_main_category_code_revisions, conn);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+            }
+            //アクセス権限
+            else if(access_auth != access)
+            {
+                string sql_access_revisions = "insert into staff_access_auth_revisions values('" + dateTime + "', " + staffCode + ", '" + access + "', '" + access_auth + "', " + code + ")";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql_access_revisions, conn);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+            }
 
             StaffMaster staffMaster = new StaffMaster(master, staffCode);
 

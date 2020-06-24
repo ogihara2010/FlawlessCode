@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -24,7 +25,6 @@ namespace Flawless_ex
             NpgsqlCommand cmd = new NpgsqlCommand();
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
-            //TopMenu topMenu = new TopMenu();
 
             int id = int.Parse(this.roginIdTextBox.Text);
             string password = this.passwordTextBox.Text;
@@ -38,10 +38,13 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             int count = dt.Rows.Count;
+            DataRow row2;
+            row2 = dt.Rows[0];
+            int invalid = (int)row2["invalid"];
 
 
 
-            if (count == 1)
+            if (count == 1 && invalid == 0)
             {
                 DataRow row;
                 row = dt.Rows[0];
