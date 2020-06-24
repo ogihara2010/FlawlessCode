@@ -19,7 +19,9 @@ namespace Flawless_ex
 
         private void clientMasterButton_Click(object sender, EventArgs e)
         {
-
+            ClientMaster clientMaster = new ClientMaster(this);
+            this.Hide();
+            clientMaster.Show();
         }
 
         private void itemMasterButton_Click(object sender, EventArgs e)

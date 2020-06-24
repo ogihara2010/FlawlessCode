@@ -1,6 +1,6 @@
 ﻿namespace Flawless_ex
 {
-    partial class Client_search
+    partial class ClientMaster
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.returnButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
@@ -75,7 +75,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.search1 = new System.Windows.Forms.Button();
+            this.add = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -97,26 +98,25 @@
             this.flowLayoutPanel9.SuspendLayout();
             this.SuspendLayout();
             // 
-            // returnButton
+            // button1
             // 
-            this.returnButton.AutoSize = true;
-            this.returnButton.Location = new System.Drawing.Point(20, 287);
-            this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(170, 78);
-            this.returnButton.TabIndex = 0;
-            this.returnButton.Text = "戻る";
-            this.returnButton.UseVisualStyleBackColor = true;
-            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
+            this.button1.Location = new System.Drawing.Point(36, 341);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(125, 88);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "戻る";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(36, 49);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1109, 249);
-            this.tabControl1.TabIndex = 1;
+            this.tabControl1.Size = new System.Drawing.Size(1109, 261);
+            this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
             // 
@@ -132,7 +132,7 @@
             this.tabPage1.Location = new System.Drawing.Point(8, 39);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1093, 202);
+            this.tabPage1.Size = new System.Drawing.Size(1093, 214);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(999, 157);
+            this.radioButton7.Location = new System.Drawing.Point(999, 163);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(73, 28);
             this.radioButton7.TabIndex = 8;
@@ -151,7 +151,7 @@
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(906, 155);
+            this.radioButton8.Location = new System.Drawing.Point(906, 163);
             this.radioButton8.Name = "radioButton8";
             this.radioButton8.Size = new System.Drawing.Size(87, 28);
             this.radioButton8.TabIndex = 7;
@@ -162,7 +162,7 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(999, 108);
+            this.radioButton5.Location = new System.Drawing.Point(999, 115);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(73, 28);
             this.radioButton5.TabIndex = 6;
@@ -173,7 +173,7 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(906, 106);
+            this.radioButton6.Location = new System.Drawing.Point(906, 115);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(87, 28);
             this.radioButton6.TabIndex = 5;
@@ -184,7 +184,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(999, 61);
+            this.radioButton3.Location = new System.Drawing.Point(999, 66);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(73, 28);
             this.radioButton3.TabIndex = 4;
@@ -195,7 +195,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(906, 59);
+            this.radioButton4.Location = new System.Drawing.Point(906, 65);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(87, 28);
             this.radioButton4.TabIndex = 3;
@@ -387,7 +387,7 @@
             this.tabPage2.Location = new System.Drawing.Point(8, 39);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1093, 202);
+            this.tabPage2.Size = new System.Drawing.Size(1093, 214);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -567,25 +567,37 @@
             this.label5.Text = "氏名";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // button1
+            // search1
             // 
-            this.button1.Location = new System.Drawing.Point(741, 287);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(170, 78);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "検索";
-            this.button1.UseVisualStyleBackColor = true;
+            this.search1.Location = new System.Drawing.Point(709, 344);
+            this.search1.Name = "search1";
+            this.search1.Size = new System.Drawing.Size(180, 85);
+            this.search1.TabIndex = 3;
+            this.search1.Text = "検索";
+            this.search1.UseVisualStyleBackColor = true;
+            this.search1.Click += new System.EventHandler(this.Search1_Click);
             // 
-            // Client_search
+            // add
+            // 
+            this.add.Location = new System.Drawing.Point(232, 344);
+            this.add.Name = "add";
+            this.add.Size = new System.Drawing.Size(177, 85);
+            this.add.TabIndex = 4;
+            this.add.Text = "新規登録";
+            this.add.UseVisualStyleBackColor = true;
+            this.add.Click += new System.EventHandler(this.Add_Click);
+            // 
+            // ClientMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 390);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1177, 475);
+            this.Controls.Add(this.add);
+            this.Controls.Add(this.search1);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.returnButton);
-            this.Name = "Client_search";
-            this.Text = "顧客選択メニュー";
+            this.Controls.Add(this.button1);
+            this.Name = "ClientMaster";
+            this.Text = "顧客マスタメンテナンス";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -615,17 +627,22 @@
             this.flowLayoutPanel10.ResumeLayout(false);
             this.flowLayoutPanel9.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button returnButton;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
         private System.Windows.Forms.TextBox textBox4;
@@ -643,31 +660,26 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton radioButton7;
-        private System.Windows.Forms.RadioButton radioButton8;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.RadioButton radioButton11;
         private System.Windows.Forms.RadioButton radioButton12;
         private System.Windows.Forms.RadioButton radioButton10;
         private System.Windows.Forms.RadioButton radioButton9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel14;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel13;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel12;
+        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel14;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel13;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel12;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button search1;
+        private System.Windows.Forms.Button add;
     }
 }
