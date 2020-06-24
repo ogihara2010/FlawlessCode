@@ -10,13 +10,15 @@ namespace Flawless_ex
         MasterMaintenanceMenu master;
         int puroductCode;
         DataTable dt;
+        int staff_code;//ログイン者の担当者コード
 
-        public ProductChangeDeleteMenu(ItemMaster nameMenu, MasterMaintenanceMenu master, int code)
+        public ProductChangeDeleteMenu(ItemMaster nameMenu, MasterMaintenanceMenu master, int code,int staff_code)
         {
             InitializeComponent();
             this.productNameMenu = nameMenu;
             this.master = master;
             puroductCode = code;
+            this.staff_code = staff_code;
         }
 
         private void ProductChangeDeleteMenu_Load(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            ItemMaster productNameMenu = new ItemMaster(master);
+            ItemMaster productNameMenu = new ItemMaster(master,staff_code);
             this.Close();
             productNameMenu.Show();
         }

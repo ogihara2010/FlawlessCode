@@ -8,20 +8,22 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu master;
         DataTable dt;
-        public ItemMaster(MasterMaintenanceMenu master)
+        int staff_code;
+        public ItemMaster(MasterMaintenanceMenu master, int staff_code)
         {
             InitializeComponent();
             this.master = master;
+            this.staff_code = staff_code;
         }
 
         private void ProductNameMenu_Load(object sender, EventArgs e)
         {
-            NpgsqlConnection conn = new NpgsqlConnection();//変更予定　大分類名、小分類名
+            NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             dt = new DataTable();
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select * from item_m";
+            string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -42,7 +44,7 @@ namespace Flawless_ex
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            ProductAddMenu productAdd = new ProductAddMenu(dt, master);
+            ProductAddMenu productAdd = new ProductAddMenu(dt, master,staff_code);
 
             this.Close();
             productAdd.Show();
@@ -51,7 +53,7 @@ namespace Flawless_ex
         private void changeDeleteButton_Click(object sender, EventArgs e)
         {
             int code = (int)dataGridView1.CurrentRow.Cells[0].Value; //選択した品名コードを取得
-            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code);
+            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code,staff_code);
             this.Close();
             changeDeleteMenu.Show();
 
