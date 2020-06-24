@@ -77,6 +77,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.search1 = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -569,7 +570,7 @@
             // 
             // search1
             // 
-            this.search1.Location = new System.Drawing.Point(709, 344);
+            this.search1.Location = new System.Drawing.Point(892, 344);
             this.search1.Name = "search1";
             this.search1.Size = new System.Drawing.Size(180, 85);
             this.search1.TabIndex = 3;
@@ -579,7 +580,7 @@
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(232, 344);
+            this.add.Location = new System.Drawing.Point(268, 344);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(177, 85);
             this.add.TabIndex = 4;
@@ -587,11 +588,22 @@
             this.add.UseVisualStyleBackColor = true;
             this.add.Click += new System.EventHandler(this.Add_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(570, 341);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(191, 85);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "変更・更新";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // ClientMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 475);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.add);
             this.Controls.Add(this.search1);
             this.Controls.Add(this.tabControl1);
@@ -681,5 +693,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button search1;
         private System.Windows.Forms.Button add;
+        private System.Windows.Forms.Button button2;
     }
 }
