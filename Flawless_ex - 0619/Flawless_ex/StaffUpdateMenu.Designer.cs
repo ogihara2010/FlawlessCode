@@ -51,11 +51,17 @@
             this.returnButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.mainCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.mainCategoryComboBox);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.accessButton);
             this.groupBox1.Controls.Add(this.passwordReText);
             this.groupBox1.Controls.Add(this.label15);
@@ -89,14 +95,14 @@
             "A",
             "B",
             "C"});
-            this.accessButton.Location = new System.Drawing.Point(300, 224);
+            this.accessButton.Location = new System.Drawing.Point(300, 263);
             this.accessButton.Name = "accessButton";
             this.accessButton.Size = new System.Drawing.Size(121, 32);
             this.accessButton.TabIndex = 23;
             // 
             // passwordReText
             // 
-            this.passwordReText.Location = new System.Drawing.Point(299, 183);
+            this.passwordReText.Location = new System.Drawing.Point(299, 222);
             this.passwordReText.Name = "passwordReText";
             this.passwordReText.Size = new System.Drawing.Size(161, 31);
             this.passwordReText.TabIndex = 21;
@@ -105,7 +111,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(259, 226);
+            this.label15.Location = new System.Drawing.Point(259, 265);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(22, 24);
             this.label15.TabIndex = 20;
@@ -114,7 +120,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(259, 186);
+            this.label14.Location = new System.Drawing.Point(259, 225);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(22, 24);
             this.label14.TabIndex = 19;
@@ -122,7 +128,7 @@
             // 
             // passwordText
             // 
-            this.passwordText.Location = new System.Drawing.Point(299, 143);
+            this.passwordText.Location = new System.Drawing.Point(299, 182);
             this.passwordText.Name = "passwordText";
             this.passwordText.Size = new System.Drawing.Size(161, 31);
             this.passwordText.TabIndex = 18;
@@ -131,7 +137,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(259, 146);
+            this.label12.Location = new System.Drawing.Point(259, 185);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(22, 24);
             this.label12.TabIndex = 16;
@@ -209,7 +215,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 226);
+            this.label7.Location = new System.Drawing.Point(9, 265);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(131, 24);
@@ -229,7 +235,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 186);
+            this.label6.Location = new System.Drawing.Point(9, 225);
             this.label6.Margin = new System.Windows.Forms.Padding(0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(175, 24);
@@ -249,7 +255,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 146);
+            this.label5.Location = new System.Drawing.Point(9, 185);
             this.label5.Margin = new System.Windows.Forms.Padding(0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 24);
@@ -274,7 +280,7 @@
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(96, 34);
             this.removeButton.TabIndex = 12;
-            this.removeButton.Text = "削除";
+            this.removeButton.Text = "無効";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
@@ -289,7 +295,33 @@
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
-            // UpdateMenu
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 146);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(246, 24);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "大分類（初期値の設定）";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(261, 146);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(22, 24);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "：";
+            // 
+            // mainCategoryComboBox
+            // 
+            this.mainCategoryComboBox.FormattingEnabled = true;
+            this.mainCategoryComboBox.Location = new System.Drawing.Point(300, 146);
+            this.mainCategoryComboBox.Name = "mainCategoryComboBox";
+            this.mainCategoryComboBox.Size = new System.Drawing.Size(160, 32);
+            this.mainCategoryComboBox.TabIndex = 26;
+            // 
+            // StaffUpdateMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -298,7 +330,7 @@
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.groupBox1);
-            this.Name = "UpdateMenu";
+            this.Name = "StaffUpdateMenu";
             this.Text = "担当者マスタメンテナンス　更新";
             this.Load += new System.EventHandler(this.UpdateMenu_Load);
             this.groupBox1.ResumeLayout(false);
@@ -333,5 +365,8 @@
         private System.Windows.Forms.Button returnButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button updateButton;
+        private System.Windows.Forms.ComboBox mainCategoryComboBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label4;
     }
 }

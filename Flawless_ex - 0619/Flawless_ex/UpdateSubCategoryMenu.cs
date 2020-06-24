@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class updateSubCategoryMenu : Form
@@ -45,13 +39,13 @@ namespace Flawless_ex
             string sql_str2 = "select sub_category_code, sub_category_name, sub_category_name from sub_category_m inner join main_category_m on sub_category_m.main_category_code = main_category_m.main_category_code;";
             conn.Open();
 
-            
+
 
             row = dt.Rows[0];
             this.subCategoryTextBox.Text = row["sub_category_name"].ToString();
             this.mainCategoryComboBox1.Text = row["main_category_name"].ToString();
 
-            
+
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt2);
 

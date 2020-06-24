@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -13,12 +6,13 @@ namespace Flawless_ex
     public partial class MasterMaintenanceMenu : Form //マスタメンテナンスメニュー(A権限者)
     {
         MainMenu mainMenu;
-        
-        public MasterMaintenanceMenu(MainMenu mainMenu)
+        int staff_code;
+        public MasterMaintenanceMenu(MainMenu mainMenu, int staff_code)
         {
             InitializeComponent();
 
             this.mainMenu = mainMenu;
+            this.staff_code = staff_code;
 
         }
 
@@ -35,10 +29,10 @@ namespace Flawless_ex
 
 
 
-        
+
         private void staffMasterButtonClick(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(this);
+            StaffMaster personMaster = new StaffMaster(this, staff_code);
             this.Hide();
             personMaster.Show();
         }

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class UpdateMainCategoryMenu : Form//大分類更新メニュー
@@ -46,7 +40,7 @@ namespace Flawless_ex
 
             this.mainCategoryCodeTextBox.Text = mainCode.ToString();
             this.mainCategoryNameTextBox.Text = mainName;
-            
+
 
             conn.Close();
         }
@@ -107,7 +101,7 @@ namespace Flawless_ex
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
-                string sql_str = "update main_category_m set main_category_name = '" + mainName + "' where main_category_code = "+ mainCode + ";";
+                string sql_str = "update main_category_m set main_category_name = '" + mainName + "' where main_category_code = " + mainCode + ";";
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 builder = new NpgsqlCommandBuilder(adapter);

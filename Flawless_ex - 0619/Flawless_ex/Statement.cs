@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class Statement : Form //計算書/納品書作成メニュー
@@ -18,7 +12,7 @@ namespace Flawless_ex
         int com = 0;　// 納品書　追加カウント
         int staff_id;
         int itemMainCategoryCode;
-        
+
         MainMenu mainMenu;
 
         DataTable dt = new DataTable();//大分類
@@ -53,12 +47,12 @@ namespace Flawless_ex
         DataTable deliverydt212 = new DataTable();
 
         DataTable dt3 = new DataTable();// 品名情報全て
-        
+
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataAdapter adapter;
-        public Statement(MainMenu main,int id)
+        public Statement(MainMenu main, int id)
         {
             InitializeComponent();
             staff_id = id;
@@ -228,7 +222,7 @@ namespace Flawless_ex
             //納品書
             DataTable deliverydt106 = new DataTable();
             deliverydt106 = dt.Copy();
-            mainCategoryComboBox07.DataSource =deliverydt106;
+            mainCategoryComboBox07.DataSource = deliverydt106;
             mainCategoryComboBox07.DisplayMember = "main_category_name";
             mainCategoryComboBox07.ValueMember = "main_category_code";
             mainCategoryComboBox07.SelectedIndex = 0;
@@ -666,7 +660,7 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
             adapter.Fill(dt300);
             //1行目
-            
+
             metalComboBox0.DataSource = dt300;
             metalComboBox0.DisplayMember = itemDisplay;
             metalComboBox0.ValueMember = itemValue; ;
@@ -677,7 +671,7 @@ namespace Flawless_ex
             dt301 = dt300.Copy();
             metalComboBox1.DataSource = dt301;
             metalComboBox1.DisplayMember = itemDisplay;
-            metalComboBox1.ValueMember = itemValue ;
+            metalComboBox1.ValueMember = itemValue;
             metalComboBox1.SelectedIndex = -1;
 
             //3行目
@@ -708,7 +702,7 @@ namespace Flawless_ex
             //ダイヤ
             DataTable dt400 = new DataTable();
             string str_sql_diamond = "select* from item_m where main_category_code = 101";
-            
+
             adapter = new NpgsqlDataAdapter(str_sql_diamond, conn);
             adapter.Fill(dt400);
             //1行目
@@ -1111,7 +1105,7 @@ namespace Flawless_ex
         private void button4_Click(object sender, EventArgs e)//ファイルを選択
         {
             DialogResult dr = openFileDialog1.ShowDialog();
-            if(dr == System.Windows.Forms.DialogResult.OK)
+            if (dr == System.Windows.Forms.DialogResult.OK)
             {
                 articlesTextBox.Text = openFileDialog1.FileName;
             }
@@ -1119,12 +1113,12 @@ namespace Flawless_ex
         #region "計算書　大分類変更"
         private void mainCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e) //大分類選択分岐
         {
-            
 
-             //大分類によって品名変更　1行目
+
+            //大分類によって品名変更　1行目
             if (a > 1)
             {
-                
+
 
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
@@ -1143,9 +1137,9 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
-            
+
         }
 
         private void mainCategoryComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1172,7 +1166,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1201,7 +1195,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1229,7 +1223,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1257,7 +1251,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1285,7 +1279,7 @@ namespace Flawless_ex
             }
             else
             {
-   
+
             }
         }
 
@@ -1313,7 +1307,7 @@ namespace Flawless_ex
             }
             else
             {
-               
+
             }
         }
 
@@ -1341,7 +1335,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1369,7 +1363,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1397,7 +1391,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1425,7 +1419,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -1453,7 +1447,7 @@ namespace Flawless_ex
             }
             else
             {
-                
+
             }
         }
 
@@ -2144,7 +2138,7 @@ namespace Flawless_ex
                         else { }
                         break;
                     case 7:
-                        if(string.IsNullOrEmpty(moneyTextBox8.Text))
+                        if (string.IsNullOrEmpty(moneyTextBox8.Text))
                         {
                             moneyTextBox8.Text = 0.ToString();
                         }
@@ -2415,9 +2409,9 @@ namespace Flawless_ex
             //合計計算
             decimal sum = subSum + taxA;
 
-            
 
-            subTotal.Text = subSum.ToString() ;
+
+            subTotal.Text = subSum.ToString();
             totalWeight.Text = weisum.ToString();
             totalCount.Text = countsum.ToString();
             taxAmount.Text = taxA.ToString();
@@ -3146,116 +3140,116 @@ namespace Flawless_ex
         #region"計算書 クリアボタン"
         private void button3_Click(object sender, EventArgs e)//クリアボタン
         {
-            switch(con)
+            switch (con)
             {
                 case 0:
                     mainCategoryComboBox1.Hide();
-                itemComboBox1.Hide();
-                weightTextBox1.Hide();
-                countTextBox1.Hide();
-                unitPriceTextBox1.Hide();
-                moneyTextBox1.Hide();
-                remarks1.Hide();
-                break;
+                    itemComboBox1.Hide();
+                    weightTextBox1.Hide();
+                    countTextBox1.Hide();
+                    unitPriceTextBox1.Hide();
+                    moneyTextBox1.Hide();
+                    remarks1.Hide();
+                    break;
                 case 1:
-                   mainCategoryComboBox2.Hide();
-                itemComboBox2.Hide();
-                weightTextBox2.Hide();
-                countTextBox2.Hide();
-                unitPriceTextBox2.Hide();
-                moneyTextBox2.Hide();
-                remarks2.Hide();
-                break;
+                    mainCategoryComboBox2.Hide();
+                    itemComboBox2.Hide();
+                    weightTextBox2.Hide();
+                    countTextBox2.Hide();
+                    unitPriceTextBox2.Hide();
+                    moneyTextBox2.Hide();
+                    remarks2.Hide();
+                    break;
                 case 2:
                     mainCategoryComboBox3.Hide();
-                itemComboBox3.Hide();
-                weightTextBox3.Hide();
-                countTextBox3.Hide();
-                unitPriceTextBox3.Hide();
-                moneyTextBox3.Hide();
-                remarks3.Hide();
-                break;
+                    itemComboBox3.Hide();
+                    weightTextBox3.Hide();
+                    countTextBox3.Hide();
+                    unitPriceTextBox3.Hide();
+                    moneyTextBox3.Hide();
+                    remarks3.Hide();
+                    break;
                 case 3:
                     mainCategoryComboBox4.Hide();
-                itemComboBox4.Hide();
-                weightTextBox4.Hide();
-                countTextBox4.Hide();
-                unitPriceTextBox4.Hide();
-                moneyTextBox4.Hide();
-                remarks4.Hide();
-                break;
+                    itemComboBox4.Hide();
+                    weightTextBox4.Hide();
+                    countTextBox4.Hide();
+                    unitPriceTextBox4.Hide();
+                    moneyTextBox4.Hide();
+                    remarks4.Hide();
+                    break;
                 case 4:
                     mainCategoryComboBox5.Hide();
-                itemComboBox5.Hide();
-                weightTextBox5.Hide();
-                countTextBox5.Hide();
-                unitPriceTextBox5.Hide();
-                moneyTextBox5.Hide();
-                remarks5.Hide();
-                break;
+                    itemComboBox5.Hide();
+                    weightTextBox5.Hide();
+                    countTextBox5.Hide();
+                    unitPriceTextBox5.Hide();
+                    moneyTextBox5.Hide();
+                    remarks5.Hide();
+                    break;
                 case 5:
                     mainCategoryComboBox6.Hide();
-                itemComboBox6.Hide();
-                weightTextBox6.Hide();
-                countTextBox6.Hide();
-                unitPriceTextBox6.Hide();
-                moneyTextBox6.Hide();
-                remarks6.Hide();
-                break;
+                    itemComboBox6.Hide();
+                    weightTextBox6.Hide();
+                    countTextBox6.Hide();
+                    unitPriceTextBox6.Hide();
+                    moneyTextBox6.Hide();
+                    remarks6.Hide();
+                    break;
                 case 6:
                     mainCategoryComboBox7.Hide();
-                itemComboBox7.Hide();
-                weightTextBox7.Hide();
-                countTextBox7.Hide();
-                unitPriceTextBox7.Hide();
-                moneyTextBox7.Hide();
-                remarks7.Hide();
-                break;
+                    itemComboBox7.Hide();
+                    weightTextBox7.Hide();
+                    countTextBox7.Hide();
+                    unitPriceTextBox7.Hide();
+                    moneyTextBox7.Hide();
+                    remarks7.Hide();
+                    break;
                 case 7:
                     mainCategoryComboBox8.Hide();
-                itemComboBox8.Hide();
-                weightTextBox8.Hide();
-                countTextBox8.Hide();
-                unitPriceTextBox8.Hide();
-                moneyTextBox8.Hide();
-                remarks8.Hide();
-                break;
+                    itemComboBox8.Hide();
+                    weightTextBox8.Hide();
+                    countTextBox8.Hide();
+                    unitPriceTextBox8.Hide();
+                    moneyTextBox8.Hide();
+                    remarks8.Hide();
+                    break;
                 case 8:
                     mainCategoryComboBox9.Hide();
-                itemComboBox9.Hide();
-                weightTextBox9.Hide();
-                countTextBox9.Hide();
-                unitPriceTextBox9.Hide();
-                moneyTextBox9.Hide();
-                remarks9.Hide();
-                break;
+                    itemComboBox9.Hide();
+                    weightTextBox9.Hide();
+                    countTextBox9.Hide();
+                    unitPriceTextBox9.Hide();
+                    moneyTextBox9.Hide();
+                    remarks9.Hide();
+                    break;
                 case 9:
                     mainCategoryComboBox10.Hide();
-                itemComboBox10.Hide();
-                weightTextBox10.Hide();
-                countTextBox10.Hide();
-                unitPriceTextBox10.Hide();
-                moneyTextBox10.Hide();
-                remarks10.Hide();
-                break;
+                    itemComboBox10.Hide();
+                    weightTextBox10.Hide();
+                    countTextBox10.Hide();
+                    unitPriceTextBox10.Hide();
+                    moneyTextBox10.Hide();
+                    remarks10.Hide();
+                    break;
                 case 10:
                     mainCategoryComboBox11.Hide();
-                itemComboBox11.Hide();
-                weightTextBox11.Hide();
-                countTextBox11.Hide();
-                unitPriceTextBox11.Hide();
-                moneyTextBox11.Hide();
-                remarks11.Hide();
-                break;
+                    itemComboBox11.Hide();
+                    weightTextBox11.Hide();
+                    countTextBox11.Hide();
+                    unitPriceTextBox11.Hide();
+                    moneyTextBox11.Hide();
+                    remarks11.Hide();
+                    break;
                 case 11:
                     mainCategoryComboBox12.Hide();
-                itemComboBox12.Hide();
-                weightTextBox12.Hide();
-                countTextBox12.Hide();
-                unitPriceTextBox12.Hide();
-                moneyTextBox12.Hide();
-                remarks12.Hide();
-                break;
+                    itemComboBox12.Hide();
+                    weightTextBox12.Hide();
+                    countTextBox12.Hide();
+                    unitPriceTextBox12.Hide();
+                    moneyTextBox12.Hide();
+                    remarks12.Hide();
+                    break;
                 default:
                     break;
             }
@@ -3505,7 +3499,7 @@ namespace Flawless_ex
 
         #endregion
 
- 
+
 
         private void client_searchButton(object sender, EventArgs e)
         {

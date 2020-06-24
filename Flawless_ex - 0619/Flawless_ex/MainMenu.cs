@@ -1,12 +1,5 @@
 ﻿using Npgsql;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace Flawless_ex
 {
@@ -15,8 +8,8 @@ namespace Flawless_ex
         TopMenu top = new TopMenu();
         string access_auth;
         int staff_id;
-        
-        public MainMenu(TopMenu topMenu,int id,string pass, string access_auth)
+
+        public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
             InitializeComponent();
 
@@ -26,20 +19,20 @@ namespace Flawless_ex
             NpgsqlCommand cmd;
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str2 = "select* from staff_m where staff_code = " + id + " and password = '" + pass + "'"; 
+            string sql_str2 = "select* from staff_m where staff_code = " + id + " and password = '" + pass + "'";
             cmd = new NpgsqlCommand(sql_str2, conn);
             conn.Open();
-            
+
             NpgsqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                label1.Text = (string.Format("{0}:{1}", reader["staff_code"].ToString(),reader["staff_name"]));
+                label1.Text = (string.Format("{0}:{1}", reader["staff_code"].ToString(), reader["staff_name"]));
                 break;
             }
 
             conn.Close();
-            
-            
+
+
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -47,28 +40,19 @@ namespace Flawless_ex
 
 
             Application.Exit();
-            
-            
+
+
         }
 
         private void MasterMainte_Click(object sender, EventArgs e)//権限によって
         {
-            if(access_auth == "A")
-            {
-                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this);
 
-                this.Hide();
-                masterMenu.Show();
-            }
-            else
-            {
-                MasterMaintenanceMenu_BC masterMenuBC = new MasterMaintenanceMenu_BC(this);
 
-                this.Hide();
-                masterMenuBC.Show();
-            }
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id);
 
-            
+            this.Hide();
+            masterMenu.Show();
+
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -78,7 +62,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this,staff_id);
+            Statement statement = new Statement(this, staff_id);
 
             this.Hide();
             statement.Show();

@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class ItemMaster : Form　//品名マスタメンテナンスメニュー
@@ -48,9 +42,9 @@ namespace Flawless_ex
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            ProductAddMenu productAdd = new ProductAddMenu(dt,master);
+            ProductAddMenu productAdd = new ProductAddMenu(dt, master);
 
-            this.Close(); 
+            this.Close();
             productAdd.Show();
         }
 

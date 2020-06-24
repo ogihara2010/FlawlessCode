@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class ProductAddMenu : Form　//品名新規登録メニュー
@@ -56,6 +50,6 @@ namespace Flawless_ex
             conn.Close();
         }
 
-     
+
     }
 }

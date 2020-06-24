@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class SubCategoryMaster : Form//小分類マスタメンテナンス
@@ -49,7 +43,7 @@ namespace Flawless_ex
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            AddSubCategoryMenu addSubCategory = new AddSubCategoryMenu(dt,master);
+            AddSubCategoryMenu addSubCategory = new AddSubCategoryMenu(dt, master);
 
             this.Close();
             addSubCategory.Show();

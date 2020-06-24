@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class StaffMaster : Form　//担当者マスタメンテナンスメニュー
     {
         MasterMaintenanceMenu masterMenu;
         DataTable dt = new DataTable();
-
-        public StaffMaster(MasterMaintenanceMenu mster)
+        int staff_code;
+        public StaffMaster(MasterMaintenanceMenu mster, int staff_code)
         {
             InitializeComponent();
 
             masterMenu = mster;
+            this.staff_code = staff_code;
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
@@ -41,7 +36,7 @@ namespace Flawless_ex
         {
             int code = (int)dataGridView1.CurrentRow.Cells[0].Value; //選択した担当者コードを取得
 
-            StaffUpdateMenu staffUpdateMenu = new StaffUpdateMenu(masterMenu, code);
+            StaffUpdateMenu staffUpdateMenu = new StaffUpdateMenu(masterMenu, code, staff_code);
             this.Close();
             staffUpdateMenu.Show();
         }
@@ -52,7 +47,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select staff_code, staff_name from staff_m";
+            string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code where staff_m.invalid = 0 ";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -60,13 +55,14 @@ namespace Flawless_ex
             dataGridView1.DataSource = dt;
             dataGridView1.Columns[0].HeaderText = "担当者コード";
             dataGridView1.Columns[1].HeaderText = "担当者名";
+            dataGridView1.Columns[2].HeaderText = "大分類";
 
             conn.Close();
         }
 
         private void addButtonClick(object sender, EventArgs e)//登録画面に遷移
         {
-            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu);
+            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu, staff_code);
             this.Close();
             addStaff.Show();
         }

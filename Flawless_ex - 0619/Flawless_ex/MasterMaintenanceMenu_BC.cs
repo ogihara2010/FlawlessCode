@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -33,9 +26,9 @@ namespace Flawless_ex
 
         private void itemMasterButton_Click(object sender, EventArgs e)
         {
-         /*  ProductNameMenu productNameMenu = new ProductNameMenu(this);
-            this.Hide();
-            productNameMenu.Show();*/
+            /*  ProductNameMenu productNameMenu = new ProductNameMenu(this);
+               this.Hide();
+               productNameMenu.Show();*/
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

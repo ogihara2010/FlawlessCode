@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class AddMainCategoryMenu : Form//大分類　新規登録メニュー
@@ -26,7 +20,7 @@ namespace Flawless_ex
 
         private void AddMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void returnButton_Click(object sender, EventArgs e)
@@ -69,7 +63,7 @@ namespace Flawless_ex
             }
             else { }
 
-            
+
         }
     }
 }
