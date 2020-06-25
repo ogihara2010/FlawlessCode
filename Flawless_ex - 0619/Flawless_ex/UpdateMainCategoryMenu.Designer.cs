@@ -80,7 +80,7 @@
             this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(182, 27);
             this.mainCategoryCodeTextBox.Name = "mainCategoryCodeTextBox";
             this.mainCategoryCodeTextBox.ReadOnly = true;
-            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(196, 31);
+            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(122, 31);
             this.mainCategoryCodeTextBox.TabIndex = 4;
             // 
             // mainCategoryNameTextBox
@@ -108,7 +108,7 @@
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(116, 45);
             this.removeButton.TabIndex = 7;
-            this.removeButton.Text = "削除";
+            this.removeButton.Text = "無効";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 

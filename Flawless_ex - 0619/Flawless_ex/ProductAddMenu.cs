@@ -60,6 +60,7 @@ namespace Flawless_ex
             NpgsqlDataReader reader = cmd.ExecuteReader();
 
             conn.Close();
+
             ItemMaster product = new ItemMaster(master,staff_code);
             this.Close();
             product.Show();
@@ -68,7 +69,7 @@ namespace Flawless_ex
 
         private void ProductAddMenu_Load(object sender, EventArgs e)
         {
-            string sql_main_name = "select* from main_category_m";
+            string sql_main_name = "select* from main_category_m where invalid = 0";
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             conn.Open();

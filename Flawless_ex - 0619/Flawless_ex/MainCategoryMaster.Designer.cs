@@ -37,6 +37,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
@@ -48,6 +50,7 @@
             // 
             // returnButton
             // 
+            this.returnButton.AutoSize = true;
             this.returnButton.Location = new System.Drawing.Point(12, 430);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(116, 45);
@@ -58,16 +61,18 @@
             // 
             // updateButton
             // 
+            this.updateButton.AutoSize = true;
             this.updateButton.Location = new System.Drawing.Point(374, 430);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(141, 45);
             this.updateButton.TabIndex = 2;
-            this.updateButton.Text = "変更・削除";
+            this.updateButton.Text = "変更・無効";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButtonClick);
             // 
             // addbutton
             // 
+            this.addbutton.AutoSize = true;
             this.addbutton.Location = new System.Drawing.Point(544, 430);
             this.addbutton.Name = "addbutton";
             this.addbutton.Size = new System.Drawing.Size(116, 45);
@@ -80,6 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(672, 521);
             this.Controls.Add(this.addbutton);
             this.Controls.Add(this.updateButton);
@@ -90,6 +96,7 @@
             this.Load += new System.EventHandler(this.MainCategoryMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

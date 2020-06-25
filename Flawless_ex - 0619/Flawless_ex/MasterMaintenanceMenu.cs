@@ -51,20 +51,6 @@ namespace Flawless_ex
             productNameMenu.Show();
         }
 
-        private void mainCategoryMasterButton_Click(object sender, EventArgs e)
-        {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(this);
-            this.Hide();
-            mainCategory.Show();
-        }
-
-        private void subCategoryMasterButton_Click(object sender, EventArgs e)
-        {
-            SubCategoryMaster subCategory = new SubCategoryMaster(this);
-            this.Hide();
-            subCategory.Show();
-        }
-
         private void TaxMaster_Click(object sender, EventArgs e)
         {
             TaxMaster taxMaster = new TaxMaster(this);

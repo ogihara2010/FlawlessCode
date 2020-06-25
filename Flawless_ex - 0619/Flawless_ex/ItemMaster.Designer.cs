@@ -81,7 +81,7 @@
             this.changeDeleteButton.Name = "changeDeleteButton";
             this.changeDeleteButton.Size = new System.Drawing.Size(137, 57);
             this.changeDeleteButton.TabIndex = 5;
-            this.changeDeleteButton.Text = "変更・削除";
+            this.changeDeleteButton.Text = "変更・無効";
             this.changeDeleteButton.UseVisualStyleBackColor = true;
             this.changeDeleteButton.Click += new System.EventHandler(this.changeDeleteButton_Click);
             // 
@@ -94,6 +94,7 @@
             this.mainCategoryMenu.TabIndex = 8;
             this.mainCategoryMenu.Text = "大分類マスタ";
             this.mainCategoryMenu.UseVisualStyleBackColor = true;
+            this.mainCategoryMenu.Click += new System.EventHandler(this.mainCategoryMenu_Click);
             // 
             // ItemMaster
             // 
