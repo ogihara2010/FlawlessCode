@@ -95,6 +95,18 @@
     <Compile Include="ClientMaster.Designer.cs">
       <DependentUpon>ClientMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientMaster_add.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMaster_add.Designer.cs">
+      <DependentUpon>ClientMaster_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientMaster_search.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMaster_search.Designer.cs">
+      <DependentUpon>ClientMaster_search.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client_search.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +261,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientMaster.resx">
       <DependentUpon>ClientMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMaster_add.resx">
+      <DependentUpon>ClientMaster_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMaster_search.resx">
+      <DependentUpon>ClientMaster_search.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client_search.resx">
       <DependentUpon>Client_search.cs</DependentUpon>
