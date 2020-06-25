@@ -87,7 +87,7 @@ namespace Flawless_ex
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
-            string sql_str2 = "select* from main_category_m";
+            string sql_str2 = "select* from main_category_m where invalid = 0";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt2);
 

@@ -37,6 +37,9 @@
             this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.returnButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.mainCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -100,6 +103,7 @@
             this.updateButton.TabIndex = 16;
             this.updateButton.Text = "更新";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // removeButton
             // 
@@ -109,8 +113,9 @@
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(107, 34);
             this.removeButton.TabIndex = 15;
-            this.removeButton.Text = "削除";
+            this.removeButton.Text = "無効";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
             // returnButton
             // 
@@ -124,11 +129,40 @@
             this.returnButton.UseVisualStyleBackColor = true;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 116);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(106, 24);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "大分類名";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(169, 116);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(22, 24);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "：";
+            // 
+            // mainCategoryComboBox
+            // 
+            this.mainCategoryComboBox.FormattingEnabled = true;
+            this.mainCategoryComboBox.Location = new System.Drawing.Point(197, 113);
+            this.mainCategoryComboBox.Name = "mainCategoryComboBox";
+            this.mainCategoryComboBox.Size = new System.Drawing.Size(238, 32);
+            this.mainCategoryComboBox.TabIndex = 19;
+            // 
             // ProductChangeDeleteMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(616, 477);
+            this.Controls.Add(this.mainCategoryComboBox);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.returnButton);
@@ -157,5 +191,8 @@
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button returnButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox mainCategoryComboBox;
     }
 }

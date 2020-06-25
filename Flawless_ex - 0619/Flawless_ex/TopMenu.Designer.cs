@@ -127,6 +127,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TopMenu";
             this.Text = "ログイン";
+            this.Load += new System.EventHandler(this.TopMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
