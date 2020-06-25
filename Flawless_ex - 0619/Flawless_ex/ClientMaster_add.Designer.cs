@@ -966,10 +966,10 @@
             // 
             // textBox58
             // 
-            this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 60F);
+            this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.textBox58.Location = new System.Drawing.Point(62, 1592);
             this.textBox58.Name = "textBox58";
-            this.textBox58.Size = new System.Drawing.Size(1222, 147);
+            this.textBox58.Size = new System.Drawing.Size(1222, 40);
             this.textBox58.TabIndex = 138;
             // 
             // label64
