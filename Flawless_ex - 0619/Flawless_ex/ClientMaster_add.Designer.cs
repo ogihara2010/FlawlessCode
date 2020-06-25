@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -100,6 +102,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.textBox58 = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -163,10 +167,6 @@
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -262,6 +262,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button4.Location = new System.Drawing.Point(92, 1764);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(169, 96);
+            this.button4.TabIndex = 1;
+            this.button4.Text = "戻る";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button5.Location = new System.Drawing.Point(1526, 1764);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(184, 96);
+            this.button5.TabIndex = 2;
+            this.button5.Text = "登録";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // comboBox1
             // 
@@ -964,6 +986,27 @@
             this.tabPage2.Text = "個人";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button18
+            // 
+            this.button18.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button18.Location = new System.Drawing.Point(1638, 1787);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(184, 87);
+            this.button18.TabIndex = 140;
+            this.button18.Text = "登録";
+            this.button18.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button6.Location = new System.Drawing.Point(144, 1787);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(152, 87);
+            this.button6.TabIndex = 139;
+            this.button6.Text = "戻る";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
+            // 
             // textBox58
             // 
             this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 14F);
@@ -1536,53 +1579,11 @@
             this.label63.TabIndex = 70;
             this.label63.Text = "登録日";
             // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button4.Location = new System.Drawing.Point(92, 1764);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(169, 96);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "戻る";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button5.Location = new System.Drawing.Point(1526, 1764);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(184, 96);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "登録";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button6.Location = new System.Drawing.Point(144, 1787);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(152, 87);
-            this.button6.TabIndex = 139;
-            this.button6.Text = "戻る";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Button6_Click);
-            // 
-            // button18
-            // 
-            this.button18.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button18.Location = new System.Drawing.Point(1638, 1787);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(184, 87);
-            this.button18.TabIndex = 140;
-            this.button18.Text = "登録";
-            this.button18.UseVisualStyleBackColor = true;
-            // 
             // ClientMaster_add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(2015, 2022);
             this.Controls.Add(this.tabControl1);
             this.Name = "ClientMaster_add";

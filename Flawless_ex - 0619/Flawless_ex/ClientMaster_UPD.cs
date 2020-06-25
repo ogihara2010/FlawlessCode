@@ -34,5 +34,13 @@ namespace Flawless_ex
             this.Close();
             clientmaster.Show();
         }
+
+        private void Button18_Click_1(object sender, EventArgs e)
+        {
+            ClientMaster clientmaster = new ClientMaster(master);
+
+            this.Close();
+            clientmaster.Show();
+        }
     }
 }

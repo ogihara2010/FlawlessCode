@@ -24,22 +24,22 @@ namespace Flawless_ex
 
         private void ClientMaster_search_Load(object sender, EventArgs e)
         {
-            NpgsqlConnection conn = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //NpgsqlConnection conn = new NpgsqlConnection();
+            //NpgsqlDataAdapter adapter;
+            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select company_name, shop_name, client_staff_name, address from client_m_corporate where invalid = 0;";
-            conn.Open();
+            //string sql_str = "select company_name, shop_name, client_staff_name, address from client_m_corporate where invalid = 0 and company_name = ";
+            //conn.Open();
 
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            adapter.Fill(dt);
+            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+            //adapter.Fill(dt);
             dataGridView1.DataSource = dt;
             dataGridView1.Columns[0].HeaderText = "会社名";
             dataGridView1.Columns[1].HeaderText = "店舗名";
             dataGridView1.Columns[2].HeaderText = "担当者名";
             dataGridView1.Columns[3].HeaderText = "住所";
 
-            conn.Close();
+            //conn.Close();
         }
         private void Button2_Click(object sender, EventArgs e)
         {

@@ -51,7 +51,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select * from client_m_corporate WHERE company_name = "+ " ' " + CompanyName + " '" + " OR shop_name =" + " '" + ShopName + " ' " + " OR staff_name =" + " ' " + ClientStaff + " ' " + " OR address =" + " ' " + Address + " ' " + ";";
+            string sql_str = "Select * From client_m_corporate where company_name = " + " '" + CompanyName + "'" + " or shop_name = " + " '" + ShopName + "' " + " or staff_name =" + " '" + ClientStaff + "' " + " or address =" + " '" + Address + "' " + ";";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
