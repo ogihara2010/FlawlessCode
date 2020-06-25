@@ -32,8 +32,6 @@
             this.staffMasterButton = new System.Windows.Forms.Button();
             this.clientMasterButton = new System.Windows.Forms.Button();
             this.itemMasterButton = new System.Windows.Forms.Button();
-            this.mainCategoryMasterButton = new System.Windows.Forms.Button();
-            this.subCategoryMasterButton = new System.Windows.Forms.Button();
             this.TaxMaster = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -81,29 +79,9 @@
             this.itemMasterButton.UseVisualStyleBackColor = true;
             this.itemMasterButton.Click += new System.EventHandler(this.itemMasterButtonClick);
             // 
-            // mainCategoryMasterButton
-            // 
-            this.mainCategoryMasterButton.Location = new System.Drawing.Point(28, 283);
-            this.mainCategoryMasterButton.Name = "mainCategoryMasterButton";
-            this.mainCategoryMasterButton.Size = new System.Drawing.Size(448, 49);
-            this.mainCategoryMasterButton.TabIndex = 4;
-            this.mainCategoryMasterButton.Text = "大分類マスタ";
-            this.mainCategoryMasterButton.UseVisualStyleBackColor = true;
-            this.mainCategoryMasterButton.Click += new System.EventHandler(this.mainCategoryMasterButton_Click);
-            // 
-            // subCategoryMasterButton
-            // 
-            this.subCategoryMasterButton.Location = new System.Drawing.Point(28, 355);
-            this.subCategoryMasterButton.Name = "subCategoryMasterButton";
-            this.subCategoryMasterButton.Size = new System.Drawing.Size(448, 49);
-            this.subCategoryMasterButton.TabIndex = 5;
-            this.subCategoryMasterButton.Text = "小分類マスタ";
-            this.subCategoryMasterButton.UseVisualStyleBackColor = true;
-            this.subCategoryMasterButton.Click += new System.EventHandler(this.subCategoryMasterButton_Click);
-            // 
             // TaxMaster
             // 
-            this.TaxMaster.Location = new System.Drawing.Point(28, 433);
+            this.TaxMaster.Location = new System.Drawing.Point(28, 288);
             this.TaxMaster.Name = "TaxMaster";
             this.TaxMaster.Size = new System.Drawing.Size(448, 52);
             this.TaxMaster.TabIndex = 6;
@@ -117,8 +95,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 636);
             this.Controls.Add(this.TaxMaster);
-            this.Controls.Add(this.subCategoryMasterButton);
-            this.Controls.Add(this.mainCategoryMasterButton);
             this.Controls.Add(this.itemMasterButton);
             this.Controls.Add(this.clientMasterButton);
             this.Controls.Add(this.staffMasterButton);
@@ -137,8 +113,6 @@
         private System.Windows.Forms.Button staffMasterButton;
         private System.Windows.Forms.Button clientMasterButton;
         private System.Windows.Forms.Button itemMasterButton;
-        private System.Windows.Forms.Button mainCategoryMasterButton;
-        private System.Windows.Forms.Button subCategoryMasterButton;
         private System.Windows.Forms.Button TaxMaster;
     }
 }
