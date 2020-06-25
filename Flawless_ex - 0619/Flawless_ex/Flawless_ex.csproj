@@ -107,6 +107,12 @@
     <Compile Include="ClientMaster_search.Designer.cs">
       <DependentUpon>ClientMaster_search.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientMaster_UPD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMaster_UPD.Designer.cs">
+      <DependentUpon>ClientMaster_UPD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Client_search.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -267,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientMaster_search.resx">
       <DependentUpon>ClientMaster_search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMaster_UPD.resx">
+      <DependentUpon>ClientMaster_UPD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client_search.resx">
       <DependentUpon>Client_search.cs</DependentUpon>

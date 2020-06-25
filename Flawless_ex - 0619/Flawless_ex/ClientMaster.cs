@@ -43,19 +43,19 @@ namespace Flawless_ex
 
         private void Search1_Click(object sender, EventArgs e)
         {
-            //string CompanyName = this.textBox1.Text;
-            //string ShopName = this.textBox2.Text;
-            //string ClientStaff = this.textBox3.Text;
-            //string Address = this.textBox4.Text;
-            //NpgsqlConnection conn = new NpgsqlConnection();
-            //NpgsqlDataAdapter adapter;
-            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            string CompanyName = this.textBox1.Text;
+            string ShopName = this.textBox2.Text;
+            string ClientStaff = this.textBox3.Text;
+            string Address = this.textBox4.Text;
+            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter;
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            //string sql_str = "select * from client_m_corporate WHERE company_name = "+ CompanyName + ",shop_name =" + ShopName + " , client_staff_name =" + ClientStaff + ", address =" + Address;
-            //conn.Open();
+            string sql_str = "select * from client_m_corporate WHERE company_name = "+ CompanyName + "or shop_name =" + ShopName + " or staff_name =" + ClientStaff + "or address =" + Address;
+            conn.Open();
 
-            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-            //adapter.Fill(dt);
+            adapter = new NpgsqlDataAdapter(sql_str, conn);
+            adapter.Fill(dt);
 
             //conn.Close();
             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu);
@@ -66,9 +66,9 @@ namespace Flawless_ex
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu);
+            ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(masterMenu);
             this.Close();
-            clientMaster_Add.Show();
+            clientMaster_UPD.Show();
         }
     }
 }
