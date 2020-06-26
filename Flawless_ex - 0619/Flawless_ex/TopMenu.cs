@@ -64,6 +64,15 @@ namespace Flawless_ex
                     adapter.Fill(dt);
                     count = dt.Rows.Count;
 
+                    if(count == 0)
+                    {
+                        MessageBox.Show("担当者コード、パスワードが違います");
+                        roginIdTextBox.Text = "";
+                        passwordTextBox.Text = "";
+                        return;
+                    }
+                    else { }
+
                     DataRow row2;
                     row2 = dt.Rows[0];
                     invalid = (int)row2["invalid"];
