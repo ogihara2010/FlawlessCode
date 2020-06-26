@@ -94,6 +94,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TaxMaster";
             this.Text = "消費税マスタ";
+            this.Load += new System.EventHandler(this.TaxMaster_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -17,5 +17,10 @@ namespace Flawless_ex
             this.Close();
             master.Show();
         }
+
+        private void TaxMaster_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

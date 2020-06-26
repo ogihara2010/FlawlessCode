@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -43,32 +44,101 @@ namespace Flawless_ex
 
         private void Search1_Click(object sender, EventArgs e)
         {
-            string CompanyName = this.textBox1.Text;
-            string ShopName = this.textBox2.Text;
-            string ClientStaff = this.textBox3.Text;
-            string Address = this.textBox4.Text;
+            //法人
+            string clientName;
+            string shopName;
+            string clientStaff;
+            string address;
+            string search1 = "or";
+            string search2 = "or";
+            string search3 = "or";
+
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "Select * From client_m_corporate where company_name = " + " '" + CompanyName + "'" + " or shop_name = " + " '" + ShopName + "' " + " or staff_name =" + " '" + ClientStaff + "' " + " or address =" + " '" + Address + "' " + ";";
-            conn.Open();
 
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            adapter.Fill(dt);
+            if (tabControl1.SelectedIndex == 0)
+            {
+                if (!string.IsNullOrWhiteSpace(clientNameTextBox.Text))
+                {
+                    clientName = this.clientNameTextBox.Text;
+                }
+                else
+                {
+                    clientName = "";
+                }
 
-            //conn.Close();
-            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu);
-            this.Close();
-            clientMastersearch.Show();
+                if(andRadioButton1.Checked == true)
+                {
+                    search1 = "and";
+                }
+                else { }
+
+                if (!string.IsNullOrWhiteSpace(shopNameTextBox.Text))
+                {
+                    shopName = this.shopNameTextBox.Text;
+                }
+                else
+                {
+                    shopName = "";
+                }
+
+                if(andRadioButton2.Checked == true)
+                {
+                    search2 = "and";
+                }
+                else { }
+
+                if (!string.IsNullOrWhiteSpace(clientStaffNameTextBox.Text))
+                {
+                    clientStaff = this.clientStaffNameTextBox.Text;
+                }
+                else
+                {
+                    clientStaff = "";
+                }
+
+                if(andRadioButton3.Checked == true)
+                {
+                    search3 = "and";
+                }
+                else { }
+
+                if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                {
+                    address = this.addressTextBox.Text;
+                }
+                else
+                {
+                    address = "";
+                }
+
+
+
+                string sql = "select* from client_m_corporate where type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address = '" + address + "' ";
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.Open();
+
+                adapter = new NpgsqlDataAdapter(sql, conn);
+                adapter.Fill(dt);
+
+                conn.Close();
+                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu,dt);
+                this.Close();
+                clientMastersearch.Show();
+
+            }
+
+            
+            
+            
 
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+
+        private void ClientMaster_Load(object sender, EventArgs e)
         {
-            ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(masterMenu);
-            this.Close();
-            clientMaster_UPD.Show();
+
         }
     }
 }
