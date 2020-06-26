@@ -36,7 +36,7 @@ namespace Flawless_ex
             {
                 var result = 0;
                 var ret = int.TryParse(roginIdTextBox.Text, out result);
-                if (result == 1)
+                if (ret == true)
                 {
                     id = int.Parse(roginIdTextBox.Text);
                 }
@@ -92,6 +92,7 @@ namespace Flawless_ex
                     else
                     {
                         MessageBox.Show("担当者コード、パスワードが違います");
+
                     }
                     conn.Close();
 
