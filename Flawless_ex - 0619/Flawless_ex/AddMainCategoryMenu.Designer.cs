@@ -79,6 +79,7 @@
             this.mainCategoryCodeTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(214, 27);
             this.mainCategoryCodeTextBox.Name = "mainCategoryCodeTextBox";
+            this.mainCategoryCodeTextBox.ReadOnly = true;
             this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(167, 31);
             this.mainCategoryCodeTextBox.TabIndex = 4;
             // 

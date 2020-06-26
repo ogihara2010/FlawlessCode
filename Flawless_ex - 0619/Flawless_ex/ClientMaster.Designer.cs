@@ -101,9 +101,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(36, 341);
+            this.button1.Location = new System.Drawing.Point(30, 298);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 88);
+            this.button1.Size = new System.Drawing.Size(106, 77);
             this.button1.TabIndex = 0;
             this.button1.Text = "戻る";
             this.button1.UseVisualStyleBackColor = true;
@@ -113,10 +113,10 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(36, 49);
+            this.tabControl1.Location = new System.Drawing.Point(30, 43);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1109, 261);
+            this.tabControl1.Size = new System.Drawing.Size(938, 228);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -130,10 +130,10 @@
             this.tabPage1.Controls.Add(this.radioButton2);
             this.tabPage1.Controls.Add(this.radioButton1);
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(8, 39);
+            this.tabPage1.Location = new System.Drawing.Point(4, 31);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1093, 214);
+            this.tabPage1.Size = new System.Drawing.Size(930, 193);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -141,9 +141,9 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(999, 163);
+            this.radioButton7.Location = new System.Drawing.Point(845, 143);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(73, 28);
+            this.radioButton7.Size = new System.Drawing.Size(63, 25);
             this.radioButton7.TabIndex = 8;
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "OR";
@@ -152,9 +152,9 @@
             // radioButton8
             // 
             this.radioButton8.AutoSize = true;
-            this.radioButton8.Location = new System.Drawing.Point(906, 163);
+            this.radioButton8.Location = new System.Drawing.Point(767, 143);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(87, 28);
+            this.radioButton8.Size = new System.Drawing.Size(75, 25);
             this.radioButton8.TabIndex = 7;
             this.radioButton8.TabStop = true;
             this.radioButton8.Text = "AND";
@@ -163,9 +163,9 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(999, 115);
+            this.radioButton5.Location = new System.Drawing.Point(845, 101);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(73, 28);
+            this.radioButton5.Size = new System.Drawing.Size(63, 25);
             this.radioButton5.TabIndex = 6;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "OR";
@@ -174,9 +174,9 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(906, 115);
+            this.radioButton6.Location = new System.Drawing.Point(767, 101);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(87, 28);
+            this.radioButton6.Size = new System.Drawing.Size(75, 25);
             this.radioButton6.TabIndex = 5;
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "AND";
@@ -185,9 +185,9 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(999, 66);
+            this.radioButton3.Location = new System.Drawing.Point(845, 58);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(73, 28);
+            this.radioButton3.Size = new System.Drawing.Size(63, 25);
             this.radioButton3.TabIndex = 4;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "OR";
@@ -196,9 +196,9 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(906, 65);
+            this.radioButton4.Location = new System.Drawing.Point(767, 57);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(87, 28);
+            this.radioButton4.Size = new System.Drawing.Size(75, 25);
             this.radioButton4.TabIndex = 3;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "AND";
@@ -207,9 +207,9 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(999, 16);
+            this.radioButton2.Location = new System.Drawing.Point(845, 14);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(73, 28);
+            this.radioButton2.Size = new System.Drawing.Size(63, 25);
             this.radioButton2.TabIndex = 2;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "OR";
@@ -218,9 +218,9 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(906, 14);
+            this.radioButton1.Location = new System.Drawing.Point(767, 12);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(87, 28);
+            this.radioButton1.Size = new System.Drawing.Size(75, 25);
             this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "AND";
@@ -240,89 +240,89 @@
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(894, 198);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(756, 173);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // flowLayoutPanel8
             // 
             this.flowLayoutPanel8.Controls.Add(this.textBox4);
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(266, 151);
+            this.flowLayoutPanel8.Location = new System.Drawing.Point(225, 133);
             this.flowLayoutPanel8.Name = "flowLayoutPanel8";
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(624, 43);
+            this.flowLayoutPanel8.Size = new System.Drawing.Size(527, 36);
             this.flowLayoutPanel8.TabIndex = 4;
             // 
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(3, 3);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(617, 31);
+            this.textBox4.Size = new System.Drawing.Size(523, 28);
             this.textBox4.TabIndex = 3;
             // 
             // flowLayoutPanel7
             // 
             this.flowLayoutPanel7.Controls.Add(this.textBox3);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(266, 102);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(225, 90);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(624, 42);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(527, 36);
             this.flowLayoutPanel7.TabIndex = 4;
             // 
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(3, 3);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(617, 31);
+            this.textBox3.Size = new System.Drawing.Size(523, 28);
             this.textBox3.TabIndex = 3;
             // 
             // flowLayoutPanel6
             // 
             this.flowLayoutPanel6.Controls.Add(this.textBox2);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(266, 53);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(225, 47);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(624, 42);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(527, 36);
             this.flowLayoutPanel6.TabIndex = 4;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(3, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(617, 31);
+            this.textBox2.Size = new System.Drawing.Size(523, 28);
             this.textBox2.TabIndex = 3;
             // 
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.Controls.Add(this.textBox1);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(266, 4);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(225, 4);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(624, 42);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(527, 36);
             this.flowLayoutPanel5.TabIndex = 4;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(617, 31);
+            this.textBox1.Size = new System.Drawing.Size(523, 28);
             this.textBox1.TabIndex = 3;
             // 
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.label4);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 151);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 133);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(255, 43);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(214, 36);
             this.flowLayoutPanel4.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(257, 29);
+            this.label4.Size = new System.Drawing.Size(217, 25);
             this.label4.TabIndex = 3;
             this.label4.Text = "住所";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -330,16 +330,16 @@
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.label3);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(4, 102);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(4, 90);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(255, 42);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(214, 36);
             this.flowLayoutPanel3.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(257, 42);
+            this.label3.Size = new System.Drawing.Size(217, 37);
             this.label3.TabIndex = 3;
             this.label3.Text = "担当者名";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -347,16 +347,16 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.label2);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 53);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 47);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(255, 42);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(214, 36);
             this.flowLayoutPanel2.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(257, 42);
+            this.label2.Size = new System.Drawing.Size(217, 37);
             this.label2.TabIndex = 3;
             this.label2.Text = "店舗名";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -366,14 +366,14 @@
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(255, 42);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(214, 36);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(257, 42);
+            this.label1.Size = new System.Drawing.Size(217, 37);
             this.label1.TabIndex = 3;
             this.label1.Text = "会社名";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -385,10 +385,10 @@
             this.tabPage2.Controls.Add(this.radioButton10);
             this.tabPage2.Controls.Add(this.radioButton9);
             this.tabPage2.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
+            this.tabPage2.Location = new System.Drawing.Point(4, 31);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1093, 214);
+            this.tabPage2.Size = new System.Drawing.Size(930, 193);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -396,9 +396,9 @@
             // radioButton11
             // 
             this.radioButton11.AutoSize = true;
-            this.radioButton11.Location = new System.Drawing.Point(998, 86);
+            this.radioButton11.Location = new System.Drawing.Point(844, 75);
             this.radioButton11.Name = "radioButton11";
-            this.radioButton11.Size = new System.Drawing.Size(73, 28);
+            this.radioButton11.Size = new System.Drawing.Size(63, 25);
             this.radioButton11.TabIndex = 15;
             this.radioButton11.TabStop = true;
             this.radioButton11.Text = "OR";
@@ -407,9 +407,9 @@
             // radioButton12
             // 
             this.radioButton12.AutoSize = true;
-            this.radioButton12.Location = new System.Drawing.Point(905, 86);
+            this.radioButton12.Location = new System.Drawing.Point(766, 75);
             this.radioButton12.Name = "radioButton12";
-            this.radioButton12.Size = new System.Drawing.Size(87, 28);
+            this.radioButton12.Size = new System.Drawing.Size(75, 25);
             this.radioButton12.TabIndex = 14;
             this.radioButton12.TabStop = true;
             this.radioButton12.Text = "AND";
@@ -418,9 +418,9 @@
             // radioButton10
             // 
             this.radioButton10.AutoSize = true;
-            this.radioButton10.Location = new System.Drawing.Point(998, 24);
+            this.radioButton10.Location = new System.Drawing.Point(844, 21);
             this.radioButton10.Name = "radioButton10";
-            this.radioButton10.Size = new System.Drawing.Size(73, 28);
+            this.radioButton10.Size = new System.Drawing.Size(63, 25);
             this.radioButton10.TabIndex = 13;
             this.radioButton10.TabStop = true;
             this.radioButton10.Text = "OR";
@@ -429,9 +429,9 @@
             // radioButton9
             // 
             this.radioButton9.AutoSize = true;
-            this.radioButton9.Location = new System.Drawing.Point(905, 24);
+            this.radioButton9.Location = new System.Drawing.Point(766, 21);
             this.radioButton9.Name = "radioButton9";
-            this.radioButton9.Size = new System.Drawing.Size(87, 28);
+            this.radioButton9.Size = new System.Drawing.Size(75, 25);
             this.radioButton9.TabIndex = 12;
             this.radioButton9.TabStop = true;
             this.radioButton9.Text = "AND";
@@ -449,22 +449,22 @@
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel11, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel10, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel9, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 6);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 5);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(893, 168);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(756, 147);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
             // flowLayoutPanel14
             // 
             this.flowLayoutPanel14.Controls.Add(this.checkBox1);
             this.flowLayoutPanel14.Controls.Add(this.checkBox2);
-            this.flowLayoutPanel14.Location = new System.Drawing.Point(266, 114);
+            this.flowLayoutPanel14.Location = new System.Drawing.Point(225, 100);
             this.flowLayoutPanel14.Name = "flowLayoutPanel14";
-            this.flowLayoutPanel14.Size = new System.Drawing.Size(623, 50);
+            this.flowLayoutPanel14.Size = new System.Drawing.Size(527, 43);
             this.flowLayoutPanel14.TabIndex = 5;
             // 
             // checkBox1
@@ -472,7 +472,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(3, 3);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(77, 28);
+            this.checkBox1.Size = new System.Drawing.Size(66, 25);
             this.checkBox1.TabIndex = 3;
             this.checkBox1.Text = "あり";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -480,9 +480,9 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(86, 3);
+            this.checkBox2.Location = new System.Drawing.Point(75, 3);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(80, 28);
+            this.checkBox2.Size = new System.Drawing.Size(69, 25);
             this.checkBox2.TabIndex = 4;
             this.checkBox2.Text = "なし";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -490,46 +490,46 @@
             // flowLayoutPanel13
             // 
             this.flowLayoutPanel13.Controls.Add(this.textBox6);
-            this.flowLayoutPanel13.Location = new System.Drawing.Point(266, 59);
+            this.flowLayoutPanel13.Location = new System.Drawing.Point(225, 52);
             this.flowLayoutPanel13.Name = "flowLayoutPanel13";
-            this.flowLayoutPanel13.Size = new System.Drawing.Size(623, 48);
+            this.flowLayoutPanel13.Size = new System.Drawing.Size(527, 41);
             this.flowLayoutPanel13.TabIndex = 3;
             // 
             // textBox6
             // 
             this.textBox6.Location = new System.Drawing.Point(3, 3);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(616, 31);
+            this.textBox6.Size = new System.Drawing.Size(522, 28);
             this.textBox6.TabIndex = 0;
             // 
             // flowLayoutPanel12
             // 
             this.flowLayoutPanel12.Controls.Add(this.textBox5);
-            this.flowLayoutPanel12.Location = new System.Drawing.Point(266, 4);
+            this.flowLayoutPanel12.Location = new System.Drawing.Point(225, 4);
             this.flowLayoutPanel12.Name = "flowLayoutPanel12";
-            this.flowLayoutPanel12.Size = new System.Drawing.Size(623, 48);
+            this.flowLayoutPanel12.Size = new System.Drawing.Size(527, 41);
             this.flowLayoutPanel12.TabIndex = 3;
             // 
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(3, 3);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(616, 31);
+            this.textBox5.Size = new System.Drawing.Size(522, 28);
             this.textBox5.TabIndex = 0;
             // 
             // flowLayoutPanel11
             // 
             this.flowLayoutPanel11.Controls.Add(this.label7);
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(4, 114);
+            this.flowLayoutPanel11.Location = new System.Drawing.Point(4, 100);
             this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(255, 50);
+            this.flowLayoutPanel11.Size = new System.Drawing.Size(214, 43);
             this.flowLayoutPanel11.TabIndex = 11;
             // 
             // label7
             // 
             this.label7.Location = new System.Drawing.Point(3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(253, 45);
+            this.label7.Size = new System.Drawing.Size(214, 39);
             this.label7.TabIndex = 0;
             this.label7.Text = "古物商許可証";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -537,16 +537,16 @@
             // flowLayoutPanel10
             // 
             this.flowLayoutPanel10.Controls.Add(this.label6);
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(4, 59);
+            this.flowLayoutPanel10.Location = new System.Drawing.Point(4, 52);
             this.flowLayoutPanel10.Name = "flowLayoutPanel10";
-            this.flowLayoutPanel10.Size = new System.Drawing.Size(255, 48);
+            this.flowLayoutPanel10.Size = new System.Drawing.Size(214, 41);
             this.flowLayoutPanel10.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(253, 56);
+            this.label6.Size = new System.Drawing.Size(214, 49);
             this.label6.TabIndex = 0;
             this.label6.Text = "住所";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -556,23 +556,23 @@
             this.flowLayoutPanel9.Controls.Add(this.label5);
             this.flowLayoutPanel9.Location = new System.Drawing.Point(4, 4);
             this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(255, 48);
+            this.flowLayoutPanel9.Size = new System.Drawing.Size(214, 41);
             this.flowLayoutPanel9.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(253, 56);
+            this.label5.Size = new System.Drawing.Size(214, 49);
             this.label5.TabIndex = 0;
             this.label5.Text = "氏名";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // search1
             // 
-            this.search1.Location = new System.Drawing.Point(892, 344);
+            this.search1.Location = new System.Drawing.Point(755, 301);
             this.search1.Name = "search1";
-            this.search1.Size = new System.Drawing.Size(180, 85);
+            this.search1.Size = new System.Drawing.Size(152, 74);
             this.search1.TabIndex = 3;
             this.search1.Text = "検索";
             this.search1.UseVisualStyleBackColor = true;
@@ -580,9 +580,9 @@
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(268, 344);
+            this.add.Location = new System.Drawing.Point(227, 301);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(177, 85);
+            this.add.Size = new System.Drawing.Size(150, 74);
             this.add.TabIndex = 4;
             this.add.Text = "新規登録";
             this.add.UseVisualStyleBackColor = true;
@@ -590,9 +590,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(570, 341);
+            this.button2.Location = new System.Drawing.Point(482, 298);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(191, 85);
+            this.button2.Size = new System.Drawing.Size(162, 74);
             this.button2.TabIndex = 5;
             this.button2.Text = "変更・更新";
             this.button2.UseVisualStyleBackColor = true;
@@ -600,9 +600,9 @@
             // 
             // ClientMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 475);
+            this.ClientSize = new System.Drawing.Size(996, 416);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.add);
             this.Controls.Add(this.search1);

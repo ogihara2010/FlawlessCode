@@ -32,6 +32,7 @@
             this.ReturnButton = new System.Windows.Forms.Button();
             this.signUpButton = new System.Windows.Forms.Button();
             this.changeDeleteButton = new System.Windows.Forms.Button();
+            this.mainCategoryMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,13 +49,13 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(925, 398);
+            this.dataGridView1.Size = new System.Drawing.Size(786, 398);
             this.dataGridView1.TabIndex = 7;
             // 
             // ReturnButton
             // 
             this.ReturnButton.AutoSize = true;
-            this.ReturnButton.Location = new System.Drawing.Point(37, 548);
+            this.ReturnButton.Location = new System.Drawing.Point(28, 665);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Size = new System.Drawing.Size(137, 57);
             this.ReturnButton.TabIndex = 4;
@@ -65,9 +66,9 @@
             // signUpButton
             // 
             this.signUpButton.AutoSize = true;
-            this.signUpButton.Location = new System.Drawing.Point(745, 548);
+            this.signUpButton.Location = new System.Drawing.Point(28, 508);
             this.signUpButton.Name = "signUpButton";
-            this.signUpButton.Size = new System.Drawing.Size(131, 57);
+            this.signUpButton.Size = new System.Drawing.Size(137, 57);
             this.signUpButton.TabIndex = 6;
             this.signUpButton.Text = "新規登録";
             this.signUpButton.UseVisualStyleBackColor = true;
@@ -76,19 +77,33 @@
             // changeDeleteButton
             // 
             this.changeDeleteButton.AutoSize = true;
-            this.changeDeleteButton.Location = new System.Drawing.Point(571, 548);
+            this.changeDeleteButton.Location = new System.Drawing.Point(28, 581);
             this.changeDeleteButton.Name = "changeDeleteButton";
             this.changeDeleteButton.Size = new System.Drawing.Size(137, 57);
             this.changeDeleteButton.TabIndex = 5;
-            this.changeDeleteButton.Text = "変更・削除";
+            this.changeDeleteButton.Text = "変更・無効";
             this.changeDeleteButton.UseVisualStyleBackColor = true;
             this.changeDeleteButton.Click += new System.EventHandler(this.changeDeleteButton_Click);
+            // 
+            // mainCategoryMenu
+            // 
+            this.mainCategoryMenu.AutoSize = true;
+            this.mainCategoryMenu.Location = new System.Drawing.Point(474, 507);
+            this.mainCategoryMenu.Name = "mainCategoryMenu";
+            this.mainCategoryMenu.Size = new System.Drawing.Size(145, 57);
+            this.mainCategoryMenu.TabIndex = 8;
+            this.mainCategoryMenu.Text = "大分類マスタ";
+            this.mainCategoryMenu.UseVisualStyleBackColor = true;
+            this.mainCategoryMenu.Click += new System.EventHandler(this.mainCategoryMenu_Click);
             // 
             // ItemMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 662);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(810, 761);
+            this.Controls.Add(this.mainCategoryMenu);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ReturnButton);
             this.Controls.Add(this.signUpButton);
@@ -108,5 +123,6 @@
         private System.Windows.Forms.Button ReturnButton;
         private System.Windows.Forms.Button signUpButton;
         private System.Windows.Forms.Button changeDeleteButton;
+        private System.Windows.Forms.Button mainCategoryMenu;
     }
 }

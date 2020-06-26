@@ -83,12 +83,6 @@
     <Compile Include="AddMainCategoryMenu.Designer.cs">
       <DependentUpon>AddMainCategoryMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddSubCategoryMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddSubCategoryMenu.Designer.cs">
-      <DependentUpon>AddSubCategoryMenu.cs</DependentUpon>
-    </Compile>
     <Compile Include="ClientMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +100,12 @@
     </Compile>
     <Compile Include="ClientMaster_search.Designer.cs">
       <DependentUpon>ClientMaster_search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientMaster_UPD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientMaster_UPD.Designer.cs">
+      <DependentUpon>ClientMaster_UPD.cs</DependentUpon>
     </Compile>
     <Compile Include="Client_search.cs">
       <SubType>Form</SubType>
@@ -215,12 +215,6 @@
     <Compile Include="Statement.Designer.cs">
       <DependentUpon>Statement.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubCategoryMaster.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SubCategoryMaster.Designer.cs">
-      <DependentUpon>SubCategoryMaster.cs</DependentUpon>
-    </Compile>
     <Compile Include="TaxMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,17 +241,8 @@
     <Compile Include="UpdateMainCategoryMenu.Designer.cs">
       <DependentUpon>UpdateMainCategoryMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateSubCategoryMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UpdateSubCategoryMenu.Designer.cs">
-      <DependentUpon>UpdateSubCategoryMenu.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AddMainCategoryMenu.resx">
       <DependentUpon>AddMainCategoryMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AddSubCategoryMenu.resx">
-      <DependentUpon>AddSubCategoryMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClientMaster.resx">
       <DependentUpon>ClientMaster.cs</DependentUpon>
@@ -267,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ClientMaster_search.resx">
       <DependentUpon>ClientMaster_search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientMaster_UPD.resx">
+      <DependentUpon>ClientMaster_UPD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Client_search.resx">
       <DependentUpon>Client_search.cs</DependentUpon>
@@ -325,9 +313,6 @@
     <EmbeddedResource Include="Statement.resx">
       <DependentUpon>Statement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubCategoryMaster.resx">
-      <DependentUpon>SubCategoryMaster.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TaxMaster.resx">
       <DependentUpon>TaxMaster.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,9 +330,6 @@
     </Compile>
     <EmbeddedResource Include="UpdateMainCategoryMenu.resx">
       <DependentUpon>UpdateMainCategoryMenu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UpdateSubCategoryMenu.resx">
-      <DependentUpon>UpdateSubCategoryMenu.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
