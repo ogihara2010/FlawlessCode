@@ -25,60 +25,97 @@ namespace Flawless_ex
             NpgsqlCommand cmd = new NpgsqlCommand();
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
-
-            int id = int.Parse(this.roginIdTextBox.Text);
-            string password = this.passwordTextBox.Text;
-
-
-            string sql_str = "select* from staff_m where staff_code = " + id + " ";
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn.Open();
+            int id = 0;
+            int count;
+            int invalid;
+            string pass;
 
             
-            //検索結果の数
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            adapter.Fill(dt);
-            int count = dt.Rows.Count;
 
-            DataRow row2;
-            row2 = dt.Rows[0];
-            int invalid = (int)row2["invalid"];
-            string pass = row2["password"].ToString();
-
-            if (count == 1 && password == pass)
+            if(!string.IsNullOrWhiteSpace(roginIdTextBox.Text) && !string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
-                
-
-                if (invalid != 0)
+                var result = 0;
+                var ret = int.TryParse(roginIdTextBox.Text, out result);
+                if (ret == true)
                 {
-                    
+                    id = int.Parse(roginIdTextBox.Text);
                 }
                 else
                 {
-                    DataRow row;
-                    row = dt.Rows[0];
-                    string access_auth = row["access_auth"].ToString();
-
-                    MainMenu mainMenu = new MainMenu(this, id, password, access_auth);
-                    this.Hide();
-                    mainMenu.Show();
+                    MessageBox.Show("担当者コード、パスワードが違います");
+                    return;
                 }
 
-            }
-            else { }
-            if (passwordTextBox.Text == string.Empty)
-            {
-                MessageBox.Show("パスワードを入力してください。");
-            }
-            else　if(pass != password)
-            {
-                MessageBox.Show("担当者コード,パスワードが違います");
-            }
+                string password = this.passwordTextBox.Text;
+                               
+                if(id == 0)
+                {
 
-            conn.Close();
+                }
+                else
+                {
+                    string sql_str = "select* from staff_m where staff_code = " + id + " ";
+                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.Open();
 
-            roginIdTextBox.Text = "";
-            passwordTextBox.Text = "";
+
+                    //検索結果の数
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt);
+                    count = dt.Rows.Count;
+
+                    if(count == 0)
+                    {
+                        MessageBox.Show("担当者コード、パスワードが違います");
+                        roginIdTextBox.Text = "";
+                        passwordTextBox.Text = "";
+                        return;
+                    }
+                    else { }
+
+                    DataRow row2;
+                    row2 = dt.Rows[0];
+                    invalid = (int)row2["invalid"];
+                    pass = row2["password"].ToString();
+
+                    if (count == 1 && password == pass && invalid == 0)
+                    {
+                        DataRow row;
+                        row = dt.Rows[0];
+                        string access_auth = row["access_auth"].ToString();
+
+                        MainMenu mainMenu = new MainMenu(this, id, password, access_auth);
+                        this.Hide();
+                        mainMenu.Show();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("担当者コード、パスワードが違います");
+
+                    }
+                    conn.Close();
+
+                    roginIdTextBox.Text = "";
+                    passwordTextBox.Text = "";
+                }
+
+                
+
+                
+
+            }
+            else if(!string.IsNullOrWhiteSpace(roginIdTextBox.Text))
+            {
+                MessageBox.Show("パスワードを入力してください");
+            }else if (!string.IsNullOrWhiteSpace(passwordTextBox.Text))
+            {
+                MessageBox.Show("担当者コードを入力してください");
+            }
+            else
+            {
+                MessageBox.Show("担当者コード、パスワードを入力してください");
+            }
 
         }
 
