@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox46 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -166,7 +167,6 @@
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
-            this.textBox46 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -262,6 +262,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // textBox46
+            // 
+            this.textBox46.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox46.Location = new System.Drawing.Point(961, 1283);
+            this.textBox46.Name = "textBox46";
+            this.textBox46.Size = new System.Drawing.Size(295, 40);
+            this.textBox46.TabIndex = 70;
             // 
             // button4
             // 
@@ -986,6 +994,7 @@
             this.button18.TabIndex = 140;
             this.button18.Text = "登録";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.Button18_Click);
             // 
             // button6
             // 
@@ -1569,14 +1578,6 @@
             this.label63.Size = new System.Drawing.Size(114, 33);
             this.label63.TabIndex = 70;
             this.label63.Text = "登録日";
-            // 
-            // textBox46
-            // 
-            this.textBox46.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox46.Location = new System.Drawing.Point(961, 1283);
-            this.textBox46.Name = "textBox46";
-            this.textBox46.Size = new System.Drawing.Size(295, 40);
-            this.textBox46.TabIndex = 70;
             // 
             // ClientMaster_add
             // 
