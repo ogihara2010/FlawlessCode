@@ -1013,6 +1013,7 @@
             this.button20.TabIndex = 72;
             this.button20.Text = "更新";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.Button20_Click);
             // 
             // button19
             // 
@@ -1024,6 +1025,7 @@
             this.button19.TabIndex = 71;
             this.button19.Text = "無効";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.Button19_Click);
             // 
             // button18
             // 
