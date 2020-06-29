@@ -242,10 +242,11 @@
             this.tabPage2.Controls.Add(this.label61);
             this.tabPage2.Controls.Add(this.label62);
             this.tabPage2.Controls.Add(this.label63);
-            this.tabPage2.Location = new System.Drawing.Point(4, 31);
+            this.tabPage2.Location = new System.Drawing.Point(8, 39);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1944, 1919);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage2.Size = new System.Drawing.Size(2291, 2186);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -253,9 +254,10 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button4.Location = new System.Drawing.Point(195, 1780);
+            this.button4.Location = new System.Drawing.Point(230, 2034);
+            this.button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(178, 77);
+            this.button4.Size = new System.Drawing.Size(210, 88);
             this.button4.TabIndex = 139;
             this.button4.Text = "戻る";
             this.button4.UseVisualStyleBackColor = true;
@@ -264,9 +266,10 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button6.Location = new System.Drawing.Point(860, 1772);
+            this.button6.Location = new System.Drawing.Point(1016, 2025);
+            this.button6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(188, 85);
+            this.button6.Size = new System.Drawing.Size(222, 97);
             this.button6.TabIndex = 4;
             this.button6.Text = "無効";
             this.button6.UseVisualStyleBackColor = true;
@@ -274,17 +277,19 @@
             // textBox58
             // 
             this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 60F);
-            this.textBox58.Location = new System.Drawing.Point(62, 1592);
+            this.textBox58.Location = new System.Drawing.Point(73, 1819);
+            this.textBox58.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox58.Name = "textBox58";
-            this.textBox58.Size = new System.Drawing.Size(1222, 147);
+            this.textBox58.Size = new System.Drawing.Size(1443, 167);
             this.textBox58.TabIndex = 138;
             // 
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button5.Location = new System.Drawing.Point(1684, 1772);
+            this.button5.Location = new System.Drawing.Point(1990, 2025);
+            this.button5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(163, 85);
+            this.button5.Size = new System.Drawing.Size(193, 97);
             this.button5.TabIndex = 3;
             this.button5.Text = "更新";
             this.button5.UseVisualStyleBackColor = true;
@@ -292,210 +297,236 @@
             // textBox30
             // 
             this.textBox30.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox30.Location = new System.Drawing.Point(960, 1220);
+            this.textBox30.Location = new System.Drawing.Point(1135, 1394);
+            this.textBox30.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(403, 40);
+            this.textBox30.Size = new System.Drawing.Size(476, 45);
             this.textBox30.TabIndex = 132;
             // 
             // textBox31
             // 
             this.textBox31.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox31.Location = new System.Drawing.Point(62, 1461);
+            this.textBox31.Location = new System.Drawing.Point(73, 1670);
+            this.textBox31.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(392, 40);
+            this.textBox31.Size = new System.Drawing.Size(463, 45);
             this.textBox31.TabIndex = 131;
             // 
             // textBox32
             // 
             this.textBox32.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox32.Location = new System.Drawing.Point(53, 1334);
+            this.textBox32.Location = new System.Drawing.Point(63, 1525);
+            this.textBox32.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(392, 40);
+            this.textBox32.Size = new System.Drawing.Size(463, 45);
             this.textBox32.TabIndex = 130;
             // 
             // textBox33
             // 
             this.textBox33.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox33.Location = new System.Drawing.Point(49, 1214);
+            this.textBox33.Location = new System.Drawing.Point(58, 1387);
+            this.textBox33.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox33.Name = "textBox33";
-            this.textBox33.Size = new System.Drawing.Size(392, 40);
+            this.textBox33.Size = new System.Drawing.Size(463, 45);
             this.textBox33.TabIndex = 128;
             // 
             // textBox34
             // 
             this.textBox34.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox34.Location = new System.Drawing.Point(1322, 990);
+            this.textBox34.Location = new System.Drawing.Point(1562, 1131);
+            this.textBox34.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox34.Name = "textBox34";
-            this.textBox34.Size = new System.Drawing.Size(367, 40);
+            this.textBox34.Size = new System.Drawing.Size(433, 45);
             this.textBox34.TabIndex = 120;
             // 
             // textBox35
             // 
             this.textBox35.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox35.Location = new System.Drawing.Point(1322, 869);
+            this.textBox35.Location = new System.Drawing.Point(1562, 993);
+            this.textBox35.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox35.Name = "textBox35";
-            this.textBox35.Size = new System.Drawing.Size(248, 40);
+            this.textBox35.Size = new System.Drawing.Size(292, 45);
             this.textBox35.TabIndex = 118;
             // 
             // textBox36
             // 
             this.textBox36.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox36.Location = new System.Drawing.Point(1322, 744);
+            this.textBox36.Location = new System.Drawing.Point(1562, 850);
+            this.textBox36.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox36.Name = "textBox36";
-            this.textBox36.Size = new System.Drawing.Size(246, 40);
+            this.textBox36.Size = new System.Drawing.Size(290, 45);
             this.textBox36.TabIndex = 115;
             // 
             // textBox37
             // 
             this.textBox37.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox37.Location = new System.Drawing.Point(1320, 594);
+            this.textBox37.Location = new System.Drawing.Point(1560, 679);
+            this.textBox37.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox37.Name = "textBox37";
-            this.textBox37.Size = new System.Drawing.Size(263, 40);
+            this.textBox37.Size = new System.Drawing.Size(310, 45);
             this.textBox37.TabIndex = 112;
             // 
             // textBox38
             // 
             this.textBox38.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox38.Location = new System.Drawing.Point(839, 986);
+            this.textBox38.Location = new System.Drawing.Point(992, 1127);
+            this.textBox38.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox38.Name = "textBox38";
-            this.textBox38.Size = new System.Drawing.Size(369, 40);
+            this.textBox38.Size = new System.Drawing.Size(435, 45);
             this.textBox38.TabIndex = 110;
             // 
             // textBox39
             // 
             this.textBox39.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox39.Location = new System.Drawing.Point(839, 907);
+            this.textBox39.Location = new System.Drawing.Point(992, 1037);
+            this.textBox39.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox39.Name = "textBox39";
-            this.textBox39.Size = new System.Drawing.Size(284, 40);
+            this.textBox39.Size = new System.Drawing.Size(335, 45);
             this.textBox39.TabIndex = 109;
             // 
             // textBox40
             // 
             this.textBox40.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox40.Location = new System.Drawing.Point(839, 816);
+            this.textBox40.Location = new System.Drawing.Point(992, 933);
+            this.textBox40.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox40.Name = "textBox40";
-            this.textBox40.Size = new System.Drawing.Size(362, 40);
+            this.textBox40.Size = new System.Drawing.Size(427, 45);
             this.textBox40.TabIndex = 108;
             // 
             // textBox41
             // 
             this.textBox41.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox41.Location = new System.Drawing.Point(268, 741);
+            this.textBox41.Location = new System.Drawing.Point(317, 847);
+            this.textBox41.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox41.Name = "textBox41";
-            this.textBox41.Size = new System.Drawing.Size(306, 40);
+            this.textBox41.Size = new System.Drawing.Size(361, 45);
             this.textBox41.TabIndex = 107;
             // 
             // textBox42
             // 
             this.textBox42.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox42.Location = new System.Drawing.Point(268, 986);
+            this.textBox42.Location = new System.Drawing.Point(317, 1127);
+            this.textBox42.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox42.Name = "textBox42";
-            this.textBox42.Size = new System.Drawing.Size(286, 40);
+            this.textBox42.Size = new System.Drawing.Size(337, 45);
             this.textBox42.TabIndex = 106;
             // 
             // textBox43
             // 
             this.textBox43.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox43.Location = new System.Drawing.Point(268, 905);
+            this.textBox43.Location = new System.Drawing.Point(317, 1034);
+            this.textBox43.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox43.Name = "textBox43";
-            this.textBox43.Size = new System.Drawing.Size(306, 40);
+            this.textBox43.Size = new System.Drawing.Size(361, 45);
             this.textBox43.TabIndex = 105;
             // 
             // textBox44
             // 
             this.textBox44.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox44.Location = new System.Drawing.Point(268, 819);
+            this.textBox44.Location = new System.Drawing.Point(317, 936);
+            this.textBox44.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox44.Name = "textBox44";
-            this.textBox44.Size = new System.Drawing.Size(306, 40);
+            this.textBox44.Size = new System.Drawing.Size(361, 45);
             this.textBox44.TabIndex = 104;
             // 
             // textBox45
             // 
             this.textBox45.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox45.Location = new System.Drawing.Point(268, 664);
+            this.textBox45.Location = new System.Drawing.Point(317, 759);
+            this.textBox45.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox45.Name = "textBox45";
-            this.textBox45.Size = new System.Drawing.Size(306, 40);
+            this.textBox45.Size = new System.Drawing.Size(361, 45);
             this.textBox45.TabIndex = 103;
             // 
             // textBox48
             // 
             this.textBox48.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox48.Location = new System.Drawing.Point(839, 582);
+            this.textBox48.Location = new System.Drawing.Point(992, 665);
+            this.textBox48.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox48.Name = "textBox48";
-            this.textBox48.Size = new System.Drawing.Size(277, 40);
+            this.textBox48.Size = new System.Drawing.Size(327, 45);
             this.textBox48.TabIndex = 99;
             // 
             // textBox49
             // 
             this.textBox49.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox49.Location = new System.Drawing.Point(268, 582);
+            this.textBox49.Location = new System.Drawing.Point(317, 665);
+            this.textBox49.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox49.Name = "textBox49";
-            this.textBox49.Size = new System.Drawing.Size(273, 40);
+            this.textBox49.Size = new System.Drawing.Size(322, 45);
             this.textBox49.TabIndex = 98;
             // 
             // textBox50
             // 
             this.textBox50.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox50.Location = new System.Drawing.Point(893, 166);
+            this.textBox50.Location = new System.Drawing.Point(1055, 190);
+            this.textBox50.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox50.Name = "textBox50";
-            this.textBox50.Size = new System.Drawing.Size(364, 40);
+            this.textBox50.Size = new System.Drawing.Size(429, 45);
             this.textBox50.TabIndex = 97;
             // 
             // textBox52
             // 
             this.textBox52.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox52.Location = new System.Drawing.Point(268, 502);
+            this.textBox52.Location = new System.Drawing.Point(317, 574);
+            this.textBox52.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox52.Name = "textBox52";
-            this.textBox52.Size = new System.Drawing.Size(744, 40);
+            this.textBox52.Size = new System.Drawing.Size(879, 45);
             this.textBox52.TabIndex = 95;
             // 
             // textBox53
             // 
             this.textBox53.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox53.Location = new System.Drawing.Point(268, 413);
+            this.textBox53.Location = new System.Drawing.Point(317, 472);
+            this.textBox53.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox53.Name = "textBox53";
-            this.textBox53.Size = new System.Drawing.Size(689, 40);
+            this.textBox53.Size = new System.Drawing.Size(814, 45);
             this.textBox53.TabIndex = 94;
             // 
             // textBox54
             // 
             this.textBox54.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox54.Location = new System.Drawing.Point(268, 327);
+            this.textBox54.Location = new System.Drawing.Point(317, 374);
+            this.textBox54.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox54.Name = "textBox54";
-            this.textBox54.Size = new System.Drawing.Size(220, 40);
+            this.textBox54.Size = new System.Drawing.Size(259, 45);
             this.textBox54.TabIndex = 93;
             // 
             // textBox55
             // 
             this.textBox55.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox55.Location = new System.Drawing.Point(268, 245);
+            this.textBox55.Location = new System.Drawing.Point(317, 280);
+            this.textBox55.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox55.Name = "textBox55";
-            this.textBox55.Size = new System.Drawing.Size(329, 40);
+            this.textBox55.Size = new System.Drawing.Size(388, 45);
             this.textBox55.TabIndex = 92;
             // 
             // textBox56
             // 
             this.textBox56.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox56.Location = new System.Drawing.Point(268, 166);
+            this.textBox56.Location = new System.Drawing.Point(317, 190);
+            this.textBox56.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox56.Name = "textBox56";
-            this.textBox56.Size = new System.Drawing.Size(329, 40);
+            this.textBox56.Size = new System.Drawing.Size(388, 45);
             this.textBox56.TabIndex = 91;
             // 
             // textBox57
             // 
             this.textBox57.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox57.Location = new System.Drawing.Point(268, 82);
+            this.textBox57.Location = new System.Drawing.Point(317, 94);
+            this.textBox57.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox57.Name = "textBox57";
-            this.textBox57.Size = new System.Drawing.Size(220, 40);
+            this.textBox57.Size = new System.Drawing.Size(259, 45);
             this.textBox57.TabIndex = 89;
             // 
             // label64
             // 
             this.label64.AutoSize = true;
             this.label64.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label64.Location = new System.Drawing.Point(63, 1539);
+            this.label64.Location = new System.Drawing.Point(74, 1759);
+            this.label64.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(114, 33);
+            this.label64.Size = new System.Drawing.Size(131, 38);
             this.label64.TabIndex = 137;
             this.label64.Text = "備考欄";
             // 
@@ -503,43 +534,48 @@
             // 
             this.comboBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(960, 1340);
+            this.comboBox2.Location = new System.Drawing.Point(1135, 1531);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(296, 41);
+            this.comboBox2.Size = new System.Drawing.Size(349, 45);
             this.comboBox2.TabIndex = 136;
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(1405, 1220);
+            this.button11.Location = new System.Drawing.Point(1660, 1394);
+            this.button11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(254, 45);
+            this.button11.Size = new System.Drawing.Size(300, 51);
             this.button11.TabIndex = 135;
             this.button11.Text = "ファイルの選択";
             this.button11.UseVisualStyleBackColor = true;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(502, 1455);
+            this.button12.Location = new System.Drawing.Point(593, 1663);
+            this.button12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(254, 46);
+            this.button12.Size = new System.Drawing.Size(300, 53);
             this.button12.TabIndex = 134;
             this.button12.Text = "ファイルの選択";
             this.button12.UseVisualStyleBackColor = true;
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(493, 1334);
+            this.button13.Location = new System.Drawing.Point(583, 1525);
+            this.button13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(254, 45);
+            this.button13.Size = new System.Drawing.Size(300, 51);
             this.button13.TabIndex = 133;
             this.button13.Text = "ファイルの選択";
             this.button13.UseVisualStyleBackColor = true;
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(493, 1214);
+            this.button14.Location = new System.Drawing.Point(583, 1387);
+            this.button14.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(254, 45);
+            this.button14.Size = new System.Drawing.Size(300, 51);
             this.button14.TabIndex = 129;
             this.button14.Text = "ファイルの選択";
             this.button14.UseVisualStyleBackColor = true;
@@ -548,9 +584,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label1.Location = new System.Drawing.Point(954, 1289);
+            this.label1.Location = new System.Drawing.Point(1127, 1473);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 33);
+            this.label1.Size = new System.Drawing.Size(169, 38);
             this.label1.TabIndex = 127;
             this.label1.Text = "在留期限";
             // 
@@ -558,9 +595,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label2.Location = new System.Drawing.Point(56, 1411);
+            this.label2.Location = new System.Drawing.Point(66, 1613);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(475, 33);
+            this.label2.Size = new System.Drawing.Size(547, 38);
             this.label2.TabIndex = 126;
             this.label2.Text = "納税証明書(設立1年以上の場合)";
             // 
@@ -568,9 +606,10 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label35.Location = new System.Drawing.Point(47, 1289);
+            this.label35.Location = new System.Drawing.Point(56, 1473);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(147, 33);
+            this.label35.Size = new System.Drawing.Size(169, 38);
             this.label35.TabIndex = 125;
             this.label35.Text = "印鑑証明";
             // 
@@ -578,9 +617,10 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label36.Location = new System.Drawing.Point(954, 1177);
+            this.label36.Location = new System.Drawing.Point(1127, 1345);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(156, 33);
+            this.label36.Size = new System.Drawing.Size(178, 38);
             this.label36.TabIndex = 124;
             this.label36.Text = "在留カード";
             // 
@@ -588,9 +628,10 @@
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label37.Location = new System.Drawing.Point(43, 1165);
+            this.label37.Location = new System.Drawing.Point(51, 1331);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(494, 33);
+            this.label37.Size = new System.Drawing.Size(568, 38);
             this.label37.TabIndex = 123;
             this.label37.Text = "定款、決算書、株主構成のいずれか";
             // 
@@ -599,18 +640,20 @@
             this.label38.AutoSize = true;
             this.label38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label38.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.label38.Location = new System.Drawing.Point(37, 1077);
+            this.label38.Location = new System.Drawing.Point(44, 1231);
+            this.label38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(864, 58);
+            this.label38.Size = new System.Drawing.Size(983, 68);
             this.label38.TabIndex = 122;
             this.label38.Text = "以下の項目は200万いじょうの取引をする場合入力して下さい。\r\n・定款、決算書、株主構成のいずれか、在留カード、印鑑証明、納税証明書";
             // 
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("MS UI Gothic", 9F);
-            this.button15.Location = new System.Drawing.Point(1628, 855);
+            this.button15.Location = new System.Drawing.Point(1924, 977);
+            this.button15.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(170, 46);
+            this.button15.Size = new System.Drawing.Size(201, 53);
             this.button15.TabIndex = 121;
             this.button15.Text = "ファイルの選択";
             this.button15.UseVisualStyleBackColor = true;
@@ -619,9 +662,10 @@
             // 
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label39.Location = new System.Drawing.Point(1328, 937);
+            this.label39.Location = new System.Drawing.Point(1569, 1071);
+            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(213, 33);
+            this.label39.Size = new System.Drawing.Size(245, 38);
             this.label39.TabIndex = 119;
             this.label39.Text = "身分証番号※";
             // 
@@ -629,17 +673,19 @@
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label40.Location = new System.Drawing.Point(1328, 822);
+            this.label40.Location = new System.Drawing.Point(1569, 939);
+            this.label40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(231, 33);
+            this.label40.Size = new System.Drawing.Size(266, 38);
             this.label40.TabIndex = 117;
             this.label40.Text = "顔つき身分証※";
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(1628, 735);
+            this.button16.Location = new System.Drawing.Point(1924, 840);
+            this.button16.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(165, 48);
+            this.button16.Size = new System.Drawing.Size(195, 55);
             this.button16.TabIndex = 116;
             this.button16.Text = "ファイルの選択";
             this.button16.UseVisualStyleBackColor = true;
@@ -648,17 +694,19 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label41.Location = new System.Drawing.Point(1328, 682);
+            this.label41.Location = new System.Drawing.Point(1569, 779);
+            this.label41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(246, 33);
+            this.label41.Size = new System.Drawing.Size(283, 38);
             this.label41.TabIndex = 114;
             this.label41.Text = "古物商許可証※";
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(1628, 589);
+            this.button17.Location = new System.Drawing.Point(1924, 673);
+            this.button17.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(165, 52);
+            this.button17.Size = new System.Drawing.Size(195, 59);
             this.button17.TabIndex = 113;
             this.button17.Text = "ファイルの選択";
             this.button17.UseVisualStyleBackColor = true;
@@ -667,9 +715,10 @@
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label42.Location = new System.Drawing.Point(1314, 528);
+            this.label42.Location = new System.Drawing.Point(1553, 603);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(213, 33);
+            this.label42.Size = new System.Drawing.Size(245, 38);
             this.label42.TabIndex = 111;
             this.label42.Text = "登記簿謄本※";
             // 
@@ -677,9 +726,10 @@
             // 
             this.label44.AutoSize = true;
             this.label44.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label44.Location = new System.Drawing.Point(601, 822);
+            this.label44.Location = new System.Drawing.Point(710, 939);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(114, 33);
+            this.label44.Size = new System.Drawing.Size(131, 38);
             this.label44.TabIndex = 90;
             this.label44.Text = "支店名";
             // 
@@ -687,9 +737,10 @@
             // 
             this.label45.AutoSize = true;
             this.label45.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label45.Location = new System.Drawing.Point(601, 989);
+            this.label45.Location = new System.Drawing.Point(710, 1130);
+            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(197, 33);
+            this.label45.Size = new System.Drawing.Size(226, 38);
             this.label45.TabIndex = 88;
             this.label45.Text = "口座名義カナ";
             // 
@@ -697,9 +748,10 @@
             // 
             this.label46.AutoSize = true;
             this.label46.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label46.Location = new System.Drawing.Point(31, 992);
+            this.label46.Location = new System.Drawing.Point(37, 1134);
+            this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(147, 33);
+            this.label46.Size = new System.Drawing.Size(169, 38);
             this.label46.TabIndex = 87;
             this.label46.Text = "口座名義";
             // 
@@ -707,9 +759,10 @@
             // 
             this.label47.AutoSize = true;
             this.label47.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label47.Location = new System.Drawing.Point(594, 907);
+            this.label47.Location = new System.Drawing.Point(702, 1037);
+            this.label47.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(147, 33);
+            this.label47.Size = new System.Drawing.Size(169, 38);
             this.label47.TabIndex = 86;
             this.label47.Text = "口座番号";
             // 
@@ -717,9 +770,10 @@
             // 
             this.label48.AutoSize = true;
             this.label48.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label48.Location = new System.Drawing.Point(31, 907);
+            this.label48.Location = new System.Drawing.Point(37, 1037);
+            this.label48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(147, 33);
+            this.label48.Size = new System.Drawing.Size(169, 38);
             this.label48.TabIndex = 85;
             this.label48.Text = "預金種別";
             // 
@@ -727,9 +781,10 @@
             // 
             this.label49.AutoSize = true;
             this.label49.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label49.Location = new System.Drawing.Point(31, 825);
+            this.label49.Location = new System.Drawing.Point(37, 943);
+            this.label49.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(180, 33);
+            this.label49.Size = new System.Drawing.Size(207, 38);
             this.label49.TabIndex = 84;
             this.label49.Text = "金融機関名";
             // 
@@ -737,9 +792,10 @@
             // 
             this.label50.AutoSize = true;
             this.label50.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label50.Location = new System.Drawing.Point(31, 744);
+            this.label50.Location = new System.Drawing.Point(37, 850);
+            this.label50.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(114, 33);
+            this.label50.Size = new System.Drawing.Size(131, 38);
             this.label50.TabIndex = 83;
             this.label50.Text = "職業※";
             // 
@@ -747,9 +803,10 @@
             // 
             this.label51.AutoSize = true;
             this.label51.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label51.Location = new System.Drawing.Point(31, 667);
+            this.label51.Location = new System.Drawing.Point(37, 762);
+            this.label51.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(191, 33);
+            this.label51.Size = new System.Drawing.Size(219, 38);
             this.label51.TabIndex = 82;
             this.label51.Text = "メールアドレス";
             // 
@@ -757,9 +814,10 @@
             // 
             this.label52.AutoSize = true;
             this.label52.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label52.Location = new System.Drawing.Point(601, 584);
+            this.label52.Location = new System.Drawing.Point(710, 667);
+            this.label52.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(140, 33);
+            this.label52.Size = new System.Drawing.Size(161, 38);
             this.label52.TabIndex = 81;
             this.label52.Text = "FAX番号";
             // 
@@ -767,9 +825,10 @@
             // 
             this.label53.AutoSize = true;
             this.label53.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label53.Location = new System.Drawing.Point(31, 588);
+            this.label53.Location = new System.Drawing.Point(37, 672);
+            this.label53.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(180, 33);
+            this.label53.Size = new System.Drawing.Size(207, 38);
             this.label53.TabIndex = 80;
             this.label53.Text = "電話番号※";
             // 
@@ -777,9 +836,10 @@
             // 
             this.label55.AutoSize = true;
             this.label55.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label55.Location = new System.Drawing.Point(31, 508);
+            this.label55.Location = new System.Drawing.Point(37, 581);
+            this.label55.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(164, 33);
+            this.label55.Size = new System.Drawing.Size(188, 38);
             this.label55.TabIndex = 78;
             this.label55.Text = "住所カナ※";
             // 
@@ -787,9 +847,10 @@
             // 
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label56.Location = new System.Drawing.Point(31, 419);
+            this.label56.Location = new System.Drawing.Point(37, 479);
+            this.label56.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(114, 33);
+            this.label56.Size = new System.Drawing.Size(131, 38);
             this.label56.TabIndex = 77;
             this.label56.Text = "住所※";
             // 
@@ -797,9 +858,10 @@
             // 
             this.label57.AutoSize = true;
             this.label57.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label57.Location = new System.Drawing.Point(31, 327);
+            this.label57.Location = new System.Drawing.Point(37, 374);
+            this.label57.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(180, 33);
+            this.label57.Size = new System.Drawing.Size(207, 38);
             this.label57.TabIndex = 76;
             this.label57.Text = "郵便番号※";
             // 
@@ -807,9 +869,10 @@
             // 
             this.label58.AutoSize = true;
             this.label58.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label58.Location = new System.Drawing.Point(689, 172);
+            this.label58.Location = new System.Drawing.Point(814, 197);
+            this.label58.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(147, 33);
+            this.label58.Size = new System.Drawing.Size(169, 38);
             this.label58.TabIndex = 75;
             this.label58.Text = "生年月日";
             // 
@@ -817,9 +880,10 @@
             // 
             this.label59.AutoSize = true;
             this.label59.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label59.Location = new System.Drawing.Point(31, 245);
+            this.label59.Location = new System.Drawing.Point(37, 280);
+            this.label59.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(164, 33);
+            this.label59.Size = new System.Drawing.Size(188, 38);
             this.label59.TabIndex = 74;
             this.label59.Text = "氏名カナ※";
             // 
@@ -827,9 +891,10 @@
             // 
             this.label61.AutoSize = true;
             this.label61.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label61.Location = new System.Drawing.Point(31, 169);
+            this.label61.Location = new System.Drawing.Point(37, 193);
+            this.label61.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(114, 33);
+            this.label61.Size = new System.Drawing.Size(131, 38);
             this.label61.TabIndex = 72;
             this.label61.Text = "氏名※";
             // 
@@ -837,9 +902,10 @@
             // 
             this.label62.AutoSize = true;
             this.label62.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label62.Location = new System.Drawing.Point(1632, 34);
+            this.label62.Location = new System.Drawing.Point(1929, 39);
+            this.label62.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(285, 33);
+            this.label62.Size = new System.Drawing.Size(328, 38);
             this.label62.TabIndex = 71;
             this.label62.Text = "※は必須項目です。";
             // 
@@ -847,9 +913,10 @@
             // 
             this.label63.AutoSize = true;
             this.label63.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label63.Location = new System.Drawing.Point(31, 88);
+            this.label63.Location = new System.Drawing.Point(37, 101);
+            this.label63.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(114, 33);
+            this.label63.Size = new System.Drawing.Size(131, 38);
             this.label63.TabIndex = 70;
             this.label63.Text = "登録日";
             // 
@@ -927,10 +994,11 @@
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 31);
+            this.tabPage1.Location = new System.Drawing.Point(8, 39);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1944, 1919);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage1.Size = new System.Drawing.Size(2291, 2186);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -938,29 +1006,34 @@
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button20.Location = new System.Drawing.Point(1642, 1742);
+            this.button20.Location = new System.Drawing.Point(1941, 1991);
+            this.button20.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(188, 89);
+            this.button20.Size = new System.Drawing.Size(222, 102);
             this.button20.TabIndex = 72;
             this.button20.Text = "更新";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.Button20_Click);
             // 
             // button19
             // 
             this.button19.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button19.Location = new System.Drawing.Point(862, 1740);
+            this.button19.Location = new System.Drawing.Point(1019, 1989);
+            this.button19.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(174, 90);
+            this.button19.Size = new System.Drawing.Size(206, 103);
             this.button19.TabIndex = 71;
             this.button19.Text = "無効";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.Button19_Click);
             // 
             // button18
             // 
             this.button18.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button18.Location = new System.Drawing.Point(98, 1741);
+            this.button18.Location = new System.Drawing.Point(116, 1990);
+            this.button18.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(161, 90);
+            this.button18.Size = new System.Drawing.Size(190, 103);
             this.button18.TabIndex = 70;
             this.button18.Text = "戻る";
             this.button18.UseVisualStyleBackColor = true;
@@ -970,34 +1043,38 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(955, 1279);
+            this.comboBox1.Location = new System.Drawing.Point(1129, 1462);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(296, 41);
+            this.comboBox1.Size = new System.Drawing.Size(349, 45);
             this.comboBox1.TabIndex = 69;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(1439, 1144);
+            this.button10.Location = new System.Drawing.Point(1701, 1307);
+            this.button10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(254, 45);
+            this.button10.Size = new System.Drawing.Size(300, 51);
             this.button10.TabIndex = 68;
             this.button10.Text = "ファイルの選択";
             this.button10.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(483, 1430);
+            this.button9.Location = new System.Drawing.Point(571, 1634);
+            this.button9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(254, 46);
+            this.button9.Size = new System.Drawing.Size(300, 53);
             this.button9.TabIndex = 67;
             this.button9.Text = "ファイルの選択";
             this.button9.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(495, 1275);
+            this.button8.Location = new System.Drawing.Point(585, 1457);
+            this.button8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(254, 45);
+            this.button8.Size = new System.Drawing.Size(300, 51);
             this.button8.TabIndex = 66;
             this.button8.Text = "ファイルの選択";
             this.button8.UseVisualStyleBackColor = true;
@@ -1005,250 +1082,281 @@
             // textBox29
             // 
             this.textBox29.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox29.Location = new System.Drawing.Point(962, 1153);
+            this.textBox29.Location = new System.Drawing.Point(1137, 1318);
+            this.textBox29.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox29.Name = "textBox29";
-            this.textBox29.Size = new System.Drawing.Size(403, 40);
+            this.textBox29.Size = new System.Drawing.Size(476, 45);
             this.textBox29.TabIndex = 64;
             // 
             // textBox28
             // 
             this.textBox28.Font = new System.Drawing.Font("MS UI Gothic", 60F);
-            this.textBox28.Location = new System.Drawing.Point(67, 1555);
+            this.textBox28.Location = new System.Drawing.Point(79, 1777);
+            this.textBox28.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(1222, 147);
+            this.textBox28.Size = new System.Drawing.Size(1443, 167);
             this.textBox28.TabIndex = 63;
             // 
             // textBox27
             // 
             this.textBox27.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox27.Location = new System.Drawing.Point(67, 1418);
+            this.textBox27.Location = new System.Drawing.Point(79, 1621);
+            this.textBox27.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(392, 40);
+            this.textBox27.Size = new System.Drawing.Size(463, 45);
             this.textBox27.TabIndex = 61;
             // 
             // textBox26
             // 
             this.textBox26.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox26.Location = new System.Drawing.Point(67, 1289);
+            this.textBox26.Location = new System.Drawing.Point(79, 1473);
+            this.textBox26.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(392, 40);
+            this.textBox26.Size = new System.Drawing.Size(463, 45);
             this.textBox26.TabIndex = 60;
             // 
             // textBox25
             // 
             this.textBox25.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox25.Location = new System.Drawing.Point(67, 1153);
+            this.textBox25.Location = new System.Drawing.Point(79, 1318);
+            this.textBox25.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(392, 40);
+            this.textBox25.Size = new System.Drawing.Size(463, 45);
             this.textBox25.TabIndex = 58;
             // 
             // textBox24
             // 
             this.textBox24.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox24.Location = new System.Drawing.Point(1321, 910);
+            this.textBox24.Location = new System.Drawing.Point(1561, 1040);
+            this.textBox24.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(367, 40);
+            this.textBox24.Size = new System.Drawing.Size(433, 45);
             this.textBox24.TabIndex = 50;
             // 
             // textBox23
             // 
             this.textBox23.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox23.Location = new System.Drawing.Point(1321, 794);
+            this.textBox23.Location = new System.Drawing.Point(1561, 907);
+            this.textBox23.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(248, 40);
+            this.textBox23.Size = new System.Drawing.Size(292, 45);
             this.textBox23.TabIndex = 48;
             // 
             // textBox22
             // 
             this.textBox22.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox22.Location = new System.Drawing.Point(1321, 681);
+            this.textBox22.Location = new System.Drawing.Point(1561, 778);
+            this.textBox22.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(246, 40);
+            this.textBox22.Size = new System.Drawing.Size(290, 45);
             this.textBox22.TabIndex = 45;
             // 
             // textBox21
             // 
             this.textBox21.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox21.Location = new System.Drawing.Point(1321, 579);
+            this.textBox21.Location = new System.Drawing.Point(1561, 662);
+            this.textBox21.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(263, 40);
+            this.textBox21.Size = new System.Drawing.Size(310, 45);
             this.textBox21.TabIndex = 42;
             // 
             // textBox20
             // 
             this.textBox20.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox20.Location = new System.Drawing.Point(837, 890);
+            this.textBox20.Location = new System.Drawing.Point(989, 1017);
+            this.textBox20.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(369, 40);
+            this.textBox20.Size = new System.Drawing.Size(435, 45);
             this.textBox20.TabIndex = 40;
             // 
             // textBox19
             // 
             this.textBox19.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox19.Location = new System.Drawing.Point(837, 814);
+            this.textBox19.Location = new System.Drawing.Point(989, 930);
+            this.textBox19.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(284, 40);
+            this.textBox19.Size = new System.Drawing.Size(335, 45);
             this.textBox19.TabIndex = 39;
             // 
             // textBox18
             // 
             this.textBox18.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox18.Location = new System.Drawing.Point(837, 742);
+            this.textBox18.Location = new System.Drawing.Point(989, 848);
+            this.textBox18.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox18.Name = "textBox18";
-            this.textBox18.Size = new System.Drawing.Size(362, 40);
+            this.textBox18.Size = new System.Drawing.Size(427, 45);
             this.textBox18.TabIndex = 38;
             // 
             // textBox17
             // 
             this.textBox17.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox17.Location = new System.Drawing.Point(837, 671);
+            this.textBox17.Location = new System.Drawing.Point(989, 767);
+            this.textBox17.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(450, 40);
+            this.textBox17.Size = new System.Drawing.Size(531, 45);
             this.textBox17.TabIndex = 37;
             // 
             // textBox16
             // 
             this.textBox16.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox16.Location = new System.Drawing.Point(273, 890);
+            this.textBox16.Location = new System.Drawing.Point(323, 1017);
+            this.textBox16.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(286, 40);
+            this.textBox16.Size = new System.Drawing.Size(337, 45);
             this.textBox16.TabIndex = 36;
             // 
             // textBox15
             // 
             this.textBox15.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox15.Location = new System.Drawing.Point(272, 813);
+            this.textBox15.Location = new System.Drawing.Point(321, 929);
+            this.textBox15.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(306, 40);
+            this.textBox15.Size = new System.Drawing.Size(361, 45);
             this.textBox15.TabIndex = 35;
             // 
             // textBox14
             // 
             this.textBox14.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox14.Location = new System.Drawing.Point(272, 742);
+            this.textBox14.Location = new System.Drawing.Point(321, 848);
+            this.textBox14.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(306, 40);
+            this.textBox14.Size = new System.Drawing.Size(361, 45);
             this.textBox14.TabIndex = 34;
             // 
             // textBox13
             // 
             this.textBox13.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox13.Location = new System.Drawing.Point(273, 671);
+            this.textBox13.Location = new System.Drawing.Point(323, 767);
+            this.textBox13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(306, 40);
+            this.textBox13.Size = new System.Drawing.Size(361, 45);
             this.textBox13.TabIndex = 33;
             // 
             // textBox12
             // 
             this.textBox12.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox12.Location = new System.Drawing.Point(837, 523);
+            this.textBox12.Location = new System.Drawing.Point(989, 598);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(241, 40);
+            this.textBox12.Size = new System.Drawing.Size(284, 45);
             this.textBox12.TabIndex = 32;
             // 
             // textBox11
             // 
             this.textBox11.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox11.Location = new System.Drawing.Point(273, 523);
+            this.textBox11.Location = new System.Drawing.Point(323, 598);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(273, 40);
+            this.textBox11.Size = new System.Drawing.Size(322, 45);
             this.textBox11.TabIndex = 31;
             // 
             // textBox10
             // 
             this.textBox10.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox10.Location = new System.Drawing.Point(837, 598);
+            this.textBox10.Location = new System.Drawing.Point(989, 683);
+            this.textBox10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(277, 40);
+            this.textBox10.Size = new System.Drawing.Size(327, 45);
             this.textBox10.TabIndex = 29;
             // 
             // textBox9
             // 
             this.textBox9.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox9.Location = new System.Drawing.Point(272, 598);
+            this.textBox9.Location = new System.Drawing.Point(321, 683);
+            this.textBox9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(273, 40);
+            this.textBox9.Size = new System.Drawing.Size(322, 45);
             this.textBox9.TabIndex = 28;
             // 
             // textBox8
             // 
             this.textBox8.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox8.Location = new System.Drawing.Point(887, 220);
+            this.textBox8.Location = new System.Drawing.Point(1048, 251);
+            this.textBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(364, 40);
+            this.textBox8.Size = new System.Drawing.Size(429, 45);
             this.textBox8.TabIndex = 27;
             // 
             // textBox7
             // 
             this.textBox7.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox7.Location = new System.Drawing.Point(887, 151);
+            this.textBox7.Location = new System.Drawing.Point(1048, 173);
+            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(282, 40);
+            this.textBox7.Size = new System.Drawing.Size(333, 45);
             this.textBox7.TabIndex = 26;
             // 
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox6.Location = new System.Drawing.Point(272, 449);
+            this.textBox6.Location = new System.Drawing.Point(321, 513);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(744, 40);
+            this.textBox6.Size = new System.Drawing.Size(879, 45);
             this.textBox6.TabIndex = 25;
             // 
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox5.Location = new System.Drawing.Point(272, 379);
+            this.textBox5.Location = new System.Drawing.Point(321, 433);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(689, 40);
+            this.textBox5.Size = new System.Drawing.Size(814, 45);
             this.textBox5.TabIndex = 24;
             // 
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox4.Location = new System.Drawing.Point(273, 304);
+            this.textBox4.Location = new System.Drawing.Point(323, 347);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(220, 40);
+            this.textBox4.Size = new System.Drawing.Size(259, 45);
             this.textBox4.TabIndex = 23;
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox3.Location = new System.Drawing.Point(272, 220);
+            this.textBox3.Location = new System.Drawing.Point(321, 251);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(329, 40);
+            this.textBox3.Size = new System.Drawing.Size(388, 45);
             this.textBox3.TabIndex = 22;
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox2.Location = new System.Drawing.Point(272, 151);
+            this.textBox2.Location = new System.Drawing.Point(321, 173);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(329, 40);
+            this.textBox2.Size = new System.Drawing.Size(388, 45);
             this.textBox2.TabIndex = 21;
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox1.Location = new System.Drawing.Point(272, 70);
+            this.textBox1.Location = new System.Drawing.Point(321, 80);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 40);
+            this.textBox1.Size = new System.Drawing.Size(259, 45);
             this.textBox1.TabIndex = 19;
             // 
             // label34
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label34.Location = new System.Drawing.Point(47, 1499);
+            this.label34.Location = new System.Drawing.Point(56, 1713);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(114, 33);
+            this.label34.Size = new System.Drawing.Size(131, 38);
             this.label34.TabIndex = 62;
             this.label34.Text = "備考欄";
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(495, 1154);
+            this.button7.Location = new System.Drawing.Point(585, 1319);
+            this.button7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(254, 45);
+            this.button7.Size = new System.Drawing.Size(300, 51);
             this.button7.TabIndex = 59;
             this.button7.Text = "ファイルの選択";
             this.button7.UseVisualStyleBackColor = true;
@@ -1257,9 +1365,10 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label33.Location = new System.Drawing.Point(956, 1237);
+            this.label33.Location = new System.Drawing.Point(1130, 1414);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(147, 33);
+            this.label33.Size = new System.Drawing.Size(169, 38);
             this.label33.TabIndex = 57;
             this.label33.Text = "在留期限";
             // 
@@ -1267,9 +1376,10 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label32.Location = new System.Drawing.Point(47, 1365);
+            this.label32.Location = new System.Drawing.Point(56, 1560);
+            this.label32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(475, 33);
+            this.label32.Size = new System.Drawing.Size(547, 38);
             this.label32.TabIndex = 56;
             this.label32.Text = "納税証明書(設立1年以上の場合)";
             // 
@@ -1277,9 +1387,10 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label31.Location = new System.Drawing.Point(47, 1229);
+            this.label31.Location = new System.Drawing.Point(56, 1405);
+            this.label31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(147, 33);
+            this.label31.Size = new System.Drawing.Size(169, 38);
             this.label31.TabIndex = 55;
             this.label31.Text = "印鑑証明";
             // 
@@ -1287,9 +1398,10 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label30.Location = new System.Drawing.Point(956, 1101);
+            this.label30.Location = new System.Drawing.Point(1130, 1258);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(156, 33);
+            this.label30.Size = new System.Drawing.Size(178, 38);
             this.label30.TabIndex = 54;
             this.label30.Text = "在留カード";
             // 
@@ -1297,9 +1409,10 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label29.Location = new System.Drawing.Point(44, 1101);
+            this.label29.Location = new System.Drawing.Point(52, 1258);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(494, 33);
+            this.label29.Size = new System.Drawing.Size(568, 38);
             this.label29.TabIndex = 53;
             this.label29.Text = "定款、決算書、株主構成のいずれか";
             // 
@@ -1308,18 +1421,20 @@
             this.label28.AutoSize = true;
             this.label28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label28.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.label28.Location = new System.Drawing.Point(50, 987);
+            this.label28.Location = new System.Drawing.Point(59, 1128);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(864, 58);
+            this.label28.Size = new System.Drawing.Size(983, 68);
             this.label28.TabIndex = 52;
             this.label28.Text = "以下の項目は200万いじょうの取引をする場合入力して下さい。\r\n・定款、決算書、株主構成のいずれか、在留カード、印鑑証明、納税証明書";
             // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("MS UI Gothic", 9F);
-            this.button3.Location = new System.Drawing.Point(1714, 910);
+            this.button3.Location = new System.Drawing.Point(2026, 1040);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(170, 46);
+            this.button3.Size = new System.Drawing.Size(201, 53);
             this.button3.TabIndex = 51;
             this.button3.Text = "ファイルの選択";
             this.button3.UseVisualStyleBackColor = true;
@@ -1328,9 +1443,10 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label27.Location = new System.Drawing.Point(1315, 851);
+            this.label27.Location = new System.Drawing.Point(1554, 973);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(541, 33);
+            this.label27.Size = new System.Drawing.Size(624, 38);
             this.label27.TabIndex = 49;
             this.label27.Text = "身分証明書または顔つき身分証明書※";
             // 
@@ -1338,17 +1454,19 @@
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label26.Location = new System.Drawing.Point(1328, 742);
+            this.label26.Location = new System.Drawing.Point(1569, 848);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(180, 33);
+            this.label26.Size = new System.Drawing.Size(207, 38);
             this.label26.TabIndex = 47;
             this.label26.Text = "古物番号※";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1623, 696);
+            this.button2.Location = new System.Drawing.Point(1918, 795);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(165, 48);
+            this.button2.Size = new System.Drawing.Size(195, 55);
             this.button2.TabIndex = 46;
             this.button2.Text = "ファイルの選択";
             this.button2.UseVisualStyleBackColor = true;
@@ -1357,17 +1475,19 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label25.Location = new System.Drawing.Point(1328, 637);
+            this.label25.Location = new System.Drawing.Point(1569, 728);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(246, 33);
+            this.label25.Size = new System.Drawing.Size(283, 38);
             this.label25.TabIndex = 44;
             this.label25.Text = "古物商許可証※";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1623, 576);
+            this.button1.Location = new System.Drawing.Point(1918, 658);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(165, 52);
+            this.button1.Size = new System.Drawing.Size(195, 59);
             this.button1.TabIndex = 43;
             this.button1.Text = "ファイルの選択";
             this.button1.UseVisualStyleBackColor = true;
@@ -1376,9 +1496,10 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label24.Location = new System.Drawing.Point(1315, 526);
+            this.label24.Location = new System.Drawing.Point(1554, 601);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(213, 33);
+            this.label24.Size = new System.Drawing.Size(245, 38);
             this.label24.TabIndex = 41;
             this.label24.Text = "登記簿謄本※";
             // 
@@ -1386,9 +1507,10 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label23.Location = new System.Drawing.Point(595, 526);
+            this.label23.Location = new System.Drawing.Point(703, 601);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(213, 33);
+            this.label23.Size = new System.Drawing.Size(245, 38);
             this.label23.TabIndex = 30;
             this.label23.Text = "担当者名義※";
             // 
@@ -1396,9 +1518,10 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label22.Location = new System.Drawing.Point(595, 742);
+            this.label22.Location = new System.Drawing.Point(703, 848);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(114, 33);
+            this.label22.Size = new System.Drawing.Size(131, 38);
             this.label22.TabIndex = 20;
             this.label22.Text = "支店名";
             // 
@@ -1406,9 +1529,10 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label21.Location = new System.Drawing.Point(595, 893);
+            this.label21.Location = new System.Drawing.Point(703, 1021);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(197, 33);
+            this.label21.Size = new System.Drawing.Size(226, 38);
             this.label21.TabIndex = 18;
             this.label21.Text = "口座名義カナ";
             // 
@@ -1416,9 +1540,10 @@
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label20.Location = new System.Drawing.Point(29, 893);
+            this.label20.Location = new System.Drawing.Point(34, 1021);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(147, 33);
+            this.label20.Size = new System.Drawing.Size(169, 38);
             this.label20.TabIndex = 17;
             this.label20.Text = "口座名義";
             // 
@@ -1426,9 +1551,10 @@
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label19.Location = new System.Drawing.Point(595, 814);
+            this.label19.Location = new System.Drawing.Point(703, 930);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(147, 33);
+            this.label19.Size = new System.Drawing.Size(169, 38);
             this.label19.TabIndex = 16;
             this.label19.Text = "口座番号";
             // 
@@ -1436,9 +1562,10 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label18.Location = new System.Drawing.Point(30, 814);
+            this.label18.Location = new System.Drawing.Point(35, 930);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(147, 33);
+            this.label18.Size = new System.Drawing.Size(169, 38);
             this.label18.TabIndex = 15;
             this.label18.Text = "預金種別";
             // 
@@ -1446,9 +1573,10 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label17.Location = new System.Drawing.Point(29, 742);
+            this.label17.Location = new System.Drawing.Point(34, 848);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(180, 33);
+            this.label17.Size = new System.Drawing.Size(207, 38);
             this.label17.TabIndex = 14;
             this.label17.Text = "金融機関名";
             // 
@@ -1456,9 +1584,10 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label16.Location = new System.Drawing.Point(595, 674);
+            this.label16.Location = new System.Drawing.Point(703, 770);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(75, 33);
+            this.label16.Size = new System.Drawing.Size(85, 38);
             this.label16.TabIndex = 13;
             this.label16.Text = "URL";
             // 
@@ -1466,9 +1595,10 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label15.Location = new System.Drawing.Point(32, 674);
+            this.label15.Location = new System.Drawing.Point(38, 770);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(191, 33);
+            this.label15.Size = new System.Drawing.Size(219, 38);
             this.label15.TabIndex = 12;
             this.label15.Text = "メールアドレス";
             // 
@@ -1476,9 +1606,10 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label14.Location = new System.Drawing.Point(595, 601);
+            this.label14.Location = new System.Drawing.Point(703, 687);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(140, 33);
+            this.label14.Size = new System.Drawing.Size(161, 38);
             this.label14.TabIndex = 11;
             this.label14.Text = "FAX番号";
             // 
@@ -1486,9 +1617,10 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label13.Location = new System.Drawing.Point(32, 601);
+            this.label13.Location = new System.Drawing.Point(38, 687);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(180, 33);
+            this.label13.Size = new System.Drawing.Size(207, 38);
             this.label13.TabIndex = 10;
             this.label13.Text = "電話番号※";
             // 
@@ -1496,9 +1628,10 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label12.Location = new System.Drawing.Point(32, 526);
+            this.label12.Location = new System.Drawing.Point(38, 601);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(81, 33);
+            this.label12.Size = new System.Drawing.Size(93, 38);
             this.label12.TabIndex = 9;
             this.label12.Text = "役職";
             // 
@@ -1506,9 +1639,10 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label11.Location = new System.Drawing.Point(32, 448);
+            this.label11.Location = new System.Drawing.Point(38, 512);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(164, 33);
+            this.label11.Size = new System.Drawing.Size(188, 38);
             this.label11.TabIndex = 8;
             this.label11.Text = "住所カナ※";
             // 
@@ -1516,9 +1650,10 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label10.Location = new System.Drawing.Point(32, 382);
+            this.label10.Location = new System.Drawing.Point(38, 437);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(114, 33);
+            this.label10.Size = new System.Drawing.Size(131, 38);
             this.label10.TabIndex = 7;
             this.label10.Text = "住所※";
             // 
@@ -1526,9 +1661,10 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label9.Location = new System.Drawing.Point(32, 307);
+            this.label9.Location = new System.Drawing.Point(38, 351);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(180, 33);
+            this.label9.Size = new System.Drawing.Size(207, 38);
             this.label9.TabIndex = 6;
             this.label9.Text = "郵便番号※";
             // 
@@ -1536,9 +1672,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label8.Location = new System.Drawing.Point(678, 223);
+            this.label8.Location = new System.Drawing.Point(801, 255);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(164, 33);
+            this.label8.Size = new System.Drawing.Size(188, 38);
             this.label8.TabIndex = 5;
             this.label8.Text = "店舗名カナ";
             // 
@@ -1546,9 +1683,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label7.Location = new System.Drawing.Point(29, 223);
+            this.label7.Location = new System.Drawing.Point(34, 255);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(197, 33);
+            this.label7.Size = new System.Drawing.Size(226, 38);
             this.label7.TabIndex = 4;
             this.label7.Text = "会社名カナ※";
             // 
@@ -1556,9 +1694,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label6.Location = new System.Drawing.Point(678, 151);
+            this.label6.Location = new System.Drawing.Point(801, 173);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(114, 33);
+            this.label6.Size = new System.Drawing.Size(131, 38);
             this.label6.TabIndex = 3;
             this.label6.Text = "店舗名";
             // 
@@ -1566,9 +1705,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label5.Location = new System.Drawing.Point(29, 151);
+            this.label5.Location = new System.Drawing.Point(34, 173);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(147, 33);
+            this.label5.Size = new System.Drawing.Size(169, 38);
             this.label5.TabIndex = 2;
             this.label5.Text = "会社名※";
             // 
@@ -1576,9 +1716,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label4.Location = new System.Drawing.Point(1647, 32);
+            this.label4.Location = new System.Drawing.Point(1946, 37);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(285, 33);
+            this.label4.Size = new System.Drawing.Size(328, 38);
             this.label4.TabIndex = 1;
             this.label4.Text = "※は必須項目です。";
             // 
@@ -1586,9 +1727,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label3.Location = new System.Drawing.Point(29, 70);
+            this.label3.Location = new System.Drawing.Point(34, 80);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 33);
+            this.label3.Size = new System.Drawing.Size(131, 38);
             this.label3.TabIndex = 0;
             this.label3.Text = "登録日";
             // 
@@ -1596,19 +1738,21 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(14, 14);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1952, 1954);
+            this.tabControl1.Size = new System.Drawing.Size(2307, 2233);
             this.tabControl1.TabIndex = 1;
             // 
             // ClientMaster_UPD
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1990, 1991);
+            this.ClientSize = new System.Drawing.Size(2352, 2275);
             this.Controls.Add(this.tabControl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster_UPD";
             this.Text = "顧客マスタメンテナンス　更新";
             this.tabPage2.ResumeLayout(false);
