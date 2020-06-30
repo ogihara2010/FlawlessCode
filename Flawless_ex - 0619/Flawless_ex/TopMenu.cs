@@ -1,7 +1,6 @@
 ﻿using Npgsql;
 using System;
 using System.Data;
-using System.Data.SqlTypes;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -30,9 +29,9 @@ namespace Flawless_ex
             int invalid;
             string pass;
 
-            
 
-            if(!string.IsNullOrWhiteSpace(roginIdTextBox.Text) && !string.IsNullOrWhiteSpace(passwordTextBox.Text))
+
+            if (!string.IsNullOrWhiteSpace(roginIdTextBox.Text) && !string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
                 var result = 0;
                 var ret = int.TryParse(roginIdTextBox.Text, out result);
@@ -47,8 +46,8 @@ namespace Flawless_ex
                 }
 
                 string password = this.passwordTextBox.Text;
-                               
-                if(id == 0)
+
+                if (id == 0)
                 {
 
                 }
@@ -64,7 +63,7 @@ namespace Flawless_ex
                     adapter.Fill(dt);
                     count = dt.Rows.Count;
 
-                    if(count == 0)
+                    if (count == 0)
                     {
                         MessageBox.Show("担当者コード、パスワードが違います");
                         roginIdTextBox.Text = "";
@@ -100,15 +99,16 @@ namespace Flawless_ex
                     passwordTextBox.Text = "";
                 }
 
-                
 
-                
+
+
 
             }
-            else if(!string.IsNullOrWhiteSpace(roginIdTextBox.Text))
+            else if (!string.IsNullOrWhiteSpace(roginIdTextBox.Text))
             {
                 MessageBox.Show("パスワードを入力してください");
-            }else if (!string.IsNullOrWhiteSpace(passwordTextBox.Text))
+            }
+            else if (!string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
                 MessageBox.Show("担当者コードを入力してください");
             }
@@ -116,11 +116,6 @@ namespace Flawless_ex
             {
                 MessageBox.Show("担当者コード、パスワードを入力してください");
             }
-
-        }
-
-        private void TopMenu_Load(object sender, EventArgs e)
-        {
 
         }
     }

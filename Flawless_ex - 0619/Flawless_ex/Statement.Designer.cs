@@ -754,17 +754,17 @@
             this.previewButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.typeTextBox = new System.Windows.Forms.TextBox();
             this.client_Button = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.clientRemarksTextBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.companyTextBox = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.clientNameTextBox = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.shopNameTextBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -823,6 +823,8 @@
             this.add2 = new System.Windows.Forms.Button();
             this.calc2Button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel689 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label93 = new System.Windows.Forms.Label();
             this.flowLayoutPanel697 = new System.Windows.Forms.FlowLayoutPanel();
             this.label78 = new System.Windows.Forms.Label();
             this.flowLayoutPanel696 = new System.Windows.Forms.FlowLayoutPanel();
@@ -832,29 +834,18 @@
             this.flowLayoutPanel694 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox304 = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel691 = new System.Windows.Forms.FlowLayoutPanel();
+            this.comboBox11 = new System.Windows.Forms.ComboBox();
             this.flowLayoutPanel693 = new System.Windows.Forms.FlowLayoutPanel();
             this.subTotal2 = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel690 = new System.Windows.Forms.FlowLayoutPanel();
             this.sumTextBox2 = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel692 = new System.Windows.Forms.FlowLayoutPanel();
             this.taxAmount2 = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel698 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label94 = new System.Windows.Forms.Label();
             this.return2 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox369 = new System.Windows.Forms.TextBox();
-            this.client_searchButton1 = new System.Windows.Forms.Button();
-            this.textBox370 = new System.Windows.Forms.TextBox();
-            this.label72 = new System.Windows.Forms.Label();
-            this.label73 = new System.Windows.Forms.Label();
-            this.textBox371 = new System.Windows.Forms.TextBox();
-            this.textBox372 = new System.Windows.Forms.TextBox();
-            this.label74 = new System.Windows.Forms.Label();
-            this.textBox373 = new System.Windows.Forms.TextBox();
-            this.label75 = new System.Windows.Forms.Label();
-            this.textBox374 = new System.Windows.Forms.TextBox();
-            this.label76 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel588 = new System.Windows.Forms.FlowLayoutPanel();
             this.itemComboBox012 = new System.Windows.Forms.ComboBox();
@@ -1551,11 +1542,24 @@
             this.flowLayoutPanel587 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBox301 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.flowLayoutPanel689 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label93 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel698 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label94 = new System.Windows.Forms.Label();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
+            this.label95 = new System.Windows.Forms.Label();
+            this.registerDateTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.registerDateTextBox2 = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.typeTextBox2 = new System.Windows.Forms.TextBox();
+            this.clientSelectButton = new System.Windows.Forms.Button();
+            this.clientRemarksTextBox2 = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.addressTextBox2 = new System.Windows.Forms.TextBox();
+            this.companyTextBox2 = new System.Windows.Forms.TextBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.clientNameTextBox2 = new System.Windows.Forms.TextBox();
+            this.label76 = new System.Windows.Forms.Label();
+            this.shopNameTextBox2 = new System.Windows.Forms.TextBox();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -1923,6 +1927,7 @@
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
+            this.flowLayoutPanel689.SuspendLayout();
             this.flowLayoutPanel697.SuspendLayout();
             this.flowLayoutPanel696.SuspendLayout();
             this.flowLayoutPanel695.SuspendLayout();
@@ -1931,7 +1936,7 @@
             this.flowLayoutPanel693.SuspendLayout();
             this.flowLayoutPanel690.SuspendLayout();
             this.flowLayoutPanel692.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.flowLayoutPanel698.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.flowLayoutPanel588.SuspendLayout();
             this.flowLayoutPanel589.SuspendLayout();
@@ -2286,8 +2291,7 @@
             this.flowLayoutPanel585.SuspendLayout();
             this.flowLayoutPanel586.SuspendLayout();
             this.flowLayoutPanel587.SuspendLayout();
-            this.flowLayoutPanel689.SuspendLayout();
-            this.flowLayoutPanel698.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -9241,35 +9245,37 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.registerDateTextBox);
+            this.groupBox2.Controls.Add(this.label95);
+            this.groupBox2.Controls.Add(this.typeTextBox);
             this.groupBox2.Controls.Add(this.client_Button);
-            this.groupBox2.Controls.Add(this.textBox7);
+            this.groupBox2.Controls.Add(this.clientRemarksTextBox);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.textBox6);
-            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.addressTextBox);
+            this.groupBox2.Controls.Add(this.companyTextBox);
             this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.clientNameTextBox);
             this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.textBox4);
+            this.groupBox2.Controls.Add(this.shopNameTextBox);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label17);
             this.groupBox2.Location = new System.Drawing.Point(2871, 30);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.groupBox2.Size = new System.Drawing.Size(366, 786);
+            this.groupBox2.Size = new System.Drawing.Size(366, 930);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             // 
-            // textBox2
+            // typeTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(26, 132);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(99, 31);
-            this.textBox2.TabIndex = 23;
+            this.typeTextBox.Location = new System.Drawing.Point(26, 149);
+            this.typeTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.typeTextBox.Name = "typeTextBox";
+            this.typeTextBox.ReadOnly = true;
+            this.typeTextBox.Size = new System.Drawing.Size(99, 31);
+            this.typeTextBox.TabIndex = 23;
             // 
             // client_Button
             // 
@@ -9283,20 +9289,20 @@
             this.client_Button.UseVisualStyleBackColor = true;
             this.client_Button.Click += new System.EventHandler(this.client_Button_Click);
             // 
-            // textBox7
+            // clientRemarksTextBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(26, 532);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.ReadOnly = true;
-            this.textBox7.Size = new System.Drawing.Size(336, 232);
-            this.textBox7.TabIndex = 28;
+            this.clientRemarksTextBox.Location = new System.Drawing.Point(26, 638);
+            this.clientRemarksTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.clientRemarksTextBox.Multiline = true;
+            this.clientRemarksTextBox.Name = "clientRemarksTextBox";
+            this.clientRemarksTextBox.ReadOnly = true;
+            this.clientRemarksTextBox.Size = new System.Drawing.Size(336, 232);
+            this.clientRemarksTextBox.TabIndex = 28;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(22, 504);
+            this.label20.Location = new System.Drawing.Point(22, 609);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(58, 24);
@@ -9306,30 +9312,30 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(22, 104);
+            this.label15.Location = new System.Drawing.Point(22, 116);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(58, 24);
             this.label15.TabIndex = 17;
             this.label15.Text = "種別";
             // 
-            // textBox6
+            // addressTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(26, 458);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.ReadOnly = true;
-            this.textBox6.Size = new System.Drawing.Size(336, 31);
-            this.textBox6.TabIndex = 27;
+            this.addressTextBox.Location = new System.Drawing.Point(26, 458);
+            this.addressTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.addressTextBox.Name = "addressTextBox";
+            this.addressTextBox.ReadOnly = true;
+            this.addressTextBox.Size = new System.Drawing.Size(336, 31);
+            this.addressTextBox.TabIndex = 27;
             // 
-            // textBox3
+            // companyTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(26, 210);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(186, 31);
-            this.textBox3.TabIndex = 24;
+            this.companyTextBox.Location = new System.Drawing.Point(26, 210);
+            this.companyTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.companyTextBox.Name = "companyTextBox";
+            this.companyTextBox.ReadOnly = true;
+            this.companyTextBox.Size = new System.Drawing.Size(186, 31);
+            this.companyTextBox.TabIndex = 24;
             // 
             // label19
             // 
@@ -9341,14 +9347,14 @@
             this.label19.TabIndex = 21;
             this.label19.Text = "住所";
             // 
-            // textBox5
+            // clientNameTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(26, 378);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.ReadOnly = true;
-            this.textBox5.Size = new System.Drawing.Size(186, 31);
-            this.textBox5.TabIndex = 26;
+            this.clientNameTextBox.Location = new System.Drawing.Point(26, 378);
+            this.clientNameTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.clientNameTextBox.Name = "clientNameTextBox";
+            this.clientNameTextBox.ReadOnly = true;
+            this.clientNameTextBox.Size = new System.Drawing.Size(186, 31);
+            this.clientNameTextBox.TabIndex = 26;
             // 
             // label16
             // 
@@ -9360,14 +9366,14 @@
             this.label16.TabIndex = 18;
             this.label16.Text = "会社名";
             // 
-            // textBox4
+            // shopNameTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(26, 292);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(186, 31);
-            this.textBox4.TabIndex = 25;
+            this.shopNameTextBox.Location = new System.Drawing.Point(26, 292);
+            this.shopNameTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.shopNameTextBox.Name = "shopNameTextBox";
+            this.shopNameTextBox.ReadOnly = true;
+            this.shopNameTextBox.Size = new System.Drawing.Size(186, 31);
+            this.shopNameTextBox.TabIndex = 25;
             // 
             // label18
             // 
@@ -9667,6 +9673,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.comboBox10);
             this.tabPage2.Controls.Add(this.dateTimePicker3);
             this.tabPage2.Controls.Add(this.dateTimePicker2);
@@ -9699,7 +9706,6 @@
             this.tabPage2.Controls.Add(this.return2);
             this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.button10);
-            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.tableLayoutPanel13);
             this.tabPage2.Controls.Add(this.tabControl3);
             this.tabPage2.Location = new System.Drawing.Point(8, 39);
@@ -10028,6 +10034,23 @@
             this.tableLayoutPanel14.Size = new System.Drawing.Size(320, 275);
             this.tableLayoutPanel14.TabIndex = 47;
             // 
+            // flowLayoutPanel689
+            // 
+            this.flowLayoutPanel689.Controls.Add(this.label93);
+            this.flowLayoutPanel689.Location = new System.Drawing.Point(4, 166);
+            this.flowLayoutPanel689.Name = "flowLayoutPanel689";
+            this.flowLayoutPanel689.Size = new System.Drawing.Size(168, 47);
+            this.flowLayoutPanel689.TabIndex = 84;
+            // 
+            // label93
+            // 
+            this.label93.Location = new System.Drawing.Point(3, 0);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(130, 46);
+            this.label93.TabIndex = 0;
+            this.label93.Text = "消費税額";
+            this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // flowLayoutPanel697
             // 
             this.flowLayoutPanel697.Controls.Add(this.label78);
@@ -10103,6 +10126,17 @@
             this.flowLayoutPanel691.Size = new System.Drawing.Size(136, 47);
             this.flowLayoutPanel691.TabIndex = 85;
             // 
+            // comboBox11
+            // 
+            this.comboBox11.FormattingEnabled = true;
+            this.comboBox11.Items.AddRange(new object[] {
+            "税抜",
+            "税込"});
+            this.comboBox11.Location = new System.Drawing.Point(3, 3);
+            this.comboBox11.Name = "comboBox11";
+            this.comboBox11.Size = new System.Drawing.Size(132, 32);
+            this.comboBox11.TabIndex = 0;
+            // 
             // flowLayoutPanel693
             // 
             this.flowLayoutPanel693.Controls.Add(this.subTotal2);
@@ -10157,6 +10191,23 @@
             this.taxAmount2.Size = new System.Drawing.Size(134, 31);
             this.taxAmount2.TabIndex = 37;
             // 
+            // flowLayoutPanel698
+            // 
+            this.flowLayoutPanel698.Controls.Add(this.label94);
+            this.flowLayoutPanel698.Location = new System.Drawing.Point(4, 220);
+            this.flowLayoutPanel698.Name = "flowLayoutPanel698";
+            this.flowLayoutPanel698.Size = new System.Drawing.Size(168, 51);
+            this.flowLayoutPanel698.TabIndex = 86;
+            // 
+            // label94
+            // 
+            this.label94.Location = new System.Drawing.Point(3, 0);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(130, 51);
+            this.label94.TabIndex = 0;
+            this.label94.Text = "合計金額";
+            this.label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // return2
             // 
             this.return2.Location = new System.Drawing.Point(2087, 1278);
@@ -10187,156 +10238,6 @@
             this.button10.TabIndex = 44;
             this.button10.Text = "登録";
             this.button10.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox369);
-            this.groupBox3.Controls.Add(this.client_searchButton1);
-            this.groupBox3.Controls.Add(this.textBox370);
-            this.groupBox3.Controls.Add(this.label72);
-            this.groupBox3.Controls.Add(this.label73);
-            this.groupBox3.Controls.Add(this.textBox371);
-            this.groupBox3.Controls.Add(this.textBox372);
-            this.groupBox3.Controls.Add(this.label74);
-            this.groupBox3.Controls.Add(this.textBox373);
-            this.groupBox3.Controls.Add(this.label75);
-            this.groupBox3.Controls.Add(this.textBox374);
-            this.groupBox3.Controls.Add(this.label76);
-            this.groupBox3.Controls.Add(this.label77);
-            this.groupBox3.Location = new System.Drawing.Point(2867, 28);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.groupBox3.Size = new System.Drawing.Size(366, 786);
-            this.groupBox3.TabIndex = 43;
-            this.groupBox3.TabStop = false;
-            // 
-            // textBox369
-            // 
-            this.textBox369.Location = new System.Drawing.Point(26, 132);
-            this.textBox369.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox369.Name = "textBox369";
-            this.textBox369.ReadOnly = true;
-            this.textBox369.Size = new System.Drawing.Size(99, 31);
-            this.textBox369.TabIndex = 23;
-            // 
-            // client_searchButton1
-            // 
-            this.client_searchButton1.AutoSize = true;
-            this.client_searchButton1.Location = new System.Drawing.Point(7, 18);
-            this.client_searchButton1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.client_searchButton1.Name = "client_searchButton1";
-            this.client_searchButton1.Size = new System.Drawing.Size(366, 92);
-            this.client_searchButton1.TabIndex = 16;
-            this.client_searchButton1.Text = "顧客選択";
-            this.client_searchButton1.UseVisualStyleBackColor = true;
-            this.client_searchButton1.Click += new System.EventHandler(this.client_searchButton1_Click);
-            // 
-            // textBox370
-            // 
-            this.textBox370.Location = new System.Drawing.Point(26, 532);
-            this.textBox370.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox370.Multiline = true;
-            this.textBox370.Name = "textBox370";
-            this.textBox370.ReadOnly = true;
-            this.textBox370.Size = new System.Drawing.Size(336, 232);
-            this.textBox370.TabIndex = 28;
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(22, 504);
-            this.label72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(58, 24);
-            this.label72.TabIndex = 22;
-            this.label72.Text = "備考";
-            // 
-            // label73
-            // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(22, 104);
-            this.label73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(58, 24);
-            this.label73.TabIndex = 17;
-            this.label73.Text = "種別";
-            // 
-            // textBox371
-            // 
-            this.textBox371.Location = new System.Drawing.Point(26, 458);
-            this.textBox371.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox371.Name = "textBox371";
-            this.textBox371.ReadOnly = true;
-            this.textBox371.Size = new System.Drawing.Size(336, 31);
-            this.textBox371.TabIndex = 27;
-            // 
-            // textBox372
-            // 
-            this.textBox372.Location = new System.Drawing.Point(26, 210);
-            this.textBox372.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox372.Name = "textBox372";
-            this.textBox372.ReadOnly = true;
-            this.textBox372.Size = new System.Drawing.Size(186, 31);
-            this.textBox372.TabIndex = 24;
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(22, 432);
-            this.label74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(58, 24);
-            this.label74.TabIndex = 21;
-            this.label74.Text = "住所";
-            // 
-            // textBox373
-            // 
-            this.textBox373.Location = new System.Drawing.Point(26, 378);
-            this.textBox373.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox373.Name = "textBox373";
-            this.textBox373.ReadOnly = true;
-            this.textBox373.Size = new System.Drawing.Size(186, 31);
-            this.textBox373.TabIndex = 26;
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(22, 184);
-            this.label75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(82, 24);
-            this.label75.TabIndex = 18;
-            this.label75.Text = "会社名";
-            // 
-            // textBox374
-            // 
-            this.textBox374.Location = new System.Drawing.Point(26, 292);
-            this.textBox374.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.textBox374.Name = "textBox374";
-            this.textBox374.ReadOnly = true;
-            this.textBox374.Size = new System.Drawing.Size(186, 31);
-            this.textBox374.TabIndex = 25;
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(22, 352);
-            this.label76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(190, 24);
-            this.label76.TabIndex = 20;
-            this.label76.Text = "担当者名・個人名";
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(22, 264);
-            this.label77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(82, 24);
-            this.label77.TabIndex = 19;
-            this.label77.Text = "店舗名";
             // 
             // tableLayoutPanel13
             // 
@@ -16960,50 +16861,191 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // flowLayoutPanel689
+            // label95
             // 
-            this.flowLayoutPanel689.Controls.Add(this.label93);
-            this.flowLayoutPanel689.Location = new System.Drawing.Point(4, 166);
-            this.flowLayoutPanel689.Name = "flowLayoutPanel689";
-            this.flowLayoutPanel689.Size = new System.Drawing.Size(168, 47);
-            this.flowLayoutPanel689.TabIndex = 84;
+            this.label95.AutoSize = true;
+            this.label95.Location = new System.Drawing.Point(22, 507);
+            this.label95.Name = "label95";
+            this.label95.Size = new System.Drawing.Size(226, 24);
+            this.label95.TabIndex = 29;
+            this.label95.Text = "登記簿謄本（登録日）";
             // 
-            // label93
+            // registerDateTextBox
             // 
-            this.label93.Location = new System.Drawing.Point(3, 0);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(130, 46);
-            this.label93.TabIndex = 0;
-            this.label93.Text = "消費税額";
-            this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.registerDateTextBox.Location = new System.Drawing.Point(26, 543);
+            this.registerDateTextBox.Name = "registerDateTextBox";
+            this.registerDateTextBox.ReadOnly = true;
+            this.registerDateTextBox.Size = new System.Drawing.Size(209, 31);
+            this.registerDateTextBox.TabIndex = 30;
             // 
-            // flowLayoutPanel698
+            // groupBox3
             // 
-            this.flowLayoutPanel698.Controls.Add(this.label94);
-            this.flowLayoutPanel698.Location = new System.Drawing.Point(4, 220);
-            this.flowLayoutPanel698.Name = "flowLayoutPanel698";
-            this.flowLayoutPanel698.Size = new System.Drawing.Size(168, 51);
-            this.flowLayoutPanel698.TabIndex = 86;
+            this.groupBox3.Controls.Add(this.registerDateTextBox2);
+            this.groupBox3.Controls.Add(this.label72);
+            this.groupBox3.Controls.Add(this.typeTextBox2);
+            this.groupBox3.Controls.Add(this.clientSelectButton);
+            this.groupBox3.Controls.Add(this.clientRemarksTextBox2);
+            this.groupBox3.Controls.Add(this.label73);
+            this.groupBox3.Controls.Add(this.label74);
+            this.groupBox3.Controls.Add(this.addressTextBox2);
+            this.groupBox3.Controls.Add(this.companyTextBox2);
+            this.groupBox3.Controls.Add(this.label75);
+            this.groupBox3.Controls.Add(this.clientNameTextBox2);
+            this.groupBox3.Controls.Add(this.label76);
+            this.groupBox3.Controls.Add(this.shopNameTextBox2);
+            this.groupBox3.Controls.Add(this.label77);
+            this.groupBox3.Controls.Add(this.label96);
+            this.groupBox3.Location = new System.Drawing.Point(2872, 28);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox3.Size = new System.Drawing.Size(366, 930);
+            this.groupBox3.TabIndex = 84;
+            this.groupBox3.TabStop = false;
             // 
-            // label94
+            // registerDateTextBox2
             // 
-            this.label94.Location = new System.Drawing.Point(3, 0);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(130, 51);
-            this.label94.TabIndex = 0;
-            this.label94.Text = "合計金額";
-            this.label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.registerDateTextBox2.Location = new System.Drawing.Point(26, 543);
+            this.registerDateTextBox2.Name = "registerDateTextBox2";
+            this.registerDateTextBox2.ReadOnly = true;
+            this.registerDateTextBox2.Size = new System.Drawing.Size(209, 31);
+            this.registerDateTextBox2.TabIndex = 30;
             // 
-            // comboBox11
+            // label72
             // 
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Items.AddRange(new object[] {
-            "税抜",
-            "税込"});
-            this.comboBox11.Location = new System.Drawing.Point(3, 3);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(132, 32);
-            this.comboBox11.TabIndex = 0;
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(22, 507);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(226, 24);
+            this.label72.TabIndex = 29;
+            this.label72.Text = "登記簿謄本（登録日）";
+            // 
+            // typeTextBox2
+            // 
+            this.typeTextBox2.Location = new System.Drawing.Point(26, 149);
+            this.typeTextBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.typeTextBox2.Name = "typeTextBox2";
+            this.typeTextBox2.ReadOnly = true;
+            this.typeTextBox2.Size = new System.Drawing.Size(99, 31);
+            this.typeTextBox2.TabIndex = 23;
+            // 
+            // clientSelectButton
+            // 
+            this.clientSelectButton.AutoSize = true;
+            this.clientSelectButton.Location = new System.Drawing.Point(7, 18);
+            this.clientSelectButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.clientSelectButton.Name = "clientSelectButton";
+            this.clientSelectButton.Size = new System.Drawing.Size(366, 92);
+            this.clientSelectButton.TabIndex = 16;
+            this.clientSelectButton.Text = "顧客選択";
+            this.clientSelectButton.UseVisualStyleBackColor = true;
+            this.clientSelectButton.Click += new System.EventHandler(this.clientSelectButton_Click);
+            // 
+            // clientRemarksTextBox2
+            // 
+            this.clientRemarksTextBox2.Location = new System.Drawing.Point(26, 638);
+            this.clientRemarksTextBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.clientRemarksTextBox2.Multiline = true;
+            this.clientRemarksTextBox2.Name = "clientRemarksTextBox2";
+            this.clientRemarksTextBox2.ReadOnly = true;
+            this.clientRemarksTextBox2.Size = new System.Drawing.Size(336, 232);
+            this.clientRemarksTextBox2.TabIndex = 28;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(22, 609);
+            this.label73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(58, 24);
+            this.label73.TabIndex = 22;
+            this.label73.Text = "備考";
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(22, 116);
+            this.label74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(58, 24);
+            this.label74.TabIndex = 17;
+            this.label74.Text = "種別";
+            // 
+            // addressTextBox2
+            // 
+            this.addressTextBox2.Location = new System.Drawing.Point(26, 458);
+            this.addressTextBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.addressTextBox2.Name = "addressTextBox2";
+            this.addressTextBox2.ReadOnly = true;
+            this.addressTextBox2.Size = new System.Drawing.Size(336, 31);
+            this.addressTextBox2.TabIndex = 27;
+            // 
+            // companyTextBox2
+            // 
+            this.companyTextBox2.Location = new System.Drawing.Point(26, 210);
+            this.companyTextBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.companyTextBox2.Name = "companyTextBox2";
+            this.companyTextBox2.ReadOnly = true;
+            this.companyTextBox2.Size = new System.Drawing.Size(186, 31);
+            this.companyTextBox2.TabIndex = 24;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(22, 432);
+            this.label75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(58, 24);
+            this.label75.TabIndex = 21;
+            this.label75.Text = "住所";
+            // 
+            // clientNameTextBox2
+            // 
+            this.clientNameTextBox2.Location = new System.Drawing.Point(26, 378);
+            this.clientNameTextBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.clientNameTextBox2.Name = "clientNameTextBox2";
+            this.clientNameTextBox2.ReadOnly = true;
+            this.clientNameTextBox2.Size = new System.Drawing.Size(186, 31);
+            this.clientNameTextBox2.TabIndex = 26;
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(22, 184);
+            this.label76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(82, 24);
+            this.label76.TabIndex = 18;
+            this.label76.Text = "会社名";
+            // 
+            // shopNameTextBox2
+            // 
+            this.shopNameTextBox2.Location = new System.Drawing.Point(26, 292);
+            this.shopNameTextBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.shopNameTextBox2.Name = "shopNameTextBox2";
+            this.shopNameTextBox2.ReadOnly = true;
+            this.shopNameTextBox2.Size = new System.Drawing.Size(186, 31);
+            this.shopNameTextBox2.TabIndex = 25;
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(22, 352);
+            this.label77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(190, 24);
+            this.label77.TabIndex = 20;
+            this.label77.Text = "担当者名・個人名";
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.Location = new System.Drawing.Point(22, 264);
+            this.label96.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(82, 24);
+            this.label96.TabIndex = 19;
+            this.label96.Text = "店舗名";
             // 
             // Statement
             // 
@@ -17614,6 +17656,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
+            this.flowLayoutPanel689.ResumeLayout(false);
             this.flowLayoutPanel697.ResumeLayout(false);
             this.flowLayoutPanel696.ResumeLayout(false);
             this.flowLayoutPanel695.ResumeLayout(false);
@@ -17626,8 +17669,7 @@
             this.flowLayoutPanel690.PerformLayout();
             this.flowLayoutPanel692.ResumeLayout(false);
             this.flowLayoutPanel692.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.flowLayoutPanel698.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
             this.flowLayoutPanel588.ResumeLayout(false);
             this.flowLayoutPanel589.ResumeLayout(false);
@@ -18203,8 +18245,8 @@
             this.flowLayoutPanel586.PerformLayout();
             this.flowLayoutPanel587.ResumeLayout(false);
             this.flowLayoutPanel587.PerformLayout();
-            this.flowLayoutPanel689.ResumeLayout(false);
-            this.flowLayoutPanel698.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -18238,12 +18280,12 @@
         private System.Windows.Forms.TextBox taxCertificateTexBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox sealCertificationTextBox;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox clientRemarksTextBox;
+        private System.Windows.Forms.TextBox addressTextBox;
+        private System.Windows.Forms.TextBox clientNameTextBox;
+        private System.Windows.Forms.TextBox shopNameTextBox;
+        private System.Windows.Forms.TextBox companyTextBox;
+        private System.Windows.Forms.TextBox typeTextBox;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
@@ -18980,20 +19022,6 @@
         private System.Windows.Forms.Button return2;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox369;
-        private System.Windows.Forms.Button client_searchButton1;
-        private System.Windows.Forms.TextBox textBox370;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.TextBox textBox371;
-        private System.Windows.Forms.TextBox textBox372;
-        private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.TextBox textBox373;
-        private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.TextBox textBox374;
-        private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.Label label77;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel588;
         private System.Windows.Forms.ComboBox itemComboBox012;
@@ -19740,5 +19768,23 @@
         private System.Windows.Forms.ComboBox comboBox11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel698;
         private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.TextBox registerDateTextBox;
+        private System.Windows.Forms.Label label95;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox registerDateTextBox2;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.TextBox typeTextBox2;
+        private System.Windows.Forms.Button clientSelectButton;
+        private System.Windows.Forms.TextBox clientRemarksTextBox2;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.TextBox addressTextBox2;
+        private System.Windows.Forms.TextBox companyTextBox2;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.TextBox clientNameTextBox2;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.TextBox shopNameTextBox2;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label96;
     }
 }

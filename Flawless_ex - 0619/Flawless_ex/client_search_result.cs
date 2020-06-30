@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Npgsql;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class client_search_result : Form
@@ -75,7 +69,7 @@ namespace Flawless_ex
 
             }
         }
-    
+
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
@@ -96,8 +90,8 @@ namespace Flawless_ex
             {
                 int anumber = (int)dataGridView1.CurrentRow.Cells[4].Value;//選択したPKを取得
 
-                
-                string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = " + anumber +" ";
+
+                string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = " + anumber + " ";
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -105,8 +99,13 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                
-            }else if(type == 1)
+                statement.clientDt = dt2;
+                statement.count = 1;
+
+                this.Close();
+                statement.Show();
+            }
+            else if (type == 1)
             {
                 int id_number = (int)dataGridView1.CurrentRow.Cells[3].Value;//選択したPKを取得
 
@@ -116,6 +115,11 @@ namespace Flawless_ex
                 adapter.Fill(dt2);
 
                 conn.Close();
+                statement.clientDt = dt2;
+                statement.count = 1;
+
+                this.Close();
+                statement.Show();
             }
         }
     }

@@ -44,7 +44,7 @@ namespace Flawless_ex
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            ProductAddMenu productAdd = new ProductAddMenu(dt, master,staff_code);
+            ProductAddMenu productAdd = new ProductAddMenu(dt, master, staff_code);
 
             this.Close();
             productAdd.Show();
@@ -53,7 +53,7 @@ namespace Flawless_ex
         private void changeDeleteButton_Click(object sender, EventArgs e)
         {
             int code = (int)dataGridView1.CurrentRow.Cells[2].Value; //選択した品名コードを取得
-            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code,staff_code);
+            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code, staff_code);
             this.Close();
             changeDeleteMenu.Show();
 
@@ -61,7 +61,7 @@ namespace Flawless_ex
 
         private void mainCategoryMenu_Click(object sender, EventArgs e)//大分類マスタ
         {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(master,staff_code);
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
 
             this.Close();
             mainCategory.Show();

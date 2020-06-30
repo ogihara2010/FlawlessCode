@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Data;
 using System.Windows.Forms;
-using Npgsql;
 namespace Flawless_ex
 {
     public partial class ProductChangeDeleteMenu : Form //品名削除・更新メニュー
@@ -17,7 +17,7 @@ namespace Flawless_ex
         int mCode;//大分類コード履歴
         string item_name;//品名履歴
 
-        public ProductChangeDeleteMenu(ItemMaster nameMenu, MasterMaintenanceMenu master, int code,int staff_code)
+        public ProductChangeDeleteMenu(ItemMaster nameMenu, MasterMaintenanceMenu master, int code, int staff_code)
         {
             InitializeComponent();
             this.productNameMenu = nameMenu;
@@ -57,12 +57,12 @@ namespace Flawless_ex
             mainCategoryComboBox.DataSource = maindt;
             mainCategoryComboBox.DisplayMember = "main_category_name";
             mainCategoryComboBox.ValueMember = "main_category_code";
-            mainCategoryComboBox.SelectedIndex = 0; 
+            mainCategoryComboBox.SelectedIndex = 0;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            ItemMaster productNameMenu = new ItemMaster(master,staff_code);
+            ItemMaster productNameMenu = new ItemMaster(master, staff_code);
             this.Close();
             productNameMenu.Show();
         }
@@ -99,7 +99,7 @@ namespace Flawless_ex
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            
+
 
             DialogResult result = MessageBox.Show("更新をしますか？", "確認", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
@@ -112,7 +112,7 @@ namespace Flawless_ex
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
-                string sql_item_m = "update item_m set main_category_code = " + mcode + ", item_name = '" + iname + "' where item_code ="+ puroductCode +"";
+                string sql_item_m = "update item_m set main_category_code = " + mcode + ", item_name = '" + iname + "' where item_code =" + puroductCode + "";
                 adapter = new NpgsqlDataAdapter(sql_item_m, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
                 adapter.Fill(dt);
@@ -121,14 +121,14 @@ namespace Flawless_ex
 
                 //履歴
                 //大分類コード履歴
-                if((int)mainCategoryComboBox.SelectedValue != mCode)
+                if ((int)mainCategoryComboBox.SelectedValue != mCode)
                 {
                     string sql_item_mCode_revisions = "insert into item_m_main_category_code_revisions values(" + mCode + ", " + mcode + "," + puroductCode + ",'" + dat + "', " + staff_code + ")";
                     NpgsqlCommand cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
                 }
                 //品名履歴
-                else if(productNameTextBox.Text != item_name)
+                else if (productNameTextBox.Text != item_name)
                 {
                     string sql_itemName = "insert into item_m_item_name_revisions values('" + iname + "', '" + item_name + "', " + puroductCode + ", '" + dat + "', " + staff_code + ")";
                     NpgsqlCommand cmd = new NpgsqlCommand(sql_itemName, conn);
