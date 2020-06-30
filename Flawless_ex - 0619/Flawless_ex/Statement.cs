@@ -469,7 +469,11 @@ namespace Flawless_ex
             //２行目以降非表示
             mainCategoryComboBox1.Hide();
             itemComboBox1.Hide();
+            brandname1.Hide();
+            types1.Hide();
             weightTextBox1.Hide();
+            midstone1.Hide();
+            wakiseki1.Hide();
             countTextBox1.Hide();
             unitPriceTextBox1.Hide();
             moneyTextBox1.Hide();
@@ -484,7 +488,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox2.Hide();
             itemComboBox2.Hide();
+            brandname2.Hide();
+            types2.Hide();
             weightTextBox2.Hide();
+            midstone2.Hide();
+            wakiseki2.Hide();
             countTextBox2.Hide();
             unitPriceTextBox2.Hide();
             moneyTextBox2.Hide();
@@ -499,7 +507,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox3.Hide();
             itemComboBox3.Hide();
+            brandname3.Hide();
+            types3.Hide();
             weightTextBox3.Hide();
+            midstone3.Hide();
+            wakiseki3.Hide();
             countTextBox3.Hide();
             unitPriceTextBox3.Hide();
             moneyTextBox3.Hide();
@@ -514,7 +526,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox4.Hide();
             itemComboBox4.Hide();
+            brandname4.Hide();
+            types4.Hide();
             weightTextBox4.Hide();
+            midstone4.Hide();
+            wakiseki4.Hide();
             countTextBox4.Hide();
             unitPriceTextBox4.Hide();
             moneyTextBox4.Hide();
@@ -529,7 +545,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox5.Hide();
             itemComboBox5.Hide();
+            brandname5.Hide();
+            types5.Hide();
             weightTextBox5.Hide();
+            midstone5.Hide();
+            wakiseki5.Hide();
             countTextBox5.Hide();
             unitPriceTextBox5.Hide();
             moneyTextBox5.Hide();
@@ -544,7 +564,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox6.Hide();
             itemComboBox6.Hide();
+            brandname6.Hide();
+            types6.Hide();
             weightTextBox6.Hide();
+            midstone6.Hide();
+            wakiseki6.Hide();
             countTextBox6.Hide();
             unitPriceTextBox6.Hide();
             moneyTextBox6.Hide();
@@ -559,7 +583,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox7.Hide();
             itemComboBox7.Hide();
+            brandname7.Hide();
+            types7.Hide();
             weightTextBox7.Hide();
+            midstone7.Hide();
+            wakiseki7.Hide();
             countTextBox7.Hide();
             unitPriceTextBox7.Hide();
             moneyTextBox7.Hide();
@@ -574,7 +602,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox8.Hide();
             itemComboBox8.Hide();
+            brandname8.Hide();
+            types8.Hide();
             weightTextBox8.Hide();
+            midstone8.Hide();
+            wakiseki8.Hide();
             countTextBox8.Hide();
             unitPriceTextBox8.Hide();
             moneyTextBox8.Hide();
@@ -589,7 +621,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox9.Hide();
             itemComboBox9.Hide();
+            brandname9.Hide();
+            types9.Hide();
             weightTextBox9.Hide();
+            midstone9.Hide();
+            wakiseki9.Hide();
             countTextBox9.Hide();
             unitPriceTextBox9.Hide();
             moneyTextBox9.Hide();
@@ -604,7 +640,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox10.Hide();
             itemComboBox10.Hide();
+            brandname10.Hide();
+            types10.Hide();
             weightTextBox10.Hide();
+            midstone10.Hide();
+            wakiseki10.Hide();
             countTextBox10.Hide();
             unitPriceTextBox10.Hide();
             moneyTextBox10.Hide();
@@ -619,7 +659,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox11.Hide();
             itemComboBox11.Hide();
+            brandname11.Hide();
+            types11.Hide();
             weightTextBox11.Hide();
+            midstone11.Hide();
+            wakiseki11.Hide();
             countTextBox11.Hide();
             unitPriceTextBox11.Hide();
             moneyTextBox11.Hide();
@@ -634,7 +678,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox12.Hide();
             itemComboBox12.Hide();
+            brandname12.Hide();
+            types12.Hide();
             weightTextBox12.Hide();
+            midstone12.Hide();
+            wakiseki12.Hide();
             countTextBox12.Hide();
             unitPriceTextBox12.Hide();
             moneyTextBox12.Hide();
@@ -723,7 +771,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -781,7 +829,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -809,7 +857,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -837,7 +885,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -865,7 +913,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt204.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -893,7 +941,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt205.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -921,7 +969,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -949,7 +997,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt207.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -977,7 +1025,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt208.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1005,7 +1053,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt209.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1033,7 +1081,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1061,7 +1109,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -2004,7 +2052,7 @@ namespace Flawless_ex
                         + decimal.Parse(moneyTextBox10.Text) + decimal.Parse(moneyTextBox11.Text) + decimal.Parse(moneyTextBox12.Text);
 
             //税額計算 DBから取得？
-            decimal tax = (decimal)1.10;
+            decimal tax = (decimal)0.10;
             decimal taxA = subSum * tax;
 
             //合計計算
@@ -2607,14 +2655,14 @@ namespace Flawless_ex
             decimal taxA = subSum * tax;
 
             //合計計算
-            decimal sum = subSum + taxA;
+            decimal sum = subSum + tax;
 
 
 
             subTotal2.Text = subSum.ToString();
             totalWeight2.Text = weisum.ToString();
             totalCount2.Text = countsum.ToString();
-            taxAmount2.Text = taxA.ToString();
+            taxAmount2.Text = tax.ToString();
             sumTextBox2.Text = sum.ToString();
             #endregion
         }
@@ -2627,7 +2675,11 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox1.Show();
                     itemComboBox1.Show();
+                    brandname1.Show();
+                    types1.Show();
                     weightTextBox1.Show();
+                    midstone1.Show();
+                    wakiseki1.Show();
                     countTextBox1.Show();
                     unitPriceTextBox1.Show();
                     moneyTextBox1.Show();
@@ -2636,7 +2688,11 @@ namespace Flawless_ex
                 case 1:
                     mainCategoryComboBox2.Show();
                     itemComboBox2.Show();
+                    brandname2.Show();
+                    types2.Show();
                     weightTextBox2.Show();
+                    midstone2.Show();
+                    wakiseki2.Show();
                     countTextBox2.Show();
                     unitPriceTextBox2.Show();
                     moneyTextBox2.Show();
@@ -2645,7 +2701,11 @@ namespace Flawless_ex
                 case 2:
                     mainCategoryComboBox3.Show();
                     itemComboBox3.Show();
+                    brandname3.Show();
+                    types3.Show();
                     weightTextBox3.Show();
+                    midstone3.Show();
+                    wakiseki3.Show();
                     countTextBox3.Show();
                     unitPriceTextBox3.Show();
                     moneyTextBox3.Show();
@@ -2654,7 +2714,11 @@ namespace Flawless_ex
                 case 3:
                     mainCategoryComboBox4.Show();
                     itemComboBox4.Show();
+                    brandname4.Show();
+                    types4.Show();
                     weightTextBox4.Show();
+                    midstone4.Show();
+                    wakiseki4.Show();
                     countTextBox4.Show();
                     unitPriceTextBox4.Show();
                     moneyTextBox4.Show();
@@ -2663,7 +2727,11 @@ namespace Flawless_ex
                 case 4:
                     mainCategoryComboBox5.Show();
                     itemComboBox5.Show();
+                    brandname5.Show();
+                    types5.Show();
                     weightTextBox5.Show();
+                    midstone5.Show();
+                    wakiseki5.Show();
                     countTextBox5.Show();
                     unitPriceTextBox5.Show();
                     moneyTextBox5.Show();
@@ -2672,7 +2740,11 @@ namespace Flawless_ex
                 case 5:
                     mainCategoryComboBox6.Show();
                     itemComboBox6.Show();
+                    brandname6.Show();
+                    types6.Show();
                     weightTextBox6.Show();
+                    midstone6.Show();
+                    wakiseki6.Show();
                     countTextBox6.Show();
                     unitPriceTextBox6.Show();
                     moneyTextBox6.Show();
@@ -2681,7 +2753,11 @@ namespace Flawless_ex
                 case 6:
                     mainCategoryComboBox7.Show();
                     itemComboBox7.Show();
+                    brandname7.Show();
+                    types7.Show();
                     weightTextBox7.Show();
+                    midstone7.Show();
+                    wakiseki7.Show();
                     countTextBox7.Show();
                     unitPriceTextBox7.Show();
                     moneyTextBox7.Show();
@@ -2690,7 +2766,11 @@ namespace Flawless_ex
                 case 7:
                     mainCategoryComboBox8.Show();
                     itemComboBox8.Show();
+                    brandname8.Show();
+                    types8.Show();
                     weightTextBox8.Show();
+                    midstone8.Show();
+                    wakiseki8.Show();
                     countTextBox8.Show();
                     unitPriceTextBox8.Show();
                     moneyTextBox8.Show();
@@ -2699,7 +2779,11 @@ namespace Flawless_ex
                 case 8:
                     mainCategoryComboBox9.Show();
                     itemComboBox9.Show();
+                    brandname9.Show();
+                    types9.Show();
                     weightTextBox9.Show();
+                    midstone9.Show();
+                    wakiseki9.Show();
                     countTextBox9.Show();
                     unitPriceTextBox9.Show();
                     moneyTextBox9.Show();
@@ -2708,7 +2792,11 @@ namespace Flawless_ex
                 case 9:
                     mainCategoryComboBox10.Show();
                     itemComboBox10.Show();
+                    brandname10.Show();
+                    types10.Show();
                     weightTextBox10.Show();
+                    midstone10.Show();
+                    wakiseki10.Show();
                     countTextBox10.Show();
                     unitPriceTextBox10.Show();
                     moneyTextBox10.Show();
@@ -2717,7 +2805,11 @@ namespace Flawless_ex
                 case 10:
                     mainCategoryComboBox11.Show();
                     itemComboBox11.Show();
+                    brandname11.Show();
+                    types11.Show();
                     weightTextBox11.Show();
+                    midstone11.Show();
+                    wakiseki11.Show();
                     countTextBox11.Show();
                     unitPriceTextBox11.Show();
                     moneyTextBox11.Show();
@@ -2726,7 +2818,11 @@ namespace Flawless_ex
                 case 11:
                     mainCategoryComboBox12.Show();
                     itemComboBox12.Show();
+                    brandname12.Show();
+                    types12.Show();
                     weightTextBox12.Show();
+                    midstone12.Show();
+                    wakiseki12.Show();
                     countTextBox12.Show();
                     unitPriceTextBox12.Show();
                     moneyTextBox12.Show();
@@ -2746,7 +2842,11 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox1.Hide();
                     itemComboBox1.Hide();
+                    brandname1.Hide();
+                    types1.Hide();
                     weightTextBox1.Hide();
+                    midstone1.Hide();
+                    wakiseki1.Hide();
                     countTextBox1.Hide();
                     unitPriceTextBox1.Hide();
                     moneyTextBox1.Hide();
@@ -2755,7 +2855,11 @@ namespace Flawless_ex
                 case 1:
                     mainCategoryComboBox2.Hide();
                     itemComboBox2.Hide();
+                    brandname2.Hide();
+                    types2.Hide();
                     weightTextBox2.Hide();
+                    midstone2.Hide();
+                    wakiseki2.Hide();
                     countTextBox2.Hide();
                     unitPriceTextBox2.Hide();
                     moneyTextBox2.Hide();
@@ -2764,7 +2868,11 @@ namespace Flawless_ex
                 case 2:
                     mainCategoryComboBox3.Hide();
                     itemComboBox3.Hide();
+                    brandname3.Hide();
+                    types3.Hide();
                     weightTextBox3.Hide();
+                    midstone3.Hide();
+                    wakiseki3.Hide();
                     countTextBox3.Hide();
                     unitPriceTextBox3.Hide();
                     moneyTextBox3.Hide();
@@ -2773,7 +2881,11 @@ namespace Flawless_ex
                 case 3:
                     mainCategoryComboBox4.Hide();
                     itemComboBox4.Hide();
+                    brandname4.Hide();
+                    types4.Hide();
                     weightTextBox4.Hide();
+                    midstone4.Hide();
+                    wakiseki4.Hide();
                     countTextBox4.Hide();
                     unitPriceTextBox4.Hide();
                     moneyTextBox4.Hide();
@@ -2782,7 +2894,11 @@ namespace Flawless_ex
                 case 4:
                     mainCategoryComboBox5.Hide();
                     itemComboBox5.Hide();
+                    brandname5.Hide();
+                    types5.Hide();
                     weightTextBox5.Hide();
+                    midstone5.Hide();
+                    wakiseki5.Hide();
                     countTextBox5.Hide();
                     unitPriceTextBox5.Hide();
                     moneyTextBox5.Hide();
@@ -2791,7 +2907,11 @@ namespace Flawless_ex
                 case 5:
                     mainCategoryComboBox6.Hide();
                     itemComboBox6.Hide();
+                    brandname6.Hide();
+                    types6.Hide();
                     weightTextBox6.Hide();
+                    midstone6.Hide();
+                    wakiseki6.Hide();
                     countTextBox6.Hide();
                     unitPriceTextBox6.Hide();
                     moneyTextBox6.Hide();
@@ -2800,7 +2920,11 @@ namespace Flawless_ex
                 case 6:
                     mainCategoryComboBox7.Hide();
                     itemComboBox7.Hide();
+                    brandname7.Hide();
+                    types7.Hide();
                     weightTextBox7.Hide();
+                    midstone7.Hide();
+                    wakiseki7.Hide();
                     countTextBox7.Hide();
                     unitPriceTextBox7.Hide();
                     moneyTextBox7.Hide();
@@ -2809,7 +2933,11 @@ namespace Flawless_ex
                 case 7:
                     mainCategoryComboBox8.Hide();
                     itemComboBox8.Hide();
+                    brandname8.Hide();
+                    types8.Hide();
                     weightTextBox8.Hide();
+                    midstone8.Hide();
+                    wakiseki8.Hide();
                     countTextBox8.Hide();
                     unitPriceTextBox8.Hide();
                     moneyTextBox8.Hide();
@@ -2818,7 +2946,11 @@ namespace Flawless_ex
                 case 8:
                     mainCategoryComboBox9.Hide();
                     itemComboBox9.Hide();
+                    brandname9.Hide();
+                    types9.Hide();
                     weightTextBox9.Hide();
+                    midstone9.Hide();
+                    wakiseki9.Hide();
                     countTextBox9.Hide();
                     unitPriceTextBox9.Hide();
                     moneyTextBox9.Hide();
@@ -2827,7 +2959,11 @@ namespace Flawless_ex
                 case 9:
                     mainCategoryComboBox10.Hide();
                     itemComboBox10.Hide();
+                    brandname10.Hide();
+                    types10.Hide();
                     weightTextBox10.Hide();
+                    midstone10.Hide();
+                    wakiseki10.Hide();
                     countTextBox10.Hide();
                     unitPriceTextBox10.Hide();
                     moneyTextBox10.Hide();
@@ -2836,7 +2972,11 @@ namespace Flawless_ex
                 case 10:
                     mainCategoryComboBox11.Hide();
                     itemComboBox11.Hide();
+                    brandname11.Hide();
+                    types11.Hide();
                     weightTextBox11.Hide();
+                    midstone11.Hide();
+                    wakiseki11.Hide();
                     countTextBox11.Hide();
                     unitPriceTextBox11.Hide();
                     moneyTextBox11.Hide();
@@ -2845,7 +2985,11 @@ namespace Flawless_ex
                 case 11:
                     mainCategoryComboBox12.Hide();
                     itemComboBox12.Hide();
+                    brandname12.Hide();
+                    types12.Hide();
                     weightTextBox12.Hide();
+                    midstone12.Hide();
+                    wakiseki12.Hide();
                     countTextBox12.Hide();
                     unitPriceTextBox12.Hide();
                     moneyTextBox12.Hide();
@@ -3123,6 +3267,59 @@ namespace Flawless_ex
 
             this.Hide();
             client_Search.Show();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+            
+            this.documentNumberTextBox.Text = "101";
+            int AntiqueNumber = int.Parse(this.textBox302.Text);
+            int TotalWeight = int.Parse(this.totalWeight.Text);
+            int Amount = int.Parse(this.totalCount.Text);
+            decimal SubTotal = decimal.Parse(this.subTotal.Text);
+            decimal TaxAmount = decimal.Parse(this.taxAmount.Text);
+            decimal Total = decimal.Parse(this.sumTextBox.Text);
+            string SettlementDate = this.settlementBox.Text;
+            string DeliveryDate = this.deliveryDateBox.Text;
+            string DeliveryMethod = this.deliveryTextBox.Text;
+            string PaymentMethod = this.paymentMethodsBox.Text;
+            decimal Weight = decimal.Parse(this.weightTextBox0.Text);
+            int Count = int.Parse(this.countTextBox0.Text);
+            decimal UnitPrice = decimal.Parse(this.unitPriceTextBox0.Text);
+            decimal amount = decimal.Parse(this.moneyTextBox0.Text);
+            string Remarks = this.remarks0.Text;
+            string BrandName = this.brandname0.Text;
+            string Types = this.types0.Text;
+            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter;
+
+            DataTable dt = new DataTable();
+            string sql_str = "Insert into statement_data VALUES ( " + AntiqueNumber + " , " +  staff_id  + " , " + TotalWeight + " ,  " + Amount + " , " + AntiqueNumber + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
+
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str, conn);
+            adapter.Fill(dt);
+            conn.Close();
+
+            DataTable dt2 = new DataTable();
+            string sql_str2 = "Insert into statement_calc_data VALUES ( " + staff_id + " , " + staff_id + " , " +  Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount +  " , '" + Remarks + "' , '" + staff_id + "' , '" + BrandName + "' , '" + Types +  "');";
+
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str2, conn);
+            adapter.Fill(dt2);
+            conn.Close();
+            MessageBox.Show("登録しました。");
+
         }
     }
 }
