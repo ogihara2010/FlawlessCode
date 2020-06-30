@@ -472,7 +472,11 @@ namespace Flawless_ex
             //２行目以降非表示
             mainCategoryComboBox1.Hide();
             itemComboBox1.Hide();
+            brandname1.Hide();
+            types1.Hide();
             weightTextBox1.Hide();
+            midstone1.Hide();
+            wakiseki1.Hide();
             countTextBox1.Hide();
             unitPriceTextBox1.Hide();
             moneyTextBox1.Hide();
@@ -487,7 +491,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox2.Hide();
             itemComboBox2.Hide();
+            brandname2.Hide();
+            types2.Hide();
             weightTextBox2.Hide();
+            midstone2.Hide();
+            wakiseki2.Hide();
             countTextBox2.Hide();
             unitPriceTextBox2.Hide();
             moneyTextBox2.Hide();
@@ -502,7 +510,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox3.Hide();
             itemComboBox3.Hide();
+            brandname3.Hide();
+            types3.Hide();
             weightTextBox3.Hide();
+            midstone3.Hide();
+            wakiseki3.Hide();
             countTextBox3.Hide();
             unitPriceTextBox3.Hide();
             moneyTextBox3.Hide();
@@ -517,7 +529,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox4.Hide();
             itemComboBox4.Hide();
+            brandname4.Hide();
+            types4.Hide();
             weightTextBox4.Hide();
+            midstone4.Hide();
+            wakiseki4.Hide();
             countTextBox4.Hide();
             unitPriceTextBox4.Hide();
             moneyTextBox4.Hide();
@@ -532,7 +548,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox5.Hide();
             itemComboBox5.Hide();
+            brandname5.Hide();
+            types5.Hide();
             weightTextBox5.Hide();
+            midstone5.Hide();
+            wakiseki5.Hide();
             countTextBox5.Hide();
             unitPriceTextBox5.Hide();
             moneyTextBox5.Hide();
@@ -547,7 +567,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox6.Hide();
             itemComboBox6.Hide();
+            brandname6.Hide();
+            types6.Hide();
             weightTextBox6.Hide();
+            midstone6.Hide();
+            wakiseki6.Hide();
             countTextBox6.Hide();
             unitPriceTextBox6.Hide();
             moneyTextBox6.Hide();
@@ -562,7 +586,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox7.Hide();
             itemComboBox7.Hide();
+            brandname7.Hide();
+            types7.Hide();
             weightTextBox7.Hide();
+            midstone7.Hide();
+            wakiseki7.Hide();
             countTextBox7.Hide();
             unitPriceTextBox7.Hide();
             moneyTextBox7.Hide();
@@ -577,7 +605,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox8.Hide();
             itemComboBox8.Hide();
+            brandname8.Hide();
+            types8.Hide();
             weightTextBox8.Hide();
+            midstone8.Hide();
+            wakiseki8.Hide();
             countTextBox8.Hide();
             unitPriceTextBox8.Hide();
             moneyTextBox8.Hide();
@@ -592,7 +624,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox9.Hide();
             itemComboBox9.Hide();
+            brandname9.Hide();
+            types9.Hide();
             weightTextBox9.Hide();
+            midstone9.Hide();
+            wakiseki9.Hide();
             countTextBox9.Hide();
             unitPriceTextBox9.Hide();
             moneyTextBox9.Hide();
@@ -607,7 +643,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox10.Hide();
             itemComboBox10.Hide();
+            brandname10.Hide();
+            types10.Hide();
             weightTextBox10.Hide();
+            midstone10.Hide();
+            wakiseki10.Hide();
             countTextBox10.Hide();
             unitPriceTextBox10.Hide();
             moneyTextBox10.Hide();
@@ -622,7 +662,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox11.Hide();
             itemComboBox11.Hide();
+            brandname11.Hide();
+            types11.Hide();
             weightTextBox11.Hide();
+            midstone11.Hide();
+            wakiseki11.Hide();
             countTextBox11.Hide();
             unitPriceTextBox11.Hide();
             moneyTextBox11.Hide();
@@ -637,7 +681,11 @@ namespace Flawless_ex
 
             mainCategoryComboBox12.Hide();
             itemComboBox12.Hide();
+            brandname12.Hide();
+            types12.Hide();
             weightTextBox12.Hide();
+            midstone12.Hide();
+            wakiseki12.Hide();
             countTextBox12.Hide();
             unitPriceTextBox12.Hide();
             moneyTextBox12.Hide();
@@ -654,53 +702,13 @@ namespace Flawless_ex
             groupBox1.Hide();//200万以上の取引情報
 
             //左の入力項目処理
-            string itemDisplay = "item_name";
-            string itemValue = "item_code";
-            #region "計算書　左の項目"
+            //string itemDisplay = "item_name";
+            //string itemValue = "item_code";
             //地金
             DataTable dt300 = new DataTable();
             string str_sql_metal = "select* from item_m where main_category_code = 100";
             adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
             adapter.Fill(dt300);
-            //1行目
-
-            metalComboBox0.DataSource = dt300;
-            metalComboBox0.DisplayMember = itemDisplay;
-            metalComboBox0.ValueMember = itemValue; ;
-            metalComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt301 = new DataTable();
-            dt301 = dt300.Copy();
-            metalComboBox1.DataSource = dt301;
-            metalComboBox1.DisplayMember = itemDisplay;
-            metalComboBox1.ValueMember = itemValue;
-            metalComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt302 = new DataTable();
-            dt302 = dt300.Copy();
-            metalComboBox2.DataSource = dt302;
-            metalComboBox2.DisplayMember = itemDisplay;
-            metalComboBox2.ValueMember = itemValue;
-            metalComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt303 = new DataTable();
-            dt303 = dt300.Copy();
-            metalComboBox3.DataSource = dt303;
-            metalComboBox3.DisplayMember = itemDisplay;
-            metalComboBox3.ValueMember = itemValue;
-            metalComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt304 = new DataTable();
-            dt304 = dt300.Copy();
-            metalComboBox4.DataSource = dt304;
-            metalComboBox4.DisplayMember = itemDisplay;
-            metalComboBox4.ValueMember = itemValue;
-            metalComboBox4.SelectedIndex = -1;
-
 
             //ダイヤ
             DataTable dt400 = new DataTable();
@@ -708,43 +716,6 @@ namespace Flawless_ex
 
             adapter = new NpgsqlDataAdapter(str_sql_diamond, conn);
             adapter.Fill(dt400);
-            //1行目
-            diamondComboBox0.DataSource = dt400;
-            diamondComboBox0.DisplayMember = itemDisplay;
-            diamondComboBox0.ValueMember = itemValue;
-            diamondComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt401 = new DataTable();
-            dt401 = dt400.Copy();
-            diamondComboBox1.DataSource = dt401;
-            diamondComboBox1.DisplayMember = itemDisplay;
-            diamondComboBox1.ValueMember = itemValue;
-            diamondComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt402 = new DataTable();
-            dt402 = dt400.Copy();
-            diamondComboBox2.DataSource = dt402;
-            diamondComboBox2.DisplayMember = itemDisplay;
-            diamondComboBox2.ValueMember = itemValue;
-            diamondComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt403 = new DataTable();
-            dt403 = dt400.Copy();
-            diamondComboBox3.DataSource = dt403;
-            diamondComboBox3.DisplayMember = itemDisplay;
-            diamondComboBox3.ValueMember = itemValue;
-            diamondComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt404 = new DataTable();
-            dt404 = dt400.Copy();
-            diamondComboBox4.DataSource = dt404;
-            diamondComboBox4.DisplayMember = itemDisplay;
-            diamondComboBox4.ValueMember = itemValue;
-            diamondComboBox4.SelectedIndex = -1;
 
             //ブランド
             DataTable dt500 = new DataTable();
@@ -752,339 +723,17 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(str_sql_brand, conn);
             adapter.Fill(dt500);
 
-            //1行目
-            brandComboBox0.DataSource = dt500;
-            brandComboBox0.DisplayMember = itemDisplay;
-            brandComboBox0.ValueMember = itemValue;
-            brandComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt501 = new DataTable();
-            dt501 = dt500.Copy();
-            brandComboBox1.DataSource = dt501;
-            brandComboBox1.DisplayMember = itemDisplay;
-            brandComboBox1.ValueMember = itemValue;
-            brandComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt502 = new DataTable();
-            dt502 = dt500.Copy();
-            brandComboBox2.DataSource = dt502;
-            brandComboBox2.DisplayMember = itemDisplay;
-            brandComboBox2.ValueMember = itemValue;
-            brandComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt503 = new DataTable();
-            dt503 = dt500.Copy();
-            brandComboBox3.DataSource = dt503;
-            brandComboBox3.DisplayMember = itemDisplay;
-            brandComboBox3.ValueMember = itemValue;
-            brandComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt504 = new DataTable();
-            dt504 = dt500.Copy();
-            brandComboBox4.DataSource = dt504;
-            brandComboBox4.DisplayMember = itemDisplay;
-            brandComboBox4.ValueMember = itemValue;
-            brandComboBox4.SelectedIndex = -1;
-
             //製品・ジュエリー
             DataTable dt600 = new DataTable();
             string str_sql_jewelry = "select* from item_m where main_category_code = 103";
             adapter = new NpgsqlDataAdapter(str_sql_jewelry, conn);
             adapter.Fill(dt600);
 
-            //1行目
-            jewelryComboBox0.DataSource = dt600;
-            jewelryComboBox0.DisplayMember = itemDisplay;
-            jewelryComboBox0.ValueMember = itemValue;
-            jewelryComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt601 = new DataTable();
-            dt601 = dt600.Copy();
-            jewelryComboBox1.DataSource = dt601;
-            jewelryComboBox1.DisplayMember = itemDisplay;
-            jewelryComboBox1.ValueMember = itemValue;
-            jewelryComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt602 = new DataTable();
-            dt602 = dt600.Copy();
-            jewelryComboBox2.DataSource = dt602;
-            jewelryComboBox2.DisplayMember = itemDisplay;
-            jewelryComboBox2.ValueMember = itemValue;
-            jewelryComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt603 = new DataTable();
-            dt603 = dt600.Copy();
-            jewelryComboBox3.DataSource = dt603;
-            jewelryComboBox3.DisplayMember = itemDisplay;
-            jewelryComboBox3.ValueMember = itemValue;
-            jewelryComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt604 = new DataTable();
-            dt604 = dt600.Copy();
-            jewelryComboBox4.DataSource = dt604;
-            jewelryComboBox4.DisplayMember = itemDisplay;
-            jewelryComboBox4.ValueMember = itemValue;
-            jewelryComboBox4.SelectedIndex = -1;
-
             //その他
             DataTable dt700 = new DataTable();
             string str_sql_other = "select* from item_m where main_category_code = 104";
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
-
-            //1行目
-            otherComboBox0.DataSource = dt700;
-            otherComboBox0.DisplayMember = itemDisplay;
-            otherComboBox0.ValueMember = itemValue;
-            otherComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt701 = new DataTable();
-            dt701 = dt700.Copy();
-            otherComboBox1.DataSource = dt701;
-            otherComboBox1.DisplayMember = itemDisplay;
-            otherComboBox1.ValueMember = itemValue;
-            otherComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt702 = new DataTable();
-            dt702 = dt700.Copy();
-            otherComboBox2.DataSource = dt702;
-            otherComboBox2.DisplayMember = itemDisplay;
-            otherComboBox2.ValueMember = itemValue;
-            otherComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt703 = new DataTable();
-            dt703 = dt700.Copy();
-            otherComboBox3.DataSource = dt703;
-            otherComboBox3.DisplayMember = itemDisplay;
-            otherComboBox3.ValueMember = itemValue;
-            otherComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt704 = new DataTable();
-            dt704 = dt700.Copy();
-            otherComboBox4.DataSource = dt704;
-            otherComboBox4.DisplayMember = itemDisplay;
-            otherComboBox4.ValueMember = itemValue;
-            otherComboBox4.SelectedIndex = -1;
-            #endregion
-            #region "納品書　左の項目"
-            //地金
-            //1行目
-            DataTable deliverydt300 = new DataTable();
-            deliverydt300 = dt300.Copy();
-            metalComboBox00.DataSource = deliverydt300;
-            metalComboBox00.DisplayMember = itemDisplay;
-            metalComboBox00.ValueMember = itemValue; ;
-            metalComboBox00.SelectedIndex = -1;
-
-            //2行目
-            DataTable deliverydt301 = new DataTable();
-            deliverydt301 = dt300.Copy();
-            metalComboBox01.DataSource = deliverydt301;
-            metalComboBox01.DisplayMember = itemDisplay;
-            metalComboBox01.ValueMember = itemValue;
-            metalComboBox01.SelectedIndex = -1;
-
-            //3行目
-            DataTable deliverydt302 = new DataTable();
-            deliverydt302 = dt300.Copy();
-            metalComboBox02.DataSource = deliverydt302;
-            metalComboBox02.DisplayMember = itemDisplay;
-            metalComboBox02.ValueMember = itemValue;
-            metalComboBox02.SelectedIndex = -1;
-
-            //4行目
-            DataTable deliverydt303 = new DataTable();
-            deliverydt303 = dt300.Copy();
-            metalComboBox03.DataSource = deliverydt303;
-            metalComboBox03.DisplayMember = itemDisplay;
-            metalComboBox03.ValueMember = itemValue;
-            metalComboBox03.SelectedIndex = -1;
-
-            //5行目
-            DataTable deliverydt304 = new DataTable();
-            deliverydt304 = dt300.Copy();
-            metalComboBox04.DataSource = deliverydt304;
-            metalComboBox04.DisplayMember = itemDisplay;
-            metalComboBox04.ValueMember = itemValue;
-            metalComboBox04.SelectedIndex = -1;
-
-
-            //ダイヤ
-            //1行目
-            DataTable deliverydt400 = new DataTable();
-            deliverydt400 = dt400.Copy();
-            diamondComboBox00.DataSource = deliverydt400;
-            diamondComboBox00.DisplayMember = itemDisplay;
-            diamondComboBox00.ValueMember = itemValue;
-            diamondComboBox00.SelectedIndex = -1;
-
-            //2行目
-            DataTable deliverydt401 = new DataTable();
-            deliverydt401 = dt400.Copy();
-            diamondComboBox01.DataSource = deliverydt401;
-            diamondComboBox01.DisplayMember = itemDisplay;
-            diamondComboBox01.ValueMember = itemValue;
-            diamondComboBox01.SelectedIndex = -1;
-
-            //3行目
-            DataTable deliverydt402 = new DataTable();
-            deliverydt402 = dt400.Copy();
-            diamondComboBox02.DataSource = deliverydt402;
-            diamondComboBox02.DisplayMember = itemDisplay;
-            diamondComboBox02.ValueMember = itemValue;
-            diamondComboBox02.SelectedIndex = -1;
-
-            //4行目
-            DataTable deliverydt403 = new DataTable();
-            deliverydt403 = dt400.Copy();
-            diamondComboBox03.DataSource = deliverydt403;
-            diamondComboBox03.DisplayMember = itemDisplay;
-            diamondComboBox03.ValueMember = itemValue;
-            diamondComboBox03.SelectedIndex = -1;
-
-            //5行目
-            DataTable deliverydt404 = new DataTable();
-            deliverydt404 = dt400.Copy();
-            diamondComboBox04.DataSource = deliverydt404;
-            diamondComboBox04.DisplayMember = itemDisplay;
-            diamondComboBox04.ValueMember = itemValue;
-            diamondComboBox04.SelectedIndex = -1;
-
-            //ブランド
-            //1行目
-            DataTable deliverydt500 = new DataTable();
-            deliverydt500 = dt500.Copy();
-            brandComboBox00.DataSource = deliverydt500;
-            brandComboBox00.DisplayMember = itemDisplay;
-            brandComboBox00.ValueMember = itemValue;
-            brandComboBox00.SelectedIndex = -1;
-
-            //2行目
-            DataTable deliverydt501 = new DataTable();
-            deliverydt501 = dt500.Copy();
-            brandComboBox01.DataSource = deliverydt501;
-            brandComboBox01.DisplayMember = itemDisplay;
-            brandComboBox01.ValueMember = itemValue;
-            brandComboBox01.SelectedIndex = -1;
-
-            //3行目
-            DataTable deliverydt502 = new DataTable();
-            deliverydt502 = dt500.Copy();
-            brandComboBox02.DataSource = deliverydt502;
-            brandComboBox02.DisplayMember = itemDisplay;
-            brandComboBox02.ValueMember = itemValue;
-            brandComboBox02.SelectedIndex = -1;
-
-            //4行目
-            DataTable deliverydt503 = new DataTable();
-            deliverydt503 = dt500.Copy();
-            brandComboBox03.DataSource = deliverydt503;
-            brandComboBox03.DisplayMember = itemDisplay;
-            brandComboBox03.ValueMember = itemValue;
-            brandComboBox03.SelectedIndex = -1;
-
-            //5行目
-            DataTable deliverydt504 = new DataTable();
-            deliverydt504 = dt500.Copy();
-            brandComboBox04.DataSource = deliverydt504;
-            brandComboBox04.DisplayMember = itemDisplay;
-            brandComboBox04.ValueMember = itemValue;
-            brandComboBox04.SelectedIndex = -1;
-
-            //製品・ジュエリー
-            //1行目
-            DataTable deliverydt600 = new DataTable();
-            deliverydt600 = dt600.Copy();
-            jewelryComboBox00.DataSource = deliverydt600;
-            jewelryComboBox00.DisplayMember = itemDisplay;
-            jewelryComboBox00.ValueMember = itemValue;
-            jewelryComboBox00.SelectedIndex = -1;
-
-            //2行目
-            DataTable deliverydt601 = new DataTable();
-            deliverydt601 = dt600.Copy();
-            jewelryComboBox01.DataSource = deliverydt601;
-            jewelryComboBox01.DisplayMember = itemDisplay;
-            jewelryComboBox01.ValueMember = itemValue;
-            jewelryComboBox01.SelectedIndex = -1;
-
-            //3行目
-            DataTable deliverydt602 = new DataTable();
-            deliverydt602 = dt600.Copy();
-            jewelryComboBox02.DataSource = deliverydt602;
-            jewelryComboBox02.DisplayMember = itemDisplay;
-            jewelryComboBox02.ValueMember = itemValue;
-            jewelryComboBox02.SelectedIndex = -1;
-
-            //4行目
-            DataTable deliverydt603 = new DataTable();
-            deliverydt603 = dt600.Copy();
-            jewelryComboBox03.DataSource = deliverydt603;
-            jewelryComboBox03.DisplayMember = itemDisplay;
-            jewelryComboBox03.ValueMember = itemValue;
-            jewelryComboBox03.SelectedIndex = -1;
-
-            //5行目
-            DataTable deliverydt604 = new DataTable();
-            deliverydt604 = dt600.Copy();
-            jewelryComboBox04.DataSource = deliverydt604;
-            jewelryComboBox04.DisplayMember = itemDisplay;
-            jewelryComboBox04.ValueMember = itemValue;
-            jewelryComboBox04.SelectedIndex = -1;
-
-            //その他
-            //1行目
-            DataTable deliverydt700 = new DataTable();
-            deliverydt700 = dt700.Copy();
-            otherComboBox00.DataSource = deliverydt700;
-            otherComboBox00.DisplayMember = itemDisplay;
-            otherComboBox00.ValueMember = itemValue;
-            otherComboBox00.SelectedIndex = -1;
-
-            //2行目
-            DataTable deliverydt701 = new DataTable();
-            deliverydt701 = dt700.Copy();
-            otherComboBox01.DataSource = deliverydt701;
-            otherComboBox01.DisplayMember = itemDisplay;
-            otherComboBox01.ValueMember = itemValue;
-            otherComboBox01.SelectedIndex = -1;
-
-            //3行目
-            DataTable deliverydt702 = new DataTable();
-            deliverydt702 = dt700.Copy();
-            otherComboBox02.DataSource = deliverydt702;
-            otherComboBox02.DisplayMember = itemDisplay;
-            otherComboBox02.ValueMember = itemValue;
-            otherComboBox02.SelectedIndex = -1;
-
-            //4行目
-            DataTable deliverydt703 = new DataTable();
-            deliverydt703 = dt700.Copy();
-            otherComboBox03.DataSource = deliverydt703;
-            otherComboBox03.DisplayMember = itemDisplay;
-            otherComboBox03.ValueMember = itemValue;
-            otherComboBox03.SelectedIndex = -1;
-
-            //5行目
-            DataTable deliverydt704 = new DataTable();
-            deliverydt704 = dt700.Copy();
-            otherComboBox04.DataSource = deliverydt704;
-            otherComboBox04.DisplayMember = itemDisplay;
-            otherComboBox04.ValueMember = itemValue;
-            otherComboBox04.SelectedIndex = -1;
-            #endregion
         }
 
 
@@ -1125,7 +774,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1183,7 +832,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1211,7 +860,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1239,7 +888,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1267,7 +916,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt204.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1295,7 +944,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt205.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1323,7 +972,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1351,7 +1000,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt207.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1379,7 +1028,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt208.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1407,7 +1056,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt209.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1435,7 +1084,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1463,7 +1112,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -2406,7 +2055,7 @@ namespace Flawless_ex
                         + decimal.Parse(moneyTextBox10.Text) + decimal.Parse(moneyTextBox11.Text) + decimal.Parse(moneyTextBox12.Text);
 
             //税額計算 DBから取得？
-            decimal tax = (decimal)1.10;
+            decimal tax = (decimal)0.10;
             decimal taxA = subSum * tax;
 
             //合計計算
@@ -3009,14 +2658,14 @@ namespace Flawless_ex
             decimal taxA = subSum * tax;
 
             //合計計算
-            decimal sum = subSum + taxA;
+            decimal sum = subSum + tax;
 
 
 
             subTotal2.Text = subSum.ToString();
             totalWeight2.Text = weisum.ToString();
             totalCount2.Text = countsum.ToString();
-            taxAmount2.Text = taxA.ToString();
+            taxAmount2.Text = tax.ToString();
             sumTextBox2.Text = sum.ToString();
             #endregion
         }
@@ -3029,7 +2678,11 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox1.Show();
                     itemComboBox1.Show();
+                    brandname1.Show();
+                    types1.Show();
                     weightTextBox1.Show();
+                    midstone1.Show();
+                    wakiseki1.Show();
                     countTextBox1.Show();
                     unitPriceTextBox1.Show();
                     moneyTextBox1.Show();
@@ -3038,7 +2691,11 @@ namespace Flawless_ex
                 case 1:
                     mainCategoryComboBox2.Show();
                     itemComboBox2.Show();
+                    brandname2.Show();
+                    types2.Show();
                     weightTextBox2.Show();
+                    midstone2.Show();
+                    wakiseki2.Show();
                     countTextBox2.Show();
                     unitPriceTextBox2.Show();
                     moneyTextBox2.Show();
@@ -3047,7 +2704,11 @@ namespace Flawless_ex
                 case 2:
                     mainCategoryComboBox3.Show();
                     itemComboBox3.Show();
+                    brandname3.Show();
+                    types3.Show();
                     weightTextBox3.Show();
+                    midstone3.Show();
+                    wakiseki3.Show();
                     countTextBox3.Show();
                     unitPriceTextBox3.Show();
                     moneyTextBox3.Show();
@@ -3056,7 +2717,11 @@ namespace Flawless_ex
                 case 3:
                     mainCategoryComboBox4.Show();
                     itemComboBox4.Show();
+                    brandname4.Show();
+                    types4.Show();
                     weightTextBox4.Show();
+                    midstone4.Show();
+                    wakiseki4.Show();
                     countTextBox4.Show();
                     unitPriceTextBox4.Show();
                     moneyTextBox4.Show();
@@ -3065,7 +2730,11 @@ namespace Flawless_ex
                 case 4:
                     mainCategoryComboBox5.Show();
                     itemComboBox5.Show();
+                    brandname5.Show();
+                    types5.Show();
                     weightTextBox5.Show();
+                    midstone5.Show();
+                    wakiseki5.Show();
                     countTextBox5.Show();
                     unitPriceTextBox5.Show();
                     moneyTextBox5.Show();
@@ -3074,7 +2743,11 @@ namespace Flawless_ex
                 case 5:
                     mainCategoryComboBox6.Show();
                     itemComboBox6.Show();
+                    brandname6.Show();
+                    types6.Show();
                     weightTextBox6.Show();
+                    midstone6.Show();
+                    wakiseki6.Show();
                     countTextBox6.Show();
                     unitPriceTextBox6.Show();
                     moneyTextBox6.Show();
@@ -3083,7 +2756,11 @@ namespace Flawless_ex
                 case 6:
                     mainCategoryComboBox7.Show();
                     itemComboBox7.Show();
+                    brandname7.Show();
+                    types7.Show();
                     weightTextBox7.Show();
+                    midstone7.Show();
+                    wakiseki7.Show();
                     countTextBox7.Show();
                     unitPriceTextBox7.Show();
                     moneyTextBox7.Show();
@@ -3092,7 +2769,11 @@ namespace Flawless_ex
                 case 7:
                     mainCategoryComboBox8.Show();
                     itemComboBox8.Show();
+                    brandname8.Show();
+                    types8.Show();
                     weightTextBox8.Show();
+                    midstone8.Show();
+                    wakiseki8.Show();
                     countTextBox8.Show();
                     unitPriceTextBox8.Show();
                     moneyTextBox8.Show();
@@ -3101,7 +2782,11 @@ namespace Flawless_ex
                 case 8:
                     mainCategoryComboBox9.Show();
                     itemComboBox9.Show();
+                    brandname9.Show();
+                    types9.Show();
                     weightTextBox9.Show();
+                    midstone9.Show();
+                    wakiseki9.Show();
                     countTextBox9.Show();
                     unitPriceTextBox9.Show();
                     moneyTextBox9.Show();
@@ -3110,7 +2795,11 @@ namespace Flawless_ex
                 case 9:
                     mainCategoryComboBox10.Show();
                     itemComboBox10.Show();
+                    brandname10.Show();
+                    types10.Show();
                     weightTextBox10.Show();
+                    midstone10.Show();
+                    wakiseki10.Show();
                     countTextBox10.Show();
                     unitPriceTextBox10.Show();
                     moneyTextBox10.Show();
@@ -3119,7 +2808,11 @@ namespace Flawless_ex
                 case 10:
                     mainCategoryComboBox11.Show();
                     itemComboBox11.Show();
+                    brandname11.Show();
+                    types11.Show();
                     weightTextBox11.Show();
+                    midstone11.Show();
+                    wakiseki11.Show();
                     countTextBox11.Show();
                     unitPriceTextBox11.Show();
                     moneyTextBox11.Show();
@@ -3128,7 +2821,11 @@ namespace Flawless_ex
                 case 11:
                     mainCategoryComboBox12.Show();
                     itemComboBox12.Show();
+                    brandname12.Show();
+                    types12.Show();
                     weightTextBox12.Show();
+                    midstone12.Show();
+                    wakiseki12.Show();
                     countTextBox12.Show();
                     unitPriceTextBox12.Show();
                     moneyTextBox12.Show();
@@ -3148,7 +2845,11 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox1.Hide();
                     itemComboBox1.Hide();
+                    brandname1.Hide();
+                    types1.Hide();
                     weightTextBox1.Hide();
+                    midstone1.Hide();
+                    wakiseki1.Hide();
                     countTextBox1.Hide();
                     unitPriceTextBox1.Hide();
                     moneyTextBox1.Hide();
@@ -3157,7 +2858,11 @@ namespace Flawless_ex
                 case 1:
                     mainCategoryComboBox2.Hide();
                     itemComboBox2.Hide();
+                    brandname2.Hide();
+                    types2.Hide();
                     weightTextBox2.Hide();
+                    midstone2.Hide();
+                    wakiseki2.Hide();
                     countTextBox2.Hide();
                     unitPriceTextBox2.Hide();
                     moneyTextBox2.Hide();
@@ -3166,7 +2871,11 @@ namespace Flawless_ex
                 case 2:
                     mainCategoryComboBox3.Hide();
                     itemComboBox3.Hide();
+                    brandname3.Hide();
+                    types3.Hide();
                     weightTextBox3.Hide();
+                    midstone3.Hide();
+                    wakiseki3.Hide();
                     countTextBox3.Hide();
                     unitPriceTextBox3.Hide();
                     moneyTextBox3.Hide();
@@ -3175,7 +2884,11 @@ namespace Flawless_ex
                 case 3:
                     mainCategoryComboBox4.Hide();
                     itemComboBox4.Hide();
+                    brandname4.Hide();
+                    types4.Hide();
                     weightTextBox4.Hide();
+                    midstone4.Hide();
+                    wakiseki4.Hide();
                     countTextBox4.Hide();
                     unitPriceTextBox4.Hide();
                     moneyTextBox4.Hide();
@@ -3184,7 +2897,11 @@ namespace Flawless_ex
                 case 4:
                     mainCategoryComboBox5.Hide();
                     itemComboBox5.Hide();
+                    brandname5.Hide();
+                    types5.Hide();
                     weightTextBox5.Hide();
+                    midstone5.Hide();
+                    wakiseki5.Hide();
                     countTextBox5.Hide();
                     unitPriceTextBox5.Hide();
                     moneyTextBox5.Hide();
@@ -3193,7 +2910,11 @@ namespace Flawless_ex
                 case 5:
                     mainCategoryComboBox6.Hide();
                     itemComboBox6.Hide();
+                    brandname6.Hide();
+                    types6.Hide();
                     weightTextBox6.Hide();
+                    midstone6.Hide();
+                    wakiseki6.Hide();
                     countTextBox6.Hide();
                     unitPriceTextBox6.Hide();
                     moneyTextBox6.Hide();
@@ -3202,7 +2923,11 @@ namespace Flawless_ex
                 case 6:
                     mainCategoryComboBox7.Hide();
                     itemComboBox7.Hide();
+                    brandname7.Hide();
+                    types7.Hide();
                     weightTextBox7.Hide();
+                    midstone7.Hide();
+                    wakiseki7.Hide();
                     countTextBox7.Hide();
                     unitPriceTextBox7.Hide();
                     moneyTextBox7.Hide();
@@ -3211,7 +2936,11 @@ namespace Flawless_ex
                 case 7:
                     mainCategoryComboBox8.Hide();
                     itemComboBox8.Hide();
+                    brandname8.Hide();
+                    types8.Hide();
                     weightTextBox8.Hide();
+                    midstone8.Hide();
+                    wakiseki8.Hide();
                     countTextBox8.Hide();
                     unitPriceTextBox8.Hide();
                     moneyTextBox8.Hide();
@@ -3220,7 +2949,11 @@ namespace Flawless_ex
                 case 8:
                     mainCategoryComboBox9.Hide();
                     itemComboBox9.Hide();
+                    brandname9.Hide();
+                    types9.Hide();
                     weightTextBox9.Hide();
+                    midstone9.Hide();
+                    wakiseki9.Hide();
                     countTextBox9.Hide();
                     unitPriceTextBox9.Hide();
                     moneyTextBox9.Hide();
@@ -3229,7 +2962,11 @@ namespace Flawless_ex
                 case 9:
                     mainCategoryComboBox10.Hide();
                     itemComboBox10.Hide();
+                    brandname10.Hide();
+                    types10.Hide();
                     weightTextBox10.Hide();
+                    midstone10.Hide();
+                    wakiseki10.Hide();
                     countTextBox10.Hide();
                     unitPriceTextBox10.Hide();
                     moneyTextBox10.Hide();
@@ -3238,7 +2975,11 @@ namespace Flawless_ex
                 case 10:
                     mainCategoryComboBox11.Hide();
                     itemComboBox11.Hide();
+                    brandname11.Hide();
+                    types11.Hide();
                     weightTextBox11.Hide();
+                    midstone11.Hide();
+                    wakiseki11.Hide();
                     countTextBox11.Hide();
                     unitPriceTextBox11.Hide();
                     moneyTextBox11.Hide();
@@ -3247,7 +2988,11 @@ namespace Flawless_ex
                 case 11:
                     mainCategoryComboBox12.Hide();
                     itemComboBox12.Hide();
+                    brandname12.Hide();
+                    types12.Hide();
                     weightTextBox12.Hide();
+                    midstone12.Hide();
+                    wakiseki12.Hide();
                     countTextBox12.Hide();
                     unitPriceTextBox12.Hide();
                     moneyTextBox12.Hide();
@@ -3599,6 +3344,99 @@ namespace Flawless_ex
                     clientRemarksTextBox2.Text = remarks;
                 }
             }
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+            
+            this.documentNumberTextBox.Text = "101";
+            //int AntiqueNumber = int.Parse(this.textBox302.Text);
+            int TotalWeight = int.Parse(this.totalWeight.Text);
+            int Amount = int.Parse(this.totalCount.Text);
+            decimal SubTotal = decimal.Parse(this.subTotal.Text);
+            decimal TaxAmount = decimal.Parse(this.taxAmount.Text);
+            decimal Total = decimal.Parse(this.sumTextBox.Text);
+            string SettlementDate = this.settlementBox.Text;
+            string DeliveryDate = this.deliveryDateBox.Text;
+            string DeliveryMethod = this.deliveryTextBox.Text;
+            string PaymentMethod = this.paymentMethodsBox.Text;
+            decimal Weight = decimal.Parse(this.weightTextBox0.Text);
+            int Count = int.Parse(this.countTextBox0.Text);
+            decimal UnitPrice = decimal.Parse(this.unitPriceTextBox0.Text);
+            decimal amount = decimal.Parse(this.moneyTextBox0.Text);
+            string Remarks = this.remarks0.Text;
+            string BrandName = this.brandname0.Text;
+            string Types = this.types0.Text;
+            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter;
+
+            DataTable dt = new DataTable();
+            string sql_str = "Insert into statement_data VALUES ( " + staff_id + " , " +  staff_id  + " , " + staff_id + " , " + TotalWeight + " ,  " + Amount + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
+
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str, conn);
+            adapter.Fill(dt);
+            conn.Close();
+
+            DataTable dt2 = new DataTable();
+            string sql_str2 = "Insert into statement_calc_data VALUES ( " + staff_id + " , " + staff_id + " , " +  Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount +  " , '" + Remarks + "' , '" + staff_id + "' , '" + BrandName + "' , '" + Types +  "');";
+
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str2, conn);
+            adapter.Fill(dt2);
+            conn.Close();
+            MessageBox.Show("登録しました。");
+
+        }
+
+        private void Button11_Click(object sender, EventArgs e)
+        {
+            string path = " ";
+            textBox1.Text = " ";
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+            }
+            else if (dialog == DialogResult.Cancel) { }
+
+            textBox1.Text = path;
+        }
+
+        private void Button12_Click(object sender, EventArgs e)
+        {
+            string path = " ";
+            textBox302.Text = " ";
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+            }
+            else if (dialog == DialogResult.Cancel) { }
+
+            textBox302.Text = path;
         }
     }
 }
