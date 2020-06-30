@@ -43,7 +43,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(master,staff_code);
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
             this.Close();
             mainCategory.Show();
         }
@@ -60,7 +60,7 @@ namespace Flawless_ex
                 string mainName = mainCategoryNameTextBox.Text;//大分類名
                 DateTime dat = DateTime.Now;
 
-                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '"+ dat +"',0);";
+                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0);";
 
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
@@ -80,9 +80,9 @@ namespace Flawless_ex
 
                 MessageBox.Show("登録完了");
 
-                
 
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master,staff_code);
+
+                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
                 this.Close();
                 mainCategory.Show();
             }

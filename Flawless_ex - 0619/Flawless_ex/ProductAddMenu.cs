@@ -55,16 +55,16 @@ namespace Flawless_ex
             MessageBox.Show("登録完了");
 
             //履歴
-            string sql_item_m_revisions = "insert into item_m_revisions values(" + code + ", '" + dat + "', " + staff_code +")";
+            string sql_item_m_revisions = "insert into item_m_revisions values(" + code + ", '" + dat + "', " + staff_code + ")";
             NpgsqlCommand cmd = new NpgsqlCommand(sql_item_m_revisions, conn);
             NpgsqlDataReader reader = cmd.ExecuteReader();
 
             conn.Close();
 
-            ItemMaster product = new ItemMaster(master,staff_code);
+            ItemMaster product = new ItemMaster(master, staff_code);
             this.Close();
             product.Show();
-            
+
         }
 
         private void ProductAddMenu_Load(object sender, EventArgs e)
