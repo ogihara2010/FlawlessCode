@@ -12,6 +12,8 @@ namespace Flawless_ex
         int com = 0;　// 納品書　追加カウント
         int staff_id;
         int itemMainCategoryCode;
+        public DataTable clientDt = new DataTable();//顧客情報
+        public int count = 0;
 
         MainMenu mainMenu;
 
@@ -57,6 +59,7 @@ namespace Flawless_ex
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
+
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -469,211 +472,243 @@ namespace Flawless_ex
             //２行目以降非表示
             mainCategoryComboBox1.Hide();
             itemComboBox1.Hide();
+            brandname1.Hide();
+            types1.Hide();
             weightTextBox1.Hide();
+            midstone1.Hide();
+            wakiseki1.Hide();
             countTextBox1.Hide();
             unitPriceTextBox1.Hide();
             moneyTextBox1.Hide();
             remarks1.Hide();
             mainCategoryComboBox01.Hide();
             itemComboBox01.Hide();
-            BlandNameTextBox01.Hide();
-            VarietyTextBox01.Hide();
             weightTextBox01.Hide();
+            countTextBox01.Hide();
+            unitPriceTextBox01.Hide();
+            moneyTextBox01.Hide();
+            remarks01.Hide();
 
             mainCategoryComboBox2.Hide();
             itemComboBox2.Hide();
+            brandname2.Hide();
+            types2.Hide();
             weightTextBox2.Hide();
+            midstone2.Hide();
+            wakiseki2.Hide();
             countTextBox2.Hide();
             unitPriceTextBox2.Hide();
             moneyTextBox2.Hide();
             remarks2.Hide();
             mainCategoryComboBox02.Hide();
             itemComboBox02.Hide();
-            BlandNameTextBox02.Hide();
-            VarietyTextBox02.Hide();
             weightTextBox02.Hide();
+            countTextBox02.Hide();
+            unitPriceTextBox02.Hide();
+            moneyTextBox02.Hide();
+            remarks02.Hide();
 
             mainCategoryComboBox3.Hide();
             itemComboBox3.Hide();
+            brandname3.Hide();
+            types3.Hide();
             weightTextBox3.Hide();
+            midstone3.Hide();
+            wakiseki3.Hide();
             countTextBox3.Hide();
             unitPriceTextBox3.Hide();
             moneyTextBox3.Hide();
             remarks3.Hide();
             mainCategoryComboBox03.Hide();
             itemComboBox03.Hide();
-            BlandNameTextBox03.Hide();
-            VarietyTextBox03.Hide();
             weightTextBox03.Hide();
+            countTextBox03.Hide();
+            unitPriceTextBox03.Hide();
+            moneyTextBox03.Hide();
+            remarks03.Hide();
 
             mainCategoryComboBox4.Hide();
             itemComboBox4.Hide();
+            brandname4.Hide();
+            types4.Hide();
             weightTextBox4.Hide();
+            midstone4.Hide();
+            wakiseki4.Hide();
             countTextBox4.Hide();
             unitPriceTextBox4.Hide();
             moneyTextBox4.Hide();
             remarks4.Hide();
             mainCategoryComboBox04.Hide();
             itemComboBox04.Hide();
-            BlandNameTextBox04.Hide();
-            VarietyTextBox04.Hide();
             weightTextBox04.Hide();
+            countTextBox04.Hide();
+            unitPriceTextBox04.Hide();
+            moneyTextBox04.Hide();
+            remarks04.Hide();
 
             mainCategoryComboBox5.Hide();
             itemComboBox5.Hide();
+            brandname5.Hide();
+            types5.Hide();
             weightTextBox5.Hide();
+            midstone5.Hide();
+            wakiseki5.Hide();
             countTextBox5.Hide();
             unitPriceTextBox5.Hide();
             moneyTextBox5.Hide();
             remarks5.Hide();
             mainCategoryComboBox05.Hide();
             itemComboBox05.Hide();
-            BlandNameTextBox05.Hide();
-            VarietyTextBox05.Hide();
             weightTextBox05.Hide();
+            countTextBox05.Hide();
+            unitPriceTextBox05.Hide();
+            moneyTextBox05.Hide();
+            remarks05.Hide();
 
             mainCategoryComboBox6.Hide();
             itemComboBox6.Hide();
+            brandname6.Hide();
+            types6.Hide();
             weightTextBox6.Hide();
+            midstone6.Hide();
+            wakiseki6.Hide();
             countTextBox6.Hide();
             unitPriceTextBox6.Hide();
             moneyTextBox6.Hide();
             remarks6.Hide();
             mainCategoryComboBox06.Hide();
             itemComboBox06.Hide();
-            BlandNameTextBox06.Hide();
-            VarietyTextBox06.Hide();
             weightTextBox06.Hide();
+            countTextBox06.Hide();
+            unitPriceTextBox06.Hide();
+            moneyTextBox06.Hide();
+            remarks06.Hide();
 
             mainCategoryComboBox7.Hide();
             itemComboBox7.Hide();
+            brandname7.Hide();
+            types7.Hide();
             weightTextBox7.Hide();
+            midstone7.Hide();
+            wakiseki7.Hide();
             countTextBox7.Hide();
             unitPriceTextBox7.Hide();
             moneyTextBox7.Hide();
             remarks7.Hide();
             mainCategoryComboBox07.Hide();
             itemComboBox07.Hide();
-            BlandNameTextBox07.Hide();
-            VarietyTextBox07.Hide();
             weightTextBox07.Hide();
+            countTextBox07.Hide();
+            unitPriceTextBox07.Hide();
+            moneyTextBox07.Hide();
+            remarks07.Hide();
 
             mainCategoryComboBox8.Hide();
             itemComboBox8.Hide();
+            brandname8.Hide();
+            types8.Hide();
             weightTextBox8.Hide();
+            midstone8.Hide();
+            wakiseki8.Hide();
             countTextBox8.Hide();
             unitPriceTextBox8.Hide();
             moneyTextBox8.Hide();
             remarks8.Hide();
             mainCategoryComboBox08.Hide();
             itemComboBox08.Hide();
-            BlandNameTextBox08.Hide();
-            VarietyTextBox08.Hide();
             weightTextBox08.Hide();
+            countTextBox08.Hide();
+            unitPriceTextBox08.Hide();
+            moneyTextBox08.Hide();
+            remarks08.Hide();
 
             mainCategoryComboBox9.Hide();
             itemComboBox9.Hide();
+            brandname9.Hide();
+            types9.Hide();
             weightTextBox9.Hide();
+            midstone9.Hide();
+            wakiseki9.Hide();
             countTextBox9.Hide();
             unitPriceTextBox9.Hide();
             moneyTextBox9.Hide();
             remarks9.Hide();
             mainCategoryComboBox09.Hide();
             itemComboBox09.Hide();
-            BlandNameTextBox09.Hide();
-            VarietyTextBox09.Hide();
             weightTextBox09.Hide();
+            countTextBox09.Hide();
+            unitPriceTextBox09.Hide();
+            moneyTextBox09.Hide();
+            remarks09.Hide();
 
             mainCategoryComboBox10.Hide();
             itemComboBox10.Hide();
+            brandname10.Hide();
+            types10.Hide();
             weightTextBox10.Hide();
+            midstone10.Hide();
+            wakiseki10.Hide();
             countTextBox10.Hide();
             unitPriceTextBox10.Hide();
             moneyTextBox10.Hide();
             remarks10.Hide();
             mainCategoryComboBox010.Hide();
             itemComboBox010.Hide();
-            BlandNameTextBox010.Hide();
-            VarietyTextBox010.Hide();
             weightTextBox010.Hide();
+            countTextBox010.Hide();
+            unitPriceTextBox010.Hide();
+            moneyTextBox010.Hide();
+            remarks010.Hide();
 
             mainCategoryComboBox11.Hide();
             itemComboBox11.Hide();
+            brandname11.Hide();
+            types11.Hide();
             weightTextBox11.Hide();
+            midstone11.Hide();
+            wakiseki11.Hide();
             countTextBox11.Hide();
             unitPriceTextBox11.Hide();
             moneyTextBox11.Hide();
             remarks11.Hide();
             mainCategoryComboBox011.Hide();
             itemComboBox011.Hide();
-            BlandNameTextBox011.Hide();
-            VarietyTextBox011.Hide();
             weightTextBox011.Hide();
+            countTextBox011.Hide();
+            unitPriceTextBox011.Hide();
+            moneyTextBox011.Hide();
+            remarks011.Hide();
 
             mainCategoryComboBox12.Hide();
             itemComboBox12.Hide();
+            brandname12.Hide();
+            types12.Hide();
             weightTextBox12.Hide();
+            midstone12.Hide();
+            wakiseki12.Hide();
             countTextBox12.Hide();
             unitPriceTextBox12.Hide();
             moneyTextBox12.Hide();
             remarks12.Hide();
             mainCategoryComboBox012.Hide();
             itemComboBox012.Hide();
-            BlandNameTextBox012.Hide();
-            VarietyTextBox012.Hide();
             weightTextBox012.Hide();
+            countTextBox012.Hide();
+            unitPriceTextBox012.Hide();
+            moneyTextBox012.Hide();
+            remarks012.Hide();
             #endregion
 
             groupBox1.Hide();//200万以上の取引情報
 
             //左の入力項目処理
-            string itemDisplay = "item_name";
-            string itemValue = "item_code";
-            #region "計算書　左の項目"
+            //string itemDisplay = "item_name";
+            //string itemValue = "item_code";
             //地金
             DataTable dt300 = new DataTable();
             string str_sql_metal = "select* from item_m where main_category_code = 100";
             adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
             adapter.Fill(dt300);
-            //1行目
-
-            metalComboBox0.DataSource = dt300;
-            metalComboBox0.DisplayMember = itemDisplay;
-            metalComboBox0.ValueMember = itemValue; ;
-            metalComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt301 = new DataTable();
-            dt301 = dt300.Copy();
-            metalComboBox1.DataSource = dt301;
-            metalComboBox1.DisplayMember = itemDisplay;
-            metalComboBox1.ValueMember = itemValue;
-            metalComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt302 = new DataTable();
-            dt302 = dt300.Copy();
-            metalComboBox2.DataSource = dt302;
-            metalComboBox2.DisplayMember = itemDisplay;
-            metalComboBox2.ValueMember = itemValue;
-            metalComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt303 = new DataTable();
-            dt303 = dt300.Copy();
-            metalComboBox3.DataSource = dt303;
-            metalComboBox3.DisplayMember = itemDisplay;
-            metalComboBox3.ValueMember = itemValue;
-            metalComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt304 = new DataTable();
-            dt304 = dt300.Copy();
-            metalComboBox4.DataSource = dt304;
-            metalComboBox4.DisplayMember = itemDisplay;
-            metalComboBox4.ValueMember = itemValue;
-            metalComboBox4.SelectedIndex = -1;
-
 
             //ダイヤ
             DataTable dt400 = new DataTable();
@@ -681,43 +716,6 @@ namespace Flawless_ex
 
             adapter = new NpgsqlDataAdapter(str_sql_diamond, conn);
             adapter.Fill(dt400);
-            //1行目
-            diamondComboBox0.DataSource = dt400;
-            diamondComboBox0.DisplayMember = itemDisplay;
-            diamondComboBox0.ValueMember = itemValue;
-            diamondComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt401 = new DataTable();
-            dt401 = dt400.Copy();
-            diamondComboBox1.DataSource = dt401;
-            diamondComboBox1.DisplayMember = itemDisplay;
-            diamondComboBox1.ValueMember = itemValue;
-            diamondComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt402 = new DataTable();
-            dt402 = dt400.Copy();
-            diamondComboBox2.DataSource = dt402;
-            diamondComboBox2.DisplayMember = itemDisplay;
-            diamondComboBox2.ValueMember = itemValue;
-            diamondComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt403 = new DataTable();
-            dt403 = dt400.Copy();
-            diamondComboBox3.DataSource = dt403;
-            diamondComboBox3.DisplayMember = itemDisplay;
-            diamondComboBox3.ValueMember = itemValue;
-            diamondComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt404 = new DataTable();
-            dt404 = dt400.Copy();
-            diamondComboBox4.DataSource = dt404;
-            diamondComboBox4.DisplayMember = itemDisplay;
-            diamondComboBox4.ValueMember = itemValue;
-            diamondComboBox4.SelectedIndex = -1;
 
             //ブランド
             DataTable dt500 = new DataTable();
@@ -725,239 +723,17 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(str_sql_brand, conn);
             adapter.Fill(dt500);
 
-            //1行目
-            brandComboBox0.DataSource = dt500;
-            brandComboBox0.DisplayMember = itemDisplay;
-            brandComboBox0.ValueMember = itemValue;
-            brandComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt501 = new DataTable();
-            dt501 = dt500.Copy();
-            brandComboBox1.DataSource = dt501;
-            brandComboBox1.DisplayMember = itemDisplay;
-            brandComboBox1.ValueMember = itemValue;
-            brandComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt502 = new DataTable();
-            dt502 = dt500.Copy();
-            brandComboBox2.DataSource = dt502;
-            brandComboBox2.DisplayMember = itemDisplay;
-            brandComboBox2.ValueMember = itemValue;
-            brandComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt503 = new DataTable();
-            dt503 = dt500.Copy();
-            brandComboBox3.DataSource = dt503;
-            brandComboBox3.DisplayMember = itemDisplay;
-            brandComboBox3.ValueMember = itemValue;
-            brandComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt504 = new DataTable();
-            dt504 = dt500.Copy();
-            brandComboBox4.DataSource = dt504;
-            brandComboBox4.DisplayMember = itemDisplay;
-            brandComboBox4.ValueMember = itemValue;
-            brandComboBox4.SelectedIndex = -1;
-
             //製品・ジュエリー
             DataTable dt600 = new DataTable();
             string str_sql_jewelry = "select* from item_m where main_category_code = 103";
             adapter = new NpgsqlDataAdapter(str_sql_jewelry, conn);
             adapter.Fill(dt600);
 
-            //1行目
-            jewelryComboBox0.DataSource = dt600;
-            jewelryComboBox0.DisplayMember = itemDisplay;
-            jewelryComboBox0.ValueMember = itemValue;
-            jewelryComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt601 = new DataTable();
-            dt601 = dt600.Copy();
-            jewelryComboBox1.DataSource = dt601;
-            jewelryComboBox1.DisplayMember = itemDisplay;
-            jewelryComboBox1.ValueMember = itemValue;
-            jewelryComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt602 = new DataTable();
-            dt602 = dt600.Copy();
-            jewelryComboBox2.DataSource = dt602;
-            jewelryComboBox2.DisplayMember = itemDisplay;
-            jewelryComboBox2.ValueMember = itemValue;
-            jewelryComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt603 = new DataTable();
-            dt603 = dt600.Copy();
-            jewelryComboBox3.DataSource = dt603;
-            jewelryComboBox3.DisplayMember = itemDisplay;
-            jewelryComboBox3.ValueMember = itemValue;
-            jewelryComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt604 = new DataTable();
-            dt604 = dt600.Copy();
-            jewelryComboBox4.DataSource = dt604;
-            jewelryComboBox4.DisplayMember = itemDisplay;
-            jewelryComboBox4.ValueMember = itemValue;
-            jewelryComboBox4.SelectedIndex = -1;
-
             //その他
             DataTable dt700 = new DataTable();
             string str_sql_other = "select* from item_m where main_category_code = 104";
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
-
-            //1行目
-            otherComboBox0.DataSource = dt700;
-            otherComboBox0.DisplayMember = itemDisplay;
-            otherComboBox0.ValueMember = itemValue;
-            otherComboBox0.SelectedIndex = -1;
-
-            //2行目
-            DataTable dt701 = new DataTable();
-            dt701 = dt700.Copy();
-            otherComboBox1.DataSource = dt701;
-            otherComboBox1.DisplayMember = itemDisplay;
-            otherComboBox1.ValueMember = itemValue;
-            otherComboBox1.SelectedIndex = -1;
-
-            //3行目
-            DataTable dt702 = new DataTable();
-            dt702 = dt700.Copy();
-            otherComboBox2.DataSource = dt702;
-            otherComboBox2.DisplayMember = itemDisplay;
-            otherComboBox2.ValueMember = itemValue;
-            otherComboBox2.SelectedIndex = -1;
-
-            //4行目
-            DataTable dt703 = new DataTable();
-            dt703 = dt700.Copy();
-            otherComboBox3.DataSource = dt703;
-            otherComboBox3.DisplayMember = itemDisplay;
-            otherComboBox3.ValueMember = itemValue;
-            otherComboBox3.SelectedIndex = -1;
-
-            //5行目
-            DataTable dt704 = new DataTable();
-            dt704 = dt700.Copy();
-            otherComboBox4.DataSource = dt704;
-            otherComboBox4.DisplayMember = itemDisplay;
-            otherComboBox4.ValueMember = itemValue;
-            otherComboBox4.SelectedIndex = -1;
-            #endregion
-            #region "納品書　左の項目"
-            //地金
-            //1行目
-            DataTable deliverydt300 = new DataTable();
-            deliverydt300 = dt300.Copy();
-
-            //2行目
-            DataTable deliverydt301 = new DataTable();
-            deliverydt301 = dt300.Copy();
-
-            //3行目
-            DataTable deliverydt302 = new DataTable();
-            deliverydt302 = dt300.Copy();
-
-            //4行目
-            DataTable deliverydt303 = new DataTable();
-            deliverydt303 = dt300.Copy();
-
-            //5行目
-            DataTable deliverydt304 = new DataTable();
-            deliverydt304 = dt300.Copy();
-
-
-            //ダイヤ
-            //1行目
-            DataTable deliverydt400 = new DataTable();
-            deliverydt400 = dt400.Copy();
-
-            //2行目
-            DataTable deliverydt401 = new DataTable();
-            deliverydt401 = dt400.Copy();
-
-            //3行目
-            DataTable deliverydt402 = new DataTable();
-            deliverydt402 = dt400.Copy();
-
-            //4行目
-            DataTable deliverydt403 = new DataTable();
-            deliverydt403 = dt400.Copy();
-
-            //5行目
-            DataTable deliverydt404 = new DataTable();
-            deliverydt404 = dt400.Copy();
-
-            //ブランド
-            //1行目
-            DataTable deliverydt500 = new DataTable();
-            deliverydt500 = dt500.Copy();
-
-            //2行目
-            DataTable deliverydt501 = new DataTable();
-            deliverydt501 = dt500.Copy();
-
-            //3行目
-            DataTable deliverydt502 = new DataTable();
-            deliverydt502 = dt500.Copy();
-
-            //4行目
-            DataTable deliverydt503 = new DataTable();
-            deliverydt503 = dt500.Copy();
-
-            //5行目
-            DataTable deliverydt504 = new DataTable();
-            deliverydt504 = dt500.Copy();
-
-            //製品・ジュエリー
-            //1行目
-            DataTable deliverydt600 = new DataTable();
-            deliverydt600 = dt600.Copy();
-
-            //2行目
-            DataTable deliverydt601 = new DataTable();
-            deliverydt601 = dt600.Copy();
-
-            //3行目
-            DataTable deliverydt602 = new DataTable();
-            deliverydt602 = dt600.Copy();
-
-            //4行目
-            DataTable deliverydt603 = new DataTable();
-            deliverydt603 = dt600.Copy();
-
-            //5行目
-            DataTable deliverydt604 = new DataTable();
-            deliverydt604 = dt600.Copy();
-
-            //その他
-            //1行目
-            DataTable deliverydt700 = new DataTable();
-            deliverydt700 = dt700.Copy();
-
-            //2行目
-            DataTable deliverydt701 = new DataTable();
-            deliverydt701 = dt700.Copy();
-
-            //3行目
-            DataTable deliverydt702 = new DataTable();
-            deliverydt702 = dt700.Copy();
-
-            //4行目
-            DataTable deliverydt703 = new DataTable();
-            deliverydt703 = dt700.Copy();
-
-            //5行目
-            DataTable deliverydt704 = new DataTable();
-            deliverydt704 = dt700.Copy();
-            #endregion
         }
 
 
@@ -998,7 +774,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1056,7 +832,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1084,7 +860,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1112,7 +888,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1140,7 +916,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt204.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1168,7 +944,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt205.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1196,7 +972,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1224,7 +1000,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt207.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1252,7 +1028,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt208.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1280,7 +1056,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt209.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1308,7 +1084,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1336,7 +1112,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -2279,7 +2055,7 @@ namespace Flawless_ex
                         + decimal.Parse(moneyTextBox10.Text) + decimal.Parse(moneyTextBox11.Text) + decimal.Parse(moneyTextBox12.Text);
 
             //税額計算 DBから取得？
-            decimal tax = (decimal)1.10;
+            decimal tax = (decimal)0.10;
             decimal taxA = subSum * tax;
 
             //合計計算
@@ -2301,7 +2077,7 @@ namespace Flawless_ex
             decimal sub;
             #region "計算開始"
             //計算開始
-            for (int i = 0; i <= com; i++)
+            for (int i = 0; i <= con; i++)
             {
                 switch (i)
                 {
@@ -2329,7 +2105,7 @@ namespace Flawless_ex
                         {
                             if (string.IsNullOrEmpty(countTextBox01.Text) && !string.IsNullOrEmpty(unitPriceTextBox01.Text))
                             {
-                                sub = decimal.Parse(weightTextBox01.Text) * decimal.Parse(weightTextBox01.Text);
+                                sub = decimal.Parse(weightTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
                                 moneyTextBox01.Text = sub.ToString();
                             }
                             else { }
@@ -2384,7 +2160,7 @@ namespace Flawless_ex
                     case 4:
                         if (!string.IsNullOrEmpty(weightTextBox04.Text))
                         {
-                            if (string.IsNullOrEmpty(VarietyTextBox04.Text) && !string.IsNullOrEmpty(unitPriceTextBox04.Text))
+                            if (string.IsNullOrEmpty(countTextBox04.Text) && !string.IsNullOrEmpty(unitPriceTextBox04.Text))
                             {
                                 sub = decimal.Parse(weightTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
                                 moneyTextBox04.Text = sub.ToString();
@@ -2393,9 +2169,9 @@ namespace Flawless_ex
                         }
                         else//数量入力版
                         {
-                            if (!string.IsNullOrEmpty(VarietyTextBox04.Text) && !string.IsNullOrEmpty(unitPriceTextBox04.Text))
+                            if (!string.IsNullOrEmpty(countTextBox04.Text) && !string.IsNullOrEmpty(unitPriceTextBox04.Text))
                             {
-                                sub = decimal.Parse(VarietyTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
+                                sub = decimal.Parse(countTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
                                 moneyTextBox04.Text = sub.ToString();
                             }
                         }
@@ -2664,93 +2440,93 @@ namespace Flawless_ex
                 switch (i)
                 {
                     case 0:
-                        if (string.IsNullOrEmpty(BlandNameTextBox01.Text))
+                        if (string.IsNullOrEmpty(weightTextBox01.Text))
                         {
-                            BlandNameTextBox01.Text = 0.ToString();
+                            weightTextBox01.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 1:
-                        if (string.IsNullOrEmpty(BlandNameTextBox02.Text))
+                        if (string.IsNullOrEmpty(weightTextBox02.Text))
                         {
-                            BlandNameTextBox02.Text = 0.ToString();
+                            weightTextBox02.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 2:
-                        if (string.IsNullOrEmpty(BlandNameTextBox03.Text))
+                        if (string.IsNullOrEmpty(weightTextBox03.Text))
                         {
-                            BlandNameTextBox03.Text = 0.ToString();
+                            weightTextBox03.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 3:
-                        if (string.IsNullOrEmpty(BlandNameTextBox04.Text))
+                        if (string.IsNullOrEmpty(weightTextBox04.Text))
                         {
-                            BlandNameTextBox04.Text = 0.ToString();
+                            weightTextBox04.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 4:
-                        if (string.IsNullOrEmpty(BlandNameTextBox05.Text))
+                        if (string.IsNullOrEmpty(weightTextBox05.Text))
                         {
-                            BlandNameTextBox05.Text = 0.ToString();
+                            weightTextBox05.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 5:
-                        if (string.IsNullOrEmpty(BlandNameTextBox06.Text))
+                        if (string.IsNullOrEmpty(weightTextBox06.Text))
                         {
-                            BlandNameTextBox06.Text = 0.ToString();
+                            weightTextBox06.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 6:
-                        if (string.IsNullOrEmpty(BlandNameTextBox07.Text))
+                        if (string.IsNullOrEmpty(weightTextBox07.Text))
                         {
-                            BlandNameTextBox07.Text = 0.ToString();
+                            weightTextBox07.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 7:
-                        if (string.IsNullOrEmpty(BlandNameTextBox08.Text))
+                        if (string.IsNullOrEmpty(weightTextBox08.Text))
                         {
-                            BlandNameTextBox08.Text = 0.ToString();
+                            weightTextBox08.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 8:
-                        if (string.IsNullOrEmpty(BlandNameTextBox09.Text))
+                        if (string.IsNullOrEmpty(weightTextBox09.Text))
                         {
-                            BlandNameTextBox09.Text = 0.ToString();
+                            weightTextBox09.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 9:
-                        if (string.IsNullOrEmpty(BlandNameTextBox010.Text))
+                        if (string.IsNullOrEmpty(weightTextBox010.Text))
                         {
-                            BlandNameTextBox010.Text = 0.ToString();
+                            weightTextBox010.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 10:
-                        if (string.IsNullOrEmpty(BlandNameTextBox011.Text))
+                        if (string.IsNullOrEmpty(weightTextBox011.Text))
                         {
-                            BlandNameTextBox011.Text = 0.ToString();
+                            weightTextBox011.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 11:
-                        if (string.IsNullOrEmpty(BlandNameTextBox012.Text))
+                        if (string.IsNullOrEmpty(weightTextBox012.Text))
                         {
-                            BlandNameTextBox012.Text = 0.ToString();
+                            weightTextBox012.Text = 0.ToString();
                         }
                         else { }
                         break;
                     default:
-                        if (string.IsNullOrEmpty(BlandNameTextBox00.Text))
+                        if (string.IsNullOrEmpty(weightTextBox00.Text))
                         {
-                            BlandNameTextBox00.Text = 0.ToString();
+                            weightTextBox00.Text = 0.ToString();
                         }
                         else { }
                         break;
@@ -2766,93 +2542,93 @@ namespace Flawless_ex
                 switch (i)
                 {
                     case 0:
-                        if (string.IsNullOrEmpty(VarietyTextBox01.Text))
+                        if (string.IsNullOrEmpty(countTextBox01.Text))
                         {
-                            VarietyTextBox01.Text = 0.ToString();
+                            countTextBox01.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 1:
-                        if (string.IsNullOrEmpty(VarietyTextBox02.Text))
+                        if (string.IsNullOrEmpty(countTextBox02.Text))
                         {
-                            VarietyTextBox02.Text = 0.ToString();
+                            countTextBox02.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 2:
-                        if (string.IsNullOrEmpty(VarietyTextBox03.Text))
+                        if (string.IsNullOrEmpty(countTextBox03.Text))
                         {
-                            VarietyTextBox03.Text = 0.ToString();
+                            countTextBox03.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 3:
-                        if (string.IsNullOrEmpty(VarietyTextBox04.Text))
+                        if (string.IsNullOrEmpty(countTextBox04.Text))
                         {
-                            VarietyTextBox04.Text = 0.ToString();
+                            countTextBox04.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 4:
-                        if (string.IsNullOrEmpty(VarietyTextBox05.Text))
+                        if (string.IsNullOrEmpty(countTextBox05.Text))
                         {
-                            VarietyTextBox05.Text = 0.ToString();
+                            countTextBox05.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 5:
-                        if (string.IsNullOrEmpty(VarietyTextBox06.Text))
+                        if (string.IsNullOrEmpty(countTextBox06.Text))
                         {
-                            VarietyTextBox06.Text = 0.ToString();
+                            countTextBox06.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 6:
-                        if (string.IsNullOrEmpty(VarietyTextBox07.Text))
+                        if (string.IsNullOrEmpty(countTextBox07.Text))
                         {
-                            VarietyTextBox07.Text = 0.ToString();
+                            countTextBox07.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 7:
-                        if (string.IsNullOrEmpty(VarietyTextBox08.Text))
+                        if (string.IsNullOrEmpty(countTextBox08.Text))
                         {
-                            VarietyTextBox08.Text = 0.ToString();
+                            countTextBox08.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 8:
-                        if (string.IsNullOrEmpty(VarietyTextBox09.Text))
+                        if (string.IsNullOrEmpty(countTextBox09.Text))
                         {
-                            VarietyTextBox09.Text = 0.ToString();
+                            countTextBox09.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 9:
-                        if (string.IsNullOrEmpty(VarietyTextBox010.Text))
+                        if (string.IsNullOrEmpty(countTextBox010.Text))
                         {
-                            VarietyTextBox010.Text = 0.ToString();
+                            countTextBox010.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 10:
-                        if (string.IsNullOrEmpty(VarietyTextBox011.Text))
+                        if (string.IsNullOrEmpty(countTextBox011.Text))
                         {
-                            VarietyTextBox011.Text = 0.ToString();
+                            countTextBox011.Text = 0.ToString();
                         }
                         else { }
                         break;
                     case 11:
-                        if (string.IsNullOrEmpty(VarietyTextBox012.Text))
+                        if (string.IsNullOrEmpty(countTextBox012.Text))
                         {
-                            VarietyTextBox012.Text = 0.ToString();
+                            countTextBox012.Text = 0.ToString();
                         }
                         else { }
                         break;
                     default:
-                        if (string.IsNullOrEmpty(VarietyTextBox00.Text))
+                        if (string.IsNullOrEmpty(countTextBox00.Text))
                         {
-                            VarietyTextBox00.Text = 0.ToString();
+                            countTextBox00.Text = 0.ToString();
                         }
                         else { }
                         break;
@@ -2863,14 +2639,14 @@ namespace Flawless_ex
             #endregion
             #region "総量"
             //総重量計算
-            decimal weisum = decimal.Parse(BlandNameTextBox00.Text) + decimal.Parse(BlandNameTextBox01.Text) + decimal.Parse(BlandNameTextBox02.Text) + decimal.Parse(BlandNameTextBox03.Text) + decimal.Parse(BlandNameTextBox04.Text)
-                        + decimal.Parse(BlandNameTextBox05.Text) + decimal.Parse(BlandNameTextBox06.Text) + decimal.Parse(BlandNameTextBox07.Text) + decimal.Parse(BlandNameTextBox08.Text) + decimal.Parse(BlandNameTextBox09.Text)
-                        + decimal.Parse(BlandNameTextBox010.Text) + decimal.Parse(BlandNameTextBox011.Text) + decimal.Parse(BlandNameTextBox012.Text);
+            decimal weisum = decimal.Parse(weightTextBox00.Text) + decimal.Parse(weightTextBox01.Text) + decimal.Parse(weightTextBox02.Text) + decimal.Parse(weightTextBox03.Text) + decimal.Parse(weightTextBox04.Text)
+                        + decimal.Parse(weightTextBox05.Text) + decimal.Parse(weightTextBox06.Text) + decimal.Parse(weightTextBox07.Text) + decimal.Parse(weightTextBox08.Text) + decimal.Parse(weightTextBox09.Text)
+                        + decimal.Parse(weightTextBox010.Text) + decimal.Parse(weightTextBox011.Text) + decimal.Parse(weightTextBox012.Text);
 
             //総数量計算
-            decimal countsum = decimal.Parse(VarietyTextBox00.Text) + decimal.Parse(VarietyTextBox01.Text) + decimal.Parse(VarietyTextBox02.Text) + decimal.Parse(VarietyTextBox03.Text) + decimal.Parse(VarietyTextBox04.Text)
-                        + decimal.Parse(VarietyTextBox05.Text) + decimal.Parse(VarietyTextBox06.Text) + decimal.Parse(VarietyTextBox07.Text) + decimal.Parse(VarietyTextBox08.Text) + decimal.Parse(VarietyTextBox09.Text)
-                        + decimal.Parse(VarietyTextBox010.Text) + decimal.Parse(VarietyTextBox011.Text) + decimal.Parse(VarietyTextBox012.Text);
+            decimal countsum = decimal.Parse(countTextBox00.Text) + decimal.Parse(countTextBox01.Text) + decimal.Parse(countTextBox02.Text) + decimal.Parse(countTextBox03.Text) + decimal.Parse(countTextBox04.Text)
+                        + decimal.Parse(countTextBox05.Text) + decimal.Parse(countTextBox06.Text) + decimal.Parse(countTextBox07.Text) + decimal.Parse(countTextBox08.Text) + decimal.Parse(countTextBox09.Text)
+                        + decimal.Parse(countTextBox010.Text) + decimal.Parse(countTextBox011.Text) + decimal.Parse(countTextBox012.Text);
 
             //小計計算
             decimal subSum = decimal.Parse(moneyTextBox00.Text) + decimal.Parse(moneyTextBox01.Text) + decimal.Parse(moneyTextBox02.Text) + decimal.Parse(moneyTextBox03.Text) + decimal.Parse(moneyTextBox04.Text)
@@ -2882,14 +2658,14 @@ namespace Flawless_ex
             decimal taxA = subSum * tax;
 
             //合計計算
-            decimal sum = subSum + taxA;
+            decimal sum = subSum + tax;
 
 
 
             subTotal2.Text = subSum.ToString();
             totalWeight2.Text = weisum.ToString();
             totalCount2.Text = countsum.ToString();
-            taxAmount2.Text = taxA.ToString();
+            taxAmount2.Text = tax.ToString();
             sumTextBox2.Text = sum.ToString();
             #endregion
         }
@@ -2902,7 +2678,11 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox1.Show();
                     itemComboBox1.Show();
+                    brandname1.Show();
+                    types1.Show();
                     weightTextBox1.Show();
+                    midstone1.Show();
+                    wakiseki1.Show();
                     countTextBox1.Show();
                     unitPriceTextBox1.Show();
                     moneyTextBox1.Show();
@@ -2911,7 +2691,11 @@ namespace Flawless_ex
                 case 1:
                     mainCategoryComboBox2.Show();
                     itemComboBox2.Show();
+                    brandname2.Show();
+                    types2.Show();
                     weightTextBox2.Show();
+                    midstone2.Show();
+                    wakiseki2.Show();
                     countTextBox2.Show();
                     unitPriceTextBox2.Show();
                     moneyTextBox2.Show();
@@ -2920,7 +2704,11 @@ namespace Flawless_ex
                 case 2:
                     mainCategoryComboBox3.Show();
                     itemComboBox3.Show();
+                    brandname3.Show();
+                    types3.Show();
                     weightTextBox3.Show();
+                    midstone3.Show();
+                    wakiseki3.Show();
                     countTextBox3.Show();
                     unitPriceTextBox3.Show();
                     moneyTextBox3.Show();
@@ -2929,7 +2717,11 @@ namespace Flawless_ex
                 case 3:
                     mainCategoryComboBox4.Show();
                     itemComboBox4.Show();
+                    brandname4.Show();
+                    types4.Show();
                     weightTextBox4.Show();
+                    midstone4.Show();
+                    wakiseki4.Show();
                     countTextBox4.Show();
                     unitPriceTextBox4.Show();
                     moneyTextBox4.Show();
@@ -2938,7 +2730,11 @@ namespace Flawless_ex
                 case 4:
                     mainCategoryComboBox5.Show();
                     itemComboBox5.Show();
+                    brandname5.Show();
+                    types5.Show();
                     weightTextBox5.Show();
+                    midstone5.Show();
+                    wakiseki5.Show();
                     countTextBox5.Show();
                     unitPriceTextBox5.Show();
                     moneyTextBox5.Show();
@@ -2947,7 +2743,11 @@ namespace Flawless_ex
                 case 5:
                     mainCategoryComboBox6.Show();
                     itemComboBox6.Show();
+                    brandname6.Show();
+                    types6.Show();
                     weightTextBox6.Show();
+                    midstone6.Show();
+                    wakiseki6.Show();
                     countTextBox6.Show();
                     unitPriceTextBox6.Show();
                     moneyTextBox6.Show();
@@ -2956,7 +2756,11 @@ namespace Flawless_ex
                 case 6:
                     mainCategoryComboBox7.Show();
                     itemComboBox7.Show();
+                    brandname7.Show();
+                    types7.Show();
                     weightTextBox7.Show();
+                    midstone7.Show();
+                    wakiseki7.Show();
                     countTextBox7.Show();
                     unitPriceTextBox7.Show();
                     moneyTextBox7.Show();
@@ -2965,7 +2769,11 @@ namespace Flawless_ex
                 case 7:
                     mainCategoryComboBox8.Show();
                     itemComboBox8.Show();
+                    brandname8.Show();
+                    types8.Show();
                     weightTextBox8.Show();
+                    midstone8.Show();
+                    wakiseki8.Show();
                     countTextBox8.Show();
                     unitPriceTextBox8.Show();
                     moneyTextBox8.Show();
@@ -2974,7 +2782,11 @@ namespace Flawless_ex
                 case 8:
                     mainCategoryComboBox9.Show();
                     itemComboBox9.Show();
+                    brandname9.Show();
+                    types9.Show();
                     weightTextBox9.Show();
+                    midstone9.Show();
+                    wakiseki9.Show();
                     countTextBox9.Show();
                     unitPriceTextBox9.Show();
                     moneyTextBox9.Show();
@@ -2983,7 +2795,11 @@ namespace Flawless_ex
                 case 9:
                     mainCategoryComboBox10.Show();
                     itemComboBox10.Show();
+                    brandname10.Show();
+                    types10.Show();
                     weightTextBox10.Show();
+                    midstone10.Show();
+                    wakiseki10.Show();
                     countTextBox10.Show();
                     unitPriceTextBox10.Show();
                     moneyTextBox10.Show();
@@ -2992,7 +2808,11 @@ namespace Flawless_ex
                 case 10:
                     mainCategoryComboBox11.Show();
                     itemComboBox11.Show();
+                    brandname11.Show();
+                    types11.Show();
                     weightTextBox11.Show();
+                    midstone11.Show();
+                    wakiseki11.Show();
                     countTextBox11.Show();
                     unitPriceTextBox11.Show();
                     moneyTextBox11.Show();
@@ -3001,7 +2821,11 @@ namespace Flawless_ex
                 case 11:
                     mainCategoryComboBox12.Show();
                     itemComboBox12.Show();
+                    brandname12.Show();
+                    types12.Show();
                     weightTextBox12.Show();
+                    midstone12.Show();
+                    wakiseki12.Show();
                     countTextBox12.Show();
                     unitPriceTextBox12.Show();
                     moneyTextBox12.Show();
@@ -3021,7 +2845,11 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox1.Hide();
                     itemComboBox1.Hide();
+                    brandname1.Hide();
+                    types1.Hide();
                     weightTextBox1.Hide();
+                    midstone1.Hide();
+                    wakiseki1.Hide();
                     countTextBox1.Hide();
                     unitPriceTextBox1.Hide();
                     moneyTextBox1.Hide();
@@ -3030,7 +2858,11 @@ namespace Flawless_ex
                 case 1:
                     mainCategoryComboBox2.Hide();
                     itemComboBox2.Hide();
+                    brandname2.Hide();
+                    types2.Hide();
                     weightTextBox2.Hide();
+                    midstone2.Hide();
+                    wakiseki2.Hide();
                     countTextBox2.Hide();
                     unitPriceTextBox2.Hide();
                     moneyTextBox2.Hide();
@@ -3039,7 +2871,11 @@ namespace Flawless_ex
                 case 2:
                     mainCategoryComboBox3.Hide();
                     itemComboBox3.Hide();
+                    brandname3.Hide();
+                    types3.Hide();
                     weightTextBox3.Hide();
+                    midstone3.Hide();
+                    wakiseki3.Hide();
                     countTextBox3.Hide();
                     unitPriceTextBox3.Hide();
                     moneyTextBox3.Hide();
@@ -3048,7 +2884,11 @@ namespace Flawless_ex
                 case 3:
                     mainCategoryComboBox4.Hide();
                     itemComboBox4.Hide();
+                    brandname4.Hide();
+                    types4.Hide();
                     weightTextBox4.Hide();
+                    midstone4.Hide();
+                    wakiseki4.Hide();
                     countTextBox4.Hide();
                     unitPriceTextBox4.Hide();
                     moneyTextBox4.Hide();
@@ -3057,7 +2897,11 @@ namespace Flawless_ex
                 case 4:
                     mainCategoryComboBox5.Hide();
                     itemComboBox5.Hide();
+                    brandname5.Hide();
+                    types5.Hide();
                     weightTextBox5.Hide();
+                    midstone5.Hide();
+                    wakiseki5.Hide();
                     countTextBox5.Hide();
                     unitPriceTextBox5.Hide();
                     moneyTextBox5.Hide();
@@ -3066,7 +2910,11 @@ namespace Flawless_ex
                 case 5:
                     mainCategoryComboBox6.Hide();
                     itemComboBox6.Hide();
+                    brandname6.Hide();
+                    types6.Hide();
                     weightTextBox6.Hide();
+                    midstone6.Hide();
+                    wakiseki6.Hide();
                     countTextBox6.Hide();
                     unitPriceTextBox6.Hide();
                     moneyTextBox6.Hide();
@@ -3075,7 +2923,11 @@ namespace Flawless_ex
                 case 6:
                     mainCategoryComboBox7.Hide();
                     itemComboBox7.Hide();
+                    brandname7.Hide();
+                    types7.Hide();
                     weightTextBox7.Hide();
+                    midstone7.Hide();
+                    wakiseki7.Hide();
                     countTextBox7.Hide();
                     unitPriceTextBox7.Hide();
                     moneyTextBox7.Hide();
@@ -3084,7 +2936,11 @@ namespace Flawless_ex
                 case 7:
                     mainCategoryComboBox8.Hide();
                     itemComboBox8.Hide();
+                    brandname8.Hide();
+                    types8.Hide();
                     weightTextBox8.Hide();
+                    midstone8.Hide();
+                    wakiseki8.Hide();
                     countTextBox8.Hide();
                     unitPriceTextBox8.Hide();
                     moneyTextBox8.Hide();
@@ -3093,7 +2949,11 @@ namespace Flawless_ex
                 case 8:
                     mainCategoryComboBox9.Hide();
                     itemComboBox9.Hide();
+                    brandname9.Hide();
+                    types9.Hide();
                     weightTextBox9.Hide();
+                    midstone9.Hide();
+                    wakiseki9.Hide();
                     countTextBox9.Hide();
                     unitPriceTextBox9.Hide();
                     moneyTextBox9.Hide();
@@ -3102,7 +2962,11 @@ namespace Flawless_ex
                 case 9:
                     mainCategoryComboBox10.Hide();
                     itemComboBox10.Hide();
+                    brandname10.Hide();
+                    types10.Hide();
                     weightTextBox10.Hide();
+                    midstone10.Hide();
+                    wakiseki10.Hide();
                     countTextBox10.Hide();
                     unitPriceTextBox10.Hide();
                     moneyTextBox10.Hide();
@@ -3111,7 +2975,11 @@ namespace Flawless_ex
                 case 10:
                     mainCategoryComboBox11.Hide();
                     itemComboBox11.Hide();
+                    brandname11.Hide();
+                    types11.Hide();
                     weightTextBox11.Hide();
+                    midstone11.Hide();
+                    wakiseki11.Hide();
                     countTextBox11.Hide();
                     unitPriceTextBox11.Hide();
                     moneyTextBox11.Hide();
@@ -3120,7 +2988,11 @@ namespace Flawless_ex
                 case 11:
                     mainCategoryComboBox12.Hide();
                     itemComboBox12.Hide();
+                    brandname12.Hide();
+                    types12.Hide();
                     weightTextBox12.Hide();
+                    midstone12.Hide();
+                    wakiseki12.Hide();
                     countTextBox12.Hide();
                     unitPriceTextBox12.Hide();
                     moneyTextBox12.Hide();
@@ -3142,170 +3014,110 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox01.Show();
                     itemComboBox01.Show();
-                    BlandNameTextBox01.Show();
-                    VarietyTextBox01.Show();
                     weightTextBox01.Show();
-                    MiddleStoneTextBox01.Show();
-                    SideStoneTextBox01.Show();
                     countTextBox01.Show();
                     unitPriceTextBox01.Show();
-                    GrossMoneyTextBox01.Show();
                     moneyTextBox01.Show();
-                    Remark01.Show();
+                    remarks01.Show();
                     break;
                 case 1:
                     mainCategoryComboBox02.Show();
                     itemComboBox02.Show();
-                    BlandNameTextBox02.Show();
-                    VarietyTextBox02.Show();
                     weightTextBox02.Show();
-                    MiddleStoneTextBox02.Show();
-                    SideStoneTextBox02.Show();
                     countTextBox02.Show();
                     unitPriceTextBox02.Show();
-                    GrossMoneyTextBox02.Show();
                     moneyTextBox02.Show();
-                    Remark02.Show();
+                    remarks02.Show();
                     break;
                 case 2:
                     mainCategoryComboBox03.Show();
                     itemComboBox03.Show();
-                    BlandNameTextBox03.Show();
-                    VarietyTextBox03.Show();
                     weightTextBox03.Show();
-                    MiddleStoneTextBox03.Show();
-                    SideStoneTextBox03.Show();
                     countTextBox03.Show();
                     unitPriceTextBox03.Show();
-                    GrossMoneyTextBox03.Show();
                     moneyTextBox03.Show();
-                    Remark03.Show();
+                    remarks03.Show();
                     break;
                 case 3:
                     mainCategoryComboBox04.Show();
                     itemComboBox04.Show();
-                    BlandNameTextBox04.Show();
-                    VarietyTextBox04.Show();
                     weightTextBox04.Show();
-                    MiddleStoneTextBox04.Show();
-                    SideStoneTextBox04.Show();
                     countTextBox04.Show();
                     unitPriceTextBox04.Show();
-                    GrossMoneyTextBox04.Show();
                     moneyTextBox04.Show();
-                    Remark04.Show();
+                    remarks04.Show();
                     break;
                 case 4:
                     mainCategoryComboBox05.Show();
                     itemComboBox05.Show();
-                    BlandNameTextBox05.Show();
-                    VarietyTextBox05.Show();
                     weightTextBox05.Show();
-                    MiddleStoneTextBox05.Show();
-                    SideStoneTextBox05.Show();
                     countTextBox05.Show();
                     unitPriceTextBox05.Show();
-                    GrossMoneyTextBox05.Show();
                     moneyTextBox05.Show();
-                    Remark05.Show();
+                    remarks05.Show();
                     break;
                 case 5:
                     mainCategoryComboBox06.Show();
                     itemComboBox06.Show();
-                    BlandNameTextBox06.Show();
-                    VarietyTextBox06.Show();
                     weightTextBox06.Show();
-                    MiddleStoneTextBox06.Show();
-                    SideStoneTextBox06.Show();
                     countTextBox06.Show();
                     unitPriceTextBox06.Show();
-                    GrossMoneyTextBox06.Show();
                     moneyTextBox06.Show();
-                    Remark06.Show();
+                    remarks06.Show();
                     break;
                 case 6:
                     mainCategoryComboBox07.Show();
                     itemComboBox07.Show();
-                    BlandNameTextBox07.Show();
-                    VarietyTextBox07.Show();
                     weightTextBox07.Show();
-                    MiddleStoneTextBox07.Show();
-                    SideStoneTextBox07.Show();
                     countTextBox07.Show();
                     unitPriceTextBox07.Show();
-                    GrossMoneyTextBox07.Show();
                     moneyTextBox07.Show();
-                    Remark07.Show();
+                    remarks07.Show();
                     break;
                 case 7:
                     mainCategoryComboBox08.Show();
                     itemComboBox08.Show();
-                    BlandNameTextBox08.Show();
-                    VarietyTextBox08.Show();
                     weightTextBox08.Show();
-                    MiddleStoneTextBox08.Show();
-                    SideStoneTextBox08.Show();
                     countTextBox08.Show();
                     unitPriceTextBox08.Show();
-                    GrossMoneyTextBox08.Show();
                     moneyTextBox08.Show();
-                    Remark08.Show();
+                    remarks08.Show();
                     break;
                 case 8:
                     mainCategoryComboBox09.Show();
                     itemComboBox09.Show();
-                    BlandNameTextBox09.Show();
-                    VarietyTextBox09.Show();
                     weightTextBox09.Show();
-                    MiddleStoneTextBox09.Show();
-                    SideStoneTextBox09.Show();
                     countTextBox09.Show();
                     unitPriceTextBox09.Show();
-                    GrossMoneyTextBox09.Show();
                     moneyTextBox09.Show();
-                    Remark09.Show();
+                    remarks09.Show();
                     break;
                 case 9:
                     mainCategoryComboBox010.Show();
                     itemComboBox010.Show();
-                    BlandNameTextBox010.Show();
-                    VarietyTextBox010.Show();
                     weightTextBox010.Show();
-                    MiddleStoneTextBox010.Show();
-                    SideStoneTextBox010.Show();
                     countTextBox010.Show();
                     unitPriceTextBox010.Show();
-                    GrossMoneyTextBox010.Show();
                     moneyTextBox010.Show();
-                    Remark010.Show();
+                    remarks010.Show();
                     break;
                 case 10:
                     mainCategoryComboBox011.Show();
                     itemComboBox011.Show();
-                    BlandNameTextBox011.Show();
-                    VarietyTextBox011.Show();
                     weightTextBox011.Show();
-                    MiddleStoneTextBox011.Show();
-                    SideStoneTextBox011.Show();
                     countTextBox011.Show();
                     unitPriceTextBox011.Show();
-                    GrossMoneyTextBox011.Show();
                     moneyTextBox011.Show();
-                    Remark011.Show();
+                    remarks011.Show();
                     break;
                 case 11:
                     mainCategoryComboBox012.Show();
                     itemComboBox012.Show();
-                    BlandNameTextBox012.Show();
-                    VarietyTextBox012.Show();
                     weightTextBox012.Show();
-                    MiddleStoneTextBox012.Show();
-                    SideStoneTextBox012.Show();
                     countTextBox012.Show();
                     unitPriceTextBox012.Show();
-                    GrossMoneyTextBox012.Show();
                     moneyTextBox012.Show();
-                    Remark012.Show();
+                    remarks012.Show();
                     break;
                 default:
                     break;
@@ -3316,185 +3128,120 @@ namespace Flawless_ex
         #region "納品書　クリアボタン"
         private void clear2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 13; i++)
+            switch (com)
             {
-                switch (i)
-                {
-                    case 0:
-                        mainCategoryComboBox01.Hide();
-                        itemComboBox01.Hide();
-                        BlandNameTextBox01.Hide();
-                        VarietyTextBox01.Hide();
-                        weightTextBox01.Hide();
-                        MiddleStoneTextBox01.Hide();
-                        SideStoneTextBox01.Hide();
-                        countTextBox01.Hide();
-                        unitPriceTextBox01.Hide();
-                        GrossMoneyTextBox01.Hide();
-                        moneyTextBox01.Hide();
-                        Remark01.Hide();
-                        break;
-                    case 1:
-                        mainCategoryComboBox02.Hide();
-                        itemComboBox02.Hide();
-                        BlandNameTextBox02.Hide();
-                        VarietyTextBox02.Hide();
-                        weightTextBox02.Hide();
-                        MiddleStoneTextBox02.Hide();
-                        SideStoneTextBox02.Hide();
-                        countTextBox02.Hide();
-                        unitPriceTextBox02.Hide();
-                        GrossMoneyTextBox02.Hide();
-                        moneyTextBox02.Hide();
-                        Remark02.Hide();
-                        break;
-                    case 2:
-                        mainCategoryComboBox03.Hide();
-                        itemComboBox03.Hide();
-                        BlandNameTextBox03.Hide();
-                        VarietyTextBox03.Hide();
-                        weightTextBox03.Hide();
-                        MiddleStoneTextBox03.Hide();
-                        SideStoneTextBox03.Hide();
-                        countTextBox03.Hide();
-                        unitPriceTextBox03.Hide();
-                        GrossMoneyTextBox03.Hide();
-                        moneyTextBox03.Hide();
-                        Remark03.Hide();
-                        break;
-                    case 3:
-                        mainCategoryComboBox04.Hide();
-                        itemComboBox04.Hide();
-                        BlandNameTextBox04.Hide();
-                        VarietyTextBox04.Hide();
-                        weightTextBox04.Hide();
-                        MiddleStoneTextBox04.Hide();
-                        SideStoneTextBox04.Hide();
-                        countTextBox04.Hide();
-                        unitPriceTextBox04.Hide();
-                        GrossMoneyTextBox04.Hide();
-                        moneyTextBox04.Hide();
-                        Remark04.Hide();
-                        break;
-                    case 4:
-                        mainCategoryComboBox05.Hide();
-                        itemComboBox05.Hide();
-                        BlandNameTextBox05.Hide();
-                        VarietyTextBox05.Hide();
-                        weightTextBox05.Hide();
-                        MiddleStoneTextBox05.Hide();
-                        SideStoneTextBox05.Hide();
-                        countTextBox05.Hide();
-                        unitPriceTextBox05.Hide();
-                        GrossMoneyTextBox05.Hide();
-                        moneyTextBox05.Hide();
-                        Remark05.Hide();
-                        break;
-                    case 5:
-                        mainCategoryComboBox06.Hide();
-                        itemComboBox06.Hide();
-                        BlandNameTextBox06.Hide();
-                        VarietyTextBox06.Hide();
-                        weightTextBox06.Hide();
-                        MiddleStoneTextBox06.Hide();
-                        SideStoneTextBox06.Hide();
-                        countTextBox06.Hide();
-                        unitPriceTextBox06.Hide();
-                        GrossMoneyTextBox06.Hide();
-                        moneyTextBox06.Hide();
-                        Remark06.Hide();
-                        break;
-                    case 6:
-                        mainCategoryComboBox07.Hide();
-                        itemComboBox07.Hide();
-                        BlandNameTextBox07.Hide();
-                        VarietyTextBox07.Hide();
-                        weightTextBox07.Hide();
-                        MiddleStoneTextBox07.Hide();
-                        SideStoneTextBox07.Hide();
-                        countTextBox07.Hide();
-                        unitPriceTextBox07.Hide();
-                        GrossMoneyTextBox07.Hide();
-                        moneyTextBox07.Hide();
-                        Remark07.Hide();
-                        break;
-                    case 7:
-                        mainCategoryComboBox08.Hide();
-                        itemComboBox08.Hide();
-                        BlandNameTextBox08.Hide();
-                        VarietyTextBox08.Hide();
-                        weightTextBox08.Hide();
-                        MiddleStoneTextBox08.Hide();
-                        SideStoneTextBox08.Hide();
-                        countTextBox08.Hide();
-                        unitPriceTextBox08.Hide();
-                        GrossMoneyTextBox08.Hide();
-                        moneyTextBox08.Hide();
-                        Remark08.Hide();
-                        break;
-                    case 8:
-                        mainCategoryComboBox09.Hide();
-                        itemComboBox09.Hide();
-                        BlandNameTextBox09.Hide();
-                        VarietyTextBox09.Hide();
-                        weightTextBox09.Hide();
-                        MiddleStoneTextBox09.Hide();
-                        SideStoneTextBox09.Hide();
-                        countTextBox09.Hide();
-                        unitPriceTextBox09.Hide();
-                        GrossMoneyTextBox09.Hide();
-                        moneyTextBox09.Hide();
-                        Remark09.Hide();
-                        break;
-                    case 9:
-                        mainCategoryComboBox010.Hide();
-                        itemComboBox010.Hide();
-                        BlandNameTextBox010.Hide();
-                        VarietyTextBox010.Hide();
-                        weightTextBox010.Hide();
-                        MiddleStoneTextBox010.Hide();
-                        SideStoneTextBox010.Hide();
-                        countTextBox010.Hide();
-                        unitPriceTextBox010.Hide();
-                        GrossMoneyTextBox010.Hide();
-                        moneyTextBox010.Hide();
-                        Remark010.Hide();
-                        break;
-                    case 10:
-                        mainCategoryComboBox011.Hide();
-                        itemComboBox011.Hide();
-                        BlandNameTextBox011.Hide();
-                        VarietyTextBox011.Hide();
-                        weightTextBox011.Hide();
-                        MiddleStoneTextBox011.Hide();
-                        SideStoneTextBox011.Hide();
-                        countTextBox011.Hide();
-                        unitPriceTextBox011.Hide();
-                        GrossMoneyTextBox011.Hide();
-                        moneyTextBox011.Hide();
-                        Remark011.Hide();
-                        break;
-                    case 11:
-                        mainCategoryComboBox012.Hide();
-                        itemComboBox012.Hide();
-                        BlandNameTextBox012.Hide();
-                        VarietyTextBox012.Hide();
-                        weightTextBox012.Hide();
-                        MiddleStoneTextBox012.Hide();
-                        SideStoneTextBox012.Hide();
-                        countTextBox012.Hide();
-                        unitPriceTextBox012.Hide();
-                        GrossMoneyTextBox012.Hide();
-                        moneyTextBox012.Hide();
-                        Remark012.Hide();
-                        break;
-                    default:
-                        break;
-                }
+                case 0:
+                    mainCategoryComboBox01.Hide();
+                    itemComboBox01.Hide();
+                    weightTextBox01.Hide();
+                    countTextBox01.Hide();
+                    unitPriceTextBox01.Hide();
+                    moneyTextBox01.Hide();
+                    remarks01.Hide();
+                    break;
+                case 1:
+                    mainCategoryComboBox02.Hide();
+                    itemComboBox02.Hide();
+                    weightTextBox02.Hide();
+                    countTextBox02.Hide();
+                    unitPriceTextBox02.Hide();
+                    moneyTextBox02.Hide();
+                    remarks02.Hide();
+                    break;
+                case 2:
+                    mainCategoryComboBox03.Hide();
+                    itemComboBox03.Hide();
+                    weightTextBox03.Hide();
+                    countTextBox03.Hide();
+                    unitPriceTextBox03.Hide();
+                    moneyTextBox03.Hide();
+                    remarks03.Hide();
+                    break;
+                case 3:
+                    mainCategoryComboBox04.Hide();
+                    itemComboBox04.Hide();
+                    weightTextBox04.Hide();
+                    countTextBox04.Hide();
+                    unitPriceTextBox04.Hide();
+                    moneyTextBox04.Hide();
+                    remarks04.Hide();
+                    break;
+                case 4:
+                    mainCategoryComboBox05.Hide();
+                    itemComboBox05.Hide();
+                    weightTextBox05.Hide();
+                    countTextBox05.Hide();
+                    unitPriceTextBox05.Hide();
+                    moneyTextBox05.Hide();
+                    remarks05.Hide();
+                    break;
+                case 5:
+                    mainCategoryComboBox06.Hide();
+                    itemComboBox06.Hide();
+                    weightTextBox06.Hide();
+                    countTextBox06.Hide();
+                    unitPriceTextBox06.Hide();
+                    moneyTextBox06.Hide();
+                    remarks06.Hide();
+                    break;
+                case 6:
+                    mainCategoryComboBox07.Hide();
+                    itemComboBox07.Hide();
+                    weightTextBox07.Hide();
+                    countTextBox07.Hide();
+                    unitPriceTextBox07.Hide();
+                    moneyTextBox07.Hide();
+                    remarks07.Hide();
+                    break;
+                case 7:
+                    mainCategoryComboBox08.Hide();
+                    itemComboBox08.Hide();
+                    weightTextBox08.Hide();
+                    countTextBox08.Hide();
+                    unitPriceTextBox08.Hide();
+                    moneyTextBox08.Hide();
+                    remarks08.Hide();
+                    break;
+                case 8:
+                    mainCategoryComboBox09.Hide();
+                    itemComboBox09.Hide();
+                    weightTextBox09.Hide();
+                    countTextBox09.Hide();
+                    unitPriceTextBox09.Hide();
+                    moneyTextBox09.Hide();
+                    remarks09.Hide();
+                    break;
+                case 9:
+                    mainCategoryComboBox010.Hide();
+                    itemComboBox010.Hide();
+                    weightTextBox010.Hide();
+                    countTextBox010.Hide();
+                    unitPriceTextBox010.Hide();
+                    moneyTextBox010.Hide();
+                    remarks010.Hide();
+                    break;
+                case 10:
+                    mainCategoryComboBox011.Hide();
+                    itemComboBox011.Hide();
+                    weightTextBox011.Hide();
+                    countTextBox011.Hide();
+                    unitPriceTextBox011.Hide();
+                    moneyTextBox011.Hide();
+                    remarks011.Hide();
+                    break;
+                case 11:
+                    mainCategoryComboBox012.Hide();
+                    itemComboBox012.Hide();
+                    weightTextBox012.Hide();
+                    countTextBox012.Hide();
+                    unitPriceTextBox012.Hide();
+                    moneyTextBox012.Hide();
+                    remarks012.Hide();
+                    break;
+                default:
+                    break;
             }
-            for (int i=com; i < 0; i--) {
-                com--;
-            }
+            com--;
         }
 
 
@@ -3502,58 +3249,194 @@ namespace Flawless_ex
 
 
 
-        private void client_searchButton(object sender, EventArgs e)
-        {
-            Client_search client_Search = new Client_search(this);
-
-            this.Hide();
-            client_Search.Show();
-        }
 
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            Client_search client_Search = new Client_search(this);
-            this.Hide();
-            client_Search.Show();
-        }
-
-        private void client_searchButton1_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
-        {
-            Client_search client_Search = new Client_search(this);
-
-            this.Hide();
-            client_Search.Show();
-        }
-
-        private void addButton01_Click(object sender, EventArgs e)
-        {
-            string message = "納品情報を登録しますか？";
-            string caption = "登録確認";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result = MessageBox.Show(message, caption, buttons, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-
-            if (result == DialogResult.Yes)
+            using (client_search search2 = new client_search(this))
             {
-                NpgsqlCommandBuilder builder;
-
-                int control_number = 000000;        //int.Parse(DocumentNumberTextBox01.Text);    //管理番号
-                string name = this.CustomerName.Text;   //宛名
-                string honorifictitle = this.TitleBox.Text;   //敬称
-                string type = this.DocumentTypeBox.Text;     //種別
-                /*
-                bool seaal_print = this.PrintYes.Checked;  //印刷する
-                bool seaal_print = this.PrintNo.Checked;    //印刷しない
-                */
-                string payment_method = this.PaymentMethodBox01.Text;    //支払い方法
-                string account_payable = this.PayeeBox.Text;   //振り込み先
-                string order_date = this.OrderDate.CustomFormat; //注文日
-                string delivery_date = this.DeliveryDate.CustomFormat;   //納品日
-                string settlement_date = this.SettlementDate.CustomFormat;   //決算日
-                string currency = this.CurrencyBox.Text;    //通貨
-                string remark2 = this.Remark2.Text; //備考
-
-                string sql_str = "insert into delivery_m values(" + control_number + ",'" + name + "','" + honorifictitle + ",'" + type + ",'" + payment_method + ",'" + account_payable + ",'" + order_date + ",'" + delivery_date + ",'" + settlement_date + ",'" + currency + ",'" + remark2 + ")";
+                this.Hide();
+                search2.ShowDialog();
             }
+
+
+
+            if (count != 0)
+            {
+                DataRow row;
+                row = clientDt.Rows[0];
+                int type = (int)row["type"];
+
+                if (type == 0)
+                {
+                    string companyNmae = row["company_name"].ToString();
+                    string shopName = row["shop_name"].ToString();
+                    string staff_name = row["staff_name"].ToString();
+                    string address = row["address"].ToString();
+                    string register_date = row["register_date"].ToString();
+                    string remarks = row["remarks"].ToString();
+
+                    typeTextBox.Text = "法人";
+                    companyTextBox.Text = companyNmae;
+                    shopNameTextBox.Text = shopName;
+                    clientNameTextBox.Text = staff_name;
+                    addressTextBox.Text = address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                }
+                else if (type == 1)
+                {
+                    string name = row["name"].ToString();
+                    string address = row["address"].ToString();
+                    string remarks = row["remarks"].ToString();
+
+                    typeTextBox.Text = "個人";
+                    clientNameTextBox.Text = name;
+                    addressTextBox.Text = address;
+                    clientRemarksTextBox.Text = remarks;
+                }
+            }
+        }
+
+
+        private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
+        {
+            using (client_search search2 = new client_search(this))
+            {
+                this.Hide();
+                search2.ShowDialog();
+            }
+
+
+
+            if (count != 0)
+            {
+                DataRow row;
+                row = clientDt.Rows[0];
+                int type = (int)row["type"];
+
+                if (type == 0)
+                {
+                    string companyNmae = row["company_name"].ToString();
+                    string shopName = row["shop_name"].ToString();
+                    string staff_name = row["staff_name"].ToString();
+                    string address = row["address"].ToString();
+                    string register_date = row["register_date"].ToString();
+                    string remarks = row["remarks"].ToString();
+
+                    typeTextBox2.Text = "法人";
+                    companyTextBox2.Text = companyNmae;
+                    shopNameTextBox2.Text = shopName;
+                    clientNameTextBox2.Text = staff_name;
+                    addressTextBox2.Text = address;
+                    registerDateTextBox2.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                }
+                else if (type == 1)
+                {
+                    string name = row["name"].ToString();
+                    string address = row["address"].ToString();
+                    string remarks = row["remarks"].ToString();
+                    string antique_license = row["antique_license"].ToString();
+
+                    typeTextBox2.Text = "個人";
+                    clientNameTextBox2.Text = name;
+                    addressTextBox2.Text = address;
+                    clientRemarksTextBox2.Text = remarks;
+                }
+            }
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+            
+            this.documentNumberTextBox.Text = "101";
+            //int AntiqueNumber = int.Parse(this.textBox302.Text);
+            int TotalWeight = int.Parse(this.totalWeight.Text);
+            int Amount = int.Parse(this.totalCount.Text);
+            decimal SubTotal = decimal.Parse(this.subTotal.Text);
+            decimal TaxAmount = decimal.Parse(this.taxAmount.Text);
+            decimal Total = decimal.Parse(this.sumTextBox.Text);
+            string SettlementDate = this.settlementBox.Text;
+            string DeliveryDate = this.deliveryDateBox.Text;
+            string DeliveryMethod = this.deliveryTextBox.Text;
+            string PaymentMethod = this.paymentMethodsBox.Text;
+            decimal Weight = decimal.Parse(this.weightTextBox0.Text);
+            int Count = int.Parse(this.countTextBox0.Text);
+            decimal UnitPrice = decimal.Parse(this.unitPriceTextBox0.Text);
+            decimal amount = decimal.Parse(this.moneyTextBox0.Text);
+            string Remarks = this.remarks0.Text;
+            string BrandName = this.brandname0.Text;
+            string Types = this.types0.Text;
+            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter;
+
+            DataTable dt = new DataTable();
+            string sql_str = "Insert into statement_data VALUES ( " + staff_id + " , " +  staff_id  + " , " + staff_id + " , " + TotalWeight + " ,  " + Amount + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
+
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str, conn);
+            adapter.Fill(dt);
+            conn.Close();
+
+            DataTable dt2 = new DataTable();
+            string sql_str2 = "Insert into statement_calc_data VALUES ( " + staff_id + " , " + staff_id + " , " +  Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount +  " , '" + Remarks + "' , '" + staff_id + "' , '" + BrandName + "' , '" + Types +  "');";
+
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str2, conn);
+            adapter.Fill(dt2);
+            conn.Close();
+            MessageBox.Show("登録しました。");
+
+        }
+
+        private void Button11_Click(object sender, EventArgs e)
+        {
+            string path = " ";
+            textBox1.Text = " ";
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+            }
+            else if (dialog == DialogResult.Cancel) { }
+
+            textBox1.Text = path;
+        }
+
+        private void Button12_Click(object sender, EventArgs e)
+        {
+            string path = " ";
+            textBox302.Text = " ";
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+            }
+            else if (dialog == DialogResult.Cancel) { }
+
+            textBox302.Text = path;
         }
     }
 }

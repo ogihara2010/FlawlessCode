@@ -23,7 +23,7 @@ namespace Flawless_ex
             dt = new DataTable();
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0";
+            string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0 order by main_category_m";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -44,7 +44,7 @@ namespace Flawless_ex
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            ProductAddMenu productAdd = new ProductAddMenu(dt, master,staff_code);
+            ProductAddMenu productAdd = new ProductAddMenu(dt, master, staff_code);
 
             this.Close();
             productAdd.Show();
@@ -53,7 +53,7 @@ namespace Flawless_ex
         private void changeDeleteButton_Click(object sender, EventArgs e)
         {
             int code = (int)dataGridView1.CurrentRow.Cells[2].Value; //選択した品名コードを取得
-            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code,staff_code);
+            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code, staff_code);
             this.Close();
             changeDeleteMenu.Show();
 
@@ -61,7 +61,7 @@ namespace Flawless_ex
 
         private void mainCategoryMenu_Click(object sender, EventArgs e)//大分類マスタ
         {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(master,staff_code);
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
 
             this.Close();
             mainCategory.Show();

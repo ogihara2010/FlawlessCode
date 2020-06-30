@@ -107,11 +107,17 @@
     <Compile Include="ClientMaster_UPD.Designer.cs">
       <DependentUpon>ClientMaster_UPD.cs</DependentUpon>
     </Compile>
-    <Compile Include="Client_search.cs">
+    <Compile Include="client_search.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Client_search.Designer.cs">
-      <DependentUpon>Client_search.cs</DependentUpon>
+    <Compile Include="client_search.Designer.cs">
+      <DependentUpon>client_search.cs</DependentUpon>
+    </Compile>
+    <Compile Include="client_search_result.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="client_search_result.Designer.cs">
+      <DependentUpon>client_search_result.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerHistory.cs">
       <SubType>Form</SubType>
@@ -256,8 +262,11 @@
     <EmbeddedResource Include="ClientMaster_UPD.resx">
       <DependentUpon>ClientMaster_UPD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Client_search.resx">
-      <DependentUpon>Client_search.cs</DependentUpon>
+    <EmbeddedResource Include="client_search.resx">
+      <DependentUpon>client_search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="client_search_result.resx">
+      <DependentUpon>client_search_result.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerHistory.resx">
       <DependentUpon>CustomerHistory.cs</DependentUpon>
