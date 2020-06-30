@@ -1073,6 +1073,7 @@
             this.button12.TabIndex = 45;
             this.button12.Text = "ファイルを選択";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // label10
             // 
@@ -1093,6 +1094,7 @@
             this.button11.TabIndex = 40;
             this.button11.Text = "ファイルを選択";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Button11_Click);
             // 
             // textBox1
             // 

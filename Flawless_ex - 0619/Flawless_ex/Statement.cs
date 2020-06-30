@@ -3279,7 +3279,7 @@ namespace Flawless_ex
             }
             
             this.documentNumberTextBox.Text = "101";
-            int AntiqueNumber = int.Parse(this.textBox302.Text);
+            //int AntiqueNumber = int.Parse(this.textBox302.Text);
             int TotalWeight = int.Parse(this.totalWeight.Text);
             int Amount = int.Parse(this.totalCount.Text);
             decimal SubTotal = decimal.Parse(this.subTotal.Text);
@@ -3300,7 +3300,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
 
             DataTable dt = new DataTable();
-            string sql_str = "Insert into statement_data VALUES ( " + AntiqueNumber + " , " +  staff_id  + " , " + TotalWeight + " ,  " + Amount + " , " + AntiqueNumber + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
+            string sql_str = "Insert into statement_data VALUES ( " + staff_id + " , " +  staff_id  + " , " + staff_id + " , " + TotalWeight + " ,  " + Amount + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
 
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -3320,6 +3320,46 @@ namespace Flawless_ex
             conn.Close();
             MessageBox.Show("登録しました。");
 
+        }
+
+        private void Button11_Click(object sender, EventArgs e)
+        {
+            string path = " ";
+            textBox1.Text = " ";
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+            }
+            else if (dialog == DialogResult.Cancel) { }
+
+            textBox1.Text = path;
+        }
+
+        private void Button12_Click(object sender, EventArgs e)
+        {
+            string path = " ";
+            textBox302.Text = " ";
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+            }
+            else if (dialog == DialogResult.Cancel) { }
+
+            textBox302.Text = path;
         }
     }
 }
