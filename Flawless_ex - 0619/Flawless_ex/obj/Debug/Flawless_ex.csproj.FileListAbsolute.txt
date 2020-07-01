@@ -524,3 +524,4 @@ C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\o
 C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.exe
 C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.pdb
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.ClientMaster_UPD.resources
+C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.client_search_result.resources
