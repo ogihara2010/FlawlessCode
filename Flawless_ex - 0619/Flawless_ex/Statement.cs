@@ -3558,10 +3558,5 @@ namespace Flawless_ex
 
             textBox302.Text = path;
         }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
