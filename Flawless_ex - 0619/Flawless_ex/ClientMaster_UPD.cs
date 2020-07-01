@@ -2,13 +2,13 @@
 using System.Windows.Forms;
 using Npgsql;
 using System.Data;
-
 namespace Flawless_ex
 {
     public partial class ClientMaster_UPD : Form
     {
         MasterMaintenanceMenu master;
         DataTable dt = new DataTable();
+        
         public ClientMaster_UPD(MasterMaintenanceMenu master)
         {
             InitializeComponent();
