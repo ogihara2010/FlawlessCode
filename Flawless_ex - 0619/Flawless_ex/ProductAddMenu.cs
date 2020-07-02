@@ -43,7 +43,7 @@ namespace Flawless_ex
 
             string sql_str = "insert into item_m values(" + mainCode + ", '" + productName + "', " + code + ", '" + dat + "', " + 0 + ")";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -70,7 +70,7 @@ namespace Flawless_ex
         private void ProductAddMenu_Load(object sender, EventArgs e)
         {
             string sql_main_name = "select* from main_category_m where invalid = 0 order by main_category_code";
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             conn.Open();
 
