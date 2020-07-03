@@ -59,7 +59,6 @@
             this.textBox56 = new System.Windows.Forms.TextBox();
             this.textBox57 = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
@@ -99,7 +98,6 @@
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -169,6 +167,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.textBox46 = new System.Windows.Forms.TextBox();
+            this.textBox47 = new System.Windows.Forms.TextBox();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -176,6 +176,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox46);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.button6);
             this.tabPage2.Controls.Add(this.textBox58);
@@ -206,7 +207,6 @@
             this.tabPage2.Controls.Add(this.textBox56);
             this.tabPage2.Controls.Add(this.textBox57);
             this.tabPage2.Controls.Add(this.label64);
-            this.tabPage2.Controls.Add(this.comboBox2);
             this.tabPage2.Controls.Add(this.button11);
             this.tabPage2.Controls.Add(this.button12);
             this.tabPage2.Controls.Add(this.button13);
@@ -273,14 +273,15 @@
             this.button6.TabIndex = 4;
             this.button6.Text = "無効";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.Button6_Click);
             // 
             // textBox58
             // 
-            this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 60F);
+            this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.textBox58.Location = new System.Drawing.Point(73, 1819);
             this.textBox58.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox58.Name = "textBox58";
-            this.textBox58.Size = new System.Drawing.Size(1443, 167);
+            this.textBox58.Size = new System.Drawing.Size(1443, 45);
             this.textBox58.TabIndex = 138;
             // 
             // button5
@@ -293,6 +294,7 @@
             this.button5.TabIndex = 3;
             this.button5.Text = "更新";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // textBox30
             // 
@@ -529,16 +531,6 @@
             this.label64.Size = new System.Drawing.Size(131, 38);
             this.label64.TabIndex = 137;
             this.label64.Text = "備考欄";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(1135, 1531);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(349, 45);
-            this.comboBox2.TabIndex = 136;
             // 
             // button11
             // 
@@ -922,10 +914,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.textBox47);
             this.tabPage1.Controls.Add(this.button20);
             this.tabPage1.Controls.Add(this.button19);
             this.tabPage1.Controls.Add(this.button18);
-            this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.button10);
             this.tabPage1.Controls.Add(this.button9);
             this.tabPage1.Controls.Add(this.button8);
@@ -1039,16 +1031,6 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.Button18_Click_1);
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1129, 1462);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(349, 45);
-            this.comboBox1.TabIndex = 69;
-            // 
             // button10
             // 
             this.button10.Location = new System.Drawing.Point(1701, 1307);
@@ -1090,11 +1072,11 @@
             // 
             // textBox28
             // 
-            this.textBox28.Font = new System.Drawing.Font("MS UI Gothic", 60F);
+            this.textBox28.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.textBox28.Location = new System.Drawing.Point(79, 1777);
             this.textBox28.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(1443, 167);
+            this.textBox28.Size = new System.Drawing.Size(1443, 45);
             this.textBox28.TabIndex = 63;
             // 
             // textBox27
@@ -1745,6 +1727,22 @@
             this.tabControl1.Size = new System.Drawing.Size(2307, 2233);
             this.tabControl1.TabIndex = 1;
             // 
+            // textBox46
+            // 
+            this.textBox46.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox46.Location = new System.Drawing.Point(1134, 1531);
+            this.textBox46.Name = "textBox46";
+            this.textBox46.Size = new System.Drawing.Size(477, 45);
+            this.textBox46.TabIndex = 140;
+            // 
+            // textBox47
+            // 
+            this.textBox47.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox47.Location = new System.Drawing.Point(1128, 1473);
+            this.textBox47.Name = "textBox47";
+            this.textBox47.Size = new System.Drawing.Size(476, 45);
+            this.textBox47.TabIndex = 73;
+            // 
             // ClientMaster_UPD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -1794,7 +1792,6 @@
         private System.Windows.Forms.TextBox textBox56;
         private System.Windows.Forms.TextBox textBox57;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
@@ -1831,7 +1828,6 @@
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
@@ -1907,5 +1903,7 @@
         private System.Windows.Forms.Button button19;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBox46;
+        private System.Windows.Forms.TextBox textBox47;
     }
 }
