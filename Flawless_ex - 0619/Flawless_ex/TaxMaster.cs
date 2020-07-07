@@ -23,28 +23,53 @@ namespace Flawless_ex
 
         private void update_Click(object sender, EventArgs e)
         {
-            DateTime time = DateTime.Now;
-            int tax = int.Parse(taxPercent.Text);
+            DialogResult result = MessageBox.Show("税率を更新しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            NpgsqlDataAdapter adapter;
-            NpgsqlCommandBuilder builder;
-            dt = new DataTable();
-            NpgsqlConnection db = new NpgsqlConnection();
-            string sql_str = "insert into vat_m (vat_rate, upd_date) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "')";
+            if (result == DialogResult.Yes)     //無記入と小数点に対応
+            {
+                int letter = 0;
+                int.TryParse(taxPercent.Text.ToString(), out letter);
 
-            db.ConnectionString = @"Server=192.168.152.43;Port=5432;User Id=postgres;Password=postgres;Database=master;";
-            db.Open();
+                if (string.IsNullOrEmpty(taxPercent.Text))
+                {
+                    this.Close();
+                    MessageBox.Show("税率が未入力です", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else if (taxPercent.Text.IndexOf(".") > 0)
+                {
+                    this.Close();
+                    MessageBox.Show("小数は入力できません", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                } else if (letter == 0) 
+                {
+                    this.Close();
+                    MessageBox.Show("半角の数値のみ入力できます。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    DateTime time = DateTime.Now;
+                    int tax = int.Parse(taxPercent.Text);
 
-            adapter = new NpgsqlDataAdapter(sql_str, db);
-            builder = new NpgsqlCommandBuilder(adapter);
+                    NpgsqlDataAdapter adapter;
+                    NpgsqlCommandBuilder builder;
+                    dt = new DataTable();
+                    NpgsqlConnection db = new NpgsqlConnection();
+                    string sql_str = "insert into vat_m (vat_rate, upd_date) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "')";
 
-            adapter.Fill(dt);
-            adapter.Update(dt);
+                    db.ConnectionString = @"Server=192.168.152.43;Port=5432;User Id=postgres;Password=postgres;Database=master;";
+                    db.Open();
 
-            db.Close();
+                    adapter = new NpgsqlDataAdapter(sql_str, db);
+                    builder = new NpgsqlCommandBuilder(adapter);
 
-            this.Close();
-            MessageBox.Show("更新しました。");
+                    adapter.Fill(dt);
+                    adapter.Update(dt);
+
+                    db.Close();
+
+                    this.Close();
+                    MessageBox.Show("更新しました。");
+                }
+            }
 
             master.Show();
         }
@@ -68,8 +93,12 @@ namespace Flawless_ex
             db.Close();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void taxPercent_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar)) 
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

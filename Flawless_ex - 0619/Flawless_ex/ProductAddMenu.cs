@@ -33,38 +33,45 @@ namespace Flawless_ex
 
         private void addButton_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo);
 
+            if (result == DialogResult.Yes && string.IsNullOrEmpty(productNameTextBox.Text))
+            {
+                MessageBox.Show("品名が未入力です。", "品名エラー", MessageBoxButtons.OK);
+            }
 
-            NpgsqlCommandBuilder builder;
+            if (result == DialogResult.Yes && !(string.IsNullOrEmpty(productNameTextBox.Text)))
+            {
+                NpgsqlCommandBuilder builder;
 
-            string productName = productNameTextBox.Text;
-            int mainCode = (int)mainCategoryComboBox.SelectedValue;
-            DateTime dat = DateTime.Now;
+                string productName = productNameTextBox.Text;
+                int mainCode = (int)mainCategoryComboBox.SelectedValue;
+                DateTime dat = DateTime.Now;
 
-            string sql_str = "insert into item_m values(" + mainCode + ", '" + productName + "', " + code + ", '" + dat + "', " + 0 + ")";
+                string sql_str = "insert into item_m values(" + mainCode + ", '" + productName + "', " + code + ", '" + dat + "', " + 0 + ",'" + staff_code + "')";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn.Open();
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.Open();
 
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            builder = new NpgsqlCommandBuilder(adapter);
+                adapter = new NpgsqlDataAdapter(sql_str, conn);
+                builder = new NpgsqlCommandBuilder(adapter);
 
-            adapter.Fill(dt);
-            adapter.Update(dt);
+                adapter.Fill(dt);
+                adapter.Update(dt);
 
-            MessageBox.Show("登録完了");
+                MessageBox.Show("登録完了");
+/*
+                //履歴
+                string sql_item_m_revisions = "insert into item_m_revisions values(" + code + ", '" + dat + "', " + staff_code + ")";
+                NpgsqlCommand cmd = new NpgsqlCommand(sql_item_m_revisions, conn);
+                NpgsqlDataReader reader = cmd.ExecuteReader();
+*/
+                conn.Close();
 
-            //履歴
-            string sql_item_m_revisions = "insert into item_m_revisions values(" + code + ", '" + dat + "', " + staff_code + ")";
-            NpgsqlCommand cmd = new NpgsqlCommand(sql_item_m_revisions, conn);
-            NpgsqlDataReader reader = cmd.ExecuteReader();
-
-            conn.Close();
-
-            ItemMaster product = new ItemMaster(master, staff_code);
-            this.Close();
-            product.Show();
-
+                ItemMaster product = new ItemMaster(master, staff_code);
+                this.Close();
+                product.Show();
+            }
         }
 
         private void ProductAddMenu_Load(object sender, EventArgs e)

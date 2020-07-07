@@ -32,6 +32,8 @@ namespace Flawless_ex
             dataGridView1.Columns[0].HeaderText = "大分類名";
             dataGridView1.Columns[1].HeaderText = "品名";
             dataGridView1.Columns[2].HeaderText = "品名コード";
+            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            dataGridView1.Columns[2].DefaultCellStyle.Format = "#,0";
 
             conn.Close();
         }
