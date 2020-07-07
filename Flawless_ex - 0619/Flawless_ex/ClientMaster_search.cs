@@ -17,21 +17,22 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         int type;
         int check;
-
-        public ClientMaster_search(MasterMaintenanceMenu master,DataTable dt, int type,int check)
+        int staff_code;
+        public ClientMaster_search(MasterMaintenanceMenu master,DataTable dt, int type,int check, int staff_code)
         {
             InitializeComponent();
             this.master = master;
             this.dt = dt;
             this.type = type;//法人・個人
             this.check = check;//古物商許可証あり・なし
+            this.staff_code = staff_code;
         }
 
         
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code);
 
             this.Close();
             clientmaster.Show();
@@ -87,10 +88,28 @@ namespace Flawless_ex
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master);
+            if (type == 0)
+            {
+                string companyname = (string)this.dataGridView1.CurrentRow.Cells[0].Value; // 会社名
+                string shopname = (string)this.dataGridView1.CurrentRow.Cells[1].Value; // 店舗名
+                string name = (string)this.dataGridView1.CurrentRow.Cells[2].Value; //担当者名
+                string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value; //住所
 
-            this.Close();
-            clientMaster_UPD.Show();
+                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code);
+
+                this.Close();
+                clientMaster_UPD.Show();
+            }
+            else if (type == 1)
+            {
+                string name = (string)this.dataGridView1.CurrentRow.Cells[0].Value; // 氏名
+                string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value; //住所
+
+                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code);
+
+                this.Close();
+                clientMaster_UPD.Show();
+            }
         }
     }
 }

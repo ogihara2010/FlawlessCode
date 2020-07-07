@@ -60,7 +60,7 @@ namespace Flawless_ex
                 string mainName = mainCategoryNameTextBox.Text;//大分類名
                 DateTime dat = DateTime.Now;
 
-                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '"+ dat +"',0);";
+                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '"+ dat +"'," + 0 + "," + staff_code + ");";
 
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
@@ -72,9 +72,9 @@ namespace Flawless_ex
                 adapter.Update(dt);
 
                 //新規登録履歴
-                string sql_mCategoryRevisions = "insert into main_category_m_revisions values(" + mainCode + ",'" + dat + "'," + staff_code + ")";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql_mCategoryRevisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
+                //string sql_mCategoryRevisions = "insert into main_category_m_revisions values(" + mainCode + ",'" + dat + "'," + staff_code + ")";
+                //NpgsqlCommand cmd = new NpgsqlCommand(sql_str, conn);
+                //NpgsqlDataReader reader = cmd.ExecuteReader();
 
                 conn.Close();
 

@@ -31,7 +31,7 @@ namespace Flawless_ex
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             productCodeTextBox.Text = puroductCode.ToString();
 
-            string sql_item = "select* from item_m where item_code =" + puroductCode + "";
+            string sql_item = "select * from item_m where item_code =" + puroductCode + "";
             DataTable itemdt = new DataTable();
 
             string sql_mainCategory = "select* from main_category_m";

@@ -39,7 +39,7 @@ namespace Flawless_ex
 
         private void clientMasterButton_Click(object sender, EventArgs e)
         {
-            ClientMaster clientMaster = new ClientMaster(this);
+            ClientMaster clientMaster = new ClientMaster(this, staff_code);
             this.Hide();
             clientMaster.Show();
         }

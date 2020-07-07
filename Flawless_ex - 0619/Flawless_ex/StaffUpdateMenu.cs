@@ -22,7 +22,6 @@ namespace Flawless_ex
         {
             InitializeComponent();
 
-
             this.master = master;
             this.staffCode = staff_code;//選択した担当者コード
             this.code = code;
@@ -188,7 +187,7 @@ namespace Flawless_ex
 
             //担当者ごとの大分類の初期値を先頭に
             DataTable dt1 = new DataTable();
-            string sql_str2 = "select* from main_category_m order by main_category_code = " + main_category + "desc;";
+            string sql_str2 = "select * from main_category_m order by main_category_code = " + main_category + "desc;";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt1);
 

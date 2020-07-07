@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox46 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox58 = new System.Windows.Forms.TextBox();
@@ -95,6 +96,7 @@
             this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.textBox47 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
@@ -167,8 +169,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.textBox46 = new System.Windows.Forms.TextBox();
-            this.textBox47 = new System.Windows.Forms.TextBox();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -250,6 +250,14 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // textBox46
+            // 
+            this.textBox46.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox46.Location = new System.Drawing.Point(1134, 1531);
+            this.textBox46.Name = "textBox46";
+            this.textBox46.Size = new System.Drawing.Size(477, 45);
+            this.textBox46.TabIndex = 140;
             // 
             // button4
             // 
@@ -995,6 +1003,14 @@
             this.tabPage1.Text = "法人";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // textBox47
+            // 
+            this.textBox47.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox47.Location = new System.Drawing.Point(1128, 1473);
+            this.textBox47.Name = "textBox47";
+            this.textBox47.Size = new System.Drawing.Size(476, 45);
+            this.textBox47.TabIndex = 73;
+            // 
             // button20
             // 
             this.button20.Font = new System.Drawing.Font("MS UI Gothic", 14F);
@@ -1727,22 +1743,6 @@
             this.tabControl1.Size = new System.Drawing.Size(2307, 2233);
             this.tabControl1.TabIndex = 1;
             // 
-            // textBox46
-            // 
-            this.textBox46.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox46.Location = new System.Drawing.Point(1134, 1531);
-            this.textBox46.Name = "textBox46";
-            this.textBox46.Size = new System.Drawing.Size(477, 45);
-            this.textBox46.TabIndex = 140;
-            // 
-            // textBox47
-            // 
-            this.textBox47.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox47.Location = new System.Drawing.Point(1128, 1473);
-            this.textBox47.Name = "textBox47";
-            this.textBox47.Size = new System.Drawing.Size(476, 45);
-            this.textBox47.TabIndex = 73;
-            // 
             // ClientMaster_UPD
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -1753,6 +1753,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster_UPD";
             this.Text = "顧客マスタメンテナンス　更新";
+            this.Load += new System.EventHandler(this.ClientMaster_UPD_Load_1);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
