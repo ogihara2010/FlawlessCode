@@ -2697,10 +2697,7 @@ namespace Flawless_ex
         }
         private void unitPriceTextBox5_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox5.Text == "単価 -> 重量 or 数量")
-            {
-                unitPriceTextBox5.Text = "";
-            }
+
         }
         private void unitPriceTextBox6_Enter(object sender, EventArgs e)
         {

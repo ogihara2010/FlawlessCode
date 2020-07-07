@@ -33,6 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SettlementDayBox = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button13 = new System.Windows.Forms.Button();
             this.textBox302 = new System.Windows.Forms.TextBox();
             this.button12 = new System.Windows.Forms.Button();
@@ -49,78 +51,6 @@
             this.taxAmount = new System.Windows.Forms.TextBox();
             this.sumTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label31 = new System.Windows.Forms.Label();
-            this.totalWeight = new System.Windows.Forms.TextBox();
-            this.remarks12 = new System.Windows.Forms.TextBox();
-            this.remarks11 = new System.Windows.Forms.TextBox();
-            this.remarks10 = new System.Windows.Forms.TextBox();
-            this.remarks9 = new System.Windows.Forms.TextBox();
-            this.remarks8 = new System.Windows.Forms.TextBox();
-            this.remarks7 = new System.Windows.Forms.TextBox();
-            this.remarks6 = new System.Windows.Forms.TextBox();
-            this.remarks5 = new System.Windows.Forms.TextBox();
-            this.remarks4 = new System.Windows.Forms.TextBox();
-            this.remarks3 = new System.Windows.Forms.TextBox();
-            this.remarks2 = new System.Windows.Forms.TextBox();
-            this.remarks1 = new System.Windows.Forms.TextBox();
-            this.remarks0 = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.moneyTextBox12 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox11 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox10 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox9 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox8 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox7 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox6 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox5 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox4 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox3 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox2 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox0 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox1 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox2 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox3 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox4 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox5 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox6 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox7 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox8 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox9 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox10 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox11 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox12 = new System.Windows.Forms.TextBox();
-            this.weightTextBox0 = new System.Windows.Forms.TextBox();
-            this.weightTextBox1 = new System.Windows.Forms.TextBox();
-            this.weightTextBox2 = new System.Windows.Forms.TextBox();
-            this.weightTextBox3 = new System.Windows.Forms.TextBox();
-            this.weightTextBox4 = new System.Windows.Forms.TextBox();
-            this.weightTextBox5 = new System.Windows.Forms.TextBox();
-            this.weightTextBox6 = new System.Windows.Forms.TextBox();
-            this.weightTextBox7 = new System.Windows.Forms.TextBox();
-            this.weightTextBox8 = new System.Windows.Forms.TextBox();
-            this.weightTextBox9 = new System.Windows.Forms.TextBox();
-            this.weightTextBox10 = new System.Windows.Forms.TextBox();
-            this.weightTextBox11 = new System.Windows.Forms.TextBox();
-            this.weightTextBox12 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox0 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox1 = new System.Windows.Forms.TextBox();
-            this.totalCount = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.countTextBox0 = new System.Windows.Forms.TextBox();
-            this.countTextBox1 = new System.Windows.Forms.TextBox();
-            this.countTextBox2 = new System.Windows.Forms.TextBox();
-            this.countTextBox3 = new System.Windows.Forms.TextBox();
-            this.countTextBox4 = new System.Windows.Forms.TextBox();
-            this.countTextBox6 = new System.Windows.Forms.TextBox();
-            this.countTextBox5 = new System.Windows.Forms.TextBox();
-            this.countTextBox7 = new System.Windows.Forms.TextBox();
-            this.countTextBox8 = new System.Windows.Forms.TextBox();
-            this.countTextBox9 = new System.Windows.Forms.TextBox();
-            this.countTextBox10 = new System.Windows.Forms.TextBox();
-            this.countTextBox11 = new System.Windows.Forms.TextBox();
-            this.countTextBox12 = new System.Windows.Forms.TextBox();
             this.itemComboBox0 = new System.Windows.Forms.ComboBox();
             this.itemComboBox1 = new System.Windows.Forms.ComboBox();
             this.itemComboBox2 = new System.Windows.Forms.ComboBox();
@@ -149,8 +79,94 @@
             this.mainCategoryComboBox12 = new System.Windows.Forms.ComboBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.remarks0 = new System.Windows.Forms.TextBox();
+            this.remarks1 = new System.Windows.Forms.TextBox();
+            this.remarks2 = new System.Windows.Forms.TextBox();
+            this.remarks3 = new System.Windows.Forms.TextBox();
+            this.remarks4 = new System.Windows.Forms.TextBox();
+            this.remarks5 = new System.Windows.Forms.TextBox();
+            this.remarks6 = new System.Windows.Forms.TextBox();
+            this.remarks7 = new System.Windows.Forms.TextBox();
+            this.remarks8 = new System.Windows.Forms.TextBox();
+            this.remarks9 = new System.Windows.Forms.TextBox();
+            this.remarks10 = new System.Windows.Forms.TextBox();
+            this.remarks11 = new System.Windows.Forms.TextBox();
+            this.remarks12 = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
+            this.moneyTextBox0 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox1 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox2 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox3 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox4 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox5 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox6 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox7 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox8 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox9 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox10 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox11 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox12 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.countTextBox0 = new System.Windows.Forms.TextBox();
+            this.countTextBox1 = new System.Windows.Forms.TextBox();
+            this.countTextBox2 = new System.Windows.Forms.TextBox();
+            this.countTextBox3 = new System.Windows.Forms.TextBox();
+            this.countTextBox4 = new System.Windows.Forms.TextBox();
+            this.countTextBox7 = new System.Windows.Forms.TextBox();
+            this.countTextBox8 = new System.Windows.Forms.TextBox();
+            this.countTextBox9 = new System.Windows.Forms.TextBox();
+            this.countTextBox10 = new System.Windows.Forms.TextBox();
+            this.countTextBox11 = new System.Windows.Forms.TextBox();
+            this.countTextBox12 = new System.Windows.Forms.TextBox();
+            this.totalCount = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.totalWeight = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.unitPriceTextBox12 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox11 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox10 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox9 = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.unitPriceTextBox0 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox1 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox2 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox3 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox4 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox5 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox6 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox7 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox8 = new System.Windows.Forms.TextBox();
+            this.weightTextBox12 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.weightTextBox0 = new System.Windows.Forms.TextBox();
+            this.weightTextBox1 = new System.Windows.Forms.TextBox();
+            this.weightTextBox2 = new System.Windows.Forms.TextBox();
+            this.weightTextBox3 = new System.Windows.Forms.TextBox();
+            this.weightTextBox4 = new System.Windows.Forms.TextBox();
+            this.weightTextBox5 = new System.Windows.Forms.TextBox();
+            this.weightTextBox6 = new System.Windows.Forms.TextBox();
+            this.weightTextBox7 = new System.Windows.Forms.TextBox();
+            this.weightTextBox8 = new System.Windows.Forms.TextBox();
+            this.weightTextBox9 = new System.Windows.Forms.TextBox();
+            this.weightTextBox10 = new System.Windows.Forms.TextBox();
+            this.weightTextBox11 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.itemDetail0 = new System.Windows.Forms.TextBox();
+            this.itemDetail1 = new System.Windows.Forms.TextBox();
+            this.itemDetail2 = new System.Windows.Forms.TextBox();
+            this.itemDetail3 = new System.Windows.Forms.TextBox();
+            this.itemDetail4 = new System.Windows.Forms.TextBox();
+            this.itemDetail5 = new System.Windows.Forms.TextBox();
+            this.itemDetail6 = new System.Windows.Forms.TextBox();
+            this.itemDetail7 = new System.Windows.Forms.TextBox();
+            this.itemDetail8 = new System.Windows.Forms.TextBox();
+            this.itemDetail9 = new System.Windows.Forms.TextBox();
+            this.itemDetail10 = new System.Windows.Forms.TextBox();
+            this.itemDetail11 = new System.Windows.Forms.TextBox();
+            this.itemDetail12 = new System.Windows.Forms.TextBox();
+            this.countTextBox5 = new System.Windows.Forms.TextBox();
+            this.countTextBox6 = new System.Windows.Forms.TextBox();
             this.returnButton = new System.Windows.Forms.Button();
             this.previewButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -193,9 +209,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.deliveryTextBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.documentNumberTextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label27 = new System.Windows.Forms.Label();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.documentNumberTextBox = new System.Windows.Forms.TextBox();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -251,37 +268,6 @@
             this.label76 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.remarks012 = new System.Windows.Forms.TextBox();
-            this.remarks011 = new System.Windows.Forms.TextBox();
-            this.totalCount2 = new System.Windows.Forms.TextBox();
-            this.totalWeight2 = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
-            this.remarks010 = new System.Windows.Forms.TextBox();
-            this.label71 = new System.Windows.Forms.Label();
-            this.remarks00 = new System.Windows.Forms.TextBox();
-            this.remarks01 = new System.Windows.Forms.TextBox();
-            this.remarks02 = new System.Windows.Forms.TextBox();
-            this.remarks03 = new System.Windows.Forms.TextBox();
-            this.remarks04 = new System.Windows.Forms.TextBox();
-            this.remarks05 = new System.Windows.Forms.TextBox();
-            this.remarks06 = new System.Windows.Forms.TextBox();
-            this.remarks07 = new System.Windows.Forms.TextBox();
-            this.remarks08 = new System.Windows.Forms.TextBox();
-            this.remarks09 = new System.Windows.Forms.TextBox();
-            this.label70 = new System.Windows.Forms.Label();
-            this.moneyTextBox00 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox01 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox02 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox03 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox04 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox05 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox06 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox07 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox08 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox09 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox010 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox011 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox012 = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
             this.mainCategoryComboBox00 = new System.Windows.Forms.ComboBox();
             this.mainCategoryComboBox01 = new System.Windows.Forms.ComboBox();
@@ -311,19 +297,52 @@
             this.itemComboBox011 = new System.Windows.Forms.ComboBox();
             this.itemComboBox012 = new System.Windows.Forms.ComboBox();
             this.label67 = new System.Windows.Forms.Label();
-            this.weightTextBox00 = new System.Windows.Forms.TextBox();
-            this.weightTextBox01 = new System.Windows.Forms.TextBox();
-            this.weightTextBox02 = new System.Windows.Forms.TextBox();
-            this.weightTextBox03 = new System.Windows.Forms.TextBox();
-            this.weightTextBox04 = new System.Windows.Forms.TextBox();
-            this.weightTextBox05 = new System.Windows.Forms.TextBox();
-            this.weightTextBox06 = new System.Windows.Forms.TextBox();
-            this.weightTextBox07 = new System.Windows.Forms.TextBox();
-            this.weightTextBox08 = new System.Windows.Forms.TextBox();
-            this.weightTextBox09 = new System.Windows.Forms.TextBox();
-            this.weightTextBox010 = new System.Windows.Forms.TextBox();
-            this.weightTextBox011 = new System.Windows.Forms.TextBox();
-            this.weightTextBox012 = new System.Windows.Forms.TextBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.remarks00 = new System.Windows.Forms.TextBox();
+            this.remarks01 = new System.Windows.Forms.TextBox();
+            this.remarks02 = new System.Windows.Forms.TextBox();
+            this.remarks03 = new System.Windows.Forms.TextBox();
+            this.remarks04 = new System.Windows.Forms.TextBox();
+            this.remarks05 = new System.Windows.Forms.TextBox();
+            this.remarks06 = new System.Windows.Forms.TextBox();
+            this.remarks07 = new System.Windows.Forms.TextBox();
+            this.remarks08 = new System.Windows.Forms.TextBox();
+            this.remarks09 = new System.Windows.Forms.TextBox();
+            this.remarks010 = new System.Windows.Forms.TextBox();
+            this.remarks011 = new System.Windows.Forms.TextBox();
+            this.remarks012 = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.moneyTextBox00 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox01 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox02 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox03 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox04 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox05 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox06 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox07 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox08 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox09 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox010 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox011 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox012 = new System.Windows.Forms.TextBox();
+            this.totalCount2 = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.totalWeight2 = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.countTextBox012 = new System.Windows.Forms.TextBox();
+            this.countTextBox011 = new System.Windows.Forms.TextBox();
+            this.countTextBox010 = new System.Windows.Forms.TextBox();
+            this.countTextBox09 = new System.Windows.Forms.TextBox();
+            this.countTextBox08 = new System.Windows.Forms.TextBox();
+            this.countTextBox07 = new System.Windows.Forms.TextBox();
+            this.countTextBox06 = new System.Windows.Forms.TextBox();
+            this.countTextBox05 = new System.Windows.Forms.TextBox();
+            this.countTextBox04 = new System.Windows.Forms.TextBox();
+            this.countTextBox03 = new System.Windows.Forms.TextBox();
+            this.countTextBox02 = new System.Windows.Forms.TextBox();
+            this.countTextBox01 = new System.Windows.Forms.TextBox();
+            this.countTextBox00 = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
             this.unitPriceTextBox00 = new System.Windows.Forms.TextBox();
             this.unitPriceTextBox01 = new System.Windows.Forms.TextBox();
@@ -338,24 +357,20 @@
             this.unitPriceTextBox010 = new System.Windows.Forms.TextBox();
             this.unitPriceTextBox011 = new System.Windows.Forms.TextBox();
             this.unitPriceTextBox012 = new System.Windows.Forms.TextBox();
-            this.label68 = new System.Windows.Forms.Label();
-            this.countTextBox00 = new System.Windows.Forms.TextBox();
-            this.countTextBox01 = new System.Windows.Forms.TextBox();
-            this.countTextBox02 = new System.Windows.Forms.TextBox();
-            this.countTextBox03 = new System.Windows.Forms.TextBox();
-            this.countTextBox04 = new System.Windows.Forms.TextBox();
-            this.countTextBox05 = new System.Windows.Forms.TextBox();
-            this.countTextBox06 = new System.Windows.Forms.TextBox();
-            this.countTextBox07 = new System.Windows.Forms.TextBox();
-            this.countTextBox08 = new System.Windows.Forms.TextBox();
-            this.countTextBox09 = new System.Windows.Forms.TextBox();
-            this.countTextBox010 = new System.Windows.Forms.TextBox();
-            this.countTextBox011 = new System.Windows.Forms.TextBox();
-            this.countTextBox012 = new System.Windows.Forms.TextBox();
-            this.label64 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label22 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
+            this.weightTextBox00 = new System.Windows.Forms.TextBox();
+            this.weightTextBox01 = new System.Windows.Forms.TextBox();
+            this.weightTextBox02 = new System.Windows.Forms.TextBox();
+            this.weightTextBox03 = new System.Windows.Forms.TextBox();
+            this.weightTextBox04 = new System.Windows.Forms.TextBox();
+            this.weightTextBox05 = new System.Windows.Forms.TextBox();
+            this.weightTextBox06 = new System.Windows.Forms.TextBox();
+            this.weightTextBox07 = new System.Windows.Forms.TextBox();
+            this.weightTextBox08 = new System.Windows.Forms.TextBox();
+            this.weightTextBox09 = new System.Windows.Forms.TextBox();
+            this.weightTextBox010 = new System.Windows.Forms.TextBox();
+            this.weightTextBox011 = new System.Windows.Forms.TextBox();
+            this.weightTextBox012 = new System.Windows.Forms.TextBox();
             this.itemDetail00 = new System.Windows.Forms.TextBox();
             this.itemDetail01 = new System.Windows.Forms.TextBox();
             this.itemDetail02 = new System.Windows.Forms.TextBox();
@@ -369,22 +384,7 @@
             this.itemDetail010 = new System.Windows.Forms.TextBox();
             this.itemDetail011 = new System.Windows.Forms.TextBox();
             this.itemDetail012 = new System.Windows.Forms.TextBox();
-            this.itemDetail0 = new System.Windows.Forms.TextBox();
-            this.itemDetail1 = new System.Windows.Forms.TextBox();
-            this.itemDetail2 = new System.Windows.Forms.TextBox();
-            this.itemDetail3 = new System.Windows.Forms.TextBox();
-            this.itemDetail4 = new System.Windows.Forms.TextBox();
-            this.itemDetail5 = new System.Windows.Forms.TextBox();
-            this.itemDetail6 = new System.Windows.Forms.TextBox();
-            this.itemDetail7 = new System.Windows.Forms.TextBox();
-            this.itemDetail8 = new System.Windows.Forms.TextBox();
-            this.itemDetail9 = new System.Windows.Forms.TextBox();
-            this.itemDetail10 = new System.Windows.Forms.TextBox();
-            this.itemDetail11 = new System.Windows.Forms.TextBox();
-            this.itemDetail12 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
@@ -468,6 +468,27 @@
             this.SettlementDayBox.Size = new System.Drawing.Size(1192, 760);
             this.SettlementDayBox.TabIndex = 0;
             this.SettlementDayBox.Text = "計算書";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Location = new System.Drawing.Point(946, 15);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 86;
+            this.label3.Text = "伝票番号";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox2.Location = new System.Drawing.Point(1007, 12);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(105, 20);
+            this.textBox2.TabIndex = 85;
             // 
             // button13
             // 
@@ -783,797 +804,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(924, 418);
             this.tableLayoutPanel1.TabIndex = 35;
             // 
-            // label31
-            // 
-            this.label31.Location = new System.Drawing.Point(389, 380);
-            this.label31.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(133, 36);
-            this.label31.TabIndex = 38;
-            this.label31.Text = "総数";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // totalWeight
-            // 
-            this.totalWeight.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.totalWeight.Location = new System.Drawing.Point(315, 382);
-            this.totalWeight.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.totalWeight.Name = "totalWeight";
-            this.totalWeight.ReadOnly = true;
-            this.totalWeight.Size = new System.Drawing.Size(70, 31);
-            this.totalWeight.TabIndex = 38;
-            this.totalWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // remarks12
-            // 
-            this.remarks12.Location = new System.Drawing.Point(737, 355);
-            this.remarks12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks12.Name = "remarks12";
-            this.remarks12.Size = new System.Drawing.Size(184, 20);
-            this.remarks12.TabIndex = 0;
-            // 
-            // remarks11
-            // 
-            this.remarks11.Location = new System.Drawing.Point(737, 328);
-            this.remarks11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks11.Name = "remarks11";
-            this.remarks11.Size = new System.Drawing.Size(184, 20);
-            this.remarks11.TabIndex = 0;
-            // 
-            // remarks10
-            // 
-            this.remarks10.Location = new System.Drawing.Point(737, 301);
-            this.remarks10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks10.Name = "remarks10";
-            this.remarks10.Size = new System.Drawing.Size(184, 20);
-            this.remarks10.TabIndex = 0;
-            // 
-            // remarks9
-            // 
-            this.remarks9.Location = new System.Drawing.Point(737, 274);
-            this.remarks9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks9.Name = "remarks9";
-            this.remarks9.Size = new System.Drawing.Size(184, 20);
-            this.remarks9.TabIndex = 0;
-            // 
-            // remarks8
-            // 
-            this.remarks8.Location = new System.Drawing.Point(737, 247);
-            this.remarks8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks8.Name = "remarks8";
-            this.remarks8.Size = new System.Drawing.Size(184, 20);
-            this.remarks8.TabIndex = 0;
-            // 
-            // remarks7
-            // 
-            this.remarks7.Location = new System.Drawing.Point(737, 220);
-            this.remarks7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks7.Name = "remarks7";
-            this.remarks7.Size = new System.Drawing.Size(184, 20);
-            this.remarks7.TabIndex = 0;
-            // 
-            // remarks6
-            // 
-            this.remarks6.Location = new System.Drawing.Point(737, 193);
-            this.remarks6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks6.Name = "remarks6";
-            this.remarks6.Size = new System.Drawing.Size(184, 20);
-            this.remarks6.TabIndex = 0;
-            // 
-            // remarks5
-            // 
-            this.remarks5.Location = new System.Drawing.Point(737, 166);
-            this.remarks5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks5.Name = "remarks5";
-            this.remarks5.Size = new System.Drawing.Size(184, 20);
-            this.remarks5.TabIndex = 0;
-            // 
-            // remarks4
-            // 
-            this.remarks4.Location = new System.Drawing.Point(737, 139);
-            this.remarks4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks4.Name = "remarks4";
-            this.remarks4.Size = new System.Drawing.Size(184, 20);
-            this.remarks4.TabIndex = 0;
-            // 
-            // remarks3
-            // 
-            this.remarks3.Location = new System.Drawing.Point(737, 112);
-            this.remarks3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks3.Name = "remarks3";
-            this.remarks3.Size = new System.Drawing.Size(184, 20);
-            this.remarks3.TabIndex = 39;
-            // 
-            // remarks2
-            // 
-            this.remarks2.Location = new System.Drawing.Point(737, 85);
-            this.remarks2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks2.Name = "remarks2";
-            this.remarks2.Size = new System.Drawing.Size(184, 20);
-            this.remarks2.TabIndex = 39;
-            // 
-            // remarks1
-            // 
-            this.remarks1.Location = new System.Drawing.Point(737, 58);
-            this.remarks1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks1.Name = "remarks1";
-            this.remarks1.Size = new System.Drawing.Size(184, 20);
-            this.remarks1.TabIndex = 38;
-            // 
-            // remarks0
-            // 
-            this.remarks0.Location = new System.Drawing.Point(737, 31);
-            this.remarks0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks0.Name = "remarks0";
-            this.remarks0.Size = new System.Drawing.Size(184, 20);
-            this.remarks0.TabIndex = 36;
-            // 
-            // label28
-            // 
-            this.label28.Location = new System.Drawing.Point(737, 2);
-            this.label28.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label28.Name = "label28";
-            this.label28.Padding = new System.Windows.Forms.Padding(32, 0, 32, 0);
-            this.label28.Size = new System.Drawing.Size(184, 25);
-            this.label28.TabIndex = 36;
-            this.label28.Text = "備考";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label23
-            // 
-            this.label23.Location = new System.Drawing.Point(314, 2);
-            this.label23.Margin = new System.Windows.Forms.Padding(0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(72, 22);
-            this.label23.TabIndex = 36;
-            this.label23.Text = "重量";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // moneyTextBox12
-            // 
-            this.moneyTextBox12.Location = new System.Drawing.Point(600, 355);
-            this.moneyTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox12.Name = "moneyTextBox12";
-            this.moneyTextBox12.ReadOnly = true;
-            this.moneyTextBox12.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox12.TabIndex = 0;
-            this.moneyTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox11
-            // 
-            this.moneyTextBox11.Location = new System.Drawing.Point(600, 328);
-            this.moneyTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox11.Name = "moneyTextBox11";
-            this.moneyTextBox11.ReadOnly = true;
-            this.moneyTextBox11.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox11.TabIndex = 0;
-            this.moneyTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox11.TextChanged += new System.EventHandler(this.moneyTextBox11_TextChanged);
-            // 
-            // moneyTextBox10
-            // 
-            this.moneyTextBox10.Location = new System.Drawing.Point(600, 301);
-            this.moneyTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox10.Name = "moneyTextBox10";
-            this.moneyTextBox10.ReadOnly = true;
-            this.moneyTextBox10.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox10.TabIndex = 0;
-            this.moneyTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox10.TextChanged += new System.EventHandler(this.moneyTextBox10_TextChanged);
-            // 
-            // moneyTextBox9
-            // 
-            this.moneyTextBox9.Location = new System.Drawing.Point(600, 274);
-            this.moneyTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox9.Name = "moneyTextBox9";
-            this.moneyTextBox9.ReadOnly = true;
-            this.moneyTextBox9.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox9.TabIndex = 0;
-            this.moneyTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox9.TextChanged += new System.EventHandler(this.moneyTextBox9_TextChanged);
-            // 
-            // moneyTextBox8
-            // 
-            this.moneyTextBox8.Location = new System.Drawing.Point(600, 247);
-            this.moneyTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox8.Name = "moneyTextBox8";
-            this.moneyTextBox8.ReadOnly = true;
-            this.moneyTextBox8.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox8.TabIndex = 0;
-            this.moneyTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox8.TextChanged += new System.EventHandler(this.moneyTextBox8_TextChanged);
-            // 
-            // moneyTextBox7
-            // 
-            this.moneyTextBox7.Location = new System.Drawing.Point(600, 220);
-            this.moneyTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox7.Name = "moneyTextBox7";
-            this.moneyTextBox7.ReadOnly = true;
-            this.moneyTextBox7.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox7.TabIndex = 0;
-            this.moneyTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox7.TextChanged += new System.EventHandler(this.moneyTextBox7_TextChanged);
-            // 
-            // moneyTextBox6
-            // 
-            this.moneyTextBox6.Location = new System.Drawing.Point(600, 193);
-            this.moneyTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox6.Name = "moneyTextBox6";
-            this.moneyTextBox6.ReadOnly = true;
-            this.moneyTextBox6.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox6.TabIndex = 0;
-            this.moneyTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox6.TextChanged += new System.EventHandler(this.moneyTextBox6_TextChanged);
-            // 
-            // moneyTextBox5
-            // 
-            this.moneyTextBox5.Location = new System.Drawing.Point(600, 166);
-            this.moneyTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox5.Name = "moneyTextBox5";
-            this.moneyTextBox5.ReadOnly = true;
-            this.moneyTextBox5.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox5.TabIndex = 0;
-            this.moneyTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox5.TextChanged += new System.EventHandler(this.moneyTextBox5_TextChanged);
-            // 
-            // moneyTextBox4
-            // 
-            this.moneyTextBox4.Location = new System.Drawing.Point(600, 139);
-            this.moneyTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox4.Name = "moneyTextBox4";
-            this.moneyTextBox4.ReadOnly = true;
-            this.moneyTextBox4.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox4.TabIndex = 0;
-            this.moneyTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox4.TextChanged += new System.EventHandler(this.moneyTextBox4_TextChanged);
-            // 
-            // moneyTextBox3
-            // 
-            this.moneyTextBox3.Location = new System.Drawing.Point(600, 112);
-            this.moneyTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox3.Name = "moneyTextBox3";
-            this.moneyTextBox3.ReadOnly = true;
-            this.moneyTextBox3.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox3.TabIndex = 39;
-            this.moneyTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox3.TextChanged += new System.EventHandler(this.moneyTextBox3_TextChanged);
-            // 
-            // moneyTextBox2
-            // 
-            this.moneyTextBox2.Location = new System.Drawing.Point(600, 85);
-            this.moneyTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox2.Name = "moneyTextBox2";
-            this.moneyTextBox2.ReadOnly = true;
-            this.moneyTextBox2.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox2.TabIndex = 39;
-            this.moneyTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox2.TextChanged += new System.EventHandler(this.moneyTextBox2_TextChanged);
-            // 
-            // unitPriceTextBox0
-            // 
-            this.unitPriceTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox0.Location = new System.Drawing.Point(389, 31);
-            this.unitPriceTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox0.Name = "unitPriceTextBox0";
-            this.unitPriceTextBox0.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox0.TabIndex = 36;
-            this.unitPriceTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox0.TextChanged += new System.EventHandler(this.unitPriceTextBox0_TextChanged);
-            this.unitPriceTextBox0.Enter += new System.EventHandler(this.unitPriceTextBox0_Enter);
-            this.unitPriceTextBox0.Leave += new System.EventHandler(this.unitPriceTextBox0_Leave);
-            // 
-            // unitPriceTextBox1
-            // 
-            this.unitPriceTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox1.Location = new System.Drawing.Point(389, 58);
-            this.unitPriceTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox1.Name = "unitPriceTextBox1";
-            this.unitPriceTextBox1.ReadOnly = true;
-            this.unitPriceTextBox1.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox1.TabIndex = 38;
-            this.unitPriceTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox1.Leave += new System.EventHandler(this.unitPriceTextBox1_Leave);
-            // 
-            // unitPriceTextBox2
-            // 
-            this.unitPriceTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox2.Location = new System.Drawing.Point(389, 85);
-            this.unitPriceTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox2.Name = "unitPriceTextBox2";
-            this.unitPriceTextBox2.ReadOnly = true;
-            this.unitPriceTextBox2.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox2.TabIndex = 39;
-            this.unitPriceTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox2.Leave += new System.EventHandler(this.unitPriceTextBox2_Leave);
-            // 
-            // unitPriceTextBox3
-            // 
-            this.unitPriceTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox3.Location = new System.Drawing.Point(389, 112);
-            this.unitPriceTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox3.Name = "unitPriceTextBox3";
-            this.unitPriceTextBox3.ReadOnly = true;
-            this.unitPriceTextBox3.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox3.TabIndex = 39;
-            this.unitPriceTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox3.Leave += new System.EventHandler(this.unitPriceTextBox3_Leave);
-            // 
-            // unitPriceTextBox4
-            // 
-            this.unitPriceTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox4.Location = new System.Drawing.Point(389, 139);
-            this.unitPriceTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox4.Name = "unitPriceTextBox4";
-            this.unitPriceTextBox4.ReadOnly = true;
-            this.unitPriceTextBox4.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox4.TabIndex = 0;
-            this.unitPriceTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox4.Leave += new System.EventHandler(this.unitPriceTextBox4_Leave);
-            // 
-            // unitPriceTextBox5
-            // 
-            this.unitPriceTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox5.Location = new System.Drawing.Point(389, 166);
-            this.unitPriceTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox5.Name = "unitPriceTextBox5";
-            this.unitPriceTextBox5.ReadOnly = true;
-            this.unitPriceTextBox5.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox5.TabIndex = 39;
-            this.unitPriceTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox5.Leave += new System.EventHandler(this.unitPriceTextBox5_Leave);
-            // 
-            // unitPriceTextBox6
-            // 
-            this.unitPriceTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox6.Location = new System.Drawing.Point(389, 193);
-            this.unitPriceTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox6.Name = "unitPriceTextBox6";
-            this.unitPriceTextBox6.ReadOnly = true;
-            this.unitPriceTextBox6.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox6.TabIndex = 0;
-            this.unitPriceTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox6.Leave += new System.EventHandler(this.unitPriceTextBox6_Leave);
-            // 
-            // unitPriceTextBox7
-            // 
-            this.unitPriceTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox7.Location = new System.Drawing.Point(389, 220);
-            this.unitPriceTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox7.Name = "unitPriceTextBox7";
-            this.unitPriceTextBox7.ReadOnly = true;
-            this.unitPriceTextBox7.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox7.TabIndex = 0;
-            this.unitPriceTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox7.Leave += new System.EventHandler(this.unitPriceTextBox7_Leave);
-            // 
-            // unitPriceTextBox8
-            // 
-            this.unitPriceTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox8.Location = new System.Drawing.Point(389, 247);
-            this.unitPriceTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox8.Name = "unitPriceTextBox8";
-            this.unitPriceTextBox8.ReadOnly = true;
-            this.unitPriceTextBox8.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox8.TabIndex = 0;
-            this.unitPriceTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox8.Leave += new System.EventHandler(this.unitPriceTextBox8_Leave);
-            // 
-            // unitPriceTextBox9
-            // 
-            this.unitPriceTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox9.Location = new System.Drawing.Point(389, 274);
-            this.unitPriceTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox9.Name = "unitPriceTextBox9";
-            this.unitPriceTextBox9.ReadOnly = true;
-            this.unitPriceTextBox9.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox9.TabIndex = 0;
-            this.unitPriceTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox9.Leave += new System.EventHandler(this.unitPriceTextBox9_Leave);
-            // 
-            // unitPriceTextBox10
-            // 
-            this.unitPriceTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox10.Location = new System.Drawing.Point(389, 301);
-            this.unitPriceTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox10.Name = "unitPriceTextBox10";
-            this.unitPriceTextBox10.ReadOnly = true;
-            this.unitPriceTextBox10.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox10.TabIndex = 0;
-            this.unitPriceTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox10.Leave += new System.EventHandler(this.unitPriceTextBox10_Leave);
-            // 
-            // unitPriceTextBox11
-            // 
-            this.unitPriceTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox11.Location = new System.Drawing.Point(389, 328);
-            this.unitPriceTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox11.Name = "unitPriceTextBox11";
-            this.unitPriceTextBox11.ReadOnly = true;
-            this.unitPriceTextBox11.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox11.TabIndex = 0;
-            this.unitPriceTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox11.Leave += new System.EventHandler(this.unitPriceTextBox11_Leave);
-            // 
-            // unitPriceTextBox12
-            // 
-            this.unitPriceTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox12.Location = new System.Drawing.Point(389, 355);
-            this.unitPriceTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox12.Name = "unitPriceTextBox12";
-            this.unitPriceTextBox12.ReadOnly = true;
-            this.unitPriceTextBox12.Size = new System.Drawing.Size(133, 20);
-            this.unitPriceTextBox12.TabIndex = 0;
-            this.unitPriceTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox12.Leave += new System.EventHandler(this.unitPriceTextBox12_Leave);
-            // 
-            // weightTextBox0
-            // 
-            this.weightTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox0.Location = new System.Drawing.Point(315, 31);
-            this.weightTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox0.Name = "weightTextBox0";
-            this.weightTextBox0.ReadOnly = true;
-            this.weightTextBox0.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox0.TabIndex = 36;
-            this.weightTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox0.TextChanged += new System.EventHandler(this.weightTextBox0_TextChanged);
-            this.weightTextBox0.Leave += new System.EventHandler(this.weightTextBox0_Leave);
-            // 
-            // weightTextBox1
-            // 
-            this.weightTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox1.Location = new System.Drawing.Point(315, 58);
-            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox1.Name = "weightTextBox1";
-            this.weightTextBox1.ReadOnly = true;
-            this.weightTextBox1.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox1.TabIndex = 38;
-            this.weightTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox1.TextChanged += new System.EventHandler(this.weightTextBox1_TextChanged);
-            this.weightTextBox1.Leave += new System.EventHandler(this.weightTextBox1_Leave);
-            // 
-            // weightTextBox2
-            // 
-            this.weightTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox2.Location = new System.Drawing.Point(315, 85);
-            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox2.Name = "weightTextBox2";
-            this.weightTextBox2.ReadOnly = true;
-            this.weightTextBox2.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox2.TabIndex = 39;
-            this.weightTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox2.TextChanged += new System.EventHandler(this.weightTextBox2_TextChanged);
-            // 
-            // weightTextBox3
-            // 
-            this.weightTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox3.Location = new System.Drawing.Point(315, 112);
-            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox3.Name = "weightTextBox3";
-            this.weightTextBox3.ReadOnly = true;
-            this.weightTextBox3.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox3.TabIndex = 39;
-            this.weightTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox3.TextChanged += new System.EventHandler(this.weightTextBox3_TextChanged);
-            // 
-            // weightTextBox4
-            // 
-            this.weightTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox4.Location = new System.Drawing.Point(315, 139);
-            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox4.Name = "weightTextBox4";
-            this.weightTextBox4.ReadOnly = true;
-            this.weightTextBox4.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox4.TabIndex = 39;
-            this.weightTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox4.TextChanged += new System.EventHandler(this.weightTextBox4_TextChanged);
-            // 
-            // weightTextBox5
-            // 
-            this.weightTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox5.Location = new System.Drawing.Point(315, 166);
-            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox5.Name = "weightTextBox5";
-            this.weightTextBox5.ReadOnly = true;
-            this.weightTextBox5.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox5.TabIndex = 0;
-            this.weightTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox5.TextChanged += new System.EventHandler(this.weightTextBox5_TextChanged);
-            // 
-            // weightTextBox6
-            // 
-            this.weightTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox6.Location = new System.Drawing.Point(315, 193);
-            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox6.Name = "weightTextBox6";
-            this.weightTextBox6.ReadOnly = true;
-            this.weightTextBox6.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox6.TabIndex = 0;
-            this.weightTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox6.TextChanged += new System.EventHandler(this.weightTextBox6_TextChanged);
-            // 
-            // weightTextBox7
-            // 
-            this.weightTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox7.Location = new System.Drawing.Point(315, 220);
-            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox7.Name = "weightTextBox7";
-            this.weightTextBox7.ReadOnly = true;
-            this.weightTextBox7.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox7.TabIndex = 0;
-            this.weightTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox7.TextChanged += new System.EventHandler(this.weightTextBox7_TextChanged);
-            // 
-            // weightTextBox8
-            // 
-            this.weightTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox8.Location = new System.Drawing.Point(315, 247);
-            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox8.Name = "weightTextBox8";
-            this.weightTextBox8.ReadOnly = true;
-            this.weightTextBox8.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox8.TabIndex = 0;
-            this.weightTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox8.TextChanged += new System.EventHandler(this.weightTextBox8_TextChanged);
-            // 
-            // weightTextBox9
-            // 
-            this.weightTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox9.Location = new System.Drawing.Point(315, 274);
-            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox9.Name = "weightTextBox9";
-            this.weightTextBox9.ReadOnly = true;
-            this.weightTextBox9.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox9.TabIndex = 0;
-            this.weightTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox9.TextChanged += new System.EventHandler(this.weightTextBox9_TextChanged);
-            // 
-            // weightTextBox10
-            // 
-            this.weightTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox10.Location = new System.Drawing.Point(315, 301);
-            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox10.Name = "weightTextBox10";
-            this.weightTextBox10.ReadOnly = true;
-            this.weightTextBox10.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox10.TabIndex = 0;
-            this.weightTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox10.TextChanged += new System.EventHandler(this.weightTextBox10_TextChanged);
-            // 
-            // weightTextBox11
-            // 
-            this.weightTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox11.Location = new System.Drawing.Point(315, 328);
-            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox11.Name = "weightTextBox11";
-            this.weightTextBox11.ReadOnly = true;
-            this.weightTextBox11.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox11.TabIndex = 0;
-            this.weightTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox11.TextChanged += new System.EventHandler(this.weightTextBox11_TextChanged);
-            // 
-            // weightTextBox12
-            // 
-            this.weightTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox12.Location = new System.Drawing.Point(315, 355);
-            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox12.Name = "weightTextBox12";
-            this.weightTextBox12.ReadOnly = true;
-            this.weightTextBox12.Size = new System.Drawing.Size(70, 20);
-            this.weightTextBox12.TabIndex = 0;
-            this.weightTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox12.TextChanged += new System.EventHandler(this.weightTextBox12_TextChanged);
-            // 
-            // moneyTextBox0
-            // 
-            this.moneyTextBox0.Location = new System.Drawing.Point(600, 31);
-            this.moneyTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox0.Name = "moneyTextBox0";
-            this.moneyTextBox0.ReadOnly = true;
-            this.moneyTextBox0.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox0.TabIndex = 36;
-            this.moneyTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox0.TextChanged += new System.EventHandler(this.moneyTextBox0_TextChanged);
-            // 
-            // moneyTextBox1
-            // 
-            this.moneyTextBox1.Location = new System.Drawing.Point(600, 58);
-            this.moneyTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox1.Name = "moneyTextBox1";
-            this.moneyTextBox1.ReadOnly = true;
-            this.moneyTextBox1.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox1.TabIndex = 38;
-            this.moneyTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox1.TextChanged += new System.EventHandler(this.moneyTextBox1_TextChanged);
-            // 
-            // totalCount
-            // 
-            this.totalCount.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.totalCount.Location = new System.Drawing.Point(526, 382);
-            this.totalCount.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.totalCount.Name = "totalCount";
-            this.totalCount.ReadOnly = true;
-            this.totalCount.Size = new System.Drawing.Size(70, 31);
-            this.totalCount.TabIndex = 38;
-            this.totalCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label32
-            // 
-            this.label32.Location = new System.Drawing.Point(187, 380);
-            this.label32.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(124, 35);
-            this.label32.TabIndex = 38;
-            this.label32.Text = "総重量";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label24
-            // 
-            this.label24.Location = new System.Drawing.Point(525, 2);
-            this.label24.Margin = new System.Windows.Forms.Padding(0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(72, 25);
-            this.label24.TabIndex = 36;
-            this.label24.Text = "数量";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // countTextBox0
-            // 
-            this.countTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox0.Location = new System.Drawing.Point(526, 31);
-            this.countTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox0.Name = "countTextBox0";
-            this.countTextBox0.ReadOnly = true;
-            this.countTextBox0.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox0.TabIndex = 36;
-            this.countTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox0.TextChanged += new System.EventHandler(this.countTextBox0_TextChanged);
-            this.countTextBox0.Leave += new System.EventHandler(this.countTextBox0_Leave);
-            // 
-            // countTextBox1
-            // 
-            this.countTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox1.Location = new System.Drawing.Point(526, 58);
-            this.countTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox1.Name = "countTextBox1";
-            this.countTextBox1.ReadOnly = true;
-            this.countTextBox1.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox1.TabIndex = 38;
-            this.countTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox1.TextChanged += new System.EventHandler(this.countTextBox1_TextChanged);
-            // 
-            // countTextBox2
-            // 
-            this.countTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox2.Location = new System.Drawing.Point(526, 85);
-            this.countTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox2.Name = "countTextBox2";
-            this.countTextBox2.ReadOnly = true;
-            this.countTextBox2.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox2.TabIndex = 39;
-            this.countTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox2.TextChanged += new System.EventHandler(this.countTextBox2_TextChanged);
-            // 
-            // countTextBox3
-            // 
-            this.countTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox3.Location = new System.Drawing.Point(526, 112);
-            this.countTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox3.Name = "countTextBox3";
-            this.countTextBox3.ReadOnly = true;
-            this.countTextBox3.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox3.TabIndex = 39;
-            this.countTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox3.TextChanged += new System.EventHandler(this.countTextBox3_TextChanged);
-            // 
-            // countTextBox4
-            // 
-            this.countTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox4.Location = new System.Drawing.Point(526, 139);
-            this.countTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox4.Name = "countTextBox4";
-            this.countTextBox4.ReadOnly = true;
-            this.countTextBox4.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox4.TabIndex = 39;
-            this.countTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox4.TextChanged += new System.EventHandler(this.countTextBox4_TextChanged);
-            // 
-            // countTextBox6
-            // 
-            this.countTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox6.Location = new System.Drawing.Point(526, 193);
-            this.countTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox6.Name = "countTextBox6";
-            this.countTextBox6.ReadOnly = true;
-            this.countTextBox6.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox6.TabIndex = 0;
-            this.countTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox6.TextChanged += new System.EventHandler(this.countTextBox5_TextChanged);
-            // 
-            // countTextBox5
-            // 
-            this.countTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox5.Location = new System.Drawing.Point(526, 166);
-            this.countTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox5.Name = "countTextBox5";
-            this.countTextBox5.ReadOnly = true;
-            this.countTextBox5.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox5.TabIndex = 39;
-            this.countTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox5.TextChanged += new System.EventHandler(this.countTextBox5_TextChanged);
-            // 
-            // countTextBox7
-            // 
-            this.countTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox7.Location = new System.Drawing.Point(526, 220);
-            this.countTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox7.Name = "countTextBox7";
-            this.countTextBox7.ReadOnly = true;
-            this.countTextBox7.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox7.TabIndex = 0;
-            this.countTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox7.TextChanged += new System.EventHandler(this.countTextBox7_TextChanged);
-            // 
-            // countTextBox8
-            // 
-            this.countTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox8.Location = new System.Drawing.Point(526, 247);
-            this.countTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox8.Name = "countTextBox8";
-            this.countTextBox8.ReadOnly = true;
-            this.countTextBox8.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox8.TabIndex = 0;
-            this.countTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox8.TextChanged += new System.EventHandler(this.countTextBox8_TextChanged);
-            // 
-            // countTextBox9
-            // 
-            this.countTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox9.Location = new System.Drawing.Point(526, 274);
-            this.countTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox9.Name = "countTextBox9";
-            this.countTextBox9.ReadOnly = true;
-            this.countTextBox9.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox9.TabIndex = 0;
-            this.countTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox9.TextChanged += new System.EventHandler(this.countTextBox9_TextChanged);
-            // 
-            // countTextBox10
-            // 
-            this.countTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox10.Location = new System.Drawing.Point(526, 301);
-            this.countTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox10.Name = "countTextBox10";
-            this.countTextBox10.ReadOnly = true;
-            this.countTextBox10.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox10.TabIndex = 0;
-            this.countTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox10.TextChanged += new System.EventHandler(this.countTextBox10_TextChanged);
-            // 
-            // countTextBox11
-            // 
-            this.countTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox11.Location = new System.Drawing.Point(526, 328);
-            this.countTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox11.Name = "countTextBox11";
-            this.countTextBox11.ReadOnly = true;
-            this.countTextBox11.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox11.TabIndex = 0;
-            this.countTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox11.TextChanged += new System.EventHandler(this.countTextBox11_TextChanged);
-            // 
-            // countTextBox12
-            // 
-            this.countTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox12.Location = new System.Drawing.Point(526, 355);
-            this.countTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox12.Name = "countTextBox12";
-            this.countTextBox12.ReadOnly = true;
-            this.countTextBox12.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox12.TabIndex = 0;
-            this.countTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.countTextBox12.TextChanged += new System.EventHandler(this.countTextBox12_TextChanged);
-            // 
             // itemComboBox0
             // 
             this.itemComboBox0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1867,15 +1097,120 @@
             this.label21.Text = "品名";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label34
+            // label28
             // 
-            this.label34.Location = new System.Drawing.Point(388, 2);
-            this.label34.Margin = new System.Windows.Forms.Padding(0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(135, 22);
-            this.label34.TabIndex = 36;
-            this.label34.Text = "単価";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label28.Location = new System.Drawing.Point(737, 2);
+            this.label28.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label28.Name = "label28";
+            this.label28.Padding = new System.Windows.Forms.Padding(32, 0, 32, 0);
+            this.label28.Size = new System.Drawing.Size(184, 25);
+            this.label28.TabIndex = 36;
+            this.label28.Text = "備考";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // remarks0
+            // 
+            this.remarks0.Location = new System.Drawing.Point(737, 31);
+            this.remarks0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks0.Name = "remarks0";
+            this.remarks0.Size = new System.Drawing.Size(184, 20);
+            this.remarks0.TabIndex = 36;
+            // 
+            // remarks1
+            // 
+            this.remarks1.Location = new System.Drawing.Point(737, 58);
+            this.remarks1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks1.Name = "remarks1";
+            this.remarks1.Size = new System.Drawing.Size(184, 20);
+            this.remarks1.TabIndex = 38;
+            // 
+            // remarks2
+            // 
+            this.remarks2.Location = new System.Drawing.Point(737, 85);
+            this.remarks2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks2.Name = "remarks2";
+            this.remarks2.Size = new System.Drawing.Size(184, 20);
+            this.remarks2.TabIndex = 39;
+            // 
+            // remarks3
+            // 
+            this.remarks3.Location = new System.Drawing.Point(737, 112);
+            this.remarks3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks3.Name = "remarks3";
+            this.remarks3.Size = new System.Drawing.Size(184, 20);
+            this.remarks3.TabIndex = 39;
+            // 
+            // remarks4
+            // 
+            this.remarks4.Location = new System.Drawing.Point(737, 139);
+            this.remarks4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks4.Name = "remarks4";
+            this.remarks4.Size = new System.Drawing.Size(184, 20);
+            this.remarks4.TabIndex = 0;
+            // 
+            // remarks5
+            // 
+            this.remarks5.Location = new System.Drawing.Point(737, 166);
+            this.remarks5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks5.Name = "remarks5";
+            this.remarks5.Size = new System.Drawing.Size(184, 20);
+            this.remarks5.TabIndex = 0;
+            // 
+            // remarks6
+            // 
+            this.remarks6.Location = new System.Drawing.Point(737, 193);
+            this.remarks6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks6.Name = "remarks6";
+            this.remarks6.Size = new System.Drawing.Size(184, 20);
+            this.remarks6.TabIndex = 0;
+            // 
+            // remarks7
+            // 
+            this.remarks7.Location = new System.Drawing.Point(737, 220);
+            this.remarks7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks7.Name = "remarks7";
+            this.remarks7.Size = new System.Drawing.Size(184, 20);
+            this.remarks7.TabIndex = 0;
+            // 
+            // remarks8
+            // 
+            this.remarks8.Location = new System.Drawing.Point(737, 247);
+            this.remarks8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks8.Name = "remarks8";
+            this.remarks8.Size = new System.Drawing.Size(184, 20);
+            this.remarks8.TabIndex = 0;
+            // 
+            // remarks9
+            // 
+            this.remarks9.Location = new System.Drawing.Point(737, 274);
+            this.remarks9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks9.Name = "remarks9";
+            this.remarks9.Size = new System.Drawing.Size(184, 20);
+            this.remarks9.TabIndex = 0;
+            // 
+            // remarks10
+            // 
+            this.remarks10.Location = new System.Drawing.Point(737, 301);
+            this.remarks10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks10.Name = "remarks10";
+            this.remarks10.Size = new System.Drawing.Size(184, 20);
+            this.remarks10.TabIndex = 0;
+            // 
+            // remarks11
+            // 
+            this.remarks11.Location = new System.Drawing.Point(737, 328);
+            this.remarks11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks11.Name = "remarks11";
+            this.remarks11.Size = new System.Drawing.Size(184, 20);
+            this.remarks11.TabIndex = 0;
+            // 
+            // remarks12
+            // 
+            this.remarks12.Location = new System.Drawing.Point(737, 355);
+            this.remarks12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks12.Name = "remarks12";
+            this.remarks12.Size = new System.Drawing.Size(184, 20);
+            this.remarks12.TabIndex = 0;
             // 
             // label35
             // 
@@ -1886,6 +1221,879 @@
             this.label35.TabIndex = 36;
             this.label35.Text = "金額";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // moneyTextBox0
+            // 
+            this.moneyTextBox0.Location = new System.Drawing.Point(600, 31);
+            this.moneyTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox0.Name = "moneyTextBox0";
+            this.moneyTextBox0.ReadOnly = true;
+            this.moneyTextBox0.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox0.TabIndex = 36;
+            this.moneyTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox0.TextChanged += new System.EventHandler(this.moneyTextBox0_TextChanged);
+            // 
+            // moneyTextBox1
+            // 
+            this.moneyTextBox1.Location = new System.Drawing.Point(600, 58);
+            this.moneyTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox1.Name = "moneyTextBox1";
+            this.moneyTextBox1.ReadOnly = true;
+            this.moneyTextBox1.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox1.TabIndex = 38;
+            this.moneyTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox1.TextChanged += new System.EventHandler(this.moneyTextBox1_TextChanged);
+            // 
+            // moneyTextBox2
+            // 
+            this.moneyTextBox2.Location = new System.Drawing.Point(600, 85);
+            this.moneyTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox2.Name = "moneyTextBox2";
+            this.moneyTextBox2.ReadOnly = true;
+            this.moneyTextBox2.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox2.TabIndex = 39;
+            this.moneyTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox2.TextChanged += new System.EventHandler(this.moneyTextBox2_TextChanged);
+            // 
+            // moneyTextBox3
+            // 
+            this.moneyTextBox3.Location = new System.Drawing.Point(600, 112);
+            this.moneyTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox3.Name = "moneyTextBox3";
+            this.moneyTextBox3.ReadOnly = true;
+            this.moneyTextBox3.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox3.TabIndex = 39;
+            this.moneyTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox3.TextChanged += new System.EventHandler(this.moneyTextBox3_TextChanged);
+            // 
+            // moneyTextBox4
+            // 
+            this.moneyTextBox4.Location = new System.Drawing.Point(600, 139);
+            this.moneyTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox4.Name = "moneyTextBox4";
+            this.moneyTextBox4.ReadOnly = true;
+            this.moneyTextBox4.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox4.TabIndex = 0;
+            this.moneyTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox4.TextChanged += new System.EventHandler(this.moneyTextBox4_TextChanged);
+            // 
+            // moneyTextBox5
+            // 
+            this.moneyTextBox5.Location = new System.Drawing.Point(600, 166);
+            this.moneyTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox5.Name = "moneyTextBox5";
+            this.moneyTextBox5.ReadOnly = true;
+            this.moneyTextBox5.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox5.TabIndex = 0;
+            this.moneyTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox5.TextChanged += new System.EventHandler(this.moneyTextBox5_TextChanged);
+            // 
+            // moneyTextBox6
+            // 
+            this.moneyTextBox6.Location = new System.Drawing.Point(600, 193);
+            this.moneyTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox6.Name = "moneyTextBox6";
+            this.moneyTextBox6.ReadOnly = true;
+            this.moneyTextBox6.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox6.TabIndex = 0;
+            this.moneyTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox6.TextChanged += new System.EventHandler(this.moneyTextBox6_TextChanged);
+            // 
+            // moneyTextBox7
+            // 
+            this.moneyTextBox7.Location = new System.Drawing.Point(600, 220);
+            this.moneyTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox7.Name = "moneyTextBox7";
+            this.moneyTextBox7.ReadOnly = true;
+            this.moneyTextBox7.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox7.TabIndex = 0;
+            this.moneyTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox7.TextChanged += new System.EventHandler(this.moneyTextBox7_TextChanged);
+            // 
+            // moneyTextBox8
+            // 
+            this.moneyTextBox8.Location = new System.Drawing.Point(600, 247);
+            this.moneyTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox8.Name = "moneyTextBox8";
+            this.moneyTextBox8.ReadOnly = true;
+            this.moneyTextBox8.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox8.TabIndex = 0;
+            this.moneyTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox8.TextChanged += new System.EventHandler(this.moneyTextBox8_TextChanged);
+            // 
+            // moneyTextBox9
+            // 
+            this.moneyTextBox9.Location = new System.Drawing.Point(600, 274);
+            this.moneyTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox9.Name = "moneyTextBox9";
+            this.moneyTextBox9.ReadOnly = true;
+            this.moneyTextBox9.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox9.TabIndex = 0;
+            this.moneyTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox9.TextChanged += new System.EventHandler(this.moneyTextBox9_TextChanged);
+            // 
+            // moneyTextBox10
+            // 
+            this.moneyTextBox10.Location = new System.Drawing.Point(600, 301);
+            this.moneyTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox10.Name = "moneyTextBox10";
+            this.moneyTextBox10.ReadOnly = true;
+            this.moneyTextBox10.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox10.TabIndex = 0;
+            this.moneyTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox10.TextChanged += new System.EventHandler(this.moneyTextBox10_TextChanged);
+            // 
+            // moneyTextBox11
+            // 
+            this.moneyTextBox11.Location = new System.Drawing.Point(600, 328);
+            this.moneyTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox11.Name = "moneyTextBox11";
+            this.moneyTextBox11.ReadOnly = true;
+            this.moneyTextBox11.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox11.TabIndex = 0;
+            this.moneyTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox11.TextChanged += new System.EventHandler(this.moneyTextBox11_TextChanged);
+            // 
+            // moneyTextBox12
+            // 
+            this.moneyTextBox12.Location = new System.Drawing.Point(600, 355);
+            this.moneyTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox12.Name = "moneyTextBox12";
+            this.moneyTextBox12.ReadOnly = true;
+            this.moneyTextBox12.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox12.TabIndex = 0;
+            this.moneyTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label24
+            // 
+            this.label24.Location = new System.Drawing.Point(525, 2);
+            this.label24.Margin = new System.Windows.Forms.Padding(0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(72, 25);
+            this.label24.TabIndex = 36;
+            this.label24.Text = "数量";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // countTextBox0
+            // 
+            this.countTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox0.Location = new System.Drawing.Point(526, 31);
+            this.countTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox0.Name = "countTextBox0";
+            this.countTextBox0.ReadOnly = true;
+            this.countTextBox0.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox0.TabIndex = 36;
+            this.countTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox0.TextChanged += new System.EventHandler(this.countTextBox0_TextChanged);
+            this.countTextBox0.Leave += new System.EventHandler(this.countTextBox0_Leave);
+            // 
+            // countTextBox1
+            // 
+            this.countTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox1.Location = new System.Drawing.Point(526, 58);
+            this.countTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox1.Name = "countTextBox1";
+            this.countTextBox1.ReadOnly = true;
+            this.countTextBox1.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox1.TabIndex = 38;
+            this.countTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox1.TextChanged += new System.EventHandler(this.countTextBox1_TextChanged);
+            this.countTextBox1.Leave += new System.EventHandler(this.countTextBox1_Leave);
+            // 
+            // countTextBox2
+            // 
+            this.countTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox2.Location = new System.Drawing.Point(526, 85);
+            this.countTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox2.Name = "countTextBox2";
+            this.countTextBox2.ReadOnly = true;
+            this.countTextBox2.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox2.TabIndex = 39;
+            this.countTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox2.TextChanged += new System.EventHandler(this.countTextBox2_TextChanged);
+            this.countTextBox2.Leave += new System.EventHandler(this.countTextBox2_Leave);
+            // 
+            // countTextBox3
+            // 
+            this.countTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox3.Location = new System.Drawing.Point(526, 112);
+            this.countTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox3.Name = "countTextBox3";
+            this.countTextBox3.ReadOnly = true;
+            this.countTextBox3.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox3.TabIndex = 39;
+            this.countTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox3.TextChanged += new System.EventHandler(this.countTextBox3_TextChanged);
+            this.countTextBox3.Leave += new System.EventHandler(this.countTextBox3_Leave);
+            // 
+            // countTextBox4
+            // 
+            this.countTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox4.Location = new System.Drawing.Point(526, 139);
+            this.countTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox4.Name = "countTextBox4";
+            this.countTextBox4.ReadOnly = true;
+            this.countTextBox4.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox4.TabIndex = 39;
+            this.countTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox4.TextChanged += new System.EventHandler(this.countTextBox4_TextChanged);
+            this.countTextBox4.Leave += new System.EventHandler(this.countTextBox4_Leave);
+            // 
+            // countTextBox7
+            // 
+            this.countTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox7.Location = new System.Drawing.Point(526, 220);
+            this.countTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox7.Name = "countTextBox7";
+            this.countTextBox7.ReadOnly = true;
+            this.countTextBox7.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox7.TabIndex = 0;
+            this.countTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox7.TextChanged += new System.EventHandler(this.countTextBox7_TextChanged);
+            this.countTextBox7.Leave += new System.EventHandler(this.countTextBox7_Leave);
+            // 
+            // countTextBox8
+            // 
+            this.countTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox8.Location = new System.Drawing.Point(526, 247);
+            this.countTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox8.Name = "countTextBox8";
+            this.countTextBox8.ReadOnly = true;
+            this.countTextBox8.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox8.TabIndex = 0;
+            this.countTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox8.TextChanged += new System.EventHandler(this.countTextBox8_TextChanged);
+            this.countTextBox8.Leave += new System.EventHandler(this.countTextBox8_Leave);
+            // 
+            // countTextBox9
+            // 
+            this.countTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox9.Location = new System.Drawing.Point(526, 274);
+            this.countTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox9.Name = "countTextBox9";
+            this.countTextBox9.ReadOnly = true;
+            this.countTextBox9.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox9.TabIndex = 0;
+            this.countTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox9.TextChanged += new System.EventHandler(this.countTextBox9_TextChanged);
+            this.countTextBox9.Leave += new System.EventHandler(this.countTextBox9_Leave);
+            // 
+            // countTextBox10
+            // 
+            this.countTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox10.Location = new System.Drawing.Point(526, 301);
+            this.countTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox10.Name = "countTextBox10";
+            this.countTextBox10.ReadOnly = true;
+            this.countTextBox10.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox10.TabIndex = 0;
+            this.countTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox10.TextChanged += new System.EventHandler(this.countTextBox10_TextChanged);
+            this.countTextBox10.Leave += new System.EventHandler(this.countTextBox10_Leave);
+            // 
+            // countTextBox11
+            // 
+            this.countTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox11.Location = new System.Drawing.Point(526, 328);
+            this.countTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox11.Name = "countTextBox11";
+            this.countTextBox11.ReadOnly = true;
+            this.countTextBox11.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox11.TabIndex = 0;
+            this.countTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox11.TextChanged += new System.EventHandler(this.countTextBox11_TextChanged);
+            this.countTextBox11.Leave += new System.EventHandler(this.countTextBox11_Leave);
+            // 
+            // countTextBox12
+            // 
+            this.countTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox12.Location = new System.Drawing.Point(526, 355);
+            this.countTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox12.Name = "countTextBox12";
+            this.countTextBox12.ReadOnly = true;
+            this.countTextBox12.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox12.TabIndex = 0;
+            this.countTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox12.TextChanged += new System.EventHandler(this.countTextBox12_TextChanged);
+            this.countTextBox12.Leave += new System.EventHandler(this.countTextBox12_Leave);
+            // 
+            // totalCount
+            // 
+            this.totalCount.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalCount.Location = new System.Drawing.Point(526, 382);
+            this.totalCount.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalCount.Name = "totalCount";
+            this.totalCount.ReadOnly = true;
+            this.totalCount.Size = new System.Drawing.Size(70, 31);
+            this.totalCount.TabIndex = 38;
+            this.totalCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label31
+            // 
+            this.label31.Location = new System.Drawing.Point(389, 380);
+            this.label31.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(133, 36);
+            this.label31.TabIndex = 38;
+            this.label31.Text = "総数";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totalWeight
+            // 
+            this.totalWeight.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalWeight.Location = new System.Drawing.Point(315, 382);
+            this.totalWeight.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalWeight.Name = "totalWeight";
+            this.totalWeight.ReadOnly = true;
+            this.totalWeight.Size = new System.Drawing.Size(70, 31);
+            this.totalWeight.TabIndex = 38;
+            this.totalWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label32
+            // 
+            this.label32.Location = new System.Drawing.Point(187, 380);
+            this.label32.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(124, 35);
+            this.label32.TabIndex = 38;
+            this.label32.Text = "総重量";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // unitPriceTextBox12
+            // 
+            this.unitPriceTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox12.Location = new System.Drawing.Point(389, 355);
+            this.unitPriceTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox12.Name = "unitPriceTextBox12";
+            this.unitPriceTextBox12.ReadOnly = true;
+            this.unitPriceTextBox12.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox12.TabIndex = 0;
+            this.unitPriceTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox12.TextChanged += new System.EventHandler(this.unitPriceTextBox12_TextChanged);
+            this.unitPriceTextBox12.Enter += new System.EventHandler(this.unitPriceTextBox12_Enter);
+            this.unitPriceTextBox12.Leave += new System.EventHandler(this.unitPriceTextBox12_Leave);
+            // 
+            // unitPriceTextBox11
+            // 
+            this.unitPriceTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox11.Location = new System.Drawing.Point(389, 328);
+            this.unitPriceTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox11.Name = "unitPriceTextBox11";
+            this.unitPriceTextBox11.ReadOnly = true;
+            this.unitPriceTextBox11.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox11.TabIndex = 0;
+            this.unitPriceTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox11.TextChanged += new System.EventHandler(this.unitPriceTextBox11_TextChanged);
+            this.unitPriceTextBox11.Enter += new System.EventHandler(this.unitPriceTextBox11_TextChanged);
+            this.unitPriceTextBox11.Leave += new System.EventHandler(this.unitPriceTextBox11_Leave);
+            // 
+            // unitPriceTextBox10
+            // 
+            this.unitPriceTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox10.Location = new System.Drawing.Point(389, 301);
+            this.unitPriceTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox10.Name = "unitPriceTextBox10";
+            this.unitPriceTextBox10.ReadOnly = true;
+            this.unitPriceTextBox10.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox10.TabIndex = 0;
+            this.unitPriceTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox10.TextChanged += new System.EventHandler(this.unitPriceTextBox10_TextChanged);
+            this.unitPriceTextBox10.Enter += new System.EventHandler(this.unitPriceTextBox10_Enter);
+            this.unitPriceTextBox10.Leave += new System.EventHandler(this.unitPriceTextBox10_Leave);
+            // 
+            // unitPriceTextBox9
+            // 
+            this.unitPriceTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox9.Location = new System.Drawing.Point(389, 274);
+            this.unitPriceTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox9.Name = "unitPriceTextBox9";
+            this.unitPriceTextBox9.ReadOnly = true;
+            this.unitPriceTextBox9.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox9.TabIndex = 0;
+            this.unitPriceTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox9.TextChanged += new System.EventHandler(this.unitPriceTextBox9_TextChanged);
+            this.unitPriceTextBox9.Enter += new System.EventHandler(this.unitPriceTextBox9_Enter);
+            this.unitPriceTextBox9.Leave += new System.EventHandler(this.unitPriceTextBox9_Leave);
+            // 
+            // label34
+            // 
+            this.label34.Location = new System.Drawing.Point(388, 2);
+            this.label34.Margin = new System.Windows.Forms.Padding(0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(135, 22);
+            this.label34.TabIndex = 36;
+            this.label34.Text = "単価";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // unitPriceTextBox0
+            // 
+            this.unitPriceTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox0.Location = new System.Drawing.Point(389, 31);
+            this.unitPriceTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox0.Name = "unitPriceTextBox0";
+            this.unitPriceTextBox0.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox0.TabIndex = 36;
+            this.unitPriceTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox0.TextChanged += new System.EventHandler(this.unitPriceTextBox0_TextChanged);
+            this.unitPriceTextBox0.Enter += new System.EventHandler(this.unitPriceTextBox0_Enter);
+            this.unitPriceTextBox0.Leave += new System.EventHandler(this.unitPriceTextBox0_Leave);
+            // 
+            // unitPriceTextBox1
+            // 
+            this.unitPriceTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox1.Location = new System.Drawing.Point(389, 58);
+            this.unitPriceTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox1.Name = "unitPriceTextBox1";
+            this.unitPriceTextBox1.ReadOnly = true;
+            this.unitPriceTextBox1.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox1.TabIndex = 38;
+            this.unitPriceTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox1.TextChanged += new System.EventHandler(this.unitPriceTextBox1_TextChanged);
+            this.unitPriceTextBox1.Enter += new System.EventHandler(this.unitPriceTextBox1_Enter);
+            this.unitPriceTextBox1.Leave += new System.EventHandler(this.unitPriceTextBox1_Leave);
+            // 
+            // unitPriceTextBox2
+            // 
+            this.unitPriceTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox2.Location = new System.Drawing.Point(389, 85);
+            this.unitPriceTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox2.Name = "unitPriceTextBox2";
+            this.unitPriceTextBox2.ReadOnly = true;
+            this.unitPriceTextBox2.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox2.TabIndex = 39;
+            this.unitPriceTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox2.TextChanged += new System.EventHandler(this.unitPriceTextBox2_TextChanged);
+            this.unitPriceTextBox2.Enter += new System.EventHandler(this.unitPriceTextBox2_Enter);
+            this.unitPriceTextBox2.Leave += new System.EventHandler(this.unitPriceTextBox2_Leave);
+            // 
+            // unitPriceTextBox3
+            // 
+            this.unitPriceTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox3.Location = new System.Drawing.Point(389, 112);
+            this.unitPriceTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox3.Name = "unitPriceTextBox3";
+            this.unitPriceTextBox3.ReadOnly = true;
+            this.unitPriceTextBox3.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox3.TabIndex = 39;
+            this.unitPriceTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox3.TextChanged += new System.EventHandler(this.unitPriceTextBox3_TextChanged);
+            this.unitPriceTextBox3.Enter += new System.EventHandler(this.unitPriceTextBox3_Enter);
+            this.unitPriceTextBox3.Leave += new System.EventHandler(this.unitPriceTextBox3_Leave);
+            // 
+            // unitPriceTextBox4
+            // 
+            this.unitPriceTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox4.Location = new System.Drawing.Point(389, 139);
+            this.unitPriceTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox4.Name = "unitPriceTextBox4";
+            this.unitPriceTextBox4.ReadOnly = true;
+            this.unitPriceTextBox4.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox4.TabIndex = 0;
+            this.unitPriceTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox4.TextChanged += new System.EventHandler(this.unitPriceTextBox4_TextChanged);
+            this.unitPriceTextBox4.Enter += new System.EventHandler(this.unitPriceTextBox4_Enter);
+            this.unitPriceTextBox4.Leave += new System.EventHandler(this.unitPriceTextBox4_Leave);
+            // 
+            // unitPriceTextBox5
+            // 
+            this.unitPriceTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox5.Location = new System.Drawing.Point(389, 166);
+            this.unitPriceTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox5.Name = "unitPriceTextBox5";
+            this.unitPriceTextBox5.ReadOnly = true;
+            this.unitPriceTextBox5.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox5.TabIndex = 39;
+            this.unitPriceTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox5.TextChanged += new System.EventHandler(this.unitPriceTextBox5_TextChanged);
+            this.unitPriceTextBox5.Enter += new System.EventHandler(this.unitPriceTextBox5_Enter);
+            this.unitPriceTextBox5.Leave += new System.EventHandler(this.unitPriceTextBox5_Leave);
+            // 
+            // unitPriceTextBox6
+            // 
+            this.unitPriceTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox6.Location = new System.Drawing.Point(389, 193);
+            this.unitPriceTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox6.Name = "unitPriceTextBox6";
+            this.unitPriceTextBox6.ReadOnly = true;
+            this.unitPriceTextBox6.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox6.TabIndex = 0;
+            this.unitPriceTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox6.TextChanged += new System.EventHandler(this.unitPriceTextBox6_TextChanged);
+            this.unitPriceTextBox6.Enter += new System.EventHandler(this.unitPriceTextBox6_Enter);
+            this.unitPriceTextBox6.Leave += new System.EventHandler(this.unitPriceTextBox6_Leave);
+            // 
+            // unitPriceTextBox7
+            // 
+            this.unitPriceTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox7.Location = new System.Drawing.Point(389, 220);
+            this.unitPriceTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox7.Name = "unitPriceTextBox7";
+            this.unitPriceTextBox7.ReadOnly = true;
+            this.unitPriceTextBox7.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox7.TabIndex = 0;
+            this.unitPriceTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox7.TextChanged += new System.EventHandler(this.unitPriceTextBox7_TextChanged);
+            this.unitPriceTextBox7.Enter += new System.EventHandler(this.unitPriceTextBox7_TextChanged);
+            this.unitPriceTextBox7.Leave += new System.EventHandler(this.unitPriceTextBox7_Leave);
+            // 
+            // unitPriceTextBox8
+            // 
+            this.unitPriceTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox8.Location = new System.Drawing.Point(389, 247);
+            this.unitPriceTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox8.Name = "unitPriceTextBox8";
+            this.unitPriceTextBox8.ReadOnly = true;
+            this.unitPriceTextBox8.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox8.TabIndex = 0;
+            this.unitPriceTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox8.TextChanged += new System.EventHandler(this.unitPriceTextBox8_TextChanged);
+            this.unitPriceTextBox8.Enter += new System.EventHandler(this.unitPriceTextBox8_Enter);
+            this.unitPriceTextBox8.Leave += new System.EventHandler(this.unitPriceTextBox8_Leave);
+            // 
+            // weightTextBox12
+            // 
+            this.weightTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox12.Location = new System.Drawing.Point(315, 355);
+            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox12.Name = "weightTextBox12";
+            this.weightTextBox12.ReadOnly = true;
+            this.weightTextBox12.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox12.TabIndex = 0;
+            this.weightTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox12.TextChanged += new System.EventHandler(this.weightTextBox12_TextChanged);
+            this.weightTextBox12.Leave += new System.EventHandler(this.weightTextBox12_Leave);
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(314, 2);
+            this.label23.Margin = new System.Windows.Forms.Padding(0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(72, 22);
+            this.label23.TabIndex = 36;
+            this.label23.Text = "重量";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // weightTextBox0
+            // 
+            this.weightTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox0.Location = new System.Drawing.Point(315, 31);
+            this.weightTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox0.Name = "weightTextBox0";
+            this.weightTextBox0.ReadOnly = true;
+            this.weightTextBox0.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox0.TabIndex = 36;
+            this.weightTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox0.TextChanged += new System.EventHandler(this.weightTextBox0_TextChanged);
+            this.weightTextBox0.Leave += new System.EventHandler(this.weightTextBox0_Leave);
+            // 
+            // weightTextBox1
+            // 
+            this.weightTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox1.Location = new System.Drawing.Point(315, 58);
+            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox1.Name = "weightTextBox1";
+            this.weightTextBox1.ReadOnly = true;
+            this.weightTextBox1.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox1.TabIndex = 38;
+            this.weightTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox1.TextChanged += new System.EventHandler(this.weightTextBox1_TextChanged);
+            this.weightTextBox1.Leave += new System.EventHandler(this.weightTextBox1_Leave);
+            // 
+            // weightTextBox2
+            // 
+            this.weightTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox2.Location = new System.Drawing.Point(315, 85);
+            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox2.Name = "weightTextBox2";
+            this.weightTextBox2.ReadOnly = true;
+            this.weightTextBox2.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox2.TabIndex = 39;
+            this.weightTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox2.TextChanged += new System.EventHandler(this.weightTextBox2_TextChanged);
+            this.weightTextBox2.Leave += new System.EventHandler(this.weightTextBox2_Leave);
+            // 
+            // weightTextBox3
+            // 
+            this.weightTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox3.Location = new System.Drawing.Point(315, 112);
+            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox3.Name = "weightTextBox3";
+            this.weightTextBox3.ReadOnly = true;
+            this.weightTextBox3.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox3.TabIndex = 39;
+            this.weightTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox3.TextChanged += new System.EventHandler(this.weightTextBox3_TextChanged);
+            this.weightTextBox3.Leave += new System.EventHandler(this.weightTextBox3_Leave);
+            // 
+            // weightTextBox4
+            // 
+            this.weightTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox4.Location = new System.Drawing.Point(315, 139);
+            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox4.Name = "weightTextBox4";
+            this.weightTextBox4.ReadOnly = true;
+            this.weightTextBox4.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox4.TabIndex = 39;
+            this.weightTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox4.TextChanged += new System.EventHandler(this.weightTextBox4_TextChanged);
+            this.weightTextBox4.Leave += new System.EventHandler(this.weightTextBox4_Leave);
+            // 
+            // weightTextBox5
+            // 
+            this.weightTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox5.Location = new System.Drawing.Point(315, 166);
+            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox5.Name = "weightTextBox5";
+            this.weightTextBox5.ReadOnly = true;
+            this.weightTextBox5.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox5.TabIndex = 0;
+            this.weightTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox5.TextChanged += new System.EventHandler(this.weightTextBox5_TextChanged);
+            this.weightTextBox5.Leave += new System.EventHandler(this.weightTextBox5_Leave);
+            // 
+            // weightTextBox6
+            // 
+            this.weightTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox6.Location = new System.Drawing.Point(315, 193);
+            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox6.Name = "weightTextBox6";
+            this.weightTextBox6.ReadOnly = true;
+            this.weightTextBox6.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox6.TabIndex = 0;
+            this.weightTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox6.TextChanged += new System.EventHandler(this.weightTextBox6_TextChanged);
+            this.weightTextBox6.Leave += new System.EventHandler(this.weightTextBox6_Leave);
+            // 
+            // weightTextBox7
+            // 
+            this.weightTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox7.Location = new System.Drawing.Point(315, 220);
+            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox7.Name = "weightTextBox7";
+            this.weightTextBox7.ReadOnly = true;
+            this.weightTextBox7.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox7.TabIndex = 0;
+            this.weightTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox7.TextChanged += new System.EventHandler(this.weightTextBox7_TextChanged);
+            this.weightTextBox7.Leave += new System.EventHandler(this.weightTextBox7_Leave);
+            // 
+            // weightTextBox8
+            // 
+            this.weightTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox8.Location = new System.Drawing.Point(315, 247);
+            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox8.Name = "weightTextBox8";
+            this.weightTextBox8.ReadOnly = true;
+            this.weightTextBox8.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox8.TabIndex = 0;
+            this.weightTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox8.TextChanged += new System.EventHandler(this.weightTextBox8_TextChanged);
+            this.weightTextBox8.Leave += new System.EventHandler(this.weightTextBox8_Leave);
+            // 
+            // weightTextBox9
+            // 
+            this.weightTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox9.Location = new System.Drawing.Point(315, 274);
+            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox9.Name = "weightTextBox9";
+            this.weightTextBox9.ReadOnly = true;
+            this.weightTextBox9.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox9.TabIndex = 0;
+            this.weightTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox9.TextChanged += new System.EventHandler(this.weightTextBox9_TextChanged);
+            this.weightTextBox9.Leave += new System.EventHandler(this.weightTextBox9_Leave);
+            // 
+            // weightTextBox10
+            // 
+            this.weightTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox10.Location = new System.Drawing.Point(315, 301);
+            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox10.Name = "weightTextBox10";
+            this.weightTextBox10.ReadOnly = true;
+            this.weightTextBox10.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox10.TabIndex = 0;
+            this.weightTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox10.TextChanged += new System.EventHandler(this.weightTextBox10_TextChanged);
+            this.weightTextBox10.Leave += new System.EventHandler(this.weightTextBox10_Leave);
+            // 
+            // weightTextBox11
+            // 
+            this.weightTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox11.Location = new System.Drawing.Point(315, 328);
+            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox11.Name = "weightTextBox11";
+            this.weightTextBox11.ReadOnly = true;
+            this.weightTextBox11.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox11.TabIndex = 0;
+            this.weightTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox11.TextChanged += new System.EventHandler(this.weightTextBox11_TextChanged);
+            this.weightTextBox11.Leave += new System.EventHandler(this.weightTextBox11_Leave);
+            // 
+            // label22
+            // 
+            this.label22.Location = new System.Drawing.Point(186, 2);
+            this.label22.Margin = new System.Windows.Forms.Padding(0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(125, 22);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "品物詳細";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // itemDetail0
+            // 
+            this.itemDetail0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail0.Location = new System.Drawing.Point(187, 31);
+            this.itemDetail0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail0.Name = "itemDetail0";
+            this.itemDetail0.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail0.TabIndex = 36;
+            this.itemDetail0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail1
+            // 
+            this.itemDetail1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail1.Location = new System.Drawing.Point(187, 58);
+            this.itemDetail1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail1.Name = "itemDetail1";
+            this.itemDetail1.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail1.TabIndex = 38;
+            this.itemDetail1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail2
+            // 
+            this.itemDetail2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail2.Location = new System.Drawing.Point(187, 85);
+            this.itemDetail2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail2.Name = "itemDetail2";
+            this.itemDetail2.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail2.TabIndex = 39;
+            this.itemDetail2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail3
+            // 
+            this.itemDetail3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail3.Location = new System.Drawing.Point(187, 112);
+            this.itemDetail3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail3.Name = "itemDetail3";
+            this.itemDetail3.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail3.TabIndex = 39;
+            this.itemDetail3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail4
+            // 
+            this.itemDetail4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail4.Location = new System.Drawing.Point(187, 139);
+            this.itemDetail4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail4.Name = "itemDetail4";
+            this.itemDetail4.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail4.TabIndex = 39;
+            this.itemDetail4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail5
+            // 
+            this.itemDetail5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail5.Location = new System.Drawing.Point(187, 166);
+            this.itemDetail5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail5.Name = "itemDetail5";
+            this.itemDetail5.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail5.TabIndex = 0;
+            this.itemDetail5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail6
+            // 
+            this.itemDetail6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail6.Location = new System.Drawing.Point(187, 193);
+            this.itemDetail6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail6.Name = "itemDetail6";
+            this.itemDetail6.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail6.TabIndex = 0;
+            this.itemDetail6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail7
+            // 
+            this.itemDetail7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail7.Location = new System.Drawing.Point(187, 220);
+            this.itemDetail7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail7.Name = "itemDetail7";
+            this.itemDetail7.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail7.TabIndex = 0;
+            this.itemDetail7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail8
+            // 
+            this.itemDetail8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail8.Location = new System.Drawing.Point(187, 247);
+            this.itemDetail8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail8.Name = "itemDetail8";
+            this.itemDetail8.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail8.TabIndex = 0;
+            this.itemDetail8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail9
+            // 
+            this.itemDetail9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail9.Location = new System.Drawing.Point(187, 274);
+            this.itemDetail9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail9.Name = "itemDetail9";
+            this.itemDetail9.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail9.TabIndex = 0;
+            this.itemDetail9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail10
+            // 
+            this.itemDetail10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail10.Location = new System.Drawing.Point(187, 301);
+            this.itemDetail10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail10.Name = "itemDetail10";
+            this.itemDetail10.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail10.TabIndex = 0;
+            this.itemDetail10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail11
+            // 
+            this.itemDetail11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail11.Location = new System.Drawing.Point(187, 328);
+            this.itemDetail11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail11.Name = "itemDetail11";
+            this.itemDetail11.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail11.TabIndex = 0;
+            this.itemDetail11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail12
+            // 
+            this.itemDetail12.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail12.Location = new System.Drawing.Point(187, 355);
+            this.itemDetail12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail12.Name = "itemDetail12";
+            this.itemDetail12.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail12.TabIndex = 0;
+            this.itemDetail12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // countTextBox5
+            // 
+            this.countTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox5.Location = new System.Drawing.Point(526, 166);
+            this.countTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox5.Name = "countTextBox5";
+            this.countTextBox5.ReadOnly = true;
+            this.countTextBox5.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox5.TabIndex = 39;
+            this.countTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox5.TextChanged += new System.EventHandler(this.countTextBox5_TextChanged);
+            this.countTextBox5.Leave += new System.EventHandler(this.countTextBox5_Leave);
+            // 
+            // countTextBox6
+            // 
+            this.countTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox6.Location = new System.Drawing.Point(526, 193);
+            this.countTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox6.Name = "countTextBox6";
+            this.countTextBox6.ReadOnly = true;
+            this.countTextBox6.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox6.TabIndex = 0;
+            this.countTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox6.TextChanged += new System.EventHandler(this.countTextBox5_TextChanged);
+            this.countTextBox6.Leave += new System.EventHandler(this.countTextBox6_Leave);
             // 
             // returnButton
             // 
@@ -2335,16 +2543,6 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "受け渡し方法";
             // 
-            // documentNumberTextBox
-            // 
-            this.documentNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.documentNumberTextBox.Location = new System.Drawing.Point(1059, 7);
-            this.documentNumberTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.documentNumberTextBox.Name = "documentNumberTextBox";
-            this.documentNumberTextBox.ReadOnly = true;
-            this.documentNumberTextBox.Size = new System.Drawing.Size(105, 31);
-            this.documentNumberTextBox.TabIndex = 5;
-            // 
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
@@ -2389,6 +2587,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "納品書";
             // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label27.Location = new System.Drawing.Point(951, 10);
+            this.label27.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(106, 24);
+            this.label27.TabIndex = 84;
+            this.label27.Text = "管理番号";
+            // 
             // comboBox10
             // 
             this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2403,6 +2612,16 @@
             this.comboBox10.Name = "comboBox10";
             this.comboBox10.Size = new System.Drawing.Size(97, 21);
             this.comboBox10.TabIndex = 83;
+            // 
+            // documentNumberTextBox
+            // 
+            this.documentNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.documentNumberTextBox.Location = new System.Drawing.Point(1059, 7);
+            this.documentNumberTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.documentNumberTextBox.Name = "documentNumberTextBox";
+            this.documentNumberTextBox.ReadOnly = true;
+            this.documentNumberTextBox.Size = new System.Drawing.Size(105, 31);
+            this.documentNumberTextBox.TabIndex = 5;
             // 
             // dateTimePicker3
             // 
@@ -3126,292 +3345,6 @@
             this.tableLayoutPanel13.Size = new System.Drawing.Size(924, 416);
             this.tableLayoutPanel13.TabIndex = 42;
             // 
-            // remarks012
-            // 
-            this.remarks012.Location = new System.Drawing.Point(737, 356);
-            this.remarks012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks012.Name = "remarks012";
-            this.remarks012.Size = new System.Drawing.Size(184, 20);
-            this.remarks012.TabIndex = 0;
-            // 
-            // remarks011
-            // 
-            this.remarks011.Location = new System.Drawing.Point(737, 329);
-            this.remarks011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks011.Name = "remarks011";
-            this.remarks011.Size = new System.Drawing.Size(184, 20);
-            this.remarks011.TabIndex = 0;
-            // 
-            // totalCount2
-            // 
-            this.totalCount2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.totalCount2.Location = new System.Drawing.Point(526, 383);
-            this.totalCount2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.totalCount2.Name = "totalCount2";
-            this.totalCount2.ReadOnly = true;
-            this.totalCount2.Size = new System.Drawing.Size(70, 31);
-            this.totalCount2.TabIndex = 38;
-            this.totalCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // totalWeight2
-            // 
-            this.totalWeight2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.totalWeight2.Location = new System.Drawing.Point(315, 383);
-            this.totalWeight2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.totalWeight2.Name = "totalWeight2";
-            this.totalWeight2.ReadOnly = true;
-            this.totalWeight2.Size = new System.Drawing.Size(88, 31);
-            this.totalWeight2.TabIndex = 38;
-            this.totalWeight2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label37
-            // 
-            this.label37.Location = new System.Drawing.Point(187, 381);
-            this.label37.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(124, 33);
-            this.label37.TabIndex = 39;
-            this.label37.Text = "総重量";
-            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // remarks010
-            // 
-            this.remarks010.Location = new System.Drawing.Point(737, 302);
-            this.remarks010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks010.Name = "remarks010";
-            this.remarks010.Size = new System.Drawing.Size(184, 20);
-            this.remarks010.TabIndex = 0;
-            // 
-            // label71
-            // 
-            this.label71.Location = new System.Drawing.Point(737, 2);
-            this.label71.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(184, 25);
-            this.label71.TabIndex = 36;
-            this.label71.Text = "備考";
-            this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // remarks00
-            // 
-            this.remarks00.Location = new System.Drawing.Point(737, 32);
-            this.remarks00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks00.Name = "remarks00";
-            this.remarks00.Size = new System.Drawing.Size(184, 20);
-            this.remarks00.TabIndex = 36;
-            // 
-            // remarks01
-            // 
-            this.remarks01.Location = new System.Drawing.Point(737, 59);
-            this.remarks01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks01.Name = "remarks01";
-            this.remarks01.Size = new System.Drawing.Size(184, 20);
-            this.remarks01.TabIndex = 38;
-            // 
-            // remarks02
-            // 
-            this.remarks02.Location = new System.Drawing.Point(737, 86);
-            this.remarks02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks02.Name = "remarks02";
-            this.remarks02.Size = new System.Drawing.Size(184, 20);
-            this.remarks02.TabIndex = 39;
-            // 
-            // remarks03
-            // 
-            this.remarks03.Location = new System.Drawing.Point(737, 113);
-            this.remarks03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks03.Name = "remarks03";
-            this.remarks03.Size = new System.Drawing.Size(184, 20);
-            this.remarks03.TabIndex = 39;
-            // 
-            // remarks04
-            // 
-            this.remarks04.Location = new System.Drawing.Point(737, 140);
-            this.remarks04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks04.Name = "remarks04";
-            this.remarks04.Size = new System.Drawing.Size(184, 20);
-            this.remarks04.TabIndex = 0;
-            // 
-            // remarks05
-            // 
-            this.remarks05.Location = new System.Drawing.Point(737, 166);
-            this.remarks05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks05.Name = "remarks05";
-            this.remarks05.Size = new System.Drawing.Size(184, 20);
-            this.remarks05.TabIndex = 0;
-            // 
-            // remarks06
-            // 
-            this.remarks06.Location = new System.Drawing.Point(737, 194);
-            this.remarks06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks06.Name = "remarks06";
-            this.remarks06.Size = new System.Drawing.Size(184, 20);
-            this.remarks06.TabIndex = 0;
-            // 
-            // remarks07
-            // 
-            this.remarks07.Location = new System.Drawing.Point(737, 221);
-            this.remarks07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks07.Name = "remarks07";
-            this.remarks07.Size = new System.Drawing.Size(184, 20);
-            this.remarks07.TabIndex = 0;
-            // 
-            // remarks08
-            // 
-            this.remarks08.Location = new System.Drawing.Point(737, 248);
-            this.remarks08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks08.Name = "remarks08";
-            this.remarks08.Size = new System.Drawing.Size(184, 20);
-            this.remarks08.TabIndex = 0;
-            // 
-            // remarks09
-            // 
-            this.remarks09.Location = new System.Drawing.Point(737, 275);
-            this.remarks09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks09.Name = "remarks09";
-            this.remarks09.Size = new System.Drawing.Size(184, 20);
-            this.remarks09.TabIndex = 0;
-            // 
-            // label70
-            // 
-            this.label70.Location = new System.Drawing.Point(600, 2);
-            this.label70.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(133, 22);
-            this.label70.TabIndex = 36;
-            this.label70.Text = "金額";
-            this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // moneyTextBox00
-            // 
-            this.moneyTextBox00.Location = new System.Drawing.Point(600, 32);
-            this.moneyTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox00.Name = "moneyTextBox00";
-            this.moneyTextBox00.ReadOnly = true;
-            this.moneyTextBox00.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox00.TabIndex = 36;
-            this.moneyTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox01
-            // 
-            this.moneyTextBox01.Location = new System.Drawing.Point(600, 59);
-            this.moneyTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox01.Name = "moneyTextBox01";
-            this.moneyTextBox01.ReadOnly = true;
-            this.moneyTextBox01.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox01.TabIndex = 38;
-            this.moneyTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox02
-            // 
-            this.moneyTextBox02.Location = new System.Drawing.Point(600, 86);
-            this.moneyTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox02.Name = "moneyTextBox02";
-            this.moneyTextBox02.ReadOnly = true;
-            this.moneyTextBox02.Size = new System.Drawing.Size(132, 20);
-            this.moneyTextBox02.TabIndex = 39;
-            this.moneyTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox03
-            // 
-            this.moneyTextBox03.Location = new System.Drawing.Point(600, 113);
-            this.moneyTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox03.Name = "moneyTextBox03";
-            this.moneyTextBox03.ReadOnly = true;
-            this.moneyTextBox03.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox03.TabIndex = 39;
-            this.moneyTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox04
-            // 
-            this.moneyTextBox04.Location = new System.Drawing.Point(600, 140);
-            this.moneyTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox04.Name = "moneyTextBox04";
-            this.moneyTextBox04.ReadOnly = true;
-            this.moneyTextBox04.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox04.TabIndex = 0;
-            this.moneyTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox05
-            // 
-            this.moneyTextBox05.Location = new System.Drawing.Point(600, 166);
-            this.moneyTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox05.Name = "moneyTextBox05";
-            this.moneyTextBox05.ReadOnly = true;
-            this.moneyTextBox05.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox05.TabIndex = 0;
-            this.moneyTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox06
-            // 
-            this.moneyTextBox06.Location = new System.Drawing.Point(600, 194);
-            this.moneyTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox06.Name = "moneyTextBox06";
-            this.moneyTextBox06.ReadOnly = true;
-            this.moneyTextBox06.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox06.TabIndex = 0;
-            this.moneyTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox07
-            // 
-            this.moneyTextBox07.Location = new System.Drawing.Point(600, 221);
-            this.moneyTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox07.Name = "moneyTextBox07";
-            this.moneyTextBox07.ReadOnly = true;
-            this.moneyTextBox07.Size = new System.Drawing.Size(133, 20);
-            this.moneyTextBox07.TabIndex = 0;
-            this.moneyTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox08
-            // 
-            this.moneyTextBox08.Location = new System.Drawing.Point(600, 248);
-            this.moneyTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox08.Name = "moneyTextBox08";
-            this.moneyTextBox08.ReadOnly = true;
-            this.moneyTextBox08.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox08.TabIndex = 0;
-            this.moneyTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox09
-            // 
-            this.moneyTextBox09.Location = new System.Drawing.Point(600, 275);
-            this.moneyTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox09.Name = "moneyTextBox09";
-            this.moneyTextBox09.ReadOnly = true;
-            this.moneyTextBox09.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox09.TabIndex = 0;
-            this.moneyTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox010
-            // 
-            this.moneyTextBox010.Location = new System.Drawing.Point(600, 302);
-            this.moneyTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox010.Name = "moneyTextBox010";
-            this.moneyTextBox010.ReadOnly = true;
-            this.moneyTextBox010.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox010.TabIndex = 0;
-            this.moneyTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox011
-            // 
-            this.moneyTextBox011.Location = new System.Drawing.Point(600, 329);
-            this.moneyTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox011.Name = "moneyTextBox011";
-            this.moneyTextBox011.ReadOnly = true;
-            this.moneyTextBox011.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox011.TabIndex = 0;
-            this.moneyTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // moneyTextBox012
-            // 
-            this.moneyTextBox012.Location = new System.Drawing.Point(600, 356);
-            this.moneyTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox012.Name = "moneyTextBox012";
-            this.moneyTextBox012.ReadOnly = true;
-            this.moneyTextBox012.Size = new System.Drawing.Size(131, 20);
-            this.moneyTextBox012.TabIndex = 0;
-            this.moneyTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // label39
             // 
             this.label39.Location = new System.Drawing.Point(3, 2);
@@ -3718,161 +3651,467 @@
             this.label67.Text = "品物詳細";
             this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // weightTextBox00
+            // label71
             // 
-            this.weightTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox00.Location = new System.Drawing.Point(315, 32);
-            this.weightTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox00.Name = "weightTextBox00";
-            this.weightTextBox00.ReadOnly = true;
-            this.weightTextBox00.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox00.TabIndex = 36;
-            this.weightTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox00.TextChanged += new System.EventHandler(this.weightTextBox00_TextChanged);
+            this.label71.Location = new System.Drawing.Point(737, 2);
+            this.label71.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(184, 25);
+            this.label71.TabIndex = 36;
+            this.label71.Text = "備考";
+            this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // weightTextBox01
+            // remarks00
             // 
-            this.weightTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox01.Location = new System.Drawing.Point(315, 59);
-            this.weightTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox01.Name = "weightTextBox01";
-            this.weightTextBox01.ReadOnly = true;
-            this.weightTextBox01.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox01.TabIndex = 38;
-            this.weightTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox01.TextChanged += new System.EventHandler(this.weightTextBox01_TextChanged);
+            this.remarks00.Location = new System.Drawing.Point(737, 32);
+            this.remarks00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks00.Name = "remarks00";
+            this.remarks00.Size = new System.Drawing.Size(184, 20);
+            this.remarks00.TabIndex = 36;
             // 
-            // weightTextBox02
+            // remarks01
             // 
-            this.weightTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox02.Location = new System.Drawing.Point(315, 86);
-            this.weightTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox02.Name = "weightTextBox02";
-            this.weightTextBox02.ReadOnly = true;
-            this.weightTextBox02.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox02.TabIndex = 39;
-            this.weightTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox02.TextChanged += new System.EventHandler(this.weightTextBox02_TextChanged);
+            this.remarks01.Location = new System.Drawing.Point(737, 59);
+            this.remarks01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks01.Name = "remarks01";
+            this.remarks01.Size = new System.Drawing.Size(184, 20);
+            this.remarks01.TabIndex = 38;
             // 
-            // weightTextBox03
+            // remarks02
             // 
-            this.weightTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox03.Location = new System.Drawing.Point(315, 113);
-            this.weightTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox03.Name = "weightTextBox03";
-            this.weightTextBox03.ReadOnly = true;
-            this.weightTextBox03.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox03.TabIndex = 39;
-            this.weightTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox03.TextChanged += new System.EventHandler(this.weightTextBox03_TextChanged);
+            this.remarks02.Location = new System.Drawing.Point(737, 86);
+            this.remarks02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks02.Name = "remarks02";
+            this.remarks02.Size = new System.Drawing.Size(184, 20);
+            this.remarks02.TabIndex = 39;
             // 
-            // weightTextBox04
+            // remarks03
             // 
-            this.weightTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox04.Location = new System.Drawing.Point(315, 140);
-            this.weightTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox04.Name = "weightTextBox04";
-            this.weightTextBox04.ReadOnly = true;
-            this.weightTextBox04.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox04.TabIndex = 39;
-            this.weightTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox04.TextChanged += new System.EventHandler(this.weightTextBox04_TextChanged);
+            this.remarks03.Location = new System.Drawing.Point(737, 113);
+            this.remarks03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks03.Name = "remarks03";
+            this.remarks03.Size = new System.Drawing.Size(184, 20);
+            this.remarks03.TabIndex = 39;
             // 
-            // weightTextBox05
+            // remarks04
             // 
-            this.weightTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox05.Location = new System.Drawing.Point(315, 166);
-            this.weightTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox05.Name = "weightTextBox05";
-            this.weightTextBox05.ReadOnly = true;
-            this.weightTextBox05.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox05.TabIndex = 0;
-            this.weightTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox05.TextChanged += new System.EventHandler(this.weightTextBox05_TextChanged);
+            this.remarks04.Location = new System.Drawing.Point(737, 140);
+            this.remarks04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks04.Name = "remarks04";
+            this.remarks04.Size = new System.Drawing.Size(184, 20);
+            this.remarks04.TabIndex = 0;
             // 
-            // weightTextBox06
+            // remarks05
             // 
-            this.weightTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox06.Location = new System.Drawing.Point(315, 194);
-            this.weightTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox06.Name = "weightTextBox06";
-            this.weightTextBox06.ReadOnly = true;
-            this.weightTextBox06.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox06.TabIndex = 0;
-            this.weightTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox06.TextChanged += new System.EventHandler(this.weightTextBox06_TextChanged);
+            this.remarks05.Location = new System.Drawing.Point(737, 166);
+            this.remarks05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks05.Name = "remarks05";
+            this.remarks05.Size = new System.Drawing.Size(184, 20);
+            this.remarks05.TabIndex = 0;
             // 
-            // weightTextBox07
+            // remarks06
             // 
-            this.weightTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox07.Location = new System.Drawing.Point(315, 221);
-            this.weightTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox07.Name = "weightTextBox07";
-            this.weightTextBox07.ReadOnly = true;
-            this.weightTextBox07.Size = new System.Drawing.Size(88, 20);
-            this.weightTextBox07.TabIndex = 0;
-            this.weightTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox07.TextChanged += new System.EventHandler(this.weightTextBox07_TextChanged);
+            this.remarks06.Location = new System.Drawing.Point(737, 194);
+            this.remarks06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks06.Name = "remarks06";
+            this.remarks06.Size = new System.Drawing.Size(184, 20);
+            this.remarks06.TabIndex = 0;
             // 
-            // weightTextBox08
+            // remarks07
             // 
-            this.weightTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox08.Location = new System.Drawing.Point(315, 248);
-            this.weightTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox08.Name = "weightTextBox08";
-            this.weightTextBox08.ReadOnly = true;
-            this.weightTextBox08.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox08.TabIndex = 0;
-            this.weightTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox08.TextChanged += new System.EventHandler(this.weightTextBox08_TextChanged);
+            this.remarks07.Location = new System.Drawing.Point(737, 221);
+            this.remarks07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks07.Name = "remarks07";
+            this.remarks07.Size = new System.Drawing.Size(184, 20);
+            this.remarks07.TabIndex = 0;
             // 
-            // weightTextBox09
+            // remarks08
             // 
-            this.weightTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox09.Location = new System.Drawing.Point(315, 275);
-            this.weightTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox09.Name = "weightTextBox09";
-            this.weightTextBox09.ReadOnly = true;
-            this.weightTextBox09.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox09.TabIndex = 0;
-            this.weightTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox09.TextChanged += new System.EventHandler(this.weightTextBox09_TextChanged);
+            this.remarks08.Location = new System.Drawing.Point(737, 248);
+            this.remarks08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks08.Name = "remarks08";
+            this.remarks08.Size = new System.Drawing.Size(184, 20);
+            this.remarks08.TabIndex = 0;
             // 
-            // weightTextBox010
+            // remarks09
             // 
-            this.weightTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox010.Location = new System.Drawing.Point(315, 302);
-            this.weightTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox010.Name = "weightTextBox010";
-            this.weightTextBox010.ReadOnly = true;
-            this.weightTextBox010.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox010.TabIndex = 0;
-            this.weightTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox010.TextChanged += new System.EventHandler(this.weightTextBox010_TextChanged);
+            this.remarks09.Location = new System.Drawing.Point(737, 275);
+            this.remarks09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks09.Name = "remarks09";
+            this.remarks09.Size = new System.Drawing.Size(184, 20);
+            this.remarks09.TabIndex = 0;
             // 
-            // weightTextBox011
+            // remarks010
             // 
-            this.weightTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox011.Location = new System.Drawing.Point(315, 329);
-            this.weightTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox011.Name = "weightTextBox011";
-            this.weightTextBox011.ReadOnly = true;
-            this.weightTextBox011.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox011.TabIndex = 0;
-            this.weightTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox011.TextChanged += new System.EventHandler(this.weightTextBox011_TextChanged);
+            this.remarks010.Location = new System.Drawing.Point(737, 302);
+            this.remarks010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks010.Name = "remarks010";
+            this.remarks010.Size = new System.Drawing.Size(184, 20);
+            this.remarks010.TabIndex = 0;
             // 
-            // weightTextBox012
+            // remarks011
             // 
-            this.weightTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox012.Location = new System.Drawing.Point(315, 356);
-            this.weightTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox012.Name = "weightTextBox012";
-            this.weightTextBox012.ReadOnly = true;
-            this.weightTextBox012.Size = new System.Drawing.Size(86, 20);
-            this.weightTextBox012.TabIndex = 0;
-            this.weightTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox012.TextChanged += new System.EventHandler(this.weightTextBox012_TextChanged);
+            this.remarks011.Location = new System.Drawing.Point(737, 329);
+            this.remarks011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks011.Name = "remarks011";
+            this.remarks011.Size = new System.Drawing.Size(184, 20);
+            this.remarks011.TabIndex = 0;
+            // 
+            // remarks012
+            // 
+            this.remarks012.Location = new System.Drawing.Point(737, 356);
+            this.remarks012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks012.Name = "remarks012";
+            this.remarks012.Size = new System.Drawing.Size(184, 20);
+            this.remarks012.TabIndex = 0;
+            // 
+            // label70
+            // 
+            this.label70.Location = new System.Drawing.Point(600, 2);
+            this.label70.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(133, 22);
+            this.label70.TabIndex = 36;
+            this.label70.Text = "金額";
+            this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // moneyTextBox00
+            // 
+            this.moneyTextBox00.Location = new System.Drawing.Point(600, 32);
+            this.moneyTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox00.Name = "moneyTextBox00";
+            this.moneyTextBox00.ReadOnly = true;
+            this.moneyTextBox00.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox00.TabIndex = 36;
+            this.moneyTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox01
+            // 
+            this.moneyTextBox01.Location = new System.Drawing.Point(600, 59);
+            this.moneyTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox01.Name = "moneyTextBox01";
+            this.moneyTextBox01.ReadOnly = true;
+            this.moneyTextBox01.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox01.TabIndex = 38;
+            this.moneyTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox02
+            // 
+            this.moneyTextBox02.Location = new System.Drawing.Point(600, 86);
+            this.moneyTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox02.Name = "moneyTextBox02";
+            this.moneyTextBox02.ReadOnly = true;
+            this.moneyTextBox02.Size = new System.Drawing.Size(132, 20);
+            this.moneyTextBox02.TabIndex = 39;
+            this.moneyTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox03
+            // 
+            this.moneyTextBox03.Location = new System.Drawing.Point(600, 113);
+            this.moneyTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox03.Name = "moneyTextBox03";
+            this.moneyTextBox03.ReadOnly = true;
+            this.moneyTextBox03.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox03.TabIndex = 39;
+            this.moneyTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox04
+            // 
+            this.moneyTextBox04.Location = new System.Drawing.Point(600, 140);
+            this.moneyTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox04.Name = "moneyTextBox04";
+            this.moneyTextBox04.ReadOnly = true;
+            this.moneyTextBox04.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox04.TabIndex = 0;
+            this.moneyTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox05
+            // 
+            this.moneyTextBox05.Location = new System.Drawing.Point(600, 166);
+            this.moneyTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox05.Name = "moneyTextBox05";
+            this.moneyTextBox05.ReadOnly = true;
+            this.moneyTextBox05.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox05.TabIndex = 0;
+            this.moneyTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox06
+            // 
+            this.moneyTextBox06.Location = new System.Drawing.Point(600, 194);
+            this.moneyTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox06.Name = "moneyTextBox06";
+            this.moneyTextBox06.ReadOnly = true;
+            this.moneyTextBox06.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox06.TabIndex = 0;
+            this.moneyTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox07
+            // 
+            this.moneyTextBox07.Location = new System.Drawing.Point(600, 221);
+            this.moneyTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox07.Name = "moneyTextBox07";
+            this.moneyTextBox07.ReadOnly = true;
+            this.moneyTextBox07.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox07.TabIndex = 0;
+            this.moneyTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox08
+            // 
+            this.moneyTextBox08.Location = new System.Drawing.Point(600, 248);
+            this.moneyTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox08.Name = "moneyTextBox08";
+            this.moneyTextBox08.ReadOnly = true;
+            this.moneyTextBox08.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox08.TabIndex = 0;
+            this.moneyTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox09
+            // 
+            this.moneyTextBox09.Location = new System.Drawing.Point(600, 275);
+            this.moneyTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox09.Name = "moneyTextBox09";
+            this.moneyTextBox09.ReadOnly = true;
+            this.moneyTextBox09.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox09.TabIndex = 0;
+            this.moneyTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox010
+            // 
+            this.moneyTextBox010.Location = new System.Drawing.Point(600, 302);
+            this.moneyTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox010.Name = "moneyTextBox010";
+            this.moneyTextBox010.ReadOnly = true;
+            this.moneyTextBox010.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox010.TabIndex = 0;
+            this.moneyTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox011
+            // 
+            this.moneyTextBox011.Location = new System.Drawing.Point(600, 329);
+            this.moneyTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox011.Name = "moneyTextBox011";
+            this.moneyTextBox011.ReadOnly = true;
+            this.moneyTextBox011.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox011.TabIndex = 0;
+            this.moneyTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox012
+            // 
+            this.moneyTextBox012.Location = new System.Drawing.Point(600, 356);
+            this.moneyTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox012.Name = "moneyTextBox012";
+            this.moneyTextBox012.ReadOnly = true;
+            this.moneyTextBox012.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox012.TabIndex = 0;
+            this.moneyTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalCount2
+            // 
+            this.totalCount2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalCount2.Location = new System.Drawing.Point(526, 383);
+            this.totalCount2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalCount2.Name = "totalCount2";
+            this.totalCount2.ReadOnly = true;
+            this.totalCount2.Size = new System.Drawing.Size(70, 31);
+            this.totalCount2.TabIndex = 38;
+            this.totalCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label64
+            // 
+            this.label64.Location = new System.Drawing.Point(407, 381);
+            this.label64.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(115, 33);
+            this.label64.TabIndex = 38;
+            this.label64.Text = "総数";
+            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totalWeight2
+            // 
+            this.totalWeight2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalWeight2.Location = new System.Drawing.Point(315, 383);
+            this.totalWeight2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalWeight2.Name = "totalWeight2";
+            this.totalWeight2.ReadOnly = true;
+            this.totalWeight2.Size = new System.Drawing.Size(88, 31);
+            this.totalWeight2.TabIndex = 38;
+            this.totalWeight2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label37
+            // 
+            this.label37.Location = new System.Drawing.Point(187, 381);
+            this.label37.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(124, 33);
+            this.label37.TabIndex = 39;
+            this.label37.Text = "総重量";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // countTextBox012
+            // 
+            this.countTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox012.Location = new System.Drawing.Point(526, 356);
+            this.countTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox012.Name = "countTextBox012";
+            this.countTextBox012.ReadOnly = true;
+            this.countTextBox012.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox012.TabIndex = 0;
+            this.countTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox012.TextChanged += new System.EventHandler(this.countTextBox012_TextChanged);
+            // 
+            // countTextBox011
+            // 
+            this.countTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox011.Location = new System.Drawing.Point(526, 329);
+            this.countTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox011.Name = "countTextBox011";
+            this.countTextBox011.ReadOnly = true;
+            this.countTextBox011.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox011.TabIndex = 0;
+            this.countTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox011.TextChanged += new System.EventHandler(this.countTextBox011_TextChanged);
+            // 
+            // countTextBox010
+            // 
+            this.countTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox010.Location = new System.Drawing.Point(526, 302);
+            this.countTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox010.Name = "countTextBox010";
+            this.countTextBox010.ReadOnly = true;
+            this.countTextBox010.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox010.TabIndex = 0;
+            this.countTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox010.TextChanged += new System.EventHandler(this.countTextBox010_TextChanged);
+            // 
+            // countTextBox09
+            // 
+            this.countTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox09.Location = new System.Drawing.Point(526, 275);
+            this.countTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox09.Name = "countTextBox09";
+            this.countTextBox09.ReadOnly = true;
+            this.countTextBox09.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox09.TabIndex = 0;
+            this.countTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox09.TextChanged += new System.EventHandler(this.countTextBox09_TextChanged);
+            // 
+            // countTextBox08
+            // 
+            this.countTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox08.Location = new System.Drawing.Point(526, 248);
+            this.countTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox08.Name = "countTextBox08";
+            this.countTextBox08.ReadOnly = true;
+            this.countTextBox08.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox08.TabIndex = 0;
+            this.countTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox08.TextChanged += new System.EventHandler(this.countTextBox08_TextChanged);
+            // 
+            // countTextBox07
+            // 
+            this.countTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox07.Location = new System.Drawing.Point(526, 221);
+            this.countTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox07.Name = "countTextBox07";
+            this.countTextBox07.ReadOnly = true;
+            this.countTextBox07.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox07.TabIndex = 0;
+            this.countTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox07.TextChanged += new System.EventHandler(this.countTextBox07_TextChanged);
+            // 
+            // countTextBox06
+            // 
+            this.countTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox06.Location = new System.Drawing.Point(526, 194);
+            this.countTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox06.Name = "countTextBox06";
+            this.countTextBox06.ReadOnly = true;
+            this.countTextBox06.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox06.TabIndex = 0;
+            this.countTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox06.TextChanged += new System.EventHandler(this.countTextBox06_TextChanged);
+            // 
+            // countTextBox05
+            // 
+            this.countTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox05.Location = new System.Drawing.Point(526, 166);
+            this.countTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox05.Name = "countTextBox05";
+            this.countTextBox05.ReadOnly = true;
+            this.countTextBox05.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox05.TabIndex = 39;
+            this.countTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox05.TextChanged += new System.EventHandler(this.countTextBox05_TextChanged);
+            // 
+            // countTextBox04
+            // 
+            this.countTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox04.Location = new System.Drawing.Point(526, 140);
+            this.countTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox04.Name = "countTextBox04";
+            this.countTextBox04.ReadOnly = true;
+            this.countTextBox04.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox04.TabIndex = 39;
+            this.countTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox04.TextChanged += new System.EventHandler(this.countTextBox04_TextChanged);
+            // 
+            // countTextBox03
+            // 
+            this.countTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox03.Location = new System.Drawing.Point(526, 113);
+            this.countTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox03.Name = "countTextBox03";
+            this.countTextBox03.ReadOnly = true;
+            this.countTextBox03.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox03.TabIndex = 39;
+            this.countTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox03.TextChanged += new System.EventHandler(this.countTextBox03_TextChanged);
+            // 
+            // countTextBox02
+            // 
+            this.countTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox02.Location = new System.Drawing.Point(526, 86);
+            this.countTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox02.Name = "countTextBox02";
+            this.countTextBox02.ReadOnly = true;
+            this.countTextBox02.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox02.TabIndex = 39;
+            this.countTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox02.TextChanged += new System.EventHandler(this.countTextBox02_TextChanged);
+            // 
+            // countTextBox01
+            // 
+            this.countTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox01.Location = new System.Drawing.Point(526, 59);
+            this.countTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox01.Name = "countTextBox01";
+            this.countTextBox01.ReadOnly = true;
+            this.countTextBox01.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox01.TabIndex = 38;
+            this.countTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox01.TextChanged += new System.EventHandler(this.countTextBox01_TextChanged);
+            // 
+            // countTextBox00
+            // 
+            this.countTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox00.Location = new System.Drawing.Point(526, 32);
+            this.countTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox00.Name = "countTextBox00";
+            this.countTextBox00.ReadOnly = true;
+            this.countTextBox00.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox00.TabIndex = 36;
+            this.countTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox00.TextChanged += new System.EventHandler(this.countTextBox00_TextChanged);
+            // 
+            // label68
+            // 
+            this.label68.Location = new System.Drawing.Point(526, 2);
+            this.label68.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(70, 26);
+            this.label68.TabIndex = 36;
+            this.label68.Text = "数量";
+            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label69
             // 
@@ -4039,196 +4278,6 @@
             this.unitPriceTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.unitPriceTextBox012.Leave += new System.EventHandler(this.unitPriceTextBox012_Leave);
             // 
-            // label68
-            // 
-            this.label68.Location = new System.Drawing.Point(526, 2);
-            this.label68.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(70, 26);
-            this.label68.TabIndex = 36;
-            this.label68.Text = "数量";
-            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // countTextBox00
-            // 
-            this.countTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox00.Location = new System.Drawing.Point(526, 32);
-            this.countTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox00.Name = "countTextBox00";
-            this.countTextBox00.ReadOnly = true;
-            this.countTextBox00.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox00.TabIndex = 36;
-            this.countTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox00.TextChanged += new System.EventHandler(this.countTextBox00_TextChanged);
-            // 
-            // countTextBox01
-            // 
-            this.countTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox01.Location = new System.Drawing.Point(526, 59);
-            this.countTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox01.Name = "countTextBox01";
-            this.countTextBox01.ReadOnly = true;
-            this.countTextBox01.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox01.TabIndex = 38;
-            this.countTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox01.TextChanged += new System.EventHandler(this.countTextBox01_TextChanged);
-            // 
-            // countTextBox02
-            // 
-            this.countTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox02.Location = new System.Drawing.Point(526, 86);
-            this.countTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox02.Name = "countTextBox02";
-            this.countTextBox02.ReadOnly = true;
-            this.countTextBox02.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox02.TabIndex = 39;
-            this.countTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox02.TextChanged += new System.EventHandler(this.countTextBox02_TextChanged);
-            // 
-            // countTextBox03
-            // 
-            this.countTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox03.Location = new System.Drawing.Point(526, 113);
-            this.countTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox03.Name = "countTextBox03";
-            this.countTextBox03.ReadOnly = true;
-            this.countTextBox03.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox03.TabIndex = 39;
-            this.countTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox03.TextChanged += new System.EventHandler(this.countTextBox03_TextChanged);
-            // 
-            // countTextBox04
-            // 
-            this.countTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox04.Location = new System.Drawing.Point(526, 140);
-            this.countTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox04.Name = "countTextBox04";
-            this.countTextBox04.ReadOnly = true;
-            this.countTextBox04.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox04.TabIndex = 39;
-            this.countTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox04.TextChanged += new System.EventHandler(this.countTextBox04_TextChanged);
-            // 
-            // countTextBox05
-            // 
-            this.countTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox05.Location = new System.Drawing.Point(526, 166);
-            this.countTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox05.Name = "countTextBox05";
-            this.countTextBox05.ReadOnly = true;
-            this.countTextBox05.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox05.TabIndex = 39;
-            this.countTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox05.TextChanged += new System.EventHandler(this.countTextBox05_TextChanged);
-            // 
-            // countTextBox06
-            // 
-            this.countTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox06.Location = new System.Drawing.Point(526, 194);
-            this.countTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox06.Name = "countTextBox06";
-            this.countTextBox06.ReadOnly = true;
-            this.countTextBox06.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox06.TabIndex = 0;
-            this.countTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox06.TextChanged += new System.EventHandler(this.countTextBox06_TextChanged);
-            // 
-            // countTextBox07
-            // 
-            this.countTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox07.Location = new System.Drawing.Point(526, 221);
-            this.countTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox07.Name = "countTextBox07";
-            this.countTextBox07.ReadOnly = true;
-            this.countTextBox07.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox07.TabIndex = 0;
-            this.countTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox07.TextChanged += new System.EventHandler(this.countTextBox07_TextChanged);
-            // 
-            // countTextBox08
-            // 
-            this.countTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox08.Location = new System.Drawing.Point(526, 248);
-            this.countTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox08.Name = "countTextBox08";
-            this.countTextBox08.ReadOnly = true;
-            this.countTextBox08.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox08.TabIndex = 0;
-            this.countTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox08.TextChanged += new System.EventHandler(this.countTextBox08_TextChanged);
-            // 
-            // countTextBox09
-            // 
-            this.countTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox09.Location = new System.Drawing.Point(526, 275);
-            this.countTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox09.Name = "countTextBox09";
-            this.countTextBox09.ReadOnly = true;
-            this.countTextBox09.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox09.TabIndex = 0;
-            this.countTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox09.TextChanged += new System.EventHandler(this.countTextBox09_TextChanged);
-            // 
-            // countTextBox010
-            // 
-            this.countTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox010.Location = new System.Drawing.Point(526, 302);
-            this.countTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox010.Name = "countTextBox010";
-            this.countTextBox010.ReadOnly = true;
-            this.countTextBox010.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox010.TabIndex = 0;
-            this.countTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox010.TextChanged += new System.EventHandler(this.countTextBox010_TextChanged);
-            // 
-            // countTextBox011
-            // 
-            this.countTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox011.Location = new System.Drawing.Point(526, 329);
-            this.countTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox011.Name = "countTextBox011";
-            this.countTextBox011.ReadOnly = true;
-            this.countTextBox011.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox011.TabIndex = 0;
-            this.countTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox011.TextChanged += new System.EventHandler(this.countTextBox011_TextChanged);
-            // 
-            // countTextBox012
-            // 
-            this.countTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox012.Location = new System.Drawing.Point(526, 356);
-            this.countTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox012.Name = "countTextBox012";
-            this.countTextBox012.ReadOnly = true;
-            this.countTextBox012.Size = new System.Drawing.Size(70, 20);
-            this.countTextBox012.TabIndex = 0;
-            this.countTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox012.TextChanged += new System.EventHandler(this.countTextBox012_TextChanged);
-            // 
-            // label64
-            // 
-            this.label64.Location = new System.Drawing.Point(407, 381);
-            this.label64.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(115, 33);
-            this.label64.TabIndex = 38;
-            this.label64.Text = "総数";
-            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label22
-            // 
-            this.label22.Location = new System.Drawing.Point(186, 2);
-            this.label22.Margin = new System.Windows.Forms.Padding(0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(125, 22);
-            this.label22.TabIndex = 36;
-            this.label22.Text = "品物詳細";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label25
             // 
             this.label25.Location = new System.Drawing.Point(314, 2);
@@ -4238,6 +4287,162 @@
             this.label25.TabIndex = 36;
             this.label25.Text = "重量";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // weightTextBox00
+            // 
+            this.weightTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox00.Location = new System.Drawing.Point(315, 32);
+            this.weightTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox00.Name = "weightTextBox00";
+            this.weightTextBox00.ReadOnly = true;
+            this.weightTextBox00.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox00.TabIndex = 36;
+            this.weightTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox00.TextChanged += new System.EventHandler(this.weightTextBox00_TextChanged);
+            // 
+            // weightTextBox01
+            // 
+            this.weightTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox01.Location = new System.Drawing.Point(315, 59);
+            this.weightTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox01.Name = "weightTextBox01";
+            this.weightTextBox01.ReadOnly = true;
+            this.weightTextBox01.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox01.TabIndex = 38;
+            this.weightTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox01.TextChanged += new System.EventHandler(this.weightTextBox01_TextChanged);
+            // 
+            // weightTextBox02
+            // 
+            this.weightTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox02.Location = new System.Drawing.Point(315, 86);
+            this.weightTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox02.Name = "weightTextBox02";
+            this.weightTextBox02.ReadOnly = true;
+            this.weightTextBox02.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox02.TabIndex = 39;
+            this.weightTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox02.TextChanged += new System.EventHandler(this.weightTextBox02_TextChanged);
+            // 
+            // weightTextBox03
+            // 
+            this.weightTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox03.Location = new System.Drawing.Point(315, 113);
+            this.weightTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox03.Name = "weightTextBox03";
+            this.weightTextBox03.ReadOnly = true;
+            this.weightTextBox03.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox03.TabIndex = 39;
+            this.weightTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox03.TextChanged += new System.EventHandler(this.weightTextBox03_TextChanged);
+            // 
+            // weightTextBox04
+            // 
+            this.weightTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox04.Location = new System.Drawing.Point(315, 140);
+            this.weightTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox04.Name = "weightTextBox04";
+            this.weightTextBox04.ReadOnly = true;
+            this.weightTextBox04.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox04.TabIndex = 39;
+            this.weightTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox04.TextChanged += new System.EventHandler(this.weightTextBox04_TextChanged);
+            // 
+            // weightTextBox05
+            // 
+            this.weightTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox05.Location = new System.Drawing.Point(315, 166);
+            this.weightTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox05.Name = "weightTextBox05";
+            this.weightTextBox05.ReadOnly = true;
+            this.weightTextBox05.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox05.TabIndex = 0;
+            this.weightTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox05.TextChanged += new System.EventHandler(this.weightTextBox05_TextChanged);
+            // 
+            // weightTextBox06
+            // 
+            this.weightTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox06.Location = new System.Drawing.Point(315, 194);
+            this.weightTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox06.Name = "weightTextBox06";
+            this.weightTextBox06.ReadOnly = true;
+            this.weightTextBox06.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox06.TabIndex = 0;
+            this.weightTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox06.TextChanged += new System.EventHandler(this.weightTextBox06_TextChanged);
+            // 
+            // weightTextBox07
+            // 
+            this.weightTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox07.Location = new System.Drawing.Point(315, 221);
+            this.weightTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox07.Name = "weightTextBox07";
+            this.weightTextBox07.ReadOnly = true;
+            this.weightTextBox07.Size = new System.Drawing.Size(88, 20);
+            this.weightTextBox07.TabIndex = 0;
+            this.weightTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox07.TextChanged += new System.EventHandler(this.weightTextBox07_TextChanged);
+            // 
+            // weightTextBox08
+            // 
+            this.weightTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox08.Location = new System.Drawing.Point(315, 248);
+            this.weightTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox08.Name = "weightTextBox08";
+            this.weightTextBox08.ReadOnly = true;
+            this.weightTextBox08.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox08.TabIndex = 0;
+            this.weightTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox08.TextChanged += new System.EventHandler(this.weightTextBox08_TextChanged);
+            // 
+            // weightTextBox09
+            // 
+            this.weightTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox09.Location = new System.Drawing.Point(315, 275);
+            this.weightTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox09.Name = "weightTextBox09";
+            this.weightTextBox09.ReadOnly = true;
+            this.weightTextBox09.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox09.TabIndex = 0;
+            this.weightTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox09.TextChanged += new System.EventHandler(this.weightTextBox09_TextChanged);
+            // 
+            // weightTextBox010
+            // 
+            this.weightTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox010.Location = new System.Drawing.Point(315, 302);
+            this.weightTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox010.Name = "weightTextBox010";
+            this.weightTextBox010.ReadOnly = true;
+            this.weightTextBox010.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox010.TabIndex = 0;
+            this.weightTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox010.TextChanged += new System.EventHandler(this.weightTextBox010_TextChanged);
+            // 
+            // weightTextBox011
+            // 
+            this.weightTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox011.Location = new System.Drawing.Point(315, 329);
+            this.weightTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox011.Name = "weightTextBox011";
+            this.weightTextBox011.ReadOnly = true;
+            this.weightTextBox011.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox011.TabIndex = 0;
+            this.weightTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox011.TextChanged += new System.EventHandler(this.weightTextBox011_TextChanged);
+            // 
+            // weightTextBox012
+            // 
+            this.weightTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox012.Location = new System.Drawing.Point(315, 356);
+            this.weightTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox012.Name = "weightTextBox012";
+            this.weightTextBox012.ReadOnly = true;
+            this.weightTextBox012.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox012.TabIndex = 0;
+            this.weightTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox012.TextChanged += new System.EventHandler(this.weightTextBox012_TextChanged);
             // 
             // itemDetail00
             // 
@@ -4382,167 +4587,9 @@
             this.itemDetail012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.itemDetail012.TextChanged += new System.EventHandler(this.weightTextBox012_TextChanged);
             // 
-            // itemDetail0
+            // openFileDialog1
             // 
-            this.itemDetail0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail0.Location = new System.Drawing.Point(187, 31);
-            this.itemDetail0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail0.Name = "itemDetail0";
-            this.itemDetail0.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail0.TabIndex = 36;
-            this.itemDetail0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail1
-            // 
-            this.itemDetail1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail1.Location = new System.Drawing.Point(187, 58);
-            this.itemDetail1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail1.Name = "itemDetail1";
-            this.itemDetail1.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail1.TabIndex = 38;
-            this.itemDetail1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail2
-            // 
-            this.itemDetail2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail2.Location = new System.Drawing.Point(187, 85);
-            this.itemDetail2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail2.Name = "itemDetail2";
-            this.itemDetail2.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail2.TabIndex = 39;
-            this.itemDetail2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail3
-            // 
-            this.itemDetail3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail3.Location = new System.Drawing.Point(187, 112);
-            this.itemDetail3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail3.Name = "itemDetail3";
-            this.itemDetail3.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail3.TabIndex = 39;
-            this.itemDetail3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail4
-            // 
-            this.itemDetail4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail4.Location = new System.Drawing.Point(187, 139);
-            this.itemDetail4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail4.Name = "itemDetail4";
-            this.itemDetail4.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail4.TabIndex = 39;
-            this.itemDetail4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail5
-            // 
-            this.itemDetail5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail5.Location = new System.Drawing.Point(187, 166);
-            this.itemDetail5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail5.Name = "itemDetail5";
-            this.itemDetail5.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail5.TabIndex = 0;
-            this.itemDetail5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail6
-            // 
-            this.itemDetail6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail6.Location = new System.Drawing.Point(187, 193);
-            this.itemDetail6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail6.Name = "itemDetail6";
-            this.itemDetail6.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail6.TabIndex = 0;
-            this.itemDetail6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail7
-            // 
-            this.itemDetail7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail7.Location = new System.Drawing.Point(187, 220);
-            this.itemDetail7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail7.Name = "itemDetail7";
-            this.itemDetail7.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail7.TabIndex = 0;
-            this.itemDetail7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail8
-            // 
-            this.itemDetail8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail8.Location = new System.Drawing.Point(187, 247);
-            this.itemDetail8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail8.Name = "itemDetail8";
-            this.itemDetail8.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail8.TabIndex = 0;
-            this.itemDetail8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail9
-            // 
-            this.itemDetail9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail9.Location = new System.Drawing.Point(187, 274);
-            this.itemDetail9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail9.Name = "itemDetail9";
-            this.itemDetail9.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail9.TabIndex = 0;
-            this.itemDetail9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail10
-            // 
-            this.itemDetail10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail10.Location = new System.Drawing.Point(187, 301);
-            this.itemDetail10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail10.Name = "itemDetail10";
-            this.itemDetail10.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail10.TabIndex = 0;
-            this.itemDetail10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail11
-            // 
-            this.itemDetail11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail11.Location = new System.Drawing.Point(187, 328);
-            this.itemDetail11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail11.Name = "itemDetail11";
-            this.itemDetail11.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail11.TabIndex = 0;
-            this.itemDetail11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail12
-            // 
-            this.itemDetail12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail12.Location = new System.Drawing.Point(187, 355);
-            this.itemDetail12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail12.Name = "itemDetail12";
-            this.itemDetail12.Size = new System.Drawing.Size(124, 20);
-            this.itemDetail12.TabIndex = 0;
-            this.itemDetail12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label27.Location = new System.Drawing.Point(951, 10);
-            this.label27.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(106, 24);
-            this.label27.TabIndex = 84;
-            this.label27.Text = "管理番号";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(946, 15);
-            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
-            this.label3.TabIndex = 86;
-            this.label3.Text = "伝票番号";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox2.Location = new System.Drawing.Point(1007, 12);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(105, 20);
-            this.textBox2.TabIndex = 85;
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // contextMenuStrip1
             // 
