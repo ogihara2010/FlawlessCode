@@ -38,7 +38,7 @@ namespace Flawless_ex
 
         private void addButton(object sender, EventArgs e)
         {
-            AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt, master,staff_code);
+            AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt, master, staff_code);
             this.Close();
             addMainCategory.Show();
         }
@@ -54,7 +54,7 @@ namespace Flawless_ex
         {
             int code = (int)dataGridView1.CurrentRow.Cells[1].Value;//選択した大分類コード取得
 
-            UpdateMainCategoryMenu updateMain = new UpdateMainCategoryMenu(master, code,staff_code);
+            UpdateMainCategoryMenu updateMain = new UpdateMainCategoryMenu(master, code, staff_code);
             this.Close();
             updateMain.Show();
         }

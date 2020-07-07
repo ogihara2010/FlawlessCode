@@ -130,26 +130,26 @@ namespace Flawless_ex
             //担当者名
             if (this.parsonNameText.Text != name)
             {
-                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + name +"','" + name_kana + "','" + staffName +"', '" + staffNameKana + "'," + code + ")";
+                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + name + "','" + name_kana + "','" + staffName + "', '" + staffNameKana + "'," + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_staffNameRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
             //パスワード
             else if (this.passwordText.Text != pass)
             {
-                string sql_passwordRevisions = "insert into staff_password_revisions values('" + dateTime + "', " + staffCode + ",'"+ pass +"','" + password + "', " + code + ")";
+                string sql_passwordRevisions = "insert into staff_password_revisions values('" + dateTime + "', " + staffCode + ",'" + pass + "','" + password + "', " + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_passwordRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
             //大分類コード
-            else if(main_category != main_code)
+            else if (main_category != main_code)
             {
                 string sql_main_category_code_revisions = "insert into staff_main_category_code_revisions values('" + dateTime + "'," + staffCode + "," + main_code + ", " + main_category + ", " + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_main_category_code_revisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
             //アクセス権限
-            else if(access_auth != access)
+            else if (access_auth != access)
             {
                 string sql_access_revisions = "insert into staff_access_auth_revisions values('" + dateTime + "', " + staffCode + ", '" + access + "', '" + access_auth + "', " + code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_access_revisions, conn);

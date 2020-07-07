@@ -62,9 +62,9 @@ namespace Flawless_ex
                 adapter.Update(dt);
 
                 //履歴
-                string staff_revisions = "insert into staff_m_revisions values(" + staffCode1 + ",'" + d + "'," + staff_code + ")";
-                NpgsqlCommand cmd = new NpgsqlCommand(staff_revisions, conn);
-                NpgsqlDataReader sdr = cmd.ExecuteReader();
+                //string staff_revisions = "insert into staff_m_revisions values(" + staffCode1 + ",'" + d + "'," + staff_code + ")";
+                //NpgsqlCommand cmd = new NpgsqlCommand(staff_revisions, conn);
+                //NpgsqlDataReader sdr = cmd.ExecuteReader();
 
 
                 conn.Close();

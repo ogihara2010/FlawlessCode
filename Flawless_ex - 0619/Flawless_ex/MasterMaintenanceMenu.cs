@@ -46,7 +46,7 @@ namespace Flawless_ex
 
         private void itemMasterButtonClick(object sender, EventArgs e)
         {
-            ItemMaster productNameMenu = new ItemMaster(this,staff_code);
+            ItemMaster productNameMenu = new ItemMaster(this, staff_code);
             this.Hide();
             productNameMenu.Show();
         }

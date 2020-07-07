@@ -12,6 +12,8 @@ namespace Flawless_ex
         int com = 0;　// 納品書　追加カウント
         int staff_id;
         int itemMainCategoryCode;
+        public DataTable clientDt = new DataTable();//顧客情報
+        public int count = 0;
 
         MainMenu mainMenu;
 
@@ -57,6 +59,7 @@ namespace Flawless_ex
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
+
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -970,7 +973,7 @@ namespace Flawless_ex
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
+                
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -1136,7 +1139,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox00.SelectedValue;
                 deliverydt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1163,7 +1166,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox01.SelectedValue;
                 deliverydt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1190,7 +1193,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox02.SelectedValue;
                 deliverydt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1216,7 +1219,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox03.SelectedValue;
                 deliverydt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1242,7 +1245,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox04.SelectedValue;
                 deliverydt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1268,7 +1271,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox05.SelectedValue;
                 deliverydt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1294,7 +1297,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox06.SelectedValue;
                 deliverydt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1320,7 +1323,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox07.SelectedValue;
                 deliverydt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1346,7 +1349,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox08.SelectedValue;
                 deliverydt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1372,7 +1375,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox09.SelectedValue;
                 deliverydt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1398,7 +1401,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox010.SelectedValue;
                 deliverydt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1424,7 +1427,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox011.SelectedValue;
                 deliverydt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1450,7 +1453,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
                 deliverydt212.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3246,27 +3249,101 @@ namespace Flawless_ex
 
 
 
-        private void client_searchButton(object sender, EventArgs e)
-        {
-            Client_search client_Search = new Client_search(this);
-
-            this.Hide();
-            client_Search.Show();
-        }
 
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            Client_search client_Search = new Client_search(this);
-            this.Hide();
-            client_Search.Show();
+            using (client_search search2 = new client_search(this))
+            {
+                this.Hide();
+                search2.ShowDialog();
+            }
+
+
+
+            if (count != 0)
+            {
+                DataRow row;
+                row = clientDt.Rows[0];
+                int type = (int)row["type"];
+
+                if (type == 0)
+                {
+                    string companyNmae = row["company_name"].ToString();
+                    string shopName = row["shop_name"].ToString();
+                    string staff_name = row["staff_name"].ToString();
+                    string address = row["address"].ToString();
+                    string register_date = row["register_date"].ToString();
+                    string remarks = row["remarks"].ToString();
+
+                    typeTextBox.Text = "法人";
+                    companyTextBox.Text = companyNmae;
+                    shopNameTextBox.Text = shopName;
+                    clientNameTextBox.Text = staff_name;
+                    addressTextBox.Text = address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                }
+                else if (type == 1)
+                {
+                    string name = row["name"].ToString();
+                    string address = row["address"].ToString();
+                    string remarks = row["remarks"].ToString();
+
+                    typeTextBox.Text = "個人";
+                    clientNameTextBox.Text = name;
+                    addressTextBox.Text = address;
+                    clientRemarksTextBox.Text = remarks;
+                }
+            }
         }
 
-        private void client_searchButton1_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
-        {
-            Client_search client_Search = new Client_search(this);
 
-            this.Hide();
-            client_Search.Show();
+        private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
+        {
+            using (client_search search2 = new client_search(this))
+            {
+                this.Hide();
+                search2.ShowDialog();
+            }
+
+
+
+            if (count != 0)
+            {
+                DataRow row;
+                row = clientDt.Rows[0];
+                int type = (int)row["type"];
+
+                if (type == 0)
+                {
+                    string companyNmae = row["company_name"].ToString();
+                    string shopName = row["shop_name"].ToString();
+                    string staff_name = row["staff_name"].ToString();
+                    string address = row["address"].ToString();
+                    string register_date = row["register_date"].ToString();
+                    string remarks = row["remarks"].ToString();
+
+                    typeTextBox2.Text = "法人";
+                    companyTextBox2.Text = companyNmae;
+                    shopNameTextBox2.Text = shopName;
+                    clientNameTextBox2.Text = staff_name;
+                    addressTextBox2.Text = address;
+                    registerDateTextBox2.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                }
+                else if (type == 1)
+                {
+                    string name = row["name"].ToString();
+                    string address = row["address"].ToString();
+                    string remarks = row["remarks"].ToString();
+                    string antique_license = row["antique_license"].ToString();
+
+                    typeTextBox2.Text = "個人";
+                    clientNameTextBox2.Text = name;
+                    addressTextBox2.Text = address;
+                    clientRemarksTextBox2.Text = remarks;
+                }
+            }
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -3360,6 +3437,11 @@ namespace Flawless_ex
             else if (dialog == DialogResult.Cancel) { }
 
             textBox302.Text = path;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

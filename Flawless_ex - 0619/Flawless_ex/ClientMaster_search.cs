@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Npgsql;
 
 namespace Flawless_ex
 {
@@ -17,28 +10,27 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         int type;
         int check;
-        int staff_code;
-        public ClientMaster_search(MasterMaintenanceMenu master,DataTable dt, int type,int check, int staff_code)
+
+        public ClientMaster_search(MasterMaintenanceMenu master, DataTable dt, int type, int check)
         {
             InitializeComponent();
             this.master = master;
             this.dt = dt;
             this.type = type;//法人・個人
             this.check = check;//古物商許可証あり・なし
-            this.staff_code = staff_code;
         }
 
-        
+
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master);
 
             this.Close();
             clientmaster.Show();
         }
 
-        
+
         private void ClientMaster_search_Load_1(object sender, EventArgs e)
         {
             if (type == 0)
@@ -51,9 +43,10 @@ namespace Flawless_ex
                 dataGridView1.Columns["antique_number"].Visible = false;
 
 
-            }else if(type == 1)
+            }
+            else if (type == 1)
             {
-                
+
                 int count = dt.Rows.Count;
 
                 if (check == 0)
@@ -69,7 +62,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
                     dataGridView1.Columns["id_number"].Visible = false;
                 }
-                else if(check == 1)
+                else if (check == 1)
                 {
                     for (int i = 0; i < count; i++)
                     {
@@ -82,34 +75,16 @@ namespace Flawless_ex
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
                     dataGridView1.Columns["id_number"].Visible = false;
                 }
-                
+
             }
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            if (type == 0)
-            {
-                string companyname = (string)this.dataGridView1.CurrentRow.Cells[0].Value; // 会社名
-                string shopname = (string)this.dataGridView1.CurrentRow.Cells[1].Value; // 店舗名
-                string name = (string)this.dataGridView1.CurrentRow.Cells[2].Value; //担当者名
-                string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value; //住所
+            ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master);
 
-                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code);
-
-                this.Close();
-                clientMaster_UPD.Show();
-            }
-            else if (type == 1)
-            {
-                string name = (string)this.dataGridView1.CurrentRow.Cells[0].Value; // 氏名
-                string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value; //住所
-
-                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code);
-
-                this.Close();
-                clientMaster_UPD.Show();
-            }
+            this.Close();
+            clientMaster_UPD.Show();
         }
     }
 }

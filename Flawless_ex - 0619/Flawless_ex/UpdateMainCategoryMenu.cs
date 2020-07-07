@@ -14,7 +14,7 @@ namespace Flawless_ex
         int staff_code;//ログイン者の担当者コード
         string mName;
 
-        public UpdateMainCategoryMenu(MasterMaintenanceMenu master, int code,int staff_code)
+        public UpdateMainCategoryMenu(MasterMaintenanceMenu master, int code, int staff_code)
         {
             InitializeComponent();
 
@@ -51,7 +51,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            MainCategoryMaster master = new MainCategoryMaster(this.master,staff_code);
+            MainCategoryMaster master = new MainCategoryMaster(this.master, staff_code);
 
             this.Close();
             master.Show();
@@ -90,7 +90,7 @@ namespace Flawless_ex
                 conn.Close();
 
 
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master,staff_code);
+                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
                 this.Close();
                 mainCategory.Show();
             }
@@ -107,8 +107,8 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter;
                 NpgsqlCommandBuilder builder;
                 DataTable dt = new DataTable();
-                
-                
+
+
                 string mainName = mainCategoryNameTextBox.Text;
 
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -126,13 +126,13 @@ namespace Flawless_ex
                 //履歴
                 DateTime dat = DateTime.Now;
                 //大分類履歴
-                string sql_mCategroy_name_revisions = "insert into main_category_m_name_revisions values("+ mainCode +", '" + mName +"','" + mainName +"','" + dat +"'," + staff_code + ")";
+                string sql_mCategroy_name_revisions = "insert into main_category_m_name_revisions values(" + mainCode + ", '" + mName + "','" + mainName + "','" + dat + "'," + staff_code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_mCategroy_name_revisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
 
                 conn.Close();
 
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master,staff_code);
+                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
                 this.Close();
                 mainCategory.Show();
             }
