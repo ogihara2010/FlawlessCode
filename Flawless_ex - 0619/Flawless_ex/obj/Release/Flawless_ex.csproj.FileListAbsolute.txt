@@ -1,6 +1,9 @@
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\Flawless_ex.exe.config
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\Flawless_ex.exe
+<<<<<<< HEAD
+=======
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\Flawless_ex.pdb
+>>>>>>> master
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\Npgsql.dll
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\System.Buffers.dll
@@ -22,13 +25,21 @@ C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Rel
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\System.Text.Json.xml
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\System.ValueTuple.xml
+<<<<<<< HEAD
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.csprojAssemblyReference.cache
+=======
+>>>>>>> master
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.AddMainCategoryMenu.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.ClientMaster.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.ClientMaster_add.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.ClientMaster_search.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.ClientMaster_UPD.resources
+<<<<<<< HEAD
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.Client_search.resources
+=======
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.client_search.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.client_search_result.resources
+>>>>>>> master
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.CustomerHistory.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.DataSearchResults.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.Invoice.resources
@@ -56,4 +67,8 @@ C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Rel
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.csproj.CopyComplete
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.exe
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.pdb
+<<<<<<< HEAD
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\bin\Release\Flawless_ex.pdb
+=======
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Release\Flawless_ex.csprojAssemblyReference.cache
+>>>>>>> master
