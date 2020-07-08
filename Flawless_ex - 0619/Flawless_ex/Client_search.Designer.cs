@@ -79,6 +79,7 @@
             this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.returnButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -645,12 +646,24 @@
             this.returnButton.UseVisualStyleBackColor = true;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(441, 327);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(177, 85);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "新規登録";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // client_search
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1098, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.search1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.returnButton);
@@ -749,5 +762,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button returnButton;
+        private System.Windows.Forms.Button button1;
     }
 }
