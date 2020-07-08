@@ -65,7 +65,7 @@ namespace Flawless_ex
         private void Statement_Load(object sender, EventArgs e)
         {
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
 
 
@@ -774,7 +774,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -803,7 +803,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox1.SelectedValue;
                 dt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -832,7 +832,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -860,7 +860,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -888,7 +888,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -916,7 +916,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -944,7 +944,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -972,8 +972,8 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -1000,7 +1000,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1028,7 +1028,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1056,7 +1056,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1084,7 +1084,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1112,7 +1112,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1139,7 +1139,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox00.SelectedValue;
                 deliverydt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1166,7 +1166,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox01.SelectedValue;
                 deliverydt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1193,7 +1193,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox02.SelectedValue;
                 deliverydt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1219,7 +1219,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox03.SelectedValue;
                 deliverydt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1245,7 +1245,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox04.SelectedValue;
                 deliverydt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1271,7 +1271,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox05.SelectedValue;
                 deliverydt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1297,7 +1297,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox06.SelectedValue;
                 deliverydt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1323,7 +1323,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox07.SelectedValue;
                 deliverydt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1349,7 +1349,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox08.SelectedValue;
                 deliverydt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1375,7 +1375,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox09.SelectedValue;
                 deliverydt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1401,7 +1401,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox010.SelectedValue;
                 deliverydt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1427,7 +1427,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox011.SelectedValue;
                 deliverydt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1453,7 +1453,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
                 deliverydt212.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -2077,7 +2077,7 @@ namespace Flawless_ex
             decimal sub;
             #region "計算開始"
             //計算開始
-            for (int i = 0; i <= com; i++)
+            for (int i = 0; i <= con; i++)
             {
                 switch (i)
                 {
@@ -3014,170 +3014,110 @@ namespace Flawless_ex
                 case 0:
                     mainCategoryComboBox01.Show();
                     itemComboBox01.Show();
-                    BlandNameTextBox01.Show();
-                    VarietyTextBox01.Show();
                     weightTextBox01.Show();
-                    MiddleStoneTextBox01.Show();
-                    SideStoneTextBox01.Show();
                     countTextBox01.Show();
                     unitPriceTextBox01.Show();
                     moneyTextBox01.Show();
                     remarks01.Show();
-                    GrossMoneyTextBox01.Show();
                     break;
                 case 1:
                     mainCategoryComboBox02.Show();
                     itemComboBox02.Show();
-                    BlandNameTextBox02.Show();
-                    VarietyTextBox02.Show();
                     weightTextBox02.Show();
-                    MiddleStoneTextBox02.Show();
-                    SideStoneTextBox02.Show();
                     countTextBox02.Show();
                     unitPriceTextBox02.Show();
                     moneyTextBox02.Show();
                     remarks02.Show();
-                    GrossMoneyTextBox02.Show();
                     break;
                 case 2:
                     mainCategoryComboBox03.Show();
                     itemComboBox03.Show();
-                    BlandNameTextBox03.Show();
-                    VarietyTextBox03.Show();
                     weightTextBox03.Show();
-                    MiddleStoneTextBox03.Show();
-                    SideStoneTextBox03.Show();
                     countTextBox03.Show();
                     unitPriceTextBox03.Show();
                     moneyTextBox03.Show();
                     remarks03.Show();
-                    GrossMoneyTextBox03.Show();
                     break;
                 case 3:
                     mainCategoryComboBox04.Show();
                     itemComboBox04.Show();
-                    BlandNameTextBox04.Show();
-                    VarietyTextBox04.Show();
                     weightTextBox04.Show();
-                    MiddleStoneTextBox04.Show();
-                    SideStoneTextBox04.Show();
                     countTextBox04.Show();
                     unitPriceTextBox04.Show();
                     moneyTextBox04.Show();
                     remarks04.Show();
-                    GrossMoneyTextBox04.Show();
                     break;
                 case 4:
                     mainCategoryComboBox05.Show();
                     itemComboBox05.Show();
-                    BlandNameTextBox05.Show();
-                    VarietyTextBox05.Show();
                     weightTextBox05.Show();
-                    MiddleStoneTextBox05.Show();
-                    SideStoneTextBox05.Show();
                     countTextBox05.Show();
                     unitPriceTextBox05.Show();
                     moneyTextBox05.Show();
                     remarks05.Show();
-                    GrossMoneyTextBox05.Show();
                     break;
                 case 5:
                     mainCategoryComboBox06.Show();
                     itemComboBox06.Show();
-                    BlandNameTextBox06.Show();
-                    VarietyTextBox06.Show();
                     weightTextBox06.Show();
-                    MiddleStoneTextBox06.Show();
-                    SideStoneTextBox06.Show();
                     countTextBox06.Show();
                     unitPriceTextBox06.Show();
                     moneyTextBox06.Show();
                     remarks06.Show();
-                    GrossMoneyTextBox06.Show();
                     break;
                 case 6:
                     mainCategoryComboBox07.Show();
                     itemComboBox07.Show();
-                    BlandNameTextBox07.Show();
-                    VarietyTextBox07.Show();
                     weightTextBox07.Show();
-                    MiddleStoneTextBox07.Show();
-                    SideStoneTextBox07.Show();
                     countTextBox07.Show();
                     unitPriceTextBox07.Show();
                     moneyTextBox07.Show();
                     remarks07.Show();
-                    GrossMoneyTextBox07.Show();
                     break;
                 case 7:
                     mainCategoryComboBox08.Show();
                     itemComboBox08.Show();
-                    BlandNameTextBox08.Show();
-                    VarietyTextBox08.Show();
                     weightTextBox08.Show();
-                    MiddleStoneTextBox08.Show();
-                    SideStoneTextBox08.Show();
                     countTextBox08.Show();
                     unitPriceTextBox08.Show();
                     moneyTextBox08.Show();
                     remarks08.Show();
-                    GrossMoneyTextBox08.Show();
                     break;
                 case 8:
                     mainCategoryComboBox09.Show();
                     itemComboBox09.Show();
-                    BlandNameTextBox09.Show();
-                    VarietyTextBox09.Show();
                     weightTextBox09.Show();
-                    MiddleStoneTextBox09.Show();
-                    SideStoneTextBox09.Show();
                     countTextBox09.Show();
                     unitPriceTextBox09.Show();
                     moneyTextBox09.Show();
                     remarks09.Show();
-                    GrossMoneyTextBox09.Show();
                     break;
                 case 9:
                     mainCategoryComboBox010.Show();
                     itemComboBox010.Show();
-                    BlandNameTextBox010.Show();
-                    VarietyTextBox010.Show();
                     weightTextBox010.Show();
-                    MiddleStoneTextBox010.Show();
-                    SideStoneTextBox010.Show();
                     countTextBox010.Show();
                     unitPriceTextBox010.Show();
                     moneyTextBox010.Show();
                     remarks010.Show();
-                    GrossMoneyTextBox010.Show();
                     break;
                 case 10:
                     mainCategoryComboBox011.Show();
                     itemComboBox011.Show();
-                    BlandNameTextBox011.Show();
-                    VarietyTextBox011.Show();
                     weightTextBox011.Show();
-                    MiddleStoneTextBox011.Show();
-                    SideStoneTextBox011.Show();
                     countTextBox011.Show();
                     unitPriceTextBox011.Show();
                     moneyTextBox011.Show();
                     remarks011.Show();
-                    GrossMoneyTextBox011.Show();
                     break;
                 case 11:
                     mainCategoryComboBox012.Show();
                     itemComboBox012.Show();
-                    BlandNameTextBox012.Show();
-                    VarietyTextBox012.Show();
                     weightTextBox012.Show();
-                    MiddleStoneTextBox012.Show();
-                    SideStoneTextBox012.Show();
                     countTextBox012.Show();
                     unitPriceTextBox012.Show();
                     moneyTextBox012.Show();
                     remarks012.Show();
-                    GrossMoneyTextBox012.Show();
                     break;
                 default:
                     break;
@@ -3188,187 +3128,127 @@ namespace Flawless_ex
         #region "納品書　クリアボタン"
         private void clear2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < com; i++)
+            switch (com)
             {
-                switch (i)
-                {
-                    case 0:
-                        mainCategoryComboBox01.Hide();
-                        itemComboBox01.Hide();
-                        BlandNameTextBox01.Hide();
-                        VarietyTextBox01.Hide();
-                        weightTextBox01.Hide();
-                        MiddleStoneTextBox01.Hide();
-                        SideStoneTextBox01.Hide();
-                        countTextBox01.Hide();
-                        unitPriceTextBox01.Hide();
-                        moneyTextBox01.Hide();
-                        remarks01.Hide();
-                        GrossMoneyTextBox01.Hide();
-                        break;
-                    case 1:
-                        mainCategoryComboBox02.Hide();
-                        itemComboBox02.Hide();
-                        BlandNameTextBox02.Hide();
-                        VarietyTextBox02.Hide();
-                        weightTextBox02.Hide();
-                        MiddleStoneTextBox02.Hide();
-                        SideStoneTextBox02.Hide();
-                        countTextBox02.Hide();
-                        unitPriceTextBox02.Hide();
-                        moneyTextBox02.Hide();
-                        remarks02.Hide();
-                        GrossMoneyTextBox02.Hide();
-                        break;
-                    case 2:
-                        mainCategoryComboBox03.Hide();
-                        itemComboBox03.Hide();
-                        BlandNameTextBox03.Hide();
-                        VarietyTextBox03.Hide();
-                        weightTextBox03.Hide();
-                        MiddleStoneTextBox03.Hide();
-                        SideStoneTextBox03.Hide();
-                        countTextBox03.Hide();
-                        unitPriceTextBox03.Hide();
-                        moneyTextBox03.Hide();
-                        remarks03.Hide();
-                        GrossMoneyTextBox03.Hide();
-                        break;
-                    case 3:
-                        mainCategoryComboBox04.Hide();
-                        itemComboBox04.Hide();
-                        BlandNameTextBox04.Hide();
-                        VarietyTextBox04.Hide();
-                        weightTextBox04.Hide();
-                        MiddleStoneTextBox04.Hide();
-                        SideStoneTextBox04.Hide();
-                        countTextBox04.Hide();
-                        unitPriceTextBox04.Hide();
-                        moneyTextBox04.Hide();
-                        remarks04.Hide();
-                        GrossMoneyTextBox04.Hide();
-                        break;
-                    case 4:
-                        mainCategoryComboBox05.Hide();
-                        itemComboBox05.Hide();
-                        BlandNameTextBox05.Hide();
-                        VarietyTextBox05.Hide();
-                        weightTextBox05.Hide();
-                        MiddleStoneTextBox05.Hide();
-                        SideStoneTextBox05.Hide();
-                        countTextBox05.Hide();
-                        unitPriceTextBox05.Hide();
-                        moneyTextBox05.Hide();
-                        remarks05.Hide();
-                        GrossMoneyTextBox05.Hide();
-                        break;
-                    case 5:
-                        mainCategoryComboBox06.Hide();
-                        itemComboBox06.Hide();
-                        BlandNameTextBox06.Hide();
-                        VarietyTextBox06.Hide();
-                        weightTextBox06.Hide();
-                        MiddleStoneTextBox06.Hide();
-                        SideStoneTextBox06.Hide();
-                        countTextBox06.Hide();
-                        unitPriceTextBox06.Hide();
-                        moneyTextBox06.Hide();
-                        remarks06.Hide();
-                        GrossMoneyTextBox06.Hide();
-                        break;
-                    case 6:
-                        mainCategoryComboBox07.Hide();
-                        itemComboBox07.Hide();
-                        BlandNameTextBox07.Hide();
-                        VarietyTextBox07.Hide();
-                        weightTextBox07.Hide();
-                        MiddleStoneTextBox07.Hide();
-                        SideStoneTextBox07.Hide();
-                        countTextBox07.Hide();
-                        unitPriceTextBox07.Hide();
-                        moneyTextBox07.Hide();
-                        remarks07.Hide();
-                        GrossMoneyTextBox07.Hide();
-                        break;
-                    case 7:
-                        mainCategoryComboBox08.Hide();
-                        itemComboBox08.Hide();
-                        BlandNameTextBox08.Hide();
-                        VarietyTextBox08.Hide();
-                        weightTextBox08.Hide();
-                        MiddleStoneTextBox08.Hide();
-                        SideStoneTextBox08.Hide();
-                        countTextBox08.Hide();
-                        unitPriceTextBox08.Hide();
-                        moneyTextBox08.Hide();
-                        remarks08.Hide();
-                        GrossMoneyTextBox08.Hide();
-                        break;
-                    case 8:
-                        mainCategoryComboBox09.Hide();
-                        itemComboBox09.Hide();
-                        BlandNameTextBox09.Hide();
-                        VarietyTextBox09.Hide();
-                        weightTextBox09.Hide();
-                        MiddleStoneTextBox09.Hide();
-                        SideStoneTextBox09.Hide();
-                        countTextBox09.Hide();
-                        unitPriceTextBox09.Hide();
-                        moneyTextBox09.Hide();
-                        remarks09.Hide();
-                        GrossMoneyTextBox09.Hide();
-                        break;
-                    case 9:
-                        mainCategoryComboBox010.Hide();
-                        itemComboBox010.Hide();
-                        BlandNameTextBox010.Hide();
-                        VarietyTextBox010.Hide();
-                        weightTextBox010.Hide();
-                        MiddleStoneTextBox010.Hide();
-                        SideStoneTextBox010.Hide();
-                        countTextBox010.Hide();
-                        unitPriceTextBox010.Hide();
-                        moneyTextBox010.Hide();
-                        remarks010.Hide();
-                        GrossMoneyTextBox010.Hide();
-                        break;
-                    case 10:
-                        mainCategoryComboBox011.Hide();
-                        itemComboBox011.Hide();
-                        BlandNameTextBox011.Hide();
-                        VarietyTextBox011.Hide();
-                        weightTextBox011.Hide();
-                        MiddleStoneTextBox011.Hide();
-                        SideStoneTextBox011.Hide();
-                        countTextBox011.Hide();
-                        unitPriceTextBox011.Hide();
-                        moneyTextBox011.Hide();
-                        remarks011.Hide();
-                        GrossMoneyTextBox011.Hide();
-                        break;
-                    case 11:
-                        mainCategoryComboBox012.Hide();
-                        itemComboBox012.Hide();
-                        BlandNameTextBox012.Hide();
-                        VarietyTextBox012.Hide();
-                        weightTextBox012.Hide();
-                        MiddleStoneTextBox012.Hide();
-                        SideStoneTextBox012.Hide();
-                        countTextBox012.Hide();
-                        unitPriceTextBox012.Hide();
-                        moneyTextBox012.Hide();
-                        remarks012.Hide();
-                        GrossMoneyTextBox012.Hide();
-                        break;
-                    default:
-                        break;
-                }
+                case 0:
+                    mainCategoryComboBox01.Hide();
+                    itemComboBox01.Hide();
+                    weightTextBox01.Hide();
+                    countTextBox01.Hide();
+                    unitPriceTextBox01.Hide();
+                    moneyTextBox01.Hide();
+                    remarks01.Hide();
+                    break;
+                case 1:
+                    mainCategoryComboBox02.Hide();
+                    itemComboBox02.Hide();
+                    weightTextBox02.Hide();
+                    countTextBox02.Hide();
+                    unitPriceTextBox02.Hide();
+                    moneyTextBox02.Hide();
+                    remarks02.Hide();
+                    break;
+                case 2:
+                    mainCategoryComboBox03.Hide();
+                    itemComboBox03.Hide();
+                    weightTextBox03.Hide();
+                    countTextBox03.Hide();
+                    unitPriceTextBox03.Hide();
+                    moneyTextBox03.Hide();
+                    remarks03.Hide();
+                    break;
+                case 3:
+                    mainCategoryComboBox04.Hide();
+                    itemComboBox04.Hide();
+                    weightTextBox04.Hide();
+                    countTextBox04.Hide();
+                    unitPriceTextBox04.Hide();
+                    moneyTextBox04.Hide();
+                    remarks04.Hide();
+                    break;
+                case 4:
+                    mainCategoryComboBox05.Hide();
+                    itemComboBox05.Hide();
+                    weightTextBox05.Hide();
+                    countTextBox05.Hide();
+                    unitPriceTextBox05.Hide();
+                    moneyTextBox05.Hide();
+                    remarks05.Hide();
+                    break;
+                case 5:
+                    mainCategoryComboBox06.Hide();
+                    itemComboBox06.Hide();
+                    weightTextBox06.Hide();
+                    countTextBox06.Hide();
+                    unitPriceTextBox06.Hide();
+                    moneyTextBox06.Hide();
+                    remarks06.Hide();
+                    break;
+                case 6:
+                    mainCategoryComboBox07.Hide();
+                    itemComboBox07.Hide();
+                    weightTextBox07.Hide();
+                    countTextBox07.Hide();
+                    unitPriceTextBox07.Hide();
+                    moneyTextBox07.Hide();
+                    remarks07.Hide();
+                    break;
+                case 7:
+                    mainCategoryComboBox08.Hide();
+                    itemComboBox08.Hide();
+                    weightTextBox08.Hide();
+                    countTextBox08.Hide();
+                    unitPriceTextBox08.Hide();
+                    moneyTextBox08.Hide();
+                    remarks08.Hide();
+                    break;
+                case 8:
+                    mainCategoryComboBox09.Hide();
+                    itemComboBox09.Hide();
+                    weightTextBox09.Hide();
+                    countTextBox09.Hide();
+                    unitPriceTextBox09.Hide();
+                    moneyTextBox09.Hide();
+                    remarks09.Hide();
+                    break;
+                case 9:
+                    mainCategoryComboBox010.Hide();
+                    itemComboBox010.Hide();
+                    weightTextBox010.Hide();
+                    countTextBox010.Hide();
+                    unitPriceTextBox010.Hide();
+                    moneyTextBox010.Hide();
+                    remarks010.Hide();
+                    break;
+                case 10:
+                    mainCategoryComboBox011.Hide();
+                    itemComboBox011.Hide();
+                    weightTextBox011.Hide();
+                    countTextBox011.Hide();
+                    unitPriceTextBox011.Hide();
+                    moneyTextBox011.Hide();
+                    remarks011.Hide();
+                    break;
+                case 11:
+                    mainCategoryComboBox012.Hide();
+                    itemComboBox012.Hide();
+                    weightTextBox012.Hide();
+                    countTextBox012.Hide();
+                    unitPriceTextBox012.Hide();
+                    moneyTextBox012.Hide();
+                    remarks012.Hide();
+                    break;
+                default:
+                    break;
             }
-            com = 0;
+            com--;
         }
 
 
         #endregion
+
+
+
 
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
@@ -3436,7 +3316,7 @@ namespace Flawless_ex
 
                 if (type == 0)
                 {
-                    string companyName = row["company_name"].ToString();
+                    string companyNmae = row["company_name"].ToString();
                     string shopName = row["shop_name"].ToString();
                     string staff_name = row["staff_name"].ToString();
                     string address = row["address"].ToString();
@@ -3444,7 +3324,7 @@ namespace Flawless_ex
                     string remarks = row["remarks"].ToString();
 
                     typeTextBox2.Text = "法人";
-                    companyTextBox2.Text = companyName;
+                    companyTextBox2.Text = companyNmae;
                     shopNameTextBox2.Text = shopName;
                     clientNameTextBox2.Text = staff_name;
                     addressTextBox2.Text = address;
@@ -3499,7 +3379,7 @@ namespace Flawless_ex
             DataTable dt = new DataTable();
             string sql_str = "Insert into statement_data VALUES ( " + staff_id + " , " +  staff_id  + " , " + staff_id + " , " + TotalWeight + " ,  " + Amount + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -3509,7 +3389,7 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             string sql_str2 = "Insert into statement_calc_data VALUES ( " + staff_id + " , " + staff_id + " , " +  Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount +  " , '" + Remarks + "' , '" + staff_id + "' , '" + BrandName + "' , '" + Types +  "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
@@ -3557,6 +3437,11 @@ namespace Flawless_ex
             else if (dialog == DialogResult.Cancel) { }
 
             textBox302.Text = path;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

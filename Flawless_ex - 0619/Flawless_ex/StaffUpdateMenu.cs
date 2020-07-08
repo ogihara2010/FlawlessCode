@@ -22,7 +22,6 @@ namespace Flawless_ex
         {
             InitializeComponent();
 
-
             this.master = master;
             this.staffCode = staff_code;//選択した担当者コード
             this.code = code;
@@ -48,7 +47,7 @@ namespace Flawless_ex
                 NpgsqlCommandBuilder builder;
 
 
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update staff_m set invalid = 1 where staff_code = " + staffCode + "";
@@ -102,7 +101,7 @@ namespace Flawless_ex
             access = access_auth;
             access_auth = this.accessButton.Text;//アクセス権限
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
             string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' where staff_code =" + staffCode + " ";
 
@@ -170,7 +169,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staffCode + "";
 
@@ -188,7 +187,7 @@ namespace Flawless_ex
 
             //担当者ごとの大分類の初期値を先頭に
             DataTable dt1 = new DataTable();
-            string sql_str2 = "select* from main_category_m order by main_category_code = " + main_category + "desc;";
+            string sql_str2 = "select * from main_category_m order by main_category_code = " + main_category + "desc;";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt1);
 
