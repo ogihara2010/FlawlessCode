@@ -10,10 +10,12 @@ namespace Flawless_ex
         MasterMaintenanceMenu masterMenu;
         MasterMaintenanceMenu_BC masterMenu_BC;
         DataTable dt = new DataTable();
-        public ClientMaster(MasterMaintenanceMenu mster)
+        int staff_code;
+        public ClientMaster(MasterMaintenanceMenu mster, int staff_code)
         {
             InitializeComponent();
             masterMenu = mster;
+            this.staff_code = staff_code;
         }
         public ClientMaster(MasterMaintenanceMenu_BC mster_BC)
         {
@@ -30,7 +32,7 @@ namespace Flawless_ex
 
         private void Add_Click(object sender, EventArgs e)
         {
-            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu);
+            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu, staff_code);
             this.Close();
             clientMaster_Add.Show();
         }
@@ -107,14 +109,14 @@ namespace Flawless_ex
                 {
                     address = this.addressTextBox.Text;
 
-                    string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address like '%" + address + "%' "; //住所部分一致検索
+                    string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address like '%" + address + "%' )"; //住所部分一致検索
                     conn.Open();
 
                     adapter = new NpgsqlDataAdapter(sql2, conn);
                     adapter.Fill(dt);
 
                     conn.Close();
-                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check);
+                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
                     this.Close();
                     clientMastersearch.Show();
 
@@ -123,14 +125,14 @@ namespace Flawless_ex
                 {
                     address = "";
 
-                    string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address = '" + address + "' ";
+                    string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address = '" + address + "' )";
                     conn.Open();
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt);
 
                     conn.Close();
-                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check);
+                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
                     this.Close();
                     clientMastersearch.Show();
                 }//法人終了
@@ -170,28 +172,29 @@ namespace Flawless_ex
                     if (radioButton1.Checked == true)//古物商許可証あり
                     {
                         check = 0;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where type = 1 and name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is not null "; //住所部分一致検索
+                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is not null )"; //住所部分一致検索
                         conn.Open();
 
                         adapter = new NpgsqlDataAdapter(sql2, conn);
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check);
+                        conn.Close();
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
                         this.Close();
                         clientMastersearch.Show();
                     }
                     else if (radioButton2.Checked == true)//古物商許可証なし
                     {
                         check = 1;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where type = 1 and name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is null "; //住所部分一致検索
+                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is null )"; //住所部分一致検索
                         conn.Open();
 
                         adapter = new NpgsqlDataAdapter(sql2, conn);
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
                         this.Close();
                         clientMastersearch.Show();
                     }
@@ -207,28 +210,28 @@ namespace Flawless_ex
                     if (radioButton1.Checked == true)//古物商許可証あり
                     {
                         check = 0;
-                        string sql2 = "select name,address, antique_license id_number from client_m_individual where type = 1 and name = '" + iname + "' " + search4 + " address like '" + iaddress + "' " + search5 + " antique_license is not null ";
+                        string sql2 = "select name,address, antique_license id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " address like '" + iaddress + "' " + search5 + " antique_license is not null )";
                         conn.Open();
 
                         adapter = new NpgsqlDataAdapter(sql2, conn);
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
                         this.Close();
                         clientMastersearch.Show();
                     }
                     else if (radioButton2.Checked == true)//古物商許可証なし
                     {
                         check = 1;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where type = 1 and name = '" + iname + "' " + search4 + " address like '" + iaddress + "' " + search5 + " antique_license is null ";
+                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " address like '" + iaddress + "' " + search5 + " antique_license is null )";
                         conn.Open();
 
                         adapter = new NpgsqlDataAdapter(sql2, conn);
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
                         this.Close();
                         clientMastersearch.Show();
                     }

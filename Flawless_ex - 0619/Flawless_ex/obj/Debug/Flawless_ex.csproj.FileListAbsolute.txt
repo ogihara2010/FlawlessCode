@@ -525,3 +525,4 @@ C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Deb
 C:\Users\fpadmin\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.ClientMaster_UPD.resources
 C:\Users\fpadmin\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.client_search_result.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.client_search_result.resources
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.csprojAssemblyReference.cache
