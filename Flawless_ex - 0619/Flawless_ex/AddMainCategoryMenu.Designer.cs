@@ -41,60 +41,67 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 27);
+            this.label1.Location = new System.Drawing.Point(10, 14);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 24);
+            this.label1.Size = new System.Drawing.Size(68, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "大分類コード";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 74);
+            this.label2.Location = new System.Drawing.Point(10, 37);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 24);
+            this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "大分類名";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(186, 27);
+            this.label3.Location = new System.Drawing.Point(86, 14);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 24);
+            this.label3.Size = new System.Drawing.Size(11, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(186, 74);
+            this.label4.Location = new System.Drawing.Point(86, 37);
+            this.label4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 24);
+            this.label4.Size = new System.Drawing.Size(11, 12);
             this.label4.TabIndex = 3;
             this.label4.Text = "：";
             // 
             // mainCategoryCodeTextBox
             // 
             this.mainCategoryCodeTextBox.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(214, 27);
+            this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(99, 14);
+            this.mainCategoryCodeTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.mainCategoryCodeTextBox.Name = "mainCategoryCodeTextBox";
             this.mainCategoryCodeTextBox.ReadOnly = true;
-            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(167, 31);
+            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(79, 19);
             this.mainCategoryCodeTextBox.TabIndex = 4;
             // 
             // mainCategoryNameTextBox
             // 
-            this.mainCategoryNameTextBox.Location = new System.Drawing.Point(214, 74);
+            this.mainCategoryNameTextBox.Location = new System.Drawing.Point(99, 37);
+            this.mainCategoryNameTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.mainCategoryNameTextBox.Name = "mainCategoryNameTextBox";
-            this.mainCategoryNameTextBox.Size = new System.Drawing.Size(167, 31);
+            this.mainCategoryNameTextBox.Size = new System.Drawing.Size(79, 19);
             this.mainCategoryNameTextBox.TabIndex = 5;
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(25, 278);
+            this.returnButton.Location = new System.Drawing.Point(12, 75);
+            this.returnButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(108, 54);
+            this.returnButton.Size = new System.Drawing.Size(87, 53);
             this.returnButton.TabIndex = 6;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -102,9 +109,10 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(493, 278);
+            this.addButton.Location = new System.Drawing.Point(126, 75);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(108, 54);
+            this.addButton.Size = new System.Drawing.Size(97, 53);
             this.addButton.TabIndex = 7;
             this.addButton.Text = "登録";
             this.addButton.UseVisualStyleBackColor = true;
@@ -112,9 +120,9 @@
             // 
             // AddMainCategoryMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 375);
+            this.ClientSize = new System.Drawing.Size(240, 140);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.mainCategoryNameTextBox);
@@ -123,6 +131,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Name = "AddMainCategoryMenu";
             this.Text = "大分類マスタメンテナンス　新規登録";
             this.Load += new System.EventHandler(this.AddMainCategoryMenu_Load);

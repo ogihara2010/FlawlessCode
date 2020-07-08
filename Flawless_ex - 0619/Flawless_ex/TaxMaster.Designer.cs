@@ -76,6 +76,8 @@
             this.taxPercent.Name = "taxPercent";
             this.taxPercent.Size = new System.Drawing.Size(79, 31);
             this.taxPercent.TabIndex = 3;
+            this.taxPercent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.taxPercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.taxPercent_KeyPress);
             // 
             // label2
             // 

@@ -29,9 +29,6 @@ namespace Flawless_ex
 
         }
 
-
-
-
         private void updateButtonClick(object sender, EventArgs e)
         {
             int code = (int)dataGridView1.CurrentRow.Cells[0].Value; //選択した担当者コードを取得

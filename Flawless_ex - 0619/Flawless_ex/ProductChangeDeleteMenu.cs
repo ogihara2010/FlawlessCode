@@ -26,7 +26,7 @@ namespace Flawless_ex
             this.staff_code = staff_code;
         }
 
-        private void ProductChangeDeleteMenu_Load(object sender, EventArgs e)
+        private void ProductChangeDeleteMenu_Load(object sender, EventArgs e)   //画面起動時
         {
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             productCodeTextBox.Text = puroductCode.ToString();
@@ -97,12 +97,19 @@ namespace Flawless_ex
             else { }
         }
 
-        private void updateButton_Click(object sender, EventArgs e)
+        private void updateButton_Click(object sender, EventArgs e)     //更新時
         {
 
 
             DialogResult result = MessageBox.Show("更新をしますか？", "確認", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
+
+            if (result == DialogResult.Yes && string.IsNullOrEmpty(productNameTextBox.Text))
+            {
+                MessageBox.Show("品名が入力されておりません。", "品名未入力", MessageBoxButtons.OK);
+            }
+            else { }
+
+            if (result == DialogResult.Yes && !(string.IsNullOrEmpty(productNameTextBox.Text)))
             {
                 DateTime dat = DateTime.Now;
                 string iname = productNameTextBox.Text;//品名

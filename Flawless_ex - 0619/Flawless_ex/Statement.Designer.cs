@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SettlementDayBox = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button13 = new System.Windows.Forms.Button();
             this.textBox302 = new System.Windows.Forms.TextBox();
             this.button12 = new System.Windows.Forms.Button();
@@ -39,342 +42,131 @@
             this.button11 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.add = new System.Windows.Forms.Button();
-            this.calcButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel13 = new System.Windows.Forms.FlowLayoutPanel();
             this.label30 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel10 = new System.Windows.Forms.FlowLayoutPanel();
-            this.sumTextBox = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel11 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel9 = new System.Windows.Forms.FlowLayoutPanel();
-            this.taxAmount = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel8 = new System.Windows.Forms.FlowLayoutPanel();
-            this.subTotal = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
             this.label29 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.subTotal = new System.Windows.Forms.TextBox();
+            this.taxAmount = new System.Windows.Forms.TextBox();
+            this.sumTextBox = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.brandname0 = new System.Windows.Forms.TextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label34 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label35 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label32 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel101 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox12 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel100 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox12 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel95 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox11 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel47 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox4 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel89 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox11 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel88 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox10 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel87 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox10 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel81 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox9 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel80 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox9 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel74 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox8 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel73 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox8 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel67 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox7 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel66 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox7 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel60 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox6 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel59 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox6 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel21 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label31 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel53 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox5 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel52 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox5 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel46 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox4 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel45 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox4 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel39 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox3 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel38 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox3 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel32 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox2 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel31 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox2 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel25 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox1 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel24 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox1 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel15 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel14 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox0 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.itemComboBox0 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel20 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks0 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel30 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks1 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel37 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel44 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks3 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel51 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks4 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel58 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks5 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel65 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks6 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel72 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks7 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel79 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks8 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel86 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks9 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel93 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks10 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel99 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks11 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel106 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks12 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel19 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label27 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox0 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel29 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox1 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel36 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel43 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox3 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel50 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox4 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel57 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox5 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel64 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox6 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel71 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox7 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel78 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox8 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel85 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox9 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel92 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox10 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel98 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox11 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel105 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox12 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel18 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label25 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox0 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel28 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox1 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel35 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel42 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox3 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel49 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox4 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel56 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox5 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel63 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox6 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel70 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox7 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel77 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox8 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel84 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox9 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel91 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox10 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel97 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox11 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel104 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox12 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel17 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label24 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox0 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel27 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox1 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel34 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel41 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox3 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel48 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox4 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel62 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox6 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel23 = new System.Windows.Forms.FlowLayoutPanel();
-            this.totalCount = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel55 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox5 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel69 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox7 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel76 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox8 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel83 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox9 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel90 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox10 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel96 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox11 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel103 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox12 = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.itemComboBox1 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox2 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox3 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox4 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox5 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox6 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox7 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox8 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox9 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox10 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox11 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox12 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox0 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox1 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox2 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox3 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox4 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox5 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox6 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox7 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox8 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox9 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox10 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox11 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox12 = new System.Windows.Forms.ComboBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel16 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label23 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox0 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel26 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox1 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel33 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel40 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox3 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel54 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox5 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel61 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox6 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel68 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox7 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel75 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox8 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel22 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.remarks0 = new System.Windows.Forms.TextBox();
+            this.remarks1 = new System.Windows.Forms.TextBox();
+            this.remarks2 = new System.Windows.Forms.TextBox();
+            this.remarks3 = new System.Windows.Forms.TextBox();
+            this.remarks4 = new System.Windows.Forms.TextBox();
+            this.remarks5 = new System.Windows.Forms.TextBox();
+            this.remarks6 = new System.Windows.Forms.TextBox();
+            this.remarks7 = new System.Windows.Forms.TextBox();
+            this.remarks8 = new System.Windows.Forms.TextBox();
+            this.remarks9 = new System.Windows.Forms.TextBox();
+            this.remarks10 = new System.Windows.Forms.TextBox();
+            this.remarks11 = new System.Windows.Forms.TextBox();
+            this.remarks12 = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.moneyTextBox0 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox1 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox2 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox3 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox4 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox5 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox6 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox7 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox8 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox9 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox10 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox11 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox12 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.countTextBox0 = new System.Windows.Forms.TextBox();
+            this.countTextBox1 = new System.Windows.Forms.TextBox();
+            this.countTextBox2 = new System.Windows.Forms.TextBox();
+            this.countTextBox3 = new System.Windows.Forms.TextBox();
+            this.countTextBox4 = new System.Windows.Forms.TextBox();
+            this.countTextBox7 = new System.Windows.Forms.TextBox();
+            this.countTextBox8 = new System.Windows.Forms.TextBox();
+            this.countTextBox9 = new System.Windows.Forms.TextBox();
+            this.countTextBox10 = new System.Windows.Forms.TextBox();
+            this.countTextBox11 = new System.Windows.Forms.TextBox();
+            this.countTextBox12 = new System.Windows.Forms.TextBox();
+            this.totalCount = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
             this.totalWeight = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel82 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox9 = new System.Windows.Forms.TextBox();
-            this.panel = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox10 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel94 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox11 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel102 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.unitPriceTextBox12 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox11 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox10 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox9 = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.unitPriceTextBox0 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox1 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox2 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox3 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox4 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox5 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox6 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox7 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox8 = new System.Windows.Forms.TextBox();
             this.weightTextBox12 = new System.Windows.Forms.TextBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.types0 = new System.Windows.Forms.TextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.midstone0 = new System.Windows.Forms.TextBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.wakiseki0 = new System.Windows.Forms.TextBox();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.brandname1 = new System.Windows.Forms.TextBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.types1 = new System.Windows.Forms.TextBox();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.midstone1 = new System.Windows.Forms.TextBox();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.wakiseki1 = new System.Windows.Forms.TextBox();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.brandname2 = new System.Windows.Forms.TextBox();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.types2 = new System.Windows.Forms.TextBox();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.midstone2 = new System.Windows.Forms.TextBox();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.wakiseki2 = new System.Windows.Forms.TextBox();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.wakiseki3 = new System.Windows.Forms.TextBox();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.brandname3 = new System.Windows.Forms.TextBox();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.types3 = new System.Windows.Forms.TextBox();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.brandname4 = new System.Windows.Forms.TextBox();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.midstone3 = new System.Windows.Forms.TextBox();
-            this.panel22 = new System.Windows.Forms.Panel();
-            this.types4 = new System.Windows.Forms.TextBox();
-            this.panel23 = new System.Windows.Forms.Panel();
-            this.midstone4 = new System.Windows.Forms.TextBox();
-            this.panel24 = new System.Windows.Forms.Panel();
-            this.wakiseki4 = new System.Windows.Forms.TextBox();
-            this.panel25 = new System.Windows.Forms.Panel();
-            this.brandname5 = new System.Windows.Forms.TextBox();
-            this.panel26 = new System.Windows.Forms.Panel();
-            this.types5 = new System.Windows.Forms.TextBox();
-            this.panel27 = new System.Windows.Forms.Panel();
-            this.midstone5 = new System.Windows.Forms.TextBox();
-            this.panel28 = new System.Windows.Forms.Panel();
-            this.wakiseki5 = new System.Windows.Forms.TextBox();
-            this.panel29 = new System.Windows.Forms.Panel();
-            this.brandname6 = new System.Windows.Forms.TextBox();
-            this.panel30 = new System.Windows.Forms.Panel();
-            this.types6 = new System.Windows.Forms.TextBox();
-            this.panel31 = new System.Windows.Forms.Panel();
-            this.midstone6 = new System.Windows.Forms.TextBox();
-            this.panel32 = new System.Windows.Forms.Panel();
-            this.wakiseki6 = new System.Windows.Forms.TextBox();
-            this.panel33 = new System.Windows.Forms.Panel();
-            this.brandname7 = new System.Windows.Forms.TextBox();
-            this.panel34 = new System.Windows.Forms.Panel();
-            this.types7 = new System.Windows.Forms.TextBox();
-            this.panel35 = new System.Windows.Forms.Panel();
-            this.midstone7 = new System.Windows.Forms.TextBox();
-            this.panel36 = new System.Windows.Forms.Panel();
-            this.wakiseki7 = new System.Windows.Forms.TextBox();
-            this.panel37 = new System.Windows.Forms.Panel();
-            this.brandname8 = new System.Windows.Forms.TextBox();
-            this.panel38 = new System.Windows.Forms.Panel();
-            this.brandname9 = new System.Windows.Forms.TextBox();
-            this.panel39 = new System.Windows.Forms.Panel();
-            this.brandname10 = new System.Windows.Forms.TextBox();
-            this.panel40 = new System.Windows.Forms.Panel();
-            this.brandname11 = new System.Windows.Forms.TextBox();
-            this.panel41 = new System.Windows.Forms.Panel();
-            this.brandname12 = new System.Windows.Forms.TextBox();
-            this.panel42 = new System.Windows.Forms.Panel();
-            this.types8 = new System.Windows.Forms.TextBox();
-            this.panel43 = new System.Windows.Forms.Panel();
-            this.types9 = new System.Windows.Forms.TextBox();
-            this.panel44 = new System.Windows.Forms.Panel();
-            this.types10 = new System.Windows.Forms.TextBox();
-            this.panel45 = new System.Windows.Forms.Panel();
-            this.types11 = new System.Windows.Forms.TextBox();
-            this.panel46 = new System.Windows.Forms.Panel();
-            this.types12 = new System.Windows.Forms.TextBox();
-            this.panel47 = new System.Windows.Forms.Panel();
-            this.midstone8 = new System.Windows.Forms.TextBox();
-            this.panel48 = new System.Windows.Forms.Panel();
-            this.wakiseki8 = new System.Windows.Forms.TextBox();
-            this.panel49 = new System.Windows.Forms.Panel();
-            this.midstone9 = new System.Windows.Forms.TextBox();
-            this.panel50 = new System.Windows.Forms.Panel();
-            this.wakiseki9 = new System.Windows.Forms.TextBox();
-            this.panel51 = new System.Windows.Forms.Panel();
-            this.midstone10 = new System.Windows.Forms.TextBox();
-            this.panel52 = new System.Windows.Forms.Panel();
-            this.wakiseki10 = new System.Windows.Forms.TextBox();
-            this.panel53 = new System.Windows.Forms.Panel();
-            this.midstone11 = new System.Windows.Forms.TextBox();
-            this.panel54 = new System.Windows.Forms.Panel();
-            this.wakiseki11 = new System.Windows.Forms.TextBox();
-            this.panel55 = new System.Windows.Forms.Panel();
-            this.midstone12 = new System.Windows.Forms.TextBox();
-            this.panel56 = new System.Windows.Forms.Panel();
-            this.wakiseki12 = new System.Windows.Forms.TextBox();
-            this.panel57 = new System.Windows.Forms.Panel();
-            this.totalmidstone = new System.Windows.Forms.TextBox();
-            this.panel58 = new System.Windows.Forms.Panel();
-            this.totalwakiseki = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.weightTextBox0 = new System.Windows.Forms.TextBox();
+            this.weightTextBox1 = new System.Windows.Forms.TextBox();
+            this.weightTextBox2 = new System.Windows.Forms.TextBox();
+            this.weightTextBox3 = new System.Windows.Forms.TextBox();
+            this.weightTextBox4 = new System.Windows.Forms.TextBox();
+            this.weightTextBox5 = new System.Windows.Forms.TextBox();
+            this.weightTextBox6 = new System.Windows.Forms.TextBox();
+            this.weightTextBox7 = new System.Windows.Forms.TextBox();
+            this.weightTextBox8 = new System.Windows.Forms.TextBox();
+            this.weightTextBox9 = new System.Windows.Forms.TextBox();
+            this.weightTextBox10 = new System.Windows.Forms.TextBox();
+            this.weightTextBox11 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.itemDetail0 = new System.Windows.Forms.TextBox();
+            this.itemDetail1 = new System.Windows.Forms.TextBox();
+            this.itemDetail2 = new System.Windows.Forms.TextBox();
+            this.itemDetail3 = new System.Windows.Forms.TextBox();
+            this.itemDetail4 = new System.Windows.Forms.TextBox();
+            this.itemDetail5 = new System.Windows.Forms.TextBox();
+            this.itemDetail6 = new System.Windows.Forms.TextBox();
+            this.itemDetail7 = new System.Windows.Forms.TextBox();
+            this.itemDetail8 = new System.Windows.Forms.TextBox();
+            this.itemDetail9 = new System.Windows.Forms.TextBox();
+            this.itemDetail10 = new System.Windows.Forms.TextBox();
+            this.itemDetail11 = new System.Windows.Forms.TextBox();
+            this.itemDetail12 = new System.Windows.Forms.TextBox();
+            this.countTextBox5 = new System.Windows.Forms.TextBox();
+            this.countTextBox6 = new System.Windows.Forms.TextBox();
             this.returnButton = new System.Windows.Forms.Button();
             this.previewButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -384,7 +176,9 @@
             this.clientRemarksTextBox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.registerDateTextBox = new System.Windows.Forms.TextBox();
             this.addressTextBox = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
             this.companyTextBox = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.clientNameTextBox = new System.Windows.Forms.TextBox();
@@ -415,10 +209,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.deliveryTextBox = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.documentNumberTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label27 = new System.Windows.Forms.Label();
             this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.documentNumberTextBox = new System.Windows.Forms.TextBox();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -443,30 +237,17 @@
             this.comboBox98 = new System.Windows.Forms.ComboBox();
             this.label84 = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
-            this.clear2 = new System.Windows.Forms.Button();
-            this.add2 = new System.Windows.Forms.Button();
-            this.calc2Button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel689 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label93 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel697 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label78 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel696 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label80 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel695 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label79 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel694 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox304 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel691 = new System.Windows.Forms.FlowLayoutPanel();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel693 = new System.Windows.Forms.FlowLayoutPanel();
             this.subTotal2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel690 = new System.Windows.Forms.FlowLayoutPanel();
-            this.sumTextBox2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel692 = new System.Windows.Forms.FlowLayoutPanel();
-            this.taxAmount2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel698 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label93 = new System.Windows.Forms.Label();
             this.label94 = new System.Windows.Forms.Label();
+            this.comboBox11 = new System.Windows.Forms.ComboBox();
+            this.tax = new System.Windows.Forms.TextBox();
+            this.taxAmount2 = new System.Windows.Forms.TextBox();
+            this.sumTextBox2 = new System.Windows.Forms.TextBox();
+            this.label79 = new System.Windows.Forms.Label();
             this.return2 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -476,7 +257,9 @@
             this.clientRemarksTextBox2 = new System.Windows.Forms.TextBox();
             this.label72 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
+            this.registerDateTextBox2 = new System.Windows.Forms.TextBox();
             this.addressTextBox2 = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.companyTextBox2 = new System.Windows.Forms.TextBox();
             this.label74 = new System.Windows.Forms.Label();
             this.clientNameTextBox2 = new System.Windows.Forms.TextBox();
@@ -485,518 +268,155 @@
             this.label76 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel588 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox012 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel589 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox012 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel590 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox011 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel591 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox011 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel592 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox010 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel593 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox010 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel594 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox09 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel595 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox09 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel596 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox09 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel597 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox08 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel598 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox08 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel599 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox07 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel600 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox07 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel601 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox07 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel602 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox06 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel603 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox06 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel604 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox06 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel605 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox06 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel606 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks05 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel607 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox05 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel608 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox05 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel609 = new System.Windows.Forms.FlowLayoutPanel();
-            this.totalCount2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel610 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label64 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel611 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox05 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel612 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox05 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel613 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox05 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel614 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox05 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel615 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks04 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel616 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox09 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel617 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox04 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel618 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox04 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel619 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox04 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel620 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox08 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel621 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox04 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel622 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox04 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel623 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks03 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel624 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox03 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel625 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox03 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel626 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox03 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel627 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox03 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel628 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox03 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel629 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox03 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel630 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks02 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel631 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox02 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel632 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox02 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel633 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox02 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel634 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox02 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel635 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox02 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel636 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox02 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel637 = new System.Windows.Forms.FlowLayoutPanel();
-            this.remarks01 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel638 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox04 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel639 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox01 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel640 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox01 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel641 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox01 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel642 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox01 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel643 = new System.Windows.Forms.FlowLayoutPanel();
-            this.itemComboBox01 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel644 = new System.Windows.Forms.FlowLayoutPanel();
-            this.mainCategoryComboBox01 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel645 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label65 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel647 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox00 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel648 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox00 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel649 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label39 = new System.Windows.Forms.Label();
             this.mainCategoryComboBox00 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel650 = new System.Windows.Forms.FlowLayoutPanel();
+            this.mainCategoryComboBox01 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox02 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox03 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox04 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox05 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox06 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox07 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox08 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox09 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox010 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox011 = new System.Windows.Forms.ComboBox();
+            this.mainCategoryComboBox012 = new System.Windows.Forms.ComboBox();
+            this.label65 = new System.Windows.Forms.Label();
             this.itemComboBox00 = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel651 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox00 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel652 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox00 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel653 = new System.Windows.Forms.FlowLayoutPanel();
-            this.textBox338 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel654 = new System.Windows.Forms.FlowLayoutPanel();
+            this.itemComboBox01 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox02 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox03 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox04 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox05 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox06 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox07 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox08 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox09 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox010 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox011 = new System.Windows.Forms.ComboBox();
+            this.itemComboBox012 = new System.Windows.Forms.ComboBox();
             this.label67 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel655 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label68 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel656 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label69 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel657 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label70 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel658 = new System.Windows.Forms.FlowLayoutPanel();
             this.label71 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel659 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox06 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel660 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox06 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel661 = new System.Windows.Forms.FlowLayoutPanel();
+            this.remarks00 = new System.Windows.Forms.TextBox();
+            this.remarks01 = new System.Windows.Forms.TextBox();
+            this.remarks02 = new System.Windows.Forms.TextBox();
+            this.remarks03 = new System.Windows.Forms.TextBox();
+            this.remarks04 = new System.Windows.Forms.TextBox();
+            this.remarks05 = new System.Windows.Forms.TextBox();
             this.remarks06 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel662 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox07 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel663 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox07 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel664 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox07 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel665 = new System.Windows.Forms.FlowLayoutPanel();
             this.remarks07 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel666 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox08 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel667 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox08 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel668 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox08 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel669 = new System.Windows.Forms.FlowLayoutPanel();
             this.remarks08 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel670 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox09 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel671 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox09 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel672 = new System.Windows.Forms.FlowLayoutPanel();
             this.remarks09 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel673 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox010 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel674 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox010 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel675 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox010 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel676 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox010 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel677 = new System.Windows.Forms.FlowLayoutPanel();
             this.remarks010 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel678 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox011 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel679 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox011 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel680 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox011 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel681 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox011 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel682 = new System.Windows.Forms.FlowLayoutPanel();
             this.remarks011 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel683 = new System.Windows.Forms.FlowLayoutPanel();
-            this.weightTextBox012 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel684 = new System.Windows.Forms.FlowLayoutPanel();
-            this.countTextBox012 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel685 = new System.Windows.Forms.FlowLayoutPanel();
-            this.unitPriceTextBox012 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel686 = new System.Windows.Forms.FlowLayoutPanel();
-            this.moneyTextBox012 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel687 = new System.Windows.Forms.FlowLayoutPanel();
             this.remarks012 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel688 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label70 = new System.Windows.Forms.Label();
+            this.moneyTextBox00 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox01 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox02 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox03 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox04 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox05 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox06 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox07 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox08 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox09 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox010 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox011 = new System.Windows.Forms.TextBox();
+            this.moneyTextBox012 = new System.Windows.Forms.TextBox();
+            this.totalCount2 = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
             this.totalWeight2 = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel646 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label66 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.countTextBox012 = new System.Windows.Forms.TextBox();
+            this.countTextBox011 = new System.Windows.Forms.TextBox();
+            this.countTextBox010 = new System.Windows.Forms.TextBox();
+            this.countTextBox09 = new System.Windows.Forms.TextBox();
+            this.countTextBox08 = new System.Windows.Forms.TextBox();
+            this.countTextBox07 = new System.Windows.Forms.TextBox();
+            this.countTextBox06 = new System.Windows.Forms.TextBox();
+            this.countTextBox05 = new System.Windows.Forms.TextBox();
+            this.countTextBox04 = new System.Windows.Forms.TextBox();
+            this.countTextBox03 = new System.Windows.Forms.TextBox();
+            this.countTextBox02 = new System.Windows.Forms.TextBox();
+            this.countTextBox01 = new System.Windows.Forms.TextBox();
+            this.countTextBox00 = new System.Windows.Forms.TextBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.unitPriceTextBox00 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox01 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox02 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox03 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox04 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox05 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox06 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox07 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox08 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox09 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox010 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox011 = new System.Windows.Forms.TextBox();
+            this.unitPriceTextBox012 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.weightTextBox00 = new System.Windows.Forms.TextBox();
+            this.weightTextBox01 = new System.Windows.Forms.TextBox();
+            this.weightTextBox02 = new System.Windows.Forms.TextBox();
+            this.weightTextBox03 = new System.Windows.Forms.TextBox();
+            this.weightTextBox04 = new System.Windows.Forms.TextBox();
+            this.weightTextBox05 = new System.Windows.Forms.TextBox();
+            this.weightTextBox06 = new System.Windows.Forms.TextBox();
+            this.weightTextBox07 = new System.Windows.Forms.TextBox();
+            this.weightTextBox08 = new System.Windows.Forms.TextBox();
+            this.weightTextBox09 = new System.Windows.Forms.TextBox();
+            this.weightTextBox010 = new System.Windows.Forms.TextBox();
+            this.weightTextBox011 = new System.Windows.Forms.TextBox();
+            this.weightTextBox012 = new System.Windows.Forms.TextBox();
+            this.itemDetail00 = new System.Windows.Forms.TextBox();
+            this.itemDetail01 = new System.Windows.Forms.TextBox();
+            this.itemDetail02 = new System.Windows.Forms.TextBox();
+            this.itemDetail03 = new System.Windows.Forms.TextBox();
+            this.itemDetail04 = new System.Windows.Forms.TextBox();
+            this.itemDetail05 = new System.Windows.Forms.TextBox();
+            this.itemDetail06 = new System.Windows.Forms.TextBox();
+            this.itemDetail07 = new System.Windows.Forms.TextBox();
+            this.itemDetail08 = new System.Windows.Forms.TextBox();
+            this.itemDetail09 = new System.Windows.Forms.TextBox();
+            this.itemDetail010 = new System.Windows.Forms.TextBox();
+            this.itemDetail011 = new System.Windows.Forms.TextBox();
+            this.itemDetail012 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label = new System.Windows.Forms.Label();
-            this.registerDateTextBox2 = new System.Windows.Forms.TextBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.registerDateTextBox = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel13.SuspendLayout();
-            this.flowLayoutPanel10.SuspendLayout();
-            this.flowLayoutPanel11.SuspendLayout();
-            this.flowLayoutPanel9.SuspendLayout();
-            this.flowLayoutPanel8.SuspendLayout();
-            this.flowLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.flowLayoutPanel101.SuspendLayout();
-            this.flowLayoutPanel100.SuspendLayout();
-            this.flowLayoutPanel95.SuspendLayout();
-            this.flowLayoutPanel47.SuspendLayout();
-            this.flowLayoutPanel89.SuspendLayout();
-            this.flowLayoutPanel88.SuspendLayout();
-            this.flowLayoutPanel87.SuspendLayout();
-            this.flowLayoutPanel81.SuspendLayout();
-            this.flowLayoutPanel80.SuspendLayout();
-            this.flowLayoutPanel74.SuspendLayout();
-            this.flowLayoutPanel73.SuspendLayout();
-            this.flowLayoutPanel67.SuspendLayout();
-            this.flowLayoutPanel66.SuspendLayout();
-            this.flowLayoutPanel60.SuspendLayout();
-            this.flowLayoutPanel59.SuspendLayout();
-            this.flowLayoutPanel21.SuspendLayout();
-            this.flowLayoutPanel53.SuspendLayout();
-            this.flowLayoutPanel52.SuspendLayout();
-            this.flowLayoutPanel46.SuspendLayout();
-            this.flowLayoutPanel45.SuspendLayout();
-            this.flowLayoutPanel39.SuspendLayout();
-            this.flowLayoutPanel38.SuspendLayout();
-            this.flowLayoutPanel32.SuspendLayout();
-            this.flowLayoutPanel31.SuspendLayout();
-            this.flowLayoutPanel25.SuspendLayout();
-            this.flowLayoutPanel24.SuspendLayout();
-            this.flowLayoutPanel15.SuspendLayout();
-            this.flowLayoutPanel14.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.flowLayoutPanel20.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
-            this.flowLayoutPanel30.SuspendLayout();
-            this.flowLayoutPanel37.SuspendLayout();
-            this.flowLayoutPanel44.SuspendLayout();
-            this.flowLayoutPanel51.SuspendLayout();
-            this.flowLayoutPanel58.SuspendLayout();
-            this.flowLayoutPanel65.SuspendLayout();
-            this.flowLayoutPanel72.SuspendLayout();
-            this.flowLayoutPanel79.SuspendLayout();
-            this.flowLayoutPanel86.SuspendLayout();
-            this.flowLayoutPanel93.SuspendLayout();
-            this.flowLayoutPanel99.SuspendLayout();
-            this.flowLayoutPanel106.SuspendLayout();
-            this.flowLayoutPanel19.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            this.flowLayoutPanel29.SuspendLayout();
-            this.flowLayoutPanel36.SuspendLayout();
-            this.flowLayoutPanel43.SuspendLayout();
-            this.flowLayoutPanel50.SuspendLayout();
-            this.flowLayoutPanel57.SuspendLayout();
-            this.flowLayoutPanel64.SuspendLayout();
-            this.flowLayoutPanel71.SuspendLayout();
-            this.flowLayoutPanel78.SuspendLayout();
-            this.flowLayoutPanel85.SuspendLayout();
-            this.flowLayoutPanel92.SuspendLayout();
-            this.flowLayoutPanel98.SuspendLayout();
-            this.flowLayoutPanel105.SuspendLayout();
-            this.flowLayoutPanel18.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
-            this.flowLayoutPanel28.SuspendLayout();
-            this.flowLayoutPanel35.SuspendLayout();
-            this.flowLayoutPanel42.SuspendLayout();
-            this.flowLayoutPanel49.SuspendLayout();
-            this.flowLayoutPanel56.SuspendLayout();
-            this.flowLayoutPanel63.SuspendLayout();
-            this.flowLayoutPanel70.SuspendLayout();
-            this.flowLayoutPanel77.SuspendLayout();
-            this.flowLayoutPanel84.SuspendLayout();
-            this.flowLayoutPanel91.SuspendLayout();
-            this.flowLayoutPanel97.SuspendLayout();
-            this.flowLayoutPanel104.SuspendLayout();
-            this.flowLayoutPanel17.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel27.SuspendLayout();
-            this.flowLayoutPanel34.SuspendLayout();
-            this.flowLayoutPanel41.SuspendLayout();
-            this.flowLayoutPanel48.SuspendLayout();
-            this.flowLayoutPanel62.SuspendLayout();
-            this.flowLayoutPanel23.SuspendLayout();
-            this.flowLayoutPanel55.SuspendLayout();
-            this.flowLayoutPanel69.SuspendLayout();
-            this.flowLayoutPanel76.SuspendLayout();
-            this.flowLayoutPanel83.SuspendLayout();
-            this.flowLayoutPanel90.SuspendLayout();
-            this.flowLayoutPanel96.SuspendLayout();
-            this.flowLayoutPanel103.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.flowLayoutPanel16.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel26.SuspendLayout();
-            this.flowLayoutPanel33.SuspendLayout();
-            this.flowLayoutPanel40.SuspendLayout();
-            this.flowLayoutPanel54.SuspendLayout();
-            this.flowLayoutPanel61.SuspendLayout();
-            this.flowLayoutPanel68.SuspendLayout();
-            this.flowLayoutPanel75.SuspendLayout();
-            this.flowLayoutPanel22.SuspendLayout();
-            this.flowLayoutPanel82.SuspendLayout();
-            this.panel.SuspendLayout();
-            this.flowLayoutPanel94.SuspendLayout();
-            this.flowLayoutPanel102.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.panel20.SuspendLayout();
-            this.panel21.SuspendLayout();
-            this.panel22.SuspendLayout();
-            this.panel23.SuspendLayout();
-            this.panel24.SuspendLayout();
-            this.panel25.SuspendLayout();
-            this.panel26.SuspendLayout();
-            this.panel27.SuspendLayout();
-            this.panel28.SuspendLayout();
-            this.panel29.SuspendLayout();
-            this.panel30.SuspendLayout();
-            this.panel31.SuspendLayout();
-            this.panel32.SuspendLayout();
-            this.panel33.SuspendLayout();
-            this.panel34.SuspendLayout();
-            this.panel35.SuspendLayout();
-            this.panel36.SuspendLayout();
-            this.panel37.SuspendLayout();
-            this.panel38.SuspendLayout();
-            this.panel39.SuspendLayout();
-            this.panel40.SuspendLayout();
-            this.panel41.SuspendLayout();
-            this.panel42.SuspendLayout();
-            this.panel43.SuspendLayout();
-            this.panel44.SuspendLayout();
-            this.panel45.SuspendLayout();
-            this.panel46.SuspendLayout();
-            this.panel47.SuspendLayout();
-            this.panel48.SuspendLayout();
-            this.panel49.SuspendLayout();
-            this.panel50.SuspendLayout();
-            this.panel51.SuspendLayout();
-            this.panel52.SuspendLayout();
-            this.panel53.SuspendLayout();
-            this.panel54.SuspendLayout();
-            this.panel55.SuspendLayout();
-            this.panel56.SuspendLayout();
-            this.panel57.SuspendLayout();
-            this.panel58.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel14.SuspendLayout();
-            this.flowLayoutPanel689.SuspendLayout();
-            this.flowLayoutPanel697.SuspendLayout();
-            this.flowLayoutPanel696.SuspendLayout();
-            this.flowLayoutPanel695.SuspendLayout();
-            this.flowLayoutPanel694.SuspendLayout();
-            this.flowLayoutPanel691.SuspendLayout();
-            this.flowLayoutPanel693.SuspendLayout();
-            this.flowLayoutPanel690.SuspendLayout();
-            this.flowLayoutPanel692.SuspendLayout();
-            this.flowLayoutPanel698.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
-            this.flowLayoutPanel588.SuspendLayout();
-            this.flowLayoutPanel589.SuspendLayout();
-            this.flowLayoutPanel590.SuspendLayout();
-            this.flowLayoutPanel591.SuspendLayout();
-            this.flowLayoutPanel592.SuspendLayout();
-            this.flowLayoutPanel593.SuspendLayout();
-            this.flowLayoutPanel594.SuspendLayout();
-            this.flowLayoutPanel595.SuspendLayout();
-            this.flowLayoutPanel596.SuspendLayout();
-            this.flowLayoutPanel597.SuspendLayout();
-            this.flowLayoutPanel598.SuspendLayout();
-            this.flowLayoutPanel599.SuspendLayout();
-            this.flowLayoutPanel600.SuspendLayout();
-            this.flowLayoutPanel601.SuspendLayout();
-            this.flowLayoutPanel602.SuspendLayout();
-            this.flowLayoutPanel603.SuspendLayout();
-            this.flowLayoutPanel604.SuspendLayout();
-            this.flowLayoutPanel605.SuspendLayout();
-            this.flowLayoutPanel606.SuspendLayout();
-            this.flowLayoutPanel607.SuspendLayout();
-            this.flowLayoutPanel608.SuspendLayout();
-            this.flowLayoutPanel609.SuspendLayout();
-            this.flowLayoutPanel610.SuspendLayout();
-            this.flowLayoutPanel611.SuspendLayout();
-            this.flowLayoutPanel612.SuspendLayout();
-            this.flowLayoutPanel613.SuspendLayout();
-            this.flowLayoutPanel614.SuspendLayout();
-            this.flowLayoutPanel615.SuspendLayout();
-            this.flowLayoutPanel616.SuspendLayout();
-            this.flowLayoutPanel617.SuspendLayout();
-            this.flowLayoutPanel618.SuspendLayout();
-            this.flowLayoutPanel619.SuspendLayout();
-            this.flowLayoutPanel620.SuspendLayout();
-            this.flowLayoutPanel621.SuspendLayout();
-            this.flowLayoutPanel622.SuspendLayout();
-            this.flowLayoutPanel623.SuspendLayout();
-            this.flowLayoutPanel624.SuspendLayout();
-            this.flowLayoutPanel625.SuspendLayout();
-            this.flowLayoutPanel626.SuspendLayout();
-            this.flowLayoutPanel627.SuspendLayout();
-            this.flowLayoutPanel628.SuspendLayout();
-            this.flowLayoutPanel629.SuspendLayout();
-            this.flowLayoutPanel630.SuspendLayout();
-            this.flowLayoutPanel631.SuspendLayout();
-            this.flowLayoutPanel632.SuspendLayout();
-            this.flowLayoutPanel633.SuspendLayout();
-            this.flowLayoutPanel634.SuspendLayout();
-            this.flowLayoutPanel635.SuspendLayout();
-            this.flowLayoutPanel636.SuspendLayout();
-            this.flowLayoutPanel637.SuspendLayout();
-            this.flowLayoutPanel638.SuspendLayout();
-            this.flowLayoutPanel639.SuspendLayout();
-            this.flowLayoutPanel640.SuspendLayout();
-            this.flowLayoutPanel641.SuspendLayout();
-            this.flowLayoutPanel642.SuspendLayout();
-            this.flowLayoutPanel643.SuspendLayout();
-            this.flowLayoutPanel644.SuspendLayout();
-            this.flowLayoutPanel645.SuspendLayout();
-            this.flowLayoutPanel647.SuspendLayout();
-            this.flowLayoutPanel648.SuspendLayout();
-            this.flowLayoutPanel649.SuspendLayout();
-            this.flowLayoutPanel650.SuspendLayout();
-            this.flowLayoutPanel651.SuspendLayout();
-            this.flowLayoutPanel652.SuspendLayout();
-            this.flowLayoutPanel653.SuspendLayout();
-            this.flowLayoutPanel654.SuspendLayout();
-            this.flowLayoutPanel655.SuspendLayout();
-            this.flowLayoutPanel656.SuspendLayout();
-            this.flowLayoutPanel657.SuspendLayout();
-            this.flowLayoutPanel658.SuspendLayout();
-            this.flowLayoutPanel659.SuspendLayout();
-            this.flowLayoutPanel660.SuspendLayout();
-            this.flowLayoutPanel661.SuspendLayout();
-            this.flowLayoutPanel662.SuspendLayout();
-            this.flowLayoutPanel663.SuspendLayout();
-            this.flowLayoutPanel664.SuspendLayout();
-            this.flowLayoutPanel665.SuspendLayout();
-            this.flowLayoutPanel666.SuspendLayout();
-            this.flowLayoutPanel667.SuspendLayout();
-            this.flowLayoutPanel668.SuspendLayout();
-            this.flowLayoutPanel669.SuspendLayout();
-            this.flowLayoutPanel670.SuspendLayout();
-            this.flowLayoutPanel671.SuspendLayout();
-            this.flowLayoutPanel672.SuspendLayout();
-            this.flowLayoutPanel673.SuspendLayout();
-            this.flowLayoutPanel674.SuspendLayout();
-            this.flowLayoutPanel675.SuspendLayout();
-            this.flowLayoutPanel676.SuspendLayout();
-            this.flowLayoutPanel677.SuspendLayout();
-            this.flowLayoutPanel678.SuspendLayout();
-            this.flowLayoutPanel679.SuspendLayout();
-            this.flowLayoutPanel680.SuspendLayout();
-            this.flowLayoutPanel681.SuspendLayout();
-            this.flowLayoutPanel682.SuspendLayout();
-            this.flowLayoutPanel683.SuspendLayout();
-            this.flowLayoutPanel684.SuspendLayout();
-            this.flowLayoutPanel685.SuspendLayout();
-            this.flowLayoutPanel686.SuspendLayout();
-            this.flowLayoutPanel687.SuspendLayout();
-            this.flowLayoutPanel688.SuspendLayout();
-            this.flowLayoutPanel646.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(952, 12);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 24);
+            this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "担当者：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(121, 24);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(1045, 12);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 24);
+            this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "label2";
             // 
@@ -1004,16 +424,20 @@
             // 
             this.tabControl1.Controls.Add(this.SettlementDayBox);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(26, 53);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tabControl1.Location = new System.Drawing.Point(10, 12);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(3276, 1605);
+            this.tabControl1.Size = new System.Drawing.Size(1200, 787);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 3;
             // 
             // SettlementDayBox
             // 
             this.SettlementDayBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.SettlementDayBox.Controls.Add(this.label3);
+            this.SettlementDayBox.Controls.Add(this.textBox2);
             this.SettlementDayBox.Controls.Add(this.button13);
             this.SettlementDayBox.Controls.Add(this.textBox302);
             this.SettlementDayBox.Controls.Add(this.button12);
@@ -1021,9 +445,6 @@
             this.SettlementDayBox.Controls.Add(this.button11);
             this.SettlementDayBox.Controls.Add(this.textBox1);
             this.SettlementDayBox.Controls.Add(this.label9);
-            this.SettlementDayBox.Controls.Add(this.button3);
-            this.SettlementDayBox.Controls.Add(this.add);
-            this.SettlementDayBox.Controls.Add(this.calcButton);
             this.SettlementDayBox.Controls.Add(this.button1);
             this.SettlementDayBox.Controls.Add(this.tableLayoutPanel2);
             this.SettlementDayBox.Controls.Add(this.tableLayoutPanel1);
@@ -1040,40 +461,59 @@
             this.SettlementDayBox.Controls.Add(this.label5);
             this.SettlementDayBox.Controls.Add(this.deliveryTextBox);
             this.SettlementDayBox.Controls.Add(this.label4);
-            this.SettlementDayBox.Controls.Add(this.documentNumberTextBox);
-            this.SettlementDayBox.Controls.Add(this.label3);
-            this.SettlementDayBox.Location = new System.Drawing.Point(8, 39);
-            this.SettlementDayBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.SettlementDayBox.Location = new System.Drawing.Point(4, 23);
+            this.SettlementDayBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.SettlementDayBox.Name = "SettlementDayBox";
-            this.SettlementDayBox.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.SettlementDayBox.Size = new System.Drawing.Size(3260, 1558);
+            this.SettlementDayBox.Padding = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.SettlementDayBox.Size = new System.Drawing.Size(1192, 760);
             this.SettlementDayBox.TabIndex = 0;
             this.SettlementDayBox.Text = "計算書";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Location = new System.Drawing.Point(946, 15);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 86;
+            this.label3.Text = "伝票番号";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox2.Location = new System.Drawing.Point(1007, 12);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.Size = new System.Drawing.Size(105, 20);
+            this.textBox2.TabIndex = 85;
+            // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(2674, 1278);
-            this.button13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button13.Location = new System.Drawing.Point(994, 697);
+            this.button13.Margin = new System.Windows.Forms.Padding(2);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(182, 53);
+            this.button13.Size = new System.Drawing.Size(180, 46);
             this.button13.TabIndex = 47;
             this.button13.Text = "成績入力画面";
             this.button13.UseVisualStyleBackColor = true;
             // 
             // textBox302
             // 
-            this.textBox302.Location = new System.Drawing.Point(1035, 1339);
-            this.textBox302.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox302.Location = new System.Drawing.Point(496, 602);
+            this.textBox302.Margin = new System.Windows.Forms.Padding(2);
             this.textBox302.Name = "textBox302";
-            this.textBox302.Size = new System.Drawing.Size(148, 31);
+            this.textBox302.Size = new System.Drawing.Size(70, 20);
             this.textBox302.TabIndex = 46;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(1216, 1331);
-            this.button12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button12.Location = new System.Drawing.Point(581, 591);
+            this.button12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(152, 40);
+            this.button12.Size = new System.Drawing.Size(117, 40);
             this.button12.TabIndex = 45;
             this.button12.Text = "ファイルを選択";
             this.button12.UseVisualStyleBackColor = true;
@@ -1082,19 +522,19 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1031, 1291);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(406, 605);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(154, 24);
+            this.label10.Size = new System.Drawing.Size(85, 13);
             this.label10.TabIndex = 44;
             this.label10.Text = "古物商許可証";
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(1216, 1211);
-            this.button11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button11.Location = new System.Drawing.Point(576, 538);
+            this.button11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(152, 40);
+            this.button11.Size = new System.Drawing.Size(108, 38);
             this.button11.TabIndex = 40;
             this.button11.Text = "ファイルを選択";
             this.button11.UseVisualStyleBackColor = true;
@@ -1102,62 +542,28 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(1035, 1221);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBox1.Location = new System.Drawing.Point(492, 550);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 31);
+            this.textBox1.Size = new System.Drawing.Size(72, 20);
             this.textBox1.TabIndex = 43;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1031, 1193);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(418, 554);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(130, 24);
+            this.label9.Size = new System.Drawing.Size(72, 13);
             this.label9.TabIndex = 42;
             this.label9.Text = "登記簿謄本";
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(2605, 930);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(252, 53);
-            this.button3.TabIndex = 41;
-            this.button3.Text = "クリア";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // add
-            // 
-            this.add.AutoSize = true;
-            this.add.Location = new System.Drawing.Point(2323, 930);
-            this.add.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(252, 53);
-            this.add.TabIndex = 38;
-            this.add.Text = "追加";
-            this.add.UseVisualStyleBackColor = true;
-            this.add.Click += new System.EventHandler(this.add_Click);
-            // 
-            // calcButton
-            // 
-            this.calcButton.Location = new System.Drawing.Point(2050, 930);
-            this.calcButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.calcButton.Name = "calcButton";
-            this.calcButton.Size = new System.Drawing.Size(252, 53);
-            this.calcButton.TabIndex = 37;
-            this.calcButton.Text = "計算";
-            this.calcButton.UseVisualStyleBackColor = true;
-            this.calcButton.Click += new System.EventHandler(this.calcButton_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(273, 1304);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button1.Location = new System.Drawing.Point(120, 673);
+            this.button1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(245, 40);
+            this.button1.Size = new System.Drawing.Size(285, 42);
             this.button1.TabIndex = 1;
             this.button1.Text = "200万円以上の取引表示";
             this.button1.UseVisualStyleBackColor = true;
@@ -1167,3106 +573,1534 @@
             // 
             this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel13, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel10, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel11, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel9, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel8, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel12, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2570, 1024);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel2.Controls.Add(this.label30, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label29, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label26, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.subTotal, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.taxAmount, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.sumTextBox, 1, 2);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(770, 518);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(286, 128);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(250, 81);
             this.tableLayoutPanel2.TabIndex = 36;
-            // 
-            // flowLayoutPanel13
-            // 
-            this.flowLayoutPanel13.Controls.Add(this.label30);
-            this.flowLayoutPanel13.Location = new System.Drawing.Point(3, 90);
-            this.flowLayoutPanel13.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel13.Name = "flowLayoutPanel13";
-            this.flowLayoutPanel13.Size = new System.Drawing.Size(134, 32);
-            this.flowLayoutPanel13.TabIndex = 38;
             // 
             // label30
             // 
-            this.label30.Location = new System.Drawing.Point(2, 0);
-            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label30.Location = new System.Drawing.Point(2, 53);
+            this.label30.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(137, 43);
+            this.label30.Size = new System.Drawing.Size(72, 27);
             this.label30.TabIndex = 37;
             this.label30.Text = "合計";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flowLayoutPanel10
+            // label29
             // 
-            this.flowLayoutPanel10.Controls.Add(this.sumTextBox);
-            this.flowLayoutPanel10.Location = new System.Drawing.Point(145, 90);
-            this.flowLayoutPanel10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel10.Name = "flowLayoutPanel10";
-            this.flowLayoutPanel10.Size = new System.Drawing.Size(137, 32);
-            this.flowLayoutPanel10.TabIndex = 37;
-            // 
-            // sumTextBox
-            // 
-            this.sumTextBox.Location = new System.Drawing.Point(2, 5);
-            this.sumTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.sumTextBox.Name = "sumTextBox";
-            this.sumTextBox.ReadOnly = true;
-            this.sumTextBox.Size = new System.Drawing.Size(134, 31);
-            this.sumTextBox.TabIndex = 37;
-            // 
-            // flowLayoutPanel11
-            // 
-            this.flowLayoutPanel11.Controls.Add(this.label26);
-            this.flowLayoutPanel11.Location = new System.Drawing.Point(3, 6);
-            this.flowLayoutPanel11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel11.Name = "flowLayoutPanel11";
-            this.flowLayoutPanel11.Size = new System.Drawing.Size(134, 31);
-            this.flowLayoutPanel11.TabIndex = 37;
+            this.label29.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label29.Location = new System.Drawing.Point(2, 27);
+            this.label29.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(72, 25);
+            this.label29.TabIndex = 37;
+            this.label29.Text = "税額";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label26
             // 
             this.label26.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label26.Location = new System.Drawing.Point(2, 0);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Location = new System.Drawing.Point(2, 4);
+            this.label26.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(134, 37);
+            this.label26.Size = new System.Drawing.Size(72, 18);
             this.label26.TabIndex = 37;
             this.label26.Text = "小計";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flowLayoutPanel9
+            // subTotal
             // 
-            this.flowLayoutPanel9.Controls.Add(this.taxAmount);
-            this.flowLayoutPanel9.Location = new System.Drawing.Point(145, 48);
-            this.flowLayoutPanel9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel9.Name = "flowLayoutPanel9";
-            this.flowLayoutPanel9.Size = new System.Drawing.Size(137, 31);
-            this.flowLayoutPanel9.TabIndex = 37;
+            this.subTotal.Location = new System.Drawing.Point(77, 3);
+            this.subTotal.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.subTotal.Name = "subTotal";
+            this.subTotal.ReadOnly = true;
+            this.subTotal.Size = new System.Drawing.Size(171, 20);
+            this.subTotal.TabIndex = 37;
+            this.subTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // taxAmount
             // 
-            this.taxAmount.Location = new System.Drawing.Point(2, 5);
-            this.taxAmount.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.taxAmount.Location = new System.Drawing.Point(77, 29);
+            this.taxAmount.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.taxAmount.Name = "taxAmount";
             this.taxAmount.ReadOnly = true;
-            this.taxAmount.Size = new System.Drawing.Size(134, 31);
+            this.taxAmount.Size = new System.Drawing.Size(171, 20);
             this.taxAmount.TabIndex = 37;
+            this.taxAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // flowLayoutPanel8
+            // sumTextBox
             // 
-            this.flowLayoutPanel8.Controls.Add(this.subTotal);
-            this.flowLayoutPanel8.Location = new System.Drawing.Point(145, 6);
-            this.flowLayoutPanel8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel8.Name = "flowLayoutPanel8";
-            this.flowLayoutPanel8.Size = new System.Drawing.Size(137, 31);
-            this.flowLayoutPanel8.TabIndex = 38;
-            // 
-            // subTotal
-            // 
-            this.subTotal.Location = new System.Drawing.Point(2, 5);
-            this.subTotal.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.subTotal.Name = "subTotal";
-            this.subTotal.ReadOnly = true;
-            this.subTotal.Size = new System.Drawing.Size(138, 31);
-            this.subTotal.TabIndex = 37;
-            // 
-            // flowLayoutPanel12
-            // 
-            this.flowLayoutPanel12.Controls.Add(this.label29);
-            this.flowLayoutPanel12.Location = new System.Drawing.Point(3, 48);
-            this.flowLayoutPanel12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel12.Name = "flowLayoutPanel12";
-            this.flowLayoutPanel12.Size = new System.Drawing.Size(134, 31);
-            this.flowLayoutPanel12.TabIndex = 38;
-            // 
-            // label29
-            // 
-            this.label29.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label29.Location = new System.Drawing.Point(2, 0);
-            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(134, 34);
-            this.label29.TabIndex = 37;
-            this.label29.Text = "税額";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.sumTextBox.Location = new System.Drawing.Point(77, 55);
+            this.sumTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.sumTextBox.Name = "sumTextBox";
+            this.sumTextBox.ReadOnly = true;
+            this.sumTextBox.Size = new System.Drawing.Size(171, 20);
+            this.sumTextBox.TabIndex = 37;
+            this.sumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.AliceBlue;
             this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel1.ColumnCount = 11;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.71341F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.01078F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.16628F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.93456F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.39338F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.84615F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.92308F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 206F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 573F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel4, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel3, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel101, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel100, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel95, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel47, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel89, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel88, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel87, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel81, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel80, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel74, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel73, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel67, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel66, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel60, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel59, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel21, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel53, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel52, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel46, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel45, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel39, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel38, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel32, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel31, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel25, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel24, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel15, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel14, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel20, 10, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel7, 10, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel30, 10, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel37, 10, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel44, 10, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel51, 10, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel58, 10, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel65, 10, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel72, 10, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel79, 10, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel86, 10, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel93, 10, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel99, 10, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel106, 10, 13);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel19, 9, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel6, 9, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel29, 9, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel36, 9, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel43, 9, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel50, 9, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel57, 9, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel64, 9, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel71, 9, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel78, 9, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel85, 9, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel92, 9, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel98, 9, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel105, 9, 13);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel18, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel5, 8, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel28, 8, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel35, 8, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel42, 8, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel49, 8, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel56, 8, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel63, 8, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel70, 8, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel77, 8, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel84, 8, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel91, 8, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel97, 8, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel104, 8, 13);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel17, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel4, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel27, 7, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel34, 7, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel41, 7, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel48, 7, 5);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel62, 7, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel23, 7, 14);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel55, 7, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel69, 7, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel76, 7, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel83, 7, 10);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel90, 7, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel96, 7, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel103, 7, 13);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel16, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel3, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel26, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel33, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel40, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel54, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel61, 4, 7);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel68, 4, 8);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel75, 4, 9);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel22, 4, 14);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel82, 4, 10);
-            this.tableLayoutPanel1.Controls.Add(this.panel, 4, 11);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel94, 4, 12);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel102, 4, 13);
-            this.tableLayoutPanel1.Controls.Add(this.panel6, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel7, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel8, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel9, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel10, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel11, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel12, 6, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel13, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel14, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel15, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel16, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel17, 6, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel18, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel19, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel20, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel21, 5, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel22, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel23, 5, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel24, 6, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel25, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.panel26, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.panel27, 5, 6);
-            this.tableLayoutPanel1.Controls.Add(this.panel28, 6, 6);
-            this.tableLayoutPanel1.Controls.Add(this.panel29, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.panel30, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.panel31, 5, 7);
-            this.tableLayoutPanel1.Controls.Add(this.panel32, 6, 7);
-            this.tableLayoutPanel1.Controls.Add(this.panel33, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel34, 3, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel35, 5, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel36, 6, 8);
-            this.tableLayoutPanel1.Controls.Add(this.panel37, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel38, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.panel39, 2, 11);
-            this.tableLayoutPanel1.Controls.Add(this.panel40, 2, 12);
-            this.tableLayoutPanel1.Controls.Add(this.panel41, 2, 13);
-            this.tableLayoutPanel1.Controls.Add(this.panel42, 3, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel43, 3, 10);
-            this.tableLayoutPanel1.Controls.Add(this.panel44, 3, 11);
-            this.tableLayoutPanel1.Controls.Add(this.panel45, 3, 12);
-            this.tableLayoutPanel1.Controls.Add(this.panel46, 3, 13);
-            this.tableLayoutPanel1.Controls.Add(this.panel47, 5, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel48, 6, 9);
-            this.tableLayoutPanel1.Controls.Add(this.panel49, 5, 10);
-            this.tableLayoutPanel1.Controls.Add(this.panel50, 6, 10);
-            this.tableLayoutPanel1.Controls.Add(this.panel51, 5, 11);
-            this.tableLayoutPanel1.Controls.Add(this.panel52, 6, 11);
-            this.tableLayoutPanel1.Controls.Add(this.panel53, 5, 12);
-            this.tableLayoutPanel1.Controls.Add(this.panel54, 6, 12);
-            this.tableLayoutPanel1.Controls.Add(this.panel55, 5, 13);
-            this.tableLayoutPanel1.Controls.Add(this.panel56, 6, 13);
-            this.tableLayoutPanel1.Controls.Add(this.panel57, 5, 14);
-            this.tableLayoutPanel1.Controls.Add(this.panel58, 6, 14);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 30);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.tableLayoutPanel1.ColumnCount = 8;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox0, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox1, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox2, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox3, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox4, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox5, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox6, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox7, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox8, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox9, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox10, 1, 11);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox11, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.itemComboBox12, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox0, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox3, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox4, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox5, 0, 6);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox6, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox7, 0, 8);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox8, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox9, 0, 10);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox10, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox11, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox12, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label33, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label21, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label28, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.remarks0, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.remarks1, 7, 2);
+            this.tableLayoutPanel1.Controls.Add(this.remarks2, 7, 3);
+            this.tableLayoutPanel1.Controls.Add(this.remarks3, 7, 4);
+            this.tableLayoutPanel1.Controls.Add(this.remarks4, 7, 5);
+            this.tableLayoutPanel1.Controls.Add(this.remarks5, 7, 6);
+            this.tableLayoutPanel1.Controls.Add(this.remarks6, 7, 7);
+            this.tableLayoutPanel1.Controls.Add(this.remarks7, 7, 8);
+            this.tableLayoutPanel1.Controls.Add(this.remarks8, 7, 9);
+            this.tableLayoutPanel1.Controls.Add(this.remarks9, 7, 10);
+            this.tableLayoutPanel1.Controls.Add(this.remarks10, 7, 11);
+            this.tableLayoutPanel1.Controls.Add(this.remarks11, 7, 12);
+            this.tableLayoutPanel1.Controls.Add(this.remarks12, 7, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label35, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox0, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox1, 6, 2);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox2, 6, 3);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox3, 6, 4);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox4, 6, 5);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox5, 6, 6);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox6, 6, 7);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox7, 6, 8);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox8, 6, 9);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox9, 6, 10);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox10, 6, 11);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox11, 6, 12);
+            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox12, 6, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label24, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox0, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox1, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox2, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox3, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox4, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox7, 5, 8);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox8, 5, 9);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox9, 5, 10);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox10, 5, 11);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox11, 5, 12);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox12, 5, 13);
+            this.tableLayoutPanel1.Controls.Add(this.totalCount, 5, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label31, 4, 14);
+            this.tableLayoutPanel1.Controls.Add(this.totalWeight, 3, 14);
+            this.tableLayoutPanel1.Controls.Add(this.label32, 2, 14);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox12, 4, 13);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox11, 4, 12);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox10, 4, 11);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox9, 4, 10);
+            this.tableLayoutPanel1.Controls.Add(this.label34, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox0, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox1, 4, 2);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox2, 4, 3);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox3, 4, 4);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox4, 4, 5);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox5, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox6, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox7, 4, 8);
+            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox8, 4, 9);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox12, 3, 13);
+            this.tableLayoutPanel1.Controls.Add(this.label23, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox0, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox1, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox2, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox3, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox4, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox5, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox6, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox7, 3, 8);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox8, 3, 9);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox9, 3, 10);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox10, 3, 11);
+            this.tableLayoutPanel1.Controls.Add(this.weightTextBox11, 3, 12);
+            this.tableLayoutPanel1.Controls.Add(this.label22, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail0, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail1, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail2, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail3, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail4, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail5, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail6, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail7, 2, 8);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail8, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail9, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail10, 2, 11);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail11, 2, 12);
+            this.tableLayoutPanel1.Controls.Add(this.itemDetail12, 2, 13);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox5, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.countTextBox6, 5, 7);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 12);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(69, 21, 0, 0);
             this.tableLayoutPanel1.RowCount = 15;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(2821, 853);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(924, 418);
             this.tableLayoutPanel1.TabIndex = 35;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.brandname0);
-            this.panel5.Location = new System.Drawing.Point(498, 81);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(237, 43);
-            this.panel5.TabIndex = 48;
-            // 
-            // brandname0
-            // 
-            this.brandname0.Location = new System.Drawing.Point(0, 6);
-            this.brandname0.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.brandname0.Name = "brandname0";
-            this.brandname0.Size = new System.Drawing.Size(239, 31);
-            this.brandname0.TabIndex = 4;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label34);
-            this.panel4.Location = new System.Drawing.Point(498, 26);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(237, 46);
-            this.panel4.TabIndex = 4;
-            // 
-            // label34
-            // 
-            this.label34.Location = new System.Drawing.Point(2, 1);
-            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label34.Name = "label34";
-            this.label34.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label34.Size = new System.Drawing.Size(234, 40);
-            this.label34.TabIndex = 48;
-            this.label34.Text = "ブランド名";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.label35);
-            this.panel3.Location = new System.Drawing.Point(745, 26);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(217, 46);
-            this.panel3.TabIndex = 4;
-            // 
-            // label35
-            // 
-            this.label35.Location = new System.Drawing.Point(2, -5);
-            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label35.Name = "label35";
-            this.label35.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label35.Size = new System.Drawing.Size(215, 48);
-            this.label35.TabIndex = 48;
-            this.label35.Text = "品種";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label32);
-            this.panel2.Location = new System.Drawing.Point(1147, 26);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(217, 43);
-            this.panel2.TabIndex = 4;
-            // 
-            // label32
-            // 
-            this.label32.Location = new System.Drawing.Point(-7, -1);
-            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label32.Name = "label32";
-            this.label32.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label32.Size = new System.Drawing.Size(215, 42);
-            this.label32.TabIndex = 37;
-            this.label32.Text = "中石ct";
-            // 
-            // flowLayoutPanel101
-            // 
-            this.flowLayoutPanel101.Controls.Add(this.itemComboBox12);
-            this.flowLayoutPanel101.Location = new System.Drawing.Point(282, 707);
-            this.flowLayoutPanel101.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel101.Name = "flowLayoutPanel101";
-            this.flowLayoutPanel101.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel101.TabIndex = 39;
-            // 
-            // itemComboBox12
-            // 
-            this.itemComboBox12.FormattingEnabled = true;
-            this.itemComboBox12.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox12.Name = "itemComboBox12";
-            this.itemComboBox12.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox12.TabIndex = 39;
-            // 
-            // flowLayoutPanel100
-            // 
-            this.flowLayoutPanel100.Controls.Add(this.mainCategoryComboBox12);
-            this.flowLayoutPanel100.Location = new System.Drawing.Point(73, 707);
-            this.flowLayoutPanel100.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel100.Name = "flowLayoutPanel100";
-            this.flowLayoutPanel100.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel100.TabIndex = 39;
-            // 
-            // mainCategoryComboBox12
-            // 
-            this.mainCategoryComboBox12.FormattingEnabled = true;
-            this.mainCategoryComboBox12.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox12.Name = "mainCategoryComboBox12";
-            this.mainCategoryComboBox12.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox12.TabIndex = 39;
-            this.mainCategoryComboBox12.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox12_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel95
-            // 
-            this.flowLayoutPanel95.Controls.Add(this.itemComboBox11);
-            this.flowLayoutPanel95.Location = new System.Drawing.Point(282, 655);
-            this.flowLayoutPanel95.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel95.Name = "flowLayoutPanel95";
-            this.flowLayoutPanel95.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel95.TabIndex = 39;
-            // 
-            // itemComboBox11
-            // 
-            this.itemComboBox11.FormattingEnabled = true;
-            this.itemComboBox11.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox11.Name = "itemComboBox11";
-            this.itemComboBox11.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox11.TabIndex = 39;
-            // 
-            // flowLayoutPanel47
-            // 
-            this.flowLayoutPanel47.Controls.Add(this.weightTextBox4);
-            this.flowLayoutPanel47.Location = new System.Drawing.Point(971, 291);
-            this.flowLayoutPanel47.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel47.Name = "flowLayoutPanel47";
-            this.flowLayoutPanel47.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel47.TabIndex = 39;
-            // 
-            // weightTextBox4
-            // 
-            this.weightTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox4.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox4.Name = "weightTextBox4";
-            this.weightTextBox4.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox4.TabIndex = 39;
-            // 
-            // flowLayoutPanel89
-            // 
-            this.flowLayoutPanel89.Controls.Add(this.mainCategoryComboBox11);
-            this.flowLayoutPanel89.Location = new System.Drawing.Point(73, 655);
-            this.flowLayoutPanel89.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel89.Name = "flowLayoutPanel89";
-            this.flowLayoutPanel89.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel89.TabIndex = 39;
-            // 
-            // mainCategoryComboBox11
-            // 
-            this.mainCategoryComboBox11.FormattingEnabled = true;
-            this.mainCategoryComboBox11.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox11.Name = "mainCategoryComboBox11";
-            this.mainCategoryComboBox11.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox11.TabIndex = 39;
-            this.mainCategoryComboBox11.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox11_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel88
-            // 
-            this.flowLayoutPanel88.Controls.Add(this.itemComboBox10);
-            this.flowLayoutPanel88.Location = new System.Drawing.Point(282, 603);
-            this.flowLayoutPanel88.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel88.Name = "flowLayoutPanel88";
-            this.flowLayoutPanel88.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel88.TabIndex = 39;
-            // 
-            // itemComboBox10
-            // 
-            this.itemComboBox10.FormattingEnabled = true;
-            this.itemComboBox10.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox10.Name = "itemComboBox10";
-            this.itemComboBox10.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox10.TabIndex = 39;
-            // 
-            // flowLayoutPanel87
-            // 
-            this.flowLayoutPanel87.Controls.Add(this.mainCategoryComboBox10);
-            this.flowLayoutPanel87.Location = new System.Drawing.Point(73, 603);
-            this.flowLayoutPanel87.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel87.Name = "flowLayoutPanel87";
-            this.flowLayoutPanel87.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel87.TabIndex = 39;
-            // 
-            // mainCategoryComboBox10
-            // 
-            this.mainCategoryComboBox10.FormattingEnabled = true;
-            this.mainCategoryComboBox10.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox10.Name = "mainCategoryComboBox10";
-            this.mainCategoryComboBox10.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox10.TabIndex = 39;
-            this.mainCategoryComboBox10.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox10_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel81
-            // 
-            this.flowLayoutPanel81.Controls.Add(this.itemComboBox9);
-            this.flowLayoutPanel81.Location = new System.Drawing.Point(282, 551);
-            this.flowLayoutPanel81.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel81.Name = "flowLayoutPanel81";
-            this.flowLayoutPanel81.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel81.TabIndex = 39;
-            // 
-            // itemComboBox9
-            // 
-            this.itemComboBox9.FormattingEnabled = true;
-            this.itemComboBox9.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox9.Name = "itemComboBox9";
-            this.itemComboBox9.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox9.TabIndex = 39;
-            // 
-            // flowLayoutPanel80
-            // 
-            this.flowLayoutPanel80.Controls.Add(this.mainCategoryComboBox9);
-            this.flowLayoutPanel80.Location = new System.Drawing.Point(73, 551);
-            this.flowLayoutPanel80.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel80.Name = "flowLayoutPanel80";
-            this.flowLayoutPanel80.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel80.TabIndex = 39;
-            // 
-            // mainCategoryComboBox9
-            // 
-            this.mainCategoryComboBox9.FormattingEnabled = true;
-            this.mainCategoryComboBox9.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox9.Name = "mainCategoryComboBox9";
-            this.mainCategoryComboBox9.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox9.TabIndex = 39;
-            this.mainCategoryComboBox9.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox9_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel74
-            // 
-            this.flowLayoutPanel74.Controls.Add(this.itemComboBox8);
-            this.flowLayoutPanel74.Location = new System.Drawing.Point(282, 499);
-            this.flowLayoutPanel74.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel74.Name = "flowLayoutPanel74";
-            this.flowLayoutPanel74.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel74.TabIndex = 39;
-            // 
-            // itemComboBox8
-            // 
-            this.itemComboBox8.FormattingEnabled = true;
-            this.itemComboBox8.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox8.Name = "itemComboBox8";
-            this.itemComboBox8.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox8.TabIndex = 39;
-            // 
-            // flowLayoutPanel73
-            // 
-            this.flowLayoutPanel73.Controls.Add(this.mainCategoryComboBox8);
-            this.flowLayoutPanel73.Location = new System.Drawing.Point(73, 499);
-            this.flowLayoutPanel73.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel73.Name = "flowLayoutPanel73";
-            this.flowLayoutPanel73.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel73.TabIndex = 39;
-            // 
-            // mainCategoryComboBox8
-            // 
-            this.mainCategoryComboBox8.FormattingEnabled = true;
-            this.mainCategoryComboBox8.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox8.Name = "mainCategoryComboBox8";
-            this.mainCategoryComboBox8.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox8.TabIndex = 39;
-            this.mainCategoryComboBox8.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox8_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel67
-            // 
-            this.flowLayoutPanel67.Controls.Add(this.itemComboBox7);
-            this.flowLayoutPanel67.Location = new System.Drawing.Point(282, 447);
-            this.flowLayoutPanel67.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel67.Name = "flowLayoutPanel67";
-            this.flowLayoutPanel67.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel67.TabIndex = 39;
-            // 
-            // itemComboBox7
-            // 
-            this.itemComboBox7.FormattingEnabled = true;
-            this.itemComboBox7.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox7.Name = "itemComboBox7";
-            this.itemComboBox7.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox7.TabIndex = 39;
-            // 
-            // flowLayoutPanel66
-            // 
-            this.flowLayoutPanel66.Controls.Add(this.mainCategoryComboBox7);
-            this.flowLayoutPanel66.Location = new System.Drawing.Point(73, 447);
-            this.flowLayoutPanel66.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel66.Name = "flowLayoutPanel66";
-            this.flowLayoutPanel66.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel66.TabIndex = 39;
-            // 
-            // mainCategoryComboBox7
-            // 
-            this.mainCategoryComboBox7.FormattingEnabled = true;
-            this.mainCategoryComboBox7.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox7.Name = "mainCategoryComboBox7";
-            this.mainCategoryComboBox7.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox7.TabIndex = 39;
-            this.mainCategoryComboBox7.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox7_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel60
-            // 
-            this.flowLayoutPanel60.Controls.Add(this.itemComboBox6);
-            this.flowLayoutPanel60.Location = new System.Drawing.Point(282, 395);
-            this.flowLayoutPanel60.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel60.Name = "flowLayoutPanel60";
-            this.flowLayoutPanel60.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel60.TabIndex = 39;
-            // 
-            // itemComboBox6
-            // 
-            this.itemComboBox6.FormattingEnabled = true;
-            this.itemComboBox6.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox6.Name = "itemComboBox6";
-            this.itemComboBox6.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox6.TabIndex = 39;
-            // 
-            // flowLayoutPanel59
-            // 
-            this.flowLayoutPanel59.Controls.Add(this.mainCategoryComboBox6);
-            this.flowLayoutPanel59.Location = new System.Drawing.Point(73, 395);
-            this.flowLayoutPanel59.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel59.Name = "flowLayoutPanel59";
-            this.flowLayoutPanel59.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel59.TabIndex = 39;
-            // 
-            // mainCategoryComboBox6
-            // 
-            this.mainCategoryComboBox6.FormattingEnabled = true;
-            this.mainCategoryComboBox6.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox6.Name = "mainCategoryComboBox6";
-            this.mainCategoryComboBox6.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox6.TabIndex = 39;
-            this.mainCategoryComboBox6.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox6_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel21
-            // 
-            this.flowLayoutPanel21.Controls.Add(this.label31);
-            this.flowLayoutPanel21.Location = new System.Drawing.Point(73, 759);
-            this.flowLayoutPanel21.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel21.Name = "flowLayoutPanel21";
-            this.flowLayoutPanel21.Size = new System.Drawing.Size(199, 58);
-            this.flowLayoutPanel21.TabIndex = 38;
-            // 
-            // label31
-            // 
-            this.label31.Location = new System.Drawing.Point(2, 0);
-            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(197, 48);
-            this.label31.TabIndex = 38;
-            this.label31.Text = "総数";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanel53
-            // 
-            this.flowLayoutPanel53.Controls.Add(this.itemComboBox5);
-            this.flowLayoutPanel53.Location = new System.Drawing.Point(282, 343);
-            this.flowLayoutPanel53.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel53.Name = "flowLayoutPanel53";
-            this.flowLayoutPanel53.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel53.TabIndex = 39;
-            // 
-            // itemComboBox5
-            // 
-            this.itemComboBox5.FormattingEnabled = true;
-            this.itemComboBox5.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox5.Name = "itemComboBox5";
-            this.itemComboBox5.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox5.TabIndex = 39;
-            // 
-            // flowLayoutPanel52
-            // 
-            this.flowLayoutPanel52.Controls.Add(this.mainCategoryComboBox5);
-            this.flowLayoutPanel52.Location = new System.Drawing.Point(73, 343);
-            this.flowLayoutPanel52.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel52.Name = "flowLayoutPanel52";
-            this.flowLayoutPanel52.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel52.TabIndex = 39;
-            // 
-            // mainCategoryComboBox5
-            // 
-            this.mainCategoryComboBox5.FormattingEnabled = true;
-            this.mainCategoryComboBox5.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox5.Name = "mainCategoryComboBox5";
-            this.mainCategoryComboBox5.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox5.TabIndex = 39;
-            this.mainCategoryComboBox5.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox5_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel46
-            // 
-            this.flowLayoutPanel46.Controls.Add(this.itemComboBox4);
-            this.flowLayoutPanel46.Location = new System.Drawing.Point(282, 291);
-            this.flowLayoutPanel46.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel46.Name = "flowLayoutPanel46";
-            this.flowLayoutPanel46.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel46.TabIndex = 39;
-            // 
-            // itemComboBox4
-            // 
-            this.itemComboBox4.FormattingEnabled = true;
-            this.itemComboBox4.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox4.Name = "itemComboBox4";
-            this.itemComboBox4.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox4.TabIndex = 39;
-            // 
-            // flowLayoutPanel45
-            // 
-            this.flowLayoutPanel45.Controls.Add(this.mainCategoryComboBox4);
-            this.flowLayoutPanel45.Location = new System.Drawing.Point(73, 291);
-            this.flowLayoutPanel45.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel45.Name = "flowLayoutPanel45";
-            this.flowLayoutPanel45.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel45.TabIndex = 39;
-            // 
-            // mainCategoryComboBox4
-            // 
-            this.mainCategoryComboBox4.FormattingEnabled = true;
-            this.mainCategoryComboBox4.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox4.Name = "mainCategoryComboBox4";
-            this.mainCategoryComboBox4.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox4.TabIndex = 39;
-            this.mainCategoryComboBox4.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox4_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel39
-            // 
-            this.flowLayoutPanel39.Controls.Add(this.itemComboBox3);
-            this.flowLayoutPanel39.Location = new System.Drawing.Point(282, 239);
-            this.flowLayoutPanel39.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel39.Name = "flowLayoutPanel39";
-            this.flowLayoutPanel39.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel39.TabIndex = 39;
-            // 
-            // itemComboBox3
-            // 
-            this.itemComboBox3.FormattingEnabled = true;
-            this.itemComboBox3.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox3.Name = "itemComboBox3";
-            this.itemComboBox3.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox3.TabIndex = 39;
-            // 
-            // flowLayoutPanel38
-            // 
-            this.flowLayoutPanel38.Controls.Add(this.mainCategoryComboBox3);
-            this.flowLayoutPanel38.Location = new System.Drawing.Point(73, 239);
-            this.flowLayoutPanel38.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel38.Name = "flowLayoutPanel38";
-            this.flowLayoutPanel38.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel38.TabIndex = 39;
-            // 
-            // mainCategoryComboBox3
-            // 
-            this.mainCategoryComboBox3.FormattingEnabled = true;
-            this.mainCategoryComboBox3.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox3.Name = "mainCategoryComboBox3";
-            this.mainCategoryComboBox3.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox3.TabIndex = 39;
-            this.mainCategoryComboBox3.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox3_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel32
-            // 
-            this.flowLayoutPanel32.Controls.Add(this.itemComboBox2);
-            this.flowLayoutPanel32.Location = new System.Drawing.Point(282, 187);
-            this.flowLayoutPanel32.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel32.Name = "flowLayoutPanel32";
-            this.flowLayoutPanel32.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel32.TabIndex = 39;
-            // 
-            // itemComboBox2
-            // 
-            this.itemComboBox2.FormattingEnabled = true;
-            this.itemComboBox2.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox2.Name = "itemComboBox2";
-            this.itemComboBox2.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox2.TabIndex = 39;
-            // 
-            // flowLayoutPanel31
-            // 
-            this.flowLayoutPanel31.Controls.Add(this.mainCategoryComboBox2);
-            this.flowLayoutPanel31.Location = new System.Drawing.Point(73, 187);
-            this.flowLayoutPanel31.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel31.Name = "flowLayoutPanel31";
-            this.flowLayoutPanel31.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel31.TabIndex = 39;
-            // 
-            // mainCategoryComboBox2
-            // 
-            this.mainCategoryComboBox2.FormattingEnabled = true;
-            this.mainCategoryComboBox2.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox2.Name = "mainCategoryComboBox2";
-            this.mainCategoryComboBox2.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox2.TabIndex = 39;
-            this.mainCategoryComboBox2.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox2_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel25
-            // 
-            this.flowLayoutPanel25.Controls.Add(this.itemComboBox1);
-            this.flowLayoutPanel25.Location = new System.Drawing.Point(282, 135);
-            this.flowLayoutPanel25.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel25.Name = "flowLayoutPanel25";
-            this.flowLayoutPanel25.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel25.TabIndex = 38;
-            // 
-            // itemComboBox1
-            // 
-            this.itemComboBox1.FormattingEnabled = true;
-            this.itemComboBox1.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox1.Name = "itemComboBox1";
-            this.itemComboBox1.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox1.TabIndex = 38;
-            // 
-            // flowLayoutPanel24
-            // 
-            this.flowLayoutPanel24.Controls.Add(this.mainCategoryComboBox1);
-            this.flowLayoutPanel24.Location = new System.Drawing.Point(73, 135);
-            this.flowLayoutPanel24.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel24.Name = "flowLayoutPanel24";
-            this.flowLayoutPanel24.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel24.TabIndex = 38;
-            // 
-            // mainCategoryComboBox1
-            // 
-            this.mainCategoryComboBox1.FormattingEnabled = true;
-            this.mainCategoryComboBox1.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox1.Name = "mainCategoryComboBox1";
-            this.mainCategoryComboBox1.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox1.TabIndex = 38;
-            this.mainCategoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox1_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel15
-            // 
-            this.flowLayoutPanel15.Controls.Add(this.label22);
-            this.flowLayoutPanel15.Location = new System.Drawing.Point(282, 28);
-            this.flowLayoutPanel15.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel15.Name = "flowLayoutPanel15";
-            this.flowLayoutPanel15.Size = new System.Drawing.Size(199, 43);
-            this.flowLayoutPanel15.TabIndex = 37;
-            // 
-            // label22
-            // 
-            this.label22.Location = new System.Drawing.Point(2, 0);
-            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label22.Name = "label22";
-            this.label22.Padding = new System.Windows.Forms.Padding(69, 10, 0, 0);
-            this.label22.Size = new System.Drawing.Size(208, 40);
-            this.label22.TabIndex = 36;
-            this.label22.Text = "品名";
-            // 
-            // flowLayoutPanel14
-            // 
-            this.flowLayoutPanel14.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flowLayoutPanel14.Controls.Add(this.label21);
-            this.flowLayoutPanel14.Location = new System.Drawing.Point(75, 28);
-            this.flowLayoutPanel14.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel14.Name = "flowLayoutPanel14";
-            this.flowLayoutPanel14.Size = new System.Drawing.Size(199, 43);
-            this.flowLayoutPanel14.TabIndex = 37;
-            // 
-            // label21
-            // 
-            this.label21.Location = new System.Drawing.Point(69, 10);
-            this.label21.Margin = new System.Windows.Forms.Padding(69, 10, 2, 5);
-            this.label21.Name = "label21";
-            this.label21.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.label21.Size = new System.Drawing.Size(98, 27);
-            this.label21.TabIndex = 36;
-            this.label21.Text = "大分類";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Controls.Add(this.mainCategoryComboBox0);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(73, 83);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(195, 40);
-            this.flowLayoutPanel1.TabIndex = 36;
-            // 
-            // mainCategoryComboBox0
-            // 
-            this.mainCategoryComboBox0.FormattingEnabled = true;
-            this.mainCategoryComboBox0.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox0.Name = "mainCategoryComboBox0";
-            this.mainCategoryComboBox0.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox0.TabIndex = 36;
-            this.mainCategoryComboBox0.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.itemComboBox0);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(282, 83);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel2.TabIndex = 37;
             // 
             // itemComboBox0
             // 
+            this.itemComboBox0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.itemComboBox0.FormattingEnabled = true;
-            this.itemComboBox0.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.itemComboBox0.Location = new System.Drawing.Point(95, 31);
+            this.itemComboBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.itemComboBox0.Name = "itemComboBox0";
-            this.itemComboBox0.Size = new System.Drawing.Size(197, 32);
+            this.itemComboBox0.Size = new System.Drawing.Size(88, 21);
             this.itemComboBox0.TabIndex = 0;
             // 
-            // flowLayoutPanel20
+            // itemComboBox1
             // 
-            this.flowLayoutPanel20.Controls.Add(this.label28);
-            this.flowLayoutPanel20.Location = new System.Drawing.Point(2245, 28);
-            this.flowLayoutPanel20.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel20.Name = "flowLayoutPanel20";
-            this.flowLayoutPanel20.Size = new System.Drawing.Size(553, 43);
-            this.flowLayoutPanel20.TabIndex = 42;
+            this.itemComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox1.FormattingEnabled = true;
+            this.itemComboBox1.Location = new System.Drawing.Point(95, 58);
+            this.itemComboBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox1.Name = "itemComboBox1";
+            this.itemComboBox1.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox1.TabIndex = 38;
+            // 
+            // itemComboBox2
+            // 
+            this.itemComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox2.FormattingEnabled = true;
+            this.itemComboBox2.Location = new System.Drawing.Point(95, 85);
+            this.itemComboBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox2.Name = "itemComboBox2";
+            this.itemComboBox2.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox2.TabIndex = 39;
+            // 
+            // itemComboBox3
+            // 
+            this.itemComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox3.FormattingEnabled = true;
+            this.itemComboBox3.Location = new System.Drawing.Point(95, 112);
+            this.itemComboBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox3.Name = "itemComboBox3";
+            this.itemComboBox3.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox3.TabIndex = 39;
+            // 
+            // itemComboBox4
+            // 
+            this.itemComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox4.FormattingEnabled = true;
+            this.itemComboBox4.Location = new System.Drawing.Point(95, 139);
+            this.itemComboBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox4.Name = "itemComboBox4";
+            this.itemComboBox4.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox4.TabIndex = 39;
+            // 
+            // itemComboBox5
+            // 
+            this.itemComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox5.FormattingEnabled = true;
+            this.itemComboBox5.Location = new System.Drawing.Point(95, 166);
+            this.itemComboBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox5.Name = "itemComboBox5";
+            this.itemComboBox5.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox5.TabIndex = 39;
+            // 
+            // itemComboBox6
+            // 
+            this.itemComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox6.FormattingEnabled = true;
+            this.itemComboBox6.Location = new System.Drawing.Point(95, 193);
+            this.itemComboBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox6.Name = "itemComboBox6";
+            this.itemComboBox6.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox6.TabIndex = 39;
+            // 
+            // itemComboBox7
+            // 
+            this.itemComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox7.FormattingEnabled = true;
+            this.itemComboBox7.Location = new System.Drawing.Point(95, 220);
+            this.itemComboBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox7.Name = "itemComboBox7";
+            this.itemComboBox7.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox7.TabIndex = 39;
+            // 
+            // itemComboBox8
+            // 
+            this.itemComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox8.FormattingEnabled = true;
+            this.itemComboBox8.Location = new System.Drawing.Point(95, 247);
+            this.itemComboBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox8.Name = "itemComboBox8";
+            this.itemComboBox8.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox8.TabIndex = 39;
+            // 
+            // itemComboBox9
+            // 
+            this.itemComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox9.FormattingEnabled = true;
+            this.itemComboBox9.Location = new System.Drawing.Point(95, 274);
+            this.itemComboBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox9.Name = "itemComboBox9";
+            this.itemComboBox9.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox9.TabIndex = 39;
+            // 
+            // itemComboBox10
+            // 
+            this.itemComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox10.FormattingEnabled = true;
+            this.itemComboBox10.Location = new System.Drawing.Point(95, 301);
+            this.itemComboBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox10.Name = "itemComboBox10";
+            this.itemComboBox10.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox10.TabIndex = 39;
+            // 
+            // itemComboBox11
+            // 
+            this.itemComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox11.FormattingEnabled = true;
+            this.itemComboBox11.Location = new System.Drawing.Point(95, 328);
+            this.itemComboBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox11.Name = "itemComboBox11";
+            this.itemComboBox11.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox11.TabIndex = 39;
+            // 
+            // itemComboBox12
+            // 
+            this.itemComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox12.FormattingEnabled = true;
+            this.itemComboBox12.Location = new System.Drawing.Point(95, 355);
+            this.itemComboBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox12.Name = "itemComboBox12";
+            this.itemComboBox12.Size = new System.Drawing.Size(88, 21);
+            this.itemComboBox12.TabIndex = 39;
+            // 
+            // mainCategoryComboBox0
+            // 
+            this.mainCategoryComboBox0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox0.FormattingEnabled = true;
+            this.mainCategoryComboBox0.Location = new System.Drawing.Point(3, 31);
+            this.mainCategoryComboBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox0.Name = "mainCategoryComboBox0";
+            this.mainCategoryComboBox0.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox0.TabIndex = 36;
+            this.mainCategoryComboBox0.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox1
+            // 
+            this.mainCategoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox1.FormattingEnabled = true;
+            this.mainCategoryComboBox1.Location = new System.Drawing.Point(3, 58);
+            this.mainCategoryComboBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox1.Name = "mainCategoryComboBox1";
+            this.mainCategoryComboBox1.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox1.TabIndex = 38;
+            this.mainCategoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox1_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox2
+            // 
+            this.mainCategoryComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox2.FormattingEnabled = true;
+            this.mainCategoryComboBox2.Location = new System.Drawing.Point(3, 85);
+            this.mainCategoryComboBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox2.Name = "mainCategoryComboBox2";
+            this.mainCategoryComboBox2.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox2.TabIndex = 39;
+            this.mainCategoryComboBox2.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox2_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox3
+            // 
+            this.mainCategoryComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox3.FormattingEnabled = true;
+            this.mainCategoryComboBox3.Location = new System.Drawing.Point(3, 112);
+            this.mainCategoryComboBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox3.Name = "mainCategoryComboBox3";
+            this.mainCategoryComboBox3.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox3.TabIndex = 39;
+            this.mainCategoryComboBox3.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox3_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox4
+            // 
+            this.mainCategoryComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox4.FormattingEnabled = true;
+            this.mainCategoryComboBox4.Location = new System.Drawing.Point(3, 139);
+            this.mainCategoryComboBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox4.Name = "mainCategoryComboBox4";
+            this.mainCategoryComboBox4.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox4.TabIndex = 39;
+            this.mainCategoryComboBox4.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox4_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox5
+            // 
+            this.mainCategoryComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox5.FormattingEnabled = true;
+            this.mainCategoryComboBox5.Location = new System.Drawing.Point(3, 166);
+            this.mainCategoryComboBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox5.Name = "mainCategoryComboBox5";
+            this.mainCategoryComboBox5.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox5.TabIndex = 39;
+            this.mainCategoryComboBox5.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox5_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox6
+            // 
+            this.mainCategoryComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox6.FormattingEnabled = true;
+            this.mainCategoryComboBox6.Location = new System.Drawing.Point(3, 193);
+            this.mainCategoryComboBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox6.Name = "mainCategoryComboBox6";
+            this.mainCategoryComboBox6.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox6.TabIndex = 39;
+            this.mainCategoryComboBox6.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox6_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox7
+            // 
+            this.mainCategoryComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox7.FormattingEnabled = true;
+            this.mainCategoryComboBox7.Location = new System.Drawing.Point(3, 220);
+            this.mainCategoryComboBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox7.Name = "mainCategoryComboBox7";
+            this.mainCategoryComboBox7.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox7.TabIndex = 39;
+            this.mainCategoryComboBox7.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox7_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox8
+            // 
+            this.mainCategoryComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox8.FormattingEnabled = true;
+            this.mainCategoryComboBox8.Location = new System.Drawing.Point(3, 247);
+            this.mainCategoryComboBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox8.Name = "mainCategoryComboBox8";
+            this.mainCategoryComboBox8.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox8.TabIndex = 39;
+            this.mainCategoryComboBox8.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox8_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox9
+            // 
+            this.mainCategoryComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox9.FormattingEnabled = true;
+            this.mainCategoryComboBox9.Location = new System.Drawing.Point(3, 274);
+            this.mainCategoryComboBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox9.Name = "mainCategoryComboBox9";
+            this.mainCategoryComboBox9.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox9.TabIndex = 39;
+            this.mainCategoryComboBox9.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox9_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox10
+            // 
+            this.mainCategoryComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox10.FormattingEnabled = true;
+            this.mainCategoryComboBox10.Location = new System.Drawing.Point(3, 301);
+            this.mainCategoryComboBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox10.Name = "mainCategoryComboBox10";
+            this.mainCategoryComboBox10.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox10.TabIndex = 39;
+            this.mainCategoryComboBox10.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox10_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox11
+            // 
+            this.mainCategoryComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox11.FormattingEnabled = true;
+            this.mainCategoryComboBox11.Location = new System.Drawing.Point(3, 328);
+            this.mainCategoryComboBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox11.Name = "mainCategoryComboBox11";
+            this.mainCategoryComboBox11.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox11.TabIndex = 39;
+            this.mainCategoryComboBox11.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox11_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox12
+            // 
+            this.mainCategoryComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox12.FormattingEnabled = true;
+            this.mainCategoryComboBox12.Location = new System.Drawing.Point(3, 355);
+            this.mainCategoryComboBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox12.Name = "mainCategoryComboBox12";
+            this.mainCategoryComboBox12.Size = new System.Drawing.Size(88, 21);
+            this.mainCategoryComboBox12.TabIndex = 39;
+            this.mainCategoryComboBox12.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox12_SelectedIndexChanged);
+            // 
+            // label33
+            // 
+            this.label33.Location = new System.Drawing.Point(2, 2);
+            this.label33.Margin = new System.Windows.Forms.Padding(0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(90, 25);
+            this.label33.TabIndex = 36;
+            this.label33.Text = "大分類";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label21
+            // 
+            this.label21.Location = new System.Drawing.Point(94, 2);
+            this.label21.Margin = new System.Windows.Forms.Padding(0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(90, 22);
+            this.label21.TabIndex = 36;
+            this.label21.Text = "品名";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label28
             // 
-            this.label28.Location = new System.Drawing.Point(2, 0);
-            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Location = new System.Drawing.Point(737, 2);
+            this.label28.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label28.Name = "label28";
-            this.label28.Padding = new System.Windows.Forms.Padding(69, 0, 69, 0);
-            this.label28.Size = new System.Drawing.Size(550, 40);
+            this.label28.Padding = new System.Windows.Forms.Padding(32, 0, 32, 0);
+            this.label28.Size = new System.Drawing.Size(184, 25);
             this.label28.TabIndex = 36;
             this.label28.Text = "備考";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Controls.Add(this.remarks0);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(2245, 83);
-            this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(553, 34);
-            this.flowLayoutPanel7.TabIndex = 36;
-            // 
             // remarks0
             // 
-            this.remarks0.Location = new System.Drawing.Point(2, 5);
-            this.remarks0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks0.Location = new System.Drawing.Point(737, 31);
+            this.remarks0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks0.Name = "remarks0";
-            this.remarks0.Size = new System.Drawing.Size(550, 31);
+            this.remarks0.Size = new System.Drawing.Size(184, 20);
             this.remarks0.TabIndex = 36;
-            // 
-            // flowLayoutPanel30
-            // 
-            this.flowLayoutPanel30.Controls.Add(this.remarks1);
-            this.flowLayoutPanel30.Location = new System.Drawing.Point(2245, 135);
-            this.flowLayoutPanel30.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel30.Name = "flowLayoutPanel30";
-            this.flowLayoutPanel30.Size = new System.Drawing.Size(553, 40);
-            this.flowLayoutPanel30.TabIndex = 38;
             // 
             // remarks1
             // 
-            this.remarks1.Location = new System.Drawing.Point(2, 5);
-            this.remarks1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks1.Location = new System.Drawing.Point(737, 58);
+            this.remarks1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks1.Name = "remarks1";
-            this.remarks1.Size = new System.Drawing.Size(548, 31);
+            this.remarks1.Size = new System.Drawing.Size(184, 20);
             this.remarks1.TabIndex = 38;
-            // 
-            // flowLayoutPanel37
-            // 
-            this.flowLayoutPanel37.Controls.Add(this.remarks2);
-            this.flowLayoutPanel37.Location = new System.Drawing.Point(2245, 187);
-            this.flowLayoutPanel37.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel37.Name = "flowLayoutPanel37";
-            this.flowLayoutPanel37.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel37.TabIndex = 40;
             // 
             // remarks2
             // 
-            this.remarks2.Location = new System.Drawing.Point(2, 5);
-            this.remarks2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks2.Location = new System.Drawing.Point(737, 85);
+            this.remarks2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks2.Name = "remarks2";
-            this.remarks2.Size = new System.Drawing.Size(548, 31);
+            this.remarks2.Size = new System.Drawing.Size(184, 20);
             this.remarks2.TabIndex = 39;
-            // 
-            // flowLayoutPanel44
-            // 
-            this.flowLayoutPanel44.Controls.Add(this.remarks3);
-            this.flowLayoutPanel44.Location = new System.Drawing.Point(2245, 239);
-            this.flowLayoutPanel44.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel44.Name = "flowLayoutPanel44";
-            this.flowLayoutPanel44.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel44.TabIndex = 39;
             // 
             // remarks3
             // 
-            this.remarks3.Location = new System.Drawing.Point(2, 5);
-            this.remarks3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks3.Location = new System.Drawing.Point(737, 112);
+            this.remarks3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks3.Name = "remarks3";
-            this.remarks3.Size = new System.Drawing.Size(548, 31);
+            this.remarks3.Size = new System.Drawing.Size(184, 20);
             this.remarks3.TabIndex = 39;
-            // 
-            // flowLayoutPanel51
-            // 
-            this.flowLayoutPanel51.Controls.Add(this.remarks4);
-            this.flowLayoutPanel51.Location = new System.Drawing.Point(2245, 291);
-            this.flowLayoutPanel51.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel51.Name = "flowLayoutPanel51";
-            this.flowLayoutPanel51.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel51.TabIndex = 39;
             // 
             // remarks4
             // 
-            this.remarks4.Location = new System.Drawing.Point(2, 5);
-            this.remarks4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks4.Location = new System.Drawing.Point(737, 139);
+            this.remarks4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks4.Name = "remarks4";
-            this.remarks4.Size = new System.Drawing.Size(548, 31);
+            this.remarks4.Size = new System.Drawing.Size(184, 20);
             this.remarks4.TabIndex = 0;
-            // 
-            // flowLayoutPanel58
-            // 
-            this.flowLayoutPanel58.Controls.Add(this.remarks5);
-            this.flowLayoutPanel58.Location = new System.Drawing.Point(2245, 343);
-            this.flowLayoutPanel58.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel58.Name = "flowLayoutPanel58";
-            this.flowLayoutPanel58.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel58.TabIndex = 39;
             // 
             // remarks5
             // 
-            this.remarks5.Location = new System.Drawing.Point(2, 5);
-            this.remarks5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks5.Location = new System.Drawing.Point(737, 166);
+            this.remarks5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks5.Name = "remarks5";
-            this.remarks5.Size = new System.Drawing.Size(548, 31);
+            this.remarks5.Size = new System.Drawing.Size(184, 20);
             this.remarks5.TabIndex = 0;
-            // 
-            // flowLayoutPanel65
-            // 
-            this.flowLayoutPanel65.Controls.Add(this.remarks6);
-            this.flowLayoutPanel65.Location = new System.Drawing.Point(2245, 395);
-            this.flowLayoutPanel65.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel65.Name = "flowLayoutPanel65";
-            this.flowLayoutPanel65.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel65.TabIndex = 46;
             // 
             // remarks6
             // 
-            this.remarks6.Location = new System.Drawing.Point(2, 5);
-            this.remarks6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks6.Location = new System.Drawing.Point(737, 193);
+            this.remarks6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks6.Name = "remarks6";
-            this.remarks6.Size = new System.Drawing.Size(548, 31);
+            this.remarks6.Size = new System.Drawing.Size(184, 20);
             this.remarks6.TabIndex = 0;
-            // 
-            // flowLayoutPanel72
-            // 
-            this.flowLayoutPanel72.Controls.Add(this.remarks7);
-            this.flowLayoutPanel72.Location = new System.Drawing.Point(2245, 447);
-            this.flowLayoutPanel72.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel72.Name = "flowLayoutPanel72";
-            this.flowLayoutPanel72.Size = new System.Drawing.Size(553, 40);
-            this.flowLayoutPanel72.TabIndex = 50;
             // 
             // remarks7
             // 
-            this.remarks7.Location = new System.Drawing.Point(2, 5);
-            this.remarks7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks7.Location = new System.Drawing.Point(737, 220);
+            this.remarks7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks7.Name = "remarks7";
-            this.remarks7.Size = new System.Drawing.Size(548, 31);
+            this.remarks7.Size = new System.Drawing.Size(184, 20);
             this.remarks7.TabIndex = 0;
-            // 
-            // flowLayoutPanel79
-            // 
-            this.flowLayoutPanel79.Controls.Add(this.remarks8);
-            this.flowLayoutPanel79.Location = new System.Drawing.Point(2245, 499);
-            this.flowLayoutPanel79.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel79.Name = "flowLayoutPanel79";
-            this.flowLayoutPanel79.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel79.TabIndex = 55;
             // 
             // remarks8
             // 
-            this.remarks8.Location = new System.Drawing.Point(2, 5);
-            this.remarks8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks8.Location = new System.Drawing.Point(737, 247);
+            this.remarks8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks8.Name = "remarks8";
-            this.remarks8.Size = new System.Drawing.Size(548, 31);
+            this.remarks8.Size = new System.Drawing.Size(184, 20);
             this.remarks8.TabIndex = 0;
-            // 
-            // flowLayoutPanel86
-            // 
-            this.flowLayoutPanel86.Controls.Add(this.remarks9);
-            this.flowLayoutPanel86.Location = new System.Drawing.Point(2245, 551);
-            this.flowLayoutPanel86.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel86.Name = "flowLayoutPanel86";
-            this.flowLayoutPanel86.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel86.TabIndex = 59;
             // 
             // remarks9
             // 
-            this.remarks9.Location = new System.Drawing.Point(2, 5);
-            this.remarks9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks9.Location = new System.Drawing.Point(737, 274);
+            this.remarks9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks9.Name = "remarks9";
-            this.remarks9.Size = new System.Drawing.Size(548, 31);
+            this.remarks9.Size = new System.Drawing.Size(184, 20);
             this.remarks9.TabIndex = 0;
-            // 
-            // flowLayoutPanel93
-            // 
-            this.flowLayoutPanel93.Controls.Add(this.remarks10);
-            this.flowLayoutPanel93.Location = new System.Drawing.Point(2245, 603);
-            this.flowLayoutPanel93.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel93.Name = "flowLayoutPanel93";
-            this.flowLayoutPanel93.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel93.TabIndex = 64;
             // 
             // remarks10
             // 
-            this.remarks10.Location = new System.Drawing.Point(2, 5);
-            this.remarks10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks10.Location = new System.Drawing.Point(737, 301);
+            this.remarks10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks10.Name = "remarks10";
-            this.remarks10.Size = new System.Drawing.Size(548, 31);
+            this.remarks10.Size = new System.Drawing.Size(184, 20);
             this.remarks10.TabIndex = 0;
-            // 
-            // flowLayoutPanel99
-            // 
-            this.flowLayoutPanel99.Controls.Add(this.remarks11);
-            this.flowLayoutPanel99.Location = new System.Drawing.Point(2245, 655);
-            this.flowLayoutPanel99.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel99.Name = "flowLayoutPanel99";
-            this.flowLayoutPanel99.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel99.TabIndex = 69;
             // 
             // remarks11
             // 
-            this.remarks11.Location = new System.Drawing.Point(2, 5);
-            this.remarks11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks11.Location = new System.Drawing.Point(737, 328);
+            this.remarks11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks11.Name = "remarks11";
-            this.remarks11.Size = new System.Drawing.Size(548, 31);
+            this.remarks11.Size = new System.Drawing.Size(184, 20);
             this.remarks11.TabIndex = 0;
-            // 
-            // flowLayoutPanel106
-            // 
-            this.flowLayoutPanel106.Controls.Add(this.remarks12);
-            this.flowLayoutPanel106.Location = new System.Drawing.Point(2245, 707);
-            this.flowLayoutPanel106.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel106.Name = "flowLayoutPanel106";
-            this.flowLayoutPanel106.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel106.TabIndex = 74;
             // 
             // remarks12
             // 
-            this.remarks12.Location = new System.Drawing.Point(2, 5);
-            this.remarks12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks12.Location = new System.Drawing.Point(737, 355);
+            this.remarks12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks12.Name = "remarks12";
-            this.remarks12.Size = new System.Drawing.Size(548, 31);
+            this.remarks12.Size = new System.Drawing.Size(184, 20);
             this.remarks12.TabIndex = 0;
             // 
-            // flowLayoutPanel19
+            // label35
             // 
-            this.flowLayoutPanel19.Controls.Add(this.label27);
-            this.flowLayoutPanel19.Location = new System.Drawing.Point(2033, 28);
-            this.flowLayoutPanel19.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel19.Name = "flowLayoutPanel19";
-            this.flowLayoutPanel19.Size = new System.Drawing.Size(206, 43);
-            this.flowLayoutPanel19.TabIndex = 41;
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(2, 0);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label27.Size = new System.Drawing.Size(197, 43);
-            this.label27.TabIndex = 36;
-            this.label27.Text = "金額";
-            // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Controls.Add(this.moneyTextBox0);
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(2033, 83);
-            this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(199, 37);
-            this.flowLayoutPanel6.TabIndex = 36;
+            this.label35.Location = new System.Drawing.Point(599, 2);
+            this.label35.Margin = new System.Windows.Forms.Padding(0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(135, 22);
+            this.label35.TabIndex = 36;
+            this.label35.Text = "金額";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // moneyTextBox0
             // 
-            this.moneyTextBox0.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox0.Location = new System.Drawing.Point(600, 31);
+            this.moneyTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox0.Name = "moneyTextBox0";
             this.moneyTextBox0.ReadOnly = true;
-            this.moneyTextBox0.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox0.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox0.TabIndex = 36;
-            // 
-            // flowLayoutPanel29
-            // 
-            this.flowLayoutPanel29.Controls.Add(this.moneyTextBox1);
-            this.flowLayoutPanel29.Location = new System.Drawing.Point(2033, 135);
-            this.flowLayoutPanel29.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel29.Name = "flowLayoutPanel29";
-            this.flowLayoutPanel29.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel29.TabIndex = 38;
+            this.moneyTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox0.TextChanged += new System.EventHandler(this.moneyTextBox0_TextChanged);
             // 
             // moneyTextBox1
             // 
-            this.moneyTextBox1.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox1.Location = new System.Drawing.Point(600, 58);
+            this.moneyTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox1.Name = "moneyTextBox1";
             this.moneyTextBox1.ReadOnly = true;
-            this.moneyTextBox1.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox1.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox1.TabIndex = 38;
-            this.moneyTextBox1.Visible = false;
-            // 
-            // flowLayoutPanel36
-            // 
-            this.flowLayoutPanel36.Controls.Add(this.moneyTextBox2);
-            this.flowLayoutPanel36.Location = new System.Drawing.Point(2033, 187);
-            this.flowLayoutPanel36.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel36.Name = "flowLayoutPanel36";
-            this.flowLayoutPanel36.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel36.TabIndex = 39;
+            this.moneyTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox1.TextChanged += new System.EventHandler(this.moneyTextBox1_TextChanged);
             // 
             // moneyTextBox2
             // 
-            this.moneyTextBox2.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox2.Location = new System.Drawing.Point(600, 85);
+            this.moneyTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox2.Name = "moneyTextBox2";
             this.moneyTextBox2.ReadOnly = true;
-            this.moneyTextBox2.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox2.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox2.TabIndex = 39;
-            // 
-            // flowLayoutPanel43
-            // 
-            this.flowLayoutPanel43.Controls.Add(this.moneyTextBox3);
-            this.flowLayoutPanel43.Location = new System.Drawing.Point(2033, 239);
-            this.flowLayoutPanel43.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel43.Name = "flowLayoutPanel43";
-            this.flowLayoutPanel43.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel43.TabIndex = 39;
+            this.moneyTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox2.TextChanged += new System.EventHandler(this.moneyTextBox2_TextChanged);
             // 
             // moneyTextBox3
             // 
-            this.moneyTextBox3.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox3.Location = new System.Drawing.Point(600, 112);
+            this.moneyTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox3.Name = "moneyTextBox3";
             this.moneyTextBox3.ReadOnly = true;
-            this.moneyTextBox3.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox3.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox3.TabIndex = 39;
-            // 
-            // flowLayoutPanel50
-            // 
-            this.flowLayoutPanel50.Controls.Add(this.moneyTextBox4);
-            this.flowLayoutPanel50.Location = new System.Drawing.Point(2033, 291);
-            this.flowLayoutPanel50.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel50.Name = "flowLayoutPanel50";
-            this.flowLayoutPanel50.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel50.TabIndex = 43;
+            this.moneyTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox3.TextChanged += new System.EventHandler(this.moneyTextBox3_TextChanged);
             // 
             // moneyTextBox4
             // 
-            this.moneyTextBox4.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox4.Location = new System.Drawing.Point(600, 139);
+            this.moneyTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox4.Name = "moneyTextBox4";
             this.moneyTextBox4.ReadOnly = true;
-            this.moneyTextBox4.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox4.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox4.TabIndex = 0;
-            // 
-            // flowLayoutPanel57
-            // 
-            this.flowLayoutPanel57.Controls.Add(this.moneyTextBox5);
-            this.flowLayoutPanel57.Location = new System.Drawing.Point(2033, 343);
-            this.flowLayoutPanel57.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel57.Name = "flowLayoutPanel57";
-            this.flowLayoutPanel57.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel57.TabIndex = 39;
+            this.moneyTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox4.TextChanged += new System.EventHandler(this.moneyTextBox4_TextChanged);
             // 
             // moneyTextBox5
             // 
-            this.moneyTextBox5.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox5.Location = new System.Drawing.Point(600, 166);
+            this.moneyTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox5.Name = "moneyTextBox5";
             this.moneyTextBox5.ReadOnly = true;
-            this.moneyTextBox5.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox5.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox5.TabIndex = 0;
-            // 
-            // flowLayoutPanel64
-            // 
-            this.flowLayoutPanel64.Controls.Add(this.moneyTextBox6);
-            this.flowLayoutPanel64.Location = new System.Drawing.Point(2033, 395);
-            this.flowLayoutPanel64.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel64.Name = "flowLayoutPanel64";
-            this.flowLayoutPanel64.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel64.TabIndex = 45;
+            this.moneyTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox5.TextChanged += new System.EventHandler(this.moneyTextBox5_TextChanged);
             // 
             // moneyTextBox6
             // 
-            this.moneyTextBox6.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox6.Location = new System.Drawing.Point(600, 193);
+            this.moneyTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox6.Name = "moneyTextBox6";
             this.moneyTextBox6.ReadOnly = true;
-            this.moneyTextBox6.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox6.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox6.TabIndex = 0;
-            // 
-            // flowLayoutPanel71
-            // 
-            this.flowLayoutPanel71.Controls.Add(this.moneyTextBox7);
-            this.flowLayoutPanel71.Location = new System.Drawing.Point(2033, 447);
-            this.flowLayoutPanel71.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel71.Name = "flowLayoutPanel71";
-            this.flowLayoutPanel71.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel71.TabIndex = 49;
+            this.moneyTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox6.TextChanged += new System.EventHandler(this.moneyTextBox6_TextChanged);
             // 
             // moneyTextBox7
             // 
-            this.moneyTextBox7.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox7.Location = new System.Drawing.Point(600, 220);
+            this.moneyTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox7.Name = "moneyTextBox7";
             this.moneyTextBox7.ReadOnly = true;
-            this.moneyTextBox7.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox7.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox7.TabIndex = 0;
-            // 
-            // flowLayoutPanel78
-            // 
-            this.flowLayoutPanel78.Controls.Add(this.moneyTextBox8);
-            this.flowLayoutPanel78.Location = new System.Drawing.Point(2033, 499);
-            this.flowLayoutPanel78.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel78.Name = "flowLayoutPanel78";
-            this.flowLayoutPanel78.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel78.TabIndex = 54;
+            this.moneyTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox7.TextChanged += new System.EventHandler(this.moneyTextBox7_TextChanged);
             // 
             // moneyTextBox8
             // 
-            this.moneyTextBox8.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox8.Location = new System.Drawing.Point(600, 247);
+            this.moneyTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox8.Name = "moneyTextBox8";
             this.moneyTextBox8.ReadOnly = true;
-            this.moneyTextBox8.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox8.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox8.TabIndex = 0;
-            // 
-            // flowLayoutPanel85
-            // 
-            this.flowLayoutPanel85.Controls.Add(this.moneyTextBox9);
-            this.flowLayoutPanel85.Location = new System.Drawing.Point(2033, 551);
-            this.flowLayoutPanel85.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel85.Name = "flowLayoutPanel85";
-            this.flowLayoutPanel85.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel85.TabIndex = 58;
+            this.moneyTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox8.TextChanged += new System.EventHandler(this.moneyTextBox8_TextChanged);
             // 
             // moneyTextBox9
             // 
-            this.moneyTextBox9.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox9.Location = new System.Drawing.Point(600, 274);
+            this.moneyTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox9.Name = "moneyTextBox9";
             this.moneyTextBox9.ReadOnly = true;
-            this.moneyTextBox9.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox9.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox9.TabIndex = 0;
-            // 
-            // flowLayoutPanel92
-            // 
-            this.flowLayoutPanel92.Controls.Add(this.moneyTextBox10);
-            this.flowLayoutPanel92.Location = new System.Drawing.Point(2033, 603);
-            this.flowLayoutPanel92.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel92.Name = "flowLayoutPanel92";
-            this.flowLayoutPanel92.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel92.TabIndex = 63;
+            this.moneyTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox9.TextChanged += new System.EventHandler(this.moneyTextBox9_TextChanged);
             // 
             // moneyTextBox10
             // 
-            this.moneyTextBox10.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox10.Location = new System.Drawing.Point(600, 301);
+            this.moneyTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox10.Name = "moneyTextBox10";
             this.moneyTextBox10.ReadOnly = true;
-            this.moneyTextBox10.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox10.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox10.TabIndex = 0;
-            // 
-            // flowLayoutPanel98
-            // 
-            this.flowLayoutPanel98.Controls.Add(this.moneyTextBox11);
-            this.flowLayoutPanel98.Location = new System.Drawing.Point(2033, 655);
-            this.flowLayoutPanel98.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel98.Name = "flowLayoutPanel98";
-            this.flowLayoutPanel98.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel98.TabIndex = 68;
+            this.moneyTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox10.TextChanged += new System.EventHandler(this.moneyTextBox10_TextChanged);
             // 
             // moneyTextBox11
             // 
-            this.moneyTextBox11.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox11.Location = new System.Drawing.Point(600, 328);
+            this.moneyTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox11.Name = "moneyTextBox11";
             this.moneyTextBox11.ReadOnly = true;
-            this.moneyTextBox11.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox11.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox11.TabIndex = 0;
-            // 
-            // flowLayoutPanel105
-            // 
-            this.flowLayoutPanel105.Controls.Add(this.moneyTextBox12);
-            this.flowLayoutPanel105.Location = new System.Drawing.Point(2033, 707);
-            this.flowLayoutPanel105.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel105.Name = "flowLayoutPanel105";
-            this.flowLayoutPanel105.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel105.TabIndex = 73;
+            this.moneyTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.moneyTextBox11.TextChanged += new System.EventHandler(this.moneyTextBox11_TextChanged);
             // 
             // moneyTextBox12
             // 
-            this.moneyTextBox12.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.moneyTextBox12.Location = new System.Drawing.Point(600, 355);
+            this.moneyTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.moneyTextBox12.Name = "moneyTextBox12";
             this.moneyTextBox12.ReadOnly = true;
-            this.moneyTextBox12.Size = new System.Drawing.Size(197, 31);
+            this.moneyTextBox12.Size = new System.Drawing.Size(133, 20);
             this.moneyTextBox12.TabIndex = 0;
-            // 
-            // flowLayoutPanel18
-            // 
-            this.flowLayoutPanel18.Controls.Add(this.label25);
-            this.flowLayoutPanel18.Location = new System.Drawing.Point(1825, 28);
-            this.flowLayoutPanel18.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel18.Name = "flowLayoutPanel18";
-            this.flowLayoutPanel18.Size = new System.Drawing.Size(201, 43);
-            this.flowLayoutPanel18.TabIndex = 40;
-            // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(2, 0);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label25.Size = new System.Drawing.Size(195, 50);
-            this.label25.TabIndex = 36;
-            this.label25.Text = "単価";
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.unitPriceTextBox0);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(1825, 83);
-            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(197, 37);
-            this.flowLayoutPanel5.TabIndex = 36;
-            // 
-            // unitPriceTextBox0
-            // 
-            this.unitPriceTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox0.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox0.Name = "unitPriceTextBox0";
-            this.unitPriceTextBox0.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox0.TabIndex = 36;
-            // 
-            // flowLayoutPanel28
-            // 
-            this.flowLayoutPanel28.Controls.Add(this.unitPriceTextBox1);
-            this.flowLayoutPanel28.Location = new System.Drawing.Point(1825, 135);
-            this.flowLayoutPanel28.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel28.Name = "flowLayoutPanel28";
-            this.flowLayoutPanel28.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel28.TabIndex = 38;
-            // 
-            // unitPriceTextBox1
-            // 
-            this.unitPriceTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox1.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox1.Name = "unitPriceTextBox1";
-            this.unitPriceTextBox1.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox1.TabIndex = 38;
-            // 
-            // flowLayoutPanel35
-            // 
-            this.flowLayoutPanel35.Controls.Add(this.unitPriceTextBox2);
-            this.flowLayoutPanel35.Location = new System.Drawing.Point(1825, 187);
-            this.flowLayoutPanel35.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel35.Name = "flowLayoutPanel35";
-            this.flowLayoutPanel35.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel35.TabIndex = 39;
-            // 
-            // unitPriceTextBox2
-            // 
-            this.unitPriceTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox2.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox2.Name = "unitPriceTextBox2";
-            this.unitPriceTextBox2.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox2.TabIndex = 39;
-            // 
-            // flowLayoutPanel42
-            // 
-            this.flowLayoutPanel42.Controls.Add(this.unitPriceTextBox3);
-            this.flowLayoutPanel42.Location = new System.Drawing.Point(1825, 239);
-            this.flowLayoutPanel42.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel42.Name = "flowLayoutPanel42";
-            this.flowLayoutPanel42.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel42.TabIndex = 39;
-            // 
-            // unitPriceTextBox3
-            // 
-            this.unitPriceTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox3.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox3.Name = "unitPriceTextBox3";
-            this.unitPriceTextBox3.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox3.TabIndex = 39;
-            // 
-            // flowLayoutPanel49
-            // 
-            this.flowLayoutPanel49.Controls.Add(this.unitPriceTextBox4);
-            this.flowLayoutPanel49.Location = new System.Drawing.Point(1825, 291);
-            this.flowLayoutPanel49.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel49.Name = "flowLayoutPanel49";
-            this.flowLayoutPanel49.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel49.TabIndex = 39;
-            // 
-            // unitPriceTextBox4
-            // 
-            this.unitPriceTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox4.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox4.Name = "unitPriceTextBox4";
-            this.unitPriceTextBox4.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox4.TabIndex = 0;
-            // 
-            // flowLayoutPanel56
-            // 
-            this.flowLayoutPanel56.Controls.Add(this.unitPriceTextBox5);
-            this.flowLayoutPanel56.Location = new System.Drawing.Point(1825, 343);
-            this.flowLayoutPanel56.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel56.Name = "flowLayoutPanel56";
-            this.flowLayoutPanel56.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel56.TabIndex = 39;
-            // 
-            // unitPriceTextBox5
-            // 
-            this.unitPriceTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox5.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox5.Name = "unitPriceTextBox5";
-            this.unitPriceTextBox5.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox5.TabIndex = 39;
-            // 
-            // flowLayoutPanel63
-            // 
-            this.flowLayoutPanel63.Controls.Add(this.unitPriceTextBox6);
-            this.flowLayoutPanel63.Location = new System.Drawing.Point(1825, 395);
-            this.flowLayoutPanel63.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel63.Name = "flowLayoutPanel63";
-            this.flowLayoutPanel63.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel63.TabIndex = 44;
-            // 
-            // unitPriceTextBox6
-            // 
-            this.unitPriceTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox6.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox6.Name = "unitPriceTextBox6";
-            this.unitPriceTextBox6.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox6.TabIndex = 0;
-            // 
-            // flowLayoutPanel70
-            // 
-            this.flowLayoutPanel70.Controls.Add(this.unitPriceTextBox7);
-            this.flowLayoutPanel70.Location = new System.Drawing.Point(1825, 447);
-            this.flowLayoutPanel70.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel70.Name = "flowLayoutPanel70";
-            this.flowLayoutPanel70.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel70.TabIndex = 48;
-            // 
-            // unitPriceTextBox7
-            // 
-            this.unitPriceTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox7.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox7.Name = "unitPriceTextBox7";
-            this.unitPriceTextBox7.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox7.TabIndex = 0;
-            // 
-            // flowLayoutPanel77
-            // 
-            this.flowLayoutPanel77.Controls.Add(this.unitPriceTextBox8);
-            this.flowLayoutPanel77.Location = new System.Drawing.Point(1825, 499);
-            this.flowLayoutPanel77.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel77.Name = "flowLayoutPanel77";
-            this.flowLayoutPanel77.Size = new System.Drawing.Size(201, 40);
-            this.flowLayoutPanel77.TabIndex = 53;
-            // 
-            // unitPriceTextBox8
-            // 
-            this.unitPriceTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox8.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox8.Name = "unitPriceTextBox8";
-            this.unitPriceTextBox8.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox8.TabIndex = 0;
-            // 
-            // flowLayoutPanel84
-            // 
-            this.flowLayoutPanel84.Controls.Add(this.unitPriceTextBox9);
-            this.flowLayoutPanel84.Location = new System.Drawing.Point(1825, 551);
-            this.flowLayoutPanel84.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel84.Name = "flowLayoutPanel84";
-            this.flowLayoutPanel84.Size = new System.Drawing.Size(201, 40);
-            this.flowLayoutPanel84.TabIndex = 57;
-            // 
-            // unitPriceTextBox9
-            // 
-            this.unitPriceTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox9.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox9.Name = "unitPriceTextBox9";
-            this.unitPriceTextBox9.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox9.TabIndex = 0;
-            // 
-            // flowLayoutPanel91
-            // 
-            this.flowLayoutPanel91.Controls.Add(this.unitPriceTextBox10);
-            this.flowLayoutPanel91.Location = new System.Drawing.Point(1825, 603);
-            this.flowLayoutPanel91.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel91.Name = "flowLayoutPanel91";
-            this.flowLayoutPanel91.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel91.TabIndex = 62;
-            // 
-            // unitPriceTextBox10
-            // 
-            this.unitPriceTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox10.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox10.Name = "unitPriceTextBox10";
-            this.unitPriceTextBox10.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox10.TabIndex = 0;
-            // 
-            // flowLayoutPanel97
-            // 
-            this.flowLayoutPanel97.Controls.Add(this.unitPriceTextBox11);
-            this.flowLayoutPanel97.Location = new System.Drawing.Point(1825, 655);
-            this.flowLayoutPanel97.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel97.Name = "flowLayoutPanel97";
-            this.flowLayoutPanel97.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel97.TabIndex = 67;
-            // 
-            // unitPriceTextBox11
-            // 
-            this.unitPriceTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox11.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox11.Name = "unitPriceTextBox11";
-            this.unitPriceTextBox11.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox11.TabIndex = 0;
-            // 
-            // flowLayoutPanel104
-            // 
-            this.flowLayoutPanel104.Controls.Add(this.unitPriceTextBox12);
-            this.flowLayoutPanel104.Location = new System.Drawing.Point(1825, 707);
-            this.flowLayoutPanel104.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel104.Name = "flowLayoutPanel104";
-            this.flowLayoutPanel104.Size = new System.Drawing.Size(199, 40);
-            this.flowLayoutPanel104.TabIndex = 72;
-            // 
-            // unitPriceTextBox12
-            // 
-            this.unitPriceTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox12.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox12.Name = "unitPriceTextBox12";
-            this.unitPriceTextBox12.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox12.TabIndex = 0;
-            // 
-            // flowLayoutPanel17
-            // 
-            this.flowLayoutPanel17.Controls.Add(this.label24);
-            this.flowLayoutPanel17.Location = new System.Drawing.Point(1600, 28);
-            this.flowLayoutPanel17.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel17.Name = "flowLayoutPanel17";
-            this.flowLayoutPanel17.Size = new System.Drawing.Size(219, 43);
-            this.flowLayoutPanel17.TabIndex = 39;
+            this.moneyTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label24
             // 
-            this.label24.Location = new System.Drawing.Point(2, 0);
-            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label24.Location = new System.Drawing.Point(525, 2);
+            this.label24.Margin = new System.Windows.Forms.Padding(0);
             this.label24.Name = "label24";
-            this.label24.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label24.Size = new System.Drawing.Size(215, 42);
+            this.label24.Size = new System.Drawing.Size(72, 25);
             this.label24.TabIndex = 36;
             this.label24.Text = "数量";
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.countTextBox0);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(1600, 83);
-            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel4.TabIndex = 36;
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // countTextBox0
             // 
             this.countTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox0.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox0.Location = new System.Drawing.Point(526, 31);
+            this.countTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox0.Name = "countTextBox0";
-            this.countTextBox0.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox0.ReadOnly = true;
+            this.countTextBox0.Size = new System.Drawing.Size(70, 20);
             this.countTextBox0.TabIndex = 36;
-            // 
-            // flowLayoutPanel27
-            // 
-            this.flowLayoutPanel27.Controls.Add(this.countTextBox1);
-            this.flowLayoutPanel27.Location = new System.Drawing.Point(1600, 135);
-            this.flowLayoutPanel27.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel27.Name = "flowLayoutPanel27";
-            this.flowLayoutPanel27.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel27.TabIndex = 38;
+            this.countTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox0.TextChanged += new System.EventHandler(this.countTextBox0_TextChanged);
+            this.countTextBox0.Leave += new System.EventHandler(this.countTextBox0_Leave);
             // 
             // countTextBox1
             // 
             this.countTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox1.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox1.Location = new System.Drawing.Point(526, 58);
+            this.countTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox1.Name = "countTextBox1";
-            this.countTextBox1.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox1.ReadOnly = true;
+            this.countTextBox1.Size = new System.Drawing.Size(70, 20);
             this.countTextBox1.TabIndex = 38;
-            // 
-            // flowLayoutPanel34
-            // 
-            this.flowLayoutPanel34.Controls.Add(this.countTextBox2);
-            this.flowLayoutPanel34.Location = new System.Drawing.Point(1600, 187);
-            this.flowLayoutPanel34.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel34.Name = "flowLayoutPanel34";
-            this.flowLayoutPanel34.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel34.TabIndex = 39;
+            this.countTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox1.TextChanged += new System.EventHandler(this.countTextBox1_TextChanged);
+            this.countTextBox1.Leave += new System.EventHandler(this.countTextBox1_Leave);
             // 
             // countTextBox2
             // 
             this.countTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox2.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox2.Location = new System.Drawing.Point(526, 85);
+            this.countTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox2.Name = "countTextBox2";
-            this.countTextBox2.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox2.ReadOnly = true;
+            this.countTextBox2.Size = new System.Drawing.Size(70, 20);
             this.countTextBox2.TabIndex = 39;
-            // 
-            // flowLayoutPanel41
-            // 
-            this.flowLayoutPanel41.Controls.Add(this.countTextBox3);
-            this.flowLayoutPanel41.Location = new System.Drawing.Point(1600, 239);
-            this.flowLayoutPanel41.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel41.Name = "flowLayoutPanel41";
-            this.flowLayoutPanel41.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel41.TabIndex = 39;
+            this.countTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox2.TextChanged += new System.EventHandler(this.countTextBox2_TextChanged);
+            this.countTextBox2.Leave += new System.EventHandler(this.countTextBox2_Leave);
             // 
             // countTextBox3
             // 
             this.countTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox3.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox3.Location = new System.Drawing.Point(526, 112);
+            this.countTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox3.Name = "countTextBox3";
-            this.countTextBox3.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox3.ReadOnly = true;
+            this.countTextBox3.Size = new System.Drawing.Size(70, 20);
             this.countTextBox3.TabIndex = 39;
-            // 
-            // flowLayoutPanel48
-            // 
-            this.flowLayoutPanel48.Controls.Add(this.countTextBox4);
-            this.flowLayoutPanel48.Location = new System.Drawing.Point(1600, 291);
-            this.flowLayoutPanel48.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel48.Name = "flowLayoutPanel48";
-            this.flowLayoutPanel48.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel48.TabIndex = 39;
+            this.countTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox3.TextChanged += new System.EventHandler(this.countTextBox3_TextChanged);
+            this.countTextBox3.Leave += new System.EventHandler(this.countTextBox3_Leave);
             // 
             // countTextBox4
             // 
             this.countTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox4.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox4.Location = new System.Drawing.Point(526, 139);
+            this.countTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox4.Name = "countTextBox4";
-            this.countTextBox4.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox4.ReadOnly = true;
+            this.countTextBox4.Size = new System.Drawing.Size(70, 20);
             this.countTextBox4.TabIndex = 39;
-            // 
-            // flowLayoutPanel62
-            // 
-            this.flowLayoutPanel62.Controls.Add(this.countTextBox6);
-            this.flowLayoutPanel62.Location = new System.Drawing.Point(1600, 343);
-            this.flowLayoutPanel62.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel62.Name = "flowLayoutPanel62";
-            this.flowLayoutPanel62.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel62.TabIndex = 39;
-            // 
-            // countTextBox6
-            // 
-            this.countTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox6.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox6.Name = "countTextBox6";
-            this.countTextBox6.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox6.TabIndex = 0;
-            // 
-            // flowLayoutPanel23
-            // 
-            this.flowLayoutPanel23.Controls.Add(this.totalCount);
-            this.flowLayoutPanel23.Location = new System.Drawing.Point(1600, 759);
-            this.flowLayoutPanel23.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel23.Name = "flowLayoutPanel23";
-            this.flowLayoutPanel23.Size = new System.Drawing.Size(215, 58);
-            this.flowLayoutPanel23.TabIndex = 38;
-            // 
-            // totalCount
-            // 
-            this.totalCount.Location = new System.Drawing.Point(2, 5);
-            this.totalCount.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.totalCount.Name = "totalCount";
-            this.totalCount.ReadOnly = true;
-            this.totalCount.Size = new System.Drawing.Size(212, 31);
-            this.totalCount.TabIndex = 38;
-            this.totalCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // flowLayoutPanel55
-            // 
-            this.flowLayoutPanel55.Controls.Add(this.countTextBox5);
-            this.flowLayoutPanel55.Location = new System.Drawing.Point(1600, 395);
-            this.flowLayoutPanel55.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel55.Name = "flowLayoutPanel55";
-            this.flowLayoutPanel55.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel55.TabIndex = 39;
-            // 
-            // countTextBox5
-            // 
-            this.countTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox5.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox5.Name = "countTextBox5";
-            this.countTextBox5.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox5.TabIndex = 39;
-            // 
-            // flowLayoutPanel69
-            // 
-            this.flowLayoutPanel69.Controls.Add(this.countTextBox7);
-            this.flowLayoutPanel69.Location = new System.Drawing.Point(1600, 447);
-            this.flowLayoutPanel69.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel69.Name = "flowLayoutPanel69";
-            this.flowLayoutPanel69.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel69.TabIndex = 47;
+            this.countTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox4.TextChanged += new System.EventHandler(this.countTextBox4_TextChanged);
+            this.countTextBox4.Leave += new System.EventHandler(this.countTextBox4_Leave);
             // 
             // countTextBox7
             // 
             this.countTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox7.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox7.Location = new System.Drawing.Point(526, 220);
+            this.countTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox7.Name = "countTextBox7";
-            this.countTextBox7.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox7.ReadOnly = true;
+            this.countTextBox7.Size = new System.Drawing.Size(70, 20);
             this.countTextBox7.TabIndex = 0;
-            // 
-            // flowLayoutPanel76
-            // 
-            this.flowLayoutPanel76.Controls.Add(this.countTextBox8);
-            this.flowLayoutPanel76.Location = new System.Drawing.Point(1600, 499);
-            this.flowLayoutPanel76.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel76.Name = "flowLayoutPanel76";
-            this.flowLayoutPanel76.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel76.TabIndex = 52;
+            this.countTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox7.TextChanged += new System.EventHandler(this.countTextBox7_TextChanged);
+            this.countTextBox7.Leave += new System.EventHandler(this.countTextBox7_Leave);
             // 
             // countTextBox8
             // 
             this.countTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox8.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox8.Location = new System.Drawing.Point(526, 247);
+            this.countTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox8.Name = "countTextBox8";
-            this.countTextBox8.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox8.ReadOnly = true;
+            this.countTextBox8.Size = new System.Drawing.Size(70, 20);
             this.countTextBox8.TabIndex = 0;
-            // 
-            // flowLayoutPanel83
-            // 
-            this.flowLayoutPanel83.Controls.Add(this.countTextBox9);
-            this.flowLayoutPanel83.Location = new System.Drawing.Point(1600, 551);
-            this.flowLayoutPanel83.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel83.Name = "flowLayoutPanel83";
-            this.flowLayoutPanel83.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel83.TabIndex = 56;
+            this.countTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox8.TextChanged += new System.EventHandler(this.countTextBox8_TextChanged);
+            this.countTextBox8.Leave += new System.EventHandler(this.countTextBox8_Leave);
             // 
             // countTextBox9
             // 
             this.countTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox9.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox9.Location = new System.Drawing.Point(526, 274);
+            this.countTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox9.Name = "countTextBox9";
-            this.countTextBox9.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox9.ReadOnly = true;
+            this.countTextBox9.Size = new System.Drawing.Size(70, 20);
             this.countTextBox9.TabIndex = 0;
-            // 
-            // flowLayoutPanel90
-            // 
-            this.flowLayoutPanel90.Controls.Add(this.countTextBox10);
-            this.flowLayoutPanel90.Location = new System.Drawing.Point(1600, 603);
-            this.flowLayoutPanel90.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel90.Name = "flowLayoutPanel90";
-            this.flowLayoutPanel90.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel90.TabIndex = 61;
+            this.countTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox9.TextChanged += new System.EventHandler(this.countTextBox9_TextChanged);
+            this.countTextBox9.Leave += new System.EventHandler(this.countTextBox9_Leave);
             // 
             // countTextBox10
             // 
             this.countTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox10.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox10.Location = new System.Drawing.Point(526, 301);
+            this.countTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox10.Name = "countTextBox10";
-            this.countTextBox10.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox10.ReadOnly = true;
+            this.countTextBox10.Size = new System.Drawing.Size(70, 20);
             this.countTextBox10.TabIndex = 0;
-            // 
-            // flowLayoutPanel96
-            // 
-            this.flowLayoutPanel96.Controls.Add(this.countTextBox11);
-            this.flowLayoutPanel96.Location = new System.Drawing.Point(1600, 655);
-            this.flowLayoutPanel96.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel96.Name = "flowLayoutPanel96";
-            this.flowLayoutPanel96.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel96.TabIndex = 66;
+            this.countTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox10.TextChanged += new System.EventHandler(this.countTextBox10_TextChanged);
+            this.countTextBox10.Leave += new System.EventHandler(this.countTextBox10_Leave);
             // 
             // countTextBox11
             // 
             this.countTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox11.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox11.Location = new System.Drawing.Point(526, 328);
+            this.countTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox11.Name = "countTextBox11";
-            this.countTextBox11.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox11.ReadOnly = true;
+            this.countTextBox11.Size = new System.Drawing.Size(70, 20);
             this.countTextBox11.TabIndex = 0;
-            // 
-            // flowLayoutPanel103
-            // 
-            this.flowLayoutPanel103.Controls.Add(this.countTextBox12);
-            this.flowLayoutPanel103.Location = new System.Drawing.Point(1600, 707);
-            this.flowLayoutPanel103.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel103.Name = "flowLayoutPanel103";
-            this.flowLayoutPanel103.Size = new System.Drawing.Size(215, 40);
-            this.flowLayoutPanel103.TabIndex = 71;
+            this.countTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox11.TextChanged += new System.EventHandler(this.countTextBox11_TextChanged);
+            this.countTextBox11.Leave += new System.EventHandler(this.countTextBox11_Leave);
             // 
             // countTextBox12
             // 
             this.countTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox12.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox12.Location = new System.Drawing.Point(526, 355);
+            this.countTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox12.Name = "countTextBox12";
-            this.countTextBox12.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox12.ReadOnly = true;
+            this.countTextBox12.Size = new System.Drawing.Size(70, 20);
             this.countTextBox12.TabIndex = 0;
+            this.countTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox12.TextChanged += new System.EventHandler(this.countTextBox12_TextChanged);
+            this.countTextBox12.Leave += new System.EventHandler(this.countTextBox12_Leave);
             // 
-            // panel1
+            // totalCount
             // 
-            this.panel1.Controls.Add(this.label33);
-            this.panel1.Location = new System.Drawing.Point(1374, 26);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(217, 46);
-            this.panel1.TabIndex = 4;
+            this.totalCount.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalCount.Location = new System.Drawing.Point(526, 382);
+            this.totalCount.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalCount.Name = "totalCount";
+            this.totalCount.ReadOnly = true;
+            this.totalCount.Size = new System.Drawing.Size(70, 31);
+            this.totalCount.TabIndex = 38;
+            this.totalCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label33
+            // label31
             // 
-            this.label33.Location = new System.Drawing.Point(8, 0);
-            this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label33.Name = "label33";
-            this.label33.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label33.Size = new System.Drawing.Size(215, 42);
-            this.label33.TabIndex = 48;
-            this.label33.Text = "脇石ct";
-            // 
-            // flowLayoutPanel16
-            // 
-            this.flowLayoutPanel16.Controls.Add(this.label23);
-            this.flowLayoutPanel16.Location = new System.Drawing.Point(971, 28);
-            this.flowLayoutPanel16.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel16.Name = "flowLayoutPanel16";
-            this.flowLayoutPanel16.Size = new System.Drawing.Size(164, 43);
-            this.flowLayoutPanel16.TabIndex = 38;
-            // 
-            // label23
-            // 
-            this.label23.Location = new System.Drawing.Point(0, 0);
-            this.label23.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Padding = new System.Windows.Forms.Padding(61, 0, 20, 5);
-            this.label23.Size = new System.Drawing.Size(169, 45);
-            this.label23.TabIndex = 36;
-            this.label23.Text = "重量";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.weightTextBox0);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(971, 83);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel3.TabIndex = 36;
-            // 
-            // weightTextBox0
-            // 
-            this.weightTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox0.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox0.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox0.Name = "weightTextBox0";
-            this.weightTextBox0.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox0.TabIndex = 36;
-            // 
-            // flowLayoutPanel26
-            // 
-            this.flowLayoutPanel26.Controls.Add(this.weightTextBox1);
-            this.flowLayoutPanel26.Location = new System.Drawing.Point(971, 135);
-            this.flowLayoutPanel26.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel26.Name = "flowLayoutPanel26";
-            this.flowLayoutPanel26.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel26.TabIndex = 38;
-            // 
-            // weightTextBox1
-            // 
-            this.weightTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox1.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox1.Name = "weightTextBox1";
-            this.weightTextBox1.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox1.TabIndex = 38;
-            // 
-            // flowLayoutPanel33
-            // 
-            this.flowLayoutPanel33.Controls.Add(this.weightTextBox2);
-            this.flowLayoutPanel33.Location = new System.Drawing.Point(971, 187);
-            this.flowLayoutPanel33.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel33.Name = "flowLayoutPanel33";
-            this.flowLayoutPanel33.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel33.TabIndex = 39;
-            // 
-            // weightTextBox2
-            // 
-            this.weightTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox2.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox2.Name = "weightTextBox2";
-            this.weightTextBox2.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox2.TabIndex = 39;
-            // 
-            // flowLayoutPanel40
-            // 
-            this.flowLayoutPanel40.Controls.Add(this.weightTextBox3);
-            this.flowLayoutPanel40.Location = new System.Drawing.Point(971, 239);
-            this.flowLayoutPanel40.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel40.Name = "flowLayoutPanel40";
-            this.flowLayoutPanel40.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel40.TabIndex = 39;
-            // 
-            // weightTextBox3
-            // 
-            this.weightTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox3.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox3.Name = "weightTextBox3";
-            this.weightTextBox3.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox3.TabIndex = 39;
-            // 
-            // flowLayoutPanel54
-            // 
-            this.flowLayoutPanel54.Controls.Add(this.weightTextBox5);
-            this.flowLayoutPanel54.Location = new System.Drawing.Point(971, 343);
-            this.flowLayoutPanel54.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel54.Name = "flowLayoutPanel54";
-            this.flowLayoutPanel54.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel54.TabIndex = 39;
-            // 
-            // weightTextBox5
-            // 
-            this.weightTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox5.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox5.Name = "weightTextBox5";
-            this.weightTextBox5.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox5.TabIndex = 0;
-            // 
-            // flowLayoutPanel61
-            // 
-            this.flowLayoutPanel61.Controls.Add(this.weightTextBox6);
-            this.flowLayoutPanel61.Location = new System.Drawing.Point(971, 395);
-            this.flowLayoutPanel61.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel61.Name = "flowLayoutPanel61";
-            this.flowLayoutPanel61.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel61.TabIndex = 39;
-            // 
-            // weightTextBox6
-            // 
-            this.weightTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox6.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox6.Name = "weightTextBox6";
-            this.weightTextBox6.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox6.TabIndex = 0;
-            // 
-            // flowLayoutPanel68
-            // 
-            this.flowLayoutPanel68.Controls.Add(this.weightTextBox7);
-            this.flowLayoutPanel68.Location = new System.Drawing.Point(971, 447);
-            this.flowLayoutPanel68.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel68.Name = "flowLayoutPanel68";
-            this.flowLayoutPanel68.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel68.TabIndex = 39;
-            // 
-            // weightTextBox7
-            // 
-            this.weightTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox7.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox7.Name = "weightTextBox7";
-            this.weightTextBox7.Size = new System.Drawing.Size(169, 31);
-            this.weightTextBox7.TabIndex = 0;
-            // 
-            // flowLayoutPanel75
-            // 
-            this.flowLayoutPanel75.Controls.Add(this.weightTextBox8);
-            this.flowLayoutPanel75.Location = new System.Drawing.Point(971, 499);
-            this.flowLayoutPanel75.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel75.Name = "flowLayoutPanel75";
-            this.flowLayoutPanel75.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel75.TabIndex = 51;
-            // 
-            // weightTextBox8
-            // 
-            this.weightTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox8.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox8.Name = "weightTextBox8";
-            this.weightTextBox8.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox8.TabIndex = 0;
-            // 
-            // flowLayoutPanel22
-            // 
-            this.flowLayoutPanel22.Controls.Add(this.totalWeight);
-            this.flowLayoutPanel22.Location = new System.Drawing.Point(971, 759);
-            this.flowLayoutPanel22.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel22.Name = "flowLayoutPanel22";
-            this.flowLayoutPanel22.Size = new System.Drawing.Size(168, 58);
-            this.flowLayoutPanel22.TabIndex = 39;
+            this.label31.Location = new System.Drawing.Point(389, 380);
+            this.label31.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(133, 36);
+            this.label31.TabIndex = 38;
+            this.label31.Text = "総数";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // totalWeight
             // 
-            this.totalWeight.Location = new System.Drawing.Point(2, 5);
-            this.totalWeight.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.totalWeight.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalWeight.Location = new System.Drawing.Point(315, 382);
+            this.totalWeight.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.totalWeight.Name = "totalWeight";
             this.totalWeight.ReadOnly = true;
-            this.totalWeight.Size = new System.Drawing.Size(164, 31);
+            this.totalWeight.Size = new System.Drawing.Size(70, 31);
             this.totalWeight.TabIndex = 38;
             this.totalWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // flowLayoutPanel82
+            // label32
             // 
-            this.flowLayoutPanel82.Controls.Add(this.weightTextBox9);
-            this.flowLayoutPanel82.Location = new System.Drawing.Point(971, 551);
-            this.flowLayoutPanel82.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel82.Name = "flowLayoutPanel82";
-            this.flowLayoutPanel82.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel82.TabIndex = 39;
+            this.label32.Location = new System.Drawing.Point(187, 380);
+            this.label32.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(124, 35);
+            this.label32.TabIndex = 38;
+            this.label32.Text = "総重量";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // weightTextBox9
+            // unitPriceTextBox12
             // 
-            this.weightTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox9.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox9.Name = "weightTextBox9";
-            this.weightTextBox9.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox9.TabIndex = 0;
+            this.unitPriceTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox12.Location = new System.Drawing.Point(389, 355);
+            this.unitPriceTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox12.Name = "unitPriceTextBox12";
+            this.unitPriceTextBox12.ReadOnly = true;
+            this.unitPriceTextBox12.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox12.TabIndex = 0;
+            this.unitPriceTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox12.TextChanged += new System.EventHandler(this.unitPriceTextBox12_TextChanged);
+            this.unitPriceTextBox12.Enter += new System.EventHandler(this.unitPriceTextBox12_Enter);
+            this.unitPriceTextBox12.Leave += new System.EventHandler(this.unitPriceTextBox12_Leave);
             // 
-            // panel
+            // unitPriceTextBox11
             // 
-            this.panel.Controls.Add(this.weightTextBox10);
-            this.panel.Location = new System.Drawing.Point(971, 603);
-            this.panel.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(168, 40);
-            this.panel.TabIndex = 60;
+            this.unitPriceTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox11.Location = new System.Drawing.Point(389, 328);
+            this.unitPriceTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox11.Name = "unitPriceTextBox11";
+            this.unitPriceTextBox11.ReadOnly = true;
+            this.unitPriceTextBox11.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox11.TabIndex = 0;
+            this.unitPriceTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox11.TextChanged += new System.EventHandler(this.unitPriceTextBox11_TextChanged);
+            this.unitPriceTextBox11.Enter += new System.EventHandler(this.unitPriceTextBox11_TextChanged);
+            this.unitPriceTextBox11.Leave += new System.EventHandler(this.unitPriceTextBox11_Leave);
             // 
-            // weightTextBox10
+            // unitPriceTextBox10
             // 
-            this.weightTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox10.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox10.Name = "weightTextBox10";
-            this.weightTextBox10.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox10.TabIndex = 0;
+            this.unitPriceTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox10.Location = new System.Drawing.Point(389, 301);
+            this.unitPriceTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox10.Name = "unitPriceTextBox10";
+            this.unitPriceTextBox10.ReadOnly = true;
+            this.unitPriceTextBox10.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox10.TabIndex = 0;
+            this.unitPriceTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox10.TextChanged += new System.EventHandler(this.unitPriceTextBox10_TextChanged);
+            this.unitPriceTextBox10.Enter += new System.EventHandler(this.unitPriceTextBox10_Enter);
+            this.unitPriceTextBox10.Leave += new System.EventHandler(this.unitPriceTextBox10_Leave);
             // 
-            // flowLayoutPanel94
+            // unitPriceTextBox9
             // 
-            this.flowLayoutPanel94.Controls.Add(this.weightTextBox11);
-            this.flowLayoutPanel94.Location = new System.Drawing.Point(971, 655);
-            this.flowLayoutPanel94.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel94.Name = "flowLayoutPanel94";
-            this.flowLayoutPanel94.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel94.TabIndex = 65;
+            this.unitPriceTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox9.Location = new System.Drawing.Point(389, 274);
+            this.unitPriceTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox9.Name = "unitPriceTextBox9";
+            this.unitPriceTextBox9.ReadOnly = true;
+            this.unitPriceTextBox9.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox9.TabIndex = 0;
+            this.unitPriceTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox9.TextChanged += new System.EventHandler(this.unitPriceTextBox9_TextChanged);
+            this.unitPriceTextBox9.Enter += new System.EventHandler(this.unitPriceTextBox9_Enter);
+            this.unitPriceTextBox9.Leave += new System.EventHandler(this.unitPriceTextBox9_Leave);
             // 
-            // weightTextBox11
+            // label34
             // 
-            this.weightTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox11.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox11.Name = "weightTextBox11";
-            this.weightTextBox11.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox11.TabIndex = 0;
+            this.label34.Location = new System.Drawing.Point(388, 2);
+            this.label34.Margin = new System.Windows.Forms.Padding(0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(135, 22);
+            this.label34.TabIndex = 36;
+            this.label34.Text = "単価";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flowLayoutPanel102
+            // unitPriceTextBox0
             // 
-            this.flowLayoutPanel102.Controls.Add(this.weightTextBox12);
-            this.flowLayoutPanel102.Location = new System.Drawing.Point(971, 707);
-            this.flowLayoutPanel102.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel102.Name = "flowLayoutPanel102";
-            this.flowLayoutPanel102.Size = new System.Drawing.Size(168, 40);
-            this.flowLayoutPanel102.TabIndex = 70;
+            this.unitPriceTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox0.Location = new System.Drawing.Point(389, 31);
+            this.unitPriceTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox0.Name = "unitPriceTextBox0";
+            this.unitPriceTextBox0.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox0.TabIndex = 36;
+            this.unitPriceTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox0.TextChanged += new System.EventHandler(this.unitPriceTextBox0_TextChanged);
+            this.unitPriceTextBox0.Enter += new System.EventHandler(this.unitPriceTextBox0_Enter);
+            this.unitPriceTextBox0.Leave += new System.EventHandler(this.unitPriceTextBox0_Leave);
+            // 
+            // unitPriceTextBox1
+            // 
+            this.unitPriceTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox1.Location = new System.Drawing.Point(389, 58);
+            this.unitPriceTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox1.Name = "unitPriceTextBox1";
+            this.unitPriceTextBox1.ReadOnly = true;
+            this.unitPriceTextBox1.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox1.TabIndex = 38;
+            this.unitPriceTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox1.TextChanged += new System.EventHandler(this.unitPriceTextBox1_TextChanged);
+            this.unitPriceTextBox1.Enter += new System.EventHandler(this.unitPriceTextBox1_Enter);
+            this.unitPriceTextBox1.Leave += new System.EventHandler(this.unitPriceTextBox1_Leave);
+            // 
+            // unitPriceTextBox2
+            // 
+            this.unitPriceTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox2.Location = new System.Drawing.Point(389, 85);
+            this.unitPriceTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox2.Name = "unitPriceTextBox2";
+            this.unitPriceTextBox2.ReadOnly = true;
+            this.unitPriceTextBox2.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox2.TabIndex = 39;
+            this.unitPriceTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox2.TextChanged += new System.EventHandler(this.unitPriceTextBox2_TextChanged);
+            this.unitPriceTextBox2.Enter += new System.EventHandler(this.unitPriceTextBox2_Enter);
+            this.unitPriceTextBox2.Leave += new System.EventHandler(this.unitPriceTextBox2_Leave);
+            // 
+            // unitPriceTextBox3
+            // 
+            this.unitPriceTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox3.Location = new System.Drawing.Point(389, 112);
+            this.unitPriceTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox3.Name = "unitPriceTextBox3";
+            this.unitPriceTextBox3.ReadOnly = true;
+            this.unitPriceTextBox3.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox3.TabIndex = 39;
+            this.unitPriceTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox3.TextChanged += new System.EventHandler(this.unitPriceTextBox3_TextChanged);
+            this.unitPriceTextBox3.Enter += new System.EventHandler(this.unitPriceTextBox3_Enter);
+            this.unitPriceTextBox3.Leave += new System.EventHandler(this.unitPriceTextBox3_Leave);
+            // 
+            // unitPriceTextBox4
+            // 
+            this.unitPriceTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox4.Location = new System.Drawing.Point(389, 139);
+            this.unitPriceTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox4.Name = "unitPriceTextBox4";
+            this.unitPriceTextBox4.ReadOnly = true;
+            this.unitPriceTextBox4.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox4.TabIndex = 0;
+            this.unitPriceTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox4.TextChanged += new System.EventHandler(this.unitPriceTextBox4_TextChanged);
+            this.unitPriceTextBox4.Enter += new System.EventHandler(this.unitPriceTextBox4_Enter);
+            this.unitPriceTextBox4.Leave += new System.EventHandler(this.unitPriceTextBox4_Leave);
+            // 
+            // unitPriceTextBox5
+            // 
+            this.unitPriceTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox5.Location = new System.Drawing.Point(389, 166);
+            this.unitPriceTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox5.Name = "unitPriceTextBox5";
+            this.unitPriceTextBox5.ReadOnly = true;
+            this.unitPriceTextBox5.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox5.TabIndex = 39;
+            this.unitPriceTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox5.TextChanged += new System.EventHandler(this.unitPriceTextBox5_TextChanged);
+            this.unitPriceTextBox5.Enter += new System.EventHandler(this.unitPriceTextBox5_Enter);
+            this.unitPriceTextBox5.Leave += new System.EventHandler(this.unitPriceTextBox5_Leave);
+            // 
+            // unitPriceTextBox6
+            // 
+            this.unitPriceTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox6.Location = new System.Drawing.Point(389, 193);
+            this.unitPriceTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox6.Name = "unitPriceTextBox6";
+            this.unitPriceTextBox6.ReadOnly = true;
+            this.unitPriceTextBox6.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox6.TabIndex = 0;
+            this.unitPriceTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox6.TextChanged += new System.EventHandler(this.unitPriceTextBox6_TextChanged);
+            this.unitPriceTextBox6.Enter += new System.EventHandler(this.unitPriceTextBox6_Enter);
+            this.unitPriceTextBox6.Leave += new System.EventHandler(this.unitPriceTextBox6_Leave);
+            // 
+            // unitPriceTextBox7
+            // 
+            this.unitPriceTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox7.Location = new System.Drawing.Point(389, 220);
+            this.unitPriceTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox7.Name = "unitPriceTextBox7";
+            this.unitPriceTextBox7.ReadOnly = true;
+            this.unitPriceTextBox7.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox7.TabIndex = 0;
+            this.unitPriceTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox7.TextChanged += new System.EventHandler(this.unitPriceTextBox7_TextChanged);
+            this.unitPriceTextBox7.Enter += new System.EventHandler(this.unitPriceTextBox7_TextChanged);
+            this.unitPriceTextBox7.Leave += new System.EventHandler(this.unitPriceTextBox7_Leave);
+            // 
+            // unitPriceTextBox8
+            // 
+            this.unitPriceTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox8.Location = new System.Drawing.Point(389, 247);
+            this.unitPriceTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox8.Name = "unitPriceTextBox8";
+            this.unitPriceTextBox8.ReadOnly = true;
+            this.unitPriceTextBox8.Size = new System.Drawing.Size(133, 20);
+            this.unitPriceTextBox8.TabIndex = 0;
+            this.unitPriceTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox8.TextChanged += new System.EventHandler(this.unitPriceTextBox8_TextChanged);
+            this.unitPriceTextBox8.Enter += new System.EventHandler(this.unitPriceTextBox8_Enter);
+            this.unitPriceTextBox8.Leave += new System.EventHandler(this.unitPriceTextBox8_Leave);
             // 
             // weightTextBox12
             // 
             this.weightTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox12.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.weightTextBox12.Location = new System.Drawing.Point(315, 355);
+            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.weightTextBox12.Name = "weightTextBox12";
-            this.weightTextBox12.Size = new System.Drawing.Size(164, 31);
+            this.weightTextBox12.ReadOnly = true;
+            this.weightTextBox12.Size = new System.Drawing.Size(70, 20);
             this.weightTextBox12.TabIndex = 0;
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.types0);
-            this.panel6.Location = new System.Drawing.Point(745, 81);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(218, 43);
-            this.panel6.TabIndex = 75;
-            // 
-            // types0
-            // 
-            this.types0.Location = new System.Drawing.Point(3, 5);
-            this.types0.Name = "types0";
-            this.types0.Size = new System.Drawing.Size(213, 31);
-            this.types0.TabIndex = 4;
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.midstone0);
-            this.panel7.Location = new System.Drawing.Point(1147, 81);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(217, 43);
-            this.panel7.TabIndex = 76;
-            // 
-            // midstone0
-            // 
-            this.midstone0.Location = new System.Drawing.Point(0, 5);
-            this.midstone0.Name = "midstone0";
-            this.midstone0.Size = new System.Drawing.Size(214, 31);
-            this.midstone0.TabIndex = 4;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.wakiseki0);
-            this.panel8.Location = new System.Drawing.Point(1374, 81);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(218, 43);
-            this.panel8.TabIndex = 77;
-            // 
-            // wakiseki0
-            // 
-            this.wakiseki0.Location = new System.Drawing.Point(5, 7);
-            this.wakiseki0.Name = "wakiseki0";
-            this.wakiseki0.Size = new System.Drawing.Size(214, 31);
-            this.wakiseki0.TabIndex = 4;
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.brandname1);
-            this.panel9.Location = new System.Drawing.Point(498, 133);
-            this.panel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(237, 42);
-            this.panel9.TabIndex = 78;
-            // 
-            // brandname1
-            // 
-            this.brandname1.Location = new System.Drawing.Point(1, 7);
-            this.brandname1.Name = "brandname1";
-            this.brandname1.Size = new System.Drawing.Size(236, 31);
-            this.brandname1.TabIndex = 4;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.types1);
-            this.panel10.Location = new System.Drawing.Point(745, 133);
-            this.panel10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(218, 42);
-            this.panel10.TabIndex = 79;
-            // 
-            // types1
-            // 
-            this.types1.Location = new System.Drawing.Point(0, 7);
-            this.types1.Name = "types1";
-            this.types1.Size = new System.Drawing.Size(213, 31);
-            this.types1.TabIndex = 4;
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.midstone1);
-            this.panel11.Location = new System.Drawing.Point(1147, 133);
-            this.panel11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(217, 42);
-            this.panel11.TabIndex = 80;
-            // 
-            // midstone1
-            // 
-            this.midstone1.Location = new System.Drawing.Point(3, 3);
-            this.midstone1.Name = "midstone1";
-            this.midstone1.Size = new System.Drawing.Size(214, 31);
-            this.midstone1.TabIndex = 4;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.wakiseki1);
-            this.panel12.Location = new System.Drawing.Point(1374, 133);
-            this.panel12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(218, 42);
-            this.panel12.TabIndex = 81;
-            // 
-            // wakiseki1
-            // 
-            this.wakiseki1.Location = new System.Drawing.Point(4, 7);
-            this.wakiseki1.Name = "wakiseki1";
-            this.wakiseki1.Size = new System.Drawing.Size(212, 31);
-            this.wakiseki1.TabIndex = 4;
-            // 
-            // panel13
-            // 
-            this.panel13.Controls.Add(this.brandname2);
-            this.panel13.Location = new System.Drawing.Point(498, 185);
-            this.panel13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(237, 42);
-            this.panel13.TabIndex = 82;
-            // 
-            // brandname2
-            // 
-            this.brandname2.Location = new System.Drawing.Point(1, 7);
-            this.brandname2.Name = "brandname2";
-            this.brandname2.Size = new System.Drawing.Size(235, 31);
-            this.brandname2.TabIndex = 4;
-            // 
-            // panel14
-            // 
-            this.panel14.Controls.Add(this.types2);
-            this.panel14.Location = new System.Drawing.Point(745, 185);
-            this.panel14.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(218, 42);
-            this.panel14.TabIndex = 83;
-            // 
-            // types2
-            // 
-            this.types2.Location = new System.Drawing.Point(0, 7);
-            this.types2.Name = "types2";
-            this.types2.Size = new System.Drawing.Size(213, 31);
-            this.types2.TabIndex = 4;
-            // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.midstone2);
-            this.panel15.Location = new System.Drawing.Point(1147, 185);
-            this.panel15.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(217, 42);
-            this.panel15.TabIndex = 84;
-            // 
-            // midstone2
-            // 
-            this.midstone2.Location = new System.Drawing.Point(0, 7);
-            this.midstone2.Name = "midstone2";
-            this.midstone2.Size = new System.Drawing.Size(214, 31);
-            this.midstone2.TabIndex = 48;
-            // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.wakiseki2);
-            this.panel16.Location = new System.Drawing.Point(1374, 185);
-            this.panel16.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(218, 42);
-            this.panel16.TabIndex = 85;
-            // 
-            // wakiseki2
-            // 
-            this.wakiseki2.Location = new System.Drawing.Point(0, 8);
-            this.wakiseki2.Name = "wakiseki2";
-            this.wakiseki2.Size = new System.Drawing.Size(217, 31);
-            this.wakiseki2.TabIndex = 48;
-            // 
-            // panel17
-            // 
-            this.panel17.Controls.Add(this.wakiseki3);
-            this.panel17.Location = new System.Drawing.Point(1374, 237);
-            this.panel17.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(218, 43);
-            this.panel17.TabIndex = 86;
-            // 
-            // wakiseki3
-            // 
-            this.wakiseki3.Location = new System.Drawing.Point(3, 3);
-            this.wakiseki3.Name = "wakiseki3";
-            this.wakiseki3.Size = new System.Drawing.Size(216, 31);
-            this.wakiseki3.TabIndex = 4;
-            // 
-            // panel18
-            // 
-            this.panel18.Controls.Add(this.brandname3);
-            this.panel18.Location = new System.Drawing.Point(498, 237);
-            this.panel18.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(236, 43);
-            this.panel18.TabIndex = 87;
-            // 
-            // brandname3
-            // 
-            this.brandname3.Location = new System.Drawing.Point(3, 3);
-            this.brandname3.Name = "brandname3";
-            this.brandname3.Size = new System.Drawing.Size(236, 31);
-            this.brandname3.TabIndex = 4;
-            // 
-            // panel19
-            // 
-            this.panel19.Controls.Add(this.types3);
-            this.panel19.Location = new System.Drawing.Point(745, 237);
-            this.panel19.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(218, 43);
-            this.panel19.TabIndex = 88;
-            // 
-            // types3
-            // 
-            this.types3.Location = new System.Drawing.Point(2, 7);
-            this.types3.Name = "types3";
-            this.types3.Size = new System.Drawing.Size(213, 31);
-            this.types3.TabIndex = 4;
-            // 
-            // panel20
-            // 
-            this.panel20.Controls.Add(this.brandname4);
-            this.panel20.Location = new System.Drawing.Point(498, 289);
-            this.panel20.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(237, 42);
-            this.panel20.TabIndex = 89;
-            // 
-            // brandname4
-            // 
-            this.brandname4.Location = new System.Drawing.Point(1, 0);
-            this.brandname4.Name = "brandname4";
-            this.brandname4.Size = new System.Drawing.Size(236, 31);
-            this.brandname4.TabIndex = 4;
-            // 
-            // panel21
-            // 
-            this.panel21.Controls.Add(this.midstone3);
-            this.panel21.Location = new System.Drawing.Point(1147, 237);
-            this.panel21.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(217, 43);
-            this.panel21.TabIndex = 90;
-            // 
-            // midstone3
-            // 
-            this.midstone3.Location = new System.Drawing.Point(3, 8);
-            this.midstone3.Name = "midstone3";
-            this.midstone3.Size = new System.Drawing.Size(211, 31);
-            this.midstone3.TabIndex = 4;
-            // 
-            // panel22
-            // 
-            this.panel22.Controls.Add(this.types4);
-            this.panel22.Location = new System.Drawing.Point(745, 289);
-            this.panel22.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel22.Name = "panel22";
-            this.panel22.Size = new System.Drawing.Size(218, 42);
-            this.panel22.TabIndex = 91;
-            // 
-            // types4
-            // 
-            this.types4.Location = new System.Drawing.Point(6, 3);
-            this.types4.Name = "types4";
-            this.types4.Size = new System.Drawing.Size(216, 31);
-            this.types4.TabIndex = 4;
-            // 
-            // panel23
-            // 
-            this.panel23.Controls.Add(this.midstone4);
-            this.panel23.Location = new System.Drawing.Point(1147, 289);
-            this.panel23.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(217, 42);
-            this.panel23.TabIndex = 92;
-            // 
-            // midstone4
-            // 
-            this.midstone4.Location = new System.Drawing.Point(3, 7);
-            this.midstone4.Name = "midstone4";
-            this.midstone4.Size = new System.Drawing.Size(211, 31);
-            this.midstone4.TabIndex = 4;
-            // 
-            // panel24
-            // 
-            this.panel24.Controls.Add(this.wakiseki4);
-            this.panel24.Location = new System.Drawing.Point(1374, 289);
-            this.panel24.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel24.Name = "panel24";
-            this.panel24.Size = new System.Drawing.Size(218, 42);
-            this.panel24.TabIndex = 93;
-            // 
-            // wakiseki4
-            // 
-            this.wakiseki4.Location = new System.Drawing.Point(3, 8);
-            this.wakiseki4.Name = "wakiseki4";
-            this.wakiseki4.Size = new System.Drawing.Size(212, 31);
-            this.wakiseki4.TabIndex = 4;
-            // 
-            // panel25
-            // 
-            this.panel25.Controls.Add(this.brandname5);
-            this.panel25.Location = new System.Drawing.Point(498, 341);
-            this.panel25.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel25.Name = "panel25";
-            this.panel25.Size = new System.Drawing.Size(237, 42);
-            this.panel25.TabIndex = 94;
-            // 
-            // brandname5
-            // 
-            this.brandname5.Location = new System.Drawing.Point(0, 8);
-            this.brandname5.Name = "brandname5";
-            this.brandname5.Size = new System.Drawing.Size(236, 31);
-            this.brandname5.TabIndex = 4;
-            // 
-            // panel26
-            // 
-            this.panel26.Controls.Add(this.types5);
-            this.panel26.Location = new System.Drawing.Point(745, 341);
-            this.panel26.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(218, 43);
-            this.panel26.TabIndex = 95;
-            // 
-            // types5
-            // 
-            this.types5.Location = new System.Drawing.Point(3, 3);
-            this.types5.Name = "types5";
-            this.types5.Size = new System.Drawing.Size(214, 31);
-            this.types5.TabIndex = 4;
-            // 
-            // panel27
-            // 
-            this.panel27.Controls.Add(this.midstone5);
-            this.panel27.Location = new System.Drawing.Point(1147, 341);
-            this.panel27.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel27.Name = "panel27";
-            this.panel27.Size = new System.Drawing.Size(217, 43);
-            this.panel27.TabIndex = 96;
-            // 
-            // midstone5
-            // 
-            this.midstone5.Location = new System.Drawing.Point(5, 9);
-            this.midstone5.Name = "midstone5";
-            this.midstone5.Size = new System.Drawing.Size(209, 31);
-            this.midstone5.TabIndex = 4;
-            // 
-            // panel28
-            // 
-            this.panel28.Controls.Add(this.wakiseki5);
-            this.panel28.Location = new System.Drawing.Point(1374, 341);
-            this.panel28.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel28.Name = "panel28";
-            this.panel28.Size = new System.Drawing.Size(218, 43);
-            this.panel28.TabIndex = 97;
-            // 
-            // wakiseki5
-            // 
-            this.wakiseki5.Location = new System.Drawing.Point(3, 9);
-            this.wakiseki5.Name = "wakiseki5";
-            this.wakiseki5.Size = new System.Drawing.Size(216, 31);
-            this.wakiseki5.TabIndex = 4;
-            // 
-            // panel29
-            // 
-            this.panel29.Controls.Add(this.brandname6);
-            this.panel29.Location = new System.Drawing.Point(498, 393);
-            this.panel29.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel29.Name = "panel29";
-            this.panel29.Size = new System.Drawing.Size(237, 42);
-            this.panel29.TabIndex = 98;
-            // 
-            // brandname6
-            // 
-            this.brandname6.Location = new System.Drawing.Point(0, 3);
-            this.brandname6.Name = "brandname6";
-            this.brandname6.Size = new System.Drawing.Size(237, 31);
-            this.brandname6.TabIndex = 4;
-            // 
-            // panel30
-            // 
-            this.panel30.Controls.Add(this.types6);
-            this.panel30.Location = new System.Drawing.Point(745, 393);
-            this.panel30.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel30.Name = "panel30";
-            this.panel30.Size = new System.Drawing.Size(218, 42);
-            this.panel30.TabIndex = 99;
-            // 
-            // types6
-            // 
-            this.types6.Location = new System.Drawing.Point(6, 3);
-            this.types6.Name = "types6";
-            this.types6.Size = new System.Drawing.Size(213, 31);
-            this.types6.TabIndex = 4;
-            // 
-            // panel31
-            // 
-            this.panel31.Controls.Add(this.midstone6);
-            this.panel31.Location = new System.Drawing.Point(1147, 393);
-            this.panel31.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel31.Name = "panel31";
-            this.panel31.Size = new System.Drawing.Size(217, 43);
-            this.panel31.TabIndex = 100;
-            // 
-            // midstone6
-            // 
-            this.midstone6.Location = new System.Drawing.Point(0, 3);
-            this.midstone6.Name = "midstone6";
-            this.midstone6.Size = new System.Drawing.Size(217, 31);
-            this.midstone6.TabIndex = 4;
-            // 
-            // panel32
-            // 
-            this.panel32.Controls.Add(this.wakiseki6);
-            this.panel32.Location = new System.Drawing.Point(1374, 393);
-            this.panel32.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel32.Name = "panel32";
-            this.panel32.Size = new System.Drawing.Size(218, 43);
-            this.panel32.TabIndex = 101;
-            // 
-            // wakiseki6
-            // 
-            this.wakiseki6.Location = new System.Drawing.Point(3, 7);
-            this.wakiseki6.Name = "wakiseki6";
-            this.wakiseki6.Size = new System.Drawing.Size(210, 31);
-            this.wakiseki6.TabIndex = 4;
-            // 
-            // panel33
-            // 
-            this.panel33.Controls.Add(this.brandname7);
-            this.panel33.Location = new System.Drawing.Point(498, 445);
-            this.panel33.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel33.Name = "panel33";
-            this.panel33.Size = new System.Drawing.Size(236, 43);
-            this.panel33.TabIndex = 102;
-            // 
-            // brandname7
-            // 
-            this.brandname7.Location = new System.Drawing.Point(1, 3);
-            this.brandname7.Name = "brandname7";
-            this.brandname7.Size = new System.Drawing.Size(235, 31);
-            this.brandname7.TabIndex = 4;
-            // 
-            // panel34
-            // 
-            this.panel34.Controls.Add(this.types7);
-            this.panel34.Location = new System.Drawing.Point(745, 445);
-            this.panel34.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel34.Name = "panel34";
-            this.panel34.Size = new System.Drawing.Size(218, 43);
-            this.panel34.TabIndex = 103;
-            // 
-            // types7
-            // 
-            this.types7.Location = new System.Drawing.Point(4, 7);
-            this.types7.Name = "types7";
-            this.types7.Size = new System.Drawing.Size(218, 31);
-            this.types7.TabIndex = 4;
-            // 
-            // panel35
-            // 
-            this.panel35.Controls.Add(this.midstone7);
-            this.panel35.Location = new System.Drawing.Point(1147, 445);
-            this.panel35.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel35.Name = "panel35";
-            this.panel35.Size = new System.Drawing.Size(217, 43);
-            this.panel35.TabIndex = 104;
-            // 
-            // midstone7
-            // 
-            this.midstone7.Location = new System.Drawing.Point(3, 7);
-            this.midstone7.Name = "midstone7";
-            this.midstone7.Size = new System.Drawing.Size(209, 31);
-            this.midstone7.TabIndex = 4;
-            // 
-            // panel36
-            // 
-            this.panel36.Controls.Add(this.wakiseki7);
-            this.panel36.Location = new System.Drawing.Point(1374, 445);
-            this.panel36.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel36.Name = "panel36";
-            this.panel36.Size = new System.Drawing.Size(217, 43);
-            this.panel36.TabIndex = 105;
-            // 
-            // wakiseki7
-            // 
-            this.wakiseki7.Location = new System.Drawing.Point(3, 8);
-            this.wakiseki7.Name = "wakiseki7";
-            this.wakiseki7.Size = new System.Drawing.Size(216, 31);
-            this.wakiseki7.TabIndex = 4;
-            // 
-            // panel37
-            // 
-            this.panel37.Controls.Add(this.brandname8);
-            this.panel37.Location = new System.Drawing.Point(498, 497);
-            this.panel37.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel37.Name = "panel37";
-            this.panel37.Size = new System.Drawing.Size(237, 42);
-            this.panel37.TabIndex = 106;
-            // 
-            // brandname8
-            // 
-            this.brandname8.Location = new System.Drawing.Point(-2, 7);
-            this.brandname8.Name = "brandname8";
-            this.brandname8.Size = new System.Drawing.Size(236, 31);
-            this.brandname8.TabIndex = 4;
-            // 
-            // panel38
-            // 
-            this.panel38.Controls.Add(this.brandname9);
-            this.panel38.Location = new System.Drawing.Point(498, 549);
-            this.panel38.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel38.Name = "panel38";
-            this.panel38.Size = new System.Drawing.Size(237, 43);
-            this.panel38.TabIndex = 107;
-            // 
-            // brandname9
-            // 
-            this.brandname9.Location = new System.Drawing.Point(-2, 3);
-            this.brandname9.Name = "brandname9";
-            this.brandname9.Size = new System.Drawing.Size(239, 31);
-            this.brandname9.TabIndex = 4;
-            // 
-            // panel39
-            // 
-            this.panel39.Controls.Add(this.brandname10);
-            this.panel39.Location = new System.Drawing.Point(498, 601);
-            this.panel39.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel39.Name = "panel39";
-            this.panel39.Size = new System.Drawing.Size(237, 42);
-            this.panel39.TabIndex = 108;
-            // 
-            // brandname10
-            // 
-            this.brandname10.Location = new System.Drawing.Point(3, 8);
-            this.brandname10.Name = "brandname10";
-            this.brandname10.Size = new System.Drawing.Size(231, 31);
-            this.brandname10.TabIndex = 4;
-            // 
-            // panel40
-            // 
-            this.panel40.Controls.Add(this.brandname11);
-            this.panel40.Location = new System.Drawing.Point(498, 653);
-            this.panel40.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel40.Name = "panel40";
-            this.panel40.Size = new System.Drawing.Size(236, 43);
-            this.panel40.TabIndex = 109;
-            // 
-            // brandname11
-            // 
-            this.brandname11.Location = new System.Drawing.Point(0, 7);
-            this.brandname11.Name = "brandname11";
-            this.brandname11.Size = new System.Drawing.Size(236, 31);
-            this.brandname11.TabIndex = 4;
-            // 
-            // panel41
-            // 
-            this.panel41.Controls.Add(this.brandname12);
-            this.panel41.Location = new System.Drawing.Point(498, 705);
-            this.panel41.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel41.Name = "panel41";
-            this.panel41.Size = new System.Drawing.Size(237, 42);
-            this.panel41.TabIndex = 110;
-            // 
-            // brandname12
-            // 
-            this.brandname12.Location = new System.Drawing.Point(5, 7);
-            this.brandname12.Name = "brandname12";
-            this.brandname12.Size = new System.Drawing.Size(231, 31);
-            this.brandname12.TabIndex = 4;
-            // 
-            // panel42
-            // 
-            this.panel42.Controls.Add(this.types8);
-            this.panel42.Location = new System.Drawing.Point(745, 497);
-            this.panel42.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel42.Name = "panel42";
-            this.panel42.Size = new System.Drawing.Size(218, 43);
-            this.panel42.TabIndex = 111;
-            // 
-            // types8
-            // 
-            this.types8.Location = new System.Drawing.Point(2, 3);
-            this.types8.Name = "types8";
-            this.types8.Size = new System.Drawing.Size(222, 31);
-            this.types8.TabIndex = 4;
-            // 
-            // panel43
-            // 
-            this.panel43.Controls.Add(this.types9);
-            this.panel43.Location = new System.Drawing.Point(745, 549);
-            this.panel43.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel43.Name = "panel43";
-            this.panel43.Size = new System.Drawing.Size(218, 42);
-            this.panel43.TabIndex = 112;
-            // 
-            // types9
-            // 
-            this.types9.Location = new System.Drawing.Point(0, 3);
-            this.types9.Name = "types9";
-            this.types9.Size = new System.Drawing.Size(222, 31);
-            this.types9.TabIndex = 4;
-            // 
-            // panel44
-            // 
-            this.panel44.Controls.Add(this.types10);
-            this.panel44.Location = new System.Drawing.Point(745, 601);
-            this.panel44.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel44.Name = "panel44";
-            this.panel44.Size = new System.Drawing.Size(218, 43);
-            this.panel44.TabIndex = 113;
-            // 
-            // types10
-            // 
-            this.types10.Location = new System.Drawing.Point(2, 9);
-            this.types10.Name = "types10";
-            this.types10.Size = new System.Drawing.Size(217, 31);
-            this.types10.TabIndex = 4;
-            // 
-            // panel45
-            // 
-            this.panel45.Controls.Add(this.types11);
-            this.panel45.Location = new System.Drawing.Point(745, 653);
-            this.panel45.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel45.Name = "panel45";
-            this.panel45.Size = new System.Drawing.Size(218, 43);
-            this.panel45.TabIndex = 114;
-            // 
-            // types11
-            // 
-            this.types11.Location = new System.Drawing.Point(4, 7);
-            this.types11.Name = "types11";
-            this.types11.Size = new System.Drawing.Size(213, 31);
-            this.types11.TabIndex = 4;
-            // 
-            // panel46
-            // 
-            this.panel46.Controls.Add(this.types12);
-            this.panel46.Location = new System.Drawing.Point(745, 705);
-            this.panel46.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.panel46.Name = "panel46";
-            this.panel46.Size = new System.Drawing.Size(218, 39);
-            this.panel46.TabIndex = 115;
-            // 
-            // types12
-            // 
-            this.types12.Location = new System.Drawing.Point(2, 2);
-            this.types12.Name = "types12";
-            this.types12.Size = new System.Drawing.Size(214, 31);
-            this.types12.TabIndex = 4;
-            // 
-            // panel47
-            // 
-            this.panel47.Controls.Add(this.midstone8);
-            this.panel47.Location = new System.Drawing.Point(1146, 497);
-            this.panel47.Name = "panel47";
-            this.panel47.Size = new System.Drawing.Size(219, 44);
-            this.panel47.TabIndex = 116;
-            // 
-            // midstone8
-            // 
-            this.midstone8.Location = new System.Drawing.Point(4, 4);
-            this.midstone8.Name = "midstone8";
-            this.midstone8.Size = new System.Drawing.Size(214, 31);
-            this.midstone8.TabIndex = 4;
-            // 
-            // panel48
-            // 
-            this.panel48.Controls.Add(this.wakiseki8);
-            this.panel48.Location = new System.Drawing.Point(1373, 497);
-            this.panel48.Name = "panel48";
-            this.panel48.Size = new System.Drawing.Size(220, 44);
-            this.panel48.TabIndex = 117;
-            // 
-            // wakiseki8
-            // 
-            this.wakiseki8.Location = new System.Drawing.Point(2, 8);
-            this.wakiseki8.Name = "wakiseki8";
-            this.wakiseki8.Size = new System.Drawing.Size(218, 31);
-            this.wakiseki8.TabIndex = 4;
-            // 
-            // panel49
-            // 
-            this.panel49.Controls.Add(this.midstone9);
-            this.panel49.Location = new System.Drawing.Point(1146, 549);
-            this.panel49.Name = "panel49";
-            this.panel49.Size = new System.Drawing.Size(219, 44);
-            this.panel49.TabIndex = 118;
-            // 
-            // midstone9
-            // 
-            this.midstone9.Location = new System.Drawing.Point(0, 3);
-            this.midstone9.Name = "midstone9";
-            this.midstone9.Size = new System.Drawing.Size(213, 31);
-            this.midstone9.TabIndex = 4;
-            // 
-            // panel50
-            // 
-            this.panel50.Controls.Add(this.wakiseki9);
-            this.panel50.Location = new System.Drawing.Point(1373, 549);
-            this.panel50.Name = "panel50";
-            this.panel50.Size = new System.Drawing.Size(220, 44);
-            this.panel50.TabIndex = 119;
-            // 
-            // wakiseki9
-            // 
-            this.wakiseki9.Location = new System.Drawing.Point(4, 10);
-            this.wakiseki9.Name = "wakiseki9";
-            this.wakiseki9.Size = new System.Drawing.Size(215, 31);
-            this.wakiseki9.TabIndex = 4;
-            // 
-            // panel51
-            // 
-            this.panel51.Controls.Add(this.midstone10);
-            this.panel51.Location = new System.Drawing.Point(1146, 601);
-            this.panel51.Name = "panel51";
-            this.panel51.Size = new System.Drawing.Size(219, 44);
-            this.panel51.TabIndex = 120;
-            // 
-            // midstone10
-            // 
-            this.midstone10.Location = new System.Drawing.Point(3, 7);
-            this.midstone10.Name = "midstone10";
-            this.midstone10.Size = new System.Drawing.Size(214, 31);
-            this.midstone10.TabIndex = 4;
-            // 
-            // panel52
-            // 
-            this.panel52.Controls.Add(this.wakiseki10);
-            this.panel52.Location = new System.Drawing.Point(1373, 601);
-            this.panel52.Name = "panel52";
-            this.panel52.Size = new System.Drawing.Size(220, 44);
-            this.panel52.TabIndex = 121;
-            // 
-            // wakiseki10
-            // 
-            this.wakiseki10.Location = new System.Drawing.Point(5, 7);
-            this.wakiseki10.Name = "wakiseki10";
-            this.wakiseki10.Size = new System.Drawing.Size(216, 31);
-            this.wakiseki10.TabIndex = 4;
-            // 
-            // panel53
-            // 
-            this.panel53.Controls.Add(this.midstone11);
-            this.panel53.Location = new System.Drawing.Point(1146, 653);
-            this.panel53.Name = "panel53";
-            this.panel53.Size = new System.Drawing.Size(219, 44);
-            this.panel53.TabIndex = 122;
-            // 
-            // midstone11
-            // 
-            this.midstone11.Location = new System.Drawing.Point(-2, 7);
-            this.midstone11.Name = "midstone11";
-            this.midstone11.Size = new System.Drawing.Size(220, 31);
-            this.midstone11.TabIndex = 4;
-            // 
-            // panel54
-            // 
-            this.panel54.Controls.Add(this.wakiseki11);
-            this.panel54.Location = new System.Drawing.Point(1373, 653);
-            this.panel54.Name = "panel54";
-            this.panel54.Size = new System.Drawing.Size(220, 44);
-            this.panel54.TabIndex = 123;
-            // 
-            // wakiseki11
-            // 
-            this.wakiseki11.Location = new System.Drawing.Point(2, 10);
-            this.wakiseki11.Name = "wakiseki11";
-            this.wakiseki11.Size = new System.Drawing.Size(214, 31);
-            this.wakiseki11.TabIndex = 48;
-            // 
-            // panel55
-            // 
-            this.panel55.Controls.Add(this.midstone12);
-            this.panel55.Location = new System.Drawing.Point(1146, 705);
-            this.panel55.Name = "panel55";
-            this.panel55.Size = new System.Drawing.Size(219, 44);
-            this.panel55.TabIndex = 124;
-            // 
-            // midstone12
-            // 
-            this.midstone12.Location = new System.Drawing.Point(4, 8);
-            this.midstone12.Name = "midstone12";
-            this.midstone12.Size = new System.Drawing.Size(217, 31);
-            this.midstone12.TabIndex = 48;
-            // 
-            // panel56
-            // 
-            this.panel56.Controls.Add(this.wakiseki12);
-            this.panel56.Location = new System.Drawing.Point(1373, 705);
-            this.panel56.Name = "panel56";
-            this.panel56.Size = new System.Drawing.Size(220, 44);
-            this.panel56.TabIndex = 125;
-            // 
-            // wakiseki12
-            // 
-            this.wakiseki12.Location = new System.Drawing.Point(2, 7);
-            this.wakiseki12.Name = "wakiseki12";
-            this.wakiseki12.Size = new System.Drawing.Size(216, 31);
-            this.wakiseki12.TabIndex = 48;
-            // 
-            // panel57
-            // 
-            this.panel57.Controls.Add(this.totalmidstone);
-            this.panel57.Location = new System.Drawing.Point(1146, 757);
-            this.panel57.Name = "panel57";
-            this.panel57.Size = new System.Drawing.Size(219, 60);
-            this.panel57.TabIndex = 126;
-            // 
-            // totalmidstone
-            // 
-            this.totalmidstone.Location = new System.Drawing.Point(4, 7);
-            this.totalmidstone.Name = "totalmidstone";
-            this.totalmidstone.ReadOnly = true;
-            this.totalmidstone.Size = new System.Drawing.Size(214, 31);
-            this.totalmidstone.TabIndex = 48;
-            // 
-            // panel58
-            // 
-            this.panel58.Controls.Add(this.totalwakiseki);
-            this.panel58.Location = new System.Drawing.Point(1373, 757);
-            this.panel58.Name = "panel58";
-            this.panel58.Size = new System.Drawing.Size(220, 60);
-            this.panel58.TabIndex = 127;
-            // 
-            // totalwakiseki
-            // 
-            this.totalwakiseki.Location = new System.Drawing.Point(3, 7);
-            this.totalwakiseki.Name = "totalwakiseki";
-            this.totalwakiseki.ReadOnly = true;
-            this.totalwakiseki.Size = new System.Drawing.Size(214, 31);
-            this.totalwakiseki.TabIndex = 48;
+            this.weightTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox12.TextChanged += new System.EventHandler(this.weightTextBox12_TextChanged);
+            this.weightTextBox12.Leave += new System.EventHandler(this.weightTextBox12_Leave);
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(314, 2);
+            this.label23.Margin = new System.Windows.Forms.Padding(0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(72, 22);
+            this.label23.TabIndex = 36;
+            this.label23.Text = "重量";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // weightTextBox0
+            // 
+            this.weightTextBox0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox0.Location = new System.Drawing.Point(315, 31);
+            this.weightTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox0.Name = "weightTextBox0";
+            this.weightTextBox0.ReadOnly = true;
+            this.weightTextBox0.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox0.TabIndex = 36;
+            this.weightTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox0.TextChanged += new System.EventHandler(this.weightTextBox0_TextChanged);
+            this.weightTextBox0.Leave += new System.EventHandler(this.weightTextBox0_Leave);
+            // 
+            // weightTextBox1
+            // 
+            this.weightTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox1.Location = new System.Drawing.Point(315, 58);
+            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox1.Name = "weightTextBox1";
+            this.weightTextBox1.ReadOnly = true;
+            this.weightTextBox1.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox1.TabIndex = 38;
+            this.weightTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox1.TextChanged += new System.EventHandler(this.weightTextBox1_TextChanged);
+            this.weightTextBox1.Leave += new System.EventHandler(this.weightTextBox1_Leave);
+            // 
+            // weightTextBox2
+            // 
+            this.weightTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox2.Location = new System.Drawing.Point(315, 85);
+            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox2.Name = "weightTextBox2";
+            this.weightTextBox2.ReadOnly = true;
+            this.weightTextBox2.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox2.TabIndex = 39;
+            this.weightTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox2.TextChanged += new System.EventHandler(this.weightTextBox2_TextChanged);
+            this.weightTextBox2.Leave += new System.EventHandler(this.weightTextBox2_Leave);
+            // 
+            // weightTextBox3
+            // 
+            this.weightTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox3.Location = new System.Drawing.Point(315, 112);
+            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox3.Name = "weightTextBox3";
+            this.weightTextBox3.ReadOnly = true;
+            this.weightTextBox3.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox3.TabIndex = 39;
+            this.weightTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox3.TextChanged += new System.EventHandler(this.weightTextBox3_TextChanged);
+            this.weightTextBox3.Leave += new System.EventHandler(this.weightTextBox3_Leave);
+            // 
+            // weightTextBox4
+            // 
+            this.weightTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox4.Location = new System.Drawing.Point(315, 139);
+            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox4.Name = "weightTextBox4";
+            this.weightTextBox4.ReadOnly = true;
+            this.weightTextBox4.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox4.TabIndex = 39;
+            this.weightTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox4.TextChanged += new System.EventHandler(this.weightTextBox4_TextChanged);
+            this.weightTextBox4.Leave += new System.EventHandler(this.weightTextBox4_Leave);
+            // 
+            // weightTextBox5
+            // 
+            this.weightTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox5.Location = new System.Drawing.Point(315, 166);
+            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox5.Name = "weightTextBox5";
+            this.weightTextBox5.ReadOnly = true;
+            this.weightTextBox5.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox5.TabIndex = 0;
+            this.weightTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox5.TextChanged += new System.EventHandler(this.weightTextBox5_TextChanged);
+            this.weightTextBox5.Leave += new System.EventHandler(this.weightTextBox5_Leave);
+            // 
+            // weightTextBox6
+            // 
+            this.weightTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox6.Location = new System.Drawing.Point(315, 193);
+            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox6.Name = "weightTextBox6";
+            this.weightTextBox6.ReadOnly = true;
+            this.weightTextBox6.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox6.TabIndex = 0;
+            this.weightTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox6.TextChanged += new System.EventHandler(this.weightTextBox6_TextChanged);
+            this.weightTextBox6.Leave += new System.EventHandler(this.weightTextBox6_Leave);
+            // 
+            // weightTextBox7
+            // 
+            this.weightTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox7.Location = new System.Drawing.Point(315, 220);
+            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox7.Name = "weightTextBox7";
+            this.weightTextBox7.ReadOnly = true;
+            this.weightTextBox7.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox7.TabIndex = 0;
+            this.weightTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox7.TextChanged += new System.EventHandler(this.weightTextBox7_TextChanged);
+            this.weightTextBox7.Leave += new System.EventHandler(this.weightTextBox7_Leave);
+            // 
+            // weightTextBox8
+            // 
+            this.weightTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox8.Location = new System.Drawing.Point(315, 247);
+            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox8.Name = "weightTextBox8";
+            this.weightTextBox8.ReadOnly = true;
+            this.weightTextBox8.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox8.TabIndex = 0;
+            this.weightTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox8.TextChanged += new System.EventHandler(this.weightTextBox8_TextChanged);
+            this.weightTextBox8.Leave += new System.EventHandler(this.weightTextBox8_Leave);
+            // 
+            // weightTextBox9
+            // 
+            this.weightTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox9.Location = new System.Drawing.Point(315, 274);
+            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox9.Name = "weightTextBox9";
+            this.weightTextBox9.ReadOnly = true;
+            this.weightTextBox9.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox9.TabIndex = 0;
+            this.weightTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox9.TextChanged += new System.EventHandler(this.weightTextBox9_TextChanged);
+            this.weightTextBox9.Leave += new System.EventHandler(this.weightTextBox9_Leave);
+            // 
+            // weightTextBox10
+            // 
+            this.weightTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox10.Location = new System.Drawing.Point(315, 301);
+            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox10.Name = "weightTextBox10";
+            this.weightTextBox10.ReadOnly = true;
+            this.weightTextBox10.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox10.TabIndex = 0;
+            this.weightTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox10.TextChanged += new System.EventHandler(this.weightTextBox10_TextChanged);
+            this.weightTextBox10.Leave += new System.EventHandler(this.weightTextBox10_Leave);
+            // 
+            // weightTextBox11
+            // 
+            this.weightTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox11.Location = new System.Drawing.Point(315, 328);
+            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox11.Name = "weightTextBox11";
+            this.weightTextBox11.ReadOnly = true;
+            this.weightTextBox11.Size = new System.Drawing.Size(70, 20);
+            this.weightTextBox11.TabIndex = 0;
+            this.weightTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox11.TextChanged += new System.EventHandler(this.weightTextBox11_TextChanged);
+            this.weightTextBox11.Leave += new System.EventHandler(this.weightTextBox11_Leave);
+            // 
+            // label22
+            // 
+            this.label22.Location = new System.Drawing.Point(186, 2);
+            this.label22.Margin = new System.Windows.Forms.Padding(0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(125, 22);
+            this.label22.TabIndex = 36;
+            this.label22.Text = "品物詳細";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // itemDetail0
+            // 
+            this.itemDetail0.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail0.Location = new System.Drawing.Point(187, 31);
+            this.itemDetail0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail0.Name = "itemDetail0";
+            this.itemDetail0.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail0.TabIndex = 36;
+            this.itemDetail0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail1
+            // 
+            this.itemDetail1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail1.Location = new System.Drawing.Point(187, 58);
+            this.itemDetail1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail1.Name = "itemDetail1";
+            this.itemDetail1.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail1.TabIndex = 38;
+            this.itemDetail1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail2
+            // 
+            this.itemDetail2.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail2.Location = new System.Drawing.Point(187, 85);
+            this.itemDetail2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail2.Name = "itemDetail2";
+            this.itemDetail2.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail2.TabIndex = 39;
+            this.itemDetail2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail3
+            // 
+            this.itemDetail3.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail3.Location = new System.Drawing.Point(187, 112);
+            this.itemDetail3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail3.Name = "itemDetail3";
+            this.itemDetail3.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail3.TabIndex = 39;
+            this.itemDetail3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail4
+            // 
+            this.itemDetail4.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail4.Location = new System.Drawing.Point(187, 139);
+            this.itemDetail4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail4.Name = "itemDetail4";
+            this.itemDetail4.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail4.TabIndex = 39;
+            this.itemDetail4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail5
+            // 
+            this.itemDetail5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail5.Location = new System.Drawing.Point(187, 166);
+            this.itemDetail5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail5.Name = "itemDetail5";
+            this.itemDetail5.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail5.TabIndex = 0;
+            this.itemDetail5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail6
+            // 
+            this.itemDetail6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail6.Location = new System.Drawing.Point(187, 193);
+            this.itemDetail6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail6.Name = "itemDetail6";
+            this.itemDetail6.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail6.TabIndex = 0;
+            this.itemDetail6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail7
+            // 
+            this.itemDetail7.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail7.Location = new System.Drawing.Point(187, 220);
+            this.itemDetail7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail7.Name = "itemDetail7";
+            this.itemDetail7.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail7.TabIndex = 0;
+            this.itemDetail7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail8
+            // 
+            this.itemDetail8.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail8.Location = new System.Drawing.Point(187, 247);
+            this.itemDetail8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail8.Name = "itemDetail8";
+            this.itemDetail8.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail8.TabIndex = 0;
+            this.itemDetail8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail9
+            // 
+            this.itemDetail9.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail9.Location = new System.Drawing.Point(187, 274);
+            this.itemDetail9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail9.Name = "itemDetail9";
+            this.itemDetail9.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail9.TabIndex = 0;
+            this.itemDetail9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail10
+            // 
+            this.itemDetail10.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail10.Location = new System.Drawing.Point(187, 301);
+            this.itemDetail10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail10.Name = "itemDetail10";
+            this.itemDetail10.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail10.TabIndex = 0;
+            this.itemDetail10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail11
+            // 
+            this.itemDetail11.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail11.Location = new System.Drawing.Point(187, 328);
+            this.itemDetail11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail11.Name = "itemDetail11";
+            this.itemDetail11.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail11.TabIndex = 0;
+            this.itemDetail11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // itemDetail12
+            // 
+            this.itemDetail12.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail12.Location = new System.Drawing.Point(187, 355);
+            this.itemDetail12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail12.Name = "itemDetail12";
+            this.itemDetail12.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail12.TabIndex = 0;
+            this.itemDetail12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // countTextBox5
+            // 
+            this.countTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox5.Location = new System.Drawing.Point(526, 166);
+            this.countTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox5.Name = "countTextBox5";
+            this.countTextBox5.ReadOnly = true;
+            this.countTextBox5.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox5.TabIndex = 39;
+            this.countTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox5.TextChanged += new System.EventHandler(this.countTextBox5_TextChanged);
+            this.countTextBox5.Leave += new System.EventHandler(this.countTextBox5_Leave);
+            // 
+            // countTextBox6
+            // 
+            this.countTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox6.Location = new System.Drawing.Point(526, 193);
+            this.countTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox6.Name = "countTextBox6";
+            this.countTextBox6.ReadOnly = true;
+            this.countTextBox6.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox6.TabIndex = 0;
+            this.countTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.countTextBox6.TextChanged += new System.EventHandler(this.countTextBox5_TextChanged);
+            this.countTextBox6.Leave += new System.EventHandler(this.countTextBox6_Leave);
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(2488, 1278);
-            this.returnButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.returnButton.Location = new System.Drawing.Point(738, 650);
+            this.returnButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(182, 53);
+            this.returnButton.Size = new System.Drawing.Size(106, 40);
             this.returnButton.TabIndex = 32;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -4274,20 +2108,20 @@
             // 
             // previewButton
             // 
-            this.previewButton.Location = new System.Drawing.Point(2674, 1209);
-            this.previewButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.previewButton.Location = new System.Drawing.Point(842, 608);
+            this.previewButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.previewButton.Name = "previewButton";
-            this.previewButton.Size = new System.Drawing.Size(182, 53);
+            this.previewButton.Size = new System.Drawing.Size(195, 47);
             this.previewButton.TabIndex = 31;
             this.previewButton.Text = "計算書プレビュー";
             this.previewButton.UseVisualStyleBackColor = true;
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(2489, 1211);
-            this.addButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.addButton.Location = new System.Drawing.Point(738, 607);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(182, 53);
+            this.addButton.Size = new System.Drawing.Size(92, 37);
             this.addButton.TabIndex = 30;
             this.addButton.Text = "登録";
             this.addButton.UseVisualStyleBackColor = true;
@@ -4295,14 +2129,14 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.registerDateTextBox);
-            this.groupBox2.Controls.Add(this.label36);
             this.groupBox2.Controls.Add(this.typeTextBox);
             this.groupBox2.Controls.Add(this.client_Button);
             this.groupBox2.Controls.Add(this.clientRemarksTextBox);
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.registerDateTextBox);
             this.groupBox2.Controls.Add(this.addressTextBox);
+            this.groupBox2.Controls.Add(this.label38);
             this.groupBox2.Controls.Add(this.companyTextBox);
             this.groupBox2.Controls.Add(this.label19);
             this.groupBox2.Controls.Add(this.clientNameTextBox);
@@ -4310,30 +2144,30 @@
             this.groupBox2.Controls.Add(this.shopNameTextBox);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label17);
-            this.groupBox2.Location = new System.Drawing.Point(2871, 30);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.groupBox2.Location = new System.Drawing.Point(939, 54);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.groupBox2.Size = new System.Drawing.Size(366, 872);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.groupBox2.Size = new System.Drawing.Size(184, 463);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             // 
             // typeTextBox
             // 
-            this.typeTextBox.Location = new System.Drawing.Point(26, 133);
-            this.typeTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.typeTextBox.Location = new System.Drawing.Point(12, 83);
+            this.typeTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.typeTextBox.Name = "typeTextBox";
             this.typeTextBox.ReadOnly = true;
-            this.typeTextBox.Size = new System.Drawing.Size(99, 31);
+            this.typeTextBox.Size = new System.Drawing.Size(48, 20);
             this.typeTextBox.TabIndex = 23;
             // 
             // client_Button
             // 
             this.client_Button.AutoSize = true;
-            this.client_Button.Location = new System.Drawing.Point(7, 18);
-            this.client_Button.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.client_Button.Location = new System.Drawing.Point(12, 16);
+            this.client_Button.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.client_Button.Name = "client_Button";
-            this.client_Button.Size = new System.Drawing.Size(366, 91);
+            this.client_Button.Size = new System.Drawing.Size(169, 46);
             this.client_Button.TabIndex = 16;
             this.client_Button.Text = "顧客選択";
             this.client_Button.UseVisualStyleBackColor = true;
@@ -4341,108 +2175,125 @@
             // 
             // clientRemarksTextBox
             // 
-            this.clientRemarksTextBox.Location = new System.Drawing.Point(26, 620);
-            this.clientRemarksTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.clientRemarksTextBox.Location = new System.Drawing.Point(12, 328);
+            this.clientRemarksTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.clientRemarksTextBox.Multiline = true;
             this.clientRemarksTextBox.Name = "clientRemarksTextBox";
-            this.clientRemarksTextBox.ReadOnly = true;
-            this.clientRemarksTextBox.Size = new System.Drawing.Size(336, 233);
+            this.clientRemarksTextBox.Size = new System.Drawing.Size(157, 118);
             this.clientRemarksTextBox.TabIndex = 28;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(22, 591);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Location = new System.Drawing.Point(10, 314);
+            this.label20.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(58, 24);
+            this.label20.Size = new System.Drawing.Size(33, 13);
             this.label20.TabIndex = 22;
             this.label20.Text = "備考";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(22, 104);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Location = new System.Drawing.Point(10, 69);
+            this.label15.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(58, 24);
+            this.label15.Size = new System.Drawing.Size(33, 13);
             this.label15.TabIndex = 17;
             this.label15.Text = "種別";
             // 
+            // registerDateTextBox
+            // 
+            this.registerDateTextBox.Location = new System.Drawing.Point(12, 287);
+            this.registerDateTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.registerDateTextBox.Name = "registerDateTextBox";
+            this.registerDateTextBox.ReadOnly = true;
+            this.registerDateTextBox.Size = new System.Drawing.Size(157, 20);
+            this.registerDateTextBox.TabIndex = 27;
+            // 
             // addressTextBox
             // 
-            this.addressTextBox.Location = new System.Drawing.Point(26, 458);
-            this.addressTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.addressTextBox.Location = new System.Drawing.Point(12, 246);
+            this.addressTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addressTextBox.Name = "addressTextBox";
             this.addressTextBox.ReadOnly = true;
-            this.addressTextBox.Size = new System.Drawing.Size(336, 31);
+            this.addressTextBox.Size = new System.Drawing.Size(157, 20);
             this.addressTextBox.TabIndex = 27;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(10, 274);
+            this.label38.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(85, 13);
+            this.label38.TabIndex = 21;
+            this.label38.Text = "古物商許可証";
             // 
             // companyTextBox
             // 
-            this.companyTextBox.Location = new System.Drawing.Point(26, 210);
-            this.companyTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.companyTextBox.Location = new System.Drawing.Point(12, 122);
+            this.companyTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.companyTextBox.Name = "companyTextBox";
             this.companyTextBox.ReadOnly = true;
-            this.companyTextBox.Size = new System.Drawing.Size(186, 31);
+            this.companyTextBox.Size = new System.Drawing.Size(88, 20);
             this.companyTextBox.TabIndex = 24;
-            this.companyTextBox.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(22, 432);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Location = new System.Drawing.Point(10, 233);
+            this.label19.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(58, 24);
+            this.label19.Size = new System.Drawing.Size(33, 13);
             this.label19.TabIndex = 21;
             this.label19.Text = "住所";
             // 
             // clientNameTextBox
             // 
-            this.clientNameTextBox.Location = new System.Drawing.Point(26, 376);
-            this.clientNameTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.clientNameTextBox.Location = new System.Drawing.Point(12, 206);
+            this.clientNameTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.clientNameTextBox.Name = "clientNameTextBox";
             this.clientNameTextBox.ReadOnly = true;
-            this.clientNameTextBox.Size = new System.Drawing.Size(186, 31);
+            this.clientNameTextBox.Size = new System.Drawing.Size(88, 20);
             this.clientNameTextBox.TabIndex = 26;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(22, 184);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Location = new System.Drawing.Point(10, 109);
+            this.label16.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(82, 24);
+            this.label16.Size = new System.Drawing.Size(46, 13);
             this.label16.TabIndex = 18;
             this.label16.Text = "会社名";
             // 
             // shopNameTextBox
             // 
-            this.shopNameTextBox.Location = new System.Drawing.Point(26, 293);
-            this.shopNameTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.shopNameTextBox.Location = new System.Drawing.Point(12, 163);
+            this.shopNameTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.shopNameTextBox.Name = "shopNameTextBox";
             this.shopNameTextBox.ReadOnly = true;
-            this.shopNameTextBox.Size = new System.Drawing.Size(186, 31);
+            this.shopNameTextBox.Size = new System.Drawing.Size(88, 20);
             this.shopNameTextBox.TabIndex = 25;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(22, 352);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Location = new System.Drawing.Point(10, 193);
+            this.label18.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(190, 24);
+            this.label18.Size = new System.Drawing.Size(105, 13);
             this.label18.TabIndex = 20;
             this.label18.Text = "担当者名・個人名";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(22, 264);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Location = new System.Drawing.Point(10, 149);
+            this.label17.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(82, 24);
+            this.label17.Size = new System.Drawing.Size(46, 13);
             this.label17.TabIndex = 19;
             this.label17.Text = "店舗名";
             // 
@@ -4463,58 +2314,58 @@
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.articlesTextBox);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Location = new System.Drawing.Point(28, 907);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.groupBox1.Location = new System.Drawing.Point(8, 489);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.groupBox1.Size = new System.Drawing.Size(862, 363);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.groupBox1.Size = new System.Drawing.Size(398, 182);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             // 
             // dateTimePicker4
             // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(417, 146);
-            this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dateTimePicker4.Location = new System.Drawing.Point(192, 73);
+            this.dateTimePicker4.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(200, 31);
+            this.dateTimePicker4.Size = new System.Drawing.Size(94, 20);
             this.dateTimePicker4.TabIndex = 39;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(584, 53);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button8.Location = new System.Drawing.Point(270, 26);
+            this.button8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(152, 40);
+            this.button8.Size = new System.Drawing.Size(70, 20);
             this.button8.TabIndex = 38;
             this.button8.Text = "ファイルを選択";
             this.button8.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(178, 269);
-            this.button7.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button7.Location = new System.Drawing.Point(82, 134);
+            this.button7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(152, 40);
+            this.button7.Size = new System.Drawing.Size(70, 20);
             this.button7.TabIndex = 37;
             this.button7.Text = "ファイルを選択";
             this.button7.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(178, 158);
-            this.button6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button6.Location = new System.Drawing.Point(82, 79);
+            this.button6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(152, 40);
+            this.button6.Size = new System.Drawing.Size(70, 20);
             this.button6.TabIndex = 36;
             this.button6.Text = "ファイルを選択";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(178, 57);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button4.Location = new System.Drawing.Point(82, 28);
+            this.button4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(152, 40);
+            this.button4.Size = new System.Drawing.Size(70, 20);
             this.button4.TabIndex = 35;
             this.button4.Text = "ファイルを選択";
             this.button4.UseVisualStyleBackColor = true;
@@ -4522,83 +2373,83 @@
             // 
             // sealCertificationTextBox
             // 
-            this.sealCertificationTextBox.Location = new System.Drawing.Point(12, 269);
-            this.sealCertificationTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.sealCertificationTextBox.Location = new System.Drawing.Point(6, 134);
+            this.sealCertificationTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.sealCertificationTextBox.Name = "sealCertificationTextBox";
-            this.sealCertificationTextBox.Size = new System.Drawing.Size(153, 31);
+            this.sealCertificationTextBox.Size = new System.Drawing.Size(73, 20);
             this.sealCertificationTextBox.TabIndex = 16;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 231);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Location = new System.Drawing.Point(4, 116);
+            this.label14.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(130, 24);
+            this.label14.Size = new System.Drawing.Size(72, 13);
             this.label14.TabIndex = 16;
             this.label14.Text = "印鑑証明書";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(412, 119);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Location = new System.Drawing.Point(190, 60);
+            this.label13.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(106, 24);
+            this.label13.Size = new System.Drawing.Size(59, 13);
             this.label13.TabIndex = 16;
             this.label13.Text = "在留期限";
             // 
             // residenceCardTextBox
             // 
-            this.residenceCardTextBox.Location = new System.Drawing.Point(417, 57);
-            this.residenceCardTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.residenceCardTextBox.Location = new System.Drawing.Point(192, 28);
+            this.residenceCardTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.residenceCardTextBox.Name = "residenceCardTextBox";
-            this.residenceCardTextBox.Size = new System.Drawing.Size(134, 31);
+            this.residenceCardTextBox.Size = new System.Drawing.Size(64, 20);
             this.residenceCardTextBox.TabIndex = 16;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(412, 22);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Location = new System.Drawing.Point(190, 11);
+            this.label12.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(112, 24);
+            this.label12.Size = new System.Drawing.Size(62, 13);
             this.label12.TabIndex = 16;
             this.label12.Text = "在留カード";
             // 
             // taxCertificateTexBox
             // 
-            this.taxCertificateTexBox.Location = new System.Drawing.Point(12, 158);
-            this.taxCertificateTexBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.taxCertificateTexBox.Location = new System.Drawing.Point(6, 79);
+            this.taxCertificateTexBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.taxCertificateTexBox.Name = "taxCertificateTexBox";
-            this.taxCertificateTexBox.Size = new System.Drawing.Size(153, 31);
+            this.taxCertificateTexBox.Size = new System.Drawing.Size(73, 20);
             this.taxCertificateTexBox.TabIndex = 16;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(9, 117);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Location = new System.Drawing.Point(4, 58);
+            this.label11.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(366, 48);
+            this.label11.Size = new System.Drawing.Size(201, 26);
             this.label11.TabIndex = 16;
             this.label11.Text = "納税証明書（設立一年以上の場合）\r\n\r\n";
             // 
             // articlesTextBox
             // 
-            this.articlesTextBox.Location = new System.Drawing.Point(14, 57);
-            this.articlesTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.articlesTextBox.Location = new System.Drawing.Point(6, 28);
+            this.articlesTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.articlesTextBox.Name = "articlesTextBox";
-            this.articlesTextBox.Size = new System.Drawing.Size(151, 31);
+            this.articlesTextBox.Size = new System.Drawing.Size(72, 20);
             this.articlesTextBox.TabIndex = 15;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 22);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Location = new System.Drawing.Point(7, 11);
+            this.label8.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(266, 24);
+            this.label8.Size = new System.Drawing.Size(148, 13);
             this.label8.TabIndex = 14;
             this.label8.Text = "定款or決算書or株主構成";
             // 
@@ -4615,55 +2466,55 @@
             "振込",
             "書留",
             "掛け"});
-            this.paymentMethodsBox.Location = new System.Drawing.Point(1036, 1128);
-            this.paymentMethodsBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.paymentMethodsBox.Location = new System.Drawing.Point(476, 494);
+            this.paymentMethodsBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.paymentMethodsBox.Name = "paymentMethodsBox";
-            this.paymentMethodsBox.Size = new System.Drawing.Size(121, 32);
+            this.paymentMethodsBox.Size = new System.Drawing.Size(58, 21);
             this.paymentMethodsBox.TabIndex = 13;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1031, 1102);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(406, 500);
+            this.label7.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(106, 24);
+            this.label7.Size = new System.Drawing.Size(59, 13);
             this.label7.TabIndex = 12;
             this.label7.Text = "決済方法";
             // 
             // deliveryDateBox
             // 
-            this.deliveryDateBox.Location = new System.Drawing.Point(1380, 1051);
-            this.deliveryDateBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.deliveryDateBox.Location = new System.Drawing.Point(612, 491);
+            this.deliveryDateBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.deliveryDateBox.Name = "deliveryDateBox";
-            this.deliveryDateBox.Size = new System.Drawing.Size(199, 31);
+            this.deliveryDateBox.Size = new System.Drawing.Size(94, 20);
             this.deliveryDateBox.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1378, 1019);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(567, 495);
+            this.label6.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 24);
+            this.label6.Size = new System.Drawing.Size(46, 13);
             this.label6.TabIndex = 10;
             this.label6.Text = "受渡日";
             // 
             // settlementBox
             // 
-            this.settlementBox.Location = new System.Drawing.Point(1036, 1051);
-            this.settlementBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.settlementBox.Location = new System.Drawing.Point(460, 454);
+            this.settlementBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.settlementBox.Name = "settlementBox";
-            this.settlementBox.Size = new System.Drawing.Size(199, 31);
+            this.settlementBox.Size = new System.Drawing.Size(94, 20);
             this.settlementBox.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1031, 1024);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(406, 456);
+            this.label5.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 24);
+            this.label5.Size = new System.Drawing.Size(46, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "決済日";
             // 
@@ -4676,44 +2527,28 @@
             this.deliveryTextBox.Items.AddRange(new object[] {
             "来社",
             "郵送"});
-            this.deliveryTextBox.Location = new System.Drawing.Point(1380, 965);
-            this.deliveryTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.deliveryTextBox.Location = new System.Drawing.Point(664, 453);
+            this.deliveryTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.deliveryTextBox.Name = "deliveryTextBox";
-            this.deliveryTextBox.Size = new System.Drawing.Size(121, 32);
+            this.deliveryTextBox.Size = new System.Drawing.Size(58, 21);
             this.deliveryTextBox.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1378, 936);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(583, 456);
+            this.label4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(143, 24);
+            this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "受け渡し方法";
             // 
-            // documentNumberTextBox
-            // 
-            this.documentNumberTextBox.Location = new System.Drawing.Point(1036, 960);
-            this.documentNumberTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.documentNumberTextBox.Name = "documentNumberTextBox";
-            this.documentNumberTextBox.ReadOnly = true;
-            this.documentNumberTextBox.Size = new System.Drawing.Size(164, 31);
-            this.documentNumberTextBox.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1031, 933);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 24);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "伝票番号";
-            // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.label27);
             this.tabPage2.Controls.Add(this.comboBox10);
+            this.tabPage2.Controls.Add(this.documentNumberTextBox);
             this.tabPage2.Controls.Add(this.dateTimePicker3);
             this.tabPage2.Controls.Add(this.dateTimePicker2);
             this.tabPage2.Controls.Add(this.dateTimePicker1);
@@ -4738,109 +2573,124 @@
             this.tabPage2.Controls.Add(this.comboBox98);
             this.tabPage2.Controls.Add(this.label84);
             this.tabPage2.Controls.Add(this.label85);
-            this.tabPage2.Controls.Add(this.clear2);
-            this.tabPage2.Controls.Add(this.add2);
-            this.tabPage2.Controls.Add(this.calc2Button2);
             this.tabPage2.Controls.Add(this.tableLayoutPanel14);
             this.tabPage2.Controls.Add(this.return2);
             this.tabPage2.Controls.Add(this.button9);
             this.tabPage2.Controls.Add(this.button10);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.tableLayoutPanel13);
-            this.tabPage2.Location = new System.Drawing.Point(8, 39);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.tabPage2.Size = new System.Drawing.Size(3260, 1558);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(32, 10, 0, 0);
+            this.tabPage2.Size = new System.Drawing.Size(1192, 760);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "納品書";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label27.Location = new System.Drawing.Point(951, 10);
+            this.label27.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(106, 24);
+            this.label27.TabIndex = 84;
+            this.label27.Text = "管理番号";
             // 
             // comboBox10
             // 
+            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox10.FormattingEnabled = true;
             this.comboBox10.Items.AddRange(new object[] {
             "現金",
             "振込",
             "書留",
             "掛け"});
-            this.comboBox10.Location = new System.Drawing.Point(715, 1023);
-            this.comboBox10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.comboBox10.Location = new System.Drawing.Point(267, 506);
+            this.comboBox10.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(206, 32);
+            this.comboBox10.Size = new System.Drawing.Size(97, 21);
             this.comboBox10.TabIndex = 83;
+            // 
+            // documentNumberTextBox
+            // 
+            this.documentNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.documentNumberTextBox.Location = new System.Drawing.Point(1059, 7);
+            this.documentNumberTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.documentNumberTextBox.Name = "documentNumberTextBox";
+            this.documentNumberTextBox.ReadOnly = true;
+            this.documentNumberTextBox.Size = new System.Drawing.Size(105, 31);
+            this.documentNumberTextBox.TabIndex = 5;
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(1226, 1097);
-            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dateTimePicker3.Location = new System.Drawing.Point(451, 539);
+            this.dateTimePicker3.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(200, 31);
+            this.dateTimePicker3.Size = new System.Drawing.Size(129, 20);
             this.dateTimePicker3.TabIndex = 82;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(1226, 1026);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dateTimePicker2.Location = new System.Drawing.Point(451, 502);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 31);
+            this.dateTimePicker2.Size = new System.Drawing.Size(129, 20);
             this.dateTimePicker2.TabIndex = 81;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(1226, 939);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dateTimePicker1.Location = new System.Drawing.Point(451, 469);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 31);
+            this.dateTimePicker1.Size = new System.Drawing.Size(129, 20);
             this.dateTimePicker1.TabIndex = 80;
             // 
             // label92
             // 
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(1073, 946);
-            this.label92.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label92.Location = new System.Drawing.Point(404, 472);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(82, 24);
+            this.label92.Size = new System.Drawing.Size(46, 13);
             this.label92.TabIndex = 79;
             this.label92.Text = "注文日";
             // 
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(1099, 1176);
-            this.label89.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label89.Location = new System.Drawing.Point(408, 587);
             this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(58, 24);
+            this.label89.Size = new System.Drawing.Size(33, 13);
             this.label89.TabIndex = 78;
             this.label89.Text = "通貨";
             // 
             // comboBox101
             // 
+            this.comboBox101.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox101.FormattingEnabled = true;
             this.comboBox101.Items.AddRange(new object[] {
             "円",
             "ドル"});
-            this.comboBox101.Location = new System.Drawing.Point(1231, 1160);
-            this.comboBox101.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.comboBox101.Location = new System.Drawing.Point(485, 587);
+            this.comboBox101.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.comboBox101.Name = "comboBox101";
-            this.comboBox101.Size = new System.Drawing.Size(206, 32);
+            this.comboBox101.Size = new System.Drawing.Size(70, 21);
             this.comboBox101.TabIndex = 77;
             // 
             // textBox383
             // 
-            this.textBox383.Location = new System.Drawing.Point(173, 1301);
-            this.textBox383.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.textBox383.Location = new System.Drawing.Point(78, 645);
             this.textBox383.Name = "textBox383";
-            this.textBox383.Size = new System.Drawing.Size(827, 31);
+            this.textBox383.Size = new System.Drawing.Size(384, 20);
             this.textBox383.TabIndex = 76;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(795, 946);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.radioButton2.Location = new System.Drawing.Point(324, 474);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(99, 28);
+            this.radioButton2.Size = new System.Drawing.Size(56, 17);
             this.radioButton2.TabIndex = 74;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "しない";
@@ -4849,10 +2699,9 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(691, 949);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.radioButton1.Location = new System.Drawing.Point(276, 475);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(79, 28);
+            this.radioButton1.Size = new System.Drawing.Size(46, 17);
             this.radioButton1.TabIndex = 73;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "する";
@@ -4860,78 +2709,79 @@
             // 
             // comboBox99
             // 
+            this.comboBox99.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox99.FormattingEnabled = true;
-            this.comboBox99.Location = new System.Drawing.Point(715, 1096);
-            this.comboBox99.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.comboBox99.Location = new System.Drawing.Point(265, 549);
+            this.comboBox99.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.comboBox99.Name = "comboBox99";
-            this.comboBox99.Size = new System.Drawing.Size(206, 32);
+            this.comboBox99.Size = new System.Drawing.Size(97, 21);
             this.comboBox99.TabIndex = 72;
             // 
             // label90
             // 
             this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(48, 1314);
-            this.label90.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label90.Location = new System.Drawing.Point(22, 651);
+            this.label90.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(58, 24);
+            this.label90.Size = new System.Drawing.Size(33, 13);
             this.label90.TabIndex = 71;
             this.label90.Text = "備考";
             // 
             // label91
             // 
             this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(524, 1110);
-            this.label91.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label91.Location = new System.Drawing.Point(207, 554);
+            this.label91.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(82, 24);
+            this.label91.Size = new System.Drawing.Size(46, 13);
             this.label91.TabIndex = 69;
             this.label91.Text = "振込先";
             // 
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(524, 1026);
-            this.label86.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label86.Location = new System.Drawing.Point(197, 512);
+            this.label86.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(126, 24);
+            this.label86.Size = new System.Drawing.Size(70, 13);
             this.label86.TabIndex = 62;
             this.label86.Text = "お支払方法";
             // 
             // label87
             // 
             this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(527, 955);
-            this.label87.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label87.Location = new System.Drawing.Point(198, 477);
+            this.label87.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(124, 24);
+            this.label87.Size = new System.Drawing.Size(69, 13);
             this.label87.TabIndex = 64;
             this.label87.Text = "印鑑を印刷";
             // 
             // textBox381
             // 
-            this.textBox381.Location = new System.Drawing.Point(173, 1010);
-            this.textBox381.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.textBox381.Location = new System.Drawing.Point(125, 509);
+            this.textBox381.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.textBox381.Name = "textBox381";
-            this.textBox381.Size = new System.Drawing.Size(206, 31);
+            this.textBox381.Size = new System.Drawing.Size(97, 20);
             this.textBox381.TabIndex = 65;
             // 
             // label88
             // 
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(48, 1190);
-            this.label88.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label88.Location = new System.Drawing.Point(22, 597);
+            this.label88.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(58, 24);
+            this.label88.Size = new System.Drawing.Size(33, 13);
             this.label88.TabIndex = 66;
             this.label88.Text = "種別";
             // 
             // textBox382
             // 
-            this.textBox382.Location = new System.Drawing.Point(173, 939);
-            this.textBox382.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.textBox382.Location = new System.Drawing.Point(125, 472);
+            this.textBox382.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.textBox382.Name = "textBox382";
             this.textBox382.ReadOnly = true;
-            this.textBox382.Size = new System.Drawing.Size(206, 31);
+            this.textBox382.Size = new System.Drawing.Size(97, 20);
             this.textBox382.TabIndex = 67;
             // 
             // comboBox97
@@ -4939,43 +2789,44 @@
             this.comboBox97.AutoCompleteCustomSource.AddRange(new string[] {
             "納品書",
             "請求書"});
+            this.comboBox97.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox97.FormattingEnabled = true;
             this.comboBox97.Items.AddRange(new object[] {
             "納品書",
             "請求書"});
-            this.comboBox97.Location = new System.Drawing.Point(173, 1176);
-            this.comboBox97.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.comboBox97.Location = new System.Drawing.Point(125, 591);
+            this.comboBox97.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.comboBox97.Name = "comboBox97";
-            this.comboBox97.Size = new System.Drawing.Size(206, 32);
+            this.comboBox97.Size = new System.Drawing.Size(97, 21);
             this.comboBox97.TabIndex = 60;
             // 
             // label81
             // 
             this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(48, 1102);
-            this.label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label81.Location = new System.Drawing.Point(22, 553);
+            this.label81.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(58, 24);
+            this.label81.Size = new System.Drawing.Size(33, 13);
             this.label81.TabIndex = 59;
             this.label81.Text = "敬称";
             // 
             // label82
             // 
             this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(1073, 1096);
-            this.label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label82.Location = new System.Drawing.Point(404, 543);
+            this.label82.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(82, 24);
+            this.label82.Size = new System.Drawing.Size(46, 13);
             this.label82.TabIndex = 57;
             this.label82.Text = "決済日";
             // 
             // label83
             // 
             this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(48, 1022);
-            this.label83.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label83.Location = new System.Drawing.Point(22, 513);
+            this.label83.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(58, 24);
+            this.label83.Size = new System.Drawing.Size(33, 13);
             this.label83.TabIndex = 55;
             this.label83.Text = "宛名";
             // 
@@ -4984,89 +2835,55 @@
             this.comboBox98.AutoCompleteCustomSource.AddRange(new string[] {
             "御中",
             "様"});
+            this.comboBox98.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox98.FormattingEnabled = true;
             this.comboBox98.Items.AddRange(new object[] {
             "御中",
             "様"});
-            this.comboBox98.Location = new System.Drawing.Point(173, 1088);
-            this.comboBox98.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.comboBox98.Location = new System.Drawing.Point(125, 549);
+            this.comboBox98.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.comboBox98.Name = "comboBox98";
-            this.comboBox98.Size = new System.Drawing.Size(206, 32);
+            this.comboBox98.Size = new System.Drawing.Size(97, 21);
             this.comboBox98.TabIndex = 54;
             // 
             // label84
             // 
             this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(1073, 1024);
-            this.label84.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label84.Location = new System.Drawing.Point(404, 507);
+            this.label84.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(82, 24);
+            this.label84.Size = new System.Drawing.Size(46, 13);
             this.label84.TabIndex = 53;
             this.label84.Text = "納品日";
             // 
             // label85
             // 
             this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(41, 950);
-            this.label85.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label85.Location = new System.Drawing.Point(19, 477);
+            this.label85.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(106, 24);
+            this.label85.Size = new System.Drawing.Size(59, 13);
             this.label85.TabIndex = 51;
             this.label85.Text = "管理番号";
-            // 
-            // clear2
-            // 
-            this.clear2.AutoSize = true;
-            this.clear2.Location = new System.Drawing.Point(2656, 918);
-            this.clear2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.clear2.Name = "clear2";
-            this.clear2.Size = new System.Drawing.Size(212, 91);
-            this.clear2.TabIndex = 50;
-            this.clear2.Text = "クリア";
-            this.clear2.UseVisualStyleBackColor = true;
-            this.clear2.Click += new System.EventHandler(this.clear2_Click);
-            // 
-            // add2
-            // 
-            this.add2.AutoSize = true;
-            this.add2.Location = new System.Drawing.Point(2431, 923);
-            this.add2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.add2.Name = "add2";
-            this.add2.Size = new System.Drawing.Size(210, 91);
-            this.add2.TabIndex = 49;
-            this.add2.Text = "追加";
-            this.add2.UseVisualStyleBackColor = true;
-            this.add2.Click += new System.EventHandler(this.add2_Click);
-            // 
-            // calc2Button2
-            // 
-            this.calc2Button2.Location = new System.Drawing.Point(1671, 918);
-            this.calc2Button2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.calc2Button2.Name = "calc2Button2";
-            this.calc2Button2.Size = new System.Drawing.Size(182, 53);
-            this.calc2Button2.TabIndex = 48;
-            this.calc2Button2.Text = "計算";
-            this.calc2Button2.UseVisualStyleBackColor = true;
-            this.calc2Button2.Click += new System.EventHandler(this.calc2Button2_Click);
             // 
             // tableLayoutPanel14
             // 
             this.tableLayoutPanel14.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutPanel14.ColumnCount = 2;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel689, 0, 3);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel697, 0, 2);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel696, 0, 1);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel695, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel694, 1, 2);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel691, 1, 1);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel693, 1, 0);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel690, 1, 4);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel692, 1, 3);
-            this.tableLayoutPanel14.Controls.Add(this.flowLayoutPanel698, 0, 4);
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(1660, 1010);
-            this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel14.Controls.Add(this.subTotal2, 1, 0);
+            this.tableLayoutPanel14.Controls.Add(this.label80, 0, 1);
+            this.tableLayoutPanel14.Controls.Add(this.label78, 0, 2);
+            this.tableLayoutPanel14.Controls.Add(this.label93, 0, 3);
+            this.tableLayoutPanel14.Controls.Add(this.label94, 0, 4);
+            this.tableLayoutPanel14.Controls.Add(this.comboBox11, 1, 1);
+            this.tableLayoutPanel14.Controls.Add(this.tax, 1, 2);
+            this.tableLayoutPanel14.Controls.Add(this.taxAmount2, 1, 3);
+            this.tableLayoutPanel14.Controls.Add(this.sumTextBox2, 1, 4);
+            this.tableLayoutPanel14.Controls.Add(this.label79, 0, 0);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(597, 514);
+            this.tableLayoutPanel14.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 5;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -5074,203 +2891,115 @@
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(320, 275);
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(364, 138);
             this.tableLayoutPanel14.TabIndex = 47;
             // 
-            // flowLayoutPanel689
+            // subTotal2
             // 
-            this.flowLayoutPanel689.Controls.Add(this.label93);
-            this.flowLayoutPanel689.Location = new System.Drawing.Point(5, 166);
-            this.flowLayoutPanel689.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel689.Name = "flowLayoutPanel689";
-            this.flowLayoutPanel689.Size = new System.Drawing.Size(166, 47);
-            this.flowLayoutPanel689.TabIndex = 84;
-            // 
-            // label93
-            // 
-            this.label93.Location = new System.Drawing.Point(4, 0);
-            this.label93.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(130, 46);
-            this.label93.TabIndex = 0;
-            this.label93.Text = "消費税額";
-            this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flowLayoutPanel697
-            // 
-            this.flowLayoutPanel697.Controls.Add(this.label78);
-            this.flowLayoutPanel697.Location = new System.Drawing.Point(5, 112);
-            this.flowLayoutPanel697.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel697.Name = "flowLayoutPanel697";
-            this.flowLayoutPanel697.Size = new System.Drawing.Size(135, 47);
-            this.flowLayoutPanel697.TabIndex = 84;
-            // 
-            // label78
-            // 
-            this.label78.Location = new System.Drawing.Point(4, 0);
-            this.label78.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(150, 47);
-            this.label78.TabIndex = 84;
-            this.label78.Text = "消費税率";
-            this.label78.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flowLayoutPanel696
-            // 
-            this.flowLayoutPanel696.Controls.Add(this.label80);
-            this.flowLayoutPanel696.Location = new System.Drawing.Point(5, 58);
-            this.flowLayoutPanel696.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel696.Name = "flowLayoutPanel696";
-            this.flowLayoutPanel696.Size = new System.Drawing.Size(166, 47);
-            this.flowLayoutPanel696.TabIndex = 84;
+            this.subTotal2.Location = new System.Drawing.Point(111, 3);
+            this.subTotal2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.subTotal2.Name = "subTotal2";
+            this.subTotal2.ReadOnly = true;
+            this.subTotal2.Size = new System.Drawing.Size(251, 20);
+            this.subTotal2.TabIndex = 37;
             // 
             // label80
             // 
-            this.label80.Location = new System.Drawing.Point(4, 0);
-            this.label80.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label80.Location = new System.Drawing.Point(3, 28);
+            this.label80.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(165, 51);
+            this.label80.Size = new System.Drawing.Size(104, 26);
             this.label80.TabIndex = 84;
             this.label80.Text = "消費税区分";
             this.label80.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // flowLayoutPanel695
+            // label78
             // 
-            this.flowLayoutPanel695.Controls.Add(this.label79);
-            this.flowLayoutPanel695.Location = new System.Drawing.Point(5, 4);
-            this.flowLayoutPanel695.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel695.Name = "flowLayoutPanel695";
-            this.flowLayoutPanel695.Size = new System.Drawing.Size(135, 47);
-            this.flowLayoutPanel695.TabIndex = 84;
+            this.label78.Location = new System.Drawing.Point(3, 55);
+            this.label78.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(104, 24);
+            this.label78.TabIndex = 84;
+            this.label78.Text = "消費税率（%）";
+            this.label78.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label79
+            // label93
             // 
-            this.label79.Location = new System.Drawing.Point(4, 0);
-            this.label79.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(150, 41);
-            this.label79.TabIndex = 84;
-            this.label79.Text = "小計";
-            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flowLayoutPanel694
-            // 
-            this.flowLayoutPanel694.Controls.Add(this.textBox304);
-            this.flowLayoutPanel694.Location = new System.Drawing.Point(180, 112);
-            this.flowLayoutPanel694.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel694.Name = "flowLayoutPanel694";
-            this.flowLayoutPanel694.Size = new System.Drawing.Size(135, 47);
-            this.flowLayoutPanel694.TabIndex = 84;
-            // 
-            // textBox304
-            // 
-            this.textBox304.Location = new System.Drawing.Point(4, 3);
-            this.textBox304.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox304.Name = "textBox304";
-            this.textBox304.ReadOnly = true;
-            this.textBox304.Size = new System.Drawing.Size(132, 31);
-            this.textBox304.TabIndex = 84;
-            // 
-            // flowLayoutPanel691
-            // 
-            this.flowLayoutPanel691.Controls.Add(this.comboBox11);
-            this.flowLayoutPanel691.Location = new System.Drawing.Point(180, 58);
-            this.flowLayoutPanel691.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel691.Name = "flowLayoutPanel691";
-            this.flowLayoutPanel691.Size = new System.Drawing.Size(135, 47);
-            this.flowLayoutPanel691.TabIndex = 85;
-            // 
-            // comboBox11
-            // 
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Items.AddRange(new object[] {
-            "税抜",
-            "税込"});
-            this.comboBox11.Location = new System.Drawing.Point(4, 3);
-            this.comboBox11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(132, 32);
-            this.comboBox11.TabIndex = 0;
-            // 
-            // flowLayoutPanel693
-            // 
-            this.flowLayoutPanel693.Controls.Add(this.subTotal2);
-            this.flowLayoutPanel693.Location = new System.Drawing.Point(178, 6);
-            this.flowLayoutPanel693.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel693.Name = "flowLayoutPanel693";
-            this.flowLayoutPanel693.Size = new System.Drawing.Size(136, 40);
-            this.flowLayoutPanel693.TabIndex = 38;
-            // 
-            // subTotal2
-            // 
-            this.subTotal2.Location = new System.Drawing.Point(2, 5);
-            this.subTotal2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.subTotal2.Name = "subTotal2";
-            this.subTotal2.ReadOnly = true;
-            this.subTotal2.Size = new System.Drawing.Size(134, 31);
-            this.subTotal2.TabIndex = 37;
-            // 
-            // flowLayoutPanel690
-            // 
-            this.flowLayoutPanel690.Controls.Add(this.sumTextBox2);
-            this.flowLayoutPanel690.Location = new System.Drawing.Point(178, 222);
-            this.flowLayoutPanel690.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel690.Name = "flowLayoutPanel690";
-            this.flowLayoutPanel690.Size = new System.Drawing.Size(137, 43);
-            this.flowLayoutPanel690.TabIndex = 37;
-            // 
-            // sumTextBox2
-            // 
-            this.sumTextBox2.Location = new System.Drawing.Point(2, 5);
-            this.sumTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.sumTextBox2.Name = "sumTextBox2";
-            this.sumTextBox2.ReadOnly = true;
-            this.sumTextBox2.Size = new System.Drawing.Size(134, 31);
-            this.sumTextBox2.TabIndex = 37;
-            // 
-            // flowLayoutPanel692
-            // 
-            this.flowLayoutPanel692.Controls.Add(this.taxAmount2);
-            this.flowLayoutPanel692.Location = new System.Drawing.Point(178, 168);
-            this.flowLayoutPanel692.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel692.Name = "flowLayoutPanel692";
-            this.flowLayoutPanel692.Size = new System.Drawing.Size(137, 43);
-            this.flowLayoutPanel692.TabIndex = 37;
-            // 
-            // taxAmount2
-            // 
-            this.taxAmount2.Location = new System.Drawing.Point(2, 5);
-            this.taxAmount2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.taxAmount2.Name = "taxAmount2";
-            this.taxAmount2.ReadOnly = true;
-            this.taxAmount2.Size = new System.Drawing.Size(134, 31);
-            this.taxAmount2.TabIndex = 37;
-            // 
-            // flowLayoutPanel698
-            // 
-            this.flowLayoutPanel698.Controls.Add(this.label94);
-            this.flowLayoutPanel698.Location = new System.Drawing.Point(5, 220);
-            this.flowLayoutPanel698.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.flowLayoutPanel698.Name = "flowLayoutPanel698";
-            this.flowLayoutPanel698.Size = new System.Drawing.Size(166, 47);
-            this.flowLayoutPanel698.TabIndex = 86;
+            this.label93.Location = new System.Drawing.Point(3, 82);
+            this.label93.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label93.Name = "label93";
+            this.label93.Size = new System.Drawing.Size(104, 23);
+            this.label93.TabIndex = 0;
+            this.label93.Text = "消費税額";
+            this.label93.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label94
             // 
-            this.label94.Location = new System.Drawing.Point(4, 0);
-            this.label94.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label94.Location = new System.Drawing.Point(3, 109);
+            this.label94.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(130, 51);
+            this.label94.Size = new System.Drawing.Size(104, 26);
             this.label94.TabIndex = 0;
             this.label94.Text = "合計金額";
             this.label94.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // comboBox11
+            // 
+            this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox11.FormattingEnabled = true;
+            this.comboBox11.Items.AddRange(new object[] {
+            "税抜",
+            "税込"});
+            this.comboBox11.Location = new System.Drawing.Point(112, 30);
+            this.comboBox11.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox11.Name = "comboBox11";
+            this.comboBox11.Size = new System.Drawing.Size(249, 21);
+            this.comboBox11.TabIndex = 0;
+            this.comboBox11.SelectedIndexChanged += new System.EventHandler(this.comboBox11_SelectedIndexChanged);
+            // 
+            // tax
+            // 
+            this.tax.Location = new System.Drawing.Point(112, 57);
+            this.tax.Margin = new System.Windows.Forms.Padding(2);
+            this.tax.Name = "tax";
+            this.tax.ReadOnly = true;
+            this.tax.Size = new System.Drawing.Size(249, 20);
+            this.tax.TabIndex = 84;
+            // 
+            // taxAmount2
+            // 
+            this.taxAmount2.Location = new System.Drawing.Point(111, 84);
+            this.taxAmount2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.taxAmount2.Name = "taxAmount2";
+            this.taxAmount2.ReadOnly = true;
+            this.taxAmount2.Size = new System.Drawing.Size(251, 20);
+            this.taxAmount2.TabIndex = 37;
+            // 
+            // sumTextBox2
+            // 
+            this.sumTextBox2.Location = new System.Drawing.Point(111, 111);
+            this.sumTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.sumTextBox2.Name = "sumTextBox2";
+            this.sumTextBox2.ReadOnly = true;
+            this.sumTextBox2.Size = new System.Drawing.Size(251, 20);
+            this.sumTextBox2.TabIndex = 37;
+            // 
+            // label79
+            // 
+            this.label79.Location = new System.Drawing.Point(3, 1);
+            this.label79.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(104, 26);
+            this.label79.TabIndex = 84;
+            this.label79.Text = "小計";
+            this.label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // return2
             // 
-            this.return2.Location = new System.Drawing.Point(2087, 1278);
-            this.return2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.return2.Location = new System.Drawing.Point(1006, 620);
+            this.return2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.return2.Name = "return2";
-            this.return2.Size = new System.Drawing.Size(182, 53);
+            this.return2.Size = new System.Drawing.Size(99, 58);
             this.return2.TabIndex = 46;
             this.return2.Text = "戻る";
             this.return2.UseVisualStyleBackColor = true;
@@ -5278,34 +3007,34 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(2087, 1176);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button9.Location = new System.Drawing.Point(1006, 545);
+            this.button9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(182, 53);
+            this.button9.Size = new System.Drawing.Size(96, 60);
             this.button9.TabIndex = 45;
             this.button9.Text = "計算書プレビュー";
             this.button9.UseVisualStyleBackColor = true;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(2087, 1082);
-            this.button10.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button10.Location = new System.Drawing.Point(1006, 479);
+            this.button10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(182, 53);
+            this.button10.Size = new System.Drawing.Size(97, 57);
             this.button10.TabIndex = 44;
             this.button10.Text = "登録";
             this.button10.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.registerDateTextBox2);
-            this.groupBox3.Controls.Add(this.label);
             this.groupBox3.Controls.Add(this.typeTextBox2);
             this.groupBox3.Controls.Add(this.client_searchButton1);
             this.groupBox3.Controls.Add(this.clientRemarksTextBox2);
             this.groupBox3.Controls.Add(this.label72);
             this.groupBox3.Controls.Add(this.label73);
+            this.groupBox3.Controls.Add(this.registerDateTextBox2);
             this.groupBox3.Controls.Add(this.addressTextBox2);
+            this.groupBox3.Controls.Add(this.label36);
             this.groupBox3.Controls.Add(this.companyTextBox2);
             this.groupBox3.Controls.Add(this.label74);
             this.groupBox3.Controls.Add(this.clientNameTextBox2);
@@ -5313,138 +3042,155 @@
             this.groupBox3.Controls.Add(this.shopNameTextBox2);
             this.groupBox3.Controls.Add(this.label76);
             this.groupBox3.Controls.Add(this.label77);
-            this.groupBox3.Location = new System.Drawing.Point(2867, 27);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.groupBox3.Location = new System.Drawing.Point(974, 46);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.groupBox3.Size = new System.Drawing.Size(366, 881);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.groupBox3.Size = new System.Drawing.Size(190, 461);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             // 
             // typeTextBox2
             // 
-            this.typeTextBox2.Location = new System.Drawing.Point(26, 133);
-            this.typeTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.typeTextBox2.Location = new System.Drawing.Point(14, 81);
+            this.typeTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.typeTextBox2.Name = "typeTextBox2";
             this.typeTextBox2.ReadOnly = true;
-            this.typeTextBox2.Size = new System.Drawing.Size(99, 31);
+            this.typeTextBox2.Size = new System.Drawing.Size(48, 20);
             this.typeTextBox2.TabIndex = 23;
             // 
             // client_searchButton1
             // 
             this.client_searchButton1.AutoSize = true;
-            this.client_searchButton1.Location = new System.Drawing.Point(7, 18);
-            this.client_searchButton1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.client_searchButton1.Location = new System.Drawing.Point(12, 12);
+            this.client_searchButton1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.client_searchButton1.Name = "client_searchButton1";
-            this.client_searchButton1.Size = new System.Drawing.Size(366, 91);
+            this.client_searchButton1.Size = new System.Drawing.Size(169, 46);
             this.client_searchButton1.TabIndex = 16;
             this.client_searchButton1.Text = "顧客選択";
             this.client_searchButton1.UseVisualStyleBackColor = true;
-            this.client_searchButton1.Click += new System.EventHandler(this.client_Button_Click);
             // 
             // clientRemarksTextBox2
             // 
-            this.clientRemarksTextBox2.Location = new System.Drawing.Point(26, 638);
-            this.clientRemarksTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.clientRemarksTextBox2.Location = new System.Drawing.Point(14, 332);
+            this.clientRemarksTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.clientRemarksTextBox2.Multiline = true;
             this.clientRemarksTextBox2.Name = "clientRemarksTextBox2";
-            this.clientRemarksTextBox2.ReadOnly = true;
-            this.clientRemarksTextBox2.Size = new System.Drawing.Size(336, 233);
+            this.clientRemarksTextBox2.Size = new System.Drawing.Size(157, 118);
             this.clientRemarksTextBox2.TabIndex = 28;
             // 
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(22, 603);
-            this.label72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label72.Location = new System.Drawing.Point(12, 318);
+            this.label72.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(58, 24);
+            this.label72.Size = new System.Drawing.Size(33, 13);
             this.label72.TabIndex = 22;
             this.label72.Text = "備考";
             // 
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(22, 104);
-            this.label73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label73.Location = new System.Drawing.Point(11, 62);
+            this.label73.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(58, 24);
+            this.label73.Size = new System.Drawing.Size(33, 13);
             this.label73.TabIndex = 17;
             this.label73.Text = "種別";
             // 
+            // registerDateTextBox2
+            // 
+            this.registerDateTextBox2.Location = new System.Drawing.Point(14, 286);
+            this.registerDateTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.registerDateTextBox2.Name = "registerDateTextBox2";
+            this.registerDateTextBox2.ReadOnly = true;
+            this.registerDateTextBox2.Size = new System.Drawing.Size(157, 20);
+            this.registerDateTextBox2.TabIndex = 27;
+            // 
             // addressTextBox2
             // 
-            this.addressTextBox2.Location = new System.Drawing.Point(26, 458);
-            this.addressTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.addressTextBox2.Location = new System.Drawing.Point(14, 244);
+            this.addressTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addressTextBox2.Name = "addressTextBox2";
             this.addressTextBox2.ReadOnly = true;
-            this.addressTextBox2.Size = new System.Drawing.Size(336, 31);
+            this.addressTextBox2.Size = new System.Drawing.Size(157, 20);
             this.addressTextBox2.TabIndex = 27;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(12, 273);
+            this.label36.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(125, 13);
+            this.label36.TabIndex = 21;
+            this.label36.Text = "登記簿謄本（登録日）";
             // 
             // companyTextBox2
             // 
-            this.companyTextBox2.Location = new System.Drawing.Point(26, 210);
-            this.companyTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.companyTextBox2.Location = new System.Drawing.Point(14, 120);
+            this.companyTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.companyTextBox2.Name = "companyTextBox2";
             this.companyTextBox2.ReadOnly = true;
-            this.companyTextBox2.Size = new System.Drawing.Size(186, 31);
+            this.companyTextBox2.Size = new System.Drawing.Size(88, 20);
             this.companyTextBox2.TabIndex = 24;
             // 
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(22, 432);
-            this.label74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label74.Location = new System.Drawing.Point(12, 231);
+            this.label74.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(58, 24);
+            this.label74.Size = new System.Drawing.Size(33, 13);
             this.label74.TabIndex = 21;
             this.label74.Text = "住所";
             // 
             // clientNameTextBox2
             // 
-            this.clientNameTextBox2.Location = new System.Drawing.Point(26, 378);
-            this.clientNameTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.clientNameTextBox2.Location = new System.Drawing.Point(14, 204);
+            this.clientNameTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.clientNameTextBox2.Name = "clientNameTextBox2";
             this.clientNameTextBox2.ReadOnly = true;
-            this.clientNameTextBox2.Size = new System.Drawing.Size(186, 31);
+            this.clientNameTextBox2.Size = new System.Drawing.Size(88, 20);
             this.clientNameTextBox2.TabIndex = 26;
             // 
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(22, 184);
-            this.label75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label75.Location = new System.Drawing.Point(12, 107);
+            this.label75.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(82, 24);
+            this.label75.Size = new System.Drawing.Size(46, 13);
             this.label75.TabIndex = 18;
             this.label75.Text = "会社名";
             // 
             // shopNameTextBox2
             // 
-            this.shopNameTextBox2.Location = new System.Drawing.Point(26, 293);
-            this.shopNameTextBox2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.shopNameTextBox2.Location = new System.Drawing.Point(14, 161);
+            this.shopNameTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.shopNameTextBox2.Name = "shopNameTextBox2";
             this.shopNameTextBox2.ReadOnly = true;
-            this.shopNameTextBox2.Size = new System.Drawing.Size(186, 31);
+            this.shopNameTextBox2.Size = new System.Drawing.Size(88, 20);
             this.shopNameTextBox2.TabIndex = 25;
             // 
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(22, 352);
-            this.label76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label76.Location = new System.Drawing.Point(12, 191);
+            this.label76.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(190, 24);
+            this.label76.Size = new System.Drawing.Size(105, 13);
             this.label76.TabIndex = 20;
             this.label76.Text = "担当者名・個人名";
             // 
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(22, 264);
-            this.label77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label77.Location = new System.Drawing.Point(12, 147);
+            this.label77.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(82, 24);
+            this.label77.Size = new System.Drawing.Size(46, 13);
             this.label77.TabIndex = 19;
             this.label77.Text = "店舗名";
             // 
@@ -5452,2023 +3198,1416 @@
             // 
             this.tableLayoutPanel13.BackColor = System.Drawing.Color.AliceBlue;
             this.tableLayoutPanel13.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tableLayoutPanel13.ColumnCount = 11;
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.972973F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.194507F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.801802F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.783784F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.657658F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.288288F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.07207F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 506F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 351F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 219F));
-            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel588, 1, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel589, 0, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel590, 1, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel591, 0, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel592, 1, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel593, 0, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel594, 2, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel595, 1, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel596, 0, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel597, 1, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel598, 0, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel599, 2, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel600, 1, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel601, 0, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel602, 3, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel603, 2, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel604, 1, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel605, 0, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel606, 6, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel607, 5, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel608, 4, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel609, 3, 14);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel610, 0, 14);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel611, 3, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel612, 2, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel613, 1, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel614, 0, 6);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel615, 6, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel616, 4, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel617, 4, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel618, 3, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel619, 2, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel620, 4, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel621, 1, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel622, 0, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel623, 6, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel624, 5, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel625, 4, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel626, 3, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel627, 2, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel628, 1, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel629, 0, 4);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel630, 6, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel631, 5, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel632, 4, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel633, 3, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel634, 2, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel635, 1, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel636, 0, 3);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel637, 6, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel638, 5, 5);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel639, 5, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel640, 4, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel641, 3, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel642, 2, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel643, 1, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel644, 0, 2);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel645, 1, 0);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel647, 5, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel648, 3, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel649, 0, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel650, 1, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel651, 2, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel652, 4, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel653, 6, 1);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel654, 2, 0);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel655, 3, 0);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel656, 4, 0);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel657, 5, 0);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel658, 6, 0);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel659, 4, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel660, 5, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel661, 6, 7);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel662, 3, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel663, 4, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel664, 5, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel665, 6, 8);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel666, 2, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel667, 3, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel668, 5, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel669, 6, 9);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel670, 3, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel671, 5, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel672, 6, 10);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel673, 2, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel674, 3, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel675, 4, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel676, 5, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel677, 6, 11);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel678, 2, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel679, 3, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel680, 4, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel681, 5, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel682, 6, 12);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel683, 2, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel684, 3, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel685, 4, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel686, 5, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel687, 6, 13);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel688, 2, 14);
-            this.tableLayoutPanel13.Controls.Add(this.flowLayoutPanel646, 0, 0);
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(35, 27);
-            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.tableLayoutPanel13.ColumnCount = 8;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel13.Controls.Add(this.label39, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox00, 0, 1);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox01, 0, 2);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox02, 0, 3);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox03, 0, 4);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox04, 0, 5);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox05, 0, 6);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox06, 0, 7);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox07, 0, 8);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox08, 0, 9);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox09, 0, 10);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox010, 0, 11);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox011, 0, 12);
+            this.tableLayoutPanel13.Controls.Add(this.mainCategoryComboBox012, 0, 13);
+            this.tableLayoutPanel13.Controls.Add(this.label65, 1, 0);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox00, 1, 1);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox01, 1, 2);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox02, 1, 3);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox03, 1, 4);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox04, 1, 5);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox05, 1, 6);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox06, 1, 7);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox07, 1, 8);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox08, 1, 9);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox09, 1, 10);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox010, 1, 11);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox011, 1, 12);
+            this.tableLayoutPanel13.Controls.Add(this.itemComboBox012, 1, 13);
+            this.tableLayoutPanel13.Controls.Add(this.label67, 2, 0);
+            this.tableLayoutPanel13.Controls.Add(this.label71, 7, 0);
+            this.tableLayoutPanel13.Controls.Add(this.remarks00, 7, 1);
+            this.tableLayoutPanel13.Controls.Add(this.remarks01, 7, 2);
+            this.tableLayoutPanel13.Controls.Add(this.remarks02, 7, 3);
+            this.tableLayoutPanel13.Controls.Add(this.remarks03, 7, 4);
+            this.tableLayoutPanel13.Controls.Add(this.remarks04, 7, 5);
+            this.tableLayoutPanel13.Controls.Add(this.remarks05, 7, 6);
+            this.tableLayoutPanel13.Controls.Add(this.remarks06, 7, 7);
+            this.tableLayoutPanel13.Controls.Add(this.remarks07, 7, 8);
+            this.tableLayoutPanel13.Controls.Add(this.remarks08, 7, 9);
+            this.tableLayoutPanel13.Controls.Add(this.remarks09, 7, 10);
+            this.tableLayoutPanel13.Controls.Add(this.remarks010, 7, 11);
+            this.tableLayoutPanel13.Controls.Add(this.remarks011, 7, 12);
+            this.tableLayoutPanel13.Controls.Add(this.remarks012, 7, 13);
+            this.tableLayoutPanel13.Controls.Add(this.label70, 6, 0);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox00, 6, 1);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox01, 6, 2);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox02, 6, 3);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox03, 6, 4);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox04, 6, 5);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox05, 6, 6);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox06, 6, 7);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox07, 6, 8);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox08, 6, 9);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox09, 6, 10);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox010, 6, 11);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox011, 6, 12);
+            this.tableLayoutPanel13.Controls.Add(this.moneyTextBox012, 6, 13);
+            this.tableLayoutPanel13.Controls.Add(this.totalCount2, 5, 14);
+            this.tableLayoutPanel13.Controls.Add(this.label64, 4, 14);
+            this.tableLayoutPanel13.Controls.Add(this.totalWeight2, 3, 14);
+            this.tableLayoutPanel13.Controls.Add(this.label37, 2, 14);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox012, 5, 13);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox011, 5, 12);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox010, 5, 11);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox09, 5, 10);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox08, 5, 9);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox07, 5, 8);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox06, 5, 7);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox05, 5, 6);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox04, 5, 5);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox03, 5, 4);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox02, 5, 3);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox01, 5, 2);
+            this.tableLayoutPanel13.Controls.Add(this.countTextBox00, 5, 1);
+            this.tableLayoutPanel13.Controls.Add(this.label68, 5, 0);
+            this.tableLayoutPanel13.Controls.Add(this.label69, 4, 0);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox00, 4, 1);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox01, 4, 2);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox02, 4, 3);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox03, 4, 4);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox04, 4, 5);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox05, 4, 6);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox06, 4, 7);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox07, 4, 8);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox08, 4, 9);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox09, 4, 10);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox010, 4, 11);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox011, 4, 12);
+            this.tableLayoutPanel13.Controls.Add(this.unitPriceTextBox012, 4, 13);
+            this.tableLayoutPanel13.Controls.Add(this.label25, 3, 0);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox00, 3, 1);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox01, 3, 2);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox02, 3, 3);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox03, 3, 4);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox04, 3, 5);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox05, 3, 6);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox06, 3, 7);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox07, 3, 8);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox08, 3, 9);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox09, 3, 10);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox010, 3, 11);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox011, 3, 12);
+            this.tableLayoutPanel13.Controls.Add(this.weightTextBox012, 3, 13);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail00, 2, 1);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail01, 2, 2);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail02, 2, 3);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail03, 2, 4);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail04, 2, 5);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail05, 2, 6);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail06, 2, 7);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail07, 2, 8);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail08, 2, 9);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail09, 2, 10);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail010, 2, 11);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail011, 2, 12);
+            this.tableLayoutPanel13.Controls.Add(this.itemDetail012, 2, 13);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(16, 14);
+            this.tableLayoutPanel13.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
-            this.tableLayoutPanel13.Padding = new System.Windows.Forms.Padding(69, 21, 0, 0);
             this.tableLayoutPanel13.RowCount = 15;
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(2802, 853);
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(924, 416);
             this.tableLayoutPanel13.TabIndex = 42;
             // 
-            // flowLayoutPanel588
-            // 
-            this.flowLayoutPanel588.Controls.Add(this.itemComboBox012);
-            this.flowLayoutPanel588.Location = new System.Drawing.Point(200, 707);
-            this.flowLayoutPanel588.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel588.Name = "flowLayoutPanel588";
-            this.flowLayoutPanel588.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel588.TabIndex = 39;
-            // 
-            // itemComboBox012
-            // 
-            this.itemComboBox012.FormattingEnabled = true;
-            this.itemComboBox012.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox012.Name = "itemComboBox012";
-            this.itemComboBox012.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox012.TabIndex = 39;
-            // 
-            // flowLayoutPanel589
-            // 
-            this.flowLayoutPanel589.Controls.Add(this.mainCategoryComboBox012);
-            this.flowLayoutPanel589.Location = new System.Drawing.Point(73, 707);
-            this.flowLayoutPanel589.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel589.Name = "flowLayoutPanel589";
-            this.flowLayoutPanel589.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel589.TabIndex = 39;
-            // 
-            // mainCategoryComboBox012
-            // 
-            this.mainCategoryComboBox012.FormattingEnabled = true;
-            this.mainCategoryComboBox012.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox012.Name = "mainCategoryComboBox012";
-            this.mainCategoryComboBox012.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox012.TabIndex = 39;
-            this.mainCategoryComboBox012.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox012_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel590
-            // 
-            this.flowLayoutPanel590.Controls.Add(this.itemComboBox011);
-            this.flowLayoutPanel590.Location = new System.Drawing.Point(200, 655);
-            this.flowLayoutPanel590.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel590.Name = "flowLayoutPanel590";
-            this.flowLayoutPanel590.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel590.TabIndex = 39;
-            // 
-            // itemComboBox011
-            // 
-            this.itemComboBox011.FormattingEnabled = true;
-            this.itemComboBox011.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox011.Name = "itemComboBox011";
-            this.itemComboBox011.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox011.TabIndex = 39;
-            // 
-            // flowLayoutPanel591
-            // 
-            this.flowLayoutPanel591.Controls.Add(this.mainCategoryComboBox011);
-            this.flowLayoutPanel591.Location = new System.Drawing.Point(73, 655);
-            this.flowLayoutPanel591.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel591.Name = "flowLayoutPanel591";
-            this.flowLayoutPanel591.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel591.TabIndex = 39;
-            // 
-            // mainCategoryComboBox011
-            // 
-            this.mainCategoryComboBox011.FormattingEnabled = true;
-            this.mainCategoryComboBox011.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox011.Name = "mainCategoryComboBox011";
-            this.mainCategoryComboBox011.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox011.TabIndex = 39;
-            this.mainCategoryComboBox011.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox011_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel592
-            // 
-            this.flowLayoutPanel592.Controls.Add(this.itemComboBox010);
-            this.flowLayoutPanel592.Location = new System.Drawing.Point(200, 603);
-            this.flowLayoutPanel592.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel592.Name = "flowLayoutPanel592";
-            this.flowLayoutPanel592.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel592.TabIndex = 39;
-            // 
-            // itemComboBox010
-            // 
-            this.itemComboBox010.FormattingEnabled = true;
-            this.itemComboBox010.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox010.Name = "itemComboBox010";
-            this.itemComboBox010.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox010.TabIndex = 39;
-            // 
-            // flowLayoutPanel593
-            // 
-            this.flowLayoutPanel593.Controls.Add(this.mainCategoryComboBox010);
-            this.flowLayoutPanel593.Location = new System.Drawing.Point(73, 603);
-            this.flowLayoutPanel593.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel593.Name = "flowLayoutPanel593";
-            this.flowLayoutPanel593.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel593.TabIndex = 39;
-            // 
-            // mainCategoryComboBox010
-            // 
-            this.mainCategoryComboBox010.FormattingEnabled = true;
-            this.mainCategoryComboBox010.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox010.Name = "mainCategoryComboBox010";
-            this.mainCategoryComboBox010.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox010.TabIndex = 39;
-            this.mainCategoryComboBox010.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox010_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel594
-            // 
-            this.flowLayoutPanel594.Controls.Add(this.weightTextBox09);
-            this.flowLayoutPanel594.Location = new System.Drawing.Point(330, 551);
-            this.flowLayoutPanel594.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel594.Name = "flowLayoutPanel594";
-            this.flowLayoutPanel594.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel594.TabIndex = 39;
-            // 
-            // weightTextBox09
-            // 
-            this.weightTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox09.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox09.Name = "weightTextBox09";
-            this.weightTextBox09.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox09.TabIndex = 0;
-            // 
-            // flowLayoutPanel595
-            // 
-            this.flowLayoutPanel595.Controls.Add(this.itemComboBox09);
-            this.flowLayoutPanel595.Location = new System.Drawing.Point(200, 551);
-            this.flowLayoutPanel595.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel595.Name = "flowLayoutPanel595";
-            this.flowLayoutPanel595.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel595.TabIndex = 39;
-            // 
-            // itemComboBox09
-            // 
-            this.itemComboBox09.FormattingEnabled = true;
-            this.itemComboBox09.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox09.Name = "itemComboBox09";
-            this.itemComboBox09.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox09.TabIndex = 39;
-            // 
-            // flowLayoutPanel596
-            // 
-            this.flowLayoutPanel596.Controls.Add(this.mainCategoryComboBox09);
-            this.flowLayoutPanel596.Location = new System.Drawing.Point(73, 551);
-            this.flowLayoutPanel596.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel596.Name = "flowLayoutPanel596";
-            this.flowLayoutPanel596.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel596.TabIndex = 39;
-            // 
-            // mainCategoryComboBox09
-            // 
-            this.mainCategoryComboBox09.FormattingEnabled = true;
-            this.mainCategoryComboBox09.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox09.Name = "mainCategoryComboBox09";
-            this.mainCategoryComboBox09.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox09.TabIndex = 39;
-            this.mainCategoryComboBox09.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox09_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel597
-            // 
-            this.flowLayoutPanel597.Controls.Add(this.itemComboBox08);
-            this.flowLayoutPanel597.Location = new System.Drawing.Point(200, 499);
-            this.flowLayoutPanel597.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel597.Name = "flowLayoutPanel597";
-            this.flowLayoutPanel597.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel597.TabIndex = 39;
-            // 
-            // itemComboBox08
-            // 
-            this.itemComboBox08.FormattingEnabled = true;
-            this.itemComboBox08.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox08.Name = "itemComboBox08";
-            this.itemComboBox08.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox08.TabIndex = 39;
-            // 
-            // flowLayoutPanel598
-            // 
-            this.flowLayoutPanel598.Controls.Add(this.mainCategoryComboBox08);
-            this.flowLayoutPanel598.Location = new System.Drawing.Point(73, 499);
-            this.flowLayoutPanel598.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel598.Name = "flowLayoutPanel598";
-            this.flowLayoutPanel598.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel598.TabIndex = 39;
-            // 
-            // mainCategoryComboBox08
-            // 
-            this.mainCategoryComboBox08.FormattingEnabled = true;
-            this.mainCategoryComboBox08.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox08.Name = "mainCategoryComboBox08";
-            this.mainCategoryComboBox08.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox08.TabIndex = 39;
-            this.mainCategoryComboBox08.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox08_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel599
-            // 
-            this.flowLayoutPanel599.Controls.Add(this.weightTextBox07);
-            this.flowLayoutPanel599.Location = new System.Drawing.Point(330, 447);
-            this.flowLayoutPanel599.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel599.Name = "flowLayoutPanel599";
-            this.flowLayoutPanel599.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel599.TabIndex = 39;
-            // 
-            // weightTextBox07
-            // 
-            this.weightTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox07.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox07.Name = "weightTextBox07";
-            this.weightTextBox07.Size = new System.Drawing.Size(169, 31);
-            this.weightTextBox07.TabIndex = 0;
-            // 
-            // flowLayoutPanel600
-            // 
-            this.flowLayoutPanel600.Controls.Add(this.itemComboBox07);
-            this.flowLayoutPanel600.Location = new System.Drawing.Point(200, 447);
-            this.flowLayoutPanel600.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel600.Name = "flowLayoutPanel600";
-            this.flowLayoutPanel600.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel600.TabIndex = 39;
-            // 
-            // itemComboBox07
-            // 
-            this.itemComboBox07.FormattingEnabled = true;
-            this.itemComboBox07.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox07.Name = "itemComboBox07";
-            this.itemComboBox07.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox07.TabIndex = 39;
-            // 
-            // flowLayoutPanel601
-            // 
-            this.flowLayoutPanel601.Controls.Add(this.mainCategoryComboBox07);
-            this.flowLayoutPanel601.Location = new System.Drawing.Point(73, 447);
-            this.flowLayoutPanel601.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel601.Name = "flowLayoutPanel601";
-            this.flowLayoutPanel601.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel601.TabIndex = 39;
-            // 
-            // mainCategoryComboBox07
-            // 
-            this.mainCategoryComboBox07.FormattingEnabled = true;
-            this.mainCategoryComboBox07.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox07.Name = "mainCategoryComboBox07";
-            this.mainCategoryComboBox07.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox07.TabIndex = 39;
-            this.mainCategoryComboBox07.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox07_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel602
-            // 
-            this.flowLayoutPanel602.Controls.Add(this.countTextBox06);
-            this.flowLayoutPanel602.Location = new System.Drawing.Point(438, 395);
-            this.flowLayoutPanel602.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel602.Name = "flowLayoutPanel602";
-            this.flowLayoutPanel602.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel602.TabIndex = 39;
-            // 
-            // countTextBox06
-            // 
-            this.countTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox06.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox06.Name = "countTextBox06";
-            this.countTextBox06.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox06.TabIndex = 0;
-            // 
-            // flowLayoutPanel603
-            // 
-            this.flowLayoutPanel603.Controls.Add(this.weightTextBox06);
-            this.flowLayoutPanel603.Location = new System.Drawing.Point(330, 395);
-            this.flowLayoutPanel603.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel603.Name = "flowLayoutPanel603";
-            this.flowLayoutPanel603.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel603.TabIndex = 39;
-            // 
-            // weightTextBox06
-            // 
-            this.weightTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox06.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox06.Name = "weightTextBox06";
-            this.weightTextBox06.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox06.TabIndex = 0;
-            // 
-            // flowLayoutPanel604
-            // 
-            this.flowLayoutPanel604.Controls.Add(this.itemComboBox06);
-            this.flowLayoutPanel604.Location = new System.Drawing.Point(200, 395);
-            this.flowLayoutPanel604.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel604.Name = "flowLayoutPanel604";
-            this.flowLayoutPanel604.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel604.TabIndex = 39;
-            // 
-            // itemComboBox06
-            // 
-            this.itemComboBox06.FormattingEnabled = true;
-            this.itemComboBox06.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox06.Name = "itemComboBox06";
-            this.itemComboBox06.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox06.TabIndex = 39;
-            // 
-            // flowLayoutPanel605
-            // 
-            this.flowLayoutPanel605.Controls.Add(this.mainCategoryComboBox06);
-            this.flowLayoutPanel605.Location = new System.Drawing.Point(73, 395);
-            this.flowLayoutPanel605.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel605.Name = "flowLayoutPanel605";
-            this.flowLayoutPanel605.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel605.TabIndex = 39;
-            // 
-            // mainCategoryComboBox06
-            // 
-            this.mainCategoryComboBox06.FormattingEnabled = true;
-            this.mainCategoryComboBox06.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox06.Name = "mainCategoryComboBox06";
-            this.mainCategoryComboBox06.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox06.TabIndex = 39;
-            this.mainCategoryComboBox06.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox06_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel606
-            // 
-            this.flowLayoutPanel606.Controls.Add(this.remarks05);
-            this.flowLayoutPanel606.Location = new System.Drawing.Point(832, 343);
-            this.flowLayoutPanel606.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel606.Name = "flowLayoutPanel606";
-            this.flowLayoutPanel606.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel606.TabIndex = 39;
-            // 
-            // remarks05
-            // 
-            this.remarks05.Location = new System.Drawing.Point(2, 5);
-            this.remarks05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.remarks05.Name = "remarks05";
-            this.remarks05.Size = new System.Drawing.Size(548, 31);
-            this.remarks05.TabIndex = 0;
-            // 
-            // flowLayoutPanel607
-            // 
-            this.flowLayoutPanel607.Controls.Add(this.moneyTextBox05);
-            this.flowLayoutPanel607.Location = new System.Drawing.Point(700, 343);
-            this.flowLayoutPanel607.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel607.Name = "flowLayoutPanel607";
-            this.flowLayoutPanel607.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel607.TabIndex = 39;
-            // 
-            // moneyTextBox05
-            // 
-            this.moneyTextBox05.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox05.Name = "moneyTextBox05";
-            this.moneyTextBox05.ReadOnly = true;
-            this.moneyTextBox05.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox05.TabIndex = 0;
-            // 
-            // flowLayoutPanel608
-            // 
-            this.flowLayoutPanel608.Controls.Add(this.unitPriceTextBox05);
-            this.flowLayoutPanel608.Location = new System.Drawing.Point(578, 343);
-            this.flowLayoutPanel608.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel608.Name = "flowLayoutPanel608";
-            this.flowLayoutPanel608.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel608.TabIndex = 39;
-            // 
-            // unitPriceTextBox05
-            // 
-            this.unitPriceTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox05.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox05.Name = "unitPriceTextBox05";
-            this.unitPriceTextBox05.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox05.TabIndex = 39;
-            // 
-            // flowLayoutPanel609
-            // 
-            this.flowLayoutPanel609.Controls.Add(this.totalCount2);
-            this.flowLayoutPanel609.Location = new System.Drawing.Point(438, 759);
-            this.flowLayoutPanel609.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel609.Name = "flowLayoutPanel609";
-            this.flowLayoutPanel609.Size = new System.Drawing.Size(134, 58);
-            this.flowLayoutPanel609.TabIndex = 38;
-            // 
-            // totalCount2
-            // 
-            this.totalCount2.Location = new System.Drawing.Point(2, 5);
-            this.totalCount2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.totalCount2.Name = "totalCount2";
-            this.totalCount2.ReadOnly = true;
-            this.totalCount2.Size = new System.Drawing.Size(212, 31);
-            this.totalCount2.TabIndex = 38;
-            this.totalCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // flowLayoutPanel610
-            // 
-            this.flowLayoutPanel610.Controls.Add(this.label64);
-            this.flowLayoutPanel610.Location = new System.Drawing.Point(73, 759);
-            this.flowLayoutPanel610.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel610.Name = "flowLayoutPanel610";
-            this.flowLayoutPanel610.Size = new System.Drawing.Size(121, 58);
-            this.flowLayoutPanel610.TabIndex = 38;
-            // 
-            // label64
-            // 
-            this.label64.Location = new System.Drawing.Point(2, 0);
-            this.label64.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(197, 48);
-            this.label64.TabIndex = 38;
-            this.label64.Text = "総数";
-            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanel611
-            // 
-            this.flowLayoutPanel611.Controls.Add(this.countTextBox05);
-            this.flowLayoutPanel611.Location = new System.Drawing.Point(438, 343);
-            this.flowLayoutPanel611.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel611.Name = "flowLayoutPanel611";
-            this.flowLayoutPanel611.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel611.TabIndex = 39;
-            // 
-            // countTextBox05
-            // 
-            this.countTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox05.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox05.Name = "countTextBox05";
-            this.countTextBox05.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox05.TabIndex = 39;
-            // 
-            // flowLayoutPanel612
-            // 
-            this.flowLayoutPanel612.Controls.Add(this.weightTextBox05);
-            this.flowLayoutPanel612.Location = new System.Drawing.Point(330, 343);
-            this.flowLayoutPanel612.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel612.Name = "flowLayoutPanel612";
-            this.flowLayoutPanel612.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel612.TabIndex = 39;
-            // 
-            // weightTextBox05
-            // 
-            this.weightTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox05.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox05.Name = "weightTextBox05";
-            this.weightTextBox05.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox05.TabIndex = 0;
-            // 
-            // flowLayoutPanel613
-            // 
-            this.flowLayoutPanel613.Controls.Add(this.itemComboBox05);
-            this.flowLayoutPanel613.Location = new System.Drawing.Point(200, 343);
-            this.flowLayoutPanel613.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel613.Name = "flowLayoutPanel613";
-            this.flowLayoutPanel613.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel613.TabIndex = 39;
-            // 
-            // itemComboBox05
-            // 
-            this.itemComboBox05.FormattingEnabled = true;
-            this.itemComboBox05.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox05.Name = "itemComboBox05";
-            this.itemComboBox05.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox05.TabIndex = 39;
-            // 
-            // flowLayoutPanel614
-            // 
-            this.flowLayoutPanel614.Controls.Add(this.mainCategoryComboBox05);
-            this.flowLayoutPanel614.Location = new System.Drawing.Point(73, 343);
-            this.flowLayoutPanel614.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel614.Name = "flowLayoutPanel614";
-            this.flowLayoutPanel614.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel614.TabIndex = 39;
-            // 
-            // mainCategoryComboBox05
-            // 
-            this.mainCategoryComboBox05.FormattingEnabled = true;
-            this.mainCategoryComboBox05.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox05.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox05.Name = "mainCategoryComboBox05";
-            this.mainCategoryComboBox05.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox05.TabIndex = 39;
-            this.mainCategoryComboBox05.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox05_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel615
-            // 
-            this.flowLayoutPanel615.Controls.Add(this.remarks04);
-            this.flowLayoutPanel615.Location = new System.Drawing.Point(832, 291);
-            this.flowLayoutPanel615.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel615.Name = "flowLayoutPanel615";
-            this.flowLayoutPanel615.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel615.TabIndex = 39;
-            // 
-            // remarks04
-            // 
-            this.remarks04.Location = new System.Drawing.Point(2, 5);
-            this.remarks04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.remarks04.Name = "remarks04";
-            this.remarks04.Size = new System.Drawing.Size(548, 31);
-            this.remarks04.TabIndex = 0;
-            // 
-            // flowLayoutPanel616
-            // 
-            this.flowLayoutPanel616.Controls.Add(this.unitPriceTextBox09);
-            this.flowLayoutPanel616.Location = new System.Drawing.Point(578, 551);
-            this.flowLayoutPanel616.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel616.Name = "flowLayoutPanel616";
-            this.flowLayoutPanel616.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel616.TabIndex = 57;
-            // 
-            // unitPriceTextBox09
-            // 
-            this.unitPriceTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox09.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox09.Name = "unitPriceTextBox09";
-            this.unitPriceTextBox09.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox09.TabIndex = 0;
-            // 
-            // flowLayoutPanel617
-            // 
-            this.flowLayoutPanel617.Controls.Add(this.unitPriceTextBox04);
-            this.flowLayoutPanel617.Location = new System.Drawing.Point(578, 291);
-            this.flowLayoutPanel617.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel617.Name = "flowLayoutPanel617";
-            this.flowLayoutPanel617.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel617.TabIndex = 39;
-            // 
-            // unitPriceTextBox04
-            // 
-            this.unitPriceTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox04.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox04.Name = "unitPriceTextBox04";
-            this.unitPriceTextBox04.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox04.TabIndex = 0;
-            // 
-            // flowLayoutPanel618
-            // 
-            this.flowLayoutPanel618.Controls.Add(this.countTextBox04);
-            this.flowLayoutPanel618.Location = new System.Drawing.Point(438, 291);
-            this.flowLayoutPanel618.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel618.Name = "flowLayoutPanel618";
-            this.flowLayoutPanel618.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel618.TabIndex = 39;
-            // 
-            // countTextBox04
-            // 
-            this.countTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox04.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox04.Name = "countTextBox04";
-            this.countTextBox04.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox04.TabIndex = 39;
-            // 
-            // flowLayoutPanel619
-            // 
-            this.flowLayoutPanel619.Controls.Add(this.weightTextBox04);
-            this.flowLayoutPanel619.Location = new System.Drawing.Point(330, 291);
-            this.flowLayoutPanel619.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel619.Name = "flowLayoutPanel619";
-            this.flowLayoutPanel619.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel619.TabIndex = 39;
-            // 
-            // weightTextBox04
-            // 
-            this.weightTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox04.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox04.Name = "weightTextBox04";
-            this.weightTextBox04.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox04.TabIndex = 39;
-            // 
-            // flowLayoutPanel620
-            // 
-            this.flowLayoutPanel620.Controls.Add(this.unitPriceTextBox08);
-            this.flowLayoutPanel620.Location = new System.Drawing.Point(578, 499);
-            this.flowLayoutPanel620.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel620.Name = "flowLayoutPanel620";
-            this.flowLayoutPanel620.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel620.TabIndex = 53;
-            // 
-            // unitPriceTextBox08
-            // 
-            this.unitPriceTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox08.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox08.Name = "unitPriceTextBox08";
-            this.unitPriceTextBox08.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox08.TabIndex = 0;
-            // 
-            // flowLayoutPanel621
-            // 
-            this.flowLayoutPanel621.Controls.Add(this.itemComboBox04);
-            this.flowLayoutPanel621.Location = new System.Drawing.Point(200, 291);
-            this.flowLayoutPanel621.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel621.Name = "flowLayoutPanel621";
-            this.flowLayoutPanel621.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel621.TabIndex = 39;
-            // 
-            // itemComboBox04
-            // 
-            this.itemComboBox04.FormattingEnabled = true;
-            this.itemComboBox04.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox04.Name = "itemComboBox04";
-            this.itemComboBox04.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox04.TabIndex = 39;
-            // 
-            // flowLayoutPanel622
-            // 
-            this.flowLayoutPanel622.Controls.Add(this.mainCategoryComboBox04);
-            this.flowLayoutPanel622.Location = new System.Drawing.Point(73, 291);
-            this.flowLayoutPanel622.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel622.Name = "flowLayoutPanel622";
-            this.flowLayoutPanel622.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel622.TabIndex = 39;
-            // 
-            // mainCategoryComboBox04
-            // 
-            this.mainCategoryComboBox04.FormattingEnabled = true;
-            this.mainCategoryComboBox04.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox04.Name = "mainCategoryComboBox04";
-            this.mainCategoryComboBox04.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox04.TabIndex = 39;
-            this.mainCategoryComboBox04.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox04_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel623
-            // 
-            this.flowLayoutPanel623.Controls.Add(this.remarks03);
-            this.flowLayoutPanel623.Location = new System.Drawing.Point(832, 239);
-            this.flowLayoutPanel623.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel623.Name = "flowLayoutPanel623";
-            this.flowLayoutPanel623.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel623.TabIndex = 39;
-            // 
-            // remarks03
-            // 
-            this.remarks03.Location = new System.Drawing.Point(2, 5);
-            this.remarks03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.remarks03.Name = "remarks03";
-            this.remarks03.Size = new System.Drawing.Size(548, 31);
-            this.remarks03.TabIndex = 39;
-            // 
-            // flowLayoutPanel624
-            // 
-            this.flowLayoutPanel624.Controls.Add(this.moneyTextBox03);
-            this.flowLayoutPanel624.Location = new System.Drawing.Point(700, 239);
-            this.flowLayoutPanel624.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel624.Name = "flowLayoutPanel624";
-            this.flowLayoutPanel624.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel624.TabIndex = 39;
-            // 
-            // moneyTextBox03
-            // 
-            this.moneyTextBox03.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox03.Name = "moneyTextBox03";
-            this.moneyTextBox03.ReadOnly = true;
-            this.moneyTextBox03.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox03.TabIndex = 39;
-            // 
-            // flowLayoutPanel625
-            // 
-            this.flowLayoutPanel625.Controls.Add(this.unitPriceTextBox03);
-            this.flowLayoutPanel625.Location = new System.Drawing.Point(578, 239);
-            this.flowLayoutPanel625.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel625.Name = "flowLayoutPanel625";
-            this.flowLayoutPanel625.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel625.TabIndex = 39;
-            // 
-            // unitPriceTextBox03
-            // 
-            this.unitPriceTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox03.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox03.Name = "unitPriceTextBox03";
-            this.unitPriceTextBox03.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox03.TabIndex = 39;
-            // 
-            // flowLayoutPanel626
-            // 
-            this.flowLayoutPanel626.Controls.Add(this.countTextBox03);
-            this.flowLayoutPanel626.Location = new System.Drawing.Point(438, 239);
-            this.flowLayoutPanel626.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel626.Name = "flowLayoutPanel626";
-            this.flowLayoutPanel626.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel626.TabIndex = 39;
-            // 
-            // countTextBox03
-            // 
-            this.countTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox03.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox03.Name = "countTextBox03";
-            this.countTextBox03.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox03.TabIndex = 39;
-            // 
-            // flowLayoutPanel627
-            // 
-            this.flowLayoutPanel627.Controls.Add(this.weightTextBox03);
-            this.flowLayoutPanel627.Location = new System.Drawing.Point(330, 239);
-            this.flowLayoutPanel627.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel627.Name = "flowLayoutPanel627";
-            this.flowLayoutPanel627.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel627.TabIndex = 39;
-            // 
-            // weightTextBox03
-            // 
-            this.weightTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox03.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox03.Name = "weightTextBox03";
-            this.weightTextBox03.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox03.TabIndex = 39;
-            // 
-            // flowLayoutPanel628
-            // 
-            this.flowLayoutPanel628.Controls.Add(this.itemComboBox03);
-            this.flowLayoutPanel628.Location = new System.Drawing.Point(200, 239);
-            this.flowLayoutPanel628.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel628.Name = "flowLayoutPanel628";
-            this.flowLayoutPanel628.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel628.TabIndex = 39;
-            // 
-            // itemComboBox03
-            // 
-            this.itemComboBox03.FormattingEnabled = true;
-            this.itemComboBox03.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox03.Name = "itemComboBox03";
-            this.itemComboBox03.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox03.TabIndex = 39;
-            // 
-            // flowLayoutPanel629
-            // 
-            this.flowLayoutPanel629.Controls.Add(this.mainCategoryComboBox03);
-            this.flowLayoutPanel629.Location = new System.Drawing.Point(73, 239);
-            this.flowLayoutPanel629.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel629.Name = "flowLayoutPanel629";
-            this.flowLayoutPanel629.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel629.TabIndex = 39;
-            // 
-            // mainCategoryComboBox03
-            // 
-            this.mainCategoryComboBox03.FormattingEnabled = true;
-            this.mainCategoryComboBox03.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox03.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox03.Name = "mainCategoryComboBox03";
-            this.mainCategoryComboBox03.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox03.TabIndex = 39;
-            this.mainCategoryComboBox03.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox03_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel630
-            // 
-            this.flowLayoutPanel630.Controls.Add(this.remarks02);
-            this.flowLayoutPanel630.Location = new System.Drawing.Point(832, 187);
-            this.flowLayoutPanel630.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel630.Name = "flowLayoutPanel630";
-            this.flowLayoutPanel630.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel630.TabIndex = 40;
-            // 
-            // remarks02
-            // 
-            this.remarks02.Location = new System.Drawing.Point(2, 5);
-            this.remarks02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.remarks02.Name = "remarks02";
-            this.remarks02.Size = new System.Drawing.Size(548, 31);
-            this.remarks02.TabIndex = 39;
-            // 
-            // flowLayoutPanel631
-            // 
-            this.flowLayoutPanel631.Controls.Add(this.moneyTextBox02);
-            this.flowLayoutPanel631.Location = new System.Drawing.Point(700, 187);
-            this.flowLayoutPanel631.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel631.Name = "flowLayoutPanel631";
-            this.flowLayoutPanel631.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel631.TabIndex = 39;
-            // 
-            // moneyTextBox02
-            // 
-            this.moneyTextBox02.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox02.Name = "moneyTextBox02";
-            this.moneyTextBox02.ReadOnly = true;
-            this.moneyTextBox02.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox02.TabIndex = 39;
-            // 
-            // flowLayoutPanel632
-            // 
-            this.flowLayoutPanel632.Controls.Add(this.unitPriceTextBox02);
-            this.flowLayoutPanel632.Location = new System.Drawing.Point(578, 187);
-            this.flowLayoutPanel632.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel632.Name = "flowLayoutPanel632";
-            this.flowLayoutPanel632.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel632.TabIndex = 39;
-            // 
-            // unitPriceTextBox02
-            // 
-            this.unitPriceTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox02.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox02.Name = "unitPriceTextBox02";
-            this.unitPriceTextBox02.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox02.TabIndex = 39;
-            // 
-            // flowLayoutPanel633
-            // 
-            this.flowLayoutPanel633.Controls.Add(this.countTextBox02);
-            this.flowLayoutPanel633.Location = new System.Drawing.Point(438, 187);
-            this.flowLayoutPanel633.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel633.Name = "flowLayoutPanel633";
-            this.flowLayoutPanel633.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel633.TabIndex = 39;
-            // 
-            // countTextBox02
-            // 
-            this.countTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox02.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox02.Name = "countTextBox02";
-            this.countTextBox02.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox02.TabIndex = 39;
-            // 
-            // flowLayoutPanel634
-            // 
-            this.flowLayoutPanel634.Controls.Add(this.weightTextBox02);
-            this.flowLayoutPanel634.Location = new System.Drawing.Point(330, 187);
-            this.flowLayoutPanel634.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel634.Name = "flowLayoutPanel634";
-            this.flowLayoutPanel634.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel634.TabIndex = 39;
-            // 
-            // weightTextBox02
-            // 
-            this.weightTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox02.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox02.Name = "weightTextBox02";
-            this.weightTextBox02.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox02.TabIndex = 39;
-            // 
-            // flowLayoutPanel635
-            // 
-            this.flowLayoutPanel635.Controls.Add(this.itemComboBox02);
-            this.flowLayoutPanel635.Location = new System.Drawing.Point(200, 187);
-            this.flowLayoutPanel635.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel635.Name = "flowLayoutPanel635";
-            this.flowLayoutPanel635.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel635.TabIndex = 39;
-            // 
-            // itemComboBox02
-            // 
-            this.itemComboBox02.FormattingEnabled = true;
-            this.itemComboBox02.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox02.Name = "itemComboBox02";
-            this.itemComboBox02.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox02.TabIndex = 39;
-            // 
-            // flowLayoutPanel636
-            // 
-            this.flowLayoutPanel636.Controls.Add(this.mainCategoryComboBox02);
-            this.flowLayoutPanel636.Location = new System.Drawing.Point(73, 187);
-            this.flowLayoutPanel636.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel636.Name = "flowLayoutPanel636";
-            this.flowLayoutPanel636.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel636.TabIndex = 39;
-            // 
-            // mainCategoryComboBox02
-            // 
-            this.mainCategoryComboBox02.FormattingEnabled = true;
-            this.mainCategoryComboBox02.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox02.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox02.Name = "mainCategoryComboBox02";
-            this.mainCategoryComboBox02.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox02.TabIndex = 39;
-            this.mainCategoryComboBox02.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox02_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel637
-            // 
-            this.flowLayoutPanel637.Controls.Add(this.remarks01);
-            this.flowLayoutPanel637.Location = new System.Drawing.Point(832, 135);
-            this.flowLayoutPanel637.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel637.Name = "flowLayoutPanel637";
-            this.flowLayoutPanel637.Size = new System.Drawing.Size(553, 40);
-            this.flowLayoutPanel637.TabIndex = 38;
-            // 
-            // remarks01
-            // 
-            this.remarks01.Location = new System.Drawing.Point(2, 5);
-            this.remarks01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.remarks01.Name = "remarks01";
-            this.remarks01.Size = new System.Drawing.Size(548, 31);
-            this.remarks01.TabIndex = 38;
-            // 
-            // flowLayoutPanel638
-            // 
-            this.flowLayoutPanel638.Controls.Add(this.moneyTextBox04);
-            this.flowLayoutPanel638.Location = new System.Drawing.Point(700, 291);
-            this.flowLayoutPanel638.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel638.Name = "flowLayoutPanel638";
-            this.flowLayoutPanel638.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel638.TabIndex = 43;
-            // 
-            // moneyTextBox04
-            // 
-            this.moneyTextBox04.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox04.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox04.Name = "moneyTextBox04";
-            this.moneyTextBox04.ReadOnly = true;
-            this.moneyTextBox04.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox04.TabIndex = 0;
-            // 
-            // flowLayoutPanel639
-            // 
-            this.flowLayoutPanel639.Controls.Add(this.moneyTextBox01);
-            this.flowLayoutPanel639.Location = new System.Drawing.Point(700, 135);
-            this.flowLayoutPanel639.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel639.Name = "flowLayoutPanel639";
-            this.flowLayoutPanel639.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel639.TabIndex = 38;
-            // 
-            // moneyTextBox01
-            // 
-            this.moneyTextBox01.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox01.Name = "moneyTextBox01";
-            this.moneyTextBox01.ReadOnly = true;
-            this.moneyTextBox01.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox01.TabIndex = 38;
-            this.moneyTextBox01.Visible = false;
-            // 
-            // flowLayoutPanel640
-            // 
-            this.flowLayoutPanel640.Controls.Add(this.unitPriceTextBox01);
-            this.flowLayoutPanel640.Location = new System.Drawing.Point(578, 135);
-            this.flowLayoutPanel640.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel640.Name = "flowLayoutPanel640";
-            this.flowLayoutPanel640.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel640.TabIndex = 38;
-            // 
-            // unitPriceTextBox01
-            // 
-            this.unitPriceTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox01.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox01.Name = "unitPriceTextBox01";
-            this.unitPriceTextBox01.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox01.TabIndex = 38;
-            // 
-            // flowLayoutPanel641
-            // 
-            this.flowLayoutPanel641.Controls.Add(this.countTextBox01);
-            this.flowLayoutPanel641.Location = new System.Drawing.Point(438, 135);
-            this.flowLayoutPanel641.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel641.Name = "flowLayoutPanel641";
-            this.flowLayoutPanel641.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel641.TabIndex = 38;
-            // 
-            // countTextBox01
-            // 
-            this.countTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox01.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox01.Name = "countTextBox01";
-            this.countTextBox01.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox01.TabIndex = 38;
-            // 
-            // flowLayoutPanel642
-            // 
-            this.flowLayoutPanel642.Controls.Add(this.weightTextBox01);
-            this.flowLayoutPanel642.Location = new System.Drawing.Point(330, 135);
-            this.flowLayoutPanel642.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel642.Name = "flowLayoutPanel642";
-            this.flowLayoutPanel642.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel642.TabIndex = 38;
-            // 
-            // weightTextBox01
-            // 
-            this.weightTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox01.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox01.Name = "weightTextBox01";
-            this.weightTextBox01.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox01.TabIndex = 38;
-            // 
-            // flowLayoutPanel643
-            // 
-            this.flowLayoutPanel643.Controls.Add(this.itemComboBox01);
-            this.flowLayoutPanel643.Location = new System.Drawing.Point(200, 135);
-            this.flowLayoutPanel643.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel643.Name = "flowLayoutPanel643";
-            this.flowLayoutPanel643.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel643.TabIndex = 38;
-            // 
-            // itemComboBox01
-            // 
-            this.itemComboBox01.FormattingEnabled = true;
-            this.itemComboBox01.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.itemComboBox01.Name = "itemComboBox01";
-            this.itemComboBox01.Size = new System.Drawing.Size(197, 32);
-            this.itemComboBox01.TabIndex = 38;
-            // 
-            // flowLayoutPanel644
-            // 
-            this.flowLayoutPanel644.Controls.Add(this.mainCategoryComboBox01);
-            this.flowLayoutPanel644.Location = new System.Drawing.Point(73, 135);
-            this.flowLayoutPanel644.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel644.Name = "flowLayoutPanel644";
-            this.flowLayoutPanel644.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel644.TabIndex = 38;
-            // 
-            // mainCategoryComboBox01
-            // 
-            this.mainCategoryComboBox01.FormattingEnabled = true;
-            this.mainCategoryComboBox01.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox01.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.mainCategoryComboBox01.Name = "mainCategoryComboBox01";
-            this.mainCategoryComboBox01.Size = new System.Drawing.Size(193, 32);
-            this.mainCategoryComboBox01.TabIndex = 38;
-            this.mainCategoryComboBox01.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox01_SelectedIndexChanged);
-            // 
-            // flowLayoutPanel645
-            // 
-            this.flowLayoutPanel645.Controls.Add(this.label65);
-            this.flowLayoutPanel645.Location = new System.Drawing.Point(200, 28);
-            this.flowLayoutPanel645.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel645.Name = "flowLayoutPanel645";
-            this.flowLayoutPanel645.Size = new System.Drawing.Size(124, 43);
-            this.flowLayoutPanel645.TabIndex = 37;
-            // 
-            // label65
-            // 
-            this.label65.Location = new System.Drawing.Point(2, 0);
-            this.label65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label65.Name = "label65";
-            this.label65.Padding = new System.Windows.Forms.Padding(69, 10, 0, 0);
-            this.label65.Size = new System.Drawing.Size(208, 40);
-            this.label65.TabIndex = 36;
-            this.label65.Text = "品名";
-            // 
-            // flowLayoutPanel647
-            // 
-            this.flowLayoutPanel647.Controls.Add(this.moneyTextBox00);
-            this.flowLayoutPanel647.Location = new System.Drawing.Point(700, 83);
-            this.flowLayoutPanel647.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel647.Name = "flowLayoutPanel647";
-            this.flowLayoutPanel647.Size = new System.Drawing.Size(125, 37);
-            this.flowLayoutPanel647.TabIndex = 36;
-            // 
-            // moneyTextBox00
-            // 
-            this.moneyTextBox00.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox00.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox00.Name = "moneyTextBox00";
-            this.moneyTextBox00.ReadOnly = true;
-            this.moneyTextBox00.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox00.TabIndex = 36;
-            // 
-            // flowLayoutPanel648
-            // 
-            this.flowLayoutPanel648.Controls.Add(this.countTextBox00);
-            this.flowLayoutPanel648.Location = new System.Drawing.Point(438, 83);
-            this.flowLayoutPanel648.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel648.Name = "flowLayoutPanel648";
-            this.flowLayoutPanel648.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel648.TabIndex = 36;
-            // 
-            // countTextBox00
-            // 
-            this.countTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox00.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox00.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox00.Name = "countTextBox00";
-            this.countTextBox00.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox00.TabIndex = 36;
-            // 
-            // flowLayoutPanel649
-            // 
-            this.flowLayoutPanel649.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel649.Controls.Add(this.mainCategoryComboBox00);
-            this.flowLayoutPanel649.Location = new System.Drawing.Point(73, 83);
-            this.flowLayoutPanel649.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel649.Name = "flowLayoutPanel649";
-            this.flowLayoutPanel649.Size = new System.Drawing.Size(121, 40);
-            this.flowLayoutPanel649.TabIndex = 36;
+            // label39
+            // 
+            this.label39.Location = new System.Drawing.Point(3, 2);
+            this.label39.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(88, 26);
+            this.label39.TabIndex = 36;
+            this.label39.Text = "大分類";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // mainCategoryComboBox00
             // 
+            this.mainCategoryComboBox00.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mainCategoryComboBox00.FormattingEnabled = true;
-            this.mainCategoryComboBox00.Location = new System.Drawing.Point(2, 5);
-            this.mainCategoryComboBox00.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.mainCategoryComboBox00.Location = new System.Drawing.Point(3, 32);
+            this.mainCategoryComboBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.mainCategoryComboBox00.Name = "mainCategoryComboBox00";
-            this.mainCategoryComboBox00.Size = new System.Drawing.Size(193, 32);
+            this.mainCategoryComboBox00.Size = new System.Drawing.Size(82, 21);
             this.mainCategoryComboBox00.TabIndex = 36;
             this.mainCategoryComboBox00.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox00_SelectedIndexChanged);
             // 
-            // flowLayoutPanel650
+            // mainCategoryComboBox01
             // 
-            this.flowLayoutPanel650.Controls.Add(this.itemComboBox00);
-            this.flowLayoutPanel650.Location = new System.Drawing.Point(200, 83);
-            this.flowLayoutPanel650.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel650.Name = "flowLayoutPanel650";
-            this.flowLayoutPanel650.Size = new System.Drawing.Size(124, 40);
-            this.flowLayoutPanel650.TabIndex = 37;
+            this.mainCategoryComboBox01.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox01.FormattingEnabled = true;
+            this.mainCategoryComboBox01.Location = new System.Drawing.Point(3, 59);
+            this.mainCategoryComboBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox01.Name = "mainCategoryComboBox01";
+            this.mainCategoryComboBox01.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox01.TabIndex = 38;
+            this.mainCategoryComboBox01.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox01_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox02
+            // 
+            this.mainCategoryComboBox02.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox02.FormattingEnabled = true;
+            this.mainCategoryComboBox02.Location = new System.Drawing.Point(3, 86);
+            this.mainCategoryComboBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox02.Name = "mainCategoryComboBox02";
+            this.mainCategoryComboBox02.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox02.TabIndex = 39;
+            this.mainCategoryComboBox02.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox02_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox03
+            // 
+            this.mainCategoryComboBox03.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox03.FormattingEnabled = true;
+            this.mainCategoryComboBox03.Location = new System.Drawing.Point(3, 113);
+            this.mainCategoryComboBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox03.Name = "mainCategoryComboBox03";
+            this.mainCategoryComboBox03.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox03.TabIndex = 39;
+            this.mainCategoryComboBox03.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox03_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox04
+            // 
+            this.mainCategoryComboBox04.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox04.FormattingEnabled = true;
+            this.mainCategoryComboBox04.Location = new System.Drawing.Point(3, 140);
+            this.mainCategoryComboBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox04.Name = "mainCategoryComboBox04";
+            this.mainCategoryComboBox04.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox04.TabIndex = 39;
+            this.mainCategoryComboBox04.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox04_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox05
+            // 
+            this.mainCategoryComboBox05.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox05.FormattingEnabled = true;
+            this.mainCategoryComboBox05.Location = new System.Drawing.Point(3, 166);
+            this.mainCategoryComboBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox05.Name = "mainCategoryComboBox05";
+            this.mainCategoryComboBox05.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox05.TabIndex = 39;
+            this.mainCategoryComboBox05.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox05_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox06
+            // 
+            this.mainCategoryComboBox06.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox06.FormattingEnabled = true;
+            this.mainCategoryComboBox06.Location = new System.Drawing.Point(3, 194);
+            this.mainCategoryComboBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox06.Name = "mainCategoryComboBox06";
+            this.mainCategoryComboBox06.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox06.TabIndex = 39;
+            this.mainCategoryComboBox06.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox06_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox07
+            // 
+            this.mainCategoryComboBox07.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox07.FormattingEnabled = true;
+            this.mainCategoryComboBox07.Location = new System.Drawing.Point(3, 221);
+            this.mainCategoryComboBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox07.Name = "mainCategoryComboBox07";
+            this.mainCategoryComboBox07.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox07.TabIndex = 39;
+            this.mainCategoryComboBox07.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox07_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox08
+            // 
+            this.mainCategoryComboBox08.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox08.FormattingEnabled = true;
+            this.mainCategoryComboBox08.Location = new System.Drawing.Point(3, 248);
+            this.mainCategoryComboBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox08.Name = "mainCategoryComboBox08";
+            this.mainCategoryComboBox08.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox08.TabIndex = 39;
+            this.mainCategoryComboBox08.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox08_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox09
+            // 
+            this.mainCategoryComboBox09.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox09.FormattingEnabled = true;
+            this.mainCategoryComboBox09.Location = new System.Drawing.Point(3, 275);
+            this.mainCategoryComboBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox09.Name = "mainCategoryComboBox09";
+            this.mainCategoryComboBox09.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox09.TabIndex = 39;
+            this.mainCategoryComboBox09.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox09_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox010
+            // 
+            this.mainCategoryComboBox010.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox010.FormattingEnabled = true;
+            this.mainCategoryComboBox010.Location = new System.Drawing.Point(3, 302);
+            this.mainCategoryComboBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox010.Name = "mainCategoryComboBox010";
+            this.mainCategoryComboBox010.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox010.TabIndex = 39;
+            this.mainCategoryComboBox010.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox010_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox011
+            // 
+            this.mainCategoryComboBox011.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox011.FormattingEnabled = true;
+            this.mainCategoryComboBox011.Location = new System.Drawing.Point(3, 329);
+            this.mainCategoryComboBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox011.Name = "mainCategoryComboBox011";
+            this.mainCategoryComboBox011.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox011.TabIndex = 39;
+            this.mainCategoryComboBox011.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox011_SelectedIndexChanged);
+            // 
+            // mainCategoryComboBox012
+            // 
+            this.mainCategoryComboBox012.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mainCategoryComboBox012.FormattingEnabled = true;
+            this.mainCategoryComboBox012.Location = new System.Drawing.Point(3, 356);
+            this.mainCategoryComboBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.mainCategoryComboBox012.Name = "mainCategoryComboBox012";
+            this.mainCategoryComboBox012.Size = new System.Drawing.Size(82, 21);
+            this.mainCategoryComboBox012.TabIndex = 39;
+            this.mainCategoryComboBox012.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox012_SelectedIndexChanged);
+            // 
+            // label65
+            // 
+            this.label65.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label65.Location = new System.Drawing.Point(95, 2);
+            this.label65.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(88, 26);
+            this.label65.TabIndex = 36;
+            this.label65.Text = "品名";
+            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // itemComboBox00
             // 
+            this.itemComboBox00.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.itemComboBox00.FormattingEnabled = true;
-            this.itemComboBox00.Location = new System.Drawing.Point(2, 5);
-            this.itemComboBox00.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.itemComboBox00.Location = new System.Drawing.Point(95, 32);
+            this.itemComboBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.itemComboBox00.Name = "itemComboBox00";
-            this.itemComboBox00.Size = new System.Drawing.Size(197, 32);
+            this.itemComboBox00.Size = new System.Drawing.Size(82, 21);
             this.itemComboBox00.TabIndex = 0;
             // 
-            // flowLayoutPanel651
+            // itemComboBox01
             // 
-            this.flowLayoutPanel651.Controls.Add(this.weightTextBox00);
-            this.flowLayoutPanel651.Location = new System.Drawing.Point(330, 83);
-            this.flowLayoutPanel651.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel651.Name = "flowLayoutPanel651";
-            this.flowLayoutPanel651.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel651.TabIndex = 36;
+            this.itemComboBox01.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox01.FormattingEnabled = true;
+            this.itemComboBox01.Location = new System.Drawing.Point(95, 59);
+            this.itemComboBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox01.Name = "itemComboBox01";
+            this.itemComboBox01.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox01.TabIndex = 38;
             // 
-            // weightTextBox00
+            // itemComboBox02
             // 
-            this.weightTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox00.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox00.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox00.Name = "weightTextBox00";
-            this.weightTextBox00.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox00.TabIndex = 36;
+            this.itemComboBox02.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox02.FormattingEnabled = true;
+            this.itemComboBox02.Location = new System.Drawing.Point(95, 86);
+            this.itemComboBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox02.Name = "itemComboBox02";
+            this.itemComboBox02.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox02.TabIndex = 39;
             // 
-            // flowLayoutPanel652
+            // itemComboBox03
             // 
-            this.flowLayoutPanel652.Controls.Add(this.unitPriceTextBox00);
-            this.flowLayoutPanel652.Location = new System.Drawing.Point(578, 83);
-            this.flowLayoutPanel652.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel652.Name = "flowLayoutPanel652";
-            this.flowLayoutPanel652.Size = new System.Drawing.Size(116, 37);
-            this.flowLayoutPanel652.TabIndex = 36;
+            this.itemComboBox03.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox03.FormattingEnabled = true;
+            this.itemComboBox03.Location = new System.Drawing.Point(95, 113);
+            this.itemComboBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox03.Name = "itemComboBox03";
+            this.itemComboBox03.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox03.TabIndex = 39;
             // 
-            // unitPriceTextBox00
+            // itemComboBox04
             // 
-            this.unitPriceTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox00.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox00.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox00.Name = "unitPriceTextBox00";
-            this.unitPriceTextBox00.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox00.TabIndex = 36;
+            this.itemComboBox04.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox04.FormattingEnabled = true;
+            this.itemComboBox04.Location = new System.Drawing.Point(95, 140);
+            this.itemComboBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox04.Name = "itemComboBox04";
+            this.itemComboBox04.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox04.TabIndex = 39;
             // 
-            // flowLayoutPanel653
+            // itemComboBox05
             // 
-            this.flowLayoutPanel653.Controls.Add(this.textBox338);
-            this.flowLayoutPanel653.Location = new System.Drawing.Point(832, 83);
-            this.flowLayoutPanel653.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel653.Name = "flowLayoutPanel653";
-            this.flowLayoutPanel653.Size = new System.Drawing.Size(553, 34);
-            this.flowLayoutPanel653.TabIndex = 36;
+            this.itemComboBox05.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox05.FormattingEnabled = true;
+            this.itemComboBox05.Location = new System.Drawing.Point(95, 166);
+            this.itemComboBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox05.Name = "itemComboBox05";
+            this.itemComboBox05.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox05.TabIndex = 39;
             // 
-            // textBox338
+            // itemComboBox06
             // 
-            this.textBox338.Location = new System.Drawing.Point(2, 5);
-            this.textBox338.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.textBox338.Name = "textBox338";
-            this.textBox338.Size = new System.Drawing.Size(550, 31);
-            this.textBox338.TabIndex = 36;
+            this.itemComboBox06.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox06.FormattingEnabled = true;
+            this.itemComboBox06.Location = new System.Drawing.Point(95, 194);
+            this.itemComboBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox06.Name = "itemComboBox06";
+            this.itemComboBox06.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox06.TabIndex = 39;
             // 
-            // flowLayoutPanel654
+            // itemComboBox07
             // 
-            this.flowLayoutPanel654.Controls.Add(this.label67);
-            this.flowLayoutPanel654.Location = new System.Drawing.Point(330, 28);
-            this.flowLayoutPanel654.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel654.Name = "flowLayoutPanel654";
-            this.flowLayoutPanel654.Size = new System.Drawing.Size(102, 43);
-            this.flowLayoutPanel654.TabIndex = 38;
+            this.itemComboBox07.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox07.FormattingEnabled = true;
+            this.itemComboBox07.Location = new System.Drawing.Point(95, 221);
+            this.itemComboBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox07.Name = "itemComboBox07";
+            this.itemComboBox07.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox07.TabIndex = 39;
+            // 
+            // itemComboBox08
+            // 
+            this.itemComboBox08.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox08.FormattingEnabled = true;
+            this.itemComboBox08.Location = new System.Drawing.Point(95, 248);
+            this.itemComboBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox08.Name = "itemComboBox08";
+            this.itemComboBox08.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox08.TabIndex = 39;
+            // 
+            // itemComboBox09
+            // 
+            this.itemComboBox09.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox09.FormattingEnabled = true;
+            this.itemComboBox09.Location = new System.Drawing.Point(95, 275);
+            this.itemComboBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox09.Name = "itemComboBox09";
+            this.itemComboBox09.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox09.TabIndex = 39;
+            // 
+            // itemComboBox010
+            // 
+            this.itemComboBox010.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox010.FormattingEnabled = true;
+            this.itemComboBox010.Location = new System.Drawing.Point(95, 302);
+            this.itemComboBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox010.Name = "itemComboBox010";
+            this.itemComboBox010.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox010.TabIndex = 39;
+            // 
+            // itemComboBox011
+            // 
+            this.itemComboBox011.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox011.FormattingEnabled = true;
+            this.itemComboBox011.Location = new System.Drawing.Point(95, 329);
+            this.itemComboBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox011.Name = "itemComboBox011";
+            this.itemComboBox011.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox011.TabIndex = 39;
+            // 
+            // itemComboBox012
+            // 
+            this.itemComboBox012.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.itemComboBox012.FormattingEnabled = true;
+            this.itemComboBox012.Location = new System.Drawing.Point(95, 356);
+            this.itemComboBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemComboBox012.Name = "itemComboBox012";
+            this.itemComboBox012.Size = new System.Drawing.Size(82, 21);
+            this.itemComboBox012.TabIndex = 39;
             // 
             // label67
             // 
-            this.label67.Location = new System.Drawing.Point(0, 0);
-            this.label67.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.label67.Location = new System.Drawing.Point(186, 2);
+            this.label67.Margin = new System.Windows.Forms.Padding(0);
             this.label67.Name = "label67";
-            this.label67.Padding = new System.Windows.Forms.Padding(61, 0, 20, 5);
-            this.label67.Size = new System.Drawing.Size(169, 53);
+            this.label67.Size = new System.Drawing.Size(125, 26);
             this.label67.TabIndex = 36;
-            this.label67.Text = "重量";
-            this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // flowLayoutPanel655
-            // 
-            this.flowLayoutPanel655.Controls.Add(this.label68);
-            this.flowLayoutPanel655.Location = new System.Drawing.Point(438, 28);
-            this.flowLayoutPanel655.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel655.Name = "flowLayoutPanel655";
-            this.flowLayoutPanel655.Size = new System.Drawing.Size(134, 43);
-            this.flowLayoutPanel655.TabIndex = 39;
-            // 
-            // label68
-            // 
-            this.label68.Location = new System.Drawing.Point(2, 0);
-            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label68.Name = "label68";
-            this.label68.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label68.Size = new System.Drawing.Size(215, 53);
-            this.label68.TabIndex = 36;
-            this.label68.Text = "数量";
-            // 
-            // flowLayoutPanel656
-            // 
-            this.flowLayoutPanel656.Controls.Add(this.label69);
-            this.flowLayoutPanel656.Location = new System.Drawing.Point(578, 28);
-            this.flowLayoutPanel656.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel656.Name = "flowLayoutPanel656";
-            this.flowLayoutPanel656.Size = new System.Drawing.Size(116, 43);
-            this.flowLayoutPanel656.TabIndex = 40;
-            // 
-            // label69
-            // 
-            this.label69.Location = new System.Drawing.Point(2, 0);
-            this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label69.Name = "label69";
-            this.label69.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label69.Size = new System.Drawing.Size(195, 50);
-            this.label69.TabIndex = 36;
-            this.label69.Text = "単価";
-            // 
-            // flowLayoutPanel657
-            // 
-            this.flowLayoutPanel657.Controls.Add(this.label70);
-            this.flowLayoutPanel657.Location = new System.Drawing.Point(700, 28);
-            this.flowLayoutPanel657.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel657.Name = "flowLayoutPanel657";
-            this.flowLayoutPanel657.Size = new System.Drawing.Size(125, 43);
-            this.flowLayoutPanel657.TabIndex = 41;
-            // 
-            // label70
-            // 
-            this.label70.Location = new System.Drawing.Point(2, 0);
-            this.label70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label70.Name = "label70";
-            this.label70.Padding = new System.Windows.Forms.Padding(69, 11, 0, 0);
-            this.label70.Size = new System.Drawing.Size(197, 43);
-            this.label70.TabIndex = 36;
-            this.label70.Text = "金額";
-            // 
-            // flowLayoutPanel658
-            // 
-            this.flowLayoutPanel658.Controls.Add(this.label71);
-            this.flowLayoutPanel658.Location = new System.Drawing.Point(832, 28);
-            this.flowLayoutPanel658.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel658.Name = "flowLayoutPanel658";
-            this.flowLayoutPanel658.Size = new System.Drawing.Size(553, 43);
-            this.flowLayoutPanel658.TabIndex = 42;
+            this.label67.Text = "品物詳細";
+            this.label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label71
             // 
-            this.label71.Location = new System.Drawing.Point(2, 0);
-            this.label71.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label71.Location = new System.Drawing.Point(737, 2);
+            this.label71.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label71.Name = "label71";
-            this.label71.Padding = new System.Windows.Forms.Padding(69, 0, 69, 0);
-            this.label71.Size = new System.Drawing.Size(550, 50);
+            this.label71.Size = new System.Drawing.Size(184, 25);
             this.label71.TabIndex = 36;
             this.label71.Text = "備考";
             this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flowLayoutPanel659
+            // remarks00
             // 
-            this.flowLayoutPanel659.Controls.Add(this.unitPriceTextBox06);
-            this.flowLayoutPanel659.Location = new System.Drawing.Point(578, 395);
-            this.flowLayoutPanel659.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel659.Name = "flowLayoutPanel659";
-            this.flowLayoutPanel659.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel659.TabIndex = 44;
+            this.remarks00.Location = new System.Drawing.Point(737, 32);
+            this.remarks00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks00.Name = "remarks00";
+            this.remarks00.Size = new System.Drawing.Size(184, 20);
+            this.remarks00.TabIndex = 36;
             // 
-            // unitPriceTextBox06
+            // remarks01
             // 
-            this.unitPriceTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox06.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox06.Name = "unitPriceTextBox06";
-            this.unitPriceTextBox06.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox06.TabIndex = 0;
+            this.remarks01.Location = new System.Drawing.Point(737, 59);
+            this.remarks01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks01.Name = "remarks01";
+            this.remarks01.Size = new System.Drawing.Size(184, 20);
+            this.remarks01.TabIndex = 38;
             // 
-            // flowLayoutPanel660
+            // remarks02
             // 
-            this.flowLayoutPanel660.Controls.Add(this.moneyTextBox06);
-            this.flowLayoutPanel660.Location = new System.Drawing.Point(700, 395);
-            this.flowLayoutPanel660.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel660.Name = "flowLayoutPanel660";
-            this.flowLayoutPanel660.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel660.TabIndex = 45;
+            this.remarks02.Location = new System.Drawing.Point(737, 86);
+            this.remarks02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks02.Name = "remarks02";
+            this.remarks02.Size = new System.Drawing.Size(184, 20);
+            this.remarks02.TabIndex = 39;
             // 
-            // moneyTextBox06
+            // remarks03
             // 
-            this.moneyTextBox06.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox06.Name = "moneyTextBox06";
-            this.moneyTextBox06.ReadOnly = true;
-            this.moneyTextBox06.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox06.TabIndex = 0;
+            this.remarks03.Location = new System.Drawing.Point(737, 113);
+            this.remarks03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks03.Name = "remarks03";
+            this.remarks03.Size = new System.Drawing.Size(184, 20);
+            this.remarks03.TabIndex = 39;
             // 
-            // flowLayoutPanel661
+            // remarks04
             // 
-            this.flowLayoutPanel661.Controls.Add(this.remarks06);
-            this.flowLayoutPanel661.Location = new System.Drawing.Point(832, 395);
-            this.flowLayoutPanel661.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel661.Name = "flowLayoutPanel661";
-            this.flowLayoutPanel661.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel661.TabIndex = 46;
+            this.remarks04.Location = new System.Drawing.Point(737, 140);
+            this.remarks04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks04.Name = "remarks04";
+            this.remarks04.Size = new System.Drawing.Size(184, 20);
+            this.remarks04.TabIndex = 0;
+            // 
+            // remarks05
+            // 
+            this.remarks05.Location = new System.Drawing.Point(737, 166);
+            this.remarks05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks05.Name = "remarks05";
+            this.remarks05.Size = new System.Drawing.Size(184, 20);
+            this.remarks05.TabIndex = 0;
             // 
             // remarks06
             // 
-            this.remarks06.Location = new System.Drawing.Point(2, 5);
-            this.remarks06.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks06.Location = new System.Drawing.Point(737, 194);
+            this.remarks06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks06.Name = "remarks06";
-            this.remarks06.Size = new System.Drawing.Size(548, 31);
+            this.remarks06.Size = new System.Drawing.Size(184, 20);
             this.remarks06.TabIndex = 0;
-            // 
-            // flowLayoutPanel662
-            // 
-            this.flowLayoutPanel662.Controls.Add(this.countTextBox07);
-            this.flowLayoutPanel662.Location = new System.Drawing.Point(438, 447);
-            this.flowLayoutPanel662.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel662.Name = "flowLayoutPanel662";
-            this.flowLayoutPanel662.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel662.TabIndex = 47;
-            // 
-            // countTextBox07
-            // 
-            this.countTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox07.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox07.Name = "countTextBox07";
-            this.countTextBox07.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox07.TabIndex = 0;
-            // 
-            // flowLayoutPanel663
-            // 
-            this.flowLayoutPanel663.Controls.Add(this.unitPriceTextBox07);
-            this.flowLayoutPanel663.Location = new System.Drawing.Point(578, 447);
-            this.flowLayoutPanel663.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel663.Name = "flowLayoutPanel663";
-            this.flowLayoutPanel663.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel663.TabIndex = 48;
-            // 
-            // unitPriceTextBox07
-            // 
-            this.unitPriceTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox07.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox07.Name = "unitPriceTextBox07";
-            this.unitPriceTextBox07.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox07.TabIndex = 0;
-            // 
-            // flowLayoutPanel664
-            // 
-            this.flowLayoutPanel664.Controls.Add(this.moneyTextBox07);
-            this.flowLayoutPanel664.Location = new System.Drawing.Point(700, 447);
-            this.flowLayoutPanel664.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel664.Name = "flowLayoutPanel664";
-            this.flowLayoutPanel664.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel664.TabIndex = 49;
-            // 
-            // moneyTextBox07
-            // 
-            this.moneyTextBox07.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox07.Name = "moneyTextBox07";
-            this.moneyTextBox07.ReadOnly = true;
-            this.moneyTextBox07.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox07.TabIndex = 0;
-            // 
-            // flowLayoutPanel665
-            // 
-            this.flowLayoutPanel665.Controls.Add(this.remarks07);
-            this.flowLayoutPanel665.Location = new System.Drawing.Point(832, 447);
-            this.flowLayoutPanel665.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel665.Name = "flowLayoutPanel665";
-            this.flowLayoutPanel665.Size = new System.Drawing.Size(553, 40);
-            this.flowLayoutPanel665.TabIndex = 50;
             // 
             // remarks07
             // 
-            this.remarks07.Location = new System.Drawing.Point(2, 5);
-            this.remarks07.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks07.Location = new System.Drawing.Point(737, 221);
+            this.remarks07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks07.Name = "remarks07";
-            this.remarks07.Size = new System.Drawing.Size(548, 31);
+            this.remarks07.Size = new System.Drawing.Size(184, 20);
             this.remarks07.TabIndex = 0;
-            // 
-            // flowLayoutPanel666
-            // 
-            this.flowLayoutPanel666.Controls.Add(this.weightTextBox08);
-            this.flowLayoutPanel666.Location = new System.Drawing.Point(330, 499);
-            this.flowLayoutPanel666.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel666.Name = "flowLayoutPanel666";
-            this.flowLayoutPanel666.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel666.TabIndex = 51;
-            // 
-            // weightTextBox08
-            // 
-            this.weightTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox08.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox08.Name = "weightTextBox08";
-            this.weightTextBox08.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox08.TabIndex = 0;
-            // 
-            // flowLayoutPanel667
-            // 
-            this.flowLayoutPanel667.Controls.Add(this.countTextBox08);
-            this.flowLayoutPanel667.Location = new System.Drawing.Point(438, 499);
-            this.flowLayoutPanel667.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel667.Name = "flowLayoutPanel667";
-            this.flowLayoutPanel667.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel667.TabIndex = 52;
-            // 
-            // countTextBox08
-            // 
-            this.countTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox08.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox08.Name = "countTextBox08";
-            this.countTextBox08.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox08.TabIndex = 0;
-            // 
-            // flowLayoutPanel668
-            // 
-            this.flowLayoutPanel668.Controls.Add(this.moneyTextBox08);
-            this.flowLayoutPanel668.Location = new System.Drawing.Point(700, 499);
-            this.flowLayoutPanel668.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel668.Name = "flowLayoutPanel668";
-            this.flowLayoutPanel668.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel668.TabIndex = 54;
-            // 
-            // moneyTextBox08
-            // 
-            this.moneyTextBox08.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox08.Name = "moneyTextBox08";
-            this.moneyTextBox08.ReadOnly = true;
-            this.moneyTextBox08.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox08.TabIndex = 0;
-            // 
-            // flowLayoutPanel669
-            // 
-            this.flowLayoutPanel669.Controls.Add(this.remarks08);
-            this.flowLayoutPanel669.Location = new System.Drawing.Point(832, 499);
-            this.flowLayoutPanel669.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel669.Name = "flowLayoutPanel669";
-            this.flowLayoutPanel669.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel669.TabIndex = 55;
             // 
             // remarks08
             // 
-            this.remarks08.Location = new System.Drawing.Point(2, 5);
-            this.remarks08.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks08.Location = new System.Drawing.Point(737, 248);
+            this.remarks08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks08.Name = "remarks08";
-            this.remarks08.Size = new System.Drawing.Size(548, 31);
+            this.remarks08.Size = new System.Drawing.Size(184, 20);
             this.remarks08.TabIndex = 0;
-            // 
-            // flowLayoutPanel670
-            // 
-            this.flowLayoutPanel670.Controls.Add(this.countTextBox09);
-            this.flowLayoutPanel670.Location = new System.Drawing.Point(438, 551);
-            this.flowLayoutPanel670.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel670.Name = "flowLayoutPanel670";
-            this.flowLayoutPanel670.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel670.TabIndex = 56;
-            // 
-            // countTextBox09
-            // 
-            this.countTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox09.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox09.Name = "countTextBox09";
-            this.countTextBox09.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox09.TabIndex = 0;
-            // 
-            // flowLayoutPanel671
-            // 
-            this.flowLayoutPanel671.Controls.Add(this.moneyTextBox09);
-            this.flowLayoutPanel671.Location = new System.Drawing.Point(700, 551);
-            this.flowLayoutPanel671.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel671.Name = "flowLayoutPanel671";
-            this.flowLayoutPanel671.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel671.TabIndex = 58;
-            // 
-            // moneyTextBox09
-            // 
-            this.moneyTextBox09.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox09.Name = "moneyTextBox09";
-            this.moneyTextBox09.ReadOnly = true;
-            this.moneyTextBox09.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox09.TabIndex = 0;
-            // 
-            // flowLayoutPanel672
-            // 
-            this.flowLayoutPanel672.Controls.Add(this.remarks09);
-            this.flowLayoutPanel672.Location = new System.Drawing.Point(832, 551);
-            this.flowLayoutPanel672.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel672.Name = "flowLayoutPanel672";
-            this.flowLayoutPanel672.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel672.TabIndex = 59;
             // 
             // remarks09
             // 
-            this.remarks09.Location = new System.Drawing.Point(2, 5);
-            this.remarks09.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks09.Location = new System.Drawing.Point(737, 275);
+            this.remarks09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks09.Name = "remarks09";
-            this.remarks09.Size = new System.Drawing.Size(548, 31);
+            this.remarks09.Size = new System.Drawing.Size(184, 20);
             this.remarks09.TabIndex = 0;
-            // 
-            // flowLayoutPanel673
-            // 
-            this.flowLayoutPanel673.Controls.Add(this.weightTextBox010);
-            this.flowLayoutPanel673.Location = new System.Drawing.Point(330, 603);
-            this.flowLayoutPanel673.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel673.Name = "flowLayoutPanel673";
-            this.flowLayoutPanel673.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel673.TabIndex = 60;
-            // 
-            // weightTextBox010
-            // 
-            this.weightTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox010.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox010.Name = "weightTextBox010";
-            this.weightTextBox010.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox010.TabIndex = 0;
-            // 
-            // flowLayoutPanel674
-            // 
-            this.flowLayoutPanel674.Controls.Add(this.countTextBox010);
-            this.flowLayoutPanel674.Location = new System.Drawing.Point(438, 603);
-            this.flowLayoutPanel674.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel674.Name = "flowLayoutPanel674";
-            this.flowLayoutPanel674.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel674.TabIndex = 61;
-            // 
-            // countTextBox010
-            // 
-            this.countTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox010.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox010.Name = "countTextBox010";
-            this.countTextBox010.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox010.TabIndex = 0;
-            // 
-            // flowLayoutPanel675
-            // 
-            this.flowLayoutPanel675.Controls.Add(this.unitPriceTextBox010);
-            this.flowLayoutPanel675.Location = new System.Drawing.Point(578, 603);
-            this.flowLayoutPanel675.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel675.Name = "flowLayoutPanel675";
-            this.flowLayoutPanel675.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel675.TabIndex = 62;
-            // 
-            // unitPriceTextBox010
-            // 
-            this.unitPriceTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox010.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox010.Name = "unitPriceTextBox010";
-            this.unitPriceTextBox010.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox010.TabIndex = 0;
-            // 
-            // flowLayoutPanel676
-            // 
-            this.flowLayoutPanel676.Controls.Add(this.moneyTextBox010);
-            this.flowLayoutPanel676.Location = new System.Drawing.Point(700, 603);
-            this.flowLayoutPanel676.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel676.Name = "flowLayoutPanel676";
-            this.flowLayoutPanel676.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel676.TabIndex = 63;
-            // 
-            // moneyTextBox010
-            // 
-            this.moneyTextBox010.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox010.Name = "moneyTextBox010";
-            this.moneyTextBox010.ReadOnly = true;
-            this.moneyTextBox010.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox010.TabIndex = 0;
-            // 
-            // flowLayoutPanel677
-            // 
-            this.flowLayoutPanel677.Controls.Add(this.remarks010);
-            this.flowLayoutPanel677.Location = new System.Drawing.Point(832, 603);
-            this.flowLayoutPanel677.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel677.Name = "flowLayoutPanel677";
-            this.flowLayoutPanel677.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel677.TabIndex = 64;
             // 
             // remarks010
             // 
-            this.remarks010.Location = new System.Drawing.Point(2, 5);
-            this.remarks010.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks010.Location = new System.Drawing.Point(737, 302);
+            this.remarks010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks010.Name = "remarks010";
-            this.remarks010.Size = new System.Drawing.Size(548, 31);
+            this.remarks010.Size = new System.Drawing.Size(184, 20);
             this.remarks010.TabIndex = 0;
-            // 
-            // flowLayoutPanel678
-            // 
-            this.flowLayoutPanel678.Controls.Add(this.weightTextBox011);
-            this.flowLayoutPanel678.Location = new System.Drawing.Point(330, 655);
-            this.flowLayoutPanel678.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel678.Name = "flowLayoutPanel678";
-            this.flowLayoutPanel678.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel678.TabIndex = 65;
-            // 
-            // weightTextBox011
-            // 
-            this.weightTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox011.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox011.Name = "weightTextBox011";
-            this.weightTextBox011.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox011.TabIndex = 0;
-            // 
-            // flowLayoutPanel679
-            // 
-            this.flowLayoutPanel679.Controls.Add(this.countTextBox011);
-            this.flowLayoutPanel679.Location = new System.Drawing.Point(438, 655);
-            this.flowLayoutPanel679.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel679.Name = "flowLayoutPanel679";
-            this.flowLayoutPanel679.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel679.TabIndex = 66;
-            // 
-            // countTextBox011
-            // 
-            this.countTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox011.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.countTextBox011.Name = "countTextBox011";
-            this.countTextBox011.Size = new System.Drawing.Size(212, 31);
-            this.countTextBox011.TabIndex = 0;
-            // 
-            // flowLayoutPanel680
-            // 
-            this.flowLayoutPanel680.Controls.Add(this.unitPriceTextBox011);
-            this.flowLayoutPanel680.Location = new System.Drawing.Point(578, 655);
-            this.flowLayoutPanel680.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel680.Name = "flowLayoutPanel680";
-            this.flowLayoutPanel680.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel680.TabIndex = 67;
-            // 
-            // unitPriceTextBox011
-            // 
-            this.unitPriceTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox011.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.unitPriceTextBox011.Name = "unitPriceTextBox011";
-            this.unitPriceTextBox011.Size = new System.Drawing.Size(195, 31);
-            this.unitPriceTextBox011.TabIndex = 0;
-            // 
-            // flowLayoutPanel681
-            // 
-            this.flowLayoutPanel681.Controls.Add(this.moneyTextBox011);
-            this.flowLayoutPanel681.Location = new System.Drawing.Point(700, 655);
-            this.flowLayoutPanel681.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel681.Name = "flowLayoutPanel681";
-            this.flowLayoutPanel681.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel681.TabIndex = 68;
-            // 
-            // moneyTextBox011
-            // 
-            this.moneyTextBox011.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox011.Name = "moneyTextBox011";
-            this.moneyTextBox011.ReadOnly = true;
-            this.moneyTextBox011.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox011.TabIndex = 0;
-            // 
-            // flowLayoutPanel682
-            // 
-            this.flowLayoutPanel682.Controls.Add(this.remarks011);
-            this.flowLayoutPanel682.Location = new System.Drawing.Point(832, 655);
-            this.flowLayoutPanel682.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel682.Name = "flowLayoutPanel682";
-            this.flowLayoutPanel682.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel682.TabIndex = 69;
             // 
             // remarks011
             // 
-            this.remarks011.Location = new System.Drawing.Point(2, 5);
-            this.remarks011.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.remarks011.Location = new System.Drawing.Point(737, 329);
+            this.remarks011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.remarks011.Name = "remarks011";
-            this.remarks011.Size = new System.Drawing.Size(548, 31);
+            this.remarks011.Size = new System.Drawing.Size(184, 20);
             this.remarks011.TabIndex = 0;
             // 
-            // flowLayoutPanel683
+            // remarks012
             // 
-            this.flowLayoutPanel683.Controls.Add(this.weightTextBox012);
-            this.flowLayoutPanel683.Location = new System.Drawing.Point(330, 707);
-            this.flowLayoutPanel683.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel683.Name = "flowLayoutPanel683";
-            this.flowLayoutPanel683.Size = new System.Drawing.Size(102, 40);
-            this.flowLayoutPanel683.TabIndex = 70;
+            this.remarks012.Location = new System.Drawing.Point(737, 356);
+            this.remarks012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.remarks012.Name = "remarks012";
+            this.remarks012.Size = new System.Drawing.Size(184, 20);
+            this.remarks012.TabIndex = 0;
             // 
-            // weightTextBox012
+            // label70
             // 
-            this.weightTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox012.Location = new System.Drawing.Point(2, 5);
-            this.weightTextBox012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.weightTextBox012.Name = "weightTextBox012";
-            this.weightTextBox012.Size = new System.Drawing.Size(164, 31);
-            this.weightTextBox012.TabIndex = 0;
+            this.label70.Location = new System.Drawing.Point(600, 2);
+            this.label70.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(133, 22);
+            this.label70.TabIndex = 36;
+            this.label70.Text = "金額";
+            this.label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // flowLayoutPanel684
+            // moneyTextBox00
             // 
-            this.flowLayoutPanel684.Controls.Add(this.countTextBox012);
-            this.flowLayoutPanel684.Location = new System.Drawing.Point(438, 707);
-            this.flowLayoutPanel684.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel684.Name = "flowLayoutPanel684";
-            this.flowLayoutPanel684.Size = new System.Drawing.Size(134, 40);
-            this.flowLayoutPanel684.TabIndex = 71;
+            this.moneyTextBox00.Location = new System.Drawing.Point(600, 32);
+            this.moneyTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox00.Name = "moneyTextBox00";
+            this.moneyTextBox00.ReadOnly = true;
+            this.moneyTextBox00.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox00.TabIndex = 36;
+            this.moneyTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox01
+            // 
+            this.moneyTextBox01.Location = new System.Drawing.Point(600, 59);
+            this.moneyTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox01.Name = "moneyTextBox01";
+            this.moneyTextBox01.ReadOnly = true;
+            this.moneyTextBox01.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox01.TabIndex = 38;
+            this.moneyTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox02
+            // 
+            this.moneyTextBox02.Location = new System.Drawing.Point(600, 86);
+            this.moneyTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox02.Name = "moneyTextBox02";
+            this.moneyTextBox02.ReadOnly = true;
+            this.moneyTextBox02.Size = new System.Drawing.Size(132, 20);
+            this.moneyTextBox02.TabIndex = 39;
+            this.moneyTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox03
+            // 
+            this.moneyTextBox03.Location = new System.Drawing.Point(600, 113);
+            this.moneyTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox03.Name = "moneyTextBox03";
+            this.moneyTextBox03.ReadOnly = true;
+            this.moneyTextBox03.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox03.TabIndex = 39;
+            this.moneyTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox04
+            // 
+            this.moneyTextBox04.Location = new System.Drawing.Point(600, 140);
+            this.moneyTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox04.Name = "moneyTextBox04";
+            this.moneyTextBox04.ReadOnly = true;
+            this.moneyTextBox04.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox04.TabIndex = 0;
+            this.moneyTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox05
+            // 
+            this.moneyTextBox05.Location = new System.Drawing.Point(600, 166);
+            this.moneyTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox05.Name = "moneyTextBox05";
+            this.moneyTextBox05.ReadOnly = true;
+            this.moneyTextBox05.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox05.TabIndex = 0;
+            this.moneyTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox06
+            // 
+            this.moneyTextBox06.Location = new System.Drawing.Point(600, 194);
+            this.moneyTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox06.Name = "moneyTextBox06";
+            this.moneyTextBox06.ReadOnly = true;
+            this.moneyTextBox06.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox06.TabIndex = 0;
+            this.moneyTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox07
+            // 
+            this.moneyTextBox07.Location = new System.Drawing.Point(600, 221);
+            this.moneyTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox07.Name = "moneyTextBox07";
+            this.moneyTextBox07.ReadOnly = true;
+            this.moneyTextBox07.Size = new System.Drawing.Size(133, 20);
+            this.moneyTextBox07.TabIndex = 0;
+            this.moneyTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox08
+            // 
+            this.moneyTextBox08.Location = new System.Drawing.Point(600, 248);
+            this.moneyTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox08.Name = "moneyTextBox08";
+            this.moneyTextBox08.ReadOnly = true;
+            this.moneyTextBox08.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox08.TabIndex = 0;
+            this.moneyTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox09
+            // 
+            this.moneyTextBox09.Location = new System.Drawing.Point(600, 275);
+            this.moneyTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox09.Name = "moneyTextBox09";
+            this.moneyTextBox09.ReadOnly = true;
+            this.moneyTextBox09.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox09.TabIndex = 0;
+            this.moneyTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox010
+            // 
+            this.moneyTextBox010.Location = new System.Drawing.Point(600, 302);
+            this.moneyTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox010.Name = "moneyTextBox010";
+            this.moneyTextBox010.ReadOnly = true;
+            this.moneyTextBox010.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox010.TabIndex = 0;
+            this.moneyTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox011
+            // 
+            this.moneyTextBox011.Location = new System.Drawing.Point(600, 329);
+            this.moneyTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox011.Name = "moneyTextBox011";
+            this.moneyTextBox011.ReadOnly = true;
+            this.moneyTextBox011.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox011.TabIndex = 0;
+            this.moneyTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // moneyTextBox012
+            // 
+            this.moneyTextBox012.Location = new System.Drawing.Point(600, 356);
+            this.moneyTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.moneyTextBox012.Name = "moneyTextBox012";
+            this.moneyTextBox012.ReadOnly = true;
+            this.moneyTextBox012.Size = new System.Drawing.Size(131, 20);
+            this.moneyTextBox012.TabIndex = 0;
+            this.moneyTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalCount2
+            // 
+            this.totalCount2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalCount2.Location = new System.Drawing.Point(526, 383);
+            this.totalCount2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalCount2.Name = "totalCount2";
+            this.totalCount2.ReadOnly = true;
+            this.totalCount2.Size = new System.Drawing.Size(70, 31);
+            this.totalCount2.TabIndex = 38;
+            this.totalCount2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label64
+            // 
+            this.label64.Location = new System.Drawing.Point(407, 381);
+            this.label64.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(115, 33);
+            this.label64.TabIndex = 38;
+            this.label64.Text = "総数";
+            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // totalWeight2
+            // 
+            this.totalWeight2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.totalWeight2.Location = new System.Drawing.Point(315, 383);
+            this.totalWeight2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.totalWeight2.Name = "totalWeight2";
+            this.totalWeight2.ReadOnly = true;
+            this.totalWeight2.Size = new System.Drawing.Size(88, 31);
+            this.totalWeight2.TabIndex = 38;
+            this.totalWeight2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label37
+            // 
+            this.label37.Location = new System.Drawing.Point(187, 381);
+            this.label37.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(124, 33);
+            this.label37.TabIndex = 39;
+            this.label37.Text = "総重量";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // countTextBox012
             // 
             this.countTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox012.Location = new System.Drawing.Point(2, 5);
-            this.countTextBox012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.countTextBox012.Location = new System.Drawing.Point(526, 356);
+            this.countTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox012.Name = "countTextBox012";
-            this.countTextBox012.Size = new System.Drawing.Size(212, 31);
+            this.countTextBox012.ReadOnly = true;
+            this.countTextBox012.Size = new System.Drawing.Size(70, 20);
             this.countTextBox012.TabIndex = 0;
+            this.countTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox012.TextChanged += new System.EventHandler(this.countTextBox012_TextChanged);
             // 
-            // flowLayoutPanel685
+            // countTextBox011
             // 
-            this.flowLayoutPanel685.Controls.Add(this.unitPriceTextBox012);
-            this.flowLayoutPanel685.Location = new System.Drawing.Point(578, 707);
-            this.flowLayoutPanel685.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel685.Name = "flowLayoutPanel685";
-            this.flowLayoutPanel685.Size = new System.Drawing.Size(116, 40);
-            this.flowLayoutPanel685.TabIndex = 72;
+            this.countTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox011.Location = new System.Drawing.Point(526, 329);
+            this.countTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox011.Name = "countTextBox011";
+            this.countTextBox011.ReadOnly = true;
+            this.countTextBox011.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox011.TabIndex = 0;
+            this.countTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox011.TextChanged += new System.EventHandler(this.countTextBox011_TextChanged);
+            // 
+            // countTextBox010
+            // 
+            this.countTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox010.Location = new System.Drawing.Point(526, 302);
+            this.countTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox010.Name = "countTextBox010";
+            this.countTextBox010.ReadOnly = true;
+            this.countTextBox010.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox010.TabIndex = 0;
+            this.countTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox010.TextChanged += new System.EventHandler(this.countTextBox010_TextChanged);
+            // 
+            // countTextBox09
+            // 
+            this.countTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox09.Location = new System.Drawing.Point(526, 275);
+            this.countTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox09.Name = "countTextBox09";
+            this.countTextBox09.ReadOnly = true;
+            this.countTextBox09.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox09.TabIndex = 0;
+            this.countTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox09.TextChanged += new System.EventHandler(this.countTextBox09_TextChanged);
+            // 
+            // countTextBox08
+            // 
+            this.countTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox08.Location = new System.Drawing.Point(526, 248);
+            this.countTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox08.Name = "countTextBox08";
+            this.countTextBox08.ReadOnly = true;
+            this.countTextBox08.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox08.TabIndex = 0;
+            this.countTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox08.TextChanged += new System.EventHandler(this.countTextBox08_TextChanged);
+            // 
+            // countTextBox07
+            // 
+            this.countTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox07.Location = new System.Drawing.Point(526, 221);
+            this.countTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox07.Name = "countTextBox07";
+            this.countTextBox07.ReadOnly = true;
+            this.countTextBox07.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox07.TabIndex = 0;
+            this.countTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox07.TextChanged += new System.EventHandler(this.countTextBox07_TextChanged);
+            // 
+            // countTextBox06
+            // 
+            this.countTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox06.Location = new System.Drawing.Point(526, 194);
+            this.countTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox06.Name = "countTextBox06";
+            this.countTextBox06.ReadOnly = true;
+            this.countTextBox06.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox06.TabIndex = 0;
+            this.countTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox06.TextChanged += new System.EventHandler(this.countTextBox06_TextChanged);
+            // 
+            // countTextBox05
+            // 
+            this.countTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox05.Location = new System.Drawing.Point(526, 166);
+            this.countTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox05.Name = "countTextBox05";
+            this.countTextBox05.ReadOnly = true;
+            this.countTextBox05.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox05.TabIndex = 39;
+            this.countTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox05.TextChanged += new System.EventHandler(this.countTextBox05_TextChanged);
+            // 
+            // countTextBox04
+            // 
+            this.countTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox04.Location = new System.Drawing.Point(526, 140);
+            this.countTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox04.Name = "countTextBox04";
+            this.countTextBox04.ReadOnly = true;
+            this.countTextBox04.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox04.TabIndex = 39;
+            this.countTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox04.TextChanged += new System.EventHandler(this.countTextBox04_TextChanged);
+            // 
+            // countTextBox03
+            // 
+            this.countTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox03.Location = new System.Drawing.Point(526, 113);
+            this.countTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox03.Name = "countTextBox03";
+            this.countTextBox03.ReadOnly = true;
+            this.countTextBox03.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox03.TabIndex = 39;
+            this.countTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox03.TextChanged += new System.EventHandler(this.countTextBox03_TextChanged);
+            // 
+            // countTextBox02
+            // 
+            this.countTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox02.Location = new System.Drawing.Point(526, 86);
+            this.countTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox02.Name = "countTextBox02";
+            this.countTextBox02.ReadOnly = true;
+            this.countTextBox02.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox02.TabIndex = 39;
+            this.countTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox02.TextChanged += new System.EventHandler(this.countTextBox02_TextChanged);
+            // 
+            // countTextBox01
+            // 
+            this.countTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox01.Location = new System.Drawing.Point(526, 59);
+            this.countTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox01.Name = "countTextBox01";
+            this.countTextBox01.ReadOnly = true;
+            this.countTextBox01.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox01.TabIndex = 38;
+            this.countTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox01.TextChanged += new System.EventHandler(this.countTextBox01_TextChanged);
+            // 
+            // countTextBox00
+            // 
+            this.countTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.countTextBox00.Location = new System.Drawing.Point(526, 32);
+            this.countTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.countTextBox00.Name = "countTextBox00";
+            this.countTextBox00.ReadOnly = true;
+            this.countTextBox00.Size = new System.Drawing.Size(70, 20);
+            this.countTextBox00.TabIndex = 36;
+            this.countTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox00.TextChanged += new System.EventHandler(this.countTextBox00_TextChanged);
+            // 
+            // label68
+            // 
+            this.label68.Location = new System.Drawing.Point(526, 2);
+            this.label68.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(70, 26);
+            this.label68.TabIndex = 36;
+            this.label68.Text = "数量";
+            this.label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label69
+            // 
+            this.label69.Location = new System.Drawing.Point(407, 2);
+            this.label69.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(115, 25);
+            this.label69.TabIndex = 36;
+            this.label69.Text = "単価";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // unitPriceTextBox00
+            // 
+            this.unitPriceTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox00.Location = new System.Drawing.Point(407, 32);
+            this.unitPriceTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox00.Name = "unitPriceTextBox00";
+            this.unitPriceTextBox00.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox00.TabIndex = 36;
+            this.unitPriceTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox00.Leave += new System.EventHandler(this.unitPriceTextBox00_Leave);
+            // 
+            // unitPriceTextBox01
+            // 
+            this.unitPriceTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox01.Location = new System.Drawing.Point(407, 59);
+            this.unitPriceTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox01.Name = "unitPriceTextBox01";
+            this.unitPriceTextBox01.ReadOnly = true;
+            this.unitPriceTextBox01.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox01.TabIndex = 38;
+            this.unitPriceTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox01.Leave += new System.EventHandler(this.unitPriceTextBox01_Leave);
+            // 
+            // unitPriceTextBox02
+            // 
+            this.unitPriceTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox02.Location = new System.Drawing.Point(407, 86);
+            this.unitPriceTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox02.Name = "unitPriceTextBox02";
+            this.unitPriceTextBox02.ReadOnly = true;
+            this.unitPriceTextBox02.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox02.TabIndex = 39;
+            this.unitPriceTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox02.Leave += new System.EventHandler(this.unitPriceTextBox02_Leave);
+            // 
+            // unitPriceTextBox03
+            // 
+            this.unitPriceTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox03.Location = new System.Drawing.Point(407, 113);
+            this.unitPriceTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox03.Name = "unitPriceTextBox03";
+            this.unitPriceTextBox03.ReadOnly = true;
+            this.unitPriceTextBox03.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox03.TabIndex = 39;
+            this.unitPriceTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox03.Leave += new System.EventHandler(this.unitPriceTextBox03_Leave);
+            // 
+            // unitPriceTextBox04
+            // 
+            this.unitPriceTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox04.Location = new System.Drawing.Point(407, 140);
+            this.unitPriceTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox04.Name = "unitPriceTextBox04";
+            this.unitPriceTextBox04.ReadOnly = true;
+            this.unitPriceTextBox04.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox04.TabIndex = 0;
+            this.unitPriceTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox04.Leave += new System.EventHandler(this.unitPriceTextBox04_Leave);
+            // 
+            // unitPriceTextBox05
+            // 
+            this.unitPriceTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox05.Location = new System.Drawing.Point(407, 166);
+            this.unitPriceTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox05.Name = "unitPriceTextBox05";
+            this.unitPriceTextBox05.ReadOnly = true;
+            this.unitPriceTextBox05.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox05.TabIndex = 39;
+            this.unitPriceTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox05.Leave += new System.EventHandler(this.unitPriceTextBox05_Leave);
+            // 
+            // unitPriceTextBox06
+            // 
+            this.unitPriceTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox06.Location = new System.Drawing.Point(407, 194);
+            this.unitPriceTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox06.Name = "unitPriceTextBox06";
+            this.unitPriceTextBox06.ReadOnly = true;
+            this.unitPriceTextBox06.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox06.TabIndex = 0;
+            this.unitPriceTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox06.Leave += new System.EventHandler(this.unitPriceTextBox06_Leave);
+            // 
+            // unitPriceTextBox07
+            // 
+            this.unitPriceTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox07.Location = new System.Drawing.Point(407, 221);
+            this.unitPriceTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox07.Name = "unitPriceTextBox07";
+            this.unitPriceTextBox07.ReadOnly = true;
+            this.unitPriceTextBox07.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox07.TabIndex = 0;
+            this.unitPriceTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox07.Leave += new System.EventHandler(this.unitPriceTextBox07_Leave);
+            // 
+            // unitPriceTextBox08
+            // 
+            this.unitPriceTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox08.Location = new System.Drawing.Point(407, 248);
+            this.unitPriceTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox08.Name = "unitPriceTextBox08";
+            this.unitPriceTextBox08.ReadOnly = true;
+            this.unitPriceTextBox08.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox08.TabIndex = 0;
+            this.unitPriceTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox08.Leave += new System.EventHandler(this.unitPriceTextBox08_Leave);
+            // 
+            // unitPriceTextBox09
+            // 
+            this.unitPriceTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox09.Location = new System.Drawing.Point(407, 275);
+            this.unitPriceTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox09.Name = "unitPriceTextBox09";
+            this.unitPriceTextBox09.ReadOnly = true;
+            this.unitPriceTextBox09.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox09.TabIndex = 0;
+            this.unitPriceTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox09.Leave += new System.EventHandler(this.unitPriceTextBox09_Leave);
+            // 
+            // unitPriceTextBox010
+            // 
+            this.unitPriceTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox010.Location = new System.Drawing.Point(407, 302);
+            this.unitPriceTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox010.Name = "unitPriceTextBox010";
+            this.unitPriceTextBox010.ReadOnly = true;
+            this.unitPriceTextBox010.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox010.TabIndex = 0;
+            this.unitPriceTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox010.Leave += new System.EventHandler(this.unitPriceTextBox010_Leave);
+            // 
+            // unitPriceTextBox011
+            // 
+            this.unitPriceTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.unitPriceTextBox011.Location = new System.Drawing.Point(407, 329);
+            this.unitPriceTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.unitPriceTextBox011.Name = "unitPriceTextBox011";
+            this.unitPriceTextBox011.ReadOnly = true;
+            this.unitPriceTextBox011.Size = new System.Drawing.Size(115, 20);
+            this.unitPriceTextBox011.TabIndex = 0;
+            this.unitPriceTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox011.Leave += new System.EventHandler(this.unitPriceTextBox011_Leave);
             // 
             // unitPriceTextBox012
             // 
             this.unitPriceTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox012.Location = new System.Drawing.Point(2, 5);
-            this.unitPriceTextBox012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.unitPriceTextBox012.Location = new System.Drawing.Point(407, 356);
+            this.unitPriceTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.unitPriceTextBox012.Name = "unitPriceTextBox012";
-            this.unitPriceTextBox012.Size = new System.Drawing.Size(195, 31);
+            this.unitPriceTextBox012.ReadOnly = true;
+            this.unitPriceTextBox012.Size = new System.Drawing.Size(115, 20);
             this.unitPriceTextBox012.TabIndex = 0;
+            this.unitPriceTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.unitPriceTextBox012.Leave += new System.EventHandler(this.unitPriceTextBox012_Leave);
             // 
-            // flowLayoutPanel686
+            // label25
             // 
-            this.flowLayoutPanel686.Controls.Add(this.moneyTextBox012);
-            this.flowLayoutPanel686.Location = new System.Drawing.Point(700, 707);
-            this.flowLayoutPanel686.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel686.Name = "flowLayoutPanel686";
-            this.flowLayoutPanel686.Size = new System.Drawing.Size(125, 40);
-            this.flowLayoutPanel686.TabIndex = 73;
+            this.label25.Location = new System.Drawing.Point(314, 2);
+            this.label25.Margin = new System.Windows.Forms.Padding(0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(89, 26);
+            this.label25.TabIndex = 36;
+            this.label25.Text = "重量";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // moneyTextBox012
+            // weightTextBox00
             // 
-            this.moneyTextBox012.Location = new System.Drawing.Point(2, 5);
-            this.moneyTextBox012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.moneyTextBox012.Name = "moneyTextBox012";
-            this.moneyTextBox012.ReadOnly = true;
-            this.moneyTextBox012.Size = new System.Drawing.Size(197, 31);
-            this.moneyTextBox012.TabIndex = 0;
+            this.weightTextBox00.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox00.Location = new System.Drawing.Point(315, 32);
+            this.weightTextBox00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox00.Name = "weightTextBox00";
+            this.weightTextBox00.ReadOnly = true;
+            this.weightTextBox00.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox00.TabIndex = 36;
+            this.weightTextBox00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox00.TextChanged += new System.EventHandler(this.weightTextBox00_TextChanged);
             // 
-            // flowLayoutPanel687
+            // weightTextBox01
             // 
-            this.flowLayoutPanel687.Controls.Add(this.remarks012);
-            this.flowLayoutPanel687.Location = new System.Drawing.Point(832, 707);
-            this.flowLayoutPanel687.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel687.Name = "flowLayoutPanel687";
-            this.flowLayoutPanel687.Size = new System.Drawing.Size(550, 40);
-            this.flowLayoutPanel687.TabIndex = 74;
+            this.weightTextBox01.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox01.Location = new System.Drawing.Point(315, 59);
+            this.weightTextBox01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox01.Name = "weightTextBox01";
+            this.weightTextBox01.ReadOnly = true;
+            this.weightTextBox01.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox01.TabIndex = 38;
+            this.weightTextBox01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox01.TextChanged += new System.EventHandler(this.weightTextBox01_TextChanged);
             // 
-            // remarks012
+            // weightTextBox02
             // 
-            this.remarks012.Location = new System.Drawing.Point(2, 5);
-            this.remarks012.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.remarks012.Name = "remarks012";
-            this.remarks012.Size = new System.Drawing.Size(548, 31);
-            this.remarks012.TabIndex = 0;
+            this.weightTextBox02.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox02.Location = new System.Drawing.Point(315, 86);
+            this.weightTextBox02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox02.Name = "weightTextBox02";
+            this.weightTextBox02.ReadOnly = true;
+            this.weightTextBox02.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox02.TabIndex = 39;
+            this.weightTextBox02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox02.TextChanged += new System.EventHandler(this.weightTextBox02_TextChanged);
             // 
-            // flowLayoutPanel688
+            // weightTextBox03
             // 
-            this.flowLayoutPanel688.Controls.Add(this.totalWeight2);
-            this.flowLayoutPanel688.Location = new System.Drawing.Point(330, 759);
-            this.flowLayoutPanel688.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel688.Name = "flowLayoutPanel688";
-            this.flowLayoutPanel688.Size = new System.Drawing.Size(102, 58);
-            this.flowLayoutPanel688.TabIndex = 39;
+            this.weightTextBox03.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox03.Location = new System.Drawing.Point(315, 113);
+            this.weightTextBox03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox03.Name = "weightTextBox03";
+            this.weightTextBox03.ReadOnly = true;
+            this.weightTextBox03.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox03.TabIndex = 39;
+            this.weightTextBox03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox03.TextChanged += new System.EventHandler(this.weightTextBox03_TextChanged);
             // 
-            // totalWeight2
+            // weightTextBox04
             // 
-            this.totalWeight2.Location = new System.Drawing.Point(2, 5);
-            this.totalWeight2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.totalWeight2.Name = "totalWeight2";
-            this.totalWeight2.ReadOnly = true;
-            this.totalWeight2.Size = new System.Drawing.Size(164, 31);
-            this.totalWeight2.TabIndex = 38;
-            this.totalWeight2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.weightTextBox04.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox04.Location = new System.Drawing.Point(315, 140);
+            this.weightTextBox04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox04.Name = "weightTextBox04";
+            this.weightTextBox04.ReadOnly = true;
+            this.weightTextBox04.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox04.TabIndex = 39;
+            this.weightTextBox04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox04.TextChanged += new System.EventHandler(this.weightTextBox04_TextChanged);
             // 
-            // flowLayoutPanel646
+            // weightTextBox05
             // 
-            this.flowLayoutPanel646.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flowLayoutPanel646.Controls.Add(this.label66);
-            this.flowLayoutPanel646.Location = new System.Drawing.Point(73, 28);
-            this.flowLayoutPanel646.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.flowLayoutPanel646.Name = "flowLayoutPanel646";
-            this.flowLayoutPanel646.Size = new System.Drawing.Size(121, 43);
-            this.flowLayoutPanel646.TabIndex = 37;
+            this.weightTextBox05.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox05.Location = new System.Drawing.Point(315, 166);
+            this.weightTextBox05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox05.Name = "weightTextBox05";
+            this.weightTextBox05.ReadOnly = true;
+            this.weightTextBox05.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox05.TabIndex = 0;
+            this.weightTextBox05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox05.TextChanged += new System.EventHandler(this.weightTextBox05_TextChanged);
             // 
-            // label66
+            // weightTextBox06
             // 
-            this.label66.Location = new System.Drawing.Point(69, 10);
-            this.label66.Margin = new System.Windows.Forms.Padding(69, 10, 2, 5);
-            this.label66.Name = "label66";
-            this.label66.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.label66.Size = new System.Drawing.Size(98, 27);
-            this.label66.TabIndex = 36;
-            this.label66.Text = "大分類";
+            this.weightTextBox06.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox06.Location = new System.Drawing.Point(315, 194);
+            this.weightTextBox06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox06.Name = "weightTextBox06";
+            this.weightTextBox06.ReadOnly = true;
+            this.weightTextBox06.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox06.TabIndex = 0;
+            this.weightTextBox06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox06.TextChanged += new System.EventHandler(this.weightTextBox06_TextChanged);
+            // 
+            // weightTextBox07
+            // 
+            this.weightTextBox07.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox07.Location = new System.Drawing.Point(315, 221);
+            this.weightTextBox07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox07.Name = "weightTextBox07";
+            this.weightTextBox07.ReadOnly = true;
+            this.weightTextBox07.Size = new System.Drawing.Size(88, 20);
+            this.weightTextBox07.TabIndex = 0;
+            this.weightTextBox07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox07.TextChanged += new System.EventHandler(this.weightTextBox07_TextChanged);
+            // 
+            // weightTextBox08
+            // 
+            this.weightTextBox08.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox08.Location = new System.Drawing.Point(315, 248);
+            this.weightTextBox08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox08.Name = "weightTextBox08";
+            this.weightTextBox08.ReadOnly = true;
+            this.weightTextBox08.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox08.TabIndex = 0;
+            this.weightTextBox08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox08.TextChanged += new System.EventHandler(this.weightTextBox08_TextChanged);
+            // 
+            // weightTextBox09
+            // 
+            this.weightTextBox09.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox09.Location = new System.Drawing.Point(315, 275);
+            this.weightTextBox09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox09.Name = "weightTextBox09";
+            this.weightTextBox09.ReadOnly = true;
+            this.weightTextBox09.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox09.TabIndex = 0;
+            this.weightTextBox09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox09.TextChanged += new System.EventHandler(this.weightTextBox09_TextChanged);
+            // 
+            // weightTextBox010
+            // 
+            this.weightTextBox010.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox010.Location = new System.Drawing.Point(315, 302);
+            this.weightTextBox010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox010.Name = "weightTextBox010";
+            this.weightTextBox010.ReadOnly = true;
+            this.weightTextBox010.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox010.TabIndex = 0;
+            this.weightTextBox010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox010.TextChanged += new System.EventHandler(this.weightTextBox010_TextChanged);
+            // 
+            // weightTextBox011
+            // 
+            this.weightTextBox011.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox011.Location = new System.Drawing.Point(315, 329);
+            this.weightTextBox011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox011.Name = "weightTextBox011";
+            this.weightTextBox011.ReadOnly = true;
+            this.weightTextBox011.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox011.TabIndex = 0;
+            this.weightTextBox011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox011.TextChanged += new System.EventHandler(this.weightTextBox011_TextChanged);
+            // 
+            // weightTextBox012
+            // 
+            this.weightTextBox012.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.weightTextBox012.Location = new System.Drawing.Point(315, 356);
+            this.weightTextBox012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.weightTextBox012.Name = "weightTextBox012";
+            this.weightTextBox012.ReadOnly = true;
+            this.weightTextBox012.Size = new System.Drawing.Size(86, 20);
+            this.weightTextBox012.TabIndex = 0;
+            this.weightTextBox012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.weightTextBox012.TextChanged += new System.EventHandler(this.weightTextBox012_TextChanged);
+            // 
+            // itemDetail00
+            // 
+            this.itemDetail00.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail00.Location = new System.Drawing.Point(187, 32);
+            this.itemDetail00.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail00.Name = "itemDetail00";
+            this.itemDetail00.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail00.TabIndex = 36;
+            this.itemDetail00.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail00.TextChanged += new System.EventHandler(this.weightTextBox00_TextChanged);
+            // 
+            // itemDetail01
+            // 
+            this.itemDetail01.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail01.Location = new System.Drawing.Point(187, 59);
+            this.itemDetail01.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail01.Name = "itemDetail01";
+            this.itemDetail01.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail01.TabIndex = 38;
+            this.itemDetail01.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail01.TextChanged += new System.EventHandler(this.weightTextBox01_TextChanged);
+            // 
+            // itemDetail02
+            // 
+            this.itemDetail02.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail02.Location = new System.Drawing.Point(187, 86);
+            this.itemDetail02.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail02.Name = "itemDetail02";
+            this.itemDetail02.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail02.TabIndex = 39;
+            this.itemDetail02.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail02.TextChanged += new System.EventHandler(this.weightTextBox02_TextChanged);
+            // 
+            // itemDetail03
+            // 
+            this.itemDetail03.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail03.Location = new System.Drawing.Point(187, 113);
+            this.itemDetail03.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail03.Name = "itemDetail03";
+            this.itemDetail03.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail03.TabIndex = 39;
+            this.itemDetail03.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail03.TextChanged += new System.EventHandler(this.weightTextBox03_TextChanged);
+            // 
+            // itemDetail04
+            // 
+            this.itemDetail04.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail04.Location = new System.Drawing.Point(187, 140);
+            this.itemDetail04.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail04.Name = "itemDetail04";
+            this.itemDetail04.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail04.TabIndex = 39;
+            this.itemDetail04.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail04.TextChanged += new System.EventHandler(this.weightTextBox04_TextChanged);
+            // 
+            // itemDetail05
+            // 
+            this.itemDetail05.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail05.Location = new System.Drawing.Point(187, 166);
+            this.itemDetail05.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail05.Name = "itemDetail05";
+            this.itemDetail05.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail05.TabIndex = 0;
+            this.itemDetail05.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail05.TextChanged += new System.EventHandler(this.weightTextBox05_TextChanged);
+            // 
+            // itemDetail06
+            // 
+            this.itemDetail06.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail06.Location = new System.Drawing.Point(187, 194);
+            this.itemDetail06.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail06.Name = "itemDetail06";
+            this.itemDetail06.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail06.TabIndex = 0;
+            this.itemDetail06.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail06.TextChanged += new System.EventHandler(this.weightTextBox06_TextChanged);
+            // 
+            // itemDetail07
+            // 
+            this.itemDetail07.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail07.Location = new System.Drawing.Point(187, 221);
+            this.itemDetail07.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail07.Name = "itemDetail07";
+            this.itemDetail07.Size = new System.Drawing.Size(124, 20);
+            this.itemDetail07.TabIndex = 0;
+            this.itemDetail07.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail07.TextChanged += new System.EventHandler(this.weightTextBox07_TextChanged);
+            // 
+            // itemDetail08
+            // 
+            this.itemDetail08.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail08.Location = new System.Drawing.Point(187, 248);
+            this.itemDetail08.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail08.Name = "itemDetail08";
+            this.itemDetail08.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail08.TabIndex = 0;
+            this.itemDetail08.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail08.TextChanged += new System.EventHandler(this.weightTextBox08_TextChanged);
+            // 
+            // itemDetail09
+            // 
+            this.itemDetail09.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail09.Location = new System.Drawing.Point(187, 275);
+            this.itemDetail09.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail09.Name = "itemDetail09";
+            this.itemDetail09.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail09.TabIndex = 0;
+            this.itemDetail09.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail09.TextChanged += new System.EventHandler(this.weightTextBox09_TextChanged);
+            // 
+            // itemDetail010
+            // 
+            this.itemDetail010.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail010.Location = new System.Drawing.Point(187, 302);
+            this.itemDetail010.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail010.Name = "itemDetail010";
+            this.itemDetail010.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail010.TabIndex = 0;
+            this.itemDetail010.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail010.TextChanged += new System.EventHandler(this.weightTextBox010_TextChanged);
+            // 
+            // itemDetail011
+            // 
+            this.itemDetail011.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail011.Location = new System.Drawing.Point(187, 329);
+            this.itemDetail011.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail011.Name = "itemDetail011";
+            this.itemDetail011.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail011.TabIndex = 0;
+            this.itemDetail011.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail011.TextChanged += new System.EventHandler(this.weightTextBox011_TextChanged);
+            // 
+            // itemDetail012
+            // 
+            this.itemDetail012.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.itemDetail012.Location = new System.Drawing.Point(187, 356);
+            this.itemDetail012.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.itemDetail012.Name = "itemDetail012";
+            this.itemDetail012.Size = new System.Drawing.Size(122, 20);
+            this.itemDetail012.TabIndex = 0;
+            this.itemDetail012.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.itemDetail012.TextChanged += new System.EventHandler(this.weightTextBox012_TextChanged);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label
+            // contextMenuStrip1
             // 
-            this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(22, 507);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(226, 24);
-            this.label.TabIndex = 29;
-            this.label.Text = "登記簿謄本（登録日）";
-            // 
-            // registerDateTextBox2
-            // 
-            this.registerDateTextBox2.Location = new System.Drawing.Point(26, 534);
-            this.registerDateTextBox2.Name = "registerDateTextBox2";
-            this.registerDateTextBox2.Size = new System.Drawing.Size(205, 31);
-            this.registerDateTextBox2.TabIndex = 30;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(22, 508);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(226, 24);
-            this.label36.TabIndex = 29;
-            this.label36.Text = "登記簿謄本（登録日）";
-            // 
-            // registerDateTextBox
-            // 
-            this.registerDateTextBox.Location = new System.Drawing.Point(26, 535);
-            this.registerDateTextBox.Name = "registerDateTextBox";
-            this.registerDateTextBox.Size = new System.Drawing.Size(205, 31);
-            this.registerDateTextBox.TabIndex = 30;
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // Statement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(3365, 1499);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(1115, 477);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.Controls.Add(this.tabControl1);
+            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Name = "Statement";
             this.Text = "計算書/納品書作成";
             this.Load += new System.EventHandler(this.Statement_Load);
@@ -7476,296 +4615,9 @@
             this.SettlementDayBox.ResumeLayout(false);
             this.SettlementDayBox.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel13.ResumeLayout(false);
-            this.flowLayoutPanel10.ResumeLayout(false);
-            this.flowLayoutPanel10.PerformLayout();
-            this.flowLayoutPanel11.ResumeLayout(false);
-            this.flowLayoutPanel9.ResumeLayout(false);
-            this.flowLayoutPanel9.PerformLayout();
-            this.flowLayoutPanel8.ResumeLayout(false);
-            this.flowLayoutPanel8.PerformLayout();
-            this.flowLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.flowLayoutPanel101.ResumeLayout(false);
-            this.flowLayoutPanel100.ResumeLayout(false);
-            this.flowLayoutPanel95.ResumeLayout(false);
-            this.flowLayoutPanel47.ResumeLayout(false);
-            this.flowLayoutPanel47.PerformLayout();
-            this.flowLayoutPanel89.ResumeLayout(false);
-            this.flowLayoutPanel88.ResumeLayout(false);
-            this.flowLayoutPanel87.ResumeLayout(false);
-            this.flowLayoutPanel81.ResumeLayout(false);
-            this.flowLayoutPanel80.ResumeLayout(false);
-            this.flowLayoutPanel74.ResumeLayout(false);
-            this.flowLayoutPanel73.ResumeLayout(false);
-            this.flowLayoutPanel67.ResumeLayout(false);
-            this.flowLayoutPanel66.ResumeLayout(false);
-            this.flowLayoutPanel60.ResumeLayout(false);
-            this.flowLayoutPanel59.ResumeLayout(false);
-            this.flowLayoutPanel21.ResumeLayout(false);
-            this.flowLayoutPanel53.ResumeLayout(false);
-            this.flowLayoutPanel52.ResumeLayout(false);
-            this.flowLayoutPanel46.ResumeLayout(false);
-            this.flowLayoutPanel45.ResumeLayout(false);
-            this.flowLayoutPanel39.ResumeLayout(false);
-            this.flowLayoutPanel38.ResumeLayout(false);
-            this.flowLayoutPanel32.ResumeLayout(false);
-            this.flowLayoutPanel31.ResumeLayout(false);
-            this.flowLayoutPanel25.ResumeLayout(false);
-            this.flowLayoutPanel24.ResumeLayout(false);
-            this.flowLayoutPanel15.ResumeLayout(false);
-            this.flowLayoutPanel14.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel20.ResumeLayout(false);
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
-            this.flowLayoutPanel30.ResumeLayout(false);
-            this.flowLayoutPanel30.PerformLayout();
-            this.flowLayoutPanel37.ResumeLayout(false);
-            this.flowLayoutPanel37.PerformLayout();
-            this.flowLayoutPanel44.ResumeLayout(false);
-            this.flowLayoutPanel44.PerformLayout();
-            this.flowLayoutPanel51.ResumeLayout(false);
-            this.flowLayoutPanel51.PerformLayout();
-            this.flowLayoutPanel58.ResumeLayout(false);
-            this.flowLayoutPanel58.PerformLayout();
-            this.flowLayoutPanel65.ResumeLayout(false);
-            this.flowLayoutPanel65.PerformLayout();
-            this.flowLayoutPanel72.ResumeLayout(false);
-            this.flowLayoutPanel72.PerformLayout();
-            this.flowLayoutPanel79.ResumeLayout(false);
-            this.flowLayoutPanel79.PerformLayout();
-            this.flowLayoutPanel86.ResumeLayout(false);
-            this.flowLayoutPanel86.PerformLayout();
-            this.flowLayoutPanel93.ResumeLayout(false);
-            this.flowLayoutPanel93.PerformLayout();
-            this.flowLayoutPanel99.ResumeLayout(false);
-            this.flowLayoutPanel99.PerformLayout();
-            this.flowLayoutPanel106.ResumeLayout(false);
-            this.flowLayoutPanel106.PerformLayout();
-            this.flowLayoutPanel19.ResumeLayout(false);
-            this.flowLayoutPanel6.ResumeLayout(false);
-            this.flowLayoutPanel6.PerformLayout();
-            this.flowLayoutPanel29.ResumeLayout(false);
-            this.flowLayoutPanel29.PerformLayout();
-            this.flowLayoutPanel36.ResumeLayout(false);
-            this.flowLayoutPanel36.PerformLayout();
-            this.flowLayoutPanel43.ResumeLayout(false);
-            this.flowLayoutPanel43.PerformLayout();
-            this.flowLayoutPanel50.ResumeLayout(false);
-            this.flowLayoutPanel50.PerformLayout();
-            this.flowLayoutPanel57.ResumeLayout(false);
-            this.flowLayoutPanel57.PerformLayout();
-            this.flowLayoutPanel64.ResumeLayout(false);
-            this.flowLayoutPanel64.PerformLayout();
-            this.flowLayoutPanel71.ResumeLayout(false);
-            this.flowLayoutPanel71.PerformLayout();
-            this.flowLayoutPanel78.ResumeLayout(false);
-            this.flowLayoutPanel78.PerformLayout();
-            this.flowLayoutPanel85.ResumeLayout(false);
-            this.flowLayoutPanel85.PerformLayout();
-            this.flowLayoutPanel92.ResumeLayout(false);
-            this.flowLayoutPanel92.PerformLayout();
-            this.flowLayoutPanel98.ResumeLayout(false);
-            this.flowLayoutPanel98.PerformLayout();
-            this.flowLayoutPanel105.ResumeLayout(false);
-            this.flowLayoutPanel105.PerformLayout();
-            this.flowLayoutPanel18.ResumeLayout(false);
-            this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
-            this.flowLayoutPanel28.ResumeLayout(false);
-            this.flowLayoutPanel28.PerformLayout();
-            this.flowLayoutPanel35.ResumeLayout(false);
-            this.flowLayoutPanel35.PerformLayout();
-            this.flowLayoutPanel42.ResumeLayout(false);
-            this.flowLayoutPanel42.PerformLayout();
-            this.flowLayoutPanel49.ResumeLayout(false);
-            this.flowLayoutPanel49.PerformLayout();
-            this.flowLayoutPanel56.ResumeLayout(false);
-            this.flowLayoutPanel56.PerformLayout();
-            this.flowLayoutPanel63.ResumeLayout(false);
-            this.flowLayoutPanel63.PerformLayout();
-            this.flowLayoutPanel70.ResumeLayout(false);
-            this.flowLayoutPanel70.PerformLayout();
-            this.flowLayoutPanel77.ResumeLayout(false);
-            this.flowLayoutPanel77.PerformLayout();
-            this.flowLayoutPanel84.ResumeLayout(false);
-            this.flowLayoutPanel84.PerformLayout();
-            this.flowLayoutPanel91.ResumeLayout(false);
-            this.flowLayoutPanel91.PerformLayout();
-            this.flowLayoutPanel97.ResumeLayout(false);
-            this.flowLayoutPanel97.PerformLayout();
-            this.flowLayoutPanel104.ResumeLayout(false);
-            this.flowLayoutPanel104.PerformLayout();
-            this.flowLayoutPanel17.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
-            this.flowLayoutPanel27.ResumeLayout(false);
-            this.flowLayoutPanel27.PerformLayout();
-            this.flowLayoutPanel34.ResumeLayout(false);
-            this.flowLayoutPanel34.PerformLayout();
-            this.flowLayoutPanel41.ResumeLayout(false);
-            this.flowLayoutPanel41.PerformLayout();
-            this.flowLayoutPanel48.ResumeLayout(false);
-            this.flowLayoutPanel48.PerformLayout();
-            this.flowLayoutPanel62.ResumeLayout(false);
-            this.flowLayoutPanel62.PerformLayout();
-            this.flowLayoutPanel23.ResumeLayout(false);
-            this.flowLayoutPanel23.PerformLayout();
-            this.flowLayoutPanel55.ResumeLayout(false);
-            this.flowLayoutPanel55.PerformLayout();
-            this.flowLayoutPanel69.ResumeLayout(false);
-            this.flowLayoutPanel69.PerformLayout();
-            this.flowLayoutPanel76.ResumeLayout(false);
-            this.flowLayoutPanel76.PerformLayout();
-            this.flowLayoutPanel83.ResumeLayout(false);
-            this.flowLayoutPanel83.PerformLayout();
-            this.flowLayoutPanel90.ResumeLayout(false);
-            this.flowLayoutPanel90.PerformLayout();
-            this.flowLayoutPanel96.ResumeLayout(false);
-            this.flowLayoutPanel96.PerformLayout();
-            this.flowLayoutPanel103.ResumeLayout(false);
-            this.flowLayoutPanel103.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.flowLayoutPanel16.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
-            this.flowLayoutPanel26.ResumeLayout(false);
-            this.flowLayoutPanel26.PerformLayout();
-            this.flowLayoutPanel33.ResumeLayout(false);
-            this.flowLayoutPanel33.PerformLayout();
-            this.flowLayoutPanel40.ResumeLayout(false);
-            this.flowLayoutPanel40.PerformLayout();
-            this.flowLayoutPanel54.ResumeLayout(false);
-            this.flowLayoutPanel54.PerformLayout();
-            this.flowLayoutPanel61.ResumeLayout(false);
-            this.flowLayoutPanel61.PerformLayout();
-            this.flowLayoutPanel68.ResumeLayout(false);
-            this.flowLayoutPanel68.PerformLayout();
-            this.flowLayoutPanel75.ResumeLayout(false);
-            this.flowLayoutPanel75.PerformLayout();
-            this.flowLayoutPanel22.ResumeLayout(false);
-            this.flowLayoutPanel22.PerformLayout();
-            this.flowLayoutPanel82.ResumeLayout(false);
-            this.flowLayoutPanel82.PerformLayout();
-            this.panel.ResumeLayout(false);
-            this.panel.PerformLayout();
-            this.flowLayoutPanel94.ResumeLayout(false);
-            this.flowLayoutPanel94.PerformLayout();
-            this.flowLayoutPanel102.ResumeLayout(false);
-            this.flowLayoutPanel102.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel15.PerformLayout();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel17.PerformLayout();
-            this.panel18.ResumeLayout(false);
-            this.panel18.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel19.PerformLayout();
-            this.panel20.ResumeLayout(false);
-            this.panel20.PerformLayout();
-            this.panel21.ResumeLayout(false);
-            this.panel21.PerformLayout();
-            this.panel22.ResumeLayout(false);
-            this.panel22.PerformLayout();
-            this.panel23.ResumeLayout(false);
-            this.panel23.PerformLayout();
-            this.panel24.ResumeLayout(false);
-            this.panel24.PerformLayout();
-            this.panel25.ResumeLayout(false);
-            this.panel25.PerformLayout();
-            this.panel26.ResumeLayout(false);
-            this.panel26.PerformLayout();
-            this.panel27.ResumeLayout(false);
-            this.panel27.PerformLayout();
-            this.panel28.ResumeLayout(false);
-            this.panel28.PerformLayout();
-            this.panel29.ResumeLayout(false);
-            this.panel29.PerformLayout();
-            this.panel30.ResumeLayout(false);
-            this.panel30.PerformLayout();
-            this.panel31.ResumeLayout(false);
-            this.panel31.PerformLayout();
-            this.panel32.ResumeLayout(false);
-            this.panel32.PerformLayout();
-            this.panel33.ResumeLayout(false);
-            this.panel33.PerformLayout();
-            this.panel34.ResumeLayout(false);
-            this.panel34.PerformLayout();
-            this.panel35.ResumeLayout(false);
-            this.panel35.PerformLayout();
-            this.panel36.ResumeLayout(false);
-            this.panel36.PerformLayout();
-            this.panel37.ResumeLayout(false);
-            this.panel37.PerformLayout();
-            this.panel38.ResumeLayout(false);
-            this.panel38.PerformLayout();
-            this.panel39.ResumeLayout(false);
-            this.panel39.PerformLayout();
-            this.panel40.ResumeLayout(false);
-            this.panel40.PerformLayout();
-            this.panel41.ResumeLayout(false);
-            this.panel41.PerformLayout();
-            this.panel42.ResumeLayout(false);
-            this.panel42.PerformLayout();
-            this.panel43.ResumeLayout(false);
-            this.panel43.PerformLayout();
-            this.panel44.ResumeLayout(false);
-            this.panel44.PerformLayout();
-            this.panel45.ResumeLayout(false);
-            this.panel45.PerformLayout();
-            this.panel46.ResumeLayout(false);
-            this.panel46.PerformLayout();
-            this.panel47.ResumeLayout(false);
-            this.panel47.PerformLayout();
-            this.panel48.ResumeLayout(false);
-            this.panel48.PerformLayout();
-            this.panel49.ResumeLayout(false);
-            this.panel49.PerformLayout();
-            this.panel50.ResumeLayout(false);
-            this.panel50.PerformLayout();
-            this.panel51.ResumeLayout(false);
-            this.panel51.PerformLayout();
-            this.panel52.ResumeLayout(false);
-            this.panel52.PerformLayout();
-            this.panel53.ResumeLayout(false);
-            this.panel53.PerformLayout();
-            this.panel54.ResumeLayout(false);
-            this.panel54.PerformLayout();
-            this.panel55.ResumeLayout(false);
-            this.panel55.PerformLayout();
-            this.panel56.ResumeLayout(false);
-            this.panel56.PerformLayout();
-            this.panel57.ResumeLayout(false);
-            this.panel57.PerformLayout();
-            this.panel58.ResumeLayout(false);
-            this.panel58.PerformLayout();
+            this.tableLayoutPanel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -7773,191 +4625,11 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
-            this.flowLayoutPanel689.ResumeLayout(false);
-            this.flowLayoutPanel697.ResumeLayout(false);
-            this.flowLayoutPanel696.ResumeLayout(false);
-            this.flowLayoutPanel695.ResumeLayout(false);
-            this.flowLayoutPanel694.ResumeLayout(false);
-            this.flowLayoutPanel694.PerformLayout();
-            this.flowLayoutPanel691.ResumeLayout(false);
-            this.flowLayoutPanel693.ResumeLayout(false);
-            this.flowLayoutPanel693.PerformLayout();
-            this.flowLayoutPanel690.ResumeLayout(false);
-            this.flowLayoutPanel690.PerformLayout();
-            this.flowLayoutPanel692.ResumeLayout(false);
-            this.flowLayoutPanel692.PerformLayout();
-            this.flowLayoutPanel698.ResumeLayout(false);
+            this.tableLayoutPanel14.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tableLayoutPanel13.ResumeLayout(false);
-            this.flowLayoutPanel588.ResumeLayout(false);
-            this.flowLayoutPanel589.ResumeLayout(false);
-            this.flowLayoutPanel590.ResumeLayout(false);
-            this.flowLayoutPanel591.ResumeLayout(false);
-            this.flowLayoutPanel592.ResumeLayout(false);
-            this.flowLayoutPanel593.ResumeLayout(false);
-            this.flowLayoutPanel594.ResumeLayout(false);
-            this.flowLayoutPanel594.PerformLayout();
-            this.flowLayoutPanel595.ResumeLayout(false);
-            this.flowLayoutPanel596.ResumeLayout(false);
-            this.flowLayoutPanel597.ResumeLayout(false);
-            this.flowLayoutPanel598.ResumeLayout(false);
-            this.flowLayoutPanel599.ResumeLayout(false);
-            this.flowLayoutPanel599.PerformLayout();
-            this.flowLayoutPanel600.ResumeLayout(false);
-            this.flowLayoutPanel601.ResumeLayout(false);
-            this.flowLayoutPanel602.ResumeLayout(false);
-            this.flowLayoutPanel602.PerformLayout();
-            this.flowLayoutPanel603.ResumeLayout(false);
-            this.flowLayoutPanel603.PerformLayout();
-            this.flowLayoutPanel604.ResumeLayout(false);
-            this.flowLayoutPanel605.ResumeLayout(false);
-            this.flowLayoutPanel606.ResumeLayout(false);
-            this.flowLayoutPanel606.PerformLayout();
-            this.flowLayoutPanel607.ResumeLayout(false);
-            this.flowLayoutPanel607.PerformLayout();
-            this.flowLayoutPanel608.ResumeLayout(false);
-            this.flowLayoutPanel608.PerformLayout();
-            this.flowLayoutPanel609.ResumeLayout(false);
-            this.flowLayoutPanel609.PerformLayout();
-            this.flowLayoutPanel610.ResumeLayout(false);
-            this.flowLayoutPanel611.ResumeLayout(false);
-            this.flowLayoutPanel611.PerformLayout();
-            this.flowLayoutPanel612.ResumeLayout(false);
-            this.flowLayoutPanel612.PerformLayout();
-            this.flowLayoutPanel613.ResumeLayout(false);
-            this.flowLayoutPanel614.ResumeLayout(false);
-            this.flowLayoutPanel615.ResumeLayout(false);
-            this.flowLayoutPanel615.PerformLayout();
-            this.flowLayoutPanel616.ResumeLayout(false);
-            this.flowLayoutPanel616.PerformLayout();
-            this.flowLayoutPanel617.ResumeLayout(false);
-            this.flowLayoutPanel617.PerformLayout();
-            this.flowLayoutPanel618.ResumeLayout(false);
-            this.flowLayoutPanel618.PerformLayout();
-            this.flowLayoutPanel619.ResumeLayout(false);
-            this.flowLayoutPanel619.PerformLayout();
-            this.flowLayoutPanel620.ResumeLayout(false);
-            this.flowLayoutPanel620.PerformLayout();
-            this.flowLayoutPanel621.ResumeLayout(false);
-            this.flowLayoutPanel622.ResumeLayout(false);
-            this.flowLayoutPanel623.ResumeLayout(false);
-            this.flowLayoutPanel623.PerformLayout();
-            this.flowLayoutPanel624.ResumeLayout(false);
-            this.flowLayoutPanel624.PerformLayout();
-            this.flowLayoutPanel625.ResumeLayout(false);
-            this.flowLayoutPanel625.PerformLayout();
-            this.flowLayoutPanel626.ResumeLayout(false);
-            this.flowLayoutPanel626.PerformLayout();
-            this.flowLayoutPanel627.ResumeLayout(false);
-            this.flowLayoutPanel627.PerformLayout();
-            this.flowLayoutPanel628.ResumeLayout(false);
-            this.flowLayoutPanel629.ResumeLayout(false);
-            this.flowLayoutPanel630.ResumeLayout(false);
-            this.flowLayoutPanel630.PerformLayout();
-            this.flowLayoutPanel631.ResumeLayout(false);
-            this.flowLayoutPanel631.PerformLayout();
-            this.flowLayoutPanel632.ResumeLayout(false);
-            this.flowLayoutPanel632.PerformLayout();
-            this.flowLayoutPanel633.ResumeLayout(false);
-            this.flowLayoutPanel633.PerformLayout();
-            this.flowLayoutPanel634.ResumeLayout(false);
-            this.flowLayoutPanel634.PerformLayout();
-            this.flowLayoutPanel635.ResumeLayout(false);
-            this.flowLayoutPanel636.ResumeLayout(false);
-            this.flowLayoutPanel637.ResumeLayout(false);
-            this.flowLayoutPanel637.PerformLayout();
-            this.flowLayoutPanel638.ResumeLayout(false);
-            this.flowLayoutPanel638.PerformLayout();
-            this.flowLayoutPanel639.ResumeLayout(false);
-            this.flowLayoutPanel639.PerformLayout();
-            this.flowLayoutPanel640.ResumeLayout(false);
-            this.flowLayoutPanel640.PerformLayout();
-            this.flowLayoutPanel641.ResumeLayout(false);
-            this.flowLayoutPanel641.PerformLayout();
-            this.flowLayoutPanel642.ResumeLayout(false);
-            this.flowLayoutPanel642.PerformLayout();
-            this.flowLayoutPanel643.ResumeLayout(false);
-            this.flowLayoutPanel644.ResumeLayout(false);
-            this.flowLayoutPanel645.ResumeLayout(false);
-            this.flowLayoutPanel647.ResumeLayout(false);
-            this.flowLayoutPanel647.PerformLayout();
-            this.flowLayoutPanel648.ResumeLayout(false);
-            this.flowLayoutPanel648.PerformLayout();
-            this.flowLayoutPanel649.ResumeLayout(false);
-            this.flowLayoutPanel650.ResumeLayout(false);
-            this.flowLayoutPanel651.ResumeLayout(false);
-            this.flowLayoutPanel651.PerformLayout();
-            this.flowLayoutPanel652.ResumeLayout(false);
-            this.flowLayoutPanel652.PerformLayout();
-            this.flowLayoutPanel653.ResumeLayout(false);
-            this.flowLayoutPanel653.PerformLayout();
-            this.flowLayoutPanel654.ResumeLayout(false);
-            this.flowLayoutPanel655.ResumeLayout(false);
-            this.flowLayoutPanel656.ResumeLayout(false);
-            this.flowLayoutPanel657.ResumeLayout(false);
-            this.flowLayoutPanel658.ResumeLayout(false);
-            this.flowLayoutPanel659.ResumeLayout(false);
-            this.flowLayoutPanel659.PerformLayout();
-            this.flowLayoutPanel660.ResumeLayout(false);
-            this.flowLayoutPanel660.PerformLayout();
-            this.flowLayoutPanel661.ResumeLayout(false);
-            this.flowLayoutPanel661.PerformLayout();
-            this.flowLayoutPanel662.ResumeLayout(false);
-            this.flowLayoutPanel662.PerformLayout();
-            this.flowLayoutPanel663.ResumeLayout(false);
-            this.flowLayoutPanel663.PerformLayout();
-            this.flowLayoutPanel664.ResumeLayout(false);
-            this.flowLayoutPanel664.PerformLayout();
-            this.flowLayoutPanel665.ResumeLayout(false);
-            this.flowLayoutPanel665.PerformLayout();
-            this.flowLayoutPanel666.ResumeLayout(false);
-            this.flowLayoutPanel666.PerformLayout();
-            this.flowLayoutPanel667.ResumeLayout(false);
-            this.flowLayoutPanel667.PerformLayout();
-            this.flowLayoutPanel668.ResumeLayout(false);
-            this.flowLayoutPanel668.PerformLayout();
-            this.flowLayoutPanel669.ResumeLayout(false);
-            this.flowLayoutPanel669.PerformLayout();
-            this.flowLayoutPanel670.ResumeLayout(false);
-            this.flowLayoutPanel670.PerformLayout();
-            this.flowLayoutPanel671.ResumeLayout(false);
-            this.flowLayoutPanel671.PerformLayout();
-            this.flowLayoutPanel672.ResumeLayout(false);
-            this.flowLayoutPanel672.PerformLayout();
-            this.flowLayoutPanel673.ResumeLayout(false);
-            this.flowLayoutPanel673.PerformLayout();
-            this.flowLayoutPanel674.ResumeLayout(false);
-            this.flowLayoutPanel674.PerformLayout();
-            this.flowLayoutPanel675.ResumeLayout(false);
-            this.flowLayoutPanel675.PerformLayout();
-            this.flowLayoutPanel676.ResumeLayout(false);
-            this.flowLayoutPanel676.PerformLayout();
-            this.flowLayoutPanel677.ResumeLayout(false);
-            this.flowLayoutPanel677.PerformLayout();
-            this.flowLayoutPanel678.ResumeLayout(false);
-            this.flowLayoutPanel678.PerformLayout();
-            this.flowLayoutPanel679.ResumeLayout(false);
-            this.flowLayoutPanel679.PerformLayout();
-            this.flowLayoutPanel680.ResumeLayout(false);
-            this.flowLayoutPanel680.PerformLayout();
-            this.flowLayoutPanel681.ResumeLayout(false);
-            this.flowLayoutPanel681.PerformLayout();
-            this.flowLayoutPanel682.ResumeLayout(false);
-            this.flowLayoutPanel682.PerformLayout();
-            this.flowLayoutPanel683.ResumeLayout(false);
-            this.flowLayoutPanel683.PerformLayout();
-            this.flowLayoutPanel684.ResumeLayout(false);
-            this.flowLayoutPanel684.PerformLayout();
-            this.flowLayoutPanel685.ResumeLayout(false);
-            this.flowLayoutPanel685.PerformLayout();
-            this.flowLayoutPanel686.ResumeLayout(false);
-            this.flowLayoutPanel686.PerformLayout();
-            this.flowLayoutPanel687.ResumeLayout(false);
-            this.flowLayoutPanel687.PerformLayout();
-            this.flowLayoutPanel688.ResumeLayout(false);
-            this.flowLayoutPanel688.PerformLayout();
-            this.flowLayoutPanel646.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -7973,7 +4645,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox documentNumberTextBox;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker settlementBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox deliveryTextBox;
@@ -8011,233 +4682,86 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.ComboBox mainCategoryComboBox0;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.ComboBox itemComboBox0;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.TextBox moneyTextBox0;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.TextBox countTextBox0;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.TextBox weightTextBox0;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.TextBox unitPriceTextBox0;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
         private System.Windows.Forms.TextBox remarks0;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel13;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel10;
         private System.Windows.Forms.TextBox sumTextBox;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel11;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel9;
         private System.Windows.Forms.TextBox taxAmount;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel8;
         private System.Windows.Forms.TextBox subTotal;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel12;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel15;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel14;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel16;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel17;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel18;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel19;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel20;
-        private System.Windows.Forms.Button calcButton;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel21;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel23;
         private System.Windows.Forms.TextBox totalCount;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel22;
         private System.Windows.Forms.TextBox totalWeight;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel25;
         private System.Windows.Forms.ComboBox itemComboBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel24;
         private System.Windows.Forms.ComboBox mainCategoryComboBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel30;
         private System.Windows.Forms.TextBox remarks1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel29;
         private System.Windows.Forms.TextBox moneyTextBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel28;
-        private System.Windows.Forms.TextBox unitPriceTextBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel27;
         private System.Windows.Forms.TextBox countTextBox1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel26;
-        private System.Windows.Forms.TextBox weightTextBox1;
-        private System.Windows.Forms.Button add;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel37;
         private System.Windows.Forms.TextBox remarks2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel36;
         private System.Windows.Forms.TextBox moneyTextBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel35;
-        private System.Windows.Forms.TextBox unitPriceTextBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel34;
         private System.Windows.Forms.TextBox countTextBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel33;
-        private System.Windows.Forms.TextBox weightTextBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel32;
         private System.Windows.Forms.ComboBox itemComboBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel31;
         private System.Windows.Forms.ComboBox mainCategoryComboBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel44;
         private System.Windows.Forms.TextBox remarks3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel43;
         private System.Windows.Forms.TextBox moneyTextBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel42;
-        private System.Windows.Forms.TextBox unitPriceTextBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel41;
         private System.Windows.Forms.TextBox countTextBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel40;
-        private System.Windows.Forms.TextBox weightTextBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel39;
         private System.Windows.Forms.ComboBox itemComboBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel38;
         private System.Windows.Forms.ComboBox mainCategoryComboBox3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel51;
         private System.Windows.Forms.TextBox remarks4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel49;
-        private System.Windows.Forms.TextBox unitPriceTextBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel48;
         private System.Windows.Forms.TextBox countTextBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel47;
-        private System.Windows.Forms.TextBox weightTextBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel46;
         private System.Windows.Forms.ComboBox itemComboBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel45;
         private System.Windows.Forms.ComboBox mainCategoryComboBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel50;
         private System.Windows.Forms.TextBox moneyTextBox4;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel58;
         private System.Windows.Forms.TextBox remarks5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel57;
         private System.Windows.Forms.TextBox moneyTextBox5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel56;
-        private System.Windows.Forms.TextBox unitPriceTextBox5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel55;
         private System.Windows.Forms.TextBox countTextBox5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel54;
-        private System.Windows.Forms.TextBox weightTextBox5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel53;
         private System.Windows.Forms.ComboBox itemComboBox5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel52;
         private System.Windows.Forms.ComboBox mainCategoryComboBox5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel62;
         private System.Windows.Forms.TextBox countTextBox6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel61;
-        private System.Windows.Forms.TextBox weightTextBox6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel60;
         private System.Windows.Forms.ComboBox itemComboBox6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel59;
         private System.Windows.Forms.ComboBox mainCategoryComboBox6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel63;
-        private System.Windows.Forms.TextBox unitPriceTextBox6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel64;
         private System.Windows.Forms.TextBox moneyTextBox6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel65;
         private System.Windows.Forms.TextBox remarks6;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel68;
-        private System.Windows.Forms.TextBox weightTextBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel67;
         private System.Windows.Forms.ComboBox itemComboBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel66;
         private System.Windows.Forms.ComboBox mainCategoryComboBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel69;
         private System.Windows.Forms.TextBox countTextBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel70;
-        private System.Windows.Forms.TextBox unitPriceTextBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel71;
         private System.Windows.Forms.TextBox moneyTextBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel72;
         private System.Windows.Forms.TextBox remarks7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel74;
         private System.Windows.Forms.ComboBox itemComboBox8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel73;
         private System.Windows.Forms.ComboBox mainCategoryComboBox8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel77;
-        private System.Windows.Forms.TextBox unitPriceTextBox8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel75;
-        private System.Windows.Forms.TextBox weightTextBox8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel76;
         private System.Windows.Forms.TextBox countTextBox8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel78;
         private System.Windows.Forms.TextBox moneyTextBox8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel79;
         private System.Windows.Forms.TextBox remarks8;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel82;
-        private System.Windows.Forms.TextBox weightTextBox9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel81;
         private System.Windows.Forms.ComboBox itemComboBox9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel80;
         private System.Windows.Forms.ComboBox mainCategoryComboBox9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel84;
-        private System.Windows.Forms.TextBox unitPriceTextBox9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel83;
         private System.Windows.Forms.TextBox countTextBox9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel85;
         private System.Windows.Forms.TextBox moneyTextBox9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel86;
         private System.Windows.Forms.TextBox remarks9;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel88;
         private System.Windows.Forms.ComboBox itemComboBox10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel87;
         private System.Windows.Forms.ComboBox mainCategoryComboBox10;
-        private System.Windows.Forms.FlowLayoutPanel panel;
-        private System.Windows.Forms.TextBox weightTextBox10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel90;
         private System.Windows.Forms.TextBox countTextBox10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel91;
-        private System.Windows.Forms.TextBox unitPriceTextBox10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel92;
         private System.Windows.Forms.TextBox moneyTextBox10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel93;
         private System.Windows.Forms.TextBox remarks10;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel95;
         private System.Windows.Forms.ComboBox itemComboBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel89;
         private System.Windows.Forms.ComboBox mainCategoryComboBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel94;
-        private System.Windows.Forms.TextBox weightTextBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel96;
         private System.Windows.Forms.TextBox countTextBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel97;
-        private System.Windows.Forms.TextBox unitPriceTextBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel98;
         private System.Windows.Forms.TextBox moneyTextBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel99;
         private System.Windows.Forms.TextBox remarks11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel101;
         private System.Windows.Forms.ComboBox itemComboBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel100;
         private System.Windows.Forms.ComboBox mainCategoryComboBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel102;
-        private System.Windows.Forms.TextBox weightTextBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel103;
         private System.Windows.Forms.TextBox countTextBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel104;
-        private System.Windows.Forms.TextBox unitPriceTextBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel105;
         private System.Windows.Forms.TextBox moneyTextBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel106;
         private System.Windows.Forms.TextBox remarks12;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button clear2;
-        private System.Windows.Forms.Button add2;
-        private System.Windows.Forms.Button calc2Button2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel690;
         private System.Windows.Forms.TextBox sumTextBox2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel692;
         private System.Windows.Forms.TextBox taxAmount2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel693;
         private System.Windows.Forms.Button return2;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
@@ -8256,207 +4780,104 @@
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel588;
         private System.Windows.Forms.ComboBox itemComboBox012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel589;
         private System.Windows.Forms.ComboBox mainCategoryComboBox012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel590;
         private System.Windows.Forms.ComboBox itemComboBox011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel591;
         private System.Windows.Forms.ComboBox mainCategoryComboBox011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel592;
         private System.Windows.Forms.ComboBox itemComboBox010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel593;
         private System.Windows.Forms.ComboBox mainCategoryComboBox010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel594;
         private System.Windows.Forms.TextBox weightTextBox09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel595;
         private System.Windows.Forms.ComboBox itemComboBox09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel596;
         private System.Windows.Forms.ComboBox mainCategoryComboBox09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel597;
         private System.Windows.Forms.ComboBox itemComboBox08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel598;
         private System.Windows.Forms.ComboBox mainCategoryComboBox08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel599;
         private System.Windows.Forms.TextBox weightTextBox07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel600;
         private System.Windows.Forms.ComboBox itemComboBox07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel601;
         private System.Windows.Forms.ComboBox mainCategoryComboBox07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel602;
         private System.Windows.Forms.TextBox countTextBox06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel603;
         private System.Windows.Forms.TextBox weightTextBox06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel604;
         private System.Windows.Forms.ComboBox itemComboBox06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel605;
         private System.Windows.Forms.ComboBox mainCategoryComboBox06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel606;
         private System.Windows.Forms.TextBox remarks05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel607;
         private System.Windows.Forms.TextBox moneyTextBox05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel608;
         private System.Windows.Forms.TextBox unitPriceTextBox05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel609;
         private System.Windows.Forms.TextBox totalCount2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel610;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel611;
         private System.Windows.Forms.TextBox countTextBox05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel612;
         private System.Windows.Forms.TextBox weightTextBox05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel613;
         private System.Windows.Forms.ComboBox itemComboBox05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel614;
         private System.Windows.Forms.ComboBox mainCategoryComboBox05;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel615;
         private System.Windows.Forms.TextBox remarks04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel616;
         private System.Windows.Forms.TextBox unitPriceTextBox09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel617;
         private System.Windows.Forms.TextBox unitPriceTextBox04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel618;
         private System.Windows.Forms.TextBox countTextBox04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel619;
         private System.Windows.Forms.TextBox weightTextBox04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel620;
         private System.Windows.Forms.TextBox unitPriceTextBox08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel621;
         private System.Windows.Forms.ComboBox itemComboBox04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel622;
         private System.Windows.Forms.ComboBox mainCategoryComboBox04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel623;
         private System.Windows.Forms.TextBox remarks03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel624;
         private System.Windows.Forms.TextBox moneyTextBox03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel625;
         private System.Windows.Forms.TextBox unitPriceTextBox03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel626;
         private System.Windows.Forms.TextBox countTextBox03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel627;
         private System.Windows.Forms.TextBox weightTextBox03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel628;
         private System.Windows.Forms.ComboBox itemComboBox03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel629;
         private System.Windows.Forms.ComboBox mainCategoryComboBox03;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel630;
         private System.Windows.Forms.TextBox remarks02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel631;
         private System.Windows.Forms.TextBox moneyTextBox02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel632;
         private System.Windows.Forms.TextBox unitPriceTextBox02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel633;
         private System.Windows.Forms.TextBox countTextBox02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel634;
         private System.Windows.Forms.TextBox weightTextBox02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel635;
         private System.Windows.Forms.ComboBox itemComboBox02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel636;
         private System.Windows.Forms.ComboBox mainCategoryComboBox02;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel637;
         private System.Windows.Forms.TextBox remarks01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel638;
         private System.Windows.Forms.TextBox moneyTextBox04;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel639;
         private System.Windows.Forms.TextBox moneyTextBox01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel640;
         private System.Windows.Forms.TextBox unitPriceTextBox01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel641;
         private System.Windows.Forms.TextBox countTextBox01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel642;
         private System.Windows.Forms.TextBox weightTextBox01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel643;
         private System.Windows.Forms.ComboBox itemComboBox01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel644;
         private System.Windows.Forms.ComboBox mainCategoryComboBox01;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel645;
-        private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel646;
-        private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel647;
         private System.Windows.Forms.TextBox moneyTextBox00;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel648;
         private System.Windows.Forms.TextBox countTextBox00;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel649;
         private System.Windows.Forms.ComboBox mainCategoryComboBox00;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel650;
         private System.Windows.Forms.ComboBox itemComboBox00;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel651;
         private System.Windows.Forms.TextBox weightTextBox00;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel652;
         private System.Windows.Forms.TextBox unitPriceTextBox00;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel653;
-        private System.Windows.Forms.TextBox textBox338;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel654;
+        private System.Windows.Forms.TextBox remarks00;
         private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel655;
         private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel656;
         private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel657;
         private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel658;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel659;
         private System.Windows.Forms.TextBox unitPriceTextBox06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel660;
         private System.Windows.Forms.TextBox moneyTextBox06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel661;
         private System.Windows.Forms.TextBox remarks06;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel662;
         private System.Windows.Forms.TextBox countTextBox07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel663;
         private System.Windows.Forms.TextBox unitPriceTextBox07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel664;
         private System.Windows.Forms.TextBox moneyTextBox07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel665;
         private System.Windows.Forms.TextBox remarks07;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel666;
         private System.Windows.Forms.TextBox weightTextBox08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel667;
         private System.Windows.Forms.TextBox countTextBox08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel668;
         private System.Windows.Forms.TextBox moneyTextBox08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel669;
         private System.Windows.Forms.TextBox remarks08;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel670;
         private System.Windows.Forms.TextBox countTextBox09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel671;
         private System.Windows.Forms.TextBox moneyTextBox09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel672;
         private System.Windows.Forms.TextBox remarks09;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel673;
         private System.Windows.Forms.TextBox weightTextBox010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel674;
         private System.Windows.Forms.TextBox countTextBox010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel675;
         private System.Windows.Forms.TextBox unitPriceTextBox010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel676;
         private System.Windows.Forms.TextBox moneyTextBox010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel677;
         private System.Windows.Forms.TextBox remarks010;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel678;
         private System.Windows.Forms.TextBox weightTextBox011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel679;
         private System.Windows.Forms.TextBox countTextBox011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel680;
         private System.Windows.Forms.TextBox unitPriceTextBox011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel681;
         private System.Windows.Forms.TextBox moneyTextBox011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel682;
         private System.Windows.Forms.TextBox remarks011;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel683;
         private System.Windows.Forms.TextBox weightTextBox012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel684;
         private System.Windows.Forms.TextBox countTextBox012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel685;
         private System.Windows.Forms.TextBox unitPriceTextBox012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel686;
         private System.Windows.Forms.TextBox moneyTextBox012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel687;
         private System.Windows.Forms.TextBox remarks012;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel688;
         private System.Windows.Forms.TextBox totalWeight2;
         private System.Windows.Forms.Label label92;
         private System.Windows.Forms.Label label89;
@@ -8494,140 +4915,84 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel697;
         private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel696;
         private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel695;
         private System.Windows.Forms.Label label79;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel694;
-        private System.Windows.Forms.TextBox textBox304;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel691;
+        private System.Windows.Forms.TextBox tax;
         private System.Windows.Forms.TextBox subTotal2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel689;
         private System.Windows.Forms.Label label93;
         private System.Windows.Forms.ComboBox comboBox11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel698;
         private System.Windows.Forms.Label label94;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox brandname0;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox registerDateTextBox2;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox registerDateTextBox;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox weightTextBox2;
+        private System.Windows.Forms.TextBox weightTextBox1;
+        private System.Windows.Forms.TextBox weightTextBox0;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox weightTextBox3;
+        private System.Windows.Forms.TextBox weightTextBox4;
+        private System.Windows.Forms.TextBox weightTextBox5;
+        private System.Windows.Forms.TextBox weightTextBox6;
+        private System.Windows.Forms.TextBox weightTextBox7;
+        private System.Windows.Forms.TextBox weightTextBox8;
+        private System.Windows.Forms.TextBox weightTextBox9;
+        private System.Windows.Forms.TextBox weightTextBox10;
+        private System.Windows.Forms.TextBox weightTextBox11;
+        private System.Windows.Forms.TextBox weightTextBox12;
+        private System.Windows.Forms.TextBox unitPriceTextBox0;
+        private System.Windows.Forms.TextBox unitPriceTextBox1;
+        private System.Windows.Forms.TextBox unitPriceTextBox2;
+        private System.Windows.Forms.TextBox unitPriceTextBox3;
+        private System.Windows.Forms.TextBox unitPriceTextBox4;
+        private System.Windows.Forms.TextBox unitPriceTextBox5;
+        private System.Windows.Forms.TextBox unitPriceTextBox6;
+        private System.Windows.Forms.TextBox unitPriceTextBox7;
+        private System.Windows.Forms.TextBox unitPriceTextBox8;
+        private System.Windows.Forms.TextBox unitPriceTextBox9;
+        private System.Windows.Forms.TextBox unitPriceTextBox10;
+        private System.Windows.Forms.TextBox unitPriceTextBox11;
+        private System.Windows.Forms.TextBox unitPriceTextBox12;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Panel panel22;
-        private System.Windows.Forms.Panel panel23;
-        private System.Windows.Forms.Panel panel24;
-        private System.Windows.Forms.Panel panel25;
-        private System.Windows.Forms.Panel panel26;
-        private System.Windows.Forms.Panel panel27;
-        private System.Windows.Forms.Panel panel28;
-        private System.Windows.Forms.Panel panel29;
-        private System.Windows.Forms.Panel panel30;
-        private System.Windows.Forms.Panel panel31;
-        private System.Windows.Forms.Panel panel32;
-        private System.Windows.Forms.Panel panel33;
-        private System.Windows.Forms.Panel panel34;
-        private System.Windows.Forms.Panel panel35;
-        private System.Windows.Forms.Panel panel36;
-        private System.Windows.Forms.Panel panel37;
-        private System.Windows.Forms.Panel panel38;
-        private System.Windows.Forms.Panel panel39;
-        private System.Windows.Forms.Panel panel40;
-        private System.Windows.Forms.Panel panel41;
-        private System.Windows.Forms.Panel panel42;
-        private System.Windows.Forms.Panel panel43;
-        private System.Windows.Forms.Panel panel44;
-        private System.Windows.Forms.Panel panel45;
-        private System.Windows.Forms.Panel panel46;
-        private System.Windows.Forms.TextBox types0;
-        private System.Windows.Forms.TextBox midstone0;
-        private System.Windows.Forms.TextBox wakiseki0;
-        private System.Windows.Forms.TextBox brandname1;
-        private System.Windows.Forms.TextBox types1;
-        private System.Windows.Forms.TextBox midstone1;
-        private System.Windows.Forms.TextBox wakiseki1;
-        private System.Windows.Forms.Panel panel47;
-        private System.Windows.Forms.Panel panel48;
-        private System.Windows.Forms.Panel panel49;
-        private System.Windows.Forms.Panel panel50;
-        private System.Windows.Forms.Panel panel51;
-        private System.Windows.Forms.Panel panel52;
-        private System.Windows.Forms.Panel panel53;
-        private System.Windows.Forms.Panel panel54;
-        private System.Windows.Forms.Panel panel55;
-        private System.Windows.Forms.Panel panel56;
-        private System.Windows.Forms.Panel panel57;
-        private System.Windows.Forms.Panel panel58;
-        private System.Windows.Forms.TextBox brandname2;
-        private System.Windows.Forms.TextBox types2;
-        private System.Windows.Forms.TextBox midstone2;
-        private System.Windows.Forms.TextBox wakiseki2;
-        private System.Windows.Forms.TextBox wakiseki3;
-        private System.Windows.Forms.TextBox brandname3;
-        private System.Windows.Forms.TextBox types3;
-        private System.Windows.Forms.TextBox brandname4;
-        private System.Windows.Forms.TextBox midstone3;
-        private System.Windows.Forms.TextBox types4;
-        private System.Windows.Forms.TextBox midstone4;
-        private System.Windows.Forms.TextBox wakiseki4;
-        private System.Windows.Forms.TextBox brandname5;
-        private System.Windows.Forms.TextBox types5;
-        private System.Windows.Forms.TextBox midstone5;
-        private System.Windows.Forms.TextBox wakiseki5;
-        private System.Windows.Forms.TextBox brandname6;
-        private System.Windows.Forms.TextBox types6;
-        private System.Windows.Forms.TextBox midstone6;
-        private System.Windows.Forms.TextBox wakiseki6;
-        private System.Windows.Forms.TextBox brandname7;
-        private System.Windows.Forms.TextBox types7;
-        private System.Windows.Forms.TextBox midstone7;
-        private System.Windows.Forms.TextBox wakiseki7;
-        private System.Windows.Forms.TextBox brandname8;
-        private System.Windows.Forms.TextBox brandname9;
-        private System.Windows.Forms.TextBox brandname10;
-        private System.Windows.Forms.TextBox brandname11;
-        private System.Windows.Forms.TextBox brandname12;
-        private System.Windows.Forms.TextBox types8;
-        private System.Windows.Forms.TextBox types9;
-        private System.Windows.Forms.TextBox types10;
-        private System.Windows.Forms.TextBox types11;
-        private System.Windows.Forms.TextBox types12;
-        private System.Windows.Forms.TextBox midstone8;
-        private System.Windows.Forms.TextBox wakiseki8;
-        private System.Windows.Forms.TextBox midstone9;
-        private System.Windows.Forms.TextBox wakiseki9;
-        private System.Windows.Forms.TextBox midstone10;
-        private System.Windows.Forms.TextBox wakiseki10;
-        private System.Windows.Forms.TextBox midstone11;
-        private System.Windows.Forms.TextBox wakiseki11;
-        private System.Windows.Forms.TextBox midstone12;
-        private System.Windows.Forms.TextBox wakiseki12;
-        private System.Windows.Forms.TextBox totalmidstone;
-        private System.Windows.Forms.TextBox totalwakiseki;
-        private System.Windows.Forms.TextBox registerDateTextBox2;
-        private System.Windows.Forms.Label label;
-        private System.Windows.Forms.TextBox registerDateTextBox;
-        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox itemDetail0;
+        private System.Windows.Forms.TextBox itemDetail1;
+        private System.Windows.Forms.TextBox itemDetail2;
+        private System.Windows.Forms.TextBox itemDetail3;
+        private System.Windows.Forms.TextBox itemDetail4;
+        private System.Windows.Forms.TextBox itemDetail5;
+        private System.Windows.Forms.TextBox itemDetail6;
+        private System.Windows.Forms.TextBox itemDetail7;
+        private System.Windows.Forms.TextBox itemDetail8;
+        private System.Windows.Forms.TextBox itemDetail9;
+        private System.Windows.Forms.TextBox itemDetail10;
+        private System.Windows.Forms.TextBox itemDetail11;
+        private System.Windows.Forms.TextBox itemDetail12;
+        private System.Windows.Forms.TextBox itemDetail00;
+        private System.Windows.Forms.TextBox itemDetail01;
+        private System.Windows.Forms.TextBox itemDetail02;
+        private System.Windows.Forms.TextBox itemDetail03;
+        private System.Windows.Forms.TextBox itemDetail04;
+        private System.Windows.Forms.TextBox itemDetail05;
+        private System.Windows.Forms.TextBox itemDetail06;
+        private System.Windows.Forms.TextBox itemDetail07;
+        private System.Windows.Forms.TextBox itemDetail08;
+        private System.Windows.Forms.TextBox itemDetail09;
+        private System.Windows.Forms.TextBox itemDetail010;
+        private System.Windows.Forms.TextBox itemDetail011;
+        private System.Windows.Forms.TextBox itemDetail012;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
