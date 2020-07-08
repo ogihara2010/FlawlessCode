@@ -52,15 +52,21 @@ namespace Flawless_ex
         {
             DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo);
 
-            if (result == DialogResult.Yes)
+            if (result == DialogResult.Yes && string.IsNullOrEmpty(mainCategoryNameTextBox.Text))
+            {
+                MessageBox.Show("大分類名が未入力です。", "登録エラー", MessageBoxButtons.OK);
+            }
+
+            if (result == DialogResult.Yes && !(string.IsNullOrEmpty(mainCategoryNameTextBox.Text)))
             {
                 NpgsqlCommandBuilder builder;
 
                 int mainCode = int.Parse(mainCategoryCodeTextBox.Text);//大分類コード
                 string mainName = mainCategoryNameTextBox.Text;//大分類名
                 DateTime dat = DateTime.Now;
+                dt = new DataTable();
 
-                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0);";
+                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0,'" + staff_code + "')";
 
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
@@ -71,16 +77,9 @@ namespace Flawless_ex
                 adapter.Fill(dt);
                 adapter.Update(dt);
 
-                //新規登録履歴
-                string sql_mCategoryRevisions = "insert into main_category_m_revisions values(" + mainCode + ",'" + dat + "'," + staff_code + ")";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql_mCategoryRevisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-
                 conn.Close();
 
                 MessageBox.Show("登録完了");
-
-
 
                 MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
                 this.Close();

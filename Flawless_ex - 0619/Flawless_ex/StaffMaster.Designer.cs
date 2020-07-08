@@ -38,9 +38,10 @@
             // updateButton
             // 
             this.updateButton.AutoSize = true;
-            this.updateButton.Location = new System.Drawing.Point(180, 576);
+            this.updateButton.Location = new System.Drawing.Point(95, 269);
+            this.updateButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(128, 45);
+            this.updateButton.Size = new System.Drawing.Size(83, 41);
             this.updateButton.TabIndex = 1;
             this.updateButton.Text = "変更・削除";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -48,29 +49,33 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 22);
+            this.dataGridView1.Location = new System.Drawing.Point(6, 11);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(621, 485);
+            this.dataGridView1.Size = new System.Drawing.Size(287, 242);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // addButton
             // 
             this.addButton.AutoSize = true;
-            this.addButton.Location = new System.Drawing.Point(364, 576);
+            this.addButton.Location = new System.Drawing.Point(191, 269);
+            this.addButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(116, 45);
+            this.addButton.Size = new System.Drawing.Size(80, 41);
             this.addButton.TabIndex = 2;
             this.addButton.Text = "新規登録";
             this.addButton.UseVisualStyleBackColor = true;
@@ -79,9 +84,10 @@
             // ReturnButton
             // 
             this.ReturnButton.AutoSize = true;
-            this.ReturnButton.Location = new System.Drawing.Point(28, 576);
+            this.ReturnButton.Location = new System.Drawing.Point(13, 269);
+            this.ReturnButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(108, 45);
+            this.ReturnButton.Size = new System.Drawing.Size(68, 41);
             this.ReturnButton.TabIndex = 0;
             this.ReturnButton.Text = "戻る";
             this.ReturnButton.UseVisualStyleBackColor = true;
@@ -89,13 +95,14 @@
             // 
             // StaffMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(645, 649);
+            this.ClientSize = new System.Drawing.Size(298, 324);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ReturnButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.updateButton);
+            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Name = "StaffMaster";
             this.Text = "担当者マスタメンテナンス";
             this.Load += new System.EventHandler(this.StaffMaster_Load);
