@@ -100,8 +100,13 @@ namespace Flawless_ex
         private void updateButton_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("更新をしますか？", "確認", MessageBoxButtons.YesNo);
+            if (string.IsNullOrEmpty(mainCategoryNameTextBox.Text))
+            {
+                MessageBox.Show("大分類名が入力されておりません。", "入力エラー", MessageBoxButtons.OK);
 
-            if (result == DialogResult.Yes)
+            }
+
+            if (result == DialogResult.Yes && !string.IsNullOrEmpty(mainCategoryNameTextBox.Text)) 
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
