@@ -9,16 +9,19 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         int type;
         int check;
-        Statement statement;
-
-        public client_search_result(DataTable dt, int type, int check, Statement statement)
+        //Statement statement;
+        MainMenu mainMenu;
+        int staff_id;
+        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id)
         {
             InitializeComponent();
 
             this.dt = dt;
             this.type = type;
             this.check = check;
-            this.statement = statement;
+            this.mainMenu = mainMenu;
+            //this.statement = statement;
+            staff_id = id;
         }
 
         private void client_search_result_Load(object sender, EventArgs e)
@@ -73,7 +76,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            client_search client_Search = new client_search(statement);
+            client_search client_Search = new client_search(mainMenu, staff_id, type);
 
             this.Close();
             client_Search.Show();
@@ -99,10 +102,11 @@ namespace Flawless_ex
 
                 conn.Close();
 
+                
+                Statement statement = new Statement(mainMenu, staff_id, type);
+                this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
-
-                this.Close();
                 statement.Show();
             }
             else if (type == 1)
@@ -115,10 +119,11 @@ namespace Flawless_ex
                 adapter.Fill(dt2);
 
                 conn.Close();
+
+                Statement statement = new Statement(mainMenu, staff_id, type);
+                this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
-
-                this.Close();
                 statement.Show();
             }
         }

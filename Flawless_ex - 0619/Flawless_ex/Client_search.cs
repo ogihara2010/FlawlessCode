@@ -7,19 +7,25 @@ namespace Flawless_ex
 {
     public partial class client_search : Form
     {
-        Statement statement;
+        //Statement statement;
+        MainMenu mainMenu;
         DataTable dt = new DataTable();
         public int count = 0;//計算書/納品書の顧客選択用
-
-        public client_search(Statement statement)
+        int staff_id;
+        int type;
+        public client_search(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
 
-            this.statement = statement;
+            //this.statement = statement;
+            this.mainMenu = mainMenu;
+            staff_id = id;
+            this.type = type;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
+            Statement statement = new Statement(mainMenu, staff_id, type);
             this.Close();
 
             statement.Show();
@@ -103,127 +109,38 @@ namespace Flawless_ex
                 {
                     address = this.addressTextBox.Text;
 
-                    string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address like '%" + address + "%' "; //住所部分一致検索
-                    string sql21 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where shop_name = '" + shopName + "' " + search2 + " address like '%" + address + "%' "; //住所部分一致検索and店舗名・住所
-                    string sql22 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where company_name = '" + clientName + "' " + search1 + " staff_name = '" + clientStaff + "' " + search3 + " address like '%" + address + "%' "; //住所部分一致検索and会社名・担当者名・住所
-                    string sql23 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where company_name = '" + clientName + "' " + search1 + "  address like '%" + address + "%' "; //住所部分一致検索and会社名・住所
+                    string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address like '%" + address + "%' )"; //住所部分一致検索
+
 
                     conn.Open();
-
-                    if (!string.IsNullOrWhiteSpace(address))
-                    {
-                        if (!string.IsNullOrWhiteSpace(shopName))
-                        {
-                            adapter = new NpgsqlDataAdapter(sql21, conn);
-                            adapter.Fill(dt);
-                        }
-                        else
-                        {
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(clientName))
-                        {
-                            adapter = new NpgsqlDataAdapter(sql23, conn);
-                            adapter.Fill(dt);
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(clientName))
-                        {
-                            if (!string.IsNullOrWhiteSpace(shopName))
-                            {
-                                if (!string.IsNullOrWhiteSpace(clientStaff))
-                                {
-                                    adapter = new NpgsqlDataAdapter(sql2, conn);
-                                    adapter.Fill(dt);
-                                }
-                            }
-                            else if (!string.IsNullOrWhiteSpace(clientStaff))
-                            {
-                                adapter = new NpgsqlDataAdapter(sql22, conn);
-                                adapter.Fill(dt);
-                            }
-                        }
-
-
-
-                        if (!string.IsNullOrWhiteSpace(clientStaff))
-                        {
-                            adapter = new NpgsqlDataAdapter(sql2, conn);
-                            adapter.Fill(dt);
-                        }
-
-
-                    }
-                    else { }
+                    adapter = new NpgsqlDataAdapter(sql2, conn);
+                    adapter.Fill(dt);
 
                     conn.Close();
-
-                    using (client_search_result search_Result = new client_search_result(dt, type, check, statement))
-                    {
-                        this.Close();
-                        search_Result.ShowDialog();
-                    }
-
-
+                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id);
+                    this.Close();
+                    search_Result.Show();
 
                 }
                 else
                 {
                     address = "";
 
-                    string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address = '" + address + "' ";
-                    string sql1 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where type = 0 and company_name = '" + clientName + "' " + search1 + " staff_name = '" + clientStaff + "'";//会社名・担当者名
-              
+                    string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address = '" + address + "' )";
+
 
                     conn.Open();
 
-                    if (string.IsNullOrWhiteSpace(address))
-                    {
-                        if (!string.IsNullOrWhiteSpace(clientName))
-                        {
-                            if (!string.IsNullOrWhiteSpace(clientStaff))
-                            {
-                                adapter = new NpgsqlDataAdapter(sql1, conn);
-                                adapter.Fill(dt);
-                            }
-
-                            if (!string.IsNullOrWhiteSpace(shopName))
-                            {
-                                if (!string.IsNullOrWhiteSpace(clientStaff))
-                                {
-                                    adapter = new NpgsqlDataAdapter(sql, conn);
-                                    adapter.Fill(dt);
-                                }
-                            }
-                        }
-                        else 
-                        {
-                            adapter = new NpgsqlDataAdapter(sql, conn);
-                            adapter.Fill(dt);
-                        }
-
-                        if (!string.IsNullOrWhiteSpace(shopName))
-                        {
-                            if (!string.IsNullOrWhiteSpace(clientStaff))
-                            {
-                                adapter = new NpgsqlDataAdapter(sql, conn);
-                                adapter.Fill(dt);
-                            }
-                        }
-
-                        
-
-                    }
-                    else { }
+                    adapter = new NpgsqlDataAdapter(sql, conn);
+                    adapter.Fill(dt);
 
                     conn.Close();
 
-                    using (client_search_result search_Result = new client_search_result(dt, type, check, statement))
+                    using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
                     {
                         this.Close();
-                        search_Result.ShowDialog();
+                        search_Result.Show();
                     }
-
 
                 }//法人終了
 
@@ -262,7 +179,7 @@ namespace Flawless_ex
                     if (radioButton1.Checked == true)//古物商許可証あり
                     {
                         check = 0;
-                        string sql2 = "select name,address, antique_license, id_number, remarks from client_m_individual where name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is not null "; //住所部分一致検索
+                        string sql2 = "select name,address, antique_license, id_number, remarks from client_m_individual where invalid = 0 and (type = 1 and  name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is not null )"; //住所部分一致検索
 
                         conn.Open();
 
@@ -271,7 +188,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, statement))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -282,7 +199,7 @@ namespace Flawless_ex
                     else if (radioButton2.Checked == true)//古物商許可証なし
                     {
                         check = 1;
-                        string sql2 = "select name,address, antique_license, id_number,remarks from client_m_individual where name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is null "; //住所部分一致検索
+                        string sql2 = "select name,address, antique_license, id_number,remarks from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is null )"; //住所部分一致検索
 
                         conn.Open();
 
@@ -292,7 +209,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, statement))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -312,7 +229,7 @@ namespace Flawless_ex
                     if (radioButton1.Checked == true)//古物商許可証あり
                     {
                         check = 0;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where name = '" + iname + "' " + search4 + "  antique_license is not null ";
+                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + "  antique_license is not null )";
                         conn.Open();
 
                         adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -320,7 +237,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, statement))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -331,7 +248,7 @@ namespace Flawless_ex
                     else if (radioButton2.Checked == true)//古物商許可証なし
                     {
                         check = 1;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where name = '" + iname + "' " + search4 + " antique_license is null ";
+                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " antique_license is null )";
                         conn.Open();
 
                         adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -339,7 +256,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, statement))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -350,6 +267,15 @@ namespace Flawless_ex
                 }
 
 
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            using (client_add client_Add = new client_add(mainMenu, staff_id, type))
+            {
+                this.Close();
+                client_Add.Show();
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Flawless_ex
         int itemMainCategoryCode;
         public DataTable clientDt = new DataTable();//顧客情報
         public int count = 0;
-
+        int type = 1;
         MainMenu mainMenu;
 
         DataTable dt = new DataTable();//大分類
@@ -54,12 +54,13 @@ namespace Flawless_ex
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataAdapter adapter;
-        public Statement(MainMenu main, int id)
+
+        public Statement(MainMenu main, int id,int type)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
-
+            this.type = type;
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -734,6 +735,83 @@ namespace Flawless_ex
             string str_sql_other = "select* from item_m where main_category_code = 104";
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
+
+          
+            if(count != 0) {
+                if (type == 0)
+                {
+                    //顧客情報 法人
+                    #region "計算書"
+                    DataTable clientDt = new DataTable();
+                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0";
+                    adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
+                    adapter.Fill(clientDt);
+
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    int type = (int)row2["type"];
+
+                    string companyNmae = row2["company_name"].ToString();
+                    string shopName = row2["shop_name"].ToString();
+                    string staff_name = row2["staff_name"].ToString();
+                    string address = row2["address"].ToString();
+                    string register_date = row2["register_date"].ToString();
+                    string remarks = row2["remarks"].ToString();
+
+                    typeTextBox.Text = "法人";
+                    companyTextBox.Text = companyNmae;
+                    shopNameTextBox.Text = shopName;
+                    clientNameTextBox.Text = staff_name;
+                    addressTextBox.Text = address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                    #endregion
+                    #region "納品書"
+                    typeTextBox2.Text = "法人";
+                    companyTextBox2.Text = companyNmae;
+                    shopNameTextBox2.Text = shopName;
+                    clientNameTextBox2.Text = staff_name;
+                    addressTextBox2.Text = address;
+                    registerDateTextBox2.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                    #endregion
+                }
+                else if (type == 1)
+                {
+                    //顧客情報 個人
+                    DataTable clientDt = new DataTable();
+                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1";
+                    adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
+                    adapter.Fill(clientDt);
+
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    int type = (int)row2["type"];
+
+                    string name = row2["name"].ToString();
+                    string address = row2["address"].ToString();
+                    string register_date = row2["register_date"].ToString();
+                    string remarks = row2["remarks"].ToString();
+                    #region "計算書"
+                    typeTextBox.Text = "個人";
+                    clientNameTextBox.Text = name;
+                    addressTextBox.Text = address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                    #endregion
+                    #region "納品書"
+                    typeTextBox2.Text = "個人";
+                    clientNameTextBox2.Text = name;
+                    addressTextBox2.Text = address;
+                    registerDateTextBox2.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                    #endregion
+                }
+            }
+
+            this.button13.Enabled = false;
+            this.previewButton.Enabled = false;
+            this.button9.Enabled = false;
         }
 
 
@@ -3252,7 +3330,7 @@ namespace Flawless_ex
 
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            using (client_search search2 = new client_search(this))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -3300,12 +3378,11 @@ namespace Flawless_ex
 
         private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
         {
-            using (client_search search2 = new client_search(this))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type))
             {
                 this.Hide();
                 search2.ShowDialog();
             }
-
 
 
             if (count != 0)
@@ -3396,7 +3473,8 @@ namespace Flawless_ex
             adapter.Fill(dt2);
             conn.Close();
             MessageBox.Show("登録しました。");
-
+            this.button13.Enabled = true;
+            this.previewButton.Enabled = true;
         }
 
         private void Button11_Click(object sender, EventArgs e)
