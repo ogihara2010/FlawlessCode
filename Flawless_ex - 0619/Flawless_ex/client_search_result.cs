@@ -12,6 +12,8 @@ namespace Flawless_ex
         //Statement statement;
         MainMenu mainMenu;
         int staff_id;
+        string staff_name;
+        string address;
         public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id)
         {
             InitializeComponent();
@@ -93,6 +95,8 @@ namespace Flawless_ex
             {
                 int anumber = (int)dataGridView1.CurrentRow.Cells[4].Value;//選択したPKを取得
 
+                string staff_name = (string)this.dataGridView1.CurrentRow.Cells[2].Value;
+                string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value;
 
                 string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = " + anumber + " ";
                 conn.Open();
@@ -103,7 +107,7 @@ namespace Flawless_ex
                 conn.Close();
 
                 
-                Statement statement = new Statement(mainMenu, staff_id, type);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
@@ -112,6 +116,8 @@ namespace Flawless_ex
             else if (type == 1)
             {
                 int id_number = (int)dataGridView1.CurrentRow.Cells[3].Value;//選択したPKを取得
+                string staff_name = (string)this.dataGridView1.CurrentRow.Cells[0].Value;
+                string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value;
 
                 string sql_str2 = "select type,name, address,register_date, remarks from client_m_individual where id_number = " + id_number + "  ";
                 conn.Open();
@@ -120,7 +126,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;

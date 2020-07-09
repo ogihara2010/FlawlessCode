@@ -13,6 +13,8 @@ namespace Flawless_ex
         public int count = 0;//計算書/納品書の顧客選択用
         int staff_id;
         int type;
+        string staff_name;
+        string address;
         public client_search(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
@@ -25,7 +27,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
             this.Close();
 
             statement.Show();
@@ -272,11 +274,10 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            using (client_add client_Add = new client_add(mainMenu, staff_id, type))
-            {
+            client_add client_Add = new client_add(mainMenu, staff_id, type);
                 this.Close();
                 client_Add.Show();
-            }
+            
         }
     }
 }

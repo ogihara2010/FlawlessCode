@@ -25,7 +25,6 @@ namespace Flawless_ex
         {
             DialogResult result = MessageBox.Show("税率を更新しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-<<<<<<< HEAD
             if (result == DialogResult.Yes)     //無記入と小数点に対応
             {
                 int letter = 0;
@@ -71,27 +70,7 @@ namespace Flawless_ex
                     MessageBox.Show("更新しました。");
                 }
             }
-=======
-            NpgsqlDataAdapter adapter;
-            NpgsqlCommandBuilder builder;
-            dt = new DataTable();
-            NpgsqlConnection db = new NpgsqlConnection();
-            string sql_str = "insert into vat_m (vat_rate, upd_date) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "')";
 
-            db.ConnectionString = @"Server= localhost;Port=5432;User Id=postgres;Password=postgres;Database=master;";
-            db.Open();
-
-            adapter = new NpgsqlDataAdapter(sql_str, db);
-            builder = new NpgsqlCommandBuilder(adapter);
-
-            adapter.Fill(dt);
-            adapter.Update(dt);
-
-            db.Close();
-
-            this.Close();
-            MessageBox.Show("更新しました。");
->>>>>>> master
 
             master.Show();
         }
