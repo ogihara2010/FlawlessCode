@@ -18,6 +18,8 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         int staff_id;
         int type;
+        string staff_name;
+        string address;
         public client_add(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
@@ -89,8 +91,10 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-
-            Statement statement = new Statement(mainMenu, staff_id, type);
+            type = 0;
+            staff_name = ClientStaffName;
+            address = Address;
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
             this.Close();
             statement.Show();
         }
@@ -147,8 +151,10 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-
-            Statement statement = new Statement(mainMenu, staff_id, type);
+            type = 1;
+            staff_name = Name;
+            address = Address;
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
             this.Close();
             statement.Show();
         }

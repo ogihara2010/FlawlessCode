@@ -20,6 +20,7 @@ namespace Flawless_ex
         decimal sum;    //税込み時の合計金額用
         decimal TaxAmount;  //税額
         public DataTable clientDt = new DataTable();//顧客情報
+        int type = 1;
         public int count = 0;
         decimal money0;
         decimal money1;
@@ -34,7 +35,8 @@ namespace Flawless_ex
         decimal money10;
         decimal money11;
         decimal money12;
-
+        string staff_name;
+        string address;
         MainMenu mainMenu;
 
         DataTable dt = new DataTable();//大分類
@@ -73,16 +75,19 @@ namespace Flawless_ex
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataAdapter adapter;
-        public Statement(MainMenu main, int id)
+        public Statement(MainMenu main, int id, int type, string staff_name, string address)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
+            this.type = type;
+            this.staff_name = staff_name;
+            this.address = address;
         }
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
 
             string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
@@ -537,13 +542,113 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
 
+            this.button13.Enabled = false;
+            this.previewButton.Enabled = false;
+            this.button9.Enabled = false;
+
             //単価の欄に初期表示
             unitPriceTextBox0.Text = "単価 -> 重量 or 数量";
 
             //タブのサイズ変更
             tabControl1.ItemSize = new Size(300, 40);
-        }
+            if (count != 0)
+            {
+                if (type == 0)
+                {
+                    //顧客情報 法人
+                    #region "計算書"
+                    DataTable clientDt = new DataTable();
+                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + staff_name + "' and address = '" + address + "';";
+                    adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
+                    adapter.Fill(clientDt);
 
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    int type = (int)row2["type"];
+
+                    string companyNmae = row2["company_name"].ToString();
+                    string shopName = row2["shop_name"].ToString();
+                    string Staff_name = row2["staff_name"].ToString();
+                    //string Address = row2["address"].ToString();
+                    string register_date = row2["register_date"].ToString();
+                    string remarks = row2["remarks"].ToString();
+                    string antique_license = row2["antique_license"].ToString();
+
+                    typeTextBox.Text = "法人";
+                    companyTextBox.Text = companyNmae;
+                    textBox302.Text = antique_license;
+                    shopNameTextBox.Text = shopName;
+                    clientNameTextBox.Text = Staff_name;
+                    //addressTextBox.Text = Address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                    #endregion
+                    #region "納品書"
+                    typeTextBox2.Text = "法人";
+                    companyTextBox2.Text = companyNmae;
+                    shopNameTextBox2.Text = shopName;
+                    clientNameTextBox2.Text = Staff_name;
+                    //addressTextBox2.Text = Address;
+                    registerDateTextBox2.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                    textBox1.Text = antique_license;
+                    #endregion
+
+                }
+                else if (type == 1)
+                {
+                    //顧客情報 個人
+                    DataTable clientDt = new DataTable();
+                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + staff_name + "' and address = '" + address + "';";
+                    adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
+                    adapter.Fill(clientDt);
+
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    int type = (int)row2["type"];
+
+                    string name = row2["name"].ToString();
+                    //string Address = row2["address"].ToString();
+                    string register_date = row2["register_date"].ToString();
+                    string remarks = row2["remarks"].ToString();
+                    string occupation = row2["occupation"].ToString();
+                    string birthday = row2["birthday"].ToString();
+                    string antique_license = row2["antique_license"].ToString();
+
+                    #region "計算書"
+                    label16.Text = "氏名";
+                    label17.Text = "生年月日";
+                    label18.Text = "職業";
+                    typeTextBox.Text = "個人";
+                    companyTextBox.Text = name;
+                    shopNameTextBox.Text = birthday;
+                    clientNameTextBox.Text = occupation;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                    textBox302.Text = antique_license;
+                    label38.Visible = false;
+                    registerDateTextBox.Visible = false;
+                    #endregion
+                    #region "納品書"
+                    typeTextBox2.Text = "個人";
+                    label75.Text = "氏名";
+                    label76.Text = "職業";
+                    label77.Text = "生年月日";
+                    clientNameTextBox2.Text = occupation;
+                    companyTextBox2.Text = name;
+                    shopNameTextBox2.Text = birthday;
+                    //addressTextBox2.Text = Address;
+                    registerDateTextBox2.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                    textBox1.Text = antique_license;
+                    label36.Visible = false;
+                    registerDateTextBox2.Visible = false;
+                    #endregion
+                }
+                
+            }
+        
+        }
         private void button1_Click(object sender, EventArgs e) //200万以上取引時の表示
         {
             groupBox1.Show();
@@ -581,7 +686,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -610,7 +715,7 @@ namespace Flawless_ex
 
                 int codeNum = (int)mainCategoryComboBox1.SelectedValue;
                 dt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1280,1007 +1385,9 @@ namespace Flawless_ex
         }
         #endregion
 
-        /*
-        #region "納品書　計算ボタン"
-        private void calc2Button2_Click(object sender, EventArgs e)
-        {
-            decimal sub;
-            #region "計算開始"
-            //計算開始
-            for (int i = 0; i <= 12; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        if (!string.IsNullOrEmpty(weightTextBox00.Text))
-                        {
-                            int j = weightTextBox00.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight00 = Math.Round(decimal.Parse(weightTextBox00.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox00.Text = weight00.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox00.Text))
-                                {
-                                    sub = weight00 * decimal.Parse(unitPriceTextBox00.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox00.Text = string.Format("{0:C}", sub);
-                                    money0 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox00.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox00.Text) * decimal.Parse(unitPriceTextBox00.Text);
-                                    moneyTextBox00.Text = string.Format("{0:C}", sub);
-                                    money0 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox00.Text) && !string.IsNullOrEmpty(unitPriceTextBox00.Text))
-                            {
-                                sub = decimal.Parse(countTextBox00.Text) * decimal.Parse(unitPriceTextBox00.Text);
-                                moneyTextBox00.Text = string.Format("{0:C}", sub);
-                                money0 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("１行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 1:
-                        if (!string.IsNullOrEmpty(weightTextBox01.Text))
-                        {
-                            int j = weightTextBox01.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight01 = Math.Round(decimal.Parse(weightTextBox01.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox01.Text = weight01.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox01.Text))
-                                {
-                                    sub = weight01 * decimal.Parse(unitPriceTextBox01.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox01.Text = string.Format("{0:C}", sub);
-                                    money1 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("２行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox01.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
-                                    moneyTextBox01.Text = string.Format("{0:C}", sub);
-                                    money1 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("２行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox01.Text) && !string.IsNullOrEmpty(unitPriceTextBox01.Text))
-                            {
-                                sub = decimal.Parse(countTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
-                                moneyTextBox01.Text = string.Format("{0:C}", sub);
-                                money1 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("２行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 2:
-                        if (!string.IsNullOrEmpty(weightTextBox02.Text))
-                        {
-                            int j = weightTextBox02.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight02 = Math.Round(decimal.Parse(weightTextBox02.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox02.Text = weight02.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox02.Text))
-                                {
-                                    sub = weight02 * decimal.Parse(unitPriceTextBox02.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox02.Text = string.Format("{0:C}", sub);
-                                    money2 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("３行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox02.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox02.Text) * decimal.Parse(unitPriceTextBox02.Text);
-                                    moneyTextBox02.Text = string.Format("{0:C}", sub);
-                                    money2 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("３行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox02.Text) && !string.IsNullOrEmpty(unitPriceTextBox02.Text))
-                            {
-                                sub = decimal.Parse(countTextBox02.Text) * decimal.Parse(unitPriceTextBox02.Text);
-                                moneyTextBox02.Text = string.Format("{0:C}", sub);
-                                money2 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("３行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 3:
-                        if (!string.IsNullOrEmpty(weightTextBox03.Text))
-                        {
-                            int j = weightTextBox03.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight03 = Math.Round(decimal.Parse(weightTextBox03.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox03.Text = weight03.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox03.Text))
-                                {
-                                    sub = weight03 * decimal.Parse(unitPriceTextBox03.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox03.Text = string.Format("{0:C}", sub);
-                                    money3 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("４行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox03.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox03.Text) * decimal.Parse(unitPriceTextBox03.Text);
-                                    moneyTextBox03.Text = string.Format("{0:C}", sub);
-                                    money3 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("４行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox03.Text) && !string.IsNullOrEmpty(unitPriceTextBox03.Text))
-                            {
-                                sub = decimal.Parse(countTextBox03.Text) * decimal.Parse(unitPriceTextBox03.Text);
-                                moneyTextBox03.Text = string.Format("{0:C}", sub);
-                                money3 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("４行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 4:
-                        if (!string.IsNullOrEmpty(weightTextBox04.Text))
-                        {
-                            int j = weightTextBox04.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight04 = Math.Round(decimal.Parse(weightTextBox04.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox04.Text = weight04.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox04.Text))
-                                {
-                                    sub = weight04 * decimal.Parse(unitPriceTextBox04.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox04.Text = string.Format("{0:C}", sub);
-                                    money4 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("５行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox04.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
-                                    moneyTextBox04.Text = string.Format("{0:C}", sub);
-                                    money4 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("５行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox04.Text) && !string.IsNullOrEmpty(unitPriceTextBox04.Text))
-                            {
-                                sub = decimal.Parse(countTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
-                                moneyTextBox04.Text = string.Format("{0:C}", sub);
-                                money4 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("５行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 5:
-                        if (!string.IsNullOrEmpty(weightTextBox05.Text))
-                        {
-                            int j = weightTextBox05.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight05 = Math.Round(decimal.Parse(weightTextBox05.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox05.Text = weight05.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox05.Text))
-                                {
-                                    sub = weight05 * decimal.Parse(unitPriceTextBox05.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox05.Text = string.Format("{0:C}", sub);
-                                    money5 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("６行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox05.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox05.Text) * decimal.Parse(unitPriceTextBox05.Text);
-                                    moneyTextBox05.Text = string.Format("{0:C}", sub);
-                                    money5 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("６行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox05.Text) && !string.IsNullOrEmpty(unitPriceTextBox05.Text))
-                            {
-                                sub = decimal.Parse(countTextBox05.Text) * decimal.Parse(unitPriceTextBox05.Text);
-                                moneyTextBox05.Text = string.Format("{0:C}", sub);
-                                money5 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("６行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 6:
-                        if (!string.IsNullOrEmpty(weightTextBox06.Text))
-                        {
-                            int j = weightTextBox06.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight06 = Math.Round(decimal.Parse(weightTextBox06.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox06.Text = weight06.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox06.Text))
-                                {
-                                    sub = weight06 * decimal.Parse(unitPriceTextBox06.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox06.Text = string.Format("{0:C}", sub);
-                                    money6 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("７行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox06.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox06.Text) * decimal.Parse(unitPriceTextBox06.Text);
-                                    moneyTextBox06.Text = string.Format("{0:C}", sub);
-                                    money6 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("７行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox06.Text) && !string.IsNullOrEmpty(unitPriceTextBox06.Text))
-                            {
-                                sub = decimal.Parse(countTextBox06.Text) * decimal.Parse(unitPriceTextBox06.Text);
-                                moneyTextBox06.Text = string.Format("{0:C}", sub);
-                                money6 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("７行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 7:
-                        if (!string.IsNullOrEmpty(weightTextBox07.Text))
-                        {
-                            int j = weightTextBox07.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight07 = Math.Round(decimal.Parse(weightTextBox07.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox07.Text = weight07.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox07.Text))
-                                {
-                                    sub = weight07 * decimal.Parse(unitPriceTextBox07.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox07.Text = string.Format("{0:C}", sub);
-                                    money7 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("８行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox07.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox07.Text) * decimal.Parse(unitPriceTextBox07.Text);
-                                    moneyTextBox07.Text = string.Format("{0:C}", sub);
-                                    money7 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("８行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox07.Text) && !string.IsNullOrEmpty(unitPriceTextBox07.Text))
-                            {
-                                sub = decimal.Parse(countTextBox07.Text) * decimal.Parse(unitPriceTextBox07.Text);
-                                moneyTextBox07.Text = string.Format("{0:C}", sub);
-                                money7 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("８行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 8:
-                        if (!string.IsNullOrEmpty(weightTextBox08.Text))
-                        {
-                            int j = weightTextBox08.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight08 = Math.Round(decimal.Parse(weightTextBox08.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox08.Text = weight08.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox08.Text))
-                                {
-                                    sub = weight08 * decimal.Parse(unitPriceTextBox08.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox08.Text = string.Format("{0:C}", sub);
-                                    money8 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("９行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox08.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox08.Text) * decimal.Parse(unitPriceTextBox08.Text);
-                                    moneyTextBox08.Text = string.Format("{0:C}", sub);
-                                    money8 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("９行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox08.Text) && !string.IsNullOrEmpty(unitPriceTextBox08.Text))
-                            {
-                                sub = decimal.Parse(countTextBox08.Text) * decimal.Parse(unitPriceTextBox08.Text);
-                                moneyTextBox08.Text = string.Format("{0:C}", sub);
-                                money8 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("９行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 9:
-                        if (!string.IsNullOrEmpty(weightTextBox09.Text))
-                        {
-                            int j = weightTextBox09.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight09 = Math.Round(decimal.Parse(weightTextBox09.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox09.Text = weight09.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox09.Text))
-                                {
-                                    sub = weight09 * decimal.Parse(unitPriceTextBox09.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox09.Text = string.Format("{0:C}", sub);
-                                    money9 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１０行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox09.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox09.Text) * decimal.Parse(unitPriceTextBox09.Text);
-                                    moneyTextBox09.Text = string.Format("{0:C}", sub);
-                                    money9 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１０行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox09.Text) && !string.IsNullOrEmpty(unitPriceTextBox09.Text))
-                            {
-                                sub = decimal.Parse(countTextBox09.Text) * decimal.Parse(unitPriceTextBox09.Text);
-                                moneyTextBox09.Text = string.Format("{0:C}", sub);
-                                money9 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("１０行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 10:
-                        if (!string.IsNullOrEmpty(weightTextBox010.Text))
-                        {
-                            int j = weightTextBox010.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight010 = Math.Round(decimal.Parse(weightTextBox010.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox010.Text = weight010.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox010.Text))
-                                {
-                                    sub = weight010 * decimal.Parse(unitPriceTextBox010.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox010.Text = string.Format("{0:C}", sub);
-                                    money10 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１１行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox010.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox010.Text) * decimal.Parse(unitPriceTextBox010.Text);
-                                    moneyTextBox010.Text = string.Format("{0:C}", sub);
-                                    money10 = sub;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１１行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox010.Text) && !string.IsNullOrEmpty(unitPriceTextBox010.Text))
-                            {
-                                sub = decimal.Parse(countTextBox010.Text) * decimal.Parse(unitPriceTextBox010.Text);
-                                moneyTextBox010.Text = string.Format("{0:C}", sub);
-                                money10 = sub;
-                            }
-                            else
-                            {
-                                MessageBox.Show("１１行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 11:
-                        if (!string.IsNullOrEmpty(weightTextBox011.Text))
-                        {
-                            int j = weightTextBox011.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight011 = Math.Round(decimal.Parse(weightTextBox011.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox011.Text = weight011.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox011.Text))
-                                {
-                                    sub = weight011 * decimal.Parse(unitPriceTextBox011.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox011.Text = string.Format("{0:#,0}", sub);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１２行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox011.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox011.Text) * decimal.Parse(unitPriceTextBox011.Text);
-                                    moneyTextBox011.Text = string.Format("{0:#,0}", sub);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１２行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox011.Text) && !string.IsNullOrEmpty(unitPriceTextBox011.Text))
-                            {
-                                sub = decimal.Parse(countTextBox011.Text) * decimal.Parse(unitPriceTextBox011.Text);
-                                moneyTextBox11.Text = string.Format("{0:#,0}", sub);
-                            }
-                            else
-                            {
-                                MessageBox.Show("１２行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    case 12:
-                        if (!string.IsNullOrEmpty(weightTextBox012.Text))
-                        {
-                            int j = weightTextBox012.Text.IndexOf(".");
-                            if (j > -1)     //小数点あり
-                            {
-                                decimal weight012 = Math.Round(decimal.Parse(weightTextBox012.Text), 1, MidpointRounding.AwayFromZero);
-                                weightTextBox012.Text = weight012.ToString();
-
-                                if (!string.IsNullOrEmpty(unitPriceTextBox012.Text))
-                                {
-                                    sub = weight012 * decimal.Parse(unitPriceTextBox012.Text);
-                                    sub = Math.Floor(sub);
-                                    moneyTextBox012.Text = string.Format("{0:#,0}", sub);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１３行目に単価が入力されておりません。");
-                                }
-                            }
-                            else
-                            {
-                                if (!string.IsNullOrEmpty(unitPriceTextBox012.Text))
-                                {
-                                    sub = decimal.Parse(weightTextBox012.Text) * decimal.Parse(unitPriceTextBox012.Text);
-                                    moneyTextBox012.Text = string.Format("{0:#,0}", sub);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("１３行目に単価が入力されておりません。");
-                                }
-                            }
-                        }
-                        else//数量入力版
-                        {
-                            if (!string.IsNullOrEmpty(countTextBox012.Text) && !string.IsNullOrEmpty(unitPriceTextBox012.Text))
-                            {
-                                sub = decimal.Parse(countTextBox012.Text) * decimal.Parse(unitPriceTextBox012.Text);
-                                moneyTextBox012.Text = string.Format("{0:#,0}", sub);
-                            }
-                            else
-                            {
-                                MessageBox.Show("１３行目に数量もしくは単価が入力されておりません。");
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }//計算終了
-            }
-            #endregion
-            #region"空欄確認"
-            //空欄確認
-            for (int i = 0; i <= 12; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        if (string.IsNullOrEmpty(moneyTextBox01.Text))
-                        {
-                            moneyTextBox01.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 1:
-                        if (string.IsNullOrEmpty(moneyTextBox02.Text))
-                        {
-                            moneyTextBox02.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 2:
-                        if (string.IsNullOrEmpty(moneyTextBox03.Text))
-                        {
-                            moneyTextBox03.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 3:
-                        if (string.IsNullOrEmpty(moneyTextBox04.Text))
-                        {
-                            moneyTextBox04.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 4:
-                        if (string.IsNullOrEmpty(moneyTextBox05.Text))
-                        {
-                            moneyTextBox05.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 5:
-                        if (string.IsNullOrEmpty(moneyTextBox06.Text))
-                        {
-                            moneyTextBox06.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 6:
-                        if (string.IsNullOrEmpty(moneyTextBox07.Text))
-                        {
-                            moneyTextBox07.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 7:
-                        if (string.IsNullOrEmpty(moneyTextBox08.Text))
-                        {
-                            moneyTextBox08.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 8:
-                        if (string.IsNullOrEmpty(moneyTextBox09.Text))
-                        {
-                            moneyTextBox09.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 9:
-                        if (string.IsNullOrEmpty(moneyTextBox010.Text))
-                        {
-                            moneyTextBox010.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 10:
-                        if (string.IsNullOrEmpty(moneyTextBox011.Text))
-                        {
-                            moneyTextBox011.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 11:
-                        if (string.IsNullOrEmpty(moneyTextBox012.Text))
-                        {
-                            moneyTextBox012.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    default:
-                        if (string.IsNullOrEmpty(moneyTextBox00.Text))
-                        {
-                            moneyTextBox00.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                }
-            }
-            #endregion
-            #region "重量空欄確認"
-            //重量空欄確認
-            for (int i = 0; i <= 12; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        if (string.IsNullOrEmpty(weightTextBox01.Text))
-                        {
-                            weightTextBox01.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 1:
-                        if (string.IsNullOrEmpty(weightTextBox02.Text))
-                        {
-                            weightTextBox02.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 2:
-                        if (string.IsNullOrEmpty(weightTextBox03.Text))
-                        {
-                            weightTextBox03.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 3:
-                        if (string.IsNullOrEmpty(weightTextBox04.Text))
-                        {
-                            weightTextBox04.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 4:
-                        if (string.IsNullOrEmpty(weightTextBox05.Text))
-                        {
-                            weightTextBox05.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 5:
-                        if (string.IsNullOrEmpty(weightTextBox06.Text))
-                        {
-                            weightTextBox06.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 6:
-                        if (string.IsNullOrEmpty(weightTextBox07.Text))
-                        {
-                            weightTextBox07.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 7:
-                        if (string.IsNullOrEmpty(weightTextBox08.Text))
-                        {
-                            weightTextBox08.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 8:
-                        if (string.IsNullOrEmpty(weightTextBox09.Text))
-                        {
-                            weightTextBox09.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 9:
-                        if (string.IsNullOrEmpty(weightTextBox010.Text))
-                        {
-                            weightTextBox010.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 10:
-                        if (string.IsNullOrEmpty(weightTextBox011.Text))
-                        {
-                            weightTextBox011.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 11:
-                        if (string.IsNullOrEmpty(weightTextBox012.Text))
-                        {
-                            weightTextBox012.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    default:
-                        if (string.IsNullOrEmpty(weightTextBox00.Text))
-                        {
-                            weightTextBox00.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                }
-            }
-            #endregion
-            #region"総数量確認"
-            //総数量確認
-            for (int i = 0; i <= 12; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        if (string.IsNullOrEmpty(countTextBox01.Text))
-                        {
-                            countTextBox01.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 1:
-                        if (string.IsNullOrEmpty(countTextBox02.Text))
-                        {
-                            countTextBox02.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 2:
-                        if (string.IsNullOrEmpty(countTextBox03.Text))
-                        {
-                            countTextBox03.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 3:
-                        if (string.IsNullOrEmpty(countTextBox04.Text))
-                        {
-                            countTextBox04.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 4:
-                        if (string.IsNullOrEmpty(countTextBox05.Text))
-                        {
-                            countTextBox05.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 5:
-                        if (string.IsNullOrEmpty(countTextBox06.Text))
-                        {
-                            countTextBox06.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 6:
-                        if (string.IsNullOrEmpty(countTextBox07.Text))
-                        {
-                            countTextBox07.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 7:
-                        if (string.IsNullOrEmpty(countTextBox08.Text))
-                        {
-                            countTextBox08.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 8:
-                        if (string.IsNullOrEmpty(countTextBox09.Text))
-                        {
-                            countTextBox09.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 9:
-                        if (string.IsNullOrEmpty(countTextBox010.Text))
-                        {
-                            countTextBox010.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 10:
-                        if (string.IsNullOrEmpty(countTextBox011.Text))
-                        {
-                            countTextBox011.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    case 11:
-                        if (string.IsNullOrEmpty(countTextBox012.Text))
-                        {
-                            countTextBox012.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                    default:
-                        if (string.IsNullOrEmpty(countTextBox00.Text))
-                        {
-                            countTextBox00.Text = 0.ToString();
-                        }
-                        else { }
-                        break;
-                }
-            }
-            #endregion
-            #region "総量"
-            //総重量計算
-            decimal weisum = decimal.Parse(weightTextBox00.Text) + decimal.Parse(weightTextBox01.Text) + decimal.Parse(weightTextBox02.Text) + decimal.Parse(weightTextBox03.Text) + decimal.Parse(weightTextBox04.Text)
-                        + decimal.Parse(weightTextBox05.Text) + decimal.Parse(weightTextBox06.Text) + decimal.Parse(weightTextBox07.Text) + decimal.Parse(weightTextBox08.Text) + decimal.Parse(weightTextBox09.Text)
-                        + decimal.Parse(weightTextBox010.Text) + decimal.Parse(weightTextBox011.Text) + decimal.Parse(weightTextBox012.Text);
-
-            //総数量計算
-            decimal countsum = decimal.Parse(countTextBox00.Text) + decimal.Parse(countTextBox01.Text) + decimal.Parse(countTextBox02.Text) + decimal.Parse(countTextBox03.Text) + decimal.Parse(countTextBox04.Text)
-                        + decimal.Parse(countTextBox05.Text) + decimal.Parse(countTextBox06.Text) + decimal.Parse(countTextBox07.Text) + decimal.Parse(countTextBox08.Text) + decimal.Parse(countTextBox09.Text)
-                        + decimal.Parse(countTextBox010.Text) + decimal.Parse(countTextBox011.Text) + decimal.Parse(countTextBox012.Text);
-
-            //小計計算
-            decimal subSum = decimal.Parse(moneyTextBox00.Text) + decimal.Parse(moneyTextBox01.Text) + decimal.Parse(moneyTextBox02.Text) + decimal.Parse(moneyTextBox03.Text) + decimal.Parse(moneyTextBox04.Text)
-                        + decimal.Parse(moneyTextBox05.Text) + decimal.Parse(moneyTextBox06.Text) + decimal.Parse(moneyTextBox07.Text) + decimal.Parse(moneyTextBox08.Text) + decimal.Parse(moneyTextBox09.Text)
-                        + decimal.Parse(moneyTextBox010.Text) + decimal.Parse(moneyTextBox011.Text) + decimal.Parse(moneyTextBox012.Text);
-
-            //税額計算 DBから取得
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;";
-            
-            string sql_str5 = "select vat_rate from vat_m;";        //税率取得
-            cmd = new NpgsqlCommand(sql_str5, conn);
-
-            conn.Open();
-
-            using (NpgsqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string vat_rate = reader["vat_rate"].ToString();
-                    tax.Text = string.Format("{0:P}", int.Parse(vat_rate));
-                }
-            }
-            Tax = int.Parse(tax.Text.ToString());
-
-            conn.Close();
-
-            decimal TaxAmount = subSum * Tax / 100;
-
-            
-            //合計計算
-            decimal sum = subSum + TaxAmount;
-
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));    //デフォルトでは税込み表記
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
-            #endregion
-        }
-        #endregion
-       */
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            using (client_search search2 = new client_search(this))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -2307,7 +1414,7 @@ namespace Flawless_ex
                     companyTextBox.Text = companyNmae;
                     shopNameTextBox.Text = shopName;
                     clientNameTextBox.Text = staff_name;
-                    addressTextBox.Text = address;
+                    //addressTextBox.Text = address;
                     registerDateTextBox.Text = register_date;
                     clientRemarksTextBox.Text = remarks;
                 }
@@ -2319,7 +1426,7 @@ namespace Flawless_ex
 
                     typeTextBox.Text = "個人";
                     clientNameTextBox.Text = name;
-                    addressTextBox.Text = address;
+                    //addressTextBox.Text = address;
                     clientRemarksTextBox.Text = remarks;
                 }
             }
@@ -2327,7 +1434,7 @@ namespace Flawless_ex
 
         private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
         {
-            using (client_search search2 = new client_search(this))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -2354,7 +1461,7 @@ namespace Flawless_ex
                     companyTextBox2.Text = companyName;
                     shopNameTextBox2.Text = shopName;
                     clientNameTextBox2.Text = staff_name;
-                    addressTextBox2.Text = address;
+                    //addressTextBox2.Text = address;
                     registerDateTextBox2.Text = register_date;
                     clientRemarksTextBox2.Text = remarks;
                 }
@@ -2367,7 +1474,7 @@ namespace Flawless_ex
 
                     typeTextBox2.Text = "個人";
                     clientNameTextBox2.Text = name;
-                    addressTextBox2.Text = address;
+                    //addressTextBox2.Text = address;
                     clientRemarksTextBox2.Text = remarks;
                 }
             }
@@ -2404,7 +1511,7 @@ namespace Flawless_ex
             DataTable dt = new DataTable();
             string sql_str = "Insert into statement_data VALUES ( " + staff_id + " , " +  staff_id  + " , " + staff_id + " , " + TotalWeight + " ,  " + Amount + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod  + "' , '" + SettlementDate + "' , '" + DeliveryDate +  "' , '" + staff_id + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -2414,14 +1521,15 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             string sql_str2 = "Insert into statement_calc_data VALUES ( " + staff_id + " , " + staff_id + " , " +  Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount +  " , '" + Remarks + "' , '" + staff_id + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt2);
             conn.Close();
             MessageBox.Show("登録しました。");
-
+            this.button13.Enabled = true;
+            this.previewButton.Enabled = true;
         }
 
         private void Button11_Click(object sender, EventArgs e)
@@ -4682,5 +3790,14 @@ namespace Flawless_ex
         #region　"納品書　数量×単価"     これから
 
         #endregion
+
+        private void Client_searchButton1_Click(object sender, EventArgs e)
+        {
+            using (client_search search2 = new client_search(mainMenu, staff_id, type))
+            {
+                this.Hide();
+                search2.ShowDialog();
+            }
+        }
     }
 }
