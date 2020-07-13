@@ -1535,7 +1535,6 @@ namespace Flawless_ex
         private void Button11_Click(object sender, EventArgs e)
         {
             string path = " ";
-            textBox1.Text = " ";
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "ファイルを開く";
             op.InitialDirectory = @"C:\Users";
@@ -1555,7 +1554,6 @@ namespace Flawless_ex
         private void Button12_Click(object sender, EventArgs e)
         {
             string path = " ";
-            textBox302.Text = " ";
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "ファイルを開く";
             op.InitialDirectory = @"C:\Users";
