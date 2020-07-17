@@ -48,7 +48,7 @@ namespace Flawless_ex
             string RegistrationDate = this.textBox1.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
-            int PostalCodeNumber = int.Parse(this.textBox4.Text);
+            string PostalCodeNumber = this.textBox4.Text;
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
             string ShopName = this.textBox7.Text;
@@ -113,7 +113,7 @@ namespace Flawless_ex
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
             string Birthday = this.textBox50.Text;
-            int PostalCodeNumber = int.Parse(this.textBox54.Text);
+            string PostalCodeNumber = this.textBox54.Text;
             string Address = this.textBox53.Text;
             string AddressKana = this.textBox52.Text;
             string PhoneNumber = this.textBox49.Text;
