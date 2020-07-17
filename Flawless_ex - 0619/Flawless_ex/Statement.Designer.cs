@@ -36,9 +36,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button13 = new System.Windows.Forms.Button();
-            this.textBox302 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label30 = new System.Windows.Forms.Label();
@@ -171,6 +168,9 @@
             this.typeTextBox = new System.Windows.Forms.TextBox();
             this.client_Button = new System.Windows.Forms.Button();
             this.clientRemarksTextBox = new System.Windows.Forms.TextBox();
+            this.textBox302 = new System.Windows.Forms.TextBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.registerDateTextBox = new System.Windows.Forms.TextBox();
@@ -247,6 +247,9 @@
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.typeTextBox2 = new System.Windows.Forms.TextBox();
             this.client_searchButton1 = new System.Windows.Forms.Button();
             this.clientRemarksTextBox2 = new System.Windows.Forms.TextBox();
@@ -379,9 +382,6 @@
             this.itemDetail012 = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button12 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -489,36 +489,6 @@
             this.button13.TabIndex = 47;
             this.button13.Text = "成績入力画面";
             this.button13.UseVisualStyleBackColor = true;
-            // 
-            // textBox302
-            // 
-            this.textBox302.Location = new System.Drawing.Point(27, 260);
-            this.textBox302.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox302.Name = "textBox302";
-            this.textBox302.ReadOnly = true;
-            this.textBox302.Size = new System.Drawing.Size(196, 33);
-            this.textBox302.TabIndex = 46;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(32, 230);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(168, 26);
-            this.label10.TabIndex = 44;
-            this.label10.Text = "古物商許可証";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(250, 238);
-            this.button11.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(199, 76);
-            this.button11.TabIndex = 40;
-            this.button11.Text = "ファイルを選択";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.Button11_Click);
             // 
             // button1
             // 
@@ -2145,6 +2115,36 @@
             this.clientRemarksTextBox.Size = new System.Drawing.Size(375, 232);
             this.clientRemarksTextBox.TabIndex = 28;
             // 
+            // textBox302
+            // 
+            this.textBox302.Location = new System.Drawing.Point(27, 260);
+            this.textBox302.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox302.Name = "textBox302";
+            this.textBox302.ReadOnly = true;
+            this.textBox302.Size = new System.Drawing.Size(196, 33);
+            this.textBox302.TabIndex = 46;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(250, 238);
+            this.button11.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(199, 76);
+            this.button11.TabIndex = 40;
+            this.button11.Text = "ファイルを選択";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Button11_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(32, 230);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(168, 26);
+            this.label10.TabIndex = 44;
+            this.label10.Text = "古物商許可証";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -2956,13 +2956,14 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(2038, 1353);
+            this.button9.Location = new System.Drawing.Point(2023, 1353);
             this.button9.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(208, 120);
+            this.button9.Size = new System.Drawing.Size(237, 120);
             this.button9.TabIndex = 45;
-            this.button9.Text = "計算書プレビュー";
+            this.button9.Text = "納品書プレビュー";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
             // button10
             // 
@@ -2973,6 +2974,7 @@
             this.button10.TabIndex = 44;
             this.button10.Text = "登録";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.Button10_Click);
             // 
             // groupBox3
             // 
@@ -2999,6 +3001,33 @@
             this.groupBox3.Size = new System.Drawing.Size(473, 1020);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(227, 248);
+            this.button12.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(216, 80);
+            this.button12.TabIndex = 85;
+            this.button12.Text = "ファイルを選択";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(18, 272);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(171, 33);
+            this.textBox1.TabIndex = 86;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(21, 228);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(168, 26);
+            this.label9.TabIndex = 85;
+            this.label9.Text = "古物商許可証";
             // 
             // typeTextBox2
             // 
@@ -4528,33 +4557,6 @@
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(21, 228);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(168, 26);
-            this.label9.TabIndex = 85;
-            this.label9.Text = "古物商許可証";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(18, 272);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(171, 33);
-            this.textBox1.TabIndex = 86;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(227, 248);
-            this.button12.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(216, 80);
-            this.button12.TabIndex = 85;
-            this.button12.Text = "ファイルを選択";
-            this.button12.UseVisualStyleBackColor = true;
             // 
             // Statement
             // 

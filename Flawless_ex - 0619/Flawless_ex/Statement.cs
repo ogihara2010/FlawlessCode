@@ -2369,12 +2369,17 @@ namespace Flawless_ex
                 subSum = money0;
                 TaxAmount = subSum * Tax / 100;
                 sum = subSum + TaxAmount;
-
+                
                 totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
                 totalCount.Text = string.Format("{0:#,0}", countsum);
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                    this.BackColor = Color.Red;
+                }
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox0.Text))
@@ -2391,6 +2396,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }
             }
         }
         private void moneyTextBox1_TextChanged(object sender, EventArgs e)
@@ -2404,12 +2413,17 @@ namespace Flawless_ex
                 subSum = money0 + money1;
                 TaxAmount = subSum * Tax / 100;
                 sum = subSum + TaxAmount;
+                
 
                 totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
                 totalCount.Text = string.Format("{0:#,0}", countsum);
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox1.Text))
@@ -2426,6 +2440,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }
             }
         }
         private void moneyTextBox2_TextChanged(object sender, EventArgs e)
@@ -2445,6 +2463,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox2.Text))
@@ -2461,6 +2483,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox3_TextChanged(object sender, EventArgs e)
@@ -2480,6 +2506,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox3.Text))
@@ -2496,6 +2526,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox4_TextChanged(object sender, EventArgs e)
@@ -2515,6 +2549,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox4.Text))
@@ -2531,6 +2569,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox5_TextChanged(object sender, EventArgs e)
@@ -2550,6 +2592,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox5.Text))
@@ -2566,6 +2612,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox6_TextChanged(object sender, EventArgs e)
@@ -2585,6 +2635,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox6.Text))
@@ -2601,6 +2655,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox7_TextChanged(object sender, EventArgs e)
@@ -2620,6 +2678,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox7.Text))
@@ -2636,6 +2698,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox8_TextChanged(object sender, EventArgs e)
@@ -2655,6 +2721,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox8.Text))
@@ -2671,6 +2741,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox9_TextChanged(object sender, EventArgs e)
@@ -2690,6 +2764,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox9.Text))
@@ -2706,6 +2784,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox10_TextChanged(object sender, EventArgs e)
@@ -2725,6 +2807,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox10.Text))
@@ -2741,6 +2827,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox11_TextChanged(object sender, EventArgs e)
@@ -2760,6 +2850,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox11.Text))
@@ -2776,6 +2870,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         private void moneyTextBox12_TextChanged(object sender, EventArgs e)
@@ -2795,6 +2893,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
             //数量×単価
             if (!string.IsNullOrEmpty(countTextBox12.Text))
@@ -2811,6 +2913,10 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                /*if (sum >= 2000000)
+                {
+                    groupBox1.Show();
+                }*/
             }
         }
         #endregion
@@ -3796,6 +3902,64 @@ namespace Flawless_ex
                 this.Hide();
                 search2.ShowDialog();
             }
+        }
+
+        private void Button9_Click(object sender, EventArgs e)
+        {
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
+            this.Close();
+            deliveryPreview.Show();
+        }
+
+        private void Button10_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.No)
+            {
+                return;
+            }
+            /*
+            this.documentNumberTextBox.Text = "101";
+            int ControlNumber = int.Parse(this.textBox382.Text);
+            int TotalWeight = int.Parse(this.totalWeight.Text);
+            int Amount = int.Parse(this.totalCount.Text);
+            decimal SubTotal = decimal.Parse(this.subTotal.Text);
+            decimal TaxAmount = decimal.Parse(this.taxAmount.Text);
+            decimal Total = decimal.Parse(this.sumTextBox.Text);
+            string SettlementDate = this.settlementBox.Text;
+            string DeliveryDate = this.deliveryDateBox.Text;
+            string DeliveryMethod = this.deliveryTextBox.Text;
+            string PaymentMethod = this.paymentMethodsBox.Text;
+            decimal Weight = decimal.Parse(this.weightTextBox0.Text);
+            int Count = int.Parse(this.countTextBox0.Text);
+            decimal UnitPrice = decimal.Parse(this.unitPriceTextBox0.Text);
+            decimal amount = decimal.Parse(this.moneyTextBox0.Text);
+            string Remarks = this.remarks0.Text;
+            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter;
+
+            DataTable dt = new DataTable();
+            string sql_str = "Insert into delivery_m VALUES ( " + ControlNumber + " , " + type + " , " + staff_id + " , " + staff_id + " ,  " + Amount + " , " + SubTotal + ", " + TaxAmount + " , " + Total + " , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "' , '" + staff_id + "');";
+
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str, conn);
+            adapter.Fill(dt);
+            conn.Close();
+
+            DataTable dt2 = new DataTable();
+            string sql_str2 = "Insert into delivery_calc VALUES ( " + staff_id + " , " + staff_id + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "' , '" + staff_id + "');";
+
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str2, conn);
+            adapter.Fill(dt2);
+            conn.Close();*/
+            MessageBox.Show("登録しました。");
+            this.button9.Enabled = true;
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Data;
+using Npgsql;
 
 namespace Flawless_ex
 {
@@ -7,6 +9,7 @@ namespace Flawless_ex
     {
         MainMenu mainMenu;
         int staff_id;
+        DataTable dt = new DataTable();
         public MonResult(MainMenu main, int id)
         {
             InitializeComponent();
@@ -23,6 +26,11 @@ namespace Flawless_ex
         private void choice_Click(object sender, EventArgs e)//選択ボタン
         {
 
+        }
+
+        private void MonResult_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }
