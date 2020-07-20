@@ -564,7 +564,7 @@ namespace Flawless_ex
 
                     DataRow row2;
                     row2 = clientDt.Rows[0];
-                    int type = (int)row2["type"];
+                    //int type = (int)row2["type"];
 
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
@@ -605,7 +605,7 @@ namespace Flawless_ex
 
                     DataRow row2;
                     row2 = clientDt.Rows[0];
-                    int type = (int)row2["type"];
+                    //int type = (int)row2["type"];
 
                     string name = row2["name"].ToString();
                     //string Address = row2["address"].ToString();

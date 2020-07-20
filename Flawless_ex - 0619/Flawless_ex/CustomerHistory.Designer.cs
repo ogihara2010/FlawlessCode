@@ -59,9 +59,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label14 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -108,6 +106,8 @@
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.radioButton53 = new System.Windows.Forms.RadioButton();
             this.radioButton54 = new System.Windows.Forms.RadioButton();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -147,6 +147,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(14, 25);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(89, 28);
@@ -163,7 +164,6 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(89, 28);
             this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
             this.radioButton2.Text = "個人";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.RadioButton2_CheckedChanged);
@@ -191,13 +191,13 @@
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(87, 28);
             this.radioButton3.TabIndex = 6;
-            this.radioButton3.TabStop = true;
             this.radioButton3.Text = "AND";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
+            this.radioButton4.Checked = true;
             this.radioButton4.Location = new System.Drawing.Point(127, 14);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(73, 28);
@@ -225,6 +225,7 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
+            this.radioButton5.Checked = true;
             this.radioButton5.Location = new System.Drawing.Point(122, 21);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(73, 28);
@@ -240,7 +241,6 @@
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(87, 28);
             this.radioButton6.TabIndex = 10;
-            this.radioButton6.TabStop = true;
             this.radioButton6.Text = "AND";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
@@ -400,13 +400,6 @@
             this.label13.TabIndex = 48;
             this.label13.Text = "決済日";
             // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(56, 1746);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 31);
-            this.dateTimePicker1.TabIndex = 49;
-            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -415,13 +408,6 @@
             this.label14.Size = new System.Drawing.Size(34, 24);
             this.label14.TabIndex = 50;
             this.label14.Text = "～";
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(302, 1748);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 31);
-            this.dateTimePicker2.TabIndex = 51;
             // 
             // label15
             // 
@@ -534,13 +520,13 @@
             this.radioButton31.Name = "radioButton31";
             this.radioButton31.Size = new System.Drawing.Size(87, 28);
             this.radioButton31.TabIndex = 6;
-            this.radioButton31.TabStop = true;
             this.radioButton31.Text = "AND";
             this.radioButton31.UseVisualStyleBackColor = true;
             // 
             // radioButton32
             // 
             this.radioButton32.AutoSize = true;
+            this.radioButton32.Checked = true;
             this.radioButton32.Location = new System.Drawing.Point(127, 14);
             this.radioButton32.Name = "radioButton32";
             this.radioButton32.Size = new System.Drawing.Size(73, 28);
@@ -566,13 +552,13 @@
             this.radioButton33.Name = "radioButton33";
             this.radioButton33.Size = new System.Drawing.Size(87, 28);
             this.radioButton33.TabIndex = 6;
-            this.radioButton33.TabStop = true;
             this.radioButton33.Text = "AND";
             this.radioButton33.UseVisualStyleBackColor = true;
             // 
             // radioButton34
             // 
             this.radioButton34.AutoSize = true;
+            this.radioButton34.Checked = true;
             this.radioButton34.Location = new System.Drawing.Point(127, 14);
             this.radioButton34.Name = "radioButton34";
             this.radioButton34.Size = new System.Drawing.Size(73, 28);
@@ -598,13 +584,13 @@
             this.radioButton35.Name = "radioButton35";
             this.radioButton35.Size = new System.Drawing.Size(87, 28);
             this.radioButton35.TabIndex = 6;
-            this.radioButton35.TabStop = true;
             this.radioButton35.Text = "AND";
             this.radioButton35.UseVisualStyleBackColor = true;
             // 
             // radioButton36
             // 
             this.radioButton36.AutoSize = true;
+            this.radioButton36.Checked = true;
             this.radioButton36.Location = new System.Drawing.Point(127, 14);
             this.radioButton36.Name = "radioButton36";
             this.radioButton36.Size = new System.Drawing.Size(73, 28);
@@ -630,13 +616,13 @@
             this.radioButton37.Name = "radioButton37";
             this.radioButton37.Size = new System.Drawing.Size(87, 28);
             this.radioButton37.TabIndex = 6;
-            this.radioButton37.TabStop = true;
             this.radioButton37.Text = "AND";
             this.radioButton37.UseVisualStyleBackColor = true;
             // 
             // radioButton38
             // 
             this.radioButton38.AutoSize = true;
+            this.radioButton38.Checked = true;
             this.radioButton38.Location = new System.Drawing.Point(127, 14);
             this.radioButton38.Name = "radioButton38";
             this.radioButton38.Size = new System.Drawing.Size(73, 28);
@@ -662,13 +648,13 @@
             this.radioButton39.Name = "radioButton39";
             this.radioButton39.Size = new System.Drawing.Size(87, 28);
             this.radioButton39.TabIndex = 6;
-            this.radioButton39.TabStop = true;
             this.radioButton39.Text = "AND";
             this.radioButton39.UseVisualStyleBackColor = true;
             // 
             // radioButton40
             // 
             this.radioButton40.AutoSize = true;
+            this.radioButton40.Checked = true;
             this.radioButton40.Location = new System.Drawing.Point(127, 14);
             this.radioButton40.Name = "radioButton40";
             this.radioButton40.Size = new System.Drawing.Size(73, 28);
@@ -694,13 +680,13 @@
             this.radioButton41.Name = "radioButton41";
             this.radioButton41.Size = new System.Drawing.Size(87, 28);
             this.radioButton41.TabIndex = 6;
-            this.radioButton41.TabStop = true;
             this.radioButton41.Text = "AND";
             this.radioButton41.UseVisualStyleBackColor = true;
             // 
             // radioButton42
             // 
             this.radioButton42.AutoSize = true;
+            this.radioButton42.Checked = true;
             this.radioButton42.Location = new System.Drawing.Point(127, 14);
             this.radioButton42.Name = "radioButton42";
             this.radioButton42.Size = new System.Drawing.Size(73, 28);
@@ -726,13 +712,13 @@
             this.radioButton43.Name = "radioButton43";
             this.radioButton43.Size = new System.Drawing.Size(87, 28);
             this.radioButton43.TabIndex = 6;
-            this.radioButton43.TabStop = true;
             this.radioButton43.Text = "AND";
             this.radioButton43.UseVisualStyleBackColor = true;
             // 
             // radioButton44
             // 
             this.radioButton44.AutoSize = true;
+            this.radioButton44.Checked = true;
             this.radioButton44.Location = new System.Drawing.Point(127, 14);
             this.radioButton44.Name = "radioButton44";
             this.radioButton44.Size = new System.Drawing.Size(73, 28);
@@ -758,13 +744,13 @@
             this.radioButton45.Name = "radioButton45";
             this.radioButton45.Size = new System.Drawing.Size(87, 28);
             this.radioButton45.TabIndex = 6;
-            this.radioButton45.TabStop = true;
             this.radioButton45.Text = "AND";
             this.radioButton45.UseVisualStyleBackColor = true;
             // 
             // radioButton46
             // 
             this.radioButton46.AutoSize = true;
+            this.radioButton46.Checked = true;
             this.radioButton46.Location = new System.Drawing.Point(127, 14);
             this.radioButton46.Name = "radioButton46";
             this.radioButton46.Size = new System.Drawing.Size(73, 28);
@@ -790,13 +776,13 @@
             this.radioButton47.Name = "radioButton47";
             this.radioButton47.Size = new System.Drawing.Size(87, 28);
             this.radioButton47.TabIndex = 6;
-            this.radioButton47.TabStop = true;
             this.radioButton47.Text = "AND";
             this.radioButton47.UseVisualStyleBackColor = true;
             // 
             // radioButton48
             // 
             this.radioButton48.AutoSize = true;
+            this.radioButton48.Checked = true;
             this.radioButton48.Location = new System.Drawing.Point(127, 14);
             this.radioButton48.Name = "radioButton48";
             this.radioButton48.Size = new System.Drawing.Size(73, 28);
@@ -822,13 +808,13 @@
             this.radioButton49.Name = "radioButton49";
             this.radioButton49.Size = new System.Drawing.Size(87, 28);
             this.radioButton49.TabIndex = 6;
-            this.radioButton49.TabStop = true;
             this.radioButton49.Text = "AND";
             this.radioButton49.UseVisualStyleBackColor = true;
             // 
             // radioButton50
             // 
             this.radioButton50.AutoSize = true;
+            this.radioButton50.Checked = true;
             this.radioButton50.Location = new System.Drawing.Point(127, 14);
             this.radioButton50.Name = "radioButton50";
             this.radioButton50.Size = new System.Drawing.Size(73, 28);
@@ -854,13 +840,13 @@
             this.radioButton51.Name = "radioButton51";
             this.radioButton51.Size = new System.Drawing.Size(87, 28);
             this.radioButton51.TabIndex = 6;
-            this.radioButton51.TabStop = true;
             this.radioButton51.Text = "AND";
             this.radioButton51.UseVisualStyleBackColor = true;
             // 
             // radioButton52
             // 
             this.radioButton52.AutoSize = true;
+            this.radioButton52.Checked = true;
             this.radioButton52.Location = new System.Drawing.Point(127, 14);
             this.radioButton52.Name = "radioButton52";
             this.radioButton52.Size = new System.Drawing.Size(73, 28);
@@ -886,13 +872,13 @@
             this.radioButton53.Name = "radioButton53";
             this.radioButton53.Size = new System.Drawing.Size(87, 28);
             this.radioButton53.TabIndex = 6;
-            this.radioButton53.TabStop = true;
             this.radioButton53.Text = "AND";
             this.radioButton53.UseVisualStyleBackColor = true;
             // 
             // radioButton54
             // 
             this.radioButton54.AutoSize = true;
+            this.radioButton54.Checked = true;
             this.radioButton54.Location = new System.Drawing.Point(127, 14);
             this.radioButton54.Name = "radioButton54";
             this.radioButton54.Size = new System.Drawing.Size(73, 28);
@@ -901,13 +887,28 @@
             this.radioButton54.Text = "OR";
             this.radioButton54.UseVisualStyleBackColor = true;
             // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(59, 1750);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(197, 31);
+            this.textBox12.TabIndex = 80;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(311, 1750);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(200, 31);
+            this.textBox13.TabIndex = 81;
+            // 
             // CustomerHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(863, 2119);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.textBox13);
+            this.Controls.Add(this.textBox12);
             this.Controls.Add(this.textBox11);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.comboBox3);
@@ -941,7 +942,6 @@
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
@@ -1028,9 +1028,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label16;
@@ -1077,5 +1075,7 @@
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.RadioButton radioButton53;
         private System.Windows.Forms.RadioButton radioButton54;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.TextBox textBox13;
     }
 }
