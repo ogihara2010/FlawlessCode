@@ -124,6 +124,7 @@ namespace Flawless_ex
             string type1 = row["type"].ToString();
             int ID = (int)row["id_number"];
             string kind = row["kind"].ToString();
+            int AntiqueNumber = (int)row["antique_number"];
             #endregion
             #region "納品書　表の部分"
             NpgsqlConnection conn2 = new NpgsqlConnection();
@@ -328,7 +329,7 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter6;
                 conn6.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + type1 + " ;";
+                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + type1 + " insert_name = " + staff_id +" and staff_name = " + name + " and antique_number = " + AntiqueNumber + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
 
@@ -336,6 +337,16 @@ namespace Flawless_ex
 
                 DataRow row6;
                 row6 = dt6.Rows[0];
+                string address = row6["address"].ToString();
+                string phoneNumber = row6["phone_number"].ToString();
+                string faxNumber = row6["fax_number"].ToString();
+                string PostalCode = row6["postal_code"].ToString();
+                #region"個人情報記入"
+                e.Graphics.DrawString("〒" + PostalCode, font, brush, new PointF(360, 80));
+                e.Graphics.DrawString(address, font, brush, new PointF(360, 100));
+                e.Graphics.DrawString("(TEL)" + phoneNumber, font, brush, new PointF(360, 120));
+                e.Graphics.DrawString("(FAX)" + faxNumber, font, brush, new PointF(520, 120));
+                #endregion
             }
             if (type1 == "1")
             {
@@ -386,7 +397,7 @@ namespace Flawless_ex
             e.Graphics.DrawString("振込先", font, brush, new PointF(50, 1050));
             e.Graphics.DrawString("小計", font, brush, new PointF(310, 950));
             e.Graphics.DrawString("消費税区分", font, brush, new PointF(310, 990));
-            e.Graphics.DrawString("消費税率(%)", font, brush, new PointF(310, 1030));
+            e.Graphics.DrawString("消費税率", font, brush, new PointF(310, 1030));
             e.Graphics.DrawString("消費税額", font, brush, new PointF(310, 1070));
             e.Graphics.DrawString("合計金額", font, brush, new PointF(310, 1110));
             #endregion
@@ -401,7 +412,7 @@ namespace Flawless_ex
             e.Graphics.DrawString(sub_total, font, brush, new PointF(690, 950));
             e.Graphics.DrawString(bank, font, brush, new PointF(180, 1050));
             e.Graphics.DrawString(vat, font, brush, new PointF(690, 990));
-            e.Graphics.DrawString(vat_rate, font, brush, new PointF(690, 1030));
+            e.Graphics.DrawString(vat_rate + "％", font, brush, new PointF(690, 1030));
             e.Graphics.DrawString(vat_amount, font, brush, new PointF(690, 1070));
             e.Graphics.DrawString(total, font, brush, new PointF(690, 1110));
             e.Graphics.DrawString(TotalWeight, font, brush, new PointF(330, 910));
@@ -555,12 +566,12 @@ namespace Flawless_ex
             #endregion
             #endregion
             #region "ロゴ"
-            Image newImage = Image.FromFile(@"C:\Users\t-kawakami\Desktop\Flawlessロゴ.png");
+            Image newImage = Image.FromFile(@"C:\Users\Flawlessロゴ.png");
             Rectangle destRect = new Rectangle(350, 20, 400, 50); 
             e.Graphics.DrawImage(newImage, destRect);
             #endregion
             #region "印鑑"
-            Image newImage1 = Image.FromFile(@"C:\Users\t-kawakami\Desktop\印鑑.png");
+            Image newImage1 = Image.FromFile(@"C:\Users\印鑑.png");
             Rectangle destRect2 = new Rectangle(580, -50, 300, 300);
             e.Graphics.DrawImage(newImage1, destRect2);
             #endregion
