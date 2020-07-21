@@ -11,34 +11,40 @@ using Npgsql;
 
 namespace Flawless_ex
 {
-    public partial class ClientMaster_add : Form
+    public partial class client_add : Form
     {
-        MasterMaintenanceMenu master;
+        //Statement statement;
+        MainMenu mainMenu;
         DataTable dt = new DataTable();
-        int staff_code;
-        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code)
+        int staff_id;
+        int type;
+        string staff_name;
+        string address;
+        public client_add(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
-            this.master = master;
-            this.staff_code = staff_code;
+            this.mainMenu = mainMenu;
+            //this.statement = statement;
+            staff_id = id;
+            this.type = type;
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
-
+            client_search client_Search = new client_search(mainMenu, staff_id, type);
             this.Close();
-            clientmaster.Show();
+            client_Search.Show();
         }
-        #region"法人　登録"
+
+        private void Button6_Click(object sender, EventArgs e)
+        {
+            client_search client_Search = new client_search(mainMenu, staff_id, type);
+            this.Close();
+            client_Search.Show();
+        }
+        #region "法人　登録"
         private void Button5_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("登録しますか？","登録確認",MessageBoxButtons.YesNo);
-
-            if (dr == DialogResult.No) {
-                return;
-            }
-
             string RegistrationDate = this.textBox1.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
@@ -73,11 +79,11 @@ namespace Flawless_ex
             string b = dat.ToString("yyyy/MM/dd");
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-           
 
-            string sql_str = "Insert into client_m_corporate VALUES (" + 0 + " , '"  + RegistrationDate + "' , '" +  CompanyName + "' ,'" + CompanyNameKana + "' , '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' , '" + PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName +
-                "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks +  "' , '" + ID + "' , '" + b  +  "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
-               0 +  ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_code + ");";
+
+            string sql_str = "Insert into client_m_corporate VALUES (" + 0 + " , '" + RegistrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' , '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' , '" + PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName +
+                "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
+               0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_id + ");";
 
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -85,19 +91,14 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
-
+            type = 0;
+            staff_name = ClientStaffName;
+            address = Address;
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
             this.Close();
-            clientmaster.Show();
+            statement.Show();
         }
         #endregion
-        private void Button6_Click(object sender, EventArgs e)
-        {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
-
-            this.Close();
-            clientmaster.Show();
-        }
         #region "個人　登録"
         private void Button18_Click(object sender, EventArgs e)
         {
@@ -139,10 +140,10 @@ namespace Flawless_ex
             string b = dat.ToString("yyyy/MM/dd");
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-           
-            string sql_str = "Insert into client_m_individual VALUES (" + 1 + " , '" + RegistrationDate + "' , '" + Name + "' ,'" + NameKana +  "' , '" + Birthday + "' , '" +  PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation + 
-               "' , '"  + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID +  "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '"  + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
-              0 + ",'" + AolFinancialShareholder +  "');";
+
+            string sql_str = "Insert into client_m_individual VALUES (" + 1 + " , '" + RegistrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + Birthday + "' , '" + PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation +
+               "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
+              0 + ",'" + AolFinancialShareholder + "');";
 
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -150,10 +151,12 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
-
+            type = 1;
+            staff_name = Name;
+            address = Address;
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
             this.Close();
-            clientmaster.Show();
+            statement.Show();
         }
         #endregion
     }

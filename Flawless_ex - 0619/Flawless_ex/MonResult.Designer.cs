@@ -128,6 +128,7 @@
             this.Controls.Add(this.label1);
             this.Name = "MonResult";
             this.Text = "月間成績表一覧";
+            this.Load += new System.EventHandler(this.MonResult_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

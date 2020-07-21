@@ -9,16 +9,21 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         int type;
         int check;
-        Statement statement;
-
-        public client_search_result(DataTable dt, int type, int check, Statement statement)
+        //Statement statement;
+        MainMenu mainMenu;
+        int staff_id;
+        string staff_name;
+        string address;
+        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id)
         {
             InitializeComponent();
 
             this.dt = dt;
             this.type = type;
             this.check = check;
-            this.statement = statement;
+            this.mainMenu = mainMenu;
+            //this.statement = statement;
+            staff_id = id;
         }
 
         private void client_search_result_Load(object sender, EventArgs e)
@@ -73,7 +78,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            client_search client_Search = new client_search(statement);
+            client_search client_Search = new client_search(mainMenu, staff_id, type);
 
             this.Close();
             client_Search.Show();
@@ -90,6 +95,8 @@ namespace Flawless_ex
             {
                 int anumber = (int)dataGridView1.CurrentRow.Cells[4].Value;//選択したPKを取得
 
+                string staff_name = (string)this.dataGridView1.CurrentRow.Cells[2].Value;
+                string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value;
 
                 string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = " + anumber + " ";
                 conn.Open();
@@ -99,15 +106,18 @@ namespace Flawless_ex
 
                 conn.Close();
 
+                
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+                this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
-
-                this.Close();
                 statement.Show();
             }
             else if (type == 1)
             {
                 int id_number = (int)dataGridView1.CurrentRow.Cells[3].Value;//選択したPKを取得
+                string staff_name = (string)this.dataGridView1.CurrentRow.Cells[0].Value;
+                string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value;
 
                 string sql_str2 = "select type,name, address,register_date, remarks from client_m_individual where id_number = " + id_number + "  ";
                 conn.Open();
@@ -115,10 +125,11 @@ namespace Flawless_ex
                 adapter.Fill(dt2);
 
                 conn.Close();
+
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+                this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
-
-                this.Close();
                 statement.Show();
             }
         }
