@@ -5,6 +5,9 @@ namespace Flawless_ex
 {
     public partial class MainMenu : Form　//メインメニュー
     {
+        int type;
+        string staff_name;
+        string address;
         TopMenu top = new TopMenu();
         string access_auth;
         int staff_id;
@@ -53,7 +56,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address);
 
             this.Hide();
             statement.Show();
