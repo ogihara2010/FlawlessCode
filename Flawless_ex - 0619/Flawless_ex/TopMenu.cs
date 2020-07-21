@@ -12,7 +12,6 @@ namespace Flawless_ex
             InitializeComponent();
         }
 
-
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -28,8 +27,6 @@ namespace Flawless_ex
             int count;
             int invalid;
             string pass;
-
-
 
             if (!string.IsNullOrWhiteSpace(roginIdTextBox.Text) && !string.IsNullOrWhiteSpace(passwordTextBox.Text))
             {
@@ -54,9 +51,8 @@ namespace Flawless_ex
                 else
                 {
                     string sql_str = "select* from staff_m where staff_code = " + id + " ";
-                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                     conn.Open();
-
 
                     //検索結果の数
                     adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -86,7 +82,6 @@ namespace Flawless_ex
                         MainMenu mainMenu = new MainMenu(this, id, password, access_auth);
                         this.Hide();
                         mainMenu.Show();
-
                     }
                     else
                     {
@@ -98,10 +93,6 @@ namespace Flawless_ex
                     roginIdTextBox.Text = "";
                     passwordTextBox.Text = "";
                 }
-
-
-
-
 
             }
             else if (!string.IsNullOrWhiteSpace(roginIdTextBox.Text))
@@ -116,7 +107,6 @@ namespace Flawless_ex
             {
                 MessageBox.Show("担当者コード、パスワードを入力してください");
             }
-
         }
     }
 }
