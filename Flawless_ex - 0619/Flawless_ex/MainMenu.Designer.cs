@@ -42,9 +42,10 @@
             // Statement_DeliveryButton
             // 
             this.Statement_DeliveryButton.AutoSize = true;
-            this.Statement_DeliveryButton.Location = new System.Drawing.Point(12, 53);
+            this.Statement_DeliveryButton.Location = new System.Drawing.Point(10, 37);
+            this.Statement_DeliveryButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Statement_DeliveryButton.Name = "Statement_DeliveryButton";
-            this.Statement_DeliveryButton.Size = new System.Drawing.Size(446, 51);
+            this.Statement_DeliveryButton.Size = new System.Drawing.Size(251, 32);
             this.Statement_DeliveryButton.TabIndex = 0;
             this.Statement_DeliveryButton.Text = "計算書/納品書作成";
             this.Statement_DeliveryButton.UseVisualStyleBackColor = true;
@@ -53,9 +54,10 @@
             // CustomerHistoriButton
             // 
             this.CustomerHistoriButton.AutoSize = true;
-            this.CustomerHistoriButton.Location = new System.Drawing.Point(12, 124);
+            this.CustomerHistoriButton.Location = new System.Drawing.Point(10, 76);
+            this.CustomerHistoriButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.CustomerHistoriButton.Name = "CustomerHistoriButton";
-            this.CustomerHistoriButton.Size = new System.Drawing.Size(446, 51);
+            this.CustomerHistoriButton.Size = new System.Drawing.Size(251, 31);
             this.CustomerHistoriButton.TabIndex = 1;
             this.CustomerHistoriButton.Text = "買取販売データ検索";
             this.CustomerHistoriButton.UseVisualStyleBackColor = true;
@@ -64,9 +66,10 @@
             // MonResults
             // 
             this.MonResults.AutoSize = true;
-            this.MonResults.Location = new System.Drawing.Point(12, 194);
+            this.MonResults.Location = new System.Drawing.Point(10, 115);
+            this.MonResults.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.MonResults.Name = "MonResults";
-            this.MonResults.Size = new System.Drawing.Size(446, 51);
+            this.MonResults.Size = new System.Drawing.Size(251, 32);
             this.MonResults.TabIndex = 2;
             this.MonResults.Text = "月間成績表";
             this.MonResults.UseVisualStyleBackColor = true;
@@ -75,9 +78,10 @@
             // MasterMainte
             // 
             this.MasterMainte.AutoSize = true;
-            this.MasterMainte.Location = new System.Drawing.Point(12, 492);
+            this.MasterMainte.Location = new System.Drawing.Point(10, 279);
+            this.MasterMainte.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.MasterMainte.Name = "MasterMainte";
-            this.MasterMainte.Size = new System.Drawing.Size(446, 51);
+            this.MasterMainte.Size = new System.Drawing.Size(251, 37);
             this.MasterMainte.TabIndex = 3;
             this.MasterMainte.Text = "マスタメンテナンス";
             this.MasterMainte.UseVisualStyleBackColor = true;
@@ -86,9 +90,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(329, 9);
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(152, 9);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 24);
+            this.label1.Size = new System.Drawing.Size(60, 21);
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -96,9 +102,10 @@
             // CloseButton
             // 
             this.CloseButton.AutoSize = true;
-            this.CloseButton.Location = new System.Drawing.Point(12, 574);
+            this.CloseButton.Location = new System.Drawing.Point(10, 320);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(79, 34);
+            this.CloseButton.Size = new System.Drawing.Size(71, 47);
             this.CloseButton.TabIndex = 5;
             this.CloseButton.Text = "閉じる";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -107,9 +114,10 @@
             // operatelog
             // 
             this.operatelog.AutoSize = true;
-            this.operatelog.Location = new System.Drawing.Point(12, 418);
+            this.operatelog.Location = new System.Drawing.Point(10, 239);
+            this.operatelog.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.operatelog.Name = "operatelog";
-            this.operatelog.Size = new System.Drawing.Size(446, 51);
+            this.operatelog.Size = new System.Drawing.Size(251, 33);
             this.operatelog.TabIndex = 6;
             this.operatelog.Text = "操作履歴";
             this.operatelog.UseVisualStyleBackColor = true;
@@ -118,9 +126,10 @@
             // Invoice
             // 
             this.Invoice.AutoSize = true;
-            this.Invoice.Location = new System.Drawing.Point(12, 337);
+            this.Invoice.Location = new System.Drawing.Point(10, 195);
+            this.Invoice.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Invoice.Name = "Invoice";
-            this.Invoice.Size = new System.Drawing.Size(446, 51);
+            this.Invoice.Size = new System.Drawing.Size(251, 37);
             this.Invoice.TabIndex = 7;
             this.Invoice.Text = "インボイス";
             this.Invoice.UseVisualStyleBackColor = true;
@@ -129,9 +138,10 @@
             // button3
             // 
             this.button3.AutoSize = true;
-            this.button3.Location = new System.Drawing.Point(12, 266);
+            this.button3.Location = new System.Drawing.Point(10, 155);
+            this.button3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(446, 51);
+            this.button3.Size = new System.Drawing.Size(251, 31);
             this.button3.TabIndex = 8;
             this.button3.Text = "卸値/未入力・次月持越し";
             this.button3.UseVisualStyleBackColor = true;
@@ -139,9 +149,9 @@
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(470, 641);
+            this.ClientSize = new System.Drawing.Size(271, 378);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.Invoice);
             this.Controls.Add(this.operatelog);
@@ -151,6 +161,7 @@
             this.Controls.Add(this.MonResults);
             this.Controls.Add(this.CustomerHistoriButton);
             this.Controls.Add(this.Statement_DeliveryButton);
+            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Name = "MainMenu";
             this.Text = "メインメニュー";
             this.Load += new System.EventHandler(this.MainMenu_Load);
