@@ -9,6 +9,8 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu master;
         DataTable dt;
+        NpgsqlDataAdapter adapter;
+        NpgsqlCommandBuilder builder;
 
         public TaxMaster(MasterMaintenanceMenu master)
         {
@@ -49,8 +51,6 @@ namespace Flawless_ex
                     DateTime time = DateTime.Now;
                     int tax = int.Parse(taxPercent.Text);
 
-                    NpgsqlDataAdapter adapter;
-                    NpgsqlCommandBuilder builder;
                     dt = new DataTable();
                     NpgsqlConnection db = new NpgsqlConnection();
                     string sql_str = "insert into vat_m (vat_rate, upd_date) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "')";
@@ -60,18 +60,16 @@ namespace Flawless_ex
 
                     adapter = new NpgsqlDataAdapter(sql_str, db);
                     builder = new NpgsqlCommandBuilder(adapter);
-
+                    
                     adapter.Fill(dt);
                     adapter.Update(dt);
-
+                    
                     db.Close();
 
                     this.Close();
                     MessageBox.Show("更新しました。");
                 }
             }
-
-
             master.Show();
         }
 
@@ -79,7 +77,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection db = new NpgsqlConnection();
 
-            db.ConnectionString = @"Server= localhost;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
+            db.ConnectionString = @"Server= 192.168.152.43;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
 
             db.Open();
 
