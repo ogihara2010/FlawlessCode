@@ -71,21 +71,24 @@
             this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "担当者",
-            "顧客",
-            "品名",
-            "大分類",
-            "消費税"});
+            "担当者マスタ",
+            "顧客マスタ　法人",
+            "顧客マスタ　個人",
+            "品名マスタ",
+            "大分類マスタ",
+            "消費税マスタ"});
             this.comboBox1.Location = new System.Drawing.Point(438, 108);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(254, 41);
             this.comboBox1.TabIndex = 4;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(75, 193);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 72;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(1047, 614);

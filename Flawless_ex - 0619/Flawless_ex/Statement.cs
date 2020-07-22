@@ -648,7 +648,7 @@ namespace Flawless_ex
 
 
             this.button9.Enabled = false;
-            this.button13.Enabled = false;
+            //this.button13.Enabled = false;
             this.previewButton.Enabled = false;
         }
 
