@@ -21,11 +21,11 @@ namespace Flawless_ex
         {
             if (access_auth == "B")
             {
-                this.staffMasterButton.Enabled = false;
+                this.staffMasterButton.Visible= false;
             }
             else if (access_auth == "C")
             {
-                this.staffMasterButton.Enabled = false;
+                this.staffMasterButton.Visible = false;
             }
             else { }
         }
