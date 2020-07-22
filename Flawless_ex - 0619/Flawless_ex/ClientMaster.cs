@@ -11,11 +11,13 @@ namespace Flawless_ex
         MasterMaintenanceMenu_BC masterMenu_BC;
         DataTable dt = new DataTable();
         int staff_code;
-        public ClientMaster(MasterMaintenanceMenu mster, int staff_code)
+        string access_auth;
+        public ClientMaster(MasterMaintenanceMenu mster, int staff_code, string access_auth)
         {
             InitializeComponent();
             masterMenu = mster;
             this.staff_code = staff_code;
+            this.access_auth = access_auth;
         }
         public ClientMaster(MasterMaintenanceMenu_BC mster_BC)
         {
@@ -32,7 +34,7 @@ namespace Flawless_ex
 
         private void Add_Click(object sender, EventArgs e)
         {
-            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu, staff_code);
+            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu, staff_code, access_auth);
             this.Close();
             clientMaster_Add.Show();
         }
@@ -54,7 +56,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //法人
             if (tabControl1.SelectedIndex == 0)
@@ -116,7 +118,7 @@ namespace Flawless_ex
                     adapter.Fill(dt);
 
                     conn.Close();
-                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
+                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
                     this.Close();
                     clientMastersearch.Show();
 
@@ -132,7 +134,7 @@ namespace Flawless_ex
                     adapter.Fill(dt);
 
                     conn.Close();
-                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
+                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
                     this.Close();
                     clientMastersearch.Show();
                 }//法人終了
@@ -180,7 +182,7 @@ namespace Flawless_ex
 
                         conn.Close();
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
                         this.Close();
                         clientMastersearch.Show();
                     }
@@ -194,7 +196,7 @@ namespace Flawless_ex
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
                         this.Close();
                         clientMastersearch.Show();
                     }
@@ -217,7 +219,7 @@ namespace Flawless_ex
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
                         this.Close();
                         clientMastersearch.Show();
                     }
@@ -231,7 +233,7 @@ namespace Flawless_ex
                         adapter.Fill(dt);
 
                         conn.Close();
-                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code);
+                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
                         this.Close();
                         clientMastersearch.Show();
                     }

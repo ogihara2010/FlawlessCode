@@ -16,16 +16,18 @@ namespace Flawless_ex
         MasterMaintenanceMenu master;
         DataTable dt = new DataTable();
         int staff_code;
-        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code)
+        string access_auth;
+        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
+            this.access_auth = access_auth;
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -79,13 +81,13 @@ namespace Flawless_ex
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks +  "' , '" + ID + "' , '" + b  +  "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
                0 +  ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_code + ");";
 
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -93,7 +95,7 @@ namespace Flawless_ex
         #endregion
         private void Button6_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -144,13 +146,13 @@ namespace Flawless_ex
                "' , '"  + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID +  "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '"  + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
               0 + ",'" + AolFinancialShareholder +  "');";
 
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();

@@ -61,7 +61,8 @@ namespace Flawless_ex
         public DataTable clientDt = new DataTable();//顧客情報
         public int count = 0;
         string format = "yyyy/MM/dd";
-
+        string docuNum;
+        string Num;
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -153,7 +154,7 @@ namespace Flawless_ex
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql = "select document_number from statement_data;";     //伝票番号の５桁取得用
@@ -170,7 +171,6 @@ namespace Flawless_ex
                 }
             }
 
-            /*string docuNum = "";
             cmd = new NpgsqlCommand(sql, conn);
 
             using (reader = cmd.ExecuteReader())
@@ -180,7 +180,17 @@ namespace Flawless_ex
                     docuNum = reader["document_number"].ToString();
                 }
             }
-            string Num = docuNum.Substring(1, 5);       //伝票番号の数字部分 
+            if (!string.IsNullOrEmpty(docuNum))
+            {
+                 Num = docuNum.Substring(1, 5);
+            }
+            else
+            {
+                docuNum = "F00000";
+                Num = docuNum.Substring(1, 5);
+            }
+
+            Num = docuNum.Substring(1, 5);       //伝票番号の数字部分 
 
             number = int.Parse(Num) + 1;
             documentNumberTextBox.Text = "F" + number.ToString().PadLeft(5, '0');       //Fを追加  */
