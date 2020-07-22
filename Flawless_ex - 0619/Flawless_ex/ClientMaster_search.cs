@@ -11,7 +11,8 @@ namespace Flawless_ex
         int type;
         int check;
         int staff_code;
-        public ClientMaster_search(MasterMaintenanceMenu master, DataTable dt, int type, int check, int staff_code)
+        string access_auth;
+        public ClientMaster_search(MasterMaintenanceMenu master, DataTable dt, int type, int check, int staff_code, string access_auth)
         {
             InitializeComponent();
             this.master = master;
@@ -19,13 +20,14 @@ namespace Flawless_ex
             this.type = type;//法人・個人
             this.check = check;//古物商許可証あり・なし
             this.staff_code = staff_code;
+            this.access_auth = access_auth;
         }
 
 
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -89,7 +91,7 @@ namespace Flawless_ex
                 string name = (string)this.dataGridView1.CurrentRow.Cells[2].Value; //担当者名
                 string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value; //住所
 
-                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code);
+                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code, access_auth);
 
                 this.Close();
                 clientMaster_UPD.Show();
@@ -99,7 +101,7 @@ namespace Flawless_ex
                 string name = (string)this.dataGridView1.CurrentRow.Cells[0].Value; // 氏名
                 string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value; //住所
 
-                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code);
+                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code, access_auth);
 
                 this.Close();
                 clientMaster_UPD.Show();

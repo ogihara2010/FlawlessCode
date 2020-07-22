@@ -36,68 +36,72 @@
             this.button1 = new System.Windows.Forms.Button();
             this.choice = new System.Windows.Forms.Button();
             this.return3 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label1.Location = new System.Drawing.Point(59, 60);
+            this.label1.Location = new System.Drawing.Point(22, 53);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 38);
+            this.label1.Size = new System.Drawing.Size(147, 33);
             this.label1.TabIndex = 0;
             this.label1.Text = "日付検索";
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.textBox1.Location = new System.Drawing.Point(255, 59);
+            this.textBox1.Location = new System.Drawing.Point(192, 52);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(218, 39);
+            this.textBox1.Size = new System.Drawing.Size(185, 35);
             this.textBox1.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label2.Location = new System.Drawing.Point(489, 60);
+            this.label2.Location = new System.Drawing.Point(398, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 38);
+            this.label2.Size = new System.Drawing.Size(48, 33);
             this.label2.TabIndex = 2;
             this.label2.Text = "～";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.textBox2.Location = new System.Drawing.Point(566, 59);
+            this.textBox2.Location = new System.Drawing.Point(464, 51);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(218, 39);
+            this.textBox2.Size = new System.Drawing.Size(185, 35);
             this.textBox2.TabIndex = 3;
             // 
             // search1
             // 
             this.search1.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.search1.Location = new System.Drawing.Point(826, 39);
+            this.search1.Location = new System.Drawing.Point(675, 31);
             this.search1.Name = "search1";
-            this.search1.Size = new System.Drawing.Size(148, 84);
+            this.search1.Size = new System.Drawing.Size(125, 74);
             this.search1.TabIndex = 4;
             this.search1.Text = "検索";
             this.search1.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1149, 55);
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button1.Location = new System.Drawing.Point(940, 31);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(293, 52);
+            this.button1.Size = new System.Drawing.Size(248, 83);
             this.button1.TabIndex = 5;
             this.button1.Text = "全レコード表示";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // choice
             // 
-            this.choice.Location = new System.Drawing.Point(1308, 1138);
+            this.choice.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.choice.Location = new System.Drawing.Point(964, 1059);
             this.choice.Name = "choice";
-            this.choice.Size = new System.Drawing.Size(182, 95);
+            this.choice.Size = new System.Drawing.Size(213, 125);
             this.choice.TabIndex = 7;
             this.choice.Text = "選択";
             this.choice.UseVisualStyleBackColor = true;
@@ -105,19 +109,31 @@
             // 
             // return3
             // 
-            this.return3.Location = new System.Drawing.Point(110, 1138);
+            this.return3.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.return3.Location = new System.Drawing.Point(57, 1059);
             this.return3.Name = "return3";
-            this.return3.Size = new System.Drawing.Size(200, 95);
+            this.return3.Size = new System.Drawing.Size(213, 125);
             this.return3.TabIndex = 8;
             this.return3.Text = "戻る";
             this.return3.UseVisualStyleBackColor = true;
             this.return3.Click += new System.EventHandler(this.Return3_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(69, 243);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 90;
+            this.dataGridView1.RowTemplate.Height = 30;
+            this.dataGridView1.Size = new System.Drawing.Size(1108, 760);
+            this.dataGridView1.TabIndex = 9;
+            // 
             // MonResult
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1598, 1393);
+            this.ClientSize = new System.Drawing.Size(1278, 1219);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.return3);
             this.Controls.Add(this.choice);
             this.Controls.Add(this.button1);
@@ -129,6 +145,7 @@
             this.Name = "MonResult";
             this.Text = "月間成績表一覧";
             this.Load += new System.EventHandler(this.MonResult_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,5 +161,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button choice;
         private System.Windows.Forms.Button return3;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -68,6 +68,7 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "計算書表示";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // dataGridView1
             // 

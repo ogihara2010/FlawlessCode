@@ -20,7 +20,7 @@ namespace Flawless_ex
             staff_id = id;
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlCommand cmd;
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "select* from staff_m where staff_code = " + id + " and password = '" + pass + "'";
             cmd = new NpgsqlCommand(sql_str2, conn);
@@ -42,7 +42,7 @@ namespace Flawless_ex
 
         private void MasterMainte_Click(object sender, EventArgs e)//権限によって
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id);
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id, access_auth);
 
             this.Hide();
             masterMenu.Show();
@@ -51,7 +51,11 @@ namespace Flawless_ex
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            if (access_auth == "C")
+            {
+                this.MonResults.Enabled = false;
+            }
+            else { }
         }
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)

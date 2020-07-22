@@ -15,6 +15,7 @@ namespace Flawless_ex
         DataTable dt4 = new DataTable();
         DataTable dt5 = new DataTable();
         DataTable dt6 = new DataTable();
+        DataTable dt7 = new DataTable();
         int type;
         int number;
         int a = 0; // クリック数 
@@ -41,7 +42,7 @@ namespace Flawless_ex
 
         private void CustomerHistory_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //大分類検索用
             string sql_str = "select * from main_category_m where invalid = 0 order by main_category_code;";
@@ -79,8 +80,8 @@ namespace Flawless_ex
             int antiqueNumber;
             string mainCategory;
             string item;
-            string date1;
-            string date2;
+            string date1 = this.dateTimePicker1.Text;
+            string date2 = this.settlementBox.Text;
             string method;
             int amount1;
             int amount2;
@@ -107,9 +108,9 @@ namespace Flawless_ex
             NpgsqlConnection conn3 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter3;
 
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn3.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn3.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             #region "検索条件 法人"
             if (radioButton1.Checked == true)
             {
@@ -268,22 +269,7 @@ namespace Flawless_ex
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox12.Text))
-                {
-                    date1 = this.textBox12.Text;
-                }
-                else
-                {
-                    date1 = "1900/4/1";
-                }
-                if (!string.IsNullOrWhiteSpace(textBox13.Text))
-                {
-                    date2 = this.textBox13.Text;
-                }
-                else
-                {
-                    date2 = "2500/12/31";
-                }
+                
                 if (radioButton49.Checked == true)
                 {
                     search12 = "and";
@@ -347,26 +333,26 @@ namespace Flawless_ex
                 string itemcode = row2["item_code"].ToString();
                 #endregion
 
-                string sql = "select A.order_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, A.total, D.item_name from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number and A.id_number = B.insert_name )" +
-                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                             "inner join statement_calc C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                              "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
-                              + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.control_number = " + controlNumber + " " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
+                              + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.document_number = " + documentNumber + " " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
                               + " D.main_category_code = " + code  + " "+ search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '"  + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11 
                               + " A.payment_method = '" + method + "'" + search12 + " A.total >= " + amount1 + " and A.total <= " + amount2 + ";"; 
 
 
                 conn.Open();
                 adapter = new NpgsqlDataAdapter(sql, conn);
-                adapter.Fill(dt);
+                adapter.Fill(dt7);
                 #endregion
                 DataRow row3;
-                row3 = dt.Rows[0];
-                name = row3["shop_name"].ToString();
-                phoneNumber = row3["phone_number"].ToString();
-                address = row3["address"].ToString();
-                item = row3["item_name"].ToString();
+                row3 = dt7.Rows[0];
+                string name1 = row3["shop_name"].ToString();
+                string phoneNumber1 = row3["phone_number"].ToString();
+                string address1 = row3["address"].ToString();
+                string item1 = row3["item_name"].ToString();
 
-                DataSearchResults dataSearch = new DataSearchResults(this, type, name, phoneNumber, address, item, search1, search3, search5);
+                DataSearchResults dataSearch = new DataSearchResults(this, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5);
                 this.Hide();
                 dataSearch.Show();
             }
@@ -500,22 +486,7 @@ namespace Flawless_ex
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox12.Text))
-                {
-                    date1 = this.textBox12.Text;
-                }
-                else
-                {
-                    date1 = "1900/4/1";
-                }
-                if (!string.IsNullOrWhiteSpace(textBox13.Text))
-                {
-                    date2 = this.textBox13.Text;
-                }
-                else
-                {
-                    date2 = "2500/12/31";
-                }
+                
                 if (radioButton49.Checked == true)
                 {
                     search12 = "and";
@@ -579,27 +550,27 @@ namespace Flawless_ex
                 string itemcode = row2["item_code"].ToString();
                 #endregion
 
-                string sql = "select A.order_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, A.total from delivery_m A inner join client_m_individual B ON ( A.name = B.name )" +
-                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code )inner join statement_m E ON (B.id_number = E.id_number) inner join statement_calc F ON (E.document_number = F.document_number) " +
+                string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                             "inner join statement_calc C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                              "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
-                              + " B.phone_number = '" + phoneNumber + "'" + search6 + " E.document_number = " + documentNumber + " " + search7 + " A.control_number = " + controlNumber + " " + search8 +  " " 
-                              + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "'" + search11
-                              + " A.payment_method = '" + method + "'" + search12 + " A.total >= " + amount1 + " and A.total <= " + amount2 + ";"; 
+                              + " B.phone_number = '" + phoneNumber + "'" +  " " + search7 + " A.document_number = " + documentNumber + " " + search8 +  " " 
+                              + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
+                              + " A.payment_method = '" + method + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");"; 
 
 
                 conn.Open();
                 adapter = new NpgsqlDataAdapter(sql, conn);
-                adapter.Fill(dt);
+                adapter.Fill(dt7);
                 #endregion
 
                 DataRow row3;
-                row3 = dt.Rows[0];
+                row3 = dt7.Rows[0];
                 name = row3["name"].ToString();
                 phoneNumber = row3["phone_number"].ToString();
                 address = row3["address"].ToString();
                 item = row3["item_name"].ToString();
 
-                DataSearchResults dataSearch = new DataSearchResults(this, type, name, phoneNumber, address, item, search3, search4, search5);
+                DataSearchResults dataSearch = new DataSearchResults(this, type, staff_id, name, phoneNumber, address, item, search3, search4, search5);
                 this.Hide();
                 dataSearch.Show();
             }
@@ -632,7 +603,7 @@ namespace Flawless_ex
             if (a > 1) {
                 int codeNum = (int)comboBox1.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
