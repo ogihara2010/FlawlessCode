@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.return1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -46,15 +45,6 @@
             this.return1.Text = "戻る";
             this.return1.UseVisualStyleBackColor = true;
             this.return1.Click += new System.EventHandler(this.Return1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
             // 
             // label2
             // 
@@ -102,7 +92,6 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.return1);
             this.Name = "Operatelog";
             this.Text = "操作履歴";
@@ -116,7 +105,6 @@
         #endregion
 
         private System.Windows.Forms.Button return1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;

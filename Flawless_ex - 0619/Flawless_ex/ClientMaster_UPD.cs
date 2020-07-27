@@ -58,7 +58,7 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox1.Text;
+            string RegistrationDate = this.dateTimePicker1.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
             string PostalCodeNumber = this.textBox4.Text;
@@ -137,6 +137,7 @@ namespace Flawless_ex
                 adapter.Update(dt);
                 MessageBox.Show("無効にしました。");
                 button20.Enabled = true;
+                label34.Text = "※変更理由";
                 return;
             }
             else
@@ -153,6 +154,8 @@ namespace Flawless_ex
                 this.button19.Enabled = false;
                 this.button5.Enabled = true;
                 this.button20.Enabled = true;
+                label34.Text = "※変更理由";
+                label64.Text = "※変更理由";
             }
             else
             {
@@ -161,6 +164,7 @@ namespace Flawless_ex
                 this.button5.Enabled = false;
                 this.button20.Enabled = false;
             }
+
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
@@ -240,7 +244,7 @@ namespace Flawless_ex
                 AolFinancialShareholder = row["aol_financial_shareholder"].ToString();
                 #endregion
                 #region "出力データ"
-                this.textBox1.Text = RegistrationDate1;
+                this.dateTimePicker1.Text = RegistrationDate1;
                 this.textBox2.Text = CompanyName;
                 this.textBox3.Text = CompanyNameKana;
                 this.textBox4.Text = PostalCodeNumber.ToString();
@@ -340,7 +344,7 @@ namespace Flawless_ex
                 AolFinancialShareholder = row["aol_financial_shareholder"].ToString();
                 #endregion
                 #region "出力データ"
-                this.textBox57.Text = RegistrationDate2;
+                this.deliveryDateBox.Text = RegistrationDate2;
                 this.textBox56.Text = Name;
                 this.textBox55.Text = NameKana;
                 this.textBox50.Text = Birthday;
@@ -381,7 +385,7 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox57.Text;
+            string RegistrationDate = this.deliveryDateBox.Text;
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
             string Birthday = this.textBox50.Text;
@@ -456,6 +460,7 @@ namespace Flawless_ex
                 adapter.Update(dt);
                 MessageBox.Show("無効にしました。");
                 button5.Enabled = true;
+                label64.Text = "※変更理由";
                 return;
             }
             else

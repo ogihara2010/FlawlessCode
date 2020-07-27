@@ -81,7 +81,8 @@ namespace Flawless_ex
 
         string staff_name;
         string address;
-        
+        string access_auth;
+
         int number;     //伝票番号の数字五桁
 
         MainMenu mainMenu;
@@ -89,7 +90,7 @@ namespace Flawless_ex
         DataTable dt = new DataTable();//大分類
 
         DataTable dt2 = new DataTable();//品名と大分類関連付け
-        
+
         DataTable dt4 = new DataTable();//2行目
         DataTable dt5 = new DataTable();//3行目
         DataTable dt6 = new DataTable();//4行目
@@ -154,7 +155,7 @@ namespace Flawless_ex
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql = "select document_number from statement_data;";     //伝票番号の５桁取得用
@@ -182,7 +183,7 @@ namespace Flawless_ex
             }
             if (!string.IsNullOrEmpty(docuNum))
             {
-                 Num = docuNum.Substring(1, 5);
+                Num = docuNum.Substring(1, 5);
             }
             else
             {
@@ -646,9 +647,105 @@ namespace Flawless_ex
             //デフォルトで円表示
             CoinComboBox.SelectedIndex = 0;
 
+            if (count != 0)
+            {
+                if (type == 0)
+                {
+                    //顧客情報 法人
+                    #region "計算書"
+                    DataTable clientDt = new DataTable();
+                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + staff_name + "' and address = '" + address + "';";
+                    adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
+                    adapter.Fill(clientDt);
 
-            this.button9.Enabled = false;
-            //this.button13.Enabled = false;
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    //int type = (int)row2["type"];
+
+                    string companyNmae = row2["company_name"].ToString();
+                    string shopName = row2["shop_name"].ToString();
+                    string Staff_name = row2["staff_name"].ToString();
+                    //string Address = row2["address"].ToString();
+                    string register_date = row2["register_date"].ToString();
+                    string remarks = row2["remarks"].ToString();
+                    string antique_license = row2["antique_license"].ToString();
+
+                    typeTextBox.Text = "法人";
+                    companyTextBox.Text = companyNmae;
+                    textBox302.Text = antique_license;
+                    shopNameTextBox.Text = shopName;
+                    clientNameTextBox.Text = Staff_name;
+                    //addressTextBox.Text = Address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                    #endregion
+                    #region "納品書"
+                    typeTextBox2.Text = "法人";
+                    companyTextBox2.Text = companyNmae;
+                    shopNameTextBox2.Text = shopName;
+                    clientNameTextBox2.Text = Staff_name;
+                    //addressTextBox2.Text = Address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                    textBox302.Text = antique_license;
+                    #endregion
+                }
+                else if (type == 1)
+                {
+                    //顧客情報 個人
+                    DataTable clientDt = new DataTable();
+                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + staff_name + "' and address = '" + address + "';";
+                    adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
+                    adapter.Fill(clientDt);
+
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    //int type = (int)row2["type"];
+
+                    string name = row2["name"].ToString();
+                    //string Address = row2["address"].ToString();
+                    string register_date = row2["register_date"].ToString();
+                    string remarks = row2["remarks"].ToString();
+                    string occupation = row2["occupation"].ToString();
+                    string birthday = row2["birthday"].ToString();
+                    string antique_license = row2["antique_license"].ToString();
+
+                    #region "計算書"
+                    label16.Text = "氏名";
+                    label17.Text = "生年月日";
+                    label18.Text = "職業";
+                    typeTextBox.Text = "個人";
+                    companyTextBox.Text = name;
+                    shopNameTextBox.Text = birthday;
+                    clientNameTextBox.Text = occupation;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox.Text = remarks;
+                    textBox302.Text = antique_license;
+                    label38.Visible = false;
+                    registerDateTextBox.Visible = false;
+                    #endregion
+                    #region "納品書"
+                    typeTextBox2.Text = "個人";
+                    label75.Text = "氏名";
+                    label76.Text = "職業";
+                    label77.Text = "生年月日";
+                    clientNameTextBox2.Text = occupation;
+                    companyTextBox2.Text = name;
+                    shopNameTextBox2.Text = birthday;
+                    //addressTextBox2.Text = Address;
+                    registerDateTextBox.Text = register_date;
+                    clientRemarksTextBox2.Text = remarks;
+                    textBox302.Text = antique_license;
+                    label36.Visible = false;
+                    registerDateTextBox.Visible = false;
+                    #endregion
+                }
+
+            }
+        
+
+            //this.button9.Enabled = false;
+            this.button13.Enabled = false;
             this.previewButton.Enabled = false;
         }
 
@@ -1537,7 +1634,7 @@ namespace Flawless_ex
                 return;
             }
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
 

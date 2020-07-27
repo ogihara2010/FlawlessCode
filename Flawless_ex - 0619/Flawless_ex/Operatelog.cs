@@ -44,7 +44,7 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter;
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select staff_code, staff_name, staff_name_kana, main_category_code, access_auth, registration_date from staff_m ;";
+                string sql_str = "select registration_date, staff_name, staff_name, staff_name_kana, main_category_code, access_auth  from staff_m ;";
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);

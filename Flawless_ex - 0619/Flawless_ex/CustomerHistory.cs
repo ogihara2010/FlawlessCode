@@ -75,7 +75,7 @@ namespace Flawless_ex
             string address;
             string addresskana;
             string phoneNumber;
-            int documentNumber;
+            string documentNumber;
             int controlNumber;
             int antiqueNumber;
             string mainCategory;
@@ -201,11 +201,11 @@ namespace Flawless_ex
                 else { }
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = int.Parse(this.textBox7.Text);
+                    documentNumber = this.textBox7.Text;
                 }
                 else
                 {
-                    documentNumber = 0;
+                    documentNumber = "''";
                 }
                 if (radioButton39.Checked == true)
                 {
@@ -334,11 +334,11 @@ namespace Flawless_ex
                 #endregion
 
                 string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                             "inner join statement_calc C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                              "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
-                              + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.document_number = " + documentNumber + " " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
+                              + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.document_number = '" + documentNumber + "' " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
                               + " D.main_category_code = " + code  + " "+ search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '"  + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11 
-                              + " A.payment_method = '" + method + "'" + search12 + " A.total >= " + amount1 + " and A.total <= " + amount2 + ";"; 
+                              + " A.payment_method = '" + method + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");"; 
 
 
                 conn.Open();
@@ -346,13 +346,19 @@ namespace Flawless_ex
                 adapter.Fill(dt7);
                 #endregion
                 DataRow row3;
+                int a = dt7.Rows.Count;
+                if (a == 0)
+                {
+                    MessageBox.Show("検索データがありません。");
+                    return;
+                }
                 row3 = dt7.Rows[0];
                 string name1 = row3["shop_name"].ToString();
                 string phoneNumber1 = row3["phone_number"].ToString();
                 string address1 = row3["address"].ToString();
                 string item1 = row3["item_name"].ToString();
 
-                DataSearchResults dataSearch = new DataSearchResults(this, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5);
+                DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5);
                 this.Hide();
                 dataSearch.Show();
             }
@@ -418,11 +424,11 @@ namespace Flawless_ex
                 else { }
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = int.Parse(this.textBox7.Text);
+                    documentNumber = this.textBox7.Text;
                 }
                 else
                 {
-                    documentNumber = 0;
+                    documentNumber = "''";
                 }
                 if (radioButton39.Checked == true)
                 {
@@ -551,7 +557,7 @@ namespace Flawless_ex
                 #endregion
 
                 string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
-                             "inner join statement_calc C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                              "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
                               + " B.phone_number = '" + phoneNumber + "'" +  " " + search7 + " A.document_number = " + documentNumber + " " + search8 +  " " 
                               + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
@@ -564,13 +570,19 @@ namespace Flawless_ex
                 #endregion
 
                 DataRow row3;
+                int a = dt7.Rows.Count;
+                if(a == 0)
+                {
+                    MessageBox.Show("検索データがありません。");
+                    return;
+                }
                 row3 = dt7.Rows[0];
                 name = row3["name"].ToString();
                 phoneNumber = row3["phone_number"].ToString();
                 address = row3["address"].ToString();
                 item = row3["item_name"].ToString();
 
-                DataSearchResults dataSearch = new DataSearchResults(this, type, staff_id, name, phoneNumber, address, item, search3, search4, search5);
+                DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5);
                 this.Hide();
                 dataSearch.Show();
             }

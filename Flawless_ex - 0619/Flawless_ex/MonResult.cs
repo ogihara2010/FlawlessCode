@@ -34,8 +34,8 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select A.settlement_date, A.delivery_date, B.staff_name, B.shop_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                                 "inner join statement_calc C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+            string sql_str = "select A.settlement_date, A.delivery_date, B.staff_name, B.company_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                                 "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                                  " where B.invalid = 0;";
             conn.Open();
 
