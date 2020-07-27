@@ -55,7 +55,7 @@ namespace Flawless_ex
                     NpgsqlConnection db = new NpgsqlConnection();
                     string sql_str = "insert into vat_m (vat_rate, upd_date) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "')";
 
-                    db.ConnectionString = @"Server=192.168.152.43;Port=5432;User Id=postgres;Password=postgres;Database=master;";
+                    db.ConnectionString = @"Server= localhost;Port = 5432;User Id = postgres;Password = postgres;Database = master;";
                     db.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, db);
@@ -77,7 +77,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection db = new NpgsqlConnection();
 
-            db.ConnectionString = @"Server= 192.168.152.43;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
+            db.ConnectionString = @"Server= localhost;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
 
             db.Open();
 

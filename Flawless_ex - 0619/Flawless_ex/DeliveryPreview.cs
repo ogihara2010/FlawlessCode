@@ -97,7 +97,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select * from delivery_m where id_number =" + staff_id + ";";
+            string sql_str = "select * from delivery_m where staff_code =" + staff_id + ";";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
 
@@ -121,9 +121,9 @@ namespace Flawless_ex
             string sealPrint = row["seaal_print"].ToString();
             string TotalWeight = row["total_weight"].ToString();
             string TotalCount = row["total_count"].ToString();
-            string type1 = row["type"].ToString();
             int ID = (int)row["id_number"];
-            string kind = row["kind"].ToString();
+            int types = (int)row["types1"];
+            string kind = row["type"].ToString();
             int AntiqueNumber = (int)row["antique_number"];
             #endregion
             #region "納品書　表の部分"
@@ -323,13 +323,13 @@ namespace Flawless_ex
 
             }
             #region "顧客情報"
-            if (type1 == "0")
+            if (types == 0)
             {
                 NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
                 conn6.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + type1 + " insert_name = " + staff_id +" and staff_name = " + name + " and antique_number = " + AntiqueNumber + ";";
+                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + types  + " and staff_name = " + name + " and antique_number = " + AntiqueNumber + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
 
@@ -348,13 +348,13 @@ namespace Flawless_ex
                 e.Graphics.DrawString("(FAX)" + faxNumber, font, brush, new PointF(520, 120));
                 #endregion
             }
-            if (type1 == "1")
+            if (types == 1)
             {
                 NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
                 conn6.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + type1 + "and name = '" + name + "' and id_number = "+ ID + ";";
+                string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + types + "and name = '" + name + "' and id_number = "+ ID + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
 

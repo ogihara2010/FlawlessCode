@@ -106,8 +106,8 @@
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.radioButton53 = new System.Windows.Forms.RadioButton();
             this.radioButton54 = new System.Windows.Forms.RadioButton();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.settlementBox = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -403,7 +403,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(262, 1753);
+            this.label14.Location = new System.Drawing.Point(348, 1750);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(34, 24);
             this.label14.TabIndex = 50;
@@ -887,19 +887,21 @@
             this.radioButton54.Text = "OR";
             this.radioButton54.UseVisualStyleBackColor = true;
             // 
-            // textBox12
+            // settlementBox
             // 
-            this.textBox12.Location = new System.Drawing.Point(59, 1750);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(197, 31);
-            this.textBox12.TabIndex = 80;
+            this.settlementBox.Location = new System.Drawing.Point(396, 1745);
+            this.settlementBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.settlementBox.Name = "settlementBox";
+            this.settlementBox.Size = new System.Drawing.Size(281, 31);
+            this.settlementBox.TabIndex = 82;
             // 
-            // textBox13
+            // dateTimePicker1
             // 
-            this.textBox13.Location = new System.Drawing.Point(311, 1750);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(200, 31);
-            this.textBox13.TabIndex = 81;
+            this.dateTimePicker1.Location = new System.Drawing.Point(45, 1745);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(281, 31);
+            this.dateTimePicker1.TabIndex = 83;
             // 
             // CustomerHistory
             // 
@@ -907,8 +909,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(863, 2119);
-            this.Controls.Add(this.textBox13);
-            this.Controls.Add(this.textBox12);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.settlementBox);
             this.Controls.Add(this.textBox11);
             this.Controls.Add(this.textBox10);
             this.Controls.Add(this.comboBox3);
@@ -1075,7 +1077,7 @@
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.RadioButton radioButton53;
         private System.Windows.Forms.RadioButton radioButton54;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.DateTimePicker settlementBox;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

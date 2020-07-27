@@ -2,41 +2,47 @@
 using System.Windows.Forms;
 using Npgsql;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Printing;
 
 namespace Flawless_ex
 {
     public partial class DataSearchResults : Form
     {
         CustomerHistory customerHistory;
+        MainMenu mainMenu;
         int type;
-        string name;
-        string phoneNumber;
+        string name1;
+        string phoneNumber1;
+        string address1;
         string address;
-        string item;
+        string item1;
         string search1;
         string search2;
         string search3;
+        string staff_name;
+        int staff_id;
         DataTable dt = new DataTable();
-        public DataSearchResults(CustomerHistory customer, int type, string name, string phoneNumber, string address, string item, string search1, string search2, string search3)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3)
         {
             InitializeComponent();
-            customerHistory = customer;
+            mainMenu = main;
             this.type = type;
-            this.name = name;
-            this.phoneNumber = phoneNumber;
-            this.address = address;
-            this.item = item;
+            this.name1 = name1;
+            this.phoneNumber1 = phoneNumber1;
+            this.address1 = address1;
+            this.item1 = item1;
             this.search1 = search1;
             this.search2 = search2;
             this.search3 = search3;
+            staff_id = id;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
-
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu,staff_id);
             this.Close();
             customerHistory.Show();
-
         }
 
         private void DataSearchResults_Load(object sender, EventArgs e)
@@ -47,8 +53,9 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter;
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select A.order_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, A.total from delivery_m A inner join client_m_corporate B ON ( A.name = B.staff_name  )inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code )" +
-                                 " where B.invalid = 0 and B.shop_name = '" + name + "' " + search1 + " B.phone_number = '" + phoneNumber + "'" + " " + search2 + " B.address like '% " + address + " %' "  + search3 + " D.item_name = '" + item + "';";
+                string sql_str = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                                 "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                                 " where B.invalid = 0 and B.shop_name = '" + name1 + "' " + search1 + " B.phone_number = '" + phoneNumber1 + "'" + " " + search2 + " B.address like '% " + address1 + " %' " + search3 + " D.item_name = '" + item1 + "';";
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -71,8 +78,9 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter;
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select A.order_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.name = B.name  )inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                                 "where B.invalid = 0 ;";
+                string sql_str = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                             "inner join statement_calc C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                                 "where B.invalid = 0 and B.name = '" + name1 + "' " + search1 + " B.phone_number = '" + phoneNumber1 + "'" + " " + search2 + " B.address like '% " + address1 + " %' " + search3 + " D.item_name = '" + item1 + "';";
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -89,7 +97,29 @@ namespace Flawless_ex
                 conn.Close();
             }
 
-            
+
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            this.Close();
+            statement.Show();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            PrintDocument pd = new PrintDocument();
+            pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+            printPreviewDialog1.Document = pd;
+            DialogResult dr = printPreviewDialog1.ShowDialog();
+        }
+
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Font font = new Font("MS Pゴシック", 10.5f);
+            Font font1 = new Font("メイリオ", 36f);
+            Brush brush = new SolidBrush(Color.Black);
         }
     }
 }

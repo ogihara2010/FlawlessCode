@@ -45,7 +45,7 @@ namespace Flawless_ex
         #region "法人　登録"
         private void Button5_Click(object sender, EventArgs e)
         {
-            string RegistrationDate = this.textBox1.Text;
+            string RegistrationDate = this.deliveryDateBox.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
             string PostalCodeNumber = this.textBox4.Text;
@@ -85,7 +85,7 @@ namespace Flawless_ex
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
                0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_id + ");";
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -109,7 +109,7 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox57.Text;
+            string RegistrationDate = this.dateTimePicker1.Text;
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
             string Birthday = this.textBox50.Text;
@@ -145,7 +145,7 @@ namespace Flawless_ex
                "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
               0 + ",'" + AolFinancialShareholder + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -159,5 +159,10 @@ namespace Flawless_ex
             statement.Show();
         }
         #endregion
+
+        private void Client_add_Load(object sender, EventArgs e)
+        {
+            this.textBox50.Text = "　年　月　日";
+        }
     }
 }

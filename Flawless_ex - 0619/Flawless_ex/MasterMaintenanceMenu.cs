@@ -7,18 +7,27 @@ namespace Flawless_ex
     {
         MainMenu mainMenu;
         int staff_code;
-        public MasterMaintenanceMenu(MainMenu mainMenu, int staff_code)
+        string access_auth;
+        public MasterMaintenanceMenu(MainMenu mainMenu, int staff_code, string access_auth)
         {
             InitializeComponent();
 
             this.mainMenu = mainMenu;
             this.staff_code = staff_code;
-
+            this.access_auth = access_auth;
         }
 
         private void MasterMaintenanceMenu_Load(object sender, EventArgs e)
         {
-
+            if (access_auth == "B")
+            {
+                this.staffMasterButton.Visible= false;
+            }
+            else if (access_auth == "C")
+            {
+                this.staffMasterButton.Visible = false;
+            }
+            else { }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -39,7 +48,7 @@ namespace Flawless_ex
 
         private void clientMasterButton_Click(object sender, EventArgs e)
         {
-            ClientMaster clientMaster = new ClientMaster(this, staff_code);
+            ClientMaster clientMaster = new ClientMaster(this, staff_code, access_auth);
             this.Hide();
             clientMaster.Show();
         }

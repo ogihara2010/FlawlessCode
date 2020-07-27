@@ -13,7 +13,8 @@ namespace Flawless_ex
         string name;
         string address;
         int staff_code;
-        public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code)
+        string access_auth;
+        public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code, string access_auth)
         {
             InitializeComponent();
             this.master = master;
@@ -21,11 +22,12 @@ namespace Flawless_ex
             this.name = name;　//担当者名または氏名
             this.address = address; // 住所
             this.type = type;  //  法人・個人
+            this.access_auth = access_auth;
         }
 
         private void Button18_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -33,7 +35,7 @@ namespace Flawless_ex
 
         private void Button4_Click_1(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -41,7 +43,7 @@ namespace Flawless_ex
 
         private void Button18_Click_1(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -56,10 +58,10 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox1.Text;
+            string RegistrationDate = this.dateTimePicker1.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
-            int PostalCodeNumber = int.Parse(this.textBox4.Text);
+            string PostalCodeNumber = this.textBox4.Text;
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
             string ShopName = this.textBox7.Text;
@@ -96,13 +98,13 @@ namespace Flawless_ex
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
                0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "');";
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("更新しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -124,7 +126,7 @@ namespace Flawless_ex
                 NpgsqlCommandBuilder builder;
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update client_m_corporate set invalid = 1 where staff_name = '" + name + "'" + "and address = '" + address + "'";
@@ -135,6 +137,7 @@ namespace Flawless_ex
                 adapter.Update(dt);
                 MessageBox.Show("無効にしました。");
                 button20.Enabled = true;
+                label34.Text = "※変更理由";
                 return;
             }
             else
@@ -145,12 +148,29 @@ namespace Flawless_ex
         #endregion
         private void ClientMaster_UPD_Load(object sender, EventArgs e)
         {
+            if (access_auth == "C")
+            {
+                this.button6.Enabled = false;
+                this.button19.Enabled = false;
+                this.button5.Enabled = true;
+                this.button20.Enabled = true;
+                label34.Text = "※変更理由";
+                label64.Text = "※変更理由";
+            }
+            else
+            {
+                this.button6.Enabled = true;
+                this.button19.Enabled = true;
+                this.button5.Enabled = false;
+                this.button20.Enabled = false;
+            }
+
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             if (type == 0)
             {
                 //法人
@@ -224,7 +244,7 @@ namespace Flawless_ex
                 AolFinancialShareholder = row["aol_financial_shareholder"].ToString();
                 #endregion
                 #region "出力データ"
-                this.textBox1.Text = RegistrationDate1;
+                this.dateTimePicker1.Text = RegistrationDate1;
                 this.textBox2.Text = CompanyName;
                 this.textBox3.Text = CompanyNameKana;
                 this.textBox4.Text = PostalCodeNumber.ToString();
@@ -324,7 +344,7 @@ namespace Flawless_ex
                 AolFinancialShareholder = row["aol_financial_shareholder"].ToString();
                 #endregion
                 #region "出力データ"
-                this.textBox57.Text = RegistrationDate2;
+                this.deliveryDateBox.Text = RegistrationDate2;
                 this.textBox56.Text = Name;
                 this.textBox55.Text = NameKana;
                 this.textBox50.Text = Birthday;
@@ -354,8 +374,6 @@ namespace Flawless_ex
                 #endregion
             }
             conn.Close();
-            button5.Enabled = false;
-            button20.Enabled = false;
         }
         #region "個人 更新"
         private void Button5_Click(object sender, EventArgs e)
@@ -367,11 +385,11 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox57.Text;
+            string RegistrationDate = this.deliveryDateBox.Text;
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
             string Birthday = this.textBox50.Text;
-            int PostalCodeNumber = int.Parse(this.textBox54.Text);
+            string PostalCodeNumber = this.textBox54.Text;
             string Address = this.textBox53.Text;
             string AddressKana = this.textBox52.Text;
             string PhoneNumber = this.textBox49.Text;
@@ -403,13 +421,13 @@ namespace Flawless_ex
                "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
               0 + ",'" + AolFinancialShareholder + "');";
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("更新しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -431,7 +449,7 @@ namespace Flawless_ex
                 NpgsqlCommandBuilder builder;
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update client_m_individual set invalid = 1 where name = '" + name + "'" + "and address = '" + address + "'";
@@ -442,6 +460,7 @@ namespace Flawless_ex
                 adapter.Update(dt);
                 MessageBox.Show("無効にしました。");
                 button5.Enabled = true;
+                label64.Text = "※変更理由";
                 return;
             }
             else

@@ -16,16 +16,18 @@ namespace Flawless_ex
         MasterMaintenanceMenu master;
         DataTable dt = new DataTable();
         int staff_code;
-        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code)
+        string access_auth;
+        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
+            this.access_auth = access_auth;
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -39,7 +41,7 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox1.Text;
+            string RegistrationDate = this.deliveryDateBox.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
             string PostalCodeNumber = this.textBox4.Text;
@@ -85,7 +87,7 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -93,7 +95,7 @@ namespace Flawless_ex
         #endregion
         private void Button6_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
@@ -108,7 +110,7 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.textBox57.Text;
+            string RegistrationDate = this.dateTimePicker1.Text;
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
             string Birthday = this.textBox50.Text;
@@ -150,11 +152,16 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
 
             this.Close();
             clientmaster.Show();
         }
         #endregion
+
+        private void ClientMaster_add_Load(object sender, EventArgs e)
+        {
+            this.textBox50.Text = "　年　月　日";
+        }
     }
 }

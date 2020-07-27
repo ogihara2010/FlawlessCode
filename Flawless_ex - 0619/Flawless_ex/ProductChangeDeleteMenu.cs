@@ -28,7 +28,7 @@ namespace Flawless_ex
 
         private void ProductChangeDeleteMenu_Load(object sender, EventArgs e)   //画面起動時
         {
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             productCodeTextBox.Text = puroductCode.ToString();
 
             string sql_item = "select * from item_m where item_code =" + puroductCode + "";
