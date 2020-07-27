@@ -52,7 +52,7 @@
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.label2.Location = new System.Drawing.Point(468, 31);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 42);
+            this.label2.Size = new System.Drawing.Size(212, 48);
             this.label2.TabIndex = 3;
             this.label2.Text = "操作一覧";
             // 
@@ -66,10 +66,12 @@
             "顧客マスタ　個人",
             "品名マスタ",
             "大分類マスタ",
-            "消費税マスタ"});
+            "消費税マスタ",
+            "計算書",
+            "納品書"});
             this.comboBox1.Location = new System.Drawing.Point(438, 108);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(254, 41);
+            this.comboBox1.Size = new System.Drawing.Size(254, 45);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 

@@ -667,7 +667,7 @@ namespace Flawless_ex
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["staff_name"].ToString();
                     //string Address = row2["address"].ToString();
-                    string register_date = row2["register_date"].ToString();
+                    string register_date = row2["registration_date"].ToString();
                     string remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
 
@@ -1198,7 +1198,7 @@ namespace Flawless_ex
                 itemComboBox00.DataSource = deliverydt200;
                 itemComboBox00.DisplayMember = "item_name";
                 itemComboBox00.ValueMember = "item_code";
-                itemCode0 = int.Parse("item_code");
+                //itemCode0 = int.Parse("item_code");
 
                 conn.Close();
             }
