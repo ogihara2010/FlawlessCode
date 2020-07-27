@@ -45,20 +45,20 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.PaymentDate = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.paymentMethodLabel = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
-            this.IdentityVerificationTextBox = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.MenRadioButton = new System.Windows.Forms.RadioButton();
             this.WomanRadioButton = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.PaymentMethodGroupBox = new System.Windows.Forms.GroupBox();
+            this.paymentMethodgroupBox = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -66,26 +66,26 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CorporationRadionButton = new System.Windows.Forms.RadioButton();
             this.individualRadioButton = new System.Windows.Forms.RadioButton();
-            this.deliveryGroupBox = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.DeliveryRudioButton = new System.Windows.Forms.RadioButton();
             this.visitRadioButton = new System.Windows.Forms.RadioButton();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.StaffName = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.ageTextBox = new System.Windows.Forms.TextBox();
-            this.StaffNameTextBox = new System.Windows.Forms.TextBox();
+            this.StaffTextBox = new System.Windows.Forms.TextBox();
             this.AssessmentDateTextBox = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.UnnecessaryRadioButton = new System.Windows.Forms.RadioButton();
             this.necessaryRadioButton = new System.Windows.Forms.RadioButton();
-            this.PaymentCheckGroupBox = new System.Windows.Forms.GroupBox();
-            this.UnpaidRadioButton = new System.Windows.Forms.RadioButton();
-            this.PaidRadioButton = new System.Windows.Forms.RadioButton();
-            this.Sagawa = new System.Windows.Forms.Label();
-            this.SagawaTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.RegisteredNumberTextBox = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -266,26 +266,16 @@
             this.textBox124 = new System.Windows.Forms.TextBox();
             this.textBox125 = new System.Windows.Forms.TextBox();
             this.textBox126 = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.PurchaseTotalTextBox = new System.Windows.Forms.TextBox();
-            this.TotalWholesalePriceTextBox = new System.Windows.Forms.TextBox();
-            this.ProfitTextBox = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.SlipNumberTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.PaymentMethodGroupBox.SuspendLayout();
+            this.paymentMethodgroupBox.SuspendLayout();
             this.sexCheckGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.deliveryGroupBox.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.PaymentCheckGroupBox.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -305,7 +295,7 @@
             // 
             // aggrigateButton
             // 
-            this.aggrigateButton.Location = new System.Drawing.Point(792, 9);
+            this.aggrigateButton.Location = new System.Drawing.Point(762, 9);
             this.aggrigateButton.Name = "aggrigateButton";
             this.aggrigateButton.Size = new System.Drawing.Size(79, 43);
             this.aggrigateButton.TabIndex = 2;
@@ -317,7 +307,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label3.ForeColor = System.Drawing.SystemColors.Window;
-            this.label3.Location = new System.Drawing.Point(577, 17);
+            this.label3.Location = new System.Drawing.Point(574, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(25, 16);
             this.label3.TabIndex = 3;
@@ -328,7 +318,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label2.ForeColor = System.Drawing.SystemColors.Window;
-            this.label2.Location = new System.Drawing.Point(361, 17);
+            this.label2.Location = new System.Drawing.Point(361, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 16);
             this.label2.TabIndex = 3;
@@ -336,18 +326,16 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(608, 12);
+            this.dateTimePicker2.Location = new System.Drawing.Point(605, 12);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(135, 23);
+            this.dateTimePicker2.Size = new System.Drawing.Size(123, 19);
             this.dateTimePicker2.TabIndex = 2;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dateTimePicker1.Location = new System.Drawing.Point(443, 12);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(128, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(125, 19);
             this.dateTimePicker1.TabIndex = 1;
             // 
             // label1
@@ -459,13 +447,13 @@
             this.textBox3.Size = new System.Drawing.Size(125, 20);
             this.textBox3.TabIndex = 4;
             // 
-            // PaymentDate
+            // textBox5
             // 
-            this.PaymentDate.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PaymentDate.Location = new System.Drawing.Point(618, 149);
-            this.PaymentDate.Name = "PaymentDate";
-            this.PaymentDate.Size = new System.Drawing.Size(79, 20);
-            this.PaymentDate.TabIndex = 4;
+            this.textBox5.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox5.Location = new System.Drawing.Point(618, 149);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(79, 20);
+            this.textBox5.TabIndex = 4;
             // 
             // label9
             // 
@@ -519,13 +507,13 @@
             this.textBox7.Size = new System.Drawing.Size(128, 20);
             this.textBox7.TabIndex = 4;
             // 
-            // IdentityVerificationTextBox
+            // textBox8
             // 
-            this.IdentityVerificationTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.IdentityVerificationTextBox.Location = new System.Drawing.Point(260, 183);
-            this.IdentityVerificationTextBox.Name = "IdentityVerificationTextBox";
-            this.IdentityVerificationTextBox.Size = new System.Drawing.Size(278, 20);
-            this.IdentityVerificationTextBox.TabIndex = 4;
+            this.textBox8.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox8.Location = new System.Drawing.Point(260, 183);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(278, 20);
+            this.textBox8.TabIndex = 4;
             // 
             // MenRadioButton
             // 
@@ -599,17 +587,17 @@
             this.radioButton6.Text = "振込";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
-            // PaymentMethodGroupBox
+            // paymentMethodgroupBox
             // 
-            this.PaymentMethodGroupBox.Controls.Add(this.radioButton6);
-            this.PaymentMethodGroupBox.Controls.Add(this.radioButton5);
-            this.PaymentMethodGroupBox.Controls.Add(this.radioButton3);
-            this.PaymentMethodGroupBox.Controls.Add(this.radioButton4);
-            this.PaymentMethodGroupBox.Location = new System.Drawing.Point(618, 170);
-            this.PaymentMethodGroupBox.Name = "PaymentMethodGroupBox";
-            this.PaymentMethodGroupBox.Size = new System.Drawing.Size(223, 36);
-            this.PaymentMethodGroupBox.TabIndex = 6;
-            this.PaymentMethodGroupBox.TabStop = false;
+            this.paymentMethodgroupBox.Controls.Add(this.radioButton6);
+            this.paymentMethodgroupBox.Controls.Add(this.radioButton5);
+            this.paymentMethodgroupBox.Controls.Add(this.radioButton3);
+            this.paymentMethodgroupBox.Controls.Add(this.radioButton4);
+            this.paymentMethodgroupBox.Location = new System.Drawing.Point(618, 170);
+            this.paymentMethodgroupBox.Name = "paymentMethodgroupBox";
+            this.paymentMethodgroupBox.Size = new System.Drawing.Size(223, 36);
+            this.paymentMethodgroupBox.TabIndex = 6;
+            this.paymentMethodgroupBox.TabStop = false;
             // 
             // label12
             // 
@@ -688,15 +676,15 @@
             this.individualRadioButton.Text = "個人";
             this.individualRadioButton.UseVisualStyleBackColor = true;
             // 
-            // deliveryGroupBox
+            // groupBox3
             // 
-            this.deliveryGroupBox.Controls.Add(this.DeliveryRudioButton);
-            this.deliveryGroupBox.Controls.Add(this.visitRadioButton);
-            this.deliveryGroupBox.Location = new System.Drawing.Point(409, 135);
-            this.deliveryGroupBox.Name = "deliveryGroupBox";
-            this.deliveryGroupBox.Size = new System.Drawing.Size(119, 36);
-            this.deliveryGroupBox.TabIndex = 8;
-            this.deliveryGroupBox.TabStop = false;
+            this.groupBox3.Controls.Add(this.DeliveryRudioButton);
+            this.groupBox3.Controls.Add(this.visitRadioButton);
+            this.groupBox3.Location = new System.Drawing.Point(409, 135);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(119, 36);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
             // 
             // DeliveryRudioButton
             // 
@@ -752,16 +740,16 @@
             this.label16.TabIndex = 3;
             this.label16.Text = "年齢";
             // 
-            // StaffName
+            // label17
             // 
-            this.StaffName.AutoSize = true;
-            this.StaffName.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.StaffName.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.StaffName.Location = new System.Drawing.Point(1036, 120);
-            this.StaffName.Name = "StaffName";
-            this.StaffName.Size = new System.Drawing.Size(35, 13);
-            this.StaffName.TabIndex = 3;
-            this.StaffName.Text = "担当";
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label17.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label17.Location = new System.Drawing.Point(1035, 85);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(35, 13);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "担当";
             // 
             // ageTextBox
             // 
@@ -771,13 +759,13 @@
             this.ageTextBox.Size = new System.Drawing.Size(71, 20);
             this.ageTextBox.TabIndex = 4;
             // 
-            // StaffNameTextBox
+            // StaffTextBox
             // 
-            this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.StaffNameTextBox.Location = new System.Drawing.Point(1077, 115);
-            this.StaffNameTextBox.Name = "StaffNameTextBox";
-            this.StaffNameTextBox.Size = new System.Drawing.Size(71, 20);
-            this.StaffNameTextBox.TabIndex = 4;
+            this.StaffTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.StaffTextBox.Location = new System.Drawing.Point(1076, 80);
+            this.StaffTextBox.Name = "StaffTextBox";
+            this.StaffTextBox.Size = new System.Drawing.Size(71, 20);
+            this.StaffTextBox.TabIndex = 4;
             // 
             // AssessmentDateTextBox
             // 
@@ -821,77 +809,77 @@
             this.necessaryRadioButton.Text = "要";
             this.necessaryRadioButton.UseVisualStyleBackColor = true;
             // 
-            // PaymentCheckGroupBox
+            // groupBox5
             // 
-            this.PaymentCheckGroupBox.Controls.Add(this.UnpaidRadioButton);
-            this.PaymentCheckGroupBox.Controls.Add(this.PaidRadioButton);
-            this.PaymentCheckGroupBox.Location = new System.Drawing.Point(708, 139);
-            this.PaymentCheckGroupBox.Name = "PaymentCheckGroupBox";
-            this.PaymentCheckGroupBox.Size = new System.Drawing.Size(94, 36);
-            this.PaymentCheckGroupBox.TabIndex = 8;
-            this.PaymentCheckGroupBox.TabStop = false;
+            this.groupBox5.Controls.Add(this.radioButton1);
+            this.groupBox5.Controls.Add(this.radioButton2);
+            this.groupBox5.Location = new System.Drawing.Point(708, 139);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(94, 36);
+            this.groupBox5.TabIndex = 8;
+            this.groupBox5.TabStop = false;
             // 
-            // UnpaidRadioButton
+            // radioButton1
             // 
-            this.UnpaidRadioButton.AutoSize = true;
-            this.UnpaidRadioButton.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.UnpaidRadioButton.Location = new System.Drawing.Point(55, 12);
-            this.UnpaidRadioButton.Name = "UnpaidRadioButton";
-            this.UnpaidRadioButton.Size = new System.Drawing.Size(38, 17);
-            this.UnpaidRadioButton.TabIndex = 5;
-            this.UnpaidRadioButton.TabStop = true;
-            this.UnpaidRadioButton.Text = "未";
-            this.UnpaidRadioButton.UseVisualStyleBackColor = true;
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.radioButton1.Location = new System.Drawing.Point(55, 12);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(38, 17);
+            this.radioButton1.TabIndex = 5;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "未";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
-            // PaidRadioButton
+            // radioButton2
             // 
-            this.PaidRadioButton.AutoSize = true;
-            this.PaidRadioButton.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PaidRadioButton.Location = new System.Drawing.Point(13, 12);
-            this.PaidRadioButton.Name = "PaidRadioButton";
-            this.PaidRadioButton.Size = new System.Drawing.Size(38, 17);
-            this.PaidRadioButton.TabIndex = 5;
-            this.PaidRadioButton.TabStop = true;
-            this.PaidRadioButton.Text = "済";
-            this.PaidRadioButton.UseVisualStyleBackColor = true;
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.radioButton2.Location = new System.Drawing.Point(13, 12);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(38, 17);
+            this.radioButton2.TabIndex = 5;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "済";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
-            // Sagawa
+            // label18
             // 
-            this.Sagawa.AutoSize = true;
-            this.Sagawa.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Sagawa.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.Sagawa.Location = new System.Drawing.Point(1008, 145);
-            this.Sagawa.Name = "Sagawa";
-            this.Sagawa.Size = new System.Drawing.Size(63, 13);
-            this.Sagawa.TabIndex = 3;
-            this.Sagawa.Text = "佐川伝番";
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label18.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label18.Location = new System.Drawing.Point(1007, 110);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(63, 13);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "佐川伝番";
             // 
-            // SagawaTextBox
+            // textBox4
             // 
-            this.SagawaTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SagawaTextBox.Location = new System.Drawing.Point(1077, 141);
-            this.SagawaTextBox.Name = "SagawaTextBox";
-            this.SagawaTextBox.Size = new System.Drawing.Size(85, 20);
-            this.SagawaTextBox.TabIndex = 4;
+            this.textBox4.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox4.Location = new System.Drawing.Point(1076, 106);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(85, 20);
+            this.textBox4.TabIndex = 4;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label19.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label19.Location = new System.Drawing.Point(1008, 174);
+            this.label19.Location = new System.Drawing.Point(1007, 139);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(63, 13);
             this.label19.TabIndex = 3;
             this.label19.Text = "書留番号";
             // 
-            // RegisteredNumberTextBox
+            // textBox6
             // 
-            this.RegisteredNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisteredNumberTextBox.Location = new System.Drawing.Point(1077, 170);
-            this.RegisteredNumberTextBox.Name = "RegisteredNumberTextBox";
-            this.RegisteredNumberTextBox.Size = new System.Drawing.Size(85, 20);
-            this.RegisteredNumberTextBox.TabIndex = 4;
+            this.textBox6.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox6.Location = new System.Drawing.Point(1076, 135);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(85, 20);
+            this.textBox6.TabIndex = 4;
             // 
             // tableLayoutPanel1
             // 
@@ -2444,7 +2432,7 @@
             this.tableLayoutPanel2.Controls.Add(this.textBox124, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.textBox125, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.textBox126, 1, 3);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(28, 568);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(48, 568);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -2771,133 +2759,26 @@
             this.textBox126.Size = new System.Drawing.Size(67, 19);
             this.textBox126.TabIndex = 12;
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel3.Controls.Add(this.label20, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label21, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label32, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.PurchaseTotalTextBox, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.TotalWholesalePriceTextBox, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.ProfitTextBox, 1, 2);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(796, 580);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(245, 85);
-            this.tableLayoutPanel3.TabIndex = 13;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label20.Location = new System.Drawing.Point(3, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(104, 28);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "買取額合計";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label21.Location = new System.Drawing.Point(3, 28);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(104, 28);
-            this.label21.TabIndex = 0;
-            this.label21.Text = "卸値合計";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label32.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label32.Location = new System.Drawing.Point(3, 56);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(104, 29);
-            this.label32.TabIndex = 0;
-            this.label32.Text = "利益";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // PurchaseTotalTextBox
-            // 
-            this.PurchaseTotalTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PurchaseTotalTextBox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PurchaseTotalTextBox.ForeColor = System.Drawing.Color.Blue;
-            this.PurchaseTotalTextBox.Location = new System.Drawing.Point(113, 3);
-            this.PurchaseTotalTextBox.Name = "PurchaseTotalTextBox";
-            this.PurchaseTotalTextBox.Size = new System.Drawing.Size(129, 23);
-            this.PurchaseTotalTextBox.TabIndex = 1;
-            // 
-            // TotalWholesalePriceTextBox
-            // 
-            this.TotalWholesalePriceTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TotalWholesalePriceTextBox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TotalWholesalePriceTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.TotalWholesalePriceTextBox.Location = new System.Drawing.Point(113, 31);
-            this.TotalWholesalePriceTextBox.Name = "TotalWholesalePriceTextBox";
-            this.TotalWholesalePriceTextBox.Size = new System.Drawing.Size(129, 23);
-            this.TotalWholesalePriceTextBox.TabIndex = 1;
-            // 
-            // ProfitTextBox
-            // 
-            this.ProfitTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ProfitTextBox.ForeColor = System.Drawing.Color.Red;
-            this.ProfitTextBox.Location = new System.Drawing.Point(113, 59);
-            this.ProfitTextBox.Name = "ProfitTextBox";
-            this.ProfitTextBox.Size = new System.Drawing.Size(129, 23);
-            this.ProfitTextBox.TabIndex = 1;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label34.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label34.Location = new System.Drawing.Point(1008, 95);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(63, 13);
-            this.label34.TabIndex = 3;
-            this.label34.Text = "伝票番号";
-            // 
-            // SlipNumberTextBox
-            // 
-            this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SlipNumberTextBox.Location = new System.Drawing.Point(1077, 88);
-            this.SlipNumberTextBox.Name = "SlipNumberTextBox";
-            this.SlipNumberTextBox.Size = new System.Drawing.Size(85, 20);
-            this.SlipNumberTextBox.TabIndex = 4;
-            // 
             // RecordList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1184, 750);
-            this.Controls.Add(this.tableLayoutPanel3);
+            this.ClientSize = new System.Drawing.Size(1184, 742);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.dateTimePicker3);
-            this.Controls.Add(this.PaymentDate);
-            this.Controls.Add(this.deliveryGroupBox);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.PaymentCheckGroupBox);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.sexCheckGroupBox);
-            this.Controls.Add(this.RegisteredNumberTextBox);
-            this.Controls.Add(this.SagawaTextBox);
-            this.Controls.Add(this.IdentityVerificationTextBox);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.SlipNumberTextBox);
-            this.Controls.Add(this.StaffNameTextBox);
+            this.Controls.Add(this.StaffTextBox);
             this.Controls.Add(this.AssessmentDateTextBox);
             this.Controls.Add(this.ageTextBox);
             this.Controls.Add(this.textBox3);
@@ -2907,12 +2788,11 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.paymentMethodLabel);
-            this.Controls.Add(this.Sagawa);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.label34);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.StaffName);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label10);
@@ -2923,7 +2803,7 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.PaymentMethodGroupBox);
+            this.Controls.Add(this.paymentMethodgroupBox);
             this.Name = "RecordList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "RecordList";
@@ -2931,24 +2811,22 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.PaymentMethodGroupBox.ResumeLayout(false);
-            this.PaymentMethodGroupBox.PerformLayout();
+            this.paymentMethodgroupBox.ResumeLayout(false);
+            this.paymentMethodgroupBox.PerformLayout();
             this.sexCheckGroupBox.ResumeLayout(false);
             this.sexCheckGroupBox.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.deliveryGroupBox.ResumeLayout(false);
-            this.deliveryGroupBox.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.PaymentCheckGroupBox.ResumeLayout(false);
-            this.PaymentCheckGroupBox.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2973,20 +2851,20 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox PaymentDate;
+        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label paymentMethodLabel;
         private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox IdentityVerificationTextBox;
+        private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.RadioButton MenRadioButton;
         private System.Windows.Forms.RadioButton WomanRadioButton;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.GroupBox PaymentMethodGroupBox;
+        private System.Windows.Forms.GroupBox paymentMethodgroupBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
@@ -2994,26 +2872,26 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton CorporationRadionButton;
         private System.Windows.Forms.RadioButton individualRadioButton;
-        private System.Windows.Forms.GroupBox deliveryGroupBox;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton DeliveryRudioButton;
         private System.Windows.Forms.RadioButton visitRadioButton;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label StaffName;
+        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox ageTextBox;
-        private System.Windows.Forms.TextBox StaffNameTextBox;
+        private System.Windows.Forms.TextBox StaffTextBox;
         private System.Windows.Forms.TextBox AssessmentDateTextBox;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton UnnecessaryRadioButton;
         private System.Windows.Forms.RadioButton necessaryRadioButton;
-        private System.Windows.Forms.GroupBox PaymentCheckGroupBox;
-        private System.Windows.Forms.RadioButton UnpaidRadioButton;
-        private System.Windows.Forms.RadioButton PaidRadioButton;
-        private System.Windows.Forms.Label Sagawa;
-        private System.Windows.Forms.TextBox SagawaTextBox;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox RegisteredNumberTextBox;
+        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
@@ -3194,14 +3072,5 @@
         private System.Windows.Forms.TextBox textBox124;
         private System.Windows.Forms.TextBox textBox125;
         private System.Windows.Forms.TextBox textBox126;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox PurchaseTotalTextBox;
-        private System.Windows.Forms.TextBox TotalWholesalePriceTextBox;
-        private System.Windows.Forms.TextBox ProfitTextBox;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox SlipNumberTextBox;
     }
 }
