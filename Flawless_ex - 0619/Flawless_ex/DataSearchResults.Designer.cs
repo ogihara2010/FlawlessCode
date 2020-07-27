@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSearchResults));
             this.returnButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,9 +41,9 @@
             // 
             this.returnButton.AutoSize = true;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.returnButton.Location = new System.Drawing.Point(48, 795);
+            this.returnButton.Location = new System.Drawing.Point(41, 696);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(177, 121);
+            this.returnButton.Size = new System.Drawing.Size(150, 106);
             this.returnButton.TabIndex = 0;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -51,20 +53,21 @@
             // 
             this.button1.AutoSize = true;
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button1.Location = new System.Drawing.Point(607, 795);
+            this.button1.Location = new System.Drawing.Point(514, 696);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(271, 121);
+            this.button1.Size = new System.Drawing.Size(229, 106);
             this.button1.TabIndex = 1;
             this.button1.Text = "印刷";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
             this.button2.AutoSize = true;
             this.button2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button2.Location = new System.Drawing.Point(1176, 795);
+            this.button2.Location = new System.Drawing.Point(995, 696);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(361, 121);
+            this.button2.Size = new System.Drawing.Size(305, 106);
             this.button2.TabIndex = 2;
             this.button2.Text = "計算書表示";
             this.button2.UseVisualStyleBackColor = true;
@@ -73,19 +76,29 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(108, 49);
+            this.dataGridView1.Location = new System.Drawing.Point(91, 43);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(1484, 667);
+            this.dataGridView1.Size = new System.Drawing.Size(1256, 584);
             this.dataGridView1.TabIndex = 3;
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
             // DataSearchResults
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1757, 963);
+            this.ClientSize = new System.Drawing.Size(1487, 843);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -105,5 +118,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }

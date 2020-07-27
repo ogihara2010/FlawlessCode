@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.search1 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.choice = new System.Windows.Forms.Button();
             this.return3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.deliveryDateBox = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,42 +44,26 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label1.Location = new System.Drawing.Point(22, 53);
+            this.label1.Location = new System.Drawing.Point(21, 47);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 33);
+            this.label1.Size = new System.Drawing.Size(169, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "日付検索";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.textBox1.Location = new System.Drawing.Point(192, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(185, 35);
-            this.textBox1.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.label2.Location = new System.Drawing.Point(398, 51);
+            this.label2.Location = new System.Drawing.Point(572, 53);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 33);
+            this.label2.Size = new System.Drawing.Size(55, 38);
             this.label2.TabIndex = 2;
             this.label2.Text = "～";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.textBox2.Location = new System.Drawing.Point(464, 51);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(185, 35);
-            this.textBox2.TabIndex = 3;
             // 
             // search1
             // 
             this.search1.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.search1.Location = new System.Drawing.Point(675, 31);
+            this.search1.Location = new System.Drawing.Point(1036, 36);
             this.search1.Name = "search1";
             this.search1.Size = new System.Drawing.Size(125, 74);
             this.search1.TabIndex = 4;
@@ -89,9 +73,9 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button1.Location = new System.Drawing.Point(940, 31);
+            this.button1.Location = new System.Drawing.Point(851, 128);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(248, 83);
+            this.button1.Size = new System.Drawing.Size(326, 83);
             this.button1.TabIndex = 5;
             this.button1.Text = "全レコード表示";
             this.button1.UseVisualStyleBackColor = true;
@@ -121,26 +105,45 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(69, 243);
+            this.dataGridView1.Location = new System.Drawing.Point(85, 235);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 90;
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.Size = new System.Drawing.Size(1108, 760);
             this.dataGridView1.TabIndex = 9;
             // 
+            // deliveryDateBox
+            // 
+            this.deliveryDateBox.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.deliveryDateBox.Location = new System.Drawing.Point(209, 47);
+            this.deliveryDateBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.deliveryDateBox.Name = "deliveryDateBox";
+            this.deliveryDateBox.Size = new System.Drawing.Size(343, 45);
+            this.deliveryDateBox.TabIndex = 12;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.dateTimePicker1.Location = new System.Drawing.Point(632, 47);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(343, 45);
+            this.dateTimePicker1.TabIndex = 13;
+            // 
             // MonResult
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1278, 1219);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1269, 1219);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.deliveryDateBox);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.return3);
             this.Controls.Add(this.choice);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.search1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Name = "MonResult";
             this.Text = "月間成績表一覧";
@@ -154,13 +157,13 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button search1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button choice;
         private System.Windows.Forms.Button return3;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DateTimePicker deliveryDateBox;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

@@ -81,6 +81,7 @@ namespace Flawless_ex
 
         string staff_name;
         string address;
+        string access_auth;
 
         int number;     //伝票番号の数字五桁
 
@@ -154,7 +155,7 @@ namespace Flawless_ex
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql = "select document_number from statement_data;";     //伝票番号の５桁取得用
@@ -743,7 +744,7 @@ namespace Flawless_ex
             }
         
 
-            this.button9.Enabled = false;
+            //this.button9.Enabled = false;
             this.button13.Enabled = false;
             this.previewButton.Enabled = false;
         }
@@ -1633,7 +1634,7 @@ namespace Flawless_ex
                 return;
             }
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
 
