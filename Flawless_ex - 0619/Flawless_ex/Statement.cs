@@ -197,7 +197,7 @@ namespace Flawless_ex
             documentNumberTextBox.Text = "F" + number.ToString().PadLeft(5, '0');       //Fを追加  */
 
             //担当者ごとの大分類の初期値を先頭に
-            string sql_str2 = "select * from main_category_m order by main_category_code = " + itemMainCategoryCode + "asc;";
+            string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code = " + itemMainCategoryCode + "asc;";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt);
 
