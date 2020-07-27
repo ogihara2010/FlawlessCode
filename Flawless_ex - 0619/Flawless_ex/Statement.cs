@@ -151,6 +151,7 @@ namespace Flawless_ex
             mainMenu = main;
             this.staff_name = staff_name;
             this.address = address;
+            this.type = type;
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -197,7 +198,7 @@ namespace Flawless_ex
             documentNumberTextBox.Text = "F" + number.ToString().PadLeft(5, '0');       //Fを追加  */
 
             //担当者ごとの大分類の初期値を先頭に
-            string sql_str2 = "select * from main_category_m order by main_category_code = " + itemMainCategoryCode + "asc;";
+            string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code = " + itemMainCategoryCode + "asc;";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt);
 
@@ -829,8 +830,8 @@ namespace Flawless_ex
                 itemComboBox0.DataSource = dt2;
                 itemComboBox0.DisplayMember = "item_name";
                 itemComboBox0.ValueMember = "item_code";
-                mainCategoryCode0 = int.Parse("main_category_code");
-                itemCode0 = int.Parse("item_code");
+                //mainCategoryCode0 = int.Parse("main_category_code");
+                //itemCode0 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -854,8 +855,8 @@ namespace Flawless_ex
                 itemComboBox1.DataSource = dt200;
                 itemComboBox1.DisplayMember = "item_name";
                 itemComboBox1.ValueMember = "item_code";
-                mainCategoryCode1 = int.Parse("main_category_code");
-                itemCode1 = int.Parse("item_code");
+                //mainCategoryCode1 = int.Parse("main_category_code");
+                //itemCode1 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -884,8 +885,8 @@ namespace Flawless_ex
                 itemComboBox2.DataSource = dt201;
                 itemComboBox2.DisplayMember = "item_name";
                 itemComboBox2.ValueMember = "item_code";
-                mainCategoryCode2 = int.Parse("main_category_code");
-                itemCode2 = int.Parse("item_code");
+                //mainCategoryCode2 = int.Parse("main_category_code");
+                //itemCode2 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -913,8 +914,8 @@ namespace Flawless_ex
                 itemComboBox3.DataSource = dt202;
                 itemComboBox3.DisplayMember = "item_name";
                 itemComboBox3.ValueMember = "item_code";
-                mainCategoryCode3 = int.Parse("main_category_code");
-                itemCode3 = int.Parse("item_code");
+                //mainCategoryCode3 = int.Parse("main_category_code");
+                //itemCode3 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -942,8 +943,8 @@ namespace Flawless_ex
                 itemComboBox4.DataSource = dt203;
                 itemComboBox4.DisplayMember = "item_name";
                 itemComboBox4.ValueMember = "item_code";
-                mainCategoryCode4 = int.Parse("main_category_code");
-                itemCode4 = int.Parse("item_code");
+                //mainCategoryCode4 = int.Parse("main_category_code");
+                //itemCode4 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -970,8 +971,8 @@ namespace Flawless_ex
                 itemComboBox5.DataSource = dt204;
                 itemComboBox5.DisplayMember = "item_name";
                 itemComboBox5.ValueMember = "item_code";
-                mainCategoryCode5 = int.Parse("main_category_code");
-                itemCode5 = int.Parse("item_code");
+                //mainCategoryCode5 = int.Parse("main_category_code");
+                //itemCode5 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -998,8 +999,8 @@ namespace Flawless_ex
                 itemComboBox6.DataSource = dt205;
                 itemComboBox6.DisplayMember = "item_name";
                 itemComboBox6.ValueMember = "item_code";
-                mainCategoryCode6 = int.Parse("main_category_code");
-                itemCode6 = int.Parse("item_code");
+                //mainCategoryCode6 = int.Parse("main_category_code");
+                //itemCode6 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -1026,8 +1027,8 @@ namespace Flawless_ex
                 itemComboBox7.DataSource = dt206;
                 itemComboBox7.DisplayMember = "item_name";
                 itemComboBox7.ValueMember = "item_code";
-                mainCategoryCode7 = int.Parse("main_category_code");
-                itemCode7 = int.Parse("item_code");
+                //mainCategoryCode7 = int.Parse("main_category_code");
+                //itemCode7 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -1054,8 +1055,8 @@ namespace Flawless_ex
                 itemComboBox8.DataSource = dt207;
                 itemComboBox8.DisplayMember = "item_name";
                 itemComboBox8.ValueMember = "item_code";
-                mainCategoryCode8 = int.Parse("main_category_code");
-                itemCode8 = int.Parse("item_code");
+                //mainCategoryCode8 = int.Parse("main_category_code");
+                //itemCode8 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -1082,8 +1083,8 @@ namespace Flawless_ex
                 itemComboBox9.DataSource = dt208;
                 itemComboBox9.DisplayMember = "item_name";
                 itemComboBox9.ValueMember = "item_code";
-                mainCategoryCode9 = int.Parse("main_category_code");
-                itemCode9 = int.Parse("item_code");
+                //mainCategoryCode9 = int.Parse("main_category_code");
+                //itemCode9 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -1110,8 +1111,8 @@ namespace Flawless_ex
                 itemComboBox10.DataSource = dt209;
                 itemComboBox10.DisplayMember = "item_name";
                 itemComboBox10.ValueMember = "item_code";
-                mainCategoryCode10 = int.Parse("main_category_code");
-                itemCode10 = int.Parse("item_code");
+                //mainCategoryCode10 = int.Parse("main_category_code");
+                //itemCode10 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -1139,8 +1140,8 @@ namespace Flawless_ex
                 itemComboBox11.DataSource = dt210;
                 itemComboBox11.DisplayMember = "item_name";
                 itemComboBox11.ValueMember = "item_code";
-                mainCategoryCode11 = int.Parse("main_category_code");
-                itemCode11 = int.Parse("item_code");
+                //mainCategoryCode11 = int.Parse("main_category_code");
+                //itemCode11 = int.Parse("item_code");
 
                 conn.Close();
             }
@@ -1168,8 +1169,8 @@ namespace Flawless_ex
                 itemComboBox12.DataSource = dt211;
                 itemComboBox12.DisplayMember = "item_name";
                 itemComboBox12.ValueMember = "item_code";
-                mainCategoryCode12 = int.Parse("main_category_code");
-                itemCode12 = int.Parse("item_code");
+                //mainCategoryCode12 = int.Parse("main_category_code");
+                //itemCode12 = int.Parse("item_code");
 
                 conn.Close();
             }

@@ -49,5 +49,10 @@ namespace Flawless_ex
             dataGridView1.Columns[4].HeaderText = "金額合計";
             //dataGridView1.Columns[5].HeaderText = "卸値合計";
         }
+
+        private void Search1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
