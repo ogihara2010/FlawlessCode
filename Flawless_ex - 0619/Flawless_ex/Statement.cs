@@ -83,27 +83,31 @@ namespace Flawless_ex
         int itemCode012;      //品目コード（13行目）
         #endregion
 
+        #region"変数"
         decimal Tax;        //計算用の税（表示用を別に用意）
         decimal weisum;     //総重量計算用
-        int countsum;   //総数計算用
+        int countsum;        //総数計算用
         decimal subSum;     //税抜き時の合計金額用
-        decimal sub;    //重量×単価 or 数量×単価、計算書では税込み、納品書では税抜き
-        decimal sub1;    //重量×単価 or 数量×単価、納品書用の税込み
-        decimal sum;    //税込み時の合計金額用
+        decimal sub;          //重量×単価 or 数量×単価、計算書では税込み、納品書では税抜き
+        decimal sub1;           //重量×単価 or 数量×単価、納品書用の税込み
+        decimal sum;          //税込み時の合計金額用
         decimal TaxAmount;  //税額
         public DataTable clientDt = new DataTable();//顧客情報
         public int count = 0;
         string docuNum;     //計算書の伝票番号
         string Num;         //計算書の伝票番号の数字部分（F を切り取った直後）
-        int conNum;      //納品書の管理番号
+        int conNum;           //納品書の管理番号
         bool second = false;     //ロード時無視用
+        #endregion
 
+        #region"画像のPATH"
         string AolFinancialShareholder = "";
         string TaxCertification = "";
         string SealCertification = "";
         string ResidenceCard = "";
         string ResidencePeriod = "";
         string AntiqueLicence = "";
+        #endregion
 
         string companyNmae;
         string shopName;
@@ -132,6 +136,7 @@ namespace Flawless_ex
 
         MainMenu mainMenu;
 
+        #region"DataTable"
         DataTable dt = new DataTable();//大分類
 
         DataTable dt2 = new DataTable();//品名と大分類関連付け
@@ -178,6 +183,7 @@ namespace Flawless_ex
         DataTable deliverydt212 = new DataTable();
 
         DataTable dt3 = new DataTable();// 品名情報全て
+        #endregion
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
@@ -262,7 +268,7 @@ namespace Flawless_ex
             #endregion
 
             //担当者ごとの大分類の初期値を先頭に
-            string sql_str2 = "select * from main_category_m order by main_category_code = " + itemMainCategoryCode + "asc;";
+            string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code = " + itemMainCategoryCode + "asc;";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt);
 
@@ -506,6 +512,7 @@ namespace Flawless_ex
             mainCategoryComboBox012.ValueMember = "main_category_code";
             mainCategoryComboBox012.SelectedIndex = 0;
             #endregion
+
             #region "品名"
             //品名ヘッダー 初期表示
 
@@ -1678,113 +1685,63 @@ namespace Flawless_ex
             string DeliveryDate = deliveryDateBox.Text;
             string DeliveryMethod = deliveryComboBox.Text;
             string PaymentMethod = paymentMethodsComboBox.Text;
+            int TYPE = 0;
+            int AntiqueNumber = 0;
+            int ID_Number = 0;
+            string CompanyName = "";
+            string ShopName = "";
+            string StaffName = "";
+            string Name = "";
+            string Birthday = "";
+            string TEL = "";
+            string Work = "";
 
-            DataTable dt = new DataTable();
-
-            if (subSum >= 2000000)
+            if (typeTextBox.Text == "法人")
             {
-                if (!string.IsNullOrEmpty(typeTextBox.Text))
-                {
-                    if (!string.IsNullOrEmpty(articlesTextBox.Text))
-                    {
-                        AolFinancialShareholder = articlesTextBox.Text;
+                TYPE = 0;
+                CompanyName = companyNmae;
+                ShopName = shopName;
+                StaffName = staff_name;
 
-                        using (transaction = conn.BeginTransaction())
+            }
+            else if (typeTextBox.Text == "個人")
+            {
+                TYPE = 1;
+                Name = companyTextBox.Text;
+                Birthday = shopNameTextBox.Text;
+                Work = clientNameTextBox.Text;
+            }
+
+            //古物番号、身分証番号、TEL の紐付け
+            string NUMBER = "";
+
+            #region"古物番号、身分証番号取得"
+            using (transaction = conn.BeginTransaction())     
+            {
+                if (!string.IsNullOrEmpty(typeTextBox.Text)) {
+                    if (typeTextBox.Text == "法人")
+                    {
+                        NUMBER = @"select antique_number, phone_number from client_m_corporate where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                        cmd = new NpgsqlCommand(NUMBER, conn);
+                        using (reader = cmd.ExecuteReader())
                         {
-                            if (typeTextBox.Text == "法人")
+                            while (reader.Read())
                             {
-                                string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                               
-                            }
-                            else if (typeTextBox.Text == "個人")
-                            {
-                                string SQL_STR = @"update client_m_individual set aol_financial_shareholder='" + AolFinancialShareholder + "' where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
+                                AntiqueNumber = (int)reader["antique_number"];
+                                TEL = reader["phone_number"].ToString();
                             }
                         }
                     }
-
-                    if (!string.IsNullOrEmpty(taxCertificateTextBox.Text))
+                    else if (typeTextBox.Text == "個人")
                     {
-                        TaxCertification = taxCertificateTextBox.Text;
-                        using (transaction = conn.BeginTransaction())
+                        NUMBER = @"select id_number, phone_number from client_m_individual where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
+                        cmd = new NpgsqlCommand(NUMBER, conn);
+                        using (reader = cmd.ExecuteReader())
                         {
-                            if (typeTextBox.Text == "法人")
+                            while (reader.Read())
                             {
-                                string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                            else if (typeTextBox.Text == "個人")
-                            {
-                                string SQL_STR = @"update client_m_individual set tax_certificate='" + TaxCertification + "'  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                        }
-                    }
-                    
-                    if (!string.IsNullOrEmpty(sealCertificationTextBox.Text))
-                    {
-                        SealCertification = sealCertificationTextBox.Text;
-                        using (transaction = conn.BeginTransaction())
-                        {
-                            if (typeTextBox.Text == "法人")
-                            {
-                                string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                            else if (typeTextBox.Text == "個人")
-                            {
-                                string SQL_STR = @"update client_m_individual set seal_certification='" + SealCertification + "' where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
-                    {
-                        ResidenceCard = residenceCardTextBox.Text;
-                        ResidencePeriod = residencePerioddatetimepicker.Value.ToShortDateString();
-                        using (transaction = conn.BeginTransaction())
-                        {
-                            if (typeTextBox.Text == "法人")
-                            {
-                                string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','"+ ResidencePeriod + "') where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                            else if (typeTextBox.Text == "個人")
-                            {
-                                string SQL_STR = @"update client_m_individual set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "')  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                        }
-                    }
-
-                    if (!string.IsNullOrEmpty(antiqueLicenceTextBox.Text))
-                    {
-                        AntiqueLicence = antiqueLicenceTextBox.Text;
-
-                        using (transaction = conn.BeginTransaction())
-                        {
-                            if (typeTextBox.Text == "法人")
-                            {
-                                string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
-                            }
-                            else if (typeTextBox.Text == "個人")
-                            {
-                                string SQL_STR = @"update client_m_individual set antique_license ='" + AntiqueLicence + "'  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
-                                cmd = new NpgsqlCommand(SQL_STR, conn);
-                                cmd.ExecuteReader();
+                                ID_Number = (int)reader["id_number"];
+                                TEL = reader["phone_number"].ToString();
                             }
                         }
                     }
@@ -1794,7 +1751,121 @@ namespace Flawless_ex
                     MessageBox.Show("顧客選択をしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            string sql_str = "Insert into statement_data (staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number) VALUES ( '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "');";
+            #endregion
+
+            DataTable dt = new DataTable();
+
+            #region"200万以上"
+            if (subSum >= 2000000)
+            {
+                if (!string.IsNullOrEmpty(articlesTextBox.Text))
+                {
+                    AolFinancialShareholder = articlesTextBox.Text;
+
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (typeTextBox.Text == "法人")
+                        {
+                            string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+
+                        }
+                        else if (typeTextBox.Text == "個人")
+                        {
+                            string SQL_STR = @"update client_m_individual set aol_financial_shareholder='" + AolFinancialShareholder + "' where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(taxCertificateTextBox.Text))
+                {
+                    TaxCertification = taxCertificateTextBox.Text;
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (typeTextBox.Text == "法人")
+                        {
+                            string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                        else if (typeTextBox.Text == "個人")
+                        {
+                            string SQL_STR = @"update client_m_individual set tax_certificate='" + TaxCertification + "'  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(sealCertificationTextBox.Text))
+                {
+                    SealCertification = sealCertificationTextBox.Text;
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (typeTextBox.Text == "法人")
+                        {
+                            string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                        else if (typeTextBox.Text == "個人")
+                        {
+                            string SQL_STR = @"update client_m_individual set seal_certification='" + SealCertification + "' where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
+                {
+                    ResidenceCard = residenceCardTextBox.Text;
+                    ResidencePeriod = residencePerioddatetimepicker.Value.ToShortDateString();
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (typeTextBox.Text == "法人")
+                        {
+                            string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                        else if (typeTextBox.Text == "個人")
+                        {
+                            string SQL_STR = @"update client_m_individual set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "')  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(antiqueLicenceTextBox.Text))
+                {
+                    AntiqueLicence = antiqueLicenceTextBox.Text;
+
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (typeTextBox.Text == "法人")
+                        {
+                            string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                        else if (typeTextBox.Text == "個人")
+                        {
+                            string SQL_STR = @"update client_m_individual set antique_license ='" + AntiqueLicence + "'  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteReader();
+                        }
+                    }
+                }
+
+            }
+            #endregion
+
+            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, phone_number, occupation) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + TEL + "','" + Work + "');";
 
             conn.Close();
 
@@ -1810,8 +1881,6 @@ namespace Flawless_ex
 
             DataTable dt2 = new DataTable();
             string sql_str2 = "Insert into statement_calc_data VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "');";
-
-
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
@@ -5665,9 +5734,22 @@ namespace Flawless_ex
                 adapter1.Fill(clientDt1);
 
                 DataRow row2;
-                row2 = clientDt.Rows[0];
+                row2 = clientDt1.Rows[0];
 
-                string tel = row2["phone_number"].ToString();
+                string tel = "";
+                try
+                {
+                    tel = row2["phone_number"].ToString();
+                }
+                catch (ArgumentException err)
+                {
+                    MessageBox.Show(err.ToString());
+                }
+                finally
+                {
+                    conn.Close();
+                }
+                
                 string fax = row2["fax_number"].ToString();
 
                 conn.Close();
@@ -5697,7 +5779,7 @@ namespace Flawless_ex
                 adapter2.Fill(clientDt2);
 
                 DataRow row2;
-                row2 = clientDt.Rows[0];
+                row2 = clientDt2.Rows[0];
                 address = row2["address"].ToString();
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
@@ -5749,7 +5831,7 @@ namespace Flawless_ex
                 adapter1.Fill(clientDt1);
 
                 DataRow row2;
-                row2 = clientDt.Rows[0];
+                row2 = clientDt1.Rows[0];
 
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
@@ -5781,7 +5863,7 @@ namespace Flawless_ex
                 adapter2.Fill(clientDt2);
 
                 DataRow row2;
-                row2 = clientDt.Rows[0];
+                row2 = clientDt2.Rows[0];
                 address = row2["address"].ToString();
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
