@@ -34,7 +34,7 @@ namespace Flawless_ex
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";              //担当者名取得用
             string sql_str1 = "select * from statement_data where staff_code = " + staff_id + ";";      //伝票番号、合計金額、受け渡し方法、決済方法、決済日、受け渡し日を取得用

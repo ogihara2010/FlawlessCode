@@ -51,7 +51,7 @@ namespace Flawless_ex
                 else
                 {
                     string sql_str = "select* from staff_m where staff_code = " + id + " ";
-                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                     conn.Open();
 
                     //検索結果の数
