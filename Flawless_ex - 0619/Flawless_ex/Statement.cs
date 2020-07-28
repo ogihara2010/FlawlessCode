@@ -5736,20 +5736,7 @@ namespace Flawless_ex
                 DataRow row2;
                 row2 = clientDt1.Rows[0];
 
-                string tel = "";
-                try
-                {
-                    tel = row2["phone_number"].ToString();
-                }
-                catch (ArgumentException err)
-                {
-                    MessageBox.Show(err.ToString());
-                }
-                finally
-                {
-                    conn.Close();
-                }
-                
+                string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
 
                 conn.Close();
