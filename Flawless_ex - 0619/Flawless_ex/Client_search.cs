@@ -267,8 +267,6 @@ namespace Flawless_ex
 
                     }
                 }
-
-
             }
         }
 
