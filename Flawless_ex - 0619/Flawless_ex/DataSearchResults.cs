@@ -39,6 +39,7 @@ namespace Flawless_ex
             this.search2 = search2;
             this.search3 = search3;
             staff_id = id;
+            this.data = data;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
@@ -150,7 +151,7 @@ namespace Flawless_ex
                     NpgsqlDataAdapter adapter;
                     conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                    string sql_str = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.control_number, A.id_number from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                    string sql_str = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.control_number, A.id_number from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                                  "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                                      "where B.invalid = 0 and B.name = '" + name1 + "' " + search1 + " B.phone_number = '" + phoneNumber1 + "'" + " " + search2 + " B.address like '% " + address1 + " %' " + search3 + " D.item_name = '" + item1 + "';";
                     conn.Open();

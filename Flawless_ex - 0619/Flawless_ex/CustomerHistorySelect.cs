@@ -20,6 +20,7 @@ namespace Flawless_ex
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
+            this.data = data;
         }
 
         private void Button2_Click(object sender, EventArgs e)
