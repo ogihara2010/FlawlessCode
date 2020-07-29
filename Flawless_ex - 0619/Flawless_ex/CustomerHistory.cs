@@ -27,21 +27,34 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter2;
         NpgsqlConnection conn3 = new NpgsqlConnection();
         NpgsqlDataAdapter adapter3;
-        public CustomerHistory(MainMenu main, int id)
+        string data;
+        public CustomerHistory(MainMenu main, int id, string data)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
+            this.data = data;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data);
             this.Close();
-            mainMenu.Show();
+            customerHistorySelect.Show();
         }
 
         private void CustomerHistory_Load(object sender, EventArgs e)
         {
+            if (data == "S")
+            {
+                this.textBox8.Enabled = false;
+                this.groupBox9.Enabled = false;
+            }
+            else if (data == "D")
+            {
+                this.textBox7.Enabled = false;
+                this.groupBox8.Enabled = false;
+            }
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //大分類検索用
@@ -333,34 +346,67 @@ namespace Flawless_ex
                 string itemcode = row2["item_code"].ToString();
                 #endregion
 
-                string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                             "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
-                              + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.document_number = '" + documentNumber + "' " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
-                              + " D.main_category_code = " + code  + " "+ search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '"  + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11 
-                              + " A.payment_method = '" + method + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");"; 
-
-
-                conn.Open();
-                adapter = new NpgsqlDataAdapter(sql, conn);
-                adapter.Fill(dt7);
-                #endregion
-                DataRow row3;
-                int a = dt7.Rows.Count;
-                if (a == 0)
+                if (data == "S")
                 {
-                    MessageBox.Show("検索データがありません。");
-                    return;
-                }
-                row3 = dt7.Rows[0];
-                string name1 = row3["shop_name"].ToString();
-                string phoneNumber1 = row3["phone_number"].ToString();
-                string address1 = row3["address"].ToString();
-                string item1 = row3["item_name"].ToString();
+                    string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                            "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
+                             + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.document_number = '" + documentNumber + "' " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
+                             + " D.main_category_code = " + code + " " + search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
+                             + " A.payment_method = '" + method + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                    conn.Open();
+                    adapter = new NpgsqlDataAdapter(sql, conn);
+                    adapter.Fill(dt7);
+                    #endregion
+                    DataRow row3;
+                    int a = dt7.Rows.Count;
+                    if (a == 0)
+                    {
+                        MessageBox.Show("検索データがありません。");
+                        return;
+                    }
+                    row3 = dt7.Rows[0];
+                    string name1 = row3["shop_name"].ToString();
+                    string phoneNumber1 = row3["phone_number"].ToString();
+                    string address1 = row3["address"].ToString();
+                    string item1 = row3["item_name"].ToString();
 
-                DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5);
-                this.Hide();
-                dataSearch.Show();
+
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data);
+                    this.Hide();
+                    dataSearch.Show();
+                }
+                else if (data == "D")
+                {
+                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                            "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
+                             + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.control_number = " + controlNumber + " " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
+                             + " D.main_category_code = " + code + " " + search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
+                             + " A.payment_method = '" + method + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                    conn.Open();
+                    adapter = new NpgsqlDataAdapter(sql, conn);
+                    adapter.Fill(dt7);
+
+                    DataRow row3;
+                    int a = dt7.Rows.Count;
+                    if (a == 0)
+                    {
+                        MessageBox.Show("検索データがありません。");
+                        return;
+                    }
+                    row3 = dt7.Rows[0];
+                    string name1 = row3["shop_name"].ToString();
+                    string phoneNumber1 = row3["phone_number"].ToString();
+                    string address1 = row3["address"].ToString();
+                    string item1 = row3["item_name"].ToString();
+
+
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data);
+                    this.Hide();
+                    dataSearch.Show();
+                }
+                    
             }
             #region "検索条件　個人"
             if (radioButton2.Checked == true)
@@ -556,35 +602,66 @@ namespace Flawless_ex
                 string itemcode = row2["item_code"].ToString();
                 #endregion
 
-                string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
-                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                             "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
-                              + " B.phone_number = '" + phoneNumber + "'" +  " " + search7 + " A.document_number = " + documentNumber + " " + search8 +  " " 
-                              + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
-                              + " A.payment_method = '" + method + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");"; 
-
-
-                conn.Open();
-                adapter = new NpgsqlDataAdapter(sql, conn);
-                adapter.Fill(dt7);
-                #endregion
-
-                DataRow row3;
-                int a = dt7.Rows.Count;
-                if(a == 0)
+                if (data == "S")
                 {
-                    MessageBox.Show("検索データがありません。");
-                    return;
-                }
-                row3 = dt7.Rows[0];
-                name = row3["name"].ToString();
-                phoneNumber = row3["phone_number"].ToString();
-                address = row3["address"].ToString();
-                item = row3["item_name"].ToString();
+                    string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                            "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
+                             + " B.phone_number = '" + phoneNumber + "'" + " " + search7 + " A.document_number = " + documentNumber + " " + search8 + " "
+                             + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
+                             + " A.payment_method = '" + method + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
 
-                DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5);
-                this.Hide();
-                dataSearch.Show();
+                    conn.Open();
+                    adapter = new NpgsqlDataAdapter(sql, conn);
+                    adapter.Fill(dt7);
+                    #endregion
+
+                    DataRow row3;
+                    int a = dt7.Rows.Count;
+                    if (a == 0)
+                    {
+                        MessageBox.Show("検索データがありません。");
+                        return;
+                    }
+                    row3 = dt7.Rows[0];
+                    name = row3["name"].ToString();
+                    phoneNumber = row3["phone_number"].ToString();
+                    address = row3["address"].ToString();
+                    item = row3["item_name"].ToString();
+
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data);
+                    this.Hide();
+                    dataSearch.Show();
+                }
+                if (data == "D")
+                {
+                    string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                            "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
+                             + " B.phone_number = '" + phoneNumber + "'" + " " + search7 + " A.control_number = " + controlNumber + " " + search8 + " "
+                             + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
+                             + " A.payment_method = '" + method + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+
+                    conn.Open();
+                    adapter = new NpgsqlDataAdapter(sql, conn);
+                    adapter.Fill(dt7);
+                    DataRow row3;
+                    int a = dt7.Rows.Count;
+                    if (a == 0)
+                    {
+                        MessageBox.Show("検索データがありません。");
+                        return;
+                    }
+                    row3 = dt7.Rows[0];
+                    name = row3["name"].ToString();
+                    phoneNumber = row3["phone_number"].ToString();
+                    address = row3["address"].ToString();
+                    item = row3["item_name"].ToString();
+
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data);
+                    this.Hide();
+                    dataSearch.Show();
+                }
             }
         }
 

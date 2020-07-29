@@ -38,72 +38,74 @@
             this.removeButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 26);
+            this.label1.Location = new System.Drawing.Point(13, 30);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 21);
+            this.label1.Size = new System.Drawing.Size(136, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "大分類コード";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 75);
+            this.label2.Location = new System.Drawing.Point(13, 86);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 21);
+            this.label2.Size = new System.Drawing.Size(106, 24);
             this.label2.TabIndex = 1;
             this.label2.Text = "大分類名";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(130, 26);
+            this.label3.Location = new System.Drawing.Point(154, 30);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 21);
+            this.label3.Size = new System.Drawing.Size(22, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(130, 75);
+            this.label4.Location = new System.Drawing.Point(154, 86);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(21, 21);
+            this.label4.Size = new System.Drawing.Size(22, 24);
             this.label4.TabIndex = 3;
             this.label4.Text = "：";
             // 
             // mainCategoryCodeTextBox
             // 
-            this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(154, 24);
-            this.mainCategoryCodeTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(182, 27);
+            this.mainCategoryCodeTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.mainCategoryCodeTextBox.Name = "mainCategoryCodeTextBox";
             this.mainCategoryCodeTextBox.ReadOnly = true;
-            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(103, 28);
+            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(121, 31);
             this.mainCategoryCodeTextBox.TabIndex = 4;
             // 
             // mainCategoryNameTextBox
             // 
-            this.mainCategoryNameTextBox.Location = new System.Drawing.Point(154, 74);
-            this.mainCategoryNameTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.mainCategoryNameTextBox.Location = new System.Drawing.Point(182, 83);
+            this.mainCategoryNameTextBox.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.mainCategoryNameTextBox.Name = "mainCategoryNameTextBox";
-            this.mainCategoryNameTextBox.Size = new System.Drawing.Size(167, 28);
+            this.mainCategoryNameTextBox.Size = new System.Drawing.Size(197, 31);
             this.mainCategoryNameTextBox.TabIndex = 5;
             // 
             // returnButton
             // 
             this.returnButton.AutoSize = true;
-            this.returnButton.Location = new System.Drawing.Point(18, 158);
-            this.returnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.returnButton.Location = new System.Drawing.Point(21, 181);
+            this.returnButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(132, 65);
+            this.returnButton.Size = new System.Drawing.Size(156, 74);
             this.returnButton.TabIndex = 6;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -112,10 +114,10 @@
             // removeButton
             // 
             this.removeButton.AutoSize = true;
-            this.removeButton.Location = new System.Drawing.Point(183, 158);
-            this.removeButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.removeButton.Location = new System.Drawing.Point(216, 181);
+            this.removeButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(141, 65);
+            this.removeButton.Size = new System.Drawing.Size(167, 74);
             this.removeButton.TabIndex = 7;
             this.removeButton.Text = "無効";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -124,10 +126,10 @@
             // updateButton
             // 
             this.updateButton.AutoSize = true;
-            this.updateButton.Location = new System.Drawing.Point(328, 158);
-            this.updateButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.updateButton.Location = new System.Drawing.Point(388, 181);
+            this.updateButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(141, 65);
+            this.updateButton.Size = new System.Drawing.Size(167, 74);
             this.updateButton.TabIndex = 8;
             this.updateButton.Text = "更新";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -136,17 +138,36 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 119);
+            this.label5.Location = new System.Drawing.Point(17, 136);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 21);
+            this.label5.Size = new System.Drawing.Size(106, 24);
             this.label5.TabIndex = 9;
-            this.label5.Text = "label5";
+            this.label5.Text = "変更理由";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(154, 136);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(22, 24);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(182, 129);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(361, 31);
+            this.textBox1.TabIndex = 11;
             // 
             // UpdateMainCategoryMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 238);
+            this.ClientSize = new System.Drawing.Size(577, 272);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.removeButton);
@@ -157,7 +178,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.Name = "UpdateMainCategoryMenu";
             this.Text = "大分類マスタメンテナンス　更新";
             this.Load += new System.EventHandler(this.UpdateMainCategoryMenu_Load);
@@ -178,5 +199,7 @@
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
