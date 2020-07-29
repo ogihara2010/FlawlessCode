@@ -84,7 +84,7 @@ namespace Flawless_ex
         {
             DataTable dt2 = new DataTable();
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string sql_str2 = "select* from main_category_m where invalid = 0";
