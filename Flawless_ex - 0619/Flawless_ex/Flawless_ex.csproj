@@ -135,6 +135,12 @@
     <Compile Include="CustomerHistory.Designer.cs">
       <DependentUpon>CustomerHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerHistorySelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerHistorySelect.Designer.cs">
+      <DependentUpon>CustomerHistorySelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataSearchResults.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -295,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerHistory.resx">
       <DependentUpon>CustomerHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerHistorySelect.resx">
+      <DependentUpon>CustomerHistorySelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataSearchResults.resx">
       <DependentUpon>DataSearchResults.cs</DependentUpon>

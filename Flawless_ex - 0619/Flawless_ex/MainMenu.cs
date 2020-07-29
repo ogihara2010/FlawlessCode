@@ -11,7 +11,7 @@ namespace Flawless_ex
         TopMenu top = new TopMenu();
         string access_auth;
         int staff_id;
-
+        string data;
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
             InitializeComponent();
@@ -20,7 +20,7 @@ namespace Flawless_ex
             staff_id = id;
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlCommand cmd;
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "select* from staff_m where staff_code = " + id + " and password = '" + pass + "'";
             cmd = new NpgsqlCommand(sql_str2, conn);
@@ -87,10 +87,10 @@ namespace Flawless_ex
         #region "買取販売データ検索ボタン"
         private void CustomerHistoriButton_Click(object sender, EventArgs e)
         {
-            CustomerHistory customerHistory = new CustomerHistory(this, staff_id);
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data);
 
             this.Hide();
-            customerHistory.Show();
+            customerHistorySelect.Show();
         }
         #endregion
         #region "月間成績表一覧"
