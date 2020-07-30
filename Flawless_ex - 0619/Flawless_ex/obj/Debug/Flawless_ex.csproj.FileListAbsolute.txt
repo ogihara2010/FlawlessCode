@@ -532,6 +532,4 @@ C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Deb
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.client_add.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.DeliveryPreview.resources
 C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.RecordList.resources
-C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.client_add.resources
-C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.DeliveryPreview.resources
-C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.RecordList.resources
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.CustomerHistorySelect.resources

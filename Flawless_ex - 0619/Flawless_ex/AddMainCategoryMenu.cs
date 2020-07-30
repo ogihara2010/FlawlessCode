@@ -22,7 +22,7 @@ namespace Flawless_ex
 
         private void AddMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             //大分類コード取得
@@ -68,7 +68,7 @@ namespace Flawless_ex
 
                 string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0,'" + staff_code + "')";
 
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
