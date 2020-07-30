@@ -12,6 +12,7 @@ namespace Flawless_ex
         string access_auth;
         int staff_id;
         string data;
+        string slipNumber;
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
             InitializeComponent();
@@ -51,11 +52,7 @@ namespace Flawless_ex
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            if (access_auth == "C")
-            {
-                this.MonResults.Enabled = false;
-            }
-            else { }
+            
         }
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
@@ -96,7 +93,7 @@ namespace Flawless_ex
         #region "月間成績表一覧"
         private void MonResults_Click(object sender, EventArgs e)
         {
-            MonResult monresult = new MonResult(this, staff_id);
+            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber);
 
             this.Hide();
             monresult.Show();
