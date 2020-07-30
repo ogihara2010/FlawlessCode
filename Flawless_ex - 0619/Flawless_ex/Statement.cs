@@ -109,9 +109,7 @@ namespace Flawless_ex
         string AntiqueLicence = "";
         #endregion
 
-        string companyNmae;
-        string shopName;
-        string staff_name;
+        string client_staff_name;
         string address;
         string register_date;
         string remarks;
@@ -191,13 +189,13 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string staff_name, string address)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
             this.type = type;
-            this.staff_name = staff_name;
+            this.client_staff_name = client_staff_name;
             this.address = address;
         }
 
@@ -234,16 +232,16 @@ namespace Flawless_ex
 
             if (!string.IsNullOrEmpty(docuNum))
             {
-                Num = docuNum.Substring(1, 5);       //伝票番号の数字部分
+                Num = docuNum.Trim('F');        //伝票番号の数字部分
             }
             else
             {
-                docuNum = "F00000";
-                Num = docuNum.Substring(1, 5);       //伝票番号の数字部分
+                docuNum = "F0";
+                Num = docuNum.Trim('F');       //伝票番号の数字部分
             }
 
             number = int.Parse(Num) + 1;
-            documentNumberTextBox.Text = "F" + number.ToString().PadLeft(5, '0');       //Fを追加
+            documentNumberTextBox.Text = "F" + number;       //Fを追加
             #endregion
 
             #region"納品書の管理番号"
@@ -312,7 +310,8 @@ namespace Flawless_ex
             mainCategoryComboBox0.DisplayMember = "main_category_name";
             mainCategoryComboBox0.ValueMember = "main_category_code";
             mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
-                                                    //納品書
+                                           
+            //納品書
             DataTable deliverydt = new DataTable();
             deliverydt = dt.Copy();
             mainCategoryComboBox00.DataSource = deliverydt;
@@ -727,7 +726,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -766,7 +765,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -843,12 +842,13 @@ namespace Flawless_ex
                 itemComboBox0.DataSource = dt2;
                 itemComboBox0.DisplayMember = "item_name";
                 itemComboBox0.ValueMember = "item_code";
-                mainCategoryCode0 = int.Parse("main_category_code");
-                itemCode0 = int.Parse("item_code");
+             
+                DataRow row = dt2.Rows[0];
+                mainCategoryCode0 = (int)row["main_category_code"];
+                itemCode0 = (int)row["item_code"];
 
                 conn.Close();
             }
-
         }
 
         private void mainCategoryComboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -868,24 +868,20 @@ namespace Flawless_ex
                 itemComboBox1.DataSource = dt200;
                 itemComboBox1.DisplayMember = "item_name";
                 itemComboBox1.ValueMember = "item_code";
-                mainCategoryCode1 = int.Parse("main_category_code");
-                itemCode1 = int.Parse("item_code");
+
+                DataRow row = dt200.Rows[0];
+                mainCategoryCode1 = (int)row["main_category_code"];
+                itemCode1 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
         private void mainCategoryComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             //大分類によって品名変更 3行目
             if (a > 1)
             {
-
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
                 conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -898,14 +894,12 @@ namespace Flawless_ex
                 itemComboBox2.DataSource = dt201;
                 itemComboBox2.DisplayMember = "item_name";
                 itemComboBox2.ValueMember = "item_code";
-                mainCategoryCode2 = int.Parse("main_category_code");
-                itemCode2 = int.Parse("item_code");
+
+                DataRow row = dt201.Rows[0];
+                mainCategoryCode2 = (int)row["main_category_code"];
+                itemCode2 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -914,7 +908,6 @@ namespace Flawless_ex
             //大分類によって品名変更 4行目
             if (a > 1)
             {
-
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
                 conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -927,14 +920,12 @@ namespace Flawless_ex
                 itemComboBox3.DataSource = dt202;
                 itemComboBox3.DisplayMember = "item_name";
                 itemComboBox3.ValueMember = "item_code";
-                mainCategoryCode3 = int.Parse("main_category_code");
-                itemCode3 = int.Parse("item_code");
+
+                DataRow row = dt202.Rows[0];
+                mainCategoryCode3 = (int)row["main_category_code"];
+                itemCode3 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -943,7 +934,6 @@ namespace Flawless_ex
             //大分類によって品名変更 5行目
             if (a > 1)
             {
-
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
                 conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -956,14 +946,12 @@ namespace Flawless_ex
                 itemComboBox4.DataSource = dt203;
                 itemComboBox4.DisplayMember = "item_name";
                 itemComboBox4.ValueMember = "item_code";
-                mainCategoryCode4 = int.Parse("main_category_code");
-                itemCode4 = int.Parse("item_code");
+
+                DataRow row = dt203.Rows[0];
+                mainCategoryCode4 = (int)row["main_category_code"];
+                itemCode4 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -984,14 +972,12 @@ namespace Flawless_ex
                 itemComboBox5.DataSource = dt204;
                 itemComboBox5.DisplayMember = "item_name";
                 itemComboBox5.ValueMember = "item_code";
-                mainCategoryCode5 = int.Parse("main_category_code");
-                itemCode5 = int.Parse("item_code");
+
+                DataRow row = dt204.Rows[0];
+                mainCategoryCode5 = (int)row["main_category_code"];
+                itemCode5 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1012,14 +998,12 @@ namespace Flawless_ex
                 itemComboBox6.DataSource = dt205;
                 itemComboBox6.DisplayMember = "item_name";
                 itemComboBox6.ValueMember = "item_code";
-                mainCategoryCode6 = int.Parse("main_category_code");
-                itemCode6 = int.Parse("item_code");
+
+                DataRow row = dt205.Rows[0];
+                mainCategoryCode6 = (int)row["main_category_code"];
+                itemCode6 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1040,14 +1024,12 @@ namespace Flawless_ex
                 itemComboBox7.DataSource = dt206;
                 itemComboBox7.DisplayMember = "item_name";
                 itemComboBox7.ValueMember = "item_code";
-                mainCategoryCode7 = int.Parse("main_category_code");
-                itemCode7 = int.Parse("item_code");
+
+                DataRow row = dt206.Rows[0];
+                mainCategoryCode7 = (int)row["main_category_code"];
+                itemCode7 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1068,14 +1050,12 @@ namespace Flawless_ex
                 itemComboBox8.DataSource = dt207;
                 itemComboBox8.DisplayMember = "item_name";
                 itemComboBox8.ValueMember = "item_code";
-                mainCategoryCode8 = int.Parse("main_category_code");
-                itemCode8 = int.Parse("item_code");
+
+                DataRow row = dt207.Rows[0];
+                mainCategoryCode8 = (int)row["main_category_code"];
+                itemCode8 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1096,14 +1076,12 @@ namespace Flawless_ex
                 itemComboBox9.DataSource = dt208;
                 itemComboBox9.DisplayMember = "item_name";
                 itemComboBox9.ValueMember = "item_code";
-                mainCategoryCode9 = int.Parse("main_category_code");
-                itemCode9 = int.Parse("item_code");
+
+                DataRow row = dt208.Rows[0];
+                mainCategoryCode9 = (int)row["main_category_code"];
+                itemCode9 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1124,14 +1102,12 @@ namespace Flawless_ex
                 itemComboBox10.DataSource = dt209;
                 itemComboBox10.DisplayMember = "item_name";
                 itemComboBox10.ValueMember = "item_code";
-                mainCategoryCode10 = int.Parse("main_category_code");
-                itemCode10 = int.Parse("item_code");
+
+                DataRow row = dt209.Rows[0];
+                mainCategoryCode10 = (int)row["main_category_code"];
+                itemCode10 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1140,7 +1116,6 @@ namespace Flawless_ex
             //大分類によって品名変更 12行目
             if (a > 1)
             {
-
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
                 conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -1153,14 +1128,12 @@ namespace Flawless_ex
                 itemComboBox11.DataSource = dt210;
                 itemComboBox11.DisplayMember = "item_name";
                 itemComboBox11.ValueMember = "item_code";
-                mainCategoryCode11 = int.Parse("main_category_code");
-                itemCode11 = int.Parse("item_code");
+
+                DataRow row = dt210.Rows[0];
+                mainCategoryCode11 = (int)row["main_category_code"];
+                itemCode11 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1169,7 +1142,6 @@ namespace Flawless_ex
             //大分類によって品名変更 13行目
             if (a > 1)
             {
-
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
                 conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -1182,8 +1154,10 @@ namespace Flawless_ex
                 itemComboBox12.DataSource = dt211;
                 itemComboBox12.DisplayMember = "item_name";
                 itemComboBox12.ValueMember = "item_code";
-                mainCategoryCode12 = int.Parse("main_category_code");
-                itemCode12 = int.Parse("item_code");
+
+                DataRow row = dt211.Rows[0];
+                mainCategoryCode12 = (int)row["main_category_code"];
+                itemCode12 = (int)row["item_code"];
 
                 conn.Close();
             }
@@ -1212,16 +1186,13 @@ namespace Flawless_ex
                 itemComboBox00.DataSource = deliverydt200;
                 itemComboBox00.DisplayMember = "item_name";
                 itemComboBox00.ValueMember = "item_code";
-                mainCategoryCode00 = int.Parse("main_category_code");
-                itemCode0 = int.Parse("item_code");
+
+                DataRow row = deliverydt200.Rows[0];
+                mainCategoryCode00 = (int)row["main_category_code"];
+                itemCode00 = (int)row["item_code"];
 
                 conn.Close();
             }
-            else
-            {
-
-            }
-
         }
 
         private void mainCategoryComboBox01_SelectedIndexChanged(object sender, EventArgs e)
@@ -1241,8 +1212,10 @@ namespace Flawless_ex
                 itemComboBox01.DataSource = deliverydt201;
                 itemComboBox01.DisplayMember = "item_name";
                 itemComboBox01.ValueMember = "item_code";
-                mainCategoryCode01 = int.Parse("main_category_code");
-                itemCode1 = int.Parse("item_code");
+
+                DataRow row = deliverydt201.Rows[0];
+                mainCategoryCode01 = (int)row["main_category_code"];
+                itemCode01 = (int)row["item_code"];
 
                 conn.Close();
             }
@@ -1269,14 +1242,12 @@ namespace Flawless_ex
                 itemComboBox02.DataSource = deliverydt202;
                 itemComboBox02.DisplayMember = "item_name";
                 itemComboBox02.ValueMember = "item_code";
-                mainCategoryCode02 = int.Parse("main_category_code");
-                itemCode2 = int.Parse("item_code");
+
+                DataRow row = deliverydt202.Rows[0];
+                mainCategoryCode02 = (int)row["main_category_code"];
+                itemCode02 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1297,14 +1268,12 @@ namespace Flawless_ex
                 itemComboBox03.DataSource = deliverydt203;
                 itemComboBox03.DisplayMember = "item_name";
                 itemComboBox03.ValueMember = "item_code";
-                mainCategoryCode03 = int.Parse("main_category_code");
-                itemCode3 = int.Parse("item_code");
+
+                DataRow row = deliverydt203.Rows[0];
+                mainCategoryCode03 = (int)row["main_category_code"];
+                itemCode03 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1325,14 +1294,12 @@ namespace Flawless_ex
                 itemComboBox04.DataSource = deliverydt204;
                 itemComboBox04.DisplayMember = "item_name";
                 itemComboBox04.ValueMember = "item_code";
-                mainCategoryCode04 = int.Parse("main_category_code");
-                itemCode4 = int.Parse("item_code");
+
+                DataRow row = deliverydt204.Rows[0];
+                mainCategoryCode04 = (int)row["main_category_code"];
+                itemCode04 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1353,14 +1320,12 @@ namespace Flawless_ex
                 itemComboBox05.DataSource = deliverydt205;
                 itemComboBox05.DisplayMember = "item_name";
                 itemComboBox05.ValueMember = "item_code";
-                mainCategoryCode05 = int.Parse("main_category_code");
-                itemCode5 = int.Parse("item_code");
+
+                DataRow row = deliverydt205.Rows[0];
+                mainCategoryCode05 = (int)row["main_category_code"];
+                itemCode05 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1381,14 +1346,12 @@ namespace Flawless_ex
                 itemComboBox06.DataSource = deliverydt206;
                 itemComboBox06.DisplayMember = "item_name";
                 itemComboBox06.ValueMember = "item_code";
-                mainCategoryCode06 = int.Parse("main_category_code");
-                itemCode6 = int.Parse("item_code");
+
+                DataRow row = deliverydt206.Rows[0];
+                mainCategoryCode06 = (int)row["main_category_code"];
+                itemCode06 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1409,14 +1372,12 @@ namespace Flawless_ex
                 itemComboBox07.DataSource = deliverydt207;
                 itemComboBox07.DisplayMember = "item_name";
                 itemComboBox07.ValueMember = "item_code";
-                mainCategoryCode07 = int.Parse("main_category_code");
-                itemCode7 = int.Parse("item_code");
+
+                DataRow row = deliverydt207.Rows[0];
+                mainCategoryCode07 = (int)row["main_category_code"];
+                itemCode07 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1437,14 +1398,12 @@ namespace Flawless_ex
                 itemComboBox08.DataSource = deliverydt208;
                 itemComboBox08.DisplayMember = "item_name";
                 itemComboBox08.ValueMember = "item_code";
-                mainCategoryCode08 = int.Parse("main_category_code");
-                itemCode8 = int.Parse("item_code");
+
+                DataRow row = deliverydt208.Rows[0];
+                mainCategoryCode08 = (int)row["main_category_code"];
+                itemCode08 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1465,14 +1424,12 @@ namespace Flawless_ex
                 itemComboBox09.DataSource = deliverydt209;
                 itemComboBox09.DisplayMember = "item_name";
                 itemComboBox09.ValueMember = "item_code";
-                mainCategoryCode09 = int.Parse("main_category_code");
-                itemCode9 = int.Parse("item_code");
+
+                DataRow row = deliverydt209.Rows[0];
+                mainCategoryCode09 = (int)row["main_category_code"];
+                itemCode09 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1493,14 +1450,12 @@ namespace Flawless_ex
                 itemComboBox010.DataSource = deliverydt210;
                 itemComboBox010.DisplayMember = "item_name";
                 itemComboBox010.ValueMember = "item_code";
-                mainCategoryCode010 = int.Parse("main_category_code");
-                itemCode10 = int.Parse("item_code");
+
+                DataRow row = deliverydt210.Rows[0];
+                mainCategoryCode010 = (int)row["main_category_code"];
+                itemCode010 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1521,14 +1476,12 @@ namespace Flawless_ex
                 itemComboBox011.DataSource = deliverydt211;
                 itemComboBox011.DisplayMember = "item_name";
                 itemComboBox011.ValueMember = "item_code";
-                mainCategoryCode011 = int.Parse("main_category_code");
-                itemCode11 = int.Parse("item_code");
+
+                DataRow row = deliverydt211.Rows[0];
+                mainCategoryCode011 = (int)row["main_category_code"];
+                itemCode011 = (int)row["item_code"];
 
                 conn.Close();
-            }
-            else
-            {
-
             }
         }
 
@@ -1549,8 +1502,10 @@ namespace Flawless_ex
                 itemComboBox012.DataSource = deliverydt212;
                 itemComboBox012.DisplayMember = "item_name";
                 itemComboBox012.ValueMember = "item_code";
-                mainCategoryCode012 = int.Parse("main_category_code");
-                itemCode12 = int.Parse("item_code");
+
+                DataRow row = deliverydt212.Rows[0];
+                mainCategoryCode012 = (int)row["main_category_code"];
+                itemCode012 = (int)row["item_code"];
 
                 conn.Close();
             }
@@ -1577,9 +1532,9 @@ namespace Flawless_ex
 
                 if (type == 0)
                 {
-                    companyNmae = row["company_name"].ToString();
-                    shopName = row["shop_name"].ToString();
-                    staff_name = row["staff_name"].ToString();
+                    string companyNmae = row["company_name"].ToString();
+                    string shopName = row["shop_name"].ToString();
+                    string staff_name = row["staff_name"].ToString();
                     address = row["address"].ToString();
                     register_date = row["registration_date"].ToString();
                     remarks = row["remarks"].ToString();
@@ -1679,8 +1634,8 @@ namespace Flawless_ex
             string DocumentNumber = documentNumberTextBox.Text;
             decimal TotalWeight = weisum;
             int Amount = countsum;
-            decimal SubTotal = subSum;
-            decimal Total = subSum;
+            decimal SubTotal = Math.Round(subSum, MidpointRounding.AwayFromZero);
+            decimal Total = Math.Round(subSum, MidpointRounding.AwayFromZero);
             string SettlementDate = settlementBox.Text;
             string DeliveryDate = deliveryDateBox.Text;
             string DeliveryMethod = deliveryComboBox.Text;
@@ -1699,9 +1654,9 @@ namespace Flawless_ex
             if (typeTextBox.Text == "法人")
             {
                 TYPE = 0;
-                CompanyName = companyNmae;
-                ShopName = shopName;
-                StaffName = staff_name;
+                CompanyName = companyTextBox.Text;
+                ShopName = shopNameTextBox.Text;
+                StaffName = client_staff_name;
 
             }
             else if (typeTextBox.Text == "個人")
@@ -1721,7 +1676,7 @@ namespace Flawless_ex
                 if (!string.IsNullOrEmpty(typeTextBox.Text)) {
                     if (typeTextBox.Text == "法人")
                     {
-                        NUMBER = @"select antique_number, phone_number from client_m_corporate where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                        NUMBER = @"select antique_number, phone_number from client_m_corporate where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                         cmd = new NpgsqlCommand(NUMBER, conn);
                         using (reader = cmd.ExecuteReader())
                         {
@@ -1766,7 +1721,7 @@ namespace Flawless_ex
                     {
                         if (typeTextBox.Text == "法人")
                         {
-                            string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteReader();
 
@@ -1787,7 +1742,7 @@ namespace Flawless_ex
                     {
                         if (typeTextBox.Text == "法人")
                         {
-                            string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteReader();
                         }
@@ -1807,7 +1762,7 @@ namespace Flawless_ex
                     {
                         if (typeTextBox.Text == "法人")
                         {
-                            string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteReader();
                         }
@@ -1828,7 +1783,7 @@ namespace Flawless_ex
                     {
                         if (typeTextBox.Text == "法人")
                         {
-                            string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteReader();
                         }
@@ -1849,7 +1804,7 @@ namespace Flawless_ex
                     {
                         if (typeTextBox.Text == "法人")
                         {
-                            string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + companyNmae + "' and shop_name ='" + shopName + "' and staff_name ='" + staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+                            string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteReader();
                         }
@@ -1865,7 +1820,7 @@ namespace Flawless_ex
             }
             #endregion
 
-            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, phone_number, occupation) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + TEL + "','" + Work + "');";
+            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "');";
 
             conn.Close();
 
@@ -2589,7 +2544,7 @@ namespace Flawless_ex
             countsum = int.Parse(countTextBox0.Text);
             weisum = decimal.Parse(weightTextBox0.Text);
             subSum = money0;        //計算書は税込み
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2617,7 +2572,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox1.Text);
             weisum += decimal.Parse(weightTextBox1.Text);
             subSum += money1;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2645,7 +2600,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox2.Text);
             weisum += decimal.Parse(weightTextBox2.Text);
             subSum += money2;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2673,7 +2628,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox3.Text);
             weisum += decimal.Parse(weightTextBox3.Text);
             subSum += money3;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2701,7 +2656,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox4.Text);
             weisum += decimal.Parse(weightTextBox4.Text);
             subSum += money4;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2730,7 +2685,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox5.Text);
             weisum += decimal.Parse(weightTextBox5.Text);
             subSum += money5;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2758,7 +2713,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox6.Text);
             weisum += decimal.Parse(weightTextBox6.Text);
             subSum += money6;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2786,7 +2741,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox7.Text);
             weisum += decimal.Parse(weightTextBox7.Text);
             subSum += money7;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2814,7 +2769,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox8.Text);
             weisum += decimal.Parse(weightTextBox8.Text);
             subSum += money8;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2842,7 +2797,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox9.Text);
             weisum += decimal.Parse(weightTextBox9.Text);
             subSum += money9;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2871,7 +2826,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox10.Text);
             weisum += decimal.Parse(weightTextBox10.Text);
             subSum += money10;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2899,7 +2854,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox11.Text);
             weisum += decimal.Parse(weightTextBox11.Text);
             subSum += money11;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -2928,7 +2883,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox12.Text);
             weisum += decimal.Parse(weightTextBox12.Text);
             subSum += money12;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
 
             totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
             totalCount.Text = string.Format("{0:#,0}", countsum);
@@ -3628,8 +3583,8 @@ namespace Flawless_ex
                 countTextBox0.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money0 = sub;       //計算書は税込み
-            moneyTextBox0.Text = string.Format("{0:C}", sub);
+            money0 = Math.Round(sub, MidpointRounding.AwayFromZero);       //計算書は税込み
+            moneyTextBox0.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox1_Leave(object sender, EventArgs e)
         {
@@ -3656,8 +3611,8 @@ namespace Flawless_ex
                 countTextBox1.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money1 = sub;
-            moneyTextBox1.Text = string.Format("{0:C}", sub);
+            money1 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox1.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox2_Leave(object sender, EventArgs e)
         {
@@ -3685,8 +3640,8 @@ namespace Flawless_ex
                 countTextBox2.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money2 = sub;
-            moneyTextBox2.Text = string.Format("{0:C}", sub);
+            money2 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox2.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox3_Leave(object sender, EventArgs e)
         {
@@ -3713,8 +3668,8 @@ namespace Flawless_ex
                 countTextBox3.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money3 = sub;
-            moneyTextBox3.Text = string.Format("{0:C}", sub);
+            money3 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox3.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox4_Leave(object sender, EventArgs e)
         {
@@ -3742,8 +3697,8 @@ namespace Flawless_ex
                 countTextBox4.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money4 = sub;
-            moneyTextBox4.Text = string.Format("{0:C}", sub);
+            money4 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox4.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox5_Leave(object sender, EventArgs e)
         {
@@ -3770,8 +3725,8 @@ namespace Flawless_ex
                 countTextBox5.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money5 = sub;
-            moneyTextBox5.Text = string.Format("{0:C}", sub);
+            money5 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox5.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox6_Leave(object sender, EventArgs e)
         {
@@ -3798,8 +3753,8 @@ namespace Flawless_ex
                 countTextBox6.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money6 = sub;
-            moneyTextBox6.Text = string.Format("{0:C}", sub);
+            money6 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox6.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox7_Leave(object sender, EventArgs e)
         {
@@ -3826,8 +3781,8 @@ namespace Flawless_ex
                 countTextBox7.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money7 = sub;
-            moneyTextBox7.Text = string.Format("{0:C}", sub);
+            money7 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox7.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox8_Leave(object sender, EventArgs e)
         {
@@ -3854,8 +3809,8 @@ namespace Flawless_ex
                 countTextBox8.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money8 = sub;
-            moneyTextBox8.Text = string.Format("{0:C}", sub);
+            money8 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox8.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox9_Leave(object sender, EventArgs e)
         {
@@ -3882,8 +3837,8 @@ namespace Flawless_ex
                 countTextBox9.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money9 = sub;
-            moneyTextBox9.Text = string.Format("{0:C}", sub);
+            money9 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox9.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox10_Leave(object sender, EventArgs e)
         {
@@ -3910,8 +3865,8 @@ namespace Flawless_ex
                 countTextBox10.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money10 = sub;
-            moneyTextBox10.Text = string.Format("{0:C}", sub);
+            money10 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox10.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox11_Leave(object sender, EventArgs e)
         {
@@ -3938,8 +3893,8 @@ namespace Flawless_ex
                 countTextBox11.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money11 = sub;
-            moneyTextBox11.Text = string.Format("{0:C}", sub);
+            money11 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox11.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox12_Leave(object sender, EventArgs e)
         {
@@ -3966,8 +3921,8 @@ namespace Flawless_ex
                 countTextBox12.ReadOnly = false;
             }
             sub += sub * Tax / 100;
-            money12 = sub;
-            moneyTextBox12.Text = string.Format("{0:C}", sub);
+            money12 = Math.Round(sub, MidpointRounding.AwayFromZero);
+            moneyTextBox12.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
         #endregion
 
@@ -3978,8 +3933,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox0.Text) * decimal.Parse(unitPriceTextBox0.Text);
                 sub += sub * Tax / 100;
-                money0 = sub;
-                moneyTextBox0.Text = string.Format("{0:C}", sub);
+                money0 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox0.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox0.ReadOnly = true;
             }
             else
@@ -3993,8 +3948,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox1.Text) * decimal.Parse(unitPriceTextBox1.Text);
                 sub += sub * Tax / 100;
-                money1 = sub;
-                moneyTextBox1.Text = string.Format("{0:C}", sub);
+                money1 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox1.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox1.ReadOnly = true;
             }
             else
@@ -4008,8 +3963,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox2.Text) * decimal.Parse(unitPriceTextBox2.Text);
                 sub += sub * Tax / 100;
-                money2 = sub;
-                moneyTextBox2.Text = string.Format("{0:C}", sub);
+                money2 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox2.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox2.ReadOnly = true;
             }
             else
@@ -4023,8 +3978,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox3.Text) * decimal.Parse(unitPriceTextBox3.Text);
                 sub += sub * Tax / 100;
-                money3 = sub;
-                moneyTextBox3.Text = string.Format("{0:C}", sub);
+                money3 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox3.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox3.ReadOnly = true;
             }
             else
@@ -4038,8 +3993,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox4.Text) * decimal.Parse(unitPriceTextBox4.Text);
                 sub += sub * Tax / 100;
-                money4 = sub;
-                moneyTextBox4.Text = string.Format("{0:C}", sub);
+                money4 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox4.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox4.ReadOnly = true;
             }
             else
@@ -4053,8 +4008,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox5.Text) * decimal.Parse(unitPriceTextBox5.Text);
                 sub += sub * Tax / 100;
-                money5 = sub;
-                moneyTextBox5.Text = string.Format("{0:C}", sub);
+                money5 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox5.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox5.ReadOnly = true;
             }
             else
@@ -4068,8 +4023,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox6.Text) * decimal.Parse(unitPriceTextBox6.Text);
                 sub += sub * Tax / 100;
-                money6 = sub;
-                moneyTextBox6.Text = string.Format("{0:C}", sub);
+                money6 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox6.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox6.ReadOnly = true;
             }
             else
@@ -4083,8 +4038,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox7.Text) * decimal.Parse(unitPriceTextBox7.Text);
                 sub += sub * Tax / 100;
-                money7 = sub;
-                moneyTextBox7.Text = string.Format("{0:C}", sub);
+                money7 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox7.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox7.ReadOnly = true;
             }
             else
@@ -4098,8 +4053,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox8.Text) * decimal.Parse(unitPriceTextBox8.Text);
                 sub += sub * Tax / 100;
-                money8 = sub;
-                moneyTextBox8.Text = string.Format("{0:C}", sub);
+                money8 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox8.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox8.ReadOnly = true;
             }
             else
@@ -4113,8 +4068,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox9.Text) * decimal.Parse(unitPriceTextBox9.Text);
                 sub += sub * Tax / 100;
-                money9 = sub;
-                moneyTextBox9.Text = string.Format("{0:C}", sub);
+                money9 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox9.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox9.ReadOnly = true;
             }
             else
@@ -4128,8 +4083,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox10.Text) * decimal.Parse(unitPriceTextBox10.Text);
                 sub += sub * Tax / 100;
-                money10 = sub;
-                moneyTextBox10.Text = string.Format("{0:C}", sub);
+                money10 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox10.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox10.ReadOnly = true;
             }
             else
@@ -4143,8 +4098,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox11.Text) * decimal.Parse(unitPriceTextBox11.Text);
                 sub += sub * Tax / 100;
-                money11 = sub;
-                moneyTextBox11.Text = string.Format("{0:C}", sub);
+                money11 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox11.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox11.ReadOnly = true;
             }
             else
@@ -4158,8 +4113,8 @@ namespace Flawless_ex
             {
                 sub = decimal.Parse(countTextBox12.Text) * decimal.Parse(unitPriceTextBox12.Text);
                 sub += sub * Tax / 100;
-                money12 = sub;
-                moneyTextBox12.Text = string.Format("{0:C}", sub);
+                money12 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                moneyTextBox12.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox12.ReadOnly = true;
             }
             else
@@ -4196,7 +4151,7 @@ namespace Flawless_ex
             }
             money0 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox00.Text = string.Format("{0:C}", sub1);
+            moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox01_Leave(object sender, EventArgs e)
         {
@@ -4224,7 +4179,7 @@ namespace Flawless_ex
             }
             money1 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox01.Text = string.Format("{0:C}", sub1);
+            moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox02_Leave(object sender, EventArgs e)
         {
@@ -4252,7 +4207,7 @@ namespace Flawless_ex
             }
             money2 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox02.Text = string.Format("{0:C}", sub1);
+            moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox03_Leave(object sender, EventArgs e)
         {
@@ -4280,7 +4235,7 @@ namespace Flawless_ex
             }
             money3 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox03.Text = string.Format("{0:C}", sub1);
+            moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox04_Leave(object sender, EventArgs e)
         {
@@ -4308,7 +4263,7 @@ namespace Flawless_ex
             }
             money4 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox04.Text = string.Format("{0:C}", sub1);
+            moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox05_Leave(object sender, EventArgs e)
         {
@@ -4336,7 +4291,7 @@ namespace Flawless_ex
             }
             money5 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox05.Text = string.Format("{0:C}", sub1);
+            moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox06_Leave(object sender, EventArgs e)
         {
@@ -4364,7 +4319,7 @@ namespace Flawless_ex
             }
             money6 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox06.Text = string.Format("{0:C}", sub1);
+            moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox07_Leave(object sender, EventArgs e)
         {
@@ -4392,7 +4347,7 @@ namespace Flawless_ex
             }
             money7 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox07.Text = string.Format("{0:C}", sub1);
+            moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox08_Leave(object sender, EventArgs e)
         {
@@ -4420,7 +4375,7 @@ namespace Flawless_ex
             }
             money8 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox08.Text = string.Format("{0:C}", sub1);
+            moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox09_Leave(object sender, EventArgs e)
         {
@@ -4448,7 +4403,7 @@ namespace Flawless_ex
             }
             money9 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox09.Text = string.Format("{0:C}", sub1);
+            moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox010_Leave(object sender, EventArgs e)
         {
@@ -4476,7 +4431,7 @@ namespace Flawless_ex
             }
             money10 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox010.Text = string.Format("{0:C}", sub1);
+            moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox011_Leave(object sender, EventArgs e)
         {
@@ -4504,7 +4459,7 @@ namespace Flawless_ex
             }
             money11 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox011.Text = string.Format("{0:C}", sub1);
+            moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void weightTextBox012_Leave(object sender, EventArgs e)
         {
@@ -4532,7 +4487,7 @@ namespace Flawless_ex
             }
             money12 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox012.Text = string.Format("{0:C}", sub1);
+            moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         #endregion
 
@@ -4550,7 +4505,7 @@ namespace Flawless_ex
             }
             money0 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox00.Text = string.Format("{0:C}", sub1);
+            moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox01_Leave(object sender, EventArgs e)
         {
@@ -4565,7 +4520,7 @@ namespace Flawless_ex
             }
             money1 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox01.Text = string.Format("{0:C}", sub1);
+            moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox02_Leave(object sender, EventArgs e)
         {
@@ -4580,7 +4535,7 @@ namespace Flawless_ex
             }
             money2 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox02.Text = string.Format("{0:C}", sub1);
+            moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox03_Leave(object sender, EventArgs e)
         {
@@ -4595,7 +4550,7 @@ namespace Flawless_ex
             }
             money3 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox03.Text = string.Format("{0:C}", sub1);
+            moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox04_Leave(object sender, EventArgs e)
         {
@@ -4610,7 +4565,7 @@ namespace Flawless_ex
             }
             money4 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox04.Text = string.Format("{0:C}", sub1);
+            moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox05_Leave(object sender, EventArgs e)
         {
@@ -4625,7 +4580,7 @@ namespace Flawless_ex
             }
             money5 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox05.Text = string.Format("{0:C}", sub1);
+            moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox06_Leave(object sender, EventArgs e)
         {
@@ -4640,7 +4595,7 @@ namespace Flawless_ex
             }
             money6 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox06.Text = string.Format("{0:C}", sub1);
+            moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox07_Leave(object sender, EventArgs e)
         {
@@ -4655,7 +4610,7 @@ namespace Flawless_ex
             }
             money7 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox07.Text = string.Format("{0:C}", sub1);
+            moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox08_Leave(object sender, EventArgs e)
         {
@@ -4670,7 +4625,7 @@ namespace Flawless_ex
             }
             money8 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox08.Text = string.Format("{0:C}", sub1);
+            moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox09_Leave(object sender, EventArgs e)
         {
@@ -4685,7 +4640,7 @@ namespace Flawless_ex
             }
             money9 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox09.Text = string.Format("{0:C}", sub1);
+            moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox010_Leave(object sender, EventArgs e)
         {
@@ -4700,7 +4655,7 @@ namespace Flawless_ex
             }
             money10 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox010.Text = string.Format("{0:C}", sub1);
+            moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox011_Leave(object sender, EventArgs e)
         {
@@ -4715,7 +4670,7 @@ namespace Flawless_ex
             }
             money11 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox011.Text = string.Format("{0:C}", sub1);
+            moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox012_Leave(object sender, EventArgs e)
         {
@@ -4730,7 +4685,7 @@ namespace Flawless_ex
             }
             money12 = sub;
             sub1 = sub + sub * Tax / 100;
-            moneyTextBox012.Text = string.Format("{0:C}", sub1);
+            moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         #endregion
 
@@ -4751,7 +4706,7 @@ namespace Flawless_ex
             countsum = int.Parse(countTextBox00.Text);
             weisum = decimal.Parse(weightTextBox00.Text);
             subSum = money0;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4776,7 +4731,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox01.Text);
             weisum += decimal.Parse(weightTextBox01.Text);
             subSum += money1;       //納品書は税抜き
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4800,7 +4755,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox02.Text);
             weisum += decimal.Parse(weightTextBox02.Text);
             subSum += money2;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4824,7 +4779,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox03.Text);
             weisum += decimal.Parse(weightTextBox03.Text);
             subSum += money3;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4848,7 +4803,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox04.Text);
             weisum += decimal.Parse(weightTextBox04.Text);
             subSum += money4;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4872,7 +4827,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox05.Text);
             weisum += decimal.Parse(weightTextBox05.Text);
             subSum += money5;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4896,7 +4851,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox06.Text);
             weisum += decimal.Parse(weightTextBox06.Text);
             subSum += money6;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4920,7 +4875,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox07.Text);
             weisum += decimal.Parse(weightTextBox07.Text);
             subSum += money7;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4944,7 +4899,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox08.Text);
             weisum += decimal.Parse(weightTextBox08.Text);
             subSum += money8;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4968,7 +4923,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox09.Text);
             weisum += decimal.Parse(weightTextBox09.Text);
             subSum += money9;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -4992,7 +4947,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox010.Text);
             weisum += decimal.Parse(weightTextBox010.Text);
             subSum += money10;
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -5016,7 +4971,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox011.Text);
             weisum += decimal.Parse(weightTextBox011.Text);
             subSum += money11;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -5040,7 +4995,7 @@ namespace Flawless_ex
             countsum += int.Parse(countTextBox012.Text);
             weisum += decimal.Parse(weightTextBox012.Text);
             subSum += money12;     //増やしていく
-            TaxAmount = subSum * Tax / 100;
+            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
             sum = subSum + TaxAmount;
 
             totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
@@ -5365,7 +5320,7 @@ namespace Flawless_ex
 
         #endregion
 
-        #region"画像登録"
+        #region"画像選択"
         private void financialButton_Click(object sender, EventArgs e)//ファイルを選択
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
@@ -5694,7 +5649,7 @@ namespace Flawless_ex
 
             e.Graphics.DrawString("：" + deliveryDateBox.Value.ToShortDateString(), font, brush, new PointF(600 + d3, 140));    //受け渡し日
             e.Graphics.DrawString("：" + settlementBox.Value.ToShortDateString(), font, brush, new PointF(600 + d3, 160));    //決済日
-            e.Graphics.DrawString("：" + paymentMethodComboBox.Text, font, brush, new PointF(600 + d3, 180));    //決済方法
+            e.Graphics.DrawString("：" + paymentMethodComboBox.SelectedIndex.ToString(), font, brush, new PointF(600 + d3, 180));    //決済方法
 
             //真ん中
 
@@ -5713,7 +5668,7 @@ namespace Flawless_ex
 
             e.Graphics.DrawString("：" + deliveryDateBox.Value.ToShortDateString(), font, brush, new PointF(570 + d3, 950));    //受け渡し日
             e.Graphics.DrawString("：" + settlementBox.Value.ToShortDateString(), font, brush, new PointF(570 + d3, 970));    //決済日
-            e.Graphics.DrawString("：" + paymentMethodComboBox.Text, font, brush, new PointF(570 + d3, 990));    //決済方法
+            e.Graphics.DrawString("：" + paymentMethodComboBox.SelectedIndex.ToString(), font, brush, new PointF(570 + d3, 990));    //決済方法
             e.Graphics.DrawString("：", font3, brush, new PointF(450 + d, 1050));   //署名
 
             e.Graphics.DrawRectangle(p, 470, 1070, 250, 0.1f);            //署名下の下線
@@ -5727,7 +5682,7 @@ namespace Flawless_ex
             if (type == 0)
             {
                 DataTable clientDt1 = new DataTable();
-                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + staff_name + "' and address = '" + address + "';";
+                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                 conn.Open();
 
                 NpgsqlDataAdapter adapter1 = new NpgsqlDataAdapter(str_sql_corporate, conn);
@@ -5758,7 +5713,7 @@ namespace Flawless_ex
             else if (type == 1)
             {
                 DataTable clientDt2 = new DataTable();
-                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + staff_name + "' and address = '" + address + "';";
+                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
 
                 conn.Open();
 
@@ -5811,7 +5766,7 @@ namespace Flawless_ex
             if (type == 0)
             {
                 DataTable clientDt1 = new DataTable();
-                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + staff_name + "' and address = '" + address + "';";
+                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                 conn.Open();
 
                 NpgsqlDataAdapter adapter1 = new NpgsqlDataAdapter(str_sql_corporate, conn);
@@ -5842,7 +5797,7 @@ namespace Flawless_ex
             else if (type == 1)
             {
                 DataTable clientDt2 = new DataTable();
-                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + staff_name + "' and address = '" + address + "';";
+                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
 
                 conn.Open();
 
@@ -6538,16 +6493,12 @@ namespace Flawless_ex
 
         }
 
-
-
-
-
         #endregion
 
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, staff_name, type, documentNumberTextBox.Text);
+            RecordList recordList = new RecordList(this, staff_id, documentNumberTextBox.Text);
 
             this.Hide();
             recordList.Show();
