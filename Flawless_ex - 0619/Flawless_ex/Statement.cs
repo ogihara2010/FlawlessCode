@@ -203,7 +203,7 @@ namespace Flawless_ex
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                 //伝票番号・管理番号取得
@@ -234,16 +234,16 @@ namespace Flawless_ex
 
             if (!string.IsNullOrEmpty(docuNum))
             {
-                Num = docuNum.Substring(1, 5);       //伝票番号の数字部分
+                Num = docuNum.Trim('F');       //伝票番号の数字部分
             }
             else
             {
-                docuNum = "F00000";
-                Num = docuNum.Substring(1, 5);       //伝票番号の数字部分
+                docuNum = "F0";
+                Num = docuNum.Trim('F');       //伝票番号の数字部分
             }
 
             number = int.Parse(Num) + 1;
-            documentNumberTextBox.Text = "F" + number.ToString().PadLeft(5, '0');       //Fを追加
+            documentNumberTextBox.Text = "F" + number;       //Fを追加
             #endregion
 
             #region"納品書の管理番号"
@@ -833,7 +833,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用

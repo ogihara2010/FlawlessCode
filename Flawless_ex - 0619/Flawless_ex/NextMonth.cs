@@ -7,6 +7,10 @@ namespace Flawless_ex
     {
         int staff_id;
         MainMenu mainMenu;
+        Statement statement;
+        string staff_name;
+        int type;
+        string slipNumber;
         public NextMonth(MainMenu main, int id)
         {
             InitializeComponent();
@@ -18,6 +22,18 @@ namespace Flawless_ex
         {
             this.Close();
             mainMenu.Show();
+        }
+
+        private void Choice2_Click(object sender, EventArgs e)
+        {
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber);
+            this.Close();
+            recordList.Show();
+        }
+
+        private void NextMonth_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
