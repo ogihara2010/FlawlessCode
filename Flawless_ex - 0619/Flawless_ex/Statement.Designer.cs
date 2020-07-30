@@ -1571,7 +1571,7 @@
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(293, 44);
             this.label34.TabIndex = 36;
-            this.label34.Text = "単価";
+            this.label34.Text = "単価（税込み）";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // unitPriceTextBox0
@@ -4164,7 +4164,7 @@
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(288, 50);
             this.label69.TabIndex = 36;
-            this.label69.Text = "単価";
+            this.label69.Text = "単価（税込み）";
             this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // unitPriceTextBox00
