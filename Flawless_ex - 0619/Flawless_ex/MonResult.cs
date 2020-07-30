@@ -125,7 +125,7 @@ namespace Flawless_ex
                 label1.Text = method;
                 label2.Text = staffname;
                 label3.Text = type;
-                label4.Text = "買";
+                label4.Text = "買 " + 10000;
                 label5.Text = "買";
                 label6.Text = "買";
                 label7.Text = "買";
@@ -174,12 +174,25 @@ namespace Flawless_ex
                 #endregion
             }
             #endregion
-
+            
         }
 
         private void Search1_Click(object sender, EventArgs e)
         {
-            
+            NpgsqlDataAdapter adapter;
+            NpgsqlConnection conn4 = new NpgsqlConnection();
+            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+            string sql_str2 = "select A.settlement_date, A.delivery_method, A.payment_method, B.staff_name, B.company_name, C.amount,A.settlement_date, " +
+                              "A.delivery_method, A.payment_method, B.staff_name, B.company_name, C.amount,A.settlement_date, A.delivery_method, A.payment_method, " +
+                              "B.staff_name, B.company_name, C.amount,A.settlement_date, A.delivery_method, A.payment_method, B.staff_name, B.company_name, C.amount " +
+                              "from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )inner join statement_calc_data C ON " +
+                              "(A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                              " where B.invalid = 0;";
+            conn4.Open();
+
+            adapter = new NpgsqlDataAdapter(sql_str2, conn4);
+            adapter.Fill(dt);
         }
         #region "担当者選択コンボボックス"
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
