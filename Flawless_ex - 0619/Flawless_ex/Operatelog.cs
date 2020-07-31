@@ -38,13 +38,82 @@ namespace Flawless_ex
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "担当者マスタ")
+           #region "担当者マスタ　名前変更"
+                if (comboBox1.Text == "担当者マスタ  名前変更")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    string sql_str = "select B.insert_date, C.staff_name, B.staff_name_before, B.staff_name_after, A.reason  from staff_m A inner join " +
+                                     " staff_name_revisions B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code);";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更前";
+                    dataGridView1.Columns[3].HeaderText = "変更後";
+                    dataGridView1.Columns[4].HeaderText = "変更理由";
+                    conn.Close();
+                }
+            #endregion
+           #region "担当者　パスワード変更"
+            if (comboBox1.Text == "担当者マスタ　パスワード変更")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    string sql_str = "select B.insert_date, C.staff_name, B.staff_password_before, B.staff_password_after, A.reason  from staff_m A inner join " +
+                                     " staff_password_revisions B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code);";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更前";
+                    dataGridView1.Columns[3].HeaderText = "変更後";
+                    dataGridView1.Columns[4].HeaderText = "変更理由";
+                    conn.Close();
+                }
+            #endregion
+           #region "担当者　アクセス権限"
+            if (comboBox1.Text == "担当者マスタ　アクセス権限変更")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    string sql_str = "select B.insert_date, C.staff_name, A.staff_name, B.access_auth_before, B.access_auth_after, A.reason  from staff_m A " +
+                                     "inner join staff_access_auth_revisions B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code);";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "権限を変更された担当者";
+                    dataGridView1.Columns[3].HeaderText = "変更前";
+                    dataGridView1.Columns[4].HeaderText = "変更後";
+                    dataGridView1.Columns[5].HeaderText = "変更理由";
+                    conn.Close();
+                }
+            #endregion
+            #region "担当者　無効"
+            if (comboBox1.Text == "担当者マスタ　無効")
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select registration_date, staff_name, staff_name, staff_name_kana, main_category_code, access_auth  from staff_m ;";
+                string sql_str = "select B.invalid_date, C.staff_name, A.staff_code, A.staff_name, A.access_auth, A.password, A.reason  from staff_m A " +
+                                 "inner join staff_m_revisions_invalid B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code) where A.invalid = 1;";
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -52,112 +121,188 @@ namespace Flawless_ex
                 dataGridView1.DataSource = dt;
                 dataGridView1.Columns[0].HeaderText = "変更日時";
                 dataGridView1.Columns[1].HeaderText = "変更者";
-                dataGridView1.Columns[2].HeaderText = "変更データ";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
+                dataGridView1.Columns[2].HeaderText = "無効になった担当者コード";
+                dataGridView1.Columns[3].HeaderText = "無効になった担当者";
+                dataGridView1.Columns[4].HeaderText = "その担当者のアクセス権限";
+                dataGridView1.Columns[5].HeaderText = "その担当者のパスワード";
+                dataGridView1.Columns[6].HeaderText = "無効理由";
                 conn.Close();
             }
+            #endregion
             if (comboBox1.Text == "顧客マスタ　法人")
             {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select registration_date, register_date, staff_name, shop_name, company_name, address from client_m_corporate ;"; 
-                conn.Open();
+                    string sql_str = "select registration_date, register_date, staff_name, shop_name, company_name, address from client_m_corporate ;";
+                    conn.Open();
 
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt2);
-                dataGridView1.DataSource = dt2;
-                dataGridView1.Columns[0].HeaderText = "変更日時";
-                dataGridView1.Columns[1].HeaderText = "変更者";
-                dataGridView1.Columns[2].HeaderText = "変更データ";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
-                conn.Close();
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt2);
+                    dataGridView1.DataSource = dt2;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更データ";
+                    dataGridView1.Columns[3].HeaderText = "変更前";
+                    dataGridView1.Columns[4].HeaderText = "変更後";
+                    dataGridView1.Columns[5].HeaderText = "変更理由";
+                    conn.Close();
             }
             if (comboBox1.Text == "顧客マスタ　個人")
             {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select registration_date, register_date, name, name_kana, phone_number, address from client_m_individual ;";
-                conn.Open();
+                    string sql_str = "select registration_date, register_date, name, name_kana, phone_number, address from client_m_individual ;";
+                    conn.Open();
 
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt3);
-                dataGridView1.DataSource = dt3;
-                dataGridView1.Columns[0].HeaderText = "変更日時";
-                dataGridView1.Columns[1].HeaderText = "変更者";
-                dataGridView1.Columns[2].HeaderText = "変更データ";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
-                conn.Close();
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt3);
+                    dataGridView1.DataSource = dt3;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更データ";
+                    dataGridView1.Columns[3].HeaderText = "変更前";
+                    dataGridView1.Columns[4].HeaderText = "変更後";
+                    dataGridView1.Columns[5].HeaderText = "変更理由";
+                    conn.Close();
             }
-            if (comboBox1.Text == "品名マスタ")
-            {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            #region "品名マスタ　無効"
+                if (comboBox1.Text == "品名マスタ　無効")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select main_category_code, item_name, item_code, registration_date, invalid, item_name from item_m ;";
-                conn.Open();
+                    string sql_str = "select B.invalid_date, C.staff_name, A.item_code, A.main_category_code,A.item_name, A.reason from item_m A " +
+                                     " inner join item_m_invalid_revisions B ON (A.item_code = B.item_code) inner join staff_m C ON (B.insert_name = C.staff_code) where A.invalid = 1;";
+                    conn.Open();
 
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt4);
-                dataGridView1.DataSource = dt4;
-                dataGridView1.Columns[0].HeaderText = "変更日時";
-                dataGridView1.Columns[1].HeaderText = "変更者";
-                dataGridView1.Columns[2].HeaderText = "変更データ";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
-                conn.Close();
-            }
-            if (comboBox1.Text == "大分類マスタ")
-            {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt4);
+                    dataGridView1.DataSource = dt4;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "無効にした品名コード";
+                    dataGridView1.Columns[3].HeaderText = "無効にした大分類コード";
+                    dataGridView1.Columns[4].HeaderText = "無効にした品名";
+                    dataGridView1.Columns[5].HeaderText = "無効理由";
+                    conn.Close();
+                }
+                #endregion
+            #region "品名マスタ　大分類変更"
+                if (comboBox1.Text == "品名マスタ　大分類変更")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select main_category_code, main_category_name, registration_date, insert_name, invalid, insert_name from main_category_m ;";
-                conn.Open();
+                    string sql_str = "select B.change_date, C.staff_name, B.main_category_code_before, B.main_category_code_after, A.reason from item_m A " +
+                                     " inner join item_m_main_category_code_revisions B ON (A.item_code = B.item_code) " +
+                                     " inner join staff_m C ON (B.insert_name = C.staff_code);";
+                    conn.Open();
 
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt5);
-                dataGridView1.DataSource = dt5;
-                dataGridView1.Columns[0].HeaderText = "変更日時";
-                dataGridView1.Columns[1].HeaderText = "変更者";
-                dataGridView1.Columns[2].HeaderText = "変更データ";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
-                conn.Close();
-            }
-            if (comboBox1.Text == "消費税マスタ")
-            {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt4);
+                    dataGridView1.DataSource = dt4;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更前のコード";
+                    dataGridView1.Columns[3].HeaderText = "変更後のコード";
+                    dataGridView1.Columns[4].HeaderText = "変更理由";
+                    conn.Close();
+                }
+                #endregion
+            #region "品名マスタ　品名変更"
+                if (comboBox1.Text == "品名マスタ　品名変更")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select vat_rate, vat_rate, vat_rate, vat_rate, vat_rate, vat_rate from vat_m ;";
-                conn.Open();
+                    string sql_str = "select B.change, C.staff_name, B.item_name_before, B.item_name_after, A.reason from item_m A " +
+                                     "inner join item_m_item_name_revisions B ON (A.item_code = B.item_code) inner join staff_m C" +
+                                     " ON (B.insert_name = C.staff_code);";
+                    conn.Open();
 
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt6);
-                dataGridView1.DataSource = dt6;
-                dataGridView1.Columns[0].HeaderText = "変更日時";
-                dataGridView1.Columns[1].HeaderText = "変更者";
-                dataGridView1.Columns[2].HeaderText = "変更データ";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
-                conn.Close();
-            }
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt4);
+                    dataGridView1.DataSource = dt4;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更前";
+                    dataGridView1.Columns[3].HeaderText = "変更後";
+                    dataGridView1.Columns[4].HeaderText = "変更理由";
+                    conn.Close();
+                }
+                #endregion
+            #region "大分類　無効"
+                if (comboBox1.Text == "大分類マスタ　無効")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    string sql_str = "select B.invalid_date, C.staff_name, B.main_category_code, A.main_category_name, A.reason from main_category_m A " +
+                        "inner join main_category_m_invalid_revisions B ON (A.main_category_code = B.main_category_code ) inner join staff_m C " +
+                        "ON ( A.insert_name = C.staff_code) inner join invalid D ON (A.invalid = D.invalid) where A.invalid = 1;";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt5);
+                    dataGridView1.DataSource = dt5;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "無効にした大分類コード";
+                    dataGridView1.Columns[3].HeaderText = "無効にした大分類名";
+                    dataGridView1.Columns[4].HeaderText = "無効理由";
+                    conn.Close();
+                }
+                #endregion
+            #region "大分類名変更した場合"
+                if (comboBox1.Text == "大分類マスタ　大分類名変更")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    string sql_str = "select B.change_date, C.staff_name, B.main_category_name_before, B.main_category_name_after, A.reason from main_category_m A " +
+                                     "inner join main_category_m_name_revisions B ON (A.main_category_code = B.main_category_code) inner join staff_m C ON ( A.insert_name = C.staff_code);";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt5);
+                    dataGridView1.DataSource = dt5;
+                    dataGridView1.Columns[0].HeaderText = "変更日時";
+                    dataGridView1.Columns[1].HeaderText = "変更者";
+                    dataGridView1.Columns[2].HeaderText = "変更前";
+                    dataGridView1.Columns[3].HeaderText = "変更後";
+                    dataGridView1.Columns[4].HeaderText = "変更理由";
+                    conn.Close();
+                }
+                #endregion
+            #region "消費税マスタ"
+                if (comboBox1.Text == "消費税マスタ")
+                {
+                    NpgsqlConnection conn = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter;
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    string sql_str = "select A.upd_date, B.staff_name, A.vat_rate from vat_m  A inner join staff_m  B ON (A.upd_name = B.staff_code);";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt6);
+                    dataGridView1.DataSource = dt6;
+                    dataGridView1.Columns[0].HeaderText = "更新日時";
+                    dataGridView1.Columns[1].HeaderText = "更新者";
+                    dataGridView1.Columns[2].HeaderText = "更新後の税率";
+                    conn.Close();
+                }
+                #endregion
+            
         }
     }
 }

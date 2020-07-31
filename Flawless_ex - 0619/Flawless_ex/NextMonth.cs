@@ -56,7 +56,7 @@ namespace Flawless_ex
             adapter2.Fill(dt);
             conn2.Close();
 
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber);
+            RecordList recordList = new RecordList(statement, staff_id, slipNumber);
             this.Close();
             recordList.Show();
         }

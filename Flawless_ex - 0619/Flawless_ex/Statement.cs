@@ -310,7 +310,7 @@ namespace Flawless_ex
             mainCategoryComboBox0.DisplayMember = "main_category_name";
             mainCategoryComboBox0.ValueMember = "main_category_code";
             mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
-                                           
+
             //納品書
             DataTable deliverydt = new DataTable();
             deliverydt = dt.Copy();
@@ -842,7 +842,7 @@ namespace Flawless_ex
                 itemComboBox0.DataSource = dt2;
                 itemComboBox0.DisplayMember = "item_name";
                 itemComboBox0.ValueMember = "item_code";
-             
+
                 DataRow row = dt2.Rows[0];
                 mainCategoryCode0 = (int)row["main_category_code"];
                 itemCode0 = (int)row["item_code"];
@@ -1520,8 +1520,12 @@ namespace Flawless_ex
         {
             using (client_search search2 = new client_search(mainMenu, staff_id, type))
             {
-                this.Hide();
+                //this.Hide();
                 search2.ShowDialog();
+                DataTable clientDt = new DataTable();
+                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '鈴木次郎';";
+                adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
+                adapter.Fill(clientDt);
             }
 
             if (count != 0)
@@ -1549,7 +1553,7 @@ namespace Flawless_ex
                 }
                 else if (type == 1)
                 {
-                    string name= row["name"].ToString();
+                    string name = row["name"].ToString();
                     address = row["address"].ToString();
                     remarks = row["remarks"].ToString();
 
@@ -1560,6 +1564,7 @@ namespace Flawless_ex
                 }
             }
         }
+    
 
         private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
         {
