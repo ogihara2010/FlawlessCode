@@ -28,7 +28,7 @@ namespace Flawless_ex
 
         private void ProductChangeDeleteMenu_Load(object sender, EventArgs e)   //画面起動時
         {
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             productCodeTextBox.Text = puroductCode.ToString();
 
             string sql_item = "select * from item_m where item_code =" + puroductCode + "";
@@ -73,7 +73,7 @@ namespace Flawless_ex
             if (result == DialogResult.Yes)
             {
                 DataTable item_mdt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update item_m set invalid = 1 where item_code = " + puroductCode + "";
@@ -115,11 +115,12 @@ namespace Flawless_ex
                 string iname = productNameTextBox.Text;//品名
                 int mcode = (int)mainCategoryComboBox.SelectedValue;//大分類コード
                 DataTable dt = new DataTable();
+                string reason = reasonText.Text;
 
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
-                string sql_item_m = "update item_m set main_category_code = " + mcode + ", item_name = '" + iname + "' where item_code =" + puroductCode + "";
+                string sql_item_m = "update item_m set main_category_code = " + mcode + ", item_name = '" + iname + "',reason = '" + reason + "' where item_code =" + puroductCode + "";
                 adapter = new NpgsqlDataAdapter(sql_item_m, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
                 adapter.Fill(dt);
@@ -137,7 +138,7 @@ namespace Flawless_ex
                 //品名履歴
                 else if (productNameTextBox.Text != item_name)
                 {
-                    string sql_itemName = "insert into item_m_item_name_revisions values('" + iname + "', '" + item_name + "', " + puroductCode + ", '" + dat + "', " + staff_code + ")";
+                    string sql_itemName = "insert into item_m_item_name_revisions values('" + item_name + "', '" + iname + "', " + puroductCode + ", '" + dat + "', " + staff_code + ")";
                     NpgsqlCommand cmd = new NpgsqlCommand(sql_itemName, conn);
                     NpgsqlDataReader reader = cmd.ExecuteReader();
                 }
