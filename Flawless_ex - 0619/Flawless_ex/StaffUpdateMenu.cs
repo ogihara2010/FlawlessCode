@@ -45,12 +45,12 @@ namespace Flawless_ex
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
                 NpgsqlCommandBuilder builder;
+                string reason = this.reason.Text;
 
-
-                conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
-                string remove_sql = "update staff_m set invalid = 1 where staff_code = " + staffCode + "";
+                string remove_sql = "update staff_m set invalid = 1, reason = '" +  reason +"' where staff_code = " + staffCode + "";
 
                 adapter = new NpgsqlDataAdapter(remove_sql, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
@@ -89,6 +89,7 @@ namespace Flawless_ex
             string pass;//パスワード　履歴
             int main_code;//大分類　履歴
             string access;//アクセス権限履歴
+            string reason; // 変更理由
 
             name = staffName;
             staffName = this.parsonNameText.Text;//担当者名
@@ -101,10 +102,11 @@ namespace Flawless_ex
             rePassword = this.passwordReText.Text;//パスワード再入力
             access = access_auth;
             access_auth = this.accessButton.Text;//アクセス権限
+            reason = this.reason.Text;
 
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
-            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' where staff_code =" + staffCode + " ";
+            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ";
 
 
 
@@ -170,7 +172,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staffCode + "";
 

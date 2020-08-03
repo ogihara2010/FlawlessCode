@@ -11,11 +11,12 @@ namespace Flawless_ex
         DataTable dt;
         NpgsqlDataAdapter adapter;
         NpgsqlCommandBuilder builder;
-
-        public TaxMaster(MasterMaintenanceMenu master)
+        int staff_code;
+        public TaxMaster(MasterMaintenanceMenu master, int staff_code)
         {
             InitializeComponent();
             this.master = master;
+            this.staff_code = staff_code;
         }
         private void back_Click(object sender, EventArgs e)
         {
@@ -53,9 +54,9 @@ namespace Flawless_ex
 
                     dt = new DataTable();
                     NpgsqlConnection db = new NpgsqlConnection();
-                    string sql_str = "insert into vat_m (vat_rate, upd_date) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "')";
+                    string sql_str = "insert into vat_m (vat_rate, upd_date, upd_name) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "'," + staff_code + ")";
 
-                    db.ConnectionString = @"Server= 192.168.11.30;Port = 5432;User Id = postgres;Password = postgres;Database = master;";
+                    db.ConnectionString = @"Server= localhost;Port = 5432;User Id = postgres;Password = postgres;Database = master;";
                     db.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, db);
@@ -77,7 +78,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection db = new NpgsqlConnection();
 
-            db.ConnectionString = @"Server= 192.168.11.30;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
+            db.ConnectionString = @"Server= localhost;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
 
             db.Open();
 

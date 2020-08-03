@@ -15,10 +15,8 @@ namespace Flawless_ex
         int type;
         string staff_name;
         string address;
-        string SlipNumber;
-        string access_auth;
-
-        public client_search(MainMenu mainMenu, int id, int type, string slipnumber, string Access_Auth)
+        string Total;
+        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, string Total)
         {
             InitializeComponent();
 
@@ -26,13 +24,14 @@ namespace Flawless_ex
             this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;
-            this.SlipNumber = slipnumber;
-            this.access_auth = Access_Auth;
+            this.address = address;
+            this.staff_name = staff_name;
+            this.Total = Total;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address , SlipNumber, access_auth);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
 
             statement.Show();
@@ -40,7 +39,6 @@ namespace Flawless_ex
 
         private void client_search2_Load(object sender, EventArgs e)
         {
-
 
 
         }
@@ -61,7 +59,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
 
             if (tabControl1.SelectedIndex == 0)
@@ -124,7 +122,7 @@ namespace Flawless_ex
                     adapter.Fill(dt);
 
                     conn.Close();
-                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id);
+                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total);
                     this.Close();
                     search_Result.Show();
 
@@ -143,7 +141,7 @@ namespace Flawless_ex
 
                     conn.Close();
 
-                    using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
+                    using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
                     {
                         this.Close();
                         search_Result.Show();
@@ -195,7 +193,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -216,7 +214,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -244,7 +242,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -263,7 +261,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -277,7 +275,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            client_add client_Add = new client_add(mainMenu, staff_id, type, SlipNumber, access_auth);
+            client_add client_Add = new client_add(mainMenu, staff_id, type);
                 this.Close();
                 client_Add.Show();
             
