@@ -2880,12 +2880,6 @@ namespace Flawless_ex
 
 
         #region"集計ボタンクリック"
-        private void UpdateSearchButton_Click(object sender, EventArgs e)
-        {}
-
-
-        #endregion
-
         private void RegisterSearchButton_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("登録・検索しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -3323,5 +3317,29 @@ namespace Flawless_ex
             MessageBox.Show("登録しました", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             RegisterSearchButton.Enabled = false;
         }
+        #endregion
+
+        #region"再登録ボタン"
+        private void UpdateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region"品名変更ボタン"
+        private void ItemNameChangeButton_Click(object sender, EventArgs e)
+        {
+            if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked && !ItemNameChangeCheckBox11.Checked && !ItemNameChangeCheckBox12.Checked && !ItemNameChangeCheckBox13.Checked)
+            {
+                MessageBox.Show("変更する品名の行を選択してください", "品名変更エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            DialogResult dialogResult = MessageBox.Show("選択した品名を変更しますか？", "変更確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+        }
+        #endregion
     }
 }
