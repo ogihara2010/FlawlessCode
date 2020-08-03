@@ -352,7 +352,7 @@
             this.RegisterSearchButton.TabIndex = 2;
             this.RegisterSearchButton.Text = "登録・成績一覧";
             this.RegisterSearchButton.UseVisualStyleBackColor = true;
-            this.RegisterSearchButton.Click += new System.EventHandler(this.UpdateSearchButton_Click);
+            this.RegisterSearchButton.Click += new System.EventHandler(this.RegisterSearchButton_Click);
             // 
             // label3
             // 

@@ -1934,6 +1934,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox1.ForeColor = Color.Red;
                 remark1.ForeColor = Color.Red;
                 BuyerTextBox1.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox1.BackColor = SystemColors.Control;
+                itemCategoryTextBox1.BackColor = SystemColors.Control;
+                itemDetailTextBox1.BackColor = SystemColors.Control;
+                weightTextBox1.BackColor = SystemColors.Control;
+                unitPriceText1.BackColor = SystemColors.Control;
+                countTextBox1.BackColor = SystemColors.Control;
+                purchaseTextBox1.BackColor = SystemColors.Control;
             }
             else
             {
@@ -1947,6 +1955,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox1.ForeColor = Color.Black;
                 remark1.ForeColor = Color.Black;
                 BuyerTextBox1.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox1.BackColor = SystemColors.Control;
+                itemCategoryTextBox1.BackColor = SystemColors.Control;
+                itemDetailTextBox1.BackColor = SystemColors.Control;
+                weightTextBox1.BackColor = SystemColors.Control;
+                unitPriceText1.BackColor = SystemColors.Control;
+                countTextBox1.BackColor = SystemColors.Control;
+                purchaseTextBox1.BackColor = SystemColors.Control;
             }
         }
 
@@ -1964,6 +1980,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox2.ForeColor = Color.Red;
                 remark2.ForeColor = Color.Red;
                 BuyerTextBox2.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox2.BackColor = SystemColors.Control;
+                itemCategoryTextBox2.BackColor = SystemColors.Control;
+                itemDetailTextBox2.BackColor = SystemColors.Control;
+                weightTextBox2.BackColor = SystemColors.Control;
+                unitPriceText2.BackColor = SystemColors.Control;
+                countTextBox2.BackColor = SystemColors.Control;
+                purchaseTextBox2.BackColor = SystemColors.Control;
             }
             else
             {
@@ -1977,6 +2001,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox2.ForeColor = Color.Black;
                 remark2.ForeColor = Color.Black;
                 BuyerTextBox2.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox2.BackColor = SystemColors.Control;
+                itemCategoryTextBox2.BackColor = SystemColors.Control;
+                itemDetailTextBox2.BackColor = SystemColors.Control;
+                weightTextBox2.BackColor = SystemColors.Control;
+                unitPriceText2.BackColor = SystemColors.Control;
+                countTextBox2.BackColor = SystemColors.Control;
+                purchaseTextBox2.BackColor = SystemColors.Control;
             }
         }
 
@@ -1994,6 +2026,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox3.ForeColor = Color.Red;
                 remark3.ForeColor = Color.Red;
                 BuyerTextBox3.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox3.BackColor = SystemColors.Control;
+                itemCategoryTextBox3.BackColor = SystemColors.Control;
+                itemDetailTextBox3.BackColor = SystemColors.Control;
+                weightTextBox3.BackColor = SystemColors.Control;
+                unitPriceText3.BackColor = SystemColors.Control;
+                countTextBox3.BackColor = SystemColors.Control;
+                purchaseTextBox3.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2007,6 +2047,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox3.ForeColor = Color.Black;
                 remark3.ForeColor = Color.Black;
                 BuyerTextBox3.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox3.BackColor = SystemColors.Control;
+                itemCategoryTextBox3.BackColor = SystemColors.Control;
+                itemDetailTextBox3.BackColor = SystemColors.Control;
+                weightTextBox3.BackColor = SystemColors.Control;
+                unitPriceText3.BackColor = SystemColors.Control;
+                countTextBox3.BackColor = SystemColors.Control;
+                purchaseTextBox3.BackColor = SystemColors.Control;
             }
         }
 
@@ -2024,6 +2072,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox4.ForeColor = Color.Red;
                 remark4.ForeColor = Color.Red;
                 BuyerTextBox4.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox4.BackColor = SystemColors.Control;
+                itemCategoryTextBox4.BackColor = SystemColors.Control;
+                itemDetailTextBox4.BackColor = SystemColors.Control;
+                weightTextBox4.BackColor = SystemColors.Control;
+                unitPriceText4.BackColor = SystemColors.Control;
+                countTextBox4.BackColor = SystemColors.Control;
+                purchaseTextBox4.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2037,6 +2093,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox4.ForeColor = Color.Black;
                 remark4.ForeColor = Color.Black;
                 BuyerTextBox4.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox4.BackColor = SystemColors.Control;
+                itemCategoryTextBox4.BackColor = SystemColors.Control;
+                itemDetailTextBox4.BackColor = SystemColors.Control;
+                weightTextBox4.BackColor = SystemColors.Control;
+                unitPriceText4.BackColor = SystemColors.Control;
+                countTextBox4.BackColor = SystemColors.Control;
+                purchaseTextBox4.BackColor = SystemColors.Control;
             }
         }
 
@@ -2054,6 +2118,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox5.ForeColor = Color.Red;
                 remark5.ForeColor = Color.Red;
                 BuyerTextBox5.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox5.BackColor = SystemColors.Control;
+                itemCategoryTextBox5.BackColor = SystemColors.Control;
+                itemDetailTextBox5.BackColor = SystemColors.Control;
+                weightTextBox5.BackColor = SystemColors.Control;
+                unitPriceText5.BackColor = SystemColors.Control;
+                countTextBox5.BackColor = SystemColors.Control;
+                purchaseTextBox5.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2067,6 +2139,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox5.ForeColor = Color.Black;
                 remark5.ForeColor = Color.Black;
                 BuyerTextBox5.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox5.BackColor = SystemColors.Control;
+                itemCategoryTextBox5.BackColor = SystemColors.Control;
+                itemDetailTextBox5.BackColor = SystemColors.Control;
+                weightTextBox5.BackColor = SystemColors.Control;
+                unitPriceText5.BackColor = SystemColors.Control;
+                countTextBox5.BackColor = SystemColors.Control;
+                purchaseTextBox5.BackColor = SystemColors.Control;
             }
         }
 
@@ -2084,6 +2164,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox6.ForeColor = Color.Red;
                 remark6.ForeColor = Color.Red;
                 BuyerTextBox6.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox6.BackColor = SystemColors.Control;
+                itemCategoryTextBox6.BackColor = SystemColors.Control;
+                itemDetailTextBox6.BackColor = SystemColors.Control;
+                weightTextBox6.BackColor = SystemColors.Control;
+                unitPriceText6.BackColor = SystemColors.Control;
+                countTextBox6.BackColor = SystemColors.Control;
+                purchaseTextBox6.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2097,6 +2185,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox6.ForeColor = Color.Black;
                 remark6.ForeColor = Color.Black;
                 BuyerTextBox6.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox6.BackColor = SystemColors.Control;
+                itemCategoryTextBox6.BackColor = SystemColors.Control;
+                itemDetailTextBox6.BackColor = SystemColors.Control;
+                weightTextBox6.BackColor = SystemColors.Control;
+                unitPriceText6.BackColor = SystemColors.Control;
+                countTextBox6.BackColor = SystemColors.Control;
+                purchaseTextBox6.BackColor = SystemColors.Control;
             }
         }
 
@@ -2114,6 +2210,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox7.ForeColor = Color.Red;
                 remark7.ForeColor = Color.Red;
                 BuyerTextBox7.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox7.BackColor = SystemColors.Control;
+                itemCategoryTextBox7.BackColor = SystemColors.Control;
+                itemDetailTextBox7.BackColor = SystemColors.Control;
+                weightTextBox7.BackColor = SystemColors.Control;
+                unitPriceText7.BackColor = SystemColors.Control;
+                countTextBox7.BackColor = SystemColors.Control;
+                purchaseTextBox7.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2127,6 +2231,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox7.ForeColor = Color.Black;
                 remark7.ForeColor = Color.Black;
                 BuyerTextBox7.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox7.BackColor = SystemColors.Control;
+                itemCategoryTextBox7.BackColor = SystemColors.Control;
+                itemDetailTextBox7.BackColor = SystemColors.Control;
+                weightTextBox7.BackColor = SystemColors.Control;
+                unitPriceText7.BackColor = SystemColors.Control;
+                countTextBox7.BackColor = SystemColors.Control;
+                purchaseTextBox7.BackColor = SystemColors.Control;
             }
         }
 
@@ -2144,6 +2256,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox8.ForeColor = Color.Red;
                 remark8.ForeColor = Color.Red;
                 BuyerTextBox8.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox8.BackColor = SystemColors.Control;
+                itemCategoryTextBox8.BackColor = SystemColors.Control;
+                itemDetailTextBox8.BackColor = SystemColors.Control;
+                weightTextBox8.BackColor = SystemColors.Control;
+                unitPriceText8.BackColor = SystemColors.Control;
+                countTextBox8.BackColor = SystemColors.Control;
+                purchaseTextBox8.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2157,6 +2277,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox8.ForeColor = Color.Black;
                 remark8.ForeColor = Color.Black;
                 BuyerTextBox8.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox8.BackColor = SystemColors.Control;
+                itemCategoryTextBox8.BackColor = SystemColors.Control;
+                itemDetailTextBox8.BackColor = SystemColors.Control;
+                weightTextBox8.BackColor = SystemColors.Control;
+                unitPriceText8.BackColor = SystemColors.Control;
+                countTextBox8.BackColor = SystemColors.Control;
+                purchaseTextBox8.BackColor = SystemColors.Control;
             }
         }
 
@@ -2174,6 +2302,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox9.ForeColor = Color.Red;
                 remark9.ForeColor = Color.Red;
                 BuyerTextBox9.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox9.BackColor = SystemColors.Control;
+                itemCategoryTextBox9.BackColor = SystemColors.Control;
+                itemDetailTextBox9.BackColor = SystemColors.Control;
+                weightTextBox9.BackColor = SystemColors.Control;
+                unitPriceText9.BackColor = SystemColors.Control;
+                countTextBox9.BackColor = SystemColors.Control;
+                purchaseTextBox9.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2187,6 +2323,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox9.ForeColor = Color.Black;
                 remark9.ForeColor = Color.Black;
                 BuyerTextBox9.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox9.BackColor = SystemColors.Control;
+                itemCategoryTextBox9.BackColor = SystemColors.Control;
+                itemDetailTextBox9.BackColor = SystemColors.Control;
+                weightTextBox9.BackColor = SystemColors.Control;
+                unitPriceText9.BackColor = SystemColors.Control;
+                countTextBox9.BackColor = SystemColors.Control;
+                purchaseTextBox9.BackColor = SystemColors.Control;
             }
         }
 
@@ -2204,6 +2348,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox10.ForeColor = Color.Red;
                 remark10.ForeColor = Color.Red;
                 BuyerTextBox10.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox10.BackColor = SystemColors.Control;
+                itemCategoryTextBox10.BackColor = SystemColors.Control;
+                itemDetailTextBox10.BackColor = SystemColors.Control;
+                weightTextBox10.BackColor = SystemColors.Control;
+                unitPriceText10.BackColor = SystemColors.Control;
+                countTextBox10.BackColor = SystemColors.Control;
+                purchaseTextBox10.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2217,6 +2369,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox10.ForeColor = Color.Black;
                 remark10.ForeColor = Color.Black;
                 BuyerTextBox10.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox10.BackColor = SystemColors.Control;
+                itemCategoryTextBox10.BackColor = SystemColors.Control;
+                itemDetailTextBox10.BackColor = SystemColors.Control;
+                weightTextBox10.BackColor = SystemColors.Control;
+                unitPriceText10.BackColor = SystemColors.Control;
+                countTextBox10.BackColor = SystemColors.Control;
+                purchaseTextBox10.BackColor = SystemColors.Control;
             }
         }
 
@@ -2234,6 +2394,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox11.ForeColor = Color.Red;
                 remark11.ForeColor = Color.Red;
                 BuyerTextBox11.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox11.BackColor = SystemColors.Control;
+                itemCategoryTextBox11.BackColor = SystemColors.Control;
+                itemDetailTextBox11.BackColor = SystemColors.Control;
+                weightTextBox11.BackColor = SystemColors.Control;
+                unitPriceText11.BackColor = SystemColors.Control;
+                countTextBox11.BackColor = SystemColors.Control;
+                purchaseTextBox11.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2247,6 +2415,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox11.ForeColor = Color.Black;
                 remark11.ForeColor = Color.Black;
                 BuyerTextBox11.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox11.BackColor = SystemColors.Control;
+                itemCategoryTextBox11.BackColor = SystemColors.Control;
+                itemDetailTextBox11.BackColor = SystemColors.Control;
+                weightTextBox11.BackColor = SystemColors.Control;
+                unitPriceText11.BackColor = SystemColors.Control;
+                countTextBox11.BackColor = SystemColors.Control;
+                purchaseTextBox11.BackColor = SystemColors.Control;
             }
         }
 
@@ -2264,6 +2440,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox12.ForeColor = Color.Red;
                 remark12.ForeColor = Color.Red;
                 BuyerTextBox12.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox12.BackColor = SystemColors.Control;
+                itemCategoryTextBox12.BackColor = SystemColors.Control;
+                itemDetailTextBox12.BackColor = SystemColors.Control;
+                weightTextBox12.BackColor = SystemColors.Control;
+                unitPriceText12.BackColor = SystemColors.Control;
+                countTextBox12.BackColor = SystemColors.Control;
+                purchaseTextBox12.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2277,6 +2461,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox12.ForeColor = Color.Black;
                 remark12.ForeColor = Color.Black;
                 BuyerTextBox12.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox12.BackColor = SystemColors.Control;
+                itemCategoryTextBox12.BackColor = SystemColors.Control;
+                itemDetailTextBox12.BackColor = SystemColors.Control;
+                weightTextBox12.BackColor = SystemColors.Control;
+                unitPriceText12.BackColor = SystemColors.Control;
+                countTextBox12.BackColor = SystemColors.Control;
+                purchaseTextBox12.BackColor = SystemColors.Control;
             }
         }
 
@@ -2294,6 +2486,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox13.ForeColor = Color.Red;
                 remark13.ForeColor = Color.Red;
                 BuyerTextBox13.ForeColor = Color.Red;
+
+                itemMainCategoryTextBox13.BackColor = SystemColors.Control;
+                itemCategoryTextBox13.BackColor = SystemColors.Control;
+                itemDetailTextBox13.BackColor = SystemColors.Control;
+                weightTextBox13.BackColor = SystemColors.Control;
+                unitPriceText13.BackColor = SystemColors.Control;
+                countTextBox13.BackColor = SystemColors.Control;
+                purchaseTextBox13.BackColor = SystemColors.Control;
             }
             else
             {
@@ -2307,6 +2507,14 @@ namespace Flawless_ex
                 WholesalePriceTextBox13.ForeColor = Color.Black;
                 remark13.ForeColor = Color.Black;
                 BuyerTextBox13.ForeColor = Color.Black;
+
+                itemMainCategoryTextBox13.BackColor = SystemColors.Control;
+                itemCategoryTextBox13.BackColor = SystemColors.Control;
+                itemDetailTextBox13.BackColor = SystemColors.Control;
+                weightTextBox13.BackColor = SystemColors.Control;
+                unitPriceText13.BackColor = SystemColors.Control;
+                countTextBox13.BackColor = SystemColors.Control;
+                purchaseTextBox13.BackColor = SystemColors.Control;
             }
         }
 
@@ -2673,8 +2881,14 @@ namespace Flawless_ex
 
         #region"集計ボタンクリック"
         private void UpdateSearchButton_Click(object sender, EventArgs e)
+        {}
+
+
+        #endregion
+
+        private void RegisterSearchButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("登録・検索しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("登録・検索しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
                 return;
@@ -2703,7 +2917,7 @@ namespace Flawless_ex
             OtherPurchase = PurChaseOther;
             OtherWholesale = WholeSaleOther;
             OtherProfit = ProFitOther;
-            ControlNumber = int.Parse(ManagementNumberTextBox.Text);
+            ControlNumber = int.Parse(GradeNumberTextBox.Text);
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -2736,7 +2950,8 @@ namespace Flawless_ex
 
             for (int i = 1; i <= record; i++)
             {
-                switch (i) {
+                switch (i)
+                {
                     case 1:
                         Record = 1;
                         MainCategoryCode = MainCategoryCode1;
@@ -2763,7 +2978,7 @@ namespace Flawless_ex
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data1);
-                        
+
                         break;
                     case 2:
                         Record = 2;
@@ -3104,10 +3319,9 @@ namespace Flawless_ex
                 }
             }
 
+            conn.Close();
             MessageBox.Show("登録しました", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RegisterSearchButton.Enabled = false;
         }
-
-
-        #endregion
     }
 }
