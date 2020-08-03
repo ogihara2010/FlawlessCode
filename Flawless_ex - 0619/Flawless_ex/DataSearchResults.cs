@@ -26,6 +26,9 @@ namespace Flawless_ex
         int control;
         int antique;
         DataTable dt = new DataTable();
+        string SlipNuber;
+        string access_auth;
+
         public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data)
         {
             InitializeComponent();
@@ -178,7 +181,7 @@ namespace Flawless_ex
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, SlipNuber, access_auth);
             this.Close();
             statement.Show();
         }
@@ -186,7 +189,7 @@ namespace Flawless_ex
         #region "納品書"
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, SlipNuber, access_auth);
             this.Close();
             statement.Show();
         }

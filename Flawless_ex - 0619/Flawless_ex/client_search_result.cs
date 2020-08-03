@@ -14,6 +14,9 @@ namespace Flawless_ex
         int staff_id;
         string staff_name;
         string address;
+        string SlipNumber;
+        string access_auth;
+
         public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id)
         {
             InitializeComponent();
@@ -78,7 +81,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, SlipNumber, access_auth);
 
             this.Close();
             client_Search.Show();
@@ -106,8 +109,8 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, SlipNumber, access_auth);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
@@ -126,7 +129,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, SlipNumber, access_auth);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
