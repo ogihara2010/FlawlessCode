@@ -15,7 +15,10 @@ namespace Flawless_ex
         int type;
         string staff_name;
         string address;
-        public client_search(MainMenu mainMenu, int id, int type)
+        string SlipNumber;
+        string access_auth;
+
+        public client_search(MainMenu mainMenu, int id, int type, string slipnumber, string Access_Auth)
         {
             InitializeComponent();
 
@@ -23,11 +26,13 @@ namespace Flawless_ex
             this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;
+            this.SlipNumber = slipnumber;
+            this.access_auth = Access_Auth;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address , SlipNumber, access_auth);
             this.Close();
 
             statement.Show();
@@ -272,7 +277,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            client_add client_Add = new client_add(mainMenu, staff_id, type);
+            client_add client_Add = new client_add(mainMenu, staff_id, type, SlipNumber, access_auth);
                 this.Close();
                 client_Add.Show();
             

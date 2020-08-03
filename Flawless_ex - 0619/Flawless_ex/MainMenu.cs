@@ -57,7 +57,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, slipNumber, access_auth);
 
             this.Hide();
             statement.Show();

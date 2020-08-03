@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Drawing.Printing;
+using System.CodeDom;
 
 namespace Flawless_ex
 {
@@ -113,6 +114,9 @@ namespace Flawless_ex
         string address;
         string register_date;
         string remarks;
+        string staff_name;
+        string SlipNumber;
+        string access_auth;
 
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
@@ -189,7 +193,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string slipnumber, string Access_Auth)
         {
             InitializeComponent();
             staff_id = id;
@@ -197,6 +201,8 @@ namespace Flawless_ex
             this.type = type;
             this.client_staff_name = client_staff_name;
             this.address = address;
+            this.SlipNumber = slipnumber;
+            this.access_auth = Access_Auth;
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -219,6 +225,7 @@ namespace Flawless_ex
                 }
             }
 
+            staff_name = label2.Text;
             cmd = new NpgsqlCommand(sql, conn);
 
             #region"計算書の伝票番号"
@@ -1518,7 +1525,7 @@ namespace Flawless_ex
 
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            using (client_search search2 = new client_search(mainMenu, staff_id, type))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, documentNumberTextBox.Text, access_auth))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -1563,7 +1570,7 @@ namespace Flawless_ex
 
         private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
         {
-            using (client_search search2 = new client_search(mainMenu, staff_id, type))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, documentNumberTextBox.Text, access_auth))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -1617,6 +1624,16 @@ namespace Flawless_ex
                 return;
             }
 
+            if(unitPriceTextBox0.Text== "単価 -> 重量 or 数量"||string.IsNullOrEmpty(unitPriceTextBox0.Text))
+            {
+                MessageBox.Show("何も入力されておりません。", "登録エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            if (string.IsNullOrEmpty(weightTextBox0.Text) || string.IsNullOrEmpty(countTextBox0.Text))
+            {
+                MessageBox.Show("重量 or 数量を入力してください", "登録エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
             if (dr == DialogResult.Yes && subSum >= 2000000)
             {
                 MessageBox.Show("200万以上の取引です。必要書類に不備がないか確認してください。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1648,8 +1665,11 @@ namespace Flawless_ex
             string StaffName = "";
             string Name = "";
             string Birthday = "";
-            string TEL = "";
             string Work = "";
+
+            DateTime date = DateTime.Now;
+            string AssessmentDate = date.ToLongDateString();
+
 
             if (typeTextBox.Text == "法人")
             {
@@ -1683,7 +1703,6 @@ namespace Flawless_ex
                             while (reader.Read())
                             {
                                 AntiqueNumber = (int)reader["antique_number"];
-                                TEL = reader["phone_number"].ToString();
                             }
                         }
                     }
@@ -1696,7 +1715,6 @@ namespace Flawless_ex
                             while (reader.Read())
                             {
                                 ID_Number = (int)reader["id_number"];
-                                TEL = reader["phone_number"].ToString();
                             }
                         }
                     }
@@ -1820,9 +1838,7 @@ namespace Flawless_ex
             }
             #endregion
 
-            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "');";
-
-            conn.Close();
+            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address, assessment_date) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "', '" + AssessmentDate + "');";
 
             int record = 1;     //行数
             int mainCategory = mainCategoryCode0;
@@ -6498,12 +6514,20 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, documentNumberTextBox.Text);
+            RecordList recordList = new RecordList(this, staff_id, staff_name, type, documentNumberTextBox.Text);
 
             this.Hide();
             recordList.Show();
         }
 
         #endregion
+
+        private void DeliveryPreviewButton_Click(object sender, EventArgs e)
+        {
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
+
+            this.Hide();
+            deliveryPreview.Show();
+        }
     }
 }

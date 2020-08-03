@@ -247,7 +247,7 @@
             this.sumTextBox2 = new System.Windows.Forms.TextBox();
             this.label79 = new System.Windows.Forms.Label();
             this.return2 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.DeliveryPreviewButton = new System.Windows.Forms.Button();
             this.Register = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.AntiqueSelectionButton2 = new System.Windows.Forms.Button();
@@ -432,8 +432,8 @@
             this.tabControl1.Controls.Add(this.SettlementDayBox);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tabControl1.Location = new System.Drawing.Point(10, 12);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Location = new System.Drawing.Point(2, 13);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1255, 772);
@@ -512,9 +512,9 @@
             // RecordListButton
             // 
             this.RecordListButton.Location = new System.Drawing.Point(975, 665);
-            this.RecordListButton.Margin = new System.Windows.Forms.Padding(2);
+            this.RecordListButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RecordListButton.Name = "RecordListButton";
-            this.RecordListButton.Padding = new System.Windows.Forms.Padding(1);
+            this.RecordListButton.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.RecordListButton.Size = new System.Drawing.Size(259, 55);
             this.RecordListButton.TabIndex = 47;
             this.RecordListButton.Text = "成績入力画面";
@@ -1061,7 +1061,7 @@
             this.label28.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label28.Name = "label28";
             this.label28.Padding = new System.Windows.Forms.Padding(32, 0, 32, 0);
-            this.label28.Size = new System.Drawing.Size(184, 25);
+            this.label28.Size = new System.Drawing.Size(183, 25);
             this.label28.TabIndex = 36;
             this.label28.Text = "備考";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2123,7 +2123,7 @@
             this.client_Button.Location = new System.Drawing.Point(12, 16);
             this.client_Button.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.client_Button.Name = "client_Button";
-            this.client_Button.Size = new System.Drawing.Size(281, 46);
+            this.client_Button.Size = new System.Drawing.Size(281, 58);
             this.client_Button.TabIndex = 16;
             this.client_Button.Text = "顧客選択";
             this.client_Button.UseVisualStyleBackColor = true;
@@ -2377,7 +2377,7 @@
             // residencePerioddatetimepicker
             // 
             this.residencePerioddatetimepicker.Location = new System.Drawing.Point(91, 140);
-            this.residencePerioddatetimepicker.Margin = new System.Windows.Forms.Padding(2);
+            this.residencePerioddatetimepicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.residencePerioddatetimepicker.Name = "residencePerioddatetimepicker";
             this.residencePerioddatetimepicker.Size = new System.Drawing.Size(145, 20);
             this.residencePerioddatetimepicker.TabIndex = 39;
@@ -2588,7 +2588,7 @@
             this.tabPage2.Controls.Add(this.label84);
             this.tabPage2.Controls.Add(this.tableLayoutPanel14);
             this.tabPage2.Controls.Add(this.return2);
-            this.tabPage2.Controls.Add(this.button9);
+            this.tabPage2.Controls.Add(this.DeliveryPreviewButton);
             this.tabPage2.Controls.Add(this.Register);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.tableLayoutPanel13);
@@ -2630,7 +2630,7 @@
             "書留",
             "掛け"});
             this.paymentMethodComboBox.Location = new System.Drawing.Point(263, 491);
-            this.paymentMethodComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.paymentMethodComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paymentMethodComboBox.Name = "paymentMethodComboBox";
             this.paymentMethodComboBox.Size = new System.Drawing.Size(97, 21);
             this.paymentMethodComboBox.TabIndex = 83;
@@ -2649,7 +2649,7 @@
             // SettlementDateTimePicker
             // 
             this.SettlementDateTimePicker.Location = new System.Drawing.Point(471, 512);
-            this.SettlementDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.SettlementDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.SettlementDateTimePicker.Name = "SettlementDateTimePicker";
             this.SettlementDateTimePicker.Size = new System.Drawing.Size(147, 20);
             this.SettlementDateTimePicker.TabIndex = 82;
@@ -2657,7 +2657,7 @@
             // DeliveryDateTimePicker
             // 
             this.DeliveryDateTimePicker.Location = new System.Drawing.Point(471, 475);
-            this.DeliveryDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.DeliveryDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DeliveryDateTimePicker.Name = "DeliveryDateTimePicker";
             this.DeliveryDateTimePicker.Size = new System.Drawing.Size(147, 20);
             this.DeliveryDateTimePicker.TabIndex = 81;
@@ -2665,7 +2665,7 @@
             // orderDateTimePicker
             // 
             this.orderDateTimePicker.Location = new System.Drawing.Point(471, 442);
-            this.orderDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
+            this.orderDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.orderDateTimePicker.Name = "orderDateTimePicker";
             this.orderDateTimePicker.Size = new System.Drawing.Size(147, 20);
             this.orderDateTimePicker.TabIndex = 80;
@@ -2939,7 +2939,7 @@
             "税込み",
             "税抜き"});
             this.comboBox11.Location = new System.Drawing.Point(102, 30);
-            this.comboBox11.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox11.Name = "comboBox11";
             this.comboBox11.Size = new System.Drawing.Size(145, 21);
             this.comboBox11.TabIndex = 0;
@@ -2949,7 +2949,7 @@
             // 
             this.tax.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tax.Location = new System.Drawing.Point(102, 57);
-            this.tax.Margin = new System.Windows.Forms.Padding(2);
+            this.tax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tax.Name = "tax";
             this.tax.ReadOnly = true;
             this.tax.Size = new System.Drawing.Size(145, 23);
@@ -3000,15 +3000,16 @@
             this.return2.UseVisualStyleBackColor = true;
             this.return2.Click += new System.EventHandler(this.return2_Click);
             // 
-            // button9
+            // DeliveryPreviewButton
             // 
-            this.button9.Location = new System.Drawing.Point(652, 595);
-            this.button9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(111, 60);
-            this.button9.TabIndex = 45;
-            this.button9.Text = "納品書プレビュー";
-            this.button9.UseVisualStyleBackColor = true;
+            this.DeliveryPreviewButton.Location = new System.Drawing.Point(652, 595);
+            this.DeliveryPreviewButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.DeliveryPreviewButton.Name = "DeliveryPreviewButton";
+            this.DeliveryPreviewButton.Size = new System.Drawing.Size(111, 60);
+            this.DeliveryPreviewButton.TabIndex = 45;
+            this.DeliveryPreviewButton.Text = "納品書プレビュー";
+            this.DeliveryPreviewButton.UseVisualStyleBackColor = true;
+            this.DeliveryPreviewButton.Click += new System.EventHandler(this.DeliveryPreviewButton_Click);
             // 
             // Register
             // 
@@ -3040,17 +3041,17 @@
             this.groupBox3.Controls.Add(this.shopNameTextBox2);
             this.groupBox3.Controls.Add(this.label76);
             this.groupBox3.Controls.Add(this.label77);
-            this.groupBox3.Location = new System.Drawing.Point(937, 46);
+            this.groupBox3.Location = new System.Drawing.Point(941, 39);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.groupBox3.Size = new System.Drawing.Size(306, 373);
+            this.groupBox3.Size = new System.Drawing.Size(306, 389);
             this.groupBox3.TabIndex = 43;
             this.groupBox3.TabStop = false;
             // 
             // AntiqueSelectionButton2
             // 
-            this.AntiqueSelectionButton2.Location = new System.Drawing.Point(247, 137);
+            this.AntiqueSelectionButton2.Location = new System.Drawing.Point(247, 144);
             this.AntiqueSelectionButton2.Name = "AntiqueSelectionButton2";
             this.AntiqueSelectionButton2.Size = new System.Drawing.Size(55, 23);
             this.AntiqueSelectionButton2.TabIndex = 30;
@@ -3060,7 +3061,7 @@
             // 
             // AntiqueLicenceCheckButton2
             // 
-            this.AntiqueLicenceCheckButton2.Location = new System.Drawing.Point(247, 162);
+            this.AntiqueLicenceCheckButton2.Location = new System.Drawing.Point(247, 169);
             this.AntiqueLicenceCheckButton2.Name = "AntiqueLicenceCheckButton2";
             this.AntiqueLicenceCheckButton2.Size = new System.Drawing.Size(55, 23);
             this.AntiqueLicenceCheckButton2.TabIndex = 29;
@@ -3070,7 +3071,7 @@
             // 
             // typeTextBox2
             // 
-            this.typeTextBox2.Location = new System.Drawing.Point(57, 65);
+            this.typeTextBox2.Location = new System.Drawing.Point(57, 77);
             this.typeTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.typeTextBox2.Name = "typeTextBox2";
             this.typeTextBox2.ReadOnly = true;
@@ -3084,14 +3085,14 @@
             this.client_searchButton1.Location = new System.Drawing.Point(12, 12);
             this.client_searchButton1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.client_searchButton1.Name = "client_searchButton1";
-            this.client_searchButton1.Size = new System.Drawing.Size(281, 46);
+            this.client_searchButton1.Size = new System.Drawing.Size(281, 58);
             this.client_searchButton1.TabIndex = 16;
             this.client_searchButton1.Text = "顧客選択";
             this.client_searchButton1.UseVisualStyleBackColor = true;
             // 
             // clientRemarksTextBox2
             // 
-            this.clientRemarksTextBox2.Location = new System.Drawing.Point(2, 272);
+            this.clientRemarksTextBox2.Location = new System.Drawing.Point(2, 279);
             this.clientRemarksTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.clientRemarksTextBox2.Multiline = true;
             this.clientRemarksTextBox2.Name = "clientRemarksTextBox2";
@@ -3102,7 +3103,7 @@
             // 
             this.label72.AutoSize = true;
             this.label72.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label72.Location = new System.Drawing.Point(40, 243);
+            this.label72.Location = new System.Drawing.Point(40, 250);
             this.label72.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(47, 19);
@@ -3112,7 +3113,7 @@
             // label73
             // 
             this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(12, 72);
+            this.label73.Location = new System.Drawing.Point(12, 79);
             this.label73.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(33, 13);
@@ -3121,7 +3122,7 @@
             // 
             // registerDateTextBox2
             // 
-            this.registerDateTextBox2.Location = new System.Drawing.Point(136, 192);
+            this.registerDateTextBox2.Location = new System.Drawing.Point(136, 199);
             this.registerDateTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.registerDateTextBox2.Name = "registerDateTextBox2";
             this.registerDateTextBox2.ReadOnly = true;
@@ -3130,7 +3131,7 @@
             // 
             // antiqueLicenceTextBox2
             // 
-            this.antiqueLicenceTextBox2.Location = new System.Drawing.Point(96, 153);
+            this.antiqueLicenceTextBox2.Location = new System.Drawing.Point(96, 160);
             this.antiqueLicenceTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.antiqueLicenceTextBox2.Name = "antiqueLicenceTextBox2";
             this.antiqueLicenceTextBox2.ReadOnly = true;
@@ -3140,7 +3141,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(10, 197);
+            this.label36.Location = new System.Drawing.Point(10, 204);
             this.label36.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(125, 13);
@@ -3149,7 +3150,7 @@
             // 
             // companyTextBox2
             // 
-            this.companyTextBox2.Location = new System.Drawing.Point(195, 65);
+            this.companyTextBox2.Location = new System.Drawing.Point(195, 77);
             this.companyTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.companyTextBox2.Name = "companyTextBox2";
             this.companyTextBox2.ReadOnly = true;
@@ -3159,7 +3160,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(9, 156);
+            this.label74.Location = new System.Drawing.Point(9, 163);
             this.label74.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(85, 13);
@@ -3168,7 +3169,7 @@
             // 
             // clientNameTextBox2
             // 
-            this.clientNameTextBox2.Location = new System.Drawing.Point(127, 126);
+            this.clientNameTextBox2.Location = new System.Drawing.Point(127, 133);
             this.clientNameTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.clientNameTextBox2.Name = "clientNameTextBox2";
             this.clientNameTextBox2.ReadOnly = true;
@@ -3178,7 +3179,7 @@
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(147, 68);
+            this.label75.Location = new System.Drawing.Point(145, 79);
             this.label75.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(46, 13);
@@ -3187,7 +3188,7 @@
             // 
             // shopNameTextBox2
             // 
-            this.shopNameTextBox2.Location = new System.Drawing.Point(57, 94);
+            this.shopNameTextBox2.Location = new System.Drawing.Point(57, 101);
             this.shopNameTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.shopNameTextBox2.Name = "shopNameTextBox2";
             this.shopNameTextBox2.ReadOnly = true;
@@ -3197,7 +3198,7 @@
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(9, 130);
+            this.label76.Location = new System.Drawing.Point(9, 137);
             this.label76.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(105, 13);
@@ -3207,7 +3208,7 @@
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(12, 99);
+            this.label77.Location = new System.Drawing.Point(12, 106);
             this.label77.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(46, 13);
@@ -3676,7 +3677,7 @@
             this.label71.Location = new System.Drawing.Point(737, 2);
             this.label71.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(184, 25);
+            this.label71.Size = new System.Drawing.Size(183, 25);
             this.label71.TabIndex = 36;
             this.label71.Text = "備考";
             this.label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4853,7 +4854,7 @@
         private System.Windows.Forms.TextBox sumTextBox2;
         private System.Windows.Forms.TextBox taxAmount2;
         private System.Windows.Forms.Button return2;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button DeliveryPreviewButton;
         private System.Windows.Forms.Button Register;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox typeTextBox2;
