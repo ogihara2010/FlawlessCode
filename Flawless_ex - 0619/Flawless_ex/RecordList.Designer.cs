@@ -35,10 +35,6 @@
             this.ItemNameChangeButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
             this.RegisterSearchButton = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SearchEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.SearchStartDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.StaffNameTextBox = new System.Windows.Forms.TextBox();
             this.StaffName = new System.Windows.Forms.Label();
@@ -208,7 +204,7 @@
             this.itemMainCategoryTextBox13 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.ItemNameChangeCheckBox2 = new System.Windows.Forms.CheckBox();
-            this.ItemNameChangeC = new System.Windows.Forms.CheckBox();
+            this.ItemNameChangeCheckBox3 = new System.Windows.Forms.CheckBox();
             this.ItemNameChangeCheckBox4 = new System.Windows.Forms.CheckBox();
             this.ItemNameChangeCheckBox5 = new System.Windows.Forms.CheckBox();
             this.ItemNameChangeCheckBox6 = new System.Windows.Forms.CheckBox();
@@ -293,10 +289,6 @@
             this.panel1.Controls.Add(this.ItemNameChangeButton);
             this.panel1.Controls.Add(this.UpdateButton);
             this.panel1.Controls.Add(this.RegisterSearchButton);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.SearchEndDateTimePicker);
-            this.panel1.Controls.Add(this.SearchStartDateTimePicker);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.StaffNameTextBox);
             this.panel1.Controls.Add(this.StaffName);
@@ -308,18 +300,18 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(968, 8);
+            this.button2.Location = new System.Drawing.Point(844, 8);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 43);
+            this.button2.Size = new System.Drawing.Size(165, 43);
             this.button2.TabIndex = 6;
             this.button2.Text = "お客様情報";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // ReturnButton
             // 
-            this.ReturnButton.Location = new System.Drawing.Point(1068, 8);
+            this.ReturnButton.Location = new System.Drawing.Point(1015, 8);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(75, 44);
+            this.ReturnButton.Size = new System.Drawing.Size(128, 44);
             this.ReturnButton.TabIndex = 5;
             this.ReturnButton.Text = "戻る";
             this.ReturnButton.UseVisualStyleBackColor = true;
@@ -327,70 +319,33 @@
             // 
             // ItemNameChangeButton
             // 
-            this.ItemNameChangeButton.Location = new System.Drawing.Point(887, 8);
+            this.ItemNameChangeButton.Location = new System.Drawing.Point(669, 8);
             this.ItemNameChangeButton.Name = "ItemNameChangeButton";
-            this.ItemNameChangeButton.Size = new System.Drawing.Size(75, 44);
+            this.ItemNameChangeButton.Size = new System.Drawing.Size(165, 44);
             this.ItemNameChangeButton.TabIndex = 6;
             this.ItemNameChangeButton.Text = "品名変更";
             this.ItemNameChangeButton.UseVisualStyleBackColor = true;
+            this.ItemNameChangeButton.Click += new System.EventHandler(this.ItemNameChangeButton_Click);
             // 
             // UpdateButton
             // 
-            this.UpdateButton.Location = new System.Drawing.Point(802, 9);
+            this.UpdateButton.Location = new System.Drawing.Point(512, 8);
             this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.Size = new System.Drawing.Size(79, 43);
+            this.UpdateButton.Size = new System.Drawing.Size(151, 43);
             this.UpdateButton.TabIndex = 2;
             this.UpdateButton.Text = "再登録";
             this.UpdateButton.UseVisualStyleBackColor = true;
-            this.UpdateButton.Click += new System.EventHandler(this.UpdateSearchButton_Click);
+            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // RegisterSearchButton
             // 
-            this.RegisterSearchButton.Location = new System.Drawing.Point(685, 9);
+            this.RegisterSearchButton.Location = new System.Drawing.Point(253, 8);
             this.RegisterSearchButton.Name = "RegisterSearchButton";
-            this.RegisterSearchButton.Size = new System.Drawing.Size(111, 43);
+            this.RegisterSearchButton.Size = new System.Drawing.Size(253, 43);
             this.RegisterSearchButton.TabIndex = 2;
             this.RegisterSearchButton.Text = "登録・成績一覧";
             this.RegisterSearchButton.UseVisualStyleBackColor = true;
             this.RegisterSearchButton.Click += new System.EventHandler(this.RegisterSearchButton_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.ForeColor = System.Drawing.SystemColors.Window;
-            this.label3.Location = new System.Drawing.Point(452, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 16);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "～";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Window;
-            this.label2.Location = new System.Drawing.Point(236, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "検索期間";
-            // 
-            // SearchEndDateTimePicker
-            // 
-            this.SearchEndDateTimePicker.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SearchEndDateTimePicker.Location = new System.Drawing.Point(483, 17);
-            this.SearchEndDateTimePicker.Name = "SearchEndDateTimePicker";
-            this.SearchEndDateTimePicker.Size = new System.Drawing.Size(135, 23);
-            this.SearchEndDateTimePicker.TabIndex = 2;
-            // 
-            // SearchStartDateTimePicker
-            // 
-            this.SearchStartDateTimePicker.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SearchStartDateTimePicker.Location = new System.Drawing.Point(318, 17);
-            this.SearchStartDateTimePicker.Name = "SearchStartDateTimePicker";
-            this.SearchStartDateTimePicker.Size = new System.Drawing.Size(128, 23);
-            this.SearchStartDateTimePicker.TabIndex = 1;
             // 
             // label1
             // 
@@ -685,7 +640,7 @@
             this.tableLayoutPanel1.Controls.Add(this.itemMainCategoryTextBox13, 2, 13);
             this.tableLayoutPanel1.Controls.Add(this.label6, 11, 0);
             this.tableLayoutPanel1.Controls.Add(this.ItemNameChangeCheckBox2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.ItemNameChangeC, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.ItemNameChangeCheckBox3, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.ItemNameChangeCheckBox4, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.ItemNameChangeCheckBox5, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.ItemNameChangeCheckBox6, 1, 6);
@@ -2262,16 +2217,16 @@
             this.ItemNameChangeCheckBox2.Text = "品名変更";
             this.ItemNameChangeCheckBox2.UseVisualStyleBackColor = true;
             // 
-            // ItemNameChangeC
+            // ItemNameChangeCheckBox3
             // 
-            this.ItemNameChangeC.AutoSize = true;
-            this.ItemNameChangeC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ItemNameChangeC.Location = new System.Drawing.Point(104, 78);
-            this.ItemNameChangeC.Name = "ItemNameChangeC";
-            this.ItemNameChangeC.Size = new System.Drawing.Size(83, 17);
-            this.ItemNameChangeC.TabIndex = 14;
-            this.ItemNameChangeC.Text = "品名変更";
-            this.ItemNameChangeC.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox3.AutoSize = true;
+            this.ItemNameChangeCheckBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ItemNameChangeCheckBox3.Location = new System.Drawing.Point(104, 78);
+            this.ItemNameChangeCheckBox3.Name = "ItemNameChangeCheckBox3";
+            this.ItemNameChangeCheckBox3.Size = new System.Drawing.Size(83, 17);
+            this.ItemNameChangeCheckBox3.TabIndex = 14;
+            this.ItemNameChangeCheckBox3.Text = "品名変更";
+            this.ItemNameChangeCheckBox3.UseVisualStyleBackColor = true;
             // 
             // ItemNameChangeCheckBox4
             // 
@@ -3124,10 +3079,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker SearchEndDateTimePicker;
-        private System.Windows.Forms.DateTimePicker SearchStartDateTimePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button RegisterSearchButton;
@@ -3346,7 +3297,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox ItemNameChangeCheckBox1;
         private System.Windows.Forms.CheckBox ItemNameChangeCheckBox2;
-        private System.Windows.Forms.CheckBox ItemNameChangeC;
+        private System.Windows.Forms.CheckBox ItemNameChangeCheckBox3;
         private System.Windows.Forms.CheckBox ItemNameChangeCheckBox4;
         private System.Windows.Forms.CheckBox ItemNameChangeCheckBox5;
         private System.Windows.Forms.CheckBox ItemNameChangeCheckBox6;
