@@ -12,9 +12,10 @@ namespace Flawless_ex
         //Statement statement;
         MainMenu mainMenu;
         int staff_id;
-        string staff_name;
         string address;
-        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id)
+        string staff_name;
+        string Total;
+        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, string Total)
         {
             InitializeComponent();
 
@@ -24,6 +25,7 @@ namespace Flawless_ex
             this.mainMenu = mainMenu;
             //this.statement = statement;
             staff_id = id;
+            this.Total = Total;
         }
 
         private void client_search_result_Load(object sender, EventArgs e)
@@ -78,7 +80,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
 
             this.Close();
             client_Search.Show();
@@ -107,7 +109,7 @@ namespace Flawless_ex
                 conn.Close();
 
                 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
@@ -126,7 +128,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;

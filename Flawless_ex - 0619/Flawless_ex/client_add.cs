@@ -20,6 +20,7 @@ namespace Flawless_ex
         int type;
         string staff_name;
         string address;
+        string Total;
         public client_add(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
@@ -31,14 +32,14 @@ namespace Flawless_ex
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
             client_Search.Show();
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
             client_Search.Show();
         }
@@ -94,7 +95,7 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
             statement.Show();
         }
@@ -154,7 +155,7 @@ namespace Flawless_ex
             type = 1;
             staff_name = Name;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
             statement.Show();
         }

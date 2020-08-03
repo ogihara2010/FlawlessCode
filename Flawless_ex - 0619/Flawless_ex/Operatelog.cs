@@ -21,7 +21,6 @@ namespace Flawless_ex
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
-
         }
 
         private void Return1_Click(object sender, EventArgs e)
@@ -61,7 +60,7 @@ namespace Flawless_ex
                 }
             #endregion
            #region "担当者　パスワード変更"
-            if (comboBox1.Text == "担当者マスタ　パスワード変更")
+            else if (comboBox1.Text == "担当者マスタ　パスワード変更")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -83,7 +82,7 @@ namespace Flawless_ex
                 }
             #endregion
            #region "担当者　アクセス権限"
-            if (comboBox1.Text == "担当者マスタ　アクセス権限変更")
+            else if (comboBox1.Text == "担当者マスタ　アクセス権限変更")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -105,8 +104,8 @@ namespace Flawless_ex
                     conn.Close();
                 }
             #endregion
-            #region "担当者　無効"
-            if (comboBox1.Text == "担当者マスタ　無効")
+           #region "担当者　無効"
+            else if (comboBox1.Text == "担当者マスタ　無効")
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
@@ -129,7 +128,7 @@ namespace Flawless_ex
                 conn.Close();
             }
             #endregion
-            if (comboBox1.Text == "顧客マスタ　法人")
+            else if (comboBox1.Text == "顧客マスタ　法人")
             {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -149,7 +148,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[5].HeaderText = "変更理由";
                     conn.Close();
             }
-            if (comboBox1.Text == "顧客マスタ　個人")
+            else if (comboBox1.Text == "顧客マスタ　個人")
             {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -169,8 +168,8 @@ namespace Flawless_ex
                     dataGridView1.Columns[5].HeaderText = "変更理由";
                     conn.Close();
             }
-            #region "品名マスタ　無効"
-                if (comboBox1.Text == "品名マスタ　無効")
+           #region "品名マスタ　無効"
+                else if (comboBox1.Text == "品名マスタ　無効")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -192,8 +191,8 @@ namespace Flawless_ex
                     conn.Close();
                 }
                 #endregion
-            #region "品名マスタ　大分類変更"
-                if (comboBox1.Text == "品名マスタ　大分類変更")
+           #region "品名マスタ　大分類変更"
+                else if (comboBox1.Text == "品名マスタ　大分類変更")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -215,8 +214,8 @@ namespace Flawless_ex
                     conn.Close();
                 }
                 #endregion
-            #region "品名マスタ　品名変更"
-                if (comboBox1.Text == "品名マスタ　品名変更")
+           #region "品名マスタ　品名変更"
+                else if (comboBox1.Text == "品名マスタ　品名変更")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -238,8 +237,8 @@ namespace Flawless_ex
                     conn.Close();
                 }
                 #endregion
-            #region "大分類　無効"
-                if (comboBox1.Text == "大分類マスタ　無効")
+           #region "大分類　無効"
+                else if (comboBox1.Text == "大分類マスタ　無効")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -261,8 +260,8 @@ namespace Flawless_ex
                     conn.Close();
                 }
                 #endregion
-            #region "大分類名変更した場合"
-                if (comboBox1.Text == "大分類マスタ　大分類名変更")
+           #region "大分類名変更した場合"
+                else if (comboBox1.Text == "大分類マスタ　大分類名変更")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
@@ -283,8 +282,8 @@ namespace Flawless_ex
                     conn.Close();
                 }
                 #endregion
-            #region "消費税マスタ"
-                if (comboBox1.Text == "消費税マスタ")
+           #region "消費税マスタ"
+                else if (comboBox1.Text == "消費税マスタ")
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;

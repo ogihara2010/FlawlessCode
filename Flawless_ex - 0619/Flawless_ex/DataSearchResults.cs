@@ -23,6 +23,7 @@ namespace Flawless_ex
         string staff_name;
         int staff_id;
         string data;
+        string Total;
         int control;
         int antique;
         DataTable dt = new DataTable();
@@ -178,7 +179,7 @@ namespace Flawless_ex
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
             statement.Show();
         }
@@ -186,7 +187,7 @@ namespace Flawless_ex
         #region "納品書"
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
             this.Close();
             statement.Show();
         }
