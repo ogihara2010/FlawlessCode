@@ -433,7 +433,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tabControl1.Location = new System.Drawing.Point(2, 13);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1255, 772);
@@ -512,9 +512,9 @@
             // RecordListButton
             // 
             this.RecordListButton.Location = new System.Drawing.Point(975, 665);
-            this.RecordListButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RecordListButton.Margin = new System.Windows.Forms.Padding(2);
             this.RecordListButton.Name = "RecordListButton";
-            this.RecordListButton.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RecordListButton.Padding = new System.Windows.Forms.Padding(1);
             this.RecordListButton.Size = new System.Drawing.Size(259, 55);
             this.RecordListButton.TabIndex = 47;
             this.RecordListButton.Text = "成績入力画面";
@@ -2377,7 +2377,7 @@
             // residencePerioddatetimepicker
             // 
             this.residencePerioddatetimepicker.Location = new System.Drawing.Point(91, 140);
-            this.residencePerioddatetimepicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.residencePerioddatetimepicker.Margin = new System.Windows.Forms.Padding(2);
             this.residencePerioddatetimepicker.Name = "residencePerioddatetimepicker";
             this.residencePerioddatetimepicker.Size = new System.Drawing.Size(145, 20);
             this.residencePerioddatetimepicker.TabIndex = 39;
@@ -2630,7 +2630,7 @@
             "書留",
             "掛け"});
             this.paymentMethodComboBox.Location = new System.Drawing.Point(263, 491);
-            this.paymentMethodComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.paymentMethodComboBox.Margin = new System.Windows.Forms.Padding(2);
             this.paymentMethodComboBox.Name = "paymentMethodComboBox";
             this.paymentMethodComboBox.Size = new System.Drawing.Size(97, 21);
             this.paymentMethodComboBox.TabIndex = 83;
@@ -2649,7 +2649,7 @@
             // SettlementDateTimePicker
             // 
             this.SettlementDateTimePicker.Location = new System.Drawing.Point(471, 512);
-            this.SettlementDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.SettlementDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.SettlementDateTimePicker.Name = "SettlementDateTimePicker";
             this.SettlementDateTimePicker.Size = new System.Drawing.Size(147, 20);
             this.SettlementDateTimePicker.TabIndex = 82;
@@ -2657,7 +2657,7 @@
             // DeliveryDateTimePicker
             // 
             this.DeliveryDateTimePicker.Location = new System.Drawing.Point(471, 475);
-            this.DeliveryDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DeliveryDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.DeliveryDateTimePicker.Name = "DeliveryDateTimePicker";
             this.DeliveryDateTimePicker.Size = new System.Drawing.Size(147, 20);
             this.DeliveryDateTimePicker.TabIndex = 81;
@@ -2665,7 +2665,7 @@
             // orderDateTimePicker
             // 
             this.orderDateTimePicker.Location = new System.Drawing.Point(471, 442);
-            this.orderDateTimePicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.orderDateTimePicker.Margin = new System.Windows.Forms.Padding(2);
             this.orderDateTimePicker.Name = "orderDateTimePicker";
             this.orderDateTimePicker.Size = new System.Drawing.Size(147, 20);
             this.orderDateTimePicker.TabIndex = 80;
@@ -2939,7 +2939,7 @@
             "税込み",
             "税抜き"});
             this.comboBox11.Location = new System.Drawing.Point(102, 30);
-            this.comboBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox11.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox11.Name = "comboBox11";
             this.comboBox11.Size = new System.Drawing.Size(145, 21);
             this.comboBox11.TabIndex = 0;
@@ -2949,7 +2949,7 @@
             // 
             this.tax.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tax.Location = new System.Drawing.Point(102, 57);
-            this.tax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tax.Margin = new System.Windows.Forms.Padding(2);
             this.tax.Name = "tax";
             this.tax.ReadOnly = true;
             this.tax.Size = new System.Drawing.Size(145, 23);
