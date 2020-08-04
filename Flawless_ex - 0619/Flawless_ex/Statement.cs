@@ -207,8 +207,8 @@ namespace Flawless_ex
         {
             #region "ボタン"
             this.previewButton.Enabled = false;
-            this.RecordListButton.Enabled = false;
-            this.button9.Enabled = false;
+            //this.RecordListButton.Enabled = false;
+            this.DeliveryPreviewButton.Enabled = false;
             #endregion
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
@@ -5889,7 +5889,7 @@ namespace Flawless_ex
 
             conn.Close();
             MessageBox.Show("登録しました。");
-            this.button9.Enabled = true;
+            this.DeliveryPreviewButton.Enabled = true;
         }
 
         #endregion
@@ -7072,12 +7072,23 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, documentNumberTextBox.Text);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, number);
 
             this.Hide();
             recordList.Show();
         }
 
         #endregion
+
+        #region"納品書　印刷プレビュー"
+        private void DeliveryPreviewButton_Click(object sender, EventArgs e)
+        {
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
+
+            this.Hide();
+            deliveryPreview.Show();
+        }
+        #endregion
+
     }
 }

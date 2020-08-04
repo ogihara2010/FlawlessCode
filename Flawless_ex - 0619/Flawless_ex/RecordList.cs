@@ -27,6 +27,9 @@ namespace Flawless_ex
         string access_auth;
         string staff_name;
         string address;
+        string total;
+        int grade;
+        RecordList recordList;
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -145,6 +148,20 @@ namespace Flawless_ex
         int Count;                          //数量
         #endregion
 
+        #region"品名変更時 保持する値"
+        string Document;
+        int GRADE;
+        decimal WHOLESALE;                      //卸値
+        string REMARK;                          //備考
+        string BUYDATE;                         //売却日
+        string BUYER;                           //売却先
+        int ChangeCheck = 0;                    //品名変更チェック
+        decimal PROFIT;                         //利益
+
+        string WEIGHT;                          //重量
+        string UNITPRICE;                       //単価
+        string COUNT;                           //数量
+        #endregion
 
         #region"大分類コード取得用"
         int MainCategoryCode1;
@@ -203,14 +220,16 @@ namespace Flawless_ex
         DataTable Data13 = new DataTable();
         #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber)
+        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade)
         {
             InitializeComponent();
+
             this.statement = statement;
             this.staff_id = staff_id;
             this.staff_name = Staff_Name;
             this.type = type;
             this.SlipNumber = slipnumber;
+            this.grade = Grade;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
@@ -872,7 +891,7 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, SlipNumber, access_auth);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, total) ;
 
             this.Close();
             statement.Show();
@@ -880,6 +899,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, total);
             statement.Show();
         }
 
@@ -2878,9 +2898,8 @@ namespace Flawless_ex
 
         #endregion
 
-
         #region"集計ボタンクリック"
-        private void RegisterSearchButton_Click(object sender, EventArgs e)
+        private void RegisterButton_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("登録・検索しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
@@ -3315,7 +3334,7 @@ namespace Flawless_ex
 
             conn.Close();
             MessageBox.Show("登録しました", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            RegisterSearchButton.Enabled = false;
+            RegisterButton.Enabled = false;
         }
         #endregion
 
@@ -3332,6 +3351,7 @@ namespace Flawless_ex
             if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked && !ItemNameChangeCheckBox11.Checked && !ItemNameChangeCheckBox12.Checked && !ItemNameChangeCheckBox13.Checked)
             {
                 MessageBox.Show("変更する品名の行を選択してください", "品名変更エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
 
             DialogResult dialogResult = MessageBox.Show("選択した品名を変更しますか？", "変更確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -3339,6 +3359,607 @@ namespace Flawless_ex
             {
                 return;
             }
+
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            string sql_str = "select * from list_result;";
+            cmd = new NpgsqlCommand(sql_str, conn);
+            conn.Open();
+            string DocumentNumber = "";
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    DocumentNumber = reader["document_number"].ToString();
+                }
+            }
+
+            if (DocumentNumber == SlipNumber)   //一度登録済み
+            {
+
+            }
+            else　                              //未登録
+            {
+                Document = SlipNumber;
+                GRADE = int.Parse(GradeNumberTextBox.Text);
+                AssessmentDate = AssessmentDateTextBox.Text;
+
+                for (int i = 1; i <= record; i++)
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            REMARK = remark1.Text;
+                            MainCategoryCode = MainCategoryCode1;
+                            ItemCategoryCode = ItemCategoryCode1;
+                            Record = 1;
+                            UnitPrice = UnitPriceUnFormat1;
+                            Purchase = PurchaseUnFormat1;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox1.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox1.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+
+                                WHOLESALE = WholeSaleUnFormat1;
+                                PROFIT = WholeSaleUnFormat1 - PurchaseUnFormat1;
+                                BUYDATE = BuyDateTimePicker1.Value.ToLongDateString();
+                                BUYER = BuyerTextBox1.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data1);
+                            break;
+                        case 2:
+                            REMARK = remark2.Text;
+                            MainCategoryCode = MainCategoryCode2;
+                            ItemCategoryCode = ItemCategoryCode2;
+                            Record = 2;
+                            UnitPrice = UnitPriceUnFormat2;
+                            Purchase = PurchaseUnFormat2;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox2.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox2.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat2;
+                                PROFIT = WholeSaleUnFormat2 - PurchaseUnFormat2;
+                                BUYDATE = BuyDateTimePicker2.Value.ToLongDateString();
+                                BUYER = BuyerTextBox2.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data2);
+                            break;
+                        case 3:
+                            REMARK = remark3.Text;
+                            MainCategoryCode = MainCategoryCode3;
+                            ItemCategoryCode = ItemCategoryCode3;
+                            Record = 3;
+                            UnitPrice = UnitPriceUnFormat3;
+                            Purchase = PurchaseUnFormat3;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox3.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox3.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat3;
+                                PROFIT = WholeSaleUnFormat3 - PurchaseUnFormat3;
+                                BUYDATE = BuyDateTimePicker3.Value.ToLongDateString();
+                                BUYER = BuyerTextBox3.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data3);
+                            break;
+                        case 4:
+                            REMARK = remark4.Text;
+                            MainCategoryCode = MainCategoryCode4;
+                            ItemCategoryCode = ItemCategoryCode4;
+                            Record = 4;
+                            UnitPrice = UnitPriceUnFormat4;
+                            Purchase = PurchaseUnFormat4;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox4.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox4.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat4;
+                                PROFIT = WholeSaleUnFormat4 - PurchaseUnFormat4;
+                                BUYDATE = BuyDateTimePicker4.Value.ToLongDateString();
+                                BUYER = BuyerTextBox4.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data4);
+                            break;
+                        case 5:
+                            REMARK = remark5.Text;
+                            MainCategoryCode = MainCategoryCode5;
+                            ItemCategoryCode = ItemCategoryCode5;
+                            Record = 5;
+                            UnitPrice = UnitPriceUnFormat5;
+                            Purchase = PurchaseUnFormat5;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox5.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox5.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat5;
+                                PROFIT = WholeSaleUnFormat5 - PurchaseUnFormat5;
+                                BUYDATE = BuyDateTimePicker5.Value.ToLongDateString();
+                                BUYER = BuyerTextBox5.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data5);
+                            break;
+                        case 6:
+                            REMARK = remark6.Text;
+                            MainCategoryCode = MainCategoryCode6;
+                            ItemCategoryCode = ItemCategoryCode6;
+                            Record = 6;
+                            UnitPrice = UnitPriceUnFormat6;
+                            Purchase = PurchaseUnFormat6;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox6.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox6.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat6;
+                                PROFIT = WholeSaleUnFormat6 - PurchaseUnFormat6;
+                                BUYDATE = BuyDateTimePicker6.Value.ToLongDateString();
+                                BUYER = BuyerTextBox6.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data6);
+                            break;
+                        case 7:
+                            REMARK = remark7.Text;
+                            MainCategoryCode = MainCategoryCode7;
+                            ItemCategoryCode = ItemCategoryCode7;
+                            Record = 7;
+                            UnitPrice = UnitPriceUnFormat7;
+                            Purchase = PurchaseUnFormat7;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox7.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox7.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat7;
+                                PROFIT = WholeSaleUnFormat7 - PurchaseUnFormat7;
+                                BUYDATE = BuyDateTimePicker7.Value.ToLongDateString();
+                                BUYER = BuyerTextBox7.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data7);
+                            break;
+                        case 8:
+                            REMARK = remark8.Text;
+                            MainCategoryCode = MainCategoryCode8;
+                            ItemCategoryCode = ItemCategoryCode8;
+                            Record = 8;
+                            UnitPrice = UnitPriceUnFormat8;
+                            Purchase = PurchaseUnFormat8;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox8.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox8.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat8;
+                                PROFIT = WholeSaleUnFormat8 - PurchaseUnFormat8;
+                                BUYDATE = BuyDateTimePicker8.Value.ToLongDateString();
+                                BUYER = BuyerTextBox8.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data8);
+                            break;
+                        case 9:
+                            REMARK = remark9.Text;
+                            MainCategoryCode = MainCategoryCode9;
+                            ItemCategoryCode = ItemCategoryCode9;
+                            Record = 9;
+                            UnitPrice = UnitPriceUnFormat9;
+                            Purchase = PurchaseUnFormat9;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox9.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox9.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat9;
+                                PROFIT = WholeSaleUnFormat9 - PurchaseUnFormat9;
+                                BUYDATE = BuyDateTimePicker9.Value.ToLongDateString();
+                                BUYER = BuyerTextBox9.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data9);
+                            break;
+                        case 10:
+                            REMARK = remark10.Text;
+                            MainCategoryCode = MainCategoryCode10;
+                            ItemCategoryCode = ItemCategoryCode10;
+                            Record = 10;
+                            UnitPrice = UnitPriceUnFormat10;
+                            Purchase = PurchaseUnFormat10;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox10.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox10.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat10;
+                                PROFIT = WholeSaleUnFormat10 - PurchaseUnFormat10;
+                                BUYDATE = BuyDateTimePicker10.Value.ToLongDateString();
+                                BUYER = BuyerTextBox10.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data10);
+                            break;
+                        case 11:
+                            REMARK = remark11.Text;
+                            MainCategoryCode = MainCategoryCode11;
+                            ItemCategoryCode = ItemCategoryCode11;
+                            Record = 11;
+                            UnitPrice = UnitPriceUnFormat11;
+                            Purchase = PurchaseUnFormat11;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox11.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox11.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat11;
+                                PROFIT = WholeSaleUnFormat11 - PurchaseUnFormat11;
+                                BUYDATE = BuyDateTimePicker11.Value.ToLongDateString();
+                                BUYER = BuyerTextBox11.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data11);
+                            break;
+                        case 12:
+                            REMARK = remark12.Text;
+                            MainCategoryCode = MainCategoryCode12;
+                            ItemCategoryCode = ItemCategoryCode12;
+                            Record = 12;
+                            UnitPrice = UnitPriceUnFormat12;
+                            Purchase = PurchaseUnFormat12;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox12.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox12.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat12;
+                                PROFIT = WholeSaleUnFormat12 - PurchaseUnFormat12;
+                                BUYDATE = BuyDateTimePicker12.Value.ToLongDateString();
+                                BUYER = BuyerTextBox12.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data12);
+                            break;
+                        case 13:
+                            REMARK = remark13.Text;
+                            MainCategoryCode = MainCategoryCode13;
+                            ItemCategoryCode = ItemCategoryCode13;
+                            Record = 13;
+                            UnitPrice = UnitPriceUnFormat13;
+                            Purchase = PurchaseUnFormat13;
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox13.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
+
+                            if (ItemNameChangeCheckBox13.Checked)
+                            {
+                                ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
+                            #endregion
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                WHOLESALE = WholeSaleUnFormat13;
+                                PROFIT = WholeSaleUnFormat13 - PurchaseUnFormat13;
+                                BUYDATE = BuyDateTimePicker13.Value.ToLongDateString();
+                                BUYER = BuyerTextBox13.Text;
+                            }
+                            else
+                            {
+                                WHOLESALE = 0;
+                                PROFIT = 0;
+                            }
+
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(Data13);
+                            break;
+                    }
+                }
+            }
+            RegisterButton.Enabled = false;
+            conn.Close();
+            MessageBox.Show("入力されたデータを登録しました。この成績表を登録する場合、次からはは再登録ボタンを押してください。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UpdateButton.Enabled = true;
+
+            ItemNameChange nameChange = new ItemNameChange(recordList, GRADE, staff_id, SlipNumber);
+
+            this.Hide();
+            nameChange.Show();
         }
         #endregion
     }
