@@ -34,7 +34,8 @@
             this.ReturnButton = new System.Windows.Forms.Button();
             this.ItemNameChangeButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
-            this.RegisterSearchButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.RegisterButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.StaffNameTextBox = new System.Windows.Forms.TextBox();
             this.StaffName = new System.Windows.Forms.Label();
@@ -288,7 +289,8 @@
             this.panel1.Controls.Add(this.ReturnButton);
             this.panel1.Controls.Add(this.ItemNameChangeButton);
             this.panel1.Controls.Add(this.UpdateButton);
-            this.panel1.Controls.Add(this.RegisterSearchButton);
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.RegisterButton);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.StaffNameTextBox);
             this.panel1.Controls.Add(this.StaffName);
@@ -329,6 +331,7 @@
             // 
             // UpdateButton
             // 
+            this.UpdateButton.Enabled = false;
             this.UpdateButton.Location = new System.Drawing.Point(512, 8);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(151, 43);
@@ -337,15 +340,24 @@
             this.UpdateButton.UseVisualStyleBackColor = true;
             this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
-            // RegisterSearchButton
+            // button3
             // 
-            this.RegisterSearchButton.Location = new System.Drawing.Point(253, 8);
-            this.RegisterSearchButton.Name = "RegisterSearchButton";
-            this.RegisterSearchButton.Size = new System.Drawing.Size(253, 43);
-            this.RegisterSearchButton.TabIndex = 2;
-            this.RegisterSearchButton.Text = "登録・成績一覧";
-            this.RegisterSearchButton.UseVisualStyleBackColor = true;
-            this.RegisterSearchButton.Click += new System.EventHandler(this.RegisterSearchButton_Click);
+            this.button3.Location = new System.Drawing.Point(378, 8);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(128, 43);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "成績一覧画面";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // RegisterButton
+            // 
+            this.RegisterButton.Location = new System.Drawing.Point(265, 7);
+            this.RegisterButton.Name = "RegisterButton";
+            this.RegisterButton.Size = new System.Drawing.Size(105, 43);
+            this.RegisterButton.TabIndex = 2;
+            this.RegisterButton.Text = "登録";
+            this.RegisterButton.UseVisualStyleBackColor = true;
+            this.RegisterButton.Click += new System.EventHandler(this.RegisterButton_Click);
             // 
             // label1
             // 
@@ -3081,7 +3093,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button RegisterSearchButton;
+        private System.Windows.Forms.Button RegisterButton;
         private System.Windows.Forms.Label NameOrCompanyNameLabel;
         private System.Windows.Forms.Label AddressOrClientStaffNameLabel;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -3323,5 +3335,6 @@
         private System.Windows.Forms.DateTimePicker BuyDateTimePicker13;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

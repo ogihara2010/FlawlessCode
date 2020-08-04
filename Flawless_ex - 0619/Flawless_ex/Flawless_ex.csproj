@@ -159,6 +159,12 @@
     <Compile Include="Invoice.Designer.cs">
       <DependentUpon>Invoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="ItemNameChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemNameChange.Designer.cs">
+      <DependentUpon>ItemNameChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonResult.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Invoice.resx">
       <DependentUpon>Invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemNameChange.resx">
+      <DependentUpon>ItemNameChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MonResult.resx">
       <DependentUpon>MonResult.cs</DependentUpon>
