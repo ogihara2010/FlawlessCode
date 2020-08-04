@@ -3953,7 +3953,7 @@ namespace Flawless_ex
             }
             RegisterButton.Enabled = false;
             conn.Close();
-            MessageBox.Show("入力されたデータを登録しました。この成績表を登録する場合、次からはは再登録ボタンを押してください。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("入力されたデータを登録しました。この成績表を登録する場合、次からは再登録ボタンを押してください。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             UpdateButton.Enabled = true;
 
             ItemNameChange nameChange = new ItemNameChange(recordList, GRADE, staff_id, SlipNumber);
