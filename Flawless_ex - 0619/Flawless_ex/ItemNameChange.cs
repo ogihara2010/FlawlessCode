@@ -455,7 +455,6 @@ namespace Flawless_ex
             conn.Close();
 
             recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade);
-
             this.Close();
             recordList.Show();
         }

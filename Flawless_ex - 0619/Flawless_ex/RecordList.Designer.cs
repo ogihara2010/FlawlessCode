@@ -375,6 +375,7 @@
             this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StaffNameTextBox.Location = new System.Drawing.Point(1202, 20);
             this.StaffNameTextBox.Name = "StaffNameTextBox";
+            this.StaffNameTextBox.ReadOnly = true;
             this.StaffNameTextBox.Size = new System.Drawing.Size(71, 20);
             this.StaffNameTextBox.TabIndex = 4;
             // 
