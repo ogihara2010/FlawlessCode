@@ -4756,7 +4756,6 @@ namespace Flawless_ex
             UpdateButton.Enabled = true;
 
             ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber);
-
             this.Close();
             nameChange.Show();
         }
