@@ -92,7 +92,7 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)//法人
             {
@@ -101,7 +101,7 @@ namespace Flawless_ex
                 string staff_name = (string)this.dataGridView1.CurrentRow.Cells[2].Value;
                 string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value;
 
-                string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = " + anumber + " ";
+                string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = '" + anumber + "';";
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);

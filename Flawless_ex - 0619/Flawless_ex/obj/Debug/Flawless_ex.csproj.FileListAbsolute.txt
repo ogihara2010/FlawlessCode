@@ -537,3 +537,4 @@ C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\o
 C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.CustomerHistorySelect.resources
 C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.DeliveryPreview.resources
 C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.RecordList.resources
+C:\Users\fpadmin\Documents\GitHub\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.ItemNameChange.resources
