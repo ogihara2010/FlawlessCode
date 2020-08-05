@@ -3226,6 +3226,8 @@ namespace Flawless_ex
             OtherProfit = ProFitOther;
             ControlNumber = int.Parse(GradeNumberTextBox.Text);
 
+            
+
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
             string sql_str = "";
@@ -3272,7 +3274,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat1;
                         Count = int.Parse(countTextBox1.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || Wholesale != 0) 
                         {
                             SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
                             Buyer = BuyerTextBox1.Text;
@@ -3286,7 +3288,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox1.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data1);
 
@@ -3304,7 +3316,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat2;
                         Count = int.Parse(countTextBox2.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
                             Buyer = BuyerTextBox2.Text;
@@ -3318,7 +3330,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox2.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data2);
 
@@ -3336,7 +3358,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat3;
                         Count = int.Parse(countTextBox3.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
                             Buyer = BuyerTextBox3.Text;
@@ -3350,7 +3372,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox3.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data3);
 
@@ -3368,7 +3400,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat4;
                         Count = int.Parse(countTextBox4.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
                             Buyer = BuyerTextBox4.Text;
@@ -3382,7 +3414,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox4.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data4);
 
@@ -3400,7 +3442,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat5;
                         Count = int.Parse(countTextBox5.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
                             Buyer = BuyerTextBox5.Text;
@@ -3414,7 +3456,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox5.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data5);
 
@@ -3432,7 +3484,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat6;
                         Count = int.Parse(countTextBox6.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
                             Buyer = BuyerTextBox6.Text;
@@ -3446,7 +3498,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox6.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data6);
 
@@ -3464,7 +3526,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat7;
                         Count = int.Parse(countTextBox7.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
                             Buyer = BuyerTextBox7.Text;
@@ -3478,7 +3540,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox7.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data7);
 
@@ -3496,7 +3568,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat8;
                         Count = int.Parse(countTextBox8.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
                             Buyer = BuyerTextBox8.Text;
@@ -3510,7 +3582,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox8.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data8);
 
@@ -3528,7 +3610,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat9;
                         Count = int.Parse(countTextBox9.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
                             Buyer = BuyerTextBox9.Text;
@@ -3542,7 +3624,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox9.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data9);
 
@@ -3560,7 +3652,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat10;
                         Count = int.Parse(countTextBox10.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
                             Buyer = BuyerTextBox10.Text;
@@ -3574,7 +3666,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox10.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data10);
 
@@ -3592,7 +3694,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat11;
                         Count = int.Parse(countTextBox11.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
                             Buyer = BuyerTextBox11.Text;
@@ -3606,7 +3708,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox11.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data11);
 
@@ -3624,7 +3736,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat12;
                         Count = int.Parse(countTextBox12.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
                             Buyer = BuyerTextBox12.Text;
@@ -3638,7 +3750,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox12.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data12);
 
@@ -3656,7 +3778,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat13;
                         Count = int.Parse(countTextBox13.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
                             Buyer = BuyerTextBox13.Text;
@@ -3670,7 +3792,17 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+
+                        if (ItemNameChangeCheckBox13.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data13);
 
@@ -3755,7 +3887,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3785,7 +3917,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3814,7 +3946,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3843,7 +3975,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3872,7 +4004,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3901,7 +4033,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3930,7 +4062,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3959,7 +4091,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -3988,7 +4120,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -4017,7 +4149,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -4046,7 +4178,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -4075,7 +4207,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -4104,7 +4236,7 @@ namespace Flawless_ex
                         }
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_category_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
