@@ -136,6 +136,9 @@ namespace Flawless_ex
         int number;     //伝票番号の数字五桁
 
         MainMenu mainMenu;
+        TopMenu topMenu;
+        string access_auth;
+        string pass;
 
         #region"DataTable"
         DataTable dt = new DataTable();//大分類
@@ -5584,6 +5587,7 @@ namespace Flawless_ex
         #region"右上の×で戻る"
         private void Statement_FormClosed(object sender, FormClosedEventArgs e)
         {
+            mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
             mainMenu.Show();
         }
         #endregion

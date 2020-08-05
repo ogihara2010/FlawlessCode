@@ -42,7 +42,22 @@
             this.AfterChangeComboBox8 = new System.Windows.Forms.ComboBox();
             this.AfterChangeComboBox13 = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.BeforeChangeTextBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.BeforeChangeTextBox2 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox3 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox4 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox5 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox6 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox7 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox8 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox9 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox10 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox11 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox12 = new System.Windows.Forms.TextBox();
+            this.BeforeChangeTextBox13 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.ChangeReasonTextBox1 = new System.Windows.Forms.TextBox();
             this.ChangeReasonTextBox2 = new System.Windows.Forms.TextBox();
             this.ChangeReasonTextBox3 = new System.Windows.Forms.TextBox();
@@ -56,8 +71,6 @@
             this.ChangeReasonTextBox11 = new System.Windows.Forms.TextBox();
             this.ChangeReasonTextBox12 = new System.Windows.Forms.TextBox();
             this.ChangeReasonTextBox13 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.ItemNameChangeButton = new System.Windows.Forms.Button();
@@ -68,19 +81,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.BeforeChangeTextBox1 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox2 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox3 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox4 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox5 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox6 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox7 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox8 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox9 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox10 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox11 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox12 = new System.Windows.Forms.TextBox();
-            this.BeforeChangeTextBox13 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -254,163 +254,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(141, 332);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // tableLayoutPanel2
+            // BeforeChangeTextBox1
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Aqua;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox2, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox13, 0, 13);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox3, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox12, 0, 12);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox11, 0, 11);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox9, 0, 9);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox8, 0, 8);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox10, 0, 10);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox4, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox5, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox6, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox7, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox1, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox2, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox3, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox4, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox5, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox6, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox7, 1, 7);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox8, 1, 8);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox9, 1, 9);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox10, 1, 10);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox11, 1, 11);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox12, 1, 12);
-            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox13, 1, 13);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(341, 85);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 14;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 332);
-            this.tableLayoutPanel2.TabIndex = 3;
-            // 
-            // ChangeReasonTextBox1
-            // 
-            this.ChangeReasonTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox1.Location = new System.Drawing.Point(149, 32);
-            this.ChangeReasonTextBox1.Name = "ChangeReasonTextBox1";
-            this.ChangeReasonTextBox1.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox1.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox2
-            // 
-            this.ChangeReasonTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox2.Location = new System.Drawing.Point(149, 55);
-            this.ChangeReasonTextBox2.Name = "ChangeReasonTextBox2";
-            this.ChangeReasonTextBox2.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox2.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox3
-            // 
-            this.ChangeReasonTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox3.Location = new System.Drawing.Point(149, 78);
-            this.ChangeReasonTextBox3.Name = "ChangeReasonTextBox3";
-            this.ChangeReasonTextBox3.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox3.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox4
-            // 
-            this.ChangeReasonTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox4.Location = new System.Drawing.Point(149, 101);
-            this.ChangeReasonTextBox4.Name = "ChangeReasonTextBox4";
-            this.ChangeReasonTextBox4.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox4.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox5
-            // 
-            this.ChangeReasonTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox5.Location = new System.Drawing.Point(149, 124);
-            this.ChangeReasonTextBox5.Name = "ChangeReasonTextBox5";
-            this.ChangeReasonTextBox5.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox5.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox6
-            // 
-            this.ChangeReasonTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox6.Location = new System.Drawing.Point(149, 147);
-            this.ChangeReasonTextBox6.Name = "ChangeReasonTextBox6";
-            this.ChangeReasonTextBox6.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox6.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox7
-            // 
-            this.ChangeReasonTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox7.Location = new System.Drawing.Point(149, 170);
-            this.ChangeReasonTextBox7.Name = "ChangeReasonTextBox7";
-            this.ChangeReasonTextBox7.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox7.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox8
-            // 
-            this.ChangeReasonTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox8.Location = new System.Drawing.Point(149, 193);
-            this.ChangeReasonTextBox8.Name = "ChangeReasonTextBox8";
-            this.ChangeReasonTextBox8.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox8.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox9
-            // 
-            this.ChangeReasonTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox9.Location = new System.Drawing.Point(149, 216);
-            this.ChangeReasonTextBox9.Name = "ChangeReasonTextBox9";
-            this.ChangeReasonTextBox9.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox9.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox10
-            // 
-            this.ChangeReasonTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox10.Location = new System.Drawing.Point(149, 239);
-            this.ChangeReasonTextBox10.Name = "ChangeReasonTextBox10";
-            this.ChangeReasonTextBox10.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox10.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox11
-            // 
-            this.ChangeReasonTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox11.Location = new System.Drawing.Point(149, 262);
-            this.ChangeReasonTextBox11.Name = "ChangeReasonTextBox11";
-            this.ChangeReasonTextBox11.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox11.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox12
-            // 
-            this.ChangeReasonTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox12.Location = new System.Drawing.Point(149, 285);
-            this.ChangeReasonTextBox12.Name = "ChangeReasonTextBox12";
-            this.ChangeReasonTextBox12.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox12.TabIndex = 2;
-            // 
-            // ChangeReasonTextBox13
-            // 
-            this.ChangeReasonTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChangeReasonTextBox13.Location = new System.Drawing.Point(149, 308);
-            this.ChangeReasonTextBox13.Name = "ChangeReasonTextBox13";
-            this.ChangeReasonTextBox13.Size = new System.Drawing.Size(337, 19);
-            this.ChangeReasonTextBox13.TabIndex = 2;
+            this.BeforeChangeTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BeforeChangeTextBox1.Location = new System.Drawing.Point(3, 32);
+            this.BeforeChangeTextBox1.Name = "BeforeChangeTextBox1";
+            this.BeforeChangeTextBox1.ReadOnly = true;
+            this.BeforeChangeTextBox1.Size = new System.Drawing.Size(135, 19);
+            this.BeforeChangeTextBox1.TabIndex = 8;
             // 
             // label1
             // 
@@ -423,123 +274,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "品名変更前";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 29);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "品名変更後";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(149, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(337, 29);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "品名変更理由";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("MS UI Gothic", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(196, 200);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(139, 97);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "⇒";
-            // 
-            // ItemNameChangeButton
-            // 
-            this.ItemNameChangeButton.Location = new System.Drawing.Point(596, 12);
-            this.ItemNameChangeButton.Name = "ItemNameChangeButton";
-            this.ItemNameChangeButton.Size = new System.Drawing.Size(121, 51);
-            this.ItemNameChangeButton.TabIndex = 5;
-            this.ItemNameChangeButton.Text = "品名変更";
-            this.ItemNameChangeButton.UseVisualStyleBackColor = true;
-            this.ItemNameChangeButton.Click += new System.EventHandler(this.ItemNameChangeButton_Click);
-            // 
-            // ReturnButton
-            // 
-            this.ReturnButton.Location = new System.Drawing.Point(738, 12);
-            this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(94, 51);
-            this.ReturnButton.TabIndex = 5;
-            this.ReturnButton.Text = "戻る";
-            this.ReturnButton.UseVisualStyleBackColor = true;
-            this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
-            // 
-            // StaffNameTextBox
-            // 
-            this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.StaffNameTextBox.Location = new System.Drawing.Point(59, 12);
-            this.StaffNameTextBox.Name = "StaffNameTextBox";
-            this.StaffNameTextBox.Size = new System.Drawing.Size(100, 26);
-            this.StaffNameTextBox.TabIndex = 6;
-            // 
-            // SlipNumberTextBox
-            // 
-            this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SlipNumberTextBox.Location = new System.Drawing.Point(269, 12);
-            this.SlipNumberTextBox.Name = "SlipNumberTextBox";
-            this.SlipNumberTextBox.Size = new System.Drawing.Size(100, 26);
-            this.SlipNumberTextBox.TabIndex = 6;
-            // 
-            // GradeNumberTextBox
-            // 
-            this.GradeNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.GradeNumberTextBox.Location = new System.Drawing.Point(466, 9);
-            this.GradeNumberTextBox.Name = "GradeNumberTextBox";
-            this.GradeNumberTextBox.Size = new System.Drawing.Size(100, 26);
-            this.GradeNumberTextBox.TabIndex = 6;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(11, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 19);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "担当";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(178, 15);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 19);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "伝票番号";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(375, 13);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(85, 19);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "成績番号";
-            // 
-            // BeforeChangeTextBox1
-            // 
-            this.BeforeChangeTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BeforeChangeTextBox1.Location = new System.Drawing.Point(3, 32);
-            this.BeforeChangeTextBox1.Name = "BeforeChangeTextBox1";
-            this.BeforeChangeTextBox1.ReadOnly = true;
-            this.BeforeChangeTextBox1.Size = new System.Drawing.Size(135, 19);
-            this.BeforeChangeTextBox1.TabIndex = 8;
             // 
             // BeforeChangeTextBox2
             // 
@@ -648,6 +382,277 @@
             this.BeforeChangeTextBox13.ReadOnly = true;
             this.BeforeChangeTextBox13.Size = new System.Drawing.Size(135, 19);
             this.BeforeChangeTextBox13.TabIndex = 8;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Aqua;
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox2, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox13, 0, 13);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox3, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox12, 0, 12);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox11, 0, 11);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox9, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox8, 0, 8);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox10, 0, 10);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox4, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox5, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox6, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.AfterChangeComboBox7, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox1, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox2, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox3, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox4, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox5, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox6, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox7, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox8, 1, 8);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox9, 1, 9);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox10, 1, 10);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox11, 1, 11);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox12, 1, 12);
+            this.tableLayoutPanel2.Controls.Add(this.ChangeReasonTextBox13, 1, 13);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(341, 85);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 14;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 332);
+            this.tableLayoutPanel2.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 29);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "品名変更後";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ChangeReasonTextBox1
+            // 
+            this.ChangeReasonTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox1.Location = new System.Drawing.Point(149, 32);
+            this.ChangeReasonTextBox1.Name = "ChangeReasonTextBox1";
+            this.ChangeReasonTextBox1.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox1.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox2
+            // 
+            this.ChangeReasonTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox2.Location = new System.Drawing.Point(149, 55);
+            this.ChangeReasonTextBox2.Name = "ChangeReasonTextBox2";
+            this.ChangeReasonTextBox2.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox2.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox3
+            // 
+            this.ChangeReasonTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox3.Location = new System.Drawing.Point(149, 78);
+            this.ChangeReasonTextBox3.Name = "ChangeReasonTextBox3";
+            this.ChangeReasonTextBox3.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox3.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox4
+            // 
+            this.ChangeReasonTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox4.Location = new System.Drawing.Point(149, 101);
+            this.ChangeReasonTextBox4.Name = "ChangeReasonTextBox4";
+            this.ChangeReasonTextBox4.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox4.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox5
+            // 
+            this.ChangeReasonTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox5.Location = new System.Drawing.Point(149, 124);
+            this.ChangeReasonTextBox5.Name = "ChangeReasonTextBox5";
+            this.ChangeReasonTextBox5.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox5.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox6
+            // 
+            this.ChangeReasonTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox6.Location = new System.Drawing.Point(149, 147);
+            this.ChangeReasonTextBox6.Name = "ChangeReasonTextBox6";
+            this.ChangeReasonTextBox6.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox6.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox7
+            // 
+            this.ChangeReasonTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox7.Location = new System.Drawing.Point(149, 170);
+            this.ChangeReasonTextBox7.Name = "ChangeReasonTextBox7";
+            this.ChangeReasonTextBox7.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox7.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox8
+            // 
+            this.ChangeReasonTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox8.Location = new System.Drawing.Point(149, 193);
+            this.ChangeReasonTextBox8.Name = "ChangeReasonTextBox8";
+            this.ChangeReasonTextBox8.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox8.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox9
+            // 
+            this.ChangeReasonTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox9.Location = new System.Drawing.Point(149, 216);
+            this.ChangeReasonTextBox9.Name = "ChangeReasonTextBox9";
+            this.ChangeReasonTextBox9.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox9.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox10
+            // 
+            this.ChangeReasonTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox10.Location = new System.Drawing.Point(149, 239);
+            this.ChangeReasonTextBox10.Name = "ChangeReasonTextBox10";
+            this.ChangeReasonTextBox10.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox10.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox11
+            // 
+            this.ChangeReasonTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox11.Location = new System.Drawing.Point(149, 262);
+            this.ChangeReasonTextBox11.Name = "ChangeReasonTextBox11";
+            this.ChangeReasonTextBox11.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox11.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox12
+            // 
+            this.ChangeReasonTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox12.Location = new System.Drawing.Point(149, 285);
+            this.ChangeReasonTextBox12.Name = "ChangeReasonTextBox12";
+            this.ChangeReasonTextBox12.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox12.TabIndex = 2;
+            // 
+            // ChangeReasonTextBox13
+            // 
+            this.ChangeReasonTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChangeReasonTextBox13.Location = new System.Drawing.Point(149, 308);
+            this.ChangeReasonTextBox13.Name = "ChangeReasonTextBox13";
+            this.ChangeReasonTextBox13.Size = new System.Drawing.Size(337, 19);
+            this.ChangeReasonTextBox13.TabIndex = 2;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Location = new System.Drawing.Point(149, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(337, 29);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "品名変更理由";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("MS UI Gothic", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label4.Location = new System.Drawing.Point(196, 200);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(139, 97);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "⇒";
+            // 
+            // ItemNameChangeButton
+            // 
+            this.ItemNameChangeButton.Location = new System.Drawing.Point(596, 12);
+            this.ItemNameChangeButton.Name = "ItemNameChangeButton";
+            this.ItemNameChangeButton.Size = new System.Drawing.Size(121, 51);
+            this.ItemNameChangeButton.TabIndex = 5;
+            this.ItemNameChangeButton.Text = "品名変更";
+            this.ItemNameChangeButton.UseVisualStyleBackColor = true;
+            this.ItemNameChangeButton.Click += new System.EventHandler(this.ItemNameChangeButton_Click);
+            // 
+            // ReturnButton
+            // 
+            this.ReturnButton.Location = new System.Drawing.Point(738, 12);
+            this.ReturnButton.Name = "ReturnButton";
+            this.ReturnButton.Size = new System.Drawing.Size(94, 51);
+            this.ReturnButton.TabIndex = 5;
+            this.ReturnButton.Text = "戻る";
+            this.ReturnButton.UseVisualStyleBackColor = true;
+            this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
+            // 
+            // StaffNameTextBox
+            // 
+            this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.StaffNameTextBox.Location = new System.Drawing.Point(59, 12);
+            this.StaffNameTextBox.Name = "StaffNameTextBox";
+            this.StaffNameTextBox.ReadOnly = true;
+            this.StaffNameTextBox.Size = new System.Drawing.Size(100, 26);
+            this.StaffNameTextBox.TabIndex = 6;
+            // 
+            // SlipNumberTextBox
+            // 
+            this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.SlipNumberTextBox.Location = new System.Drawing.Point(269, 12);
+            this.SlipNumberTextBox.Name = "SlipNumberTextBox";
+            this.SlipNumberTextBox.ReadOnly = true;
+            this.SlipNumberTextBox.Size = new System.Drawing.Size(100, 26);
+            this.SlipNumberTextBox.TabIndex = 6;
+            this.SlipNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // GradeNumberTextBox
+            // 
+            this.GradeNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.GradeNumberTextBox.Location = new System.Drawing.Point(466, 9);
+            this.GradeNumberTextBox.Name = "GradeNumberTextBox";
+            this.GradeNumberTextBox.ReadOnly = true;
+            this.GradeNumberTextBox.Size = new System.Drawing.Size(100, 26);
+            this.GradeNumberTextBox.TabIndex = 6;
+            this.GradeNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(11, 15);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 19);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "担当";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label6.Location = new System.Drawing.Point(178, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 19);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "伝票番号";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(375, 13);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(85, 19);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "成績番号";
             // 
             // ItemNameChange
             // 
