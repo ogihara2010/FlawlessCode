@@ -26,7 +26,8 @@ namespace Flawless_ex
         int type;
         string staff_name;
         string address;
-        string Total;
+        decimal Total;
+        string access_auth;
         public DeliveryPreview(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
             this.Close();
             statement.Show();
         }

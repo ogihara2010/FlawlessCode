@@ -23,9 +23,10 @@ namespace Flawless_ex
         string staff_name;
         int staff_id;
         string data;
-        string Total;
+        decimal Total;
         int control;
         int antique;
+        string access_auth;
         DataTable dt = new DataTable();
         public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data)
         {
@@ -179,7 +180,7 @@ namespace Flawless_ex
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
             this.Close();
             statement.Show();
         }
@@ -187,7 +188,7 @@ namespace Flawless_ex
         #region "納品書"
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
             this.Close();
             statement.Show();
         }

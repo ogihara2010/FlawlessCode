@@ -47,6 +47,11 @@ namespace Flawless_ex
                 string access_auth = this.accessButton.Text;//アクセス権限
                 DateTime dat = DateTime.Now;
                 string d = dat.ToString();//登録日時
+                if (password != rePassword)
+                {
+                    MessageBox.Show("パスワードを確認してください。");
+                    return;
+                }
 
                 string sql_str = "insert into staff_m values(" + staffCode1 + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "','" + d + "'," + 0 + ")";
 

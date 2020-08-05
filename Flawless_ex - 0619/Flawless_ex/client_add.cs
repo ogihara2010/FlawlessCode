@@ -20,7 +20,8 @@ namespace Flawless_ex
         int type;
         string staff_name;
         string address;
-        string Total;
+        decimal Total;
+        string access_auth;
         public client_add(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
@@ -95,7 +96,7 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
             this.Close();
             statement.Show();
         }
@@ -155,7 +156,7 @@ namespace Flawless_ex
             type = 1;
             staff_name = Name;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
             this.Close();
             statement.Show();
         }
