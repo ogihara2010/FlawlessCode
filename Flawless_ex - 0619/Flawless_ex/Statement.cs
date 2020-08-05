@@ -116,6 +116,7 @@ namespace Flawless_ex
         string register_date;
         string remarks;
         string access_auth;
+        int Grade;
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -136,7 +137,6 @@ namespace Flawless_ex
 
         MainMenu mainMenu;
         TopMenu topMenu;
-        string access_auth;
         string pass;
 
         #region"DataTable"
@@ -8112,7 +8112,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade);
 
             this.Hide();
             recordList.Show();
