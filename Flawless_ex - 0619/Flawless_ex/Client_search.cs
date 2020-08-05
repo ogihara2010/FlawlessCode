@@ -15,8 +15,9 @@ namespace Flawless_ex
         int type;
         string staff_name;
         string address;
-        string Total;
-        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, string Total)
+        decimal Total;
+        string access_auth;
+        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total)
         {
             InitializeComponent();
 
@@ -31,7 +32,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
             this.Close();
 
             statement.Show();

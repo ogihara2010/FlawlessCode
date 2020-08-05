@@ -273,7 +273,7 @@ namespace Flawless_ex
         #region "成績入力画面へ"
         private void Button2_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(statement, staff_id, slipNumber);
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber);
             this.Close();
             recordList.Show();
         }
