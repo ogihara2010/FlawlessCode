@@ -27,7 +27,7 @@ namespace Flawless_ex
         string access_auth;
         string staff_name;
         string address;
-        string total;
+        decimal total;
         int grade;
         RecordList recordList;
         DateTime date;
@@ -1167,7 +1167,7 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, total) ;
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, access_auth, total) ;
 
             this.Close();
             statement.Show();
@@ -1175,7 +1175,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, total);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, access_auth, total);
             statement.Show();
         }
 

@@ -465,7 +465,6 @@ namespace Flawless_ex
         private void ReturnButton_Click(object sender, EventArgs e)
         {
             recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade);
-
             this.Close();
             recordList.Show();
         }
