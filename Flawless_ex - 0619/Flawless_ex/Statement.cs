@@ -955,7 +955,103 @@ namespace Flawless_ex
                 #endregion
             }
 
-            #region "計算書戻ってきた時に"
+            if (data == "S")
+            {
+                #region "計算書の表の入力を呼び出し"
+                DataTable dt19 = new DataTable();
+                string str_document = "select * from statement_calc_data where document_number = '" + document + "';";
+                adapter = new NpgsqlDataAdapter(str_document, conn);
+                adapter.Fill(dt19);
+                int st = dt19.Rows.Count;
+                #endregion
+                #region "計算書の表の外部の入力データを呼び出し"
+                DataTable dt21 = new DataTable();
+                string str_document1 = "select * from statement_data where document_number = '" + document + "';";
+                adapter = new NpgsqlDataAdapter(str_document1, conn);
+                adapter.Fill(dt21);
+                DataRow row1;
+                row1 = dt21.Rows[0];
+                #endregion
+                for (int S = 0; S <= st; S++)
+                {
+                    #region "1行目"
+                    if (S == 0)
+                    {
+
+                    }
+                    #endregion
+                    #region "2行目"
+                    if (S == 1)
+                    {
+
+                    }
+                    #endregion
+                    #region "3行目"
+                    if (S == 2)
+                    {
+
+                    }
+                    #endregion
+                    if (S == 3)
+                    {
+
+                    }
+                    if (S == 4)
+                    {
+
+                    }
+                    if (S == 5)
+                    {
+
+                    }
+                    if (S == 6)
+                    {
+
+                    }
+                    if (S == 7)
+                    {
+
+                    }
+                    if (S == 8)
+                    {
+
+                    }
+                    if (S == 9)
+                    {
+
+                    }
+                    if (S == 10)
+                    {
+
+                    }
+                    if (S == 11)
+                    {
+
+                    }
+                    if (S == 12)
+                    {
+
+                    }
+                }
+            }
+            if (data == "D")
+            {
+                #region "納品書の表の入力を呼び出し"
+                DataTable dt20 = new DataTable();
+                string str_control = "select * from delivery_calc where control_number = " + control + ";";
+                adapter = new NpgsqlDataAdapter(str_control, conn);
+                adapter.Fill(dt20);
+                int de = dt20.Rows.Count;
+                #endregion
+                for (int D = 0; D <= de; D++)
+                {
+                    if (D ==0)
+                    {
+
+                    }
+                }
+            }
+            #region "顧客選択から計算書戻ってきた時に"
             if (total != 0)
             {
                 DataTable dt8 = new DataTable();
