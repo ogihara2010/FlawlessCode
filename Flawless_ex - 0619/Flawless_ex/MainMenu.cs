@@ -14,6 +14,10 @@ namespace Flawless_ex
         string data;
         string slipNumber;
         decimal Total;
+        int control;
+        string search1;
+        string search2;
+        string search3;
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
             InitializeComponent();
@@ -58,7 +62,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, slipNumber, control, data, search1, search2, search3);
 
             this.Hide();
             statement.Show();

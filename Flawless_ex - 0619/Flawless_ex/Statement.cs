@@ -13,12 +13,13 @@ namespace Flawless_ex
     public partial class Statement : Form //計算書/納品書作成メニュー
     {
         int a = 0;//大分類クリックカウント数（計算書）
-        int b = 1;//大分類クリックカウント数（納品書）
+        int b = 0;//大分類クリックカウント数（納品書）
         int staff_id;
         int itemMainCategoryCode;
         int type = 0;
         string path;
         decimal total;
+        int Grade;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -116,6 +117,14 @@ namespace Flawless_ex
         string register_date;
         string remarks;
         string access_auth;
+        string document;
+        int control;
+        string data;
+        string item;
+        string phone;
+        string search1;
+        string search2;
+        string search3;
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -194,7 +203,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string document, int control, string data, string search1, string search2, string search3)
         {
             InitializeComponent();
             staff_id = id;
@@ -204,18 +213,248 @@ namespace Flawless_ex
             this.address = address;
             this.access_auth = access_auth;
             total = Total;
+            this.document = document;
+            this.control = control;
+            this.data = data;
+            this.search1 = search1;
+            this.search2 = search2;
+            this.search3 = search3;
         }
 
         private void Statement_Load(object sender, EventArgs e)
         {
             #region "ボタン"
-            this.previewButton.Enabled = false;
-            this.RecordListButton.Enabled = false;
-            this.DeliveryPreviewButton.Enabled = false;
+            if (data == "S")
+            {
+                #region "計算書のタブのみ表示"
+                tabControl1.SelectedTab = SettlementDayBox;
+                tabControl1.TabPages.Remove(tabPage2);
+                #endregion
+                #region "登録、顧客選択ボタンは使用禁止"
+                this.previewButton.Enabled = true;
+                this.RecordListButton.Enabled = true;
+                this.addButton.Enabled = false;
+                this.client_Button.Enabled = false;
+                this.AntiqueSelectionButton1.Enabled = false;
+                this.taxCertificateButton.Enabled = false;
+                this.financialButton.Enabled = false;
+                this.sealCertificationButton.Enabled = false;
+                this.residenceButton.Enabled = false;
+                #endregion
+                #region "すべてReadOnlyにする"
+                #region "品物詳細"
+                this.itemDetail0.ReadOnly = true;
+                this.itemDetail1.ReadOnly = true;
+                this.itemDetail2.ReadOnly = true;
+                this.itemDetail3.ReadOnly = true;
+                this.itemDetail4.ReadOnly = true;
+                this.itemDetail5.ReadOnly = true;
+                this.itemDetail6.ReadOnly = true;
+                this.itemDetail7.ReadOnly = true;
+                this.itemDetail8.ReadOnly = true;
+                this.itemDetail9.ReadOnly = true;
+                this.itemDetail10.ReadOnly = true;
+                this.itemDetail11.ReadOnly = true;
+                this.itemDetail12.ReadOnly = true;
+                #endregion
+                #region "数量"
+                countTextBox0.ReadOnly = true;
+                countTextBox1.ReadOnly = true;
+                countTextBox2.ReadOnly = true;
+                countTextBox3.ReadOnly = true;
+                countTextBox4.ReadOnly = true;
+                countTextBox5.ReadOnly = true;
+                countTextBox6.ReadOnly = true;
+                countTextBox7.ReadOnly = true;
+                countTextBox8.ReadOnly = true;
+                countTextBox9.ReadOnly = true;
+                countTextBox10.ReadOnly = true;
+                countTextBox11.ReadOnly = true;
+                countTextBox12.ReadOnly = true;
+                #endregion
+                #region "重量"
+                weightTextBox0.ReadOnly = true;
+                weightTextBox1.ReadOnly = true;
+                weightTextBox2.ReadOnly = true;
+                weightTextBox3.ReadOnly = true;
+                weightTextBox4.ReadOnly = true;
+                weightTextBox5.ReadOnly = true;
+                weightTextBox6.ReadOnly = true;
+                weightTextBox7.ReadOnly = true;
+                weightTextBox8.ReadOnly = true;
+                weightTextBox9.ReadOnly = true;
+                weightTextBox10.ReadOnly = true;
+                weightTextBox11.ReadOnly = true;
+                weightTextBox12.ReadOnly = true;
+                #endregion
+                #region "単価"
+                unitPriceTextBox0.ReadOnly = true;
+                unitPriceTextBox1.ReadOnly = true;
+                unitPriceTextBox2.ReadOnly = true;
+                unitPriceTextBox3.ReadOnly = true;
+                unitPriceTextBox4.ReadOnly = true;
+                unitPriceTextBox5.ReadOnly = true;
+                unitPriceTextBox6.ReadOnly = true;
+                unitPriceTextBox7.ReadOnly = true;
+                unitPriceTextBox8.ReadOnly = true;
+                unitPriceTextBox9.ReadOnly = true;
+                unitPriceTextBox10.ReadOnly = true;
+                unitPriceTextBox11.ReadOnly = true;
+                unitPriceTextBox12.ReadOnly = true;
+                #endregion
+                #region "金額"
+                this.moneyTextBox0.ReadOnly = true;
+                this.moneyTextBox1.ReadOnly = true;
+                this.moneyTextBox2.ReadOnly = true;
+                this.moneyTextBox3.ReadOnly = true;
+                this.moneyTextBox4.ReadOnly = true;
+                this.moneyTextBox5.ReadOnly = true;
+                this.moneyTextBox6.ReadOnly = true;
+                this.moneyTextBox7.ReadOnly = true;
+                this.moneyTextBox8.ReadOnly = true;
+                this.moneyTextBox9.ReadOnly = true;
+                this.moneyTextBox10.ReadOnly = true;
+                this.moneyTextBox11.ReadOnly = true;
+                this.moneyTextBox12.ReadOnly = true;
+                #endregion
+                #region "備考"
+                this.remarks0.ReadOnly = true;
+                this.remarks1.ReadOnly = true;
+                this.remarks2.ReadOnly = true;
+                this.remarks3.ReadOnly = true;
+                this.remarks4.ReadOnly = true;
+                this.remarks5.ReadOnly = true;
+                this.remarks6.ReadOnly = true;
+                this.remarks7.ReadOnly = true;
+                this.remarks8.ReadOnly = true;
+                this.remarks9.ReadOnly = true;
+                this.remarks10.ReadOnly = true;
+                this.remarks11.ReadOnly = true;
+                this.remarks12.ReadOnly = true;
+                #endregion
+                this.clientRemarksTextBox.ReadOnly = true;
+                #endregion
+            }
+            else if (data == "D")
+            {
+                #region "納品書のタブのみ表示"
+                tabControl1.SelectedTab = tabPage2;
+                tabControl1.TabPages.Remove(SettlementDayBox);
+                #endregion
+                #region "登録ボタンは使用禁止"
+                this.client_searchButton1.Enabled = false;
+                this.Register.Enabled = false;
+                this.AntiqueSelectionButton2.Enabled = false;
+                this.DeliveryPreviewButton.Enabled = true;
+                #endregion
+                #region "すべてReadOnlyにする"
+                #region "品物詳細"
+                this.itemDetail00.ReadOnly = true;
+                this.itemDetail01.ReadOnly = true;
+                this.itemDetail02.ReadOnly = true;
+                this.itemDetail03.ReadOnly = true;
+                this.itemDetail04.ReadOnly = true;
+                this.itemDetail05.ReadOnly = true;
+                this.itemDetail06.ReadOnly = true;
+                this.itemDetail07.ReadOnly = true;
+                this.itemDetail08.ReadOnly = true;
+                this.itemDetail09.ReadOnly = true;
+                this.itemDetail010.ReadOnly = true;
+                this.itemDetail011.ReadOnly = true;
+                this.itemDetail012.ReadOnly = true;
+                #endregion
+                #region "数量"
+                countTextBox00.ReadOnly = true;
+                countTextBox01.ReadOnly = true;
+                countTextBox02.ReadOnly = true;
+                countTextBox03.ReadOnly = true;
+                countTextBox04.ReadOnly = true;
+                countTextBox05.ReadOnly = true;
+                countTextBox06.ReadOnly = true;
+                countTextBox07.ReadOnly = true;
+                countTextBox08.ReadOnly = true;
+                countTextBox09.ReadOnly = true;
+                countTextBox010.ReadOnly = true;
+                countTextBox011.ReadOnly = true;
+                countTextBox012.ReadOnly = true;
+                #endregion
+                #region "重量"
+                weightTextBox00.ReadOnly = true;
+                weightTextBox01.ReadOnly = true;
+                weightTextBox02.ReadOnly = true;
+                weightTextBox03.ReadOnly = true;
+                weightTextBox04.ReadOnly = true;
+                weightTextBox05.ReadOnly = true;
+                weightTextBox06.ReadOnly = true;
+                weightTextBox07.ReadOnly = true;
+                weightTextBox08.ReadOnly = true;
+                weightTextBox09.ReadOnly = true;
+                weightTextBox010.ReadOnly = true;
+                weightTextBox011.ReadOnly = true;
+                weightTextBox012.ReadOnly = true;
+                #endregion
+                #region "単価"
+                unitPriceTextBox00.ReadOnly = true;
+                unitPriceTextBox01.ReadOnly = true;
+                unitPriceTextBox02.ReadOnly = true;
+                unitPriceTextBox03.ReadOnly = true;
+                unitPriceTextBox04.ReadOnly = true;
+                unitPriceTextBox05.ReadOnly = true;
+                unitPriceTextBox06.ReadOnly = true;
+                unitPriceTextBox07.ReadOnly = true;
+                unitPriceTextBox08.ReadOnly = true;
+                unitPriceTextBox09.ReadOnly = true;
+                unitPriceTextBox010.ReadOnly = true;
+                unitPriceTextBox011.ReadOnly = true;
+                unitPriceTextBox012.ReadOnly = true;
+                #endregion
+                #region "金額"
+                this.moneyTextBox00.ReadOnly = true;
+                this.moneyTextBox01.ReadOnly = true;
+                this.moneyTextBox02.ReadOnly = true;
+                this.moneyTextBox03.ReadOnly = true;
+                this.moneyTextBox04.ReadOnly = true;
+                this.moneyTextBox05.ReadOnly = true;
+                this.moneyTextBox06.ReadOnly = true;
+                this.moneyTextBox07.ReadOnly = true;
+                this.moneyTextBox08.ReadOnly = true;
+                this.moneyTextBox09.ReadOnly = true;
+                this.moneyTextBox010.ReadOnly = true;
+                this.moneyTextBox011.ReadOnly = true;
+                this.moneyTextBox012.ReadOnly = true;
+                #endregion
+                #region "備考"
+                this.remarks00.ReadOnly = true;
+                this.remarks01.ReadOnly = true;
+                this.remarks02.ReadOnly = true;
+                this.remarks03.ReadOnly = true;
+                this.remarks04.ReadOnly = true;
+                this.remarks05.ReadOnly = true;
+                this.remarks06.ReadOnly = true;
+                this.remarks07.ReadOnly = true;
+                this.remarks08.ReadOnly = true;
+                this.remarks09.ReadOnly = true;
+                this.remarks010.ReadOnly = true;
+                this.remarks011.ReadOnly = true;
+                this.remarks012.ReadOnly = true;
+                #endregion
+                this.clientRemarksTextBox2.ReadOnly = true;
+                this.name.ReadOnly = true;
+                this.RemarkRegister.ReadOnly = true;
+                #endregion
+            }
+            else
+            {
+                this.previewButton.Enabled = false;
+                this.RecordListButton.Enabled = false;
+                this.DeliveryPreviewButton.Enabled = false;
+                this.button1.Enabled = false;
+                this.button2.Enabled = false;
+            }
             #endregion
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
+            string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                 //伝票番号・管理番号取得
             sql = "select document_number from statement_data;";     //伝票番号の取得用
             cmd = new NpgsqlCommand(sql_str, conn);
@@ -234,47 +473,67 @@ namespace Flawless_ex
             cmd = new NpgsqlCommand(sql, conn);
 
             #region"計算書の伝票番号"
-            using (reader = cmd.ExecuteReader())
+            #region "買取販売から遷移してきた場合"
+            if (data == "S")
             {
-                while (reader.Read())
-                {
-                    docuNum = reader["document_number"].ToString();
-                }
+                documentNumberTextBox.Text = document;
             }
-
-            if (!string.IsNullOrEmpty(docuNum))
-            {
-                Num = docuNum.Trim('F');        //伝票番号の数字部分
-            }
+            #endregion
             else
             {
-                docuNum = "F0";
-                Num = docuNum.Trim('F');       //伝票番号の数字部分
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        docuNum = reader["document_number"].ToString();
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(docuNum))
+                {
+                    Num = docuNum.Trim('F');        //伝票番号の数字部分
+                }
+                else
+                {
+                    docuNum = "F0";
+                    Num = docuNum.Trim('F');       //伝票番号の数字部分
+                }
+
+                number = int.Parse(Num) + 1;
+                documentNumberTextBox.Text = "F" + number;       //Fを追加
             }
 
-            number = int.Parse(Num) + 1;
-            documentNumberTextBox.Text = "F" + number;       //Fを追加
             #endregion
 
             #region"納品書の管理番号"
-            sql = "select control_number from delivery_m;";         //管理番号取得
-            cmd = new NpgsqlCommand(sql, conn);
-
-            using (reader = cmd.ExecuteReader())
+            #region "買取販売から遷移してきた場合"
+            if (data == "D")
             {
-                while (reader.Read())
+                documentNumberTextBox2.Text = control.ToString();
+            }
+            #endregion
+            else
+            {
+                sql = "select control_number from delivery_m;";         //管理番号取得
+                cmd = new NpgsqlCommand(sql, conn);
+
+                using (reader = cmd.ExecuteReader())
                 {
-                    conNum = (int)reader["control_number"];
+                    while (reader.Read())
+                    {
+                        conNum = (int)reader["control_number"];
+                    }
                 }
-            }
 
-            if (!string.IsNullOrEmpty(conNum.ToString()))
-            {
-                conNum = 0;
-            }
+                if (!string.IsNullOrEmpty(conNum.ToString()))
+                {
+                    conNum = 0;
+                }
 
-            number = conNum + 1;
-            documentNumberTextBox2.Text = number.ToString();
+                number = conNum + 1;
+                documentNumberTextBox2.Text = number.ToString();
+            }
+            
             #endregion
             
            //担当者ごとの大分類の初期値を先頭に
@@ -315,374 +574,387 @@ namespace Flawless_ex
 
             conn.Close();
 
-            #region "大分類"
-            //大分類ヘッダー
-            //1行目
-            //計算書
-            mainCategoryComboBox0.DataSource = dt;
-            mainCategoryComboBox0.DisplayMember = "main_category_name";
-            mainCategoryComboBox0.ValueMember = "main_category_code";
-            mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+            if (data != "S")
+            {
+                #region "納品書"
+                #region "納品書　大分類"
+                #region "納品書1行目"
+                DataTable deliverydt = new DataTable();
+                deliverydt = dt.Copy();
+                mainCategoryComboBox00.DataSource = deliverydt;
+                mainCategoryComboBox00.DisplayMember = "main_category_name";
+                mainCategoryComboBox00.ValueMember = "main_category_code";
+                mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+                #endregion
+                #region "納品書2行目"
+                DataTable deliverydt100 = new DataTable();
+                deliverydt100 = dt.Copy();
+                mainCategoryComboBox01.DataSource = deliverydt100;
+                mainCategoryComboBox01.DisplayMember = "main_category_name";
+                mainCategoryComboBox01.ValueMember = "main_category_code";
+                mainCategoryComboBox01.SelectedIndex = 0;
+                #endregion
+                #region "納品書3行目"
+                DataTable deliverydt101 = new DataTable();
+                deliverydt101 = dt.Copy();
+                mainCategoryComboBox02.DataSource = deliverydt101;
+                mainCategoryComboBox02.DisplayMember = "main_category_name";
+                mainCategoryComboBox02.ValueMember = "main_category_code";
+                mainCategoryComboBox02.SelectedIndex = 0;
+                #endregion
+                #region "納品書4行目"
+                DataTable deliverydt102 = new DataTable();
+                deliverydt102 = dt.Copy();
+                mainCategoryComboBox03.DataSource = deliverydt102;
+                mainCategoryComboBox03.DisplayMember = "main_category_name";
+                mainCategoryComboBox03.ValueMember = "main_category_code";
+                mainCategoryComboBox03.SelectedIndex = 0;
+                #endregion
+                #region "納品書5行目"
+                DataTable deliverydt103 = new DataTable();
+                deliverydt103 = dt.Copy();
+                mainCategoryComboBox04.DataSource = deliverydt103;
+                mainCategoryComboBox04.DisplayMember = "main_category_name";
+                mainCategoryComboBox04.ValueMember = "main_category_code";
+                mainCategoryComboBox04.SelectedIndex = 0;
+                #endregion
+                #region "納品書6行目"
+                DataTable deliverydt104 = new DataTable();
+                deliverydt104 = dt.Copy();
+                mainCategoryComboBox05.DataSource = deliverydt104;
+                mainCategoryComboBox05.DisplayMember = "main_category_name";
+                mainCategoryComboBox05.ValueMember = "main_category_code";
+                mainCategoryComboBox05.SelectedIndex = 0;
+                #endregion
+                #region "納品書7行目"
+                DataTable deliverydt105 = new DataTable();
+                deliverydt105 = dt.Copy();
+                mainCategoryComboBox06.DataSource = deliverydt105;
+                mainCategoryComboBox06.DisplayMember = "main_category_name";
+                mainCategoryComboBox06.ValueMember = "main_category_code";
+                mainCategoryComboBox06.SelectedIndex = 0;
+                #endregion
+                #region "納品書8行目"
+                DataTable deliverydt106 = new DataTable();
+                deliverydt106 = dt.Copy();
+                mainCategoryComboBox07.DataSource = deliverydt106;
+                mainCategoryComboBox07.DisplayMember = "main_category_name";
+                mainCategoryComboBox07.ValueMember = "main_category_code";
+                mainCategoryComboBox07.SelectedIndex = 0;
+                #endregion
+                #region "納品書9行目"
+                DataTable deliverydt107 = new DataTable();
+                deliverydt107 = dt.Copy();
+                mainCategoryComboBox08.DataSource = deliverydt107;
+                mainCategoryComboBox08.DisplayMember = "main_category_name";
+                mainCategoryComboBox08.ValueMember = "main_category_code";
+                mainCategoryComboBox08.SelectedIndex = 0;
+                #endregion
+                #region "納品書10行目"
+                DataTable deliverydt108 = new DataTable();
+                deliverydt108 = dt.Copy();
+                mainCategoryComboBox09.DataSource = deliverydt108;
+                mainCategoryComboBox09.DisplayMember = "main_category_name";
+                mainCategoryComboBox09.ValueMember = "main_category_code";
+                mainCategoryComboBox09.SelectedIndex = 0;
+                #endregion
+                #region "納品書11行目"
+                DataTable deliverydt109 = new DataTable();
+                deliverydt109 = dt.Copy();
+                mainCategoryComboBox010.DataSource = deliverydt109;
+                mainCategoryComboBox010.DisplayMember = "main_category_name";
+                mainCategoryComboBox010.ValueMember = "main_category_code";
+                mainCategoryComboBox010.SelectedIndex = 0;
+                #endregion
+                #region "納品書12行目"
+                DataTable deliverydt110 = new DataTable();
+                deliverydt110 = dt.Copy();
+                mainCategoryComboBox011.DataSource = deliverydt110;
+                mainCategoryComboBox011.DisplayMember = "main_category_name";
+                mainCategoryComboBox011.ValueMember = "main_category_code";
+                mainCategoryComboBox011.SelectedIndex = 0;
+                #endregion
+                #region "納品書13行目"
+                DataTable deliverydt112 = new DataTable();
+                deliverydt112 = dt.Copy();
+                mainCategoryComboBox012.DataSource = deliverydt112;
+                mainCategoryComboBox012.DisplayMember = "main_category_name";
+                mainCategoryComboBox012.ValueMember = "main_category_code";
+                mainCategoryComboBox012.SelectedIndex = 0;
+                #endregion
+                #endregion
+                #region "納品書　品名"
+                #region "納品書1行目"
+                deliverydt200 = dt2.Copy();
+                itemComboBox00.DataSource = deliverydt200;
+                itemComboBox00.DisplayMember = "item_name";
+                itemComboBox00.ValueMember = "item_code";
+                #endregion
+                #region "納品書2行目"
+                deliverydt201 = dt2.Copy();
+                itemComboBox01.DataSource = deliverydt201;
+                itemComboBox01.DisplayMember = "item_name";
+                itemComboBox01.ValueMember = "item_code";
+                #endregion
+                #region "納品書3行目"
+                deliverydt202 = dt2.Copy();
+                itemComboBox02.DataSource = deliverydt202;
+                itemComboBox02.DisplayMember = "item_name";
+                itemComboBox02.ValueMember = "item_code";
+                #endregion
+                #region "納品書4行目"
+                deliverydt203 = dt2.Copy();
+                itemComboBox03.DataSource = deliverydt203;
+                itemComboBox03.DisplayMember = "item_name";
+                itemComboBox03.ValueMember = "item_code";
+                #endregion
+                #region "納品書5行目"
+                deliverydt204 = dt2.Copy();
+                itemComboBox04.DataSource = deliverydt204;
+                itemComboBox04.DisplayMember = "item_name";
+                itemComboBox04.ValueMember = "item_code";
+                #endregion
+                #region "納品書6行目"
+                deliverydt205 = dt2.Copy();
+                itemComboBox05.DataSource = deliverydt205;
+                itemComboBox05.DisplayMember = "item_name";
+                itemComboBox05.ValueMember = "item_code";
+                #endregion
+                #region "納品書7行目"
+                deliverydt206 = dt2.Copy();
+                itemComboBox06.DataSource = deliverydt206;
+                itemComboBox06.DisplayMember = "item_name";
+                itemComboBox06.ValueMember = "item_code";
+                #endregion
+                #region "納品書8行目"
+                deliverydt207 = dt2.Copy();
+                itemComboBox07.DataSource = deliverydt207;
+                itemComboBox07.DisplayMember = "item_name";
+                itemComboBox07.ValueMember = "item_code";
+                #endregion
+                #region "納品書9行目"
+                deliverydt208 = dt2.Copy();
+                itemComboBox08.DataSource = deliverydt208;
+                itemComboBox08.DisplayMember = "item_name";
+                itemComboBox08.ValueMember = "item_code";
+                #endregion
+                #region "納品書10行目"
+                deliverydt209 = dt2.Copy();
+                itemComboBox09.DataSource = deliverydt209;
+                itemComboBox09.DisplayMember = "item_name";
+                itemComboBox09.ValueMember = "item_code";
+                #endregion
+                #region "納品書11行目"
+                deliverydt210 = dt2.Copy();
+                itemComboBox010.DataSource = deliverydt210;
+                itemComboBox010.DisplayMember = "item_name";
+                itemComboBox010.ValueMember = "item_code";
+                #endregion
+                #region "納品書12行目"
+                deliverydt211 = dt2.Copy();
+                itemComboBox011.DataSource = deliverydt211;
+                itemComboBox011.DisplayMember = "item_name";
+                itemComboBox011.ValueMember = "item_code";
+                #endregion
+                #region "納品書13行目"
+                //納品書
+                deliverydt212 = dt2.Copy();
+                itemComboBox012.DataSource = deliverydt212;
+                itemComboBox012.DisplayMember = "item_name";
+                itemComboBox012.ValueMember = "item_code";
+                #endregion
+                #endregion
+                #endregion
+            }
+            if (data != "D")
+            {
+                #region "計算書"
+                #region "計算書　大分類"
+                #region "計算書1行目"
+                mainCategoryComboBox0.DataSource = dt;
+                mainCategoryComboBox0.DisplayMember = "main_category_name";
+                mainCategoryComboBox0.ValueMember = "main_category_code";
+                mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+                #endregion
+                #region "計算書2行目"
+                DataTable dt100 = new DataTable();
+                dt100 = dt.Copy();
+                mainCategoryComboBox1.DataSource = dt100;
+                mainCategoryComboBox1.DisplayMember = "main_category_name";
+                mainCategoryComboBox1.ValueMember = "main_category_code";
+                mainCategoryComboBox1.SelectedIndex = 0;
+                #endregion
+                #region "計算書3行目"
+                DataTable dt101 = new DataTable();
+                dt101 = dt.Copy();
+                mainCategoryComboBox2.DataSource = dt101;
+                mainCategoryComboBox2.DisplayMember = "main_category_name";
+                mainCategoryComboBox2.ValueMember = "main_category_code";
+                mainCategoryComboBox2.SelectedIndex = 0;
+                #endregion
+                #region "計算書4行目"
+                DataTable dt102 = new DataTable();
+                dt102 = dt.Copy();
+                mainCategoryComboBox3.DataSource = dt102;
+                mainCategoryComboBox3.DisplayMember = "main_category_name";
+                mainCategoryComboBox3.ValueMember = "main_category_code";
+                mainCategoryComboBox3.SelectedIndex = 0;
+                #endregion
+                #region "計算書5行目"
+                DataTable dt103 = new DataTable();
+                dt103 = dt.Copy();
+                mainCategoryComboBox4.DataSource = dt103;
+                mainCategoryComboBox4.DisplayMember = "main_category_name";
+                mainCategoryComboBox4.ValueMember = "main_category_code";
+                mainCategoryComboBox4.SelectedIndex = 0;
+                #endregion
+                #region "計算書6行目"
+                DataTable dt104 = new DataTable();
+                dt104 = dt.Copy();
+                mainCategoryComboBox5.DataSource = dt104;
+                mainCategoryComboBox5.DisplayMember = "main_category_name";
+                mainCategoryComboBox5.ValueMember = "main_category_code";
+                mainCategoryComboBox5.SelectedIndex = 0;
+                #endregion
+                #region "計算書7行目"
+                DataTable dt105 = new DataTable();
+                dt105 = dt.Copy();
+                mainCategoryComboBox6.DataSource = dt105;
+                mainCategoryComboBox6.DisplayMember = "main_category_name";
+                mainCategoryComboBox6.ValueMember = "main_category_code";
+                mainCategoryComboBox6.SelectedIndex = 0;
+                #endregion
+                #region "計算書8行目"
+                DataTable dt106 = new DataTable();
+                dt106 = dt.Copy();
+                mainCategoryComboBox7.DataSource = dt106;
+                mainCategoryComboBox7.DisplayMember = "main_category_name";
+                mainCategoryComboBox7.ValueMember = "main_category_code";
+                mainCategoryComboBox7.SelectedIndex = 0;
+                #endregion
+                #region "計算書9行目"
+                DataTable dt107 = new DataTable();
+                dt107 = dt.Copy();
+                mainCategoryComboBox8.DataSource = dt107;
+                mainCategoryComboBox8.DisplayMember = "main_category_name";
+                mainCategoryComboBox8.ValueMember = "main_category_code";
+                mainCategoryComboBox8.SelectedIndex = 0;
+                #endregion
+                #region "計算書10行目"
+                DataTable dt108 = new DataTable();
+                dt108 = dt.Copy();
+                mainCategoryComboBox9.DataSource = dt108;
+                mainCategoryComboBox9.DisplayMember = "main_category_name";
+                mainCategoryComboBox9.ValueMember = "main_category_code";
+                mainCategoryComboBox9.SelectedIndex = 0;
+                #endregion
+                #region "計算書11行目"
+                DataTable dt109 = new DataTable();
+                dt109 = dt.Copy();
+                mainCategoryComboBox10.DataSource = dt109;
+                mainCategoryComboBox10.DisplayMember = "main_category_name";
+                mainCategoryComboBox10.ValueMember = "main_category_code";
+                mainCategoryComboBox10.SelectedIndex = 0;
+                #endregion
+                #region "計算書12行目"
+                DataTable dt110 = new DataTable();
+                dt110 = dt.Copy();
+                mainCategoryComboBox11.DataSource = dt110;
+                mainCategoryComboBox11.DisplayMember = "main_category_name";
+                mainCategoryComboBox11.ValueMember = "main_category_code";
+                mainCategoryComboBox11.SelectedIndex = 0;
+                #endregion
+                #region "計算書13行目"
+                DataTable dt111 = new DataTable();
+                dt111 = dt.Copy();
+                mainCategoryComboBox12.DataSource = dt111;
+                mainCategoryComboBox12.DisplayMember = "main_category_name";
+                mainCategoryComboBox12.ValueMember = "main_category_code";
+                mainCategoryComboBox12.SelectedIndex = 0;
+                #endregion
+                #endregion
+                #region "計算書　品名"
+                #region "計算書1行目"
+                itemComboBox0.DataSource = dt2;
+                itemComboBox0.DisplayMember = "item_name";
+                itemComboBox0.ValueMember = "item_code";
+                #endregion
+                #region "計算書2行目"
+                dt200 = dt2.Copy();
+                itemComboBox1.DataSource = dt200;
+                itemComboBox1.DisplayMember = "item_name";
+                itemComboBox1.ValueMember = "item_code";
+                #endregion
+                #region "計算書3行目"
+                dt201 = dt2.Copy();
+                itemComboBox2.DataSource = dt201;
+                itemComboBox2.DisplayMember = "item_name";
+                itemComboBox2.ValueMember = "item_code";
+                #endregion
+                #region "計算書4行目"
+                dt202 = dt2.Copy();
+                itemComboBox3.DataSource = dt202;
+                itemComboBox3.DisplayMember = "item_name";
+                itemComboBox3.ValueMember = "item_code";
+                #endregion
+                #region "計算書5行目"
+                dt203 = dt2.Copy();
+                itemComboBox4.DataSource = dt203;
+                itemComboBox4.DisplayMember = "item_name";
+                itemComboBox4.ValueMember = "item_code";
+                #endregion
+                #region "計算書6行目"
+                dt204 = dt2.Copy();
+                itemComboBox5.DataSource = dt204;
+                itemComboBox5.DisplayMember = "item_name";
+                itemComboBox5.ValueMember = "item_code";
+                #endregion
+                #region "計算書7行目"
+                dt205 = dt2.Copy();
+                itemComboBox6.DataSource = dt205;
+                itemComboBox6.DisplayMember = "item_name";
+                itemComboBox6.ValueMember = "item_code";
+                #endregion
+                #region "計算書8行目"
+                dt206 = dt2.Copy();
+                itemComboBox7.DataSource = dt206;
+                itemComboBox7.DisplayMember = "item_name";
+                itemComboBox7.ValueMember = "item_code";
+                #endregion
+                #region "計算書9行目"
+                dt207 = dt2.Copy();
+                itemComboBox8.DataSource = dt207;
+                itemComboBox8.DisplayMember = "item_name";
+                itemComboBox8.ValueMember = "item_code";
+                #endregion
+                #region "計算書10行目"
+                dt208 = dt2.Copy();
+                itemComboBox9.DataSource = dt208;
+                itemComboBox9.DisplayMember = "item_name";
+                itemComboBox9.ValueMember = "item_code";
+                #endregion
+                #region "計算書11行目"
+                dt209 = dt2.Copy();
+                itemComboBox10.DataSource = dt209;
+                itemComboBox10.DisplayMember = "item_name";
+                itemComboBox10.ValueMember = "item_code";
+                #endregion
+                #region "計算書12行目"
+                dt210 = dt2.Copy();
+                itemComboBox11.DataSource = dt210;
+                itemComboBox11.DisplayMember = "item_name";
+                itemComboBox11.ValueMember = "item_code";
+                #endregion
+                #region "計算書13行目"
+                dt211 = dt2.Copy();
+                itemComboBox12.DataSource = dt211;
+                itemComboBox12.DisplayMember = "item_name";
+                itemComboBox12.ValueMember = "item_code";
+                #endregion
+                #endregion
+                #endregion
+            }
 
-            //納品書
-            DataTable deliverydt = new DataTable();
-            deliverydt = dt.Copy();
-            mainCategoryComboBox00.DataSource = deliverydt;
-            mainCategoryComboBox00.DisplayMember = "main_category_name";
-            mainCategoryComboBox00.ValueMember = "main_category_code";
-            mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
-
-            //2行目
-            //計算書
-            DataTable dt100 = new DataTable();
-            dt100 = dt.Copy();
-            mainCategoryComboBox1.DataSource = dt100;
-            mainCategoryComboBox1.DisplayMember = "main_category_name";
-            mainCategoryComboBox1.ValueMember = "main_category_code";
-            mainCategoryComboBox1.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt100 = new DataTable();
-            deliverydt100 = dt.Copy();
-            mainCategoryComboBox01.DataSource = deliverydt100;
-            mainCategoryComboBox01.DisplayMember = "main_category_name";
-            mainCategoryComboBox01.ValueMember = "main_category_code";
-            mainCategoryComboBox01.SelectedIndex = 0;
-
-            //3行目
-            //計算書
-            DataTable dt101 = new DataTable();
-            dt101 = dt.Copy();
-            mainCategoryComboBox2.DataSource = dt101;
-            mainCategoryComboBox2.DisplayMember = "main_category_name";
-            mainCategoryComboBox2.ValueMember = "main_category_code";
-            mainCategoryComboBox2.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt101 = new DataTable();
-            deliverydt101 = dt.Copy();
-            mainCategoryComboBox02.DataSource = deliverydt101;
-            mainCategoryComboBox02.DisplayMember = "main_category_name";
-            mainCategoryComboBox02.ValueMember = "main_category_code";
-            mainCategoryComboBox02.SelectedIndex = 0;
-
-            //4行目
-            //計算書
-            DataTable dt102 = new DataTable();
-            dt102 = dt.Copy();
-            mainCategoryComboBox3.DataSource = dt102;
-            mainCategoryComboBox3.DisplayMember = "main_category_name";
-            mainCategoryComboBox3.ValueMember = "main_category_code";
-            mainCategoryComboBox3.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt102 = new DataTable();
-            deliverydt102 = dt.Copy();
-            mainCategoryComboBox03.DataSource = deliverydt102;
-            mainCategoryComboBox03.DisplayMember = "main_category_name";
-            mainCategoryComboBox03.ValueMember = "main_category_code";
-            mainCategoryComboBox03.SelectedIndex = 0;
-
-            //5行目
-            //計算書
-            DataTable dt103 = new DataTable();
-            dt103 = dt.Copy();
-            mainCategoryComboBox4.DataSource = dt103;
-            mainCategoryComboBox4.DisplayMember = "main_category_name";
-            mainCategoryComboBox4.ValueMember = "main_category_code";
-            mainCategoryComboBox4.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt103 = new DataTable();
-            deliverydt103 = dt.Copy();
-            mainCategoryComboBox04.DataSource = deliverydt103;
-            mainCategoryComboBox04.DisplayMember = "main_category_name";
-            mainCategoryComboBox04.ValueMember = "main_category_code";
-            mainCategoryComboBox04.SelectedIndex = 0;
-
-            //6行目
-            //計算書
-            DataTable dt104 = new DataTable();
-            dt104 = dt.Copy();
-            mainCategoryComboBox5.DataSource = dt104;
-            mainCategoryComboBox5.DisplayMember = "main_category_name";
-            mainCategoryComboBox5.ValueMember = "main_category_code";
-            mainCategoryComboBox5.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt104 = new DataTable();
-            deliverydt104 = dt.Copy();
-            mainCategoryComboBox05.DataSource = deliverydt104;
-            mainCategoryComboBox05.DisplayMember = "main_category_name";
-            mainCategoryComboBox05.ValueMember = "main_category_code";
-            mainCategoryComboBox05.SelectedIndex = 0;
-
-            //7行目
-            //計算書
-            DataTable dt105 = new DataTable();
-            dt105 = dt.Copy();
-            mainCategoryComboBox6.DataSource = dt105;
-            mainCategoryComboBox6.DisplayMember = "main_category_name";
-            mainCategoryComboBox6.ValueMember = "main_category_code";
-            mainCategoryComboBox6.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt105 = new DataTable();
-            deliverydt105 = dt.Copy();
-            mainCategoryComboBox06.DataSource = deliverydt105;
-            mainCategoryComboBox06.DisplayMember = "main_category_name";
-            mainCategoryComboBox06.ValueMember = "main_category_code";
-            mainCategoryComboBox06.SelectedIndex = 0;
-
-            //8行目
-            //計算書
-            DataTable dt106 = new DataTable();
-            dt106 = dt.Copy();
-            mainCategoryComboBox7.DataSource = dt106;
-            mainCategoryComboBox7.DisplayMember = "main_category_name";
-            mainCategoryComboBox7.ValueMember = "main_category_code";
-            mainCategoryComboBox7.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt106 = new DataTable();
-            deliverydt106 = dt.Copy();
-            mainCategoryComboBox07.DataSource = deliverydt106;
-            mainCategoryComboBox07.DisplayMember = "main_category_name";
-            mainCategoryComboBox07.ValueMember = "main_category_code";
-            mainCategoryComboBox07.SelectedIndex = 0;
-
-            //9行目
-            //計算書
-            DataTable dt107 = new DataTable();
-            dt107 = dt.Copy();
-            mainCategoryComboBox8.DataSource = dt107;
-            mainCategoryComboBox8.DisplayMember = "main_category_name";
-            mainCategoryComboBox8.ValueMember = "main_category_code";
-            mainCategoryComboBox8.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt107 = new DataTable();
-            deliverydt107 = dt.Copy();
-            mainCategoryComboBox08.DataSource = deliverydt107;
-            mainCategoryComboBox08.DisplayMember = "main_category_name";
-            mainCategoryComboBox08.ValueMember = "main_category_code";
-            mainCategoryComboBox08.SelectedIndex = 0;
-
-            //10行目
-            //計算書
-            DataTable dt108 = new DataTable();
-            dt108 = dt.Copy();
-            mainCategoryComboBox9.DataSource = dt108;
-            mainCategoryComboBox9.DisplayMember = "main_category_name";
-            mainCategoryComboBox9.ValueMember = "main_category_code";
-            mainCategoryComboBox9.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt108 = new DataTable();
-            deliverydt108 = dt.Copy();
-            mainCategoryComboBox09.DataSource = deliverydt108;
-            mainCategoryComboBox09.DisplayMember = "main_category_name";
-            mainCategoryComboBox09.ValueMember = "main_category_code";
-            mainCategoryComboBox09.SelectedIndex = 0;
-
-            //11行目
-            //計算書
-            DataTable dt109 = new DataTable();
-            dt109 = dt.Copy();
-            mainCategoryComboBox10.DataSource = dt109;
-            mainCategoryComboBox10.DisplayMember = "main_category_name";
-            mainCategoryComboBox10.ValueMember = "main_category_code";
-            mainCategoryComboBox10.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt109 = new DataTable();
-            deliverydt109 = dt.Copy();
-            mainCategoryComboBox010.DataSource = deliverydt109;
-            mainCategoryComboBox010.DisplayMember = "main_category_name";
-            mainCategoryComboBox010.ValueMember = "main_category_code";
-            mainCategoryComboBox010.SelectedIndex = 0;
-
-            //12行目
-            //計算書
-            DataTable dt110 = new DataTable();
-            dt110 = dt.Copy();
-            mainCategoryComboBox11.DataSource = dt110;
-            mainCategoryComboBox11.DisplayMember = "main_category_name";
-            mainCategoryComboBox11.ValueMember = "main_category_code";
-            mainCategoryComboBox11.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt110 = new DataTable();
-            deliverydt110 = dt.Copy();
-            mainCategoryComboBox011.DataSource = deliverydt110;
-            mainCategoryComboBox011.DisplayMember = "main_category_name";
-            mainCategoryComboBox011.ValueMember = "main_category_code";
-            mainCategoryComboBox011.SelectedIndex = 0;
-
-            //13行目
-            //計算書
-            DataTable dt111 = new DataTable();
-            dt111 = dt.Copy();
-            mainCategoryComboBox12.DataSource = dt111;
-            mainCategoryComboBox12.DisplayMember = "main_category_name";
-            mainCategoryComboBox12.ValueMember = "main_category_code";
-            mainCategoryComboBox12.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt112 = new DataTable();
-            deliverydt112 = dt.Copy();
-            mainCategoryComboBox012.DataSource = deliverydt112;
-            mainCategoryComboBox012.DisplayMember = "main_category_name";
-            mainCategoryComboBox012.ValueMember = "main_category_code";
-            mainCategoryComboBox012.SelectedIndex = 0;
-            #endregion
-
-            #region "品名"
-            //品名ヘッダー 初期表示
-
-            //1行目
-            //計算書
-            itemComboBox0.DataSource = dt2;
-            itemComboBox0.DisplayMember = "item_name";
-            itemComboBox0.ValueMember = "item_code";
-            //納品書
-            deliverydt200 = dt2.Copy();
-            itemComboBox00.DataSource = deliverydt200;
-            itemComboBox00.DisplayMember = "item_name";
-            itemComboBox00.ValueMember = "item_code";
-
-            //2行目
-            //計算書
-            dt200 = dt2.Copy();
-            itemComboBox1.DataSource = dt200;
-            itemComboBox1.DisplayMember = "item_name";
-            itemComboBox1.ValueMember = "item_code";
-            //納品書
-            deliverydt201 = dt2.Copy();
-            itemComboBox01.DataSource = deliverydt201;
-            itemComboBox01.DisplayMember = "item_name";
-            itemComboBox01.ValueMember = "item_code";
-
-            //3行目
-            //計算書
-            dt201 = dt2.Copy();
-            itemComboBox2.DataSource = dt201;
-            itemComboBox2.DisplayMember = "item_name";
-            itemComboBox2.ValueMember = "item_code";
-            //納品書
-            deliverydt202 = dt2.Copy();
-            itemComboBox02.DataSource = deliverydt202;
-            itemComboBox02.DisplayMember = "item_name";
-            itemComboBox02.ValueMember = "item_code";
-
-            //4行目
-            //計算書
-            dt202 = dt2.Copy();
-            itemComboBox3.DataSource = dt202;
-            itemComboBox3.DisplayMember = "item_name";
-            itemComboBox3.ValueMember = "item_code";
-            //納品書
-            deliverydt203 = dt2.Copy();
-            itemComboBox03.DataSource = deliverydt203;
-            itemComboBox03.DisplayMember = "item_name";
-            itemComboBox03.ValueMember = "item_code";
-
-            //5行目
-            //計算書
-            dt203 = dt2.Copy();
-            itemComboBox4.DataSource = dt203;
-            itemComboBox4.DisplayMember = "item_name";
-            itemComboBox4.ValueMember = "item_code";
-            //納品書
-            deliverydt204 = dt2.Copy();
-            itemComboBox04.DataSource = deliverydt204;
-            itemComboBox04.DisplayMember = "item_name";
-            itemComboBox04.ValueMember = "item_code";
-
-            //6行目
-            //計算書
-            dt204 = dt2.Copy();
-            itemComboBox5.DataSource = dt204;
-            itemComboBox5.DisplayMember = "item_name";
-            itemComboBox5.ValueMember = "item_code";
-            //納品書
-            deliverydt205 = dt2.Copy();
-            itemComboBox05.DataSource = deliverydt205;
-            itemComboBox05.DisplayMember = "item_name";
-            itemComboBox05.ValueMember = "item_code";
-
-            //7行目
-            //計算書
-            dt205 = dt2.Copy();
-            itemComboBox6.DataSource = dt205;
-            itemComboBox6.DisplayMember = "item_name";
-            itemComboBox6.ValueMember = "item_code";
-            //納品書
-            deliverydt206 = dt2.Copy();
-            itemComboBox06.DataSource = deliverydt206;
-            itemComboBox06.DisplayMember = "item_name";
-            itemComboBox06.ValueMember = "item_code";
-
-            //8行目
-            //計算書
-            dt206 = dt2.Copy();
-            itemComboBox7.DataSource = dt206;
-            itemComboBox7.DisplayMember = "item_name";
-            itemComboBox7.ValueMember = "item_code";
-            //納品書
-            deliverydt207 = dt2.Copy();
-            itemComboBox07.DataSource = deliverydt207;
-            itemComboBox07.DisplayMember = "item_name";
-            itemComboBox07.ValueMember = "item_code";
-
-            //9行目
-            //計算書
-            dt207 = dt2.Copy();
-            itemComboBox8.DataSource = dt207;
-            itemComboBox8.DisplayMember = "item_name";
-            itemComboBox8.ValueMember = "item_code";
-            //納品書
-            deliverydt208 = dt2.Copy();
-            itemComboBox08.DataSource = deliverydt208;
-            itemComboBox08.DisplayMember = "item_name";
-            itemComboBox08.ValueMember = "item_code";
-
-            //10行目
-            //計算書
-            dt208 = dt2.Copy();
-            itemComboBox9.DataSource = dt208;
-            itemComboBox9.DisplayMember = "item_name";
-            itemComboBox9.ValueMember = "item_code";
-            //納品書
-            deliverydt209 = dt2.Copy();
-            itemComboBox09.DataSource = deliverydt209;
-            itemComboBox09.DisplayMember = "item_name";
-            itemComboBox09.ValueMember = "item_code";
-
-            //11行目
-            //計算書
-            dt209 = dt2.Copy();
-            itemComboBox10.DataSource = dt209;
-            itemComboBox10.DisplayMember = "item_name";
-            itemComboBox10.ValueMember = "item_code";
-            //納品書
-            deliverydt210 = dt2.Copy();
-            itemComboBox010.DataSource = deliverydt210;
-            itemComboBox010.DisplayMember = "item_name";
-            itemComboBox010.ValueMember = "item_code";
-
-            //12行目
-            //計算書
-            dt210 = dt2.Copy();
-            itemComboBox11.DataSource = dt210;
-            itemComboBox11.DisplayMember = "item_name";
-            itemComboBox11.ValueMember = "item_code";
-            //納品書
-            deliverydt211 = dt2.Copy();
-            itemComboBox011.DataSource = deliverydt211;
-            itemComboBox011.DisplayMember = "item_name";
-            itemComboBox011.ValueMember = "item_code";
-
-            //13行目
-            //計算書
-            dt211 = dt2.Copy();
-            itemComboBox12.DataSource = dt211;
-            itemComboBox12.DisplayMember = "item_name";
-            itemComboBox12.ValueMember = "item_code";
-            //納品書
-            deliverydt212 = dt2.Copy();
-            itemComboBox012.DataSource = deliverydt212;
-            itemComboBox012.DisplayMember = "item_name";
-            itemComboBox012.ValueMember = "item_code";
-            #endregion
             #region "計算書戻ってきた時に"
             if (total != 0)
             {
@@ -1411,7 +1683,7 @@ namespace Flawless_ex
             }
             #endregion
             #region "１度選択して戻る場合"
-            else if (count == 0 && (address != null && client_staff_name != null))
+            else if (count == 0 && (address != null && client_staff_name != null) && data == null)
             {
                 if (type == 0)
                 {
@@ -2441,7 +2713,7 @@ namespace Flawless_ex
 
         private void mainCategoryComboBox012_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //大分類によって品名変更 12行目
+            //大分類によって品名変更 13行目
             if (b > 1)
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
@@ -8108,7 +8380,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade);
 
             this.Hide();
             recordList.Show();
@@ -8121,6 +8393,22 @@ namespace Flawless_ex
             DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
             this.Close();
             deliveryPreview.Show();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data);
+            this.Close();
+            mainMenu.Hide();
+            dataSearchResults.Show();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data);
+            this.Close();
+            mainMenu.Hide();
+            dataSearchResults.Show();
         }
     }
 }

@@ -389,6 +389,8 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -433,7 +435,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tabControl1.Location = new System.Drawing.Point(4, 26);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(2719, 1544);
@@ -443,6 +445,7 @@
             // SettlementDayBox
             // 
             this.SettlementDayBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.SettlementDayBox.Controls.Add(this.button1);
             this.SettlementDayBox.Controls.Add(this.pictureBox2);
             this.SettlementDayBox.Controls.Add(this.pictureBox1);
             this.SettlementDayBox.Controls.Add(this.label3);
@@ -514,9 +517,9 @@
             // RecordListButton
             // 
             this.RecordListButton.Location = new System.Drawing.Point(2113, 1330);
-            this.RecordListButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RecordListButton.Margin = new System.Windows.Forms.Padding(4);
             this.RecordListButton.Name = "RecordListButton";
-            this.RecordListButton.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RecordListButton.Padding = new System.Windows.Forms.Padding(2);
             this.RecordListButton.Size = new System.Drawing.Size(561, 110);
             this.RecordListButton.TabIndex = 47;
             this.RecordListButton.Text = "成績入力画面";
@@ -2381,7 +2384,7 @@
             // residencePerioddatetimepicker
             // 
             this.residencePerioddatetimepicker.Location = new System.Drawing.Point(197, 280);
-            this.residencePerioddatetimepicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.residencePerioddatetimepicker.Margin = new System.Windows.Forms.Padding(4);
             this.residencePerioddatetimepicker.Name = "residencePerioddatetimepicker";
             this.residencePerioddatetimepicker.Size = new System.Drawing.Size(310, 33);
             this.residencePerioddatetimepicker.TabIndex = 39;
@@ -2566,6 +2569,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.pictureBox3);
             this.tabPage2.Controls.Add(this.label27);
             this.tabPage2.Controls.Add(this.paymentMethodComboBox);
@@ -2635,7 +2639,7 @@
             "書留",
             "掛け"});
             this.paymentMethodComboBox.Location = new System.Drawing.Point(570, 982);
-            this.paymentMethodComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.paymentMethodComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.paymentMethodComboBox.Name = "paymentMethodComboBox";
             this.paymentMethodComboBox.Size = new System.Drawing.Size(206, 34);
             this.paymentMethodComboBox.TabIndex = 83;
@@ -2654,7 +2658,7 @@
             // SettlementDateTimePicker
             // 
             this.SettlementDateTimePicker.Location = new System.Drawing.Point(1021, 1024);
-            this.SettlementDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SettlementDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.SettlementDateTimePicker.Name = "SettlementDateTimePicker";
             this.SettlementDateTimePicker.Size = new System.Drawing.Size(314, 33);
             this.SettlementDateTimePicker.TabIndex = 82;
@@ -2662,7 +2666,7 @@
             // DeliveryDateTimePicker
             // 
             this.DeliveryDateTimePicker.Location = new System.Drawing.Point(1021, 950);
-            this.DeliveryDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeliveryDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.DeliveryDateTimePicker.Name = "DeliveryDateTimePicker";
             this.DeliveryDateTimePicker.Size = new System.Drawing.Size(314, 33);
             this.DeliveryDateTimePicker.TabIndex = 81;
@@ -2670,7 +2674,7 @@
             // orderDateTimePicker
             // 
             this.orderDateTimePicker.Location = new System.Drawing.Point(1021, 884);
-            this.orderDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.orderDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.orderDateTimePicker.Name = "orderDateTimePicker";
             this.orderDateTimePicker.Size = new System.Drawing.Size(314, 33);
             this.orderDateTimePicker.TabIndex = 80;
@@ -2947,7 +2951,7 @@
             "税込み",
             "税抜き"});
             this.comboBox11.Location = new System.Drawing.Point(221, 60);
-            this.comboBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox11.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox11.Name = "comboBox11";
             this.comboBox11.Size = new System.Drawing.Size(310, 34);
             this.comboBox11.TabIndex = 0;
@@ -2957,7 +2961,7 @@
             // 
             this.tax.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tax.Location = new System.Drawing.Point(221, 115);
-            this.tax.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tax.Margin = new System.Windows.Forms.Padding(4);
             this.tax.Name = "tax";
             this.tax.ReadOnly = true;
             this.tax.Size = new System.Drawing.Size(310, 39);
@@ -4694,6 +4698,26 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(850, 1222);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(303, 118);
+            this.button1.TabIndex = 90;
+            this.button1.Text = "買取販売データ画面へ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1137, 1334);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(311, 124);
+            this.button2.TabIndex = 87;
+            this.button2.Text = "買取販売データ画面へ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // Statement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -4701,7 +4725,7 @@
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(2782, 1324);
+            this.ClientSize = new System.Drawing.Size(1274, 629);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
@@ -5104,5 +5128,7 @@
         private System.Windows.Forms.Button AntiqueLicenceCheckButton2;
         private System.Windows.Forms.Button AntiqueSelectionButton2;
         private System.Windows.Forms.Button AntiqueSelectionButton1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
