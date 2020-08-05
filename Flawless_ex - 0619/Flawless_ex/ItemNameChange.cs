@@ -504,6 +504,7 @@ namespace Flawless_ex
 
             //成績入力画面でチェックした変更する品名数取得
             ChangeCount = int.Parse(cmd.ExecuteScalar().ToString());        //カウントは１から
+            
             MessageBox.Show(ChangeCount.ToString());
 
             #region"左の表"

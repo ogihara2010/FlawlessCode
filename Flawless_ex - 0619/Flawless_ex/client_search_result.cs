@@ -14,8 +14,9 @@ namespace Flawless_ex
         int staff_id;
         string address;
         string staff_name;
-        string Total;
-        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, string Total)
+        decimal Total;
+        string access_auth;
+        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, decimal Total)
         {
             InitializeComponent();
 
@@ -109,7 +110,7 @@ namespace Flawless_ex
                 conn.Close();
 
                 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
@@ -128,7 +129,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, Total);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;

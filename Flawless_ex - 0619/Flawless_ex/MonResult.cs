@@ -17,7 +17,6 @@ namespace Flawless_ex
         int type;
         string slipNumber;
         string access_auth;
-        int Grade;
         int a = 0; // クリック数 
         public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber)
         {
@@ -274,7 +273,7 @@ namespace Flawless_ex
         #region "成績入力画面へ"
         private void Button2_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade);
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber);
             this.Close();
             recordList.Show();
         }
