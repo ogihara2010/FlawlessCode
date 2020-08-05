@@ -213,7 +213,7 @@ namespace Flawless_ex
         {
             #region "ボタン"
             this.previewButton.Enabled = false;
-            this.RecordListButton.Enabled = false;
+            //this.RecordListButton.Enabled = false;
             this.DeliveryPreviewButton.Enabled = false;
             #endregion
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
