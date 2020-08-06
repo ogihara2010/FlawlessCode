@@ -62,7 +62,7 @@ namespace Flawless_ex
 
         private void TaxMaster_Click(object sender, EventArgs e)
         {
-            TaxMaster taxMaster = new TaxMaster(this, staff_code);
+            TaxMaster taxMaster = new TaxMaster(this, staff_code, access_auth);
             this.Hide();
             taxMaster.Show();
         }
