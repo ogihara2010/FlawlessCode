@@ -708,6 +708,7 @@
             this.ItemNameChangeCheckBox1.TabIndex = 14;
             this.ItemNameChangeCheckBox1.Text = "品名変更";
             this.ItemNameChangeCheckBox1.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox1.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox1_CheckedChanged);
             // 
             // NextMonthCheckBox6
             // 
@@ -2230,6 +2231,7 @@
             this.ItemNameChangeCheckBox2.TabIndex = 14;
             this.ItemNameChangeCheckBox2.Text = "品名変更";
             this.ItemNameChangeCheckBox2.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox2.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox2_CheckedChanged);
             // 
             // ItemNameChangeCheckBox3
             // 
@@ -2241,6 +2243,7 @@
             this.ItemNameChangeCheckBox3.TabIndex = 14;
             this.ItemNameChangeCheckBox3.Text = "品名変更";
             this.ItemNameChangeCheckBox3.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox3.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox3_CheckedChanged);
             // 
             // ItemNameChangeCheckBox4
             // 
@@ -2252,6 +2255,7 @@
             this.ItemNameChangeCheckBox4.TabIndex = 14;
             this.ItemNameChangeCheckBox4.Text = "品名変更";
             this.ItemNameChangeCheckBox4.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox4.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox4_CheckedChanged);
             // 
             // ItemNameChangeCheckBox5
             // 
@@ -2263,6 +2267,7 @@
             this.ItemNameChangeCheckBox5.TabIndex = 14;
             this.ItemNameChangeCheckBox5.Text = "品名変更";
             this.ItemNameChangeCheckBox5.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox5.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox5_CheckedChanged);
             // 
             // ItemNameChangeCheckBox6
             // 
@@ -2274,6 +2279,7 @@
             this.ItemNameChangeCheckBox6.TabIndex = 14;
             this.ItemNameChangeCheckBox6.Text = "品名変更";
             this.ItemNameChangeCheckBox6.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox6.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox6_CheckedChanged);
             // 
             // ItemNameChangeCheckBox7
             // 
@@ -2285,6 +2291,7 @@
             this.ItemNameChangeCheckBox7.TabIndex = 14;
             this.ItemNameChangeCheckBox7.Text = "品名変更";
             this.ItemNameChangeCheckBox7.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox7.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox7_CheckedChanged);
             // 
             // ItemNameChangeCheckBox8
             // 
@@ -2296,6 +2303,7 @@
             this.ItemNameChangeCheckBox8.TabIndex = 14;
             this.ItemNameChangeCheckBox8.Text = "品名変更";
             this.ItemNameChangeCheckBox8.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox8.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox8_CheckedChanged);
             // 
             // ItemNameChangeCheckBox9
             // 
@@ -2307,6 +2315,7 @@
             this.ItemNameChangeCheckBox9.TabIndex = 14;
             this.ItemNameChangeCheckBox9.Text = "品名変更";
             this.ItemNameChangeCheckBox9.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox9.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox9_CheckedChanged);
             // 
             // ItemNameChangeCheckBox10
             // 
@@ -2318,6 +2327,7 @@
             this.ItemNameChangeCheckBox10.TabIndex = 14;
             this.ItemNameChangeCheckBox10.Text = "品名変更";
             this.ItemNameChangeCheckBox10.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox10.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox10_CheckedChanged);
             // 
             // ItemNameChangeCheckBox11
             // 
@@ -2329,6 +2339,7 @@
             this.ItemNameChangeCheckBox11.TabIndex = 14;
             this.ItemNameChangeCheckBox11.Text = "品名変更";
             this.ItemNameChangeCheckBox11.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox11.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox11_CheckedChanged);
             // 
             // ItemNameChangeCheckBox12
             // 
@@ -2340,6 +2351,7 @@
             this.ItemNameChangeCheckBox12.TabIndex = 14;
             this.ItemNameChangeCheckBox12.Text = "品名変更";
             this.ItemNameChangeCheckBox12.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox12.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox12_CheckedChanged);
             // 
             // ItemNameChangeCheckBox13
             // 
@@ -2351,6 +2363,7 @@
             this.ItemNameChangeCheckBox13.TabIndex = 14;
             this.ItemNameChangeCheckBox13.Text = "品名変更";
             this.ItemNameChangeCheckBox13.UseVisualStyleBackColor = true;
+            this.ItemNameChangeCheckBox13.CheckedChanged += new System.EventHandler(this.ItemNameChangeCheckBox13_CheckedChanged);
             // 
             // BuyDateTimePicker1
             // 
