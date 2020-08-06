@@ -87,6 +87,12 @@
     <Compile Include="AddMainCategoryMenu.Designer.cs">
       <DependentUpon>AddMainCategoryMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClientInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientInformation.Designer.cs">
+      <DependentUpon>ClientInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="ClientMaster.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </Compile>
     <EmbeddedResource Include="AddMainCategoryMenu.resx">
       <DependentUpon>AddMainCategoryMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientInformation.resx">
+      <DependentUpon>ClientInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ClientMaster.resx">
       <DependentUpon>ClientMaster.cs</DependentUpon>

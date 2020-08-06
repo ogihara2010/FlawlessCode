@@ -600,6 +600,7 @@
             this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StaffNameTextBox.Location = new System.Drawing.Point(59, 12);
             this.StaffNameTextBox.Name = "StaffNameTextBox";
+            this.StaffNameTextBox.ReadOnly = true;
             this.StaffNameTextBox.Size = new System.Drawing.Size(100, 26);
             this.StaffNameTextBox.TabIndex = 6;
             // 
@@ -608,16 +609,20 @@
             this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.SlipNumberTextBox.Location = new System.Drawing.Point(269, 12);
             this.SlipNumberTextBox.Name = "SlipNumberTextBox";
+            this.SlipNumberTextBox.ReadOnly = true;
             this.SlipNumberTextBox.Size = new System.Drawing.Size(100, 26);
             this.SlipNumberTextBox.TabIndex = 6;
+            this.SlipNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // GradeNumberTextBox
             // 
             this.GradeNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.GradeNumberTextBox.Location = new System.Drawing.Point(466, 9);
             this.GradeNumberTextBox.Name = "GradeNumberTextBox";
+            this.GradeNumberTextBox.ReadOnly = true;
             this.GradeNumberTextBox.Size = new System.Drawing.Size(100, 26);
             this.GradeNumberTextBox.TabIndex = 6;
+            this.GradeNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label5
             // 

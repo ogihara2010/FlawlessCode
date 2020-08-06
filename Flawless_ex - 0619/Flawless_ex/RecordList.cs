@@ -16,8 +16,6 @@ namespace Flawless_ex
 {
     public partial class RecordList : Form
     {
-        int control;
-        string data;
         int staff_id;                       //ログインしてる人の id
         int type;                           //法人・個人
         Statement statement;                //計算書
@@ -26,15 +24,16 @@ namespace Flawless_ex
         int record;                         //行数
         string Birthday;                    //誕生日（個人）, DBから持ってきた値を保持
         DateTime BirthdayDate;
-        string access_auth;
+        string Access_auth;
         string staff_name;
         string address;
         decimal total;
         int grade;
-        string search1;
-        string search2;
-        string search3;
         RecordList recordList;
+        DateTime date;
+        int AntiqueNumber ;
+        int ID_Number ;
+        string Pass;
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -162,10 +161,6 @@ namespace Flawless_ex
         string BUYER;                           //売却先
         int ChangeCheck = 0;                    //品名変更チェック
         decimal PROFIT;                         //利益
-
-        string WEIGHT;                          //重量
-        string UNITPRICE;                       //単価
-        string COUNT;                           //数量
         #endregion
 
         #region"大分類コード取得用"
@@ -201,13 +196,15 @@ namespace Flawless_ex
         #endregion
 
         DataTable dataTable = new DataTable();
+        DataTable data = new DataTable();
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataReader reader;
         NpgsqlDataAdapter adapter;
+        NpgsqlTransaction transaction;
 
-        //list_resultに登録するようのデータテイブル
+        //list_resultに登録する用のデータテイブル
         DataTable DataTable = new DataTable();         
         #region"list_result2 に登録する各行のデータテイブル"
         DataTable Data1 = new DataTable();
@@ -224,8 +221,25 @@ namespace Flawless_ex
         DataTable Data12 = new DataTable();
         DataTable Data13 = new DataTable();
         #endregion
+        //list_resultに更新する際のデータテイブル
+        DataTable DATATable= new DataTable();
+        #region"list_result2 に更新する際の各行のデータテイブル"
+        DataTable DATA1 = new DataTable();
+        DataTable DATA2 = new DataTable();
+        DataTable DATA3 = new DataTable();
+        DataTable DATA4 = new DataTable();
+        DataTable DATA5 = new DataTable();
+        DataTable DATA6 = new DataTable();
+        DataTable DATA7 = new DataTable();
+        DataTable DATA8 = new DataTable();
+        DataTable DATA9 = new DataTable();
+        DataTable DATA10 = new DataTable();
+        DataTable DATA11 = new DataTable();
+        DataTable DATA12 = new DataTable();
+        DataTable DATA13 = new DataTable();
+        #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade)
+        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id, string access_auth, string pass)
         {
             InitializeComponent();
 
@@ -235,12 +249,17 @@ namespace Flawless_ex
             this.type = type;
             this.SlipNumber = slipnumber;
             this.grade = Grade;
+            this.AntiqueNumber = antique;
+            this.ID_Number = id;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            #region"画面上の会社・個人情報と合計金額"
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            
+            #region"画面上の会社・個人情報と合計金額"
 
             StaffNameTextBox.Text = staff_name;
 
@@ -250,21 +269,34 @@ namespace Flawless_ex
              *成績一覧や印刷プレビューを押せないようにしたら
              *削除予定
             */
-            string sql_str = "select * from statement_data where staff_code = '" + staff_id + "';";
+            string sql_str = "select * from statement_data inner join staff_m on statement_data.staff_code = staff_m.staff_code where statement_data.staff_code = '" + staff_id + "';";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
-            using (reader = cmd.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                using (reader = cmd.ExecuteReader())
                 {
-                    SlipNumber = reader["document_number"].ToString();
+                    while (reader.Read())
+                    {
+                        SlipNumber = reader["document_number"].ToString();
+                        Access_auth = reader["access_auth"].ToString();
+                    }
                 }
+            }catch(Exception err)
+            {
+                MessageBox.Show(err.ToString());
             }
             conn.Close();
             /*
              * 削除予定範囲終了
              * 
             */
+            #endregion
+            #region"権限"
+            if (Access_auth == "C")
+            {
+                ItemNameChangeButton.Enabled = false;
+            }
             #endregion
 
             SlipNumberTextBox.Text = SlipNumber;
@@ -517,7 +549,284 @@ namespace Flawless_ex
             }
             #endregion
 
-            conn.Close();
+            #region"品名変更画面に一度行った後"
+            if (grade != 0)
+            {
+                string Sql_Str2 = "select * from list_result2 inner join main_category_m on list_result2.main_category_code = main_category_m.main_category_code inner join item_m on list_result2.item_code = item_m.item_code where grade_number = '" + grade + "';";
+                adapter = new NpgsqlDataAdapter(Sql_Str2, conn);
+                adapter.Fill(data);
+                
+                for(int i = 0; i < record; i++)
+                {
+                    DataRow row = data.Rows[i];
+                    switch (i)
+                    {
+                        #region"１行目"
+                        case 0:
+                            itemMainCategoryTextBox1.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox1.Text = row["item_name"].ToString();
+                            remark1.Text = row["remarks"].ToString();
+                            MainCategoryCode1 = (int)row["main_category_code"];
+                            ItemCategoryCode1 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)  
+                            {
+                                WholesalePriceTextBox1.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox1.Text = row["buyer"].ToString();
+                                BuyDateTimePicker1.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox1.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"２行目"
+                        case 1:
+                            itemMainCategoryTextBox2.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox2.Text = row["item_name"].ToString();
+                            remark2.Text = row["remarks"].ToString();
+                            MainCategoryCode2 = (int)row["main_category_code"];
+                            ItemCategoryCode2 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0) 
+                            {
+                                WholesalePriceTextBox2.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox2.Text = row["buyer"].ToString();
+                                BuyDateTimePicker2.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox2.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"３行目"
+                        case 2:
+                            itemMainCategoryTextBox3.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox3.Text = row["item_name"].ToString();
+                            remark3.Text = row["remarks"].ToString();
+                            MainCategoryCode3 = (int)row["main_category_code"];
+                            ItemCategoryCode3 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox3.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox3.Text = row["buyer"].ToString();
+                                BuyDateTimePicker3.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox3.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"４行目"
+                        case 3:
+                            itemMainCategoryTextBox4.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox4.Text = row["item_name"].ToString();
+                            remark4.Text = row["remarks"].ToString();
+                            MainCategoryCode4 = (int)row["main_category_code"];
+                            ItemCategoryCode4 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox4.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox4.Text = row["buyer"].ToString();
+                                BuyDateTimePicker4.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox4.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"５行目"
+                        case 4:
+                            itemMainCategoryTextBox5.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox5.Text = row["item_name"].ToString();
+                            remark5.Text = row["remarks"].ToString();
+                            MainCategoryCode5 = (int)row["main_category_code"];
+                            ItemCategoryCode5 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox5.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox5.Text = row["buyer"].ToString();
+                                BuyDateTimePicker5.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox5.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"６行目"
+                        case 5:
+                            itemMainCategoryTextBox6.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox6.Text = row["item_name"].ToString();
+                            remark6.Text = row["remarks"].ToString();
+                            MainCategoryCode6 = (int)row["main_category_code"];
+                            ItemCategoryCode6 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox6.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox6.Text = row["buyer"].ToString();
+                                BuyDateTimePicker6.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox6.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"７行目"
+                        case 6:
+                            itemMainCategoryTextBox7.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox7.Text = row["item_name"].ToString();
+                            remark7.Text = row["remarks"].ToString();
+                            MainCategoryCode7 = (int)row["main_category_code"];
+                            ItemCategoryCode7 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox7.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox7.Text = row["buyer"].ToString();
+                                BuyDateTimePicker7.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox7.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"８行目"
+                        case 7:
+                            itemMainCategoryTextBox8.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox8.Text = row["item_name"].ToString();
+                            remark8.Text = row["remarks"].ToString();
+                            MainCategoryCode8 = (int)row["main_category_code"];
+                            ItemCategoryCode8 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox8.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox8.Text = row["buyer"].ToString();
+                                BuyDateTimePicker8.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox8.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"９行目"
+                        case 8:
+                            itemMainCategoryTextBox9.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox9.Text = row["item_name"].ToString();
+                            remark9.Text = row["remarks"].ToString();
+                            MainCategoryCode9 = (int)row["main_category_code"];
+                            ItemCategoryCode9 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox9.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox9.Text = row["buyer"].ToString();
+                                BuyDateTimePicker9.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox9.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"１０行目"
+                        case 9:
+                            itemMainCategoryTextBox10.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox10.Text = row["item_name"].ToString();
+                            remark10.Text = row["remarks"].ToString();
+                            MainCategoryCode10 = (int)row["main_category_code"];
+                            ItemCategoryCode10 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox10.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox10.Text = row["buyer"].ToString();
+                                BuyDateTimePicker10.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox10.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"１１行目"
+                        case 10:
+                            itemMainCategoryTextBox11.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox11.Text = row["item_name"].ToString();
+                            remark11.Text = row["remarks"].ToString();
+                            MainCategoryCode11 = (int)row["main_category_code"];
+                            ItemCategoryCode11 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox11.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox11.Text = row["buyer"].ToString();
+                                BuyDateTimePicker11.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox11.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"１２行目"
+                        case 11:
+                            itemMainCategoryTextBox12.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox12.Text = row["item_name"].ToString();
+                            remark12.Text = row["remarks"].ToString();
+                            MainCategoryCode12 = (int)row["main_category_code"];
+                            ItemCategoryCode12 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox12.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox12.Text = row["buyer"].ToString();
+                                BuyDateTimePicker12.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox12.Checked = true;
+                            }
+                            break;
+                        #endregion
+                        #region"１３行目"
+                        case 12:
+                            itemMainCategoryTextBox13.Text = row["main_category_name"].ToString();
+                            itemCategoryTextBox13.Text = row["item_name"].ToString();
+                            remark13.Text = row["remarks"].ToString();
+                            MainCategoryCode13 = (int)row["main_category_code"];
+                            ItemCategoryCode13 = (int)row["item_code"];
+                            //卸値。売却先、売却日
+                            if ((decimal)row["wholesale_price"] != 0)
+                            {
+                                WholesalePriceTextBox13.Text = row["wholesale_price"].ToString();
+                                BuyerTextBox13.Text = row["buyer"].ToString();
+                                BuyDateTimePicker13.Value = DateTime.Parse(row["sale_date"].ToString());
+                            }
+                            if ((int)row["carry_over_month"] == 1)
+                            {
+                                NextMonthCheckBox13.Checked = true;
+                            }
+                            break;
+                        #endregion
+                    }
+                }
+                RegisterButton.Enabled = false;
+                UpdateButton.Enabled = true;
+            }
+            #endregion
 
             #region"大分類ごとの金額"
 
@@ -875,6 +1184,149 @@ namespace Flawless_ex
 
             #endregion
 
+            conn.Close();
+            #region"色"
+            #region"1"
+            itemMainCategoryTextBox1.BackColor = SystemColors.Control;
+            itemCategoryTextBox1.BackColor = SystemColors.Control;
+            itemDetailTextBox1.BackColor = SystemColors.Control;
+            weightTextBox1.BackColor = SystemColors.Control;
+            unitPriceText1.BackColor = SystemColors.Control;
+            countTextBox1.BackColor = SystemColors.Control;
+            purchaseTextBox1.BackColor = SystemColors.Control;
+            #endregion
+            #region"2"
+            itemMainCategoryTextBox2.BackColor = SystemColors.Control;
+            itemCategoryTextBox2.BackColor = SystemColors.Control;
+            itemDetailTextBox2.BackColor = SystemColors.Control;
+            weightTextBox2.BackColor = SystemColors.Control;
+            unitPriceText2.BackColor = SystemColors.Control;
+            countTextBox2.BackColor = SystemColors.Control;
+            purchaseTextBox2.BackColor = SystemColors.Control;
+            #endregion
+            #region"3"
+            itemMainCategoryTextBox3.BackColor = SystemColors.Control;
+            itemCategoryTextBox3.BackColor = SystemColors.Control;
+            itemDetailTextBox3.BackColor = SystemColors.Control;
+            weightTextBox3.BackColor = SystemColors.Control;
+            unitPriceText3.BackColor = SystemColors.Control;
+            countTextBox3.BackColor = SystemColors.Control;
+            purchaseTextBox3.BackColor = SystemColors.Control;
+            #endregion
+            #region"4"
+            itemMainCategoryTextBox4.BackColor = SystemColors.Control;
+            itemCategoryTextBox4.BackColor = SystemColors.Control;
+            itemDetailTextBox4.BackColor = SystemColors.Control;
+            weightTextBox4.BackColor = SystemColors.Control;
+            unitPriceText4.BackColor = SystemColors.Control;
+            countTextBox4.BackColor = SystemColors.Control;
+            purchaseTextBox4.BackColor = SystemColors.Control;
+            #endregion
+            #region"5"
+            itemMainCategoryTextBox5.BackColor = SystemColors.Control;
+            itemCategoryTextBox5.BackColor = SystemColors.Control;
+            itemDetailTextBox5.BackColor = SystemColors.Control;
+            weightTextBox5.BackColor = SystemColors.Control;
+            unitPriceText5.BackColor = SystemColors.Control;
+            countTextBox5.BackColor = SystemColors.Control;
+            purchaseTextBox5.BackColor = SystemColors.Control;
+            #endregion
+            #region"6"
+            itemMainCategoryTextBox6.BackColor = SystemColors.Control;
+            itemCategoryTextBox6.BackColor = SystemColors.Control;
+            itemDetailTextBox6.BackColor = SystemColors.Control;
+            weightTextBox6.BackColor = SystemColors.Control;
+            unitPriceText6.BackColor = SystemColors.Control;
+            countTextBox6.BackColor = SystemColors.Control;
+            purchaseTextBox6.BackColor = SystemColors.Control;
+            #endregion
+            #region"7"
+            itemMainCategoryTextBox7.BackColor = SystemColors.Control;
+            itemCategoryTextBox7.BackColor = SystemColors.Control;
+            itemDetailTextBox7.BackColor = SystemColors.Control;
+            weightTextBox7.BackColor = SystemColors.Control;
+            unitPriceText7.BackColor = SystemColors.Control;
+            countTextBox7.BackColor = SystemColors.Control;
+            purchaseTextBox7.BackColor = SystemColors.Control;
+            #endregion
+            #region"8"
+            itemMainCategoryTextBox8.BackColor = SystemColors.Control;
+            itemCategoryTextBox8.BackColor = SystemColors.Control;
+            itemDetailTextBox8.BackColor = SystemColors.Control;
+            weightTextBox8.BackColor = SystemColors.Control;
+            unitPriceText8.BackColor = SystemColors.Control;
+            countTextBox8.BackColor = SystemColors.Control;
+            purchaseTextBox8.BackColor = SystemColors.Control;
+            #endregion
+            #region"9"
+            itemMainCategoryTextBox9.BackColor = SystemColors.Control;
+            itemCategoryTextBox9.BackColor = SystemColors.Control;
+            itemDetailTextBox9.BackColor = SystemColors.Control;
+            weightTextBox9.BackColor = SystemColors.Control;
+            unitPriceText9.BackColor = SystemColors.Control;
+            countTextBox9.BackColor = SystemColors.Control;
+            purchaseTextBox9.BackColor = SystemColors.Control;
+            #endregion
+            #region"10"
+            itemMainCategoryTextBox10.BackColor = SystemColors.Control;
+            itemCategoryTextBox10.BackColor = SystemColors.Control;
+            itemDetailTextBox10.BackColor = SystemColors.Control;
+            weightTextBox10.BackColor = SystemColors.Control;
+            unitPriceText10.BackColor = SystemColors.Control;
+            countTextBox10.BackColor = SystemColors.Control;
+            purchaseTextBox10.BackColor = SystemColors.Control;
+            #endregion
+            #region"11"
+            itemMainCategoryTextBox11.BackColor = SystemColors.Control;
+            itemCategoryTextBox11.BackColor = SystemColors.Control;
+            itemDetailTextBox11.BackColor = SystemColors.Control;
+            weightTextBox11.BackColor = SystemColors.Control;
+            unitPriceText11.BackColor = SystemColors.Control;
+            countTextBox11.BackColor = SystemColors.Control;
+            purchaseTextBox11.BackColor = SystemColors.Control;
+            #endregion
+            #region"12"
+            itemMainCategoryTextBox12.BackColor = SystemColors.Control;
+            itemCategoryTextBox12.BackColor = SystemColors.Control;
+            itemDetailTextBox12.BackColor = SystemColors.Control;
+            weightTextBox12.BackColor = SystemColors.Control;
+            unitPriceText12.BackColor = SystemColors.Control;
+            countTextBox12.BackColor = SystemColors.Control;
+            purchaseTextBox12.BackColor = SystemColors.Control;
+            #endregion
+            #region"13"
+            itemMainCategoryTextBox13.BackColor = SystemColors.Control;
+            itemCategoryTextBox13.BackColor = SystemColors.Control;
+            itemDetailTextBox13.BackColor = SystemColors.Control;
+            weightTextBox13.BackColor = SystemColors.Control;
+            unitPriceText13.BackColor = SystemColors.Control;
+            countTextBox13.BackColor = SystemColors.Control;
+            purchaseTextBox13.BackColor = SystemColors.Control;
+            #endregion
+            #region"下の表"
+            MetalPurchaseTextBox.BackColor = SystemColors.Control;
+            MetalWholesaleTextBox.BackColor = SystemColors.Control;
+            MetalProfitTextBox.BackColor = SystemColors.Control;
+            DiamondPurchaseTextBox.BackColor = SystemColors.Control;
+            DiamondWholesaleTextBox.BackColor = SystemColors.Control;
+            DiamondProfitTextBox.BackColor = SystemColors.Control;
+            BrandPurchaseTextBox.BackColor = SystemColors.Control;
+            BrandWholesaleTextBox.BackColor = SystemColors.Control;
+            BrandProfitTextBox.BackColor = SystemColors.Control;
+            ProductPurchaseTextBox.BackColor = SystemColors.Control;
+            ProductWholesaleTextBox.BackColor = SystemColors.Control;
+            ProductProfitTextBox.BackColor = SystemColors.Control;
+            OtherPurchaseTextBox.BackColor = SystemColors.Control;
+            OtherWholesaleTextBox.BackColor = SystemColors.Control;
+            OtherProfitTextBox.BackColor = SystemColors.Control;
+            TotalPurchaseTextBox.BackColor = SystemColors.Control;
+            TotalWholesaleTextBox.BackColor = SystemColors.Control;
+            TotalPurchaseTextBox.BackColor = SystemColors.Control;
+            PurchaseTotalTextBox.BackColor = SystemColors.Control;
+            WholesaleTotalTextBox.BackColor = SystemColors.Control;
+            ProfitTotalTextBox.BackColor = SystemColors.Control;
+            #endregion
+            #endregion
             ///<summary>
             ///納品書を検索できるようにする機能を追加したら削除予定
             ///範囲開始
@@ -896,7 +1348,7 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, access_auth, total, SlipNumber, control, data, search1, search2, search3) ;
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass) ;
 
             this.Close();
             statement.Show();
@@ -904,7 +1356,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, access_auth, total, SlipNumber, control, data, search1, search2, search3);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass);
             statement.Show();
         }
 
@@ -1945,9 +2397,39 @@ namespace Flawless_ex
         #region"上の表"
 
         #region"次月持ち越しチェック"
+        #region"1"
         private void NextMonthCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox1.Checked)
+            //次月・品名両方
+            if (NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Purple;
+                itemCategoryTextBox1.ForeColor = Color.Purple;
+                itemDetailTextBox1.ForeColor = Color.Purple;
+                weightTextBox1.ForeColor = Color.Purple;
+                unitPriceText1.ForeColor = Color.Purple;
+                countTextBox1.ForeColor = Color.Purple;
+                purchaseTextBox1.ForeColor = Color.Purple;
+                WholesalePriceTextBox1.ForeColor = Color.Purple;
+                remark1.ForeColor = Color.Purple;
+                BuyerTextBox1.ForeColor = Color.Purple;
+            }
+            //品名のみ
+            if (!NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Blue;
+                itemCategoryTextBox1.ForeColor = Color.Blue;
+                itemDetailTextBox1.ForeColor = Color.Blue;
+                weightTextBox1.ForeColor = Color.Blue;
+                unitPriceText1.ForeColor = Color.Blue;
+                countTextBox1.ForeColor = Color.Blue;
+                purchaseTextBox1.ForeColor = Color.Blue;
+                WholesalePriceTextBox1.ForeColor = Color.Blue;
+                remark1.ForeColor = Color.Blue;
+                BuyerTextBox1.ForeColor = Color.Blue;
+            }
+            //次月のみ
+            if (NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked) 
             {
                 itemMainCategoryTextBox1.ForeColor = Color.Red;
                 itemCategoryTextBox1.ForeColor = Color.Red;
@@ -1959,16 +2441,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox1.ForeColor = Color.Red;
                 remark1.ForeColor = Color.Red;
                 BuyerTextBox1.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox1.BackColor = SystemColors.Control;
-                itemCategoryTextBox1.BackColor = SystemColors.Control;
-                itemDetailTextBox1.BackColor = SystemColors.Control;
-                weightTextBox1.BackColor = SystemColors.Control;
-                unitPriceText1.BackColor = SystemColors.Control;
-                countTextBox1.BackColor = SystemColors.Control;
-                purchaseTextBox1.BackColor = SystemColors.Control;
             }
-            else
+            //どちらもノーチェック
+            if (!NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked) 
             {
                 itemMainCategoryTextBox1.ForeColor = Color.Black;
                 itemCategoryTextBox1.ForeColor = Color.Black;
@@ -1980,20 +2455,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox1.ForeColor = Color.Black;
                 remark1.ForeColor = Color.Black;
                 BuyerTextBox1.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox1.BackColor = SystemColors.Control;
-                itemCategoryTextBox1.BackColor = SystemColors.Control;
-                itemDetailTextBox1.BackColor = SystemColors.Control;
-                weightTextBox1.BackColor = SystemColors.Control;
-                unitPriceText1.BackColor = SystemColors.Control;
-                countTextBox1.BackColor = SystemColors.Control;
-                purchaseTextBox1.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"2"
         private void NextMonthCheckBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox2.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Blue;
+                itemCategoryTextBox2.ForeColor = Color.Blue;
+                itemDetailTextBox2.ForeColor = Color.Blue;
+                weightTextBox2.ForeColor = Color.Blue;
+                unitPriceText2.ForeColor = Color.Blue;
+                countTextBox2.ForeColor = Color.Blue;
+                purchaseTextBox2.ForeColor = Color.Blue;
+                WholesalePriceTextBox2.ForeColor = Color.Blue;
+                remark2.ForeColor = Color.Blue;
+                BuyerTextBox2.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)        
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Purple;
+                itemCategoryTextBox2.ForeColor = Color.Purple;
+                itemDetailTextBox2.ForeColor = Color.Purple;
+                weightTextBox2.ForeColor = Color.Purple;
+                unitPriceText2.ForeColor = Color.Purple;
+                countTextBox2.ForeColor = Color.Purple;
+                purchaseTextBox2.ForeColor = Color.Purple;
+                WholesalePriceTextBox2.ForeColor = Color.Purple;
+                remark2.ForeColor = Color.Purple;
+                BuyerTextBox2.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)        
             {
                 itemMainCategoryTextBox2.ForeColor = Color.Red;
                 itemCategoryTextBox2.ForeColor = Color.Red;
@@ -2005,16 +2502,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox2.ForeColor = Color.Red;
                 remark2.ForeColor = Color.Red;
                 BuyerTextBox2.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox2.BackColor = SystemColors.Control;
-                itemCategoryTextBox2.BackColor = SystemColors.Control;
-                itemDetailTextBox2.BackColor = SystemColors.Control;
-                weightTextBox2.BackColor = SystemColors.Control;
-                unitPriceText2.BackColor = SystemColors.Control;
-                countTextBox2.BackColor = SystemColors.Control;
-                purchaseTextBox2.BackColor = SystemColors.Control;
             }
-            else
+            //両方空
+            if (!NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
             {
                 itemMainCategoryTextBox2.ForeColor = Color.Black;
                 itemCategoryTextBox2.ForeColor = Color.Black;
@@ -2026,20 +2516,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox2.ForeColor = Color.Black;
                 remark2.ForeColor = Color.Black;
                 BuyerTextBox2.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox2.BackColor = SystemColors.Control;
-                itemCategoryTextBox2.BackColor = SystemColors.Control;
-                itemDetailTextBox2.BackColor = SystemColors.Control;
-                weightTextBox2.BackColor = SystemColors.Control;
-                unitPriceText2.BackColor = SystemColors.Control;
-                countTextBox2.BackColor = SystemColors.Control;
-                purchaseTextBox2.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"3"
         private void NextMonthCheckBox3_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox3.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Blue;
+                itemCategoryTextBox3.ForeColor = Color.Blue;
+                itemDetailTextBox3.ForeColor = Color.Blue;
+                weightTextBox3.ForeColor = Color.Blue;
+                unitPriceText3.ForeColor = Color.Blue;
+                countTextBox3.ForeColor = Color.Blue;
+                purchaseTextBox3.ForeColor = Color.Blue;
+                WholesalePriceTextBox3.ForeColor = Color.Blue;
+                remark3.ForeColor = Color.Blue;
+                BuyerTextBox3.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)        
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Purple;
+                itemCategoryTextBox3.ForeColor = Color.Purple;
+                itemDetailTextBox3.ForeColor = Color.Purple;
+                weightTextBox3.ForeColor = Color.Purple;
+                unitPriceText3.ForeColor = Color.Purple;
+                countTextBox3.ForeColor = Color.Purple;
+                purchaseTextBox3.ForeColor = Color.Purple;
+                WholesalePriceTextBox3.ForeColor = Color.Purple;
+                remark3.ForeColor = Color.Purple;
+                BuyerTextBox3.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)        
             {
                 itemMainCategoryTextBox3.ForeColor = Color.Red;
                 itemCategoryTextBox3.ForeColor = Color.Red;
@@ -2051,16 +2563,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox3.ForeColor = Color.Red;
                 remark3.ForeColor = Color.Red;
                 BuyerTextBox3.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox3.BackColor = SystemColors.Control;
-                itemCategoryTextBox3.BackColor = SystemColors.Control;
-                itemDetailTextBox3.BackColor = SystemColors.Control;
-                weightTextBox3.BackColor = SystemColors.Control;
-                unitPriceText3.BackColor = SystemColors.Control;
-                countTextBox3.BackColor = SystemColors.Control;
-                purchaseTextBox3.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
             {
                 itemMainCategoryTextBox3.ForeColor = Color.Black;
                 itemCategoryTextBox3.ForeColor = Color.Black;
@@ -2072,20 +2577,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox3.ForeColor = Color.Black;
                 remark3.ForeColor = Color.Black;
                 BuyerTextBox3.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox3.BackColor = SystemColors.Control;
-                itemCategoryTextBox3.BackColor = SystemColors.Control;
-                itemDetailTextBox3.BackColor = SystemColors.Control;
-                weightTextBox3.BackColor = SystemColors.Control;
-                unitPriceText3.BackColor = SystemColors.Control;
-                countTextBox3.BackColor = SystemColors.Control;
-                purchaseTextBox3.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"4"
         private void NextMonthCheckBox4_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox4.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Blue;
+                itemCategoryTextBox4.ForeColor = Color.Blue;
+                itemDetailTextBox4.ForeColor = Color.Blue;
+                weightTextBox4.ForeColor = Color.Blue;
+                unitPriceText4.ForeColor = Color.Blue;
+                countTextBox4.ForeColor = Color.Blue;
+                purchaseTextBox4.ForeColor = Color.Blue;
+                WholesalePriceTextBox4.ForeColor = Color.Blue;
+                remark4.ForeColor = Color.Blue;
+                BuyerTextBox4.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)        
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Purple;
+                itemCategoryTextBox4.ForeColor = Color.Purple;
+                itemDetailTextBox4.ForeColor = Color.Purple;
+                weightTextBox4.ForeColor = Color.Purple;
+                unitPriceText4.ForeColor = Color.Purple;
+                countTextBox4.ForeColor = Color.Purple;
+                purchaseTextBox4.ForeColor = Color.Purple;
+                WholesalePriceTextBox4.ForeColor = Color.Purple;
+                remark4.ForeColor = Color.Purple;
+                BuyerTextBox4.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)        
             {
                 itemMainCategoryTextBox4.ForeColor = Color.Red;
                 itemCategoryTextBox4.ForeColor = Color.Red;
@@ -2097,16 +2624,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox4.ForeColor = Color.Red;
                 remark4.ForeColor = Color.Red;
                 BuyerTextBox4.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox4.BackColor = SystemColors.Control;
-                itemCategoryTextBox4.BackColor = SystemColors.Control;
-                itemDetailTextBox4.BackColor = SystemColors.Control;
-                weightTextBox4.BackColor = SystemColors.Control;
-                unitPriceText4.BackColor = SystemColors.Control;
-                countTextBox4.BackColor = SystemColors.Control;
-                purchaseTextBox4.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
             {
                 itemMainCategoryTextBox4.ForeColor = Color.Black;
                 itemCategoryTextBox4.ForeColor = Color.Black;
@@ -2118,20 +2638,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox4.ForeColor = Color.Black;
                 remark4.ForeColor = Color.Black;
                 BuyerTextBox4.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox4.BackColor = SystemColors.Control;
-                itemCategoryTextBox4.BackColor = SystemColors.Control;
-                itemDetailTextBox4.BackColor = SystemColors.Control;
-                weightTextBox4.BackColor = SystemColors.Control;
-                unitPriceText4.BackColor = SystemColors.Control;
-                countTextBox4.BackColor = SystemColors.Control;
-                purchaseTextBox4.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"5"
         private void NextMonthCheckBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox5.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Blue;
+                itemCategoryTextBox5.ForeColor = Color.Blue;
+                itemDetailTextBox5.ForeColor = Color.Blue;
+                weightTextBox5.ForeColor = Color.Blue;
+                unitPriceText5.ForeColor = Color.Blue;
+                countTextBox5.ForeColor = Color.Blue;
+                purchaseTextBox5.ForeColor = Color.Blue;
+                WholesalePriceTextBox5.ForeColor = Color.Blue;
+                remark5.ForeColor = Color.Blue;
+                BuyerTextBox5.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)       
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Purple;
+                itemCategoryTextBox5.ForeColor = Color.Purple;
+                itemDetailTextBox5.ForeColor = Color.Purple;
+                weightTextBox5.ForeColor = Color.Purple;
+                unitPriceText5.ForeColor = Color.Purple;
+                countTextBox5.ForeColor = Color.Purple;
+                purchaseTextBox5.ForeColor = Color.Purple;
+                WholesalePriceTextBox5.ForeColor = Color.Purple;
+                remark5.ForeColor = Color.Purple;
+                BuyerTextBox5.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)        
             {
                 itemMainCategoryTextBox5.ForeColor = Color.Red;
                 itemCategoryTextBox5.ForeColor = Color.Red;
@@ -2143,16 +2685,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox5.ForeColor = Color.Red;
                 remark5.ForeColor = Color.Red;
                 BuyerTextBox5.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox5.BackColor = SystemColors.Control;
-                itemCategoryTextBox5.BackColor = SystemColors.Control;
-                itemDetailTextBox5.BackColor = SystemColors.Control;
-                weightTextBox5.BackColor = SystemColors.Control;
-                unitPriceText5.BackColor = SystemColors.Control;
-                countTextBox5.BackColor = SystemColors.Control;
-                purchaseTextBox5.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
             {
                 itemMainCategoryTextBox5.ForeColor = Color.Black;
                 itemCategoryTextBox5.ForeColor = Color.Black;
@@ -2164,20 +2699,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox5.ForeColor = Color.Black;
                 remark5.ForeColor = Color.Black;
                 BuyerTextBox5.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox5.BackColor = SystemColors.Control;
-                itemCategoryTextBox5.BackColor = SystemColors.Control;
-                itemDetailTextBox5.BackColor = SystemColors.Control;
-                weightTextBox5.BackColor = SystemColors.Control;
-                unitPriceText5.BackColor = SystemColors.Control;
-                countTextBox5.BackColor = SystemColors.Control;
-                purchaseTextBox5.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"6"
         private void NextMonthCheckBox6_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox6.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Blue;
+                itemCategoryTextBox6.ForeColor = Color.Blue;
+                itemDetailTextBox6.ForeColor = Color.Blue;
+                weightTextBox6.ForeColor = Color.Blue;
+                unitPriceText6.ForeColor = Color.Blue;
+                countTextBox6.ForeColor = Color.Blue;
+                purchaseTextBox6.ForeColor = Color.Blue;
+                WholesalePriceTextBox6.ForeColor = Color.Blue;
+                remark6.ForeColor = Color.Blue;
+                BuyerTextBox6.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)        
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Purple;
+                itemCategoryTextBox6.ForeColor = Color.Purple;
+                itemDetailTextBox6.ForeColor = Color.Purple;
+                weightTextBox6.ForeColor = Color.Purple;
+                unitPriceText6.ForeColor = Color.Purple;
+                countTextBox6.ForeColor = Color.Purple;
+                purchaseTextBox6.ForeColor = Color.Purple;
+                WholesalePriceTextBox6.ForeColor = Color.Purple;
+                remark6.ForeColor = Color.Purple;
+                BuyerTextBox6.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)        
             {
                 itemMainCategoryTextBox6.ForeColor = Color.Red;
                 itemCategoryTextBox6.ForeColor = Color.Red;
@@ -2189,16 +2746,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox6.ForeColor = Color.Red;
                 remark6.ForeColor = Color.Red;
                 BuyerTextBox6.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox6.BackColor = SystemColors.Control;
-                itemCategoryTextBox6.BackColor = SystemColors.Control;
-                itemDetailTextBox6.BackColor = SystemColors.Control;
-                weightTextBox6.BackColor = SystemColors.Control;
-                unitPriceText6.BackColor = SystemColors.Control;
-                countTextBox6.BackColor = SystemColors.Control;
-                purchaseTextBox6.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
             {
                 itemMainCategoryTextBox6.ForeColor = Color.Black;
                 itemCategoryTextBox6.ForeColor = Color.Black;
@@ -2210,20 +2760,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox6.ForeColor = Color.Black;
                 remark6.ForeColor = Color.Black;
                 BuyerTextBox6.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox6.BackColor = SystemColors.Control;
-                itemCategoryTextBox6.BackColor = SystemColors.Control;
-                itemDetailTextBox6.BackColor = SystemColors.Control;
-                weightTextBox6.BackColor = SystemColors.Control;
-                unitPriceText6.BackColor = SystemColors.Control;
-                countTextBox6.BackColor = SystemColors.Control;
-                purchaseTextBox6.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"7"
         private void NextMonthCheckBox7_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox7.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Blue;
+                itemCategoryTextBox7.ForeColor = Color.Blue;
+                itemDetailTextBox7.ForeColor = Color.Blue;
+                weightTextBox7.ForeColor = Color.Blue;
+                unitPriceText7.ForeColor = Color.Blue;
+                countTextBox7.ForeColor = Color.Blue;
+                purchaseTextBox7.ForeColor = Color.Blue;
+                WholesalePriceTextBox7.ForeColor = Color.Blue;
+                remark7.ForeColor = Color.Blue;
+                BuyerTextBox7.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)        
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Purple;
+                itemCategoryTextBox7.ForeColor = Color.Purple;
+                itemDetailTextBox7.ForeColor = Color.Purple;
+                weightTextBox7.ForeColor = Color.Purple;
+                unitPriceText7.ForeColor = Color.Purple;
+                countTextBox7.ForeColor = Color.Purple;
+                purchaseTextBox7.ForeColor = Color.Purple;
+                WholesalePriceTextBox7.ForeColor = Color.Purple;
+                remark7.ForeColor = Color.Purple;
+                BuyerTextBox7.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)        
             {
                 itemMainCategoryTextBox7.ForeColor = Color.Red;
                 itemCategoryTextBox7.ForeColor = Color.Red;
@@ -2235,16 +2807,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox7.ForeColor = Color.Red;
                 remark7.ForeColor = Color.Red;
                 BuyerTextBox7.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox7.BackColor = SystemColors.Control;
-                itemCategoryTextBox7.BackColor = SystemColors.Control;
-                itemDetailTextBox7.BackColor = SystemColors.Control;
-                weightTextBox7.BackColor = SystemColors.Control;
-                unitPriceText7.BackColor = SystemColors.Control;
-                countTextBox7.BackColor = SystemColors.Control;
-                purchaseTextBox7.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
             {
                 itemMainCategoryTextBox7.ForeColor = Color.Black;
                 itemCategoryTextBox7.ForeColor = Color.Black;
@@ -2256,20 +2821,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox7.ForeColor = Color.Black;
                 remark7.ForeColor = Color.Black;
                 BuyerTextBox7.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox7.BackColor = SystemColors.Control;
-                itemCategoryTextBox7.BackColor = SystemColors.Control;
-                itemDetailTextBox7.BackColor = SystemColors.Control;
-                weightTextBox7.BackColor = SystemColors.Control;
-                unitPriceText7.BackColor = SystemColors.Control;
-                countTextBox7.BackColor = SystemColors.Control;
-                purchaseTextBox7.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"8"
         private void NextMonthCheckBox8_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox8.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Blue;
+                itemCategoryTextBox8.ForeColor = Color.Blue;
+                itemDetailTextBox8.ForeColor = Color.Blue;
+                weightTextBox8.ForeColor = Color.Blue;
+                unitPriceText8.ForeColor = Color.Blue;
+                countTextBox8.ForeColor = Color.Blue;
+                purchaseTextBox8.ForeColor = Color.Blue;
+                WholesalePriceTextBox8.ForeColor = Color.Blue;
+                remark8.ForeColor = Color.Blue;
+                BuyerTextBox8.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)        
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Purple;
+                itemCategoryTextBox8.ForeColor = Color.Purple;
+                itemDetailTextBox8.ForeColor = Color.Purple;
+                weightTextBox8.ForeColor = Color.Purple;
+                unitPriceText8.ForeColor = Color.Purple;
+                countTextBox8.ForeColor = Color.Purple;
+                purchaseTextBox8.ForeColor = Color.Purple;
+                WholesalePriceTextBox8.ForeColor = Color.Purple;
+                remark8.ForeColor = Color.Purple;
+                BuyerTextBox8.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)        
             {
                 itemMainCategoryTextBox8.ForeColor = Color.Red;
                 itemCategoryTextBox8.ForeColor = Color.Red;
@@ -2281,16 +2868,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox8.ForeColor = Color.Red;
                 remark8.ForeColor = Color.Red;
                 BuyerTextBox8.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox8.BackColor = SystemColors.Control;
-                itemCategoryTextBox8.BackColor = SystemColors.Control;
-                itemDetailTextBox8.BackColor = SystemColors.Control;
-                weightTextBox8.BackColor = SystemColors.Control;
-                unitPriceText8.BackColor = SystemColors.Control;
-                countTextBox8.BackColor = SystemColors.Control;
-                purchaseTextBox8.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
             {
                 itemMainCategoryTextBox8.ForeColor = Color.Black;
                 itemCategoryTextBox8.ForeColor = Color.Black;
@@ -2302,20 +2882,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox8.ForeColor = Color.Black;
                 remark8.ForeColor = Color.Black;
                 BuyerTextBox8.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox8.BackColor = SystemColors.Control;
-                itemCategoryTextBox8.BackColor = SystemColors.Control;
-                itemDetailTextBox8.BackColor = SystemColors.Control;
-                weightTextBox8.BackColor = SystemColors.Control;
-                unitPriceText8.BackColor = SystemColors.Control;
-                countTextBox8.BackColor = SystemColors.Control;
-                purchaseTextBox8.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"9"
         private void NextMonthCheckBox9_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox9.Checked)
+            //品名
+            if (!NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Blue;
+                itemCategoryTextBox9.ForeColor = Color.Blue;
+                itemDetailTextBox9.ForeColor = Color.Blue;
+                weightTextBox9.ForeColor = Color.Blue;
+                unitPriceText9.ForeColor = Color.Blue;
+                countTextBox9.ForeColor = Color.Blue;
+                purchaseTextBox9.ForeColor = Color.Blue;
+                WholesalePriceTextBox9.ForeColor = Color.Blue;
+                remark9.ForeColor = Color.Blue;
+                BuyerTextBox9.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)        
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Purple;
+                itemCategoryTextBox9.ForeColor = Color.Purple;
+                itemDetailTextBox9.ForeColor = Color.Purple;
+                weightTextBox9.ForeColor = Color.Purple;
+                unitPriceText9.ForeColor = Color.Purple;
+                countTextBox9.ForeColor = Color.Purple;
+                purchaseTextBox9.ForeColor = Color.Purple;
+                WholesalePriceTextBox9.ForeColor = Color.Purple;
+                remark9.ForeColor = Color.Purple;
+                BuyerTextBox9.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)        
             {
                 itemMainCategoryTextBox9.ForeColor = Color.Red;
                 itemCategoryTextBox9.ForeColor = Color.Red;
@@ -2327,16 +2929,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox9.ForeColor = Color.Red;
                 remark9.ForeColor = Color.Red;
                 BuyerTextBox9.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox9.BackColor = SystemColors.Control;
-                itemCategoryTextBox9.BackColor = SystemColors.Control;
-                itemDetailTextBox9.BackColor = SystemColors.Control;
-                weightTextBox9.BackColor = SystemColors.Control;
-                unitPriceText9.BackColor = SystemColors.Control;
-                countTextBox9.BackColor = SystemColors.Control;
-                purchaseTextBox9.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
             {
                 itemMainCategoryTextBox9.ForeColor = Color.Black;
                 itemCategoryTextBox9.ForeColor = Color.Black;
@@ -2348,20 +2943,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox9.ForeColor = Color.Black;
                 remark9.ForeColor = Color.Black;
                 BuyerTextBox9.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox9.BackColor = SystemColors.Control;
-                itemCategoryTextBox9.BackColor = SystemColors.Control;
-                itemDetailTextBox9.BackColor = SystemColors.Control;
-                weightTextBox9.BackColor = SystemColors.Control;
-                unitPriceText9.BackColor = SystemColors.Control;
-                countTextBox9.BackColor = SystemColors.Control;
-                purchaseTextBox9.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"10"
         private void NextMonthCheckBox10_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox10.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Blue;
+                itemCategoryTextBox10.ForeColor = Color.Blue;
+                itemDetailTextBox10.ForeColor = Color.Blue;
+                weightTextBox10.ForeColor = Color.Blue;
+                unitPriceText10.ForeColor = Color.Blue;
+                countTextBox10.ForeColor = Color.Blue;
+                purchaseTextBox10.ForeColor = Color.Blue;
+                WholesalePriceTextBox10.ForeColor = Color.Blue;
+                remark10.ForeColor = Color.Blue;
+                BuyerTextBox10.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)        
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Purple;
+                itemCategoryTextBox10.ForeColor = Color.Purple;
+                itemDetailTextBox10.ForeColor = Color.Purple;
+                weightTextBox10.ForeColor = Color.Purple;
+                unitPriceText10.ForeColor = Color.Purple;
+                countTextBox10.ForeColor = Color.Purple;
+                purchaseTextBox10.ForeColor = Color.Purple;
+                WholesalePriceTextBox10.ForeColor = Color.Purple;
+                remark10.ForeColor = Color.Purple;
+                BuyerTextBox10.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)       
             {
                 itemMainCategoryTextBox10.ForeColor = Color.Red;
                 itemCategoryTextBox10.ForeColor = Color.Red;
@@ -2373,16 +2990,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox10.ForeColor = Color.Red;
                 remark10.ForeColor = Color.Red;
                 BuyerTextBox10.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox10.BackColor = SystemColors.Control;
-                itemCategoryTextBox10.BackColor = SystemColors.Control;
-                itemDetailTextBox10.BackColor = SystemColors.Control;
-                weightTextBox10.BackColor = SystemColors.Control;
-                unitPriceText10.BackColor = SystemColors.Control;
-                countTextBox10.BackColor = SystemColors.Control;
-                purchaseTextBox10.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
             {
                 itemMainCategoryTextBox10.ForeColor = Color.Black;
                 itemCategoryTextBox10.ForeColor = Color.Black;
@@ -2394,20 +3004,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox10.ForeColor = Color.Black;
                 remark10.ForeColor = Color.Black;
                 BuyerTextBox10.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox10.BackColor = SystemColors.Control;
-                itemCategoryTextBox10.BackColor = SystemColors.Control;
-                itemDetailTextBox10.BackColor = SystemColors.Control;
-                weightTextBox10.BackColor = SystemColors.Control;
-                unitPriceText10.BackColor = SystemColors.Control;
-                countTextBox10.BackColor = SystemColors.Control;
-                purchaseTextBox10.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"11"
         private void NextMonthCheckBox11_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox11.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Blue;
+                itemCategoryTextBox11.ForeColor = Color.Blue;
+                itemDetailTextBox11.ForeColor = Color.Blue;
+                weightTextBox11.ForeColor = Color.Blue;
+                unitPriceText11.ForeColor = Color.Blue;
+                countTextBox11.ForeColor = Color.Blue;
+                purchaseTextBox11.ForeColor = Color.Blue;
+                WholesalePriceTextBox11.ForeColor = Color.Blue;
+                remark11.ForeColor = Color.Blue;
+                BuyerTextBox11.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)        
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Purple;
+                itemCategoryTextBox11.ForeColor = Color.Purple;
+                itemDetailTextBox11.ForeColor = Color.Purple;
+                weightTextBox11.ForeColor = Color.Purple;
+                unitPriceText11.ForeColor = Color.Purple;
+                countTextBox11.ForeColor = Color.Purple;
+                purchaseTextBox11.ForeColor = Color.Purple;
+                WholesalePriceTextBox11.ForeColor = Color.Purple;
+                remark11.ForeColor = Color.Purple;
+                BuyerTextBox11.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)        
             {
                 itemMainCategoryTextBox11.ForeColor = Color.Red;
                 itemCategoryTextBox11.ForeColor = Color.Red;
@@ -2419,16 +3051,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox11.ForeColor = Color.Red;
                 remark11.ForeColor = Color.Red;
                 BuyerTextBox11.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox11.BackColor = SystemColors.Control;
-                itemCategoryTextBox11.BackColor = SystemColors.Control;
-                itemDetailTextBox11.BackColor = SystemColors.Control;
-                weightTextBox11.BackColor = SystemColors.Control;
-                unitPriceText11.BackColor = SystemColors.Control;
-                countTextBox11.BackColor = SystemColors.Control;
-                purchaseTextBox11.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
             {
                 itemMainCategoryTextBox11.ForeColor = Color.Black;
                 itemCategoryTextBox11.ForeColor = Color.Black;
@@ -2440,20 +3065,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox11.ForeColor = Color.Black;
                 remark11.ForeColor = Color.Black;
                 BuyerTextBox11.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox11.BackColor = SystemColors.Control;
-                itemCategoryTextBox11.BackColor = SystemColors.Control;
-                itemDetailTextBox11.BackColor = SystemColors.Control;
-                weightTextBox11.BackColor = SystemColors.Control;
-                unitPriceText11.BackColor = SystemColors.Control;
-                countTextBox11.BackColor = SystemColors.Control;
-                purchaseTextBox11.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"12"
         private void NextMonthCheckBox12_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox12.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Blue;
+                itemCategoryTextBox12.ForeColor = Color.Blue;
+                itemDetailTextBox12.ForeColor = Color.Blue;
+                weightTextBox12.ForeColor = Color.Blue;
+                unitPriceText12.ForeColor = Color.Blue;
+                countTextBox12.ForeColor = Color.Blue;
+                purchaseTextBox12.ForeColor = Color.Blue;
+                WholesalePriceTextBox12.ForeColor = Color.Blue;
+                remark12.ForeColor = Color.Blue;
+                BuyerTextBox12.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)        
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Purple;
+                itemCategoryTextBox12.ForeColor = Color.Purple;
+                itemDetailTextBox12.ForeColor = Color.Purple;
+                weightTextBox12.ForeColor = Color.Purple;
+                unitPriceText12.ForeColor = Color.Purple;
+                countTextBox12.ForeColor = Color.Purple;
+                purchaseTextBox12.ForeColor = Color.Purple;
+                WholesalePriceTextBox12.ForeColor = Color.Purple;
+                remark12.ForeColor = Color.Purple;
+                BuyerTextBox12.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)        
             {
                 itemMainCategoryTextBox12.ForeColor = Color.Red;
                 itemCategoryTextBox12.ForeColor = Color.Red;
@@ -2465,16 +3112,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox12.ForeColor = Color.Red;
                 remark12.ForeColor = Color.Red;
                 BuyerTextBox12.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox12.BackColor = SystemColors.Control;
-                itemCategoryTextBox12.BackColor = SystemColors.Control;
-                itemDetailTextBox12.BackColor = SystemColors.Control;
-                weightTextBox12.BackColor = SystemColors.Control;
-                unitPriceText12.BackColor = SystemColors.Control;
-                countTextBox12.BackColor = SystemColors.Control;
-                purchaseTextBox12.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
             {
                 itemMainCategoryTextBox12.ForeColor = Color.Black;
                 itemCategoryTextBox12.ForeColor = Color.Black;
@@ -2486,20 +3126,43 @@ namespace Flawless_ex
                 WholesalePriceTextBox12.ForeColor = Color.Black;
                 remark12.ForeColor = Color.Black;
                 BuyerTextBox12.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox12.BackColor = SystemColors.Control;
-                itemCategoryTextBox12.BackColor = SystemColors.Control;
-                itemDetailTextBox12.BackColor = SystemColors.Control;
-                weightTextBox12.BackColor = SystemColors.Control;
-                unitPriceText12.BackColor = SystemColors.Control;
-                countTextBox12.BackColor = SystemColors.Control;
-                purchaseTextBox12.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"13"
         private void NextMonthCheckBox13_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox13.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Blue;
+                itemCategoryTextBox13.ForeColor = Color.Blue;
+                itemDetailTextBox13.ForeColor = Color.Blue;
+                weightTextBox13.ForeColor = Color.Blue;
+                unitPriceText13.ForeColor = Color.Blue;
+                countTextBox13.ForeColor = Color.Blue;
+                purchaseTextBox13.ForeColor = Color.Blue;
+                WholesalePriceTextBox13.ForeColor = Color.Blue;
+                remark13.ForeColor = Color.Blue;
+                BuyerTextBox13.ForeColor = Color.Blue;
+
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)        
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Purple;
+                itemCategoryTextBox13.ForeColor = Color.Purple;
+                itemDetailTextBox13.ForeColor = Color.Purple;
+                weightTextBox13.ForeColor = Color.Purple;
+                unitPriceText13.ForeColor = Color.Purple;
+                countTextBox13.ForeColor = Color.Purple;
+                purchaseTextBox13.ForeColor = Color.Purple;
+                WholesalePriceTextBox13.ForeColor = Color.Purple;
+                remark13.ForeColor = Color.Purple;
+                BuyerTextBox13.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)        
             {
                 itemMainCategoryTextBox13.ForeColor = Color.Red;
                 itemCategoryTextBox13.ForeColor = Color.Red;
@@ -2511,16 +3174,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox13.ForeColor = Color.Red;
                 remark13.ForeColor = Color.Red;
                 BuyerTextBox13.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox13.BackColor = SystemColors.Control;
-                itemCategoryTextBox13.BackColor = SystemColors.Control;
-                itemDetailTextBox13.BackColor = SystemColors.Control;
-                weightTextBox13.BackColor = SystemColors.Control;
-                unitPriceText13.BackColor = SystemColors.Control;
-                countTextBox13.BackColor = SystemColors.Control;
-                purchaseTextBox13.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
             {
                 itemMainCategoryTextBox13.ForeColor = Color.Black;
                 itemCategoryTextBox13.ForeColor = Color.Black;
@@ -2532,17 +3188,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox13.ForeColor = Color.Black;
                 remark13.ForeColor = Color.Black;
                 BuyerTextBox13.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox13.BackColor = SystemColors.Control;
-                itemCategoryTextBox13.BackColor = SystemColors.Control;
-                itemDetailTextBox13.BackColor = SystemColors.Control;
-                weightTextBox13.BackColor = SystemColors.Control;
-                unitPriceText13.BackColor = SystemColors.Control;
-                countTextBox13.BackColor = SystemColors.Control;
-                purchaseTextBox13.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
         #endregion
 
         #region"単価の数値を３桁区切りで表示 TextChangedイベント"
@@ -2901,12 +3549,809 @@ namespace Flawless_ex
         }
         #endregion
 
+        #region"品名変更ボタン　色"
+        #region"1"
+        private void ItemNameChangeCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //次月・品名両方
+            if (NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Purple;
+                itemCategoryTextBox1.ForeColor = Color.Purple;
+                itemDetailTextBox1.ForeColor = Color.Purple;
+                weightTextBox1.ForeColor = Color.Purple;
+                unitPriceText1.ForeColor = Color.Purple;
+                countTextBox1.ForeColor = Color.Purple;
+                purchaseTextBox1.ForeColor = Color.Purple;
+                WholesalePriceTextBox1.ForeColor = Color.Purple;
+                remark1.ForeColor = Color.Purple;
+                BuyerTextBox1.ForeColor = Color.Purple;
+            }
+            //品名のみ
+            if (!NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Blue;
+                itemCategoryTextBox1.ForeColor = Color.Blue;
+                itemDetailTextBox1.ForeColor = Color.Blue;
+                weightTextBox1.ForeColor = Color.Blue;
+                unitPriceText1.ForeColor = Color.Blue;
+                countTextBox1.ForeColor = Color.Blue;
+                purchaseTextBox1.ForeColor = Color.Blue;
+                WholesalePriceTextBox1.ForeColor = Color.Blue;
+                remark1.ForeColor = Color.Blue;
+                BuyerTextBox1.ForeColor = Color.Blue;
+            }
+            //次月のみ
+            if (NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Red;
+                itemCategoryTextBox1.ForeColor = Color.Red;
+                itemDetailTextBox1.ForeColor = Color.Red;
+                weightTextBox1.ForeColor = Color.Red;
+                unitPriceText1.ForeColor = Color.Red;
+                countTextBox1.ForeColor = Color.Red;
+                purchaseTextBox1.ForeColor = Color.Red;
+                WholesalePriceTextBox1.ForeColor = Color.Red;
+                remark1.ForeColor = Color.Red;
+                BuyerTextBox1.ForeColor = Color.Red;
+            }
+            //どちらもノーチェック
+            if (!NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Black;
+                itemCategoryTextBox1.ForeColor = Color.Black;
+                itemDetailTextBox1.ForeColor = Color.Black;
+                weightTextBox1.ForeColor = Color.Black;
+                unitPriceText1.ForeColor = Color.Black;
+                countTextBox1.ForeColor = Color.Black;
+                purchaseTextBox1.ForeColor = Color.Black;
+                WholesalePriceTextBox1.ForeColor = Color.Black;
+                remark1.ForeColor = Color.Black;
+                BuyerTextBox1.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"2"
+        private void ItemNameChangeCheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Blue;
+                itemCategoryTextBox2.ForeColor = Color.Blue;
+                itemDetailTextBox2.ForeColor = Color.Blue;
+                weightTextBox2.ForeColor = Color.Blue;
+                unitPriceText2.ForeColor = Color.Blue;
+                countTextBox2.ForeColor = Color.Blue;
+                purchaseTextBox2.ForeColor = Color.Blue;
+                WholesalePriceTextBox2.ForeColor = Color.Blue;
+                remark2.ForeColor = Color.Blue;
+                BuyerTextBox2.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Purple;
+                itemCategoryTextBox2.ForeColor = Color.Purple;
+                itemDetailTextBox2.ForeColor = Color.Purple;
+                weightTextBox2.ForeColor = Color.Purple;
+                unitPriceText2.ForeColor = Color.Purple;
+                countTextBox2.ForeColor = Color.Purple;
+                purchaseTextBox2.ForeColor = Color.Purple;
+                WholesalePriceTextBox2.ForeColor = Color.Purple;
+                remark2.ForeColor = Color.Purple;
+                BuyerTextBox2.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Red;
+                itemCategoryTextBox2.ForeColor = Color.Red;
+                itemDetailTextBox2.ForeColor = Color.Red;
+                weightTextBox2.ForeColor = Color.Red;
+                unitPriceText2.ForeColor = Color.Red;
+                countTextBox2.ForeColor = Color.Red;
+                purchaseTextBox2.ForeColor = Color.Red;
+                WholesalePriceTextBox2.ForeColor = Color.Red;
+                remark2.ForeColor = Color.Red;
+                BuyerTextBox2.ForeColor = Color.Red;
+            }
+            //両方空
+            if (!NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Black;
+                itemCategoryTextBox2.ForeColor = Color.Black;
+                itemDetailTextBox2.ForeColor = Color.Black;
+                weightTextBox2.ForeColor = Color.Black;
+                unitPriceText2.ForeColor = Color.Black;
+                countTextBox2.ForeColor = Color.Black;
+                purchaseTextBox2.ForeColor = Color.Black;
+                WholesalePriceTextBox2.ForeColor = Color.Black;
+                remark2.ForeColor = Color.Black;
+                BuyerTextBox2.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"3"
+        private void ItemNameChangeCheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Blue;
+                itemCategoryTextBox3.ForeColor = Color.Blue;
+                itemDetailTextBox3.ForeColor = Color.Blue;
+                weightTextBox3.ForeColor = Color.Blue;
+                unitPriceText3.ForeColor = Color.Blue;
+                countTextBox3.ForeColor = Color.Blue;
+                purchaseTextBox3.ForeColor = Color.Blue;
+                WholesalePriceTextBox3.ForeColor = Color.Blue;
+                remark3.ForeColor = Color.Blue;
+                BuyerTextBox3.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Purple;
+                itemCategoryTextBox3.ForeColor = Color.Purple;
+                itemDetailTextBox3.ForeColor = Color.Purple;
+                weightTextBox3.ForeColor = Color.Purple;
+                unitPriceText3.ForeColor = Color.Purple;
+                countTextBox3.ForeColor = Color.Purple;
+                purchaseTextBox3.ForeColor = Color.Purple;
+                WholesalePriceTextBox3.ForeColor = Color.Purple;
+                remark3.ForeColor = Color.Purple;
+                BuyerTextBox3.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Red;
+                itemCategoryTextBox3.ForeColor = Color.Red;
+                itemDetailTextBox3.ForeColor = Color.Red;
+                weightTextBox3.ForeColor = Color.Red;
+                unitPriceText3.ForeColor = Color.Red;
+                countTextBox3.ForeColor = Color.Red;
+                purchaseTextBox3.ForeColor = Color.Red;
+                WholesalePriceTextBox3.ForeColor = Color.Red;
+                remark3.ForeColor = Color.Red;
+                BuyerTextBox3.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Black;
+                itemCategoryTextBox3.ForeColor = Color.Black;
+                itemDetailTextBox3.ForeColor = Color.Black;
+                weightTextBox3.ForeColor = Color.Black;
+                unitPriceText3.ForeColor = Color.Black;
+                countTextBox3.ForeColor = Color.Black;
+                purchaseTextBox3.ForeColor = Color.Black;
+                WholesalePriceTextBox3.ForeColor = Color.Black;
+                remark3.ForeColor = Color.Black;
+                BuyerTextBox3.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"4"
+        private void ItemNameChangeCheckBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Blue;
+                itemCategoryTextBox4.ForeColor = Color.Blue;
+                itemDetailTextBox4.ForeColor = Color.Blue;
+                weightTextBox4.ForeColor = Color.Blue;
+                unitPriceText4.ForeColor = Color.Blue;
+                countTextBox4.ForeColor = Color.Blue;
+                purchaseTextBox4.ForeColor = Color.Blue;
+                WholesalePriceTextBox4.ForeColor = Color.Blue;
+                remark4.ForeColor = Color.Blue;
+                BuyerTextBox4.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Purple;
+                itemCategoryTextBox4.ForeColor = Color.Purple;
+                itemDetailTextBox4.ForeColor = Color.Purple;
+                weightTextBox4.ForeColor = Color.Purple;
+                unitPriceText4.ForeColor = Color.Purple;
+                countTextBox4.ForeColor = Color.Purple;
+                purchaseTextBox4.ForeColor = Color.Purple;
+                WholesalePriceTextBox4.ForeColor = Color.Purple;
+                remark4.ForeColor = Color.Purple;
+                BuyerTextBox4.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Red;
+                itemCategoryTextBox4.ForeColor = Color.Red;
+                itemDetailTextBox4.ForeColor = Color.Red;
+                weightTextBox4.ForeColor = Color.Red;
+                unitPriceText4.ForeColor = Color.Red;
+                countTextBox4.ForeColor = Color.Red;
+                purchaseTextBox4.ForeColor = Color.Red;
+                WholesalePriceTextBox4.ForeColor = Color.Red;
+                remark4.ForeColor = Color.Red;
+                BuyerTextBox4.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Black;
+                itemCategoryTextBox4.ForeColor = Color.Black;
+                itemDetailTextBox4.ForeColor = Color.Black;
+                weightTextBox4.ForeColor = Color.Black;
+                unitPriceText4.ForeColor = Color.Black;
+                countTextBox4.ForeColor = Color.Black;
+                purchaseTextBox4.ForeColor = Color.Black;
+                WholesalePriceTextBox4.ForeColor = Color.Black;
+                remark4.ForeColor = Color.Black;
+                BuyerTextBox4.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"5"
+        private void ItemNameChangeCheckBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Blue;
+                itemCategoryTextBox5.ForeColor = Color.Blue;
+                itemDetailTextBox5.ForeColor = Color.Blue;
+                weightTextBox5.ForeColor = Color.Blue;
+                unitPriceText5.ForeColor = Color.Blue;
+                countTextBox5.ForeColor = Color.Blue;
+                purchaseTextBox5.ForeColor = Color.Blue;
+                WholesalePriceTextBox5.ForeColor = Color.Blue;
+                remark5.ForeColor = Color.Blue;
+                BuyerTextBox5.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Purple;
+                itemCategoryTextBox5.ForeColor = Color.Purple;
+                itemDetailTextBox5.ForeColor = Color.Purple;
+                weightTextBox5.ForeColor = Color.Purple;
+                unitPriceText5.ForeColor = Color.Purple;
+                countTextBox5.ForeColor = Color.Purple;
+                purchaseTextBox5.ForeColor = Color.Purple;
+                WholesalePriceTextBox5.ForeColor = Color.Purple;
+                remark5.ForeColor = Color.Purple;
+                BuyerTextBox5.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Red;
+                itemCategoryTextBox5.ForeColor = Color.Red;
+                itemDetailTextBox5.ForeColor = Color.Red;
+                weightTextBox5.ForeColor = Color.Red;
+                unitPriceText5.ForeColor = Color.Red;
+                countTextBox5.ForeColor = Color.Red;
+                purchaseTextBox5.ForeColor = Color.Red;
+                WholesalePriceTextBox5.ForeColor = Color.Red;
+                remark5.ForeColor = Color.Red;
+                BuyerTextBox5.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Black;
+                itemCategoryTextBox5.ForeColor = Color.Black;
+                itemDetailTextBox5.ForeColor = Color.Black;
+                weightTextBox5.ForeColor = Color.Black;
+                unitPriceText5.ForeColor = Color.Black;
+                countTextBox5.ForeColor = Color.Black;
+                purchaseTextBox5.ForeColor = Color.Black;
+                WholesalePriceTextBox5.ForeColor = Color.Black;
+                remark5.ForeColor = Color.Black;
+                BuyerTextBox5.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"6"
+        private void ItemNameChangeCheckBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Blue;
+                itemCategoryTextBox6.ForeColor = Color.Blue;
+                itemDetailTextBox6.ForeColor = Color.Blue;
+                weightTextBox6.ForeColor = Color.Blue;
+                unitPriceText6.ForeColor = Color.Blue;
+                countTextBox6.ForeColor = Color.Blue;
+                purchaseTextBox6.ForeColor = Color.Blue;
+                WholesalePriceTextBox6.ForeColor = Color.Blue;
+                remark6.ForeColor = Color.Blue;
+                BuyerTextBox6.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Purple;
+                itemCategoryTextBox6.ForeColor = Color.Purple;
+                itemDetailTextBox6.ForeColor = Color.Purple;
+                weightTextBox6.ForeColor = Color.Purple;
+                unitPriceText6.ForeColor = Color.Purple;
+                countTextBox6.ForeColor = Color.Purple;
+                purchaseTextBox6.ForeColor = Color.Purple;
+                WholesalePriceTextBox6.ForeColor = Color.Purple;
+                remark6.ForeColor = Color.Purple;
+                BuyerTextBox6.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Red;
+                itemCategoryTextBox6.ForeColor = Color.Red;
+                itemDetailTextBox6.ForeColor = Color.Red;
+                weightTextBox6.ForeColor = Color.Red;
+                unitPriceText6.ForeColor = Color.Red;
+                countTextBox6.ForeColor = Color.Red;
+                purchaseTextBox6.ForeColor = Color.Red;
+                WholesalePriceTextBox6.ForeColor = Color.Red;
+                remark6.ForeColor = Color.Red;
+                BuyerTextBox6.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Black;
+                itemCategoryTextBox6.ForeColor = Color.Black;
+                itemDetailTextBox6.ForeColor = Color.Black;
+                weightTextBox6.ForeColor = Color.Black;
+                unitPriceText6.ForeColor = Color.Black;
+                countTextBox6.ForeColor = Color.Black;
+                purchaseTextBox6.ForeColor = Color.Black;
+                WholesalePriceTextBox6.ForeColor = Color.Black;
+                remark6.ForeColor = Color.Black;
+                BuyerTextBox6.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"7"
+        private void ItemNameChangeCheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Blue;
+                itemCategoryTextBox7.ForeColor = Color.Blue;
+                itemDetailTextBox7.ForeColor = Color.Blue;
+                weightTextBox7.ForeColor = Color.Blue;
+                unitPriceText7.ForeColor = Color.Blue;
+                countTextBox7.ForeColor = Color.Blue;
+                purchaseTextBox7.ForeColor = Color.Blue;
+                WholesalePriceTextBox7.ForeColor = Color.Blue;
+                remark7.ForeColor = Color.Blue;
+                BuyerTextBox7.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Purple;
+                itemCategoryTextBox7.ForeColor = Color.Purple;
+                itemDetailTextBox7.ForeColor = Color.Purple;
+                weightTextBox7.ForeColor = Color.Purple;
+                unitPriceText7.ForeColor = Color.Purple;
+                countTextBox7.ForeColor = Color.Purple;
+                purchaseTextBox7.ForeColor = Color.Purple;
+                WholesalePriceTextBox7.ForeColor = Color.Purple;
+                remark7.ForeColor = Color.Purple;
+                BuyerTextBox7.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Red;
+                itemCategoryTextBox7.ForeColor = Color.Red;
+                itemDetailTextBox7.ForeColor = Color.Red;
+                weightTextBox7.ForeColor = Color.Red;
+                unitPriceText7.ForeColor = Color.Red;
+                countTextBox7.ForeColor = Color.Red;
+                purchaseTextBox7.ForeColor = Color.Red;
+                WholesalePriceTextBox7.ForeColor = Color.Red;
+                remark7.ForeColor = Color.Red;
+                BuyerTextBox7.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Black;
+                itemCategoryTextBox7.ForeColor = Color.Black;
+                itemDetailTextBox7.ForeColor = Color.Black;
+                weightTextBox7.ForeColor = Color.Black;
+                unitPriceText7.ForeColor = Color.Black;
+                countTextBox7.ForeColor = Color.Black;
+                purchaseTextBox7.ForeColor = Color.Black;
+                WholesalePriceTextBox7.ForeColor = Color.Black;
+                remark7.ForeColor = Color.Black;
+                BuyerTextBox7.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"8"
+        private void ItemNameChangeCheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Blue;
+                itemCategoryTextBox8.ForeColor = Color.Blue;
+                itemDetailTextBox8.ForeColor = Color.Blue;
+                weightTextBox8.ForeColor = Color.Blue;
+                unitPriceText8.ForeColor = Color.Blue;
+                countTextBox8.ForeColor = Color.Blue;
+                purchaseTextBox8.ForeColor = Color.Blue;
+                WholesalePriceTextBox8.ForeColor = Color.Blue;
+                remark8.ForeColor = Color.Blue;
+                BuyerTextBox8.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Purple;
+                itemCategoryTextBox8.ForeColor = Color.Purple;
+                itemDetailTextBox8.ForeColor = Color.Purple;
+                weightTextBox8.ForeColor = Color.Purple;
+                unitPriceText8.ForeColor = Color.Purple;
+                countTextBox8.ForeColor = Color.Purple;
+                purchaseTextBox8.ForeColor = Color.Purple;
+                WholesalePriceTextBox8.ForeColor = Color.Purple;
+                remark8.ForeColor = Color.Purple;
+                BuyerTextBox8.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Red;
+                itemCategoryTextBox8.ForeColor = Color.Red;
+                itemDetailTextBox8.ForeColor = Color.Red;
+                weightTextBox8.ForeColor = Color.Red;
+                unitPriceText8.ForeColor = Color.Red;
+                countTextBox8.ForeColor = Color.Red;
+                purchaseTextBox8.ForeColor = Color.Red;
+                WholesalePriceTextBox8.ForeColor = Color.Red;
+                remark8.ForeColor = Color.Red;
+                BuyerTextBox8.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Black;
+                itemCategoryTextBox8.ForeColor = Color.Black;
+                itemDetailTextBox8.ForeColor = Color.Black;
+                weightTextBox8.ForeColor = Color.Black;
+                unitPriceText8.ForeColor = Color.Black;
+                countTextBox8.ForeColor = Color.Black;
+                purchaseTextBox8.ForeColor = Color.Black;
+                WholesalePriceTextBox8.ForeColor = Color.Black;
+                remark8.ForeColor = Color.Black;
+                BuyerTextBox8.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"9"
+        private void ItemNameChangeCheckBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名
+            if (!NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Blue;
+                itemCategoryTextBox9.ForeColor = Color.Blue;
+                itemDetailTextBox9.ForeColor = Color.Blue;
+                weightTextBox9.ForeColor = Color.Blue;
+                unitPriceText9.ForeColor = Color.Blue;
+                countTextBox9.ForeColor = Color.Blue;
+                purchaseTextBox9.ForeColor = Color.Blue;
+                WholesalePriceTextBox9.ForeColor = Color.Blue;
+                remark9.ForeColor = Color.Blue;
+                BuyerTextBox9.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Purple;
+                itemCategoryTextBox9.ForeColor = Color.Purple;
+                itemDetailTextBox9.ForeColor = Color.Purple;
+                weightTextBox9.ForeColor = Color.Purple;
+                unitPriceText9.ForeColor = Color.Purple;
+                countTextBox9.ForeColor = Color.Purple;
+                purchaseTextBox9.ForeColor = Color.Purple;
+                WholesalePriceTextBox9.ForeColor = Color.Purple;
+                remark9.ForeColor = Color.Purple;
+                BuyerTextBox9.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Red;
+                itemCategoryTextBox9.ForeColor = Color.Red;
+                itemDetailTextBox9.ForeColor = Color.Red;
+                weightTextBox9.ForeColor = Color.Red;
+                unitPriceText9.ForeColor = Color.Red;
+                countTextBox9.ForeColor = Color.Red;
+                purchaseTextBox9.ForeColor = Color.Red;
+                WholesalePriceTextBox9.ForeColor = Color.Red;
+                remark9.ForeColor = Color.Red;
+                BuyerTextBox9.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Black;
+                itemCategoryTextBox9.ForeColor = Color.Black;
+                itemDetailTextBox9.ForeColor = Color.Black;
+                weightTextBox9.ForeColor = Color.Black;
+                unitPriceText9.ForeColor = Color.Black;
+                countTextBox9.ForeColor = Color.Black;
+                purchaseTextBox9.ForeColor = Color.Black;
+                WholesalePriceTextBox9.ForeColor = Color.Black;
+                remark9.ForeColor = Color.Black;
+                BuyerTextBox9.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"10"
+        private void ItemNameChangeCheckBox10_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Blue;
+                itemCategoryTextBox10.ForeColor = Color.Blue;
+                itemDetailTextBox10.ForeColor = Color.Blue;
+                weightTextBox10.ForeColor = Color.Blue;
+                unitPriceText10.ForeColor = Color.Blue;
+                countTextBox10.ForeColor = Color.Blue;
+                purchaseTextBox10.ForeColor = Color.Blue;
+                WholesalePriceTextBox10.ForeColor = Color.Blue;
+                remark10.ForeColor = Color.Blue;
+                BuyerTextBox10.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Purple;
+                itemCategoryTextBox10.ForeColor = Color.Purple;
+                itemDetailTextBox10.ForeColor = Color.Purple;
+                weightTextBox10.ForeColor = Color.Purple;
+                unitPriceText10.ForeColor = Color.Purple;
+                countTextBox10.ForeColor = Color.Purple;
+                purchaseTextBox10.ForeColor = Color.Purple;
+                WholesalePriceTextBox10.ForeColor = Color.Purple;
+                remark10.ForeColor = Color.Purple;
+                BuyerTextBox10.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Red;
+                itemCategoryTextBox10.ForeColor = Color.Red;
+                itemDetailTextBox10.ForeColor = Color.Red;
+                weightTextBox10.ForeColor = Color.Red;
+                unitPriceText10.ForeColor = Color.Red;
+                countTextBox10.ForeColor = Color.Red;
+                purchaseTextBox10.ForeColor = Color.Red;
+                WholesalePriceTextBox10.ForeColor = Color.Red;
+                remark10.ForeColor = Color.Red;
+                BuyerTextBox10.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Black;
+                itemCategoryTextBox10.ForeColor = Color.Black;
+                itemDetailTextBox10.ForeColor = Color.Black;
+                weightTextBox10.ForeColor = Color.Black;
+                unitPriceText10.ForeColor = Color.Black;
+                countTextBox10.ForeColor = Color.Black;
+                purchaseTextBox10.ForeColor = Color.Black;
+                WholesalePriceTextBox10.ForeColor = Color.Black;
+                remark10.ForeColor = Color.Black;
+                BuyerTextBox10.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"11"
+        private void ItemNameChangeCheckBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Blue;
+                itemCategoryTextBox11.ForeColor = Color.Blue;
+                itemDetailTextBox11.ForeColor = Color.Blue;
+                weightTextBox11.ForeColor = Color.Blue;
+                unitPriceText11.ForeColor = Color.Blue;
+                countTextBox11.ForeColor = Color.Blue;
+                purchaseTextBox11.ForeColor = Color.Blue;
+                WholesalePriceTextBox11.ForeColor = Color.Blue;
+                remark11.ForeColor = Color.Blue;
+                BuyerTextBox11.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Purple;
+                itemCategoryTextBox11.ForeColor = Color.Purple;
+                itemDetailTextBox11.ForeColor = Color.Purple;
+                weightTextBox11.ForeColor = Color.Purple;
+                unitPriceText11.ForeColor = Color.Purple;
+                countTextBox11.ForeColor = Color.Purple;
+                purchaseTextBox11.ForeColor = Color.Purple;
+                WholesalePriceTextBox11.ForeColor = Color.Purple;
+                remark11.ForeColor = Color.Purple;
+                BuyerTextBox11.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Red;
+                itemCategoryTextBox11.ForeColor = Color.Red;
+                itemDetailTextBox11.ForeColor = Color.Red;
+                weightTextBox11.ForeColor = Color.Red;
+                unitPriceText11.ForeColor = Color.Red;
+                countTextBox11.ForeColor = Color.Red;
+                purchaseTextBox11.ForeColor = Color.Red;
+                WholesalePriceTextBox11.ForeColor = Color.Red;
+                remark11.ForeColor = Color.Red;
+                BuyerTextBox11.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Black;
+                itemCategoryTextBox11.ForeColor = Color.Black;
+                itemDetailTextBox11.ForeColor = Color.Black;
+                weightTextBox11.ForeColor = Color.Black;
+                unitPriceText11.ForeColor = Color.Black;
+                countTextBox11.ForeColor = Color.Black;
+                purchaseTextBox11.ForeColor = Color.Black;
+                WholesalePriceTextBox11.ForeColor = Color.Black;
+                remark11.ForeColor = Color.Black;
+                BuyerTextBox11.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"12"
+        private void ItemNameChangeCheckBox12_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Blue;
+                itemCategoryTextBox12.ForeColor = Color.Blue;
+                itemDetailTextBox12.ForeColor = Color.Blue;
+                weightTextBox12.ForeColor = Color.Blue;
+                unitPriceText12.ForeColor = Color.Blue;
+                countTextBox12.ForeColor = Color.Blue;
+                purchaseTextBox12.ForeColor = Color.Blue;
+                WholesalePriceTextBox12.ForeColor = Color.Blue;
+                remark12.ForeColor = Color.Blue;
+                BuyerTextBox12.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Purple;
+                itemCategoryTextBox12.ForeColor = Color.Purple;
+                itemDetailTextBox12.ForeColor = Color.Purple;
+                weightTextBox12.ForeColor = Color.Purple;
+                unitPriceText12.ForeColor = Color.Purple;
+                countTextBox12.ForeColor = Color.Purple;
+                purchaseTextBox12.ForeColor = Color.Purple;
+                WholesalePriceTextBox12.ForeColor = Color.Purple;
+                remark12.ForeColor = Color.Purple;
+                BuyerTextBox12.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Red;
+                itemCategoryTextBox12.ForeColor = Color.Red;
+                itemDetailTextBox12.ForeColor = Color.Red;
+                weightTextBox12.ForeColor = Color.Red;
+                unitPriceText12.ForeColor = Color.Red;
+                countTextBox12.ForeColor = Color.Red;
+                purchaseTextBox12.ForeColor = Color.Red;
+                WholesalePriceTextBox12.ForeColor = Color.Red;
+                remark12.ForeColor = Color.Red;
+                BuyerTextBox12.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Black;
+                itemCategoryTextBox12.ForeColor = Color.Black;
+                itemDetailTextBox12.ForeColor = Color.Black;
+                weightTextBox12.ForeColor = Color.Black;
+                unitPriceText12.ForeColor = Color.Black;
+                countTextBox12.ForeColor = Color.Black;
+                purchaseTextBox12.ForeColor = Color.Black;
+                WholesalePriceTextBox12.ForeColor = Color.Black;
+                remark12.ForeColor = Color.Black;
+                BuyerTextBox12.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"13"
+        private void ItemNameChangeCheckBox13_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Blue;
+                itemCategoryTextBox13.ForeColor = Color.Blue;
+                itemDetailTextBox13.ForeColor = Color.Blue;
+                weightTextBox13.ForeColor = Color.Blue;
+                unitPriceText13.ForeColor = Color.Blue;
+                countTextBox13.ForeColor = Color.Blue;
+                purchaseTextBox13.ForeColor = Color.Blue;
+                WholesalePriceTextBox13.ForeColor = Color.Blue;
+                remark13.ForeColor = Color.Blue;
+                BuyerTextBox13.ForeColor = Color.Blue;
+
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Purple;
+                itemCategoryTextBox13.ForeColor = Color.Purple;
+                itemDetailTextBox13.ForeColor = Color.Purple;
+                weightTextBox13.ForeColor = Color.Purple;
+                unitPriceText13.ForeColor = Color.Purple;
+                countTextBox13.ForeColor = Color.Purple;
+                purchaseTextBox13.ForeColor = Color.Purple;
+                WholesalePriceTextBox13.ForeColor = Color.Purple;
+                remark13.ForeColor = Color.Purple;
+                BuyerTextBox13.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Red;
+                itemCategoryTextBox13.ForeColor = Color.Red;
+                itemDetailTextBox13.ForeColor = Color.Red;
+                weightTextBox13.ForeColor = Color.Red;
+                unitPriceText13.ForeColor = Color.Red;
+                countTextBox13.ForeColor = Color.Red;
+                purchaseTextBox13.ForeColor = Color.Red;
+                WholesalePriceTextBox13.ForeColor = Color.Red;
+                remark13.ForeColor = Color.Red;
+                BuyerTextBox13.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Black;
+                itemCategoryTextBox13.ForeColor = Color.Black;
+                itemDetailTextBox13.ForeColor = Color.Black;
+                weightTextBox13.ForeColor = Color.Black;
+                unitPriceText13.ForeColor = Color.Black;
+                countTextBox13.ForeColor = Color.Black;
+                purchaseTextBox13.ForeColor = Color.Black;
+                WholesalePriceTextBox13.ForeColor = Color.Black;
+                remark13.ForeColor = Color.Black;
+                BuyerTextBox13.ForeColor = Color.Black;
+            }
+        }
+        #endregion
         #endregion
 
-        #region"集計ボタンクリック"
+        #endregion
+
+        #region"登録ボタンクリック"
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("登録・検索しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
                 return;
@@ -2936,6 +4381,8 @@ namespace Flawless_ex
             OtherWholesale = WholeSaleOther;
             OtherProfit = ProFitOther;
             ControlNumber = int.Parse(GradeNumberTextBox.Text);
+
+            
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -2983,7 +4430,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat1;
                         Count = int.Parse(countTextBox1.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || Wholesale != 0) 
                         {
                             SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
                             Buyer = BuyerTextBox1.Text;
@@ -2993,7 +4440,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox1.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data1);
 
@@ -3011,7 +4472,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat2;
                         Count = int.Parse(countTextBox2.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
                             Buyer = BuyerTextBox2.Text;
@@ -3021,7 +4482,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox2.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data2);
 
@@ -3039,7 +4514,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat3;
                         Count = int.Parse(countTextBox3.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
                             Buyer = BuyerTextBox3.Text;
@@ -3049,7 +4524,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox3.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data3);
 
@@ -3067,7 +4556,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat4;
                         Count = int.Parse(countTextBox4.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
                             Buyer = BuyerTextBox4.Text;
@@ -3077,7 +4566,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox4.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data4);
 
@@ -3095,7 +4598,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat5;
                         Count = int.Parse(countTextBox5.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
                             Buyer = BuyerTextBox5.Text;
@@ -3105,7 +4608,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox5.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data5);
 
@@ -3123,7 +4640,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat6;
                         Count = int.Parse(countTextBox6.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
                             Buyer = BuyerTextBox6.Text;
@@ -3133,7 +4650,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox6.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data6);
 
@@ -3151,7 +4682,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat7;
                         Count = int.Parse(countTextBox7.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
                             Buyer = BuyerTextBox7.Text;
@@ -3161,7 +4692,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox7.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data7);
 
@@ -3179,7 +4724,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat8;
                         Count = int.Parse(countTextBox8.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
                             Buyer = BuyerTextBox8.Text;
@@ -3189,7 +4734,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox8.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data8);
 
@@ -3207,7 +4766,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat9;
                         Count = int.Parse(countTextBox9.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
                             Buyer = BuyerTextBox9.Text;
@@ -3217,7 +4776,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox9.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data9);
 
@@ -3235,7 +4808,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat10;
                         Count = int.Parse(countTextBox10.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
                             Buyer = BuyerTextBox10.Text;
@@ -3245,7 +4818,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox10.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data10);
 
@@ -3263,7 +4850,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat11;
                         Count = int.Parse(countTextBox11.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
                             Buyer = BuyerTextBox11.Text;
@@ -3273,7 +4860,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox11.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data11);
 
@@ -3291,7 +4892,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat12;
                         Count = int.Parse(countTextBox12.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
                             Buyer = BuyerTextBox12.Text;
@@ -3301,7 +4902,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox12.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data12);
 
@@ -3319,7 +4934,7 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat13;
                         Count = int.Parse(countTextBox13.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
                             Buyer = BuyerTextBox13.Text;
@@ -3329,7 +4944,21 @@ namespace Flawless_ex
                         {
                             NextMonth = 1;
                         }
-                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "');";
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+
+                        if (ItemNameChangeCheckBox13.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+
+                        Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data13);
 
@@ -3340,13 +4969,439 @@ namespace Flawless_ex
             conn.Close();
             MessageBox.Show("登録しました", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             RegisterButton.Enabled = false;
+            UpdateButton.Enabled = true;
         }
         #endregion
 
         #region"再登録ボタン"
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("再登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
 
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+            #region"list_result への更新"
+            TotalPurchase = PurChase;
+            TotalWholesale = WholeSale;
+            TotalProfit = ProFit;
+            DNumber = SlipNumber;
+            MetalPurchase = PurChaseMetal;
+            MetalWholesale = WholeSaleMetal;
+            MetalProfit = ProFitMetal;
+            DiamondPurchase = PurChaseDiamond;
+            DiamondWholesale = WholeSaleDiamond;
+            DiamondProfit = ProFitDiamond;
+            BrandPurchase = PurChaseBrand;
+            BrandWholesale = WholeSaleBrand;
+            BrandProfit = ProFitBrand;
+            ProductPurchase = PurChaseProduct;
+            ProductWholesale = WholeSaleProduct;
+            ProductProfit = ProFitProduct;
+            OtherPurchase = PurChaseOther;
+            OtherWholesale = WholeSaleOther;
+            OtherProfit = ProFitOther;
+
+            using (transaction = conn.BeginTransaction())
+            {
+                string sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "';";
+                cmd = new NpgsqlCommand(sql_str, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            #endregion
+            #region"list_result2 への更新"
+
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        MainCategoryCode = MainCategoryCode1;
+                        ItemCategoryCode = ItemCategoryCode1;
+                        Wholesale = WholeSaleUnFormat1;
+                        Remark = remark1.Text;
+                        Profit = WholeSaleUnFormat1 - PurchaseUnFormat1;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        {
+                            SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
+                            Buyer = BuyerTextBox1.Text;
+                        }
+
+                        if (NextMonthCheckBox1.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    #endregion
+                    case 2:
+                        MainCategoryCode = MainCategoryCode2;
+                        ItemCategoryCode = ItemCategoryCode2;
+                        Wholesale = WholeSaleUnFormat2;
+                        Remark = remark2.Text;
+                        Profit = WholeSaleUnFormat2 - PurchaseUnFormat2;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
+                            Buyer = BuyerTextBox2.Text;
+                        }
+
+                        if (NextMonthCheckBox2.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 3:
+                        MainCategoryCode = MainCategoryCode3;
+                        ItemCategoryCode = ItemCategoryCode3;
+                        Wholesale = WholeSaleUnFormat3;
+                        Remark = remark3.Text;
+                        Profit = WholeSaleUnFormat3 - PurchaseUnFormat3;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
+                            Buyer = BuyerTextBox3.Text;
+                        }
+
+                        if (NextMonthCheckBox3.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 4:
+                        MainCategoryCode = MainCategoryCode4;
+                        ItemCategoryCode = ItemCategoryCode4;
+                        Wholesale = WholeSaleUnFormat4;
+                        Remark = remark4.Text;
+                        Profit = WholeSaleUnFormat4 - PurchaseUnFormat4;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
+                            Buyer = BuyerTextBox4.Text;
+                        }
+
+                        if (NextMonthCheckBox4.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 5:
+                        MainCategoryCode = MainCategoryCode5;
+                        ItemCategoryCode = ItemCategoryCode5;
+                        Wholesale = WholeSaleUnFormat5;
+                        Remark = remark5.Text;
+                        Profit = WholeSaleUnFormat5 - PurchaseUnFormat5;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
+                            Buyer = BuyerTextBox5.Text;
+                        }
+
+                        if (NextMonthCheckBox5.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 6:
+                        MainCategoryCode = MainCategoryCode6;
+                        ItemCategoryCode = ItemCategoryCode6;
+                        Wholesale = WholeSaleUnFormat6;
+                        Remark = remark6.Text;
+                        Profit = WholeSaleUnFormat6 - PurchaseUnFormat6;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
+                            Buyer = BuyerTextBox6.Text;
+                        }
+
+                        if (NextMonthCheckBox6.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 7:
+                        MainCategoryCode = MainCategoryCode7;
+                        ItemCategoryCode = ItemCategoryCode7;
+                        Wholesale = WholeSaleUnFormat7;
+                        Remark = remark1.Text;
+                        Profit = WholeSaleUnFormat7 - PurchaseUnFormat7;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
+                            Buyer = BuyerTextBox7.Text;
+                        }
+
+                        if (NextMonthCheckBox7.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 8:
+                        MainCategoryCode = MainCategoryCode8;
+                        ItemCategoryCode = ItemCategoryCode8;
+                        Wholesale = WholeSaleUnFormat8;
+                        Remark = remark8.Text;
+                        Profit = WholeSaleUnFormat8 - PurchaseUnFormat8;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
+                            Buyer = BuyerTextBox8.Text;
+                        }
+
+                        if (NextMonthCheckBox8.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 9:
+                        MainCategoryCode = MainCategoryCode9;
+                        ItemCategoryCode = ItemCategoryCode9;
+                        Wholesale = WholeSaleUnFormat9;
+                        Remark = remark9.Text;
+                        Profit = WholeSaleUnFormat9 - PurchaseUnFormat9;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
+                            Buyer = BuyerTextBox9.Text;
+                        }
+
+                        if (NextMonthCheckBox9.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 10:
+                        MainCategoryCode = MainCategoryCode10;
+                        ItemCategoryCode = ItemCategoryCode10;
+                        Wholesale = WholeSaleUnFormat10;
+                        Remark = remark10.Text;
+                        Profit = WholeSaleUnFormat10 - PurchaseUnFormat10;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
+                            Buyer = BuyerTextBox10.Text;
+                        }
+
+                        if (NextMonthCheckBox10.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 11:
+                        MainCategoryCode = MainCategoryCode11;
+                        ItemCategoryCode = ItemCategoryCode11;
+                        Wholesale = WholeSaleUnFormat11;
+                        Remark = remark11.Text;
+                        Profit = WholeSaleUnFormat11 - PurchaseUnFormat11;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        {
+                            SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
+                            Buyer = BuyerTextBox11.Text;
+                        }
+
+                        if (NextMonthCheckBox11.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 12:
+                        MainCategoryCode = MainCategoryCode12;
+                        ItemCategoryCode = ItemCategoryCode12;
+                        Wholesale = WholeSaleUnFormat12;
+                        Remark = remark12.Text;
+                        Profit = WholeSaleUnFormat12 - PurchaseUnFormat12;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
+                            Buyer = BuyerTextBox12.Text;
+                        }
+
+                        if (NextMonthCheckBox12.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                    case 13:
+                        MainCategoryCode = MainCategoryCode13;
+                        ItemCategoryCode = ItemCategoryCode13;
+                        Wholesale = WholeSaleUnFormat13;
+                        Remark = remark13.Text;
+                        Profit = WholeSaleUnFormat13 - PurchaseUnFormat13;
+
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
+                            Buyer = BuyerTextBox13.Text;
+                        }
+
+                        if (NextMonthCheckBox13.Checked)
+                        {
+                            NextMonth = 1;
+                        }
+                        else
+                        {
+                            NextMonth = 0;
+                        }
+                        using (transaction = conn.BeginTransaction())
+                        {
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            cmd = new NpgsqlCommand(sql_str, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        break;
+                }
+            }
+            #endregion
+            conn.Close();
         }
         #endregion
 
@@ -3387,11 +5442,15 @@ namespace Flawless_ex
                 Document = SlipNumber;
                 GRADE = int.Parse(GradeNumberTextBox.Text);
                 AssessmentDate = AssessmentDateTextBox.Text;
+                string SQL = "insert into list_result (type, staff_code, result, sum_money, sum_wholesale_price, profit, document_number) values('" + type + "','" + staff_id + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "');";
+                adapter = new NpgsqlDataAdapter(SQL, conn);
+                adapter.Fill(DataTable);
 
                 for (int i = 1; i <= record; i++)
                 {
                     switch (i)
                     {
+                        #region"１行目"
                         case 1:
                             REMARK = remark1.Text;
                             MainCategoryCode = MainCategoryCode1;
@@ -3420,7 +5479,6 @@ namespace Flawless_ex
                             #endregion
                             if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
                             {
-
                                 WHOLESALE = WholeSaleUnFormat1;
                                 PROFIT = WholeSaleUnFormat1 - PurchaseUnFormat1;
                                 BUYDATE = BuyDateTimePicker1.Value.ToLongDateString();
@@ -3432,11 +5490,12 @@ namespace Flawless_ex
                                 PROFIT = 0;
                             }
 
-
                             sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data1);
                             break;
+                        #endregion
+                        #region"２行目"
                         case 2:
                             REMARK = remark2.Text;
                             MainCategoryCode = MainCategoryCode2;
@@ -3480,6 +5539,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data2);
                             break;
+                        #endregion
+                        #region"３行目"
                         case 3:
                             REMARK = remark3.Text;
                             MainCategoryCode = MainCategoryCode3;
@@ -3523,6 +5584,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data3);
                             break;
+                        #endregion
+                        #region"４行目"
                         case 4:
                             REMARK = remark4.Text;
                             MainCategoryCode = MainCategoryCode4;
@@ -3566,6 +5629,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data4);
                             break;
+                        #endregion
+                        #region"５行目"
                         case 5:
                             REMARK = remark5.Text;
                             MainCategoryCode = MainCategoryCode5;
@@ -3609,6 +5674,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data5);
                             break;
+                        #endregion
+                        #region"６行目"
                         case 6:
                             REMARK = remark6.Text;
                             MainCategoryCode = MainCategoryCode6;
@@ -3652,6 +5719,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data6);
                             break;
+                        #endregion
+                        #region"７行目"
                         case 7:
                             REMARK = remark7.Text;
                             MainCategoryCode = MainCategoryCode7;
@@ -3695,6 +5764,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data7);
                             break;
+                        #endregion
+                        #region"８行目"
                         case 8:
                             REMARK = remark8.Text;
                             MainCategoryCode = MainCategoryCode8;
@@ -3738,6 +5809,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data8);
                             break;
+                        #endregion
+                        #region"９行目"
                         case 9:
                             REMARK = remark9.Text;
                             MainCategoryCode = MainCategoryCode9;
@@ -3781,6 +5854,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data9);
                             break;
+                        #endregion
+                        #region"１０行目"
                         case 10:
                             REMARK = remark10.Text;
                             MainCategoryCode = MainCategoryCode10;
@@ -3824,6 +5899,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data10);
                             break;
+                        #endregion
+                        #region"１１行目"
                         case 11:
                             REMARK = remark11.Text;
                             MainCategoryCode = MainCategoryCode11;
@@ -3867,6 +5944,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data11);
                             break;
+                        #endregion
+                        #region"１２行目"
                         case 12:
                             REMARK = remark12.Text;
                             MainCategoryCode = MainCategoryCode12;
@@ -3910,6 +5989,8 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data12);
                             break;
+                        #endregion
+                        #region"１３行目"
                         case 13:
                             REMARK = remark13.Text;
                             MainCategoryCode = MainCategoryCode13;
@@ -3953,19 +6034,33 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data13);
                             break;
+                            #endregion
                     }
                 }
+                MessageBox.Show("入力されたデータを登録しました。この成績表を登録する場合、次からはは再登録ボタンを押してください。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            RegisterButton.Enabled = false;
             conn.Close();
-            MessageBox.Show("入力されたデータを登録しました。この成績表を登録する場合、次からは再登録ボタンを押してください。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RegisterButton.Enabled = false;
             UpdateButton.Enabled = true;
 
-            ItemNameChange nameChange = new ItemNameChange(recordList, GRADE, staff_id, SlipNumber);
-
+            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass);
             this.Hide();
             nameChange.Show();
         }
         #endregion
+
+        private void ClientInformationButton_Click(object sender, EventArgs e)
+        {
+            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass);
+            this.Hide();
+            clientInformation.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass);
+            this.Hide();
+            monResult.Show();
+        }
     }
 }
