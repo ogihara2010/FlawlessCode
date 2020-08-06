@@ -284,13 +284,14 @@ namespace Flawless_ex
              * 
             */
             #endregion
+
+
             #region"権限"
             if (Access_auth == "C")
             {
                 ItemNameChangeButton.Enabled = false;
             }
             #endregion
-
             SlipNumberTextBox.Text = SlipNumber;
 
             GradeNumberTextBox.Text = SlipNumber.Trim('F');
