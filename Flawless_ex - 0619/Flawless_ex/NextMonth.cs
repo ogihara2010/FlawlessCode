@@ -16,6 +16,7 @@ namespace Flawless_ex
         int grade;
         int antique;
         int id;
+        string access_auth;
         DataTable dt = new DataTable();
         public NextMonth(MainMenu main, int id)
         {
@@ -59,7 +60,7 @@ namespace Flawless_ex
             adapter2.Fill(dt);
             conn2.Close();
 
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, grade, antique, id);
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, grade, antique, id, access_auth);
             this.Close();
             recordList.Show();
         }
