@@ -15,18 +15,21 @@ namespace Flawless_ex
         MainMenu mainMenu;
         int staff_id;
         string data;
-        public CustomerHistorySelect(MainMenu main, int id, string data)
+        string Pass;
+
+        public CustomerHistorySelect(MainMenu main, int id, string data, string pass)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
             this.data = data;
+            this.Pass = pass;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
             data = "S";
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
             this.Hide();
             customerHistory.Show();
         }
@@ -34,7 +37,7 @@ namespace Flawless_ex
         private void Button3_Click(object sender, EventArgs e)
         {
             data = "D";
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
             this.Hide();
             customerHistory.Show();
         }

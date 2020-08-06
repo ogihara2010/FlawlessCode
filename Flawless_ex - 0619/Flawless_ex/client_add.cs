@@ -22,25 +22,28 @@ namespace Flawless_ex
         string address;
         decimal Total;
         string access_auth;
-        public client_add(MainMenu mainMenu, int id, int type)
+        string Pass;
+
+        public client_add(MainMenu mainMenu, int id, int type, string pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
             //this.statement = statement;
             staff_id = id;
             this.type = type;
+            this.Pass = pass;
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, Pass);
             this.Close();
             client_Search.Show();
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, Pass);
             this.Close();
             client_Search.Show();
         }
@@ -96,7 +99,7 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass);
             this.Close();
             statement.Show();
         }
@@ -156,7 +159,7 @@ namespace Flawless_ex
             type = 1;
             staff_name = Name;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass);
             this.Close();
             statement.Show();
         }

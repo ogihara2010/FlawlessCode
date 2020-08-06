@@ -33,6 +33,7 @@ namespace Flawless_ex
         DateTime date;
         int AntiqueNumber ;
         int ID_Number ;
+        string Pass;
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -238,7 +239,7 @@ namespace Flawless_ex
         DataTable DATA13 = new DataTable();
         #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id, string access_auth)
+        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id, string access_auth, string pass)
         {
             InitializeComponent();
 
@@ -251,6 +252,7 @@ namespace Flawless_ex
             this.AntiqueNumber = antique;
             this.ID_Number = id;
             this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
@@ -267,16 +269,22 @@ namespace Flawless_ex
              *成績一覧や印刷プレビューを押せないようにしたら
              *削除予定
             */
-            string sql_str = "select * from statement_data inner join staff_m on statement_data.staff_code = staff_m.staff_code where staff_code = '" + staff_id + "';";
+            string sql_str = "select * from statement_data inner join staff_m on statement_data.staff_code = staff_m.staff_code where statement_data.staff_code = '" + staff_id + "';";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
-            using (reader = cmd.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                using (reader = cmd.ExecuteReader())
                 {
-                    SlipNumber = reader["document_number"].ToString();
-                    Access_auth = reader["access_auth"].ToString();
+                    while (reader.Read())
+                    {
+                        SlipNumber = reader["document_number"].ToString();
+                        Access_auth = reader["access_auth"].ToString();
+                    }
                 }
+            }catch(Exception err)
+            {
+                MessageBox.Show(err.ToString());
             }
             conn.Close();
             /*
@@ -1177,6 +1185,148 @@ namespace Flawless_ex
             #endregion
 
             conn.Close();
+            #region"色"
+            #region"1"
+            itemMainCategoryTextBox1.BackColor = SystemColors.Control;
+            itemCategoryTextBox1.BackColor = SystemColors.Control;
+            itemDetailTextBox1.BackColor = SystemColors.Control;
+            weightTextBox1.BackColor = SystemColors.Control;
+            unitPriceText1.BackColor = SystemColors.Control;
+            countTextBox1.BackColor = SystemColors.Control;
+            purchaseTextBox1.BackColor = SystemColors.Control;
+            #endregion
+            #region"2"
+            itemMainCategoryTextBox2.BackColor = SystemColors.Control;
+            itemCategoryTextBox2.BackColor = SystemColors.Control;
+            itemDetailTextBox2.BackColor = SystemColors.Control;
+            weightTextBox2.BackColor = SystemColors.Control;
+            unitPriceText2.BackColor = SystemColors.Control;
+            countTextBox2.BackColor = SystemColors.Control;
+            purchaseTextBox2.BackColor = SystemColors.Control;
+            #endregion
+            #region"3"
+            itemMainCategoryTextBox3.BackColor = SystemColors.Control;
+            itemCategoryTextBox3.BackColor = SystemColors.Control;
+            itemDetailTextBox3.BackColor = SystemColors.Control;
+            weightTextBox3.BackColor = SystemColors.Control;
+            unitPriceText3.BackColor = SystemColors.Control;
+            countTextBox3.BackColor = SystemColors.Control;
+            purchaseTextBox3.BackColor = SystemColors.Control;
+            #endregion
+            #region"4"
+            itemMainCategoryTextBox4.BackColor = SystemColors.Control;
+            itemCategoryTextBox4.BackColor = SystemColors.Control;
+            itemDetailTextBox4.BackColor = SystemColors.Control;
+            weightTextBox4.BackColor = SystemColors.Control;
+            unitPriceText4.BackColor = SystemColors.Control;
+            countTextBox4.BackColor = SystemColors.Control;
+            purchaseTextBox4.BackColor = SystemColors.Control;
+            #endregion
+            #region"5"
+            itemMainCategoryTextBox5.BackColor = SystemColors.Control;
+            itemCategoryTextBox5.BackColor = SystemColors.Control;
+            itemDetailTextBox5.BackColor = SystemColors.Control;
+            weightTextBox5.BackColor = SystemColors.Control;
+            unitPriceText5.BackColor = SystemColors.Control;
+            countTextBox5.BackColor = SystemColors.Control;
+            purchaseTextBox5.BackColor = SystemColors.Control;
+            #endregion
+            #region"6"
+            itemMainCategoryTextBox6.BackColor = SystemColors.Control;
+            itemCategoryTextBox6.BackColor = SystemColors.Control;
+            itemDetailTextBox6.BackColor = SystemColors.Control;
+            weightTextBox6.BackColor = SystemColors.Control;
+            unitPriceText6.BackColor = SystemColors.Control;
+            countTextBox6.BackColor = SystemColors.Control;
+            purchaseTextBox6.BackColor = SystemColors.Control;
+            #endregion
+            #region"7"
+            itemMainCategoryTextBox7.BackColor = SystemColors.Control;
+            itemCategoryTextBox7.BackColor = SystemColors.Control;
+            itemDetailTextBox7.BackColor = SystemColors.Control;
+            weightTextBox7.BackColor = SystemColors.Control;
+            unitPriceText7.BackColor = SystemColors.Control;
+            countTextBox7.BackColor = SystemColors.Control;
+            purchaseTextBox7.BackColor = SystemColors.Control;
+            #endregion
+            #region"8"
+            itemMainCategoryTextBox8.BackColor = SystemColors.Control;
+            itemCategoryTextBox8.BackColor = SystemColors.Control;
+            itemDetailTextBox8.BackColor = SystemColors.Control;
+            weightTextBox8.BackColor = SystemColors.Control;
+            unitPriceText8.BackColor = SystemColors.Control;
+            countTextBox8.BackColor = SystemColors.Control;
+            purchaseTextBox8.BackColor = SystemColors.Control;
+            #endregion
+            #region"9"
+            itemMainCategoryTextBox9.BackColor = SystemColors.Control;
+            itemCategoryTextBox9.BackColor = SystemColors.Control;
+            itemDetailTextBox9.BackColor = SystemColors.Control;
+            weightTextBox9.BackColor = SystemColors.Control;
+            unitPriceText9.BackColor = SystemColors.Control;
+            countTextBox9.BackColor = SystemColors.Control;
+            purchaseTextBox9.BackColor = SystemColors.Control;
+            #endregion
+            #region"10"
+            itemMainCategoryTextBox10.BackColor = SystemColors.Control;
+            itemCategoryTextBox10.BackColor = SystemColors.Control;
+            itemDetailTextBox10.BackColor = SystemColors.Control;
+            weightTextBox10.BackColor = SystemColors.Control;
+            unitPriceText10.BackColor = SystemColors.Control;
+            countTextBox10.BackColor = SystemColors.Control;
+            purchaseTextBox10.BackColor = SystemColors.Control;
+            #endregion
+            #region"11"
+            itemMainCategoryTextBox11.BackColor = SystemColors.Control;
+            itemCategoryTextBox11.BackColor = SystemColors.Control;
+            itemDetailTextBox11.BackColor = SystemColors.Control;
+            weightTextBox11.BackColor = SystemColors.Control;
+            unitPriceText11.BackColor = SystemColors.Control;
+            countTextBox11.BackColor = SystemColors.Control;
+            purchaseTextBox11.BackColor = SystemColors.Control;
+            #endregion
+            #region"12"
+            itemMainCategoryTextBox12.BackColor = SystemColors.Control;
+            itemCategoryTextBox12.BackColor = SystemColors.Control;
+            itemDetailTextBox12.BackColor = SystemColors.Control;
+            weightTextBox12.BackColor = SystemColors.Control;
+            unitPriceText12.BackColor = SystemColors.Control;
+            countTextBox12.BackColor = SystemColors.Control;
+            purchaseTextBox12.BackColor = SystemColors.Control;
+            #endregion
+            #region"13"
+            itemMainCategoryTextBox13.BackColor = SystemColors.Control;
+            itemCategoryTextBox13.BackColor = SystemColors.Control;
+            itemDetailTextBox13.BackColor = SystemColors.Control;
+            weightTextBox13.BackColor = SystemColors.Control;
+            unitPriceText13.BackColor = SystemColors.Control;
+            countTextBox13.BackColor = SystemColors.Control;
+            purchaseTextBox13.BackColor = SystemColors.Control;
+            #endregion
+            #region"下の表"
+            MetalPurchaseTextBox.BackColor = SystemColors.Control;
+            MetalWholesaleTextBox.BackColor = SystemColors.Control;
+            MetalProfitTextBox.BackColor = SystemColors.Control;
+            DiamondPurchaseTextBox.BackColor = SystemColors.Control;
+            DiamondWholesaleTextBox.BackColor = SystemColors.Control;
+            DiamondProfitTextBox.BackColor = SystemColors.Control;
+            BrandPurchaseTextBox.BackColor = SystemColors.Control;
+            BrandWholesaleTextBox.BackColor = SystemColors.Control;
+            BrandProfitTextBox.BackColor = SystemColors.Control;
+            ProductPurchaseTextBox.BackColor = SystemColors.Control;
+            ProductWholesaleTextBox.BackColor = SystemColors.Control;
+            ProductProfitTextBox.BackColor = SystemColors.Control;
+            OtherPurchaseTextBox.BackColor = SystemColors.Control;
+            OtherWholesaleTextBox.BackColor = SystemColors.Control;
+            OtherProfitTextBox.BackColor = SystemColors.Control;
+            TotalPurchaseTextBox.BackColor = SystemColors.Control;
+            TotalWholesaleTextBox.BackColor = SystemColors.Control;
+            TotalPurchaseTextBox.BackColor = SystemColors.Control;
+            PurchaseTotalTextBox.BackColor = SystemColors.Control;
+            WholesaleTotalTextBox.BackColor = SystemColors.Control;
+            ProfitTotalTextBox.BackColor = SystemColors.Control;
+            #endregion
+            #endregion
             ///<summary>
             ///納品書を検索できるようにする機能を追加したら削除予定
             ///範囲開始
@@ -1198,7 +1348,7 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total) ;
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass) ;
 
             this.Close();
             statement.Show();
@@ -1206,7 +1356,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass);
             statement.Show();
         }
 
@@ -2247,9 +2397,39 @@ namespace Flawless_ex
         #region"上の表"
 
         #region"次月持ち越しチェック"
+        #region"1"
         private void NextMonthCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox1.Checked)
+            //次月・品名両方
+            if (NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Purple;
+                itemCategoryTextBox1.ForeColor = Color.Purple;
+                itemDetailTextBox1.ForeColor = Color.Purple;
+                weightTextBox1.ForeColor = Color.Purple;
+                unitPriceText1.ForeColor = Color.Purple;
+                countTextBox1.ForeColor = Color.Purple;
+                purchaseTextBox1.ForeColor = Color.Purple;
+                WholesalePriceTextBox1.ForeColor = Color.Purple;
+                remark1.ForeColor = Color.Purple;
+                BuyerTextBox1.ForeColor = Color.Purple;
+            }
+            //品名のみ
+            if (!NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Blue;
+                itemCategoryTextBox1.ForeColor = Color.Blue;
+                itemDetailTextBox1.ForeColor = Color.Blue;
+                weightTextBox1.ForeColor = Color.Blue;
+                unitPriceText1.ForeColor = Color.Blue;
+                countTextBox1.ForeColor = Color.Blue;
+                purchaseTextBox1.ForeColor = Color.Blue;
+                WholesalePriceTextBox1.ForeColor = Color.Blue;
+                remark1.ForeColor = Color.Blue;
+                BuyerTextBox1.ForeColor = Color.Blue;
+            }
+            //次月のみ
+            if (NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked) 
             {
                 itemMainCategoryTextBox1.ForeColor = Color.Red;
                 itemCategoryTextBox1.ForeColor = Color.Red;
@@ -2261,16 +2441,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox1.ForeColor = Color.Red;
                 remark1.ForeColor = Color.Red;
                 BuyerTextBox1.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox1.BackColor = SystemColors.Control;
-                itemCategoryTextBox1.BackColor = SystemColors.Control;
-                itemDetailTextBox1.BackColor = SystemColors.Control;
-                weightTextBox1.BackColor = SystemColors.Control;
-                unitPriceText1.BackColor = SystemColors.Control;
-                countTextBox1.BackColor = SystemColors.Control;
-                purchaseTextBox1.BackColor = SystemColors.Control;
             }
-            else
+            //どちらもノーチェック
+            if (!NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked) 
             {
                 itemMainCategoryTextBox1.ForeColor = Color.Black;
                 itemCategoryTextBox1.ForeColor = Color.Black;
@@ -2282,20 +2455,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox1.ForeColor = Color.Black;
                 remark1.ForeColor = Color.Black;
                 BuyerTextBox1.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox1.BackColor = SystemColors.Control;
-                itemCategoryTextBox1.BackColor = SystemColors.Control;
-                itemDetailTextBox1.BackColor = SystemColors.Control;
-                weightTextBox1.BackColor = SystemColors.Control;
-                unitPriceText1.BackColor = SystemColors.Control;
-                countTextBox1.BackColor = SystemColors.Control;
-                purchaseTextBox1.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"2"
         private void NextMonthCheckBox2_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox2.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Blue;
+                itemCategoryTextBox2.ForeColor = Color.Blue;
+                itemDetailTextBox2.ForeColor = Color.Blue;
+                weightTextBox2.ForeColor = Color.Blue;
+                unitPriceText2.ForeColor = Color.Blue;
+                countTextBox2.ForeColor = Color.Blue;
+                purchaseTextBox2.ForeColor = Color.Blue;
+                WholesalePriceTextBox2.ForeColor = Color.Blue;
+                remark2.ForeColor = Color.Blue;
+                BuyerTextBox2.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)        
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Purple;
+                itemCategoryTextBox2.ForeColor = Color.Purple;
+                itemDetailTextBox2.ForeColor = Color.Purple;
+                weightTextBox2.ForeColor = Color.Purple;
+                unitPriceText2.ForeColor = Color.Purple;
+                countTextBox2.ForeColor = Color.Purple;
+                purchaseTextBox2.ForeColor = Color.Purple;
+                WholesalePriceTextBox2.ForeColor = Color.Purple;
+                remark2.ForeColor = Color.Purple;
+                BuyerTextBox2.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)        
             {
                 itemMainCategoryTextBox2.ForeColor = Color.Red;
                 itemCategoryTextBox2.ForeColor = Color.Red;
@@ -2307,16 +2502,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox2.ForeColor = Color.Red;
                 remark2.ForeColor = Color.Red;
                 BuyerTextBox2.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox2.BackColor = SystemColors.Control;
-                itemCategoryTextBox2.BackColor = SystemColors.Control;
-                itemDetailTextBox2.BackColor = SystemColors.Control;
-                weightTextBox2.BackColor = SystemColors.Control;
-                unitPriceText2.BackColor = SystemColors.Control;
-                countTextBox2.BackColor = SystemColors.Control;
-                purchaseTextBox2.BackColor = SystemColors.Control;
             }
-            else
+            //両方空
+            if (!NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
             {
                 itemMainCategoryTextBox2.ForeColor = Color.Black;
                 itemCategoryTextBox2.ForeColor = Color.Black;
@@ -2328,20 +2516,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox2.ForeColor = Color.Black;
                 remark2.ForeColor = Color.Black;
                 BuyerTextBox2.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox2.BackColor = SystemColors.Control;
-                itemCategoryTextBox2.BackColor = SystemColors.Control;
-                itemDetailTextBox2.BackColor = SystemColors.Control;
-                weightTextBox2.BackColor = SystemColors.Control;
-                unitPriceText2.BackColor = SystemColors.Control;
-                countTextBox2.BackColor = SystemColors.Control;
-                purchaseTextBox2.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"3"
         private void NextMonthCheckBox3_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox3.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Blue;
+                itemCategoryTextBox3.ForeColor = Color.Blue;
+                itemDetailTextBox3.ForeColor = Color.Blue;
+                weightTextBox3.ForeColor = Color.Blue;
+                unitPriceText3.ForeColor = Color.Blue;
+                countTextBox3.ForeColor = Color.Blue;
+                purchaseTextBox3.ForeColor = Color.Blue;
+                WholesalePriceTextBox3.ForeColor = Color.Blue;
+                remark3.ForeColor = Color.Blue;
+                BuyerTextBox3.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)        
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Purple;
+                itemCategoryTextBox3.ForeColor = Color.Purple;
+                itemDetailTextBox3.ForeColor = Color.Purple;
+                weightTextBox3.ForeColor = Color.Purple;
+                unitPriceText3.ForeColor = Color.Purple;
+                countTextBox3.ForeColor = Color.Purple;
+                purchaseTextBox3.ForeColor = Color.Purple;
+                WholesalePriceTextBox3.ForeColor = Color.Purple;
+                remark3.ForeColor = Color.Purple;
+                BuyerTextBox3.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)        
             {
                 itemMainCategoryTextBox3.ForeColor = Color.Red;
                 itemCategoryTextBox3.ForeColor = Color.Red;
@@ -2353,16 +2563,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox3.ForeColor = Color.Red;
                 remark3.ForeColor = Color.Red;
                 BuyerTextBox3.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox3.BackColor = SystemColors.Control;
-                itemCategoryTextBox3.BackColor = SystemColors.Control;
-                itemDetailTextBox3.BackColor = SystemColors.Control;
-                weightTextBox3.BackColor = SystemColors.Control;
-                unitPriceText3.BackColor = SystemColors.Control;
-                countTextBox3.BackColor = SystemColors.Control;
-                purchaseTextBox3.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
             {
                 itemMainCategoryTextBox3.ForeColor = Color.Black;
                 itemCategoryTextBox3.ForeColor = Color.Black;
@@ -2374,20 +2577,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox3.ForeColor = Color.Black;
                 remark3.ForeColor = Color.Black;
                 BuyerTextBox3.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox3.BackColor = SystemColors.Control;
-                itemCategoryTextBox3.BackColor = SystemColors.Control;
-                itemDetailTextBox3.BackColor = SystemColors.Control;
-                weightTextBox3.BackColor = SystemColors.Control;
-                unitPriceText3.BackColor = SystemColors.Control;
-                countTextBox3.BackColor = SystemColors.Control;
-                purchaseTextBox3.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"4"
         private void NextMonthCheckBox4_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox4.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Blue;
+                itemCategoryTextBox4.ForeColor = Color.Blue;
+                itemDetailTextBox4.ForeColor = Color.Blue;
+                weightTextBox4.ForeColor = Color.Blue;
+                unitPriceText4.ForeColor = Color.Blue;
+                countTextBox4.ForeColor = Color.Blue;
+                purchaseTextBox4.ForeColor = Color.Blue;
+                WholesalePriceTextBox4.ForeColor = Color.Blue;
+                remark4.ForeColor = Color.Blue;
+                BuyerTextBox4.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)        
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Purple;
+                itemCategoryTextBox4.ForeColor = Color.Purple;
+                itemDetailTextBox4.ForeColor = Color.Purple;
+                weightTextBox4.ForeColor = Color.Purple;
+                unitPriceText4.ForeColor = Color.Purple;
+                countTextBox4.ForeColor = Color.Purple;
+                purchaseTextBox4.ForeColor = Color.Purple;
+                WholesalePriceTextBox4.ForeColor = Color.Purple;
+                remark4.ForeColor = Color.Purple;
+                BuyerTextBox4.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)        
             {
                 itemMainCategoryTextBox4.ForeColor = Color.Red;
                 itemCategoryTextBox4.ForeColor = Color.Red;
@@ -2399,16 +2624,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox4.ForeColor = Color.Red;
                 remark4.ForeColor = Color.Red;
                 BuyerTextBox4.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox4.BackColor = SystemColors.Control;
-                itemCategoryTextBox4.BackColor = SystemColors.Control;
-                itemDetailTextBox4.BackColor = SystemColors.Control;
-                weightTextBox4.BackColor = SystemColors.Control;
-                unitPriceText4.BackColor = SystemColors.Control;
-                countTextBox4.BackColor = SystemColors.Control;
-                purchaseTextBox4.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
             {
                 itemMainCategoryTextBox4.ForeColor = Color.Black;
                 itemCategoryTextBox4.ForeColor = Color.Black;
@@ -2420,20 +2638,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox4.ForeColor = Color.Black;
                 remark4.ForeColor = Color.Black;
                 BuyerTextBox4.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox4.BackColor = SystemColors.Control;
-                itemCategoryTextBox4.BackColor = SystemColors.Control;
-                itemDetailTextBox4.BackColor = SystemColors.Control;
-                weightTextBox4.BackColor = SystemColors.Control;
-                unitPriceText4.BackColor = SystemColors.Control;
-                countTextBox4.BackColor = SystemColors.Control;
-                purchaseTextBox4.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"5"
         private void NextMonthCheckBox5_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox5.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Blue;
+                itemCategoryTextBox5.ForeColor = Color.Blue;
+                itemDetailTextBox5.ForeColor = Color.Blue;
+                weightTextBox5.ForeColor = Color.Blue;
+                unitPriceText5.ForeColor = Color.Blue;
+                countTextBox5.ForeColor = Color.Blue;
+                purchaseTextBox5.ForeColor = Color.Blue;
+                WholesalePriceTextBox5.ForeColor = Color.Blue;
+                remark5.ForeColor = Color.Blue;
+                BuyerTextBox5.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)       
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Purple;
+                itemCategoryTextBox5.ForeColor = Color.Purple;
+                itemDetailTextBox5.ForeColor = Color.Purple;
+                weightTextBox5.ForeColor = Color.Purple;
+                unitPriceText5.ForeColor = Color.Purple;
+                countTextBox5.ForeColor = Color.Purple;
+                purchaseTextBox5.ForeColor = Color.Purple;
+                WholesalePriceTextBox5.ForeColor = Color.Purple;
+                remark5.ForeColor = Color.Purple;
+                BuyerTextBox5.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)        
             {
                 itemMainCategoryTextBox5.ForeColor = Color.Red;
                 itemCategoryTextBox5.ForeColor = Color.Red;
@@ -2445,16 +2685,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox5.ForeColor = Color.Red;
                 remark5.ForeColor = Color.Red;
                 BuyerTextBox5.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox5.BackColor = SystemColors.Control;
-                itemCategoryTextBox5.BackColor = SystemColors.Control;
-                itemDetailTextBox5.BackColor = SystemColors.Control;
-                weightTextBox5.BackColor = SystemColors.Control;
-                unitPriceText5.BackColor = SystemColors.Control;
-                countTextBox5.BackColor = SystemColors.Control;
-                purchaseTextBox5.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
             {
                 itemMainCategoryTextBox5.ForeColor = Color.Black;
                 itemCategoryTextBox5.ForeColor = Color.Black;
@@ -2466,20 +2699,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox5.ForeColor = Color.Black;
                 remark5.ForeColor = Color.Black;
                 BuyerTextBox5.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox5.BackColor = SystemColors.Control;
-                itemCategoryTextBox5.BackColor = SystemColors.Control;
-                itemDetailTextBox5.BackColor = SystemColors.Control;
-                weightTextBox5.BackColor = SystemColors.Control;
-                unitPriceText5.BackColor = SystemColors.Control;
-                countTextBox5.BackColor = SystemColors.Control;
-                purchaseTextBox5.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"6"
         private void NextMonthCheckBox6_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox6.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Blue;
+                itemCategoryTextBox6.ForeColor = Color.Blue;
+                itemDetailTextBox6.ForeColor = Color.Blue;
+                weightTextBox6.ForeColor = Color.Blue;
+                unitPriceText6.ForeColor = Color.Blue;
+                countTextBox6.ForeColor = Color.Blue;
+                purchaseTextBox6.ForeColor = Color.Blue;
+                WholesalePriceTextBox6.ForeColor = Color.Blue;
+                remark6.ForeColor = Color.Blue;
+                BuyerTextBox6.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)        
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Purple;
+                itemCategoryTextBox6.ForeColor = Color.Purple;
+                itemDetailTextBox6.ForeColor = Color.Purple;
+                weightTextBox6.ForeColor = Color.Purple;
+                unitPriceText6.ForeColor = Color.Purple;
+                countTextBox6.ForeColor = Color.Purple;
+                purchaseTextBox6.ForeColor = Color.Purple;
+                WholesalePriceTextBox6.ForeColor = Color.Purple;
+                remark6.ForeColor = Color.Purple;
+                BuyerTextBox6.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)        
             {
                 itemMainCategoryTextBox6.ForeColor = Color.Red;
                 itemCategoryTextBox6.ForeColor = Color.Red;
@@ -2491,16 +2746,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox6.ForeColor = Color.Red;
                 remark6.ForeColor = Color.Red;
                 BuyerTextBox6.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox6.BackColor = SystemColors.Control;
-                itemCategoryTextBox6.BackColor = SystemColors.Control;
-                itemDetailTextBox6.BackColor = SystemColors.Control;
-                weightTextBox6.BackColor = SystemColors.Control;
-                unitPriceText6.BackColor = SystemColors.Control;
-                countTextBox6.BackColor = SystemColors.Control;
-                purchaseTextBox6.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
             {
                 itemMainCategoryTextBox6.ForeColor = Color.Black;
                 itemCategoryTextBox6.ForeColor = Color.Black;
@@ -2512,20 +2760,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox6.ForeColor = Color.Black;
                 remark6.ForeColor = Color.Black;
                 BuyerTextBox6.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox6.BackColor = SystemColors.Control;
-                itemCategoryTextBox6.BackColor = SystemColors.Control;
-                itemDetailTextBox6.BackColor = SystemColors.Control;
-                weightTextBox6.BackColor = SystemColors.Control;
-                unitPriceText6.BackColor = SystemColors.Control;
-                countTextBox6.BackColor = SystemColors.Control;
-                purchaseTextBox6.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"7"
         private void NextMonthCheckBox7_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox7.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Blue;
+                itemCategoryTextBox7.ForeColor = Color.Blue;
+                itemDetailTextBox7.ForeColor = Color.Blue;
+                weightTextBox7.ForeColor = Color.Blue;
+                unitPriceText7.ForeColor = Color.Blue;
+                countTextBox7.ForeColor = Color.Blue;
+                purchaseTextBox7.ForeColor = Color.Blue;
+                WholesalePriceTextBox7.ForeColor = Color.Blue;
+                remark7.ForeColor = Color.Blue;
+                BuyerTextBox7.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)        
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Purple;
+                itemCategoryTextBox7.ForeColor = Color.Purple;
+                itemDetailTextBox7.ForeColor = Color.Purple;
+                weightTextBox7.ForeColor = Color.Purple;
+                unitPriceText7.ForeColor = Color.Purple;
+                countTextBox7.ForeColor = Color.Purple;
+                purchaseTextBox7.ForeColor = Color.Purple;
+                WholesalePriceTextBox7.ForeColor = Color.Purple;
+                remark7.ForeColor = Color.Purple;
+                BuyerTextBox7.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)        
             {
                 itemMainCategoryTextBox7.ForeColor = Color.Red;
                 itemCategoryTextBox7.ForeColor = Color.Red;
@@ -2537,16 +2807,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox7.ForeColor = Color.Red;
                 remark7.ForeColor = Color.Red;
                 BuyerTextBox7.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox7.BackColor = SystemColors.Control;
-                itemCategoryTextBox7.BackColor = SystemColors.Control;
-                itemDetailTextBox7.BackColor = SystemColors.Control;
-                weightTextBox7.BackColor = SystemColors.Control;
-                unitPriceText7.BackColor = SystemColors.Control;
-                countTextBox7.BackColor = SystemColors.Control;
-                purchaseTextBox7.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
             {
                 itemMainCategoryTextBox7.ForeColor = Color.Black;
                 itemCategoryTextBox7.ForeColor = Color.Black;
@@ -2558,20 +2821,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox7.ForeColor = Color.Black;
                 remark7.ForeColor = Color.Black;
                 BuyerTextBox7.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox7.BackColor = SystemColors.Control;
-                itemCategoryTextBox7.BackColor = SystemColors.Control;
-                itemDetailTextBox7.BackColor = SystemColors.Control;
-                weightTextBox7.BackColor = SystemColors.Control;
-                unitPriceText7.BackColor = SystemColors.Control;
-                countTextBox7.BackColor = SystemColors.Control;
-                purchaseTextBox7.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"8"
         private void NextMonthCheckBox8_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox8.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Blue;
+                itemCategoryTextBox8.ForeColor = Color.Blue;
+                itemDetailTextBox8.ForeColor = Color.Blue;
+                weightTextBox8.ForeColor = Color.Blue;
+                unitPriceText8.ForeColor = Color.Blue;
+                countTextBox8.ForeColor = Color.Blue;
+                purchaseTextBox8.ForeColor = Color.Blue;
+                WholesalePriceTextBox8.ForeColor = Color.Blue;
+                remark8.ForeColor = Color.Blue;
+                BuyerTextBox8.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)        
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Purple;
+                itemCategoryTextBox8.ForeColor = Color.Purple;
+                itemDetailTextBox8.ForeColor = Color.Purple;
+                weightTextBox8.ForeColor = Color.Purple;
+                unitPriceText8.ForeColor = Color.Purple;
+                countTextBox8.ForeColor = Color.Purple;
+                purchaseTextBox8.ForeColor = Color.Purple;
+                WholesalePriceTextBox8.ForeColor = Color.Purple;
+                remark8.ForeColor = Color.Purple;
+                BuyerTextBox8.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)        
             {
                 itemMainCategoryTextBox8.ForeColor = Color.Red;
                 itemCategoryTextBox8.ForeColor = Color.Red;
@@ -2583,16 +2868,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox8.ForeColor = Color.Red;
                 remark8.ForeColor = Color.Red;
                 BuyerTextBox8.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox8.BackColor = SystemColors.Control;
-                itemCategoryTextBox8.BackColor = SystemColors.Control;
-                itemDetailTextBox8.BackColor = SystemColors.Control;
-                weightTextBox8.BackColor = SystemColors.Control;
-                unitPriceText8.BackColor = SystemColors.Control;
-                countTextBox8.BackColor = SystemColors.Control;
-                purchaseTextBox8.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
             {
                 itemMainCategoryTextBox8.ForeColor = Color.Black;
                 itemCategoryTextBox8.ForeColor = Color.Black;
@@ -2604,20 +2882,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox8.ForeColor = Color.Black;
                 remark8.ForeColor = Color.Black;
                 BuyerTextBox8.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox8.BackColor = SystemColors.Control;
-                itemCategoryTextBox8.BackColor = SystemColors.Control;
-                itemDetailTextBox8.BackColor = SystemColors.Control;
-                weightTextBox8.BackColor = SystemColors.Control;
-                unitPriceText8.BackColor = SystemColors.Control;
-                countTextBox8.BackColor = SystemColors.Control;
-                purchaseTextBox8.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"9"
         private void NextMonthCheckBox9_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox9.Checked)
+            //品名
+            if (!NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Blue;
+                itemCategoryTextBox9.ForeColor = Color.Blue;
+                itemDetailTextBox9.ForeColor = Color.Blue;
+                weightTextBox9.ForeColor = Color.Blue;
+                unitPriceText9.ForeColor = Color.Blue;
+                countTextBox9.ForeColor = Color.Blue;
+                purchaseTextBox9.ForeColor = Color.Blue;
+                WholesalePriceTextBox9.ForeColor = Color.Blue;
+                remark9.ForeColor = Color.Blue;
+                BuyerTextBox9.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)        
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Purple;
+                itemCategoryTextBox9.ForeColor = Color.Purple;
+                itemDetailTextBox9.ForeColor = Color.Purple;
+                weightTextBox9.ForeColor = Color.Purple;
+                unitPriceText9.ForeColor = Color.Purple;
+                countTextBox9.ForeColor = Color.Purple;
+                purchaseTextBox9.ForeColor = Color.Purple;
+                WholesalePriceTextBox9.ForeColor = Color.Purple;
+                remark9.ForeColor = Color.Purple;
+                BuyerTextBox9.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)        
             {
                 itemMainCategoryTextBox9.ForeColor = Color.Red;
                 itemCategoryTextBox9.ForeColor = Color.Red;
@@ -2629,16 +2929,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox9.ForeColor = Color.Red;
                 remark9.ForeColor = Color.Red;
                 BuyerTextBox9.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox9.BackColor = SystemColors.Control;
-                itemCategoryTextBox9.BackColor = SystemColors.Control;
-                itemDetailTextBox9.BackColor = SystemColors.Control;
-                weightTextBox9.BackColor = SystemColors.Control;
-                unitPriceText9.BackColor = SystemColors.Control;
-                countTextBox9.BackColor = SystemColors.Control;
-                purchaseTextBox9.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
             {
                 itemMainCategoryTextBox9.ForeColor = Color.Black;
                 itemCategoryTextBox9.ForeColor = Color.Black;
@@ -2650,20 +2943,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox9.ForeColor = Color.Black;
                 remark9.ForeColor = Color.Black;
                 BuyerTextBox9.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox9.BackColor = SystemColors.Control;
-                itemCategoryTextBox9.BackColor = SystemColors.Control;
-                itemDetailTextBox9.BackColor = SystemColors.Control;
-                weightTextBox9.BackColor = SystemColors.Control;
-                unitPriceText9.BackColor = SystemColors.Control;
-                countTextBox9.BackColor = SystemColors.Control;
-                purchaseTextBox9.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"10"
         private void NextMonthCheckBox10_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox10.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Blue;
+                itemCategoryTextBox10.ForeColor = Color.Blue;
+                itemDetailTextBox10.ForeColor = Color.Blue;
+                weightTextBox10.ForeColor = Color.Blue;
+                unitPriceText10.ForeColor = Color.Blue;
+                countTextBox10.ForeColor = Color.Blue;
+                purchaseTextBox10.ForeColor = Color.Blue;
+                WholesalePriceTextBox10.ForeColor = Color.Blue;
+                remark10.ForeColor = Color.Blue;
+                BuyerTextBox10.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)        
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Purple;
+                itemCategoryTextBox10.ForeColor = Color.Purple;
+                itemDetailTextBox10.ForeColor = Color.Purple;
+                weightTextBox10.ForeColor = Color.Purple;
+                unitPriceText10.ForeColor = Color.Purple;
+                countTextBox10.ForeColor = Color.Purple;
+                purchaseTextBox10.ForeColor = Color.Purple;
+                WholesalePriceTextBox10.ForeColor = Color.Purple;
+                remark10.ForeColor = Color.Purple;
+                BuyerTextBox10.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)       
             {
                 itemMainCategoryTextBox10.ForeColor = Color.Red;
                 itemCategoryTextBox10.ForeColor = Color.Red;
@@ -2675,16 +2990,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox10.ForeColor = Color.Red;
                 remark10.ForeColor = Color.Red;
                 BuyerTextBox10.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox10.BackColor = SystemColors.Control;
-                itemCategoryTextBox10.BackColor = SystemColors.Control;
-                itemDetailTextBox10.BackColor = SystemColors.Control;
-                weightTextBox10.BackColor = SystemColors.Control;
-                unitPriceText10.BackColor = SystemColors.Control;
-                countTextBox10.BackColor = SystemColors.Control;
-                purchaseTextBox10.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
             {
                 itemMainCategoryTextBox10.ForeColor = Color.Black;
                 itemCategoryTextBox10.ForeColor = Color.Black;
@@ -2696,20 +3004,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox10.ForeColor = Color.Black;
                 remark10.ForeColor = Color.Black;
                 BuyerTextBox10.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox10.BackColor = SystemColors.Control;
-                itemCategoryTextBox10.BackColor = SystemColors.Control;
-                itemDetailTextBox10.BackColor = SystemColors.Control;
-                weightTextBox10.BackColor = SystemColors.Control;
-                unitPriceText10.BackColor = SystemColors.Control;
-                countTextBox10.BackColor = SystemColors.Control;
-                purchaseTextBox10.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"11"
         private void NextMonthCheckBox11_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox11.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Blue;
+                itemCategoryTextBox11.ForeColor = Color.Blue;
+                itemDetailTextBox11.ForeColor = Color.Blue;
+                weightTextBox11.ForeColor = Color.Blue;
+                unitPriceText11.ForeColor = Color.Blue;
+                countTextBox11.ForeColor = Color.Blue;
+                purchaseTextBox11.ForeColor = Color.Blue;
+                WholesalePriceTextBox11.ForeColor = Color.Blue;
+                remark11.ForeColor = Color.Blue;
+                BuyerTextBox11.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)        
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Purple;
+                itemCategoryTextBox11.ForeColor = Color.Purple;
+                itemDetailTextBox11.ForeColor = Color.Purple;
+                weightTextBox11.ForeColor = Color.Purple;
+                unitPriceText11.ForeColor = Color.Purple;
+                countTextBox11.ForeColor = Color.Purple;
+                purchaseTextBox11.ForeColor = Color.Purple;
+                WholesalePriceTextBox11.ForeColor = Color.Purple;
+                remark11.ForeColor = Color.Purple;
+                BuyerTextBox11.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)        
             {
                 itemMainCategoryTextBox11.ForeColor = Color.Red;
                 itemCategoryTextBox11.ForeColor = Color.Red;
@@ -2721,16 +3051,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox11.ForeColor = Color.Red;
                 remark11.ForeColor = Color.Red;
                 BuyerTextBox11.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox11.BackColor = SystemColors.Control;
-                itemCategoryTextBox11.BackColor = SystemColors.Control;
-                itemDetailTextBox11.BackColor = SystemColors.Control;
-                weightTextBox11.BackColor = SystemColors.Control;
-                unitPriceText11.BackColor = SystemColors.Control;
-                countTextBox11.BackColor = SystemColors.Control;
-                purchaseTextBox11.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
             {
                 itemMainCategoryTextBox11.ForeColor = Color.Black;
                 itemCategoryTextBox11.ForeColor = Color.Black;
@@ -2742,20 +3065,42 @@ namespace Flawless_ex
                 WholesalePriceTextBox11.ForeColor = Color.Black;
                 remark11.ForeColor = Color.Black;
                 BuyerTextBox11.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox11.BackColor = SystemColors.Control;
-                itemCategoryTextBox11.BackColor = SystemColors.Control;
-                itemDetailTextBox11.BackColor = SystemColors.Control;
-                weightTextBox11.BackColor = SystemColors.Control;
-                unitPriceText11.BackColor = SystemColors.Control;
-                countTextBox11.BackColor = SystemColors.Control;
-                purchaseTextBox11.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"12"
         private void NextMonthCheckBox12_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox12.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Blue;
+                itemCategoryTextBox12.ForeColor = Color.Blue;
+                itemDetailTextBox12.ForeColor = Color.Blue;
+                weightTextBox12.ForeColor = Color.Blue;
+                unitPriceText12.ForeColor = Color.Blue;
+                countTextBox12.ForeColor = Color.Blue;
+                purchaseTextBox12.ForeColor = Color.Blue;
+                WholesalePriceTextBox12.ForeColor = Color.Blue;
+                remark12.ForeColor = Color.Blue;
+                BuyerTextBox12.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)        
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Purple;
+                itemCategoryTextBox12.ForeColor = Color.Purple;
+                itemDetailTextBox12.ForeColor = Color.Purple;
+                weightTextBox12.ForeColor = Color.Purple;
+                unitPriceText12.ForeColor = Color.Purple;
+                countTextBox12.ForeColor = Color.Purple;
+                purchaseTextBox12.ForeColor = Color.Purple;
+                WholesalePriceTextBox12.ForeColor = Color.Purple;
+                remark12.ForeColor = Color.Purple;
+                BuyerTextBox12.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)        
             {
                 itemMainCategoryTextBox12.ForeColor = Color.Red;
                 itemCategoryTextBox12.ForeColor = Color.Red;
@@ -2767,16 +3112,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox12.ForeColor = Color.Red;
                 remark12.ForeColor = Color.Red;
                 BuyerTextBox12.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox12.BackColor = SystemColors.Control;
-                itemCategoryTextBox12.BackColor = SystemColors.Control;
-                itemDetailTextBox12.BackColor = SystemColors.Control;
-                weightTextBox12.BackColor = SystemColors.Control;
-                unitPriceText12.BackColor = SystemColors.Control;
-                countTextBox12.BackColor = SystemColors.Control;
-                purchaseTextBox12.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
             {
                 itemMainCategoryTextBox12.ForeColor = Color.Black;
                 itemCategoryTextBox12.ForeColor = Color.Black;
@@ -2788,20 +3126,43 @@ namespace Flawless_ex
                 WholesalePriceTextBox12.ForeColor = Color.Black;
                 remark12.ForeColor = Color.Black;
                 BuyerTextBox12.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox12.BackColor = SystemColors.Control;
-                itemCategoryTextBox12.BackColor = SystemColors.Control;
-                itemDetailTextBox12.BackColor = SystemColors.Control;
-                weightTextBox12.BackColor = SystemColors.Control;
-                unitPriceText12.BackColor = SystemColors.Control;
-                countTextBox12.BackColor = SystemColors.Control;
-                purchaseTextBox12.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
+        #region"13"
         private void NextMonthCheckBox13_CheckedChanged(object sender, EventArgs e)
         {
-            if (NextMonthCheckBox13.Checked)
+            //品名のみ
+            if (!NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Blue;
+                itemCategoryTextBox13.ForeColor = Color.Blue;
+                itemDetailTextBox13.ForeColor = Color.Blue;
+                weightTextBox13.ForeColor = Color.Blue;
+                unitPriceText13.ForeColor = Color.Blue;
+                countTextBox13.ForeColor = Color.Blue;
+                purchaseTextBox13.ForeColor = Color.Blue;
+                WholesalePriceTextBox13.ForeColor = Color.Blue;
+                remark13.ForeColor = Color.Blue;
+                BuyerTextBox13.ForeColor = Color.Blue;
+
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)        
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Purple;
+                itemCategoryTextBox13.ForeColor = Color.Purple;
+                itemDetailTextBox13.ForeColor = Color.Purple;
+                weightTextBox13.ForeColor = Color.Purple;
+                unitPriceText13.ForeColor = Color.Purple;
+                countTextBox13.ForeColor = Color.Purple;
+                purchaseTextBox13.ForeColor = Color.Purple;
+                WholesalePriceTextBox13.ForeColor = Color.Purple;
+                remark13.ForeColor = Color.Purple;
+                BuyerTextBox13.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)        
             {
                 itemMainCategoryTextBox13.ForeColor = Color.Red;
                 itemCategoryTextBox13.ForeColor = Color.Red;
@@ -2813,16 +3174,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox13.ForeColor = Color.Red;
                 remark13.ForeColor = Color.Red;
                 BuyerTextBox13.ForeColor = Color.Red;
-
-                itemMainCategoryTextBox13.BackColor = SystemColors.Control;
-                itemCategoryTextBox13.BackColor = SystemColors.Control;
-                itemDetailTextBox13.BackColor = SystemColors.Control;
-                weightTextBox13.BackColor = SystemColors.Control;
-                unitPriceText13.BackColor = SystemColors.Control;
-                countTextBox13.BackColor = SystemColors.Control;
-                purchaseTextBox13.BackColor = SystemColors.Control;
             }
-            else
+            //空
+            if (!NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
             {
                 itemMainCategoryTextBox13.ForeColor = Color.Black;
                 itemCategoryTextBox13.ForeColor = Color.Black;
@@ -2834,17 +3188,9 @@ namespace Flawless_ex
                 WholesalePriceTextBox13.ForeColor = Color.Black;
                 remark13.ForeColor = Color.Black;
                 BuyerTextBox13.ForeColor = Color.Black;
-
-                itemMainCategoryTextBox13.BackColor = SystemColors.Control;
-                itemCategoryTextBox13.BackColor = SystemColors.Control;
-                itemDetailTextBox13.BackColor = SystemColors.Control;
-                weightTextBox13.BackColor = SystemColors.Control;
-                unitPriceText13.BackColor = SystemColors.Control;
-                countTextBox13.BackColor = SystemColors.Control;
-                purchaseTextBox13.BackColor = SystemColors.Control;
             }
         }
-
+        #endregion
         #endregion
 
         #region"単価の数値を３桁区切りで表示 TextChangedイベント"
@@ -3201,6 +3547,803 @@ namespace Flawless_ex
                 first = true;
             }
         }
+        #endregion
+
+        #region"品名変更ボタン　色"
+        #region"1"
+        private void ItemNameChangeCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //次月・品名両方
+            if (NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Purple;
+                itemCategoryTextBox1.ForeColor = Color.Purple;
+                itemDetailTextBox1.ForeColor = Color.Purple;
+                weightTextBox1.ForeColor = Color.Purple;
+                unitPriceText1.ForeColor = Color.Purple;
+                countTextBox1.ForeColor = Color.Purple;
+                purchaseTextBox1.ForeColor = Color.Purple;
+                WholesalePriceTextBox1.ForeColor = Color.Purple;
+                remark1.ForeColor = Color.Purple;
+                BuyerTextBox1.ForeColor = Color.Purple;
+            }
+            //品名のみ
+            if (!NextMonthCheckBox1.Checked && ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Blue;
+                itemCategoryTextBox1.ForeColor = Color.Blue;
+                itemDetailTextBox1.ForeColor = Color.Blue;
+                weightTextBox1.ForeColor = Color.Blue;
+                unitPriceText1.ForeColor = Color.Blue;
+                countTextBox1.ForeColor = Color.Blue;
+                purchaseTextBox1.ForeColor = Color.Blue;
+                WholesalePriceTextBox1.ForeColor = Color.Blue;
+                remark1.ForeColor = Color.Blue;
+                BuyerTextBox1.ForeColor = Color.Blue;
+            }
+            //次月のみ
+            if (NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Red;
+                itemCategoryTextBox1.ForeColor = Color.Red;
+                itemDetailTextBox1.ForeColor = Color.Red;
+                weightTextBox1.ForeColor = Color.Red;
+                unitPriceText1.ForeColor = Color.Red;
+                countTextBox1.ForeColor = Color.Red;
+                purchaseTextBox1.ForeColor = Color.Red;
+                WholesalePriceTextBox1.ForeColor = Color.Red;
+                remark1.ForeColor = Color.Red;
+                BuyerTextBox1.ForeColor = Color.Red;
+            }
+            //どちらもノーチェック
+            if (!NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked)
+            {
+                itemMainCategoryTextBox1.ForeColor = Color.Black;
+                itemCategoryTextBox1.ForeColor = Color.Black;
+                itemDetailTextBox1.ForeColor = Color.Black;
+                weightTextBox1.ForeColor = Color.Black;
+                unitPriceText1.ForeColor = Color.Black;
+                countTextBox1.ForeColor = Color.Black;
+                purchaseTextBox1.ForeColor = Color.Black;
+                WholesalePriceTextBox1.ForeColor = Color.Black;
+                remark1.ForeColor = Color.Black;
+                BuyerTextBox1.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"2"
+        private void ItemNameChangeCheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Blue;
+                itemCategoryTextBox2.ForeColor = Color.Blue;
+                itemDetailTextBox2.ForeColor = Color.Blue;
+                weightTextBox2.ForeColor = Color.Blue;
+                unitPriceText2.ForeColor = Color.Blue;
+                countTextBox2.ForeColor = Color.Blue;
+                purchaseTextBox2.ForeColor = Color.Blue;
+                WholesalePriceTextBox2.ForeColor = Color.Blue;
+                remark2.ForeColor = Color.Blue;
+                BuyerTextBox2.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Purple;
+                itemCategoryTextBox2.ForeColor = Color.Purple;
+                itemDetailTextBox2.ForeColor = Color.Purple;
+                weightTextBox2.ForeColor = Color.Purple;
+                unitPriceText2.ForeColor = Color.Purple;
+                countTextBox2.ForeColor = Color.Purple;
+                purchaseTextBox2.ForeColor = Color.Purple;
+                WholesalePriceTextBox2.ForeColor = Color.Purple;
+                remark2.ForeColor = Color.Purple;
+                BuyerTextBox2.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Red;
+                itemCategoryTextBox2.ForeColor = Color.Red;
+                itemDetailTextBox2.ForeColor = Color.Red;
+                weightTextBox2.ForeColor = Color.Red;
+                unitPriceText2.ForeColor = Color.Red;
+                countTextBox2.ForeColor = Color.Red;
+                purchaseTextBox2.ForeColor = Color.Red;
+                WholesalePriceTextBox2.ForeColor = Color.Red;
+                remark2.ForeColor = Color.Red;
+                BuyerTextBox2.ForeColor = Color.Red;
+            }
+            //両方空
+            if (!NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
+            {
+                itemMainCategoryTextBox2.ForeColor = Color.Black;
+                itemCategoryTextBox2.ForeColor = Color.Black;
+                itemDetailTextBox2.ForeColor = Color.Black;
+                weightTextBox2.ForeColor = Color.Black;
+                unitPriceText2.ForeColor = Color.Black;
+                countTextBox2.ForeColor = Color.Black;
+                purchaseTextBox2.ForeColor = Color.Black;
+                WholesalePriceTextBox2.ForeColor = Color.Black;
+                remark2.ForeColor = Color.Black;
+                BuyerTextBox2.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"3"
+        private void ItemNameChangeCheckBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Blue;
+                itemCategoryTextBox3.ForeColor = Color.Blue;
+                itemDetailTextBox3.ForeColor = Color.Blue;
+                weightTextBox3.ForeColor = Color.Blue;
+                unitPriceText3.ForeColor = Color.Blue;
+                countTextBox3.ForeColor = Color.Blue;
+                purchaseTextBox3.ForeColor = Color.Blue;
+                WholesalePriceTextBox3.ForeColor = Color.Blue;
+                remark3.ForeColor = Color.Blue;
+                BuyerTextBox3.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Purple;
+                itemCategoryTextBox3.ForeColor = Color.Purple;
+                itemDetailTextBox3.ForeColor = Color.Purple;
+                weightTextBox3.ForeColor = Color.Purple;
+                unitPriceText3.ForeColor = Color.Purple;
+                countTextBox3.ForeColor = Color.Purple;
+                purchaseTextBox3.ForeColor = Color.Purple;
+                WholesalePriceTextBox3.ForeColor = Color.Purple;
+                remark3.ForeColor = Color.Purple;
+                BuyerTextBox3.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Red;
+                itemCategoryTextBox3.ForeColor = Color.Red;
+                itemDetailTextBox3.ForeColor = Color.Red;
+                weightTextBox3.ForeColor = Color.Red;
+                unitPriceText3.ForeColor = Color.Red;
+                countTextBox3.ForeColor = Color.Red;
+                purchaseTextBox3.ForeColor = Color.Red;
+                WholesalePriceTextBox3.ForeColor = Color.Red;
+                remark3.ForeColor = Color.Red;
+                BuyerTextBox3.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
+            {
+                itemMainCategoryTextBox3.ForeColor = Color.Black;
+                itemCategoryTextBox3.ForeColor = Color.Black;
+                itemDetailTextBox3.ForeColor = Color.Black;
+                weightTextBox3.ForeColor = Color.Black;
+                unitPriceText3.ForeColor = Color.Black;
+                countTextBox3.ForeColor = Color.Black;
+                purchaseTextBox3.ForeColor = Color.Black;
+                WholesalePriceTextBox3.ForeColor = Color.Black;
+                remark3.ForeColor = Color.Black;
+                BuyerTextBox3.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"4"
+        private void ItemNameChangeCheckBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Blue;
+                itemCategoryTextBox4.ForeColor = Color.Blue;
+                itemDetailTextBox4.ForeColor = Color.Blue;
+                weightTextBox4.ForeColor = Color.Blue;
+                unitPriceText4.ForeColor = Color.Blue;
+                countTextBox4.ForeColor = Color.Blue;
+                purchaseTextBox4.ForeColor = Color.Blue;
+                WholesalePriceTextBox4.ForeColor = Color.Blue;
+                remark4.ForeColor = Color.Blue;
+                BuyerTextBox4.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Purple;
+                itemCategoryTextBox4.ForeColor = Color.Purple;
+                itemDetailTextBox4.ForeColor = Color.Purple;
+                weightTextBox4.ForeColor = Color.Purple;
+                unitPriceText4.ForeColor = Color.Purple;
+                countTextBox4.ForeColor = Color.Purple;
+                purchaseTextBox4.ForeColor = Color.Purple;
+                WholesalePriceTextBox4.ForeColor = Color.Purple;
+                remark4.ForeColor = Color.Purple;
+                BuyerTextBox4.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Red;
+                itemCategoryTextBox4.ForeColor = Color.Red;
+                itemDetailTextBox4.ForeColor = Color.Red;
+                weightTextBox4.ForeColor = Color.Red;
+                unitPriceText4.ForeColor = Color.Red;
+                countTextBox4.ForeColor = Color.Red;
+                purchaseTextBox4.ForeColor = Color.Red;
+                WholesalePriceTextBox4.ForeColor = Color.Red;
+                remark4.ForeColor = Color.Red;
+                BuyerTextBox4.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
+            {
+                itemMainCategoryTextBox4.ForeColor = Color.Black;
+                itemCategoryTextBox4.ForeColor = Color.Black;
+                itemDetailTextBox4.ForeColor = Color.Black;
+                weightTextBox4.ForeColor = Color.Black;
+                unitPriceText4.ForeColor = Color.Black;
+                countTextBox4.ForeColor = Color.Black;
+                purchaseTextBox4.ForeColor = Color.Black;
+                WholesalePriceTextBox4.ForeColor = Color.Black;
+                remark4.ForeColor = Color.Black;
+                BuyerTextBox4.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"5"
+        private void ItemNameChangeCheckBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Blue;
+                itemCategoryTextBox5.ForeColor = Color.Blue;
+                itemDetailTextBox5.ForeColor = Color.Blue;
+                weightTextBox5.ForeColor = Color.Blue;
+                unitPriceText5.ForeColor = Color.Blue;
+                countTextBox5.ForeColor = Color.Blue;
+                purchaseTextBox5.ForeColor = Color.Blue;
+                WholesalePriceTextBox5.ForeColor = Color.Blue;
+                remark5.ForeColor = Color.Blue;
+                BuyerTextBox5.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Purple;
+                itemCategoryTextBox5.ForeColor = Color.Purple;
+                itemDetailTextBox5.ForeColor = Color.Purple;
+                weightTextBox5.ForeColor = Color.Purple;
+                unitPriceText5.ForeColor = Color.Purple;
+                countTextBox5.ForeColor = Color.Purple;
+                purchaseTextBox5.ForeColor = Color.Purple;
+                WholesalePriceTextBox5.ForeColor = Color.Purple;
+                remark5.ForeColor = Color.Purple;
+                BuyerTextBox5.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Red;
+                itemCategoryTextBox5.ForeColor = Color.Red;
+                itemDetailTextBox5.ForeColor = Color.Red;
+                weightTextBox5.ForeColor = Color.Red;
+                unitPriceText5.ForeColor = Color.Red;
+                countTextBox5.ForeColor = Color.Red;
+                purchaseTextBox5.ForeColor = Color.Red;
+                WholesalePriceTextBox5.ForeColor = Color.Red;
+                remark5.ForeColor = Color.Red;
+                BuyerTextBox5.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
+            {
+                itemMainCategoryTextBox5.ForeColor = Color.Black;
+                itemCategoryTextBox5.ForeColor = Color.Black;
+                itemDetailTextBox5.ForeColor = Color.Black;
+                weightTextBox5.ForeColor = Color.Black;
+                unitPriceText5.ForeColor = Color.Black;
+                countTextBox5.ForeColor = Color.Black;
+                purchaseTextBox5.ForeColor = Color.Black;
+                WholesalePriceTextBox5.ForeColor = Color.Black;
+                remark5.ForeColor = Color.Black;
+                BuyerTextBox5.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"6"
+        private void ItemNameChangeCheckBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Blue;
+                itemCategoryTextBox6.ForeColor = Color.Blue;
+                itemDetailTextBox6.ForeColor = Color.Blue;
+                weightTextBox6.ForeColor = Color.Blue;
+                unitPriceText6.ForeColor = Color.Blue;
+                countTextBox6.ForeColor = Color.Blue;
+                purchaseTextBox6.ForeColor = Color.Blue;
+                WholesalePriceTextBox6.ForeColor = Color.Blue;
+                remark6.ForeColor = Color.Blue;
+                BuyerTextBox6.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Purple;
+                itemCategoryTextBox6.ForeColor = Color.Purple;
+                itemDetailTextBox6.ForeColor = Color.Purple;
+                weightTextBox6.ForeColor = Color.Purple;
+                unitPriceText6.ForeColor = Color.Purple;
+                countTextBox6.ForeColor = Color.Purple;
+                purchaseTextBox6.ForeColor = Color.Purple;
+                WholesalePriceTextBox6.ForeColor = Color.Purple;
+                remark6.ForeColor = Color.Purple;
+                BuyerTextBox6.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Red;
+                itemCategoryTextBox6.ForeColor = Color.Red;
+                itemDetailTextBox6.ForeColor = Color.Red;
+                weightTextBox6.ForeColor = Color.Red;
+                unitPriceText6.ForeColor = Color.Red;
+                countTextBox6.ForeColor = Color.Red;
+                purchaseTextBox6.ForeColor = Color.Red;
+                WholesalePriceTextBox6.ForeColor = Color.Red;
+                remark6.ForeColor = Color.Red;
+                BuyerTextBox6.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
+            {
+                itemMainCategoryTextBox6.ForeColor = Color.Black;
+                itemCategoryTextBox6.ForeColor = Color.Black;
+                itemDetailTextBox6.ForeColor = Color.Black;
+                weightTextBox6.ForeColor = Color.Black;
+                unitPriceText6.ForeColor = Color.Black;
+                countTextBox6.ForeColor = Color.Black;
+                purchaseTextBox6.ForeColor = Color.Black;
+                WholesalePriceTextBox6.ForeColor = Color.Black;
+                remark6.ForeColor = Color.Black;
+                BuyerTextBox6.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"7"
+        private void ItemNameChangeCheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Blue;
+                itemCategoryTextBox7.ForeColor = Color.Blue;
+                itemDetailTextBox7.ForeColor = Color.Blue;
+                weightTextBox7.ForeColor = Color.Blue;
+                unitPriceText7.ForeColor = Color.Blue;
+                countTextBox7.ForeColor = Color.Blue;
+                purchaseTextBox7.ForeColor = Color.Blue;
+                WholesalePriceTextBox7.ForeColor = Color.Blue;
+                remark7.ForeColor = Color.Blue;
+                BuyerTextBox7.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Purple;
+                itemCategoryTextBox7.ForeColor = Color.Purple;
+                itemDetailTextBox7.ForeColor = Color.Purple;
+                weightTextBox7.ForeColor = Color.Purple;
+                unitPriceText7.ForeColor = Color.Purple;
+                countTextBox7.ForeColor = Color.Purple;
+                purchaseTextBox7.ForeColor = Color.Purple;
+                WholesalePriceTextBox7.ForeColor = Color.Purple;
+                remark7.ForeColor = Color.Purple;
+                BuyerTextBox7.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Red;
+                itemCategoryTextBox7.ForeColor = Color.Red;
+                itemDetailTextBox7.ForeColor = Color.Red;
+                weightTextBox7.ForeColor = Color.Red;
+                unitPriceText7.ForeColor = Color.Red;
+                countTextBox7.ForeColor = Color.Red;
+                purchaseTextBox7.ForeColor = Color.Red;
+                WholesalePriceTextBox7.ForeColor = Color.Red;
+                remark7.ForeColor = Color.Red;
+                BuyerTextBox7.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
+            {
+                itemMainCategoryTextBox7.ForeColor = Color.Black;
+                itemCategoryTextBox7.ForeColor = Color.Black;
+                itemDetailTextBox7.ForeColor = Color.Black;
+                weightTextBox7.ForeColor = Color.Black;
+                unitPriceText7.ForeColor = Color.Black;
+                countTextBox7.ForeColor = Color.Black;
+                purchaseTextBox7.ForeColor = Color.Black;
+                WholesalePriceTextBox7.ForeColor = Color.Black;
+                remark7.ForeColor = Color.Black;
+                BuyerTextBox7.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"8"
+        private void ItemNameChangeCheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Blue;
+                itemCategoryTextBox8.ForeColor = Color.Blue;
+                itemDetailTextBox8.ForeColor = Color.Blue;
+                weightTextBox8.ForeColor = Color.Blue;
+                unitPriceText8.ForeColor = Color.Blue;
+                countTextBox8.ForeColor = Color.Blue;
+                purchaseTextBox8.ForeColor = Color.Blue;
+                WholesalePriceTextBox8.ForeColor = Color.Blue;
+                remark8.ForeColor = Color.Blue;
+                BuyerTextBox8.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Purple;
+                itemCategoryTextBox8.ForeColor = Color.Purple;
+                itemDetailTextBox8.ForeColor = Color.Purple;
+                weightTextBox8.ForeColor = Color.Purple;
+                unitPriceText8.ForeColor = Color.Purple;
+                countTextBox8.ForeColor = Color.Purple;
+                purchaseTextBox8.ForeColor = Color.Purple;
+                WholesalePriceTextBox8.ForeColor = Color.Purple;
+                remark8.ForeColor = Color.Purple;
+                BuyerTextBox8.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Red;
+                itemCategoryTextBox8.ForeColor = Color.Red;
+                itemDetailTextBox8.ForeColor = Color.Red;
+                weightTextBox8.ForeColor = Color.Red;
+                unitPriceText8.ForeColor = Color.Red;
+                countTextBox8.ForeColor = Color.Red;
+                purchaseTextBox8.ForeColor = Color.Red;
+                WholesalePriceTextBox8.ForeColor = Color.Red;
+                remark8.ForeColor = Color.Red;
+                BuyerTextBox8.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
+            {
+                itemMainCategoryTextBox8.ForeColor = Color.Black;
+                itemCategoryTextBox8.ForeColor = Color.Black;
+                itemDetailTextBox8.ForeColor = Color.Black;
+                weightTextBox8.ForeColor = Color.Black;
+                unitPriceText8.ForeColor = Color.Black;
+                countTextBox8.ForeColor = Color.Black;
+                purchaseTextBox8.ForeColor = Color.Black;
+                WholesalePriceTextBox8.ForeColor = Color.Black;
+                remark8.ForeColor = Color.Black;
+                BuyerTextBox8.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"9"
+        private void ItemNameChangeCheckBox9_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名
+            if (!NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Blue;
+                itemCategoryTextBox9.ForeColor = Color.Blue;
+                itemDetailTextBox9.ForeColor = Color.Blue;
+                weightTextBox9.ForeColor = Color.Blue;
+                unitPriceText9.ForeColor = Color.Blue;
+                countTextBox9.ForeColor = Color.Blue;
+                purchaseTextBox9.ForeColor = Color.Blue;
+                WholesalePriceTextBox9.ForeColor = Color.Blue;
+                remark9.ForeColor = Color.Blue;
+                BuyerTextBox9.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Purple;
+                itemCategoryTextBox9.ForeColor = Color.Purple;
+                itemDetailTextBox9.ForeColor = Color.Purple;
+                weightTextBox9.ForeColor = Color.Purple;
+                unitPriceText9.ForeColor = Color.Purple;
+                countTextBox9.ForeColor = Color.Purple;
+                purchaseTextBox9.ForeColor = Color.Purple;
+                WholesalePriceTextBox9.ForeColor = Color.Purple;
+                remark9.ForeColor = Color.Purple;
+                BuyerTextBox9.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Red;
+                itemCategoryTextBox9.ForeColor = Color.Red;
+                itemDetailTextBox9.ForeColor = Color.Red;
+                weightTextBox9.ForeColor = Color.Red;
+                unitPriceText9.ForeColor = Color.Red;
+                countTextBox9.ForeColor = Color.Red;
+                purchaseTextBox9.ForeColor = Color.Red;
+                WholesalePriceTextBox9.ForeColor = Color.Red;
+                remark9.ForeColor = Color.Red;
+                BuyerTextBox9.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
+            {
+                itemMainCategoryTextBox9.ForeColor = Color.Black;
+                itemCategoryTextBox9.ForeColor = Color.Black;
+                itemDetailTextBox9.ForeColor = Color.Black;
+                weightTextBox9.ForeColor = Color.Black;
+                unitPriceText9.ForeColor = Color.Black;
+                countTextBox9.ForeColor = Color.Black;
+                purchaseTextBox9.ForeColor = Color.Black;
+                WholesalePriceTextBox9.ForeColor = Color.Black;
+                remark9.ForeColor = Color.Black;
+                BuyerTextBox9.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"10"
+        private void ItemNameChangeCheckBox10_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Blue;
+                itemCategoryTextBox10.ForeColor = Color.Blue;
+                itemDetailTextBox10.ForeColor = Color.Blue;
+                weightTextBox10.ForeColor = Color.Blue;
+                unitPriceText10.ForeColor = Color.Blue;
+                countTextBox10.ForeColor = Color.Blue;
+                purchaseTextBox10.ForeColor = Color.Blue;
+                WholesalePriceTextBox10.ForeColor = Color.Blue;
+                remark10.ForeColor = Color.Blue;
+                BuyerTextBox10.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Purple;
+                itemCategoryTextBox10.ForeColor = Color.Purple;
+                itemDetailTextBox10.ForeColor = Color.Purple;
+                weightTextBox10.ForeColor = Color.Purple;
+                unitPriceText10.ForeColor = Color.Purple;
+                countTextBox10.ForeColor = Color.Purple;
+                purchaseTextBox10.ForeColor = Color.Purple;
+                WholesalePriceTextBox10.ForeColor = Color.Purple;
+                remark10.ForeColor = Color.Purple;
+                BuyerTextBox10.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Red;
+                itemCategoryTextBox10.ForeColor = Color.Red;
+                itemDetailTextBox10.ForeColor = Color.Red;
+                weightTextBox10.ForeColor = Color.Red;
+                unitPriceText10.ForeColor = Color.Red;
+                countTextBox10.ForeColor = Color.Red;
+                purchaseTextBox10.ForeColor = Color.Red;
+                WholesalePriceTextBox10.ForeColor = Color.Red;
+                remark10.ForeColor = Color.Red;
+                BuyerTextBox10.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
+            {
+                itemMainCategoryTextBox10.ForeColor = Color.Black;
+                itemCategoryTextBox10.ForeColor = Color.Black;
+                itemDetailTextBox10.ForeColor = Color.Black;
+                weightTextBox10.ForeColor = Color.Black;
+                unitPriceText10.ForeColor = Color.Black;
+                countTextBox10.ForeColor = Color.Black;
+                purchaseTextBox10.ForeColor = Color.Black;
+                WholesalePriceTextBox10.ForeColor = Color.Black;
+                remark10.ForeColor = Color.Black;
+                BuyerTextBox10.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"11"
+        private void ItemNameChangeCheckBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Blue;
+                itemCategoryTextBox11.ForeColor = Color.Blue;
+                itemDetailTextBox11.ForeColor = Color.Blue;
+                weightTextBox11.ForeColor = Color.Blue;
+                unitPriceText11.ForeColor = Color.Blue;
+                countTextBox11.ForeColor = Color.Blue;
+                purchaseTextBox11.ForeColor = Color.Blue;
+                WholesalePriceTextBox11.ForeColor = Color.Blue;
+                remark11.ForeColor = Color.Blue;
+                BuyerTextBox11.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Purple;
+                itemCategoryTextBox11.ForeColor = Color.Purple;
+                itemDetailTextBox11.ForeColor = Color.Purple;
+                weightTextBox11.ForeColor = Color.Purple;
+                unitPriceText11.ForeColor = Color.Purple;
+                countTextBox11.ForeColor = Color.Purple;
+                purchaseTextBox11.ForeColor = Color.Purple;
+                WholesalePriceTextBox11.ForeColor = Color.Purple;
+                remark11.ForeColor = Color.Purple;
+                BuyerTextBox11.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Red;
+                itemCategoryTextBox11.ForeColor = Color.Red;
+                itemDetailTextBox11.ForeColor = Color.Red;
+                weightTextBox11.ForeColor = Color.Red;
+                unitPriceText11.ForeColor = Color.Red;
+                countTextBox11.ForeColor = Color.Red;
+                purchaseTextBox11.ForeColor = Color.Red;
+                WholesalePriceTextBox11.ForeColor = Color.Red;
+                remark11.ForeColor = Color.Red;
+                BuyerTextBox11.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
+            {
+                itemMainCategoryTextBox11.ForeColor = Color.Black;
+                itemCategoryTextBox11.ForeColor = Color.Black;
+                itemDetailTextBox11.ForeColor = Color.Black;
+                weightTextBox11.ForeColor = Color.Black;
+                unitPriceText11.ForeColor = Color.Black;
+                countTextBox11.ForeColor = Color.Black;
+                purchaseTextBox11.ForeColor = Color.Black;
+                WholesalePriceTextBox11.ForeColor = Color.Black;
+                remark11.ForeColor = Color.Black;
+                BuyerTextBox11.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"12"
+        private void ItemNameChangeCheckBox12_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Blue;
+                itemCategoryTextBox12.ForeColor = Color.Blue;
+                itemDetailTextBox12.ForeColor = Color.Blue;
+                weightTextBox12.ForeColor = Color.Blue;
+                unitPriceText12.ForeColor = Color.Blue;
+                countTextBox12.ForeColor = Color.Blue;
+                purchaseTextBox12.ForeColor = Color.Blue;
+                WholesalePriceTextBox12.ForeColor = Color.Blue;
+                remark12.ForeColor = Color.Blue;
+                BuyerTextBox12.ForeColor = Color.Blue;
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Purple;
+                itemCategoryTextBox12.ForeColor = Color.Purple;
+                itemDetailTextBox12.ForeColor = Color.Purple;
+                weightTextBox12.ForeColor = Color.Purple;
+                unitPriceText12.ForeColor = Color.Purple;
+                countTextBox12.ForeColor = Color.Purple;
+                purchaseTextBox12.ForeColor = Color.Purple;
+                WholesalePriceTextBox12.ForeColor = Color.Purple;
+                remark12.ForeColor = Color.Purple;
+                BuyerTextBox12.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Red;
+                itemCategoryTextBox12.ForeColor = Color.Red;
+                itemDetailTextBox12.ForeColor = Color.Red;
+                weightTextBox12.ForeColor = Color.Red;
+                unitPriceText12.ForeColor = Color.Red;
+                countTextBox12.ForeColor = Color.Red;
+                purchaseTextBox12.ForeColor = Color.Red;
+                WholesalePriceTextBox12.ForeColor = Color.Red;
+                remark12.ForeColor = Color.Red;
+                BuyerTextBox12.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
+            {
+                itemMainCategoryTextBox12.ForeColor = Color.Black;
+                itemCategoryTextBox12.ForeColor = Color.Black;
+                itemDetailTextBox12.ForeColor = Color.Black;
+                weightTextBox12.ForeColor = Color.Black;
+                unitPriceText12.ForeColor = Color.Black;
+                countTextBox12.ForeColor = Color.Black;
+                purchaseTextBox12.ForeColor = Color.Black;
+                WholesalePriceTextBox12.ForeColor = Color.Black;
+                remark12.ForeColor = Color.Black;
+                BuyerTextBox12.ForeColor = Color.Black;
+            }
+        }
+        #endregion
+        #region"13"
+        private void ItemNameChangeCheckBox13_CheckedChanged(object sender, EventArgs e)
+        {
+            //品名のみ
+            if (!NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Blue;
+                itemCategoryTextBox13.ForeColor = Color.Blue;
+                itemDetailTextBox13.ForeColor = Color.Blue;
+                weightTextBox13.ForeColor = Color.Blue;
+                unitPriceText13.ForeColor = Color.Blue;
+                countTextBox13.ForeColor = Color.Blue;
+                purchaseTextBox13.ForeColor = Color.Blue;
+                WholesalePriceTextBox13.ForeColor = Color.Blue;
+                remark13.ForeColor = Color.Blue;
+                BuyerTextBox13.ForeColor = Color.Blue;
+
+            }
+            //次月・品名両方チェック
+            if (NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Purple;
+                itemCategoryTextBox13.ForeColor = Color.Purple;
+                itemDetailTextBox13.ForeColor = Color.Purple;
+                weightTextBox13.ForeColor = Color.Purple;
+                unitPriceText13.ForeColor = Color.Purple;
+                countTextBox13.ForeColor = Color.Purple;
+                purchaseTextBox13.ForeColor = Color.Purple;
+                WholesalePriceTextBox13.ForeColor = Color.Purple;
+                remark13.ForeColor = Color.Purple;
+                BuyerTextBox13.ForeColor = Color.Purple;
+            }
+            //次月のみチェック
+            if (NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Red;
+                itemCategoryTextBox13.ForeColor = Color.Red;
+                itemDetailTextBox13.ForeColor = Color.Red;
+                weightTextBox13.ForeColor = Color.Red;
+                unitPriceText13.ForeColor = Color.Red;
+                countTextBox13.ForeColor = Color.Red;
+                purchaseTextBox13.ForeColor = Color.Red;
+                WholesalePriceTextBox13.ForeColor = Color.Red;
+                remark13.ForeColor = Color.Red;
+                BuyerTextBox13.ForeColor = Color.Red;
+            }
+            //空
+            if (!NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
+            {
+                itemMainCategoryTextBox13.ForeColor = Color.Black;
+                itemCategoryTextBox13.ForeColor = Color.Black;
+                itemDetailTextBox13.ForeColor = Color.Black;
+                weightTextBox13.ForeColor = Color.Black;
+                unitPriceText13.ForeColor = Color.Black;
+                countTextBox13.ForeColor = Color.Black;
+                purchaseTextBox13.ForeColor = Color.Black;
+                WholesalePriceTextBox13.ForeColor = Color.Black;
+                remark13.ForeColor = Color.Black;
+                BuyerTextBox13.ForeColor = Color.Black;
+            }
+        }
+        #endregion
         #endregion
 
         #endregion
@@ -4900,7 +6043,7 @@ namespace Flawless_ex
             RegisterButton.Enabled = false;
             UpdateButton.Enabled = true;
 
-            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber);
+            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass);
             this.Hide();
             nameChange.Show();
         }
@@ -4908,9 +6051,10 @@ namespace Flawless_ex
 
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
-            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number);
+            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass);
             this.Hide();
             clientInformation.Show();
         }
+
     }
 }

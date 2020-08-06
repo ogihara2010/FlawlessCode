@@ -24,13 +24,14 @@ namespace Flawless_ex
         int Grade;
         int invalid;
         string Access_auth;
+        string Pass;
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlCommand cmd1;
         NpgsqlDataReader reader;
 
-        public ClientInformation(RecordList recordList, int staff_id, string staff_name, int type, string slipnumber, int antique, int id)
+        public ClientInformation(RecordList recordList, int staff_id, string staff_name, int type, string slipnumber, int antique, int id, string pass)
         {
             InitializeComponent();
 
@@ -41,6 +42,7 @@ namespace Flawless_ex
             this.SlipNumber = slipnumber;
             this.AntiqueNumber = antique;
             this.ID_Number = id;
+            this.Pass = pass;
         }
 
         private void ClientInformation_Load(object sender, EventArgs e)
@@ -225,14 +227,14 @@ namespace Flawless_ex
         #region"戻る"
         private void ClientInformation_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth);
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass);
 
             RecordList.Show();
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth);
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass);
             this.Close();
             RecordList.Show();
         }
