@@ -4909,7 +4909,6 @@ namespace Flawless_ex
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
             ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number);
-
             this.Hide();
             clientInformation.Show();
         }
