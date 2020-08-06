@@ -33,6 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SettlementDayBox = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -211,6 +212,7 @@
             this.articlesTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label27 = new System.Windows.Forms.Label();
             this.paymentMethodComboBox = new System.Windows.Forms.ComboBox();
@@ -389,8 +391,6 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -473,6 +473,16 @@
             this.SettlementDayBox.Size = new System.Drawing.Size(2703, 1495);
             this.SettlementDayBox.TabIndex = 0;
             this.SettlementDayBox.Text = "計算書";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(850, 1222);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(303, 118);
+            this.button1.TabIndex = 90;
+            this.button1.Text = "買取販売データ画面へ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // pictureBox2
             // 
@@ -2609,6 +2619,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "納品書";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1137, 1334);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(311, 124);
+            this.button2.TabIndex = 87;
+            this.button2.Text = "買取販売データ画面へ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Location = new System.Drawing.Point(1963, 866);
@@ -4698,34 +4718,15 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(850, 1222);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(303, 118);
-            this.button1.TabIndex = 90;
-            this.button1.Text = "買取販売データ画面へ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1137, 1334);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(311, 124);
-            this.button2.TabIndex = 87;
-            this.button2.Text = "買取販売データ画面へ";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
             // Statement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1274, 629);
+            this.ClientSize = new System.Drawing.Size(2774, 1629);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);

@@ -194,6 +194,9 @@ namespace Flawless_ex
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
         {
+            document = (string)dataGridView1.CurrentRow.Cells[0].Value;
+            staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
+            address = (string)dataGridView1.CurrentRow.Cells[5].Value;
             Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3);
             this.Close();
             statement.Show();
@@ -202,6 +205,9 @@ namespace Flawless_ex
         #region "納品書"
         private void Button1_Click(object sender, EventArgs e)
         {
+            control = (int)dataGridView1.CurrentRow.Cells[0].Value;
+            staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
+            address = (string)dataGridView1.CurrentRow.Cells[5].Value;
             Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3);
             this.Close();
             statement.Show();
