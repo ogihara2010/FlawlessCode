@@ -13,15 +13,13 @@ namespace Flawless_ex
     public partial class Statement : Form //計算書/納品書作成メニュー
     {
         int a = 0;//大分類クリックカウント数（計算書）
-        int b = 1;//大分類クリックカウント数（納品書）
+        int b = 0;//大分類クリックカウント数（納品書）
         int staff_id;
         int itemMainCategoryCode;
         int type = 0;
         string path;
         decimal total;
-        int AntiqueNumber ;
-        int ID_Number ;
-        string Pass;
+        int Grade;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -119,7 +117,14 @@ namespace Flawless_ex
         string register_date;
         string remarks;
         string access_auth;
-        int Grade;
+        string document;
+        int control;
+        string data;
+        string item;
+        string phone;
+        string search1;
+        string search2;
+        string search3;
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -139,8 +144,6 @@ namespace Flawless_ex
         int number;     //伝票番号の数字五桁
 
         MainMenu mainMenu;
-        TopMenu topMenu;
-        string pass;
 
         #region"DataTable"
         DataTable dt = new DataTable();//大分類
@@ -200,7 +203,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string pass)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string document, int control, string data, string search1, string search2, string search3)
         {
             InitializeComponent();
             staff_id = id;
@@ -210,19 +213,258 @@ namespace Flawless_ex
             this.address = address;
             this.access_auth = access_auth;
             total = Total;
-            Pass = pass;
+            this.document = document;
+            this.control = control;
+            this.data = data;
+            this.search1 = search1;
+            this.search2 = search2;
+            this.search3 = search3;
         }
 
         private void Statement_Load(object sender, EventArgs e)
         {
             #region "ボタン"
-            this.previewButton.Enabled = false;
-            //this.RecordListButton.Enabled = false;
-            this.DeliveryPreviewButton.Enabled = false;
+            if (data == "S")
+            {
+                #region "計算書のタブのみ表示"
+                tabControl1.SelectedTab = SettlementDayBox;
+                tabControl1.TabPages.Remove(tabPage2);
+                #endregion
+                #region "登録、顧客選択ボタンは使用禁止"
+                this.previewButton.Enabled = true;
+                this.RecordListButton.Enabled = true;
+                this.addButton.Enabled = false;
+                this.client_Button.Enabled = false;
+                this.AntiqueSelectionButton1.Enabled = false;
+                this.taxCertificateButton.Enabled = false;
+                this.financialButton.Enabled = false;
+                this.sealCertificationButton.Enabled = false;
+                this.residenceButton.Enabled = false;
+                #endregion
+                #region "すべてReadOnlyにする"
+                #region "品物詳細"
+                this.itemDetail0.ReadOnly = true;
+                this.itemDetail1.ReadOnly = true;
+                this.itemDetail2.ReadOnly = true;
+                this.itemDetail3.ReadOnly = true;
+                this.itemDetail4.ReadOnly = true;
+                this.itemDetail5.ReadOnly = true;
+                this.itemDetail6.ReadOnly = true;
+                this.itemDetail7.ReadOnly = true;
+                this.itemDetail8.ReadOnly = true;
+                this.itemDetail9.ReadOnly = true;
+                this.itemDetail10.ReadOnly = true;
+                this.itemDetail11.ReadOnly = true;
+                this.itemDetail12.ReadOnly = true;
+                #endregion
+                #region "数量"
+                countTextBox0.ReadOnly = true;
+                this.countTextBox0.Enabled = false;
+                countTextBox1.ReadOnly = true;
+                countTextBox2.ReadOnly = true;
+                countTextBox3.ReadOnly = true;
+                countTextBox4.ReadOnly = true;
+                countTextBox5.ReadOnly = true;
+                countTextBox6.ReadOnly = true;
+                countTextBox7.ReadOnly = true;
+                countTextBox8.ReadOnly = true;
+                countTextBox9.ReadOnly = true;
+                countTextBox10.ReadOnly = true;
+                countTextBox11.ReadOnly = true;
+                countTextBox12.ReadOnly = true;
+                #endregion
+                #region "重量"
+                weightTextBox0.ReadOnly = true;
+                weightTextBox1.ReadOnly = true;
+                weightTextBox2.ReadOnly = true;
+                weightTextBox3.ReadOnly = true;
+                weightTextBox4.ReadOnly = true;
+                weightTextBox5.ReadOnly = true;
+                weightTextBox6.ReadOnly = true;
+                weightTextBox7.ReadOnly = true;
+                weightTextBox8.ReadOnly = true;
+                weightTextBox9.ReadOnly = true;
+                weightTextBox10.ReadOnly = true;
+                weightTextBox11.ReadOnly = true;
+                weightTextBox12.ReadOnly = true;
+                #endregion
+                #region "単価"
+                unitPriceTextBox0.ReadOnly = true;
+                unitPriceTextBox1.ReadOnly = true;
+                unitPriceTextBox2.ReadOnly = true;
+                unitPriceTextBox3.ReadOnly = true;
+                unitPriceTextBox4.ReadOnly = true;
+                unitPriceTextBox5.ReadOnly = true;
+                unitPriceTextBox6.ReadOnly = true;
+                unitPriceTextBox7.ReadOnly = true;
+                unitPriceTextBox8.ReadOnly = true;
+                unitPriceTextBox9.ReadOnly = true;
+                unitPriceTextBox10.ReadOnly = true;
+                unitPriceTextBox11.ReadOnly = true;
+                unitPriceTextBox12.ReadOnly = true;
+                #endregion
+                #region "金額"
+                this.moneyTextBox0.ReadOnly = true;
+                this.moneyTextBox1.ReadOnly = true;
+                this.moneyTextBox2.ReadOnly = true;
+                this.moneyTextBox3.ReadOnly = true;
+                this.moneyTextBox4.ReadOnly = true;
+                this.moneyTextBox5.ReadOnly = true;
+                this.moneyTextBox6.ReadOnly = true;
+                this.moneyTextBox7.ReadOnly = true;
+                this.moneyTextBox8.ReadOnly = true;
+                this.moneyTextBox9.ReadOnly = true;
+                this.moneyTextBox10.ReadOnly = true;
+                this.moneyTextBox11.ReadOnly = true;
+                this.moneyTextBox12.ReadOnly = true;
+                #endregion
+                #region "備考"
+                this.remarks0.ReadOnly = true;
+                this.remarks1.ReadOnly = true;
+                this.remarks2.ReadOnly = true;
+                this.remarks3.ReadOnly = true;
+                this.remarks4.ReadOnly = true;
+                this.remarks5.ReadOnly = true;
+                this.remarks6.ReadOnly = true;
+                this.remarks7.ReadOnly = true;
+                this.remarks8.ReadOnly = true;
+                this.remarks9.ReadOnly = true;
+                this.remarks10.ReadOnly = true;
+                this.remarks11.ReadOnly = true;
+                this.remarks12.ReadOnly = true;
+                #endregion
+                this.clientRemarksTextBox.ReadOnly = true;
+                this.paymentMethodsComboBox.Enabled = false;
+                this.deliveryComboBox.Enabled = false;
+                #endregion
+            }
+            else if (data == "D")
+            {
+                #region "納品書のタブのみ表示"
+                tabControl1.SelectedTab = tabPage2;
+                tabControl1.TabPages.Remove(SettlementDayBox);
+                #endregion
+                #region "登録ボタンは使用禁止"
+                this.client_searchButton1.Enabled = false;
+                this.Register.Enabled = false;
+                this.AntiqueSelectionButton2.Enabled = false;
+                this.DeliveryPreviewButton.Enabled = true;
+                #endregion
+                #region "すべてReadOnlyにする"
+                #region "品物詳細"
+                this.itemDetail00.ReadOnly = true;
+                this.itemDetail01.ReadOnly = true;
+                this.itemDetail02.ReadOnly = true;
+                this.itemDetail03.ReadOnly = true;
+                this.itemDetail04.ReadOnly = true;
+                this.itemDetail05.ReadOnly = true;
+                this.itemDetail06.ReadOnly = true;
+                this.itemDetail07.ReadOnly = true;
+                this.itemDetail08.ReadOnly = true;
+                this.itemDetail09.ReadOnly = true;
+                this.itemDetail010.ReadOnly = true;
+                this.itemDetail011.ReadOnly = true;
+                this.itemDetail012.ReadOnly = true;
+                #endregion
+                #region "数量"
+                countTextBox00.ReadOnly = true;
+                countTextBox01.ReadOnly = true;
+                countTextBox02.ReadOnly = true;
+                countTextBox03.ReadOnly = true;
+                countTextBox04.ReadOnly = true;
+                countTextBox05.ReadOnly = true;
+                countTextBox06.ReadOnly = true;
+                countTextBox07.ReadOnly = true;
+                countTextBox08.ReadOnly = true;
+                countTextBox09.ReadOnly = true;
+                countTextBox010.ReadOnly = true;
+                countTextBox011.ReadOnly = true;
+                countTextBox012.ReadOnly = true;
+                #endregion
+                #region "重量"
+                weightTextBox00.ReadOnly = true;
+                weightTextBox01.ReadOnly = true;
+                weightTextBox02.ReadOnly = true;
+                weightTextBox03.ReadOnly = true;
+                weightTextBox04.ReadOnly = true;
+                weightTextBox05.ReadOnly = true;
+                weightTextBox06.ReadOnly = true;
+                weightTextBox07.ReadOnly = true;
+                weightTextBox08.ReadOnly = true;
+                weightTextBox09.ReadOnly = true;
+                weightTextBox010.ReadOnly = true;
+                weightTextBox011.ReadOnly = true;
+                weightTextBox012.ReadOnly = true;
+                #endregion
+                #region "単価"
+                unitPriceTextBox00.ReadOnly = true;
+                unitPriceTextBox01.ReadOnly = true;
+                unitPriceTextBox02.ReadOnly = true;
+                unitPriceTextBox03.ReadOnly = true;
+                unitPriceTextBox04.ReadOnly = true;
+                unitPriceTextBox05.ReadOnly = true;
+                unitPriceTextBox06.ReadOnly = true;
+                unitPriceTextBox07.ReadOnly = true;
+                unitPriceTextBox08.ReadOnly = true;
+                unitPriceTextBox09.ReadOnly = true;
+                unitPriceTextBox010.ReadOnly = true;
+                unitPriceTextBox011.ReadOnly = true;
+                unitPriceTextBox012.ReadOnly = true;
+                #endregion
+                #region "金額"
+                this.moneyTextBox00.ReadOnly = true;
+                this.moneyTextBox01.ReadOnly = true;
+                this.moneyTextBox02.ReadOnly = true;
+                this.moneyTextBox03.ReadOnly = true;
+                this.moneyTextBox04.ReadOnly = true;
+                this.moneyTextBox05.ReadOnly = true;
+                this.moneyTextBox06.ReadOnly = true;
+                this.moneyTextBox07.ReadOnly = true;
+                this.moneyTextBox08.ReadOnly = true;
+                this.moneyTextBox09.ReadOnly = true;
+                this.moneyTextBox010.ReadOnly = true;
+                this.moneyTextBox011.ReadOnly = true;
+                this.moneyTextBox012.ReadOnly = true;
+                #endregion
+                #region "備考"
+                this.remarks00.ReadOnly = true;
+                this.remarks01.ReadOnly = true;
+                this.remarks02.ReadOnly = true;
+                this.remarks03.ReadOnly = true;
+                this.remarks04.ReadOnly = true;
+                this.remarks05.ReadOnly = true;
+                this.remarks06.ReadOnly = true;
+                this.remarks07.ReadOnly = true;
+                this.remarks08.ReadOnly = true;
+                this.remarks09.ReadOnly = true;
+                this.remarks010.ReadOnly = true;
+                this.remarks011.ReadOnly = true;
+                this.remarks012.ReadOnly = true;
+                #endregion
+                this.clientRemarksTextBox2.ReadOnly = true;
+                this.name.ReadOnly = true;
+                this.RemarkRegister.ReadOnly = true;
+                this.titleComboBox.Enabled = false;
+                this.RemarkRegister.ReadOnly = true;
+                this.typeComboBox.Enabled = false;
+                this.paymentMethodComboBox.Enabled = false;
+                //this.PayeeComboBox.SelectedItem = row1[""].ToString();
+                this.CoinComboBox.Enabled = false;
+                this.comboBox11.Enabled = false;
+                #endregion
+            }
+            else
+            {
+                this.previewButton.Enabled = false;
+                this.RecordListButton.Enabled = false;
+                this.DeliveryPreviewButton.Enabled = false;
+                this.button1.Enabled = false;
+                this.button2.Enabled = false;
+            }
             #endregion
             conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select* from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
+            string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                 //伝票番号・管理番号取得
             sql = "select document_number from statement_data;";     //伝票番号の取得用
             cmd = new NpgsqlCommand(sql_str, conn);
@@ -241,47 +483,67 @@ namespace Flawless_ex
             cmd = new NpgsqlCommand(sql, conn);
 
             #region"計算書の伝票番号"
-            using (reader = cmd.ExecuteReader())
+            #region "買取販売から遷移してきた場合"
+            if (data == "S")
             {
-                while (reader.Read())
-                {
-                    docuNum = reader["document_number"].ToString();
-                }
+                documentNumberTextBox.Text = document;
             }
-
-            if (!string.IsNullOrEmpty(docuNum))
-            {
-                Num = docuNum.Trim('F');        //伝票番号の数字部分
-            }
+            #endregion
             else
             {
-                docuNum = "F0";
-                Num = docuNum.Trim('F');       //伝票番号の数字部分
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        docuNum = reader["document_number"].ToString();
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(docuNum))
+                {
+                    Num = docuNum.Trim('F');        //伝票番号の数字部分
+                }
+                else
+                {
+                    docuNum = "F0";
+                    Num = docuNum.Trim('F');       //伝票番号の数字部分
+                }
+
+                number = int.Parse(Num) + 1;
+                documentNumberTextBox.Text = "F" + number;       //Fを追加
             }
 
-            number = int.Parse(Num) + 1;
-            documentNumberTextBox.Text = "F" + number;       //Fを追加
             #endregion
 
             #region"納品書の管理番号"
-            sql = "select control_number from delivery_m;";         //管理番号取得
-            cmd = new NpgsqlCommand(sql, conn);
-
-            using (reader = cmd.ExecuteReader())
+            #region "買取販売から遷移してきた場合"
+            if (data == "D")
             {
-                while (reader.Read())
+                documentNumberTextBox2.Text = control.ToString();
+            }
+            #endregion
+            else
+            {
+                sql = "select control_number from delivery_m;";         //管理番号取得
+                cmd = new NpgsqlCommand(sql, conn);
+
+                using (reader = cmd.ExecuteReader())
                 {
-                    conNum = (int)reader["control_number"];
+                    while (reader.Read())
+                    {
+                        conNum = (int)reader["control_number"];
+                    }
                 }
-            }
 
-            if (!string.IsNullOrEmpty(conNum.ToString()))
-            {
-                conNum = 0;
-            }
+                if (!string.IsNullOrEmpty(conNum.ToString()))
+                {
+                    conNum = 0;
+                }
 
-            number = conNum + 1;
-            documentNumberTextBox2.Text = number.ToString();
+                number = conNum + 1;
+                documentNumberTextBox2.Text = number.ToString();
+            }
+            
             #endregion
             
            //担当者ごとの大分類の初期値を先頭に
@@ -322,375 +584,1758 @@ namespace Flawless_ex
 
             conn.Close();
 
-            #region "大分類"
-            //大分類ヘッダー
-            //1行目
-            //計算書
-            mainCategoryComboBox0.DataSource = dt;
-            mainCategoryComboBox0.DisplayMember = "main_category_name";
-            mainCategoryComboBox0.ValueMember = "main_category_code";
-            mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+            if (data != "S")
+            {
+                #region "納品書"
+                #region "納品書　大分類"
+                #region "納品書1行目"
+                DataTable deliverydt = new DataTable();
+                deliverydt = dt.Copy();
+                mainCategoryComboBox00.DataSource = deliverydt;
+                mainCategoryComboBox00.DisplayMember = "main_category_name";
+                mainCategoryComboBox00.ValueMember = "main_category_code";
+                mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+                #endregion
+                #region "納品書2行目"
+                DataTable deliverydt100 = new DataTable();
+                deliverydt100 = dt.Copy();
+                mainCategoryComboBox01.DataSource = deliverydt100;
+                mainCategoryComboBox01.DisplayMember = "main_category_name";
+                mainCategoryComboBox01.ValueMember = "main_category_code";
+                mainCategoryComboBox01.SelectedIndex = 0;
+                #endregion
+                #region "納品書3行目"
+                DataTable deliverydt101 = new DataTable();
+                deliverydt101 = dt.Copy();
+                mainCategoryComboBox02.DataSource = deliverydt101;
+                mainCategoryComboBox02.DisplayMember = "main_category_name";
+                mainCategoryComboBox02.ValueMember = "main_category_code";
+                mainCategoryComboBox02.SelectedIndex = 0;
+                #endregion
+                #region "納品書4行目"
+                DataTable deliverydt102 = new DataTable();
+                deliverydt102 = dt.Copy();
+                mainCategoryComboBox03.DataSource = deliverydt102;
+                mainCategoryComboBox03.DisplayMember = "main_category_name";
+                mainCategoryComboBox03.ValueMember = "main_category_code";
+                mainCategoryComboBox03.SelectedIndex = 0;
+                #endregion
+                #region "納品書5行目"
+                DataTable deliverydt103 = new DataTable();
+                deliverydt103 = dt.Copy();
+                mainCategoryComboBox04.DataSource = deliverydt103;
+                mainCategoryComboBox04.DisplayMember = "main_category_name";
+                mainCategoryComboBox04.ValueMember = "main_category_code";
+                mainCategoryComboBox04.SelectedIndex = 0;
+                #endregion
+                #region "納品書6行目"
+                DataTable deliverydt104 = new DataTable();
+                deliverydt104 = dt.Copy();
+                mainCategoryComboBox05.DataSource = deliverydt104;
+                mainCategoryComboBox05.DisplayMember = "main_category_name";
+                mainCategoryComboBox05.ValueMember = "main_category_code";
+                mainCategoryComboBox05.SelectedIndex = 0;
+                #endregion
+                #region "納品書7行目"
+                DataTable deliverydt105 = new DataTable();
+                deliverydt105 = dt.Copy();
+                mainCategoryComboBox06.DataSource = deliverydt105;
+                mainCategoryComboBox06.DisplayMember = "main_category_name";
+                mainCategoryComboBox06.ValueMember = "main_category_code";
+                mainCategoryComboBox06.SelectedIndex = 0;
+                #endregion
+                #region "納品書8行目"
+                DataTable deliverydt106 = new DataTable();
+                deliverydt106 = dt.Copy();
+                mainCategoryComboBox07.DataSource = deliverydt106;
+                mainCategoryComboBox07.DisplayMember = "main_category_name";
+                mainCategoryComboBox07.ValueMember = "main_category_code";
+                mainCategoryComboBox07.SelectedIndex = 0;
+                #endregion
+                #region "納品書9行目"
+                DataTable deliverydt107 = new DataTable();
+                deliverydt107 = dt.Copy();
+                mainCategoryComboBox08.DataSource = deliverydt107;
+                mainCategoryComboBox08.DisplayMember = "main_category_name";
+                mainCategoryComboBox08.ValueMember = "main_category_code";
+                mainCategoryComboBox08.SelectedIndex = 0;
+                #endregion
+                #region "納品書10行目"
+                DataTable deliverydt108 = new DataTable();
+                deliverydt108 = dt.Copy();
+                mainCategoryComboBox09.DataSource = deliverydt108;
+                mainCategoryComboBox09.DisplayMember = "main_category_name";
+                mainCategoryComboBox09.ValueMember = "main_category_code";
+                mainCategoryComboBox09.SelectedIndex = 0;
+                #endregion
+                #region "納品書11行目"
+                DataTable deliverydt109 = new DataTable();
+                deliverydt109 = dt.Copy();
+                mainCategoryComboBox010.DataSource = deliverydt109;
+                mainCategoryComboBox010.DisplayMember = "main_category_name";
+                mainCategoryComboBox010.ValueMember = "main_category_code";
+                mainCategoryComboBox010.SelectedIndex = 0;
+                #endregion
+                #region "納品書12行目"
+                DataTable deliverydt110 = new DataTable();
+                deliverydt110 = dt.Copy();
+                mainCategoryComboBox011.DataSource = deliverydt110;
+                mainCategoryComboBox011.DisplayMember = "main_category_name";
+                mainCategoryComboBox011.ValueMember = "main_category_code";
+                mainCategoryComboBox011.SelectedIndex = 0;
+                #endregion
+                #region "納品書13行目"
+                DataTable deliverydt112 = new DataTable();
+                deliverydt112 = dt.Copy();
+                mainCategoryComboBox012.DataSource = deliverydt112;
+                mainCategoryComboBox012.DisplayMember = "main_category_name";
+                mainCategoryComboBox012.ValueMember = "main_category_code";
+                mainCategoryComboBox012.SelectedIndex = 0;
+                #endregion
+                #endregion
+                #region "納品書　品名"
+                #region "納品書1行目"
+                deliverydt200 = dt2.Copy();
+                itemComboBox00.DataSource = deliverydt200;
+                itemComboBox00.DisplayMember = "item_name";
+                itemComboBox00.ValueMember = "item_code";
+                #endregion
+                #region "納品書2行目"
+                deliverydt201 = dt2.Copy();
+                itemComboBox01.DataSource = deliverydt201;
+                itemComboBox01.DisplayMember = "item_name";
+                itemComboBox01.ValueMember = "item_code";
+                #endregion
+                #region "納品書3行目"
+                deliverydt202 = dt2.Copy();
+                itemComboBox02.DataSource = deliverydt202;
+                itemComboBox02.DisplayMember = "item_name";
+                itemComboBox02.ValueMember = "item_code";
+                #endregion
+                #region "納品書4行目"
+                deliverydt203 = dt2.Copy();
+                itemComboBox03.DataSource = deliverydt203;
+                itemComboBox03.DisplayMember = "item_name";
+                itemComboBox03.ValueMember = "item_code";
+                #endregion
+                #region "納品書5行目"
+                deliverydt204 = dt2.Copy();
+                itemComboBox04.DataSource = deliverydt204;
+                itemComboBox04.DisplayMember = "item_name";
+                itemComboBox04.ValueMember = "item_code";
+                #endregion
+                #region "納品書6行目"
+                deliverydt205 = dt2.Copy();
+                itemComboBox05.DataSource = deliverydt205;
+                itemComboBox05.DisplayMember = "item_name";
+                itemComboBox05.ValueMember = "item_code";
+                #endregion
+                #region "納品書7行目"
+                deliverydt206 = dt2.Copy();
+                itemComboBox06.DataSource = deliverydt206;
+                itemComboBox06.DisplayMember = "item_name";
+                itemComboBox06.ValueMember = "item_code";
+                #endregion
+                #region "納品書8行目"
+                deliverydt207 = dt2.Copy();
+                itemComboBox07.DataSource = deliverydt207;
+                itemComboBox07.DisplayMember = "item_name";
+                itemComboBox07.ValueMember = "item_code";
+                #endregion
+                #region "納品書9行目"
+                deliverydt208 = dt2.Copy();
+                itemComboBox08.DataSource = deliverydt208;
+                itemComboBox08.DisplayMember = "item_name";
+                itemComboBox08.ValueMember = "item_code";
+                #endregion
+                #region "納品書10行目"
+                deliverydt209 = dt2.Copy();
+                itemComboBox09.DataSource = deliverydt209;
+                itemComboBox09.DisplayMember = "item_name";
+                itemComboBox09.ValueMember = "item_code";
+                #endregion
+                #region "納品書11行目"
+                deliverydt210 = dt2.Copy();
+                itemComboBox010.DataSource = deliverydt210;
+                itemComboBox010.DisplayMember = "item_name";
+                itemComboBox010.ValueMember = "item_code";
+                #endregion
+                #region "納品書12行目"
+                deliverydt211 = dt2.Copy();
+                itemComboBox011.DataSource = deliverydt211;
+                itemComboBox011.DisplayMember = "item_name";
+                itemComboBox011.ValueMember = "item_code";
+                #endregion
+                #region "納品書13行目"
+                //納品書
+                deliverydt212 = dt2.Copy();
+                itemComboBox012.DataSource = deliverydt212;
+                itemComboBox012.DisplayMember = "item_name";
+                itemComboBox012.ValueMember = "item_code";
+                #endregion
+                #endregion
+                #endregion
+            }
+            if (data != "D")
+            {
+                #region "計算書"
+                #region "計算書　大分類"
+                #region "計算書1行目"
+                mainCategoryComboBox0.DataSource = dt;
+                mainCategoryComboBox0.DisplayMember = "main_category_name";
+                mainCategoryComboBox0.ValueMember = "main_category_code";
+                mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+                #endregion
+                #region "計算書2行目"
+                DataTable dt100 = new DataTable();
+                dt100 = dt.Copy();
+                mainCategoryComboBox1.DataSource = dt100;
+                mainCategoryComboBox1.DisplayMember = "main_category_name";
+                mainCategoryComboBox1.ValueMember = "main_category_code";
+                mainCategoryComboBox1.SelectedIndex = 0;
+                #endregion
+                #region "計算書3行目"
+                DataTable dt101 = new DataTable();
+                dt101 = dt.Copy();
+                mainCategoryComboBox2.DataSource = dt101;
+                mainCategoryComboBox2.DisplayMember = "main_category_name";
+                mainCategoryComboBox2.ValueMember = "main_category_code";
+                mainCategoryComboBox2.SelectedIndex = 0;
+                #endregion
+                #region "計算書4行目"
+                DataTable dt102 = new DataTable();
+                dt102 = dt.Copy();
+                mainCategoryComboBox3.DataSource = dt102;
+                mainCategoryComboBox3.DisplayMember = "main_category_name";
+                mainCategoryComboBox3.ValueMember = "main_category_code";
+                mainCategoryComboBox3.SelectedIndex = 0;
+                #endregion
+                #region "計算書5行目"
+                DataTable dt103 = new DataTable();
+                dt103 = dt.Copy();
+                mainCategoryComboBox4.DataSource = dt103;
+                mainCategoryComboBox4.DisplayMember = "main_category_name";
+                mainCategoryComboBox4.ValueMember = "main_category_code";
+                mainCategoryComboBox4.SelectedIndex = 0;
+                #endregion
+                #region "計算書6行目"
+                DataTable dt104 = new DataTable();
+                dt104 = dt.Copy();
+                mainCategoryComboBox5.DataSource = dt104;
+                mainCategoryComboBox5.DisplayMember = "main_category_name";
+                mainCategoryComboBox5.ValueMember = "main_category_code";
+                mainCategoryComboBox5.SelectedIndex = 0;
+                #endregion
+                #region "計算書7行目"
+                DataTable dt105 = new DataTable();
+                dt105 = dt.Copy();
+                mainCategoryComboBox6.DataSource = dt105;
+                mainCategoryComboBox6.DisplayMember = "main_category_name";
+                mainCategoryComboBox6.ValueMember = "main_category_code";
+                mainCategoryComboBox6.SelectedIndex = 0;
+                #endregion
+                #region "計算書8行目"
+                DataTable dt106 = new DataTable();
+                dt106 = dt.Copy();
+                mainCategoryComboBox7.DataSource = dt106;
+                mainCategoryComboBox7.DisplayMember = "main_category_name";
+                mainCategoryComboBox7.ValueMember = "main_category_code";
+                mainCategoryComboBox7.SelectedIndex = 0;
+                #endregion
+                #region "計算書9行目"
+                DataTable dt107 = new DataTable();
+                dt107 = dt.Copy();
+                mainCategoryComboBox8.DataSource = dt107;
+                mainCategoryComboBox8.DisplayMember = "main_category_name";
+                mainCategoryComboBox8.ValueMember = "main_category_code";
+                mainCategoryComboBox8.SelectedIndex = 0;
+                #endregion
+                #region "計算書10行目"
+                DataTable dt108 = new DataTable();
+                dt108 = dt.Copy();
+                mainCategoryComboBox9.DataSource = dt108;
+                mainCategoryComboBox9.DisplayMember = "main_category_name";
+                mainCategoryComboBox9.ValueMember = "main_category_code";
+                mainCategoryComboBox9.SelectedIndex = 0;
+                #endregion
+                #region "計算書11行目"
+                DataTable dt109 = new DataTable();
+                dt109 = dt.Copy();
+                mainCategoryComboBox10.DataSource = dt109;
+                mainCategoryComboBox10.DisplayMember = "main_category_name";
+                mainCategoryComboBox10.ValueMember = "main_category_code";
+                mainCategoryComboBox10.SelectedIndex = 0;
+                #endregion
+                #region "計算書12行目"
+                DataTable dt110 = new DataTable();
+                dt110 = dt.Copy();
+                mainCategoryComboBox11.DataSource = dt110;
+                mainCategoryComboBox11.DisplayMember = "main_category_name";
+                mainCategoryComboBox11.ValueMember = "main_category_code";
+                mainCategoryComboBox11.SelectedIndex = 0;
+                #endregion
+                #region "計算書13行目"
+                DataTable dt111 = new DataTable();
+                dt111 = dt.Copy();
+                mainCategoryComboBox12.DataSource = dt111;
+                mainCategoryComboBox12.DisplayMember = "main_category_name";
+                mainCategoryComboBox12.ValueMember = "main_category_code";
+                mainCategoryComboBox12.SelectedIndex = 0;
+                #endregion
+                #endregion
+                #region "計算書　品名"
+                #region "計算書1行目"
+                itemComboBox0.DataSource = dt2;
+                itemComboBox0.DisplayMember = "item_name";
+                itemComboBox0.ValueMember = "item_code";
+                #endregion
+                #region "計算書2行目"
+                dt200 = dt2.Copy();
+                itemComboBox1.DataSource = dt200;
+                itemComboBox1.DisplayMember = "item_name";
+                itemComboBox1.ValueMember = "item_code";
+                #endregion
+                #region "計算書3行目"
+                dt201 = dt2.Copy();
+                itemComboBox2.DataSource = dt201;
+                itemComboBox2.DisplayMember = "item_name";
+                itemComboBox2.ValueMember = "item_code";
+                #endregion
+                #region "計算書4行目"
+                dt202 = dt2.Copy();
+                itemComboBox3.DataSource = dt202;
+                itemComboBox3.DisplayMember = "item_name";
+                itemComboBox3.ValueMember = "item_code";
+                #endregion
+                #region "計算書5行目"
+                dt203 = dt2.Copy();
+                itemComboBox4.DataSource = dt203;
+                itemComboBox4.DisplayMember = "item_name";
+                itemComboBox4.ValueMember = "item_code";
+                #endregion
+                #region "計算書6行目"
+                dt204 = dt2.Copy();
+                itemComboBox5.DataSource = dt204;
+                itemComboBox5.DisplayMember = "item_name";
+                itemComboBox5.ValueMember = "item_code";
+                #endregion
+                #region "計算書7行目"
+                dt205 = dt2.Copy();
+                itemComboBox6.DataSource = dt205;
+                itemComboBox6.DisplayMember = "item_name";
+                itemComboBox6.ValueMember = "item_code";
+                #endregion
+                #region "計算書8行目"
+                dt206 = dt2.Copy();
+                itemComboBox7.DataSource = dt206;
+                itemComboBox7.DisplayMember = "item_name";
+                itemComboBox7.ValueMember = "item_code";
+                #endregion
+                #region "計算書9行目"
+                dt207 = dt2.Copy();
+                itemComboBox8.DataSource = dt207;
+                itemComboBox8.DisplayMember = "item_name";
+                itemComboBox8.ValueMember = "item_code";
+                #endregion
+                #region "計算書10行目"
+                dt208 = dt2.Copy();
+                itemComboBox9.DataSource = dt208;
+                itemComboBox9.DisplayMember = "item_name";
+                itemComboBox9.ValueMember = "item_code";
+                #endregion
+                #region "計算書11行目"
+                dt209 = dt2.Copy();
+                itemComboBox10.DataSource = dt209;
+                itemComboBox10.DisplayMember = "item_name";
+                itemComboBox10.ValueMember = "item_code";
+                #endregion
+                #region "計算書12行目"
+                dt210 = dt2.Copy();
+                itemComboBox11.DataSource = dt210;
+                itemComboBox11.DisplayMember = "item_name";
+                itemComboBox11.ValueMember = "item_code";
+                #endregion
+                #region "計算書13行目"
+                dt211 = dt2.Copy();
+                itemComboBox12.DataSource = dt211;
+                itemComboBox12.DisplayMember = "item_name";
+                itemComboBox12.ValueMember = "item_code";
+                #endregion
+                #endregion
+                #endregion
+            }
 
-            //納品書
-            DataTable deliverydt = new DataTable();
-            deliverydt = dt.Copy();
-            mainCategoryComboBox00.DataSource = deliverydt;
-            mainCategoryComboBox00.DisplayMember = "main_category_name";
-            mainCategoryComboBox00.ValueMember = "main_category_code";
-            mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+            if (data == "S")
+            {
+                #region "計算書の表の入力を呼び出し"
+                DataTable dt19 = new DataTable();
+                string str_document = "select * from statement_calc_data where document_number = '" + document + "';";
+                adapter = new NpgsqlDataAdapter(str_document, conn);
+                adapter.Fill(dt19);
+                int st = dt19.Rows.Count;
+                #endregion
+                #region "計算書の表の外部の入力データを呼び出し"
+                DataTable dt21 = new DataTable();
+                string str_document1 = "select * from statement_data where document_number = '" + document + "';";
+                adapter = new NpgsqlDataAdapter(str_document1, conn);
+                adapter.Fill(dt21);
+                DataRow row1;
+                row1 = dt21.Rows[0];
+                int types = (int)row1["type"];  //法人か個人か
+                #region "法人"
+                if (types == 0)
+                {
+                    typeTextBox.Text = "法人";
+                    #region "入力する値"
+                    #region "顧客"
+                    this.companyTextBox.Text = row1["company_name"].ToString();
+                    this.shopNameTextBox.Text = row1["shop_name"].ToString();
+                    this.clientNameTextBox.Text = row1["staff_name"].ToString();
+                    DataTable dt25 = new DataTable();
+                    string str_client = "select * from client_m_corporate where type = 0 and company_name = '" + this.companyTextBox.Text + "' and shop_name = '" + this.shopNameTextBox.Text + "' and staff_name = '" + this.clientNameTextBox.Text + "';";
+                    adapter = new NpgsqlDataAdapter(str_client, conn);
+                    adapter.Fill(dt25);
+                    DataRow row2;
+                    row2 = dt25.Rows[0];
+                    this.antiqueLicenceTextBox.Text = row2["antique_license"].ToString();
+                    this.registerDateTextBox.Text = row2["registration_date"].ToString();
+                    this.clientRemarksTextBox.Text = row2["remarks"].ToString();
+                    #endregion
+                    #region "枠外"
+                    this.subTotal.Text = row1["sub_total"].ToString();
+                    subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
+                    int sum = (int)row1["total"];
+                    this.sumTextBox.Text = row1["total"].ToString();
+                    sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
+                    this.taxAmount.Text = row1["tax_amount"].ToString();
+                    taxAmount.Text = string.Format("{0:C}", decimal.Parse(taxAmount.Text, System.Globalization.NumberStyles.Number));
+                    this.paymentMethodsComboBox.SelectedItem = row1["payment_method"].ToString();
+                    this.deliveryComboBox.SelectedItem = row1["delivery_method"].ToString();
+                    this.totalCount.Text = row1["total_amount"].ToString();
+                    this.totalWeight.Text = row1["total_weight"].ToString();
+                    if (sum >= 2000000)
+                    {
+                        groupBox1.BackColor = Color.OrangeRed;
+                    }
+                    #endregion
+                    #endregion
+                }
+                #endregion
+                #region "個人"
+                if (types == 1)
+                {
+                    #region "入力する値"
+                    #region "顧客"
+                    label16.Text = "氏名";
+                    label17.Text = "生年月日";
+                    label18.Text = "職業";
+                    label38.Visible = false;
+                    registerDateTextBox.Visible = false;
+                    typeTextBox.Text = "個人";
+                    this.companyTextBox.Text = row1["name"].ToString();
+                    this.shopNameTextBox.Text = row1["birthday"].ToString();
+                    this.clientNameTextBox.Text = row1["occupation"].ToString();
+                    DataTable dt25 = new DataTable();
+                    string str_client = "select * from client_m_individual where type = 1 and name = '" + this.companyTextBox.Text + "' and birthday = '" + this.shopNameTextBox.Text + "' and occupation = '" + this.clientNameTextBox.Text + "';";
+                    adapter = new NpgsqlDataAdapter(str_client, conn);
+                    adapter.Fill(dt25);
+                    DataRow row2;
+                    row2 = dt25.Rows[0];
+                    this.antiqueLicenceTextBox.Text = row2["antique_license"].ToString();
+                    this.clientRemarksTextBox.Text = row2["remarks"].ToString();
+                    #endregion
+                    #region "枠外"
+                    this.subTotal.Text = row1["subtotal"].ToString();
+                    subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
+                    this.sumTextBox.Text = row1["total"].ToString();
+                    int sum = (int)row1["total"];
+                    sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
+                    this.taxAmount.Text = row1["tax_amount"].ToString();
+                    taxAmount.Text = string.Format("{0:C}", decimal.Parse(taxAmount.Text, System.Globalization.NumberStyles.Number));
+                    this.paymentMethodsComboBox.SelectedItem = row1["payment_method"].ToString();
+                    this.deliveryComboBox.SelectedItem = row1["delivery_method"].ToString();
+                    this.totalCount.Text = row1["total_amount"].ToString();
+                    this.totalWeight.Text = row1["total_weight"].ToString();
+                    if (sum >= 2000000)
+                    {
+                        groupBox1.BackColor = Color.OrangeRed;
+                    }
+                    #endregion
+                    #endregion
+                }
+                #endregion
+                #endregion
+                for (int St = 0; St <= (st - 1); St++)
+                {
+                    #region "1行目"
+                    if (St == 0)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode0 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode0 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt23 = new DataTable();
+                        string sql_document = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode0 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document, conn);
+                        adapter.Fill(dt23);
+                        mainCategoryComboBox0.DataSource = dt23;
+                        mainCategoryComboBox0.DisplayMember = "main_category_name";
+                        mainCategoryComboBox0.ValueMember = "main_category_code";
+                        mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt24 = new DataTable();
+                        string sql_item1 = "select * from item_m  where invalid = 0 and item_code = " + itemCode0 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item1, conn);
+                        adapter.Fill(dt24);
+                        itemComboBox0.DataSource = dt24;
+                        itemComboBox0.DisplayMember = "item_name";
+                        itemComboBox0.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 1行目"
+                        this.weightTextBox0.Text = dataRow1["weight"].ToString();
+                        this.countTextBox0.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox0.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox0.Text = dataRow1["amount"].ToString();
+                        moneyTextBox0.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox0.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks0.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "2行目"
+                    if (St == 1)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode1 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode1 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt231 = new DataTable();
+                        string sql_document1 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode1 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document1, conn);
+                        adapter.Fill(dt231);
+                        mainCategoryComboBox1.DataSource = dt231;
+                        mainCategoryComboBox1.DisplayMember = "main_category_name";
+                        mainCategoryComboBox1.ValueMember = "main_category_code";
+                        mainCategoryComboBox1.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt241 = new DataTable();
+                        string sql_item2 = "select * from item_m  where invalid = 0 and item_code = " + itemCode1 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item2, conn);
+                        adapter.Fill(dt241);
+                        itemComboBox1.DataSource = dt241;
+                        itemComboBox1.DisplayMember = "item_name";
+                        itemComboBox1.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 2行目"
+                        this.weightTextBox1.Text = dataRow1["weight"].ToString();
+                        this.countTextBox1.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox1.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox1.Text = dataRow1["amount"].ToString();
+                        moneyTextBox1.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox1.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks1.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "3行目"
+                    if (St == 2)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode2 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode2 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt232 = new DataTable();
+                        string sql_document2 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode2 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document2, conn);
+                        adapter.Fill(dt232);
+                        mainCategoryComboBox2.DataSource = dt232;
+                        mainCategoryComboBox2.DisplayMember = "main_category_name";
+                        mainCategoryComboBox2.ValueMember = "main_category_code";
+                        mainCategoryComboBox2.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt242 = new DataTable();
+                        string sql_item3 = "select * from item_m  where invalid = 0 and item_code = " + itemCode2 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item3, conn);
+                        adapter.Fill(dt242);
+                        itemComboBox2.DataSource = dt242;
+                        itemComboBox2.DisplayMember = "item_name";
+                        itemComboBox2.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 3行目"
+                        this.weightTextBox2.Text = dataRow1["weight"].ToString();
+                        this.countTextBox2.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox2.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox2.Text = dataRow1["amount"].ToString();
+                        moneyTextBox2.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox2.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks2.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "4行目"
+                    if (St == 3)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode3 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode3 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt233 = new DataTable();
+                        string sql_document3 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode3 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document3, conn);
+                        adapter.Fill(dt233);
+                        mainCategoryComboBox3.DataSource = dt233;
+                        mainCategoryComboBox3.DisplayMember = "main_category_name";
+                        mainCategoryComboBox3.ValueMember = "main_category_code";
+                        mainCategoryComboBox3.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt243 = new DataTable();
+                        string sql_item4 = "select * from item_m  where invalid = 0 and item_code = " + itemCode3 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item4, conn);
+                        adapter.Fill(dt243);
+                        itemComboBox3.DataSource = dt243;
+                        itemComboBox3.DisplayMember = "item_name";
+                        itemComboBox3.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 4行目"
+                        this.weightTextBox3.Text = dataRow1["weight"].ToString();
+                        this.countTextBox3.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox3.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox3.Text = dataRow1["amount"].ToString();
+                        moneyTextBox3.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox3.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks3.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "5行目"
+                    if (St == 4)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document4 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document4, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode4 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode4 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt234 = new DataTable();
+                        string sql_document4 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode4 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document4, conn);
+                        adapter.Fill(dt234);
+                        mainCategoryComboBox4.DataSource = dt234;
+                        mainCategoryComboBox4.DisplayMember = "main_category_name";
+                        mainCategoryComboBox4.ValueMember = "main_category_code";
+                        mainCategoryComboBox4.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt244 = new DataTable();
+                        string sql_item5 = "select * from item_m  where invalid = 0 and item_code = " + itemCode4 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item5, conn);
+                        adapter.Fill(dt244);
+                        itemComboBox4.DataSource = dt244;
+                        itemComboBox4.DisplayMember = "item_name";
+                        itemComboBox4.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 5行目"
+                        this.weightTextBox4.Text = dataRow1["weight"].ToString();
+                        this.countTextBox4.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox4.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox4.Text = dataRow1["amount"].ToString();
+                        moneyTextBox4.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox4.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks4.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "6行目"
+                    if (St == 5)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode5 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode5 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt235 = new DataTable();
+                        string sql_document5 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode5 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document5, conn);
+                        adapter.Fill(dt235);
+                        mainCategoryComboBox5.DataSource = dt235;
+                        mainCategoryComboBox5.DisplayMember = "main_category_name";
+                        mainCategoryComboBox5.ValueMember = "main_category_code";
+                        mainCategoryComboBox5.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt245 = new DataTable();
+                        string sql_item6 = "select * from item_m  where invalid = 0 and item_code = " + itemCode5 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item6, conn);
+                        adapter.Fill(dt245);
+                        itemComboBox5.DataSource = dt245;
+                        itemComboBox5.DisplayMember = "item_name";
+                        itemComboBox5.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 6行目"
+                        this.weightTextBox5.Text = dataRow1["weight"].ToString();
+                        this.countTextBox5.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox5.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox5.Text = dataRow1["amount"].ToString();
+                        moneyTextBox5.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox5.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks5.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "7行目"
+                    if (St == 6)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode6 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode6 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt236 = new DataTable();
+                        string sql_document6 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode6 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document6, conn);
+                        adapter.Fill(dt236);
+                        mainCategoryComboBox6.DataSource = dt236;
+                        mainCategoryComboBox6.DisplayMember = "main_category_name";
+                        mainCategoryComboBox6.ValueMember = "main_category_code";
+                        mainCategoryComboBox6.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt246 = new DataTable();
+                        string sql_item7 = "select * from item_m  where invalid = 0 and item_code = " + itemCode6 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item7, conn);
+                        adapter.Fill(dt246);
+                        itemComboBox6.DataSource = dt246;
+                        itemComboBox6.DisplayMember = "item_name";
+                        itemComboBox6.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 7行目"
+                        this.weightTextBox6.Text = dataRow1["weight"].ToString();
+                        this.countTextBox6.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox6.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox6.Text = dataRow1["amount"].ToString();
+                        moneyTextBox6.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox6.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks6.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "8行目"
+                    if (St == 7)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode7 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode7 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt237 = new DataTable();
+                        string sql_document7 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode7 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document7, conn);
+                        adapter.Fill(dt237);
+                        mainCategoryComboBox7.DataSource = dt237;
+                        mainCategoryComboBox7.DisplayMember = "main_category_name";
+                        mainCategoryComboBox7.ValueMember = "main_category_code";
+                        mainCategoryComboBox7.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt247 = new DataTable();
+                        string sql_item8 = "select * from item_m  where invalid = 0 and item_code = " + itemCode7 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item8, conn);
+                        adapter.Fill(dt247);
+                        itemComboBox7.DataSource = dt247;
+                        itemComboBox7.DisplayMember = "item_name";
+                        itemComboBox7.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 8行目"
+                        this.weightTextBox7.Text = dataRow1["weight"].ToString();
+                        this.countTextBox7.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox7.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox7.Text = dataRow1["amount"].ToString();
+                        moneyTextBox7.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox7.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks7.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "9行目"
+                    if (St == 8)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode8 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode8 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt238 = new DataTable();
+                        string sql_document8 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode8 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document8, conn);
+                        adapter.Fill(dt238);
+                        mainCategoryComboBox8.DataSource = dt238;
+                        mainCategoryComboBox8.DisplayMember = "main_category_name";
+                        mainCategoryComboBox8.ValueMember = "main_category_code";
+                        mainCategoryComboBox8.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt248 = new DataTable();
+                        string sql_item9 = "select * from item_m  where invalid = 0 and item_code = " + itemCode8 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item9, conn);
+                        adapter.Fill(dt248);
+                        itemComboBox8.DataSource = dt248;
+                        itemComboBox8.DisplayMember = "item_name";
+                        itemComboBox8.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 9行目"
+                        this.weightTextBox8.Text = dataRow1["weight"].ToString();
+                        this.countTextBox8.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox8.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox8.Text = dataRow1["amount"].ToString();
+                        moneyTextBox8.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox8.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks8.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "10行目"
+                    if (St == 9)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode9 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode9 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt239 = new DataTable();
+                        string sql_document9 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode9 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document9, conn);
+                        adapter.Fill(dt239);
+                        mainCategoryComboBox9.DataSource = dt239;
+                        mainCategoryComboBox9.DisplayMember = "main_category_name";
+                        mainCategoryComboBox9.ValueMember = "main_category_code";
+                        mainCategoryComboBox9.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt249 = new DataTable();
+                        string sql_item10 = "select * from item_m  where invalid = 0 and item_code = " + itemCode9 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item10, conn);
+                        adapter.Fill(dt249);
+                        itemComboBox9.DataSource = dt249;
+                        itemComboBox9.DisplayMember = "item_name";
+                        itemComboBox9.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 10行目"
+                        this.weightTextBox9.Text = dataRow1["weight"].ToString();
+                        this.countTextBox9.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox9.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox9.Text = dataRow1["amount"].ToString();
+                        moneyTextBox9.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox9.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks9.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "11行目"
+                    if (St == 10)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode10 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode10 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt2310 = new DataTable();
+                        string sql_document10 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode10 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document10, conn);
+                        adapter.Fill(dt2310);
+                        mainCategoryComboBox10.DataSource = dt2310;
+                        mainCategoryComboBox10.DisplayMember = "main_category_name";
+                        mainCategoryComboBox10.ValueMember = "main_category_code";
+                        mainCategoryComboBox10.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt2410 = new DataTable();
+                        string sql_item11 = "select * from item_m  where invalid = 0 and item_code = " + itemCode10 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item11, conn);
+                        adapter.Fill(dt2410);
+                        itemComboBox10.DataSource = dt2410;
+                        itemComboBox10.DisplayMember = "item_name";
+                        itemComboBox10.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 11行目"
+                        this.weightTextBox10.Text = dataRow1["weight"].ToString();
+                        this.countTextBox10.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox10.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox10.Text = dataRow1["amount"].ToString();
+                        moneyTextBox10.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox10.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks10.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "12行目"
+                    if (St == 11)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode11 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode11 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt2311 = new DataTable();
+                        string sql_document11 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode11 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document11, conn);
+                        adapter.Fill(dt2311);
+                        mainCategoryComboBox11.DataSource = dt2311;
+                        mainCategoryComboBox11.DisplayMember = "main_category_name";
+                        mainCategoryComboBox11.ValueMember = "main_category_code";
+                        mainCategoryComboBox11.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt2411 = new DataTable();
+                        string sql_item12 = "select * from item_m  where invalid = 0 and item_code = " + itemCode11 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item12, conn);
+                        adapter.Fill(dt2411);
+                        itemComboBox11.DataSource = dt2411;
+                        itemComboBox11.DisplayMember = "item_name";
+                        itemComboBox11.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 12行目"
+                        this.weightTextBox11.Text = dataRow1["weight"].ToString();
+                        this.countTextBox11.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox11.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox1.Text = dataRow1["amount"].ToString();
+                        moneyTextBox11.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox11.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks11.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "13行目"
+                    if (St == 12)
+                    {
+                        DataTable dt22 = new DataTable();
+                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_document2, conn);
+                        adapter.Fill(dt22);
+                        DataRow dataRow1;
+                        dataRow1 = dt22.Rows[0];
+                        int itemMainCategoryCode12 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode12 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt2312 = new DataTable();
+                        string sql_document12 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode12 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_document12, conn);
+                        adapter.Fill(dt2312);
+                        mainCategoryComboBox12.DataSource = dt2312;
+                        mainCategoryComboBox12.DisplayMember = "main_category_name";
+                        mainCategoryComboBox12.ValueMember = "main_category_code";
+                        mainCategoryComboBox12.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt2412 = new DataTable();
+                        string sql_item13 = "select * from item_m  where invalid = 0 and item_code = " + itemCode12 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item13, conn);
+                        adapter.Fill(dt2412);
+                        itemComboBox12.DataSource = dt2412;
+                        itemComboBox12.DisplayMember = "item_name";
+                        itemComboBox12.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 13行目"
+                        this.weightTextBox12.Text = dataRow1["weight"].ToString();
+                        this.countTextBox12.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox12.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox12.Text = dataRow1["amount"].ToString();
+                        moneyTextBox12.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox12.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks12.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                }
+            }
+            if (data == "D")
+            {
+                #region "納品書の表の入力を呼び出し"
+                DataTable dt20 = new DataTable();
+                string str_control = "select * from delivery_calc where control_number = " + control + ";";
+                adapter = new NpgsqlDataAdapter(str_control, conn);
+                adapter.Fill(dt20);
+                int de = dt20.Rows.Count;
+                #endregion
+                #region "納品書の表の外のデータを呼び出し"
+                DataTable dt21 = new DataTable();
+                string sql_control = "select * from delivery_m where control_number = " + control + ";";
+                adapter = new NpgsqlDataAdapter(sql_control, conn);
+                adapter.Fill(dt21);
+                DataRow row1;
+                row1 = dt21.Rows[0];
+                int type1 = (int)row1["types1"];
+                string yes = row1["seaal_print"].ToString();
+                if (type1 == 0)
+                {
+                    #region "枠外"
+                    this.name.Text = row1["name"].ToString();
+                    this.titleComboBox.SelectedItem = row1["honorific_title"].ToString();
+                    this.RemarkRegister.Text = row1["remarks2"].ToString();
+                    this.typeComboBox.SelectedItem = row1["type"].ToString();
+                    this.paymentMethodComboBox.SelectedItem = row1["payment_method"].ToString();
+                    //this.PayeeComboBox.SelectedItem = row1[""].ToString();
+                    this.CoinComboBox.SelectedItem = row1["currency"].ToString();
+                    this.comboBox11.SelectedItem = row1["vat"].ToString();
+                    if (yes == "する")
+                    {
+                        sealY.Checked = true;
+                    }
+                    if (yes == "しない")
+                    {
+                        sealN.Checked = true;
+                    }
+                    this.totalCount2.Text = row1["total_count"].ToString();
+                    this.totalWeight2.Text = row1["total_weight"].ToString();
+                    this.sumTextBox2.Text = row1["total"].ToString();
+                    sumTextBox2.Text = string.Format("{0:C}", decimal.Parse(sumTextBox2.Text, System.Globalization.NumberStyles.Number));
+                    this.subTotal2.Text = row1["sub_total"].ToString();
+                    subTotal2.Text = string.Format("{0:C}", decimal.Parse(subTotal2.Text, System.Globalization.NumberStyles.Number));
+                    this.taxAmount2.Text = row1["vat_amount"].ToString();
+                    taxAmount2.Text = string.Format("{0:C}", decimal.Parse(taxAmount2.Text, System.Globalization.NumberStyles.Number));
+                    this.tax.Text = row1["vat_rate"].ToString() + ".00%";
+                    #endregion
+                    #region "顧客"
+                    int antique = (int)row1["antique_number"];
+                    typeTextBox2.Text = "法人";
+                    DataTable dt25 = new DataTable();
+                    string str_client = "select * from client_m_corporate where type = 0 and antique_number = " + antique + " ;";
+                    adapter = new NpgsqlDataAdapter(str_client, conn);
+                    adapter.Fill(dt25);
+                    DataRow row2;
+                    row2 = dt25.Rows[0];
+                    this.companyTextBox2.Text = row2["company_name"].ToString();
+                    this.shopNameTextBox2.Text = row2["shop_name"].ToString();
+                    this.clientNameTextBox2.Text = row2["staff_name"].ToString();
+                    this.antiqueLicenceTextBox2.Text = row2["antique_license"].ToString();
+                    this.registerDateTextBox2.Text = row2["registration_date"].ToString();
+                    this.clientRemarksTextBox2.Text = row2["remarks"].ToString();
+                    #endregion
+                }
+                if (type1 == 1)
+                {
+                    typeTextBox2.Text = "個人";
+                    #region "枠外"
+                    this.name.Text = row1["name"].ToString();
+                    this.titleComboBox.SelectedItem = row1["honorific_title"].ToString();
+                    this.RemarkRegister.Text = row1["remarks2"].ToString();
+                    this.typeComboBox.SelectedItem = row1["type"].ToString();
+                    this.paymentMethodComboBox.SelectedItem = row1["payment_method"].ToString();
+                    //this.PayeeComboBox.SelectedItem = row1[""].ToString();
+                    this.CoinComboBox.SelectedItem = row1["currency"].ToString();
+                    this.comboBox11.SelectedItem = row["vat"].ToString();
+                    if (yes == "する")
+                    {
+                        sealY.Checked = true;
+                    }
+                    if (yes == "しない")
+                    {
+                        sealN.Checked = true;
+                    }
+                    this.totalCount2.Text = row1["total_count"].ToString();
+                    this.totalWeight2.Text = row1["total_weight"].ToString();
+                    this.sumTextBox2.Text = row1["total"].ToString();
+                    sumTextBox2.Text = string.Format("{0:C}", decimal.Parse(sumTextBox2.Text, System.Globalization.NumberStyles.Number));
+                    this.subTotal2.Text = row1["sub_total"].ToString();
+                    subTotal2.Text = string.Format("{0:C}", decimal.Parse(subTotal2.Text, System.Globalization.NumberStyles.Number));
+                    this.taxAmount2.Text = row1["vat_amount"].ToString();
+                    taxAmount2.Text = string.Format("{0:C}", decimal.Parse(taxAmount2.Text, System.Globalization.NumberStyles.Number));
+                    this.tax.Text = row1["vat_rate"].ToString() + ".00%";
+                    #endregion
+                    #region "顧客"
+                    typeTextBox2.Text = "個人";
+                    label75.Text = "氏名";
+                    label76.Text = "職業";
+                    label77.Text = "生年月日";
+                    label36.Visible = false;
+                    registerDateTextBox2.Visible = false;
+                    int idNumber = (int)row1["id_number"];
+                    typeTextBox2.Text = "法人";
+                    DataTable dt25 = new DataTable();
+                    string str_client = "select * from client_m_individual where type = 1 and id_number = " + idNumber + " ;";
+                    adapter = new NpgsqlDataAdapter(str_client, conn);
+                    adapter.Fill(dt25);
+                    DataRow row2;
+                    row2 = dt25.Rows[0];
+                    this.companyTextBox2.Text = row2["name"].ToString();
+                    this.shopNameTextBox2.Text = row2["birthday"].ToString();
+                    this.clientNameTextBox2.Text = row2["occupation"].ToString();
+                    this.antiqueLicenceTextBox2.Text = row2["antique_license"].ToString();
+                    this.clientRemarksTextBox2.Text = row2["remarks"].ToString();
+                    #endregion
+                }
+                #endregion
 
-            //2行目
-            //計算書
-            DataTable dt100 = new DataTable();
-            dt100 = dt.Copy();
-            mainCategoryComboBox1.DataSource = dt100;
-            mainCategoryComboBox1.DisplayMember = "main_category_name";
-            mainCategoryComboBox1.ValueMember = "main_category_code";
-            mainCategoryComboBox1.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt100 = new DataTable();
-            deliverydt100 = dt.Copy();
-            mainCategoryComboBox01.DataSource = deliverydt100;
-            mainCategoryComboBox01.DisplayMember = "main_category_name";
-            mainCategoryComboBox01.ValueMember = "main_category_code";
-            mainCategoryComboBox01.SelectedIndex = 0;
-
-            //3行目
-            //計算書
-            DataTable dt101 = new DataTable();
-            dt101 = dt.Copy();
-            mainCategoryComboBox2.DataSource = dt101;
-            mainCategoryComboBox2.DisplayMember = "main_category_name";
-            mainCategoryComboBox2.ValueMember = "main_category_code";
-            mainCategoryComboBox2.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt101 = new DataTable();
-            deliverydt101 = dt.Copy();
-            mainCategoryComboBox02.DataSource = deliverydt101;
-            mainCategoryComboBox02.DisplayMember = "main_category_name";
-            mainCategoryComboBox02.ValueMember = "main_category_code";
-            mainCategoryComboBox02.SelectedIndex = 0;
-
-            //4行目
-            //計算書
-            DataTable dt102 = new DataTable();
-            dt102 = dt.Copy();
-            mainCategoryComboBox3.DataSource = dt102;
-            mainCategoryComboBox3.DisplayMember = "main_category_name";
-            mainCategoryComboBox3.ValueMember = "main_category_code";
-            mainCategoryComboBox3.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt102 = new DataTable();
-            deliverydt102 = dt.Copy();
-            mainCategoryComboBox03.DataSource = deliverydt102;
-            mainCategoryComboBox03.DisplayMember = "main_category_name";
-            mainCategoryComboBox03.ValueMember = "main_category_code";
-            mainCategoryComboBox03.SelectedIndex = 0;
-
-            //5行目
-            //計算書
-            DataTable dt103 = new DataTable();
-            dt103 = dt.Copy();
-            mainCategoryComboBox4.DataSource = dt103;
-            mainCategoryComboBox4.DisplayMember = "main_category_name";
-            mainCategoryComboBox4.ValueMember = "main_category_code";
-            mainCategoryComboBox4.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt103 = new DataTable();
-            deliverydt103 = dt.Copy();
-            mainCategoryComboBox04.DataSource = deliverydt103;
-            mainCategoryComboBox04.DisplayMember = "main_category_name";
-            mainCategoryComboBox04.ValueMember = "main_category_code";
-            mainCategoryComboBox04.SelectedIndex = 0;
-
-            //6行目
-            //計算書
-            DataTable dt104 = new DataTable();
-            dt104 = dt.Copy();
-            mainCategoryComboBox5.DataSource = dt104;
-            mainCategoryComboBox5.DisplayMember = "main_category_name";
-            mainCategoryComboBox5.ValueMember = "main_category_code";
-            mainCategoryComboBox5.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt104 = new DataTable();
-            deliverydt104 = dt.Copy();
-            mainCategoryComboBox05.DataSource = deliverydt104;
-            mainCategoryComboBox05.DisplayMember = "main_category_name";
-            mainCategoryComboBox05.ValueMember = "main_category_code";
-            mainCategoryComboBox05.SelectedIndex = 0;
-
-            //7行目
-            //計算書
-            DataTable dt105 = new DataTable();
-            dt105 = dt.Copy();
-            mainCategoryComboBox6.DataSource = dt105;
-            mainCategoryComboBox6.DisplayMember = "main_category_name";
-            mainCategoryComboBox6.ValueMember = "main_category_code";
-            mainCategoryComboBox6.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt105 = new DataTable();
-            deliverydt105 = dt.Copy();
-            mainCategoryComboBox06.DataSource = deliverydt105;
-            mainCategoryComboBox06.DisplayMember = "main_category_name";
-            mainCategoryComboBox06.ValueMember = "main_category_code";
-            mainCategoryComboBox06.SelectedIndex = 0;
-
-            //8行目
-            //計算書
-            DataTable dt106 = new DataTable();
-            dt106 = dt.Copy();
-            mainCategoryComboBox7.DataSource = dt106;
-            mainCategoryComboBox7.DisplayMember = "main_category_name";
-            mainCategoryComboBox7.ValueMember = "main_category_code";
-            mainCategoryComboBox7.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt106 = new DataTable();
-            deliverydt106 = dt.Copy();
-            mainCategoryComboBox07.DataSource = deliverydt106;
-            mainCategoryComboBox07.DisplayMember = "main_category_name";
-            mainCategoryComboBox07.ValueMember = "main_category_code";
-            mainCategoryComboBox07.SelectedIndex = 0;
-
-            //9行目
-            //計算書
-            DataTable dt107 = new DataTable();
-            dt107 = dt.Copy();
-            mainCategoryComboBox8.DataSource = dt107;
-            mainCategoryComboBox8.DisplayMember = "main_category_name";
-            mainCategoryComboBox8.ValueMember = "main_category_code";
-            mainCategoryComboBox8.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt107 = new DataTable();
-            deliverydt107 = dt.Copy();
-            mainCategoryComboBox08.DataSource = deliverydt107;
-            mainCategoryComboBox08.DisplayMember = "main_category_name";
-            mainCategoryComboBox08.ValueMember = "main_category_code";
-            mainCategoryComboBox08.SelectedIndex = 0;
-
-            //10行目
-            //計算書
-            DataTable dt108 = new DataTable();
-            dt108 = dt.Copy();
-            mainCategoryComboBox9.DataSource = dt108;
-            mainCategoryComboBox9.DisplayMember = "main_category_name";
-            mainCategoryComboBox9.ValueMember = "main_category_code";
-            mainCategoryComboBox9.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt108 = new DataTable();
-            deliverydt108 = dt.Copy();
-            mainCategoryComboBox09.DataSource = deliverydt108;
-            mainCategoryComboBox09.DisplayMember = "main_category_name";
-            mainCategoryComboBox09.ValueMember = "main_category_code";
-            mainCategoryComboBox09.SelectedIndex = 0;
-
-            //11行目
-            //計算書
-            DataTable dt109 = new DataTable();
-            dt109 = dt.Copy();
-            mainCategoryComboBox10.DataSource = dt109;
-            mainCategoryComboBox10.DisplayMember = "main_category_name";
-            mainCategoryComboBox10.ValueMember = "main_category_code";
-            mainCategoryComboBox10.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt109 = new DataTable();
-            deliverydt109 = dt.Copy();
-            mainCategoryComboBox010.DataSource = deliverydt109;
-            mainCategoryComboBox010.DisplayMember = "main_category_name";
-            mainCategoryComboBox010.ValueMember = "main_category_code";
-            mainCategoryComboBox010.SelectedIndex = 0;
-
-            //12行目
-            //計算書
-            DataTable dt110 = new DataTable();
-            dt110 = dt.Copy();
-            mainCategoryComboBox11.DataSource = dt110;
-            mainCategoryComboBox11.DisplayMember = "main_category_name";
-            mainCategoryComboBox11.ValueMember = "main_category_code";
-            mainCategoryComboBox11.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt110 = new DataTable();
-            deliverydt110 = dt.Copy();
-            mainCategoryComboBox011.DataSource = deliverydt110;
-            mainCategoryComboBox011.DisplayMember = "main_category_name";
-            mainCategoryComboBox011.ValueMember = "main_category_code";
-            mainCategoryComboBox011.SelectedIndex = 0;
-
-            //13行目
-            //計算書
-            DataTable dt111 = new DataTable();
-            dt111 = dt.Copy();
-            mainCategoryComboBox12.DataSource = dt111;
-            mainCategoryComboBox12.DisplayMember = "main_category_name";
-            mainCategoryComboBox12.ValueMember = "main_category_code";
-            mainCategoryComboBox12.SelectedIndex = 0;
-            //納品書
-            DataTable deliverydt112 = new DataTable();
-            deliverydt112 = dt.Copy();
-            mainCategoryComboBox012.DataSource = deliverydt112;
-            mainCategoryComboBox012.DisplayMember = "main_category_name";
-            mainCategoryComboBox012.ValueMember = "main_category_code";
-            mainCategoryComboBox012.SelectedIndex = 0;
-            #endregion
-
-            #region "品名"
-            //品名ヘッダー 初期表示
-
-            //1行目
-            //計算書
-            itemComboBox0.DataSource = dt2;
-            itemComboBox0.DisplayMember = "item_name";
-            itemComboBox0.ValueMember = "item_code";
-            //納品書
-            deliverydt200 = dt2.Copy();
-            itemComboBox00.DataSource = deliverydt200;
-            itemComboBox00.DisplayMember = "item_name";
-            itemComboBox00.ValueMember = "item_code";
-
-            //2行目
-            //計算書
-            dt200 = dt2.Copy();
-            itemComboBox1.DataSource = dt200;
-            itemComboBox1.DisplayMember = "item_name";
-            itemComboBox1.ValueMember = "item_code";
-            //納品書
-            deliverydt201 = dt2.Copy();
-            itemComboBox01.DataSource = deliverydt201;
-            itemComboBox01.DisplayMember = "item_name";
-            itemComboBox01.ValueMember = "item_code";
-
-            //3行目
-            //計算書
-            dt201 = dt2.Copy();
-            itemComboBox2.DataSource = dt201;
-            itemComboBox2.DisplayMember = "item_name";
-            itemComboBox2.ValueMember = "item_code";
-            //納品書
-            deliverydt202 = dt2.Copy();
-            itemComboBox02.DataSource = deliverydt202;
-            itemComboBox02.DisplayMember = "item_name";
-            itemComboBox02.ValueMember = "item_code";
-
-            //4行目
-            //計算書
-            dt202 = dt2.Copy();
-            itemComboBox3.DataSource = dt202;
-            itemComboBox3.DisplayMember = "item_name";
-            itemComboBox3.ValueMember = "item_code";
-            //納品書
-            deliverydt203 = dt2.Copy();
-            itemComboBox03.DataSource = deliverydt203;
-            itemComboBox03.DisplayMember = "item_name";
-            itemComboBox03.ValueMember = "item_code";
-
-            //5行目
-            //計算書
-            dt203 = dt2.Copy();
-            itemComboBox4.DataSource = dt203;
-            itemComboBox4.DisplayMember = "item_name";
-            itemComboBox4.ValueMember = "item_code";
-            //納品書
-            deliverydt204 = dt2.Copy();
-            itemComboBox04.DataSource = deliverydt204;
-            itemComboBox04.DisplayMember = "item_name";
-            itemComboBox04.ValueMember = "item_code";
-
-            //6行目
-            //計算書
-            dt204 = dt2.Copy();
-            itemComboBox5.DataSource = dt204;
-            itemComboBox5.DisplayMember = "item_name";
-            itemComboBox5.ValueMember = "item_code";
-            //納品書
-            deliverydt205 = dt2.Copy();
-            itemComboBox05.DataSource = deliverydt205;
-            itemComboBox05.DisplayMember = "item_name";
-            itemComboBox05.ValueMember = "item_code";
-
-            //7行目
-            //計算書
-            dt205 = dt2.Copy();
-            itemComboBox6.DataSource = dt205;
-            itemComboBox6.DisplayMember = "item_name";
-            itemComboBox6.ValueMember = "item_code";
-            //納品書
-            deliverydt206 = dt2.Copy();
-            itemComboBox06.DataSource = deliverydt206;
-            itemComboBox06.DisplayMember = "item_name";
-            itemComboBox06.ValueMember = "item_code";
-
-            //8行目
-            //計算書
-            dt206 = dt2.Copy();
-            itemComboBox7.DataSource = dt206;
-            itemComboBox7.DisplayMember = "item_name";
-            itemComboBox7.ValueMember = "item_code";
-            //納品書
-            deliverydt207 = dt2.Copy();
-            itemComboBox07.DataSource = deliverydt207;
-            itemComboBox07.DisplayMember = "item_name";
-            itemComboBox07.ValueMember = "item_code";
-
-            //9行目
-            //計算書
-            dt207 = dt2.Copy();
-            itemComboBox8.DataSource = dt207;
-            itemComboBox8.DisplayMember = "item_name";
-            itemComboBox8.ValueMember = "item_code";
-            //納品書
-            deliverydt208 = dt2.Copy();
-            itemComboBox08.DataSource = deliverydt208;
-            itemComboBox08.DisplayMember = "item_name";
-            itemComboBox08.ValueMember = "item_code";
-
-            //10行目
-            //計算書
-            dt208 = dt2.Copy();
-            itemComboBox9.DataSource = dt208;
-            itemComboBox9.DisplayMember = "item_name";
-            itemComboBox9.ValueMember = "item_code";
-            //納品書
-            deliverydt209 = dt2.Copy();
-            itemComboBox09.DataSource = deliverydt209;
-            itemComboBox09.DisplayMember = "item_name";
-            itemComboBox09.ValueMember = "item_code";
-
-            //11行目
-            //計算書
-            dt209 = dt2.Copy();
-            itemComboBox10.DataSource = dt209;
-            itemComboBox10.DisplayMember = "item_name";
-            itemComboBox10.ValueMember = "item_code";
-            //納品書
-            deliverydt210 = dt2.Copy();
-            itemComboBox010.DataSource = deliverydt210;
-            itemComboBox010.DisplayMember = "item_name";
-            itemComboBox010.ValueMember = "item_code";
-
-            //12行目
-            //計算書
-            dt210 = dt2.Copy();
-            itemComboBox11.DataSource = dt210;
-            itemComboBox11.DisplayMember = "item_name";
-            itemComboBox11.ValueMember = "item_code";
-            //納品書
-            deliverydt211 = dt2.Copy();
-            itemComboBox011.DataSource = deliverydt211;
-            itemComboBox011.DisplayMember = "item_name";
-            itemComboBox011.ValueMember = "item_code";
-
-            //13行目
-            //計算書
-            dt211 = dt2.Copy();
-            itemComboBox12.DataSource = dt211;
-            itemComboBox12.DisplayMember = "item_name";
-            itemComboBox12.ValueMember = "item_code";
-            //納品書
-            deliverydt212 = dt2.Copy();
-            itemComboBox012.DataSource = deliverydt212;
-            itemComboBox012.DisplayMember = "item_name";
-            itemComboBox012.ValueMember = "item_code";
-            #endregion
-            #region "計算書戻ってきた時に"
+                for (int De = 0; De <= (de - 1); De++)
+                {
+                    #region "1行目"
+                    if (De ==0)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode00 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode00 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt26 = new DataTable();
+                        string sql_control1 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode00 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control1, conn);
+                        adapter.Fill(dt26);
+                        mainCategoryComboBox00.DataSource = dt26;
+                        mainCategoryComboBox00.DisplayMember = "main_category_name";
+                        mainCategoryComboBox00.ValueMember = "main_category_code";
+                        mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt27 = new DataTable();
+                        string sql_item1 = "select * from item_m  where invalid = 0 and item_code = " + itemCode00 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item1, conn);
+                        adapter.Fill(dt27);
+                        itemComboBox00.DataSource = dt27;
+                        itemComboBox00.DisplayMember = "item_name";
+                        itemComboBox00.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 1行目"
+                        this.weightTextBox00.Text = dataRow1["weight"].ToString();
+                        this.countTextBox00.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox00.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox00.Text = dataRow1["amount"].ToString();
+                        moneyTextBox00.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox00.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks00.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "2行目"
+                    if (De == 1)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode01 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode01 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt261 = new DataTable();
+                        string sql_control2 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode01 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control2, conn);
+                        adapter.Fill(dt261);
+                        mainCategoryComboBox01.DataSource = dt261;
+                        mainCategoryComboBox01.DisplayMember = "main_category_name";
+                        mainCategoryComboBox01.ValueMember = "main_category_code";
+                        mainCategoryComboBox01.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt271 = new DataTable();
+                        string sql_item2 = "select * from item_m  where invalid = 0 and item_code = " + itemCode01 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item2, conn);
+                        adapter.Fill(dt271);
+                        itemComboBox01.DataSource = dt271;
+                        itemComboBox01.DisplayMember = "item_name";
+                        itemComboBox01.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 2行目"
+                        this.weightTextBox01.Text = dataRow1["weight"].ToString();
+                        this.countTextBox01.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox01.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox01.Text = dataRow1["amount"].ToString();
+                        moneyTextBox01.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox01.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks01.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "3行目"
+                    if (De == 2)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode02 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode02 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt262 = new DataTable();
+                        string sql_control3 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode02 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control3, conn);
+                        adapter.Fill(dt262);
+                        mainCategoryComboBox02.DataSource = dt262;
+                        mainCategoryComboBox02.DisplayMember = "main_category_name";
+                        mainCategoryComboBox02.ValueMember = "main_category_code";
+                        mainCategoryComboBox02.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt272 = new DataTable();
+                        string sql_item3 = "select * from item_m  where invalid = 0 and item_code = " + itemCode02 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item3, conn);
+                        adapter.Fill(dt272);
+                        itemComboBox02.DataSource = dt272;
+                        itemComboBox02.DisplayMember = "item_name";
+                        itemComboBox02.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 3行目"
+                        this.weightTextBox02.Text = dataRow1["weight"].ToString();
+                        this.countTextBox02.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox02.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox02.Text = dataRow1["amount"].ToString();
+                        moneyTextBox02.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox02.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks02.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "4行目"
+                    if (De == 3)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode03 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode03 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt263 = new DataTable();
+                        string sql_control4 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode03 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control4, conn);
+                        adapter.Fill(dt263);
+                        mainCategoryComboBox03.DataSource = dt263;
+                        mainCategoryComboBox03.DisplayMember = "main_category_name";
+                        mainCategoryComboBox03.ValueMember = "main_category_code";
+                        mainCategoryComboBox03.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt273 = new DataTable();
+                        string sql_item4 = "select * from item_m  where invalid = 0 and item_code = " + itemCode03 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item4, conn);
+                        adapter.Fill(dt273);
+                        itemComboBox03.DataSource = dt273;
+                        itemComboBox03.DisplayMember = "item_name";
+                        itemComboBox03.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 4行目"
+                        this.weightTextBox03.Text = dataRow1["weight"].ToString();
+                        this.countTextBox03.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox03.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox03.Text = dataRow1["amount"].ToString();
+                        moneyTextBox03.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox03.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks03.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "5行目"
+                    if (De == 4)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode04 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode04 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt264 = new DataTable();
+                        string sql_control5 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode04 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control5, conn);
+                        adapter.Fill(dt264);
+                        mainCategoryComboBox04.DataSource = dt264;
+                        mainCategoryComboBox04.DisplayMember = "main_category_name";
+                        mainCategoryComboBox04.ValueMember = "main_category_code";
+                        mainCategoryComboBox04.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt274 = new DataTable();
+                        string sql_item4 = "select * from item_m  where invalid = 0 and item_code = " + itemCode04 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item4, conn);
+                        adapter.Fill(dt274);
+                        itemComboBox04.DataSource = dt274;
+                        itemComboBox04.DisplayMember = "item_name";
+                        itemComboBox04.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 5行目"
+                        this.weightTextBox04.Text = dataRow1["weight"].ToString();
+                        this.countTextBox04.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox04.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox04.Text = dataRow1["amount"].ToString();
+                        moneyTextBox04.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox04.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks04.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "6行目"
+                    if (De == 5)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode05 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode05 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt265 = new DataTable();
+                        string sql_control6 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode05 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control6, conn);
+                        adapter.Fill(dt265);
+                        mainCategoryComboBox05.DataSource = dt265;
+                        mainCategoryComboBox05.DisplayMember = "main_category_name";
+                        mainCategoryComboBox05.ValueMember = "main_category_code";
+                        mainCategoryComboBox05.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt275 = new DataTable();
+                        string sql_item6 = "select * from item_m  where invalid = 0 and item_code = " + itemCode05 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item6, conn);
+                        adapter.Fill(dt275);
+                        itemComboBox05.DataSource = dt275;
+                        itemComboBox05.DisplayMember = "item_name";
+                        itemComboBox05.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 6行目"
+                        this.weightTextBox05.Text = dataRow1["weight"].ToString();
+                        this.countTextBox05.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox05.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox05.Text = dataRow1["amount"].ToString();
+                        moneyTextBox05.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox05.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks05.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "7行目"
+                    if (De == 6)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode06 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode06 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt266 = new DataTable();
+                        string sql_control7 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode06 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control7, conn);
+                        adapter.Fill(dt266);
+                        mainCategoryComboBox06.DataSource = dt266;
+                        mainCategoryComboBox06.DisplayMember = "main_category_name";
+                        mainCategoryComboBox06.ValueMember = "main_category_code";
+                        mainCategoryComboBox06.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt276 = new DataTable();
+                        string sql_item7 = "select * from item_m  where invalid = 0 and item_code = " + itemCode06 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item7, conn);
+                        adapter.Fill(dt276);
+                        itemComboBox06.DataSource = dt276;
+                        itemComboBox06.DisplayMember = "item_name";
+                        itemComboBox06.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 7行目"
+                        this.weightTextBox06.Text = dataRow1["weight"].ToString();
+                        this.countTextBox06.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox06.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox06.Text = dataRow1["amount"].ToString();
+                        moneyTextBox06.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox06.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks06.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "8行目"
+                    if (De == 7)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode07 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode07 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt267 = new DataTable();
+                        string sql_control8 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode07 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control8, conn);
+                        adapter.Fill(dt267);
+                        mainCategoryComboBox07.DataSource = dt267;
+                        mainCategoryComboBox07.DisplayMember = "main_category_name";
+                        mainCategoryComboBox07.ValueMember = "main_category_code";
+                        mainCategoryComboBox07.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt277 = new DataTable();
+                        string sql_item8 = "select * from item_m  where invalid = 0 and item_code = " + itemCode07 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item8, conn);
+                        adapter.Fill(dt277);
+                        itemComboBox07.DataSource = dt277;
+                        itemComboBox07.DisplayMember = "item_name";
+                        itemComboBox07.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 8行目"
+                        this.weightTextBox07.Text = dataRow1["weight"].ToString();
+                        this.countTextBox07.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox07.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox07.Text = dataRow1["amount"].ToString();
+                        moneyTextBox07.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox07.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks07.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "9行目"
+                    if (De == 8)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode08 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode08 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt268 = new DataTable();
+                        string sql_control9 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode08 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control9, conn);
+                        adapter.Fill(dt268);
+                        mainCategoryComboBox08.DataSource = dt268;
+                        mainCategoryComboBox08.DisplayMember = "main_category_name";
+                        mainCategoryComboBox08.ValueMember = "main_category_code";
+                        mainCategoryComboBox08.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt278 = new DataTable();
+                        string sql_item9 = "select * from item_m  where invalid = 0 and item_code = " + itemCode08 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item9, conn);
+                        adapter.Fill(dt278);
+                        itemComboBox08.DataSource = dt278;
+                        itemComboBox08.DisplayMember = "item_name";
+                        itemComboBox08.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 9行目"
+                        this.weightTextBox08.Text = dataRow1["weight"].ToString();
+                        this.countTextBox08.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox08.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox08.Text = dataRow1["amount"].ToString();
+                        moneyTextBox08.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox08.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks08.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "10行目"
+                    if (De == 9)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode09 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode09 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt269 = new DataTable();
+                        string sql_control10 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode09 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control10, conn);
+                        adapter.Fill(dt269);
+                        mainCategoryComboBox09.DataSource = dt269;
+                        mainCategoryComboBox09.DisplayMember = "main_category_name";
+                        mainCategoryComboBox09.ValueMember = "main_category_code";
+                        mainCategoryComboBox09.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt279 = new DataTable();
+                        string sql_item10 = "select * from item_m  where invalid = 0 and item_code = " + itemCode09 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item10, conn);
+                        adapter.Fill(dt279);
+                        itemComboBox09.DataSource = dt279;
+                        itemComboBox09.DisplayMember = "item_name";
+                        itemComboBox09.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 10行目"
+                        this.weightTextBox09.Text = dataRow1["weight"].ToString();
+                        this.countTextBox09.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox09.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox09.Text = dataRow1["amount"].ToString();
+                        moneyTextBox09.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox09.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks09.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "11行目"
+                    if (De == 10)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode010 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode010 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt2610 = new DataTable();
+                        string sql_control11 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode010 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control11, conn);
+                        adapter.Fill(dt2610);
+                        mainCategoryComboBox010.DataSource = dt2610;
+                        mainCategoryComboBox010.DisplayMember = "main_category_name";
+                        mainCategoryComboBox010.ValueMember = "main_category_code";
+                        mainCategoryComboBox010.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt2710 = new DataTable();
+                        string sql_item11 = "select * from item_m  where invalid = 0 and item_code = " + itemCode010 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item11, conn);
+                        adapter.Fill(dt2710);
+                        itemComboBox010.DataSource = dt2710;
+                        itemComboBox010.DisplayMember = "item_name";
+                        itemComboBox010.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 11行目"
+                        this.weightTextBox010.Text = dataRow1["weight"].ToString();
+                        this.countTextBox010.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox010.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox010.Text = dataRow1["amount"].ToString();
+                        moneyTextBox010.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox010.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks010.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "12行目"
+                    if (De == 11)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode011 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode011 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt2611 = new DataTable();
+                        string sql_control12 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode011 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control12, conn);
+                        adapter.Fill(dt2611);
+                        mainCategoryComboBox011.DataSource = dt2611;
+                        mainCategoryComboBox011.DisplayMember = "main_category_name";
+                        mainCategoryComboBox011.ValueMember = "main_category_code";
+                        mainCategoryComboBox011.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt2711 = new DataTable();
+                        string sql_item12 = "select * from item_m  where invalid = 0 and item_code = " + itemCode011 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item12, conn);
+                        adapter.Fill(dt2711);
+                        itemComboBox011.DataSource = dt2711;
+                        itemComboBox011.DisplayMember = "item_name";
+                        itemComboBox011.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 12行目"
+                        this.weightTextBox011.Text = dataRow1["weight"].ToString();
+                        this.countTextBox011.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox011.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox011.Text = dataRow1["amount"].ToString();
+                        moneyTextBox011.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox011.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks011.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                    #region "13行目"
+                    if (De == 12)
+                    {
+                        DataTable dt25 = new DataTable();
+                        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+                        adapter = new NpgsqlDataAdapter(str_control0, conn);
+                        adapter.Fill(dt25);
+                        DataRow dataRow1;
+                        dataRow1 = dt25.Rows[0];
+                        int itemMainCategoryCode012 = (int)dataRow1["main_category_code"]; //大分類
+                        int itemCode012 = (int)dataRow1["item_code"];　　//品名
+                        #region "コンボボックス"
+                        #region "大分類"
+                        DataTable dt2612 = new DataTable();
+                        string sql_control13 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode012 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_control13, conn);
+                        adapter.Fill(dt2612);
+                        mainCategoryComboBox012.DataSource = dt2612;
+                        mainCategoryComboBox012.DisplayMember = "main_category_name";
+                        mainCategoryComboBox012.ValueMember = "main_category_code";
+                        mainCategoryComboBox012.SelectedIndex = 0;//担当者ごとの初期値設定
+                        #endregion
+                        #region "品名"
+                        //品名検索用
+                        DataTable dt2712 = new DataTable();
+                        string sql_item13 = "select * from item_m  where invalid = 0 and item_code = " + itemCode012 + ";";
+                        adapter = new NpgsqlDataAdapter(sql_item13, conn);
+                        adapter.Fill(dt2712);
+                        itemComboBox012.DataSource = dt2712;
+                        itemComboBox012.DisplayMember = "item_name";
+                        itemComboBox012.ValueMember = "item_code";
+                        #endregion
+                        #endregion
+                        #region "入力された項目 13行目"
+                        this.weightTextBox012.Text = dataRow1["weight"].ToString();
+                        this.countTextBox012.Text = dataRow1["count"].ToString();
+                        this.unitPriceTextBox012.Text = dataRow1["unit_price"].ToString();
+                        unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
+                        this.moneyTextBox012.Text = dataRow1["amount"].ToString();
+                        moneyTextBox012.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox012.Text, System.Globalization.NumberStyles.Number));
+                        this.remarks012.Text = dataRow1["remarks"].ToString();
+                        #endregion
+                    }
+                    #endregion
+                }
+            }
+            #region "顧客選択から計算書戻ってきた時に"
             if (total != 0)
             {
                 DataTable dt8 = new DataTable();
@@ -1308,8 +2953,12 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
             #region "1行目の入力値"
-            //単価の欄に初期表示
-            if (total == 0)
+                //単価の欄に初期表示
+            if ((data == "S" || data == "D") && total == 0)
+            {
+
+            }
+            else if (total == 0 )
             {
                 unitPriceTextBox0.Text = "単価 -> 重量 or 数量";
                 unitPriceTextBox00.Text = "単価 -> 重量 or 数量";
@@ -1418,7 +3067,7 @@ namespace Flawless_ex
             }
             #endregion
             #region "１度選択して戻る場合"
-            else if (count == 0 && (address != null && client_staff_name != null))
+            else if (count == 0 && (address != null && client_staff_name != null) && data == null)
             {
                 if (type == 0)
                 {
@@ -2448,7 +4097,7 @@ namespace Flawless_ex
 
         private void mainCategoryComboBox012_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //大分類によって品名変更 12行目
+            //大分類によって品名変更 13行目
             if (b > 1)
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
@@ -2755,7 +4404,7 @@ namespace Flawless_ex
             }
             
             
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, Pass))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -2805,7 +4454,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, Pass))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -2883,8 +4532,8 @@ namespace Flawless_ex
             string DeliveryMethod = deliveryComboBox.Text;
             string PaymentMethod = paymentMethodsComboBox.Text;
             int TYPE = 0;
-            AntiqueNumber = 0;
-            ID_Number = 0;
+            int AntiqueNumber = 0;
+            int ID_Number = 0;
             string CompanyName = "";
             string ShopName = "";
             string StaffName = "";
@@ -3497,436 +5146,623 @@ namespace Flawless_ex
         #region "計算書　フォーカス時初期状態ならnull"
         private void unitPriceTextBox0_Enter(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(typeTextBox.Text))
+            if (data == "S")
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                unitPriceTextBox0.Text = "";
-                unitPriceTextBox0.ReadOnly = true;
-                return;
+
             }
-            if (unitPriceTextBox0.Text.ToString() == "単価 -> 重量 or 数量")
+            else
             {
+                if (string.IsNullOrEmpty(typeTextBox.Text))
+                {
+                    MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     unitPriceTextBox0.Text = "";
+                    unitPriceTextBox0.ReadOnly = true;
+                    return;
+                }
+                if (unitPriceTextBox0.Text.ToString() == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox0.Text = "";
+                }
             }
+            
             
         }
         private void unitPriceTextBox1_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox1.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox1.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox0.Text)))
+            else
             {
-                unitPriceTextBox1.ReadOnly = false;
+                if (unitPriceTextBox1.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox1.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox0.Text)))
+                {
+                    unitPriceTextBox1.ReadOnly = false;
+                }
             }
+            
         }
         private void unitPriceTextBox2_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox2.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox2.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox1.Text)))
+            else
             {
-                unitPriceTextBox2.ReadOnly = false;
+                if (unitPriceTextBox2.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox2.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox1.Text)))
+                {
+                    unitPriceTextBox2.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox3_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox3.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox3.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox2.Text)))
+            else
             {
-                unitPriceTextBox3.ReadOnly = false;
+                if (unitPriceTextBox3.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox3.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox2.Text)))
+                {
+                    unitPriceTextBox3.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox4_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox4.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox4.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox3.Text)))
+            else
             {
-                unitPriceTextBox4.ReadOnly = false;
+                if (unitPriceTextBox4.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox4.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox3.Text)))
+                {
+                    unitPriceTextBox4.ReadOnly = false;
+                }
             }
         }
     
         private void unitPriceTextBox5_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox5.Text.ToString() == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox5.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox4.Text)))
+            else
             {
-                unitPriceTextBox5.ReadOnly = false;
+                if (unitPriceTextBox5.Text.ToString() == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox5.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox4.Text)))
+                {
+                    unitPriceTextBox5.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox6_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox6.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox6.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox5.Text)))
+            else
             {
-                unitPriceTextBox6.ReadOnly = false;
+                if (unitPriceTextBox6.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox6.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox5.Text)))
+                {
+                    unitPriceTextBox6.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox7_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox7.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox7.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox6.Text)))
+            else
             {
-                unitPriceTextBox7.ReadOnly = false;
+                if (unitPriceTextBox7.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox7.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox6.Text)))
+                {
+                    unitPriceTextBox7.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox8_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox8.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox8.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox7.Text)))
+            else
             {
-                unitPriceTextBox8.ReadOnly = false;
+                if (unitPriceTextBox8.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox8.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox7.Text)))
+                {
+                    unitPriceTextBox8.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox9_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox9.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox9.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox8.Text)))
+            else
             {
-                unitPriceTextBox9.ReadOnly = false;
+                if (unitPriceTextBox9.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox9.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox8.Text)))
+                {
+                    unitPriceTextBox9.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox10_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox10.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox10.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox9.Text)))
+            else
             {
-                unitPriceTextBox10.ReadOnly = false;
+                if (unitPriceTextBox10.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox10.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox9.Text)))
+                {
+                    unitPriceTextBox10.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox11_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox11.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox11.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox10.Text)))
+            else
             {
-                unitPriceTextBox11.ReadOnly = false;
+                if (unitPriceTextBox11.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox11.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox10.Text)))
+                {
+                    unitPriceTextBox11.ReadOnly = false;
+                }
             }
         }
         private void unitPriceTextBox12_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox12.Text == "単価 -> 重量 or 数量")
+            if (data == "S")
             {
-                unitPriceTextBox12.Text = "";
+
             }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox11.Text)))
+            else
             {
-                unitPriceTextBox12.ReadOnly = false;
+                if (unitPriceTextBox12.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox12.Text = "";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox11.Text)))
+                {
+                    unitPriceTextBox12.ReadOnly = false;
+                }
             }
+            
         }
         #endregion
 
         #region"計算書　単価３桁区切り＋フォーカスが外れた時"
         private void unitPriceTextBox0_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox0.Text))
+            if (data == "S")
             {
-                unitPriceTextBox0.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox0.Text)))
-            {
-                unitPriceTextBox1.ReadOnly = false;
+
             }
             else
             {
-                unitPriceTextBox1.ReadOnly = false;
-                unitPriceTextBox1.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox0.Text))
+                {
+                    unitPriceTextBox0.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox0.Text)))
+                {
+                    unitPriceTextBox1.ReadOnly = false;
+                }
+                else
+                {
+                    unitPriceTextBox1.ReadOnly = false;
+                    unitPriceTextBox1.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
             }
+            
         }
 
         private void unitPriceTextBox1_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox1.Text))
+            if (data == "S")
             {
-                unitPriceTextBox1.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox1.Text)))
-            {
-                unitPriceTextBox2.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox1.Text)))
-            {
-                unitPriceTextBox2.ReadOnly = false;
-                unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox2.ReadOnly = false;
-                unitPriceTextBox2.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox1.Text))
+                {
+                    unitPriceTextBox1.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox1.Text)))
+                {
+                    unitPriceTextBox2.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox1.Text)))
+                {
+                    unitPriceTextBox2.ReadOnly = false;
+                    unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox2.ReadOnly = false;
+                    unitPriceTextBox2.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox2_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox2.Text))
+            if (data == "S")
             {
-                unitPriceTextBox2.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox2.Text)))
-            {
-                unitPriceTextBox3.ReadOnly = false;
-                unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox2.Text)))
-            {
-                unitPriceTextBox3.ReadOnly = false;
-                unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox3.ReadOnly = false;
-                unitPriceTextBox3.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox2.Text))
+                {
+                    unitPriceTextBox2.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox2.Text)))
+                {
+                    unitPriceTextBox3.ReadOnly = false;
+                    unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox2.Text)))
+                {
+                    unitPriceTextBox3.ReadOnly = false;
+                    unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox3.ReadOnly = false;
+                    unitPriceTextBox3.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
+                }
             }
+            
         }
 
         private void unitPriceTextBox3_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox3.Text))
+            if (data == "S")
             {
-                unitPriceTextBox3.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox3.Text)))
-            {
-                unitPriceTextBox4.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox3.Text)))
-            {
-                unitPriceTextBox4.ReadOnly = false;
-                unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox4.ReadOnly = false;
-                unitPriceTextBox4.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox3.Text))
+                {
+                    unitPriceTextBox3.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox3.Text)))
+                {
+                    unitPriceTextBox4.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox3.Text)))
+                {
+                    unitPriceTextBox4.ReadOnly = false;
+                    unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox4.ReadOnly = false;
+                    unitPriceTextBox4.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox4_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox4.Text))
+            if (data == "S")
             {
-                unitPriceTextBox4.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox4.Text)))
-            {
-                unitPriceTextBox5.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox4.Text)))
-            {
-                unitPriceTextBox5.ReadOnly = false;
-                unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox5.ReadOnly = false;
-                unitPriceTextBox5.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox4.Text))
+                {
+                    unitPriceTextBox4.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox4.Text)))
+                {
+                    unitPriceTextBox5.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox4.Text)))
+                {
+                    unitPriceTextBox5.ReadOnly = false;
+                    unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox5.ReadOnly = false;
+                    unitPriceTextBox5.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox5_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox5.Text))
+            if (data == "S")
             {
-                unitPriceTextBox5.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox5.Text)))
-            {
-                unitPriceTextBox6.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox5.Text)))
-            {
-                unitPriceTextBox6.ReadOnly = false;
-                unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox6.ReadOnly = false;
-                unitPriceTextBox6.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox5.Text))
+                {
+                    unitPriceTextBox5.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox5.Text)))
+                {
+                    unitPriceTextBox6.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox5.Text)))
+                {
+                    unitPriceTextBox6.ReadOnly = false;
+                    unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox6.ReadOnly = false;
+                    unitPriceTextBox6.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox6_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox6.Text))
+            if (data == "S")
             {
-                unitPriceTextBox6.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox6.Text)))
-            {
-                unitPriceTextBox7.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox6.Text)))
-            {
-                unitPriceTextBox7.ReadOnly = false;
-                unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox7.ReadOnly = false;
-                unitPriceTextBox7.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox6.Text))
+                {
+                    unitPriceTextBox6.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox6.Text)))
+                {
+                    unitPriceTextBox7.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox6.Text)))
+                {
+                    unitPriceTextBox7.ReadOnly = false;
+                    unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox7.ReadOnly = false;
+                    unitPriceTextBox7.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox7_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox7.Text))
+            if (data == "S")
             {
-                unitPriceTextBox7.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox7.Text)))
-            {
-                unitPriceTextBox8.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox7.Text)))
-            {
-                unitPriceTextBox8.ReadOnly = false;
-                unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox8.ReadOnly = false;
-                unitPriceTextBox8.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox7.Text))
+                {
+                    unitPriceTextBox7.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox7.Text)))
+                {
+                    unitPriceTextBox8.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox7.Text)))
+                {
+                    unitPriceTextBox8.ReadOnly = false;
+                    unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox8.ReadOnly = false;
+                    unitPriceTextBox8.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox8_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox8.Text))
+            if (data == "S")
             {
-                unitPriceTextBox8.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox8.Text)))
-            {
-                unitPriceTextBox9.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox8.Text)))
-            {
-                unitPriceTextBox9.ReadOnly = false;
-                unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox9.ReadOnly = false;
-                unitPriceTextBox9.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox8.Text))
+                {
+                    unitPriceTextBox8.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox8.Text)))
+                {
+                    unitPriceTextBox9.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox8.Text)))
+                {
+                    unitPriceTextBox9.ReadOnly = false;
+                    unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox9.ReadOnly = false;
+                    unitPriceTextBox9.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox9_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox9.Text))
+            if (data == "S")
             {
-                unitPriceTextBox9.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox9.Text)))
-            {
-                unitPriceTextBox10.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox9.Text)))
-            {
-                unitPriceTextBox10.ReadOnly = false;
-                unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox10.ReadOnly = false;
-                unitPriceTextBox10.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox9.Text))
+                {
+                    unitPriceTextBox9.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox9.Text)))
+                {
+                    unitPriceTextBox10.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox9.Text)))
+                {
+                    unitPriceTextBox10.ReadOnly = false;
+                    unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox10.ReadOnly = false;
+                    unitPriceTextBox10.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox10_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox10.Text))
+            if (data == "S")
             {
-                unitPriceTextBox10.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox10.Text)))
-            {
-                unitPriceTextBox11.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox10.Text)))
-            {
-                unitPriceTextBox11.ReadOnly = false;
-                unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox11.ReadOnly = false;
-                unitPriceTextBox11.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox10.Text))
+                {
+                    unitPriceTextBox10.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox10.Text)))
+                {
+                    unitPriceTextBox11.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox10.Text)))
+                {
+                    unitPriceTextBox11.ReadOnly = false;
+                    unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox11.ReadOnly = false;
+                    unitPriceTextBox11.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox11_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox11.Text))
+            if (data == "S")
             {
-                unitPriceTextBox11.Text = "単価 -> 重量 or 数量";
-            }
-            else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox11.Text)))
-            {
-                unitPriceTextBox12.ReadOnly = false;
-            }
-            else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox11.Text)))
-            {
-                unitPriceTextBox12.ReadOnly = false;
-                unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             }
             else
             {
-                unitPriceTextBox12.ReadOnly = false;
-                unitPriceTextBox12.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox11.Text))
+                {
+                    unitPriceTextBox11.Text = "単価 -> 重量 or 数量";
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox11.Text)))
+                {
+                    unitPriceTextBox12.ReadOnly = false;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox11.Text)))
+                {
+                    unitPriceTextBox12.ReadOnly = false;
+                    unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else
+                {
+                    unitPriceTextBox12.ReadOnly = false;
+                    unitPriceTextBox12.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox12_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox12.Text))
+            if (data == "S")
             {
-                unitPriceTextBox12.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox12.Text))
+                {
+                    unitPriceTextBox12.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
         #endregion
@@ -3934,583 +5770,684 @@ namespace Flawless_ex
         #region"計算書　金額が入力されたら次の単価が入力可＋総重量 or 総数計算、自動計算"
         private void moneyTextBox0_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox0.Text) && string.IsNullOrEmpty(countTextBox0.Text))
+            if (data == "S")
             {
-                countTextBox0.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox0.Text) && string.IsNullOrEmpty(weightTextBox0.Text))
-            {
-                weightTextBox0.Text = 0.ToString();
-            }
-            if (total != 0)
-            {
-                countsum = int.Parse(countTextBox0.Text);
-                weisum = decimal.Parse(weightTextBox0.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum = int.Parse(countTextBox0.Text);
-                weisum = decimal.Parse(weightTextBox0.Text);
-                subSum = money0;        //計算書は税込み
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero); 
-            }
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox0.Text) && string.IsNullOrEmpty(countTextBox0.Text))
+                {
+                    countTextBox0.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox0.Text) && string.IsNullOrEmpty(weightTextBox0.Text))
+                {
+                    weightTextBox0.Text = 0.ToString();
+                }
+                if (total != 0)
+                {
+                    countsum = int.Parse(countTextBox0.Text);
+                    weisum = decimal.Parse(weightTextBox0.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum = int.Parse(countTextBox0.Text);
+                    weisum = decimal.Parse(weightTextBox0.Text);
+                    subSum = money0;        //計算書は税込み
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
+            
         }
         private void moneyTextBox1_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox1.Text) && string.IsNullOrEmpty(countTextBox1.Text))
+            if (data == "S")
             {
-                countTextBox1.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox1.Text) && string.IsNullOrEmpty(weightTextBox1.Text))
-            {
-                weightTextBox1.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox1.Text) == 0 && decimal.Parse(weightTextBox1.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox1.Text);
-                weisum = decimal.Parse(weightTextBox1.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox1.Text) != 0 && decimal.Parse(weightTextBox1.Text) == 0))
-            {
-                countsum = int.Parse(countTextBox1.Text);
-                weisum += decimal.Parse(weightTextBox1.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox1.Text);
-                weisum += decimal.Parse(weightTextBox1.Text);
-                subSum += money1;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox1.Text) && string.IsNullOrEmpty(countTextBox1.Text))
+                {
+                    countTextBox1.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox1.Text) && string.IsNullOrEmpty(weightTextBox1.Text))
+                {
+                    weightTextBox1.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox1.Text) == 0 && decimal.Parse(weightTextBox1.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox1.Text);
+                    weisum = decimal.Parse(weightTextBox1.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox1.Text) != 0 && decimal.Parse(weightTextBox1.Text) == 0))
+                {
+                    countsum = int.Parse(countTextBox1.Text);
+                    weisum += decimal.Parse(weightTextBox1.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox1.Text);
+                    weisum += decimal.Parse(weightTextBox1.Text);
+                    subSum += money1;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
-
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-
-
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
-            }
+            
         }
         private void moneyTextBox2_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox2.Text) && string.IsNullOrEmpty(countTextBox2.Text))
+            if (data == "S")
             {
-                countTextBox2.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox2.Text) && string.IsNullOrEmpty(weightTextBox2.Text))
-            {
-                weightTextBox2.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox2.Text) != 0 && decimal.Parse(weightTextBox2.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox2.Text);
-                weisum += decimal.Parse(weightTextBox2.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox2.Text) == 0 && decimal.Parse(weightTextBox2.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox2.Text);
-                weisum += decimal.Parse(weightTextBox2.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox2.Text);
-                weisum += decimal.Parse(weightTextBox2.Text);
-                subSum += money2;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox2.Text) && string.IsNullOrEmpty(countTextBox2.Text))
+                {
+                    countTextBox2.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox2.Text) && string.IsNullOrEmpty(weightTextBox2.Text))
+                {
+                    weightTextBox2.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox2.Text) != 0 && decimal.Parse(weightTextBox2.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox2.Text);
+                    weisum += decimal.Parse(weightTextBox2.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox2.Text) == 0 && decimal.Parse(weightTextBox2.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox2.Text);
+                    weisum += decimal.Parse(weightTextBox2.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox2.Text);
+                    weisum += decimal.Parse(weightTextBox2.Text);
+                    subSum += money2;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
 
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
-            }
         }
         private void moneyTextBox3_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox3.Text) && string.IsNullOrEmpty(countTextBox3.Text))
+            if (data == "S")
             {
-                countTextBox3.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox3.Text) && string.IsNullOrEmpty(weightTextBox3.Text))
-            {
-                weightTextBox3.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox3.Text) != 0 && decimal.Parse(weightTextBox3.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox3.Text);
-                weisum += decimal.Parse(weightTextBox3.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox3.Text) == 0 && decimal.Parse(weightTextBox3.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox3.Text);
-                weisum += decimal.Parse(weightTextBox3.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox3.Text);
-                weisum += decimal.Parse(weightTextBox3.Text);
-                subSum += money3;     //増やしていく
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox3.Text) && string.IsNullOrEmpty(countTextBox3.Text))
+                {
+                    countTextBox3.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox3.Text) && string.IsNullOrEmpty(weightTextBox3.Text))
+                {
+                    weightTextBox3.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox3.Text) != 0 && decimal.Parse(weightTextBox3.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox3.Text);
+                    weisum += decimal.Parse(weightTextBox3.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox3.Text) == 0 && decimal.Parse(weightTextBox3.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox3.Text);
+                    weisum += decimal.Parse(weightTextBox3.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox3.Text);
+                    weisum += decimal.Parse(weightTextBox3.Text);
+                    subSum += money3;     //増やしていく
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
+ 
         }
         private void moneyTextBox4_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox4.Text) && string.IsNullOrEmpty(countTextBox4.Text))
+            if (data == "S")
             {
-                countTextBox4.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox4.Text) && string.IsNullOrEmpty(weightTextBox4.Text))
-            {
-                weightTextBox4.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox4.Text) != 0 && decimal.Parse(weightTextBox4.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox4.Text);
-                weisum += decimal.Parse(weightTextBox4.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox4.Text) == 0 && decimal.Parse(weightTextBox4.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox4.Text);
-                weisum += decimal.Parse(weightTextBox4.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox4.Text);
-                weisum += decimal.Parse(weightTextBox4.Text);
-                subSum += money4;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox4.Text) && string.IsNullOrEmpty(countTextBox4.Text))
+                {
+                    countTextBox4.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox4.Text) && string.IsNullOrEmpty(weightTextBox4.Text))
+                {
+                    weightTextBox4.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox4.Text) != 0 && decimal.Parse(weightTextBox4.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox4.Text);
+                    weisum += decimal.Parse(weightTextBox4.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox4.Text) == 0 && decimal.Parse(weightTextBox4.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox4.Text);
+                    weisum += decimal.Parse(weightTextBox4.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox4.Text);
+                    weisum += decimal.Parse(weightTextBox4.Text);
+                    subSum += money4;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
 
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
-            }
         }
         private void moneyTextBox5_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox5.Text) && string.IsNullOrEmpty(countTextBox5.Text))
+            if (data == "S")
             {
-                countTextBox5.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox5.Text) && string.IsNullOrEmpty(weightTextBox5.Text))
-            {
-                weightTextBox5.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox5.Text) != 0 && decimal.Parse(weightTextBox5.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox5.Text);
-                weisum += decimal.Parse(weightTextBox5.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox5.Text) == 0 && decimal.Parse(weightTextBox5.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox5.Text);
-                weisum += decimal.Parse(weightTextBox5.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox5.Text);
-                weisum += decimal.Parse(weightTextBox5.Text);
-                subSum += money5;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox5.Text) && string.IsNullOrEmpty(countTextBox5.Text))
+                {
+                    countTextBox5.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox5.Text) && string.IsNullOrEmpty(weightTextBox5.Text))
+                {
+                    weightTextBox5.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox5.Text) != 0 && decimal.Parse(weightTextBox5.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox5.Text);
+                    weisum += decimal.Parse(weightTextBox5.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox5.Text) == 0 && decimal.Parse(weightTextBox5.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox5.Text);
+                    weisum += decimal.Parse(weightTextBox5.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox5.Text);
+                    weisum += decimal.Parse(weightTextBox5.Text);
+                    subSum += money5;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
+
         }
         private void moneyTextBox6_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox6.Text) && string.IsNullOrEmpty(countTextBox6.Text))
+            if (data == "S")
             {
-                countTextBox6.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox6.Text) && string.IsNullOrEmpty(weightTextBox6.Text))
-            {
-                weightTextBox6.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox6.Text) != 0 && decimal.Parse(weightTextBox6.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox6.Text);
-                weisum += decimal.Parse(weightTextBox6.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox6.Text) == 0 && decimal.Parse(weightTextBox6.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox6.Text);
-                weisum += decimal.Parse(weightTextBox6.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox6.Text);
-                weisum += decimal.Parse(weightTextBox6.Text);
-                subSum += money6;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox6.Text) && string.IsNullOrEmpty(countTextBox6.Text))
+                {
+                    countTextBox6.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox6.Text) && string.IsNullOrEmpty(weightTextBox6.Text))
+                {
+                    weightTextBox6.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox6.Text) != 0 && decimal.Parse(weightTextBox6.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox6.Text);
+                    weisum += decimal.Parse(weightTextBox6.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox6.Text) == 0 && decimal.Parse(weightTextBox6.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox6.Text);
+                    weisum += decimal.Parse(weightTextBox6.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox6.Text);
+                    weisum += decimal.Parse(weightTextBox6.Text);
+                    subSum += money6;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
+
         }
         private void moneyTextBox7_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox7.Text) && string.IsNullOrEmpty(countTextBox7.Text))
+            if (data == "S")
             {
-                countTextBox7.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox7.Text) && string.IsNullOrEmpty(weightTextBox7.Text))
-            {
-                weightTextBox7.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox7.Text) != 0 && decimal.Parse(weightTextBox7.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox7.Text);
-                weisum += decimal.Parse(weightTextBox7.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox7.Text) == 0 && decimal.Parse(weightTextBox7.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox7.Text);
-                weisum += decimal.Parse(weightTextBox7.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox7.Text);
-                weisum += decimal.Parse(weightTextBox7.Text);
-                subSum += money7;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox7.Text) && string.IsNullOrEmpty(countTextBox7.Text))
+                {
+                    countTextBox7.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox7.Text) && string.IsNullOrEmpty(weightTextBox7.Text))
+                {
+                    weightTextBox7.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox7.Text) != 0 && decimal.Parse(weightTextBox7.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox7.Text);
+                    weisum += decimal.Parse(weightTextBox7.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox7.Text) == 0 && decimal.Parse(weightTextBox7.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox7.Text);
+                    weisum += decimal.Parse(weightTextBox7.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox7.Text);
+                    weisum += decimal.Parse(weightTextBox7.Text);
+                    subSum += money7;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
         }
         private void moneyTextBox8_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox8.Text) && string.IsNullOrEmpty(countTextBox8.Text))
+            if (data == "S")
             {
-                countTextBox8.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox8.Text) && string.IsNullOrEmpty(weightTextBox8.Text))
-            {
-                weightTextBox8.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox8.Text) != 0 && decimal.Parse(weightTextBox8.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox8.Text);
-                weisum += decimal.Parse(weightTextBox8.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox8.Text) == 0 && decimal.Parse(weightTextBox8.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox8.Text);
-                weisum += decimal.Parse(weightTextBox8.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox8.Text);
-                weisum += decimal.Parse(weightTextBox8.Text);
-                subSum += money8;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox8.Text) && string.IsNullOrEmpty(countTextBox8.Text))
+                {
+                    countTextBox8.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox8.Text) && string.IsNullOrEmpty(weightTextBox8.Text))
+                {
+                    weightTextBox8.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox8.Text) != 0 && decimal.Parse(weightTextBox8.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox8.Text);
+                    weisum += decimal.Parse(weightTextBox8.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox8.Text) == 0 && decimal.Parse(weightTextBox8.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox8.Text);
+                    weisum += decimal.Parse(weightTextBox8.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox8.Text);
+                    weisum += decimal.Parse(weightTextBox8.Text);
+                    subSum += money8;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
         }
         private void moneyTextBox9_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox9.Text) && string.IsNullOrEmpty(countTextBox9.Text))
+            if (data == "S")
             {
-                countTextBox9.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox9.Text) && string.IsNullOrEmpty(weightTextBox9.Text))
-            {
-                weightTextBox9.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox9.Text) != 0 && decimal.Parse(weightTextBox9.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox9.Text);
-                weisum += decimal.Parse(weightTextBox9.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox9.Text) == 0 && decimal.Parse(weightTextBox9.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox9.Text);
-                weisum += decimal.Parse(weightTextBox9.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox9.Text);
-                weisum += decimal.Parse(weightTextBox9.Text);
-                subSum += money9;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox9.Text) && string.IsNullOrEmpty(countTextBox9.Text))
+                {
+                    countTextBox9.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox9.Text) && string.IsNullOrEmpty(weightTextBox9.Text))
+                {
+                    weightTextBox9.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox9.Text) != 0 && decimal.Parse(weightTextBox9.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox9.Text);
+                    weisum += decimal.Parse(weightTextBox9.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox9.Text) == 0 && decimal.Parse(weightTextBox9.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox9.Text);
+                    weisum += decimal.Parse(weightTextBox9.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox9.Text);
+                    weisum += decimal.Parse(weightTextBox9.Text);
+                    subSum += money9;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
+
         }
         private void moneyTextBox10_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox10.Text) && string.IsNullOrEmpty(countTextBox10.Text))
+            if (data == "S")
             {
-                countTextBox10.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox10.Text) && string.IsNullOrEmpty(weightTextBox10.Text))
-            {
-                weightTextBox10.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox10.Text) != 0 && decimal.Parse(weightTextBox10.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox10.Text);
-                weisum += decimal.Parse(weightTextBox10.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox10.Text) == 0 && decimal.Parse(weightTextBox10.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox10.Text);
-                weisum += decimal.Parse(weightTextBox10.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox10.Text);
-                weisum += decimal.Parse(weightTextBox10.Text);
-                subSum += money10;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox10.Text) && string.IsNullOrEmpty(countTextBox10.Text))
+                {
+                    countTextBox10.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox10.Text) && string.IsNullOrEmpty(weightTextBox10.Text))
+                {
+                    weightTextBox10.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox10.Text) != 0 && decimal.Parse(weightTextBox10.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox10.Text);
+                    weisum += decimal.Parse(weightTextBox10.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox10.Text) == 0 && decimal.Parse(weightTextBox10.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox10.Text);
+                    weisum += decimal.Parse(weightTextBox10.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox10.Text);
+                    weisum += decimal.Parse(weightTextBox10.Text);
+                    subSum += money10;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
 
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
         }
         private void moneyTextBox11_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox11.Text) && string.IsNullOrEmpty(countTextBox11.Text))
+            if (data == "S")
             {
-                countTextBox11.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox11.Text) && string.IsNullOrEmpty(weightTextBox11.Text))
-            {
-                weightTextBox11.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox11.Text) != 0 && decimal.Parse(weightTextBox11.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox11.Text);
-                weisum += decimal.Parse(weightTextBox11.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox11.Text) == 0 && decimal.Parse(weightTextBox11.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox11.Text);
-                weisum += decimal.Parse(weightTextBox11.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox11.Text);
-                weisum += decimal.Parse(weightTextBox11.Text);
-                subSum += money11;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox11.Text) && string.IsNullOrEmpty(countTextBox11.Text))
+                {
+                    countTextBox11.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox11.Text) && string.IsNullOrEmpty(weightTextBox11.Text))
+                {
+                    weightTextBox11.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox11.Text) != 0 && decimal.Parse(weightTextBox11.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox11.Text);
+                    weisum += decimal.Parse(weightTextBox11.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox11.Text) == 0 && decimal.Parse(weightTextBox11.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox11.Text);
+                    weisum += decimal.Parse(weightTextBox11.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox11.Text);
+                    weisum += decimal.Parse(weightTextBox11.Text);
+                    subSum += money11;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
             
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
-            }
         }
         private void moneyTextBox12_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox12.Text) && string.IsNullOrEmpty(countTextBox12.Text))
+            if (data == "S")
             {
-                countTextBox12.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox12.Text) && string.IsNullOrEmpty(weightTextBox12.Text))
-            {
-                weightTextBox12.Text = 0.ToString();
-            }
-            if (total != 0 && (decimal.Parse(countTextBox12.Text) != 0 && decimal.Parse(weightTextBox12.Text) == 0))
-            {
-                countsum += int.Parse(countTextBox12.Text);
-                weisum += decimal.Parse(weightTextBox12.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            }
-            else if (total != 0 && (decimal.Parse(countTextBox12.Text) == 0 && decimal.Parse(weightTextBox12.Text) != 0))
-            {
-                countsum += int.Parse(countTextBox12.Text);
-                weisum += decimal.Parse(weightTextBox12.Text);
-                subSum = total;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+
             }
             else
             {
-                countsum += int.Parse(countTextBox12.Text);
-                weisum += decimal.Parse(weightTextBox12.Text);
-                subSum += money12;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox12.Text) && string.IsNullOrEmpty(countTextBox12.Text))
+                {
+                    countTextBox12.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox12.Text) && string.IsNullOrEmpty(weightTextBox12.Text))
+                {
+                    weightTextBox12.Text = 0.ToString();
+                }
+                if (total != 0 && (decimal.Parse(countTextBox12.Text) != 0 && decimal.Parse(weightTextBox12.Text) == 0))
+                {
+                    countsum += int.Parse(countTextBox12.Text);
+                    weisum += decimal.Parse(weightTextBox12.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else if (total != 0 && (decimal.Parse(countTextBox12.Text) == 0 && decimal.Parse(weightTextBox12.Text) != 0))
+                {
+                    countsum += int.Parse(countTextBox12.Text);
+                    weisum += decimal.Parse(weightTextBox12.Text);
+                    subSum = total;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+                else
+                {
+                    countsum += int.Parse(countTextBox12.Text);
+                    weisum += decimal.Parse(weightTextBox12.Text);
+                    subSum += money12;
+                    TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                }
+
+
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
             }
             
-
-            totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount.Text = string.Format("{0:#,0}", countsum);
-            subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-            taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-
-            if (subSum >= 2000000)
-            {
-                groupBox1.BackColor = Color.OrangeRed;
-            }
         }
         #endregion
 
@@ -4702,94 +6639,185 @@ namespace Flawless_ex
         #region"納品書　フォーカス時初期状態ならnull"
         private void unitPriceTextBox00_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox00.Text.ToString() == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox00.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox00.Text.ToString() == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox00.Text = "";
+                }
             }
         }
 
         private void unitPriceTextBox01_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox01.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox01.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox01.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox01.Text = "";
+                }
             }
         }
         private void unitPriceTextBox02_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox02.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox02.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox02.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox02.Text = "";
+                }
             }
         }
         private void unitPriceTextBox03_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox03.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox03.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox03.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox03.Text = "";
+                }
             }
         }
         private void unitPriceTextBox04_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox04.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox04.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox04.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox04.Text = "";
+                }
             }
         }
         private void unitPriceTextBox05_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox05.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox05.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox05.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox05.Text = "";
+                }
             }
         }
         private void unitPriceTextBox06_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox06.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox06.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox06.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox06.Text = "";
+                }
             }
         }
         private void unitPriceTextBox07_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox07.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox07.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox07.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox07.Text = "";
+                }
             }
         }
         private void unitPriceTextBox08_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox08.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox08.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox08.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox08.Text = "";
+                }
             }
         }
         private void unitPriceTextBox09_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox09.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox09.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox09.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox09.Text = "";
+                }
             }
         }
         private void unitPriceTextBox010_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox010.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox010.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox010.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox010.Text = "";
+                }
             }
         }
         private void unitPriceTextBox011_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox011.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox011.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox011.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox011.Text = "";
+                }
             }
         }
         private void unitPriceTextBox012_Enter(object sender, EventArgs e)
         {
-            if (unitPriceTextBox012.Text == "単価 -> 重量 or 数量")
+            if (data == "D")
             {
-                unitPriceTextBox012.Text = "";
+
+            }
+            else
+            {
+                if (unitPriceTextBox012.Text == "単価 -> 重量 or 数量")
+                {
+                    unitPriceTextBox012.Text = "";
+                }
             }
         }
         #endregion
@@ -4798,157 +6826,248 @@ namespace Flawless_ex
 
         private void countTextBox00_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox00.Text))
+            if (data == "D")
             {
-                weightTextBox00.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox00.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox00.Text))
+                {
+                    weightTextBox00.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox00.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox01_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox01.Text))
+            if (data == "D")
             {
-                weightTextBox01.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox01.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox01.Text))
+                {
+                    weightTextBox01.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox01.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox02_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox02.Text))
+            if (data == "D")
             {
-                weightTextBox02.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox02.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox02.Text))
+                {
+                    weightTextBox02.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox02.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox03_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox03.Text))
+            if (data == "D")
             {
-                weightTextBox03.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox03.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox03.Text))
+                {
+                    weightTextBox03.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox03.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox04_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox04.Text))
+            if (data == "D")
             {
-                weightTextBox04.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox04.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox04.Text))
+                {
+                    weightTextBox04.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox04.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox05_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox05.Text))
+            if (data == "D")
             {
-                weightTextBox05.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox05.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox05.Text))
+                {
+                    weightTextBox05.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox05.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox06_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox06.Text))
+            if (data == "D")
             {
-                weightTextBox06.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox06.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox06.Text))
+                {
+                    weightTextBox06.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox06.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox07_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox07.Text))
+            if (data == "D")
             {
-                weightTextBox07.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox07.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox07.Text))
+                {
+                    weightTextBox07.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox07.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox08_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox08.Text))
+            if (data == "D")
             {
-                weightTextBox08.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox08.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox08.Text))
+                {
+                    weightTextBox08.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox08.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox09_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox09.Text))
+            if (data == "D")
             {
-                weightTextBox09.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox09.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox09.Text))
+                {
+                    weightTextBox09.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox09.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox010_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox010.Text))
+            if (data == "D")
             {
-                weightTextBox010.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox010.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox010.Text))
+                {
+                    weightTextBox010.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox010.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox011_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox011.Text))
+            if (data == "D")
             {
-                weightTextBox011.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox011.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox011.Text))
+                {
+                    weightTextBox011.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox011.ReadOnly = false;
+                }
             }
         }
 
         private void countTextBox012_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox012.Text))
+            if (data == "D")
             {
-                weightTextBox012.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox012.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox012.Text))
+                {
+                    weightTextBox012.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox012.ReadOnly = false;
+                }
             }
         }
 
@@ -4993,181 +7112,272 @@ namespace Flawless_ex
         #region"納品書　単価３桁区切り＋フォーカスが外れた時"
         private void unitPriceTextBox00_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox00.Text))
+            if (data == "D")
             {
-                unitPriceTextBox00.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox01.ReadOnly = false;
-                unitPriceTextBox01.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox00.Text))
+                {
+                    unitPriceTextBox00.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox01.ReadOnly = false;
+                    unitPriceTextBox01.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox01_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox01.Text))
+            if (data == "D")
             {
-                unitPriceTextBox01.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox02.ReadOnly = false;
-                unitPriceTextBox02.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox01.Text))
+                {
+                    unitPriceTextBox01.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox02.ReadOnly = false;
+                    unitPriceTextBox02.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox02_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox02.Text))
+            if (data == "D")
             {
-                unitPriceTextBox02.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox03.ReadOnly = false;
-                unitPriceTextBox03.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox02.Text))
+                {
+                    unitPriceTextBox02.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox03.ReadOnly = false;
+                    unitPriceTextBox03.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox03_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox03.Text))
+            if (data == "D")
             {
-                unitPriceTextBox03.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox04.ReadOnly = false;
-                unitPriceTextBox04.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox03.Text))
+                {
+                    unitPriceTextBox03.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox04.ReadOnly = false;
+                    unitPriceTextBox04.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox04_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox04.Text))
+            if (data == "D")
             {
-                unitPriceTextBox04.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox05.ReadOnly = false;
-                unitPriceTextBox05.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox04.Text))
+                {
+                    unitPriceTextBox04.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox05.ReadOnly = false;
+                    unitPriceTextBox05.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox05_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox05.Text))
+            if (data == "D")
             {
-                unitPriceTextBox05.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox06.ReadOnly = false;
-                unitPriceTextBox06.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox05.Text))
+                {
+                    unitPriceTextBox05.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox06.ReadOnly = false;
+                    unitPriceTextBox06.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox06_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox06.Text))
+            if (data == "D")
             {
-                unitPriceTextBox06.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox07.ReadOnly = false;
-                unitPriceTextBox07.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox06.Text))
+                {
+                    unitPriceTextBox06.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox07.ReadOnly = false;
+                    unitPriceTextBox07.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox07_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox07.Text))
+            if (data == "D")
             {
-                unitPriceTextBox07.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox08.ReadOnly = false;
-                unitPriceTextBox08.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox07.Text))
+                {
+                    unitPriceTextBox07.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox08.ReadOnly = false;
+                    unitPriceTextBox08.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox08_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox08.Text))
+            if (data == "D")
             {
-                unitPriceTextBox08.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox09.ReadOnly = false;
-                unitPriceTextBox09.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox08.Text))
+                {
+                    unitPriceTextBox08.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox09.ReadOnly = false;
+                    unitPriceTextBox09.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox09_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox09.Text))
+            if (data == "D")
             {
-                unitPriceTextBox09.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox10.ReadOnly = false;
-                unitPriceTextBox10.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox09.Text))
+                {
+                    unitPriceTextBox09.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox10.ReadOnly = false;
+                    unitPriceTextBox10.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox010_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox010.Text))
+            if (data == "D")
             {
-                unitPriceTextBox010.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox011.ReadOnly = false;
-                unitPriceTextBox011.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox010.Text))
+                {
+                    unitPriceTextBox010.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox011.ReadOnly = false;
+                    unitPriceTextBox011.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox011_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox011.Text))
+            if (data == "D")
             {
-                unitPriceTextBox011.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox012.ReadOnly = false;
-                unitPriceTextBox012.Text = "単価 -> 重量 or 数量";
-                unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox011.Text))
+                {
+                    unitPriceTextBox011.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox012.ReadOnly = false;
+                    unitPriceTextBox012.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
 
         private void unitPriceTextBox012_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(unitPriceTextBox012.Text))
+            if (data == "D")
             {
-                unitPriceTextBox012.Text = "単価 -> 重量 or 数量";
+
             }
             else
             {
-                unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
+                if (string.IsNullOrEmpty(unitPriceTextBox012.Text))
+                {
+                    unitPriceTextBox012.Text = "単価 -> 重量 or 数量";
+                }
+                else
+                {
+                    unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
+                }
             }
         }
         #endregion
@@ -6110,374 +8320,525 @@ namespace Flawless_ex
         #region　"納品書　数量×単価"
         private void countTextBox00_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox00.Text) && !(countTextBox00.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox00.Text) * decimal.Parse(unitPriceTextBox00.Text);
-                weightTextBox00.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox00.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox00.Text) && !(countTextBox00.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox00.Text) * decimal.Parse(unitPriceTextBox00.Text);
+                    weightTextBox00.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox00.ReadOnly = false;
+                }
+                money0 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money0 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox01_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox01.Text) && !(countTextBox01.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
-                weightTextBox01.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox01.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox01.Text) && !(countTextBox01.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
+                    weightTextBox01.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox01.ReadOnly = false;
+                }
+                money1 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money1 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox02_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox02.Text) && !(countTextBox02.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox02.Text) * decimal.Parse(unitPriceTextBox02.Text);
-                weightTextBox02.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox02.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox02.Text) && !(countTextBox02.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox02.Text) * decimal.Parse(unitPriceTextBox02.Text);
+                    weightTextBox02.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox02.ReadOnly = false;
+                }
+                money2 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money2 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox03_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox03.Text) && !(countTextBox03.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox03.Text) * decimal.Parse(unitPriceTextBox03.Text);
-                weightTextBox03.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox03.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox03.Text) && !(countTextBox03.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox03.Text) * decimal.Parse(unitPriceTextBox03.Text);
+                    weightTextBox03.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox03.ReadOnly = false;
+                }
+                money3 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money3 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox04_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox04.Text) && !(countTextBox04.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
-                weightTextBox04.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox04.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox04.Text) && !(countTextBox04.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
+                    weightTextBox04.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox04.ReadOnly = false;
+                }
+                money4 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money4 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox05_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox05.Text) && !(countTextBox05.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox05.Text) * decimal.Parse(unitPriceTextBox05.Text);
-                weightTextBox05.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox05.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox05.Text) && !(countTextBox05.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox05.Text) * decimal.Parse(unitPriceTextBox05.Text);
+                    weightTextBox05.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox05.ReadOnly = false;
+                }
+                money5 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money5 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox06_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox06.Text) && !(countTextBox06.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox06.Text) * decimal.Parse(unitPriceTextBox06.Text);
-                weightTextBox06.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox06.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox06.Text) && !(countTextBox06.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox06.Text) * decimal.Parse(unitPriceTextBox06.Text);
+                    weightTextBox06.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox06.ReadOnly = false;
+                }
+                money6 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money6 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox07_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox07.Text) && !(countTextBox07.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox07.Text) * decimal.Parse(unitPriceTextBox07.Text);
-                weightTextBox07.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox07.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox07.Text) && !(countTextBox07.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox07.Text) * decimal.Parse(unitPriceTextBox07.Text);
+                    weightTextBox07.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox07.ReadOnly = false;
+                }
+                money7 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money7 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox08_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox08.Text) && !(countTextBox08.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox08.Text) * decimal.Parse(unitPriceTextBox08.Text);
-                weightTextBox08.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox08.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox08.Text) && !(countTextBox08.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox08.Text) * decimal.Parse(unitPriceTextBox08.Text);
+                    weightTextBox08.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox08.ReadOnly = false;
+                }
+                money8 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money8 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox09_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox09.Text) && !(countTextBox09.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox09.Text) * decimal.Parse(unitPriceTextBox09.Text);
-                weightTextBox09.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox09.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox09.Text) && !(countTextBox09.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox09.Text) * decimal.Parse(unitPriceTextBox09.Text);
+                    weightTextBox09.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox09.ReadOnly = false;
+                }
+                money9 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money9 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
+            
         }
         private void countTextBox010_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox010.Text) && !(countTextBox010.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox010.Text) * decimal.Parse(unitPriceTextBox010.Text);
-                weightTextBox010.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox010.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox010.Text) && !(countTextBox010.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox010.Text) * decimal.Parse(unitPriceTextBox010.Text);
+                    weightTextBox010.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox010.ReadOnly = false;
+                }
+                money10 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money10 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox011_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox011.Text) && !(countTextBox011.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox011.Text) * decimal.Parse(unitPriceTextBox011.Text);
-                weightTextBox011.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox011.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox011.Text) && !(countTextBox011.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox011.Text) * decimal.Parse(unitPriceTextBox011.Text);
+                    weightTextBox011.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox011.ReadOnly = false;
+                }
+                money11 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money11 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         private void countTextBox012_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(countTextBox012.Text) && !(countTextBox012.Text == "0"))
+            if (data == "D")
             {
-                sub = decimal.Parse(countTextBox012.Text) * decimal.Parse(unitPriceTextBox012.Text);
-                weightTextBox012.ReadOnly = true;
+
             }
             else
             {
-                weightTextBox012.ReadOnly = false;
+                if (!string.IsNullOrEmpty(countTextBox012.Text) && !(countTextBox012.Text == "0"))
+                {
+                    sub = decimal.Parse(countTextBox012.Text) * decimal.Parse(unitPriceTextBox012.Text);
+                    weightTextBox012.ReadOnly = true;
+                }
+                else
+                {
+                    weightTextBox012.ReadOnly = false;
+                }
+                money12 = sub;
+                sub1 = sub + sub * Tax / 100;
+                moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
             }
-            money12 = sub;
-            sub1 = sub + sub * Tax / 100;
-            moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub1, MidpointRounding.AwayFromZero));
         }
         #endregion
 
         #region"納品書　金額が入力されたら総重量 or 総数計算、自動計算"
         private void moneyTextBox00_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox00.Text) && string.IsNullOrEmpty(countTextBox00.Text))
+            if (data == "D")
             {
-                countTextBox00.Text = 0.ToString();
 
             }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox00.Text) && string.IsNullOrEmpty(weightTextBox00.Text))
+            else
             {
-                weightTextBox00.Text = 0.ToString();
-            }
-            countsum = int.Parse(countTextBox00.Text);
-            weisum = decimal.Parse(weightTextBox00.Text);
-            subSum = money0;
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox00.Text) && string.IsNullOrEmpty(countTextBox00.Text))
+                {
+                    countTextBox00.Text = 0.ToString();
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox00.Text) && string.IsNullOrEmpty(weightTextBox00.Text))
+                {
+                    weightTextBox00.Text = 0.ToString();
+                }
+                countsum = int.Parse(countTextBox00.Text);
+                weisum = decimal.Parse(weightTextBox00.Text);
+                subSum = money0;
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox01_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox01.Text) && string.IsNullOrEmpty(countTextBox01.Text))
+            if (data == "D")
             {
-                countTextBox01.Text = 0.ToString();
+
             }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox01.Text) && string.IsNullOrEmpty(weightTextBox01.Text))
+            else
             {
-                weightTextBox01.Text = 0.ToString();
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox01.Text) && string.IsNullOrEmpty(countTextBox01.Text))
+                {
+                    countTextBox01.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox01.Text) && string.IsNullOrEmpty(weightTextBox01.Text))
+                {
+                    weightTextBox01.Text = 0.ToString();
+                }
+
+                countsum += int.Parse(countTextBox01.Text);
+                weisum += decimal.Parse(weightTextBox01.Text);
+                subSum += money1;       //納品書は税抜き
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
             }
-
-            countsum += int.Parse(countTextBox01.Text);
-            weisum += decimal.Parse(weightTextBox01.Text);
-            subSum += money1;       //納品書は税抜き
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
-
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            
         }
         private void moneyTextBox02_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox02.Text) && string.IsNullOrEmpty(countTextBox02.Text))
+            if (data == "D")
             {
-                countTextBox02.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox02.Text) && string.IsNullOrEmpty(weightTextBox02.Text))
-            {
-                weightTextBox02.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox02.Text);
-            weisum += decimal.Parse(weightTextBox02.Text);
-            subSum += money2;
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox02.Text) && string.IsNullOrEmpty(countTextBox02.Text))
+                {
+                    countTextBox02.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox02.Text) && string.IsNullOrEmpty(weightTextBox02.Text))
+                {
+                    weightTextBox02.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox02.Text);
+                weisum += decimal.Parse(weightTextBox02.Text);
+                subSum += money2;
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            
         }
         private void moneyTextBox03_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox03.Text) && string.IsNullOrEmpty(countTextBox03.Text))
+            if (data == "D")
             {
-                countTextBox03.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox03.Text) && string.IsNullOrEmpty(weightTextBox03.Text))
-            {
-                weightTextBox03.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox03.Text);
-            weisum += decimal.Parse(weightTextBox03.Text);
-            subSum += money3;     //増やしていく
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox03.Text) && string.IsNullOrEmpty(countTextBox03.Text))
+                {
+                    countTextBox03.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox03.Text) && string.IsNullOrEmpty(weightTextBox03.Text))
+                {
+                    weightTextBox03.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox03.Text);
+                weisum += decimal.Parse(weightTextBox03.Text);
+                subSum += money3;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox04_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox04.Text) && string.IsNullOrEmpty(countTextBox04.Text))
+            if (data == "D")
             {
-                countTextBox04.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox04.Text) && string.IsNullOrEmpty(weightTextBox04.Text))
-            {
-                weightTextBox04.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox04.Text);
-            weisum += decimal.Parse(weightTextBox04.Text);
-            subSum += money4;     //増やしていく
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox04.Text) && string.IsNullOrEmpty(countTextBox04.Text))
+                {
+                    countTextBox04.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox04.Text) && string.IsNullOrEmpty(weightTextBox04.Text))
+                {
+                    weightTextBox04.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox04.Text);
+                weisum += decimal.Parse(weightTextBox04.Text);
+                subSum += money4;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox05_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox05.Text) && string.IsNullOrEmpty(countTextBox05.Text))
+            if (data == "D")
             {
-                countTextBox05.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox05.Text) && string.IsNullOrEmpty(weightTextBox05.Text))
-            {
-                weightTextBox05.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox05.Text);
-            weisum += decimal.Parse(weightTextBox05.Text);
-            subSum += money5;     //増やしていく
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox05.Text) && string.IsNullOrEmpty(countTextBox05.Text))
+                {
+                    countTextBox05.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox05.Text) && string.IsNullOrEmpty(weightTextBox05.Text))
+                {
+                    weightTextBox05.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox05.Text);
+                weisum += decimal.Parse(weightTextBox05.Text);
+                subSum += money5;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox06_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox06.Text) && string.IsNullOrEmpty(countTextBox06.Text))
+            if (data == "D")
             {
-                countTextBox06.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox06.Text) && string.IsNullOrEmpty(weightTextBox06.Text))
-            {
-                weightTextBox06.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox06.Text);
-            weisum += decimal.Parse(weightTextBox06.Text);
-            subSum += money6;     //増やしていく
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox06.Text) && string.IsNullOrEmpty(countTextBox06.Text))
+                {
+                    countTextBox06.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox06.Text) && string.IsNullOrEmpty(weightTextBox06.Text))
+                {
+                    weightTextBox06.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox06.Text);
+                weisum += decimal.Parse(weightTextBox06.Text);
+                subSum += money6;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox07_TextChanged(object sender, EventArgs e)
         {
+            if (data == "D")
+            {
+
+            }
+            else
+            {
+
+            }
             //重量×単価
             if (!string.IsNullOrEmpty(weightTextBox07.Text) && string.IsNullOrEmpty(countTextBox07.Text))
             {
@@ -6502,6 +8863,14 @@ namespace Flawless_ex
         }
         private void moneyTextBox08_TextChanged(object sender, EventArgs e)
         {
+            if (data == "D")
+            {
+
+            }
+            else
+            {
+
+            }
             //重量×単価
             if (!string.IsNullOrEmpty(weightTextBox08.Text) && string.IsNullOrEmpty(countTextBox08.Text))
             {
@@ -6526,99 +8895,127 @@ namespace Flawless_ex
         }
         private void moneyTextBox09_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox09.Text) && string.IsNullOrEmpty(countTextBox09.Text))
+            if (data == "D")
             {
-                countTextBox09.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox09.Text) && string.IsNullOrEmpty(weightTextBox09.Text))
-            {
-                weightTextBox09.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox09.Text);
-            weisum += decimal.Parse(weightTextBox09.Text);
-            subSum += money9;
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox09.Text) && string.IsNullOrEmpty(countTextBox09.Text))
+                {
+                    countTextBox09.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox09.Text) && string.IsNullOrEmpty(weightTextBox09.Text))
+                {
+                    weightTextBox09.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox09.Text);
+                weisum += decimal.Parse(weightTextBox09.Text);
+                subSum += money9;
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox010_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox010.Text) && string.IsNullOrEmpty(countTextBox010.Text))
+            if (data == "D")
             {
-                countTextBox010.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox010.Text) && string.IsNullOrEmpty(weightTextBox010.Text))
-            {
-                weightTextBox010.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox010.Text);
-            weisum += decimal.Parse(weightTextBox010.Text);
-            subSum += money10;
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox010.Text) && string.IsNullOrEmpty(countTextBox010.Text))
+                {
+                    countTextBox010.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox010.Text) && string.IsNullOrEmpty(weightTextBox010.Text))
+                {
+                    weightTextBox010.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox010.Text);
+                weisum += decimal.Parse(weightTextBox010.Text);
+                subSum += money10;
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox011_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox011.Text) && string.IsNullOrEmpty(countTextBox011.Text))
+            if (data == "D")
             {
-                countTextBox011.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox011.Text) && string.IsNullOrEmpty(weightTextBox011.Text))
-            {
-                weightTextBox011.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox011.Text);
-            weisum += decimal.Parse(weightTextBox011.Text);
-            subSum += money11;     //増やしていく
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox011.Text) && string.IsNullOrEmpty(countTextBox011.Text))
+                {
+                    countTextBox011.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox011.Text) && string.IsNullOrEmpty(weightTextBox011.Text))
+                {
+                    weightTextBox011.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox011.Text);
+                weisum += decimal.Parse(weightTextBox011.Text);
+                subSum += money11;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         private void moneyTextBox012_TextChanged(object sender, EventArgs e)
         {
-            //重量×単価
-            if (!string.IsNullOrEmpty(weightTextBox012.Text) && string.IsNullOrEmpty(countTextBox012.Text))
+            if (data == "D")
             {
-                countTextBox012.Text = 0.ToString();
-            }
-            //数量×単価
-            if (!string.IsNullOrEmpty(countTextBox012.Text) && string.IsNullOrEmpty(weightTextBox012.Text))
-            {
-                weightTextBox012.Text = 0.ToString();
-            }
-            countsum += int.Parse(countTextBox012.Text);
-            weisum += decimal.Parse(weightTextBox012.Text);
-            subSum += money12;     //増やしていく
-            TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
-            sum = subSum + TaxAmount;
 
-            totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
-            totalCount2.Text = string.Format("{0:#,0}", countsum);
-            subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
-            taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
-            sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox012.Text) && string.IsNullOrEmpty(countTextBox012.Text))
+                {
+                    countTextBox012.Text = 0.ToString();
+                }
+                //数量×単価
+                if (!string.IsNullOrEmpty(countTextBox012.Text) && string.IsNullOrEmpty(weightTextBox012.Text))
+                {
+                    weightTextBox012.Text = 0.ToString();
+                }
+                countsum += int.Parse(countTextBox012.Text);
+                weisum += decimal.Parse(weightTextBox012.Text);
+                subSum += money12;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(sum, MidpointRounding.AwayFromZero));
+            }
         }
         #endregion
 
@@ -6627,8 +9024,7 @@ namespace Flawless_ex
         #region"右上の×で戻る"
         private void Statement_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
-            mainMenu.Show();
+              mainMenu.Show();   
         }
         #endregion
 
@@ -6678,7 +9074,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
 
             DataTable dt = new DataTable();
-            string sql_str = "Insert into delivery_m (control_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, hororific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payable, currency, remark2, total_count, total_weight) VALUES ( '" + ControlNumber + "','" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "' '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "');";
+            string sql_str = "Insert into delivery_m (control_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, hororific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payable, currency, remark2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "','" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "' '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + type +");";
 
             //管理番号：ControlNumber
             int record = 1;     //行数
@@ -8116,7 +10512,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, Pass);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade);
 
             this.Hide();
             recordList.Show();
@@ -8126,9 +10522,25 @@ namespace Flawless_ex
 
         private void DeliveryPreviewButton_Click(object sender, EventArgs e)
         {
-            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type, Pass);
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
             this.Close();
             deliveryPreview.Show();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data);
+            this.Close();
+            mainMenu.Hide();
+            dataSearchResults.Show();
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data);
+            this.Close();
+            mainMenu.Hide();
+            dataSearchResults.Show();
         }
     }
 }
