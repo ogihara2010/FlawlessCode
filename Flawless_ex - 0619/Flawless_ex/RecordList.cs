@@ -24,7 +24,7 @@ namespace Flawless_ex
         int record;                         //行数
         string Birthday;                    //誕生日（個人）, DBから持ってきた値を保持
         DateTime BirthdayDate;
-        string access_auth;
+        string Access_auth;
         string staff_name;
         string address;
         decimal total;
@@ -238,7 +238,7 @@ namespace Flawless_ex
         DataTable DATA13 = new DataTable();
         #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id)
+        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id, string access_auth)
         {
             InitializeComponent();
 
@@ -250,12 +250,14 @@ namespace Flawless_ex
             this.grade = Grade;
             this.AntiqueNumber = antique;
             this.ID_Number = id;
+            this.Access_auth = access_auth;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            #region"画面上の会社・個人情報と合計金額"
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            
+            #region"画面上の会社・個人情報と合計金額"
 
             StaffNameTextBox.Text = staff_name;
 
@@ -265,7 +267,7 @@ namespace Flawless_ex
              *成績一覧や印刷プレビューを押せないようにしたら
              *削除予定
             */
-            string sql_str = "select * from statement_data where staff_code = '" + staff_id + "';";
+            string sql_str = "select * from statement_data inner join staff_m on statement_data.staff_code = staff_m.staff_code where staff_code = '" + staff_id + "';";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
             using (reader = cmd.ExecuteReader())
@@ -273,6 +275,7 @@ namespace Flawless_ex
                 while (reader.Read())
                 {
                     SlipNumber = reader["document_number"].ToString();
+                    Access_auth = reader["access_auth"].ToString();
                 }
             }
             conn.Close();
@@ -280,6 +283,12 @@ namespace Flawless_ex
              * 削除予定範囲終了
              * 
             */
+            #endregion
+            #region"権限"
+            if (Access_auth == "C")
+            {
+                ItemNameChangeButton.Enabled = false;
+            }
             #endregion
 
             SlipNumberTextBox.Text = SlipNumber;
@@ -1189,7 +1198,7 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, access_auth, total) ;
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total) ;
 
             this.Close();
             statement.Show();
@@ -1197,7 +1206,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, access_auth, total);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total);
             statement.Show();
         }
 
