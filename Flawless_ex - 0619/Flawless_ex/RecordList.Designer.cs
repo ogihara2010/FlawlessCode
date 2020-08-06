@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ClientInformationButton = new System.Windows.Forms.Button();
             this.ReturnButton = new System.Windows.Forms.Button();
             this.ItemNameChangeButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
@@ -285,7 +285,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.ClientInformationButton);
             this.panel1.Controls.Add(this.ReturnButton);
             this.panel1.Controls.Add(this.ItemNameChangeButton);
             this.panel1.Controls.Add(this.UpdateButton);
@@ -300,14 +300,15 @@
             this.panel1.Size = new System.Drawing.Size(1284, 58);
             this.panel1.TabIndex = 0;
             // 
-            // button2
+            // ClientInformationButton
             // 
-            this.button2.Location = new System.Drawing.Point(844, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(165, 43);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "お客様情報";
-            this.button2.UseVisualStyleBackColor = true;
+            this.ClientInformationButton.Location = new System.Drawing.Point(844, 8);
+            this.ClientInformationButton.Name = "ClientInformationButton";
+            this.ClientInformationButton.Size = new System.Drawing.Size(165, 43);
+            this.ClientInformationButton.TabIndex = 6;
+            this.ClientInformationButton.Text = "お客様情報";
+            this.ClientInformationButton.UseVisualStyleBackColor = true;
+            this.ClientInformationButton.Click += new System.EventHandler(this.ClientInformationButton_Click);
             // 
             // ReturnButton
             // 
@@ -2955,6 +2956,7 @@
             this.SlipNumberTextBox.ReadOnly = true;
             this.SlipNumberTextBox.Size = new System.Drawing.Size(85, 20);
             this.SlipNumberTextBox.TabIndex = 4;
+            this.SlipNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // GradeNumberLabel
             // 
@@ -2975,6 +2977,7 @@
             this.GradeNumberTextBox.ReadOnly = true;
             this.GradeNumberTextBox.Size = new System.Drawing.Size(85, 20);
             this.GradeNumberTextBox.TabIndex = 4;
+            this.GradeNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // ControlNumberLabel
             // 
@@ -2995,6 +2998,7 @@
             this.ManagementNumberTextBox.Name = "ManagementNumberTextBox";
             this.ManagementNumberTextBox.Size = new System.Drawing.Size(85, 20);
             this.ManagementNumberTextBox.TabIndex = 4;
+            this.ManagementNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ManagementNumberTextBox.Visible = false;
             // 
             // contextMenuStrip1
@@ -3335,7 +3339,7 @@
         private System.Windows.Forms.DateTimePicker BuyDateTimePicker12;
         private System.Windows.Forms.DateTimePicker BuyDateTimePicker13;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button ClientInformationButton;
         private System.Windows.Forms.Button button3;
     }
 }

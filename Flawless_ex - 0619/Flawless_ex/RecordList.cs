@@ -31,6 +31,8 @@ namespace Flawless_ex
         int grade;
         RecordList recordList;
         DateTime date;
+        int AntiqueNumber ;
+        int ID_Number ;
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -236,7 +238,7 @@ namespace Flawless_ex
         DataTable DATA13 = new DataTable();
         #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade)
+        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id)
         {
             InitializeComponent();
 
@@ -246,6 +248,8 @@ namespace Flawless_ex
             this.type = type;
             this.SlipNumber = slipnumber;
             this.grade = Grade;
+            this.AntiqueNumber = antique;
+            this.ID_Number = id;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
@@ -4888,9 +4892,17 @@ namespace Flawless_ex
             UpdateButton.Enabled = true;
 
             ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber);
-            this.Close();
+            this.Hide();
             nameChange.Show();
         }
         #endregion
+
+        private void ClientInformationButton_Click(object sender, EventArgs e)
+        {
+            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number);
+
+            this.Hide();
+            clientInformation.Show();
+        }
     }
 }
