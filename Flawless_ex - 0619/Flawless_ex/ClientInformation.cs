@@ -22,7 +22,6 @@ namespace Flawless_ex
         int AntiqueNumber = 0;
         int ID_Number = 0;
         int Grade;
-
         int invalid;
 
         NpgsqlConnection conn = new NpgsqlConnection();

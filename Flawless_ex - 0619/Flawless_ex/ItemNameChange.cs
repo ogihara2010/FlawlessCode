@@ -677,7 +677,6 @@ namespace Flawless_ex
             #endregion
 
             #endregion
-
             conn.Close();
         }
     }
