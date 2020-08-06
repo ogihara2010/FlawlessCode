@@ -21,6 +21,7 @@ namespace Flawless_ex
         decimal total;
         int AntiqueNumber ;
         int ID_Number ;
+        string Pass;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -199,7 +200,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string pass)
         {
             InitializeComponent();
             staff_id = id;
@@ -209,6 +210,7 @@ namespace Flawless_ex
             this.address = address;
             this.access_auth = access_auth;
             total = Total;
+            Pass = pass;
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -2753,7 +2755,7 @@ namespace Flawless_ex
             }
             
             
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, Pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -2803,7 +2805,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, Pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -8114,7 +8116,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, Pass);
 
             this.Hide();
             recordList.Show();
@@ -8124,7 +8126,7 @@ namespace Flawless_ex
 
         private void DeliveryPreviewButton_Click(object sender, EventArgs e)
         {
-            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type, Pass);
             this.Close();
             deliveryPreview.Show();
         }

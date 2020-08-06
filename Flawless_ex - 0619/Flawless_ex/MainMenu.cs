@@ -14,12 +14,14 @@ namespace Flawless_ex
         string data;
         string slipNumber;
         decimal Total;
+        string Pass;
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
             InitializeComponent();
 
             this.access_auth = access_auth;
             staff_id = id;
+            Pass = pass;
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlCommand cmd;
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -58,7 +60,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass);
 
             this.Hide();
             statement.Show();
@@ -85,7 +87,7 @@ namespace Flawless_ex
         #region "買取販売データ検索ボタン"
         private void CustomerHistoriButton_Click(object sender, EventArgs e)
         {
-            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data);
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data, Pass);
 
             this.Hide();
             customerHistorySelect.Show();
@@ -94,7 +96,7 @@ namespace Flawless_ex
         #region "月間成績表一覧"
         private void MonResults_Click(object sender, EventArgs e)
         {
-            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber);
+            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass);
 
             this.Hide();
             monresult.Show();
@@ -103,7 +105,7 @@ namespace Flawless_ex
         #region"未入力・次月持ち越し"
         private void Button3_Click(object sender, EventArgs e)
         {
-            NextMonth nextmonth = new NextMonth(this, staff_id);
+            NextMonth nextmonth = new NextMonth(this, staff_id, Pass, access_auth);
 
             this.Hide();
             nextmonth.Show();

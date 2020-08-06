@@ -27,8 +27,9 @@ namespace Flawless_ex
         int control;
         int antique;
         string access_auth;
+        string Pass;
         DataTable dt = new DataTable();
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass)
         {
             InitializeComponent();
             mainMenu = main;
@@ -42,11 +43,12 @@ namespace Flawless_ex
             this.search3 = search3;
             staff_id = id;
             this.data = data;
+            this.Pass = pass;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu,staff_id, data);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu,staff_id, data, Pass);
             this.Close();
             customerHistory.Show();
         }
@@ -174,13 +176,11 @@ namespace Flawless_ex
             }
             #endregion
 
-
-
         }
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass);
             this.Close();
             statement.Show();
         }
@@ -188,7 +188,7 @@ namespace Flawless_ex
         #region "納品書"
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass);
             this.Close();
             statement.Show();
         }

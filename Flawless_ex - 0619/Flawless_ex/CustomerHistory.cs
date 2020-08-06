@@ -28,17 +28,20 @@ namespace Flawless_ex
         NpgsqlConnection conn3 = new NpgsqlConnection();
         NpgsqlDataAdapter adapter3;
         string data;
-        public CustomerHistory(MainMenu main, int id, string data)
+        string Pass;
+
+        public CustomerHistory(MainMenu main, int id, string data, string pass)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
             this.data = data;
+            this.Pass = pass;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data);
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass);
             this.Close();
             customerHistorySelect.Show();
         }
@@ -372,7 +375,7 @@ namespace Flawless_ex
                     string item1 = row3["item_name"].ToString();
 
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data, Pass);
                     this.Hide();
                     dataSearch.Show();
                 }
@@ -402,7 +405,7 @@ namespace Flawless_ex
                     string item1 = row3["item_name"].ToString();
 
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data, Pass);
                     this.Hide();
                     dataSearch.Show();
                 }
@@ -628,7 +631,7 @@ namespace Flawless_ex
                     address = row3["address"].ToString();
                     item = row3["item_name"].ToString();
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data, Pass);
                     this.Hide();
                     dataSearch.Show();
                 }
@@ -657,7 +660,7 @@ namespace Flawless_ex
                     address = row3["address"].ToString();
                     item = row3["item_name"].ToString();
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data, Pass);
                     this.Hide();
                     dataSearch.Show();
                 }

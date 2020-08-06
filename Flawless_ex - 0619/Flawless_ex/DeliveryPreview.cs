@@ -28,17 +28,20 @@ namespace Flawless_ex
         string address;
         decimal Total;
         string access_auth;
-        public DeliveryPreview(MainMenu mainMenu, int id, int type)
+        string Pass;
+
+        public DeliveryPreview(MainMenu mainMenu, int id, int type, string pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;
+            this.Pass = pass;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass);
             this.Close();
             statement.Show();
         }

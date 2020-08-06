@@ -17,7 +17,9 @@ namespace Flawless_ex
         string address;
         decimal Total;
         string access_auth;
-        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total)
+        string Pass;
+
+        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, string pass)
         {
             InitializeComponent();
 
@@ -28,11 +30,12 @@ namespace Flawless_ex
             this.address = address;
             this.staff_name = staff_name;
             this.Total = Total;
+            this.Pass = pass;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass);
             this.Close();
 
             statement.Show();
@@ -123,7 +126,7 @@ namespace Flawless_ex
                     adapter.Fill(dt);
 
                     conn.Close();
-                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total);
+                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, Pass);
                     this.Close();
                     search_Result.Show();
 
@@ -142,7 +145,7 @@ namespace Flawless_ex
 
                     conn.Close();
 
-                    using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
+                    using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, Pass))
                     {
                         this.Close();
                         search_Result.Show();
@@ -194,7 +197,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, Pass))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -215,7 +218,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, Pass))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -243,7 +246,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, Pass))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -262,7 +265,7 @@ namespace Flawless_ex
 
                         conn.Close();
 
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total))
+                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, Pass))
                         {
                             this.Close();
                             search_Result.ShowDialog();
@@ -276,7 +279,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            client_add client_Add = new client_add(mainMenu, staff_id, type);
+            client_add client_Add = new client_add(mainMenu, staff_id, type, Pass);
                 this.Close();
                 client_Add.Show();
             
