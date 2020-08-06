@@ -23,6 +23,7 @@ namespace Flawless_ex
         int ID_Number = 0;
         int Grade;
         int invalid;
+        string Access_auth;
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
@@ -224,14 +225,14 @@ namespace Flawless_ex
         #region"戻る"
         private void ClientInformation_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number);
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth);
 
             RecordList.Show();
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number);
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth);
             this.Close();
             RecordList.Show();
         }

@@ -23,6 +23,8 @@ namespace Flawless_ex
         int ChangeCount;
         int antique;
         int id;
+        string Access_auth;
+
         #region"品名変更時"
         string REASON;
         int ItemCategoryCode;
@@ -456,7 +458,7 @@ namespace Flawless_ex
             MessageBox.Show("品名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             conn.Close();
 
-            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id);
+            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id, Access_auth);
             this.Close();
             recordList.Show();
         }
@@ -465,14 +467,14 @@ namespace Flawless_ex
         #region"戻る"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id);
+            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id, Access_auth);
             this.Close();
             recordList.Show();
         }
 
         private void ItemNameChange_FormClosed(object sender, FormClosedEventArgs e)
         {
-            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id);
+            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id, Access_auth);
 
             this.Close();
             recordList.Show();
