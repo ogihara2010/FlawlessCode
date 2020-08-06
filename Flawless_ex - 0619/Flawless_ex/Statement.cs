@@ -19,6 +19,8 @@ namespace Flawless_ex
         int type = 0;
         string path;
         decimal total;
+        int AntiqueNumber ;
+        int ID_Number ;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -2879,8 +2881,8 @@ namespace Flawless_ex
             string DeliveryMethod = deliveryComboBox.Text;
             string PaymentMethod = paymentMethodsComboBox.Text;
             int TYPE = 0;
-            int AntiqueNumber = 0;
-            int ID_Number = 0;
+            AntiqueNumber = 0;
+            ID_Number = 0;
             string CompanyName = "";
             string ShopName = "";
             string StaffName = "";
@@ -8112,7 +8114,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number);
 
             this.Hide();
             recordList.Show();
