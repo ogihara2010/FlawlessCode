@@ -6056,5 +6056,11 @@ namespace Flawless_ex
             clientInformation.Show();
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass);
+            this.Hide();
+            monResult.Show();
+        }
     }
 }

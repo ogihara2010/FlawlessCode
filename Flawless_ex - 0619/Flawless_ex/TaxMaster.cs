@@ -11,15 +11,22 @@ namespace Flawless_ex
         DataTable dt;
         NpgsqlDataAdapter adapter;
         NpgsqlCommandBuilder builder;
+        NpgsqlCommand cmd;
+        NpgsqlDataReader reader;
         int staff_code;
-        public TaxMaster(MasterMaintenanceMenu master, int staff_code)
+        string Access_auth;
+        MainMenu mainMenu;
+
+        public TaxMaster(MasterMaintenanceMenu master, int staff_code, string access_auth)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
         }
         private void back_Click(object sender, EventArgs e)
         {
+            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth);
             this.Close();
             master.Show();
         }
@@ -56,7 +63,7 @@ namespace Flawless_ex
                     NpgsqlConnection db = new NpgsqlConnection();
                     string sql_str = "insert into vat_m (vat_rate, upd_date, upd_name) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "'," + staff_code + ")";
 
-                    db.ConnectionString = @"Server= localhost;Port = 5432;User Id = postgres;Password = postgres;Database = master;";
+                    db.ConnectionString = @"Server= 192.168.152.157;Port = 5432;User Id = postgres;Password = postgres;Database = master;";
                     db.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, db);
@@ -78,18 +85,24 @@ namespace Flawless_ex
         {
             NpgsqlConnection db = new NpgsqlConnection();
 
-            db.ConnectionString = @"Server= localhost;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
+            db.ConnectionString = @"Server= 192.168.152.157;Port = 5432;User Id=postgres;Password=postgres;Database=master;";
 
             db.Open();
 
-            var cmd = new NpgsqlCommand("SELECT vat_rate FROM vat_m", db);
-            var reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            cmd = new NpgsqlCommand("SELECT vat_rate FROM vat_m", db);
+            try
             {
-                taxPercent.Text = reader["vat_rate"].ToString();
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        taxPercent.Text = reader["vat_rate"].ToString();
+                    }
+                }
+            }catch(Exception err)
+            {
+                MessageBox.Show(err.ToString());
             }
-
             db.Close();
         }
 
@@ -99,6 +112,12 @@ namespace Flawless_ex
             {
                 MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void TaxMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth);
+            master.Show();
         }
     }
 }
