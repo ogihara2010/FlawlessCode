@@ -42,11 +42,7 @@ namespace Flawless_ex
         {
             string slipNumber = (string)dataGridView1.CurrentRow.Cells[0].Value;
             Grade = (int)dataGridView1.CurrentRow.Cells[1].Value;
-            string date1 = (string)dataGridView1.CurrentRow.Cells[2].Value;
-            string delivery_method = (string)dataGridView1.CurrentRow.Cells[3].Value;
-            string pay_method = (string)dataGridView1.CurrentRow.Cells[4].Value;
             string staff_name = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            string buyer = (string)dataGridView1.CurrentRow.Cells[6].Value;
             
             RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, antique, id, Access_auth, Pass);
             this.Hide();
