@@ -9,12 +9,20 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu master;
         int staff_code;
+        string Access_auth;
+        string Pass;
+
         DataTable dt = new DataTable();
-        public MainCategoryMaster(MasterMaintenanceMenu master, int staff_code)
+
+
+
+        public MainCategoryMaster(MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void MainCategoryMaster_Load(object sender, EventArgs e)
@@ -22,7 +30,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             dt = new DataTable();
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select main_category_name, main_category_code from main_category_m where invalid = 0 order by main_category_code";
             conn.Open();
@@ -38,14 +46,14 @@ namespace Flawless_ex
 
         private void addButton(object sender, EventArgs e)
         {
-            AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt, master, staff_code);
+            AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt, master, staff_code, Access_auth, Pass);
             this.Close();
             addMainCategory.Show();
         }
 
         private void returnButtonClick(object sender, EventArgs e)
         {
-            ItemMaster itemMaster = new ItemMaster(master, staff_code);
+            ItemMaster itemMaster = new ItemMaster(master, staff_code, Access_auth, Pass);
             this.Close();
             itemMaster.Show();
         }
@@ -54,7 +62,7 @@ namespace Flawless_ex
         {
             int code = (int)dataGridView1.CurrentRow.Cells[1].Value;//選択した大分類コード取得
 
-            UpdateMainCategoryMenu updateMain = new UpdateMainCategoryMenu(master, code, staff_code);
+            UpdateMainCategoryMenu updateMain = new UpdateMainCategoryMenu(master, code, staff_code, Access_auth, Pass);
             this.Close();
             updateMain.Show();
         }

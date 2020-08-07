@@ -16,19 +16,21 @@ namespace Flawless_ex
         int staff_code;
         string Access_auth;
         MainMenu mainMenu;
+        int Tax;
+        bool figure = false;
+        string Pass;
 
-        public TaxMaster(MasterMaintenanceMenu master, int staff_code, string access_auth)
+        public TaxMaster(MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
             this.Access_auth = access_auth;
+            this.Pass = pass;
         }
         private void back_Click(object sender, EventArgs e)
         {
-            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth);
             this.Close();
-            master.Show();
         }
 
         private void update_Click(object sender, EventArgs e)
@@ -42,16 +44,16 @@ namespace Flawless_ex
 
                 if (string.IsNullOrEmpty(taxPercent.Text))
                 {
-                    this.Close();
+                    this.Hide();
                     MessageBox.Show("税率が未入力です", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else if (taxPercent.Text.IndexOf(".") > 0)
                 {
-                    this.Close();
+                    this.Hide();
                     MessageBox.Show("小数は入力できません", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 } else if (letter == 0) 
                 {
-                    this.Close();
+                    this.Hide();
                     MessageBox.Show("半角の数値のみ入力できます。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
@@ -73,12 +75,10 @@ namespace Flawless_ex
                     adapter.Update(dt);
                     
                     db.Close();
-
+                    MessageBox.Show("税率を変更しました。", "変更確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     this.Close();
-                    MessageBox.Show("更新しました。");
                 }
             }
-            master.Show();
         }
 
         private void TaxMaster_Load(object sender, EventArgs e)
@@ -90,34 +90,40 @@ namespace Flawless_ex
             db.Open();
 
             cmd = new NpgsqlCommand("SELECT vat_rate FROM vat_m", db);
-            try
+            using (reader = cmd.ExecuteReader())
             {
-                using (reader = cmd.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        taxPercent.Text = reader["vat_rate"].ToString();
-                    }
+                    Tax = (int)reader["vat_rate"];
+                    taxPercent.Text = Tax.ToString();
                 }
-            }catch(Exception err)
-            {
-                MessageBox.Show(err.ToString());
             }
             db.Close();
         }
 
         private void taxPercent_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar)) 
+
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
             {
                 MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                figure = true;
             }
         }
 
         private void TaxMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth);
+            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth, Pass);
             master.Show();
+        }
+
+        private void taxPercent_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (figure)
+            {
+                taxPercent.Text = Tax.ToString();
+                figure = false;
+            }   
         }
     }
 }

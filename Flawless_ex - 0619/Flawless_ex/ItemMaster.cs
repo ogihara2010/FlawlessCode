@@ -8,20 +8,29 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu master;
         DataTable dt;
+        NpgsqlConnection conn = new NpgsqlConnection();
+        NpgsqlDataAdapter adapter;
+        NpgsqlCommand cmd;
+        NpgsqlDataReader reader;
+        MainMenu main;
+        string Access_auth;
+        string Pass;
+        int MainCode;
+
         int staff_code;
-        public ItemMaster(MasterMaintenanceMenu master, int staff_code)
+        public ItemMaster(MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void ProductNameMenu_Load(object sender, EventArgs e)
         {
-            NpgsqlConnection conn = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter;
             dt = new DataTable();
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0 order by main_category_m";
             conn.Open();
@@ -41,32 +50,51 @@ namespace Flawless_ex
         private void ReturnButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            master.Show();
         }
 
         private void signUpButton_Click(object sender, EventArgs e)
         {
-            ProductAddMenu productAdd = new ProductAddMenu(dt, master, staff_code);
+            ProductAddMenu productAdd = new ProductAddMenu(dt, master, staff_code, Access_auth, Pass);
 
-            this.Close();
+            this.Hide();
             productAdd.Show();
         }
 
         private void changeDeleteButton_Click(object sender, EventArgs e)
         {
             int code = (int)dataGridView1.CurrentRow.Cells[2].Value; //選択した品名コードを取得
-            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code, staff_code);
-            this.Close();
+
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            string sql = "select * from main_category_m where main_category_name = '" + dataGridView1.CurrentRow.Cells[0].Value + "';";
+            cmd = new NpgsqlCommand(sql, conn);
+            using(reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    MainCode = (int)reader["main_category_code"];
+                }
+            }
+
+            ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code, staff_code, Access_auth, Pass, MainCode);
+            this.Hide();
             changeDeleteMenu.Show();
 
         }
 
         private void mainCategoryMenu_Click(object sender, EventArgs e)//大分類マスタ
         {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
 
-            this.Close();
+            this.Hide();
             mainCategory.Show();
+        }
+
+        private void ItemMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            master = new MasterMaintenanceMenu(main, staff_code, Access_auth, Pass);
+            master.Show();
         }
     }
 }

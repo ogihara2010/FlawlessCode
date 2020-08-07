@@ -13,19 +13,23 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter;
         int code;//品名コード
         int staff_code;//ログイン者のコード
+        string Access_auth;
+        string Pass;
 
-        public ProductAddMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code)
+        public ProductAddMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
 
             this.master = master;
             this.dt = dt;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            ItemMaster product = new ItemMaster(master, staff_code);
+            ItemMaster product = new ItemMaster(master, staff_code, Access_auth, Pass);
 
             this.Close();
             product.Show();
@@ -68,7 +72,7 @@ namespace Flawless_ex
 */
                 conn.Close();
 
-                ItemMaster product = new ItemMaster(master, staff_code);
+                ItemMaster product = new ItemMaster(master, staff_code, Access_auth, Pass);
                 this.Close();
                 product.Show();
             }
