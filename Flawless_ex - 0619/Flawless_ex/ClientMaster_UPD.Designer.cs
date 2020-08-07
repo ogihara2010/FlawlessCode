@@ -1801,6 +1801,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster_UPD";
             this.Text = "顧客マスタメンテナンス　更新";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_UPD_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_UPD_Load);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();

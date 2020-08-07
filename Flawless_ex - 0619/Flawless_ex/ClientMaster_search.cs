@@ -107,5 +107,11 @@ namespace Flawless_ex
                 clientMaster_UPD.Show();
             }
         }
+
+        private void ClientMaster_search_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            clientmaster.Show();
+        }
     }
 }

@@ -47,5 +47,10 @@ namespace Flawless_ex
             this.Close();
             mainMenu.Show();
         }
+
+        private void CustomerHistorySelect_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            mainMenu.Show();
+        }
     }
 }

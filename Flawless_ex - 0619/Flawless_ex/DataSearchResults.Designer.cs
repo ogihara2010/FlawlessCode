@@ -110,6 +110,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "DataSearchResults";
             this.Text = "買取販売データ検索　検索結果";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DataSearchResults_FormClosed);
             this.Load += new System.EventHandler(this.DataSearchResults_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

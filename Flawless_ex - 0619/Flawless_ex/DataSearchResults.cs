@@ -20,7 +20,7 @@ namespace Flawless_ex
         string search1;
         string search2;
         string search3;
-
+        string Pass;
         string staff_name;
         int staff_id;
         string data;
@@ -29,7 +29,7 @@ namespace Flawless_ex
         string document;
         string access_auth;
         DataTable dt = new DataTable();
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string Pass)
         {
             InitializeComponent();
             mainMenu = main;
@@ -43,11 +43,12 @@ namespace Flawless_ex
             this.search3 = search3;
             staff_id = id;
             this.data = data;
+            this.Pass = Pass;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu,staff_id, data);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu,staff_id, data, Pass);
             this.Close();
             customerHistory.Show();
         }
@@ -197,7 +198,7 @@ namespace Flawless_ex
             document = (string)dataGridView1.CurrentRow.Cells[0].Value;
             staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
             address = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3, Pass);
             this.Close();
             statement.Show();
         }
@@ -208,10 +209,16 @@ namespace Flawless_ex
             control = (int)dataGridView1.CurrentRow.Cells[0].Value;
             staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
             address = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3, Pass);
             this.Close();
             statement.Show();
         }
         #endregion
+
+        private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            customerHistory.Show();
+        }
     }
 }

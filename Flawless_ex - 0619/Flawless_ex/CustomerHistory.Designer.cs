@@ -961,6 +961,7 @@
             this.Controls.Add(this.button1);
             this.Name = "CustomerHistory";
             this.Text = "買取販売データ検索";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomerHistory_FormClosed);
             this.Load += new System.EventHandler(this.CustomerHistory_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
