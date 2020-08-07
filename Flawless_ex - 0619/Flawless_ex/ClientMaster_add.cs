@@ -75,7 +75,23 @@ namespace Flawless_ex
             string b = dat.ToString("yyyy/MM/dd");
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-           
+            #region "起こりうるミス"
+            if (string.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("会社名を入力してください。");
+                return;
+            }
+            else if (string.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("会社名のフリガナを入力して下さい。");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(CompanyNameKana, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            {
+                MessageBox.Show("カタカナを入力して下さい。");
+                return;
+            }
+            #endregion
 
             string sql_str = "Insert into client_m_corporate VALUES (" + 0 + " , '"  + RegistrationDate + "' , '" +  CompanyName + "' ,'" + CompanyNameKana + "' , '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' , '" + PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName +
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks +  "' , '" + ID + "' , '" + b  +  "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
@@ -162,6 +178,17 @@ namespace Flawless_ex
         private void ClientMaster_add_Load(object sender, EventArgs e)
         {
             this.textBox50.Text = "　年　月　日";
+        }
+
+        private void ClientMaster_add_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            clientmaster.Show();
+        }
+
+        private void Label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

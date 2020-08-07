@@ -34,7 +34,11 @@ namespace Flawless_ex
         int AntiqueNumber ;
         int ID_Number ;
         string Pass;
-
+        int control;
+        string search1;
+        string search2;
+        string search3;
+        string Data;
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
         #region"各行の単価（フォーマット未処理）"
@@ -1348,7 +1352,7 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass) ;
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total,SlipNumber, control, Data, search1, search2, search3, Pass);
 
             this.Close();
             statement.Show();
@@ -1356,7 +1360,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, SlipNumber, control, Data, search1, search2, search3, Pass);
             statement.Show();
         }
 

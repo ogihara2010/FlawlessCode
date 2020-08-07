@@ -253,5 +253,10 @@ namespace Flawless_ex
         {
 
         }
+
+        private void ClientMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            masterMenu.Show();
+        }
     }
 }

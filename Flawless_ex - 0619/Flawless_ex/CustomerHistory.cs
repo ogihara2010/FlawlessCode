@@ -709,5 +709,11 @@ namespace Flawless_ex
             }
             a++;
         }
+
+        private void CustomerHistory_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass);
+            customerHistorySelect.Show();
+        }
     }
 }

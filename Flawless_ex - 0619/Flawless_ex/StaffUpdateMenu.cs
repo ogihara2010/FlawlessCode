@@ -46,6 +46,64 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter;
                 NpgsqlCommandBuilder builder;
                 string reason = this.reason.Text;
+                #region "起こりうるミス"
+                if (string.IsNullOrEmpty(password))//パスワード未入力
+                {
+                    if (string.IsNullOrEmpty(rePassword))
+                    {
+                        MessageBox.Show("パスワードを入力してください");
+                        conn.Close();
+                        return;
+                    }
+                }
+                else if (this.passwordText.Text != this.passwordReText.Text)
+                {
+                    MessageBox.Show("パスワードを確認してください。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(parsonNameText.Text))
+                {
+                    MessageBox.Show("担当者名を入力して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(parsonNamt2Text.Text))
+                {
+                    MessageBox.Show("担当者のカナを入力して下さい。");
+                    return;
+                }
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(staffNameKana, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("カタカナを入力して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(passwordText.Text))
+                {
+                    MessageBox.Show("パスワードを入力して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(passwordReText.Text))
+                {
+                    MessageBox.Show("パスワードを再入力して下さい。");
+                    return;
+                }
+                else if (this.accessButton.SelectedIndex == -1)
+                {
+                    MessageBox.Show("アクセス権限を選択して下さい。");
+                    return;
+                }
+                else if (this.mainCategoryComboBox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("大分類名を選択して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(this.reason.Text))
+                {
+                    MessageBox.Show("理由を入力して下さい。");
+                    return;
+                }
+                else { }
+                #endregion
+
 
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
@@ -109,7 +167,7 @@ namespace Flawless_ex
             string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ";
 
 
-
+            #region "起こりうるミス"
             if (string.IsNullOrEmpty(password))//パスワード未入力
             {
                 if (string.IsNullOrEmpty(rePassword))
@@ -119,7 +177,53 @@ namespace Flawless_ex
                     return;
                 }
             }
+            else if (pass != rePassword)
+            {
+                MessageBox.Show("パスワードを確認してください。");
+                return;
+            }
+            else if (string.IsNullOrEmpty(parsonNameText.Text))
+            {
+                MessageBox.Show("担当者名を入力して下さい。");
+                return;
+            }
+            else if (string.IsNullOrEmpty(parsonNamt2Text.Text))
+            {
+                MessageBox.Show("担当者のカナを入力して下さい。");
+                return;
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(staffNameKana, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            {
+                MessageBox.Show("カタカナを入力して下さい。");
+                return;
+            }
+            else if (string.IsNullOrEmpty(passwordText.Text))
+            {
+                MessageBox.Show("パスワードを入力して下さい。");
+                return;
+            }
+            else if (string.IsNullOrEmpty(passwordReText.Text))
+            {
+                MessageBox.Show("パスワードを再入力して下さい。");
+                return;
+            }
+            else if (this.accessButton.SelectedIndex == -1)
+            {
+                MessageBox.Show("アクセス権限を選択して下さい。");
+                return;
+            }
+            else if (this.mainCategoryComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("大分類名を選択して下さい。");
+                return;
+            }
+            else if (string.IsNullOrEmpty(this.reason.Text))
+            {
+                MessageBox.Show("理由を入力して下さい。");
+                return;
+            }
             else { }
+            #endregion
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             builder = new NpgsqlCommandBuilder(adapter);
@@ -206,6 +310,13 @@ namespace Flawless_ex
             this.accessButton.Text = access_auth;
 
             conn.Close();
+        }
+
+        private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StaffMaster staffMaster = new StaffMaster(master, code);
+
+            staffMaster.Show();
         }
     }
 }

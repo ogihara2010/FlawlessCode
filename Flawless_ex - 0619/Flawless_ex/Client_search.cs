@@ -23,6 +23,7 @@ namespace Flawless_ex
         string search6;
         string search7;
         string search8;
+        string Pass;
         public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total)
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search6, search7, search8);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search6, search7, search8, Pass);
             this.Close();
 
             statement.Show();

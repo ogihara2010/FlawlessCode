@@ -76,6 +76,7 @@
             this.Controls.Add(this.button1);
             this.Name = "CustomerHistorySelect";
             this.Text = "買取販売履歴選択画面";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CustomerHistorySelect_FormClosed);
             this.ResumeLayout(false);
 
         }

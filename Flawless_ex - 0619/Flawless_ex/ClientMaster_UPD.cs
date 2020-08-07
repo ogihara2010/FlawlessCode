@@ -462,5 +462,11 @@ namespace Flawless_ex
             //clientmaster.Show();
         }
         #endregion
+
+        private void ClientMaster_UPD_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            clientmaster.Show();
+        }
     }
 }

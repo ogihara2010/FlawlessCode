@@ -58,12 +58,16 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.orRadioButton5 = new System.Windows.Forms.RadioButton();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.andRadioButton5 = new System.Windows.Forms.RadioButton();
-            this.orRadioButton4 = new System.Windows.Forms.RadioButton();
+            this.orRadioButton5 = new System.Windows.Forms.RadioButton();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.andRadioButton4 = new System.Windows.Forms.RadioButton();
+            this.orRadioButton4 = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel14 = new System.Windows.Forms.FlowLayoutPanel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.flowLayoutPanel13 = new System.Windows.Forms.FlowLayoutPanel();
             this.iaddressTextBox = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel12 = new System.Windows.Forms.FlowLayoutPanel();
@@ -76,10 +80,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.search1 = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -95,6 +95,8 @@
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel14.SuspendLayout();
             this.flowLayoutPanel13.SuspendLayout();
@@ -102,8 +104,6 @@
             this.flowLayoutPanel11.SuspendLayout();
             this.flowLayoutPanel10.SuspendLayout();
             this.flowLayoutPanel9.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -424,6 +424,26 @@
             this.tabPage2.Text = "個人";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.andRadioButton5);
+            this.panel5.Controls.Add(this.orRadioButton5);
+            this.panel5.Location = new System.Drawing.Point(906, 64);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(200, 48);
+            this.panel5.TabIndex = 5;
+            // 
+            // andRadioButton5
+            // 
+            this.andRadioButton5.AutoSize = true;
+            this.andRadioButton5.Location = new System.Drawing.Point(4, 9);
+            this.andRadioButton5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.andRadioButton5.Name = "andRadioButton5";
+            this.andRadioButton5.Size = new System.Drawing.Size(87, 28);
+            this.andRadioButton5.TabIndex = 14;
+            this.andRadioButton5.Text = "AND";
+            this.andRadioButton5.UseVisualStyleBackColor = true;
+            // 
             // orRadioButton5
             // 
             this.orRadioButton5.AutoSize = true;
@@ -437,16 +457,25 @@
             this.orRadioButton5.Text = "OR";
             this.orRadioButton5.UseVisualStyleBackColor = true;
             // 
-            // andRadioButton5
+            // panel4
             // 
-            this.andRadioButton5.AutoSize = true;
-            this.andRadioButton5.Location = new System.Drawing.Point(4, 9);
-            this.andRadioButton5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.andRadioButton5.Name = "andRadioButton5";
-            this.andRadioButton5.Size = new System.Drawing.Size(87, 28);
-            this.andRadioButton5.TabIndex = 14;
-            this.andRadioButton5.Text = "AND";
-            this.andRadioButton5.UseVisualStyleBackColor = true;
+            this.panel4.Controls.Add(this.andRadioButton4);
+            this.panel4.Controls.Add(this.orRadioButton4);
+            this.panel4.Location = new System.Drawing.Point(906, 10);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(200, 37);
+            this.panel4.TabIndex = 5;
+            // 
+            // andRadioButton4
+            // 
+            this.andRadioButton4.AutoSize = true;
+            this.andRadioButton4.Location = new System.Drawing.Point(4, 3);
+            this.andRadioButton4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.andRadioButton4.Name = "andRadioButton4";
+            this.andRadioButton4.Size = new System.Drawing.Size(87, 28);
+            this.andRadioButton4.TabIndex = 12;
+            this.andRadioButton4.Text = "AND";
+            this.andRadioButton4.UseVisualStyleBackColor = true;
             // 
             // orRadioButton4
             // 
@@ -460,17 +489,6 @@
             this.orRadioButton4.TabStop = true;
             this.orRadioButton4.Text = "OR";
             this.orRadioButton4.UseVisualStyleBackColor = true;
-            // 
-            // andRadioButton4
-            // 
-            this.andRadioButton4.AutoSize = true;
-            this.andRadioButton4.Location = new System.Drawing.Point(4, 3);
-            this.andRadioButton4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.andRadioButton4.Name = "andRadioButton4";
-            this.andRadioButton4.Size = new System.Drawing.Size(87, 28);
-            this.andRadioButton4.TabIndex = 12;
-            this.andRadioButton4.Text = "AND";
-            this.andRadioButton4.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel2
             // 
@@ -503,6 +521,28 @@
             this.flowLayoutPanel14.Name = "flowLayoutPanel14";
             this.flowLayoutPanel14.Size = new System.Drawing.Size(621, 49);
             this.flowLayoutPanel14.TabIndex = 5;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(3, 3);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(76, 28);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.Text = "あり";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(85, 3);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(79, 28);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "なし";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel13
             // 
@@ -617,46 +657,6 @@
             this.add.UseVisualStyleBackColor = true;
             this.add.Click += new System.EventHandler(this.Add_Click);
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.andRadioButton4);
-            this.panel4.Controls.Add(this.orRadioButton4);
-            this.panel4.Location = new System.Drawing.Point(906, 10);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(200, 37);
-            this.panel4.TabIndex = 5;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.andRadioButton5);
-            this.panel5.Controls.Add(this.orRadioButton5);
-            this.panel5.Location = new System.Drawing.Point(906, 64);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 48);
-            this.panel5.TabIndex = 5;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(3, 3);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(76, 28);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.Text = "あり";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(85, 3);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(79, 28);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "なし";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // ClientMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -669,6 +669,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster";
             this.Text = "顧客マスタメンテナンス";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -692,6 +693,10 @@
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel14.ResumeLayout(false);
             this.flowLayoutPanel14.PerformLayout();
@@ -702,10 +707,6 @@
             this.flowLayoutPanel11.ResumeLayout(false);
             this.flowLayoutPanel10.ResumeLayout(false);
             this.flowLayoutPanel9.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
