@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.reason = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.mainCategoryComboBox = new System.Windows.Forms.ComboBox();
@@ -54,9 +57,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.reason = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,6 +98,31 @@
             this.groupBox1.Size = new System.Drawing.Size(609, 487);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
+            // 
+            // reason
+            // 
+            this.reason.Location = new System.Drawing.Point(299, 303);
+            this.reason.Name = "reason";
+            this.reason.Size = new System.Drawing.Size(240, 31);
+            this.reason.TabIndex = 29;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(260, 303);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(22, 24);
+            this.label17.TabIndex = 28;
+            this.label17.Text = "：";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(12, 303);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(106, 24);
+            this.label16.TabIndex = 27;
+            this.label16.Text = "変更理由";
             // 
             // updateButton
             // 
@@ -350,31 +375,6 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "パスワード";
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(12, 303);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(106, 24);
-            this.label16.TabIndex = 27;
-            this.label16.Text = "変更理由";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(260, 303);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(22, 24);
-            this.label17.TabIndex = 28;
-            this.label17.Text = "：";
-            // 
-            // reason
-            // 
-            this.reason.Location = new System.Drawing.Point(299, 303);
-            this.reason.Name = "reason";
-            this.reason.Size = new System.Drawing.Size(240, 31);
-            this.reason.TabIndex = 29;
-            // 
             // StaffUpdateMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -384,6 +384,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "StaffUpdateMenu";
             this.Text = "担当者マスタメンテナンス　更新";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffUpdateMenu_FormClosed);
             this.Load += new System.EventHandler(this.UpdateMenu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

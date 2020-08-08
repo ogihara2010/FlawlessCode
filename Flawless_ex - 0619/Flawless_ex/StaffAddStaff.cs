@@ -47,11 +47,48 @@ namespace Flawless_ex
                 string access_auth = this.accessButton.Text;//アクセス権限
                 DateTime dat = DateTime.Now;
                 string d = dat.ToString();//登録日時
+                #region "起こりうるミス"
                 if (password != rePassword)
                 {
                     MessageBox.Show("パスワードを確認してください。");
                     return;
                 }
+                else if (string.IsNullOrEmpty(parsonNameText.Text))
+                {
+                    MessageBox.Show("担当者名を入力して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(parsonNamt2Text.Text))
+                {
+                    MessageBox.Show("担当者のカナを入力して下さい。");
+                    return;
+                }
+                else if (!System.Text.RegularExpressions.Regex.IsMatch(staffNameKana, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("カタカナを入力して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(passwordText.Text))
+                {
+                    MessageBox.Show("パスワードを入力して下さい。");
+                    return;
+                }
+                else if (string.IsNullOrEmpty(passwordReText.Text))
+                {
+                    MessageBox.Show("パスワードを再入力して下さい。");
+                    return;
+                }
+                else if (this.accessButton.SelectedIndex == -1)
+                {
+                    MessageBox.Show("アクセス権限を選択して下さい。");
+                    return;
+                }
+                else if (this.mainCategoryComboBox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("大分類名を選択して下さい。");
+                    return;
+                }
+                #endregion
 
                 string sql_str = "insert into staff_m values(" + staffCode1 + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "','" + d + "'," + 0 + ")";
 
@@ -114,6 +151,21 @@ namespace Flawless_ex
             int code = (int)row["staff_code"];
             code++;
             parsonCodeText.Text = code.ToString();
+        }
+
+        /*private void StaffAddStaff_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StaffMaster staffMaster = new StaffMaster(master, staff_code);
+
+            this.Close();
+            staffMaster.Show();
+        }*/
+
+        private void StaffAddStaff_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            StaffMaster staffMaster = new StaffMaster(master, staff_code);
+
+            staffMaster.Show();
         }
     }
 }

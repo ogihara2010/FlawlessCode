@@ -63,6 +63,11 @@ namespace Flawless_ex
             this.Close();
             addStaff.Show();
         }
+
+        private void StaffMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            masterMenu.Show();
+        }
     }
 }
 

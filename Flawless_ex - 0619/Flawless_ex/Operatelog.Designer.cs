@@ -75,7 +75,8 @@
             "消費税マスタ",
             "顧客マスタ　法人　無効",
             "顧客マスタ　個人　更新",
-            "顧客マスタ　個人　無効"});
+            "顧客マスタ　個人　無効",
+            "計算書"});
             this.comboBox1.Location = new System.Drawing.Point(356, 105);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.comboBox1.Name = "comboBox1";
