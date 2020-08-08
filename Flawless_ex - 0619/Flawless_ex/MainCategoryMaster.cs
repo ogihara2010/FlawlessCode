@@ -11,9 +11,9 @@ namespace Flawless_ex
         int staff_code;
         string Access_auth;
         string Pass;
+        bool screan = true;
 
         DataTable dt = new DataTable();
-
 
 
         public MainCategoryMaster(MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
@@ -40,6 +40,8 @@ namespace Flawless_ex
             dataGridView1.DataSource = dt;
             dataGridView1.Columns[0].HeaderText = "大分類名";
             dataGridView1.Columns[1].HeaderText = "大分類コード";
+
+            conn.Close();
         }
 
 
@@ -47,15 +49,14 @@ namespace Flawless_ex
         private void addButton(object sender, EventArgs e)
         {
             AddMainCategoryMenu addMainCategory = new AddMainCategoryMenu(dt, master, staff_code, Access_auth, Pass);
+            screan = false;
             this.Close();
             addMainCategory.Show();
         }
 
         private void returnButtonClick(object sender, EventArgs e)
         {
-            ItemMaster itemMaster = new ItemMaster(master, staff_code, Access_auth, Pass);
             this.Close();
-            itemMaster.Show();
         }
 
         private void updateButtonClick(object sender, EventArgs e)
@@ -63,8 +64,18 @@ namespace Flawless_ex
             int code = (int)dataGridView1.CurrentRow.Cells[1].Value;//選択した大分類コード取得
 
             UpdateMainCategoryMenu updateMain = new UpdateMainCategoryMenu(master, code, staff_code, Access_auth, Pass);
+            screan = false;
             this.Close();
             updateMain.Show();
+        }
+
+        private void MainCategoryMaster_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (screan)
+            {
+                ItemMaster itemMaster = new ItemMaster(master, staff_code, Access_auth, Pass);
+                itemMaster.Show();
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Flawless_ex
         string Access_auth;
         string Pass;
         int MainCode;
+        bool screan = true;
 
         int staff_code;
         public ItemMaster(MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
@@ -32,7 +33,7 @@ namespace Flawless_ex
             dt = new DataTable();
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0 order by main_category_m";
+            string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0 order by main_category_m ;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -55,8 +56,8 @@ namespace Flawless_ex
         private void signUpButton_Click(object sender, EventArgs e)
         {
             ProductAddMenu productAdd = new ProductAddMenu(dt, master, staff_code, Access_auth, Pass);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             productAdd.Show();
         }
 
@@ -78,7 +79,8 @@ namespace Flawless_ex
             }
 
             ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code, staff_code, Access_auth, Pass, MainCode);
-            this.Hide();
+            screan = false;
+            this.Close();
             changeDeleteMenu.Show();
 
         }
@@ -86,15 +88,18 @@ namespace Flawless_ex
         private void mainCategoryMenu_Click(object sender, EventArgs e)//大分類マスタ
         {
             MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             mainCategory.Show();
         }
 
         private void ItemMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            master = new MasterMaintenanceMenu(main, staff_code, Access_auth, Pass);
-            master.Show();
+            if (screan)
+            {
+                master = new MasterMaintenanceMenu(main, staff_code, Access_auth, Pass);
+                master.Show();
+            }
         }
     }
 }

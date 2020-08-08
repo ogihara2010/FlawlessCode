@@ -49,9 +49,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu,staff_id, data, Pass);
             this.Close();
-            customerHistory.Show();
         }
 
         private void DataSearchResults_Load(object sender, EventArgs e)
@@ -190,8 +188,6 @@ namespace Flawless_ex
             }
             #endregion
 
-
-
         }
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
@@ -215,5 +211,11 @@ namespace Flawless_ex
             statement.Show();
         }
         #endregion
+
+        private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            customerHistory.Show();
+        }
     }
 }
