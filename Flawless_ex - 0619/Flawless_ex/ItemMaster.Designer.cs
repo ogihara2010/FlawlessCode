@@ -54,7 +54,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Location = new System.Drawing.Point(40, 35);
+            this.dataGridView1.Location = new System.Drawing.Point(43, 39);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -62,17 +62,17 @@
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1522, 617);
+            this.dataGridView1.Size = new System.Drawing.Size(1751, 694);
             this.dataGridView1.TabIndex = 7;
             // 
             // ReturnButton
             // 
             this.ReturnButton.AutoSize = true;
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ReturnButton.Location = new System.Drawing.Point(772, 737);
+            this.ReturnButton.Location = new System.Drawing.Point(937, 829);
             this.ReturnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(246, 168);
+            this.ReturnButton.Size = new System.Drawing.Size(265, 189);
             this.ReturnButton.TabIndex = 4;
             this.ReturnButton.Text = "戻る";
             this.ReturnButton.UseVisualStyleBackColor = true;
@@ -82,10 +82,10 @@
             // 
             this.signUpButton.AutoSize = true;
             this.signUpButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.signUpButton.Location = new System.Drawing.Point(40, 737);
+            this.signUpButton.Location = new System.Drawing.Point(43, 829);
             this.signUpButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.signUpButton.Name = "signUpButton";
-            this.signUpButton.Size = new System.Drawing.Size(314, 168);
+            this.signUpButton.Size = new System.Drawing.Size(338, 189);
             this.signUpButton.TabIndex = 6;
             this.signUpButton.Text = "新規登録";
             this.signUpButton.UseVisualStyleBackColor = true;
@@ -95,10 +95,10 @@
             // 
             this.changeDeleteButton.AutoSize = true;
             this.changeDeleteButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.changeDeleteButton.Location = new System.Drawing.Point(414, 737);
+            this.changeDeleteButton.Location = new System.Drawing.Point(446, 829);
             this.changeDeleteButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.changeDeleteButton.Name = "changeDeleteButton";
-            this.changeDeleteButton.Size = new System.Drawing.Size(303, 168);
+            this.changeDeleteButton.Size = new System.Drawing.Size(411, 189);
             this.changeDeleteButton.TabIndex = 5;
             this.changeDeleteButton.Text = "変更・無効";
             this.changeDeleteButton.UseVisualStyleBackColor = true;
@@ -108,10 +108,10 @@
             // 
             this.mainCategoryMenu.AutoSize = true;
             this.mainCategoryMenu.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.mainCategoryMenu.Location = new System.Drawing.Point(1127, 740);
+            this.mainCategoryMenu.Location = new System.Drawing.Point(1326, 832);
             this.mainCategoryMenu.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.mainCategoryMenu.Name = "mainCategoryMenu";
-            this.mainCategoryMenu.Size = new System.Drawing.Size(435, 168);
+            this.mainCategoryMenu.Size = new System.Drawing.Size(468, 189);
             this.mainCategoryMenu.TabIndex = 8;
             this.mainCategoryMenu.Text = "大分類マスタ一覧";
             this.mainCategoryMenu.UseVisualStyleBackColor = true;
@@ -119,11 +119,12 @@
             // 
             // ItemMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AcceptButton = this.ReturnButton;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1639, 937);
+            this.ClientSize = new System.Drawing.Size(1857, 1054);
             this.Controls.Add(this.mainCategoryMenu);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ReturnButton);

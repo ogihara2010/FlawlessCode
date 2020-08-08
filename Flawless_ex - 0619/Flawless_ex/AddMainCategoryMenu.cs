@@ -8,11 +8,16 @@ namespace Flawless_ex
     {
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
+        NpgsqlTransaction transaction;
+        NpgsqlDataReader reader;
+        NpgsqlCommand cmd;
+
         MasterMaintenanceMenu master;
         DataTable dt;
         int staff_code;
         string Access_auth;
         string Pass;
+        string MainName;
 
         public AddMainCategoryMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
@@ -27,7 +32,7 @@ namespace Flawless_ex
 
         private void AddMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             //大分類コード取得
@@ -48,19 +53,18 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
             this.Close();
-            mainCategory.Show();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes && string.IsNullOrEmpty(mainCategoryNameTextBox.Text))
+            if (string.IsNullOrEmpty(mainCategoryNameTextBox.Text))
             {
-                MessageBox.Show("大分類名が未入力です。", "登録エラー", MessageBoxButtons.OK);
+                MessageBox.Show("大分類名が未入力です。", "登録エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes && !(string.IsNullOrEmpty(mainCategoryNameTextBox.Text)))
             {
@@ -71,10 +75,31 @@ namespace Flawless_ex
                 DateTime dat = DateTime.Now;
                 dt = new DataTable();
 
-                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0," + staff_code + ")";
-
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
+
+                using (transaction = conn.BeginTransaction())
+                {
+                    string SQL = "select * from main_category_m;";
+                    cmd = new NpgsqlCommand(SQL, conn);
+                    using (reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            MainName = reader["main_category_name"].ToString();
+                            if (MainName == mainName)
+                            {
+                                MessageBox.Show("既に登録されている大分類名です", "登録エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                conn.Close();
+                                mainCategoryNameTextBox.Text = "";
+                                return;
+                            }
+                        }
+                    }
+                }
+
+
+                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0," + staff_code + ")";
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
@@ -84,15 +109,15 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                MessageBox.Show("登録完了");
-
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
+                MessageBox.Show("大分類名を新規登録しました", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); 
                 this.Close();
-                mainCategory.Show();
             }
-            else { }
+        }
 
-
+        private void AddMainCategoryMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
+            mainCategory.Show();
         }
     }
 }

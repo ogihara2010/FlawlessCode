@@ -22,7 +22,7 @@ namespace Flawless_ex
         string Access_auth;
         string Pass;
         int MainCode;
-
+        string reason;
 
         public ProductChangeDeleteMenu(ItemMaster nameMenu, MasterMaintenanceMenu master, int code, int staff_code, string access_auth, string pass, int maincode)
         {
@@ -88,24 +88,25 @@ namespace Flawless_ex
                 MessageBox.Show("理由を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
+            // Yes かつ 理由あり
             DataTable item_mdt = new DataTable();
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             using (transaction = conn.BeginTransaction())
             {
-                string remove_sql = "update item_m set invalid = 1 where item_code = " + puroductCode + "";
+                string remove_sql = "update item_m set invalid = 1 where item_code = " + puroductCode + ";";
                 cmd = new NpgsqlCommand(remove_sql, conn);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
             }
 
             //履歴
+            reason = reasonText.Text;
             using (transaction = conn.BeginTransaction())
             {
                 DateTime dat = DateTime.Now;
-                string sql_remove_invalid = "insert into item_m_invalid_revisions values(" + puroductCode + ", '" + dat + "', " + staff_code + ")";
+                string sql_remove_invalid = "insert into item_m_invalid_revisions values(" + puroductCode + ", '" + dat + "', " + staff_code + ", '" + reason + "');";
                 cmd = new NpgsqlCommand(sql_remove_invalid, conn);
                 cmd.ExecuteReader();
             }
@@ -117,8 +118,6 @@ namespace Flawless_ex
 
         private void updateButton_Click(object sender, EventArgs e)     //更新時
         {
-
-
             DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No)
             {
@@ -141,7 +140,7 @@ namespace Flawless_ex
             string iname = productNameTextBox.Text;//品名
             int mcode = (int)mainCategoryComboBox.SelectedValue;//大分類コード
             DataTable dt = new DataTable();
-            string reason = reasonText.Text;
+            reason = reasonText.Text;
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -152,13 +151,13 @@ namespace Flawless_ex
                 //大分類・品名両方変更
                 using (transaction = conn.BeginTransaction())
                 {
-                    string sql_item_mCode_revisions = "insert into item_m_main_category_code_revisions values(" + mCode + ", " + mcode + "," + puroductCode + ",'" + dat + "', " + staff_code + ")";
+                    string sql_item_mCode_revisions = "insert into item_m_main_category_code_revisions values(" + mCode + ", " + mcode + "," + puroductCode + ",'" + dat + "', " + staff_code + ", '" + reason + "');";
                     cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
                     cmd.ExecuteReader();
                 }
                 using (transaction = conn.BeginTransaction())
                 {
-                    string sql_itemName = "insert into item_m_item_name_revisions values('" + item_name + "', '" + iname + "', " + puroductCode + ", '" + dat + "', " + staff_code + ")";
+                    string sql_itemName = "insert into item_m_item_name_revisions values('" + item_name + "', '" + iname + "', " + puroductCode + ", '" + dat + "', " + staff_code + ", '" + reason + "');";
                     cmd = new NpgsqlCommand(sql_itemName, conn);
                     cmd.ExecuteReader();
                 }
@@ -173,7 +172,7 @@ namespace Flawless_ex
                     MessageBox.Show("品名のみ変更します", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     using (transaction = conn.BeginTransaction())
                     {
-                        string sql_itemName = "insert into item_m_item_name_revisions values('" + item_name + "', '" + iname + "', " + puroductCode + ", '" + dat + "', " + staff_code + ")";
+                        string sql_itemName = "insert into item_m_item_name_revisions values('" + item_name + "', '" + iname + "', " + puroductCode + ", '" + dat + "', " + staff_code + ", '" + reason + "');";
                         cmd = new NpgsqlCommand(sql_itemName, conn);
                         cmd.ExecuteReader();
                         MessageBox.Show("品名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -197,7 +196,7 @@ namespace Flawless_ex
                     //例：ダイヤ->地金
                     using (transaction = conn.BeginTransaction())
                     {
-                        string sql_item_mCode_revisions = "insert into item_m_main_category_code_revisions values(" + mCode + ", " + mcode + "," + puroductCode + ",'" + dat + "', " + staff_code + ")";
+                        string sql_item_mCode_revisions = "insert into item_m_main_category_code_revisions values(" + mCode + ", " + mcode + "," + puroductCode + ",'" + dat + "', " + staff_code + ", '" + reason + "');";
                         cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
                         cmd.ExecuteReader();
                         MessageBox.Show("大分類名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

@@ -15,6 +15,16 @@ namespace Flawless_ex
         string mName;
         string Access_auth;
         string Pass;
+        string reason;
+
+        NpgsqlConnection conn = new NpgsqlConnection();
+        NpgsqlDataAdapter adapter;
+        DataRow row;
+        NpgsqlCommandBuilder builder;
+        NpgsqlTransaction transaction;
+        NpgsqlCommand cmd;
+        NpgsqlDataReader reader;
+        NpgsqlDataAdapter adapter2;
 
         public UpdateMainCategoryMenu(MasterMaintenanceMenu master, int code, int staff_code, string access_auth, string pass)
         {
@@ -29,10 +39,6 @@ namespace Flawless_ex
 
         private void UpdateMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            NpgsqlConnection conn = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter;
-            DataTable dt = new DataTable();
-            DataRow row;
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from main_category_m where main_category_code = " + mainCode + "";
@@ -49,79 +55,88 @@ namespace Flawless_ex
             this.mainCategoryNameTextBox.Text = mainName;
             mName = mainName;
 
-
             conn.Close();
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            MainCategoryMaster master = new MainCategoryMaster(this.master, staff_code, Access_auth, Pass);
-
             this.Close();
-            master.Show();
         }
 
         private void removeButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(mainCategoryNameTextBox.Text))
+            {
+                MessageBox.Show("大分類名が入力されておりません。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(reasonText.Text))
+            {
+                MessageBox.Show("選択した大分類名を無効にする理由を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             DialogResult result = MessageBox.Show("無効にしますか？", "確認", MessageBoxButtons.YesNo);
 
-            if (result == DialogResult.Yes)
+            if (result == DialogResult.No)
             {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                NpgsqlCommandBuilder builder;
-
-
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
-                string sql_str = "update main_category_m set invalid = 1 where main_category_code = " + mainCode + "";
-                conn.Open();
-
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                builder = new NpgsqlCommandBuilder(adapter);
-                adapter.Fill(dt);
-                adapter.Update(dt);
-                MessageBox.Show("無効完了");
-
-                //履歴
-                DateTime dat = DateTime.Now;
-
-                //無効履歴
-                string sql_mCategoryRevisions = "insert into main_category_m_invalid_revisions values(" + mainCode + ",'" + dat + "'," + staff_code + ")";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql_mCategoryRevisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-                reader.Close();
-
-                conn.Close();
-
-
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
-                this.Close();
-                mainCategory.Show();
+                MessageBox.Show("大分類マスタ一覧に戻ります", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
             }
-            else { }
+            //大分類名・理由入力済みかつYes
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+
+            using (transaction = conn.BeginTransaction())
+            {
+                string sql_str = "update main_category_m set invalid = 1 where main_category_code = " + mainCode + ";";
+                cmd = new NpgsqlCommand(sql_str, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            
+            //無効履歴
+            DateTime dat = DateTime.Now;
+            reason = reasonText.Text;
+            using (transaction = conn.BeginTransaction())
+            {
+                string sql_mCategoryRevisions = "insert into main_category_m_invalid_revisions values(" + mainCode + ",'" + dat + "'," + staff_code + ", '" + reason + "');";
+                cmd = new NpgsqlCommand(sql_mCategoryRevisions, conn);
+                reader = cmd.ExecuteReader();
+            }
+            MessageBox.Show("選択された大分類名を無効にしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
+            
+            conn.Close();
+            this.Close();
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("更新をしますか？", "確認", MessageBoxButtons.YesNo);
             if (string.IsNullOrEmpty(mainCategoryNameTextBox.Text))
             {
-                MessageBox.Show("大分類名が入力されておりません。", "入力エラー", MessageBoxButtons.OK);
-
+                MessageBox.Show("大分類名が入力されておりません。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            if (result == DialogResult.Yes && !string.IsNullOrEmpty(mainCategoryNameTextBox.Text)) 
+            if (mainName == mainCategoryNameTextBox.Text)
             {
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                NpgsqlDataAdapter adapter2;
-                NpgsqlCommandBuilder builder;
-                DataTable dt = new DataTable();
+                MessageBox.Show("大分類名が変更されておりません。", "変更エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            if (string.IsNullOrEmpty(reasonText.Text))
+            {
+                MessageBox.Show("選択した大分類名を変更する理由を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            //大分類名・理由入力済み
+            DialogResult result = MessageBox.Show("更新をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                string mainName = mainCategoryNameTextBox.Text;
-                string reason = reasonText.Text;
+            if (result == DialogResult.Yes ) 
+            {
+                mainName = mainCategoryNameTextBox.Text;
+                reason = reasonText.Text;
 
                 conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
@@ -136,23 +151,25 @@ namespace Flawless_ex
                 adapter.Update(dt);
                 adapter2.Fill(dt);
                 adapter2.Update(dt);
-                MessageBox.Show("更新完了");
+                MessageBox.Show("大分類名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
 
                 //履歴
                 DateTime dat = DateTime.Now;
                 //大分類履歴
-                string sql_mCategroy_name_revisions = "insert into main_category_m_name_revisions values(" + mainCode + ", '" + mName + "','" + mainName + "','" + dat + "'," + staff_code + ")";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql_mCategroy_name_revisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
+                string sql_mCategroy_name_revisions = "insert into main_category_m_name_revisions values(" + mainCode + ", '" + mName + "','" + mainName + "','" + dat + "'," + staff_code + ", '" + reason + "');";
+                cmd = new NpgsqlCommand(sql_mCategroy_name_revisions, conn);
+                reader = cmd.ExecuteReader();
+                reader.Close();
 
                 conn.Close();
-
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
                 this.Close();
-                mainCategory.Show();
             }
-            else { }
+        }
 
+        private void UpdateMainCategoryMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
+            mainCategory.Show();
         }
     }
 }
