@@ -34,11 +34,12 @@ namespace Flawless_ex
         int AntiqueNumber ;
         int ID_Number ;
         string Pass;
-        int control;
-        string search1;
-        string search2;
-        string search3;
+        int Control;
         string Data;
+        string Search1;
+        string Search2;
+        string Search3;
+
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
         #region"各行の単価（フォーマット未処理）"
@@ -110,7 +111,7 @@ namespace Flawless_ex
         string CName;                       //会社名（法人）
         string CShop;                       //店舗名（法人）
         string CStaff;                      //担当者名（法人）
-        string Name;                        //名前（個人）
+        string name;                        //名前（個人）
         string Address;                     //住所（個人）
         string Registration;                //登録日
         int GradeNumber;                    //成績番号
@@ -1352,15 +1353,12 @@ namespace Flawless_ex
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total,SlipNumber, control, Data, search1, search2, search3, Pass);
-
             this.Close();
-            statement.Show();
         }
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, SlipNumber, control, Data, search1, search2, search3, Pass);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
             statement.Show();
         }
 
@@ -4402,12 +4400,12 @@ namespace Flawless_ex
             }
             else if (type == 1)
             {
-                Name = NameOrCompanyNameTextBox.Text;
+                name = NameOrCompanyNameTextBox.Text;
                 Occupation = OccupationOrShopNameTextBox.Text;
                 Address = AddressOrClientStaffNameTextBox.Text;
                 BirthDay = BirthdayTextBox.Text;
 
-                sql_str = "Insert into list_result(name, address, occupation, birthday, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit, control_number) values ('" + Name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "','" + ControlNumber + "');";
+                sql_str = "Insert into list_result(name, address, occupation, birthday, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit, control_number) values ('" + name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "','" + ControlNumber + "');";
             }
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(DataTable);
@@ -6055,14 +6053,14 @@ namespace Flawless_ex
 
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
-            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass);
+            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade);
             this.Hide();
             clientInformation.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass);
+            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade);
             this.Hide();
             monResult.Show();
         }

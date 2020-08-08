@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 namespace Flawless_ex
 {
@@ -19,27 +20,20 @@ namespace Flawless_ex
         string search2;
         string search3;
         string Pass;
+        int grade;
+
+        NpgsqlConnection conn;
+        NpgsqlCommand cmd;
+        NpgsqlDataReader reader;
+
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
             InitializeComponent();
 
             this.access_auth = access_auth;
             staff_id = id;
-            NpgsqlConnection conn = new NpgsqlConnection();
-            NpgsqlCommand cmd;
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
-            string sql_str2 = "select* from staff_m where staff_code = " + id + " and password = '" + pass + "'";
-            cmd = new NpgsqlCommand(sql_str2, conn);
-            conn.Open();
-
-            NpgsqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                label1.Text = (string.Format("{0}:{1}", reader["staff_code"].ToString(), reader["staff_name"]));
-                break;
-            }
-            conn.Close();
+            this.Pass = pass;
+            
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -49,21 +43,36 @@ namespace Flawless_ex
 
         private void MasterMainte_Click(object sender, EventArgs e)//権限によって
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id, access_auth);
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id, access_auth, Pass);
 
             this.Hide();
             masterMenu.Show();
-
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            
+            conn = new NpgsqlConnection();
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+            string sql_str2 = "select* from staff_m where staff_code = " + staff_id + " and password = '" + Pass + "'";
+            cmd = new NpgsqlCommand(sql_str2, conn);
+            conn.Open();
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    label1.Text = (string.Format("{0}:{1}", reader["staff_code"].ToString(), reader["staff_name"]));
+                }
+            }
+            conn.Close();
+
+            //this.Size = new Size(500, 800);
+
         }
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, slipNumber, control, data, search1, search2, search3, Pass);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3);
 
             this.Hide();
             statement.Show();
@@ -99,7 +108,7 @@ namespace Flawless_ex
         #region "月間成績表一覧"
         private void MonResults_Click(object sender, EventArgs e)
         {
-            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass);
+            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade);
 
             this.Hide();
             monresult.Show();
@@ -114,5 +123,10 @@ namespace Flawless_ex
             nextmonth.Show();
         }
         #endregion
+
+        private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -13,14 +13,18 @@ namespace Flawless_ex
         string mainName; //大分類名
         int staff_code;//ログイン者の担当者コード
         string mName;
+        string Access_auth;
+        string Pass;
 
-        public UpdateMainCategoryMenu(MasterMaintenanceMenu master, int code, int staff_code)
+        public UpdateMainCategoryMenu(MasterMaintenanceMenu master, int code, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
 
             this.master = master;
             this.mainCode = code;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void UpdateMainCategoryMenu_Load(object sender, EventArgs e)
@@ -29,7 +33,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from main_category_m where main_category_code = " + mainCode + "";
 
@@ -51,7 +55,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            MainCategoryMaster master = new MainCategoryMaster(this.master, staff_code);
+            MainCategoryMaster master = new MainCategoryMaster(this.master, staff_code, Access_auth, Pass);
 
             this.Close();
             master.Show();
@@ -68,7 +72,7 @@ namespace Flawless_ex
                 NpgsqlCommandBuilder builder;
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "update main_category_m set invalid = 1 where main_category_code = " + mainCode + "";
                 conn.Open();
@@ -86,11 +90,12 @@ namespace Flawless_ex
                 string sql_mCategoryRevisions = "insert into main_category_m_invalid_revisions values(" + mainCode + ",'" + dat + "'," + staff_code + ")";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_mCategoryRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
+                reader.Close();
 
                 conn.Close();
 
 
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
+                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
                 this.Close();
                 mainCategory.Show();
             }
@@ -118,7 +123,7 @@ namespace Flawless_ex
                 string mainName = mainCategoryNameTextBox.Text;
                 string reason = reasonText.Text;
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string sql_str = "update main_category_m set main_category_name = '" + mainName + "' where main_category_code = " + mainCode + ";";
@@ -142,7 +147,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
+                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
                 this.Close();
                 mainCategory.Show();
             }

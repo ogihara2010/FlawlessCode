@@ -11,13 +11,18 @@ namespace Flawless_ex
         MasterMaintenanceMenu master;
         DataTable dt;
         int staff_code;
-        public AddMainCategoryMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code)
+        string Access_auth;
+        string Pass;
+
+        public AddMainCategoryMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
 
             this.master = master;
             this.dt = dt;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void AddMainCategoryMenu_Load(object sender, EventArgs e)
@@ -43,7 +48,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
+            MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
             this.Close();
             mainCategory.Show();
         }
@@ -81,7 +86,7 @@ namespace Flawless_ex
 
                 MessageBox.Show("登録完了");
 
-                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code);
+                MainCategoryMaster mainCategory = new MainCategoryMaster(master, staff_code, Access_auth, Pass);
                 this.Close();
                 mainCategory.Show();
             }

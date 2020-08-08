@@ -19,7 +19,9 @@ namespace Flawless_ex
         int type = 0;
         string path;
         decimal total;
-        int Grade;
+        int Grade; 
+        int AntiqueNumber;
+        int ID_Number;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -125,9 +127,7 @@ namespace Flawless_ex
         string search1;
         string search2;
         string search3;
-        string Pass;
-        int ID;
-        int antique;
+        string pass;
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -206,7 +206,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string document, int control, string data, string search1, string search2, string search3, string Pass)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3)
         {
             InitializeComponent();
             staff_id = id;
@@ -222,7 +222,7 @@ namespace Flawless_ex
             this.search1 = search1;
             this.search2 = search2;
             this.search3 = search3;
-            this.Pass = Pass;
+            this.pass = Pass;
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -466,7 +466,7 @@ namespace Flawless_ex
                 this.button2.Enabled = false;
             }
             #endregion
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                 //伝票番号・管理番号取得
@@ -1008,7 +1008,7 @@ namespace Flawless_ex
                     #region "枠外"
                     this.subTotal.Text = row1["sub_total"].ToString();
                     subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
-                    int sum = int.Parse(row1["total"].ToString());
+                    int sum = (int)row1["total"];
                     this.sumTextBox.Text = row1["total"].ToString();
                     sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
                     this.taxAmount.Text = row1["tax_amount"].ToString();
@@ -4536,8 +4536,8 @@ namespace Flawless_ex
             string DeliveryMethod = deliveryComboBox.Text;
             string PaymentMethod = paymentMethodsComboBox.Text;
             int TYPE = 0;
-            int AntiqueNumber = 0;
-            int ID_Number = 0;
+            AntiqueNumber = 0;
+            ID_Number = 0;
             string CompanyName = "";
             string ShopName = "";
             string StaffName = "";
@@ -10516,7 +10516,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, antique, ID, access_auth, Pass);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass);
 
             this.Hide();
             recordList.Show();
@@ -10533,7 +10533,7 @@ namespace Flawless_ex
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, Pass);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass);
             this.Close();
             mainMenu.Hide();
             dataSearchResults.Show();
@@ -10541,7 +10541,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, Pass);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass) ;
             this.Close();
             mainMenu.Hide();
             dataSearchResults.Show();

@@ -22,7 +22,7 @@ namespace Flawless_ex
         string search1;
         string search2;
         string search3;
-        string Pass;
+        string pass;
         public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, decimal Total)
         {
             InitializeComponent();
@@ -117,7 +117,7 @@ namespace Flawless_ex
                 conn.Close();
 
                 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3, Pass);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
@@ -136,7 +136,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, document, control, data, search1, search2, search3, Pass);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
