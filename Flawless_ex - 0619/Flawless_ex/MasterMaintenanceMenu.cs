@@ -6,8 +6,10 @@ namespace Flawless_ex
     public partial class MasterMaintenanceMenu : Form //マスタメンテナンスメニュー(A権限者)
     {
         MainMenu mainMenu;
+        TopMenu topMenu;
         int staff_code;
         string access_auth;
+        string pass;
         public MasterMaintenanceMenu(MainMenu mainMenu, int staff_code, string access_auth)
         {
             InitializeComponent();
@@ -32,6 +34,7 @@ namespace Flawless_ex
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
+            MainMenu mainMenu = new MainMenu(topMenu, staff_code, pass, access_auth);
             this.Close();
             mainMenu.Show();
         }
@@ -42,14 +45,14 @@ namespace Flawless_ex
         private void staffMasterButtonClick(object sender, EventArgs e)
         {
             StaffMaster personMaster = new StaffMaster(this, staff_code);
-            this.Hide();
+            this.Close();
             personMaster.Show();
         }
 
         private void clientMasterButton_Click(object sender, EventArgs e)
         {
             ClientMaster clientMaster = new ClientMaster(this, staff_code, access_auth);
-            this.Hide();
+            this.Close();
             clientMaster.Show();
         }
 

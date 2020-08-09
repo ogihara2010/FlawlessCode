@@ -94,7 +94,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster_search";
             this.Text = "顧客マスタメンテナンス検索";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_search_FormClosed);
+            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_search_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_search_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

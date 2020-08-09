@@ -312,11 +312,16 @@ namespace Flawless_ex
             conn.Close();
         }
 
-        private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
+        /*private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
             StaffMaster staffMaster = new StaffMaster(master, code);
-
             staffMaster.Show();
-        }
+        }*/
+
+        /*private void StaffUpdateMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StaffMaster staffMaster = new StaffMaster(master, code);
+            staffMaster.Show();
+        }*/
     }
 }

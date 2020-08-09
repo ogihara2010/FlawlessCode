@@ -156,16 +156,14 @@ namespace Flawless_ex
         /*private void StaffAddStaff_FormClosing(object sender, FormClosingEventArgs e)
         {
             StaffMaster staffMaster = new StaffMaster(master, staff_code);
-
-            this.Close();
             staffMaster.Show();
         }*/
 
-        private void StaffAddStaff_FormClosed(object sender, FormClosedEventArgs e)
+        /*private void StaffAddStaff_FormClosed(object sender, FormClosedEventArgs e)
         {
-            StaffMaster staffMaster = new StaffMaster(master, staff_code);
 
+            StaffMaster staffMaster = new StaffMaster(master, staff_code);
             staffMaster.Show();
-        }
+        }*/
     }
 }

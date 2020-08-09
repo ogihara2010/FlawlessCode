@@ -384,7 +384,8 @@
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "StaffUpdateMenu";
             this.Text = "担当者マスタメンテナンス　更新";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffUpdateMenu_FormClosed);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StaffUpdateMenu_FormClosing);
+            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffUpdateMenu_FormClosed);
             this.Load += new System.EventHandler(this.UpdateMenu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

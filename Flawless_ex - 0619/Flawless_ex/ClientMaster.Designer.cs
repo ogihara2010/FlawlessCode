@@ -669,7 +669,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster";
             this.Text = "顧客マスタメンテナンス";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_FormClosed);
+            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

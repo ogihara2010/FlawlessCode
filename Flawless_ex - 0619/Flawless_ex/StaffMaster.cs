@@ -7,8 +7,10 @@ namespace Flawless_ex
     public partial class StaffMaster : Form　//担当者マスタメンテナンスメニュー
     {
         MasterMaintenanceMenu masterMenu;
+        MainMenu mainMenu;
         DataTable dt = new DataTable();
         int staff_code;
+        string access_auth;
         public StaffMaster(MasterMaintenanceMenu mster, int staff_code)
         {
             InitializeComponent();
@@ -19,6 +21,7 @@ namespace Flawless_ex
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
             this.Close();
             masterMenu.Show();
         }
@@ -64,10 +67,17 @@ namespace Flawless_ex
             addStaff.Show();
         }
 
-        private void StaffMaster_FormClosed(object sender, FormClosedEventArgs e)
+        /*private void StaffMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
             masterMenu.Show();
-        }
+        }*/
+
+        /*private void StaffMaster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+            masterMenu.Show();
+        }*/
     }
 }
 
