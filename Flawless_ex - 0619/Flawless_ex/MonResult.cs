@@ -19,10 +19,11 @@ namespace Flawless_ex
         string access_auth;
         int a = 0; // クリック数 
         int Grade;
-        int antique;
-        int ID;
+        int Antique;
+        int Id;
         string Pass;
-        public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string Pass)
+
+        public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade)
         {
             InitializeComponent();
             staff_id = id;
@@ -31,7 +32,8 @@ namespace Flawless_ex
             this.staff_name = staff_name;
             this.type = type;
             this.slipNumber = slipNumber;
-            this.Pass = Pass;
+            this.Pass = pass;
+            this.Grade = grade;
         }
 
         private void Return3_Click(object sender, EventArgs e)//戻るボタン
@@ -189,7 +191,7 @@ namespace Flawless_ex
         #region "成績入力画面へ"
         private void Button2_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, antique, ID, access_auth, Pass);
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass);
             this.Close();
             recordList.Show();
         }

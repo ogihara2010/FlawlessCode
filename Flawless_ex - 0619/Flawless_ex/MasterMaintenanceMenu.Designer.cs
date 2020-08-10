@@ -38,20 +38,22 @@
             // CloseButton
             // 
             this.CloseButton.AutoSize = true;
-            this.CloseButton.Location = new System.Drawing.Point(28, 545);
+            this.CloseButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.CloseButton.Location = new System.Drawing.Point(28, 880);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(115, 57);
+            this.CloseButton.Size = new System.Drawing.Size(321, 129);
             this.CloseButton.TabIndex = 0;
-            this.CloseButton.Text = "閉じる";
+            this.CloseButton.Text = "メインメニュー";
             this.CloseButton.UseVisualStyleBackColor = true;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // staffMasterButton
             // 
             this.staffMasterButton.AutoSize = true;
-            this.staffMasterButton.Location = new System.Drawing.Point(28, 48);
+            this.staffMasterButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.staffMasterButton.Location = new System.Drawing.Point(28, 50);
             this.staffMasterButton.Name = "staffMasterButton";
-            this.staffMasterButton.Size = new System.Drawing.Size(448, 49);
+            this.staffMasterButton.Size = new System.Drawing.Size(850, 136);
             this.staffMasterButton.TabIndex = 1;
             this.staffMasterButton.Text = "担当者マスタ";
             this.staffMasterButton.UseVisualStyleBackColor = true;
@@ -60,9 +62,10 @@
             // clientMasterButton
             // 
             this.clientMasterButton.AutoSize = true;
-            this.clientMasterButton.Location = new System.Drawing.Point(28, 125);
+            this.clientMasterButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.clientMasterButton.Location = new System.Drawing.Point(28, 224);
             this.clientMasterButton.Name = "clientMasterButton";
-            this.clientMasterButton.Size = new System.Drawing.Size(448, 49);
+            this.clientMasterButton.Size = new System.Drawing.Size(850, 162);
             this.clientMasterButton.TabIndex = 2;
             this.clientMasterButton.Text = "顧客マスタ";
             this.clientMasterButton.UseVisualStyleBackColor = true;
@@ -71,9 +74,10 @@
             // itemMasterButton
             // 
             this.itemMasterButton.AutoSize = true;
-            this.itemMasterButton.Location = new System.Drawing.Point(28, 204);
+            this.itemMasterButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.itemMasterButton.Location = new System.Drawing.Point(28, 430);
             this.itemMasterButton.Name = "itemMasterButton";
-            this.itemMasterButton.Size = new System.Drawing.Size(448, 49);
+            this.itemMasterButton.Size = new System.Drawing.Size(850, 168);
             this.itemMasterButton.TabIndex = 3;
             this.itemMasterButton.Text = "品名マスタ";
             this.itemMasterButton.UseVisualStyleBackColor = true;
@@ -81,9 +85,10 @@
             // 
             // TaxMaster
             // 
-            this.TaxMaster.Location = new System.Drawing.Point(28, 288);
+            this.TaxMaster.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.TaxMaster.Location = new System.Drawing.Point(28, 648);
             this.TaxMaster.Name = "TaxMaster";
-            this.TaxMaster.Size = new System.Drawing.Size(448, 52);
+            this.TaxMaster.Size = new System.Drawing.Size(850, 167);
             this.TaxMaster.TabIndex = 6;
             this.TaxMaster.Text = "消費税マスタ";
             this.TaxMaster.UseVisualStyleBackColor = true;
@@ -93,14 +98,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 636);
+            this.ClientSize = new System.Drawing.Size(905, 1050);
             this.Controls.Add(this.TaxMaster);
             this.Controls.Add(this.itemMasterButton);
             this.Controls.Add(this.clientMasterButton);
             this.Controls.Add(this.staffMasterButton);
             this.Controls.Add(this.CloseButton);
             this.Name = "MasterMaintenanceMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "マスタメンテナンスメニュー";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MasterMaintenanceMenu_FormClosed);
             this.Load += new System.EventHandler(this.MasterMaintenanceMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

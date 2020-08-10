@@ -11,33 +11,39 @@ namespace Flawless_ex
         DataTable maindt = new DataTable();//大分類
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlDataAdapter adapter;
+        NpgsqlTransaction transaction;
+        NpgsqlDataReader reader;
+        NpgsqlCommand cmd;
+
         int code;//品名コード
         int staff_code;//ログイン者のコード
+        string Access_auth;
+        string Pass;
+        string ItemName;
 
-        public ProductAddMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code)
+        public ProductAddMenu(DataTable dt, MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
 
             this.master = master;
             this.dt = dt;
             this.staff_code = staff_code;
+            this.Access_auth = access_auth;
+            this.Pass = pass;
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            ItemMaster product = new ItemMaster(master, staff_code);
-
             this.Close();
-            product.Show();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes && string.IsNullOrEmpty(productNameTextBox.Text))
             {
-                MessageBox.Show("品名が未入力です。", "品名エラー", MessageBoxButtons.OK);
+                MessageBox.Show("品名が未入力です。", "品名エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             if (result == DialogResult.Yes && !(string.IsNullOrEmpty(productNameTextBox.Text)))
@@ -48,10 +54,30 @@ namespace Flawless_ex
                 int mainCode = (int)mainCategoryComboBox.SelectedValue;
                 DateTime dat = DateTime.Now;
 
-                string sql_str = "insert into item_m values(" + mainCode + ", '" + productName + "', " + code + ", '" + dat + "', " + 0 + ",'" + staff_code + "')";
-
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
+
+                using (transaction = conn.BeginTransaction())
+                {
+                    string SQL = "select * from item_m;";
+                    cmd = new NpgsqlCommand(SQL, conn);
+                    using (reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ItemName = reader["item_name"].ToString();
+                            if (ItemName == productName)
+                            {
+                                MessageBox.Show("既に登録されている品名です", "登録エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                conn.Close();
+                                productNameTextBox.Text = "";
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                string sql_str = "insert into item_m values(" + mainCode + ", '" + productName + "', " + code + ", '" + dat + "', " + 0 + ",'" + staff_code + "')";
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
@@ -60,24 +86,16 @@ namespace Flawless_ex
                 adapter.Update(dt);
 
                 MessageBox.Show("登録完了");
-/*
-                //履歴
-                string sql_item_m_revisions = "insert into item_m_revisions values(" + code + ", '" + dat + "', " + staff_code + ")";
-                NpgsqlCommand cmd = new NpgsqlCommand(sql_item_m_revisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
-*/
-                conn.Close();
 
-                ItemMaster product = new ItemMaster(master, staff_code);
+                conn.Close();
                 this.Close();
-                product.Show();
             }
         }
 
         private void ProductAddMenu_Load(object sender, EventArgs e)
         {
             string sql_main_name = "select* from main_category_m where invalid = 0 order by main_category_code";
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             conn.Open();
 
@@ -104,7 +122,12 @@ namespace Flawless_ex
             code = (int)row["item_code"];
             code++;
             itemCodeTextBox.Text = code.ToString();
+        }
 
+        private void ProductAddMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ItemMaster product = new ItemMaster(master, staff_code, Access_auth, Pass);
+            product.Show();
         }
     }
 }

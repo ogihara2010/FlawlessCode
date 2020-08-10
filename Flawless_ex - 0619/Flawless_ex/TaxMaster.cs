@@ -16,43 +16,44 @@ namespace Flawless_ex
         int staff_code;
         string Access_auth;
         MainMenu mainMenu;
+        int Tax;
+        bool figure = false;
+        string Pass;
 
-        public TaxMaster(MasterMaintenanceMenu master, int staff_code, string access_auth)
+        public TaxMaster(MasterMaintenanceMenu master, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
             this.Access_auth = access_auth;
+            this.Pass = pass;
         }
         private void back_Click(object sender, EventArgs e)
         {
-            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth);
             this.Close();
-            master.Show();
         }
 
         private void update_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("税率を更新しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)     //無記入と小数点に対応
+            DialogResult result = MessageBox.Show("税率を変更しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
             {
-                int letter = 0;
-                int.TryParse(taxPercent.Text.ToString(), out letter);
+                MessageBox.Show("マスタメインメニューに戻ります", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                this.Close();
+            }
 
+           if (result == DialogResult.Yes)     //無記入、未変更に対応
+            {
                 if (string.IsNullOrEmpty(taxPercent.Text))
                 {
-                    this.Close();
                     MessageBox.Show("税率が未入力です", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    taxPercent.Text = Tax.ToString();
+                    return;
                 }
-                else if (taxPercent.Text.IndexOf(".") > 0)
+
+                if (int.Parse(taxPercent.Text) == Tax)
                 {
-                    this.Close();
-                    MessageBox.Show("小数は入力できません", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                } else if (letter == 0) 
-                {
-                    this.Close();
-                    MessageBox.Show("半角の数値のみ入力できます。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("税率が変更されておりません", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
@@ -61,24 +62,22 @@ namespace Flawless_ex
 
                     dt = new DataTable();
                     NpgsqlConnection db = new NpgsqlConnection();
-                    string sql_str = "insert into vat_m (vat_rate, upd_date, upd_name) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "'," + staff_code + ")";
+                    string sql_str = "insert into vat_m (vat_rate, upd_date, upd_name) values (" + tax + ",'" + time.ToString("yyyy/MM/dd") + "'," + staff_code + ");";
 
                     db.ConnectionString = @"Server= 192.168.152.157;Port = 5432;User Id = postgres;Password = postgres;Database = master;";
                     db.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, db);
                     builder = new NpgsqlCommandBuilder(adapter);
-                    
+
                     adapter.Fill(dt);
                     adapter.Update(dt);
-                    
-                    db.Close();
 
+                    db.Close();
+                    MessageBox.Show("税率を変更しました。", "変更確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     this.Close();
-                    MessageBox.Show("更新しました。");
                 }
             }
-            master.Show();
         }
 
         private void TaxMaster_Load(object sender, EventArgs e)
@@ -90,34 +89,39 @@ namespace Flawless_ex
             db.Open();
 
             cmd = new NpgsqlCommand("SELECT vat_rate FROM vat_m", db);
-            try
+            using (reader = cmd.ExecuteReader())
             {
-                using (reader = cmd.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        taxPercent.Text = reader["vat_rate"].ToString();
-                    }
+                    Tax = (int)reader["vat_rate"];
+                    taxPercent.Text = Tax.ToString();
                 }
-            }catch(Exception err)
-            {
-                MessageBox.Show(err.ToString());
             }
             db.Close();
         }
 
         private void taxPercent_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar)) 
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
             {
                 MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                figure = true;
             }
         }
 
         private void TaxMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth);
+            master = new MasterMaintenanceMenu(mainMenu, staff_code, Access_auth, Pass);
             master.Show();
+        }
+
+        private void taxPercent_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (figure)
+            {
+                taxPercent.Text = Tax.ToString();
+                figure = false;
+            }   
         }
     }
 }

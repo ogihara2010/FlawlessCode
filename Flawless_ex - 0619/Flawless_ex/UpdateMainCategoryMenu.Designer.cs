@@ -30,82 +30,73 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.mainCategoryCodeTextBox = new System.Windows.Forms.TextBox();
             this.mainCategoryNameTextBox = new System.Windows.Forms.TextBox();
             this.returnButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.reasonText = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 30);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(2, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 24);
+            this.label1.Size = new System.Drawing.Size(420, 133);
             this.label1.TabIndex = 0;
             this.label1.Text = "大分類コード";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 86);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(2, 133);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 24);
+            this.label2.Size = new System.Drawing.Size(420, 133);
             this.label2.TabIndex = 1;
             this.label2.Text = "大分類名";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(154, 30);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(22, 24);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "：";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(154, 86);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 24);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "：";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // mainCategoryCodeTextBox
             // 
-            this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(182, 28);
+            this.mainCategoryCodeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainCategoryCodeTextBox.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.mainCategoryCodeTextBox.Location = new System.Drawing.Point(426, 4);
             this.mainCategoryCodeTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.mainCategoryCodeTextBox.Name = "mainCategoryCodeTextBox";
             this.mainCategoryCodeTextBox.ReadOnly = true;
-            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(121, 31);
+            this.mainCategoryCodeTextBox.Size = new System.Drawing.Size(987, 79);
             this.mainCategoryCodeTextBox.TabIndex = 4;
+            this.mainCategoryCodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // mainCategoryNameTextBox
             // 
-            this.mainCategoryNameTextBox.Location = new System.Drawing.Point(182, 84);
+            this.mainCategoryNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainCategoryNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.mainCategoryNameTextBox.Location = new System.Drawing.Point(426, 137);
             this.mainCategoryNameTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.mainCategoryNameTextBox.Name = "mainCategoryNameTextBox";
-            this.mainCategoryNameTextBox.Size = new System.Drawing.Size(197, 31);
+            this.mainCategoryNameTextBox.Size = new System.Drawing.Size(987, 79);
             this.mainCategoryNameTextBox.TabIndex = 5;
             // 
             // returnButton
             // 
             this.returnButton.AutoSize = true;
-            this.returnButton.Location = new System.Drawing.Point(17, 203);
+            this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.returnButton.Location = new System.Drawing.Point(102, 496);
             this.returnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(156, 74);
+            this.returnButton.Size = new System.Drawing.Size(307, 190);
             this.returnButton.TabIndex = 6;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -114,10 +105,11 @@
             // removeButton
             // 
             this.removeButton.AutoSize = true;
-            this.removeButton.Location = new System.Drawing.Point(212, 203);
+            this.removeButton.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.removeButton.Location = new System.Drawing.Point(591, 496);
             this.removeButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(167, 74);
+            this.removeButton.Size = new System.Drawing.Size(335, 190);
             this.removeButton.TabIndex = 7;
             this.removeButton.Text = "無効";
             this.removeButton.UseVisualStyleBackColor = true;
@@ -126,61 +118,75 @@
             // updateButton
             // 
             this.updateButton.AutoSize = true;
-            this.updateButton.Location = new System.Drawing.Point(398, 203);
+            this.updateButton.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.updateButton.Location = new System.Drawing.Point(1118, 496);
             this.updateButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(167, 74);
+            this.updateButton.Size = new System.Drawing.Size(328, 190);
             this.updateButton.TabIndex = 8;
-            this.updateButton.Text = "更新";
+            this.updateButton.Text = "変更";
             this.updateButton.UseVisualStyleBackColor = true;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 137);
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(3, 266);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 24);
+            this.label5.Size = new System.Drawing.Size(418, 135);
             this.label5.TabIndex = 9;
             this.label5.Text = "変更理由";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(154, 137);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(22, 24);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "：";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // reasonText
             // 
-            this.reasonText.Location = new System.Drawing.Point(182, 134);
+            this.reasonText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reasonText.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.reasonText.Location = new System.Drawing.Point(427, 269);
             this.reasonText.Name = "reasonText";
-            this.reasonText.Size = new System.Drawing.Size(324, 31);
+            this.reasonText.Size = new System.Drawing.Size(985, 79);
             this.reasonText.TabIndex = 11;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.PaleGreen;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.reasonText, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryNameTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.mainCategoryCodeTextBox, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(68, 34);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1415, 401);
+            this.tableLayoutPanel1.TabIndex = 12;
             // 
             // UpdateMainCategoryMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 309);
-            this.Controls.Add(this.reasonText);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
+            this.BackColor = System.Drawing.Color.LightCyan;
+            this.ClientSize = new System.Drawing.Size(1554, 719);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.returnButton);
-            this.Controls.Add(this.mainCategoryNameTextBox);
-            this.Controls.Add(this.mainCategoryCodeTextBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "UpdateMainCategoryMenu";
             this.Text = "大分類マスタメンテナンス　更新";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.UpdateMainCategoryMenu_FormClosed);
             this.Load += new System.EventHandler(this.UpdateMainCategoryMenu_Load);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,15 +196,13 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox mainCategoryCodeTextBox;
         private System.Windows.Forms.TextBox mainCategoryNameTextBox;
         private System.Windows.Forms.Button returnButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox reasonText;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

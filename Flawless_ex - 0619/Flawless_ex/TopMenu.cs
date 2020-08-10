@@ -108,5 +108,10 @@ namespace Flawless_ex
                 MessageBox.Show("担当者コード、パスワードを入力してください");
             }
         }
+
+        private void TopMenu_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
