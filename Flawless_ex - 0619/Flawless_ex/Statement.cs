@@ -128,6 +128,166 @@ namespace Flawless_ex
         string search2;
         string search3;
         string pass;
+
+        #region"コメントアウト"
+        /*
+        #region"単価が数値じゃないとき"
+        #region"計算書"
+        bool NotUnit0;
+        bool NotUnit1;
+        bool NotUnit2;
+        bool NotUnit3;
+        bool NotUnit4;
+        bool NotUnit5;
+        bool NotUnit6;
+        bool NotUnit7;
+        bool NotUnit8;
+        bool NotUnit9;
+        bool NotUnit10;
+        bool NotUnit11;
+        bool NotUnit12;
+        #endregion
+        #region"納品書"
+        bool NotUnit00;
+        bool NotUnit01;
+        bool NotUnit02;
+        bool NotUnit03;
+        bool NotUnit04;
+        bool NotUnit05;
+        bool NotUnit06;
+        bool NotUnit07;
+        bool NotUnit08;
+        bool NotUnit09;
+        bool NotUnit010;
+        bool NotUnit011;
+        bool NotUnit012;
+        #endregion
+        #endregion
+        */
+        #endregion
+        
+        #region"数値のフォーマット未処理"
+        #region"計算書　単価"
+        decimal UnitUnformat0;
+        decimal UnitUnformat1;
+        decimal UnitUnformat2;
+        decimal UnitUnformat3;
+        decimal UnitUnformat4;
+        decimal UnitUnformat5;
+        decimal UnitUnformat6;
+        decimal UnitUnformat7;
+        decimal UnitUnformat8;
+        decimal UnitUnformat9;
+        decimal UnitUnformat10;
+        decimal UnitUnformat11;
+        decimal UnitUnformat12;
+        #endregion
+        #region"計算書　重量"
+        decimal WeightUnformat0;
+        decimal WeightUnformat1;
+        decimal WeightUnformat2;
+        decimal WeightUnformat3;
+        decimal WeightUnformat4;
+        decimal WeightUnformat5;
+        decimal WeightUnformat6;
+        decimal WeightUnformat7;
+        decimal WeightUnformat8;
+        decimal WeightUnformat9;
+        decimal WeightUnformat10;
+        decimal WeightUnformat11;
+        decimal WeightUnformat12;
+        #endregion
+        #region"計算書　数値"
+        decimal CountUnformat0;
+        decimal CountUnformat1;
+        decimal CountUnformat2;
+        decimal CountUnformat3;
+        decimal CountUnformat4;
+        decimal CountUnformat5;
+        decimal CountUnformat6;
+        decimal CountUnformat7;
+        decimal CountUnformat8;
+        decimal CountUnformat9;
+        decimal CountUnformat10;
+        decimal CountUnformat11;
+        decimal CountUnformat12;
+        #endregion
+        #region"計算書　金額"
+        decimal MoneyUnformat0;
+        decimal MoneyUnformat1;
+        decimal MoneyUnformat2;
+        decimal MoneyUnformat3;
+        decimal MoneyUnformat4;
+        decimal MoneyUnformat5;
+        decimal MoneyUnformat6;
+        decimal MoneyUnformat7;
+        decimal MoneyUnformat8;
+        decimal MoneyUnformat9;
+        decimal MoneyUnformat10;
+        decimal MoneyUnformat11;
+        decimal MoneyUnformat12;
+        #endregion
+        #region"納品書　単価"
+        decimal UnitUnformat00;
+        decimal UnitUnformat01;
+        decimal UnitUnformat02;
+        decimal UnitUnformat03;
+        decimal UnitUnformat04;
+        decimal UnitUnformat05;
+        decimal UnitUnformat06;
+        decimal UnitUnformat07;
+        decimal UnitUnformat08;
+        decimal UnitUnformat09;
+        decimal UnitUnformat010;
+        decimal UnitUnformat011;
+        decimal UnitUnformat012;
+        #endregion
+        #region"納品書　重量"
+        decimal WeightUnformat00;
+        decimal WeightUnformat01;
+        decimal WeightUnformat02;
+        decimal WeightUnformat03;
+        decimal WeightUnformat04;
+        decimal WeightUnformat05;
+        decimal WeightUnformat06;
+        decimal WeightUnformat07;
+        decimal WeightUnformat08;
+        decimal WeightUnformat09;
+        decimal WeightUnformat010;
+        decimal WeightUnformat011;
+        decimal WeightUnformat012;
+        #endregion
+        #region"納品書　数値"
+        decimal CountUnformat00;
+        decimal CountUnformat01;
+        decimal CountUnformat02;
+        decimal CountUnformat03;
+        decimal CountUnformat04;
+        decimal CountUnformat05;
+        decimal CountUnformat06;
+        decimal CountUnformat07;
+        decimal CountUnformat08;
+        decimal CountUnformat09;
+        decimal CountUnformat010;
+        decimal CountUnformat011;
+        decimal CountUnformat012;
+        #endregion
+        #region"納品書　金額"
+        decimal MoneyUnformat00;
+        decimal MoneyUnformat01;
+        decimal MoneyUnformat02;
+        decimal MoneyUnformat03;
+        decimal MoneyUnformat04;
+        decimal MoneyUnformat05;
+        decimal MoneyUnformat06;
+        decimal MoneyUnformat07;
+        decimal MoneyUnformat08;
+        decimal MoneyUnformat09;
+        decimal MoneyUnformat010;
+        decimal MoneyUnformat011;
+        decimal MoneyUnformat012;
+        #endregion
+        #endregion
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -205,6 +365,7 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter;
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
+        NpgsqlCommandBuilder builder;
 
         public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3)
         {
@@ -227,6 +388,44 @@ namespace Flawless_ex
 
         private void Statement_Load(object sender, EventArgs e)
         {
+            #region"コメントアウト"
+            /*
+            #region"単価が数値じゃないとき"
+            #region"計算書"
+            NotUnit0 = string.IsNullOrEmpty(unitPriceTextBox0.Text) || unitPriceTextBox0.Text == "単価 -> 重量 or 数量";
+            NotUnit1 = string.IsNullOrEmpty(unitPriceTextBox1.Text) || unitPriceTextBox1.Text == "単価 -> 重量 or 数量";
+            NotUnit2 = string.IsNullOrEmpty(unitPriceTextBox2.Text) || unitPriceTextBox2.Text == "単価 -> 重量 or 数量";
+            NotUnit3 = string.IsNullOrEmpty(unitPriceTextBox3.Text) || unitPriceTextBox3.Text == "単価 -> 重量 or 数量";
+            NotUnit4 = string.IsNullOrEmpty(unitPriceTextBox4.Text) || unitPriceTextBox4.Text == "単価 -> 重量 or 数量";
+            NotUnit5 = string.IsNullOrEmpty(unitPriceTextBox5.Text) || unitPriceTextBox5.Text == "単価 -> 重量 or 数量";
+            NotUnit6 = string.IsNullOrEmpty(unitPriceTextBox6.Text) || unitPriceTextBox6.Text == "単価 -> 重量 or 数量";
+            NotUnit7 = string.IsNullOrEmpty(unitPriceTextBox7.Text) || unitPriceTextBox7.Text == "単価 -> 重量 or 数量";
+            NotUnit8 = string.IsNullOrEmpty(unitPriceTextBox8.Text) || unitPriceTextBox8.Text == "単価 -> 重量 or 数量";
+            NotUnit9 = string.IsNullOrEmpty(unitPriceTextBox9.Text) || unitPriceTextBox9.Text == "単価 -> 重量 or 数量";
+            NotUnit10 = string.IsNullOrEmpty(unitPriceTextBox10.Text) || unitPriceTextBox10.Text == "単価 -> 重量 or 数量";
+            NotUnit11 = string.IsNullOrEmpty(unitPriceTextBox11.Text) || unitPriceTextBox11.Text == "単価 -> 重量 or 数量";
+            NotUnit12 = string.IsNullOrEmpty(unitPriceTextBox12.Text) || unitPriceTextBox12.Text == "単価 -> 重量 or 数量";
+            #endregion
+            #region"納品書"
+            NotUnit00 = string.IsNullOrEmpty(unitPriceTextBox00.Text) || unitPriceTextBox00.Text == "単価 -> 重量 or 数量";
+            NotUnit01 = string.IsNullOrEmpty(unitPriceTextBox01.Text) || unitPriceTextBox01.Text == "単価 -> 重量 or 数量";
+            NotUnit02 = string.IsNullOrEmpty(unitPriceTextBox02.Text) || unitPriceTextBox02.Text == "単価 -> 重量 or 数量";
+            NotUnit03 = string.IsNullOrEmpty(unitPriceTextBox03.Text) || unitPriceTextBox03.Text == "単価 -> 重量 or 数量";
+            NotUnit04 = string.IsNullOrEmpty(unitPriceTextBox04.Text) || unitPriceTextBox04.Text == "単価 -> 重量 or 数量";
+            NotUnit05 = string.IsNullOrEmpty(unitPriceTextBox05.Text) || unitPriceTextBox05.Text == "単価 -> 重量 or 数量";
+            NotUnit06 = string.IsNullOrEmpty(unitPriceTextBox06.Text) || unitPriceTextBox06.Text == "単価 -> 重量 or 数量";
+            NotUnit07 = string.IsNullOrEmpty(unitPriceTextBox07.Text) || unitPriceTextBox07.Text == "単価 -> 重量 or 数量";
+            NotUnit08 = string.IsNullOrEmpty(unitPriceTextBox08.Text) || unitPriceTextBox08.Text == "単価 -> 重量 or 数量";
+            NotUnit09 = string.IsNullOrEmpty(unitPriceTextBox09.Text) || unitPriceTextBox09.Text == "単価 -> 重量 or 数量";
+            NotUnit010 = string.IsNullOrEmpty(unitPriceTextBox010.Text) || unitPriceTextBox010.Text == "単価 -> 重量 or 数量";
+            NotUnit011 = string.IsNullOrEmpty(unitPriceTextBox011.Text) || unitPriceTextBox011.Text == "単価 -> 重量 or 数量";
+            NotUnit012 = string.IsNullOrEmpty(unitPriceTextBox012.Text) || unitPriceTextBox012.Text == "単価 -> 重量 or 数量";
+            #endregion
+            #endregion
+            */
+            #endregion
+
+
             #region "ボタン"
             if (data == "S")
             {
@@ -263,7 +462,6 @@ namespace Flawless_ex
                 #endregion
                 #region "数量"
                 countTextBox0.ReadOnly = true;
-                this.countTextBox0.Enabled = false;
                 countTextBox1.ReadOnly = true;
                 countTextBox2.ReadOnly = true;
                 countTextBox3.ReadOnly = true;
@@ -452,7 +650,6 @@ namespace Flawless_ex
                 this.RemarkRegister.ReadOnly = true;
                 this.typeComboBox.Enabled = false;
                 this.paymentMethodComboBox.Enabled = false;
-                //this.PayeeComboBox.SelectedItem = row1[""].ToString();
                 this.CoinComboBox.Enabled = false;
                 this.comboBox11.Enabled = false;
                 #endregion
@@ -2957,7 +3154,7 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
             #region "1行目の入力値"
-                //単価の欄に初期表示
+            //単価の欄に初期表示
             if ((data == "S" || data == "D") && total == 0)
             {
 
@@ -4407,12 +4604,12 @@ namespace Flawless_ex
                 }
             }
             
-            
             using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
             {
                 this.Hide();
                 search2.ShowDialog();
             }
+            #region"コメントアウト"
             /*
             if (count != 0)
             {
@@ -4449,8 +4646,8 @@ namespace Flawless_ex
                     clientRemarksTextBox.Text = remarks;
                 }
             }*/
+            #endregion
         }
-    
 
         private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
         {
@@ -4505,6 +4702,12 @@ namespace Flawless_ex
         #region"計算書　登録ボタン"
         private void AddButton_Click(object sender, EventArgs e)        //計算書用登録ボタン
         {
+            if ((unitPriceTextBox0.Text == "単価 -> 重量 or 数量") || (unitPriceTextBox0.Text == "") )
+            {
+                MessageBox.Show("計算書に入力されておりません"+"\r\n"+"顧客選択がまだの場合は顧客選択を先にしてください", "登録エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
 
             if (dr == DialogResult.No)
@@ -4535,6 +4738,8 @@ namespace Flawless_ex
             string DeliveryDate = deliveryDateBox.Text;
             string DeliveryMethod = deliveryComboBox.Text;
             string PaymentMethod = paymentMethodsComboBox.Text;
+            DateTime date = DateTime.Now.Date;
+            string Date = date.ToLongDateString();
             int TYPE = 0;
             AntiqueNumber = 0;
             ID_Number = 0;
@@ -4618,14 +4823,16 @@ namespace Flawless_ex
                         {
                             string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
 
                         }
                         else if (typeTextBox.Text == "個人")
                         {
                             string SQL_STR = @"update client_m_individual set aol_financial_shareholder='" + AolFinancialShareholder + "' where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                     }
                 }
@@ -4639,13 +4846,15 @@ namespace Flawless_ex
                         {
                             string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                         else if (typeTextBox.Text == "個人")
                         {
                             string SQL_STR = @"update client_m_individual set tax_certificate='" + TaxCertification + "'  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                     }
                 }
@@ -4659,13 +4868,15 @@ namespace Flawless_ex
                         {
                             string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                         else if (typeTextBox.Text == "個人")
                         {
                             string SQL_STR = @"update client_m_individual set seal_certification='" + SealCertification + "' where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                     }
                 }
@@ -4680,13 +4891,15 @@ namespace Flawless_ex
                         {
                             string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                         else if (typeTextBox.Text == "個人")
                         {
                             string SQL_STR = @"update client_m_individual set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "')  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                     }
                 }
@@ -4701,13 +4914,15 @@ namespace Flawless_ex
                         {
                             string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                         else if (typeTextBox.Text == "個人")
                         {
                             string SQL_STR = @"update client_m_individual set antique_license ='" + AntiqueLicence + "'  where name ='" + companyTextBox.Text + "' and birthday ='" + shopNameTextBox.Text + "' and occupation ='" + clientNameTextBox.Text + "' and registration_date='" + registerDateTextBox.Text + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteReader();
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
                         }
                     }
                 }
@@ -4715,9 +4930,8 @@ namespace Flawless_ex
             }
             #endregion
 
-            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "');";
+            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address, assessment_date) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "','" + Date + "');";
 
-            conn.Close();
 
             int record = 1;     //行数
             int mainCategory = mainCategoryCode0;
@@ -4962,7 +5176,7 @@ namespace Flawless_ex
 
         #region"計算書・納品書　計算処理"
 
-        #region　"計算書　単価を入力したら重量、数値入力可"
+        #region　"計算書　単価を入力したら重量、数値入力可　TextChangedイベント"
         private void unitPriceTextBox0_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(unitPriceTextBox0.Text))
@@ -4971,7 +5185,7 @@ namespace Flawless_ex
                 countTextBox0.ReadOnly = true;
                 unitPriceTextBox1.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox0.Text) && !(unitPriceTextBox0.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox0.Text) && !(unitPriceTextBox0.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox0.ReadOnly = false;
                 countTextBox0.ReadOnly = false;
@@ -4985,7 +5199,7 @@ namespace Flawless_ex
                 countTextBox1.ReadOnly = true;
                 unitPriceTextBox2.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox1.Text) && !(unitPriceTextBox1.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox1.Text) && !(unitPriceTextBox1.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox1.ReadOnly = false;
                 countTextBox1.ReadOnly = false;
@@ -4999,7 +5213,7 @@ namespace Flawless_ex
                 countTextBox2.ReadOnly = true;
                 unitPriceTextBox3.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox2.Text) && !(unitPriceTextBox2.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox2.Text) && !(unitPriceTextBox2.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox2.ReadOnly = false;
                 countTextBox2.ReadOnly = false;
@@ -5013,7 +5227,7 @@ namespace Flawless_ex
                 countTextBox3.ReadOnly = true;
                 unitPriceTextBox4.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox3.Text) && !(unitPriceTextBox3.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox3.Text) && !(unitPriceTextBox3.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox3.ReadOnly = false;
                 countTextBox3.ReadOnly = false;
@@ -5027,7 +5241,7 @@ namespace Flawless_ex
                 countTextBox4.ReadOnly = true;
                 unitPriceTextBox5.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox4.Text) && !(unitPriceTextBox4.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox4.Text) && !(unitPriceTextBox4.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox4.ReadOnly = false;
                 countTextBox4.ReadOnly = false;
@@ -5041,7 +5255,7 @@ namespace Flawless_ex
                 countTextBox5.ReadOnly = true;
                 unitPriceTextBox6.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox5.Text) && !(unitPriceTextBox5.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox5.Text) && !(unitPriceTextBox5.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox5.ReadOnly = false;
                 countTextBox5.ReadOnly = false;
@@ -5055,7 +5269,7 @@ namespace Flawless_ex
                 countTextBox6.ReadOnly = true;
                 unitPriceTextBox7.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox6.Text) && !(unitPriceTextBox6.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox6.Text) && !(unitPriceTextBox6.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox6.ReadOnly = false;
                 countTextBox6.ReadOnly = false;
@@ -5069,7 +5283,7 @@ namespace Flawless_ex
                 countTextBox7.ReadOnly = true;
                 unitPriceTextBox8.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox7.Text) && !(unitPriceTextBox7.Text.ToString() == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox7.Text) && !(unitPriceTextBox7.Text == "単価 -> 重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox7.ReadOnly = false;
                 countTextBox7.ReadOnly = false;
@@ -5083,7 +5297,7 @@ namespace Flawless_ex
                 countTextBox8.ReadOnly = true;
                 unitPriceTextBox9.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox8.Text) && !(unitPriceTextBox8.Text.ToString() == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox8.Text) && !(unitPriceTextBox8.Text == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox8.ReadOnly = false;
                 countTextBox8.ReadOnly = false;
@@ -5097,7 +5311,7 @@ namespace Flawless_ex
                 countTextBox9.ReadOnly = true;
                 unitPriceTextBox10.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox9.Text) && !(unitPriceTextBox9.Text.ToString() == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox9.Text) && !(unitPriceTextBox9.Text == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox9.ReadOnly = false;
                 countTextBox9.ReadOnly = false;
@@ -5111,7 +5325,7 @@ namespace Flawless_ex
                 countTextBox10.ReadOnly = true;
                 unitPriceTextBox11.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox10.Text) && !(unitPriceTextBox10.Text.ToString() == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox10.Text) && !(unitPriceTextBox10.Text == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox10.ReadOnly = false;
                 countTextBox10.ReadOnly = false;
@@ -5125,7 +5339,7 @@ namespace Flawless_ex
                 countTextBox11.ReadOnly = true;
                 unitPriceTextBox12.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox11.Text) && !(unitPriceTextBox11.Text.ToString() == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox11.Text) && !(unitPriceTextBox11.Text == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox11.ReadOnly = false;
                 countTextBox11.ReadOnly = false;
@@ -5138,7 +5352,7 @@ namespace Flawless_ex
                 weightTextBox12.ReadOnly = true;
                 countTextBox12.ReadOnly = true;
             }
-            else if (!string.IsNullOrEmpty(unitPriceTextBox12.Text) && !(unitPriceTextBox12.Text.ToString() == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
+            else if (!string.IsNullOrEmpty(unitPriceTextBox12.Text) && !(unitPriceTextBox12.Text == "単価から重量 or 数量"))        //単価がnullでなく、初期状態でもないとき
             {
                 weightTextBox12.ReadOnly = false;
                 countTextBox12.ReadOnly = false;
@@ -5147,7 +5361,7 @@ namespace Flawless_ex
 
         #endregion
 
-        #region "計算書　フォーカス時初期状態ならnull"
+        #region "計算書　フォーカス時初期状態ならnull　Enterイベント"
         private void unitPriceTextBox0_Enter(object sender, EventArgs e)
         {
             if (data == "S")
@@ -5159,7 +5373,7 @@ namespace Flawless_ex
                 if (string.IsNullOrEmpty(typeTextBox.Text))
                 {
                     MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    unitPriceTextBox0.Text = "";
+                    unitPriceTextBox0.Text = "単価 -> 重量 or 数量";
                     unitPriceTextBox0.ReadOnly = true;
                     return;
                 }
@@ -5392,10 +5606,10 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"計算書　単価３桁区切り＋フォーカスが外れた時"
+        #region"計算書　単価３桁区切り＋フォーカスが外れた時　Leaveイベント"
         private void unitPriceTextBox0_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S")//
             {
 
             }
@@ -5405,15 +5619,20 @@ namespace Flawless_ex
                 {
                     unitPriceTextBox0.Text = "単価 -> 重量 or 数量";
                 }
-                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox0.Text)))
+                else if (total != 0 && !string.IsNullOrEmpty(unitPriceTextBox0.Text))       //顧客変更 and 現行の単価が null じゃないとき
                 {
                     unitPriceTextBox1.ReadOnly = false;
                 }
                 else
                 {
+                    //顧客選択後、現行が null じゃないとき
                     unitPriceTextBox1.ReadOnly = false;
                     unitPriceTextBox1.Text = "単価 -> 重量 or 数量";
                     unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    if (unitPriceTextBox1.Text != "単価 -> 重量 or 数量" && !string.IsNullOrEmpty(unitPriceTextBox1.Text)) 
+                    {
+                        return;
+                    }
                 }
             }
             
@@ -5421,27 +5640,29 @@ namespace Flawless_ex
 
         private void unitPriceTextBox1_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S")    //成績一覧から来た時
             {
-
             }
             else
             {
-                if (string.IsNullOrEmpty(unitPriceTextBox1.Text))
+                if (string.IsNullOrEmpty(unitPriceTextBox1.Text))       //単価がnullだったとき
                 {
                     unitPriceTextBox1.Text = "単価 -> 重量 or 数量";
+                    unitPriceTextBox1.ReadOnly = true;
                 }
-                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox1.Text)))
+
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox1.Text)))  //前の行に 0 以外の数値が入力されていない時
+                {
+                    return;
+                }
+                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox2.Text)))      //顧客変更時 and (単価がnullじゃない or 単価が初期状態)
                 {
                     unitPriceTextBox2.ReadOnly = false;
-                }
-                else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox1.Text)))
-                {
-                    unitPriceTextBox2.ReadOnly = false;
-                    unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
+                    //顧客選択後、前行と現行が null 、初期状態じゃないとき
                     unitPriceTextBox2.ReadOnly = false;
                     unitPriceTextBox2.Text = "単価 -> 重量 or 数量";
                     unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
@@ -5451,7 +5672,12 @@ namespace Flawless_ex
 
         private void unitPriceTextBox2_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            //if (unitPriceTextBox1.Text == "" || unitPriceTextBox1.Text == "単価 -> 重量 or 数量")
+            //{
+            //    return;
+            //}
+
+            if (data == "S")    //成績一覧から来た時
             {
 
             }
@@ -5483,7 +5709,7 @@ namespace Flawless_ex
 
         private void unitPriceTextBox3_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S")    //成績一覧から来た時
             {
 
             }
@@ -5493,14 +5719,14 @@ namespace Flawless_ex
                 {
                     unitPriceTextBox3.Text = "単価 -> 重量 or 数量";
                 }
-                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox3.Text)))
-                {
-                    unitPriceTextBox4.ReadOnly = false;
-                }
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox3.Text)))
                 {
                     unitPriceTextBox4.ReadOnly = false;
-                    unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                }
+                else if (total != 0 && (!string.IsNullOrEmpty(unitPriceTextBox3.Text)))
+                {
+                    unitPriceTextBox4.ReadOnly = false;
+                    unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5560,7 +5786,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox5.Text)))
                 {
                     unitPriceTextBox6.ReadOnly = false;
-                    unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5590,7 +5816,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox6.Text)))
                 {
                     unitPriceTextBox7.ReadOnly = false;
-                    unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5620,7 +5846,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox7.Text)))
                 {
                     unitPriceTextBox8.ReadOnly = false;
-                    unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5650,7 +5876,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox8.Text)))
                 {
                     unitPriceTextBox9.ReadOnly = false;
-                    unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5680,7 +5906,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox9.Text)))
                 {
                     unitPriceTextBox10.ReadOnly = false;
-                    unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5710,7 +5936,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox10.Text)))
                 {
                     unitPriceTextBox11.ReadOnly = false;
-                    unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5740,7 +5966,7 @@ namespace Flawless_ex
                 else if (total != 0 && (string.IsNullOrEmpty(unitPriceTextBox11.Text)))
                 {
                     unitPriceTextBox12.ReadOnly = false;
-                    unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
                 }
                 else
                 {
@@ -5771,7 +5997,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"計算書　金額が入力されたら次の単価が入力可＋総重量 or 総数計算、自動計算"
+        #region"計算書　金額が入力されたら次の単価が入力可＋総重量 or 総数計算、自動計算　TextChangedイベント"
         private void moneyTextBox0_TextChanged(object sender, EventArgs e)
         {
             if (data == "S")
@@ -5790,6 +6016,12 @@ namespace Flawless_ex
                 {
                     weightTextBox0.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox0.Text) && string.IsNullOrEmpty(countTextBox0.Text))
+                {
+                    return;
+                }
+
                 if (total != 0)
                 {
                     countsum = int.Parse(countTextBox0.Text);
@@ -5810,13 +6042,16 @@ namespace Flawless_ex
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
                 taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
                 sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
-
-                if (subSum >= 2000000)
-                {
-                    groupBox1.BackColor = Color.OrangeRed;
-                }
             }
-            
+
+            if (subSum >= 2000000)
+            {
+                groupBox1.BackColor = Color.OrangeRed;
+            }
+            else
+            {
+                groupBox1.BackColor = Color.GreenYellow;
+            }
         }
         private void moneyTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -5836,6 +6071,12 @@ namespace Flawless_ex
                 {
                     weightTextBox1.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox1.Text) && string.IsNullOrEmpty(countTextBox1.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox1.Text) == 0 && decimal.Parse(weightTextBox1.Text) != 0))
                 {
                     countsum += int.Parse(countTextBox1.Text);
@@ -5890,6 +6131,12 @@ namespace Flawless_ex
                 {
                     weightTextBox2.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox2.Text) && string.IsNullOrEmpty(countTextBox2.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox2.Text) != 0 && decimal.Parse(weightTextBox2.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox2.Text);
@@ -5943,6 +6190,12 @@ namespace Flawless_ex
                 {
                     weightTextBox3.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox3.Text) && string.IsNullOrEmpty(countTextBox3.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox3.Text) != 0 && decimal.Parse(weightTextBox3.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox3.Text);
@@ -5996,6 +6249,12 @@ namespace Flawless_ex
                 {
                     weightTextBox4.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox4.Text) && string.IsNullOrEmpty(countTextBox4.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox4.Text) != 0 && decimal.Parse(weightTextBox4.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox4.Text);
@@ -6049,6 +6308,12 @@ namespace Flawless_ex
                 {
                     weightTextBox5.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox5.Text) && string.IsNullOrEmpty(countTextBox5.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox5.Text) != 0 && decimal.Parse(weightTextBox5.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox5.Text);
@@ -6102,6 +6367,12 @@ namespace Flawless_ex
                 {
                     weightTextBox6.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox6.Text) && string.IsNullOrEmpty(countTextBox6.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox6.Text) != 0 && decimal.Parse(weightTextBox6.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox6.Text);
@@ -6155,6 +6426,12 @@ namespace Flawless_ex
                 {
                     weightTextBox7.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox7.Text) && string.IsNullOrEmpty(countTextBox7.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox7.Text) != 0 && decimal.Parse(weightTextBox7.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox7.Text);
@@ -6207,6 +6484,12 @@ namespace Flawless_ex
                 {
                     weightTextBox8.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox8.Text) && string.IsNullOrEmpty(countTextBox8.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox8.Text) != 0 && decimal.Parse(weightTextBox8.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox8.Text);
@@ -6259,6 +6542,12 @@ namespace Flawless_ex
                 {
                     weightTextBox9.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox9.Text) && string.IsNullOrEmpty(countTextBox9.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox9.Text) != 0 && decimal.Parse(weightTextBox9.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox9.Text);
@@ -6312,6 +6601,12 @@ namespace Flawless_ex
                 {
                     weightTextBox10.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox10.Text) && string.IsNullOrEmpty(countTextBox10.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox10.Text) != 0 && decimal.Parse(weightTextBox10.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox10.Text);
@@ -6364,6 +6659,12 @@ namespace Flawless_ex
                 {
                     weightTextBox11.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox11.Text) && string.IsNullOrEmpty(countTextBox11.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox11.Text) != 0 && decimal.Parse(weightTextBox11.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox11.Text);
@@ -6417,6 +6718,12 @@ namespace Flawless_ex
                 {
                     weightTextBox12.Text = 0.ToString();
                 }
+
+                if (string.IsNullOrEmpty(weightTextBox12.Text) && string.IsNullOrEmpty(countTextBox12.Text))
+                {
+                    return;
+                }
+
                 if (total != 0 && (decimal.Parse(countTextBox12.Text) != 0 && decimal.Parse(weightTextBox12.Text) == 0))
                 {
                     countsum += int.Parse(countTextBox12.Text);
@@ -6455,7 +6762,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region　"納品書　単価を入力したら重量、数値入力可"
+        #region　"納品書　単価を入力したら重量、数値入力可　TextChangdイベント"
         private void unitPriceTextBox00_TextChanged(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(unitPriceTextBox00.Text))
@@ -6640,7 +6947,7 @@ namespace Flawless_ex
 
         #endregion
 
-        #region"納品書　フォーカス時初期状態ならnull"
+        #region"納品書　フォーカス時初期状態ならnull　Enterイベント"
         private void unitPriceTextBox00_Enter(object sender, EventArgs e)
         {
             if (data == "D")
@@ -6826,7 +7133,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"納品書　数量を入力したら重量を入力不可"
+        #region"納品書　数量を入力したら重量を入力不可　TextChangedイベント"
 
         private void countTextBox00_TextChanged(object sender, EventArgs e)
         {
@@ -7077,7 +7384,7 @@ namespace Flawless_ex
 
         #endregion
 
-        #region"納品書　税込み税抜き選択"
+        #region"納品書　税込み税抜き選択　TextChangedイベント"
 
         private void comboBox11_TextChanged(object sender, EventArgs e)
         {
@@ -7113,7 +7420,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"納品書　単価３桁区切り＋フォーカスが外れた時"
+        #region"納品書　単価３桁区切り＋フォーカスが外れた時　Leaveイベント"
         private void unitPriceTextBox00_Leave(object sender, EventArgs e)
         {
             if (data == "D")
@@ -7386,9 +7693,20 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"計算書　重量×単価"
+        //修正中
+        #region"計算書　重量×単価　Leaveイベント"
         private void weightTextBox0_Leave(object sender, EventArgs e)
         {
+            //if (string.IsNullOrEmpty(weightTextBox0.Text) && string.IsNullOrEmpty(countTextBox0.Text))
+            //{
+            //    return;
+            //}
+
+            //if (weightTextBox0.Text == "0" && !string.IsNullOrEmpty(countTextBox0.Text)) 
+            //{
+            //    weightTextBox0.ReadOnly = true;
+            //    return;
+            //}
 
             if (!string.IsNullOrEmpty(weightTextBox0.Text) && !(weightTextBox0.Text == "0"))
             {
@@ -7756,7 +8074,8 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"計算書　数量×単価"
+        //修正中
+        #region"計算書　数量×単価 Leaveイベント"
         private void countTextBox0_Leave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(countTextBox0.Text) && !(countTextBox0.Text == "0"))
@@ -7954,7 +8273,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region "納品書　重量×単価"
+        #region "納品書　重量×単価 Leaveイベント"
         private void weightTextBox00_Leave(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(weightTextBox00.Text) && !(weightTextBox00.Text == "0"))
@@ -8321,7 +8640,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region　"納品書　数量×単価"
+        #region　"納品書　数量×単価　Leaveイベント"
         private void countTextBox00_Leave(object sender, EventArgs e)
         {
             if (data == "D")
@@ -8611,7 +8930,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"納品書　金額が入力されたら総重量 or 総数計算、自動計算"
+        #region"納品書　金額が入力されたら総重量 or 総数計算、自動計算　TextChangedイベント"
         private void moneyTextBox00_TextChanged(object sender, EventArgs e)
         {
             if (data == "D")
@@ -9564,7 +9883,6 @@ namespace Flawless_ex
             //計算書印刷プレビュー
             PrintDocument pd = new PrintDocument();
             pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
-            pd.Print();
             printPreviewDialog1.Document = pd;
             DialogResult dr = printPreviewDialog1.ShowDialog();
         }
