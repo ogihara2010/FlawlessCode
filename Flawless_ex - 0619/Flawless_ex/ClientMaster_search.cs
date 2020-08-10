@@ -12,6 +12,7 @@ namespace Flawless_ex
         int check;
         int staff_code;
         string access_auth;
+        bool screan = true;
         public ClientMaster_search(MasterMaintenanceMenu master, DataTable dt, int type, int check, int staff_code, string access_auth)
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace Flawless_ex
         private void Button1_Click(object sender, EventArgs e)
         {
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-
+            screan = false;
             this.Close();
             clientmaster.Show();
         }
@@ -92,7 +93,7 @@ namespace Flawless_ex
                 string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value; //住所
 
                 ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code, access_auth);
-
+                screan = false;
                 this.Close();
                 clientMaster_UPD.Show();
             }
@@ -102,7 +103,7 @@ namespace Flawless_ex
                 string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value; //住所
 
                 ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code, access_auth);
-
+                screan = false;
                 this.Close();
                 clientMaster_UPD.Show();
             }
@@ -110,8 +111,11 @@ namespace Flawless_ex
 
         private void ClientMaster_search_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-            clientmaster.Show();
+            if (screan)
+            {
+                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+                clientmaster.Show();
+            }
         }
     }
 }

@@ -167,6 +167,10 @@
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.textBox51 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -185,6 +189,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.label43);
             this.tabPage1.Controls.Add(this.deliveryDateBox);
             this.tabPage1.Controls.Add(this.textBox46);
             this.tabPage1.Controls.Add(this.button4);
@@ -317,6 +323,7 @@
             this.button10.TabIndex = 68;
             this.button10.Text = "ファイルの選択";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.Button10_Click);
             // 
             // button9
             // 
@@ -327,6 +334,7 @@
             this.button9.TabIndex = 67;
             this.button9.Text = "ファイルの選択";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.Button9_Click);
             // 
             // button8
             // 
@@ -337,6 +345,7 @@
             this.button8.TabIndex = 66;
             this.button8.Text = "ファイルの選択";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.Button8_Click);
             // 
             // textBox29
             // 
@@ -344,6 +353,7 @@
             this.textBox29.Location = new System.Drawing.Point(1136, 1311);
             this.textBox29.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox29.Name = "textBox29";
+            this.textBox29.ReadOnly = true;
             this.textBox29.Size = new System.Drawing.Size(476, 45);
             this.textBox29.TabIndex = 64;
             // 
@@ -373,6 +383,7 @@
             this.textBox27.Location = new System.Drawing.Point(59, 1629);
             this.textBox27.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox27.Name = "textBox27";
+            this.textBox27.ReadOnly = true;
             this.textBox27.Size = new System.Drawing.Size(463, 45);
             this.textBox27.TabIndex = 61;
             // 
@@ -382,6 +393,7 @@
             this.textBox26.Location = new System.Drawing.Point(59, 1459);
             this.textBox26.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox26.Name = "textBox26";
+            this.textBox26.ReadOnly = true;
             this.textBox26.Size = new System.Drawing.Size(463, 45);
             this.textBox26.TabIndex = 60;
             // 
@@ -394,6 +406,7 @@
             this.button7.TabIndex = 59;
             this.button7.Text = "ファイルの選択";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.Button7_Click);
             // 
             // textBox25
             // 
@@ -401,6 +414,7 @@
             this.textBox25.Location = new System.Drawing.Point(59, 1318);
             this.textBox25.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox25.Name = "textBox25";
+            this.textBox25.ReadOnly = true;
             this.textBox25.Size = new System.Drawing.Size(463, 45);
             this.textBox25.TabIndex = 58;
             // 
@@ -481,6 +495,7 @@
             this.button3.TabIndex = 51;
             this.button3.Text = "ファイルの選択";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // textBox24
             // 
@@ -488,6 +503,7 @@
             this.textBox24.Location = new System.Drawing.Point(1561, 1045);
             this.textBox24.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox24.Name = "textBox24";
+            this.textBox24.ReadOnly = true;
             this.textBox24.Size = new System.Drawing.Size(433, 45);
             this.textBox24.TabIndex = 50;
             // 
@@ -531,6 +547,7 @@
             this.button2.TabIndex = 46;
             this.button2.Text = "ファイルの選択";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // textBox22
             // 
@@ -538,6 +555,7 @@
             this.textBox22.Location = new System.Drawing.Point(1561, 786);
             this.textBox22.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox22.Name = "textBox22";
+            this.textBox22.ReadOnly = true;
             this.textBox22.Size = new System.Drawing.Size(290, 45);
             this.textBox22.TabIndex = 45;
             // 
@@ -561,6 +579,7 @@
             this.button1.TabIndex = 43;
             this.button1.Text = "ファイルの選択";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // textBox21
             // 
@@ -568,6 +587,7 @@
             this.textBox21.Location = new System.Drawing.Point(1561, 659);
             this.textBox21.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox21.Name = "textBox21";
+            this.textBox21.ReadOnly = true;
             this.textBox21.Size = new System.Drawing.Size(310, 45);
             this.textBox21.TabIndex = 42;
             // 
@@ -743,7 +763,7 @@
             this.textBox4.Location = new System.Drawing.Point(318, 343);
             this.textBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(259, 45);
+            this.textBox4.Size = new System.Drawing.Size(135, 45);
             this.textBox4.TabIndex = 23;
             // 
             // textBox3
@@ -987,6 +1007,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBox51);
+            this.tabPage2.Controls.Add(this.label54);
             this.tabPage2.Controls.Add(this.dateTimePicker1);
             this.tabPage2.Controls.Add(this.textBox47);
             this.tabPage2.Controls.Add(this.button18);
@@ -1133,6 +1155,7 @@
             this.button11.TabIndex = 135;
             this.button11.Text = "ファイルの選択";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.Button11_Click);
             // 
             // button12
             // 
@@ -1143,6 +1166,7 @@
             this.button12.TabIndex = 134;
             this.button12.Text = "ファイルの選択";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.Button12_Click);
             // 
             // button13
             // 
@@ -1153,6 +1177,7 @@
             this.button13.TabIndex = 133;
             this.button13.Text = "ファイルの選択";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.Button13_Click);
             // 
             // textBox30
             // 
@@ -1160,6 +1185,7 @@
             this.textBox30.Location = new System.Drawing.Point(1135, 1394);
             this.textBox30.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox30.Name = "textBox30";
+            this.textBox30.ReadOnly = true;
             this.textBox30.Size = new System.Drawing.Size(476, 45);
             this.textBox30.TabIndex = 132;
             // 
@@ -1169,6 +1195,7 @@
             this.textBox31.Location = new System.Drawing.Point(73, 1670);
             this.textBox31.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox31.Name = "textBox31";
+            this.textBox31.ReadOnly = true;
             this.textBox31.Size = new System.Drawing.Size(463, 45);
             this.textBox31.TabIndex = 131;
             // 
@@ -1178,6 +1205,7 @@
             this.textBox32.Location = new System.Drawing.Point(63, 1525);
             this.textBox32.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox32.Name = "textBox32";
+            this.textBox32.ReadOnly = true;
             this.textBox32.Size = new System.Drawing.Size(463, 45);
             this.textBox32.TabIndex = 130;
             // 
@@ -1190,6 +1218,7 @@
             this.button14.TabIndex = 129;
             this.button14.Text = "ファイルの選択";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.Button14_Click);
             // 
             // textBox33
             // 
@@ -1197,6 +1226,7 @@
             this.textBox33.Location = new System.Drawing.Point(58, 1387);
             this.textBox33.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox33.Name = "textBox33";
+            this.textBox33.ReadOnly = true;
             this.textBox33.Size = new System.Drawing.Size(463, 45);
             this.textBox33.TabIndex = 128;
             // 
@@ -1277,6 +1307,7 @@
             this.button15.TabIndex = 121;
             this.button15.Text = "ファイルの選択";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.Button15_Click);
             // 
             // textBox34
             // 
@@ -1304,6 +1335,7 @@
             this.textBox35.Location = new System.Drawing.Point(1562, 993);
             this.textBox35.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox35.Name = "textBox35";
+            this.textBox35.ReadOnly = true;
             this.textBox35.Size = new System.Drawing.Size(292, 45);
             this.textBox35.TabIndex = 118;
             // 
@@ -1327,6 +1359,7 @@
             this.button16.TabIndex = 116;
             this.button16.Text = "ファイルの選択";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.Button16_Click);
             // 
             // textBox36
             // 
@@ -1334,6 +1367,7 @@
             this.textBox36.Location = new System.Drawing.Point(1562, 850);
             this.textBox36.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox36.Name = "textBox36";
+            this.textBox36.ReadOnly = true;
             this.textBox36.Size = new System.Drawing.Size(290, 45);
             this.textBox36.TabIndex = 115;
             // 
@@ -1357,6 +1391,7 @@
             this.button17.TabIndex = 113;
             this.button17.Text = "ファイルの選択";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.Button17_Click);
             // 
             // textBox37
             // 
@@ -1364,6 +1399,7 @@
             this.textBox37.Location = new System.Drawing.Point(1560, 679);
             this.textBox37.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox37.Name = "textBox37";
+            this.textBox37.ReadOnly = true;
             this.textBox37.Size = new System.Drawing.Size(310, 45);
             this.textBox37.TabIndex = 112;
             // 
@@ -1501,7 +1537,7 @@
             this.textBox54.Location = new System.Drawing.Point(317, 374);
             this.textBox54.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox54.Name = "textBox54";
-            this.textBox54.Size = new System.Drawing.Size(259, 45);
+            this.textBox54.Size = new System.Drawing.Size(175, 45);
             this.textBox54.TabIndex = 93;
             // 
             // textBox55
@@ -1720,6 +1756,42 @@
             this.label63.TabIndex = 70;
             this.label63.Text = "登録日";
             // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.label43.Location = new System.Drawing.Point(460, 343);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(59, 48);
+            this.label43.TabIndex = 72;
+            this.label43.Text = "ー";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox1.Location = new System.Drawing.Point(537, 343);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(206, 45);
+            this.textBox1.TabIndex = 73;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.label54.Location = new System.Drawing.Point(511, 377);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(48, 38);
+            this.label54.TabIndex = 143;
+            this.label54.Text = "ー";
+            // 
+            // textBox51
+            // 
+            this.textBox51.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.textBox51.Location = new System.Drawing.Point(563, 371);
+            this.textBox51.Name = "textBox51";
+            this.textBox51.Size = new System.Drawing.Size(278, 45);
+            this.textBox51.TabIndex = 144;
+            // 
             // ClientMaster_add
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -1882,5 +1954,9 @@
         private System.Windows.Forms.TextBox textBox47;
         private System.Windows.Forms.DateTimePicker deliveryDateBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.TextBox textBox51;
+        private System.Windows.Forms.Label label54;
     }
 }
