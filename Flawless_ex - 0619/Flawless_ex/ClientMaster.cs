@@ -14,6 +14,7 @@ namespace Flawless_ex
         int staff_code;
         string access_auth;
         int type;
+        string pass;
         bool screan = true;
         public ClientMaster(MasterMaintenanceMenu mster, int staff_code, string access_auth)
         {
@@ -31,7 +32,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, pass);
             screan = false;
             this.Close();
             masterMenu.Show();
@@ -2505,7 +2506,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, pass);
                 masterMenu.Show();
             }
         }
