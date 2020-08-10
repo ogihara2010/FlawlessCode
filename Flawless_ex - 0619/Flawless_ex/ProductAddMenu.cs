@@ -85,7 +85,7 @@ namespace Flawless_ex
                 adapter.Fill(dt);
                 adapter.Update(dt);
 
-                MessageBox.Show("登録完了");
+                MessageBox.Show("品名の新規登録が完了しました", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
 
                 conn.Close();
                 this.Close();
