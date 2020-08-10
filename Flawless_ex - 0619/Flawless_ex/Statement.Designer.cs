@@ -391,6 +391,7 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.PayeeTextBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -2579,6 +2580,7 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.PayeeTextBox1);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.pictureBox3);
             this.tabPage2.Controls.Add(this.label27);
@@ -2744,7 +2746,7 @@
             // 
             this.PayeeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PayeeComboBox.FormattingEnabled = true;
-            this.PayeeComboBox.Location = new System.Drawing.Point(566, 1064);
+            this.PayeeComboBox.Location = new System.Drawing.Point(591, 1236);
             this.PayeeComboBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.PayeeComboBox.Name = "PayeeComboBox";
             this.PayeeComboBox.Size = new System.Drawing.Size(206, 34);
@@ -3123,6 +3125,7 @@
             this.client_searchButton1.TabIndex = 16;
             this.client_searchButton1.Text = "顧客選択";
             this.client_searchButton1.UseVisualStyleBackColor = true;
+            this.client_searchButton1.Click += new System.EventHandler(this.Client_searchButton1_Click);
             // 
             // clientRemarksTextBox2
             // 
@@ -4718,6 +4721,13 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // PayeeTextBox1
+            // 
+            this.PayeeTextBox1.Location = new System.Drawing.Point(570, 1070);
+            this.PayeeTextBox1.Name = "PayeeTextBox1";
+            this.PayeeTextBox1.Size = new System.Drawing.Size(218, 33);
+            this.PayeeTextBox1.TabIndex = 88;
+            // 
             // Statement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -5131,5 +5141,6 @@
         private System.Windows.Forms.Button AntiqueSelectionButton1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox PayeeTextBox1;
     }
 }

@@ -16,7 +16,7 @@ namespace Flawless_ex
         int staff_id;
         string data;
         string Pass;
-
+        bool screan = true;
         public CustomerHistorySelect(MainMenu main, int id, string data, string pass)
         {
             InitializeComponent();
@@ -30,6 +30,7 @@ namespace Flawless_ex
         {
             data = "S";
             CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            screan = false;
             this.Hide();
             customerHistory.Show();
         }
@@ -38,19 +39,24 @@ namespace Flawless_ex
         {
             data = "D";
             CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            screan = false;
             this.Hide();
             customerHistory.Show();
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            screan = false;
             this.Close();
             mainMenu.Show();
         }
 
         private void CustomerHistorySelect_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainMenu.Show();
+            if (screan)
+            {
+                mainMenu.Show();
+            }
         }
     }
 }

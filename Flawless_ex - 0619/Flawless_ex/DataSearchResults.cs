@@ -30,7 +30,8 @@ namespace Flawless_ex
         string access_auth;
         string Pass;
         DataTable dt = new DataTable();
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass)
+        bool screan = true;
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass, string document, int control)
         {
             InitializeComponent();
             mainMenu = main;
@@ -45,10 +46,13 @@ namespace Flawless_ex
             staff_id = id;
             this.data = data;
             this.Pass = pass;
+            this.document = document;
+            this.control = control;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
+            screan = false;
             this.Close();
         }
 
@@ -84,9 +88,13 @@ namespace Flawless_ex
                     dataGridView1.Columns[8].HeaderText = "金額";
 
                     conn.Close();
-                    document = (string)dataGridView1.CurrentRow.Cells[0].Value;
-                    staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
-                    address = (string)dataGridView1.CurrentRow.Cells[5].Value;
+                    if (data == null)
+                    {
+                        document = (string)dataGridView1.CurrentRow.Cells[0].Value;
+                        staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
+                        address = (string)dataGridView1.CurrentRow.Cells[5].Value;
+                    }
+                    
                 }
                 #endregion
                 #region "個人"
@@ -192,10 +200,22 @@ namespace Flawless_ex
         #region "計算書"
         private void Button2_Click(object sender, EventArgs e)
         {
-            document = (string)dataGridView1.CurrentRow.Cells[0].Value;
-            staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
-            address = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3);
+            if (type == 0)
+            {
+                type = 0;
+                document = (string)dataGridView1.CurrentRow.Cells[0].Value;
+                staff_name = (string)dataGridView1.CurrentRow.Cells[4].Value;
+                address = (string)dataGridView1.CurrentRow.Cells[6].Value;
+            }
+            if (type == 1)
+            {
+                type = 1;
+                document = (string)dataGridView1.CurrentRow.Cells[0].Value;
+                staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
+                address = (string)dataGridView1.CurrentRow.Cells[5].Value;
+            }
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address,  access_auth, Total, Pass, document, control, data, search1, search2, search3);
+            screan = false;
             this.Close();
             statement.Show();
         }
@@ -207,6 +227,7 @@ namespace Flawless_ex
             staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
             address = (string)dataGridView1.CurrentRow.Cells[5].Value;
             Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3);
+            screan = false;
             this.Close();
             statement.Show();
         }
@@ -214,8 +235,11 @@ namespace Flawless_ex
 
         private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
-            customerHistory.Show();
+            if (screan)
+            {
+                CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+                customerHistory.Show();
+            }
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Flawless_ex
         int Grade; 
         int AntiqueNumber;
         int ID_Number;
+        bool screan = true;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -1008,7 +1009,7 @@ namespace Flawless_ex
                     #region "枠外"
                     this.subTotal.Text = row1["sub_total"].ToString();
                     subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
-                    int sum = (int)row1["total"];
+                    int sum = int.Parse(row1["total"].ToString());
                     this.sumTextBox.Text = row1["total"].ToString();
                     sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
                     this.taxAmount.Text = row1["tax_amount"].ToString();
@@ -4410,7 +4411,8 @@ namespace Flawless_ex
             
             using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
             {
-                this.Hide();
+                screan = false;
+                this.Close();
                 search2.ShowDialog();
             }
             /*
@@ -4715,7 +4717,10 @@ namespace Flawless_ex
             }
             #endregion
 
-            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "');";
+            DateTime dat1 = DateTime.Now;
+            DateTime dtToday = dat1.Date;
+            string c = dtToday.ToString("yyyy年MM月dd日");
+            string sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address, assessment_date) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "','" + c + "');";
 
             conn.Close();
 
@@ -4728,6 +4733,7 @@ namespace Flawless_ex
             decimal UnitPrice = decimal.Parse(unitPriceTextBox0.Text);
             decimal amount = money0;
             string Remarks = remarks0.Text;
+            
 
             DataTable dt2 = new DataTable();
             string sql_str2 = "Insert into statement_calc_data VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "');";
@@ -9028,7 +9034,22 @@ namespace Flawless_ex
         #region"右上の×で戻る"
         private void Statement_FormClosed(object sender, FormClosedEventArgs e)
         {
-              mainMenu.Show();   
+            if (screan && data == "S")
+            {
+                document = documentNumberTextBox.Text;
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass, document, control);
+                dataSearchResults.Show();
+            }
+            else if (screan && data == "D")
+            {
+                control = int.Parse(documentNumberTextBox2.Text);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass, document, control);
+                dataSearchResults.Show();
+            }
+            else if (screan)
+            {
+                mainMenu.Show();
+            }              
         }
         #endregion
 
@@ -9070,7 +9091,7 @@ namespace Flawless_ex
             string Name = name.Text;                                           //宛名
             string Title = titleComboBox.SelectedItem.ToString();              //敬称
             string Type = typeComboBox.SelectedItem.ToString();                //納品書or請求書
-            string payee = PayeeComboBox.SelectedItem.ToString();              //振り込み先
+            string payee = PayeeTextBox1.Text;                                 //振り込み先
             string coin = CoinComboBox.SelectedItem.ToString();                //通貨
             string remark = RemarkRegister.Text;
 
@@ -9078,7 +9099,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
 
             DataTable dt = new DataTable();
-            string sql_str = "Insert into delivery_m (control_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, hororific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payable, currency, remark2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "','" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "' '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + type +");";
+            string sql_str = "Insert into delivery_m (control_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, remarks2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "','" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + type +");";
 
             //管理番号：ControlNumber
             int record = 1;     //行数
@@ -9092,7 +9113,7 @@ namespace Flawless_ex
             string Remarks = remarks00.Text;
 
             DataTable dt2 = new DataTable();
-            string sql_str2 = "Insert into delivery_calc VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory + "','" + Detail + "');";
+            string sql_str2 = "Insert into delivery_calc VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + mainCategory + "','" + Detail + "');";
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -9686,7 +9707,7 @@ namespace Flawless_ex
 
             e.Graphics.DrawString("：" + deliveryDateBox.Value.ToShortDateString(), font, brush, new PointF(570 + d3, 950));    //受け渡し日
             e.Graphics.DrawString("：" + settlementBox.Value.ToShortDateString(), font, brush, new PointF(570 + d3, 970));    //決済日
-            e.Graphics.DrawString("：" + paymentMethodComboBox.SelectedIndex.ToString(), font, brush, new PointF(570 + d3, 990));    //決済方法
+            e.Graphics.DrawString("：" + paymentMethodsComboBox.SelectedIndex.ToString(), font, brush, new PointF(570 + d3, 990));    //決済方法
             e.Graphics.DrawString("：", font3, brush, new PointF(450 + d, 1050));   //署名
 
             e.Graphics.DrawRectangle(p, 470, 1070, 250, 0.1f);            //署名下の下線
@@ -10527,13 +10548,15 @@ namespace Flawless_ex
         private void DeliveryPreviewButton_Click(object sender, EventArgs e)
         {
             DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
+            screan = false;
             this.Close();
             deliveryPreview.Show();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass, document, control);
+            screan = false;
             this.Close();
             mainMenu.Hide();
             dataSearchResults.Show();
@@ -10541,10 +10564,21 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass) ;
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass, document, control) ;
+            screan = false;
             this.Close();
             mainMenu.Hide();
             dataSearchResults.Show();
+        }
+
+        private void Client_searchButton1_Click(object sender, EventArgs e)
+        {
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
+            {
+                screan = false;
+                this.Close();
+                search2.ShowDialog();
+            }
         }
     }
 }
