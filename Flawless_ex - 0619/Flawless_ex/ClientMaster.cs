@@ -9,10 +9,12 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu masterMenu;
         MasterMaintenanceMenu_BC masterMenu_BC;
+        MainMenu mainMenu;
         DataTable dt = new DataTable();
         int staff_code;
         string access_auth;
         int type;
+        bool screan = true;
         public ClientMaster(MasterMaintenanceMenu mster, int staff_code, string access_auth)
         {
             InitializeComponent();
@@ -29,6 +31,8 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+            screan = false;
             this.Close();
             masterMenu.Show();
         }
@@ -44,6 +48,7 @@ namespace Flawless_ex
                 type = 1;
             }
             ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu, staff_code, access_auth, type);
+            screan = false;
             this.Close();
             clientMaster_Add.Show();
         }
@@ -107,6 +112,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -123,6 +129,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -145,6 +152,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -161,6 +169,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -279,6 +288,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -295,6 +305,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -317,6 +328,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -333,6 +345,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -361,6 +374,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -377,6 +391,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -399,6 +414,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -415,6 +431,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -455,6 +472,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -471,6 +489,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -493,6 +512,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -509,6 +529,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -537,6 +558,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -553,6 +575,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -625,6 +648,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -641,6 +665,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -663,6 +688,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -679,6 +705,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -807,6 +834,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -823,6 +851,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -845,6 +874,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -861,6 +891,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -889,6 +920,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -904,6 +936,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -926,6 +959,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -941,6 +975,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -975,6 +1010,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -991,6 +1027,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1013,6 +1050,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -1029,6 +1067,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1057,6 +1096,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1072,6 +1112,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1095,6 +1136,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1110,6 +1152,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1150,6 +1193,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1165,6 +1209,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1187,6 +1232,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1202,6 +1248,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1230,6 +1277,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1245,6 +1293,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1267,6 +1316,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1282,6 +1332,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1316,6 +1367,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1331,6 +1383,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1353,6 +1406,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -1369,6 +1423,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1397,6 +1452,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1412,6 +1468,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1434,6 +1491,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -1450,6 +1508,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -1495,6 +1554,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
 
@@ -1511,6 +1571,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1533,6 +1594,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
 
@@ -1549,6 +1611,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1577,6 +1640,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1614,6 +1678,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
 
@@ -1630,6 +1695,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1664,6 +1730,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1679,6 +1746,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1701,6 +1769,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1716,6 +1785,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1744,6 +1814,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1759,6 +1830,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1781,6 +1853,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1796,6 +1869,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1829,6 +1903,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -1844,6 +1919,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -1866,6 +1942,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -1881,6 +1958,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -1903,6 +1981,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
                             }
@@ -1954,6 +2033,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -1970,6 +2050,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -1992,6 +2073,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2008,6 +2090,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2036,6 +2119,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2052,6 +2136,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2074,6 +2159,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2090,6 +2176,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2124,6 +2211,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2140,6 +2228,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2206,6 +2295,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2222,6 +2312,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2244,6 +2335,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2260,6 +2352,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2293,6 +2386,7 @@ namespace Flawless_ex
                                 conn.Close();
                                 conn.Close();
                                 ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
                             }
@@ -2309,6 +2403,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
                             }
@@ -2329,6 +2424,7 @@ namespace Flawless_ex
                                 conn.Close();
                                 conn.Close();
                                 ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
                             }
@@ -2345,6 +2441,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
                             }
@@ -2368,6 +2465,7 @@ namespace Flawless_ex
                             conn.Close();
                             conn.Close();
                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                            screan = false;
                             this.Close();
                             clientMastersearch.Show();
                         }
@@ -2384,6 +2482,7 @@ namespace Flawless_ex
 
                             conn.Close();
                             ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                            screan = false;
                             this.Close();
                             clientMastersearch.Show();
                         }
@@ -2402,11 +2501,13 @@ namespace Flawless_ex
 
         }
 
-        /*private void ClientMaster_FormClosed(object sender, FormClosedEventArgs e)
+        private void ClientMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            masterMenu.Show();
-        }*/
-
- 
+            if (screan)
+            {
+                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+                masterMenu.Show();
+            }
+        }
     }
 }

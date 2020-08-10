@@ -1802,7 +1802,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ClientMaster_add";
             this.Text = "顧客マスタメンテナンス　新規登録";
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_add_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_add_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_add_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

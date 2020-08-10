@@ -18,6 +18,7 @@ namespace Flawless_ex
         string rePassword;//パスワード再入力
         string access_auth;//アクセス権限
         int code;//ログイン担当者コード
+        bool screan = true;
         public StaffUpdateMenu(MasterMaintenanceMenu master, int staff_code, int code)
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace Flawless_ex
         private void ReturnButton(object sender, EventArgs e)
         {
             StaffMaster personMaster = new StaffMaster(master, staffCode);//注意
-
+            screan = false;
             this.Close();
             personMaster.Show();
         }
@@ -264,7 +265,7 @@ namespace Flawless_ex
             }
 
             StaffMaster staffMaster = new StaffMaster(master, staffCode);
-
+            screan = false;
             this.Close();
             staffMaster.Show();
 
@@ -312,11 +313,11 @@ namespace Flawless_ex
             conn.Close();
         }
 
-        /*private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
+        private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
             StaffMaster staffMaster = new StaffMaster(master, code);
             staffMaster.Show();
-        }*/
+        }
 
         /*private void StaffUpdateMenu_FormClosing(object sender, FormClosingEventArgs e)
         {

@@ -12,7 +12,7 @@ namespace Flawless_ex
         MasterMaintenanceMenu master;
         DataTable dt;
         int staff_code;
-
+        bool screan = true;
         public StaffAddStaff(DataTable dt, MasterMaintenanceMenu master, int staff_code)
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace Flawless_ex
         private void returnButton_Click(object sender, EventArgs e)
         {
             StaffMaster staffMaster = new StaffMaster(master, staff_code);
-
+            screan = false;
             this.Close();
             staffMaster.Show();
         }
@@ -115,6 +115,7 @@ namespace Flawless_ex
 
 
                 StaffMaster staffMaster = new StaffMaster(master, staff_code);
+                screan = false;
                 this.Close();
                 staffMaster.Show();
             }
@@ -159,11 +160,13 @@ namespace Flawless_ex
             staffMaster.Show();
         }*/
 
-        /*private void StaffAddStaff_FormClosed(object sender, FormClosedEventArgs e)
+        private void StaffAddStaff_FormClosed(object sender, FormClosedEventArgs e)
         {
-
-            StaffMaster staffMaster = new StaffMaster(master, staff_code);
-            staffMaster.Show();
-        }*/
+            if (screan)
+            {
+                StaffMaster staffMaster = new StaffMaster(master, staff_code);
+                staffMaster.Show();
+            }
+        }
     }
 }

@@ -385,7 +385,7 @@
             this.Name = "StaffUpdateMenu";
             this.Text = "担当者マスタメンテナンス　更新";
             //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StaffUpdateMenu_FormClosing);
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffUpdateMenu_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffUpdateMenu_FormClosed);
             this.Load += new System.EventHandler(this.UpdateMenu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

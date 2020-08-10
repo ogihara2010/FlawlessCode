@@ -11,6 +11,7 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         int staff_code;
         string access_auth;
+        bool screan = true;
         public StaffMaster(MasterMaintenanceMenu mster, int staff_code)
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace Flawless_ex
         private void ReturnButton_Click(object sender, EventArgs e)
         {
             MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+            screan = false;
             this.Close();
             masterMenu.Show();
         }
@@ -37,6 +39,7 @@ namespace Flawless_ex
             int code = (int)dataGridView1.CurrentRow.Cells[0].Value; //選択した担当者コードを取得
 
             StaffUpdateMenu staffUpdateMenu = new StaffUpdateMenu(masterMenu, code, staff_code);
+            screan = false;
             this.Close();
             staffUpdateMenu.Show();
         }
@@ -63,15 +66,20 @@ namespace Flawless_ex
         private void addButtonClick(object sender, EventArgs e)//登録画面に遷移
         {
             StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu, staff_code);
+            screan = false;
             this.Close();
             addStaff.Show();
         }
 
-        /*private void StaffMaster_FormClosed(object sender, FormClosedEventArgs e)
+        private void StaffMaster_FormClosed(object sender, FormClosedEventArgs e)
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
-            masterMenu.Show();
-        }*/
+            if (screan)
+            {
+                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+                masterMenu.Show();
+            }
+        }
+            
 
         /*private void StaffMaster_FormClosing(object sender, FormClosingEventArgs e)
         {

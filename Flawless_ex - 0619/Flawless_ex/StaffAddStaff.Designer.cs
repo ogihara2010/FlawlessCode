@@ -350,7 +350,7 @@
             this.Name = "StaffAddStaff";
             this.Text = "担当者マスタメンテナンス　新規登録";
             //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StaffAddStaff_FormClosing);
-            //this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffAddStaff_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffAddStaff_FormClosed);
             this.Load += new System.EventHandler(this.StaffAddStaff_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

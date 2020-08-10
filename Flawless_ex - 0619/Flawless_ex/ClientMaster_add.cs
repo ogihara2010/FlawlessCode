@@ -19,6 +19,7 @@ namespace Flawless_ex
         string access_auth;
         string path;
         int type;
+        bool screan = true;
         public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth, int type)
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace Flawless_ex
         private void Button4_Click(object sender, EventArgs e)
         {
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-
+            screan = false;
             this.Close();
             clientmaster.Show();
         }
@@ -244,7 +245,7 @@ namespace Flawless_ex
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-
+            screan = false;
             this.Close();
             clientmaster.Show();
         }
@@ -441,7 +442,7 @@ namespace Flawless_ex
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-
+            screan = false;
             this.Close();
             clientmaster.Show();
         }
@@ -463,11 +464,14 @@ namespace Flawless_ex
             else { }
         }
 
-        /*private void ClientMaster_add_FormClosed(object sender, FormClosedEventArgs e)
+        private void ClientMaster_add_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-            clientmaster.Show();
-        }*/
+            if (screan)
+            {
+                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+                clientmaster.Show();
+            }
+        }
 
         private void Label6_Click(object sender, EventArgs e)
         {
