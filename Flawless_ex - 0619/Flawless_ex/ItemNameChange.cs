@@ -54,7 +54,7 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter;
         NpgsqlTransaction transaction;
 
-        public ItemNameChange(RecordList record, int grade, int staff_id, string slipNumber, string pass)
+        public ItemNameChange(RecordList record, int grade, int staff_id, string slipNumber, string pass, string access_auth)
         {
             InitializeComponent();
 
@@ -63,6 +63,7 @@ namespace Flawless_ex
             this.staff_id = staff_id;
             this.SlipNumber = slipNumber;
             this.Pass = pass;
+            this.Access_auth = access_auth;
         }
 
         #region"品名変更完了"

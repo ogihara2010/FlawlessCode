@@ -6045,7 +6045,7 @@ namespace Flawless_ex
             RegisterButton.Enabled = false;
             UpdateButton.Enabled = true;
 
-            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass);
+            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass, Access_auth);
             this.Hide();
             nameChange.Show();
         }
@@ -6053,7 +6053,7 @@ namespace Flawless_ex
 
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
-            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade);
+            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth);
             this.Hide();
             clientInformation.Show();
         }

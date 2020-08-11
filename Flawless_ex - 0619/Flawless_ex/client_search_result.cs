@@ -23,7 +23,8 @@ namespace Flawless_ex
         string search2;
         string search3;
         string pass;
-        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, decimal Total)
+
+        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, decimal Total, string Access_auth, string Pass)
         {
             InitializeComponent();
 
@@ -34,6 +35,8 @@ namespace Flawless_ex
             //this.statement = statement;
             staff_id = id;
             this.Total = Total;
+            this.access_auth = Access_auth;
+            this.pass = Pass;
         }
 
         private void client_search_result_Load(object sender, EventArgs e)
@@ -88,7 +91,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, access_auth, pass);
 
             this.Close();
             client_Search.Show();

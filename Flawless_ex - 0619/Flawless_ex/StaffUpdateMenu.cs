@@ -19,19 +19,24 @@ namespace Flawless_ex
         string access_auth;//アクセス権限
         int code;//ログイン担当者コード
         bool screan = true;
-        public StaffUpdateMenu(MasterMaintenanceMenu master, int staff_code, int code)
+        string Pass;
+
+
+        public StaffUpdateMenu(MasterMaintenanceMenu master, int staff_code, int code, string access_auth, string pass)
         {
             InitializeComponent();
 
             this.master = master;
             this.staffCode = staff_code;//選択した担当者コード
             this.code = code;
+            this.Pass = pass;
+            this.access_auth = access_auth;
         }
 
 
         private void ReturnButton(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(master, staffCode);//注意
+            StaffMaster personMaster = new StaffMaster(master, staffCode, access_auth, Pass);//注意
             screan = false;
             this.Close();
             personMaster.Show();
@@ -106,7 +111,7 @@ namespace Flawless_ex
                 #endregion
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update staff_m set invalid = 1, reason = '" +  reason +"' where staff_code = " + staffCode + "";
@@ -131,7 +136,7 @@ namespace Flawless_ex
 
             }
 
-            StaffMaster staffMaster = new StaffMaster(master, staffCode);
+            StaffMaster staffMaster = new StaffMaster(master, staffCode, access_auth, Pass);
             this.Close();
             staffMaster.Show();
         }
@@ -163,7 +168,7 @@ namespace Flawless_ex
             access_auth = this.accessButton.Text;//アクセス権限
             reason = this.reason.Text;
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
             string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ";
 
@@ -264,7 +269,7 @@ namespace Flawless_ex
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
 
-            StaffMaster staffMaster = new StaffMaster(master, staffCode);
+            StaffMaster staffMaster = new StaffMaster(master, staffCode, access_auth, Pass);
             screan = false;
             this.Close();
             staffMaster.Show();
@@ -277,7 +282,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from staff_m where staff_code = " + staffCode + "";
 
@@ -315,14 +320,9 @@ namespace Flawless_ex
 
         private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            StaffMaster staffMaster = new StaffMaster(master, code);
+            StaffMaster staffMaster = new StaffMaster(master, code, access_auth, Pass);
             staffMaster.Show();
         }
 
-        /*private void StaffUpdateMenu_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StaffMaster staffMaster = new StaffMaster(master, code);
-            staffMaster.Show();
-        }*/
     }
 }

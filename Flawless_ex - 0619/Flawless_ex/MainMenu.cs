@@ -81,7 +81,7 @@ namespace Flawless_ex
         #region "インボイス"
         private void Invoice_Click(object sender, EventArgs e)
         {
-            Invoice invoice = new Invoice(this, staff_id);
+            Invoice invoice = new Invoice(this, staff_id, access_auth, Pass);
 
             this.Hide();
             invoice.Show();
@@ -90,7 +90,7 @@ namespace Flawless_ex
         #region"操作履歴ボタン"
         private void Operatelog_Click(object sender, EventArgs e)
         {
-            Operatelog operatelog = new Operatelog(this, staff_id);
+            Operatelog operatelog = new Operatelog(this, staff_id, access_auth, Pass);
 
             this.Hide();
             operatelog.Show();
@@ -99,7 +99,7 @@ namespace Flawless_ex
         #region "買取販売データ検索ボタン"
         private void CustomerHistoriButton_Click(object sender, EventArgs e)
         {
-            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data, Pass);
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data, Pass, access_auth);
 
             this.Hide();
             customerHistorySelect.Show();

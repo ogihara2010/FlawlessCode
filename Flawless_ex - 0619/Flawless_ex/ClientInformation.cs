@@ -30,7 +30,7 @@ namespace Flawless_ex
         NpgsqlCommand cmd;
         NpgsqlDataReader reader;
 
-        public ClientInformation(RecordList recordList, int staff_id, string staff_name, int type, string slipnumber, int antique, int id, string pass, int grade)
+        public ClientInformation(RecordList recordList, int staff_id, string staff_name, int type, string slipnumber, int antique, int id, string pass, int grade, string access_auth)
         {
             InitializeComponent();
 
@@ -43,6 +43,7 @@ namespace Flawless_ex
             this.ID_Number = id;
             this.Pass = pass;
             this.Grade = grade;
+            this.Access_auth = access_auth;
         }
 
         private void ClientInformation_Load(object sender, EventArgs e)
