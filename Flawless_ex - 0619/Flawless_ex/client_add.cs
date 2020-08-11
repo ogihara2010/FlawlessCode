@@ -29,25 +29,27 @@ namespace Flawless_ex
         string search2;
         string search3;
         string pass;
-        public client_add(MainMenu mainMenu, int id, int type)
+        public client_add(MainMenu mainMenu, int id, int type, string Access_auth, string Pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
             //this.statement = statement;
             staff_id = id;
+            this.access_auth = Access_auth;
+            this.pass = Pass;
             this.type = type;
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, access_auth, pass);
             this.Close();
             client_Search.Show();
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, access_auth, pass);
             this.Close();
             client_Search.Show();
         }

@@ -18,7 +18,9 @@ namespace Flawless_ex
         string access_auth;
         string path;
         bool screan = true;
-        public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code, string access_auth)
+        string pass;
+
+        public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code, string access_auth, string Pass)
         {
             InitializeComponent();
             this.master = master;
@@ -27,11 +29,12 @@ namespace Flawless_ex
             this.address = address; // 住所
             this.type = type;  //  法人・個人
             this.access_auth = access_auth;
+            this.pass = Pass;
         }
 
         private void Button18_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
             screan = false;
             this.Close();
             clientmaster.Show();
@@ -39,7 +42,7 @@ namespace Flawless_ex
 
         private void Button4_Click_1(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
 
             this.Close();
             clientmaster.Show();
@@ -47,7 +50,7 @@ namespace Flawless_ex
 
         private void Button18_Click_1(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
             screan = false;
             this.Close();
             clientmaster.Show();
@@ -216,7 +219,7 @@ namespace Flawless_ex
             #region "旧データ"
             NpgsqlConnection conn1 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
-            conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_old = "select * from client_m_corporate where invalid = 0 and (staff_name = '" + name + "' and address = '" + address + "');";
             conn1.Open();
             adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
@@ -263,7 +266,7 @@ namespace Flawless_ex
                "' , '" + ClientStaffName_old + "','" +  EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old  + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old  + "' , '" + PeriodStay_old + "','" + SealCertification_old +  "'," +
               0 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
-            conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn2.Open();
 
             adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
@@ -314,13 +317,13 @@ namespace Flawless_ex
                 "' ,email_address = '" + EmailAddress + "',url_infor = '" + URLinfor + "',bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name_kana = '" + AccountNameKana + "' ,account_name = '" + AccountName + "' ,remarks = '" + Remarks + "' ,id = '" + ID + "' ,register_date = '" + b + "',antique_license = '" + Antiquelicense + "',tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + 
                 "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 +"' where antique_number = " + AntiqueNumber + "; ";
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("更新しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
             screan = false;
             this.Close();
             clientmaster.Show();
@@ -343,7 +346,7 @@ namespace Flawless_ex
                 NpgsqlCommandBuilder builder;
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update client_m_corporate set invalid = 1 where staff_name = '" + name + "'" + "and address = '" + address + "'";
@@ -384,7 +387,7 @@ namespace Flawless_ex
             #region "旧データ"
             NpgsqlConnection conn1 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
-            conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_old = "select * from client_m_corporate where invalid = 0 and (staff_name = '" + name + "' and address = '" + address + "');";
             conn1.Open();
             adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
@@ -431,7 +434,7 @@ namespace Flawless_ex
                "' , '" + ClientStaffName_old + "','" + EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "' , '" + PeriodStay_old + "','" + SealCertification_old + "'," +
               1 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
-            conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn2.Open();
 
             adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
@@ -444,7 +447,7 @@ namespace Flawless_ex
             DataTable dt = new DataTable();
             DataRow row;
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             if (type == 0)
             {
                 //法人
@@ -800,7 +803,7 @@ namespace Flawless_ex
             NpgsqlConnection conn1 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
             string sql_old = "select * from client_m_individual where invalid = 0 and (name = '" + name + "' and address = '" + address + "');";
-            conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn1.Open();
             adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
             adapter1.Fill(dt2);
@@ -843,7 +846,7 @@ namespace Flawless_ex
                "' , '" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountName_old + "' , '" + AccountNameKana_old + "' , '" + ID_old + "' , '" + Remarks_old + "','" + RegisterCopy_old + "' , '" + Antiquelicense_old + "','" + PhotoID_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "','" + PeriodStay_old + "','" + SealCertification_old + "'," +
               0 + ",'" + AolFinancialShareholder_old + "','" + c + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
-            conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn2.Open();
 
             adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
@@ -890,13 +893,13 @@ namespace Flawless_ex
                "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '"  + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "',photo_id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
               0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 +"',reason = '" + reason2 + "'where id_number = " + ID + ";";
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("更新しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
             screan = false;
             this.Close();
             clientmaster.Show();
@@ -917,7 +920,7 @@ namespace Flawless_ex
                 NpgsqlConnection conn1 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter1;
                 string sql_old = "select * from client_m_individual where name = '" + name + "' and address = '" + address + "';";
-                conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn1.Open();
                 adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
                 adapter1.Fill(dt2);
@@ -960,7 +963,7 @@ namespace Flawless_ex
                    "' , '" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountName_old + "' , '" + AccountNameKana_old + "' , '" + ID_old + "' , '" + Remarks_old + "','" + RegisterCopy_old + "' , '" + Antiquelicense_old + "','" + PhotoID_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "','" + PeriodStay_old + "','" + SealCertification_old + "'," +
                   1 + ",'" + AolFinancialShareholder_old + "','" + c + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
-                conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn2.Open();
 
                 adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
@@ -972,7 +975,7 @@ namespace Flawless_ex
                 NpgsqlCommandBuilder builder;
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update client_m_individual set invalid = 1 where name = '" + name + "'" + "and address = '" + address + "'";
@@ -1311,7 +1314,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
                 clientmaster.Show();
             }
         }
@@ -1320,7 +1323,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
                 clientmaster.Show();
             }
         }

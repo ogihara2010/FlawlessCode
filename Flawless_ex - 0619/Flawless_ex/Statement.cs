@@ -4604,7 +4604,7 @@ namespace Flawless_ex
                 }
             }
             
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, access_auth, pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -4655,7 +4655,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, access_auth, pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -10844,14 +10844,14 @@ namespace Flawless_ex
 
         private void DeliveryPreviewButton_Click(object sender, EventArgs e)
         {
-            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type);
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type, access_auth, pass);
             this.Close();
             deliveryPreview.Show();
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass, access_auth);
             this.Close();
             mainMenu.Hide();
             dataSearchResults.Show();
@@ -10859,7 +10859,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass) ;
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, client_staff_name, phone, address, item, search1, search2, search3, data, pass, access_auth) ;
             this.Close();
             mainMenu.Hide();
             dataSearchResults.Show();

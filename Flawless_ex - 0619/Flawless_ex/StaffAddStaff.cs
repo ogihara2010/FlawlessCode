@@ -13,18 +13,23 @@ namespace Flawless_ex
         DataTable dt;
         int staff_code;
         bool screan = true;
-        public StaffAddStaff(DataTable dt, MasterMaintenanceMenu master, int staff_code)
+        string Pass;
+        string access_auth;
+
+        public StaffAddStaff(DataTable dt, MasterMaintenanceMenu master, int staff_code, string pass, string access_auth)
         {
             InitializeComponent();
 
             this.dt = dt;
             this.master = master;
             this.staff_code = staff_code;
+            this.Pass = pass;
+            this.access_auth = access_auth;
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            StaffMaster staffMaster = new StaffMaster(master, staff_code);
+            StaffMaster staffMaster = new StaffMaster(master, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             staffMaster.Show();
@@ -93,7 +98,7 @@ namespace Flawless_ex
                 string sql_str = "insert into staff_m values(" + staffCode1 + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "','" + d + "'," + 0 + ")";
 
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -114,7 +119,7 @@ namespace Flawless_ex
                 MessageBox.Show("登録完了");
 
 
-                StaffMaster staffMaster = new StaffMaster(master, staff_code);
+                StaffMaster staffMaster = new StaffMaster(master, staff_code, access_auth, Pass);
                 screan = false;
                 this.Close();
                 staffMaster.Show();
@@ -127,7 +132,7 @@ namespace Flawless_ex
         {
             DataTable dt2 = new DataTable();
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string sql_str2 = "select* from main_category_m where invalid = 0";
@@ -164,7 +169,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                StaffMaster staffMaster = new StaffMaster(master, staff_code);
+                StaffMaster staffMaster = new StaffMaster(master, staff_code, access_auth, Pass);
                 staffMaster.Show();
             }
         }

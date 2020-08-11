@@ -35,12 +35,14 @@ namespace Flawless_ex
         string search2;
         string search3;
         string pass;
-        public DeliveryPreview(MainMenu mainMenu, int id, int type)
+        public DeliveryPreview(MainMenu mainMenu, int id, int type, string access_auth, string pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;
+            this.access_auth = access_auth;
+            this.pass = pass;
         }
 
         private void Button1_Click(object sender, EventArgs e)

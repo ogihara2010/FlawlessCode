@@ -30,7 +30,7 @@ namespace Flawless_ex
         string access_auth;
         string Pass;
         DataTable dt = new DataTable();
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass, string Access_auth)
         {
             InitializeComponent();
             mainMenu = main;
@@ -45,6 +45,7 @@ namespace Flawless_ex
             staff_id = id;
             this.data = data;
             this.Pass = pass;
+            this.access_auth = Access_auth;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
@@ -214,7 +215,7 @@ namespace Flawless_ex
 
         private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
             customerHistory.Show();
         }
     }

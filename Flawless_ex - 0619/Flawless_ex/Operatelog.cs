@@ -9,6 +9,9 @@ namespace Flawless_ex
     {
 
         int staff_id;
+        string Access_auth;
+        string Pass;
+
         MainMenu mainMenu;
         DataTable dt = new DataTable();
         DataTable dt2 = new DataTable();
@@ -17,11 +20,13 @@ namespace Flawless_ex
         DataTable dt5 = new DataTable();
         DataTable dt6 = new DataTable();
         DataTable dt7 = new DataTable();
-        public Operatelog(MainMenu main, int id)
+        public Operatelog(MainMenu main, int id, string access_auth, string pass)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
+            Access_auth = access_auth;
+            Pass = pass;
         }
 
         private void Return1_Click(object sender, EventArgs e)

@@ -12,17 +12,22 @@ namespace Flawless_ex
         int staff_code;
         string access_auth;
         bool screan = true;
-        public StaffMaster(MasterMaintenanceMenu mster, int staff_code)
+        string Pass;
+
+        public StaffMaster(MasterMaintenanceMenu mster, int staff_code, string pass, string access_auth)
         {
             InitializeComponent();
 
             masterMenu = mster;
             this.staff_code = staff_code;
+            this.Pass = pass;
+            this.access_auth = access_auth;
+
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             masterMenu.Show();
@@ -38,7 +43,7 @@ namespace Flawless_ex
         {
             int code = (int)dataGridView1.CurrentRow.Cells[0].Value; //選択した担当者コードを取得
 
-            StaffUpdateMenu staffUpdateMenu = new StaffUpdateMenu(masterMenu, code, staff_code);
+            StaffUpdateMenu staffUpdateMenu = new StaffUpdateMenu(masterMenu, code, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             staffUpdateMenu.Show();
@@ -48,7 +53,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code where staff_m.invalid = 0 ";
             conn.Open();
@@ -65,7 +70,7 @@ namespace Flawless_ex
 
         private void addButtonClick(object sender, EventArgs e)//登録画面に遷移
         {
-            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu, staff_code);
+            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             addStaff.Show();
@@ -75,17 +80,11 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
+                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, Pass);
                 masterMenu.Show();
             }
         }
             
-
-        /*private void StaffMaster_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth);
-            masterMenu.Show();
-        }*/
     }
 }
 

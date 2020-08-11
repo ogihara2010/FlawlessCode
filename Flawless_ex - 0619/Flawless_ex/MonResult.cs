@@ -106,7 +106,7 @@ namespace Flawless_ex
 
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn4.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (access_auth == "C")
             {
@@ -201,7 +201,7 @@ namespace Flawless_ex
         {
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn4.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (access_auth == "C")
             {
@@ -228,7 +228,7 @@ namespace Flawless_ex
                 adapter = new NpgsqlDataAdapter(sql_str2, conn4);
                 adapter.Fill(dt);
             }
-            
+            conn4.Close();
             
         }
 
