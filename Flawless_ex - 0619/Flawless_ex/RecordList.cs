@@ -30,7 +30,6 @@ namespace Flawless_ex
         decimal total;
         int grade;
         RecordList recordList;
-        DateTime date;
         int AntiqueNumber ;
         int ID_Number ;
         string Pass;
@@ -39,6 +38,7 @@ namespace Flawless_ex
         string Search1;
         string Search2;
         string Search3;
+        bool screan = true;
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -277,19 +277,13 @@ namespace Flawless_ex
             string sql_str = "select * from statement_data inner join staff_m on statement_data.staff_code = staff_m.staff_code where statement_data.staff_code = '" + staff_id + "';";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
-            try
+            using (reader = cmd.ExecuteReader())
             {
-                using (reader = cmd.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        SlipNumber = reader["document_number"].ToString();
-                        Access_auth = reader["access_auth"].ToString();
-                    }
+                    SlipNumber = reader["document_number"].ToString();
+                    Access_auth = reader["access_auth"].ToString();
                 }
-            }catch(Exception err)
-            {
-                MessageBox.Show(err.ToString());
             }
             conn.Close();
             /*
@@ -389,7 +383,6 @@ namespace Flawless_ex
             for (int i = 0; i < record; i++)
             {
                 DataRow row = dataTable.Rows[i];
-
                 switch (i)
                 {
                     case 0:
@@ -1326,28 +1319,13 @@ namespace Flawless_ex
             OtherProfitTextBox.BackColor = SystemColors.Control;
             TotalPurchaseTextBox.BackColor = SystemColors.Control;
             TotalWholesaleTextBox.BackColor = SystemColors.Control;
-            TotalPurchaseTextBox.BackColor = SystemColors.Control;
+            TotalProfitTextBox.BackColor = SystemColors.Control;
             PurchaseTotalTextBox.BackColor = SystemColors.Control;
             WholesaleTotalTextBox.BackColor = SystemColors.Control;
             ProfitTotalTextBox.BackColor = SystemColors.Control;
             #endregion
             #endregion
-            ///<summary>
-            ///納品書を検索できるようにする機能を追加したら削除予定
-            ///範囲開始
-            /// </summary>
-            ///
-            int x = 750;
-            AssessmentLabel.Left = x;
-            AssessmentDateTextBox.Left = x + 50;
-            SlipNumberLabel.Left = x + 200;
-            SlipNumberTextBox.Left = x + 260;
-            GradeNumberLabel.Left = x + 360;
-            GradeNumberTextBox.Left = x + 420;
-            ///<summary>
-            ///納品書を検索できるようにする機能を追加したら削除予定
-            /// 範囲終了
-            /// </summary>
+
         }
 
         #region"成績入力画面から計算書へ"
@@ -1358,10 +1336,16 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
-            statement.Show();
+            if (screan)
+            {
+                statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
+                statement.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
-
 
 
         #endregion
@@ -1379,6 +1363,12 @@ namespace Flawless_ex
             switch (MainCategoryCode1)
             {
                 case 100:
+                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat1;
+                        WholeSale = WholeSale - WholeSaleUnFormat1;
+                    }
                     WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
                     WholeSaleMetal = WholeSaleUnFormat1 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
@@ -1390,6 +1380,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat1;
+                        WholeSale = WholeSale - WholeSaleUnFormat1;
+                    }
                     WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
                     WholeSaleDiamond = WholeSaleUnFormat1 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
@@ -1401,6 +1397,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat1;
+                        WholeSale = WholeSale - WholeSaleUnFormat1;
+                    }
                     WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
                     WholeSaleBrand = WholeSaleUnFormat1 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
@@ -1412,6 +1414,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat1;
+                        WholeSale = WholeSale - WholeSaleUnFormat1;
+                    }
                     WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
                     WholeSaleProduct = WholeSaleUnFormat1 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat1 + WholeSale;                                        //卸値の合計
@@ -1423,6 +1431,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat1;
+                        WholeSale = WholeSale - WholeSaleUnFormat1;
+                    }
                     WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
                     WholeSaleOther = WholeSaleUnFormat1 + WholeSaleOther;                                 //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
@@ -1435,7 +1449,6 @@ namespace Flawless_ex
                     break;
             }
         }
-
         private void WholesalePriceTextBox2_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
@@ -1446,6 +1459,12 @@ namespace Flawless_ex
             switch (MainCategoryCode2)
             {
                 case 100:
+                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat2;
+                        WholeSale = WholeSale - WholeSaleUnFormat2;
+                    }
                     WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
                     WholeSaleMetal = WholeSaleUnFormat2 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
@@ -1457,6 +1476,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat2;
+                        WholeSale = WholeSale - WholeSaleUnFormat2;
+                    }
                     WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
                     WholeSaleDiamond = WholeSaleUnFormat2 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
@@ -1468,6 +1493,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat2;
+                        WholeSale = WholeSale - WholeSaleUnFormat2;
+                    }
                     WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
                     WholeSaleBrand = WholeSaleUnFormat2 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
@@ -1479,6 +1510,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat2;
+                        WholeSale = WholeSale - WholeSaleUnFormat2;
+                    }
                     WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
                     WholeSaleProduct = WholeSaleUnFormat2 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
@@ -1490,6 +1527,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat2;
+                        WholeSale = WholeSale - WholeSaleUnFormat2;
+                    }
                     WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
                     WholeSaleOther = WholeSaleUnFormat2 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
@@ -1512,6 +1555,12 @@ namespace Flawless_ex
             switch (MainCategoryCode3)
             {
                 case 100:
+                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat3;
+                        WholeSale = WholeSale - WholeSaleUnFormat3;
+                    }
                     WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
                     WholeSaleMetal = WholeSaleUnFormat3 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
@@ -1523,6 +1572,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat3;
+                        WholeSale = WholeSale - WholeSaleUnFormat3;
+                    }
                     WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
                     WholeSaleDiamond = WholeSaleUnFormat3 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
@@ -1534,6 +1589,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat3;
+                        WholeSale = WholeSale - WholeSaleUnFormat3;
+                    }
                     WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
                     WholeSaleBrand = WholeSaleUnFormat3 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
@@ -1545,6 +1606,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat3;
+                        WholeSale = WholeSale - WholeSaleUnFormat3;
+                    }
                     WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
                     WholeSaleProduct = WholeSaleUnFormat3 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
@@ -1556,6 +1623,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat3;
+                        WholeSale = WholeSale - WholeSaleUnFormat3;
+                    }
                     WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
                     WholeSaleOther = WholeSaleUnFormat3 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
@@ -1578,6 +1651,12 @@ namespace Flawless_ex
             switch (MainCategoryCode4)
             {
                 case 100:
+                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat4;
+                        WholeSale = WholeSale - WholeSaleUnFormat4;
+                    }
                     WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
                     WholeSaleMetal = WholeSaleUnFormat4 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
@@ -1589,6 +1668,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat4;
+                        WholeSale = WholeSale - WholeSaleUnFormat4;
+                    }
                     WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
                     WholeSaleDiamond = WholeSaleUnFormat4 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
@@ -1600,6 +1685,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat4;
+                        WholeSale = WholeSale - WholeSaleUnFormat4;
+                    }
                     WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
                     WholeSaleBrand = WholeSaleUnFormat4 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
@@ -1611,6 +1702,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat4;
+                        WholeSale = WholeSale - WholeSaleUnFormat4;
+                    }
                     WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
                     WholeSaleProduct = WholeSaleUnFormat4 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
@@ -1622,6 +1719,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat4;
+                        WholeSale = WholeSale - WholeSaleUnFormat4;
+                    }
                     WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
                     WholeSaleOther = WholeSaleUnFormat4 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
@@ -1644,6 +1747,12 @@ namespace Flawless_ex
             switch (MainCategoryCode5)
             {
                 case 100:
+                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat5;
+                        WholeSale = WholeSale - WholeSaleUnFormat5;
+                    }
                     WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
                     WholeSaleMetal = WholeSaleUnFormat5 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
@@ -1655,6 +1764,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat5;
+                        WholeSale = WholeSale - WholeSaleUnFormat5;
+                    }
                     WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
                     WholeSaleDiamond = WholeSaleUnFormat5 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
@@ -1666,6 +1781,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat5;
+                        WholeSale = WholeSale - WholeSaleUnFormat5;
+                    }
                     WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
                     WholeSaleBrand = WholeSaleUnFormat5 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
@@ -1677,6 +1798,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat5;
+                        WholeSale = WholeSale - WholeSaleUnFormat5;
+                    }
                     WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
                     WholeSaleProduct = WholeSaleUnFormat5 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
@@ -1688,6 +1815,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat5;
+                        WholeSale = WholeSale - WholeSaleUnFormat5;
+                    }
                     WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
                     WholeSaleOther = WholeSaleUnFormat5 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
@@ -1700,7 +1833,6 @@ namespace Flawless_ex
                     break;
             }
         }
-
         private void WholesalePriceTextBox6_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
@@ -1711,6 +1843,12 @@ namespace Flawless_ex
             switch (MainCategoryCode6)
             {
                 case 100:
+                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat6;
+                        WholeSale = WholeSale - WholeSaleUnFormat6;
+                    }
                     WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
                     WholeSaleMetal = WholeSaleUnFormat6 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
@@ -1722,6 +1860,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat6;
+                        WholeSale = WholeSale - WholeSaleUnFormat6;
+                    }
                     WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
                     WholeSaleDiamond = WholeSaleUnFormat6 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
@@ -1733,6 +1877,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat6;
+                        WholeSale = WholeSale - WholeSaleUnFormat6;
+                    }
                     WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
                     WholeSaleBrand = WholeSaleUnFormat6 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
@@ -1744,6 +1894,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat6;
+                        WholeSale = WholeSale - WholeSaleUnFormat6;
+                    }
                     WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
                     WholeSaleProduct = WholeSaleUnFormat6 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
@@ -1755,6 +1911,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat6;
+                        WholeSale = WholeSale - WholeSaleUnFormat6;
+                    }
                     WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
                     WholeSaleOther = WholeSaleUnFormat6 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
@@ -1777,6 +1939,12 @@ namespace Flawless_ex
             switch (MainCategoryCode7)
             {
                 case 100:
+                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat7;
+                        WholeSale = WholeSale - WholeSaleUnFormat7;
+                    }
                     WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
                     WholeSaleMetal = WholeSaleUnFormat7 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
@@ -1788,6 +1956,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat7;
+                        WholeSale = WholeSale - WholeSaleUnFormat7;
+                    }
                     WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
                     WholeSaleDiamond = WholeSaleUnFormat7 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
@@ -1799,6 +1973,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat7;
+                        WholeSale = WholeSale - WholeSaleUnFormat7;
+                    }
                     WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
                     WholeSaleBrand = WholeSaleUnFormat7 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
@@ -1810,6 +1990,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat7;
+                        WholeSale = WholeSale - WholeSaleUnFormat7;
+                    }
                     WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
                     WholeSaleProduct = WholeSaleUnFormat7 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
@@ -1821,6 +2007,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat7;
+                        WholeSale = WholeSale - WholeSaleUnFormat7;
+                    }
                     WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
                     WholeSaleOther = WholeSaleUnFormat7 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
@@ -1843,6 +2035,12 @@ namespace Flawless_ex
             switch (MainCategoryCode8)
             {
                 case 100:
+                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat8;
+                        WholeSale = WholeSale - WholeSaleUnFormat8;
+                    }
                     WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
                     WholeSaleMetal = WholeSaleUnFormat8 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
@@ -1854,6 +2052,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat8;
+                        WholeSale = WholeSale - WholeSaleUnFormat8;
+                    }
                     WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
                     WholeSaleDiamond = WholeSaleUnFormat8 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
@@ -1865,6 +2069,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat8;
+                        WholeSale = WholeSale - WholeSaleUnFormat8;
+                    }
                     WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
                     WholeSaleBrand = WholeSaleUnFormat8 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
@@ -1876,6 +2086,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat8;
+                        WholeSale = WholeSale - WholeSaleUnFormat8;
+                    }
                     WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
                     WholeSaleProduct = WholeSaleUnFormat8 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
@@ -1887,6 +2103,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat8;
+                        WholeSale = WholeSale - WholeSaleUnFormat8;
+                    }
                     WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
                     WholeSaleOther = WholeSaleUnFormat8 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
@@ -1909,6 +2131,12 @@ namespace Flawless_ex
             switch (MainCategoryCode9)
             {
                 case 100:
+                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat9;
+                        WholeSale = WholeSale - WholeSaleUnFormat9;
+                    }
                     WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
                     WholeSaleMetal = WholeSaleUnFormat9 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
@@ -1920,6 +2148,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat9;
+                        WholeSale = WholeSale - WholeSaleUnFormat9;
+                    }
                     WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
                     WholeSaleDiamond = WholeSaleUnFormat9 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
@@ -1931,6 +2165,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat9;
+                        WholeSale = WholeSale - WholeSaleUnFormat9;
+                    }
                     WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
                     WholeSaleBrand = WholeSaleUnFormat9 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
@@ -1942,6 +2182,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat9;
+                        WholeSale = WholeSale - WholeSaleUnFormat9;
+                    }
                     WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
                     WholeSaleProduct = WholeSaleUnFormat9 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
@@ -1953,6 +2199,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat9;
+                        WholeSale = WholeSale - WholeSaleUnFormat9;
+                    }
                     WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
                     WholeSaleOther = WholeSaleUnFormat9 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
@@ -1975,6 +2227,12 @@ namespace Flawless_ex
             switch (MainCategoryCode10)
             {
                 case 100:
+                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat10;
+                        WholeSale = WholeSale - WholeSaleUnFormat10;
+                    }
                     WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
                     WholeSaleMetal = WholeSaleUnFormat10 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
@@ -1986,6 +2244,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat10;
+                        WholeSale = WholeSale - WholeSaleUnFormat10;
+                    }
                     WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
                     WholeSaleDiamond = WholeSaleUnFormat10 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
@@ -1997,6 +2261,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat10;
+                        WholeSale = WholeSale - WholeSaleUnFormat10;
+                    }
                     WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
                     WholeSaleBrand = WholeSaleUnFormat10 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
@@ -2008,6 +2278,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat10;
+                        WholeSale = WholeSale - WholeSaleUnFormat10;
+                    }
                     WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
                     WholeSaleProduct = WholeSaleUnFormat10 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
@@ -2019,6 +2295,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat10;
+                        WholeSale = WholeSale - WholeSaleUnFormat10;
+                    }
                     WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
                     WholeSaleOther = WholeSaleUnFormat10 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
@@ -2041,6 +2323,12 @@ namespace Flawless_ex
             switch (MainCategoryCode11)
             {
                 case 100:
+                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat11;
+                        WholeSale = WholeSale - WholeSaleUnFormat11;
+                    }
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleMetal = WholeSaleUnFormat11 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
@@ -2052,6 +2340,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat11;
+                        WholeSale = WholeSale - WholeSaleUnFormat11;
+                    }
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleDiamond = WholeSaleUnFormat11 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
@@ -2063,6 +2357,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat11;
+                        WholeSale = WholeSale - WholeSaleUnFormat11;
+                    }
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleBrand = WholeSaleUnFormat11 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
@@ -2074,6 +2374,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat11;
+                        WholeSale = WholeSale - WholeSaleUnFormat11;
+                    }
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleProduct = WholeSaleUnFormat11 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
@@ -2085,6 +2391,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat11;
+                        WholeSale = WholeSale - WholeSaleUnFormat11;
+                    }
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleOther = WholeSaleUnFormat11 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
@@ -2107,6 +2419,12 @@ namespace Flawless_ex
             switch (MainCategoryCode12)
             {
                 case 100:
+                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat12;
+                        WholeSale = WholeSale - WholeSaleUnFormat12;
+                    }
                     WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
                     WholeSaleMetal = WholeSaleUnFormat12 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
@@ -2118,6 +2436,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat12;
+                        WholeSale = WholeSale - WholeSaleUnFormat12;
+                    }
                     WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
                     WholeSaleDiamond = WholeSaleUnFormat12 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
@@ -2129,6 +2453,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat12;
+                        WholeSale = WholeSale - WholeSaleUnFormat12;
+                    }
                     WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
                     WholeSaleBrand = WholeSaleUnFormat12 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
@@ -2140,6 +2470,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat12;
+                        WholeSale = WholeSale - WholeSaleUnFormat12;
+                    }
                     WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
                     WholeSaleProduct = WholeSaleUnFormat12 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
@@ -2151,6 +2487,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat12;
+                        WholeSale = WholeSale - WholeSaleUnFormat12;
+                    }
                     WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
                     WholeSaleOther = WholeSaleUnFormat12 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
@@ -2173,6 +2515,12 @@ namespace Flawless_ex
             switch (MainCategoryCode13)
             {
                 case 100:
+                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat13;
+                        WholeSale = WholeSale - WholeSaleUnFormat13;
+                    }
                     WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
                     WholeSaleMetal = WholeSaleUnFormat13 + WholeSaleMetal;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
@@ -2184,6 +2532,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 101:
+                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat13;
+                        WholeSale = WholeSale - WholeSaleUnFormat13;
+                    }
                     WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
                     WholeSaleDiamond = WholeSaleUnFormat13 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
@@ -2195,6 +2549,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 102:
+                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat13;
+                        WholeSale = WholeSale - WholeSaleUnFormat13;
+                    }
                     WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
                     WholeSaleBrand = WholeSaleUnFormat13 + WholeSaleBrand;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
@@ -2206,6 +2566,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 103:
+                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat13;
+                        WholeSale = WholeSale - WholeSaleUnFormat13;
+                    }
                     WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
                     WholeSaleProduct = WholeSaleUnFormat13 + WholeSaleProduct;                        //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
@@ -2217,6 +2583,12 @@ namespace Flawless_ex
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     break;
                 case 104:
+                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    {
+                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat13;
+                        WholeSale = WholeSale - WholeSaleUnFormat13;
+                    }
                     WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
                     WholeSaleOther = WholeSaleUnFormat13 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
@@ -2234,162 +2606,74 @@ namespace Flawless_ex
         #region"金額が下の表に表示されたら合計金額表示（￥マーク設定済み）TextChangedイベント"
         private void MetalPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                PurChase = PurChaseMetal + PurChase;
-                TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
-                PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
-            }
-            else
-            {
-                first = true;
-            }
+            PurChase = PurChaseMetal + PurChase;
+            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
+            PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
         private void DiamondPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                PurChase = PurChaseDiamond + PurChase;
-                TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
-                PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
-            }
-            else
-            {
-                first = true;
-            }
+            PurChase = PurChaseDiamond + PurChase;
+            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
+            PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
         private void BrandPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                PurChase = PurChaseBrand + PurChase;
-                TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
-                PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
-            }
-            else
-            {
-                first = true;
-            }
+            PurChase = PurChaseBrand + PurChase;
+            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
+            PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
         private void ProductPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                PurChase = PurChaseProduct + PurChase;
-                TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
-                PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
-            }
-            else
-            {
-                first = true;
-            }
+            PurChase = PurChaseProduct + PurChase;
+            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
+            PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
         private void OtherPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                PurChase = PurChaseOther + PurChase;
-                TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
-                PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
-            }
-            else
-            {
-                first = true;
-            }
+            PurChase = PurChaseOther + PurChase;
+            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
+            PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
         #endregion
 
         #region"下の表に卸値が表示されたら左下の表に大分類ごとに利益表示（￥マーク設定済み）TextChangedイベント"
         private void MetalWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                ProFitMetal = WholeSaleMetal - PurChaseMetal;
-                MetalProfitTextBox.Text = string.Format("{0:C}", ProFitMetal);
-            }
-            else
-            {
-                first = true;
-            }
+            ProFitMetal = WholeSaleMetal - PurChaseMetal;
+            MetalProfitTextBox.Text = string.Format("{0:C}", ProFitMetal);
         }
 
         private void DiamondWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                ProFitDiamond = WholeSaleDiamond - PurChaseDiamond;
-                DiamondProfitTextBox.Text = string.Format("{0:C}", ProFitDiamond);
-            }
-            else
-            {
-                first = true;
-            }
+            ProFitDiamond = WholeSaleDiamond - PurChaseDiamond;
+            DiamondProfitTextBox.Text = string.Format("{0:C}", ProFitDiamond);
         }
 
         private void BrandWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                ProFitBrand = WholeSaleBrand - PurChaseBrand;
-                BrandProfitTextBox.Text = string.Format("{0:C}", ProFitBrand);
-            }
-            else
-            {
-                first = true;
-            }
+            ProFitBrand = WholeSaleBrand - PurChaseBrand;
+            BrandProfitTextBox.Text = string.Format("{0:C}", ProFitBrand);
         }
 
         private void ProductWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                ProFitProduct = WholeSaleProduct - PurChaseProduct;
-                ProductProfitTextBox.Text = string.Format("{0:C}", ProFitProduct);
-            }
-            else
-            {
-                first = true;
-            }
+            ProFitProduct = WholeSaleProduct - PurChaseProduct;
+            ProductProfitTextBox.Text = string.Format("{0:C}", ProFitProduct);
         }
 
         private void OtherWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                ProFitOther = WholeSaleOther - PurChaseOther;
-                OtherProfitTextBox.Text = string.Format("{0:C}", ProFitOther);
-            }
-            else
-            {
-                first = true;
-            }
+            ProFitOther = WholeSaleOther - PurChaseOther;
+            OtherProfitTextBox.Text = string.Format("{0:C}", ProFitOther);
         }
         #endregion
 
         #region"左下表と右下表の利益の合計表示（\マーク設定済み）TextChangedイベント"
         private void TotalWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                ProFit = WholeSale - PurChase;
-                TotalProfitTextBox.Text = string.Format("{0:C}", ProFit);
-                ProfitTotalTextBox.Text = string.Format("{0:C}", ProFit);
-            }
-            else
-            {
-                first = true;
-            }
+            ProFit = WholeSale - PurChase;
+            TotalProfitTextBox.Text = string.Format("{0:C}", ProFit);
+            ProfitTotalTextBox.Text = string.Format("{0:C}", ProFit);
         }
 
         #endregion
@@ -3198,184 +3482,81 @@ namespace Flawless_ex
         #region"単価の数値を３桁区切りで表示 TextChangedイベント"
         private void unitPriceText1_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat1 = decimal.Parse(unitPriceText1.Text);
-                unitPriceText1.Text = string.Format("{0:#,0}", UnitPriceUnFormat1);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat1 = decimal.Parse(unitPriceText1.Text);
+            unitPriceText1.Text = string.Format("{0:#,0}", UnitPriceUnFormat1);
         }
 
         private void unitPriceText2_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat2 = decimal.Parse(unitPriceText2.Text);
-                unitPriceText2.Text = string.Format("{0:#,0}", UnitPriceUnFormat2);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat2 = decimal.Parse(unitPriceText2.Text);
+            unitPriceText2.Text = string.Format("{0:#,0}", UnitPriceUnFormat2);
         }
 
         private void unitPriceText3_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat3 = decimal.Parse(unitPriceText3.Text);
-                unitPriceText3.Text = string.Format("{0:#,0}", UnitPriceUnFormat3);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat3 = decimal.Parse(unitPriceText3.Text);
+            unitPriceText3.Text = string.Format("{0:#,0}", UnitPriceUnFormat3);
         }
 
         private void unitPriceText4_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat4 = decimal.Parse(unitPriceText4.Text);
-                unitPriceText4.Text = string.Format("{0:#,0}", UnitPriceUnFormat4);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat4 = decimal.Parse(unitPriceText4.Text);
+            unitPriceText4.Text = string.Format("{0:#,0}", UnitPriceUnFormat4);
         }
+
 
         private void unitPriceText5_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat5 = decimal.Parse(unitPriceText5.Text);
-                unitPriceText5.Text = string.Format("{0:#,0}", UnitPriceUnFormat5);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat5 = decimal.Parse(unitPriceText5.Text);
+            unitPriceText5.Text = string.Format("{0:#,0}", UnitPriceUnFormat5);
         }
 
         private void unitPriceText6_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat6 = decimal.Parse(unitPriceText6.Text);
-                unitPriceText6.Text = string.Format("{0:#,0}", UnitPriceUnFormat6);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat6 = decimal.Parse(unitPriceText6.Text);
+            unitPriceText6.Text = string.Format("{0:#,0}", UnitPriceUnFormat6);
         }
 
         private void unitPriceText7_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat7 = decimal.Parse(unitPriceText7.Text);
-                unitPriceText7.Text = string.Format("{0:#,0}", UnitPriceUnFormat7);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat7 = decimal.Parse(unitPriceText7.Text);
+            unitPriceText7.Text = string.Format("{0:#,0}", UnitPriceUnFormat7);
         }
 
         private void unitPriceText8_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat8 = decimal.Parse(unitPriceText8.Text);
-                unitPriceText8.Text = string.Format("{0:#,0}", UnitPriceUnFormat8);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat8 = decimal.Parse(unitPriceText8.Text);
+            unitPriceText8.Text = string.Format("{0:#,0}", UnitPriceUnFormat8);
         }
 
         private void unitPriceText9_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat9 = decimal.Parse(unitPriceText9.Text);
-                unitPriceText9.Text = string.Format("{0:#,0}", UnitPriceUnFormat9);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat9 = decimal.Parse(unitPriceText9.Text);
+            unitPriceText9.Text = string.Format("{0:#,0}", UnitPriceUnFormat9);
         }
 
         private void unitPriceText10_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat10 = decimal.Parse(unitPriceText10.Text);
-                unitPriceText10.Text = string.Format("{0:#,0}", UnitPriceUnFormat10);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat10 = decimal.Parse(unitPriceText10.Text);
+            unitPriceText10.Text = string.Format("{0:#,0}", UnitPriceUnFormat10);
         }
 
         private void unitPriceText11_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat11 = decimal.Parse(unitPriceText11.Text);
-                unitPriceText11.Text = string.Format("{0:#,0}", UnitPriceUnFormat11);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat11 = decimal.Parse(unitPriceText11.Text);
+            unitPriceText11.Text = string.Format("{0:#,0}", UnitPriceUnFormat11);
         }
 
         private void unitPriceText12_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat12 = decimal.Parse(unitPriceText12.Text);
-                unitPriceText12.Text = string.Format("{0:#,0}", UnitPriceUnFormat12);
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat12 = decimal.Parse(unitPriceText12.Text);
+            unitPriceText12.Text = string.Format("{0:#,0}", UnitPriceUnFormat12);
         }
 
         private void unitPriceText13_TextChanged(object sender, EventArgs e)
         {
-            if (first)
-            {
-                first = false;
-                UnitPriceUnFormat13 = decimal.Parse(unitPriceText13.Text);
-                unitPriceText13.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceText13.Text));
-            }
-            else
-            {
-                first = true;
-            }
+            UnitPriceUnFormat13 = decimal.Parse(unitPriceText13.Text);
+            unitPriceText13.Text = string.Format("{0:#,0}", UnitPriceUnFormat13);
         }
         #endregion
 
@@ -3404,7 +3585,7 @@ namespace Flawless_ex
             else
             {
                 first = true;
-            } 
+            }
         }
         private void purchaseTextBox3_TextChanged(object sender, EventArgs e)
         {
@@ -6046,7 +6227,8 @@ namespace Flawless_ex
             UpdateButton.Enabled = true;
 
             ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass, Access_auth);
-            this.Hide();
+            screan = false;
+            this.Close();
             nameChange.Show();
         }
         #endregion
@@ -6054,15 +6236,142 @@ namespace Flawless_ex
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
             ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth);
-            this.Hide();
+            screan = false;
+            this.Close();
             clientInformation.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade);
-            this.Hide();
+            screan = false;
+            this.Close();
             monResult.Show();
+        }
+
+        #region"値の検証"
+        private void WholesalePriceTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox9_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox10_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox11_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox12_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void WholesalePriceTextBox13_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+        #endregion
+
+        private void DeliverySearchButton_Click(object sender, EventArgs e)
+        {
+            Control = int.Parse(ManagementNumberTextBox.Text);
+            this.Close();
         }
     }
 }
