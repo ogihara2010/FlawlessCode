@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 using Npgsql;
 
 namespace Flawless_ex
@@ -25,6 +26,9 @@ namespace Flawless_ex
         int invalid;
         string Access_auth;
         string Pass;
+        bool NameChange;
+        string PostalUpCode;
+        string PostalDownCode;
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
@@ -80,7 +84,7 @@ namespace Flawless_ex
                 TypeTextBox.Text = "法人";
                 AntiqueNumberTextBox.Text = AntiqueNumber.ToString();
                  
-                SQL = "select * from client_m_corporate inner join staff_m on staff_m.staff_code = client_m_corporate.insert_name where antique_number = '" + AntiqueNumber + "';";
+                SQL = "select * from client_m_corporate where antique_number = '" + AntiqueNumber + "';";
                 cmd = new NpgsqlCommand(SQL, conn);
                 using (reader = cmd.ExecuteReader())
                 {
@@ -100,7 +104,9 @@ namespace Flawless_ex
                         ComPanyKanaTextBox.Text = reader["company_kana"].ToString();
                         ShopNameTextBox.Text = reader["shop_name"].ToString();
                         ShopKanaTextBox.Text = reader["shop_name_kana"].ToString();
-                        PostalCodeTextBox.Text = reader["postal_code"].ToString();
+                        PostalUpCode = reader["postal_code1"].ToString();
+                        PostalDownCode = reader["postal_code2"].ToString();
+                        PostalCodeTextBox.Text = PostalUpCode + PostalDownCode;
                         AddressTextBox.Text = reader["address"].ToString();
                         AddressKanaTextBox.Text = reader["address_kana"].ToString();
                         TelTextBox.Text = reader["phone_number"].ToString();
@@ -125,8 +131,6 @@ namespace Flawless_ex
                         ResidenceCardTextBox.Text = reader["residence_card"].ToString();
                         PeriodStayTextBox.Text = reader["period_stay"].ToString();
                         SealCetificationTextBox.Text = reader["seal_certification"].ToString();
-                        InsertNameTextBox.Text = reader["staff_name"].ToString();
-                        ReasonTextBox.Text = reader["reason"].ToString();
                     }
                 }
             }
@@ -160,22 +164,21 @@ namespace Flawless_ex
                 IdLabel.Text = "定款、決算書、" + "\r\n" + "株主構成";
                 RegisterCopyLabel.Text = "納税証明書";
                 RegisterDateLabel.Text = "在留カード";
-                AntiqueLabel.Text = "在留期限";
+                AntiqueLicenseLabel.Text = "在留期限";
                 AolLabel.Text = "印鑑証明書";
-                TaxCertificateLabel.Text = "更新・変更者";
-                ResidenceCardLabel.Text = "更新・変更理由";
-                PeriodStayLabel.Text = "更新・変更日";
                 #endregion
                 #region"非表示"
+                TaxCertificateLabel.Visible = false;
+                TaxCertificateTextBox.Visible = false;
+                ResidenceCardLabel.Visible = false;
+                ResidenceCardTextBox.Visible = false;
+                PeriodStayLabel.Visible = false;
+                PeriodStayTextBox.Visible = false;
                 SealCertificateLabel.Visible = false;
                 SealCetificationTextBox.Visible = false;
-                InsertLabel.Visible = false;
-                InsertNameTextBox.Visible = false;
-                ReasonLabel.Visible = false;
-                ReasonTextBox.Visible = false;
                 #endregion
 
-                SQL = "selest * from client_m_individual inner join staff_m on staff_m.staff_code = client_m_corporate.insert_name where id_number = '" + ID_Number + "';";
+                SQL = "select * from client_m_individual where id_number = '" + ID_Number + "';";
                 cmd = new NpgsqlCommand(SQL, conn);
                 using (reader = cmd.ExecuteReader())
                 {
@@ -194,7 +197,11 @@ namespace Flawless_ex
                         CompanyNameTextBox.Text = reader["name"].ToString();
                         ComPanyKanaTextBox.Text = reader["name_kana"].ToString();
                         ShopNameTextBox.Text = reader["birthday"].ToString();
-                        ShopKanaTextBox.Text = reader["postal_code"].ToString();
+
+                        PostalUpCode = reader["postal_code1"].ToString();
+                        PostalDownCode = reader["postal_code2"].ToString();
+                        ShopKanaTextBox.Text = PostalUpCode + PostalDownCode;
+
                         AntiqueNumberTextBox.Text = reader["address"].ToString();
                         PostalCodeTextBox.Text = reader["address_kana"].ToString();
                         AddressTextBox.Text = reader["phone_number"].ToString();
@@ -217,9 +224,6 @@ namespace Flawless_ex
                         RegisterDateTextBox.Text = reader["residence_card"].ToString();
                         AntiqueLicenseTextBox.Text = reader["period_stay"].ToString();
                         AolFinancialShareholderTextBox.Text = reader["seal_certification"].ToString();
-                        TaxCertificateTextBox.Text = reader["staff_name"].ToString();
-                        ResidenceCardTextBox.Text = reader["reason"].ToString();
-                        PeriodStayTextBox.Text = (DateTime.Parse(reader["register_date"].ToString())).ToLongDateString();
                     }
                 }
             }
@@ -228,16 +232,104 @@ namespace Flawless_ex
         #region"戻る"
         private void ClientInformation_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass);
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass, NameChange);
 
             RecordList.Show();
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass);
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass, NameChange);
             this.Close();
             RecordList.Show();
+        }
+        #endregion
+        #region"画像の表示"
+        private void ResidenceCardTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 0)
+            {
+                pictureBox2.ImageLocation = ResidenceCardTextBox.Text;
+            }
+        }
+
+        private void RegisterCopyTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = RegisterCopyTextBox.Text;
+        }
+
+        private void IdTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = IdTextBox.Text;
+        }
+
+        private void AntiqueLicenseTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 0)
+            {
+                pictureBox2.ImageLocation = AntiqueLicenseTextBox.Text;
+            }
+        }
+
+        private void AolFinancialShareholderTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = AolFinancialShareholderTextBox.Text;
+        }
+
+        private void TaxCertificateLabel_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 0)
+            {
+                pictureBox2.ImageLocation = TaxCertificateTextBox.Text;
+            }
+        }
+
+        private void TaxCertificateTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 0)
+            {
+                pictureBox2.ImageLocation = TaxCertificateTextBox.Text;
+            }
+        }
+
+        private void SealCetificationTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 0)
+            {
+                pictureBox2.ImageLocation = SealCetificationTextBox.Text;
+            }
+        }
+
+        private void AccountNameTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 1)
+            {
+                pictureBox2.ImageLocation = AccountNameTextBox.Text;
+            }
+        }
+
+        private void AccountNameKanaTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 1)
+            {
+                pictureBox2.ImageLocation = AccountNameKanaTextBox.Text;
+            }
+        }
+
+        private void RemarksTextBox_DoubleClick(object sender, EventArgs e)
+        {
+            if (Type == 1)
+            {
+                pictureBox2.ImageLocation = RemarksTextBox.Text;
+            }
+        }
+
+        private void RegisterDateTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Type == 1)
+            {
+                pictureBox2.ImageLocation = RegisterDateTextBox.Text;
+            }
         }
         #endregion
     }

@@ -22,6 +22,7 @@ namespace Flawless_ex
         int Grade; 
         int AntiqueNumber;
         int ID_Number;
+        bool NameChange;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -9839,9 +9840,9 @@ namespace Flawless_ex
         #region"画像確認"
         private void financialCheckButton_Click(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = @articlesTextBox.Text;
+            pictureBox1.ImageLocation = articlesTextBox.Text;
         }
-
+        
         private void taxCertificateCheckButton_Click(object sender, EventArgs e)
         {
             pictureBox1.ImageLocation = @taxCertificateTextBox.Text;
@@ -10834,7 +10835,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass, NameChange);
 
             this.Hide();
             recordList.Show();

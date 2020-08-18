@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup;
+using System.Windows.Media.Animation;
 
 namespace Flawless_ex
 {
@@ -30,8 +32,8 @@ namespace Flawless_ex
         decimal total;
         int grade;
         RecordList recordList;
-        int AntiqueNumber ;
-        int ID_Number ;
+        int AntiqueNumber;
+        int ID_Number;
         string Pass;
         int Control;
         string Data;
@@ -39,6 +41,40 @@ namespace Flawless_ex
         string Search2;
         string Search3;
         bool screan = true;
+        bool NameChange = false;                    //品名変更をクリックしたら true
+        DialogResult result;
+
+        #region"卸値を再入力時にすでに入力されているかどうかを検知"
+        bool ReEnter1 = true;
+        bool ReEnter2 = true;
+        bool ReEnter3 = true;
+        bool ReEnter4 = true;
+        bool ReEnter5 = true;
+        bool ReEnter6 = true;
+        bool ReEnter7 = true;
+        bool ReEnter8 = true;
+        bool ReEnter9 = true;
+        bool ReEnter10 = true;
+        bool ReEnter11 = true;
+        bool ReEnter12 = true;
+        bool ReEnter13 = true;
+        #endregion
+
+        #region"再登録時、すでに登録されている売却日（現在入力されている売却日と比較用）"
+        string CheckBuyDate1;
+        string CheckBuyDate2;
+        string CheckBuyDate3;
+        string CheckBuyDate4;
+        string CheckBuyDate5;
+        string CheckBuyDate6;
+        string CheckBuyDate7;
+        string CheckBuyDate8;
+        string CheckBuyDate9;
+        string CheckBuyDate10;
+        string CheckBuyDate11;
+        string CheckBuyDate12;
+        string CheckBuyDate13;
+        #endregion
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -58,34 +94,34 @@ namespace Flawless_ex
         decimal UnitPriceUnFormat13;
         #endregion
         #region"各行の買取額（フォーマット未処理）：￥マーク"
-        decimal PurchaseUnFormat1;                   
-        decimal PurchaseUnFormat2;                  
-        decimal PurchaseUnFormat3;                   
-        decimal PurchaseUnFormat4;             
-        decimal PurchaseUnFormat5;           
-        decimal PurchaseUnFormat6;         
-        decimal PurchaseUnFormat7;                   
-        decimal PurchaseUnFormat8;                 
-        decimal PurchaseUnFormat9;                  
-        decimal PurchaseUnFormat10;                   
-        decimal PurchaseUnFormat11;          
+        decimal PurchaseUnFormat1;
+        decimal PurchaseUnFormat2;
+        decimal PurchaseUnFormat3;
+        decimal PurchaseUnFormat4;
+        decimal PurchaseUnFormat5;
+        decimal PurchaseUnFormat6;
+        decimal PurchaseUnFormat7;
+        decimal PurchaseUnFormat8;
+        decimal PurchaseUnFormat9;
+        decimal PurchaseUnFormat10;
+        decimal PurchaseUnFormat11;
         decimal PurchaseUnFormat12;
         decimal PurchaseUnFormat13;
         #endregion
         #region"各行の卸値（フォーマット未処理）：￥マーク"
-        decimal WholeSaleUnFormat1;              
-        decimal WholeSaleUnFormat2;         
-        decimal WholeSaleUnFormat3;     
-        decimal WholeSaleUnFormat4;       
-        decimal WholeSaleUnFormat5;              
-        decimal WholeSaleUnFormat6;        
-        decimal WholeSaleUnFormat7;         
-        decimal WholeSaleUnFormat8;            
-        decimal WholeSaleUnFormat9;         
-        decimal WholeSaleUnFormat10;       
-        decimal WholeSaleUnFormat11;       
-        decimal WholeSaleUnFormat12;      
-        decimal WholeSaleUnFormat13;         
+        decimal WholeSaleUnFormat1;
+        decimal WholeSaleUnFormat2;
+        decimal WholeSaleUnFormat3;
+        decimal WholeSaleUnFormat4;
+        decimal WholeSaleUnFormat5;
+        decimal WholeSaleUnFormat6;
+        decimal WholeSaleUnFormat7;
+        decimal WholeSaleUnFormat8;
+        decimal WholeSaleUnFormat9;
+        decimal WholeSaleUnFormat10;
+        decimal WholeSaleUnFormat11;
+        decimal WholeSaleUnFormat12;
+        decimal WholeSaleUnFormat13;
         #endregion
         decimal PurChaseMetal;                      //下表の地金の合計買取額（フォーマット未処理）：￥マーク
         decimal PurChaseDiamond;                    //下表のダイヤの合計買取額（フォーマット未処理）：￥マーク
@@ -210,8 +246,8 @@ namespace Flawless_ex
         NpgsqlTransaction transaction;
 
         //list_resultに登録する用のデータテイブル
-        DataTable DataTable = new DataTable();         
-        #region"list_result2 に登録する各行のデータテイブル"
+        DataTable DataTable = new DataTable();
+        #region"list_result2 に登録・更新する各行のデータテイブル"
         DataTable Data1 = new DataTable();
         DataTable Data2 = new DataTable();
         DataTable Data3 = new DataTable();
@@ -226,8 +262,8 @@ namespace Flawless_ex
         DataTable Data12 = new DataTable();
         DataTable Data13 = new DataTable();
         #endregion
-        //list_resultに更新する際のデータテイブル
-        DataTable DATATable= new DataTable();
+        //list_resultに更新する際のデータテイブル                         < - いらないかも？
+        DataTable DATATable = new DataTable();
         #region"list_result2 に更新する際の各行のデータテイブル"
         DataTable DATA1 = new DataTable();
         DataTable DATA2 = new DataTable();
@@ -244,7 +280,7 @@ namespace Flawless_ex
         DataTable DATA13 = new DataTable();
         #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name , int type , string slipnumber, int Grade, int antique, int id, string access_auth, string pass)
+        public RecordList(Statement statement, int staff_id, string Staff_Name, int type, string slipnumber, int Grade, int antique, int id, string access_auth, string pass, bool namechange)
         {
             InitializeComponent();
 
@@ -258,39 +294,27 @@ namespace Flawless_ex
             this.ID_Number = id;
             this.Access_auth = access_auth;
             this.Pass = pass;
+            this.NameChange = namechange;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
         {
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            
+
             #region"画面上の会社・個人情報と合計金額"
 
-            StaffNameTextBox.Text = staff_name;
-
-            #region"削除予定"
-            /*
-             *計算書で登録しないと
-             *成績一覧や印刷プレビューを押せないようにしたら
-             *削除予定
-            */
-            string sql_str = "select * from statement_data inner join staff_m on statement_data.staff_code = staff_m.staff_code where statement_data.staff_code = '" + staff_id + "';";
-            cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
+
+            string sql = "select * from staff_m where staff_code = " + staff_id + ";";
+            cmd = new NpgsqlCommand(sql, conn);
             using (reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    SlipNumber = reader["document_number"].ToString();
-                    Access_auth = reader["access_auth"].ToString();
+                    StaffNameTextBox.Text = reader["staff_name"].ToString();
                 }
             }
-            conn.Close();
-            /*
-             * 削除予定範囲終了
-             * 
-            */
-            #endregion
+
             #region"権限"
             if (Access_auth == "C")
             {
@@ -307,27 +331,32 @@ namespace Flawless_ex
             string sql_str1 = "";
             if (type == 0)
             {   //法人用   合計金額, 会社名, 店舗名, 担当者名を取得
-                sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 0 + "';";      
+                sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 0 + "';";
             }
             else if (type == 1)
             {   //個人用    合計金額、名前、職業、住所、生年月日を取得
-                sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 1 + "';";    
+                sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 1 + "';";
             }
-            
+
             #endregion
             cmd = new NpgsqlCommand(sql_str1, conn);
 
             //会社名、店舗名、担当者名、名前、職業、住所取得
-            conn.Open();
 
             using (reader = cmd.ExecuteReader())
             {
                 if (type == 0)
                 {
+                    int x = 50;
                     NameOrCompanyNameLabel.Text = "会社名";
                     OccupationOrShopNameLabel.Text = "店舗名";
                     AddressOrClientStaffNameLabel.Text = "担当者名";
-                    AddressOrClientStaffNameTextBox.Size = new System.Drawing.Size(130, 20);
+                    //AddressOrClientStaffNameTextBox.Size = new Size(280, 55);
+                    //NameOrCompanyNameTextBox.Location = new System.Drawing.Point(180, 200);
+                    //OccupationOrShopNameLabel.Location = new System.Drawing.Point(410, 198);
+                    //OccupationOrShopNameTextBox.Location = new System.Drawing.Point(590, 200);
+                    //AddressOrClientStaffNameLabel.Location = new System.Drawing.Point(910, 198);
+                    //AddressOrClientStaffNameTextBox.Location = new System.Drawing.Point(1060, 200);
                     BirthdayLabel.Visible = false;
                     BirthdayTextBox.Visible = false;
 
@@ -341,7 +370,7 @@ namespace Flawless_ex
                 }
                 else if (type == 1)
                 {
-                    AddressOrClientStaffNameTextBox.Location = new System.Drawing.Point(420, 85);
+                    //AddressOrClientStaffNameTextBox.Location = new Point(420, 85);
 
                     while (reader.Read())
                     {
@@ -355,15 +384,15 @@ namespace Flawless_ex
                     }
                 }
             }
-            
+
             #endregion
 
             #region"表のデータ"
 
             //伝票番号から表の行番号を取得
-            string Sql_Str = "select * from statement_calc_data where document_number = '" + SlipNumber + "';";
+            string Sql_Str = "select * from statement_calc_data where document_number = '" + SlipNumber + "' order by record_number;";
             //伝票番号と表の行番号から表のデータを取得し、大分類マスタと品名マスタを結合
-            string Sql_Str1 = "select * from statement_calc_data inner join main_category_m on statement_calc_data.main_category_code = main_category_m.main_category_code inner join item_m on statement_calc_data.item_code = item_m.item_code where document_number = '" + SlipNumber + "';";
+            string Sql_Str1 = "select * from statement_calc_data inner join main_category_m on statement_calc_data.main_category_code = main_category_m.main_category_code inner join item_m on statement_calc_data.item_code = item_m.item_code where document_number = '" + SlipNumber + "' order by  record_number;";
 
             cmd = new NpgsqlCommand(Sql_Str, conn);
             adapter = new NpgsqlDataAdapter(Sql_Str1, conn);
@@ -547,14 +576,14 @@ namespace Flawless_ex
             }
             #endregion
 
-            #region"品名変更画面に一度行った後"
+            #region"計算書以外から成績入力に画面遷移したとき"
             if (grade != 0)
             {
-                string Sql_Str2 = "select * from list_result2 inner join main_category_m on list_result2.main_category_code = main_category_m.main_category_code inner join item_m on list_result2.item_code = item_m.item_code where grade_number = '" + grade + "';";
+                string Sql_Str2 = "select * from list_result2 inner join main_category_m on list_result2.main_category_code = main_category_m.main_category_code inner join item_m on list_result2.item_code = item_m.item_code where grade_number = '" + grade + "' order by record_number;";
                 adapter = new NpgsqlDataAdapter(Sql_Str2, conn);
                 adapter.Fill(data);
-                
-                for(int i = 0; i < record; i++)
+
+                for (int i = 0; i < record; i++)
                 {
                     DataRow row = data.Rows[i];
                     switch (i)
@@ -567,7 +596,7 @@ namespace Flawless_ex
                             MainCategoryCode1 = (int)row["main_category_code"];
                             ItemCategoryCode1 = (int)row["item_code"];
                             //卸値。売却先、売却日
-                            if ((decimal)row["wholesale_price"] != 0)  
+                            if ((decimal)row["wholesale_price"] != 0)
                             {
                                 WholesalePriceTextBox1.Text = row["wholesale_price"].ToString();
                                 BuyerTextBox1.Text = row["buyer"].ToString();
@@ -587,7 +616,7 @@ namespace Flawless_ex
                             MainCategoryCode2 = (int)row["main_category_code"];
                             ItemCategoryCode2 = (int)row["item_code"];
                             //卸値。売却先、売却日
-                            if ((decimal)row["wholesale_price"] != 0) 
+                            if ((decimal)row["wholesale_price"] != 0)
                             {
                                 WholesalePriceTextBox2.Text = row["wholesale_price"].ToString();
                                 BuyerTextBox2.Text = row["buyer"].ToString();
@@ -818,7 +847,7 @@ namespace Flawless_ex
                                 NextMonthCheckBox13.Checked = true;
                             }
                             break;
-                        #endregion
+                            #endregion
                     }
                 }
                 RegisterButton.Enabled = false;
@@ -834,22 +863,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -861,22 +895,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat2 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat2 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat2 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat2 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat2 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -888,22 +927,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat3 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat3 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat3 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat3 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat3 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -915,22 +959,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat4 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat4 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat4 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat4 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat4 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -942,22 +991,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat5 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat5 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat5 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat5 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat5 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -969,22 +1023,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat6 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat6 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat6 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat6 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat6 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -996,22 +1055,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat7 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat7 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat7 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat7 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat7 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1023,22 +1087,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat8 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat8 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat8 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat8 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat8 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1050,22 +1119,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat9 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat9 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat9 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat9 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat9 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1077,22 +1151,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat10 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat10 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat10 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat10 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat10 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1104,22 +1183,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat11 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat11 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat11 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat11 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat11 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1131,22 +1215,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat12 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat12 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat12 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat12 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat12 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1158,22 +1247,27 @@ namespace Flawless_ex
                 {
                     case 100:
                         PurChaseMetal = PurchaseUnFormat13 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
                         break;
                     case 101:
                         PurChaseDiamond = PurchaseUnFormat13 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
                         break;
                     case 102:
                         PurChaseBrand = PurchaseUnFormat13 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
                         break;
                     case 103:
                         PurChaseProduct = PurchaseUnFormat13 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
                         break;
                     case 104:
                         PurChaseOther = PurchaseUnFormat13 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
                 }
@@ -1326,12 +1420,21 @@ namespace Flawless_ex
             #endregion
             #endregion
 
+            #region"品名を変更した後"
+            button3.Enabled = false;        //月間成績表へのボタン
+            #endregion
         }
 
         #region"成績入力画面から計算書へ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
+            if (NameChange)
+            {
+                MessageBox.Show("登録 or 再登録ボタンをクリックして登録をしてください。", "未登録", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             this.Close();
+           
         }
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
@@ -1347,7 +1450,6 @@ namespace Flawless_ex
             }
         }
 
-
         #endregion
 
         #region"下の表"
@@ -1357,95 +1459,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
             {
-                return;
+                WholesalePriceTextBox1.Text = 0.ToString();
             }
 
             switch (MainCategoryCode1)
             {
                 case 100:
-                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    if (ReEnter1)
                     {
-                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat1;
-                        WholeSale = WholeSale - WholeSaleUnFormat1;
-                    }
-                    WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
-                    WholeSaleMetal = WholeSaleUnFormat1 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleMetal = WholeSaleUnFormat1 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter1 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleMetal = WholeSaleUnFormat1 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    if (ReEnter1)
                     {
-                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat1;
-                        WholeSale = WholeSale - WholeSaleUnFormat1;
-                    }
-                    WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat1 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat1 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter1 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat1 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    if (ReEnter1)
                     {
-                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat1;
-                        WholeSale = WholeSale - WholeSaleUnFormat1;
-                    }
-                    WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
-                    WholeSaleBrand = WholeSaleUnFormat1 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleBrand = WholeSaleUnFormat1 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter1 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleBrand = WholeSaleUnFormat1 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    if (ReEnter1)
                     {
-                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat1;
-                        WholeSale = WholeSale - WholeSaleUnFormat1;
-                    }
-                    WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
-                    WholeSaleProduct = WholeSaleUnFormat1 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat1 + WholeSale;                                        //卸値の合計
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleProduct = WholeSaleUnFormat1 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                        //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter1 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleProduct = WholeSaleUnFormat1 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                    if (ReEnter1)
                     {
-                        WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat1;
-                        WholeSale = WholeSale - WholeSaleUnFormat1;
-                    }
-                    WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
-                    WholeSaleOther = WholeSaleUnFormat1 + WholeSaleOther;                                 //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleOther = WholeSaleUnFormat1 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter1 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleOther = WholeSaleUnFormat1 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -1453,95 +1640,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
             {
-                return;
+                WholesalePriceTextBox2.Text = 0.ToString();
             }
 
             switch (MainCategoryCode2)
             {
                 case 100:
-                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    if (ReEnter2)
                     {
-                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat2;
-                        WholeSale = WholeSale - WholeSaleUnFormat2;
-                    }
-                    WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
-                    WholeSaleMetal = WholeSaleUnFormat2 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleMetal = WholeSaleUnFormat2 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter2 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleMetal = WholeSaleUnFormat2 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    if (ReEnter2)
                     {
-                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat2;
-                        WholeSale = WholeSale - WholeSaleUnFormat2;
-                    }
-                    WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat2 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat2 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter2 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat2 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    if (ReEnter2)
                     {
-                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat2;
-                        WholeSale = WholeSale - WholeSaleUnFormat2;
-                    }
-                    WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
-                    WholeSaleBrand = WholeSaleUnFormat2 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleBrand = WholeSaleUnFormat2 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter2 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleBrand = WholeSaleUnFormat2 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    if (ReEnter2)
                     {
-                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat2;
-                        WholeSale = WholeSale - WholeSaleUnFormat2;
-                    }
-                    WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
-                    WholeSaleProduct = WholeSaleUnFormat2 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleProduct = WholeSaleUnFormat2 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter2 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleProduct = WholeSaleUnFormat2 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
+                    if (ReEnter2)
                     {
-                        WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat2;
-                        WholeSale = WholeSale - WholeSaleUnFormat2;
-                    }
-                    WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
-                    WholeSaleOther = WholeSaleUnFormat2 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
+                        WholeSaleOther = WholeSaleUnFormat2 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat2 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter2 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
+                        WholeSaleOther = WholeSaleUnFormat1 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat1 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -1549,95 +1821,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
             {
-                return;
+                WholesalePriceTextBox3.Text = 0.ToString();
             }
 
             switch (MainCategoryCode3)
             {
                 case 100:
-                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    if (ReEnter3)
                     {
-                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat3;
-                        WholeSale = WholeSale - WholeSaleUnFormat3;
-                    }
-                    WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
-                    WholeSaleMetal = WholeSaleUnFormat3 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleMetal = WholeSaleUnFormat3 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter3 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleMetal = WholeSaleUnFormat3 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    if (ReEnter3)
                     {
-                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat3;
-                        WholeSale = WholeSale - WholeSaleUnFormat3;
-                    }
-                    WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat3 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat3 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter3 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat3;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat3 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    if (ReEnter3)
                     {
-                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat3;
-                        WholeSale = WholeSale - WholeSaleUnFormat3;
-                    }
-                    WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
-                    WholeSaleBrand = WholeSaleUnFormat3 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleBrand = WholeSaleUnFormat3 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter3 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleBrand = WholeSaleUnFormat3 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    if (ReEnter3)
                     {
-                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat3;
-                        WholeSale = WholeSale - WholeSaleUnFormat3;
-                    }
-                    WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
-                    WholeSaleProduct = WholeSaleUnFormat3 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleProduct = WholeSaleUnFormat3 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter3 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleProduct = WholeSaleUnFormat3 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                    if (ReEnter3)
                     {
-                        WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat3;
-                        WholeSale = WholeSale - WholeSaleUnFormat3;
-                    }
-                    WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
-                    WholeSaleOther = WholeSaleUnFormat3 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleOther = WholeSaleUnFormat3 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter3 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
+                        WholeSaleOther = WholeSaleUnFormat3 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat3 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -1645,191 +2002,360 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
             {
-                return;
+                WholesalePriceTextBox4.Text = 0.ToString();
             }
 
             switch (MainCategoryCode4)
             {
                 case 100:
-                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    if (ReEnter4)
                     {
-                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat4;
-                        WholeSale = WholeSale - WholeSaleUnFormat4;
-                    }
-                    WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
-                    WholeSaleMetal = WholeSaleUnFormat4 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleMetal = WholeSaleUnFormat4 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter4 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleMetal = WholeSaleUnFormat4 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    if (ReEnter4)
                     {
-                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat4;
-                        WholeSale = WholeSale - WholeSaleUnFormat4;
-                    }
-                    WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat4 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat4 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter4 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat4;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat4 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 102:
-                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    if (ReEnter4)
                     {
-                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat4;
-                        WholeSale = WholeSale - WholeSaleUnFormat4;
-                    }
-                    WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
-                    WholeSaleBrand = WholeSaleUnFormat4 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleBrand = WholeSaleUnFormat4 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter4 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleBrand = WholeSaleUnFormat4 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 103:
-                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    if (ReEnter4)
                     {
-                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat4;
-                        WholeSale = WholeSale - WholeSaleUnFormat4;
-                    }
-                    WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
-                    WholeSaleProduct = WholeSaleUnFormat4 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleProduct = WholeSaleUnFormat4 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter4 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleProduct = WholeSaleUnFormat4 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 104:
-                    if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                    if (ReEnter4)
                     {
-                        WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat4;
-                        WholeSale = WholeSale - WholeSaleUnFormat4;
-                    }
-                    WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
-                    WholeSaleOther = WholeSaleUnFormat4 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleOther = WholeSaleUnFormat4 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter4 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
+                        WholeSaleOther = WholeSaleUnFormat4 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat4 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
             }
         }
         private void WholesalePriceTextBox5_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
             {
-                return;
+                WholesalePriceTextBox5.Text = 0.ToString();
             }
 
             switch (MainCategoryCode5)
             {
                 case 100:
-                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    if (ReEnter5)
                     {
-                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat5;
-                        WholeSale = WholeSale - WholeSaleUnFormat5;
-                    }
-                    WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
-                    WholeSaleMetal = WholeSaleUnFormat5 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleMetal = WholeSaleUnFormat5 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter5 = false;
+                    }
+                    else
+                    { // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleMetal = WholeSaleUnFormat5 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 101:
-                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    if (ReEnter5)
                     {
-                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat5;
-                        WholeSale = WholeSale - WholeSaleUnFormat5;
-                    }
-                    WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat5 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat5 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter5 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat5;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat5 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 102:
-                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    if (ReEnter5)
                     {
-                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat5;
-                        WholeSale = WholeSale - WholeSaleUnFormat5;
-                    }
-                    WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
-                    WholeSaleBrand = WholeSaleUnFormat5 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleBrand = WholeSaleUnFormat5 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter5 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleBrand = WholeSaleUnFormat5 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 103:
-                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    if (ReEnter5)
                     {
-                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat5;
-                        WholeSale = WholeSale - WholeSaleUnFormat5;
-                    }
-                    WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
-                    WholeSaleProduct = WholeSaleUnFormat5 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleProduct = WholeSaleUnFormat5 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter5 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleProduct = WholeSaleUnFormat5 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 104:
-                    if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                    if (ReEnter5)
                     {
-                        WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat5;
-                        WholeSale = WholeSale - WholeSaleUnFormat5;
-                    }
-                    WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
-                    WholeSaleOther = WholeSaleUnFormat5 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleOther = WholeSaleUnFormat5 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter5 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
+                        WholeSaleOther = WholeSaleUnFormat5 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat5 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -1837,191 +2363,361 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
             {
-                return;
+                WholesalePriceTextBox6.Text = 0.ToString();
             }
 
             switch (MainCategoryCode6)
             {
                 case 100:
-                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    if (ReEnter6)
                     {
-                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat6;
-                        WholeSale = WholeSale - WholeSaleUnFormat6;
-                    }
-                    WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
-                    WholeSaleMetal = WholeSaleUnFormat6 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleMetal = WholeSaleUnFormat6 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter6 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleMetal = WholeSaleUnFormat6 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 101:
-                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    if (ReEnter6)
                     {
-                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat6;
-                        WholeSale = WholeSale - WholeSaleUnFormat6;
-                    }
-                    WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat6 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat6 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter6 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat6;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat6 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 102:
-                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    if (ReEnter6)
                     {
-                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat6;
-                        WholeSale = WholeSale - WholeSaleUnFormat6;
-                    }
-                    WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
-                    WholeSaleBrand = WholeSaleUnFormat6 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleBrand = WholeSaleUnFormat6 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter6 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleBrand = WholeSaleUnFormat6 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 103:
-                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    if (ReEnter6)
                     {
-                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat6;
-                        WholeSale = WholeSale - WholeSaleUnFormat6;
-                    }
-                    WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
-                    WholeSaleProduct = WholeSaleUnFormat6 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleProduct = WholeSaleUnFormat6 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter6 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleProduct = WholeSaleUnFormat6 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 104:
-                    if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                    if (ReEnter6)
                     {
-                        WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat6;
-                        WholeSale = WholeSale - WholeSaleUnFormat6;
-                    }
-                    WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
-                    WholeSaleOther = WholeSaleUnFormat6 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleOther = WholeSaleUnFormat6 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter6 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
+                        WholeSaleOther = WholeSaleUnFormat6 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat6 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
             }
         }
         private void WholesalePriceTextBox7_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
             {
-                return;
+                WholesalePriceTextBox7.Text = 0.ToString();
             }
 
             switch (MainCategoryCode7)
             {
                 case 100:
-                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    if (ReEnter7)
                     {
-                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat7;
-                        WholeSale = WholeSale - WholeSaleUnFormat7;
-                    }
-                    WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
-                    WholeSaleMetal = WholeSaleUnFormat7 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleMetal = WholeSaleUnFormat7 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter7 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleMetal = WholeSaleUnFormat7 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    if (ReEnter7)
                     {
-                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat7;
-                        WholeSale = WholeSale - WholeSaleUnFormat7;
-                    }
-                    WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat7 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat7 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter7 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat7;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat7 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    if (ReEnter7)
                     {
-                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat7;
-                        WholeSale = WholeSale - WholeSaleUnFormat7;
-                    }
-                    WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
-                    WholeSaleBrand = WholeSaleUnFormat7 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleBrand = WholeSaleUnFormat7 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter7 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleBrand = WholeSaleUnFormat7 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    if (ReEnter7)
                     {
-                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat7;
-                        WholeSale = WholeSale - WholeSaleUnFormat7;
-                    }
-                    WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
-                    WholeSaleProduct = WholeSaleUnFormat7 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleProduct = WholeSaleUnFormat7 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter7 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleProduct = WholeSaleUnFormat7 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                    if (ReEnter7)
                     {
-                        WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat7;
-                        WholeSale = WholeSale - WholeSaleUnFormat7;
-                    }
-                    WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
-                    WholeSaleOther = WholeSaleUnFormat7 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleOther = WholeSaleUnFormat7 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter7 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
+                        WholeSaleOther = WholeSaleUnFormat7 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat7 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2029,95 +2725,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
             {
-                return;
+                WholesalePriceTextBox8.Text = 0.ToString();
             }
 
             switch (MainCategoryCode8)
             {
                 case 100:
-                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    if (ReEnter8)
                     {
-                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat8;
-                        WholeSale = WholeSale - WholeSaleUnFormat8;
-                    }
-                    WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
-                    WholeSaleMetal = WholeSaleUnFormat8 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleMetal = WholeSaleUnFormat8 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter8 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleMetal = WholeSaleUnFormat8 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    if (ReEnter8)
                     {
-                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat8;
-                        WholeSale = WholeSale - WholeSaleUnFormat8;
-                    }
-                    WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat8 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat8 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter8 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat8;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat8 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    if (ReEnter8)
                     {
-                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat8;
-                        WholeSale = WholeSale - WholeSaleUnFormat8;
-                    }
-                    WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
-                    WholeSaleBrand = WholeSaleUnFormat8 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleBrand = WholeSaleUnFormat8 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter8 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleBrand = WholeSaleUnFormat8 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    if (ReEnter8)
                     {
-                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat8;
-                        WholeSale = WholeSale - WholeSaleUnFormat8;
-                    }
-                    WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
-                    WholeSaleProduct = WholeSaleUnFormat8 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleProduct = WholeSaleUnFormat8 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter8 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleProduct = WholeSaleUnFormat8 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                    if (ReEnter8)
                     {
-                        WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat8;
-                        WholeSale = WholeSale - WholeSaleUnFormat8;
-                    }
-                    WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
-                    WholeSaleOther = WholeSaleUnFormat8 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleOther = WholeSaleUnFormat8 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter8 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
+                        WholeSaleOther = WholeSaleUnFormat8 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat8 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2125,95 +2906,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
             {
-                return;
+                WholesalePriceTextBox9.Text = 0.ToString();
             }
 
             switch (MainCategoryCode9)
             {
                 case 100:
-                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    if (ReEnter9)
                     {
-                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat9;
-                        WholeSale = WholeSale - WholeSaleUnFormat9;
-                    }
-                    WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
-                    WholeSaleMetal = WholeSaleUnFormat9 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleMetal = WholeSaleUnFormat9 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter9 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleMetal = WholeSaleUnFormat9 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    if (ReEnter9)
                     {
-                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat9;
-                        WholeSale = WholeSale - WholeSaleUnFormat9;
-                    }
-                    WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat9 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat9 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter9 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat9;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat9 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    if (ReEnter9)
                     {
-                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat9;
-                        WholeSale = WholeSale - WholeSaleUnFormat9;
-                    }
-                    WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
-                    WholeSaleBrand = WholeSaleUnFormat9 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleBrand = WholeSaleUnFormat9 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter9 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleBrand = WholeSaleUnFormat9 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    if (ReEnter9)
                     {
-                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat9;
-                        WholeSale = WholeSale - WholeSaleUnFormat9;
-                    }
-                    WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
-                    WholeSaleProduct = WholeSaleUnFormat9 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleProduct = WholeSaleUnFormat9 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter9 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleProduct = WholeSaleUnFormat9 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                    if (ReEnter9)
                     {
-                        WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat9;
-                        WholeSale = WholeSale - WholeSaleUnFormat9;
-                    }
-                    WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
-                    WholeSaleOther = WholeSaleUnFormat9 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleOther = WholeSaleUnFormat9 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter9 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
+                        WholeSaleOther = WholeSaleUnFormat9 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat9 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2221,95 +3087,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
             {
-                return;
+                WholesalePriceTextBox10.Text = 0.ToString();
             }
 
             switch (MainCategoryCode10)
             {
                 case 100:
-                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    if (ReEnter10)
                     {
-                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat10;
-                        WholeSale = WholeSale - WholeSaleUnFormat10;
-                    }
-                    WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
-                    WholeSaleMetal = WholeSaleUnFormat10 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleMetal = WholeSaleUnFormat10 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter10 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleMetal = WholeSaleUnFormat10 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    if (ReEnter10)
                     {
-                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat10;
-                        WholeSale = WholeSale - WholeSaleUnFormat10;
-                    }
-                    WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat10 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat10 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter10 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat10;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat10 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    if (ReEnter10)
                     {
-                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat10;
-                        WholeSale = WholeSale - WholeSaleUnFormat10;
-                    }
-                    WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
-                    WholeSaleBrand = WholeSaleUnFormat10 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleBrand = WholeSaleUnFormat10 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter10 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleBrand = WholeSaleUnFormat10 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    if (ReEnter10)
                     {
-                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat10;
-                        WholeSale = WholeSale - WholeSaleUnFormat10;
-                    }
-                    WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
-                    WholeSaleProduct = WholeSaleUnFormat10 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleProduct = WholeSaleUnFormat10 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter10 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleProduct = WholeSaleUnFormat10 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                    if (ReEnter10)
                     {
-                        WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat10;
-                        WholeSale = WholeSale - WholeSaleUnFormat10;
-                    }
-                    WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
-                    WholeSaleOther = WholeSaleUnFormat10 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleOther = WholeSaleUnFormat10 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter10 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
+                        WholeSaleOther = WholeSaleUnFormat10 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat10 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2317,86 +3268,149 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
             {
-                return;
+                WholesalePriceTextBox11.Text = 0.ToString();
             }
 
             switch (MainCategoryCode11)
             {
                 case 100:
-                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    if (ReEnter11)
                     {
-                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat11;
-                        WholeSale = WholeSale - WholeSaleUnFormat11;
-                    }
-                    WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
-                    WholeSaleMetal = WholeSaleUnFormat11 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleMetal = WholeSaleUnFormat11 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
-                    break;
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter11 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleMetal = WholeSaleUnFormat11 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
+                        break;
                 case 101:
-                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    if (ReEnter11)
                     {
-                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat11;
-                        WholeSale = WholeSale - WholeSaleUnFormat11;
-                    }
-                    WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat11 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat11 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter11 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat11;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat11 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    if (ReEnter11)
                     {
-                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat11;
-                        WholeSale = WholeSale - WholeSaleUnFormat11;
-                    }
-                    WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
-                    WholeSaleBrand = WholeSaleUnFormat11 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleBrand = WholeSaleUnFormat11 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter11 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleBrand = WholeSaleUnFormat11 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                    if (ReEnter11)
                     {
-                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat11;
-                        WholeSale = WholeSale - WholeSaleUnFormat11;
-                    }
-                    WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
-                    WholeSaleProduct = WholeSaleUnFormat11 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleProduct = WholeSaleUnFormat11 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter11 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleProduct = WholeSaleUnFormat11 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
-                    {
-                        WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat11;
-                        WholeSale = WholeSale - WholeSaleUnFormat11;
-                    }
+                    if (ReEnter11) {
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleOther = WholeSaleUnFormat11 + WholeSaleOther;                            //左下表の地金の卸値に入力
                     WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
@@ -2406,6 +3420,27 @@ namespace Flawless_ex
                     OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
                     TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter11 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
+                        WholeSaleOther = WholeSaleUnFormat11 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat11 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2413,95 +3448,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
             {
-                return;
+                WholesalePriceTextBox12.Text = 0.ToString();
             }
 
             switch (MainCategoryCode12)
             {
                 case 100:
-                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    if (ReEnter12)
                     {
-                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat12;
-                        WholeSale = WholeSale - WholeSaleUnFormat12;
-                    }
-                    WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
-                    WholeSaleMetal = WholeSaleUnFormat12 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleMetal = WholeSaleUnFormat12 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter12 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleMetal = WholeSaleUnFormat12 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    if (ReEnter12)
                     {
-                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat12;
-                        WholeSale = WholeSale - WholeSaleUnFormat12;
-                    }
-                    WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat12 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat12 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter12 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat12;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat12 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    if (ReEnter12)
                     {
-                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat12;
-                        WholeSale = WholeSale - WholeSaleUnFormat12;
-                    }
-                    WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
-                    WholeSaleBrand = WholeSaleUnFormat12 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleBrand = WholeSaleUnFormat12 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter12 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleBrand = WholeSaleUnFormat12 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    if (ReEnter12)
                     {
-                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat12;
-                        WholeSale = WholeSale - WholeSaleUnFormat12;
-                    }
-                    WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
-                    WholeSaleProduct = WholeSaleUnFormat12 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleProduct = WholeSaleUnFormat12 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter12 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleProduct = WholeSaleUnFormat12 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 104:
-                    if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                    if (ReEnter12)
                     {
-                        WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat12;
-                        WholeSale = WholeSale - WholeSaleUnFormat12;
-                    }
-                    WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
-                    WholeSaleOther = WholeSaleUnFormat12 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleOther = WholeSaleUnFormat12 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter12 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
+                        WholeSaleOther = WholeSaleUnFormat12 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat12 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2509,95 +3629,180 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
             {
-                return;
+                WholesalePriceTextBox13.Text = 0.ToString();
             }
 
             switch (MainCategoryCode13)
             {
                 case 100:
-                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    if (ReEnter13)
                     {
-                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
-                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat13;
-                        WholeSale = WholeSale - WholeSaleUnFormat13;
-                    }
-                    WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
-                    WholeSaleMetal = WholeSaleUnFormat13 + WholeSaleMetal;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleMetal = WholeSaleUnFormat13 + WholeSaleMetal;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
-                    MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter13 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        }
+                        WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleMetal = WholeSaleUnFormat13 + WholeSaleMetal;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 101:
-                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    if (ReEnter13)
                     {
-                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
-                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat13;
-                        WholeSale = WholeSale - WholeSaleUnFormat13;
-                    }
-                    WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
-                    WholeSaleDiamond = WholeSaleUnFormat13 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat13 + WholeSaleDiamond;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
-                    DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter13 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        }
+                        WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat13;                                         //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleDiamond = WholeSaleUnFormat13 + WholeSaleDiamond;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                         //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 102:
-                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    if (ReEnter13)
                     {
-                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
-                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat13;
-                        WholeSale = WholeSale - WholeSaleUnFormat13;
-                    }
-                    WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
-                    WholeSaleBrand = WholeSaleUnFormat13 + WholeSaleBrand;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleBrand = WholeSaleUnFormat13 + WholeSaleBrand;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
-                    BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter13 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        }
+                        WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleBrand = WholeSaleUnFormat13 + WholeSaleBrand;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
                 case 103:
-                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    if (ReEnter13)
                     {
-                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
-                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat13;
-                        WholeSale = WholeSale - WholeSaleUnFormat13;
-                    }
-                    WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
-                    WholeSaleProduct = WholeSaleUnFormat13 + WholeSaleProduct;                        //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleProduct = WholeSaleUnFormat13 + WholeSaleProduct;                        //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
-                    ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter13 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        }
+                        WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleProduct = WholeSaleUnFormat13 + WholeSaleProduct;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    };
                     break;
                 case 104:
-                    if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                    if (ReEnter13)
                     {
-                        WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
-                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat13;
-                        WholeSale = WholeSale - WholeSaleUnFormat13;
-                    }
-                    WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
-                    WholeSaleOther = WholeSaleUnFormat13 + WholeSaleOther;                            //左下表の地金の卸値に入力
-                    WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleOther = WholeSaleUnFormat13 + WholeSaleOther;                            //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
 
-                    //￥マーク表示
-                    WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
-                    OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
-                    WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                        ReEnter13 = false;
+                    }
+                    else
+                    {
+                        // \ マークがある場合、\ マーク除外
+                        if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
+                        {
+                            WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                        }
+                        WholeSaleOther = WholeSaleOther - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
+                        WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
+                        WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
+                        WholeSaleOther = WholeSaleUnFormat13 + WholeSaleOther;                                 //左下表の地金の卸値に入力
+                        WholeSale = WholeSaleUnFormat13 + WholeSale;                                      //卸値の合計
+
+                        //￥マーク表示
+                        WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
+                        OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
+                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
+                        WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
+                    }
                     break;
             }
         }
@@ -2606,34 +3811,34 @@ namespace Flawless_ex
         #region"金額が下の表に表示されたら合計金額表示（￥マーク設定済み）TextChangedイベント"
         private void MetalPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            PurChase = PurChaseMetal + PurChase;
             TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
+
         private void DiamondPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            PurChase = PurChaseDiamond + PurChase;
             TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
+
         private void BrandPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            PurChase = PurChaseBrand + PurChase;
             TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
+
         private void ProductPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            PurChase = PurChaseProduct + PurChase;
             TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
+
         private void OtherPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            PurChase = PurChaseOther + PurChase;
             TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
+
         #endregion
 
         #region"下の表に卸値が表示されたら左下の表に大分類ごとに利益表示（￥マーク設定済み）TextChangedイベント"
@@ -2715,7 +3920,7 @@ namespace Flawless_ex
                 BuyerTextBox1.ForeColor = Color.Blue;
             }
             //次月のみ
-            if (NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked) 
+            if (NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked)
             {
                 itemMainCategoryTextBox1.ForeColor = Color.Red;
                 itemCategoryTextBox1.ForeColor = Color.Red;
@@ -2729,7 +3934,7 @@ namespace Flawless_ex
                 BuyerTextBox1.ForeColor = Color.Red;
             }
             //どちらもノーチェック
-            if (!NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked) 
+            if (!NextMonthCheckBox1.Checked && !ItemNameChangeCheckBox1.Checked)
             {
                 itemMainCategoryTextBox1.ForeColor = Color.Black;
                 itemCategoryTextBox1.ForeColor = Color.Black;
@@ -2762,7 +3967,7 @@ namespace Flawless_ex
                 BuyerTextBox2.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)        
+            if (NextMonthCheckBox2.Checked && ItemNameChangeCheckBox2.Checked)
             {
                 itemMainCategoryTextBox2.ForeColor = Color.Purple;
                 itemCategoryTextBox2.ForeColor = Color.Purple;
@@ -2776,7 +3981,7 @@ namespace Flawless_ex
                 BuyerTextBox2.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)        
+            if (NextMonthCheckBox2.Checked && !ItemNameChangeCheckBox2.Checked)
             {
                 itemMainCategoryTextBox2.ForeColor = Color.Red;
                 itemCategoryTextBox2.ForeColor = Color.Red;
@@ -2823,7 +4028,7 @@ namespace Flawless_ex
                 BuyerTextBox3.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)        
+            if (NextMonthCheckBox3.Checked && ItemNameChangeCheckBox3.Checked)
             {
                 itemMainCategoryTextBox3.ForeColor = Color.Purple;
                 itemCategoryTextBox3.ForeColor = Color.Purple;
@@ -2837,7 +4042,7 @@ namespace Flawless_ex
                 BuyerTextBox3.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)        
+            if (NextMonthCheckBox3.Checked && !ItemNameChangeCheckBox3.Checked)
             {
                 itemMainCategoryTextBox3.ForeColor = Color.Red;
                 itemCategoryTextBox3.ForeColor = Color.Red;
@@ -2884,7 +4089,7 @@ namespace Flawless_ex
                 BuyerTextBox4.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)        
+            if (NextMonthCheckBox4.Checked && ItemNameChangeCheckBox4.Checked)
             {
                 itemMainCategoryTextBox4.ForeColor = Color.Purple;
                 itemCategoryTextBox4.ForeColor = Color.Purple;
@@ -2898,7 +4103,7 @@ namespace Flawless_ex
                 BuyerTextBox4.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)        
+            if (NextMonthCheckBox4.Checked && !ItemNameChangeCheckBox4.Checked)
             {
                 itemMainCategoryTextBox4.ForeColor = Color.Red;
                 itemCategoryTextBox4.ForeColor = Color.Red;
@@ -2945,7 +4150,7 @@ namespace Flawless_ex
                 BuyerTextBox5.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)       
+            if (NextMonthCheckBox5.Checked && ItemNameChangeCheckBox5.Checked)
             {
                 itemMainCategoryTextBox5.ForeColor = Color.Purple;
                 itemCategoryTextBox5.ForeColor = Color.Purple;
@@ -2959,7 +4164,7 @@ namespace Flawless_ex
                 BuyerTextBox5.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)        
+            if (NextMonthCheckBox5.Checked && !ItemNameChangeCheckBox5.Checked)
             {
                 itemMainCategoryTextBox5.ForeColor = Color.Red;
                 itemCategoryTextBox5.ForeColor = Color.Red;
@@ -3006,7 +4211,7 @@ namespace Flawless_ex
                 BuyerTextBox6.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)        
+            if (NextMonthCheckBox6.Checked && ItemNameChangeCheckBox6.Checked)
             {
                 itemMainCategoryTextBox6.ForeColor = Color.Purple;
                 itemCategoryTextBox6.ForeColor = Color.Purple;
@@ -3020,7 +4225,7 @@ namespace Flawless_ex
                 BuyerTextBox6.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)        
+            if (NextMonthCheckBox6.Checked && !ItemNameChangeCheckBox6.Checked)
             {
                 itemMainCategoryTextBox6.ForeColor = Color.Red;
                 itemCategoryTextBox6.ForeColor = Color.Red;
@@ -3067,7 +4272,7 @@ namespace Flawless_ex
                 BuyerTextBox7.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)        
+            if (NextMonthCheckBox7.Checked && ItemNameChangeCheckBox7.Checked)
             {
                 itemMainCategoryTextBox7.ForeColor = Color.Purple;
                 itemCategoryTextBox7.ForeColor = Color.Purple;
@@ -3081,7 +4286,7 @@ namespace Flawless_ex
                 BuyerTextBox7.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)        
+            if (NextMonthCheckBox7.Checked && !ItemNameChangeCheckBox7.Checked)
             {
                 itemMainCategoryTextBox7.ForeColor = Color.Red;
                 itemCategoryTextBox7.ForeColor = Color.Red;
@@ -3128,7 +4333,7 @@ namespace Flawless_ex
                 BuyerTextBox8.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)        
+            if (NextMonthCheckBox8.Checked && ItemNameChangeCheckBox8.Checked)
             {
                 itemMainCategoryTextBox8.ForeColor = Color.Purple;
                 itemCategoryTextBox8.ForeColor = Color.Purple;
@@ -3142,7 +4347,7 @@ namespace Flawless_ex
                 BuyerTextBox8.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)        
+            if (NextMonthCheckBox8.Checked && !ItemNameChangeCheckBox8.Checked)
             {
                 itemMainCategoryTextBox8.ForeColor = Color.Red;
                 itemCategoryTextBox8.ForeColor = Color.Red;
@@ -3189,7 +4394,7 @@ namespace Flawless_ex
                 BuyerTextBox9.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)        
+            if (NextMonthCheckBox9.Checked && ItemNameChangeCheckBox9.Checked)
             {
                 itemMainCategoryTextBox9.ForeColor = Color.Purple;
                 itemCategoryTextBox9.ForeColor = Color.Purple;
@@ -3203,7 +4408,7 @@ namespace Flawless_ex
                 BuyerTextBox9.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)        
+            if (NextMonthCheckBox9.Checked && !ItemNameChangeCheckBox9.Checked)
             {
                 itemMainCategoryTextBox9.ForeColor = Color.Red;
                 itemCategoryTextBox9.ForeColor = Color.Red;
@@ -3250,7 +4455,7 @@ namespace Flawless_ex
                 BuyerTextBox10.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)        
+            if (NextMonthCheckBox10.Checked && ItemNameChangeCheckBox10.Checked)
             {
                 itemMainCategoryTextBox10.ForeColor = Color.Purple;
                 itemCategoryTextBox10.ForeColor = Color.Purple;
@@ -3264,7 +4469,7 @@ namespace Flawless_ex
                 BuyerTextBox10.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)       
+            if (NextMonthCheckBox10.Checked && !ItemNameChangeCheckBox10.Checked)
             {
                 itemMainCategoryTextBox10.ForeColor = Color.Red;
                 itemCategoryTextBox10.ForeColor = Color.Red;
@@ -3311,7 +4516,7 @@ namespace Flawless_ex
                 BuyerTextBox11.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)        
+            if (NextMonthCheckBox11.Checked && ItemNameChangeCheckBox11.Checked)
             {
                 itemMainCategoryTextBox11.ForeColor = Color.Purple;
                 itemCategoryTextBox11.ForeColor = Color.Purple;
@@ -3325,7 +4530,7 @@ namespace Flawless_ex
                 BuyerTextBox11.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)        
+            if (NextMonthCheckBox11.Checked && !ItemNameChangeCheckBox11.Checked)
             {
                 itemMainCategoryTextBox11.ForeColor = Color.Red;
                 itemCategoryTextBox11.ForeColor = Color.Red;
@@ -3372,7 +4577,7 @@ namespace Flawless_ex
                 BuyerTextBox12.ForeColor = Color.Blue;
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)        
+            if (NextMonthCheckBox12.Checked && ItemNameChangeCheckBox12.Checked)
             {
                 itemMainCategoryTextBox12.ForeColor = Color.Purple;
                 itemCategoryTextBox12.ForeColor = Color.Purple;
@@ -3386,7 +4591,7 @@ namespace Flawless_ex
                 BuyerTextBox12.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)        
+            if (NextMonthCheckBox12.Checked && !ItemNameChangeCheckBox12.Checked)
             {
                 itemMainCategoryTextBox12.ForeColor = Color.Red;
                 itemCategoryTextBox12.ForeColor = Color.Red;
@@ -3434,7 +4639,7 @@ namespace Flawless_ex
 
             }
             //次月・品名両方チェック
-            if (NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)        
+            if (NextMonthCheckBox13.Checked && ItemNameChangeCheckBox13.Checked)
             {
                 itemMainCategoryTextBox13.ForeColor = Color.Purple;
                 itemCategoryTextBox13.ForeColor = Color.Purple;
@@ -3448,7 +4653,7 @@ namespace Flawless_ex
                 BuyerTextBox13.ForeColor = Color.Purple;
             }
             //次月のみチェック
-            if (NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)        
+            if (NextMonthCheckBox13.Checked && !ItemNameChangeCheckBox13.Checked)
             {
                 itemMainCategoryTextBox13.ForeColor = Color.Red;
                 itemCategoryTextBox13.ForeColor = Color.Red;
@@ -4534,6 +5739,649 @@ namespace Flawless_ex
         #region"登録ボタンクリック"
         private void RegisterButton_Click(object sender, EventArgs e)
         {
+            #region"次月と品名変更の両方にチェックが入ってることを通知"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (itemMainCategoryTextBox1.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (itemMainCategoryTextBox2.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (itemMainCategoryTextBox3.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (itemMainCategoryTextBox4.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("４行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (itemMainCategoryTextBox5.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("５行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (itemMainCategoryTextBox6.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("６行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (itemMainCategoryTextBox7.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("７行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (itemMainCategoryTextBox8.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("８行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (itemMainCategoryTextBox9.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("９行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (itemMainCategoryTextBox10.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１０行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (itemMainCategoryTextBox11.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (itemMainCategoryTextBox12.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (itemMainCategoryTextBox13.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"次月にチェックが入っていて卸値にも入力されているとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"品名のみチェックが入っているとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    case 1:
+                        #region"１行目"
+                        if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 2:
+                        #region"２行目"
+                        if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 3:
+                        #region"３行目"
+                        if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 4:
+                        #region"４行目"
+                        if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 5:
+                        #region"５行目"
+                        if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 6:
+                        #region"６行目"
+                        if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 7:
+                        #region"７行目"
+                        if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 8:
+                        #region"８行目"
+                        if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 9:
+                        #region"９行目"
+                        if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 10:
+                        #region"１０行目"
+                        if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 11:
+                        #region"１１行目"
+                        if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 12:
+                        #region"１２行目"
+                        if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+
+                    case 13:
+                        #region"１３行目"
+                        if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        #endregion
+                        break;
+                }
+            }
+            #endregion
+
+            #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"卸値に値が入力されていて売却先が無記入のとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                     #endregion
+                }
+            }
+            #endregion
+
+
             DialogResult dialogResult = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
@@ -4542,30 +6390,27 @@ namespace Flawless_ex
 
             //伝票番号は引数から使用
             DateTime dt = new DateTime();
-            Registration = dt.ToLongDateString();
-            GradeNumber = int.Parse(GradeNumberTextBox.Text);                   //消すかも？
-            TotalPurchase = PurChase;
-            TotalWholesale = WholeSale;
-            TotalProfit = ProFit;
-            DNumber = SlipNumber;
-            MetalPurchase = PurChaseMetal;
-            MetalWholesale = WholeSaleMetal;
-            MetalProfit = ProFitMetal;
-            DiamondPurchase = PurChaseDiamond;
-            DiamondWholesale = WholeSaleDiamond;
-            DiamondProfit = ProFitDiamond;
-            BrandPurchase = PurChaseBrand;
-            BrandWholesale = WholeSaleBrand;
-            BrandProfit = ProFitBrand;
-            ProductPurchase = PurChaseProduct;
-            ProductWholesale = WholeSaleProduct;
-            ProductProfit = ProFitProduct;
-            OtherPurchase = PurChaseOther;
-            OtherWholesale = WholeSaleOther;
-            OtherProfit = ProFitOther;
-            ControlNumber = int.Parse(GradeNumberTextBox.Text);
-
-            
+            Registration = dt.ToLongDateString();                   //登録日
+            GradeNumber = int.Parse(GradeNumberTextBox.Text);       //成績番号
+            TotalPurchase = PurChase;                               //合計買取金額
+            TotalWholesale = WholeSale;                             //合計卸値
+            TotalProfit = ProFit;                                   //合計利益
+            DNumber = SlipNumber;                                   //伝票番号
+            MetalPurchase = PurChaseMetal;                          //地金買取額
+            MetalWholesale = WholeSaleMetal;                        //地金卸値
+            MetalProfit = ProFitMetal;                              //地金利益
+            DiamondPurchase = PurChaseDiamond;                      //ダイヤ買取額
+            DiamondWholesale = WholeSaleDiamond;                    //ダイヤ卸値
+            DiamondProfit = ProFitDiamond;                          //ダイヤ利益
+            BrandPurchase = PurChaseBrand;                          //ブランド買取額
+            BrandWholesale = WholeSaleBrand;                        //ブランド卸値
+            BrandProfit = ProFitBrand;                              //ブランド利益
+            ProductPurchase = PurChaseProduct;                      //製品買取額
+            ProductWholesale = WholeSaleProduct;                    //製品卸値
+            ProductProfit = ProFitProduct;                          //製品利益
+            OtherPurchase = PurChaseOther;                          //その他買取額
+            OtherWholesale = WholeSaleOther;                        //その他卸値
+            OtherProfit = ProFitOther;                              //その他利益
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -4577,7 +6422,7 @@ namespace Flawless_ex
                 CShop = OccupationOrShopNameTextBox.Text;
                 CStaff = AddressOrClientStaffNameTextBox.Text;
 
-                sql_str = "Insert into list_result(company_name, shop_name, staff_name, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit, control_number) values ('" + CName + "','" + CShop + "','" + CStaff + "','" + 0 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "','" + ControlNumber + "');";
+                sql_str = "Insert into list_result(company_name, shop_name, staff_name, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + CName + "','" + CShop + "','" + CStaff + "','" + 0 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
             }
             else if (type == 1)
             {
@@ -4586,7 +6431,7 @@ namespace Flawless_ex
                 Address = AddressOrClientStaffNameTextBox.Text;
                 BirthDay = BirthdayTextBox.Text;
 
-                sql_str = "Insert into list_result(name, address, occupation, birthday, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit, control_number) values ('" + name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "','" + ControlNumber + "');";
+                sql_str = "Insert into list_result(name, address, occupation, birthday, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
             }
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(DataTable);
@@ -4613,12 +6458,18 @@ namespace Flawless_ex
                         UnitPrice = UnitPriceUnFormat1;
                         Count = int.Parse(countTextBox1.Text);
 
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || Wholesale != 0) 
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || Wholesale != 0)
                         {
                             SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
                             Buyer = BuyerTextBox1.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox1.Checked)
                         {
                             NextMonth = 1;
@@ -4636,6 +6487,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4660,7 +6512,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
                             Buyer = BuyerTextBox2.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox2.Checked)
                         {
                             NextMonth = 1;
@@ -4678,6 +6536,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4702,7 +6561,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
                             Buyer = BuyerTextBox3.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox3.Checked)
                         {
                             NextMonth = 1;
@@ -4720,6 +6585,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4744,7 +6610,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
                             Buyer = BuyerTextBox4.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox4.Checked)
                         {
                             NextMonth = 1;
@@ -4762,6 +6634,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4786,7 +6659,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
                             Buyer = BuyerTextBox5.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox5.Checked)
                         {
                             NextMonth = 1;
@@ -4804,6 +6683,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4828,7 +6708,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
                             Buyer = BuyerTextBox6.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox6.Checked)
                         {
                             NextMonth = 1;
@@ -4846,6 +6732,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4870,7 +6757,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
                             Buyer = BuyerTextBox7.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox7.Checked)
                         {
                             NextMonth = 1;
@@ -4888,6 +6781,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4895,7 +6789,7 @@ namespace Flawless_ex
 
                         break;
                     case 8:
-                        record = 8;
+                        Record = 8;
                         MainCategoryCode = MainCategoryCode8;
                         ItemCategoryCode = ItemCategoryCode8;
                         Purchase = PurchaseUnFormat8;
@@ -4912,7 +6806,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
                             Buyer = BuyerTextBox8.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox8.Checked)
                         {
                             NextMonth = 1;
@@ -4930,6 +6830,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4954,7 +6855,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
                             Buyer = BuyerTextBox9.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox9.Checked)
                         {
                             NextMonth = 1;
@@ -4972,6 +6879,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -4996,7 +6904,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
                             Buyer = BuyerTextBox10.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox10.Checked)
                         {
                             NextMonth = 1;
@@ -5014,6 +6928,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -5038,7 +6953,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
                             Buyer = BuyerTextBox11.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox11.Checked)
                         {
                             NextMonth = 1;
@@ -5056,6 +6977,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -5080,7 +7002,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
                             Buyer = BuyerTextBox12.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox12.Checked)
                         {
                             NextMonth = 1;
@@ -5098,6 +7026,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -5122,7 +7051,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
                             Buyer = BuyerTextBox13.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox13.Checked)
                         {
                             NextMonth = 1;
@@ -5140,6 +7075,7 @@ namespace Flawless_ex
                         {
                             ChangeCheck = 0;
                         }
+                        #endregion
 
                         Sql_Str = "Insert into list_result2(assessment_date, sale_date, main_category_code, item_code, money, wholesale_price, buyer, remarks, carry_over_month, grade_number, record_number, document_number, profit, item_detail, weight, unit_price, count, item_name_change) values('" + AssessmentDate + "','" + SaleDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + Purchase + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + DNumber + "','" + Profit + "','" + ItemDetail + "','" + Weight + "','" + UnitPrice + "','" + Count + "','" + ChangeCheck + "');";
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
@@ -5159,6 +7095,637 @@ namespace Flawless_ex
         #region"再登録ボタン"
         private void UpdateButton_Click(object sender, EventArgs e)
         {
+            #region"次月と品名変更の両方にチェックが入ってることを通知"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (itemMainCategoryTextBox1.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (itemMainCategoryTextBox2.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (itemMainCategoryTextBox3.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (itemMainCategoryTextBox4.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("４行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (itemMainCategoryTextBox5.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("５行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (itemMainCategoryTextBox6.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("６行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (itemMainCategoryTextBox7.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("７行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (itemMainCategoryTextBox8.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("８行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (itemMainCategoryTextBox9.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("９行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (itemMainCategoryTextBox10.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１０行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (itemMainCategoryTextBox11.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (itemMainCategoryTextBox12.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (itemMainCategoryTextBox13.ForeColor == Color.Purple)
+                        {
+                            MessageBox.Show("１３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "品名を変更する必要がある場合は品名を変更してから登録してください", "登録内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"次月にチェックが入っていて卸値にも入力されているとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text)) 
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+
+            #endregion
+
+            #region"品名変更のみチェックが入っているとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
+                        {
+                            MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"卸値に値が入力されていて売却先が無記入のとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
             DialogResult dialogResult = MessageBox.Show("再登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
@@ -5168,29 +7735,29 @@ namespace Flawless_ex
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
             #region"list_result への更新"
-            TotalPurchase = PurChase;
-            TotalWholesale = WholeSale;
-            TotalProfit = ProFit;
-            DNumber = SlipNumber;
-            MetalPurchase = PurChaseMetal;
-            MetalWholesale = WholeSaleMetal;
-            MetalProfit = ProFitMetal;
-            DiamondPurchase = PurChaseDiamond;
-            DiamondWholesale = WholeSaleDiamond;
-            DiamondProfit = ProFitDiamond;
-            BrandPurchase = PurChaseBrand;
-            BrandWholesale = WholeSaleBrand;
-            BrandProfit = ProFitBrand;
-            ProductPurchase = PurChaseProduct;
-            ProductWholesale = WholeSaleProduct;
-            ProductProfit = ProFitProduct;
-            OtherPurchase = PurChaseOther;
-            OtherWholesale = WholeSaleOther;
-            OtherProfit = ProFitOther;
+            TotalPurchase = PurChase;                   //合計買取金額
+            TotalWholesale = WholeSale;                 //合計卸値
+            TotalProfit = ProFit;                       //合計利益
+            DNumber = SlipNumber;                       //伝票番号
+            MetalPurchase = PurChaseMetal;              //地金買取額
+            MetalWholesale = WholeSaleMetal;            //地金卸値
+            MetalProfit = ProFitMetal;                  //地金利益
+            DiamondPurchase = PurChaseDiamond;          //ダイヤ買取額
+            DiamondWholesale = WholeSaleDiamond;        //ダイヤ卸値
+            DiamondProfit = ProFitDiamond;              //ダイヤ利益
+            BrandPurchase = PurChaseBrand;              //ブランド買取額
+            BrandWholesale = WholeSaleBrand;            //ブランド卸値
+            BrandProfit = ProFitBrand;                  //ブランド利益
+            ProductPurchase = PurChaseProduct;          //製品買取額
+            ProductWholesale = WholeSaleProduct;        //製品卸値
+            ProductProfit = ProFitProduct;              //製品利益
+            OtherPurchase = PurChaseOther;              //その他買取額
+            OtherWholesale = WholeSaleOther;            //その他卸値
+            OtherProfit = ProFitOther;                  //その他利益
 
             using (transaction = conn.BeginTransaction())
             {
-                string sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "';";
+                string sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "' where document_number = '" + DNumber + "';";
                 cmd = new NpgsqlCommand(sql_str, conn);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
@@ -5215,7 +7782,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
                             Buyer = BuyerTextBox1.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox1.Checked)
                         {
                             NextMonth = 1;
@@ -5224,15 +7797,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox1.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
                     #endregion
+                    #region"２行目"
                     case 2:
                         MainCategoryCode = MainCategoryCode2;
                         ItemCategoryCode = ItemCategoryCode2;
@@ -5245,7 +7830,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
                             Buyer = BuyerTextBox2.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox2.Checked)
                         {
                             NextMonth = 1;
@@ -5254,14 +7845,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox2.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"３行目"
                     case 3:
                         MainCategoryCode = MainCategoryCode3;
                         ItemCategoryCode = ItemCategoryCode3;
@@ -5274,7 +7878,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
                             Buyer = BuyerTextBox3.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox3.Checked)
                         {
                             NextMonth = 1;
@@ -5283,14 +7893,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox3.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"４行目"
                     case 4:
                         MainCategoryCode = MainCategoryCode4;
                         ItemCategoryCode = ItemCategoryCode4;
@@ -5303,7 +7926,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
                             Buyer = BuyerTextBox4.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox4.Checked)
                         {
                             NextMonth = 1;
@@ -5312,14 +7941,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox4.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"５行目"
                     case 5:
                         MainCategoryCode = MainCategoryCode5;
                         ItemCategoryCode = ItemCategoryCode5;
@@ -5332,7 +7974,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
                             Buyer = BuyerTextBox5.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox5.Checked)
                         {
                             NextMonth = 1;
@@ -5341,14 +7989,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox5.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"６行目"
                     case 6:
                         MainCategoryCode = MainCategoryCode6;
                         ItemCategoryCode = ItemCategoryCode6;
@@ -5361,7 +8022,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
                             Buyer = BuyerTextBox6.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox6.Checked)
                         {
                             NextMonth = 1;
@@ -5370,14 +8037,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox6.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"７行目"
                     case 7:
                         MainCategoryCode = MainCategoryCode7;
                         ItemCategoryCode = ItemCategoryCode7;
@@ -5390,7 +8070,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
                             Buyer = BuyerTextBox7.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox7.Checked)
                         {
                             NextMonth = 1;
@@ -5399,14 +8085,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox7.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"８行目"
                     case 8:
                         MainCategoryCode = MainCategoryCode8;
                         ItemCategoryCode = ItemCategoryCode8;
@@ -5419,7 +8118,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
                             Buyer = BuyerTextBox8.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox8.Checked)
                         {
                             NextMonth = 1;
@@ -5428,14 +8133,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox8.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"９行目"
                     case 9:
                         MainCategoryCode = MainCategoryCode9;
                         ItemCategoryCode = ItemCategoryCode9;
@@ -5448,7 +8166,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
                             Buyer = BuyerTextBox9.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox9.Checked)
                         {
                             NextMonth = 1;
@@ -5457,14 +8181,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox9.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"１０行目"
                     case 10:
                         MainCategoryCode = MainCategoryCode10;
                         ItemCategoryCode = ItemCategoryCode10;
@@ -5477,7 +8214,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
                             Buyer = BuyerTextBox10.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox10.Checked)
                         {
                             NextMonth = 1;
@@ -5486,14 +8229,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox10.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"１１行目"
                     case 11:
                         MainCategoryCode = MainCategoryCode11;
                         ItemCategoryCode = ItemCategoryCode11;
@@ -5506,7 +8262,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
                             Buyer = BuyerTextBox11.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox11.Checked)
                         {
                             NextMonth = 1;
@@ -5515,14 +8277,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox11.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"１２行目"
                     case 12:
                         MainCategoryCode = MainCategoryCode12;
                         ItemCategoryCode = ItemCategoryCode12;
@@ -5535,7 +8310,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
                             Buyer = BuyerTextBox12.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox12.Checked)
                         {
                             NextMonth = 1;
@@ -5544,14 +8325,27 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox12.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
+                    #region"１３行目"
                     case 13:
                         MainCategoryCode = MainCategoryCode13;
                         ItemCategoryCode = ItemCategoryCode13;
@@ -5564,7 +8358,13 @@ namespace Flawless_ex
                             SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
                             Buyer = BuyerTextBox13.Text;
                         }
+                        else
+                        {
+                            SaleDate = "";
+                            Buyer = "";
+                        }
 
+                        #region"チェックボックス"
                         if (NextMonthCheckBox13.Checked)
                         {
                             NextMonth = 1;
@@ -5573,29 +8373,579 @@ namespace Flawless_ex
                         {
                             NextMonth = 0;
                         }
+
+                        if (ItemNameChangeCheckBox13.Checked)
+                        {
+                            ChangeCheck = 1;
+                        }
+                        else
+                        {
+                            ChangeCheck = 0;
+                        }
+                        #endregion
+
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         break;
+                    #endregion
                 }
             }
             #endregion
             conn.Close();
+            MessageBox.Show("再登録しました。", "再登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            NameChange = false;
+            button3.Enabled = true;
+
         }
         #endregion
 
         #region"品名変更ボタン"
         private void ItemNameChangeButton_Click(object sender, EventArgs e)
         {
-            if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked && !ItemNameChangeCheckBox11.Checked && !ItemNameChangeCheckBox12.Checked && !ItemNameChangeCheckBox13.Checked)
+            #region"品名変更にチェックされているかどうか"
+            switch (record)
             {
-                MessageBox.Show("変更する品名の行を選択してください", "品名変更エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
+                #region"１行目まで"
+                case 1:
+                    if (!ItemNameChangeCheckBox1.Checked)
+                    {
+                        MessageBox.Show("１行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は１行目の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"２行目まで"
+                case 2:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked)
+                    {
+                        MessageBox.Show("１行目～２行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"３行目まで"
+                case 3:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked)
+                    {
+                        MessageBox.Show("１行目～３行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"４行目まで"
+                case 4:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked)
+                    {
+                        MessageBox.Show("１行目～４行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"５行目まで"
+                case 5:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked)
+                    {
+                        MessageBox.Show("１行目～５行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"６行目まで"
+                case 6:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked)
+                    {
+                        MessageBox.Show("１行目～６行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"７行目まで"
+                case 7:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked)
+                    {
+                        MessageBox.Show("１行目～７行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"８行目まで"
+                case 8:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked)
+                    {
+                        MessageBox.Show("１行目～８行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"９行目まで"
+                case 9:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked)
+                    {
+                        MessageBox.Show("１行目～９行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"１０行目まで"
+                case 10:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked)
+                    {
+                        MessageBox.Show("１行目～１０行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"１１行目まで"
+                case 11:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked && !ItemNameChangeCheckBox11.Checked)
+                    {
+                        MessageBox.Show("１行目～１１行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"１２行目まで"
+                case 12:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked && !ItemNameChangeCheckBox11.Checked && !ItemNameChangeCheckBox12.Checked)
+                    {
+                        MessageBox.Show("１行目～１２行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                #endregion
+                #region"１３行目まで"
+                case 13:
+                    if (!ItemNameChangeCheckBox1.Checked && !ItemNameChangeCheckBox2.Checked && !ItemNameChangeCheckBox3.Checked && !ItemNameChangeCheckBox4.Checked && !ItemNameChangeCheckBox5.Checked && !ItemNameChangeCheckBox6.Checked && !ItemNameChangeCheckBox7.Checked && !ItemNameChangeCheckBox8.Checked && !ItemNameChangeCheckBox9.Checked && !ItemNameChangeCheckBox10.Checked && !ItemNameChangeCheckBox11.Checked && !ItemNameChangeCheckBox12.Checked && !ItemNameChangeCheckBox13.Checked)
+                    {
+                        MessageBox.Show("１行目～１３行目の品名変更にチェックが入っておりません。" + "\r\n" + "品名を変更する場合は変更する行の品名変更にチェックを入れてください", "入力項目を確認してください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    break;
+                    #endregion
             }
+            #endregion
+
+            #region"次月にチェックが入っていて卸値にも入力されているとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text)) 
+                        {
+                            MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"卸値に値が入力されていて売却先が無記入のとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
+                        {
+                            MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
+                        {
+                            MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
+                        {
+                            MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
+                        {
+                            MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
+                        {
+                            MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
+                        {
+                            MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
+                        {
+                            MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
+                        {
+                            MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
+                        {
+                            MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        {
+                            result = MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力内容確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        {
+                            result = MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        {
+                            result = MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        {
+                            result = MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        {
+                            result = MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        {
+                            result = MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        {
+                            result = MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        {
+                            result = MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        {
+                            result = MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        {
+                            result = MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        {
+                            result = MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        {
+                            result = MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        {
+                            result = MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
 
             DialogResult dialogResult = MessageBox.Show("選択した品名を変更しますか？", "変更確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
@@ -5604,7 +8954,7 @@ namespace Flawless_ex
             }
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            string sql_str = "select * from list_result;";
+            string sql_str = "select * from list_result order by result;";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
             string DocumentNumber = "";
@@ -5616,14 +8966,628 @@ namespace Flawless_ex
                 }
             }
 
-            if (DocumentNumber == SlipNumber)   //一度登録済み
+            if (DocumentNumber == SlipNumber)   //一度登録済み（品名変更にチェックが付いているものだけ変更）
             {
+                #region"list_resultへの更新"
+                TotalPurchase = PurChase;                   //合計買取金額
+                TotalWholesale = WholeSale;                 //合計卸値
+                TotalProfit = ProFit;                       //合計利益
+                DNumber = SlipNumber;                       //伝票番号
+                MetalPurchase = PurChaseMetal;              //地金買取額
+                MetalWholesale = WholeSaleMetal;            //地金卸値
+                MetalProfit = ProFitMetal;                  //地金利益
+                DiamondPurchase = PurChaseDiamond;          //ダイヤ買取額
+                DiamondWholesale = WholeSaleDiamond;        //ダイヤ卸値
+                DiamondProfit = ProFitDiamond;              //ダイヤ利益
+                BrandPurchase = PurChaseBrand;              //ブランド買取額
+                BrandWholesale = WholeSaleBrand;            //ブランド卸値
+                BrandProfit = ProFitBrand;                  //ブランド利益
+                ProductPurchase = PurChaseProduct;          //製品買取額
+                ProductWholesale = WholeSaleProduct;        //製品卸値
+                ProductProfit = ProFitProduct;              //製品利益
+                OtherPurchase = PurChaseOther;              //その他買取額
+                OtherWholesale = WholeSaleOther;            //その他卸値
+                OtherProfit = ProFitOther;                  //その他利益
 
+                using (transaction = conn.BeginTransaction())
+                {
+                    sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "' where document_number = '" + DNumber + "';";
+                    cmd = new NpgsqlCommand(sql_str, conn);
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+                #endregion
+                #region"list_result2への更新"
+                for (int i = 1; i <= record; i++)
+                {
+                    switch (i)
+                    {
+                        #region"１行目"
+                        case 1:
+                            if (ItemNameChangeCheckBox1.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode1;
+                                ItemCategoryCode = ItemCategoryCode1;
+                                Wholesale = WholeSaleUnFormat1;
+                                Remark = remark1.Text;
+                                Profit = WholeSaleUnFormat1 - PurchaseUnFormat1;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox1.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox1.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"２行目"
+                        case 2:
+                            if (ItemNameChangeCheckBox2.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode2;
+                                ItemCategoryCode = ItemCategoryCode2;
+                                Wholesale = WholeSaleUnFormat2;
+                                Remark = remark2.Text;
+                                Profit = WholeSaleUnFormat2 - PurchaseUnFormat2;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox2.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox2.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"３行目"
+                        case 3:
+                            if (ItemNameChangeCheckBox3.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode3;
+                                ItemCategoryCode = ItemCategoryCode3;
+                                Wholesale = WholeSaleUnFormat3;
+                                Remark = remark3.Text;
+                                Profit = WholeSaleUnFormat3 - PurchaseUnFormat3;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox3.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox3.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"４行目"
+                        case 4:
+                            if (ItemNameChangeCheckBox4.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode4;
+                                ItemCategoryCode = ItemCategoryCode4;
+                                Wholesale = WholeSaleUnFormat4;
+                                Remark = remark4.Text;
+                                Profit = WholeSaleUnFormat4 - PurchaseUnFormat4;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox4.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox4.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"５行目"
+                        case 5:
+                            if (ItemNameChangeCheckBox5.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode5;
+                                ItemCategoryCode = ItemCategoryCode5;
+                                Wholesale = WholeSaleUnFormat5;
+                                Remark = remark5.Text;
+                                Profit = WholeSaleUnFormat5 - PurchaseUnFormat5;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox5.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox5.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"６行目"
+                        case 6:
+                            if (ItemNameChangeCheckBox6.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode6;
+                                ItemCategoryCode = ItemCategoryCode6;
+                                Wholesale = WholeSaleUnFormat6;
+                                Remark = remark6.Text;
+                                Profit = WholeSaleUnFormat6 - PurchaseUnFormat6;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox6.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox6.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"７行目"
+                        case 7:
+                            if (ItemNameChangeCheckBox7.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode7;
+                                ItemCategoryCode = ItemCategoryCode7;
+                                Wholesale = WholeSaleUnFormat7;
+                                Remark = remark7.Text;
+                                Profit = WholeSaleUnFormat7 - PurchaseUnFormat7;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox7.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox7.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"８行目"
+                        case 8:
+                            if (ItemNameChangeCheckBox8.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode8;
+                                ItemCategoryCode = ItemCategoryCode8;
+                                Wholesale = WholeSaleUnFormat8;
+                                Remark = remark8.Text;
+                                Profit = WholeSaleUnFormat8 - PurchaseUnFormat8;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox8.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox8.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"９行目"
+                        case 9:
+                            if (ItemNameChangeCheckBox9.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode9;
+                                ItemCategoryCode = ItemCategoryCode9;
+                                Wholesale = WholeSaleUnFormat9;
+                                Remark = remark9.Text;
+                                Profit = WholeSaleUnFormat9 - PurchaseUnFormat9;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox9.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox9.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"１０行目"
+                        case 10:
+                            if (ItemNameChangeCheckBox10.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode10;
+                                ItemCategoryCode = ItemCategoryCode10;
+                                Wholesale = WholeSaleUnFormat10;
+                                Remark = remark10.Text;
+                                Profit = WholeSaleUnFormat10 - PurchaseUnFormat10;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox10.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox10.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"１１行目"
+                        case 11:
+                            if (ItemNameChangeCheckBox11.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode11;
+                                ItemCategoryCode = ItemCategoryCode11;
+                                Wholesale = WholeSaleUnFormat1;
+                                Remark = remark11.Text;
+                                Profit = WholeSaleUnFormat11 - PurchaseUnFormat11;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox11.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox11.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"１２行目"
+                        case 12:
+                            if (ItemNameChangeCheckBox12.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode12;
+                                ItemCategoryCode = ItemCategoryCode12;
+                                Wholesale = WholeSaleUnFormat12;
+                                Remark = remark12.Text;
+                                Profit = WholeSaleUnFormat12 - PurchaseUnFormat12;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox12.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox12.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                        #endregion
+                        #region"１３行目"
+                        case 13:
+                            if (ItemNameChangeCheckBox13.Checked)
+                            {
+                                MainCategoryCode = MainCategoryCode13;
+                                ItemCategoryCode = ItemCategoryCode13;
+                                Wholesale = WholeSaleUnFormat13;
+                                Remark = remark13.Text;
+                                Profit = WholeSaleUnFormat13 - PurchaseUnFormat13;
+
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                                {
+                                    SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
+                                    Buyer = BuyerTextBox13.Text;
+                                }
+                                else
+                                {
+                                    SaleDate = "";
+                                    Buyer = "";
+                                }
+
+                                #region"チェックボックス"
+                                if (NextMonthCheckBox13.Checked)
+                                {
+                                    NextMonth = 1;
+                                }
+                                else
+                                {
+                                    NextMonth = 0;
+                                }
+
+                                ChangeCheck = 1;
+
+                                #endregion
+                                using (transaction = conn.BeginTransaction())
+                                {
+                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
+                                    cmd = new NpgsqlCommand(sql_str, conn);
+                                    cmd.ExecuteNonQuery();
+                                    transaction.Commit();
+                                }
+                            }
+                            break;
+                            #endregion
+                    }
+                }
+                #endregion
             }
             else　                              //未登録
             {
-                Document = SlipNumber;
-                GRADE = int.Parse(GradeNumberTextBox.Text);
+                GradeNumber = int.Parse(GradeNumberTextBox.Text);       //成績番号
+                TotalPurchase = PurChase;                               //合計買取金額
+                TotalWholesale = WholeSale;                             //合計卸値
+                TotalProfit = ProFit;                                   //合計利益
+                DNumber = SlipNumber;                                   //伝票番号
+
+                Document = SlipNumber;                                  //list_result2 への登録時
+                GRADE = int.Parse(GradeNumberTextBox.Text);             //list_result2 への登録時
                 AssessmentDate = AssessmentDateTextBox.Text;
                 string SQL = "insert into list_result (type, staff_code, result, sum_money, sum_wholesale_price, profit, document_number) values('" + type + "','" + staff_id + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "');";
                 adapter = new NpgsqlDataAdapter(SQL, conn);
@@ -5670,10 +9634,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat1 - PurchaseUnFormat1;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data1);
                             break;
@@ -5715,10 +9681,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat2 - PurchaseUnFormat2;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data2);
                             break;
@@ -5760,10 +9728,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat3 - PurchaseUnFormat3;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data3);
                             break;
@@ -5805,10 +9775,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat4 - PurchaseUnFormat4;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data4);
                             break;
@@ -5850,10 +9822,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat5 - PurchaseUnFormat5;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data5);
                             break;
@@ -5895,10 +9869,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat6 - PurchaseUnFormat6;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data6);
                             break;
@@ -5940,10 +9916,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat7 - PurchaseUnFormat7;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data7);
                             break;
@@ -5985,10 +9963,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat8 - PurchaseUnFormat8;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data8);
                             break;
@@ -6030,10 +10010,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat9 - PurchaseUnFormat9;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data9);
                             break;
@@ -6075,10 +10057,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat10 - PurchaseUnFormat10;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data10);
                             break;
@@ -6120,10 +10104,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat11 - PurchaseUnFormat11;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data11);
                             break;
@@ -6165,10 +10151,12 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat12 - PurchaseUnFormat12;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data12);
                             break;
@@ -6210,29 +10198,32 @@ namespace Flawless_ex
                             else
                             {
                                 WHOLESALE = 0;
-                                PROFIT = 0;
+                                PROFIT = WholeSaleUnFormat13 - PurchaseUnFormat13;
+                                BUYDATE = "";
+                                BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_category_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date) values (,'" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data13);
                             break;
                             #endregion
                     }
                 }
-                MessageBox.Show("入力されたデータを登録しました。この成績表を登録する場合、次からはは再登録ボタンを押してください。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("入力されたデータを登録しました。"+"\r\n"+"品名変更画面に移動します。", "操作確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             conn.Close();
             RegisterButton.Enabled = false;
             UpdateButton.Enabled = true;
 
-            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass, Access_auth);
+            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass, Access_auth, NameChange);
             screan = false;
             this.Close();
             nameChange.Show();
         }
         #endregion
 
+        #region"お客様情報ボタン"
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
             ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth);
@@ -6240,7 +10231,9 @@ namespace Flawless_ex
             this.Close();
             clientInformation.Show();
         }
+        #endregion
 
+        #region"月間成績表"
         private void button3_Click(object sender, EventArgs e)
         {
             MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade);
@@ -6248,6 +10241,7 @@ namespace Flawless_ex
             this.Close();
             monResult.Show();
         }
+        #endregion
 
         #region"値の検証"
         private void WholesalePriceTextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -6368,10 +10362,22 @@ namespace Flawless_ex
         }
         #endregion
 
+        #region"納品書検索"
         private void DeliverySearchButton_Click(object sender, EventArgs e)
         {
             Control = int.Parse(ManagementNumberTextBox.Text);
             this.Close();
+        }
+        #endregion
+
+        private void RecordList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //品名を変更してまだ再登録をしていないとき
+            if (NameChange)
+            {
+                MessageBox.Show("再登録を行ってください", "登録未完了", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = true;
+            }
         }
     }
 }
