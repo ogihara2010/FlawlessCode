@@ -282,6 +282,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -437,7 +438,7 @@
             this.NameOrCompanyNameLabel.AutoSize = true;
             this.NameOrCompanyNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.NameOrCompanyNameLabel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.NameOrCompanyNameLabel.Location = new System.Drawing.Point(81, 192);
+            this.NameOrCompanyNameLabel.Location = new System.Drawing.Point(38, 195);
             this.NameOrCompanyNameLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.NameOrCompanyNameLabel.Name = "NameOrCompanyNameLabel";
             this.NameOrCompanyNameLabel.Size = new System.Drawing.Size(118, 48);
@@ -449,7 +450,7 @@
             this.AddressOrClientStaffNameLabel.AutoSize = true;
             this.AddressOrClientStaffNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AddressOrClientStaffNameLabel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.AddressOrClientStaffNameLabel.Location = new System.Drawing.Point(1125, 195);
+            this.AddressOrClientStaffNameLabel.Location = new System.Drawing.Point(1089, 186);
             this.AddressOrClientStaffNameLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.AddressOrClientStaffNameLabel.Name = "AddressOrClientStaffNameLabel";
             this.AddressOrClientStaffNameLabel.Size = new System.Drawing.Size(118, 48);
@@ -459,7 +460,7 @@
             // NameOrCompanyNameTextBox
             // 
             this.NameOrCompanyNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.NameOrCompanyNameTextBox.Location = new System.Drawing.Point(242, 192);
+            this.NameOrCompanyNameTextBox.Location = new System.Drawing.Point(200, 188);
             this.NameOrCompanyNameTextBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.NameOrCompanyNameTextBox.Name = "NameOrCompanyNameTextBox";
             this.NameOrCompanyNameTextBox.ReadOnly = true;
@@ -469,7 +470,7 @@
             // AddressOrClientStaffNameTextBox
             // 
             this.AddressOrClientStaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressOrClientStaffNameTextBox.Location = new System.Drawing.Point(1319, 192);
+            this.AddressOrClientStaffNameTextBox.Location = new System.Drawing.Point(1256, 184);
             this.AddressOrClientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.AddressOrClientStaffNameTextBox.Name = "AddressOrClientStaffNameTextBox";
             this.AddressOrClientStaffNameTextBox.ReadOnly = true;
@@ -481,7 +482,7 @@
             this.OccupationOrShopNameLabel.AutoSize = true;
             this.OccupationOrShopNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.OccupationOrShopNameLabel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.OccupationOrShopNameLabel.Location = new System.Drawing.Point(568, 195);
+            this.OccupationOrShopNameLabel.Location = new System.Drawing.Point(550, 191);
             this.OccupationOrShopNameLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.OccupationOrShopNameLabel.Name = "OccupationOrShopNameLabel";
             this.OccupationOrShopNameLabel.Size = new System.Drawing.Size(118, 48);
@@ -491,7 +492,7 @@
             // OccupationOrShopNameTextBox
             // 
             this.OccupationOrShopNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.OccupationOrShopNameTextBox.Location = new System.Drawing.Point(771, 192);
+            this.OccupationOrShopNameTextBox.Location = new System.Drawing.Point(714, 183);
             this.OccupationOrShopNameTextBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.OccupationOrShopNameTextBox.Name = "OccupationOrShopNameTextBox";
             this.OccupationOrShopNameTextBox.ReadOnly = true;
@@ -503,7 +504,7 @@
             this.BirthdayLabel.AutoSize = true;
             this.BirthdayLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BirthdayLabel.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.BirthdayLabel.Location = new System.Drawing.Point(2039, 195);
+            this.BirthdayLabel.Location = new System.Drawing.Point(2004, 186);
             this.BirthdayLabel.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.BirthdayLabel.Name = "BirthdayLabel";
             this.BirthdayLabel.Size = new System.Drawing.Size(216, 48);
@@ -3300,7 +3301,7 @@
             // BirthdayTextBox
             // 
             this.BirthdayTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BirthdayTextBox.Location = new System.Drawing.Point(2253, 192);
+            this.BirthdayTextBox.Location = new System.Drawing.Point(2223, 183);
             this.BirthdayTextBox.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.BirthdayTextBox.Name = "BirthdayTextBox";
             this.BirthdayTextBox.ReadOnly = true;
@@ -3332,10 +3333,10 @@
             // DeliverySearchButton
             // 
             this.DeliverySearchButton.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.DeliverySearchButton.Location = new System.Drawing.Point(2874, 292);
+            this.DeliverySearchButton.Location = new System.Drawing.Point(138, 129);
             this.DeliverySearchButton.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.DeliverySearchButton.Name = "DeliverySearchButton";
-            this.DeliverySearchButton.Size = new System.Drawing.Size(257, 88);
+            this.DeliverySearchButton.Size = new System.Drawing.Size(301, 88);
             this.DeliverySearchButton.TabIndex = 6;
             this.DeliverySearchButton.Text = "納品書検索";
             this.DeliverySearchButton.UseVisualStyleBackColor = true;
@@ -3344,6 +3345,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.OldLace;
+            this.groupBox2.Controls.Add(this.DeliverySearchButton);
             this.groupBox2.Location = new System.Drawing.Point(2593, 164);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(571, 253);
@@ -3357,7 +3359,6 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(3201, 1507);
-            this.Controls.Add(this.DeliverySearchButton);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -3396,6 +3397,7 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

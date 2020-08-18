@@ -41,7 +41,9 @@ namespace Flawless_ex
         string Search2;
         string Search3;
         bool screan = true;
-        bool NameChange = false;                    //品名変更をクリックしたら true
+        bool NameChange = false;                    //品名を変更したら true
+        bool CarryOver;                      //次月持ち越しから画面遷移したとき
+        bool MonthCatalog;                      //月間成績一覧
         DialogResult result;
 
         #region"卸値を再入力時にすでに入力されているかどうかを検知"
@@ -280,7 +282,7 @@ namespace Flawless_ex
         DataTable DATA13 = new DataTable();
         #endregion
 
-        public RecordList(Statement statement, int staff_id, string Staff_Name, int type, string slipnumber, int Grade, int antique, int id, string access_auth, string pass, bool namechange)
+        public RecordList(Statement statement, int staff_id, string Staff_Name, int type, string slipnumber, int Grade, int antique, int id, string access_auth, string pass, bool namechange, bool carryover, bool monthCatalog)
         {
             InitializeComponent();
 
@@ -295,6 +297,8 @@ namespace Flawless_ex
             this.Access_auth = access_auth;
             this.Pass = pass;
             this.NameChange = namechange;
+            this.CarryOver = carryover;
+            this.MonthCatalog = monthCatalog;
         }
 
         private void RecordList_Load(object sender, EventArgs e)
@@ -1421,16 +1425,20 @@ namespace Flawless_ex
             #endregion
 
             #region"品名を変更した後"
-            button3.Enabled = false;        //月間成績表へのボタン
-            #endregion
-        }
-
-        #region"成績入力画面から計算書へ"
-        private void ReturnButton_Click(object sender, EventArgs e)
-        {
             if (NameChange)
             {
-                MessageBox.Show("登録 or 再登録ボタンをクリックして登録をしてください。", "未登録", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                button3.Enabled = false;        //月間成績表へのボタン
+            }
+                #endregion
+        }
+
+        #region"成績入力画面から計算書 or 次月持ち越しへ"
+        private void ReturnButton_Click(object sender, EventArgs e)
+        {
+            //品名変更時、再登録をまだしていない場合
+            if (NameChange)
+            {
+                MessageBox.Show("再登録ボタンをクリックして登録をしてください。", "未登録", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             this.Close();
@@ -1439,11 +1447,19 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (screan)
+            //次月持ち越しから画面遷移したとき
+            if (CarryOver && screan) 
+            {
+                NextMonth next = new NextMonth(mainmenu, staff_id, Pass, Access_auth);
+                next.Show();
+            }
+            //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移しないとき
+            else if (screan)
             {
                 statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
                 statement.Show();
             }
+            //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移したとき
             else
             {
                 screan = true;
@@ -7771,6 +7787,7 @@ namespace Flawless_ex
                 {
                     #region"１行目"
                     case 1:
+                        Record = 1;
                         MainCategoryCode = MainCategoryCode1;
                         ItemCategoryCode = ItemCategoryCode1;
                         Wholesale = WholeSaleUnFormat1;
@@ -7810,7 +7827,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -7819,6 +7836,7 @@ namespace Flawless_ex
                     #endregion
                     #region"２行目"
                     case 2:
+                        Record = 2;
                         MainCategoryCode = MainCategoryCode2;
                         ItemCategoryCode = ItemCategoryCode2;
                         Wholesale = WholeSaleUnFormat2;
@@ -7858,7 +7876,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -7867,6 +7885,7 @@ namespace Flawless_ex
                     #endregion
                     #region"３行目"
                     case 3:
+                        Record = 3;
                         MainCategoryCode = MainCategoryCode3;
                         ItemCategoryCode = ItemCategoryCode3;
                         Wholesale = WholeSaleUnFormat3;
@@ -7906,7 +7925,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -7915,6 +7934,7 @@ namespace Flawless_ex
                     #endregion
                     #region"４行目"
                     case 4:
+                        Record = 4;
                         MainCategoryCode = MainCategoryCode4;
                         ItemCategoryCode = ItemCategoryCode4;
                         Wholesale = WholeSaleUnFormat4;
@@ -7954,7 +7974,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -7963,6 +7983,7 @@ namespace Flawless_ex
                     #endregion
                     #region"５行目"
                     case 5:
+                        Record = 5;
                         MainCategoryCode = MainCategoryCode5;
                         ItemCategoryCode = ItemCategoryCode5;
                         Wholesale = WholeSaleUnFormat5;
@@ -8002,7 +8023,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8011,6 +8032,7 @@ namespace Flawless_ex
                     #endregion
                     #region"６行目"
                     case 6:
+                        Record = 6;
                         MainCategoryCode = MainCategoryCode6;
                         ItemCategoryCode = ItemCategoryCode6;
                         Wholesale = WholeSaleUnFormat6;
@@ -8050,7 +8072,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8059,6 +8081,7 @@ namespace Flawless_ex
                     #endregion
                     #region"７行目"
                     case 7:
+                        Record = 7;
                         MainCategoryCode = MainCategoryCode7;
                         ItemCategoryCode = ItemCategoryCode7;
                         Wholesale = WholeSaleUnFormat7;
@@ -8098,7 +8121,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8107,6 +8130,7 @@ namespace Flawless_ex
                     #endregion
                     #region"８行目"
                     case 8:
+                        Record = 8;
                         MainCategoryCode = MainCategoryCode8;
                         ItemCategoryCode = ItemCategoryCode8;
                         Wholesale = WholeSaleUnFormat8;
@@ -8146,7 +8170,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8155,6 +8179,7 @@ namespace Flawless_ex
                     #endregion
                     #region"９行目"
                     case 9:
+                        Record = 9;
                         MainCategoryCode = MainCategoryCode9;
                         ItemCategoryCode = ItemCategoryCode9;
                         Wholesale = WholeSaleUnFormat9;
@@ -8194,7 +8219,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8203,6 +8228,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１０行目"
                     case 10:
+                        Record = 10;
                         MainCategoryCode = MainCategoryCode10;
                         ItemCategoryCode = ItemCategoryCode10;
                         Wholesale = WholeSaleUnFormat10;
@@ -8242,7 +8268,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8251,6 +8277,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１１行目"
                     case 11:
+                        Record = 11;
                         MainCategoryCode = MainCategoryCode11;
                         ItemCategoryCode = ItemCategoryCode11;
                         Wholesale = WholeSaleUnFormat11;
@@ -8290,7 +8317,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8299,6 +8326,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１２行目"
                     case 12:
+                        Record = 12;
                         MainCategoryCode = MainCategoryCode12;
                         ItemCategoryCode = ItemCategoryCode12;
                         Wholesale = WholeSaleUnFormat12;
@@ -8338,7 +8366,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8347,6 +8375,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１３行目"
                     case 13:
+                        Record = 13;
                         MainCategoryCode = MainCategoryCode13;
                         ItemCategoryCode = ItemCategoryCode13;
                         Wholesale = WholeSaleUnFormat13;
@@ -8386,7 +8415,7 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + record + "';";
+                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -8966,7 +8995,7 @@ namespace Flawless_ex
                 }
             }
 
-            if (DocumentNumber == SlipNumber)   //一度登録済み（品名変更にチェックが付いているものだけ変更）
+            if (DocumentNumber == SlipNumber || CarryOver)    //一度登録済み（品名変更にチェックが付いているものだけ変更）
             {
                 #region"list_resultへの更新"
                 TotalPurchase = PurChase;                   //合計買取金額
@@ -9004,573 +9033,625 @@ namespace Flawless_ex
                     {
                         #region"１行目"
                         case 1:
+                            Record = 1;
+                            MainCategoryCode = MainCategoryCode1;
+                            ItemCategoryCode = ItemCategoryCode1;
+                            Wholesale = WholeSaleUnFormat1;
+                            Remark = remark1.Text;
+                            Profit = WholeSaleUnFormat1 - PurchaseUnFormat1;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
+                                Buyer = BuyerTextBox1.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox1.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox1.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode1;
-                                ItemCategoryCode = ItemCategoryCode1;
-                                Wholesale = WholeSaleUnFormat1;
-                                Remark = remark1.Text;
-                                Profit = WholeSaleUnFormat1 - PurchaseUnFormat1;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox1.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox1.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"２行目"
                         case 2:
+                            Record = 2;
+                            MainCategoryCode = MainCategoryCode2;
+                            ItemCategoryCode = ItemCategoryCode2;
+                            Wholesale = WholeSaleUnFormat2;
+                            Remark = remark2.Text;
+                            Profit = WholeSaleUnFormat2 - PurchaseUnFormat2;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
+                                Buyer = BuyerTextBox2.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox2.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox2.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode2;
-                                ItemCategoryCode = ItemCategoryCode2;
-                                Wholesale = WholeSaleUnFormat2;
-                                Remark = remark2.Text;
-                                Profit = WholeSaleUnFormat2 - PurchaseUnFormat2;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox2.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox2.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"３行目"
                         case 3:
+                            Record = 3;
+                            MainCategoryCode = MainCategoryCode3;
+                            ItemCategoryCode = ItemCategoryCode3;
+                            Wholesale = WholeSaleUnFormat3;
+                            Remark = remark3.Text;
+                            Profit = WholeSaleUnFormat3 - PurchaseUnFormat3;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
+                                Buyer = BuyerTextBox3.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox3.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox3.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode3;
-                                ItemCategoryCode = ItemCategoryCode3;
-                                Wholesale = WholeSaleUnFormat3;
-                                Remark = remark3.Text;
-                                Profit = WholeSaleUnFormat3 - PurchaseUnFormat3;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox3.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox3.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"４行目"
                         case 4:
+                            Record = 4;
+                            MainCategoryCode = MainCategoryCode4;
+                            ItemCategoryCode = ItemCategoryCode4;
+                            Wholesale = WholeSaleUnFormat4;
+                            Remark = remark4.Text;
+                            Profit = WholeSaleUnFormat4 - PurchaseUnFormat4;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
+                                Buyer = BuyerTextBox4.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox4.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox4.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode4;
-                                ItemCategoryCode = ItemCategoryCode4;
-                                Wholesale = WholeSaleUnFormat4;
-                                Remark = remark4.Text;
-                                Profit = WholeSaleUnFormat4 - PurchaseUnFormat4;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox4.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox4.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"５行目"
                         case 5:
+                            Record = 5;
+                            MainCategoryCode = MainCategoryCode5;
+                            ItemCategoryCode = ItemCategoryCode5;
+                            Wholesale = WholeSaleUnFormat5;
+                            Remark = remark5.Text;
+                            Profit = WholeSaleUnFormat5 - PurchaseUnFormat5;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
+                                Buyer = BuyerTextBox5.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox5.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox5.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode5;
-                                ItemCategoryCode = ItemCategoryCode5;
-                                Wholesale = WholeSaleUnFormat5;
-                                Remark = remark5.Text;
-                                Profit = WholeSaleUnFormat5 - PurchaseUnFormat5;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox5.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox5.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"６行目"
                         case 6:
+                            Record = 6;
+                            MainCategoryCode = MainCategoryCode6;
+                            ItemCategoryCode = ItemCategoryCode6;
+                            Wholesale = WholeSaleUnFormat6;
+                            Remark = remark6.Text;
+                            Profit = WholeSaleUnFormat6 - PurchaseUnFormat6;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
+                                Buyer = BuyerTextBox6.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox6.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox6.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode6;
-                                ItemCategoryCode = ItemCategoryCode6;
-                                Wholesale = WholeSaleUnFormat6;
-                                Remark = remark6.Text;
-                                Profit = WholeSaleUnFormat6 - PurchaseUnFormat6;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox6.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox6.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"７行目"
                         case 7:
+                            Record = 7;
+                            MainCategoryCode = MainCategoryCode7;
+                            ItemCategoryCode = ItemCategoryCode7;
+                            Wholesale = WholeSaleUnFormat7;
+                            Remark = remark7.Text;
+                            Profit = WholeSaleUnFormat7 - PurchaseUnFormat7;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
+                                Buyer = BuyerTextBox7.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox7.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox7.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode7;
-                                ItemCategoryCode = ItemCategoryCode7;
-                                Wholesale = WholeSaleUnFormat7;
-                                Remark = remark7.Text;
-                                Profit = WholeSaleUnFormat7 - PurchaseUnFormat7;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox7.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox7.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"８行目"
                         case 8:
+                            Record = 8;
+                            MainCategoryCode = MainCategoryCode8;
+                            ItemCategoryCode = ItemCategoryCode8;
+                            Wholesale = WholeSaleUnFormat8;
+                            Remark = remark8.Text;
+                            Profit = WholeSaleUnFormat8 - PurchaseUnFormat8;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
+                                Buyer = BuyerTextBox8.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox8.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox8.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode8;
-                                ItemCategoryCode = ItemCategoryCode8;
-                                Wholesale = WholeSaleUnFormat8;
-                                Remark = remark8.Text;
-                                Profit = WholeSaleUnFormat8 - PurchaseUnFormat8;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox8.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox8.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"９行目"
                         case 9:
+                            Record = 9;
+                            MainCategoryCode = MainCategoryCode9;
+                            ItemCategoryCode = ItemCategoryCode9;
+                            Wholesale = WholeSaleUnFormat9;
+                            Remark = remark9.Text;
+                            Profit = WholeSaleUnFormat9 - PurchaseUnFormat9;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
+                                Buyer = BuyerTextBox9.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox9.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox9.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode9;
-                                ItemCategoryCode = ItemCategoryCode9;
-                                Wholesale = WholeSaleUnFormat9;
-                                Remark = remark9.Text;
-                                Profit = WholeSaleUnFormat9 - PurchaseUnFormat9;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox9.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox9.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"１０行目"
                         case 10:
+                            Record = 10;
+                            MainCategoryCode = MainCategoryCode10;
+                            ItemCategoryCode = ItemCategoryCode10;
+                            Wholesale = WholeSaleUnFormat10;
+                            Remark = remark10.Text;
+                            Profit = WholeSaleUnFormat10 - PurchaseUnFormat10;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
+                                Buyer = BuyerTextBox10.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox10.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox10.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode10;
-                                ItemCategoryCode = ItemCategoryCode10;
-                                Wholesale = WholeSaleUnFormat10;
-                                Remark = remark10.Text;
-                                Profit = WholeSaleUnFormat10 - PurchaseUnFormat10;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox10.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox10.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"１１行目"
                         case 11:
+                            Record = 11;
+                            MainCategoryCode = MainCategoryCode11;
+                            ItemCategoryCode = ItemCategoryCode11;
+                            Wholesale = WholeSaleUnFormat1;
+                            Remark = remark11.Text;
+                            Profit = WholeSaleUnFormat11 - PurchaseUnFormat11;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
+                                Buyer = BuyerTextBox11.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox11.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox11.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode11;
-                                ItemCategoryCode = ItemCategoryCode11;
-                                Wholesale = WholeSaleUnFormat1;
-                                Remark = remark11.Text;
-                                Profit = WholeSaleUnFormat11 - PurchaseUnFormat11;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox11.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox11.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"１２行目"
                         case 12:
+                            Record = 12;
+                            MainCategoryCode = MainCategoryCode12;
+                            ItemCategoryCode = ItemCategoryCode12;
+                            Wholesale = WholeSaleUnFormat12;
+                            Remark = remark12.Text;
+                            Profit = WholeSaleUnFormat12 - PurchaseUnFormat12;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
+                                Buyer = BuyerTextBox12.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox12.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox12.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode12;
-                                ItemCategoryCode = ItemCategoryCode12;
-                                Wholesale = WholeSaleUnFormat12;
-                                Remark = remark12.Text;
-                                Profit = WholeSaleUnFormat12 - PurchaseUnFormat12;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox12.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox12.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                         #endregion
                         #region"１３行目"
                         case 13:
+                            Record = 13;
+                            MainCategoryCode = MainCategoryCode13;
+                            ItemCategoryCode = ItemCategoryCode13;
+                            Wholesale = WholeSaleUnFormat13;
+                            Remark = remark13.Text;
+                            Profit = WholeSaleUnFormat13 - PurchaseUnFormat13;
+
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
+                                Buyer = BuyerTextBox13.Text;
+                            }
+                            else
+                            {
+                                SaleDate = "";
+                                Buyer = "";
+                            }
+
+                            #region"チェックボックス"
+                            if (NextMonthCheckBox13.Checked)
+                            {
+                                NextMonth = 1;
+                            }
+                            else
+                            {
+                                NextMonth = 0;
+                            }
                             if (ItemNameChangeCheckBox13.Checked)
                             {
-                                MainCategoryCode = MainCategoryCode13;
-                                ItemCategoryCode = ItemCategoryCode13;
-                                Wholesale = WholeSaleUnFormat13;
-                                Remark = remark13.Text;
-                                Profit = WholeSaleUnFormat13 - PurchaseUnFormat13;
-
-                                if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
-                                {
-                                    SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
-                                    Buyer = BuyerTextBox13.Text;
-                                }
-                                else
-                                {
-                                    SaleDate = "";
-                                    Buyer = "";
-                                }
-
-                                #region"チェックボックス"
-                                if (NextMonthCheckBox13.Checked)
-                                {
-                                    NextMonth = 1;
-                                }
-                                else
-                                {
-                                    NextMonth = 0;
-                                }
-
                                 ChangeCheck = 1;
+                            }
+                            else
+                            {
+                                ChangeCheck = 0;
+                            }
 
-                                #endregion
-                                using (transaction = conn.BeginTransaction())
-                                {
-                                    sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + record + "';";
-                                    cmd = new NpgsqlCommand(sql_str, conn);
-                                    cmd.ExecuteNonQuery();
-                                    transaction.Commit();
-                                }
+                            #endregion
+                            using (transaction = conn.BeginTransaction())
+                            {
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                cmd = new NpgsqlCommand(sql_str, conn);
+                                cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             break;
                             #endregion
@@ -10215,8 +10296,8 @@ namespace Flawless_ex
             conn.Close();
             RegisterButton.Enabled = false;
             UpdateButton.Enabled = true;
-
-            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass, Access_auth, NameChange);
+            NameChange = false;
+            ItemNameChange nameChange = new ItemNameChange(recordList, int.Parse(GradeNumberTextBox.Text), staff_id, SlipNumber, Pass, Access_auth, NameChange, CarryOver, MonthCatalog);
             screan = false;
             this.Close();
             nameChange.Show();
@@ -10226,7 +10307,7 @@ namespace Flawless_ex
         #region"お客様情報ボタン"
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
-            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth);
+            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth, MonthCatalog, CarryOver);
             screan = false;
             this.Close();
             clientInformation.Show();
@@ -10236,7 +10317,8 @@ namespace Flawless_ex
         #region"月間成績表"
         private void button3_Click(object sender, EventArgs e)
         {
-            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade);
+            MonthCatalog = true;
+            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade, CarryOver, MonthCatalog);
             screan = false;
             this.Close();
             monResult.Show();

@@ -340,6 +340,7 @@
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MonResult";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "月間成績表一覧";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MonResult_FormClosed);
             this.Load += new System.EventHandler(this.MonResult_Load);

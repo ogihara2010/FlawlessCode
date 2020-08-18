@@ -27,14 +27,16 @@ namespace Flawless_ex
         string Access_auth;
         string Pass;
         bool NameChange;
+        bool CarryOver;
         string PostalUpCode;
         string PostalDownCode;
+        bool MonthCatalog;
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataReader reader;
 
-        public ClientInformation(RecordList recordList, int staff_id, string staff_name, int type, string slipnumber, int antique, int id, string pass, int grade, string access_auth)
+        public ClientInformation(RecordList recordList, int staff_id, string staff_name, int type, string slipnumber, int antique, int id, string pass, int grade, string access_auth, bool monthCatalog, bool carryOver)
         {
             InitializeComponent();
 
@@ -48,6 +50,8 @@ namespace Flawless_ex
             this.Pass = pass;
             this.Grade = grade;
             this.Access_auth = access_auth;
+            this.MonthCatalog = monthCatalog;
+            this.CarryOver = carryOver;
         }
 
         private void ClientInformation_Load(object sender, EventArgs e)
@@ -232,16 +236,13 @@ namespace Flawless_ex
         #region"戻る"
         private void ClientInformation_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass, NameChange);
-
+            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass, NameChange, CarryOver, MonthCatalog);
             RecordList.Show();
         }
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            RecordList = new RecordList(Statement, Staff_id, Staff_Name, Type, SlipNumber, Grade, AntiqueNumber, ID_Number, Access_auth, Pass, NameChange);
             this.Close();
-            RecordList.Show();
         }
         #endregion
         #region"画像の表示"

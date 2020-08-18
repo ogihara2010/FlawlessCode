@@ -27,11 +27,28 @@ namespace Flawless_ex
         string Pass;
         bool notLoad = false;
         bool NameChange;
+        bool CarryOver;
+        bool MonthCatalog;
 
         #region"品名変更時"
         string REASON;
         int ItemCategoryCode;
         int MainCategoryCode;
+        #region"DBに入っている行数"
+        int record1;
+        int record2;
+        int record3;
+        int record4;
+        int record5;
+        int record6;
+        int record7;
+        int record8;
+        int record9;
+        int record10;
+        int record11;
+        int record12;
+        int record13;
+        #endregion
         #endregion
         DataTable dt = new DataTable();
         #region"品名変更時のデータテイブル"
@@ -86,7 +103,7 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter;
         NpgsqlTransaction transaction;
 
-        public ItemNameChange(RecordList record, int grade, int staff_id, string slipNumber, string pass, string access_auth, bool nameChange)
+        public ItemNameChange(RecordList record, int grade, int staff_id, string slipNumber, string pass, string access_auth, bool nameChange, bool carryOver, bool monthCatalog)
         {
             InitializeComponent();
 
@@ -97,6 +114,8 @@ namespace Flawless_ex
             this.Pass = pass;
             this.Access_auth = access_auth;
             this.NameChange = nameChange;
+            this.CarryOver = carryOver;
+            this.MonthCatalog = monthCatalog;
         }
 
         #region"品名変更ボタン"
@@ -198,7 +217,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "',item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 1 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "',item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0 where record_number = '" + record1 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -213,7 +232,7 @@ namespace Flawless_ex
                        
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 2 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record2 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -228,7 +247,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 3 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record3 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -243,7 +262,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 4 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record4 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -258,7 +277,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 5 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record5 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -273,7 +292,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 6 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record6 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -288,7 +307,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 7 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record7 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -303,7 +322,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 8 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record8 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -318,7 +337,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 9 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record9 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -333,7 +352,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 10 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record10 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -348,7 +367,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 11 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record11 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -363,7 +382,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 12 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record12 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -378,7 +397,7 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + 13 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "', item_name_change = 0  where record_number = '" + record13 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
@@ -404,8 +423,7 @@ namespace Flawless_ex
 
         private void ItemNameChange_FormClosed(object sender, FormClosedEventArgs e)
         {
-            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id, Access_auth, Pass, NameChange);
-
+            recordList = new RecordList(statement, staff_id, Staff_Name, type, SlipNumber, Grade, antique, id, Access_auth, Pass, NameChange, CarryOver, MonthCatalog);
             recordList.Show();
         }
         #endregion
@@ -437,7 +455,7 @@ namespace Flawless_ex
             ChangeCount = int.Parse(cmd.ExecuteScalar().ToString());        //カウントは１から
 
             #region"左の表"
-            sql_str = "select * from list_result2 inner join item_m on item_m.item_code = list_result2.item_code where document_number = '" + SlipNumber + "' order by record_number;";
+            sql_str = "select * from list_result2 inner join item_m on item_m.item_code = list_result2.item_code where document_number = '" + SlipNumber + "' and item_name_change = 1 order by record_number;";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             
@@ -448,42 +466,55 @@ namespace Flawless_ex
                 switch(i){
                     case 0:
                         BeforeChangeTextBox1.Text = row["item_name"].ToString();
+                        record1 = (int)row["record_number"];
                         break;
                     case 1:
                         BeforeChangeTextBox2.Text = row["item_name"].ToString();
+                        record2 = (int)row["record_number"];
                         break;
                     case 2:
                         BeforeChangeTextBox3.Text = row["item_name"].ToString();
+                        record3 = (int)row["record_number"];
                         break;
                     case 3:
                         BeforeChangeTextBox4.Text = row["item_name"].ToString();
+                        record4 = (int)row["record_number"];
                         break;
                     case 4:
                         BeforeChangeTextBox5.Text = row["item_name"].ToString();
+                        record5 = (int)row["record_number"];
                         break;
                     case 5:
                         BeforeChangeTextBox6.Text = row["item_name"].ToString();
+                        record6 = (int)row["record_number"];
                         break;
                     case 6:
                         BeforeChangeTextBox7.Text = row["item_name"].ToString();
+                        record7 = (int)row["record_number"];
                         break;
                     case 7:
                         BeforeChangeTextBox8.Text = row["item_name"].ToString();
+                        record8 = (int)row["record_number"];
                         break;
                     case 8:
                         BeforeChangeTextBox9.Text = row["item_name"].ToString();
+                        record9 = (int)row["record_number"];
                         break;
                     case 9:
                         BeforeChangeTextBox10.Text = row["item_name"].ToString();
+                        record10 = (int)row["record_number"];
                         break;
                     case 10:
                         BeforeChangeTextBox11.Text = row["item_name"].ToString();
+                        record11 = (int)row["record_number"];
                         break;
                     case 11:
                         BeforeChangeTextBox12.Text = row["item_name"].ToString();
+                        record12 = (int)row["record_number"];
                         break;
                     case 12:
                         BeforeChangeTextBox13.Text = row["item_name"].ToString();
+                        record13 = (int)row["record_number"];
                         break;
                 }
             }
