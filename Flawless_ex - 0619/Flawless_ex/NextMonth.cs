@@ -21,6 +21,9 @@ namespace Flawless_ex
         int antique;
         int id;
         bool NameChange;
+        bool screan = true;
+        bool CarryOver = true;
+        bool MonthCatalog;
 
         public NextMonth(MainMenu main, int id, string pass, string access_auth)
         {
@@ -39,12 +42,13 @@ namespace Flawless_ex
         //選択ボタンクリック時
         private void Choice2_Click(object sender, EventArgs e)
         {
-            string slipNumber = (string)dataGridView1.CurrentRow.Cells[0].Value;
+            slipNumber = (string)dataGridView1.CurrentRow.Cells[0].Value;
             Grade = (int)dataGridView1.CurrentRow.Cells[1].Value;
-            string staff_name = (string)dataGridView1.CurrentRow.Cells[5].Value;
+            staff_name = (string)dataGridView1.CurrentRow.Cells[5].Value;
             
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, antique, id, Access_auth, Pass, NameChange);
-            this.Hide();
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, antique, id, Access_auth, Pass, NameChange, CarryOver, MonthCatalog);
+            screan = false;
+            this.Close();
             recordList.Show();
         }
 
@@ -75,8 +79,15 @@ namespace Flawless_ex
 
         private void NextMonth_FormClosed(object sender, EventArgs e)
         {
-            mainMenu = new MainMenu(top, staff_id, Pass, Access_auth);
-            mainMenu.Show();
+            if (screan)
+            {
+                mainMenu = new MainMenu(top, staff_id, Pass, Access_auth);
+                mainMenu.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }

@@ -21,6 +21,8 @@ namespace Flawless_ex
         string search3;
         string Pass;
         int grade;
+        bool CarryOver;
+        bool MonthCatalog;
 
         NpgsqlConnection conn;
         NpgsqlCommand cmd;
@@ -108,7 +110,7 @@ namespace Flawless_ex
         #region "月間成績表一覧"
         private void MonResults_Click(object sender, EventArgs e)
         {
-            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade);
+            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade, CarryOver, MonthCatalog);
 
             this.Hide();
             monresult.Show();

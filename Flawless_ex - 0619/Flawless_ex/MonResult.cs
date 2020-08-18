@@ -25,9 +25,10 @@ namespace Flawless_ex
         bool NameChange;
         TopMenu top;
         bool screan = true;
+        bool CarryOver;
+        bool MonthCatalog;
 
-
-        public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade)
+        public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade, bool carryOver, bool monthCatalog)
         {
             InitializeComponent();
             staff_id = id;
@@ -38,6 +39,8 @@ namespace Flawless_ex
             this.slipNumber = slipNumber;
             this.Pass = pass;
             this.Grade = grade;
+            this.CarryOver = carryOver;
+            this.MonthCatalog = monthCatalog;
         }
 
         private void Return3_Click(object sender, EventArgs e)//戻るボタン
@@ -80,6 +83,11 @@ namespace Flawless_ex
 
         private void Search1_Click(object sender, EventArgs e)
         {
+            if (!radioButton1.Checked && !radioButton2.Checked)
+            {
+                MessageBox.Show("法人 or 個人を選択してください", "選択不十分", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             dt.Clear();
             string search1 = "or";
             string search2 = "or";
@@ -194,10 +202,7 @@ namespace Flawless_ex
         #region "成績入力画面へ"
         private void Button2_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange);
-            screan = false;
             this.Close();
-            recordList.Show();
         }
         #endregion
 
@@ -238,7 +243,12 @@ namespace Flawless_ex
 
         private void MonResult_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (screan)
+            if (MonthCatalog && screan) 
+            {
+                RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange, CarryOver, MonthCatalog);
+                recordList.Show();
+            }
+            else if (screan)
             {
                 mainMenu = new MainMenu(top, staff_id, Pass, access_auth);
                 mainMenu.Show();

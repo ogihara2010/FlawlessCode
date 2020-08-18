@@ -88,13 +88,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(2077, 1441);
+            this.ClientSize = new System.Drawing.Size(2077, 1470);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.choice2);
             this.Controls.Add(this.return4);
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "NextMonth";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "未入力・次月持ち越し一覧";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.NextMonth_FormClosed);
             this.Load += new System.EventHandler(this.NextMonth_Load);

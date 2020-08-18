@@ -500,7 +500,7 @@
             this.tableLayoutPanel2.Controls.Add(this.MainCategoryComboBox11, 0, 11);
             this.tableLayoutPanel2.Controls.Add(this.MainCategoryComboBox12, 0, 12);
             this.tableLayoutPanel2.Controls.Add(this.MainCategoryComboBox13, 0, 13);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(958, 241);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(981, 241);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(7);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 14;
@@ -863,7 +863,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 72F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(420, 491);
+            this.label4.Location = new System.Drawing.Point(427, 485);
             this.label4.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(524, 216);
@@ -873,7 +873,7 @@
             // ItemNameChangeButton
             // 
             this.ItemNameChangeButton.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ItemNameChangeButton.Location = new System.Drawing.Point(1674, 34);
+            this.ItemNameChangeButton.Location = new System.Drawing.Point(1703, 31);
             this.ItemNameChangeButton.Margin = new System.Windows.Forms.Padding(7);
             this.ItemNameChangeButton.Name = "ItemNameChangeButton";
             this.ItemNameChangeButton.Size = new System.Drawing.Size(381, 153);
@@ -885,7 +885,7 @@
             // ReturnButton
             // 
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ReturnButton.Location = new System.Drawing.Point(2108, 34);
+            this.ReturnButton.Location = new System.Drawing.Point(2131, 34);
             this.ReturnButton.Margin = new System.Windows.Forms.Padding(7);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Size = new System.Drawing.Size(392, 153);
@@ -964,7 +964,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(2554, 1198);
+            this.ClientSize = new System.Drawing.Size(2641, 1198);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -978,6 +978,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "ItemNameChange";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "品名変更";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ItemNameChange_FormClosed);
             this.Load += new System.EventHandler(this.ItemNameChange_Load);

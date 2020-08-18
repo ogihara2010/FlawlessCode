@@ -23,6 +23,8 @@ namespace Flawless_ex
         int AntiqueNumber;
         int ID_Number;
         bool NameChange;
+        bool CarryOver;
+        bool MonthCatalog;
 
         #region"計算書　各大分類コード"
         int mainCategoryCode0;      //大分類コード（1行目）
@@ -10835,7 +10837,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass, NameChange);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass, NameChange, CarryOver, MonthCatalog);
 
             this.Hide();
             recordList.Show();
