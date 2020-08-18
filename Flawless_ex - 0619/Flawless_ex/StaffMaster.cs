@@ -27,10 +27,7 @@ namespace Flawless_ex
 
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, Pass);
-            screan = false;
             this.Close();
-            masterMenu.Show();
         }
 
 
@@ -55,7 +52,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code where staff_m.invalid = 0 ";
+            string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code where staff_m.invalid = 0 order by staff_code;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -70,7 +67,7 @@ namespace Flawless_ex
 
         private void addButtonClick(object sender, EventArgs e)//登録画面に遷移
         {
-            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu, staff_code, access_auth, Pass);
+            StaffAddStaff addStaff = new StaffAddStaff(dt, masterMenu, staff_code, Pass, access_auth);
             screan = false;
             this.Close();
             addStaff.Show();
@@ -82,6 +79,10 @@ namespace Flawless_ex
             {
                 MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, Pass);
                 masterMenu.Show();
+            }
+            else
+            {
+                screan = true;
             }
         }
             
