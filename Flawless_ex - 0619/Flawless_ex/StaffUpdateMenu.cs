@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Text;
+
 namespace Flawless_ex
 {
     public partial class StaffUpdateMenu : Form　//担当者更新メニュー
@@ -20,7 +22,7 @@ namespace Flawless_ex
         int code;//ログイン担当者コード
         bool screan = true;
         string Pass;
-
+        string kana;
 
         public StaffUpdateMenu(MasterMaintenanceMenu master, int staff_code, int code, string access_auth, string pass)
         {
@@ -36,15 +38,12 @@ namespace Flawless_ex
 
         private void ReturnButton(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(master, staffCode, access_auth, Pass);//注意
-            screan = false;
             this.Close();
-            personMaster.Show();
         }
 
         private void removeButton_Click(object sender, EventArgs e)//無効ボタン
         {
-            DialogResult result = MessageBox.Show("無効をしますか？", "確認", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("無効をしますか？", "確認", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -123,22 +122,18 @@ namespace Flawless_ex
 
                 //履歴
                 DateTime dateTime = DateTime.Now;
-                string remove_rivisions_sql = "insert into staff_m_revisions_invalid values(" + staffCode + ",'" + dateTime + "'," + code + ")";
+                string remove_rivisions_sql = "insert into staff_m_revisions_invalid values(" + staffCode + ",'" + dateTime + "'," + code + ");";
                 NpgsqlCommand cmd = new NpgsqlCommand(remove_rivisions_sql, conn);
                 NpgsqlDataReader dtr = cmd.ExecuteReader();
 
                 conn.Close();
-                MessageBox.Show("無効完了");
-                this.updateButton.Enabled = true;
+                MessageBox.Show("選択した担当者を無効にしました", "無効処理完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); ;
             }
             else
             {
-
+                return;
             }
-
-            StaffMaster staffMaster = new StaffMaster(master, staffCode, access_auth, Pass);
             this.Close();
-            staffMaster.Show();
         }
 
         private void updateButton_Click(object sender, EventArgs e)//更新ボタン
@@ -170,7 +165,7 @@ namespace Flawless_ex
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
-            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ";
+            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ;";
 
 
             #region "起こりうるミス"
@@ -236,14 +231,14 @@ namespace Flawless_ex
 
             adapter.Fill(dt);
             adapter.Update(dt);
-            MessageBox.Show("更新完了");
+            MessageBox.Show("担当者の設定を変更しました", "変更完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
 
             //履歴
             DateTime dateTime = DateTime.Now;
             //担当者名
             if (this.parsonNameText.Text != name)
             {
-                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + name + "','" + name_kana + "','" + staffName + "', '" + staffNameKana + "'," + code + ")";
+                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + name + "','" + name_kana + "','" + staffName + "', '" + staffNameKana + "'," + code + ");";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_staffNameRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
@@ -269,11 +264,7 @@ namespace Flawless_ex
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
 
-            StaffMaster staffMaster = new StaffMaster(master, staffCode, access_auth, Pass);
-            screan = false;
             this.Close();
-            staffMaster.Show();
-
         }
 
         private void UpdateMenu_Load(object sender, EventArgs e)
@@ -284,7 +275,7 @@ namespace Flawless_ex
             DataRow row;
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select* from staff_m where staff_code = " + staffCode + "";
+            string sql_str = "select * from staff_m where staff_code = " + staffCode + ";";
 
             conn.Open();
 
@@ -320,8 +311,18 @@ namespace Flawless_ex
 
         private void StaffUpdateMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            StaffMaster staffMaster = new StaffMaster(master, code, access_auth, Pass);
+            StaffMaster staffMaster = new StaffMaster(master, code, Pass, access_auth);
             staffMaster.Show();
+        }
+
+        private void parsonNamt2Text_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(parsonNamt2Text.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            parsonNamt2Text.Text = stringBuilder.ToString();
+            parsonNamt2Text.Select(parsonNamt2Text.Text.Length, 0);
         }
 
     }

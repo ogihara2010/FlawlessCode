@@ -130,7 +130,7 @@ namespace Flawless_ex
                               "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale, " +
                               "A.sum_money, A.sum_wholesale_price from list_result A inner join statement_data C ON " +
                               "(A.document_number = C.document_number ) inner join staff_m D ON (C.staff_code = D.staff_code )  inner join type E ON (A.type = E.type) where D.invalid = 0 " +
-                              " and D.staff_name = '" + staff + "'" + search1 + " (C.assessment_date >= '" + date1 + "' and C.assessment_date <= '" + date2 + "')" + search2 + " E.type = " + type + ";";
+                              " and D.staff_name = '" + staff + "'" + search1 + " (C.assessment_date >= '" + date1 + "' and C.assessment_date <= '" + date2 + "')" + search2 + " E.type = " + type + " order by result;";
                 conn4.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str2, conn4);

@@ -60,7 +60,7 @@ namespace Flawless_ex
 
             string sql_str = "select A.document_number, A.grade_number, A.assessment_date, B.delivery_method, B.payment_method, C.staff_name, A.buyer from list_result2 A " +
                              "inner join statement_data B ON (A.document_number = B.document_number ) " +
-                             "inner join staff_m C ON (B.staff_code = C.staff_code ) where carry_over_month = '" + 1 + "';";
+                             "inner join staff_m C ON (B.staff_code = C.staff_code ) where carry_over_month = '" + 1 + "' order by grade_number;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
