@@ -364,21 +364,24 @@ namespace Flawless_ex
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
                     #endregion
-                    DataRow row3;
+
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    string name1 = row3["shop_name"].ToString();
-                    string phoneNumber1 = row3["phone_number"].ToString();
-                    string address1 = row3["address"].ToString();
-                    string item1 = row3["item_name"].ToString();
 
+                    string name1 = shopname;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = itemcode;
+                    string code1 = code;
+                    string method1 = method;
+                    int antique = antiqueNumber;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data, Pass, document, control);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amount1, amount2, search1, search2, search3, search4, search5, search6, search7,search8, search9, search10, search11, search12, data, Pass, document, control, antique);
                     this.Hide();
                     dataSearch.Show();
                 }
@@ -394,21 +397,23 @@ namespace Flawless_ex
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
 
-                    DataRow row3;
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    string name1 = row3["shop_name"].ToString();
-                    string phoneNumber1 = row3["phone_number"].ToString();
-                    string address1 = row3["address"].ToString();
-                    string item1 = row3["item_name"].ToString();
+                    string name1 = shopname;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = itemcode;
+                    string code1 = code;
+                    control = controlNumber;
+                    string method1 = method;
+                    int antique = antiqueNumber;
 
-
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data, Pass, document, control);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1,  amount1, amount2, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antique);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -622,20 +627,23 @@ namespace Flawless_ex
                     adapter.Fill(dt7);
                     #endregion
 
-                    DataRow row3;
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    name = row3["name"].ToString();
-                    phoneNumber = row3["phone_number"].ToString();
-                    address = row3["address"].ToString();
-                    item = row3["item_name"].ToString();
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data, Pass, document, control);
+                    string name1 = name;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = itemcode;
+                    string code1 = code;
+                    string method1 = method;
+                    int antique = antiqueNumber;
+
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amount1, amount2, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antique);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -652,20 +660,25 @@ namespace Flawless_ex
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
-                    DataRow row3;
+
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    name = row3["name"].ToString();
-                    phoneNumber = row3["phone_number"].ToString();
-                    address = row3["address"].ToString();
-                    item = row3["item_name"].ToString();
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data, Pass, document, control);
+                    string name1 = name;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = itemcode;
+                    string code1 = code;
+                    string method1 = method;
+                    int antique = antiqueNumber;
+
+                    control = controlNumber;
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amount1, amount2, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antique);
                     screan = false;
                     this.Close();
                     dataSearch.Show();

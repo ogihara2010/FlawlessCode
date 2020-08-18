@@ -36,9 +36,33 @@ namespace Flawless_ex
         string Pass;
         int Control;
         string Data;
-        string Search1;
-        string Search2;
-        string Search3;
+        #region "買取販売履歴"
+        string search1;
+        string search2;
+        string search3;
+        string search4;
+        string search5;
+        string search6;
+        string search7;
+        string search8;
+        string search9;
+        string search10;
+        string search11;
+        string search12;
+        #endregion
+        decimal amount00;
+        decimal amount01;
+        decimal amount02;
+        decimal amount03;
+        decimal amount04;
+        decimal amount05;
+        decimal amount06;
+        decimal amount07;
+        decimal amount08;
+        decimal amount09;
+        decimal amount010;
+        decimal amount011;
+        decimal amount012;
 
         #region"フォーマット未処理保持"
         bool first = true;                          //３桁、￥マーク処理
@@ -1358,7 +1382,7 @@ namespace Flawless_ex
 
         private void RecordList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
+            statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
             statement.Show();
         }
 

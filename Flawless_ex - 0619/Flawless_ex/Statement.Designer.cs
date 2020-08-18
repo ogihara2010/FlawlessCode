@@ -212,6 +212,7 @@
             this.articlesTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.PayeeTextBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label27 = new System.Windows.Forms.Label();
@@ -224,7 +225,6 @@
             this.label89 = new System.Windows.Forms.Label();
             this.CoinComboBox = new System.Windows.Forms.ComboBox();
             this.RemarkRegister = new System.Windows.Forms.TextBox();
-            this.PayeeComboBox = new System.Windows.Forms.ComboBox();
             this.label90 = new System.Windows.Forms.Label();
             this.label91 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
@@ -391,7 +391,6 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.PayeeTextBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -2593,7 +2592,6 @@
             this.tabPage2.Controls.Add(this.label89);
             this.tabPage2.Controls.Add(this.CoinComboBox);
             this.tabPage2.Controls.Add(this.RemarkRegister);
-            this.tabPage2.Controls.Add(this.PayeeComboBox);
             this.tabPage2.Controls.Add(this.label90);
             this.tabPage2.Controls.Add(this.label91);
             this.tabPage2.Controls.Add(this.label86);
@@ -2620,6 +2618,13 @@
             this.tabPage2.Size = new System.Drawing.Size(2703, 1495);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "納品書";
+            // 
+            // PayeeTextBox1
+            // 
+            this.PayeeTextBox1.Location = new System.Drawing.Point(570, 1070);
+            this.PayeeTextBox1.Name = "PayeeTextBox1";
+            this.PayeeTextBox1.Size = new System.Drawing.Size(218, 33);
+            this.PayeeTextBox1.TabIndex = 88;
             // 
             // button2
             // 
@@ -2741,16 +2746,6 @@
             this.RemarkRegister.Name = "RemarkRegister";
             this.RemarkRegister.Size = new System.Drawing.Size(827, 33);
             this.RemarkRegister.TabIndex = 76;
-            // 
-            // PayeeComboBox
-            // 
-            this.PayeeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PayeeComboBox.FormattingEnabled = true;
-            this.PayeeComboBox.Location = new System.Drawing.Point(591, 1236);
-            this.PayeeComboBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.PayeeComboBox.Name = "PayeeComboBox";
-            this.PayeeComboBox.Size = new System.Drawing.Size(206, 34);
-            this.PayeeComboBox.TabIndex = 72;
             // 
             // label90
             // 
@@ -4721,13 +4716,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // PayeeTextBox1
-            // 
-            this.PayeeTextBox1.Location = new System.Drawing.Point(570, 1070);
-            this.PayeeTextBox1.Name = "PayeeTextBox1";
-            this.PayeeTextBox1.Size = new System.Drawing.Size(218, 33);
-            this.PayeeTextBox1.TabIndex = 88;
-            // 
             // Statement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -5025,7 +5013,6 @@
         private System.Windows.Forms.TextBox RemarkRegister;
         private System.Windows.Forms.RadioButton sealN;
         private System.Windows.Forms.RadioButton sealY;
-        private System.Windows.Forms.ComboBox PayeeComboBox;
         private System.Windows.Forms.Label label90;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Label label86;

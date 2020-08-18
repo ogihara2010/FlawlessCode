@@ -25,10 +25,37 @@ namespace Flawless_ex
         string document;
         int control;
         string data;
+        #region "買取販売履歴"
         string search1;
         string search2;
         string search3;
+        string search4;
+        string search5;
+        string search6;
+        string search7;
+        string search8;
+        string search9;
+        string search10;
+        string search11;
+        string search12;
+        #endregion
         string pass;
+        bool screan = true;
+        #region "納品書の引数"
+        decimal amount00;
+        decimal amount01;
+        decimal amount02;
+        decimal amount03;
+        decimal amount04;
+        decimal amount05;
+        decimal amount06;
+        decimal amount07;
+        decimal amount08;
+        decimal amount09;
+        decimal amount010;
+        decimal amount011;
+        decimal amount012;
+        #endregion
         public client_add(MainMenu mainMenu, int id, int type)
         {
             InitializeComponent();
@@ -40,14 +67,16 @@ namespace Flawless_ex
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+            screan = false;
             this.Close();
             client_Search.Show();
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total);
+            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+            screan = false;
             this.Close();
             client_Search.Show();
         }
@@ -103,7 +132,8 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+            screan = false;
             this.Close();
             statement.Show();
         }
@@ -163,7 +193,8 @@ namespace Flawless_ex
             type = 1;
             staff_name = Name;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+            screan = false;
             this.Close();
             statement.Show();
         }
