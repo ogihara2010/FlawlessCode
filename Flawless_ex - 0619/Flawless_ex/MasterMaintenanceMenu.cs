@@ -44,7 +44,7 @@ namespace Flawless_ex
 
         private void staffMasterButtonClick(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(this, staff_code, access_auth, Pass);
+            StaffMaster personMaster = new StaffMaster(this, staff_code, Pass, access_auth);
             this.Hide();
             personMaster.Show();
         }

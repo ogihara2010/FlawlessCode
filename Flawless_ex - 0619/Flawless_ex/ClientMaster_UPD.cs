@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using Npgsql;
 using System.Data;
+using System.Text;
+
 namespace Flawless_ex
 {
     public partial class ClientMaster_UPD : Form
@@ -17,8 +19,8 @@ namespace Flawless_ex
         int staff_code;
         string access_auth;
         string path;
-        bool screan = true;
         string pass;
+        string kana;
 
         public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code, string access_auth, string Pass)
         {
@@ -34,27 +36,14 @@ namespace Flawless_ex
 
         private void Button18_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-            screan = false;
             this.Close();
-            clientmaster.Show();
         }
 
         private void Button4_Click_1(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-
             this.Close();
-            clientmaster.Show();
         }
 
-        private void Button18_Click_1(object sender, EventArgs e)
-        {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-            screan = false;
-            this.Close();
-            clientmaster.Show();
-        }
         #region "法人　更新"
         private void Button20_Click(object sender, EventArgs e)
         {
@@ -262,8 +251,8 @@ namespace Flawless_ex
             #region "履歴へ"
             NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
-            string sql_in = "Insert into client_m_corporate_revisions VALUES (" + 0 + " , '" + RegistrationDate2_old + "' , '" + CompanyName_old + "' ,'" + CompanyNameKana_old + "' , '" + ShopName_old + "' , '" + ShopNameKana_old + "',"  + Antique_old + " ,'" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "','" + Position_old +
-               "' , '" + ClientStaffName_old + "','" +  EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old  + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old  + "' , '" + PeriodStay_old + "','" + SealCertification_old +  "'," +
+            string sql_in = "Insert into client_m_corporate_revisions VALUES (" + 0 + " , '" + RegistrationDate2_old + "' , '" + CompanyName_old + "' ,'" + CompanyNameKana_old + "' , '" + ShopName_old + "' , '" + ShopNameKana_old + "'," + Antique_old + " ,'" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "','" + Position_old +
+               "' , '" + ClientStaffName_old + "','" + EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "' , '" + PeriodStay_old + "','" + SealCertification_old + "'," +
               0 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
             conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -313,9 +302,9 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
 
 
-            string sql_str = "UPDATE client_m_corporate SET type = " + 0 + " ,registration_date = '" + RegistrationDate + "' ,company_name =  '" + CompanyName + "' ,company_kana = '" + CompanyNameKana + "' ,shop_name =  '" + ShopName + "' ,shop_name_kana = '" + ShopNameKana + " ',address =  '"  + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,position = '" + Position + "' ,staff_name = '" + ClientStaffName +
-                "' ,email_address = '" + EmailAddress + "',url_infor = '" + URLinfor + "',bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name_kana = '" + AccountNameKana + "' ,account_name = '" + AccountName + "' ,remarks = '" + Remarks + "' ,id = '" + ID + "' ,register_date = '" + b + "',antique_license = '" + Antiquelicense + "',tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + 
-                "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 +"' where antique_number = " + AntiqueNumber + "; ";
+            string sql_str = "UPDATE client_m_corporate SET type = " + 0 + " ,registration_date = '" + RegistrationDate + "' ,company_name =  '" + CompanyName + "' ,company_kana = '" + CompanyNameKana + "' ,shop_name =  '" + ShopName + "' ,shop_name_kana = '" + ShopNameKana + " ',address =  '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,position = '" + Position + "' ,staff_name = '" + ClientStaffName +
+                "' ,email_address = '" + EmailAddress + "',url_infor = '" + URLinfor + "',bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name_kana = '" + AccountNameKana + "' ,account_name = '" + AccountName + "' ,remarks = '" + Remarks + "' ,id = '" + ID + "' ,register_date = '" + b + "',antique_license = '" + Antiquelicense + "',tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification +
+                "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 + "' where antique_number = " + AntiqueNumber + "; ";
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -323,10 +312,8 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("更新しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-            screan = false;
+
             this.Close();
-            clientmaster.Show();
         }
         #endregion
         #region "法人　無効"
@@ -384,63 +371,65 @@ namespace Flawless_ex
                 this.button5.Enabled = true;
                 this.button20.Enabled = true;
             }
-            #region "旧データ"
-            NpgsqlConnection conn1 = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter1;
-            conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            string sql_old = "select * from client_m_corporate where invalid = 0 and (staff_name = '" + name + "' and address = '" + address + "');";
-            conn1.Open();
-            adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
-            adapter1.Fill(dt2);
-            DataRow row1;
-            row1 = dt2.Rows[0];
-            string RegistrationDate2_old = row1["registration_date"].ToString();
-            int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
-            string PostalCode2_old = row1["postal_code2"].ToString();
-            string Address_old = row1["address"].ToString();
-            string AddressKana_old = row1["address_kana"].ToString();
-            string CompanyName_old = row1["company_name"].ToString();
-            string CompanyNameKana_old = row1["company_kana"].ToString();
-            string ShopName_old = row1["shop_name"].ToString();
-            string ShopNameKana_old = row1["shop_name_kana"].ToString();
-            int Antique_old = (int)row1["antique_number"];
-            string PhoneNumber_old = row1["phone_number"].ToString();
-            string FaxNumber_old = row1["fax_number"].ToString();
-            string URL_old = row1["url_infor"].ToString();
-            string ClientStaffName_old = row1["staff_name"].ToString();
-            string Position_old = row1["position"].ToString();
-            string EmailAddress_old = row1["email_address"].ToString();
-            string BankName_old = row1["bank_name"].ToString();
-            string DepositType_old = row1["deposit_type"].ToString();
-            string AccountName_old = row1["account_name"].ToString();
-            string BranchName_old = row1["branch_name"].ToString();
-            string AccountNumber_old = row1["account_number"].ToString();
-            string AccountNameKana_old = row1["account_name_kana"].ToString();
-            string RegisterCopy_old = row1["register_copy"].ToString();
-            string Antiquelicense_old = row1["antique_license"].ToString();
-            string ID_old = row1["id"].ToString();
-            string PeriodStay_old = row1["period_stay"].ToString();
-            string SealCertification_old = row1["seal_certification"].ToString();
-            string TaxCertification_old = row1["tax_certificate"].ToString();
-            string Remarks_old = row1["remarks"].ToString();
-            string ResidenceCard_old = row1["residence_card"].ToString();
-            string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
-            DateTime dat1 = DateTime.Now;
-            string c = dat1.ToString("yyyy/MM/dd");
-            #region "履歴へ"
-            NpgsqlConnection conn2 = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter2;
-            string sql_in = "Insert into client_m_corporate_revisions VALUES (" + 0 + " , '" + RegistrationDate2_old + "' , '" + CompanyName_old + "' ,'" + CompanyNameKana_old + "' , '" + ShopName_old + "' , '" + ShopNameKana_old + "'," + Antique_old + " ,'" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "','" + Position_old +
-               "' , '" + ClientStaffName_old + "','" + EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "' , '" + PeriodStay_old + "','" + SealCertification_old + "'," +
-              1 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
+            #region"コメントアウト"
+            //#region "旧データ"
+            //NpgsqlConnection conn1 = new NpgsqlConnection();
+            //NpgsqlDataAdapter adapter1;
+            //conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //string sql_old = "select * from client_m_individual where invalid = 0 and (name = '" + name + "' and address = '" + address + "');";
+            //conn1.Open();
+            //adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
+            //adapter1.Fill(dt2);
+            //DataRow row1;
+            //row1 = dt2.Rows[0];
+            //string RegistrationDate2_old = row1["registration_date"].ToString();
+            //int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
+            //string PostalCode2_old = row1["postal_code2"].ToString();
+            //string Address_old = row1["address"].ToString();
+            //string AddressKana_old = row1["address_kana"].ToString();
+            //string CompanyName_old = row1["company_name"].ToString();
+            //string CompanyNameKana_old = row1["company_kana"].ToString();
+            //string ShopName_old = row1["shop_name"].ToString();
+            //string ShopNameKana_old = row1["shop_name_kana"].ToString();
+            //int Antique_old = (int)row1["antique_number"];
+            //string PhoneNumber_old = row1["phone_number"].ToString();
+            //string FaxNumber_old = row1["fax_number"].ToString();
+            //string URL_old = row1["url_infor"].ToString();
+            //string ClientStaffName_old = row1["staff_name"].ToString();
+            //string Position_old = row1["position"].ToString();
+            //string EmailAddress_old = row1["email_address"].ToString();
+            //string BankName_old = row1["bank_name"].ToString();
+            //string DepositType_old = row1["deposit_type"].ToString();
+            //string AccountName_old = row1["account_name"].ToString();
+            //string BranchName_old = row1["branch_name"].ToString();
+            //string AccountNumber_old = row1["account_number"].ToString();
+            //string AccountNameKana_old = row1["account_name_kana"].ToString();
+            //string RegisterCopy_old = row1["register_copy"].ToString();
+            //string Antiquelicense_old = row1["antique_license"].ToString();
+            //string ID_old = row1["id"].ToString();
+            //string PeriodStay_old = row1["period_stay"].ToString();
+            //string SealCertification_old = row1["seal_certification"].ToString();
+            //string TaxCertification_old = row1["tax_certificate"].ToString();
+            //string Remarks_old = row1["remarks"].ToString();
+            //string ResidenceCard_old = row1["residence_card"].ToString();
+            //string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
+            //DateTime dat1 = DateTime.Now;
+            //string c = dat1.ToString("yyyy/MM/dd");
+            //#region "履歴へ"
+            //NpgsqlConnection conn2 = new NpgsqlConnection();
+            //NpgsqlDataAdapter adapter2;
+            //string sql_in = "Insert into client_m_corporate_revisions VALUES (" + 0 + " , '" + RegistrationDate2_old + "' , '" + CompanyName_old + "' ,'" + CompanyNameKana_old + "' , '" + ShopName_old + "' , '" + ShopNameKana_old + "'," + Antique_old + " ,'" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "','" + Position_old +
+            //   "' , '" + ClientStaffName_old + "','" + EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "' , '" + PeriodStay_old + "','" + SealCertification_old + "'," +
+            //  1 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
-            conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.Open();
+            //conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //conn2.Open();
 
-            adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-            adapter2.Fill(dt3);
-            #endregion
-            #endregion
+            //adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+            //adapter2.Fill(dt3);
+            //#endregion
+            //#endregion
+            #endregion"コメントアウト"
 
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
@@ -889,9 +878,9 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            string sql_str = "UPDATE client_m_individual SET type = " + 1 + " , registration_date = '" + RegistrationDate + "' , name = '" + Name + "' ,name_kana = '" + NameKana + "' ,birthday = '" + Birthday + "' ,address = '"  + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,email_address = '" + EmailAddress + "',occupation = '" + Occupation +
-               "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '"  + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "',photo_id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
-              0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 +"',reason = '" + reason2 + "'where id_number = " + ID + ";";
+            string sql_str = "UPDATE client_m_individual SET type = " + 1 + " , registration_date = '" + RegistrationDate + "' , name = '" + Name + "' ,name_kana = '" + NameKana + "' ,birthday = '" + Birthday + "' ,address = '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,email_address = '" + EmailAddress + "',occupation = '" + Occupation +
+               "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '" + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "',photo_id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
+              0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason2 + "'where id_number = " + ID + ";";
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -899,10 +888,8 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("更新しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-            screan = false;
+
             this.Close();
-            clientmaster.Show();
         }
         #endregion
         #region "個人　無効"
@@ -996,7 +983,7 @@ namespace Flawless_ex
             //clientmaster.Show();
         }
         #endregion
-       
+
         #region "法人"
         #region "登記簿謄本"
         private void Button1_Click(object sender, EventArgs e)
@@ -1312,20 +1299,149 @@ namespace Flawless_ex
 
         private void ClientMaster_UPD_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (screan)
-            {
-                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-                clientmaster.Show();
-            }
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
+            clientmaster.Show();
         }
 
-        private void ClientMaster_UPD_FormClosed_1(object sender, FormClosedEventArgs e)
+        
+        private void textBox24_DoubleClick(object sender, EventArgs e)
         {
-            if (screan)
-            {
-                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, pass);
-                clientmaster.Show();
-            }
+            pictureBox1.ImageLocation = textBox24.Text;
+        }
+
+        private void textBox21_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox1.ImageLocation = textBox21.Text;
+        }
+
+        private void textBox22_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox1.ImageLocation = textBox22.Text;
+        }
+
+        private void textBox25_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox1.ImageLocation = textBox25.Text;
+        }
+
+        private void textBox27_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox1.ImageLocation = textBox27.Text;
+        }
+
+        private void textBox29_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox1.ImageLocation = textBox29.Text;
+        }
+
+        private void textBox26_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox1.ImageLocation = textBox26.Text;
+        }
+
+        private void textBox37_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox37.Text;
+        }
+
+        private void textBox33_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox33.Text;
+        }
+
+        private void textBox35_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox35.Text;
+        }
+
+        private void textBox36_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox36.Text;
+        }
+
+        private void textBox31_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox31.Text;
+        }
+
+        private void textBox30_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox30.Text;
+        }
+
+        private void textBox32_DoubleClick(object sender, EventArgs e)
+        {
+            pictureBox2.ImageLocation = textBox32.Text;
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox3.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox3.Text = stringBuilder.ToString();
+            textBox3.Select(textBox3.Text.Length, 0);
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox8.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox8.Text = stringBuilder.ToString();
+            textBox8.Select(textBox8.Text.Length, 0);
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox6.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox6.Text = stringBuilder.ToString();
+            textBox6.Select(textBox6.Text.Length, 0);
+        }
+
+        private void textBox20_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox20.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox20.Text = stringBuilder.ToString();
+            textBox20.Select(textBox20.Text.Length, 0);
+        }
+
+        private void textBox55_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox55.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox55.Text = stringBuilder.ToString();
+            textBox55.Select(textBox55.Text.Length, 0);
+        }
+
+        private void textBox52_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox52.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox52.Text = stringBuilder.ToString();
+            textBox52.Select(textBox52.Text.Length, 0);
+        }
+
+        private void textBox38_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox38.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox38.Text = stringBuilder.ToString();
+            textBox38.Select(textBox38.Text.Length, 0);
         }
     }
 }
