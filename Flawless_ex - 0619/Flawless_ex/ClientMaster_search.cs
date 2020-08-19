@@ -27,14 +27,9 @@ namespace Flawless_ex
             this.Pass = pass;
         }
 
-
-
         private void Button1_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
-            screan = false;
             this.Close();
-            clientmaster.Show();
         }
 
 
@@ -118,6 +113,10 @@ namespace Flawless_ex
             {
                 ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
                 clientmaster.Show();
+            }
+            else
+            {
+                screan = true;
             }
         }
     }

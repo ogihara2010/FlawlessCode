@@ -43,9 +43,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass, Access_auth);
             this.Close();
-            customerHistorySelect.Show();
         }
 
         private void CustomerHistory_Load(object sender, EventArgs e)

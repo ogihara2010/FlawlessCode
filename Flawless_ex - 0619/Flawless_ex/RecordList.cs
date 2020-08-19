@@ -8818,157 +8818,131 @@ namespace Flawless_ex
                 {
                     #region"１行目"
                     case 1:
-                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && !ItemNameChangeCheckBox1.Checked)
                         {
-                            result = MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力内容確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"２行目"
                     case 2:
-                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && !ItemNameChangeCheckBox2.Checked)
                         {
-                            result = MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"３行目"
                     case 3:
-                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && !ItemNameChangeCheckBox3.Checked)
                         {
-                            result = MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"４行目"
                     case 4:
-                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && !ItemNameChangeCheckBox4.Checked)
                         {
-                            result = MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"５行目"
                     case 5:
-                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && !ItemNameChangeCheckBox5.Checked)
                         {
-                            result = MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"６行目"
                     case 6:
-                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && !ItemNameChangeCheckBox6.Checked)
                         {
-                            result = MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"７行目"
                     case 7:
-                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && !ItemNameChangeCheckBox7.Checked)
                         {
-                            result = MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"８行目"
                     case 8:
-                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && !ItemNameChangeCheckBox8.Checked)
                         {
-                            result = MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"９行目"
                     case 9:
-                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && !ItemNameChangeCheckBox9.Checked)
                         {
-                            result = MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"１０行目"
                     case 10:
-                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && !ItemNameChangeCheckBox10.Checked)
                         {
-                            result = MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"１１行目"
                     case 11:
-                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && !ItemNameChangeCheckBox11.Checked)
                         {
-                            result = MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"１２行目"
                     case 12:
-                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && !ItemNameChangeCheckBox12.Checked)
                         {
-                            result = MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                     #endregion
                     #region"１３行目"
                     case 13:
-                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && !ItemNameChangeCheckBox13.Checked)
                         {
-                            result = MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "このままでよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
+                            MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                            return;
                         }
                         break;
                         #endregion
