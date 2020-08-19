@@ -51,7 +51,22 @@ namespace Flawless_ex
         decimal amount011;
         decimal amount012;
         #endregion
-        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, int control, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012)
+        #region "計算書の引数"
+        decimal amount10;
+        decimal amount11;
+        decimal amount12;
+        decimal amount13;
+        decimal amount14;
+        decimal amount15;
+        decimal amount16;
+        decimal amount17;
+        decimal amount18;
+        decimal amount19;
+        decimal amount110;
+        decimal amount111;
+        decimal amount112;
+        #endregion
+        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, int control, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012, decimal amount10, decimal amount11, decimal amount12, decimal amount13, decimal amount14, decimal amount15, decimal amount16, decimal amount17, decimal amount18, decimal amount19, decimal amount110, decimal amount111, decimal amount112, string document)
         {
             InitializeComponent();
 
@@ -63,6 +78,8 @@ namespace Flawless_ex
             this.staff_name = staff_name;
             this.Total = Total;
             this.control = control;
+            this.document = document;
+            #region "納品書の引数"
             this.amount00 = amount00;
             this.amount01 = amount01;
             this.amount02 = amount02;
@@ -76,11 +93,27 @@ namespace Flawless_ex
             this.amount010 = amount010;
             this.amount011 = amount011;
             this.amount012 = amount012;
+            #endregion
+            #region "計算書の引数"
+            this.amount10 = amount10;
+            this.amount11 = amount11;
+            this.amount12 = amount12;
+            this.amount13 = amount13;
+            this.amount14 = amount14;
+            this.amount15 = amount15;
+            this.amount16 = amount16;
+            this.amount17 = amount17;
+            this.amount18 = amount18;
+            this.amount19 = amount19;
+            this.amount110 = amount110;
+            this.amount111 = amount111;
+            this.amount112 = amount112;
+            #endregion
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search01, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search01, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112);
             this.Close();
             statement.Show();
         }
@@ -148,7 +181,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -165,7 +198,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -188,7 +221,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -205,7 +238,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -235,7 +268,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
 
@@ -251,7 +284,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
                                         }
@@ -274,7 +307,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
 
@@ -290,7 +323,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
                                         }
@@ -324,7 +357,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -341,7 +374,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -364,7 +397,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -381,7 +414,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -410,7 +443,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -427,7 +460,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -450,7 +483,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
 
@@ -466,7 +499,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -507,7 +540,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -524,7 +557,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -547,7 +580,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -564,7 +597,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -593,7 +626,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -610,7 +643,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -633,7 +666,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
 
@@ -649,7 +682,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
                                         }
@@ -683,7 +716,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -700,7 +733,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -723,7 +756,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -740,7 +773,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -769,7 +802,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
 
@@ -785,7 +818,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
                                         }
@@ -807,7 +840,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
 
@@ -823,7 +856,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             this.Close();
                                             search_Result.Show();
                                         }
@@ -869,7 +902,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -886,7 +919,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -909,7 +942,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -926,7 +959,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -955,7 +988,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -971,7 +1004,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -994,7 +1027,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1010,7 +1043,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1045,7 +1078,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1062,7 +1095,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1085,7 +1118,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1102,7 +1135,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1131,7 +1164,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1147,7 +1180,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1171,7 +1204,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1187,7 +1220,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1228,7 +1261,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1244,7 +1277,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1267,7 +1300,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1283,7 +1316,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1312,7 +1345,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1328,7 +1361,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1351,7 +1384,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1367,7 +1400,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1402,7 +1435,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1418,7 +1451,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1441,7 +1474,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1458,7 +1491,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1487,7 +1520,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1503,7 +1536,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1526,7 +1559,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1543,7 +1576,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                             screan = false;
                                             this.Close();
                                             search_Result.Show();
@@ -1589,7 +1622,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1606,7 +1639,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1629,7 +1662,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1646,7 +1679,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1675,7 +1708,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1691,7 +1724,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         this.Close();
                                         search_Result.Show();
                                     }
@@ -1713,7 +1746,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1730,7 +1763,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1765,7 +1798,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1781,7 +1814,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1804,7 +1837,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1820,7 +1853,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1849,7 +1882,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1865,7 +1898,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1888,7 +1921,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1904,7 +1937,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                         screan = false;
                                         this.Close();
                                         search_Result.Show();
@@ -1938,7 +1971,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -1954,7 +1987,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -1977,7 +2010,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -1993,7 +2026,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2016,7 +2049,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                 screan = false;
                                 this.Close();
                                 search_Result.Show();
@@ -2067,7 +2100,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2084,7 +2117,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2107,7 +2140,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total,control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total,control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2124,7 +2157,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2153,7 +2186,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2170,7 +2203,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2193,7 +2226,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2210,7 +2243,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2245,7 +2278,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total,control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total,control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2262,7 +2295,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2285,7 +2318,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     this.Close();
                                     search_Result.Show();
                                 }
@@ -2301,7 +2334,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     this.Close();
                                     search_Result.Show();
                                 }
@@ -2329,7 +2362,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total,control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total,control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2346,7 +2379,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2369,7 +2402,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2386,7 +2419,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                     screan = false;
                                     this.Close();
                                     search_Result.Show();
@@ -2419,7 +2452,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                 screan = false;
                                 this.Close();
                                 search_Result.Show();
@@ -2436,7 +2469,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                 screan = false;
                                 this.Close();
                                 search_Result.Show();
@@ -2457,7 +2490,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                 screan = false;
                                 this.Close();
                                 search_Result.Show();
@@ -2474,7 +2507,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                                 screan = false;
                                 this.Close();
                                 search_Result.Show();
@@ -2497,7 +2530,7 @@ namespace Flawless_ex
                             adapter.Fill(dt);
 
                             conn.Close();
-                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                             screan = false;
                             this.Close();
                             search_Result.Show();
@@ -2514,7 +2547,7 @@ namespace Flawless_ex
                             adapter.Fill(dt);
 
                             conn.Close();
-                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
                             screan = false;
                             this.Close();
                             search_Result.Show();

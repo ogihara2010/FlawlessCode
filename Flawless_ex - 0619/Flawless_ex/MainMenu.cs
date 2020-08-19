@@ -32,6 +32,7 @@ namespace Flawless_ex
         #endregion
         string Pass;
         int grade;
+        #region "納品書の引数"
         decimal amount00;
         decimal amount01;
         decimal amount02;
@@ -45,6 +46,22 @@ namespace Flawless_ex
         decimal amount010;
         decimal amount011;
         decimal amount012;
+        #endregion
+        #region "計算書の引数"
+        decimal amount10;
+        decimal amount11;
+        decimal amount12;
+        decimal amount13;
+        decimal amount14;
+        decimal amount15;
+        decimal amount16;
+        decimal amount17;
+        decimal amount18;
+        decimal amount19;
+        decimal amount110;
+        decimal amount111;
+        decimal amount112;
+        #endregion
         NpgsqlConnection conn;
         NpgsqlCommand cmd;
         NpgsqlDataReader reader;
@@ -95,7 +112,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112);
 
             this.Hide();
             statement.Show();
