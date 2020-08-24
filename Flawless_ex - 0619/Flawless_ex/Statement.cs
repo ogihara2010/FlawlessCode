@@ -3170,7 +3170,7 @@ namespace Flawless_ex
             #endregion
 
             //タブのサイズ変更
-            tabControl1.ItemSize = new Size(300, 40);
+            //tabControl1.ItemSize = new Size(300, 40);
 
             //デフォルトで税込み表示
             comboBox11.SelectedIndex = 0;
