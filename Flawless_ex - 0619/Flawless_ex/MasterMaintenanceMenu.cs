@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -11,6 +12,7 @@ namespace Flawless_ex
         string access_auth;
         TopMenu top;
         string Pass;
+        bool screan = true;
 
         public MasterMaintenanceMenu(MainMenu mainMenu, int staff_code, string access_auth, string pass)
         {
@@ -34,7 +36,6 @@ namespace Flawless_ex
             }
             else { }
 
-            this.Size = new Size(450, 580);
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -45,35 +46,46 @@ namespace Flawless_ex
         private void staffMasterButtonClick(object sender, EventArgs e)
         {
             StaffMaster personMaster = new StaffMaster(this, staff_code, Pass, access_auth);
-            this.Hide();
+            screan = false;
+            this.Close();
             personMaster.Show();
         }
 
         private void clientMasterButton_Click(object sender, EventArgs e)
         {
             ClientMaster clientMaster = new ClientMaster(this, staff_code, access_auth, Pass);
-            this.Hide();
+            screan = false;
+            this.Close();
             clientMaster.Show();
         }
 
         private void itemMasterButtonClick(object sender, EventArgs e)
         {
             ItemMaster productNameMenu = new ItemMaster(this, staff_code, access_auth, Pass);
-            this.Hide();
+            screan = false;
+            this.Close();
             productNameMenu.Show();
         }
 
         private void TaxMaster_Click(object sender, EventArgs e)
         {
             TaxMaster taxMaster = new TaxMaster(this, staff_code, access_auth, Pass);
-            this.Hide();
+            screan = false;
+            this.Close();
             taxMaster.Show();
         }
 
         private void MasterMaintenanceMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainMenu = new MainMenu(top, staff_code, Pass, access_auth);
-            mainMenu.Show();
+            if (screan)
+            {
+                mainMenu = new MainMenu(top, staff_code, Pass, access_auth);
+                mainMenu.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }

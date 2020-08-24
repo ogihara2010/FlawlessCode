@@ -256,7 +256,7 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(RegisterCopyTextBox2.Text))
             {
-                pictureBox2.ImageLocation = RegisterCopyTextBox2.Text;
+                pictureBox1.ImageLocation = RegisterCopyTextBox2.Text;
             }
         }
 
@@ -264,7 +264,7 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(AntiqueLicenseTextBox2.Text))
             {
-                pictureBox2.ImageLocation = AntiqueLicenseTextBox2.Text;
+                pictureBox1.ImageLocation = AntiqueLicenseTextBox2.Text;
             }
         }
 
@@ -272,7 +272,7 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(PhotoIdTextBox2.Text))
             {
-                pictureBox2.ImageLocation = PhotoIdTextBox2.Text;
+                pictureBox1.ImageLocation = PhotoIdTextBox2.Text;
             }
         }
 
@@ -280,7 +280,7 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(TaxCertificateTextBox2.Text))
             {
-                pictureBox2.ImageLocation = TaxCertificateTextBox2.Text;
+                pictureBox1.ImageLocation = TaxCertificateTextBox2.Text;
             }
         }
 
@@ -288,7 +288,7 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(AolFinancialShareholderTextBox2.Text))
             {
-                pictureBox2.ImageLocation = AolFinancialShareholderTextBox2.Text;
+                pictureBox1.ImageLocation = AolFinancialShareholderTextBox2.Text;
             }
         }
 
@@ -296,7 +296,7 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(ResidenceCardTextBox2.Text))
             {
-                pictureBox2.ImageLocation = ResidenceCardTextBox2.Text;
+                pictureBox1.ImageLocation = ResidenceCardTextBox2.Text;
             }
         }
 
@@ -304,11 +304,10 @@ namespace Flawless_ex
         {
             if (!string.IsNullOrEmpty(SealCetificationTextBox2.Text))
             {
-                pictureBox2.ImageLocation = SealCetificationTextBox2.Text;
+                pictureBox1.ImageLocation = SealCetificationTextBox2.Text;
             }
         }
 
         #endregion
-
     }
 }

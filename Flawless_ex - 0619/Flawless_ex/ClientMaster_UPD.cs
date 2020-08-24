@@ -364,6 +364,7 @@ namespace Flawless_ex
                 tabControl1.TabPages.Remove(tabPage1);
             }
             else { }
+
             if (access_auth == "C")
             {
                 this.button6.Enabled = false;
@@ -1442,6 +1443,42 @@ namespace Flawless_ex
 
             textBox38.Text = stringBuilder.ToString();
             textBox38.Select(textBox38.Text.Length, 0);
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox51_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox54_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
         }
     }
 }
