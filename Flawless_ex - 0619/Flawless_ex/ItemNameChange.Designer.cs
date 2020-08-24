@@ -106,7 +106,7 @@
             this.AfterChangeComboBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox1.FormattingEnabled = true;
             this.AfterChangeComboBox1.Location = new System.Drawing.Point(362, 100);
-            this.AfterChangeComboBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox1.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox1.Name = "AfterChangeComboBox1";
             this.AfterChangeComboBox1.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox1.TabIndex = 0;
@@ -118,7 +118,7 @@
             this.AfterChangeComboBox5.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox5.FormattingEnabled = true;
             this.AfterChangeComboBox5.Location = new System.Drawing.Point(362, 384);
-            this.AfterChangeComboBox5.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox5.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox5.Name = "AfterChangeComboBox5";
             this.AfterChangeComboBox5.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox5.TabIndex = 0;
@@ -130,7 +130,7 @@
             this.AfterChangeComboBox3.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox3.FormattingEnabled = true;
             this.AfterChangeComboBox3.Location = new System.Drawing.Point(362, 242);
-            this.AfterChangeComboBox3.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox3.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox3.Name = "AfterChangeComboBox3";
             this.AfterChangeComboBox3.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox3.TabIndex = 0;
@@ -142,7 +142,7 @@
             this.AfterChangeComboBox10.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox10.FormattingEnabled = true;
             this.AfterChangeComboBox10.Location = new System.Drawing.Point(362, 739);
-            this.AfterChangeComboBox10.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox10.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox10.Name = "AfterChangeComboBox10";
             this.AfterChangeComboBox10.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox10.TabIndex = 0;
@@ -154,7 +154,7 @@
             this.AfterChangeComboBox7.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox7.FormattingEnabled = true;
             this.AfterChangeComboBox7.Location = new System.Drawing.Point(362, 526);
-            this.AfterChangeComboBox7.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox7.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox7.Name = "AfterChangeComboBox7";
             this.AfterChangeComboBox7.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox7.TabIndex = 0;
@@ -166,7 +166,7 @@
             this.AfterChangeComboBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox2.FormattingEnabled = true;
             this.AfterChangeComboBox2.Location = new System.Drawing.Point(362, 171);
-            this.AfterChangeComboBox2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox2.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox2.Name = "AfterChangeComboBox2";
             this.AfterChangeComboBox2.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox2.TabIndex = 1;
@@ -178,7 +178,7 @@
             this.AfterChangeComboBox12.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox12.FormattingEnabled = true;
             this.AfterChangeComboBox12.Location = new System.Drawing.Point(362, 881);
-            this.AfterChangeComboBox12.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox12.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox12.Name = "AfterChangeComboBox12";
             this.AfterChangeComboBox12.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox12.TabIndex = 0;
@@ -190,7 +190,7 @@
             this.AfterChangeComboBox6.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox6.FormattingEnabled = true;
             this.AfterChangeComboBox6.Location = new System.Drawing.Point(362, 455);
-            this.AfterChangeComboBox6.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox6.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox6.Name = "AfterChangeComboBox6";
             this.AfterChangeComboBox6.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox6.TabIndex = 1;
@@ -202,7 +202,7 @@
             this.AfterChangeComboBox4.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox4.FormattingEnabled = true;
             this.AfterChangeComboBox4.Location = new System.Drawing.Point(362, 313);
-            this.AfterChangeComboBox4.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox4.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox4.Name = "AfterChangeComboBox4";
             this.AfterChangeComboBox4.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox4.TabIndex = 1;
@@ -214,7 +214,7 @@
             this.AfterChangeComboBox11.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox11.FormattingEnabled = true;
             this.AfterChangeComboBox11.Location = new System.Drawing.Point(362, 810);
-            this.AfterChangeComboBox11.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox11.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox11.Name = "AfterChangeComboBox11";
             this.AfterChangeComboBox11.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox11.TabIndex = 1;
@@ -226,7 +226,7 @@
             this.AfterChangeComboBox9.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox9.FormattingEnabled = true;
             this.AfterChangeComboBox9.Location = new System.Drawing.Point(362, 668);
-            this.AfterChangeComboBox9.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox9.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox9.Name = "AfterChangeComboBox9";
             this.AfterChangeComboBox9.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox9.TabIndex = 1;
@@ -238,7 +238,7 @@
             this.AfterChangeComboBox8.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox8.FormattingEnabled = true;
             this.AfterChangeComboBox8.Location = new System.Drawing.Point(362, 597);
-            this.AfterChangeComboBox8.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox8.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox8.Name = "AfterChangeComboBox8";
             this.AfterChangeComboBox8.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox8.TabIndex = 1;
@@ -250,14 +250,14 @@
             this.AfterChangeComboBox13.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AfterChangeComboBox13.FormattingEnabled = true;
             this.AfterChangeComboBox13.Location = new System.Drawing.Point(362, 952);
-            this.AfterChangeComboBox13.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.AfterChangeComboBox13.Margin = new System.Windows.Forms.Padding(8);
             this.AfterChangeComboBox13.Name = "AfterChangeComboBox13";
             this.AfterChangeComboBox13.Size = new System.Drawing.Size(338, 55);
             this.AfterChangeComboBox13.TabIndex = 1;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.PaleGreen;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.BeforeChangeTextBox1, 0, 1);
@@ -275,7 +275,7 @@
             this.tableLayoutPanel1.Controls.Add(this.BeforeChangeTextBox12, 0, 12);
             this.tableLayoutPanel1.Controls.Add(this.BeforeChangeTextBox13, 0, 13);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(96, 268);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(8);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 14;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
@@ -300,7 +300,7 @@
             this.BeforeChangeTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox1.Location = new System.Drawing.Point(8, 100);
-            this.BeforeChangeTextBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox1.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox1.Name = "BeforeChangeTextBox1";
             this.BeforeChangeTextBox1.ReadOnly = true;
             this.BeforeChangeTextBox1.Size = new System.Drawing.Size(360, 54);
@@ -324,7 +324,7 @@
             this.BeforeChangeTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox2.Location = new System.Drawing.Point(8, 171);
-            this.BeforeChangeTextBox2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox2.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox2.Name = "BeforeChangeTextBox2";
             this.BeforeChangeTextBox2.ReadOnly = true;
             this.BeforeChangeTextBox2.Size = new System.Drawing.Size(360, 54);
@@ -335,7 +335,7 @@
             this.BeforeChangeTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox3.Location = new System.Drawing.Point(8, 242);
-            this.BeforeChangeTextBox3.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox3.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox3.Name = "BeforeChangeTextBox3";
             this.BeforeChangeTextBox3.ReadOnly = true;
             this.BeforeChangeTextBox3.Size = new System.Drawing.Size(360, 54);
@@ -346,7 +346,7 @@
             this.BeforeChangeTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox4.Location = new System.Drawing.Point(8, 313);
-            this.BeforeChangeTextBox4.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox4.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox4.Name = "BeforeChangeTextBox4";
             this.BeforeChangeTextBox4.ReadOnly = true;
             this.BeforeChangeTextBox4.Size = new System.Drawing.Size(360, 54);
@@ -357,7 +357,7 @@
             this.BeforeChangeTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox5.Location = new System.Drawing.Point(8, 384);
-            this.BeforeChangeTextBox5.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox5.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox5.Name = "BeforeChangeTextBox5";
             this.BeforeChangeTextBox5.ReadOnly = true;
             this.BeforeChangeTextBox5.Size = new System.Drawing.Size(360, 54);
@@ -368,7 +368,7 @@
             this.BeforeChangeTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox6.Location = new System.Drawing.Point(8, 455);
-            this.BeforeChangeTextBox6.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox6.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox6.Name = "BeforeChangeTextBox6";
             this.BeforeChangeTextBox6.ReadOnly = true;
             this.BeforeChangeTextBox6.Size = new System.Drawing.Size(360, 54);
@@ -379,7 +379,7 @@
             this.BeforeChangeTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox7.Location = new System.Drawing.Point(8, 526);
-            this.BeforeChangeTextBox7.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox7.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox7.Name = "BeforeChangeTextBox7";
             this.BeforeChangeTextBox7.ReadOnly = true;
             this.BeforeChangeTextBox7.Size = new System.Drawing.Size(360, 54);
@@ -390,7 +390,7 @@
             this.BeforeChangeTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox8.Location = new System.Drawing.Point(8, 597);
-            this.BeforeChangeTextBox8.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox8.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox8.Name = "BeforeChangeTextBox8";
             this.BeforeChangeTextBox8.ReadOnly = true;
             this.BeforeChangeTextBox8.Size = new System.Drawing.Size(360, 54);
@@ -401,7 +401,7 @@
             this.BeforeChangeTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox9.Location = new System.Drawing.Point(8, 668);
-            this.BeforeChangeTextBox9.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox9.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox9.Name = "BeforeChangeTextBox9";
             this.BeforeChangeTextBox9.ReadOnly = true;
             this.BeforeChangeTextBox9.Size = new System.Drawing.Size(360, 54);
@@ -412,7 +412,7 @@
             this.BeforeChangeTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox10.Location = new System.Drawing.Point(8, 739);
-            this.BeforeChangeTextBox10.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox10.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox10.Name = "BeforeChangeTextBox10";
             this.BeforeChangeTextBox10.ReadOnly = true;
             this.BeforeChangeTextBox10.Size = new System.Drawing.Size(360, 54);
@@ -423,7 +423,7 @@
             this.BeforeChangeTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox11.Location = new System.Drawing.Point(8, 810);
-            this.BeforeChangeTextBox11.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox11.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox11.Name = "BeforeChangeTextBox11";
             this.BeforeChangeTextBox11.ReadOnly = true;
             this.BeforeChangeTextBox11.Size = new System.Drawing.Size(360, 54);
@@ -434,7 +434,7 @@
             this.BeforeChangeTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox12.Location = new System.Drawing.Point(8, 881);
-            this.BeforeChangeTextBox12.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox12.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox12.Name = "BeforeChangeTextBox12";
             this.BeforeChangeTextBox12.ReadOnly = true;
             this.BeforeChangeTextBox12.Size = new System.Drawing.Size(360, 54);
@@ -445,7 +445,7 @@
             this.BeforeChangeTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BeforeChangeTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BeforeChangeTextBox13.Location = new System.Drawing.Point(8, 952);
-            this.BeforeChangeTextBox13.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.BeforeChangeTextBox13.Margin = new System.Windows.Forms.Padding(8);
             this.BeforeChangeTextBox13.Name = "BeforeChangeTextBox13";
             this.BeforeChangeTextBox13.ReadOnly = true;
             this.BeforeChangeTextBox13.Size = new System.Drawing.Size(360, 54);
@@ -453,7 +453,7 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.LightCyan;
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -501,7 +501,7 @@
             this.tableLayoutPanel2.Controls.Add(this.MainCategoryComboBox12, 0, 12);
             this.tableLayoutPanel2.Controls.Add(this.MainCategoryComboBox13, 0, 13);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(1121, 268);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(8);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 14;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
@@ -539,7 +539,7 @@
             this.ChangeReasonTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox1.Location = new System.Drawing.Point(716, 100);
-            this.ChangeReasonTextBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox1.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox1.Name = "ChangeReasonTextBox1";
             this.ChangeReasonTextBox1.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox1.TabIndex = 2;
@@ -549,7 +549,7 @@
             this.ChangeReasonTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox2.Location = new System.Drawing.Point(716, 171);
-            this.ChangeReasonTextBox2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox2.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox2.Name = "ChangeReasonTextBox2";
             this.ChangeReasonTextBox2.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox2.TabIndex = 2;
@@ -559,7 +559,7 @@
             this.ChangeReasonTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox3.Location = new System.Drawing.Point(716, 242);
-            this.ChangeReasonTextBox3.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox3.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox3.Name = "ChangeReasonTextBox3";
             this.ChangeReasonTextBox3.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox3.TabIndex = 2;
@@ -569,7 +569,7 @@
             this.ChangeReasonTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox4.Location = new System.Drawing.Point(716, 313);
-            this.ChangeReasonTextBox4.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox4.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox4.Name = "ChangeReasonTextBox4";
             this.ChangeReasonTextBox4.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox4.TabIndex = 2;
@@ -579,7 +579,7 @@
             this.ChangeReasonTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox5.Location = new System.Drawing.Point(716, 384);
-            this.ChangeReasonTextBox5.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox5.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox5.Name = "ChangeReasonTextBox5";
             this.ChangeReasonTextBox5.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox5.TabIndex = 2;
@@ -589,7 +589,7 @@
             this.ChangeReasonTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox6.Location = new System.Drawing.Point(716, 455);
-            this.ChangeReasonTextBox6.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox6.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox6.Name = "ChangeReasonTextBox6";
             this.ChangeReasonTextBox6.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox6.TabIndex = 2;
@@ -599,7 +599,7 @@
             this.ChangeReasonTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox7.Location = new System.Drawing.Point(716, 526);
-            this.ChangeReasonTextBox7.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox7.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox7.Name = "ChangeReasonTextBox7";
             this.ChangeReasonTextBox7.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox7.TabIndex = 2;
@@ -609,7 +609,7 @@
             this.ChangeReasonTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox8.Location = new System.Drawing.Point(716, 597);
-            this.ChangeReasonTextBox8.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox8.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox8.Name = "ChangeReasonTextBox8";
             this.ChangeReasonTextBox8.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox8.TabIndex = 2;
@@ -619,7 +619,7 @@
             this.ChangeReasonTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox9.Location = new System.Drawing.Point(716, 668);
-            this.ChangeReasonTextBox9.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox9.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox9.Name = "ChangeReasonTextBox9";
             this.ChangeReasonTextBox9.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox9.TabIndex = 2;
@@ -629,7 +629,7 @@
             this.ChangeReasonTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox10.Location = new System.Drawing.Point(716, 739);
-            this.ChangeReasonTextBox10.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox10.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox10.Name = "ChangeReasonTextBox10";
             this.ChangeReasonTextBox10.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox10.TabIndex = 2;
@@ -639,7 +639,7 @@
             this.ChangeReasonTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox11.Location = new System.Drawing.Point(716, 810);
-            this.ChangeReasonTextBox11.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox11.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox11.Name = "ChangeReasonTextBox11";
             this.ChangeReasonTextBox11.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox11.TabIndex = 2;
@@ -649,7 +649,7 @@
             this.ChangeReasonTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox12.Location = new System.Drawing.Point(716, 881);
-            this.ChangeReasonTextBox12.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox12.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox12.Name = "ChangeReasonTextBox12";
             this.ChangeReasonTextBox12.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox12.TabIndex = 2;
@@ -659,7 +659,7 @@
             this.ChangeReasonTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChangeReasonTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ChangeReasonTextBox13.Location = new System.Drawing.Point(716, 952);
-            this.ChangeReasonTextBox13.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ChangeReasonTextBox13.Margin = new System.Windows.Forms.Padding(8);
             this.ChangeReasonTextBox13.Name = "ChangeReasonTextBox13";
             this.ChangeReasonTextBox13.Size = new System.Drawing.Size(1046, 54);
             this.ChangeReasonTextBox13.TabIndex = 2;
@@ -697,7 +697,7 @@
             this.MainCategoryComboBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox1.FormattingEnabled = true;
             this.MainCategoryComboBox1.Location = new System.Drawing.Point(8, 100);
-            this.MainCategoryComboBox1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox1.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox1.Name = "MainCategoryComboBox1";
             this.MainCategoryComboBox1.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox1.TabIndex = 0;
@@ -710,7 +710,7 @@
             this.MainCategoryComboBox2.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox2.FormattingEnabled = true;
             this.MainCategoryComboBox2.Location = new System.Drawing.Point(8, 171);
-            this.MainCategoryComboBox2.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox2.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox2.Name = "MainCategoryComboBox2";
             this.MainCategoryComboBox2.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox2.TabIndex = 0;
@@ -723,7 +723,7 @@
             this.MainCategoryComboBox3.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox3.FormattingEnabled = true;
             this.MainCategoryComboBox3.Location = new System.Drawing.Point(8, 242);
-            this.MainCategoryComboBox3.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox3.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox3.Name = "MainCategoryComboBox3";
             this.MainCategoryComboBox3.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox3.TabIndex = 0;
@@ -736,7 +736,7 @@
             this.MainCategoryComboBox4.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox4.FormattingEnabled = true;
             this.MainCategoryComboBox4.Location = new System.Drawing.Point(8, 313);
-            this.MainCategoryComboBox4.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox4.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox4.Name = "MainCategoryComboBox4";
             this.MainCategoryComboBox4.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox4.TabIndex = 0;
@@ -749,7 +749,7 @@
             this.MainCategoryComboBox5.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox5.FormattingEnabled = true;
             this.MainCategoryComboBox5.Location = new System.Drawing.Point(8, 384);
-            this.MainCategoryComboBox5.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox5.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox5.Name = "MainCategoryComboBox5";
             this.MainCategoryComboBox5.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox5.TabIndex = 0;
@@ -762,7 +762,7 @@
             this.MainCategoryComboBox6.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox6.FormattingEnabled = true;
             this.MainCategoryComboBox6.Location = new System.Drawing.Point(8, 455);
-            this.MainCategoryComboBox6.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox6.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox6.Name = "MainCategoryComboBox6";
             this.MainCategoryComboBox6.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox6.TabIndex = 0;
@@ -775,7 +775,7 @@
             this.MainCategoryComboBox7.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox7.FormattingEnabled = true;
             this.MainCategoryComboBox7.Location = new System.Drawing.Point(8, 526);
-            this.MainCategoryComboBox7.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox7.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox7.Name = "MainCategoryComboBox7";
             this.MainCategoryComboBox7.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox7.TabIndex = 0;
@@ -788,7 +788,7 @@
             this.MainCategoryComboBox8.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox8.FormattingEnabled = true;
             this.MainCategoryComboBox8.Location = new System.Drawing.Point(8, 597);
-            this.MainCategoryComboBox8.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox8.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox8.Name = "MainCategoryComboBox8";
             this.MainCategoryComboBox8.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox8.TabIndex = 0;
@@ -801,7 +801,7 @@
             this.MainCategoryComboBox9.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox9.FormattingEnabled = true;
             this.MainCategoryComboBox9.Location = new System.Drawing.Point(8, 668);
-            this.MainCategoryComboBox9.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox9.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox9.Name = "MainCategoryComboBox9";
             this.MainCategoryComboBox9.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox9.TabIndex = 0;
@@ -814,7 +814,7 @@
             this.MainCategoryComboBox10.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox10.FormattingEnabled = true;
             this.MainCategoryComboBox10.Location = new System.Drawing.Point(8, 739);
-            this.MainCategoryComboBox10.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox10.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox10.Name = "MainCategoryComboBox10";
             this.MainCategoryComboBox10.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox10.TabIndex = 0;
@@ -827,7 +827,7 @@
             this.MainCategoryComboBox11.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox11.FormattingEnabled = true;
             this.MainCategoryComboBox11.Location = new System.Drawing.Point(8, 810);
-            this.MainCategoryComboBox11.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox11.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox11.Name = "MainCategoryComboBox11";
             this.MainCategoryComboBox11.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox11.TabIndex = 0;
@@ -840,7 +840,7 @@
             this.MainCategoryComboBox12.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox12.FormattingEnabled = true;
             this.MainCategoryComboBox12.Location = new System.Drawing.Point(8, 881);
-            this.MainCategoryComboBox12.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox12.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox12.Name = "MainCategoryComboBox12";
             this.MainCategoryComboBox12.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox12.TabIndex = 0;
@@ -853,7 +853,7 @@
             this.MainCategoryComboBox13.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MainCategoryComboBox13.FormattingEnabled = true;
             this.MainCategoryComboBox13.Location = new System.Drawing.Point(8, 952);
-            this.MainCategoryComboBox13.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.MainCategoryComboBox13.Margin = new System.Windows.Forms.Padding(8);
             this.MainCategoryComboBox13.Name = "MainCategoryComboBox13";
             this.MainCategoryComboBox13.Size = new System.Drawing.Size(338, 55);
             this.MainCategoryComboBox13.TabIndex = 0;
@@ -872,33 +872,35 @@
             // 
             // ItemNameChangeButton
             // 
+            this.ItemNameChangeButton.BackColor = System.Drawing.Color.LightCyan;
             this.ItemNameChangeButton.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ItemNameChangeButton.Location = new System.Drawing.Point(1946, 34);
-            this.ItemNameChangeButton.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ItemNameChangeButton.Margin = new System.Windows.Forms.Padding(8);
             this.ItemNameChangeButton.Name = "ItemNameChangeButton";
             this.ItemNameChangeButton.Size = new System.Drawing.Size(435, 170);
             this.ItemNameChangeButton.TabIndex = 5;
             this.ItemNameChangeButton.Text = "品名変更";
-            this.ItemNameChangeButton.UseVisualStyleBackColor = true;
+            this.ItemNameChangeButton.UseVisualStyleBackColor = false;
             this.ItemNameChangeButton.Click += new System.EventHandler(this.ItemNameChangeButton_Click);
             // 
             // ReturnButton
             // 
+            this.ReturnButton.BackColor = System.Drawing.Color.MistyRose;
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ReturnButton.Location = new System.Drawing.Point(2435, 38);
-            this.ReturnButton.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.ReturnButton.Margin = new System.Windows.Forms.Padding(8);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Size = new System.Drawing.Size(448, 170);
             this.ReturnButton.TabIndex = 5;
             this.ReturnButton.Text = "戻る";
-            this.ReturnButton.UseVisualStyleBackColor = true;
+            this.ReturnButton.UseVisualStyleBackColor = false;
             this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
             // 
             // StaffNameTextBox
             // 
             this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StaffNameTextBox.Location = new System.Drawing.Point(363, 39);
-            this.StaffNameTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.StaffNameTextBox.Margin = new System.Windows.Forms.Padding(8);
             this.StaffNameTextBox.Name = "StaffNameTextBox";
             this.StaffNameTextBox.ReadOnly = true;
             this.StaffNameTextBox.Size = new System.Drawing.Size(290, 81);
@@ -908,7 +910,7 @@
             // 
             this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.SlipNumberTextBox.Location = new System.Drawing.Point(1242, 31);
-            this.SlipNumberTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.SlipNumberTextBox.Margin = new System.Windows.Forms.Padding(8);
             this.SlipNumberTextBox.Name = "SlipNumberTextBox";
             this.SlipNumberTextBox.ReadOnly = true;
             this.SlipNumberTextBox.Size = new System.Drawing.Size(635, 81);
@@ -919,7 +921,7 @@
             // 
             this.GradeNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.GradeNumberTextBox.Location = new System.Drawing.Point(1242, 127);
-            this.GradeNumberTextBox.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.GradeNumberTextBox.Margin = new System.Windows.Forms.Padding(8);
             this.GradeNumberTextBox.Name = "GradeNumberTextBox";
             this.GradeNumberTextBox.ReadOnly = true;
             this.GradeNumberTextBox.Size = new System.Drawing.Size(635, 81);
@@ -976,7 +978,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Margin = new System.Windows.Forms.Padding(8);
             this.Name = "ItemNameChange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "品名変更";

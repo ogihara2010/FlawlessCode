@@ -12,11 +12,13 @@ namespace Flawless_ex
 {
     public partial class CustomerHistorySelect : Form
     {
+        TopMenu topMenu;
         MainMenu mainMenu;
         int staff_id;
         string data;
         string Pass;
         string Access_auth;
+        bool screan;
 
         public CustomerHistorySelect(MainMenu main, int id, string data, string pass, string access_auth)
         {
@@ -32,7 +34,8 @@ namespace Flawless_ex
         {
             data = "S";
             CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, Access_auth);
-            this.Hide();
+            screan = false;
+            this.Close();
             customerHistory.Show();
         }
 
@@ -40,7 +43,8 @@ namespace Flawless_ex
         {
             data = "D";
             CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, Access_auth);
-            this.Hide();
+            screan = false;
+            this.Close();
             customerHistory.Show();
         }
 
@@ -51,7 +55,15 @@ namespace Flawless_ex
 
         private void CustomerHistorySelect_FormClosed(object sender, FormClosedEventArgs e)
         {
-            mainMenu.Show();
+            if (screan)
+            {
+                mainMenu = new MainMenu(topMenu, staff_id, Pass, Access_auth);
+                mainMenu.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }
