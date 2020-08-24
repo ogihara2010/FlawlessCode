@@ -105,7 +105,7 @@ namespace Flawless_ex
             if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
             {
                 MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                figure = true;
+                e.Handled = true;
             }
         }
 
@@ -115,13 +115,5 @@ namespace Flawless_ex
             master.Show();
         }
 
-        private void taxPercent_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (figure)
-            {
-                taxPercent.Text = Tax.ToString();
-                figure = false;
-            }   
-        }
     }
 }

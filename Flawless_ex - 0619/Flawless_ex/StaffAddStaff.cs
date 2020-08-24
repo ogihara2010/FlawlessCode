@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Text;
 
 namespace Flawless_ex
 {
@@ -13,26 +14,29 @@ namespace Flawless_ex
         DataTable dt;
         int staff_code;
         bool screan = true;
-        public StaffAddStaff(DataTable dt, MasterMaintenanceMenu master, int staff_code)
+        string Pass;
+        string access_auth;
+        string kana;
+
+        public StaffAddStaff(DataTable dt, MasterMaintenanceMenu master, int staff_code, string pass, string access_auth)
         {
             InitializeComponent();
 
             this.dt = dt;
             this.master = master;
             this.staff_code = staff_code;
+            this.Pass = pass;
+            this.access_auth = access_auth;
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            StaffMaster staffMaster = new StaffMaster(master, staff_code);
-            screan = false;
             this.Close();
-            staffMaster.Show();
         }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
@@ -92,13 +96,11 @@ namespace Flawless_ex
 
                 string sql_str = "insert into staff_m values(" + staffCode1 + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "','" + d + "'," + 0 + ")";
 
-
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
-
 
                 adapter.Fill(dt);
                 adapter.Update(dt);
@@ -108,16 +110,11 @@ namespace Flawless_ex
                 //NpgsqlCommand cmd = new NpgsqlCommand(staff_revisions, conn);
                 //NpgsqlDataReader sdr = cmd.ExecuteReader();
 
-
                 conn.Close();
 
-                MessageBox.Show("登録完了");
+                MessageBox.Show("担当者を登録しました。", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
 
-
-                StaffMaster staffMaster = new StaffMaster(master, staff_code);
-                screan = false;
                 this.Close();
-                staffMaster.Show();
             }
             else { }
 
@@ -127,15 +124,15 @@ namespace Flawless_ex
         {
             DataTable dt2 = new DataTable();
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
-            string sql_str2 = "select* from main_category_m where invalid = 0";
+            string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code;";
             adapter = new NpgsqlDataAdapter(sql_str2, conn);
             adapter.Fill(dt2);
 
             //担当者コード取得
-            string staffCode_sql = "select staff_code from staff_m order by staff_code desc";
+            string staffCode_sql = "select staff_code from staff_m order by staff_code desc;";
             DataTable staffCode = new DataTable();
             adapter = new NpgsqlDataAdapter(staffCode_sql, conn);
             adapter.Fill(staffCode);
@@ -154,19 +151,27 @@ namespace Flawless_ex
             parsonCodeText.Text = code.ToString();
         }
 
-        /*private void StaffAddStaff_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StaffMaster staffMaster = new StaffMaster(master, staff_code);
-            staffMaster.Show();
-        }*/
-
         private void StaffAddStaff_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (screan)
             {
-                StaffMaster staffMaster = new StaffMaster(master, staff_code);
+                StaffMaster staffMaster = new StaffMaster(master, staff_code, access_auth, Pass);
                 staffMaster.Show();
             }
+            else
+            {
+                screan = true;
+            }
+        }
+
+        private void parsonNamt2Text_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(parsonNamt2Text.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            parsonNamt2Text.Text = stringBuilder.ToString();
+            parsonNamt2Text.Select(parsonNamt2Text.Text.Length, 0);
         }
     }
 }

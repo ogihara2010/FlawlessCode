@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.updateButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.addButton = new System.Windows.Forms.Button();
@@ -38,10 +39,11 @@
             // updateButton
             // 
             this.updateButton.AutoSize = true;
-            this.updateButton.Location = new System.Drawing.Point(206, 538);
+            this.updateButton.Font = new System.Drawing.Font("MS UI Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.updateButton.Location = new System.Drawing.Point(407, 852);
             this.updateButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(180, 82);
+            this.updateButton.Size = new System.Drawing.Size(373, 176);
             this.updateButton.TabIndex = 1;
             this.updateButton.Text = "変更・削除";
             this.updateButton.UseVisualStyleBackColor = true;
@@ -56,7 +58,15 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 22);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.Location = new System.Drawing.Point(49, 23);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -65,17 +75,18 @@
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(622, 484);
+            this.dataGridView1.Size = new System.Drawing.Size(1148, 798);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // addButton
             // 
             this.addButton.AutoSize = true;
-            this.addButton.Location = new System.Drawing.Point(414, 538);
+            this.addButton.Font = new System.Drawing.Font("MS UI Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.addButton.Location = new System.Drawing.Point(827, 852);
             this.addButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(173, 82);
+            this.addButton.Size = new System.Drawing.Size(340, 176);
             this.addButton.TabIndex = 2;
             this.addButton.Text = "新規登録";
             this.addButton.UseVisualStyleBackColor = true;
@@ -84,10 +95,11 @@
             // ReturnButton
             // 
             this.ReturnButton.AutoSize = true;
-            this.ReturnButton.Location = new System.Drawing.Point(28, 538);
+            this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.ReturnButton.Location = new System.Drawing.Point(67, 852);
             this.ReturnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(147, 82);
+            this.ReturnButton.Size = new System.Drawing.Size(303, 176);
             this.ReturnButton.TabIndex = 0;
             this.ReturnButton.Text = "戻る";
             this.ReturnButton.UseVisualStyleBackColor = true;
@@ -95,17 +107,18 @@
             // 
             // StaffMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 648);
+            this.BackColor = System.Drawing.Color.LightCyan;
+            this.ClientSize = new System.Drawing.Size(1249, 1065);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ReturnButton);
             this.Controls.Add(this.addButton);
             this.Controls.Add(this.updateButton);
             this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "StaffMaster";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "担当者マスタメンテナンス";
-            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StaffMaster_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffMaster_FormClosed);
             this.Load += new System.EventHandler(this.StaffMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

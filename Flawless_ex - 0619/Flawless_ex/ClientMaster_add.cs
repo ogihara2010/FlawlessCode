@@ -20,21 +20,22 @@ namespace Flawless_ex
         string path;
         int type;
         bool screan = true;
-        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth, int type)
+        string Pass;
+        string kana;
+
+        public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth, int type, string pass)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
             this.access_auth = access_auth;
             this.type = type;
+            this.Pass = pass;
         }
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-            screan = false;
             this.Close();
-            clientmaster.Show();
         }
         #region"法人　登録"
         private void Button5_Click(object sender, EventArgs e)
@@ -238,13 +239,13 @@ namespace Flawless_ex
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks +  "' , '" + ID + "' , '" + b  +  "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
                0 +  ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_code + "," + PostalCode1 + ",'" + PostalCode2 + "');";
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             clientmaster.Show();
@@ -252,10 +253,7 @@ namespace Flawless_ex
         #endregion
         private void Button6_Click(object sender, EventArgs e)
         {
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
-
             this.Close();
-            clientmaster.Show();
         }
         #region "個人　登録"
         private void Button18_Click(object sender, EventArgs e)
@@ -435,13 +433,13 @@ namespace Flawless_ex
                "' , '"  + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID +  "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '"  + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
               0 + ",'" + AolFinancialShareholder +  "','" + b +"'," + staff_code + "," + PostalCode1 +",'" + PostalCode2 +"');";
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             MessageBox.Show("登録しました。");
-            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+            ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             clientmaster.Show();
@@ -466,11 +464,8 @@ namespace Flawless_ex
 
         private void ClientMaster_add_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (screan)
-            {
-                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth);
+                ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
                 clientmaster.Show();
-            }
         }
 
         private void Label6_Click(object sender, EventArgs e)
@@ -804,6 +799,197 @@ namespace Flawless_ex
             }
         }
         #endregion
+
+        #endregion
+
+        #region"画像の表示　法人"
+        private void textBox24_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox24.Text))
+            {
+                pictureBox1.ImageLocation = textBox24.Text;
+            }
+        }
+
+        private void textBox21_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox21.Text))
+            {
+                pictureBox1.ImageLocation = textBox21.Text;
+            }
+        }
+
+        private void textBox22_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox22.Text))
+            {
+                pictureBox1.ImageLocation = textBox22.Text;
+            }
+        }
+
+        private void textBox25_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox25.Text))
+            {
+                pictureBox1.ImageLocation = textBox25.Text;
+            }
+        }
+
+        private void textBox27_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox27.Text))
+            {
+                pictureBox1.ImageLocation = textBox27.Text;
+            }
+        }
+
+        private void textBox29_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox29.Text))
+            {
+                pictureBox1.ImageLocation = textBox29.Text;
+            }
+        }
+
+        private void textBox26_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox26.Text))
+            {
+                pictureBox1.ImageLocation = textBox26.Text;
+            }
+        }
+        #endregion
+
+        #region"画像の表示　個人"
+
+        private void textBox37_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox37.Text))
+            {
+                pictureBox2.ImageLocation = textBox37.Text;
+            }
+        }
+
+        private void textBox36_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox36.Text))
+            {
+                pictureBox2.ImageLocation = textBox36.Text;
+            }
+        }
+
+        private void textBox35_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox35.Text))
+            {
+                pictureBox2.ImageLocation = textBox35.Text;
+            }
+        }
+
+        private void textBox33_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox33.Text))
+            {
+                pictureBox2.ImageLocation = textBox33.Text;
+            }
+        }
+
+        private void textBox31_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox31.Text))
+            {
+                pictureBox2.ImageLocation = textBox31.Text;
+            }
+        }
+
+        private void textBox30_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox30.Text))
+            {
+                pictureBox2.ImageLocation = textBox30.Text;
+            }
+        }
+
+        private void textBox32_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox32.Text))
+            {
+                pictureBox2.ImageLocation = textBox32.Text;
+            }
+        }
+
+        #endregion
+
+        #region"値の検証"
+        private void textBox55_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox55.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox55.Text = stringBuilder.ToString();
+            textBox55.Select(textBox55.Text.Length, 0);
+        }
+
+        private void textBox52_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox52.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox52.Text = stringBuilder.ToString();
+            textBox52.Select(textBox52.Text.Length, 0);
+        }
+
+        private void textBox38_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox38.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox38.Text = stringBuilder.ToString();
+            textBox38.Select(textBox38.Text.Length, 0);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox3.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox3.Text = stringBuilder.ToString();
+            textBox3.Select(textBox3.Text.Length, 0);
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox8.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox8.Text = stringBuilder.ToString();
+            textBox8.Select(textBox8.Text.Length, 0);
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox6.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox6.Text = stringBuilder.ToString();
+            textBox6.Select(textBox6.Text.Length, 0);
+        }
+
+        private void textBox20_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox20.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox20.Text = stringBuilder.ToString();
+            textBox20.Select(textBox20.Text.Length, 0);
+        }
         #endregion
     }
 }

@@ -14,14 +14,16 @@ namespace Flawless_ex
         int staff_code;
         string access_auth;
         int type;
-        string pass;
         bool screan = true;
-        public ClientMaster(MasterMaintenanceMenu mster, int staff_code, string access_auth)
+        string Pass;
+
+        public ClientMaster(MasterMaintenanceMenu mster, int staff_code, string access_auth, string pass)
         {
             InitializeComponent();
             masterMenu = mster;
             this.staff_code = staff_code;
             this.access_auth = access_auth;
+            this.Pass = pass;
         }
         public ClientMaster(MasterMaintenanceMenu_BC mster_BC)
         {
@@ -32,7 +34,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, pass);
+            MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
             masterMenu.Show();
@@ -48,7 +50,7 @@ namespace Flawless_ex
             {
                 type = 1;
             }
-            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu, staff_code, access_auth, type);
+            ClientMaster_add clientMaster_Add = new ClientMaster_add(masterMenu, staff_code, access_auth, type, Pass);
             screan = false;
             this.Close();
             clientMaster_Add.Show();
@@ -71,7 +73,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //法人
             if (tabControl1.SelectedIndex == 0)
@@ -112,7 +114,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -129,7 +131,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -152,7 +154,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -169,7 +171,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -199,7 +201,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -215,7 +217,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -238,7 +240,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -254,7 +256,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -288,7 +290,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -305,7 +307,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -328,7 +330,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -345,7 +347,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -374,7 +376,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -391,7 +393,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -414,7 +416,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -431,7 +433,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -472,7 +474,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -489,7 +491,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -512,7 +514,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -529,7 +531,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -558,7 +560,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -575,7 +577,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -598,7 +600,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -614,7 +616,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -648,7 +650,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -665,7 +667,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -688,7 +690,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -705,7 +707,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -734,7 +736,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -750,7 +752,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -772,7 +774,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
 
@@ -788,7 +790,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             this.Close();
                                             clientMastersearch.Show();
                                         }
@@ -834,7 +836,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -851,7 +853,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -874,7 +876,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -891,7 +893,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -920,7 +922,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -936,7 +938,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -959,7 +961,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -975,7 +977,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1010,7 +1012,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1027,7 +1029,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1050,7 +1052,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1067,7 +1069,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1096,7 +1098,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1112,7 +1114,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1136,7 +1138,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1152,7 +1154,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1193,7 +1195,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1209,7 +1211,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1232,7 +1234,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1248,7 +1250,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1277,7 +1279,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1293,7 +1295,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1316,7 +1318,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1332,7 +1334,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1367,7 +1369,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1383,7 +1385,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1406,7 +1408,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1423,7 +1425,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1452,7 +1454,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1468,7 +1470,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1491,7 +1493,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1508,7 +1510,7 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                             screan = false;
                                             this.Close();
                                             clientMastersearch.Show();
@@ -1554,7 +1556,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1571,7 +1573,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1594,7 +1596,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1611,7 +1613,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1640,7 +1642,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1656,7 +1658,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         this.Close();
                                         clientMastersearch.Show();
                                     }
@@ -1678,7 +1680,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1695,7 +1697,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1730,7 +1732,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1746,7 +1748,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1769,7 +1771,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1785,7 +1787,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1814,7 +1816,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1830,7 +1832,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1853,7 +1855,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1869,7 +1871,7 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                        ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                         screan = false;
                                         this.Close();
                                         clientMastersearch.Show();
@@ -1903,7 +1905,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -1919,7 +1921,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -1942,7 +1944,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -1958,7 +1960,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -1981,7 +1983,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                 screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
@@ -2033,7 +2035,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2050,7 +2052,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2073,7 +2075,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2090,7 +2092,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2119,7 +2121,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2136,7 +2138,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2159,7 +2161,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2176,7 +2178,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2211,7 +2213,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2228,7 +2230,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2251,7 +2253,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2267,7 +2269,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     this.Close();
                                     clientMastersearch.Show();
                                 }
@@ -2295,7 +2297,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2312,7 +2314,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2335,7 +2337,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2352,7 +2354,7 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                    ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                     screan = false;
                                     this.Close();
                                     clientMastersearch.Show();
@@ -2386,7 +2388,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 conn.Close();
-                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                 screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
@@ -2403,7 +2405,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                 screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
@@ -2424,7 +2426,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 conn.Close();
-                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                 screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
@@ -2441,7 +2443,7 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                                ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                                 screan = false;
                                 this.Close();
                                 clientMastersearch.Show();
@@ -2465,7 +2467,7 @@ namespace Flawless_ex
 
                             conn.Close();
                             conn.Close();
-                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                             screan = false;
                             this.Close();
                             clientMastersearch.Show();
@@ -2482,7 +2484,7 @@ namespace Flawless_ex
                             adapter.Fill(dt);
 
                             conn.Close();
-                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth);
+                            ClientMaster_search clientMastersearch = new ClientMaster_search(masterMenu, dt, type, check, staff_code, access_auth, Pass);
                             screan = false;
                             this.Close();
                             clientMastersearch.Show();
@@ -2506,7 +2508,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, pass);
+                MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(mainMenu, staff_code, access_auth, Pass);
                 masterMenu.Show();
             }
         }

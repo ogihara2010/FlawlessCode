@@ -22,8 +22,13 @@ namespace Flawless_ex
         int Antique;
         int Id;
         string Pass;
+        bool NameChange;
+        TopMenu top;
+        bool screan = true;
+        bool CarryOver;
+        bool MonthCatalog;
 
-        public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade)
+        public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade, bool carryOver, bool monthCatalog)
         {
             InitializeComponent();
             staff_id = id;
@@ -34,12 +39,13 @@ namespace Flawless_ex
             this.slipNumber = slipNumber;
             this.Pass = pass;
             this.Grade = grade;
+            this.CarryOver = carryOver;
+            this.MonthCatalog = monthCatalog;
         }
 
         private void Return3_Click(object sender, EventArgs e)//戻るボタン
         {
             this.Close();
-            mainMenu.Show();
         }
 
         private void MonResult_Load(object sender, EventArgs e)
@@ -61,7 +67,7 @@ namespace Flawless_ex
             }
             else
             {
-                string sql_str = "select * from staff_m;";
+                string sql_str = "select * from staff_m order by staff_code;";
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt3);
                 comboBox1.DataSource = dt3;
@@ -77,6 +83,12 @@ namespace Flawless_ex
 
         private void Search1_Click(object sender, EventArgs e)
         {
+            if (!radioButton1.Checked && !radioButton2.Checked)
+            {
+                MessageBox.Show("法人 or 個人を選択してください", "選択不十分", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            dt.Clear();
             string search1 = "or";
             string search2 = "or";
             string staff;
@@ -106,7 +118,7 @@ namespace Flawless_ex
 
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn4.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (access_auth == "C")
             {
@@ -114,11 +126,11 @@ namespace Flawless_ex
             }
             else
             {
-                string sql_str2 = "select B.assessment_date, C.delivery_method, C.payment_method, D.staff_name, A.staff_name, E.type_name, A.metal_purchase, A.metal_wholesale, " +
+                string sql_str2 = "select C.assessment_date, C.delivery_method, C.payment_method, D.staff_name, A.staff_name, E.type_name, A.metal_purchase, A.metal_wholesale, " +
                               "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale, " +
-                              "A.sum_money, A.sum_wholesale_price from list_result A inner join list_result2 B ON (A.document_number = B.document_number )inner join statement_data C ON " +
+                              "A.sum_money, A.sum_wholesale_price from list_result A inner join statement_data C ON " +
                               "(A.document_number = C.document_number ) inner join staff_m D ON (C.staff_code = D.staff_code )  inner join type E ON (A.type = E.type) where D.invalid = 0 " +
-                              " and D.staff_name = '" + staff + "'" + search1 + " (B.assessment_date >= '" + date1 + "' and B.assessment_date <= '" + date2 + "')" + search2 + " E.type = " + type + ";";
+                              " and D.staff_name = '" + staff + "'" + search1 + " (C.assessment_date >= '" + date1 + "' and C.assessment_date <= '" + date2 + "')" + search2 + " E.type = " + type + " order by result;";
                 conn4.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str2, conn4);
@@ -151,7 +163,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            if (a > 1)
+            if (a > 0)
             {
                 if (access_auth == "C")
                 {
@@ -184,16 +196,13 @@ namespace Flawless_ex
                     conn.Close();
                 }
             }
-                
-            
+            a++;
         }
         #endregion
         #region "成績入力画面へ"
         private void Button2_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass);
             this.Close();
-            recordList.Show();
         }
         #endregion
 
@@ -201,7 +210,7 @@ namespace Flawless_ex
         {
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn4.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (access_auth == "C")
             {
@@ -228,13 +237,26 @@ namespace Flawless_ex
                 adapter = new NpgsqlDataAdapter(sql_str2, conn4);
                 adapter.Fill(dt);
             }
-            
+            conn4.Close();
             
         }
 
-        private void RadioButton3_CheckedChanged(object sender, EventArgs e)
+        private void MonResult_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            if (MonthCatalog && screan) 
+            {
+                RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange, CarryOver, MonthCatalog);
+                recordList.Show();
+            }
+            else if (screan)
+            {
+                mainMenu = new MainMenu(top, staff_id, Pass, access_auth);
+                mainMenu.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }

@@ -20,7 +20,10 @@ namespace Flawless_ex
         string Access_auth;
         int antique;
         int id;
-        
+        bool NameChange;
+        bool screan = true;
+        bool CarryOver = true;
+        bool MonthCatalog;
 
         public NextMonth(MainMenu main, int id, string pass, string access_auth)
         {
@@ -33,19 +36,19 @@ namespace Flawless_ex
 
         private void Return4_Click(object sender, EventArgs e)
         {
-            mainMenu = new MainMenu(top, staff_id, Pass, Access_auth);
             this.Close();
-            mainMenu.Show();
         }
 
+        //選択ボタンクリック時
         private void Choice2_Click(object sender, EventArgs e)
         {
-            string slipNumber = (string)dataGridView1.CurrentRow.Cells[0].Value;
+            slipNumber = (string)dataGridView1.CurrentRow.Cells[0].Value;
             Grade = (int)dataGridView1.CurrentRow.Cells[1].Value;
-            string staff_name = (string)dataGridView1.CurrentRow.Cells[5].Value;
+            staff_name = (string)dataGridView1.CurrentRow.Cells[5].Value;
             
-            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, antique, id, Access_auth, Pass);
-            this.Hide();
+            RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, antique, id, Access_auth, Pass, NameChange, CarryOver, MonthCatalog);
+            screan = false;
+            this.Close();
             recordList.Show();
         }
 
@@ -57,7 +60,7 @@ namespace Flawless_ex
 
             string sql_str = "select A.document_number, A.grade_number, A.assessment_date, B.delivery_method, B.payment_method, C.staff_name, A.buyer from list_result2 A " +
                              "inner join statement_data B ON (A.document_number = B.document_number ) " +
-                             "inner join staff_m C ON (B.staff_code = C.staff_code ) where carry_over_month = '" + 1 + "';";
+                             "inner join staff_m C ON (B.staff_code = C.staff_code ) where carry_over_month = '" + 1 + "' order by grade_number;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -76,8 +79,15 @@ namespace Flawless_ex
 
         private void NextMonth_FormClosed(object sender, EventArgs e)
         {
-            mainMenu = new MainMenu(top, staff_id, Pass, Access_auth);
-            mainMenu.Show();
+            if (screan)
+            {
+                mainMenu = new MainMenu(top, staff_id, Pass, Access_auth);
+                mainMenu.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }

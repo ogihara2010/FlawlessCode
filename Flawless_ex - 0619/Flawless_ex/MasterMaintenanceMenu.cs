@@ -44,14 +44,14 @@ namespace Flawless_ex
 
         private void staffMasterButtonClick(object sender, EventArgs e)
         {
-            StaffMaster personMaster = new StaffMaster(this, staff_code);
+            StaffMaster personMaster = new StaffMaster(this, staff_code, Pass, access_auth);
             this.Hide();
             personMaster.Show();
         }
 
         private void clientMasterButton_Click(object sender, EventArgs e)
         {
-            ClientMaster clientMaster = new ClientMaster(this, staff_code, access_auth);
+            ClientMaster clientMaster = new ClientMaster(this, staff_code, access_auth, Pass);
             this.Hide();
             clientMaster.Show();
         }
