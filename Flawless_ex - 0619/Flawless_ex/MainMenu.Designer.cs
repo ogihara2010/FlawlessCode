@@ -35,7 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.operatelog = new System.Windows.Forms.Button();
-            this.Invoice = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -86,7 +85,7 @@
             this.MasterMainte.AutoSize = true;
             this.MasterMainte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.MasterMainte.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MasterMainte.Location = new System.Drawing.Point(229, 1242);
+            this.MasterMainte.Location = new System.Drawing.Point(229, 1121);
             this.MasterMainte.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.MasterMainte.Name = "MasterMainte";
             this.MasterMainte.Size = new System.Drawing.Size(892, 150);
@@ -113,7 +112,7 @@
             this.CloseButton.BackColor = System.Drawing.Color.MistyRose;
             this.CloseButton.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CloseButton.ForeColor = System.Drawing.Color.Black;
-            this.CloseButton.Location = new System.Drawing.Point(94, 1446);
+            this.CloseButton.Location = new System.Drawing.Point(93, 1323);
             this.CloseButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(384, 175);
@@ -127,7 +126,7 @@
             this.operatelog.AutoSize = true;
             this.operatelog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.operatelog.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.operatelog.Location = new System.Drawing.Point(229, 1075);
+            this.operatelog.Location = new System.Drawing.Point(229, 926);
             this.operatelog.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.operatelog.Name = "operatelog";
             this.operatelog.Size = new System.Drawing.Size(892, 128);
@@ -135,20 +134,6 @@
             this.operatelog.Text = "操作履歴";
             this.operatelog.UseVisualStyleBackColor = false;
             this.operatelog.Click += new System.EventHandler(this.Operatelog_Click);
-            // 
-            // Invoice
-            // 
-            this.Invoice.AutoSize = true;
-            this.Invoice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.Invoice.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Invoice.Location = new System.Drawing.Point(229, 901);
-            this.Invoice.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.Invoice.Name = "Invoice";
-            this.Invoice.Size = new System.Drawing.Size(892, 132);
-            this.Invoice.TabIndex = 7;
-            this.Invoice.Text = "インボイス";
-            this.Invoice.UseVisualStyleBackColor = false;
-            this.Invoice.Click += new System.EventHandler(this.Invoice_Click);
             // 
             // button3
             // 
@@ -169,9 +154,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1356, 1670);
+            this.ClientSize = new System.Drawing.Size(1356, 1537);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.Invoice);
             this.Controls.Add(this.operatelog);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.label1);
@@ -199,7 +183,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button operatelog;
-        private System.Windows.Forms.Button Invoice;
         private System.Windows.Forms.Button button3;
     }
 }
