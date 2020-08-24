@@ -22,9 +22,9 @@ namespace Flawless_ex
         string date1;
         string date2;
         string method1;
-        int amount1;
-        int amount2;
-        int antique;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
         #region "買取販売履歴"
         string search1;
         string search2;
@@ -49,6 +49,7 @@ namespace Flawless_ex
         string Pass;
         DataTable dt = new DataTable();
         bool screan = true;
+        string documentNumber;
         #region "納品書"
         decimal amount00;
         decimal amount01;
@@ -79,7 +80,7 @@ namespace Flawless_ex
         decimal amount111;
         decimal amount112;
         #endregion
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, string date2, string method1,int amount1, int amount2, string search1, string search2, string search3, string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, string data, string pass, string document, int control, int antique)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, string date2, string method1,string amountA, string amountB, string search1, string search2, string search3, string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, string data, string pass, string document, int control, string antiqueNumber, string documentNumber)
         {
             InitializeComponent();
             mainMenu = main;
@@ -93,9 +94,9 @@ namespace Flawless_ex
             this.date1 = date1;
             this.date2 = date2;
             this.method1 = method1;
-            this.amount1 = amount1;
-            this.amount2 = amount2;
-            this.antique = antique;
+            this.amountA = amountA;
+            this.amountB = amountB;
+            this.antiqueNumber = antiqueNumber;
             #region "買取販売履歴"
             this.search1 = search1;
             this.search2 = search2;
@@ -110,6 +111,7 @@ namespace Flawless_ex
             this.search11 = search11;
             this.search12 = search12;
             #endregion
+            this.documentNumber = documentNumber;
             staff_id = id;
             this.data = data;
             this.Pass = pass;
@@ -139,9 +141,13 @@ namespace Flawless_ex
                     conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                                      "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                                      "where B.shop_name = '" + name1  + "'" + search1 + " B.address like '%"  + address1 + "%'" + search2 +  " B.address_kana = '" + addresskana1 + search3 + " B.phone_number = '" + phoneNumber1 + search4 + " A.document_number = '" + document + "' " + search5 + " B.antique_number = " + antique + " " + search6
-                                      + " D.main_category_code = " + code1  + search7 + " D.item_code = " + item1 +  search8 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search9 + " A.payment_method = '"+  method1 + "'" + search10 +  " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
+                            "where B.type = 0 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                              method1 + amountA + amountB + ";";
+                                 /*"select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                                  "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                                  "where B.shop_name = '" + name1  + "'" + search1 + " B.address like '%"  + address1 + "%'" + search2 +  " B.address_kana = '" + addresskana1 + search3 + " B.phone_number = '" + phoneNumber1 + search4 + " A.document_number = '" + document + "' " + search5 + " B.antique_number = " + antique + " " + search6
+                                  + " D.main_category_code = " + code1  + search7 + " D.item_code = " + item1 +  search8 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search9 + " A.payment_method = '"+  method1 + "'" + search10 +  " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";*/
 
                     conn.Open();
 
@@ -176,11 +182,15 @@ namespace Flawless_ex
                     conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
-                                 "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                                     "where B.name = '" + name1 + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana1 + "'" + search5
-                             + " B.phone_number = '" + phoneNumber1 + "'" + " " + search7 + " A.document_number = '" + document + "' " + search8 + " "
-                             + " D.main_category_code = " + code1 + " " + search10 + " D.item_code = " + item1 + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
-                             + " A.payment_method = '" + method1 + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
+                            "where B.type = 1 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method1 + amountA + amountB + ";";
+
+                    /*"select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                                 "where B.name = '" + name1 + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana1 + "'" + search5
+                         + " B.phone_number = '" + phoneNumber1 + "'" + " " + search7 + " A.document_number = '" + document + "' " + search8 + " "
+                         + " D.main_category_code = " + code1 + " " + search10 + " D.item_code = " + item1 + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
+                         + " A.payment_method = '" + method1 + "'" + search12 + " (A.total >= " + amountA + " and A.total <= " + amountB + ");";*/
                     conn.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -214,12 +224,17 @@ namespace Flawless_ex
                     NpgsqlDataAdapter adapter;
                     conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                    string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount,  A.antique_number from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                                     "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                                     "where B.shop_name = '" + name1 + "'" + search2 +  " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana1 + "'" + search4
-                                     + " B.phone_number = '" + phoneNumber1 + "'" + search5 + " A.control_number = " + control + " " + search7 + " B.antique_number = " + antique + " " + search8
-                                     + " D.main_category_code = " + code1 + " " + search9 + " D.item_code = " + item1 + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
-                                     + " A.payment_method = '" + method1 + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                    string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, A.antique_number from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                           "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
+                           "where B.type = 0 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                              method1 + amountA + amountB + ";";
+
+                    /*"select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount,  A.antique_number from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                                 "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                                 "where B.shop_name = '" + name1 + "'" + search2 +  " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana1 + "'" + search4
+                                 + " B.phone_number = '" + phoneNumber1 + "'" + search5 + " A.control_number = " + control + " " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
+                                 + " D.main_category_code = " + code1 + " " + search9 + " D.item_code = " + item1 + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
+                                 + " A.payment_method = '" + method1 + "'" + search12 + "( A.total >= " + amountA + " and A.total <= " + amountB + ");";*/
 
                     conn.Open();
 
@@ -250,12 +265,16 @@ namespace Flawless_ex
                     NpgsqlDataAdapter adapter;
                     conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                    string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.id_number from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
-                                 "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                                     "where B.name = '" + name1 + "'" + search1  + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana1 + "'" + search4
-                            + " B.phone_number = '" + phoneNumber1 + "'" + search5 + " A.control_number = " + control + " "  + search8
-                            + " D.main_category_code = " + code1 + " " + search9 + " D.item_code = " + item1 + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
-                            + " A.payment_method = '" + method1 + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                    string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
+                            "where B.type = 1 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
+                             + method1 + amountA + amountB + ";";
+                    /* "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.id_number from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                              "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
+                                  "where B.name = '" + name1 + "'" + search1  + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana1 + "'" + search4
+                         + " B.phone_number = '" + phoneNumber1 + "'" + search5 + " A.control_number = " + control + " "  + search8
+                         + " D.main_category_code = " + code1 + " " + search9 + " D.item_code = " + item1 + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
+                         + " A.payment_method = '" + method1 + "'" + search12 + "( A.total >= " + amountA + " and A.total <= " + amountB + ");";*/
                     conn.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -296,7 +315,7 @@ namespace Flawless_ex
                 staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
                 address = (string)dataGridView1.CurrentRow.Cells[5].Value;
             }
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address,  access_auth, Total, Pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address,  access_auth, Total, Pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
             screan = false;
             this.Close();
             statement.Show();
@@ -308,7 +327,7 @@ namespace Flawless_ex
             control = (int)dataGridView1.CurrentRow.Cells[0].Value;
             staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
             address = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
             screan = false;
             this.Close();
             statement.Show();

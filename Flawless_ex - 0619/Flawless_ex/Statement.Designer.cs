@@ -391,6 +391,10 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -445,6 +449,8 @@
             // SettlementDayBox
             // 
             this.SettlementDayBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.SettlementDayBox.Controls.Add(this.textBox1);
+            this.SettlementDayBox.Controls.Add(this.label9);
             this.SettlementDayBox.Controls.Add(this.button1);
             this.SettlementDayBox.Controls.Add(this.pictureBox2);
             this.SettlementDayBox.Controls.Add(this.pictureBox1);
@@ -476,7 +482,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(850, 1222);
+            this.button1.Location = new System.Drawing.Point(852, 1322);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(303, 118);
             this.button1.TabIndex = 90;
@@ -495,7 +501,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(41, 934);
+            this.pictureBox1.Location = new System.Drawing.Point(25, 940);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(797, 486);
@@ -2044,7 +2050,7 @@
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(847, 1080);
+            this.returnButton.Location = new System.Drawing.Point(852, 1199);
             this.returnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(308, 100);
@@ -2066,7 +2072,7 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(847, 954);
+            this.addButton.Location = new System.Drawing.Point(852, 1068);
             this.addButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(308, 94);
@@ -2579,6 +2585,8 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.AliceBlue;
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.PayeeTextBox1);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.pictureBox3);
@@ -4716,6 +4724,38 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(861, 943);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 26);
+            this.label9.TabIndex = 91;
+            this.label9.Text = "変更理由";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(852, 983);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(308, 33);
+            this.textBox1.TabIndex = 92;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(74, 1284);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(116, 26);
+            this.label10.TabIndex = 89;
+            this.label10.Text = "変更理由";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(215, 1281);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(537, 33);
+            this.textBox2.TabIndex = 90;
+            // 
             // Statement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
@@ -5129,5 +5169,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox PayeeTextBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label10;
     }
 }

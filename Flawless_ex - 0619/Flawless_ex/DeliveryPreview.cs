@@ -22,6 +22,7 @@ namespace Flawless_ex
         DataTable dt5 = new DataTable();
         DataTable dt6 = new DataTable();
         int a; // record_numberの数
+        int b; // 2巡目
         int staff_id;
         int type;
         string staff_name;
@@ -31,6 +32,7 @@ namespace Flawless_ex
         string document;
         int control;
         string data;
+        int print;
         #region "買取販売履歴"
         string search1;
         string search2;
@@ -44,6 +46,19 @@ namespace Flawless_ex
         string search10;
         string search11;
         string search12;
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
         #endregion
         string pass;
         #region "納品書の引数"
@@ -87,7 +102,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
             this.Close();
             statement.Show();
         }
@@ -152,8 +167,6 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
 
-            conn.Close();
-
             DataRow row;
             row = dt.Rows[0];
             string method = row["payment_method"].ToString();
@@ -184,8 +197,13 @@ namespace Flawless_ex
             adapter2 = new NpgsqlDataAdapter(sql_str2, conn2);
             adapter2.Fill(dt2);
 
-            conn2.Close();
             int a = dt2.Rows.Count;
+
+            if (print >= 1)
+            {
+                a = a /(print + 1);
+            }
+            else{ }
             
             for (int b = 1; b <= a; b++)
             {
@@ -197,8 +215,6 @@ namespace Flawless_ex
                 string sql_str5 = "select * from delivery_calc where control_number =" + control + " and record_number = "+ b + ";";
                 adapter5 = new NpgsqlDataAdapter(sql_str5, conn5);
                 adapter5.Fill(dt5);
-
-                conn5.Close();
 
                 int c = b - 1;
                 DataRow row5;
@@ -406,8 +422,6 @@ namespace Flawless_ex
                 adapterA = new NpgsqlDataAdapter(sql_antique, connA);
                 adapterA.Fill(dt);
 
-                connA.Close();
-
                 DataRow rowA;
                 rowA = dt.Rows[0];
                 string AntiqueNumber = rowA["antique_number"].ToString();
@@ -419,8 +433,6 @@ namespace Flawless_ex
                 string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + types  + " and antique_number = " + AntiqueNumber + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
-
-                conn6.Close();
 
                 DataRow row6;
                 row6 = dt6.Rows[0];
@@ -446,8 +458,6 @@ namespace Flawless_ex
                 adapterI = new NpgsqlDataAdapter(sql_id, connI);
                 adapterI.Fill(dt);
 
-                connI.Close();
-
                 DataRow rowI;
                 rowI = dt.Rows[0];
                 string ID = rowI["id_number"].ToString();
@@ -459,8 +469,6 @@ namespace Flawless_ex
                 string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + types + " and id_number = "+ ID + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
-
-                conn6.Close();
 
                 DataRow row6;
                 row6 = dt6.Rows[0];
@@ -678,6 +686,7 @@ namespace Flawless_ex
             Rectangle destRect2 = new Rectangle(580, -50, 300, 300);
             e.Graphics.DrawImage(newImage1, destRect2);
             #endregion
+            print++;
         }
     }
 }

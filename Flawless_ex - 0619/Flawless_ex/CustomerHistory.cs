@@ -32,6 +32,7 @@ namespace Flawless_ex
         bool screan = true;
         string document;
         int control;
+        string antiqueNumber;
         public CustomerHistory(MainMenu main, int id, string data, string pass)
         {
             InitializeComponent();
@@ -108,8 +109,8 @@ namespace Flawless_ex
             string method;
             int amount1;
             int amount2;
-            string amount01;
-            string amount02;
+            string amountA;
+            string amountB;
             int ant;
             int amt;
             int amt1;
@@ -272,7 +273,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " ";
+                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " " + search7;
                 }
                 else
                 {
@@ -312,19 +313,19 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amount01 = " A.total >= " + int.Parse(this.textBox10.Text);
+                    amountA = " A.total >= " + int.Parse(this.textBox10.Text);
                 }
                 else
                 {
-                    amount01 = "";
+                    amountA = "";
                 }
                 if (!string.IsNullOrWhiteSpace(textBox11.Text))
                 {
-                    amount02 = " and A.total <= "  + int.Parse(this.textBox11.Text) ;
+                    amountB = " and A.total <= "  + int.Parse(this.textBox11.Text) ;
                 }
                 else
                 {
-                    amount02 = "";
+                    amountB = "";
                 }
                 if (string.IsNullOrWhiteSpace(textBox9.Text))
                 {
@@ -356,7 +357,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    control = int.Parse(textBox9.Text);
+                    control = int.Parse(textBox8.Text);
                 }
                 #endregion
                 #endregion
@@ -400,8 +401,8 @@ namespace Flawless_ex
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where A.type = 0 and " + shopname +  shopnamekana +  address +  addresskana +  phoneNumber +  documentNumber +  antiqueNumber + mainCategory  + item  + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + 
-                              method +  amount01 + amount02 + ";";
+                            "where " + shopname +  shopnamekana +  address +  addresskana +  phoneNumber +  documentNumber +  antiqueNumber + mainCategory  + item  + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + 
+                              method +  amountA + amountB + ";";
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
@@ -414,19 +415,19 @@ namespace Flawless_ex
                         return;
                     }
                     
-                    string name1 = textBox1.Text;
-                    string phoneNumber1 = textBox6.Text;
-                    string address1 = this.textBox4.Text;
-                    string addresskana1 = this.textBox5.Text;
-                    string item1 = itemcode;
-                    string code1 = code;
-                    string method1 = this.comboBox3.Text;
+                    string name1 = shopname;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    string method1 = method;
                     int antique = ant;
-                    document = documentNumber;
+                    document = this.textBox7.Text;
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amount1, amount2, search1, search2, search3, search4, search5, search6, search7,search8, search9, search10, search11, search12, data, Pass, document, control, antique);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7,search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
                     this.Hide();
                     dataSearch.Show();
                 }
@@ -435,7 +436,7 @@ namespace Flawless_ex
                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
                            "where "+ shopname  +  shopnamekana  +  address +  addresskana  +  phoneNumber + controlNumber + antiqueNumber +  mainCategory +  item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + 
-                              method  + amount01  + amount02 + ";";
+                              method  + amountA  + amountB + ";";
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
@@ -446,19 +447,20 @@ namespace Flawless_ex
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    string name1 = textBox1.Text;
-                    string phoneNumber1 = textBox6.Text;
-                    string address1 = this.textBox4.Text;
-                    string addresskana1 = this.textBox5.Text;
-                    string item1 = itemcode;
-                    string code1 = code;
+                    string name1 = shopname;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
                     //control = int.Parse(this.textBox8.Text);
-                    string method1 = this.comboBox3.Text;
+                    string method1 = method;
+                    documentNumber = controlNumber;
                     int antique = ant;
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1,  amount1, amount2, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antique);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1,  amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -611,19 +613,19 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amount01 = " (A.total >= " + int.Parse(this.textBox10.Text);
+                    amountA = " (A.total >= " + int.Parse(this.textBox10.Text);
                 }
                 else
                 {
-                    amount01 = " ";
+                    amountA = " ";
                 }
                 if (!string.IsNullOrWhiteSpace(textBox11.Text))
                 {
-                    amount02 = " and A.total <= " + int.Parse(this.textBox11.Text);
+                    amountB = " and A.total <= " + int.Parse(this.textBox11.Text);
                 }
                 else
                 {
-                    amount02 = "";
+                    amountB = "";
                 }
                 if (string.IsNullOrWhiteSpace(textBox9.Text))
                 {
@@ -689,7 +691,7 @@ namespace Flawless_ex
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where A.type = 1 and " + name +  address +  addresskana  +  phoneNumber  +  documentNumber +  mainCategory  +  item  + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "  + method  +  amount01 +  amount02 + ";";
+                            "where A.type = 1 and " + name +  address +  addresskana  +  phoneNumber  +  documentNumber +  mainCategory  +  item  + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "  + method  +  amountA +  amountB + ";";
 
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
@@ -703,18 +705,18 @@ namespace Flawless_ex
                         return;
                     }
 
-                    string name1 = this.textBox3.Text;
-                    string phoneNumber1 = this.textBox6.Text;
-                    string address1 = this.textBox4.Text;
-                    string addresskana1 = this.textBox5.Text;
-                    string item1 = itemcode;
-                    string code1 = code;
-                    string method1 = this.comboBox3.Text;
-                    int antique = ant;
+                    string name1 = name;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    string method1 = method;
+                    antiqueNumber = null;
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amount1, amount2, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antique);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -724,7 +726,7 @@ namespace Flawless_ex
                     string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
                             "where " + name  + address +  addresskana + phoneNumber + controlNumber +  mainCategory  + item + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " 
-                             +  method  + amount01 + amount02 + ";";
+                             +  method  + amountA + amountB + ";";
 
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
@@ -737,19 +739,20 @@ namespace Flawless_ex
                         return;
                     }
 
-                    string name1 = this.textBox3.Text;
-                    string phoneNumber1 = this.textBox6.Text;
-                    string address1 = this.textBox4.Text;
-                    string addresskana1 = this.textBox5.Text;
-                    string item1 = itemcode;
-                    string code1 = code;
-                    string method1 = this.comboBox3.Text;
-                    int antique = ant;
+                    string name1 = name;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    string method1 = method;
+                    antiqueNumber = null;
+                    documentNumber = controlNumber;
                     amount2 = amt;
                     amount1 = amt1;
 
-                    control = int.Parse(this.textBox8.Text);
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amount1, amount2, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antique);
+                    //control = int.Parse(this.textBox8.Text);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
                     screan = false;
                     this.Close();
                     dataSearch.Show();

@@ -29,6 +29,19 @@ namespace Flawless_ex
         string search10;
         string search11;
         string search12;
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
         #endregion
         string Pass;
         int grade;
@@ -112,7 +125,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
 
             this.Hide();
             statement.Show();
@@ -121,10 +134,10 @@ namespace Flawless_ex
         #region "インボイス"
         private void Invoice_Click(object sender, EventArgs e)
         {
-            Invoice invoice = new Invoice(this, staff_id);
+            //Invoice invoice = new Invoice(this, staff_id);
 
-            this.Hide();
-            invoice.Show();
+            //this.Hide();
+            //invoice.Show();
         }
         #endregion
         #region"操作履歴ボタン"
