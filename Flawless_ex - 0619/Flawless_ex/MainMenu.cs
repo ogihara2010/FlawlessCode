@@ -23,6 +23,7 @@ namespace Flawless_ex
         int grade;
         bool CarryOver;
         bool MonthCatalog;
+        bool screan = true;
 
         NpgsqlConnection conn;
         NpgsqlCommand cmd;
@@ -46,8 +47,8 @@ namespace Flawless_ex
         private void MasterMainte_Click(object sender, EventArgs e)//権限によって
         {
             MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id, access_auth, Pass);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             masterMenu.Show();
         }
 
@@ -74,26 +75,17 @@ namespace Flawless_ex
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
             Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             statement.Show();
-        }
-        #endregion
-        #region "インボイス"
-        private void Invoice_Click(object sender, EventArgs e)
-        {
-            Invoice invoice = new Invoice(this, staff_id, access_auth, Pass);
-
-            this.Hide();
-            invoice.Show();
         }
         #endregion
         #region"操作履歴ボタン"
         private void Operatelog_Click(object sender, EventArgs e)
         {
             Operatelog operatelog = new Operatelog(this, staff_id, access_auth, Pass);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             operatelog.Show();
         }
         #endregion
@@ -101,8 +93,8 @@ namespace Flawless_ex
         private void CustomerHistoriButton_Click(object sender, EventArgs e)
         {
             CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data, Pass, access_auth);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             customerHistorySelect.Show();
         }
         #endregion
@@ -110,8 +102,8 @@ namespace Flawless_ex
         private void MonResults_Click(object sender, EventArgs e)
         {
             MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade, CarryOver, MonthCatalog);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             monresult.Show();
         }
         #endregion
@@ -119,15 +111,22 @@ namespace Flawless_ex
         private void Button3_Click(object sender, EventArgs e)
         {
             NextMonth nextmonth = new NextMonth(this, staff_id, Pass, access_auth);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             nextmonth.Show();
         }
         #endregion
 
         private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            if (screan)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }
