@@ -69,7 +69,6 @@ namespace Flawless_ex
             }
             conn.Close();
 
-
         }
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)

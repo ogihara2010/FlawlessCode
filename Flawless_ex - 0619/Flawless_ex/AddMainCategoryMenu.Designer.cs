@@ -92,7 +92,7 @@
             // 
             // returnButton
             // 
-            this.returnButton.BackColor = System.Drawing.Color.LightCyan;
+            this.returnButton.BackColor = System.Drawing.Color.MistyRose;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.returnButton.Location = new System.Drawing.Point(55, 533);
             this.returnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);

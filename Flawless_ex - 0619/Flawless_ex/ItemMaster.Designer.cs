@@ -78,7 +78,7 @@
             // ReturnButton
             // 
             this.ReturnButton.AutoSize = true;
-            this.ReturnButton.BackColor = System.Drawing.Color.LightCyan;
+            this.ReturnButton.BackColor = System.Drawing.Color.MistyRose;
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ReturnButton.Location = new System.Drawing.Point(49, 1093);
             this.ReturnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
