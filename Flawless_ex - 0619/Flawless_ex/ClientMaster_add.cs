@@ -448,16 +448,18 @@ namespace Flawless_ex
 
         private void ClientMaster_add_Load(object sender, EventArgs e)
         {
-            this.textBox50.Text = "　年　月　日";
             if (type == 0)
             {
                 tabControl1.SelectedTab = tabPage1;
                 tabControl1.TabPages.Remove(tabPage2);
+                this.ActiveControl = this.textBox2;
             }
             else if (type == 1)
             {
                 tabControl1.SelectedTab = tabPage2;
                 tabControl1.TabPages.Remove(tabPage1);
+                this.textBox50.Text = "　年　月　日";
+                this.ActiveControl = this.textBox56;
             }
             else { }
         }
@@ -991,5 +993,46 @@ namespace Flawless_ex
             textBox20.Select(textBox20.Text.Length, 0);
         }
         #endregion
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox54_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox51_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void label34_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

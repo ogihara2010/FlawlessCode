@@ -156,6 +156,19 @@ namespace Flawless_ex
             dataGridView1.Columns[15].HeaderText = "その他卸値";
             dataGridView1.Columns[16].HeaderText = "合計金額";
             dataGridView1.Columns[17].HeaderText = "卸値合計";
+
+            dataGridView1.Columns[6].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[7].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[8].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[9].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[10].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[11].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[12].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[13].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[14].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[15].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[16].DefaultCellStyle.Format = "c";
+            dataGridView1.Columns[17].DefaultCellStyle.Format = "c";
         }
         #region "担当者選択コンボボックス"
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
