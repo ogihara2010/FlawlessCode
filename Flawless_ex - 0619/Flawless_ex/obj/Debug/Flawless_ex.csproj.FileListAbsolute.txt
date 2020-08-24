@@ -547,3 +547,5 @@ C:\Users\fpadmin\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\
 C:\Users\fpadmin\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.DeliveryPreview.resources
 C:\Users\fpadmin\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.ItemNameChange.resources
 C:\Users\fpadmin\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.RecordList.resources
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.ClientInformation.resources
+C:\Users\t-kawakami\Desktop\Flawless_code\Flawless_ex - 0619\Flawless_ex\obj\Debug\Flawless_ex.ItemNameChange.resources

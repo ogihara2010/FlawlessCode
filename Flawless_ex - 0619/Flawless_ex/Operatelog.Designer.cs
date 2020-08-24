@@ -32,13 +32,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // return1
             // 
             this.return1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.return1.Location = new System.Drawing.Point(78, 980);
+            this.return1.Location = new System.Drawing.Point(39, 1003);
             this.return1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.return1.Name = "return1";
             this.return1.Size = new System.Drawing.Size(254, 144);
@@ -76,7 +77,9 @@
             "顧客マスタ　法人　無効",
             "顧客マスタ　個人　更新",
             "顧客マスタ　個人　無効",
-            "計算書"});
+            "計算書",
+            "納品書",
+            "成績一覧"});
             this.comboBox1.Location = new System.Drawing.Point(356, 105);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.comboBox1.Name = "comboBox1";
@@ -87,14 +90,25 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(98, 186);
+            this.dataGridView1.Location = new System.Drawing.Point(58, 247);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 80;
             this.dataGridView1.RowTemplate.Height = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(1085, 702);
+            this.dataGridView1.Size = new System.Drawing.Size(1222, 702);
             this.dataGridView1.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button1.Location = new System.Drawing.Point(910, 1003);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(347, 144);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "計算書／納品書　変更画面へ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Operatelog
             // 
@@ -103,6 +117,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1334, 1191);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
@@ -123,5 +138,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
     }
 }
