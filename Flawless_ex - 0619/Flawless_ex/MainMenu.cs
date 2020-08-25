@@ -78,6 +78,8 @@ namespace Flawless_ex
         NpgsqlConnection conn;
         NpgsqlCommand cmd;
         NpgsqlDataReader reader;
+        bool CarryOver;
+        bool MonthCatalog;
 
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
@@ -161,7 +163,7 @@ namespace Flawless_ex
         #region "月間成績表一覧"
         private void MonResults_Click(object sender, EventArgs e)
         {
-            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade);
+            MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade, CarryOver, MonthCatalog);
 
             this.Hide();
             monresult.Show();

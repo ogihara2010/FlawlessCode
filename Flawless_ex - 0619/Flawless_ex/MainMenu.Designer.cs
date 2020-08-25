@@ -35,7 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.operatelog = new System.Windows.Forms.Button();
-            this.Invoice = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -82,7 +81,7 @@
             // 
             this.MasterMainte.AutoSize = true;
             this.MasterMainte.Font = new System.Drawing.Font("MS UI Gothic", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MasterMainte.Location = new System.Drawing.Point(188, 948);
+            this.MasterMainte.Location = new System.Drawing.Point(188, 844);
             this.MasterMainte.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.MasterMainte.Name = "MasterMainte";
             this.MasterMainte.Size = new System.Drawing.Size(725, 120);
@@ -120,7 +119,7 @@
             // 
             this.operatelog.AutoSize = true;
             this.operatelog.Font = new System.Drawing.Font("MS UI Gothic", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.operatelog.Location = new System.Drawing.Point(188, 814);
+            this.operatelog.Location = new System.Drawing.Point(188, 691);
             this.operatelog.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.operatelog.Name = "operatelog";
             this.operatelog.Size = new System.Drawing.Size(725, 102);
@@ -128,19 +127,6 @@
             this.operatelog.Text = "操作履歴";
             this.operatelog.UseVisualStyleBackColor = true;
             this.operatelog.Click += new System.EventHandler(this.Operatelog_Click);
-            // 
-            // Invoice
-            // 
-            this.Invoice.AutoSize = true;
-            this.Invoice.Font = new System.Drawing.Font("MS UI Gothic", 16.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Invoice.Location = new System.Drawing.Point(188, 675);
-            this.Invoice.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.Invoice.Name = "Invoice";
-            this.Invoice.Size = new System.Drawing.Size(725, 106);
-            this.Invoice.TabIndex = 7;
-            this.Invoice.Text = "インボイス";
-            this.Invoice.UseVisualStyleBackColor = true;
-            this.Invoice.Click += new System.EventHandler(this.Invoice_Click);
             // 
             // button3
             // 
@@ -162,7 +148,6 @@
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1102, 1319);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.Invoice);
             this.Controls.Add(this.operatelog);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.label1);
@@ -190,7 +175,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button operatelog;
-        private System.Windows.Forms.Button Invoice;
         private System.Windows.Forms.Button button3;
     }
 }

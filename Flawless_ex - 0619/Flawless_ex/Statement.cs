@@ -316,6 +316,9 @@ namespace Flawless_ex
         string pass;
         int regist;
         int regist1;
+        bool NameChange = false;                    //品名を変更したら true
+        bool CarryOver;                      //次月持ち越しから画面遷移したとき
+        bool MonthCatalog;
         #region"計算書・納品書での各金額（計算書と納品書で扱いが少し違う）"
         decimal money0;
         decimal money1;
@@ -6969,7 +6972,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox1.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox0.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox0.Text, @"^[a-zA-Z]+$"))
             {
@@ -7026,7 +7029,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox2.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox0.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox0.Text, @"^[a-zA-Z]+$"))
             {
@@ -7080,7 +7083,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox3.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox1.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox1.Text, @"^[a-zA-Z]+$"))
             {
@@ -7134,7 +7137,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox4.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox2.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox2.Text, @"^[a-zA-Z]+$"))
             {
@@ -7188,7 +7191,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox5.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox3.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox3.Text, @"^[a-zA-Z]+$"))
             {
@@ -7241,7 +7244,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox6.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox4.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox4.Text, @"^[a-zA-Z]+$"))
             {
@@ -7294,7 +7297,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox7.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox5.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox5.Text, @"^[a-zA-Z]+$"))
             {
@@ -7347,7 +7350,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox8.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox6.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox6.Text, @"^[a-zA-Z]+$"))
             {
@@ -7400,7 +7403,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox9.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox7.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox7.Text, @"^[a-zA-Z]+$"))
             {
@@ -7453,7 +7456,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox10.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox8.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox8.Text, @"^[a-zA-Z]+$"))
             {
@@ -7506,7 +7509,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox11.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox9.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox9.Text, @"^[a-zA-Z]+$"))
             {
@@ -7559,7 +7562,7 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                unitPriceTextBox12.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox10.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox10.Text, @"^[a-zA-Z]+$"))
             {
@@ -9796,7 +9799,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox01.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox00.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox00.Text, @"^[a-zA-Z]+$"))
             {
@@ -9848,7 +9851,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox02.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox00.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox00.Text, @"^[a-zA-Z]+$"))
             {
@@ -9902,7 +9905,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox03.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox01.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox01.Text, @"^[a-zA-Z]+$"))
             {
@@ -9955,7 +9958,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox04.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox02.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox02.Text, @"^[a-zA-Z]+$"))
             {
@@ -10009,7 +10012,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox05.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox03.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox03.Text, @"^[a-zA-Z]+$"))
             {
@@ -10062,7 +10065,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox06.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox04.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox04.Text, @"^[a-zA-Z]+$"))
             {
@@ -10115,7 +10118,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox07.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox05.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox05.Text, @"^[a-zA-Z]+$"))
             {
@@ -10168,7 +10171,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox08.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox06.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox06.Text, @"^[a-zA-Z]+$"))
             {
@@ -10221,7 +10224,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox09.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox07.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox07.Text, @"^[a-zA-Z]+$"))
             {
@@ -10274,7 +10277,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox10.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox08.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox08.Text, @"^[a-zA-Z]+$"))
             {
@@ -10327,7 +10330,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox011.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox09.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox09.Text, @"^[a-zA-Z]+$"))
             {
@@ -10380,7 +10383,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox012.ReadOnly = false;
             }
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox010.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox010.Text, @"^[a-zA-Z]+$"))
             {
@@ -16435,7 +16438,7 @@ namespace Flawless_ex
         #region"計算書　成績入力画面"
         private void RecordListButton_Click(object sender, EventArgs e)
         {
-            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass);
+            RecordList recordList = new RecordList(this, staff_id, client_staff_name, type, documentNumberTextBox.Text, Grade, AntiqueNumber, ID_Number, access_auth, pass, NameChange, CarryOver, MonthCatalog);
 
             this.Hide();
             recordList.Show();

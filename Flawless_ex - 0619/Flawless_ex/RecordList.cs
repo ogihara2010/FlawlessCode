@@ -37,9 +37,63 @@ namespace Flawless_ex
         string Pass;
         int Control;
         string Data;
-        string Search1;
-        string Search2;
-        string Search3;
+        #region "計算書"
+        decimal amount10;
+        decimal amount11;
+        decimal amount12;
+        decimal amount13;
+        decimal amount14;
+        decimal amount15;
+        decimal amount16;
+        decimal amount17;
+        decimal amount18;
+        decimal amount19;
+        decimal amount110;
+        decimal amount111;
+        decimal amount112;
+        #endregion
+        #region "納品書"
+        decimal amount00;
+        decimal amount01;
+        decimal amount02;
+        decimal amount03;
+        decimal amount04;
+        decimal amount05;
+        decimal amount06;
+        decimal amount07;
+        decimal amount08;
+        decimal amount09;
+        decimal amount010;
+        decimal amount011;
+        decimal amount012;
+        #endregion
+        #region "買取販売履歴の引数"
+        string search1;
+        string search2;
+        string search3;
+        string search4;
+        string search5;
+        string search6;
+        string search7;
+        string search8;
+        string search9;
+        string search10;
+        string search11;
+        string search12;
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
         bool screan = true;
         bool NameChange = false;                    //品名を変更したら true
         bool CarryOver;                      //次月持ち越しから画面遷移したとき
@@ -1456,7 +1510,7 @@ namespace Flawless_ex
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移しないとき
             else if (screan)
             {
-                statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
+                Statement statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
                 statement.Show();
             }
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移したとき
@@ -10421,6 +10475,12 @@ namespace Flawless_ex
         #region"納品書検索"
         private void DeliverySearchButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(ManagementNumberTextBox.Text))
+            {
+                MessageBox.Show("数字を入力して下さい。");
+                return;
+            }
+            else { }
             Control = int.Parse(ManagementNumberTextBox.Text);
             this.Close();
         }

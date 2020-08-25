@@ -58,6 +58,12 @@ namespace Flawless_ex
             #region "計算書　決済方法"
             if (comboBox1.Text == "計算書　決済方法")
             {
+                if (document == null)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt = new DataTable();
                 DataTable dt2 = new DataTable();
                 NpgsqlDataAdapter adapter;
@@ -105,6 +111,12 @@ namespace Flawless_ex
             #region "計算書　受渡方法"
             if (comboBox1.Text == "計算書　受渡方法")
             {
+                if (document == null)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 NpgsqlDataAdapter adapter3;
                 NpgsqlDataAdapter adapter4;
                 NpgsqlDataAdapter adapter6;
@@ -153,6 +165,12 @@ namespace Flawless_ex
             #region "納品書　決済日"
             if (comboBox1.Text == "納品書　決済日")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt12 = new DataTable();
                 DataTable dt13 = new DataTable();
                 NpgsqlDataAdapter adapter14;
@@ -204,6 +222,12 @@ namespace Flawless_ex
             #region "納品書　注文日"
             if (comboBox1.Text == "納品書　注文日")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt15 = new DataTable();
                 DataTable dt16 = new DataTable();
                 NpgsqlDataAdapter adapter17;
@@ -255,6 +279,12 @@ namespace Flawless_ex
             #region "納品書　納品日"
             if (comboBox1.Text == "納品書　納品日")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt18 = new DataTable();
                 DataTable dt19 = new DataTable();
                 NpgsqlDataAdapter adapter20;
@@ -306,6 +336,12 @@ namespace Flawless_ex
             #region "納品書　宛名"
             if (comboBox1.Text == "納品書　宛名")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt21 = new DataTable();
                 DataTable dt22 = new DataTable();
                 NpgsqlDataAdapter adapter23;
@@ -357,6 +393,12 @@ namespace Flawless_ex
             #region "納品書　印鑑印刷"
             if (comboBox1.Text == "納品書　印鑑印刷")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt24 = new DataTable();
                 DataTable dt25 = new DataTable();
                 NpgsqlDataAdapter adapter26;
@@ -408,6 +450,12 @@ namespace Flawless_ex
             #region "納品書　通貨"
             if (comboBox1.Text == "納品書　通貨")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt27 = new DataTable();
                 DataTable dt28 = new DataTable();
                 NpgsqlDataAdapter adapter29;
@@ -459,6 +507,12 @@ namespace Flawless_ex
             #region "納品書　種別"
             if (comboBox1.Text == "納品書　種別")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt30 = new DataTable();
                 DataTable dt31 = new DataTable();
                 NpgsqlDataAdapter adapter32;
@@ -510,6 +564,12 @@ namespace Flawless_ex
             #region "納品書　支払方法"
             if (comboBox1.Text == "納品書　支払方法")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt33 = new DataTable();
                 DataTable dt34 = new DataTable();
                 NpgsqlDataAdapter adapter35;
@@ -565,6 +625,12 @@ namespace Flawless_ex
             #region "計算書　商品変更"
             if (comboBox2.Text == "計算書　商品変更")
             {
+                if (document == null)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt7 = new DataTable();
                 DataTable dt8 = new DataTable();
                 NpgsqlDataAdapter adapter7;
@@ -586,18 +652,22 @@ namespace Flawless_ex
 
                 if (a > b)
                 {
-                    string sql_str3 = "select C.assessment_date, C.staff_code, A.document_number, A.record_number,A.main_category_code, A.item_code, C.reason from statement_calc_data A " +
+                    string sql_str3 = "select C.assessment_date, C.staff_code, A.document_number, A.record_number,E.main_category_name, F.item_name, C.reason from statement_calc_data A " +
                                       " inner join statement_calc_data_revisions B ON (A.document_number = B.document_number ) inner join statement_data C ON " +
-                                      "(A.document_number = C.document_number) where A.document_number = '" + document + "' and A.record_number > " + b + ";";
+                                      "(A.document_number = C.document_number) inner join staff_m D ON (C.staff_code = D.staff_code) inner join main_category_m E " +
+                                      " ON (A.main_category_code = E.main_category_code ) inner join item_m F ON (A.item_code  = F.item_code) " +
+                                      " where A.document_number = '" + document + "' and A.record_number > " + b + ";";
 
                     adapter9 = new NpgsqlDataAdapter(sql_str3, conn);
                     adapter9.Fill(dt9);
                 }
                 else if(a < b) 
                 {
-                    string sql_str3 = "select C.assessment_date, C.staff_code, A.document_number, A.record_number,A.main_category_code, A.item_code, C.reason from statement_calc_data_revisions A " +
+                    string sql_str3 = "select C.assessment_date, D.staff_name, A.document_number, A.record_number,E.main_category_name, F.item_name, C.reason from statement_calc_data_revisions A " +
                                       " inner join statement_calc_data B ON (A.document_number = B.document_number ) inner join statement_data C ON " +
-                                      "(A.document_number = C.document_number) where A.document_number = '" + document + "' and A.record_number > " + a + ";";
+                                      "(A.document_number = C.document_number) inner join staff_m D ON (C.staff_code = D.staff_code) inner join main_category_m E " +
+                                      " ON (A.main_category_code = E.main_category_code ) inner join item_m F ON (A.item_code  = F.item_code) " +
+                                      "where A.document_number = '" + document + "' and A.record_number > " + a + ";";
 
                     adapter10 = new NpgsqlDataAdapter(sql_str3, conn);
                     adapter10.Fill(dt10);
@@ -607,15 +677,22 @@ namespace Flawless_ex
                 dataGridView1.Columns[0].HeaderText = "更新日時";
                 dataGridView1.Columns[1].HeaderText = "変更者";
                 dataGridView1.Columns[2].HeaderText = "変更があった伝票番号";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
+                dataGridView1.Columns[3].HeaderText = "変更があった行番号";
+                dataGridView1.Columns[4].HeaderText = "変更前";
+                dataGridView1.Columns[5].HeaderText = "変更後"; 
+                dataGridView1.Columns[6].HeaderText = "変更理由";
                 conn.Close();
             }
             #endregion
             #region "納品書　商品変更"
             if (comboBox2.Text == "納品書　商品変更")
             {
+                if (control == 0)
+                {
+                    MessageBox.Show("選択できません。");
+                    return;
+                }
+                else { }
                 DataTable dt9 = new DataTable();
                 DataTable dt10 = new DataTable();
                 NpgsqlDataAdapter adapter11;
@@ -636,9 +713,11 @@ namespace Flawless_ex
 
                 if (a > b)
                 {
-                    string sql_str3 = "select C.registration_date, C.staff_code, A.control_number, A.record_number,A.main_category_code, A.item_code, C.reason from delivery_calc A " +
+                    string sql_str3 = "select C.registration_date, D.staff_name, A.control_number, A.record_number,E.main_category_name, F.item_name, C.reason from delivery_calc A " +
                                       " inner join delivery_calc_revisions B ON (A.control_number = B.control_number ) inner join delivery_m C ON " +
-                                      "(A.control_number = C.control_number) where A.control_number = '" + control + "' and A.record_number > " + b + ";";
+                                      "(A.control_number = C.control_number) inner join staff_m D ON (C.staff_code = D.staff_code ) inner join main_category_m E ON" +
+                                      "(A.main_category_code = E.main_category_code) inner join item_m F ON (A.item_code = F.item_code) " +
+                                      " where A.control_number = '" + control + "' and A.record_number > " + b + ";";
 
                     adapter13 = new NpgsqlDataAdapter(sql_str3, conn);
                     adapter13.Fill(dt11);
@@ -647,7 +726,9 @@ namespace Flawless_ex
                 {
                     string sql_str3 = "select C.registration_date, C.staff_code, A.control_number, A.record_number,A.main_category_code, A.item_code, C.reason from delivery_calc_revisions A " +
                                       " inner join delivery_calc B ON (A.control_number = B.control_number ) inner join delivery_m C ON " +
-                                      "(A.control_number = C.control_number) where A.control_number = '" + control + "' and A.record_number > " + a + ";";
+                                      "(A.control_number = C.control_number) inner join staff_m D ON (C.staff_code = D.staff_code ) inner join main_category_m E ON " +
+                                      " (A.main_category_code = E.main_category_code) inner join item_m F ON (A.item_code = F.item_code)" +
+                                      " where A.control_number = '" + control + "' and A.record_number > " + a + ";";
 
                     adapter13 = new NpgsqlDataAdapter(sql_str3, conn);
                     adapter13.Fill(dt11);
@@ -657,9 +738,10 @@ namespace Flawless_ex
                 dataGridView1.Columns[0].HeaderText = "更新日時";
                 dataGridView1.Columns[1].HeaderText = "変更者";
                 dataGridView1.Columns[2].HeaderText = "変更があった伝票番号";
-                dataGridView1.Columns[3].HeaderText = "変更前";
-                dataGridView1.Columns[4].HeaderText = "変更後";
-                dataGridView1.Columns[5].HeaderText = "変更理由";
+                dataGridView1.Columns[3].HeaderText = "変更があった行番後";
+                dataGridView1.Columns[4].HeaderText = "変更前";
+                dataGridView1.Columns[5].HeaderText = "変更後";
+                dataGridView1.Columns[6].HeaderText = "変更理由";
                 conn.Close();
             }
             #endregion
