@@ -200,13 +200,14 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tabControl1.ItemSize = new System.Drawing.Size(216, 87);
-            this.tabControl1.Location = new System.Drawing.Point(14, 12);
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(3700, 1800);
+            this.tabControl1.Size = new System.Drawing.Size(3768, 1912);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             // 
@@ -229,7 +230,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.tabPage1.Size = new System.Drawing.Size(3680, 1693);
+            this.tabPage1.Size = new System.Drawing.Size(3748, 1805);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             // 
@@ -238,7 +239,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(5, 2836);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(3628, 50);
+            this.panel3.Size = new System.Drawing.Size(3695, 50);
             this.panel3.TabIndex = 77;
             // 
             // pictureBox1
@@ -345,7 +346,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666668F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666668F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666668F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(2617, 2319);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(2640, 2319);
             this.tableLayoutPanel1.TabIndex = 74;
             // 
             // deliveryDateBox
@@ -353,10 +354,10 @@
             this.deliveryDateBox.CalendarFont = new System.Drawing.Font("MS UI Gothic", 8F);
             this.deliveryDateBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deliveryDateBox.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.deliveryDateBox.Location = new System.Drawing.Point(525, 7);
+            this.deliveryDateBox.Location = new System.Drawing.Point(530, 7);
             this.deliveryDateBox.Margin = new System.Windows.Forms.Padding(2, 7, 2, 7);
             this.deliveryDateBox.Name = "deliveryDateBox";
-            this.deliveryDateBox.Size = new System.Drawing.Size(781, 94);
+            this.deliveryDateBox.Size = new System.Drawing.Size(788, 94);
             this.deliveryDateBox.TabIndex = 71;
             // 
             // label5
@@ -365,10 +366,10 @@
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(1313, 0);
+            this.label5.Location = new System.Drawing.Point(1325, 0);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(513, 154);
+            this.label5.Size = new System.Drawing.Size(518, 154);
             this.label5.TabIndex = 2;
             this.label5.Text = "会社名※";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -377,12 +378,12 @@
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox2.Location = new System.Drawing.Point(1836, 3);
+            this.textBox2.Location = new System.Drawing.Point(1853, 3);
             this.textBox2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox2.Size = new System.Drawing.Size(776, 148);
+            this.textBox2.Size = new System.Drawing.Size(782, 148);
             this.textBox2.TabIndex = 21;
             // 
             // label3
@@ -393,7 +394,7 @@
             this.label3.Location = new System.Drawing.Point(5, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(513, 154);
+            this.label3.Size = new System.Drawing.Size(518, 154);
             this.label3.TabIndex = 0;
             this.label3.Text = "登録日";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -407,7 +408,7 @@
             this.label7.Location = new System.Drawing.Point(5, 154);
             this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(513, 154);
+            this.label7.Size = new System.Drawing.Size(518, 154);
             this.label7.TabIndex = 4;
             this.label7.Text = "会社名カナ※";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -416,12 +417,12 @@
             // 
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox3.Location = new System.Drawing.Point(528, 157);
+            this.textBox3.Location = new System.Drawing.Point(533, 157);
             this.textBox3.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(775, 148);
+            this.textBox3.Size = new System.Drawing.Size(782, 148);
             this.textBox3.TabIndex = 22;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
@@ -430,10 +431,10 @@
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(1313, 154);
+            this.label6.Location = new System.Drawing.Point(1325, 154);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(513, 154);
+            this.label6.Size = new System.Drawing.Size(518, 154);
             this.label6.TabIndex = 3;
             this.label6.Text = "店舗名";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -443,12 +444,12 @@
             // 
             this.textBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox7.Location = new System.Drawing.Point(1836, 157);
+            this.textBox7.Location = new System.Drawing.Point(1853, 157);
             this.textBox7.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
             this.textBox7.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox7.Size = new System.Drawing.Size(776, 148);
+            this.textBox7.Size = new System.Drawing.Size(782, 148);
             this.textBox7.TabIndex = 26;
             // 
             // label8
@@ -459,7 +460,7 @@
             this.label8.Location = new System.Drawing.Point(5, 308);
             this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(513, 154);
+            this.label8.Size = new System.Drawing.Size(518, 154);
             this.label8.TabIndex = 5;
             this.label8.Text = "店舗名カナ";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -468,12 +469,12 @@
             // 
             this.textBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox8.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox8.Location = new System.Drawing.Point(528, 311);
+            this.textBox8.Location = new System.Drawing.Point(533, 311);
             this.textBox8.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
             this.textBox8.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox8.Size = new System.Drawing.Size(775, 148);
+            this.textBox8.Size = new System.Drawing.Size(782, 148);
             this.textBox8.TabIndex = 27;
             this.textBox8.TextChanged += new System.EventHandler(this.textBox8_TextChanged);
             // 
@@ -483,10 +484,10 @@
             this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label26.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label26.ForeColor = System.Drawing.Color.Blue;
-            this.label26.Location = new System.Drawing.Point(1313, 308);
+            this.label26.Location = new System.Drawing.Point(1325, 308);
             this.label26.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(513, 154);
+            this.label26.Size = new System.Drawing.Size(518, 154);
             this.label26.TabIndex = 47;
             this.label26.Text = "古物番号※";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -495,12 +496,12 @@
             // 
             this.textBox23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox23.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox23.Location = new System.Drawing.Point(1836, 311);
+            this.textBox23.Location = new System.Drawing.Point(1853, 311);
             this.textBox23.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox23.Multiline = true;
             this.textBox23.Name = "textBox23";
             this.textBox23.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox23.Size = new System.Drawing.Size(776, 148);
+            this.textBox23.Size = new System.Drawing.Size(782, 148);
             this.textBox23.TabIndex = 48;
             // 
             // label9
@@ -512,7 +513,7 @@
             this.label9.Location = new System.Drawing.Point(5, 462);
             this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(513, 154);
+            this.label9.Size = new System.Drawing.Size(518, 154);
             this.label9.TabIndex = 6;
             this.label9.Text = "郵便番号※";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -523,33 +524,31 @@
             this.panel2.Controls.Add(this.textBox4);
             this.panel2.Controls.Add(this.label43);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(526, 465);
+            this.panel2.Location = new System.Drawing.Point(531, 465);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(779, 148);
+            this.panel2.Size = new System.Drawing.Size(786, 148);
             this.panel2.TabIndex = 72;
             // 
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1.Location = new System.Drawing.Point(442, 0);
+            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox1.Location = new System.Drawing.Point(400, 0);
             this.textBox1.MaxLength = 4;
-            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(337, 148);
+            this.textBox1.Size = new System.Drawing.Size(386, 127);
             this.textBox1.TabIndex = 73;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // textBox4
             // 
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBox4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox4.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox4.Location = new System.Drawing.Point(0, 0);
             this.textBox4.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox4.MaxLength = 3;
-            this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(244, 148);
+            this.textBox4.Size = new System.Drawing.Size(270, 127);
             this.textBox4.TabIndex = 23;
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
             // 
@@ -557,7 +556,7 @@
             // 
             this.label43.AutoSize = true;
             this.label43.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label43.Location = new System.Drawing.Point(285, 34);
+            this.label43.Location = new System.Drawing.Point(284, 19);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(110, 88);
             this.label43.TabIndex = 72;
@@ -569,10 +568,10 @@
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(1313, 462);
+            this.label10.Location = new System.Drawing.Point(1325, 462);
             this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(513, 154);
+            this.label10.Size = new System.Drawing.Size(518, 154);
             this.label10.TabIndex = 7;
             this.label10.Text = "住所※";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -581,12 +580,12 @@
             // 
             this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox5.Location = new System.Drawing.Point(1836, 465);
+            this.textBox5.Location = new System.Drawing.Point(1853, 465);
             this.textBox5.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox5.Size = new System.Drawing.Size(776, 148);
+            this.textBox5.Size = new System.Drawing.Size(782, 148);
             this.textBox5.TabIndex = 24;
             // 
             // label11
@@ -598,7 +597,7 @@
             this.label11.Location = new System.Drawing.Point(5, 616);
             this.label11.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(513, 154);
+            this.label11.Size = new System.Drawing.Size(518, 154);
             this.label11.TabIndex = 8;
             this.label11.Text = "住所カナ※";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -607,12 +606,12 @@
             // 
             this.textBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox6.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox6.Location = new System.Drawing.Point(528, 619);
+            this.textBox6.Location = new System.Drawing.Point(533, 619);
             this.textBox6.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
             this.textBox6.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox6.Size = new System.Drawing.Size(775, 148);
+            this.textBox6.Size = new System.Drawing.Size(782, 148);
             this.textBox6.TabIndex = 25;
             this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
             // 
@@ -622,10 +621,10 @@
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label13.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label13.ForeColor = System.Drawing.Color.Blue;
-            this.label13.Location = new System.Drawing.Point(1313, 616);
+            this.label13.Location = new System.Drawing.Point(1325, 616);
             this.label13.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(513, 154);
+            this.label13.Size = new System.Drawing.Size(518, 154);
             this.label13.TabIndex = 10;
             this.label13.Text = "電話番号※";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -634,12 +633,12 @@
             // 
             this.textBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox9.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox9.Location = new System.Drawing.Point(1836, 619);
+            this.textBox9.Location = new System.Drawing.Point(1853, 619);
             this.textBox9.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox9.Size = new System.Drawing.Size(776, 148);
+            this.textBox9.Size = new System.Drawing.Size(782, 148);
             this.textBox9.TabIndex = 28;
             // 
             // label14
@@ -650,7 +649,7 @@
             this.label14.Location = new System.Drawing.Point(5, 770);
             this.label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(513, 154);
+            this.label14.Size = new System.Drawing.Size(518, 154);
             this.label14.TabIndex = 11;
             this.label14.Text = "FAX番号";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -659,12 +658,12 @@
             // 
             this.textBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox10.Location = new System.Drawing.Point(528, 773);
+            this.textBox10.Location = new System.Drawing.Point(533, 773);
             this.textBox10.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox10.Multiline = true;
             this.textBox10.Name = "textBox10";
             this.textBox10.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox10.Size = new System.Drawing.Size(775, 148);
+            this.textBox10.Size = new System.Drawing.Size(782, 148);
             this.textBox10.TabIndex = 29;
             // 
             // label12
@@ -672,10 +671,10 @@
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.Location = new System.Drawing.Point(1313, 770);
+            this.label12.Location = new System.Drawing.Point(1325, 770);
             this.label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(513, 154);
+            this.label12.Size = new System.Drawing.Size(518, 154);
             this.label12.TabIndex = 9;
             this.label12.Text = "役職";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -684,12 +683,12 @@
             // 
             this.textBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox11.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox11.Location = new System.Drawing.Point(1836, 773);
+            this.textBox11.Location = new System.Drawing.Point(1853, 773);
             this.textBox11.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox11.Multiline = true;
             this.textBox11.Name = "textBox11";
             this.textBox11.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox11.Size = new System.Drawing.Size(776, 148);
+            this.textBox11.Size = new System.Drawing.Size(782, 148);
             this.textBox11.TabIndex = 31;
             // 
             // label23
@@ -701,7 +700,7 @@
             this.label23.Location = new System.Drawing.Point(5, 924);
             this.label23.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(513, 154);
+            this.label23.Size = new System.Drawing.Size(518, 154);
             this.label23.TabIndex = 30;
             this.label23.Text = "担当者名義※";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -710,12 +709,12 @@
             // 
             this.textBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox12.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox12.Location = new System.Drawing.Point(528, 927);
+            this.textBox12.Location = new System.Drawing.Point(533, 927);
             this.textBox12.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox12.Multiline = true;
             this.textBox12.Name = "textBox12";
             this.textBox12.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox12.Size = new System.Drawing.Size(775, 148);
+            this.textBox12.Size = new System.Drawing.Size(782, 148);
             this.textBox12.TabIndex = 32;
             // 
             // label15
@@ -723,10 +722,10 @@
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label15.Location = new System.Drawing.Point(1313, 924);
+            this.label15.Location = new System.Drawing.Point(1325, 924);
             this.label15.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(513, 154);
+            this.label15.Size = new System.Drawing.Size(518, 154);
             this.label15.TabIndex = 12;
             this.label15.Text = "メールアドレス";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -735,12 +734,12 @@
             // 
             this.textBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox13.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox13.Location = new System.Drawing.Point(1836, 927);
+            this.textBox13.Location = new System.Drawing.Point(1853, 927);
             this.textBox13.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
             this.textBox13.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox13.Size = new System.Drawing.Size(776, 148);
+            this.textBox13.Size = new System.Drawing.Size(782, 148);
             this.textBox13.TabIndex = 33;
             // 
             // label16
@@ -751,7 +750,7 @@
             this.label16.Location = new System.Drawing.Point(5, 1078);
             this.label16.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(513, 154);
+            this.label16.Size = new System.Drawing.Size(518, 154);
             this.label16.TabIndex = 13;
             this.label16.Text = "URL";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -760,12 +759,12 @@
             // 
             this.textBox17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox17.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox17.Location = new System.Drawing.Point(528, 1081);
+            this.textBox17.Location = new System.Drawing.Point(533, 1081);
             this.textBox17.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox17.Multiline = true;
             this.textBox17.Name = "textBox17";
             this.textBox17.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox17.Size = new System.Drawing.Size(775, 148);
+            this.textBox17.Size = new System.Drawing.Size(782, 148);
             this.textBox17.TabIndex = 37;
             // 
             // label17
@@ -773,10 +772,10 @@
             this.label17.AutoSize = true;
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label17.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label17.Location = new System.Drawing.Point(1313, 1078);
+            this.label17.Location = new System.Drawing.Point(1325, 1078);
             this.label17.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(513, 154);
+            this.label17.Size = new System.Drawing.Size(518, 154);
             this.label17.TabIndex = 14;
             this.label17.Text = "金融機関名";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -785,12 +784,12 @@
             // 
             this.textBox14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox14.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox14.Location = new System.Drawing.Point(1836, 1081);
+            this.textBox14.Location = new System.Drawing.Point(1853, 1081);
             this.textBox14.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox14.Multiline = true;
             this.textBox14.Name = "textBox14";
             this.textBox14.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox14.Size = new System.Drawing.Size(776, 148);
+            this.textBox14.Size = new System.Drawing.Size(782, 148);
             this.textBox14.TabIndex = 34;
             // 
             // label22
@@ -801,7 +800,7 @@
             this.label22.Location = new System.Drawing.Point(5, 1232);
             this.label22.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(513, 154);
+            this.label22.Size = new System.Drawing.Size(518, 154);
             this.label22.TabIndex = 20;
             this.label22.Text = "支店名";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -810,12 +809,12 @@
             // 
             this.textBox18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox18.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox18.Location = new System.Drawing.Point(528, 1235);
+            this.textBox18.Location = new System.Drawing.Point(533, 1235);
             this.textBox18.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox18.Multiline = true;
             this.textBox18.Name = "textBox18";
             this.textBox18.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox18.Size = new System.Drawing.Size(775, 148);
+            this.textBox18.Size = new System.Drawing.Size(782, 148);
             this.textBox18.TabIndex = 38;
             // 
             // label18
@@ -823,10 +822,10 @@
             this.label18.AutoSize = true;
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label18.Location = new System.Drawing.Point(1313, 1232);
+            this.label18.Location = new System.Drawing.Point(1325, 1232);
             this.label18.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(513, 154);
+            this.label18.Size = new System.Drawing.Size(518, 154);
             this.label18.TabIndex = 15;
             this.label18.Text = "預金種別";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -835,12 +834,12 @@
             // 
             this.textBox15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox15.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox15.Location = new System.Drawing.Point(1836, 1235);
+            this.textBox15.Location = new System.Drawing.Point(1853, 1235);
             this.textBox15.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox15.Multiline = true;
             this.textBox15.Name = "textBox15";
             this.textBox15.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox15.Size = new System.Drawing.Size(776, 148);
+            this.textBox15.Size = new System.Drawing.Size(782, 148);
             this.textBox15.TabIndex = 35;
             // 
             // label19
@@ -851,7 +850,7 @@
             this.label19.Location = new System.Drawing.Point(5, 1386);
             this.label19.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(513, 154);
+            this.label19.Size = new System.Drawing.Size(518, 154);
             this.label19.TabIndex = 16;
             this.label19.Text = "口座番号";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -860,12 +859,12 @@
             // 
             this.textBox19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox19.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox19.Location = new System.Drawing.Point(528, 1389);
+            this.textBox19.Location = new System.Drawing.Point(533, 1389);
             this.textBox19.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox19.Multiline = true;
             this.textBox19.Name = "textBox19";
             this.textBox19.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox19.Size = new System.Drawing.Size(775, 148);
+            this.textBox19.Size = new System.Drawing.Size(782, 148);
             this.textBox19.TabIndex = 39;
             // 
             // label20
@@ -873,10 +872,10 @@
             this.label20.AutoSize = true;
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label20.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label20.Location = new System.Drawing.Point(1313, 1386);
+            this.label20.Location = new System.Drawing.Point(1325, 1386);
             this.label20.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(513, 154);
+            this.label20.Size = new System.Drawing.Size(518, 154);
             this.label20.TabIndex = 17;
             this.label20.Text = "口座名義";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -885,12 +884,12 @@
             // 
             this.textBox16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox16.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox16.Location = new System.Drawing.Point(1836, 1389);
+            this.textBox16.Location = new System.Drawing.Point(1853, 1389);
             this.textBox16.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox16.Multiline = true;
             this.textBox16.Name = "textBox16";
             this.textBox16.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox16.Size = new System.Drawing.Size(776, 148);
+            this.textBox16.Size = new System.Drawing.Size(782, 148);
             this.textBox16.TabIndex = 36;
             // 
             // label21
@@ -901,7 +900,7 @@
             this.label21.Location = new System.Drawing.Point(5, 1540);
             this.label21.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(513, 154);
+            this.label21.Size = new System.Drawing.Size(518, 154);
             this.label21.TabIndex = 18;
             this.label21.Text = "口座名義カナ";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -910,12 +909,12 @@
             // 
             this.textBox20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox20.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox20.Location = new System.Drawing.Point(528, 1543);
+            this.textBox20.Location = new System.Drawing.Point(533, 1543);
             this.textBox20.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox20.Multiline = true;
             this.textBox20.Name = "textBox20";
             this.textBox20.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox20.Size = new System.Drawing.Size(775, 148);
+            this.textBox20.Size = new System.Drawing.Size(782, 148);
             this.textBox20.TabIndex = 40;
             this.textBox20.TextChanged += new System.EventHandler(this.textBox20_TextChanged);
             // 
@@ -925,10 +924,10 @@
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label27.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label27.ForeColor = System.Drawing.Color.Blue;
-            this.label27.Location = new System.Drawing.Point(1313, 1540);
+            this.label27.Location = new System.Drawing.Point(1325, 1540);
             this.label27.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(513, 154);
+            this.label27.Size = new System.Drawing.Size(518, 154);
             this.label27.TabIndex = 49;
             this.label27.Text = "身分証明書\r\n顔つき身分証明書※";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -937,13 +936,13 @@
             // 
             this.textBox24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox24.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox24.Location = new System.Drawing.Point(1836, 1543);
+            this.textBox24.Location = new System.Drawing.Point(1853, 1543);
             this.textBox24.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox24.Multiline = true;
             this.textBox24.Name = "textBox24";
             this.textBox24.ReadOnly = true;
             this.textBox24.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox24.Size = new System.Drawing.Size(776, 148);
+            this.textBox24.Size = new System.Drawing.Size(782, 148);
             this.textBox24.TabIndex = 50;
             this.textBox24.DoubleClick += new System.EventHandler(this.textBox24_DoubleClick);
             // 
@@ -956,7 +955,7 @@
             this.label24.Location = new System.Drawing.Point(5, 1694);
             this.label24.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(513, 154);
+            this.label24.Size = new System.Drawing.Size(518, 154);
             this.label24.TabIndex = 41;
             this.label24.Text = "登記簿謄本※";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -965,13 +964,13 @@
             // 
             this.textBox21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox21.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox21.Location = new System.Drawing.Point(528, 1697);
+            this.textBox21.Location = new System.Drawing.Point(533, 1697);
             this.textBox21.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox21.Multiline = true;
             this.textBox21.Name = "textBox21";
             this.textBox21.ReadOnly = true;
             this.textBox21.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox21.Size = new System.Drawing.Size(775, 148);
+            this.textBox21.Size = new System.Drawing.Size(782, 148);
             this.textBox21.TabIndex = 42;
             this.textBox21.DoubleClick += new System.EventHandler(this.textBox21_DoubleClick);
             // 
@@ -981,10 +980,10 @@
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label25.ForeColor = System.Drawing.Color.Blue;
-            this.label25.Location = new System.Drawing.Point(1313, 1694);
+            this.label25.Location = new System.Drawing.Point(1325, 1694);
             this.label25.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(513, 154);
+            this.label25.Size = new System.Drawing.Size(518, 154);
             this.label25.TabIndex = 44;
             this.label25.Text = "古物商許可証※";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -993,13 +992,13 @@
             // 
             this.textBox22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox22.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox22.Location = new System.Drawing.Point(1836, 1697);
+            this.textBox22.Location = new System.Drawing.Point(1853, 1697);
             this.textBox22.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox22.Multiline = true;
             this.textBox22.Name = "textBox22";
             this.textBox22.ReadOnly = true;
             this.textBox22.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox22.Size = new System.Drawing.Size(776, 148);
+            this.textBox22.Size = new System.Drawing.Size(782, 148);
             this.textBox22.TabIndex = 45;
             this.textBox22.DoubleClick += new System.EventHandler(this.textBox22_DoubleClick);
             // 
@@ -1011,7 +1010,7 @@
             this.label29.Location = new System.Drawing.Point(5, 1848);
             this.label29.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(513, 154);
+            this.label29.Size = new System.Drawing.Size(518, 154);
             this.label29.TabIndex = 53;
             this.label29.Text = "定款、決算書、\r\n株主構成のいずれか";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1020,13 +1019,13 @@
             // 
             this.textBox25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox25.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox25.Location = new System.Drawing.Point(528, 1851);
+            this.textBox25.Location = new System.Drawing.Point(533, 1851);
             this.textBox25.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox25.Multiline = true;
             this.textBox25.Name = "textBox25";
             this.textBox25.ReadOnly = true;
             this.textBox25.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox25.Size = new System.Drawing.Size(775, 148);
+            this.textBox25.Size = new System.Drawing.Size(782, 148);
             this.textBox25.TabIndex = 58;
             this.textBox25.DoubleClick += new System.EventHandler(this.textBox25_DoubleClick);
             // 
@@ -1035,10 +1034,10 @@
             this.label32.AutoSize = true;
             this.label32.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label32.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label32.Location = new System.Drawing.Point(1313, 1848);
+            this.label32.Location = new System.Drawing.Point(1325, 1848);
             this.label32.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(513, 154);
+            this.label32.Size = new System.Drawing.Size(518, 154);
             this.label32.TabIndex = 56;
             this.label32.Text = "納税証明書\r\n(設立1年以上の場合)";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1047,13 +1046,13 @@
             // 
             this.textBox27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox27.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox27.Location = new System.Drawing.Point(1836, 1851);
+            this.textBox27.Location = new System.Drawing.Point(1853, 1851);
             this.textBox27.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox27.Multiline = true;
             this.textBox27.Name = "textBox27";
             this.textBox27.ReadOnly = true;
             this.textBox27.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox27.Size = new System.Drawing.Size(776, 148);
+            this.textBox27.Size = new System.Drawing.Size(782, 148);
             this.textBox27.TabIndex = 61;
             this.textBox27.DoubleClick += new System.EventHandler(this.textBox27_DoubleClick);
             // 
@@ -1065,7 +1064,7 @@
             this.label30.Location = new System.Drawing.Point(5, 2002);
             this.label30.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(513, 154);
+            this.label30.Size = new System.Drawing.Size(518, 154);
             this.label30.TabIndex = 54;
             this.label30.Text = "在留カード";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1074,13 +1073,13 @@
             // 
             this.textBox29.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox29.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox29.Location = new System.Drawing.Point(528, 2005);
+            this.textBox29.Location = new System.Drawing.Point(533, 2005);
             this.textBox29.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox29.Multiline = true;
             this.textBox29.Name = "textBox29";
             this.textBox29.ReadOnly = true;
             this.textBox29.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox29.Size = new System.Drawing.Size(775, 148);
+            this.textBox29.Size = new System.Drawing.Size(782, 148);
             this.textBox29.TabIndex = 64;
             this.textBox29.DoubleClick += new System.EventHandler(this.textBox29_DoubleClick);
             // 
@@ -1089,10 +1088,10 @@
             this.label33.AutoSize = true;
             this.label33.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label33.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label33.Location = new System.Drawing.Point(1313, 2002);
+            this.label33.Location = new System.Drawing.Point(1325, 2002);
             this.label33.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(513, 154);
+            this.label33.Size = new System.Drawing.Size(518, 154);
             this.label33.TabIndex = 57;
             this.label33.Text = "在留期限";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1101,12 +1100,12 @@
             // 
             this.textBox46.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox46.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox46.Location = new System.Drawing.Point(1836, 2005);
+            this.textBox46.Location = new System.Drawing.Point(1853, 2005);
             this.textBox46.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox46.Multiline = true;
             this.textBox46.Name = "textBox46";
             this.textBox46.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox46.Size = new System.Drawing.Size(776, 148);
+            this.textBox46.Size = new System.Drawing.Size(782, 148);
             this.textBox46.TabIndex = 70;
             // 
             // label31
@@ -1117,7 +1116,7 @@
             this.label31.Location = new System.Drawing.Point(5, 2156);
             this.label31.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(513, 163);
+            this.label31.Size = new System.Drawing.Size(518, 163);
             this.label31.TabIndex = 55;
             this.label31.Text = "印鑑証明";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1126,13 +1125,13 @@
             // 
             this.textBox26.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox26.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox26.Location = new System.Drawing.Point(528, 2159);
+            this.textBox26.Location = new System.Drawing.Point(533, 2159);
             this.textBox26.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox26.Multiline = true;
             this.textBox26.Name = "textBox26";
             this.textBox26.ReadOnly = true;
             this.textBox26.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox26.Size = new System.Drawing.Size(775, 157);
+            this.textBox26.Size = new System.Drawing.Size(782, 157);
             this.textBox26.TabIndex = 60;
             this.textBox26.DoubleClick += new System.EventHandler(this.textBox26_DoubleClick);
             // 
@@ -1337,16 +1336,16 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.tabPage2.Size = new System.Drawing.Size(3680, 1693);
+            this.tabPage2.Size = new System.Drawing.Size(3748, 1805);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(5, 2839);
+            this.panel4.Location = new System.Drawing.Point(5, 2837);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(3627, 50);
+            this.panel4.Size = new System.Drawing.Size(3695, 50);
             this.panel4.TabIndex = 147;
             // 
             // pictureBox2
@@ -1421,19 +1420,19 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(26, 267);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 13;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692308F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692309F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.69231F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(2641, 2300);
             this.tableLayoutPanel2.TabIndex = 145;
             // 
@@ -1451,13 +1450,12 @@
             // textBox54
             // 
             this.textBox54.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBox54.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox54.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox54.Location = new System.Drawing.Point(0, 0);
             this.textBox54.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox54.MaxLength = 3;
-            this.textBox54.Multiline = true;
             this.textBox54.Name = "textBox54";
-            this.textBox54.Size = new System.Drawing.Size(254, 170);
+            this.textBox54.Size = new System.Drawing.Size(280, 167);
             this.textBox54.TabIndex = 93;
             this.textBox54.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox54_KeyPress);
             // 
@@ -1474,12 +1472,11 @@
             // textBox51
             // 
             this.textBox51.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox51.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox51.Location = new System.Drawing.Point(448, 0);
+            this.textBox51.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox51.Location = new System.Drawing.Point(419, 0);
             this.textBox51.MaxLength = 4;
-            this.textBox51.Multiline = true;
             this.textBox51.Name = "textBox51";
-            this.textBox51.Size = new System.Drawing.Size(338, 170);
+            this.textBox51.Size = new System.Drawing.Size(367, 167);
             this.textBox51.TabIndex = 144;
             this.textBox51.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox51_KeyPress);
             // 
@@ -2177,7 +2174,7 @@
             // textBox58
             // 
             this.textBox58.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.textBox58.Location = new System.Drawing.Point(58, 2696);
+            this.textBox58.Location = new System.Drawing.Point(26, 2694);
             this.textBox58.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox58.Multiline = true;
             this.textBox58.Name = "textBox58";
@@ -2189,7 +2186,7 @@
             // 
             this.label64.AutoSize = true;
             this.label64.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label64.Location = new System.Drawing.Point(56, 2602);
+            this.label64.Location = new System.Drawing.Point(28, 2607);
             this.label64.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(233, 68);
@@ -2243,7 +2240,7 @@
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.button13);
-            this.groupBox1.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.groupBox1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(2718, 49);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(872, 749);

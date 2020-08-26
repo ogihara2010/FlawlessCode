@@ -266,8 +266,10 @@ namespace Flawless_ex
             string RegistrationDate = this.dateTimePicker1.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
+
             int PostalCode1 = int.Parse(this.textBox4.Text);
             string PostalCode2 = this.textBox1.Text;
+            
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
             string ShopName = this.textBox7.Text;
@@ -483,8 +485,10 @@ namespace Flawless_ex
                 RegistrationDate1 = row["registration_date"].ToString();
                 CompanyName = row["company_name"].ToString();
                 CompanyNameKana = row["company_kana"].ToString();
+
                 PostalCode1 = int.Parse(row["postal_code1"].ToString());
                 PostalCode2 = row["postal_code2"].ToString();
+                
                 Address = row["address"].ToString();
                 AddressKana = row["address_kana"].ToString();
                 ShopName = row["shop_name"].ToString();
@@ -501,7 +505,9 @@ namespace Flawless_ex
                 BranchName = row["branch_name"].ToString();
                 AccountNumber = row["account_number"].ToString();
                 AccountNameKana = row["account_name_kana"].ToString();
+                
                 RegisterCopy = row["register_copy"].ToString();
+                
                 Antiquelicense = row["antique_license"].ToString();
                 AntiqueNumber = (int)row["antique_number"];
                 ID = row["id"].ToString();
@@ -516,8 +522,10 @@ namespace Flawless_ex
                 this.dateTimePicker1.Text = RegistrationDate1;
                 this.textBox2.Text = CompanyName;
                 this.textBox3.Text = CompanyNameKana;
+
                 this.textBox4.Text = PostalCode1.ToString();
                 this.textBox1.Text = PostalCode2.ToString();
+                
                 this.textBox5.Text = Address;
                 this.textBox6.Text = AddressKana;
                 this.textBox7.Text = ShopName;
@@ -539,7 +547,9 @@ namespace Flawless_ex
                 this.textBox23.Text = AntiqueNumber.ToString();
                 this.textBox24.Text = ID;
                 this.textBox25.Text = AolFinancialShareholder;
+
                 this.textBox47.Text = PeriodStay;
+                
                 this.textBox26.Text = SealCertification;
                 this.textBox27.Text = TaxCertification;
                 this.textBox28.Text = Remarks;
@@ -593,7 +603,9 @@ namespace Flawless_ex
                 AddressKana = row["address_kana"].ToString();
                 Name = row["name"].ToString();
                 NameKana = row["name_kana"].ToString();
+
                 Birthday = row["birthday"].ToString();
+                
                 PhoneNumber = row["phone_number"].ToString();
                 FaxNumber = row["fax_number"].ToString();
                 Occupation = row["occupation"].ToString();
@@ -782,13 +794,13 @@ namespace Flawless_ex
             }
             #endregion
             #endregion
-            DialogResult dr = MessageBox.Show("更新しますか？", "登録確認", MessageBoxButtons.YesNo);
-
+            DialogResult dr = MessageBox.Show("個人情報を変更しますか？", "登録確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dr == DialogResult.No)
             {
                 return;
             }
+
             #region "旧データ"
             NpgsqlConnection conn1 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
@@ -800,13 +812,17 @@ namespace Flawless_ex
             DataRow row1;
             row1 = dt2.Rows[0];
             string RegistrationDate2_old = row1["registration_date"].ToString();
+            
             int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
             string PostalCode2_old = row1["postal_code2"].ToString();
+            
             string Address_old = row1["address"].ToString();
             string AddressKana_old = row1["address_kana"].ToString();
             string Name_old = row1["name"].ToString();
             string NameKana_old = row1["name_kana"].ToString();
+
             string Birthday_old = row1["birthday"].ToString();
+            
             string PhoneNumber_old = row1["phone_number"].ToString();
             string FaxNumber_old = row1["fax_number"].ToString();
             string Occupation_old = row1["occupation"].ToString();
@@ -821,7 +837,9 @@ namespace Flawless_ex
             string Antiquelicense_old = row1["antique_license"].ToString();
             string PhotoID_old = row1["photo_id"].ToString();
             string ID_old = row1["id_number"].ToString();
+            
             string PeriodStay_old = row1["period_stay"].ToString();
+            
             string SealCertification_old = row1["seal_certification"].ToString();
             string TaxCertification_old = row1["tax_certificate"].ToString();
             string Remarks_old = row1["remarks"].ToString();
@@ -848,8 +866,10 @@ namespace Flawless_ex
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
             string Birthday = this.textBox50.Text;
+            
             int PostalCode1 = int.Parse(this.textBox54.Text);
             string PostalCode2 = this.textBox51.Text;
+            
             string Address = this.textBox53.Text;
             string AddressKana = this.textBox52.Text;
             string PhoneNumber = this.textBox49.Text;
@@ -866,7 +886,9 @@ namespace Flawless_ex
             string Antiquelicense = this.textBox36.Text;
             string PhotoID = this.textBox35.Text;
             string ID = this.textBox34.Text;
+            
             string PeriodStay = this.textBox46.Text;
+            
             string SealCertification = this.textBox32.Text;
             string TaxCertification = this.textBox31.Text;
             string Remarks = this.textBox58.Text;

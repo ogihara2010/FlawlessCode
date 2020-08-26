@@ -201,8 +201,10 @@ namespace Flawless_ex
             string RegistrationDate = this.deliveryDateBox.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
+            
             int PostalCode1 = int.Parse(this.textBox4.Text);
             string PostalCode2 = this.textBox1.Text;
+            
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
             string ShopName = this.textBox7.Text;
@@ -223,7 +225,9 @@ namespace Flawless_ex
             string Antiquelicense = this.textBox22.Text;
             int AntiqueNumber = int.Parse(this.textBox23.Text);
             string ID = this.textBox24.Text;
+            
             string PeriodStay = this.textBox46.Text;
+            
             string SealCertification = this.textBox26.Text;
             string TaxCertification = this.textBox27.Text;
             string Remarks = this.textBox28.Text;
@@ -244,7 +248,7 @@ namespace Flawless_ex
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
-            MessageBox.Show("登録しました。");
+            MessageBox.Show("法人の顧客を登録しました。", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
             screan = false;
             this.Close();
@@ -466,8 +470,15 @@ namespace Flawless_ex
 
         private void ClientMaster_add_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (screan)
+            {
                 ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
                 clientmaster.Show();
+            }
+            else
+            {
+                screan = true;
+            }
         }
 
         private void Label6_Click(object sender, EventArgs e)
