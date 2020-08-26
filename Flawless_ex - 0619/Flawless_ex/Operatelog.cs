@@ -11,7 +11,9 @@ namespace Flawless_ex
         int staff_id;
         string Access_auth;
         string Pass;
-
+        string document;
+        int control;
+        int grade;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
         DataTable dt2 = new DataTable();
@@ -20,6 +22,16 @@ namespace Flawless_ex
         DataTable dt5 = new DataTable();
         DataTable dt6 = new DataTable();
         DataTable dt7 = new DataTable();
+        DataTable dt8 = new DataTable();
+        DataTable dt9 = new DataTable();
+        DataTable dt10 = new DataTable();
+        DataTable dt11 = new DataTable();
+        DataTable dt12 = new DataTable();
+        DataTable dt13 = new DataTable();
+        DataTable dt14 = new DataTable();
+        DataTable dt15 = new DataTable();
+        DataTable dt16 = new DataTable();
+        DataTable dt17 = new DataTable();
         public Operatelog(MainMenu main, int id, string access_auth, string pass)
         {
             InitializeComponent();
@@ -328,6 +340,58 @@ namespace Flawless_ex
                 dataGridView1.Columns[3].HeaderText = "変更後";
                 dataGridView1.Columns[4].HeaderText = "変更理由";
                 conn.Close();
+            }
+            #endregion
+            #region "納品書"
+            else if (comboBox1.Text == "納品書")
+            {
+                this.button1.Visible = true;
+                NpgsqlConnection conn = new NpgsqlConnection();
+                NpgsqlDataAdapter adapter13;
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                string sql_str = "select A.registration_date, C.staff_name, A.control_number, A.reason from delivery_m  A " +
+                                 " inner join staff_m C ON (A.staff_code = C.staff_code) " +
+                                 " where A.reason is not Null;";
+                conn.Open();
+
+                adapter13 = new NpgsqlDataAdapter(sql_str, conn);
+                adapter13.Fill(dt14);
+                dataGridView1.DataSource = dt14;
+                dataGridView1.Columns[0].HeaderText = "更新日時";
+                dataGridView1.Columns[1].HeaderText = "変更者";
+                dataGridView1.Columns[2].HeaderText = "変更があった管理番号";
+                dataGridView1.Columns[3].HeaderText = "変更理由";
+                conn.Close();
+
+                control = (int)this.dataGridView1.CurrentRow.Cells[2].Value;
+            }
+            #endregion
+            #region "成績入力"
+            else if (comboBox1.Text == "成績一覧")
+            {
+                this.button1.Visible = false;
+                NpgsqlConnection conn = new NpgsqlConnection();
+                NpgsqlDataAdapter adapter14;
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                string sql_str = "select A.registration_date, B.staff_name, A.grade_number,C.item_name, D.item_name, A.reason from item_name_change_revisions  A " +
+                                 " inner join staff_m B ON (A.staff_id = B.staff_code) inner join item_m C ON (A.before_item_code = C.item_code) inner join item_m D " +
+                                 " ON (A.after_item_code = D.item_code);";
+                conn.Open();
+
+                adapter14 = new NpgsqlDataAdapter(sql_str, conn);
+                adapter14.Fill(dt15);
+                dataGridView1.DataSource = dt15;
+                dataGridView1.Columns[0].HeaderText = "更新日時";
+                dataGridView1.Columns[1].HeaderText = "変更者";
+                dataGridView1.Columns[2].HeaderText = "変更があった成績番号";
+                dataGridView1.Columns[3].HeaderText = "変更前";
+                dataGridView1.Columns[4].HeaderText = "変更後";
+                dataGridView1.Columns[5].HeaderText = "変更理由";
+                conn.Close();
+
+                grade = (int)this.dataGridView1.CurrentRow.Cells[2].Value;
             }
             #endregion
         }

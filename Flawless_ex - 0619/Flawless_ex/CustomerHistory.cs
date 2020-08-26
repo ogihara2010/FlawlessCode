@@ -30,7 +30,10 @@ namespace Flawless_ex
         string data;
         string Pass;
         string Access_auth;
-
+        bool screan = true;
+        string document;
+        int control;
+        string antiqueNumber;
         public CustomerHistory(MainMenu main, int id, string data, string pass, string access_auth)
         {
             InitializeComponent();
@@ -43,7 +46,10 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass, Access_auth);
+            screan = false;
             this.Close();
+            customerHistorySelect.Show();
         }
 
         private void CustomerHistory_Load(object sender, EventArgs e)
@@ -76,10 +82,12 @@ namespace Flawless_ex
             comboBox1.DataSource = dt;
             comboBox1.DisplayMember = "main_category_name";
             comboBox1.ValueMember = "main_category_code";
+            comboBox1.SelectedIndex = -1;
 
             comboBox2.DataSource = dt2;
             comboBox2.DisplayMember = "item_name";
             comboBox2.ValueMember = "item_code";
+            comboBox2.SelectedIndex = -1;
         }
 
         private void dataSelectButton_Click(object sender, EventArgs e)//検索ボタン
@@ -92,15 +100,22 @@ namespace Flawless_ex
             string addresskana;
             string phoneNumber;
             string documentNumber;
-            int controlNumber;
-            int antiqueNumber;
+            string controlNumber;
+            string antiqueNumber;
             string mainCategory;
+            string code;
             string item;
+            string itemcode;
             string date1 = this.dateTimePicker1.Text;
             string date2 = this.settlementBox.Text;
             string method;
             int amount1;
             int amount2;
+            string amountA;
+            string amountB;
+            int ant;
+            int amt;
+            int amt1;
             string search1 = "or";
             string search2 = "or";
             string search3 = "or";
@@ -113,8 +128,6 @@ namespace Flawless_ex
             string search10 = "or";
             string search11 = "or";
             string search12 = "or";
-            string search13 = "or";
-            string search14 = "or";
             #endregion
 
             NpgsqlConnection conn = new NpgsqlConnection();
@@ -131,282 +144,327 @@ namespace Flawless_ex
             if (radioButton1.Checked == true)
             {
                 type = 0;
-                if (!string.IsNullOrWhiteSpace(textBox1.Text))
-                {
-                    shopname = this.textBox1.Text;
-                }
-                else
-                {
-                    shopname = "";
-                }
+                #region "ラジオボタン"
                 if (radioButton3.Checked == true)
                 {
                     search1 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox2.Text))
-                {
-                    shopnamekana = this.textBox2.Text;
-                }
-                else
-                {
-                    shopnamekana = "";
-                }
                 if (radioButton6.Checked == true)
                 {
                     search2 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox3.Text))
-                {
-                    name = this.textBox3.Text;
-                }
-                else
-                {
-                    name = "";
-                }
                 if (radioButton31.Checked == true)
                 {
                     search3 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox4.Text))
-                {
-                    address = this.textBox4.Text;
-                }
-                else
-                {
-                    address = "";
-                }
                 if (radioButton33.Checked == true)
                 {
                     search4 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox5.Text))
-                {
-                    addresskana = this.textBox4.Text;
-                }
-                else
-                {
-                    addresskana = "";
-                }
                 if (radioButton35.Checked == true)
                 {
                     search5 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox6.Text))
-                {
-                    phoneNumber = this.textBox6.Text;
-                }
-                else
-                {
-                    phoneNumber = "";
-                }
                 if (radioButton37.Checked == true)
                 {
                     search6 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox7.Text))
-                {
-                    documentNumber = this.textBox7.Text;
-                }
-                else
-                {
-                    documentNumber = "''";
-                }
                 if (radioButton39.Checked == true)
                 {
                     search7 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox8.Text))
-                {
-                    controlNumber = int.Parse(this.textBox8.Text);
-                }
-                else
-                {
-                    controlNumber = 0;
-                }
                 if (radioButton41.Checked == true)
                 {
                     search8 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox9.Text))
-                {
-                    antiqueNumber = int.Parse(this.textBox9.Text);
-                }
-                else
-                {
-                    antiqueNumber = 0;
-                }
                 if (radioButton43.Checked == true)
                 {
                     search9 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(comboBox1.Text))
-                {
-                    mainCategory = this.comboBox1.Text;
-                }
-                else
-                {
-                    mainCategory = "";
-                }
                 if (radioButton45.Checked == true)
                 {
                     search10 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(comboBox2.Text))
-                {
-                    item = this.comboBox2.Text;
-                }
-                else
-                {
-                    item = "";
-                }
                 if (radioButton47.Checked == true)
                 {
                     search11 = "and";
 
                 }
                 else { }
-
                 if (radioButton49.Checked == true)
                 {
                     search12 = "and";
 
                 }
                 else { }
+                #endregion
+                #region "入力パラメーター"
+                if (!string.IsNullOrWhiteSpace(textBox1.Text))
+                {
+                    shopname = "B.shopname = '" + this.textBox1.Text + "'" + search1;
+
+                }
+                else
+                {
+                    shopname = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox2.Text))
+                {
+                    shopnamekana = " B.shop_name_kana = '" + this.textBox2.Text + "'" + search2;
+                }
+                else
+                {
+                    shopnamekana = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox3.Text))
+                {
+                    name = this.textBox3.Text;
+                }
+                else { }
+                if (!string.IsNullOrWhiteSpace(textBox4.Text))
+                {
+                    address = " B.address like '% " + this.textBox4.Text + "%'" + search3;
+                }
+                else
+                {
+                    address = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox5.Text))
+                {
+                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'" + search4;
+                }
+                else
+                {
+                    addresskana = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox6.Text))
+                {
+                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'" + search5;
+                }
+                else
+                {
+                    phoneNumber = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox7.Text))
+                {
+                    documentNumber = " A.document_number = '" + this.textBox7.Text + "' " + search7;
+                }
+                else
+                {
+                    documentNumber = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox8.Text))
+                {
+                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " " + search7;
+                }
+                else
+                {
+                    controlNumber = "";
+                }
+                if (!string.IsNullOrWhiteSpace(textBox9.Text))
+                {
+                    antiqueNumber = " B.antique_number = " + int.Parse(this.textBox9.Text) + " " + search8;
+                }
+                else
+                {
+                    antiqueNumber = "";
+                }
+                if (!string.IsNullOrWhiteSpace(comboBox1.Text))
+                {
+                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "'" + search9;
+                }
+                else
+                {
+                    mainCategory = "";
+                }
+                if (!string.IsNullOrWhiteSpace(comboBox2.Text))
+                {
+                    item = " D.item_name = '" + this.comboBox2.Text + "'" + search10;
+                }
+                else
+                {
+                    item = "";
+                }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = this.comboBox3.Text;
+                    method = search11 + " A.payment_method = '" + this.comboBox3.Text + "'" + search12;
                 }
                 else
                 {
                     method = "";
                 }
-                if (radioButton51.Checked == true)
-                {
-                    search13 = "and";
-
-                }
-                else { }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amount1 = int.Parse(this.textBox10.Text);
+                    amountA = " A.total >= " + int.Parse(this.textBox10.Text);
                 }
                 else
                 {
-                    amount1 = 0;
+                    amountA = "";
                 }
                 if (!string.IsNullOrWhiteSpace(textBox11.Text))
                 {
-                    amount2 = int.Parse(this.textBox11.Text);
+                    amountB = " and A.total <= " + int.Parse(this.textBox11.Text);
                 }
                 else
                 {
-                    amount2 = 999999999;
+                    amountB = "";
                 }
-                if (radioButton53.Checked == true)
+                if (string.IsNullOrWhiteSpace(textBox9.Text))
                 {
-                    search14 = "and";
-
+                    ant = 0;
                 }
-                else { }
+                else
+                {
+                    ant = int.Parse(textBox9.Text);
+                }
+                if (string.IsNullOrWhiteSpace(textBox11.Text))
+                {
+                    amt = 0;
+                }
+                else
+                {
+                    amt = int.Parse(textBox11.Text);
+                }
+                if (string.IsNullOrWhiteSpace(textBox10.Text))
+                {
+                    amt1 = 0;
+                }
+                else
+                {
+                    amt1 = int.Parse(textBox11.Text);
+                }
+                if (string.IsNullOrWhiteSpace(textBox8.Text))
+                {
+                    control = 0;
+                }
+                else
+                {
+                    control = int.Parse(textBox8.Text);
+                }
+                #endregion
                 #endregion
                 #region "繋げるSQL"
                 #region "大分類名をコードに変換"
-                string sql2 = "select * from main_category_m where main_category_name = '" + mainCategory + "';";
-                conn2.Open();
-                adapter2 = new NpgsqlDataAdapter(sql2, conn2);
-                adapter2.Fill(dt5);
-                DataRow row;
-                row = dt5.Rows[0];
-                string code = row["main_category_code"].ToString();
+                if (comboBox1.SelectedIndex != -1)
+                {
+                    string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
+                    conn2.Open();
+                    adapter2 = new NpgsqlDataAdapter(sql2, conn2);
+                    adapter2.Fill(dt5);
+                    DataRow row;
+                    row = dt5.Rows[0];
+                    code = row["main_category_code"].ToString();
+                }
+                else
+                {
+                    code = "100";
+                }
+
                 #endregion
                 #region "品名をコードに変換"
-                string sql3 = "select * from item_m where item_name = '" + item + "';";
-                conn3.Open();
-                adapter3 = new NpgsqlDataAdapter(sql3, conn3);
-                adapter3.Fill(dt6);
-                DataRow row2;
-                row2 = dt6.Rows[0];
-                string itemcode = row2["item_code"].ToString();
+                if (comboBox2.SelectedIndex != -1)
+                {
+                    string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
+                    conn3.Open();
+                    adapter3 = new NpgsqlDataAdapter(sql3, conn3);
+                    adapter3.Fill(dt6);
+                    DataRow row2;
+                    row2 = dt6.Rows[0];
+                    itemcode = row2["item_code"].ToString();
+                }
+                else
+                {
+                    itemcode = "1000";
+                }
+
                 #endregion
 
                 if (data == "S")
                 {
-                    string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                            "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
-                             + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.document_number = '" + documentNumber + "' " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
-                             + " D.main_category_code = " + code + " " + search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
-                             + " A.payment_method = '" + method + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                    string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
+                            "where " + shopname + shopnamekana + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                              method + amountA + amountB + ";";
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
                     #endregion
-                    DataRow row3;
+
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    string name1 = row3["shop_name"].ToString();
-                    string phoneNumber1 = row3["phone_number"].ToString();
-                    string address1 = row3["address"].ToString();
-                    string item1 = row3["item_name"].ToString();
 
+                    string name1 = shopname;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    string method1 = method;
+                    int antique = ant;
+                    document = this.textBox7.Text;
+                    amount2 = amt;
+                    amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data, Pass, Access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, Access_auth);
                     this.Hide();
                     dataSearch.Show();
                 }
                 else if (data == "D")
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
-                           "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                           "where B.shop_name = '" + shopname + "'" + search1 + " B.shop_name_kana = '" + shopnamekana + "'" + search2 + " B.address like '% " + address + "%'" + search3 + " B.address_kana = '" + addresskana + "'" + search4
-                            + " B.phone_number = '" + phoneNumber + "'" + search5 + " A.control_number = " + controlNumber + " " + search7 + " B.antique_number = " + antiqueNumber + " " + search8
-                            + " D.main_category_code = " + code + " " + search9 + " D.item_code = " + itemcode + " " + search10 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" + search11
-                            + " A.payment_method = '" + method + "'" + search12 + "( A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                           "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
+                           "where " + shopname + shopnamekana + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                              method + amountA + amountB + ";";
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
 
-                    DataRow row3;
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    string name1 = row3["shop_name"].ToString();
-                    string phoneNumber1 = row3["phone_number"].ToString();
-                    string address1 = row3["address"].ToString();
-                    string item1 = row3["item_name"].ToString();
+                    string name1 = shopname;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    //control = int.Parse(this.textBox8.Text);
+                    string method1 = method;
+                    documentNumber = controlNumber;
+                    int antique = ant;
+                    amount2 = amt;
+                    amount1 = amt1;
 
-
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, item1, search1, search3, search5, data, Pass, Access_auth);
-                    this.Hide();
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, Access_auth);
+                    screan = false;
+                    this.Close();
                     dataSearch.Show();
                 }
             }
@@ -414,254 +472,291 @@ namespace Flawless_ex
             if (radioButton2.Checked == true)
             {
                 type = 1;
-                if (!string.IsNullOrWhiteSpace(textBox3.Text))
-                {
-                    name = this.textBox3.Text;
-                }
-                else
-                {
-                    name = "";
-                }
+                #region "ラジオボタン"
                 if (radioButton31.Checked == true)
                 {
                     search3 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox4.Text))
-                {
-                    address = this.textBox4.Text;
-                }
-                else
-                {
-                    address = "";
-                }
                 if (radioButton33.Checked == true)
                 {
                     search4 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox5.Text))
-                {
-                    addresskana = this.textBox4.Text;
-                }
-                else
-                {
-                    addresskana = "";
-                }
                 if (radioButton35.Checked == true)
                 {
                     search5 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox6.Text))
-                {
-                    phoneNumber = this.textBox6.Text;
-                }
-                else
-                {
-                    phoneNumber = "";
-                }
                 if (radioButton37.Checked == true)
                 {
                     search6 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox7.Text))
-                {
-                    documentNumber = this.textBox7.Text;
-                }
-                else
-                {
-                    documentNumber = "''";
-                }
                 if (radioButton39.Checked == true)
                 {
                     search7 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox8.Text))
-                {
-                    controlNumber = int.Parse(this.textBox8.Text);
-                }
-                else
-                {
-                    controlNumber = 0;
-                }
                 if (radioButton41.Checked == true)
                 {
                     search8 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(textBox9.Text))
-                {
-                    antiqueNumber = int.Parse(this.textBox9.Text);
-                }
-                else
-                {
-                    antiqueNumber = 0;
-                }
                 if (radioButton43.Checked == true)
                 {
                     search9 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(comboBox1.Text))
-                {
-                    mainCategory = this.comboBox1.Text;
-                }
-                else
-                {
-                    mainCategory = "";
-                }
                 if (radioButton45.Checked == true)
                 {
                     search10 = "and";
 
                 }
                 else { }
-                if (!string.IsNullOrWhiteSpace(comboBox2.Text))
-                {
-                    item = this.comboBox2.Text;
-                }
-                else
-                {
-                    item = "";
-                }
                 if (radioButton47.Checked == true)
                 {
                     search11 = "and";
 
                 }
                 else { }
-
                 if (radioButton49.Checked == true)
                 {
                     search12 = "and";
 
                 }
                 else { }
+                #endregion
+                #region "パラメーター"
+                if (!string.IsNullOrWhiteSpace(textBox3.Text))
+                {
+                    name = "B.name = '" + this.textBox3.Text + "'" + search3;
+                }
+                else
+                {
+                    name = "";
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox4.Text))
+                {
+                    address = " B.address like '% " + this.textBox4.Text + "%'" + search4;
+                }
+                else
+                {
+                    address = "";
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox5.Text))
+                {
+                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'" + search5;
+                }
+                else
+                {
+                    addresskana = "";
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox6.Text))
+                {
+                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'" + search7;
+                }
+                else
+                {
+                    phoneNumber = "";
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox7.Text))
+                {
+                    documentNumber = " A.document_number = '" + this.textBox7.Text + "'" + search8;
+                }
+                else
+                {
+                    documentNumber = "";
+                }
+
+                if (!string.IsNullOrWhiteSpace(textBox8.Text))
+                {
+                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " " + search8;
+                }
+                else
+                {
+                    controlNumber = "";
+                }
+                if (!string.IsNullOrWhiteSpace(comboBox1.Text))
+                {
+                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "' " + search10;
+                }
+                else
+                {
+                    mainCategory = "";
+                }
+
+                if (!string.IsNullOrWhiteSpace(comboBox2.Text))
+                {
+                    item = " D.item_name = '" + this.comboBox2.Text + "'" + search11;
+                }
+                else
+                {
+                    item = "";
+                }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = this.comboBox3.Text;
+                    method = search11 + " A.payment_method = '" + this.comboBox3.Text + "'" + search12;
                 }
                 else
                 {
                     method = "";
                 }
-                if (radioButton51.Checked == true)
-                {
-                    search13 = "and";
-
-                }
-                else { }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amount1 = int.Parse(this.textBox10.Text);
+                    amountA = " (A.total >= " + int.Parse(this.textBox10.Text);
                 }
                 else
                 {
-                    amount1 = 0;
+                    amountA = " ";
                 }
                 if (!string.IsNullOrWhiteSpace(textBox11.Text))
                 {
-                    amount2 = int.Parse(this.textBox11.Text);
+                    amountB = " and A.total <= " + int.Parse(this.textBox11.Text);
                 }
                 else
                 {
-                    amount2 = 999999999;
+                    amountB = "";
                 }
-                if (radioButton53.Checked == true)
+                if (string.IsNullOrWhiteSpace(textBox9.Text))
                 {
-                    search14 = "and";
-
+                    ant = 0;
                 }
-                else { }
+                else
+                {
+                    ant = int.Parse(textBox9.Text);
+                }
+                if (string.IsNullOrWhiteSpace(textBox11.Text))
+                {
+                    amt = 0;
+                }
+                else
+                {
+                    amt = int.Parse(textBox11.Text);
+                }
+                if (string.IsNullOrWhiteSpace(textBox10.Text))
+                {
+                    amt1 = 0;
+                }
+                else
+                {
+                    amt1 = int.Parse(textBox10.Text);
+                }
+                #endregion
                 #endregion
                 #region "繋げるSQL"
                 #region "大分類名をコードに変換"
-                string sql2 = "select * from main_category_m where main_category_name = '" + mainCategory + "';";
-                conn2.Open();
-                adapter2 = new NpgsqlDataAdapter(sql2, conn2);
-                adapter2.Fill(dt5);
-                DataRow row;
-                row = dt5.Rows[0];
-                string code = row["main_category_code"].ToString();
+                if (comboBox1.SelectedIndex != -1)
+                {
+                    string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
+                    conn2.Open();
+                    adapter2 = new NpgsqlDataAdapter(sql2, conn2);
+                    adapter2.Fill(dt5);
+                    DataRow row;
+                    row = dt5.Rows[0];
+                    code = row["main_category_code"].ToString();
+                }
+                else
+                {
+                    code = "100";
+                }
                 #endregion
                 #region "品名をコードに変換"
-                string sql3 = "select * from item_m where item_name = '" + item + "';";
-                conn3.Open();
-                adapter3 = new NpgsqlDataAdapter(sql3, conn3);
-                adapter3.Fill(dt6);
-                DataRow row2;
-                row2 = dt6.Rows[0];
-                string itemcode = row2["item_code"].ToString();
+                if (comboBox2.SelectedIndex != -1)
+                {
+                    string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
+                    conn3.Open();
+                    adapter3 = new NpgsqlDataAdapter(sql3, conn3);
+                    adapter3.Fill(dt6);
+                    DataRow row2;
+                    row2 = dt6.Rows[0];
+                    itemcode = row2["item_code"].ToString();
+                }
+                else
+                {
+                    itemcode = "1000";
+                }
                 #endregion
 
                 if (data == "S")
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
-                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                            "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
-                             + " B.phone_number = '" + phoneNumber + "'" + " " + search7 + " A.document_number = " + documentNumber + " " + search8 + " "
-                             + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
-                             + " A.payment_method = '" + method + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
+                            "where A.type = 1 and " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method + amountA + amountB + ";";
 
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
                     #endregion
 
-                    DataRow row3;
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    name = row3["name"].ToString();
-                    phoneNumber = row3["phone_number"].ToString();
-                    address = row3["address"].ToString();
-                    item = row3["item_name"].ToString();
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data, Pass, Access_auth);
-                    this.Hide();
+                    string name1 = name;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    string method1 = method;
+                    antiqueNumber = null;
+                    amount2 = amt;
+                    amount1 = amt1;
+
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, Access_auth);
+                    screan = false;
+                    this.Close();
                     dataSearch.Show();
                 }
                 if (data == "D")
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
-                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                            "where B.name = '" + name + "'" + search3 + " B.address like '% " + address + "%'" + search4 + " B.address_kana = '" + addresskana + "'" + search5
-                             + " B.phone_number = '" + phoneNumber + "'" + " " + search7 + " A.control_number = " + controlNumber + " " + search8 + " "
-                             + " D.main_category_code = " + code + " " + search10 + " D.item_code = " + itemcode + " " + search11 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + search11
-                             + " A.payment_method = '" + method + "'" + search12 + " (A.total >= " + amount1 + " and A.total <= " + amount2 + ");";
+                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
+                            "where " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
+                             + method + amountA + amountB + ";";
 
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
-                    DataRow row3;
+
                     int a = dt7.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    row3 = dt7.Rows[0];
-                    name = row3["name"].ToString();
-                    phoneNumber = row3["phone_number"].ToString();
-                    address = row3["address"].ToString();
-                    item = row3["item_name"].ToString();
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name, phoneNumber, address, item, search3, search4, search5, data, Pass, Access_auth);
-                    this.Hide();
+                    string name1 = name;
+                    string phoneNumber1 = phoneNumber;
+                    string address1 = address;
+                    string addresskana1 = addresskana;
+                    string item1 = item;
+                    string code1 = mainCategory;
+                    string method1 = method;
+                    antiqueNumber = null;
+                    documentNumber = controlNumber;
+                    amount2 = amt;
+                    amount1 = amt1;
+
+                    //control = int.Parse(this.textBox8.Text);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, Access_auth);
+                    screan = false;
+                    this.Close();
                     dataSearch.Show();
                 }
             }
@@ -687,27 +782,6 @@ namespace Flawless_ex
             radioButton4.Enabled = true;
             radioButton5.Enabled = true;
             radioButton6.Enabled = true;
-        }
-
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (a > 1) {
-                int codeNum = (int)comboBox1.SelectedValue;
-                dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
-                conn.Open();
-                //品名検索用
-                string sql_str = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt2);
-                comboBox2.DataSource = dt2;
-                comboBox2.DisplayMember = "item_name";
-                comboBox2.ValueMember = "item_code";
-
-                conn.Close();
-            }
-            a++;
         }
 
         private void CustomerHistory_FormClosed(object sender, FormClosedEventArgs e)
