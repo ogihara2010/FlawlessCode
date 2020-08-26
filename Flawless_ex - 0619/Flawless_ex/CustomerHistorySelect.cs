@@ -12,50 +12,57 @@ namespace Flawless_ex
 {
     public partial class CustomerHistorySelect : Form
     {
+        TopMenu topMenu;
         MainMenu mainMenu;
         int staff_id;
         string data;
         string Pass;
-        bool screan = true;
-        public CustomerHistorySelect(MainMenu main, int id, string data, string pass)
+        string Access_auth;
+        bool screan;
+
+        public CustomerHistorySelect(MainMenu main, int id, string data, string pass, string access_auth)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
             this.data = data;
             this.Pass = pass;
+            this.Access_auth = access_auth;
         }
 
         private void Button2_Click(object sender, EventArgs e)
         {
             data = "S";
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, Access_auth);
             screan = false;
-            this.Hide();
+            this.Close();
             customerHistory.Show();
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
             data = "D";
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, Access_auth);
             screan = false;
-            this.Hide();
+            this.Close();
             customerHistory.Show();
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            screan = false;
             this.Close();
-            mainMenu.Show();
         }
 
         private void CustomerHistorySelect_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (screan)
             {
+                mainMenu = new MainMenu(topMenu, staff_id, Pass, Access_auth);
                 mainMenu.Show();
+            }
+            else
+            {
+                screan = true;
             }
         }
     }

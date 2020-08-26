@@ -27,7 +27,7 @@ namespace Flawless_ex
         string Birthday;                    //誕生日（個人）, DBから持ってきた値を保持
         DateTime BirthdayDate;
         string Access_auth;
-        string staff_name;
+        string staff_name;                  //顧客の名前
         string address;
         decimal total;
         int grade;
@@ -37,63 +37,9 @@ namespace Flawless_ex
         string Pass;
         int Control;
         string Data;
-        #region "計算書"
-        decimal amount10;
-        decimal amount11;
-        decimal amount12;
-        decimal amount13;
-        decimal amount14;
-        decimal amount15;
-        decimal amount16;
-        decimal amount17;
-        decimal amount18;
-        decimal amount19;
-        decimal amount110;
-        decimal amount111;
-        decimal amount112;
-        #endregion
-        #region "納品書"
-        decimal amount00;
-        decimal amount01;
-        decimal amount02;
-        decimal amount03;
-        decimal amount04;
-        decimal amount05;
-        decimal amount06;
-        decimal amount07;
-        decimal amount08;
-        decimal amount09;
-        decimal amount010;
-        decimal amount011;
-        decimal amount012;
-        #endregion
-        #region "買取販売履歴の引数"
-        string search1;
-        string search2;
-        string search3;
-        string search4;
-        string search5;
-        string search6;
-        string search7;
-        string search8;
-        string search9;
-        string search10;
-        string search11;
-        string search12;
-        string name1;
-        string phoneNumber1;
-        string address1;
-        string addresskana1;
-        string code1;
-        string item1;
-        string date1;
-        string date2;
-        string method1;
-        string amountA;
-        string amountB;
-        string antiqueNumber;
-        string documentNumber;
-        #endregion
+        string Search1;
+        string Search2;
+        string Search3;
         bool screan = true;
         bool NameChange = false;                    //品名を変更したら true
         bool CarryOver;                      //次月持ち越しから画面遷移したとき
@@ -318,9 +264,10 @@ namespace Flawless_ex
         DataTable Data12 = new DataTable();
         DataTable Data13 = new DataTable();
         #endregion
-        //list_resultに更新する際のデータテイブル                         < - いらないかも？
+
+        //list_result_revisions に登録する際のデータテイブル                         < - 登録時・再登録時・品名変更の新規登録時・品名変更の再登録時で分ける必要があるかも？
         DataTable DATATable = new DataTable();
-        #region"list_result2 に更新する際の各行のデータテイブル"
+        #region"list_result_revisions2 に登録する際の各行のデータテイブル"
         DataTable DATA1 = new DataTable();
         DataTable DATA2 = new DataTable();
         DataTable DATA3 = new DataTable();
@@ -335,6 +282,7 @@ namespace Flawless_ex
         DataTable DATA12 = new DataTable();
         DataTable DATA13 = new DataTable();
         #endregion
+        
 
         public RecordList(Statement statement, int staff_id, string Staff_Name, int type, string slipnumber, int Grade, int antique, int id, string access_auth, string pass, bool namechange, bool carryover, bool monthCatalog)
         {
@@ -405,16 +353,16 @@ namespace Flawless_ex
             {
                 if (type == 0)
                 {
-                    int x = 50;
                     NameOrCompanyNameLabel.Text = "会社名";
                     OccupationOrShopNameLabel.Text = "店舗名";
                     AddressOrClientStaffNameLabel.Text = "担当者名";
-                    //AddressOrClientStaffNameTextBox.Size = new Size(280, 55);
-                    //NameOrCompanyNameTextBox.Location = new System.Drawing.Point(180, 200);
-                    //OccupationOrShopNameLabel.Location = new System.Drawing.Point(410, 198);
-                    //OccupationOrShopNameTextBox.Location = new System.Drawing.Point(590, 200);
-                    //AddressOrClientStaffNameLabel.Location = new System.Drawing.Point(910, 198);
-                    //AddressOrClientStaffNameTextBox.Location = new System.Drawing.Point(1060, 200);
+                    AddressOrClientStaffNameTextBox.Size = new Size(400, 60);
+                    NameOrCompanyNameTextBox.Size = new Size(466, 61);
+                    NameOrCompanyNameTextBox.Location = new Point(240, 205);
+                    OccupationOrShopNameLabel.Location = new Point(710, 210);
+                    OccupationOrShopNameTextBox.Location = new Point(910, 205);
+                    AddressOrClientStaffNameLabel.Location = new Point(1360, 210);
+                    AddressOrClientStaffNameTextBox.Location = new Point(1600, 205);
                     BirthdayLabel.Visible = false;
                     BirthdayTextBox.Visible = false;
 
@@ -428,8 +376,6 @@ namespace Flawless_ex
                 }
                 else if (type == 1)
                 {
-                    //AddressOrClientStaffNameTextBox.Location = new Point(420, 85);
-
                     while (reader.Read())
                     {
                         NameOrCompanyNameTextBox.Text = reader["name"].ToString();
@@ -664,6 +610,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox1.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox1.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"２行目"
@@ -683,6 +633,10 @@ namespace Flawless_ex
                             if ((int)row["carry_over_month"] == 1)
                             {
                                 NextMonthCheckBox2.Checked = true;
+                            }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox2.Checked = true;
                             }
                             break;
                         #endregion
@@ -704,6 +658,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox3.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox3.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"４行目"
@@ -723,6 +681,10 @@ namespace Flawless_ex
                             if ((int)row["carry_over_month"] == 1)
                             {
                                 NextMonthCheckBox4.Checked = true;
+                            }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox4.Checked = true;
                             }
                             break;
                         #endregion
@@ -744,6 +706,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox5.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox5.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"６行目"
@@ -763,6 +729,10 @@ namespace Flawless_ex
                             if ((int)row["carry_over_month"] == 1)
                             {
                                 NextMonthCheckBox6.Checked = true;
+                            }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox6.Checked = true;
                             }
                             break;
                         #endregion
@@ -784,6 +754,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox7.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox7.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"８行目"
@@ -803,6 +777,10 @@ namespace Flawless_ex
                             if ((int)row["carry_over_month"] == 1)
                             {
                                 NextMonthCheckBox8.Checked = true;
+                            }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox8.Checked = true;
                             }
                             break;
                         #endregion
@@ -824,6 +802,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox9.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox9.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"１０行目"
@@ -843,6 +825,10 @@ namespace Flawless_ex
                             if ((int)row["carry_over_month"] == 1)
                             {
                                 NextMonthCheckBox10.Checked = true;
+                            }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox10.Checked = true;
                             }
                             break;
                         #endregion
@@ -864,6 +850,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox11.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox11.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"１２行目"
@@ -884,6 +874,10 @@ namespace Flawless_ex
                             {
                                 NextMonthCheckBox12.Checked = true;
                             }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox12.Checked = true;
+                            }
                             break;
                         #endregion
                         #region"１３行目"
@@ -903,6 +897,10 @@ namespace Flawless_ex
                             if ((int)row["carry_over_month"] == 1)
                             {
                                 NextMonthCheckBox13.Checked = true;
+                            }
+                            if ((int)row["item_name_change"] == 1)
+                            {
+                                ItemNameChangeCheckBox13.Checked = true;
                             }
                             break;
                             #endregion
@@ -1492,7 +1490,7 @@ namespace Flawless_ex
             //品名変更時、再登録をまだしていない場合
             if (NameChange)
             {
-                MessageBox.Show("再登録ボタンをクリックして登録をしてください。", "未登録", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("再登録ボタンをクリックして登録をしてください。", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             this.Close();
@@ -1510,7 +1508,7 @@ namespace Flawless_ex
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移しないとき
             else if (screan)
             {
-                Statement statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
+                statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3);
                 statement.Show();
             }
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移したとき
@@ -1554,6 +1552,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                WholesalePriceTextBox1.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
@@ -1588,6 +1590,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                WholesalePriceTextBox1.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
@@ -1622,6 +1628,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                WholesalePriceTextBox1.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
@@ -1656,6 +1666,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                WholesalePriceTextBox1.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
@@ -1690,6 +1704,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                WholesalePriceTextBox1.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
@@ -1735,6 +1753,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                WholesalePriceTextBox2.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
@@ -1769,6 +1791,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                WholesalePriceTextBox2.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
@@ -1803,6 +1829,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                WholesalePriceTextBox2.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
@@ -1837,6 +1867,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox2.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox2.Text = WholesalePriceTextBox2.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                WholesalePriceTextBox2.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat2;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat2;                                     //以前に入力した卸値を合計から引く
@@ -1871,6 +1905,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox1.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox1.Text = WholesalePriceTextBox1.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                WholesalePriceTextBox2.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat1;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat1;                                     //以前に入力した卸値を合計から引く
@@ -1916,6 +1954,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                WholesalePriceTextBox3.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
@@ -1950,6 +1992,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                WholesalePriceTextBox3.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat3;                                         //以前に入力した卸値を合計から引く
@@ -1984,6 +2030,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                WholesalePriceTextBox3.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
@@ -2018,6 +2068,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                WholesalePriceTextBox3.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
@@ -2052,6 +2106,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox3.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox3.Text = WholesalePriceTextBox3.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                WholesalePriceTextBox3.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat3;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat3;                                     //以前に入力した卸値を合計から引く
@@ -2097,6 +2155,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                WholesalePriceTextBox4.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
@@ -2131,6 +2193,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                WholesalePriceTextBox4.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat4;                                         //以前に入力した卸値を合計から引く
@@ -2165,6 +2231,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                WholesalePriceTextBox4.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
@@ -2199,6 +2269,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                WholesalePriceTextBox4.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
@@ -2233,6 +2307,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox4.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox4.Text = WholesalePriceTextBox4.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                WholesalePriceTextBox4.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat4;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat4;                                     //以前に入力した卸値を合計から引く
@@ -2277,6 +2355,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                WholesalePriceTextBox5.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
@@ -2311,6 +2393,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                WholesalePriceTextBox5.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat5;                                         //以前に入力した卸値を合計から引く
@@ -2345,6 +2431,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                WholesalePriceTextBox5.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
@@ -2379,6 +2469,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                WholesalePriceTextBox5.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
@@ -2413,6 +2507,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox5.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox5.Text = WholesalePriceTextBox5.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                WholesalePriceTextBox5.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat5;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat5;                                     //以前に入力した卸値を合計から引く
@@ -2458,6 +2556,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                WholesalePriceTextBox6.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
@@ -2492,6 +2594,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                WholesalePriceTextBox6.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat6;                                         //以前に入力した卸値を合計から引く
@@ -2526,6 +2632,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                WholesalePriceTextBox6.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
@@ -2560,6 +2670,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                WholesalePriceTextBox6.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
@@ -2594,6 +2708,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox6.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox6.Text = WholesalePriceTextBox6.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                WholesalePriceTextBox6.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat6;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat6;                                     //以前に入力した卸値を合計から引く
@@ -2639,6 +2757,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                WholesalePriceTextBox7.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
@@ -2673,6 +2795,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                WholesalePriceTextBox7.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat7;                                         //以前に入力した卸値を合計から引く
@@ -2707,6 +2833,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                WholesalePriceTextBox7.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
@@ -2741,6 +2871,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                WholesalePriceTextBox7.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
@@ -2775,6 +2909,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox7.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox7.Text = WholesalePriceTextBox7.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                WholesalePriceTextBox7.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat7;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat7;                                     //以前に入力した卸値を合計から引く
@@ -2820,6 +2958,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                WholesalePriceTextBox8.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
@@ -2854,6 +2996,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                WholesalePriceTextBox8.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat8;                                         //以前に入力した卸値を合計から引く
@@ -2888,6 +3034,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                WholesalePriceTextBox8.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
@@ -2922,6 +3072,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                WholesalePriceTextBox8.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
@@ -2956,6 +3110,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox8.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox8.Text = WholesalePriceTextBox8.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                WholesalePriceTextBox8.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat8;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat8;                                     //以前に入力した卸値を合計から引く
@@ -3001,6 +3159,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                WholesalePriceTextBox9.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
@@ -3035,6 +3197,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                WholesalePriceTextBox9.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat9;                                         //以前に入力した卸値を合計から引く
@@ -3069,6 +3235,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                WholesalePriceTextBox9.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
@@ -3103,6 +3273,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                WholesalePriceTextBox9.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
@@ -3137,6 +3311,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox9.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox9.Text = WholesalePriceTextBox9.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                WholesalePriceTextBox9.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat9;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat9;                                     //以前に入力した卸値を合計から引く
@@ -3182,6 +3360,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                WholesalePriceTextBox10.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
@@ -3216,6 +3398,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                WholesalePriceTextBox10.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat10;                                         //以前に入力した卸値を合計から引く
@@ -3250,6 +3436,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                WholesalePriceTextBox10.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
@@ -3284,6 +3474,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                WholesalePriceTextBox10.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
@@ -3318,6 +3512,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox10.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox10.Text = WholesalePriceTextBox10.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                WholesalePriceTextBox10.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat10;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat10;                                     //以前に入力した卸値を合計から引く
@@ -3363,6 +3561,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                WholesalePriceTextBox11.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
@@ -3397,6 +3599,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                WholesalePriceTextBox11.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat11;                                         //以前に入力した卸値を合計から引く
@@ -3431,6 +3637,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                WholesalePriceTextBox11.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
@@ -3465,6 +3675,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                WholesalePriceTextBox11.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
@@ -3498,6 +3712,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox11.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox11.Text = WholesalePriceTextBox11.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                WholesalePriceTextBox11.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat11;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat11;                                     //以前に入力した卸値を合計から引く
@@ -3543,6 +3761,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                WholesalePriceTextBox12.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
@@ -3577,6 +3799,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                WholesalePriceTextBox12.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat12;                                         //以前に入力した卸値を合計から引く
@@ -3611,6 +3837,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                WholesalePriceTextBox12.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
@@ -3645,6 +3875,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                WholesalePriceTextBox12.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
@@ -3679,6 +3913,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox12.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox12.Text = WholesalePriceTextBox12.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                WholesalePriceTextBox12.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat12;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat12;                                     //以前に入力した卸値を合計から引く
@@ -3724,6 +3962,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                WholesalePriceTextBox13.Text = 0.ToString();
+                            }
                         }
                         WholeSaleMetal = WholeSaleMetal - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
@@ -3758,6 +4000,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                WholesalePriceTextBox13.Text = 0.ToString();
+                            }
                         }
                         WholeSaleDiamond = WholeSaleDiamond - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat13;                                         //以前に入力した卸値を合計から引く
@@ -3792,6 +4038,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                WholesalePriceTextBox13.Text = 0.ToString();
+                            }
                         }
                         WholeSaleBrand = WholeSaleBrand - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
@@ -3826,6 +4076,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                WholesalePriceTextBox13.Text = 0.ToString();
+                            }
                         }
                         WholeSaleProduct = WholeSaleProduct - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
@@ -3860,6 +4114,10 @@ namespace Flawless_ex
                         if (WholesalePriceTextBox13.Text.StartsWith(@"\"))
                         {
                             WholesalePriceTextBox13.Text = WholesalePriceTextBox13.Text.Substring(1);
+                            if (string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                WholesalePriceTextBox13.Text = 0.ToString();
+                            }
                         }
                         WholeSaleOther = WholeSaleOther - WholeSaleUnFormat13;                           //以前に入力した卸値を合計から引く
                         WholeSale = WholeSale - WholeSaleUnFormat13;                                     //以前に入力した卸値を合計から引く
@@ -5942,7 +6200,7 @@ namespace Flawless_ex
                 {
                     #region"１行目"
                     case 1:
-                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && WholesalePriceTextBox1.Text != @"\0") 
                         {
                             MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -5951,7 +6209,7 @@ namespace Flawless_ex
                     #endregion
                     #region"２行目"
                     case 2:
-                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && WholesalePriceTextBox2.Text != @"\0")
                         {
                             MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -5960,7 +6218,7 @@ namespace Flawless_ex
                     #endregion
                     #region"３行目"
                     case 3:
-                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && WholesalePriceTextBox3.Text != @"\0")
                         {
                             MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -5969,7 +6227,7 @@ namespace Flawless_ex
                     #endregion
                     #region"４行目"
                     case 4:
-                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && WholesalePriceTextBox4.Text != @"\0")
                         {
                             MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -5978,7 +6236,7 @@ namespace Flawless_ex
                     #endregion
                     #region"５行目"
                     case 5:
-                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && WholesalePriceTextBox5.Text != @"\0")
                         {
                             MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -5987,7 +6245,7 @@ namespace Flawless_ex
                     #endregion
                     #region"６行目"
                     case 6:
-                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && WholesalePriceTextBox6.Text != @"\0")
                         {
                             MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -5996,7 +6254,7 @@ namespace Flawless_ex
                     #endregion
                     #region"７行目"
                     case 7:
-                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && WholesalePriceTextBox7.Text != @"\0")
                         {
                             MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6005,7 +6263,7 @@ namespace Flawless_ex
                     #endregion
                     #region"８行目"
                     case 8:
-                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && WholesalePriceTextBox8.Text != @"\0")
                         {
                             MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6014,7 +6272,7 @@ namespace Flawless_ex
                     #endregion
                     #region"９行目"
                     case 9:
-                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && WholesalePriceTextBox9.Text != @"\0")
                         {
                             MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6023,7 +6281,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１０行目"
                     case 10:
-                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && WholesalePriceTextBox10.Text != @"\0")
                         {
                             MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6032,7 +6290,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１１行目"
                     case 11:
-                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && WholesalePriceTextBox11.Text != @"\0")
                         {
                             MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6041,7 +6299,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１２行目"
                     case 12:
-                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && WholesalePriceTextBox12.Text != @"\0")
                         {
                             MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6050,7 +6308,7 @@ namespace Flawless_ex
                     #endregion
                     #region"１３行目"
                     case 13:
-                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && WholesalePriceTextBox13.Text != @"\0")
                         {
                             MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -6459,12 +6717,12 @@ namespace Flawless_ex
             }
 
             //伝票番号は引数から使用
-            DateTime dt = new DateTime();
+            DateTime dt = DateTime.Now;
             Registration = dt.ToLongDateString();                   //登録日
             GradeNumber = int.Parse(GradeNumberTextBox.Text);       //成績番号
             TotalPurchase = PurChase;                               //合計買取金額
             TotalWholesale = WholeSale;                             //合計卸値
-            TotalProfit = ProFit;                                   //合計利益
+            TotalProfit = WholeSale - PurChase;                     //合計利益
             DNumber = SlipNumber;                                   //伝票番号
             MetalPurchase = PurChaseMetal;                          //地金買取額
             MetalWholesale = WholeSaleMetal;                        //地金卸値
@@ -6493,6 +6751,7 @@ namespace Flawless_ex
                 CStaff = AddressOrClientStaffNameTextBox.Text;
 
                 sql_str = "Insert into list_result(company_name, shop_name, staff_name, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + CName + "','" + CShop + "','" + CStaff + "','" + 0 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
+                
             }
             else if (type == 1)
             {
@@ -6501,10 +6760,15 @@ namespace Flawless_ex
                 Address = AddressOrClientStaffNameTextBox.Text;
                 BirthDay = BirthdayTextBox.Text;
 
-                sql_str = "Insert into list_result(name, address, occupation, birthday, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
+                sql_str = "Insert into list_result(name, address, occupation, birthday, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
             }
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(DataTable);
+
+            //履歴用に登録
+            string SQL = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
+            adapter = new NpgsqlDataAdapter(SQL, conn);
+            adapter.Fill(DATATable);
 
             //卸値 -> 売却日と売却先を登録
 
@@ -6515,6 +6779,7 @@ namespace Flawless_ex
             {
                 switch (i)
                 {
+                    #region"１行目"
                     case 1:
                         Record = 1;
                         MainCategoryCode = MainCategoryCode1;
@@ -6563,7 +6828,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data1);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA1);
                         break;
+                    #endregion
+                    #region"２行目"
                     case 2:
                         Record = 2;
                         MainCategoryCode = MainCategoryCode2;
@@ -6612,7 +6883,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data2);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA2);
                         break;
+                    #endregion
+                    #region"３行目"
                     case 3:
                         Record = 3;
                         MainCategoryCode = MainCategoryCode3;
@@ -6661,7 +6938,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data3);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA3);
                         break;
+                    #endregion
+                    #region"４行目"
                     case 4:
                         Record = 4;
                         MainCategoryCode = MainCategoryCode4;
@@ -6710,7 +6993,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data4);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA4);
                         break;
+                    #endregion
+                    #region"５行目"
                     case 5:
                         Record = 5;
                         MainCategoryCode = MainCategoryCode5;
@@ -6759,7 +7048,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data5);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA5);
                         break;
+                    #endregion
+                    #region"６行目"
                     case 6:
                         Record = 6;
                         MainCategoryCode = MainCategoryCode6;
@@ -6808,7 +7103,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data6);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA6);
                         break;
+                    #endregion
+                    #region"７行目"
                     case 7:
                         Record = 7;
                         MainCategoryCode = MainCategoryCode7;
@@ -6857,7 +7158,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data7);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA7);
                         break;
+                    #endregion
+                    #region"８行目"
                     case 8:
                         Record = 8;
                         MainCategoryCode = MainCategoryCode8;
@@ -6906,7 +7213,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data8);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA8);
                         break;
+                    #endregion
+                    #region"９行目"
                     case 9:
                         Record = 9;
                         MainCategoryCode = MainCategoryCode9;
@@ -6955,7 +7268,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data9);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA9);
                         break;
+                    #endregion
+                    #region"１０行目"
                     case 10:
                         Record = 10;
                         MainCategoryCode = MainCategoryCode10;
@@ -7004,7 +7323,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data10);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA10);
                         break;
+                    #endregion
+                    #region"１１行目"
                     case 11:
                         Record = 11;
                         MainCategoryCode = MainCategoryCode11;
@@ -7053,7 +7378,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data11);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA11);
                         break;
+                    #endregion
+                    #region"１２行目"
                     case 12:
                         Record = 12;
                         MainCategoryCode = MainCategoryCode12;
@@ -7102,7 +7433,13 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data12);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA12);
                         break;
+                    #endregion
+                    #region"１３行目"
                     case 13:
                         Record = 13;
                         MainCategoryCode = MainCategoryCode13;
@@ -7151,7 +7488,12 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(Sql_Str, conn);
                         adapter.Fill(Data13);
 
+                        //履歴に登録
+                        SQL = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(SQL, conn);
+                        adapter.Fill(DATA13);
                         break;
+                        #endregion
                 }
             }
 
@@ -7427,8 +7769,11 @@ namespace Flawless_ex
                     case 1:
                         if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7436,8 +7781,11 @@ namespace Flawless_ex
                     case 2:
                         if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7445,8 +7793,11 @@ namespace Flawless_ex
                     case 3:
                         if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7454,8 +7805,11 @@ namespace Flawless_ex
                     case 4:
                         if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7463,8 +7817,11 @@ namespace Flawless_ex
                     case 5:
                         if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7472,8 +7829,11 @@ namespace Flawless_ex
                     case 6:
                         if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7481,8 +7841,11 @@ namespace Flawless_ex
                     case 7:
                         if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7490,8 +7853,11 @@ namespace Flawless_ex
                     case 8:
                         if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7499,8 +7865,11 @@ namespace Flawless_ex
                     case 9:
                         if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7508,8 +7877,11 @@ namespace Flawless_ex
                     case 10:
                         if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7517,8 +7889,11 @@ namespace Flawless_ex
                     case 11:
                         if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7526,8 +7901,11 @@ namespace Flawless_ex
                     case 12:
                         if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                     #endregion
@@ -7535,8 +7913,11 @@ namespace Flawless_ex
                     case 13:
                         if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
                         {
-                            MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更する場合は変更してから登録してください", "入力項目確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
+                            result = MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (result == DialogResult.No)
+                            {
+                                return;
+                            }
                         }
                         break;
                         #endregion
@@ -7807,7 +8188,7 @@ namespace Flawless_ex
             #region"list_result への更新"
             TotalPurchase = PurChase;                   //合計買取金額
             TotalWholesale = WholeSale;                 //合計卸値
-            TotalProfit = ProFit;                       //合計利益
+            TotalProfit = WholeSale - PurChase;         //合計利益
             DNumber = SlipNumber;                       //伝票番号
             MetalPurchase = PurChaseMetal;              //地金買取額
             MetalWholesale = WholeSaleMetal;            //地金卸値
@@ -7824,14 +8205,25 @@ namespace Flawless_ex
             OtherPurchase = PurChaseOther;              //その他買取額
             OtherWholesale = WholeSaleOther;            //その他卸値
             OtherProfit = ProFitOther;                  //その他利益
+            GradeNumber = int.Parse(GradeNumberTextBox.Text);
+
+            string sql_str = "";
 
             using (transaction = conn.BeginTransaction())
             {
-                string sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "' where document_number = '" + DNumber + "';";
+                sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "' where document_number = '" + DNumber + "';";
                 cmd = new NpgsqlCommand(sql_str, conn);
                 cmd.ExecuteNonQuery();
                 transaction.Commit();
             }
+            //履歴に登録
+
+            DateTime date = DateTime.Now;
+            Registration = date.ToLongDateString();         //再登録した日
+            sql_str = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
+            adapter = new NpgsqlDataAdapter(sql_str, conn);
+            adapter.Fill(DATATable);
+
             #endregion
             #region"list_result2 への更新"
 
@@ -7881,11 +8273,16 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        //履歴に登録
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA1);
+
                         break;
                     #endregion
                     #region"２行目"
@@ -7930,11 +8327,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA2);
+
                         break;
                     #endregion
                     #region"３行目"
@@ -7979,11 +8380,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA3);
+
                         break;
                     #endregion
                     #region"４行目"
@@ -8028,11 +8433,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA4);
+
                         break;
                     #endregion
                     #region"５行目"
@@ -8077,11 +8486,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA5);
+
                         break;
                     #endregion
                     #region"６行目"
@@ -8126,11 +8539,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA6);
+
                         break;
                     #endregion
                     #region"７行目"
@@ -8175,11 +8592,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA7);
+
                         break;
                     #endregion
                     #region"８行目"
@@ -8224,11 +8645,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA8);
+
                         break;
                     #endregion
                     #region"９行目"
@@ -8273,11 +8698,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA9);
+
                         break;
                     #endregion
                     #region"１０行目"
@@ -8322,11 +8751,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA10);
+
                         break;
                     #endregion
                     #region"１１行目"
@@ -8371,11 +8804,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA11);
+
                         break;
                     #endregion
                     #region"１２行目"
@@ -8420,11 +8857,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA12);
+
                         break;
                     #endregion
                     #region"１３行目"
@@ -8469,11 +8910,15 @@ namespace Flawless_ex
 
                         using (transaction = conn.BeginTransaction())
                         {
-                            string sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
+                            sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + DNumber + "' and record_number = '" + Record + "';";
                             cmd = new NpgsqlCommand(sql_str, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
+                        sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                        adapter = new NpgsqlDataAdapter(sql_str, conn);
+                        adapter.Fill(DATA13);
+
                         break;
                     #endregion
                 }
@@ -9010,6 +9455,9 @@ namespace Flawless_ex
                 return;
             }
 
+            DateTime date = DateTime.Now;
+            Registration = date.ToLongDateString();         //再登録した日
+
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_str = "select * from list_result order by result;";
             cmd = new NpgsqlCommand(sql_str, conn);
@@ -9028,7 +9476,7 @@ namespace Flawless_ex
                 #region"list_resultへの更新"
                 TotalPurchase = PurChase;                   //合計買取金額
                 TotalWholesale = WholeSale;                 //合計卸値
-                TotalProfit = ProFit;                       //合計利益
+                TotalProfit = WholeSale - PurChase;         //合計利益
                 DNumber = SlipNumber;                       //伝票番号
                 MetalPurchase = PurChaseMetal;              //地金買取額
                 MetalWholesale = WholeSaleMetal;            //地金卸値
@@ -9692,13 +10140,13 @@ namespace Flawless_ex
                 GradeNumber = int.Parse(GradeNumberTextBox.Text);       //成績番号
                 TotalPurchase = PurChase;                               //合計買取金額
                 TotalWholesale = WholeSale;                             //合計卸値
-                TotalProfit = ProFit;                                   //合計利益
+                TotalProfit = WholeSale - PurChase;                     //合計利益
                 DNumber = SlipNumber;                                   //伝票番号
 
                 Document = SlipNumber;                                  //list_result2 への登録時
                 GRADE = int.Parse(GradeNumberTextBox.Text);             //list_result2 への登録時
                 AssessmentDate = AssessmentDateTextBox.Text;
-                string SQL = "insert into list_result (type, staff_code, result, sum_money, sum_wholesale_price, profit, document_number) values('" + type + "','" + staff_id + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "');";
+                string SQL = "insert into list_result (type, staff_code, result, sum_money, sum_wholesale_price, profit, document_number, registration_date) values('" + type + "','" + staff_id + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "', '"+Registration+"');";
                 adapter = new NpgsqlDataAdapter(SQL, conn);
                 adapter.Fill(DataTable);
 
@@ -10335,6 +10783,11 @@ namespace Flawless_ex
         #region"お客様情報ボタン"
         private void ClientInformationButton_Click(object sender, EventArgs e)
         {
+            if (NameChange)
+            {
+                MessageBox.Show("再登録を行ってください", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth, MonthCatalog, CarryOver);
             screan = false;
             this.Close();
@@ -10345,6 +10798,11 @@ namespace Flawless_ex
         #region"月間成績表"
         private void button3_Click(object sender, EventArgs e)
         {
+            if (NameChange)
+            {
+                MessageBox.Show("再登録を行っていください。", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             MonthCatalog = true;
             MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade, CarryOver, MonthCatalog);
             screan = false;
@@ -10475,12 +10933,11 @@ namespace Flawless_ex
         #region"納品書検索"
         private void DeliverySearchButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ManagementNumberTextBox.Text))
+            if (NameChange)
             {
-                MessageBox.Show("数字を入力して下さい。");
+                MessageBox.Show("再登録を行ってください。", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else { }
             Control = int.Parse(ManagementNumberTextBox.Text);
             this.Close();
         }

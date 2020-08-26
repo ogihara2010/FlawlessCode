@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ReturnButton = new System.Windows.Forms.Button();
             this.signUpButton = new System.Windows.Forms.Button();
@@ -43,18 +44,27 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.Location = new System.Drawing.Point(43, 39);
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Location = new System.Drawing.Point(49, 43);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -62,69 +72,74 @@
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1751, 694);
+            this.dataGridView1.Size = new System.Drawing.Size(2075, 1001);
             this.dataGridView1.TabIndex = 7;
             // 
             // ReturnButton
             // 
             this.ReturnButton.AutoSize = true;
+            this.ReturnButton.BackColor = System.Drawing.Color.MistyRose;
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ReturnButton.Location = new System.Drawing.Point(937, 829);
+            this.ReturnButton.Location = new System.Drawing.Point(49, 1093);
             this.ReturnButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(265, 189);
+            this.ReturnButton.Size = new System.Drawing.Size(303, 210);
             this.ReturnButton.TabIndex = 4;
             this.ReturnButton.Text = "戻る";
-            this.ReturnButton.UseVisualStyleBackColor = true;
+            this.ReturnButton.UseVisualStyleBackColor = false;
             this.ReturnButton.Click += new System.EventHandler(this.ReturnButton_Click);
             // 
             // signUpButton
             // 
             this.signUpButton.AutoSize = true;
+            this.signUpButton.BackColor = System.Drawing.Color.LightCyan;
             this.signUpButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.signUpButton.Location = new System.Drawing.Point(43, 829);
+            this.signUpButton.Location = new System.Drawing.Point(932, 1093);
             this.signUpButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.signUpButton.Name = "signUpButton";
-            this.signUpButton.Size = new System.Drawing.Size(338, 189);
+            this.signUpButton.Size = new System.Drawing.Size(419, 210);
             this.signUpButton.TabIndex = 6;
             this.signUpButton.Text = "新規登録";
-            this.signUpButton.UseVisualStyleBackColor = true;
+            this.signUpButton.UseVisualStyleBackColor = false;
             this.signUpButton.Click += new System.EventHandler(this.signUpButton_Click);
             // 
             // changeDeleteButton
             // 
             this.changeDeleteButton.AutoSize = true;
+            this.changeDeleteButton.BackColor = System.Drawing.Color.LightCyan;
             this.changeDeleteButton.Font = new System.Drawing.Font("MS UI Gothic", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.changeDeleteButton.Location = new System.Drawing.Point(446, 829);
+            this.changeDeleteButton.Location = new System.Drawing.Point(416, 1093);
             this.changeDeleteButton.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.changeDeleteButton.Name = "changeDeleteButton";
-            this.changeDeleteButton.Size = new System.Drawing.Size(411, 189);
+            this.changeDeleteButton.Size = new System.Drawing.Size(470, 210);
             this.changeDeleteButton.TabIndex = 5;
-            this.changeDeleteButton.Text = "変更・無効";
-            this.changeDeleteButton.UseVisualStyleBackColor = true;
+            this.changeDeleteButton.Text = "変更・削除";
+            this.changeDeleteButton.UseVisualStyleBackColor = false;
             this.changeDeleteButton.Click += new System.EventHandler(this.changeDeleteButton_Click);
             // 
             // mainCategoryMenu
             // 
             this.mainCategoryMenu.AutoSize = true;
-            this.mainCategoryMenu.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.mainCategoryMenu.Location = new System.Drawing.Point(1326, 832);
+            this.mainCategoryMenu.BackColor = System.Drawing.Color.LightCyan;
+            this.mainCategoryMenu.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.mainCategoryMenu.Location = new System.Drawing.Point(1543, 1095);
             this.mainCategoryMenu.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.mainCategoryMenu.Name = "mainCategoryMenu";
-            this.mainCategoryMenu.Size = new System.Drawing.Size(468, 189);
+            this.mainCategoryMenu.Size = new System.Drawing.Size(583, 210);
             this.mainCategoryMenu.TabIndex = 8;
             this.mainCategoryMenu.Text = "大分類マスタ一覧";
-            this.mainCategoryMenu.UseVisualStyleBackColor = true;
+            this.mainCategoryMenu.UseVisualStyleBackColor = false;
             this.mainCategoryMenu.Click += new System.EventHandler(this.mainCategoryMenu_Click);
             // 
             // ItemMaster
             // 
             this.AcceptButton = this.ReturnButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1857, 1054);
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(2173, 1352);
             this.Controls.Add(this.mainCategoryMenu);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.ReturnButton);

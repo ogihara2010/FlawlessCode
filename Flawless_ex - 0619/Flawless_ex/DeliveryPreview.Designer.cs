@@ -36,24 +36,28 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button1.Location = new System.Drawing.Point(58, 95);
+            this.button1.BackColor = System.Drawing.Color.MistyRose;
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(62, 133);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(259, 140);
+            this.button1.Size = new System.Drawing.Size(475, 283);
             this.button1.TabIndex = 0;
             this.button1.Text = "戻る";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button2.Location = new System.Drawing.Point(453, 95);
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.button2.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button2.Location = new System.Drawing.Point(629, 133);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(264, 140);
+            this.button2.Size = new System.Drawing.Size(496, 283);
             this.button2.TabIndex = 1;
             this.button2.Text = "印刷";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // printPreviewDialog1
@@ -68,13 +72,16 @@
             // 
             // DeliveryPreview
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(817, 314);
+            this.BackColor = System.Drawing.Color.AliceBlue;
+            this.ClientSize = new System.Drawing.Size(1187, 542);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DeliveryPreview";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "納品書プレビュー";
             this.Load += new System.EventHandler(this.DeliveryPreview_Load);
             this.ResumeLayout(false);

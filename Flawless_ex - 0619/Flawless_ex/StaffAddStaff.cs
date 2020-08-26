@@ -155,7 +155,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                StaffMaster staffMaster = new StaffMaster(master, staff_code, access_auth, Pass);
+                StaffMaster staffMaster = new StaffMaster(master, staff_code, Pass, access_auth);
                 staffMaster.Show();
             }
             else

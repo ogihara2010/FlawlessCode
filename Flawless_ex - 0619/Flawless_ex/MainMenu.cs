@@ -16,70 +16,18 @@ namespace Flawless_ex
         string slipNumber;
         decimal Total;
         int control;
-        #region "買取販売履歴"
         string search1;
         string search2;
         string search3;
-        string search4;
-        string search5;
-        string search6;
-        string search7;
-        string search8;
-        string search9;
-        string search10;
-        string search11;
-        string search12;
-        string name1;
-        string phoneNumber1;
-        string address1;
-        string addresskana1;
-        string code1;
-        string item1;
-        string date1;
-        string date2;
-        string method1;
-        string amountA;
-        string amountB;
-        string antiqueNumber;
-        string documentNumber;
-        #endregion
         string Pass;
         int grade;
-        #region "納品書の引数"
-        decimal amount00;
-        decimal amount01;
-        decimal amount02;
-        decimal amount03;
-        decimal amount04;
-        decimal amount05;
-        decimal amount06;
-        decimal amount07;
-        decimal amount08;
-        decimal amount09;
-        decimal amount010;
-        decimal amount011;
-        decimal amount012;
-        #endregion
-        #region "計算書の引数"
-        decimal amount10;
-        decimal amount11;
-        decimal amount12;
-        decimal amount13;
-        decimal amount14;
-        decimal amount15;
-        decimal amount16;
-        decimal amount17;
-        decimal amount18;
-        decimal amount19;
-        decimal amount110;
-        decimal amount111;
-        decimal amount112;
-        #endregion
+        bool CarryOver;
+        bool MonthCatalog;
+        bool screan = true;
+
         NpgsqlConnection conn;
         NpgsqlCommand cmd;
         NpgsqlDataReader reader;
-        bool CarryOver;
-        bool MonthCatalog;
 
         public MainMenu(TopMenu topMenu, int id, string pass, string access_auth)
         {
@@ -99,8 +47,8 @@ namespace Flawless_ex
         private void MasterMainte_Click(object sender, EventArgs e)//権限によって
         {
             MasterMaintenanceMenu masterMenu = new MasterMaintenanceMenu(this, staff_id, access_auth, Pass);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             masterMenu.Show();
         }
 
@@ -121,42 +69,31 @@ namespace Flawless_ex
             }
             conn.Close();
 
-            //this.Size = new Size(500, 800);
-
         }
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
-
-            this.Hide();
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3);
+            screan = false;
+            this.Close();
             statement.Show();
-        }
-        #endregion
-        #region "インボイス"
-        private void Invoice_Click(object sender, EventArgs e)
-        {
-            //Invoice invoice = new Invoice(this, staff_id);
-
-            //this.Hide();
-            //invoice.Show();
         }
         #endregion
         #region"操作履歴ボタン"
         private void Operatelog_Click(object sender, EventArgs e)
         {
-            Operatelog operatelog = new Operatelog(this, staff_id);
-
-            this.Hide();
+            Operatelog operatelog = new Operatelog(this, staff_id, access_auth, Pass);
+            screan = false;
+            this.Close();
             operatelog.Show();
         }
         #endregion
         #region "買取販売データ検索ボタン"
         private void CustomerHistoriButton_Click(object sender, EventArgs e)
         {
-            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data, Pass);
-
-            this.Hide();
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(this, staff_id, data, Pass, access_auth);
+            screan = false;
+            this.Close();
             customerHistorySelect.Show();
         }
         #endregion
@@ -164,8 +101,8 @@ namespace Flawless_ex
         private void MonResults_Click(object sender, EventArgs e)
         {
             MonResult monresult = new MonResult(this, staff_id, access_auth, staff_name, type, slipNumber, Pass, grade, CarryOver, MonthCatalog);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             monresult.Show();
         }
         #endregion
@@ -173,15 +110,22 @@ namespace Flawless_ex
         private void Button3_Click(object sender, EventArgs e)
         {
             NextMonth nextmonth = new NextMonth(this, staff_id, Pass, access_auth);
-
-            this.Hide();
+            screan = false;
+            this.Close();
             nextmonth.Show();
         }
         #endregion
 
         private void MainMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            if (screan)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                screan = true;
+            }
         }
     }
 }
