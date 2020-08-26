@@ -993,13 +993,12 @@
             // textBox54
             // 
             this.textBox54.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBox54.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox54.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox54.Location = new System.Drawing.Point(0, 0);
             this.textBox54.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox54.MaxLength = 3;
-            this.textBox54.Multiline = true;
             this.textBox54.Name = "textBox54";
-            this.textBox54.Size = new System.Drawing.Size(245, 152);
+            this.textBox54.Size = new System.Drawing.Size(245, 127);
             this.textBox54.TabIndex = 93;
             this.textBox54.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox54_KeyPress);
             // 
@@ -1007,7 +1006,7 @@
             // 
             this.label65.AutoSize = true;
             this.label65.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label65.Location = new System.Drawing.Point(277, 29);
+            this.label65.Location = new System.Drawing.Point(276, 18);
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(110, 88);
             this.label65.TabIndex = 145;
@@ -1016,12 +1015,11 @@
             // textBox51
             // 
             this.textBox51.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox51.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox51.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox51.Location = new System.Drawing.Point(422, 0);
             this.textBox51.MaxLength = 4;
-            this.textBox51.Multiline = true;
             this.textBox51.Name = "textBox51";
-            this.textBox51.Size = new System.Drawing.Size(328, 152);
+            this.textBox51.Size = new System.Drawing.Size(328, 127);
             this.textBox51.TabIndex = 144;
             this.textBox51.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox51_KeyPress);
             // 
@@ -2157,12 +2155,11 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox1.Location = new System.Drawing.Point(425, 0);
             this.textBox1.MaxLength = 4;
-            this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(302, 130);
+            this.textBox1.Size = new System.Drawing.Size(302, 127);
             this.textBox1.TabIndex = 78;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
@@ -2170,7 +2167,7 @@
             // 
             this.label60.AutoSize = true;
             this.label60.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label60.Location = new System.Drawing.Point(287, 22);
+            this.label60.Location = new System.Drawing.Point(282, 18);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(110, 88);
             this.label60.TabIndex = 77;
@@ -2179,13 +2176,12 @@
             // textBox4
             // 
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBox4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox4.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox4.Location = new System.Drawing.Point(0, 0);
             this.textBox4.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.textBox4.MaxLength = 3;
-            this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(255, 130);
+            this.textBox4.Size = new System.Drawing.Size(255, 127);
             this.textBox4.TabIndex = 23;
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
             // 

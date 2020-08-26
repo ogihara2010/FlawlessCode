@@ -18,7 +18,7 @@ namespace Flawless_ex
         string data;
         string Pass;
         string Access_auth;
-        bool screan;
+        bool screan = true;
 
         public CustomerHistorySelect(MainMenu main, int id, string data, string pass, string access_auth)
         {

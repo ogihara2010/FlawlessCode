@@ -29,6 +29,8 @@ namespace Flawless_ex
         string search2;
         string search3;
         string pass;
+        string kana;
+
         public client_add(MainMenu mainMenu, int id, int type, string Access_auth, string Pass)
         {
             InitializeComponent();
@@ -59,7 +61,9 @@ namespace Flawless_ex
             string RegistrationDate = this.deliveryDateBox.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
-            string PostalCodeNumber = this.textBox4.Text;
+            
+            string PostalCodeNumber = this.PostalUpCordTextBox.Text;
+            
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
             string ShopName = this.textBox7.Text;
@@ -80,7 +84,9 @@ namespace Flawless_ex
             string Antiquelicense = this.textBox22.Text;
             int AntiqueNumber = int.Parse(this.textBox23.Text);
             string ID = this.textBox24.Text;
+
             string PeriodStay = this.textBox46.Text;
+            
             string SealCertification = this.textBox26.Text;
             string TaxCertification = this.textBox27.Text;
             string Remarks = this.textBox28.Text;
@@ -123,8 +129,11 @@ namespace Flawless_ex
             string RegistrationDate = this.dateTimePicker1.Text;
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
+
             string Birthday = this.textBox50.Text;
-            string PostalCodeNumber = this.textBox54.Text;
+
+            string PostalCodeNumber = this.PostalUpCordTextBox2.Text;
+            
             string Address = this.textBox53.Text;
             string AddressKana = this.textBox52.Text;
             string PhoneNumber = this.textBox49.Text;
@@ -141,7 +150,9 @@ namespace Flawless_ex
             string Antiquelicense = this.textBox36.Text;
             string PhotoID = this.textBox35.Text;
             string ID = this.textBox34.Text;
+            
             string PeriodStay = this.textBox47.Text;
+            
             string SealCertification = this.textBox32.Text;
             string TaxCertification = this.textBox31.Text;
             string Remarks = this.textBox58.Text;
@@ -174,6 +185,255 @@ namespace Flawless_ex
         private void Client_add_Load(object sender, EventArgs e)
         {
             this.textBox50.Text = "　年　月　日";
+        }
+        
+        #region"個人　値の検証"
+        private void textBox55_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox55.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox55.Text = stringBuilder.ToString();
+            textBox55.Select(textBox55.Text.Length, 0);
+        }
+
+        private void textBox52_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox52.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox52.Text = stringBuilder.ToString();
+            textBox52.Select(textBox52.Text.Length, 0);
+        }
+
+        private void textBox38_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox38.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox38.Text = stringBuilder.ToString();
+            textBox38.Select(textBox38.Text.Length, 0);
+        }
+
+        private void PostalUpCordTextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void PostalDownCordTextBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        #endregion
+
+        #region"法人　値の検証"
+        private void PostalUpCordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void PostalDownCordTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox3.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox3.Text = stringBuilder.ToString();
+            textBox3.Select(textBox3.Text.Length, 0);
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox8.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox8.Text = stringBuilder.ToString();
+            textBox8.Select(textBox8.Text.Length, 0);
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox6.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox6.Text = stringBuilder.ToString();
+            textBox6.Select(textBox6.Text.Length, 0);
+        }
+
+        private void textBox20_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox20.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox20.Text = stringBuilder.ToString();
+            textBox20.Select(textBox20.Text.Length, 0);
+        }
+        #endregion
+
+        #region"法人　画像確認"
+        private void textBox24_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox24.Text))
+            {
+                pictureBox1.ImageLocation = textBox24.Text;
+            }
+        }
+
+        private void textBox21_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox21.Text))
+            {
+                pictureBox1.ImageLocation = textBox21.Text;
+            }
+        }
+
+        private void textBox22_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox22.Text))
+            {
+                pictureBox1.ImageLocation = textBox22.Text;
+            }
+        }
+
+        private void textBox25_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox25.Text))
+            {
+                pictureBox1.ImageLocation = textBox25.Text;
+            }
+        }
+
+        private void textBox27_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox27.Text))
+            {
+                pictureBox1.ImageLocation = textBox27.Text;
+            }
+        }
+
+        private void textBox29_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox29.Text))
+            {
+                pictureBox1.ImageLocation = textBox29.Text;
+            }
+        }
+
+        private void textBox26_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox26.Text))
+            {
+                pictureBox1.ImageLocation = textBox26.Text;
+            }
+        }
+        #endregion
+
+        #region"個人　画像確認"
+        private void textBox37_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox37.Text))
+            {
+                pictureBox2.ImageLocation = textBox37.Text;
+            }
+        }
+
+        private void textBox36_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox36.Text))
+            {
+                pictureBox2.ImageLocation = textBox36.Text;
+            }
+        }
+
+        private void textBox35_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox35.Text))
+            {
+                pictureBox2.ImageLocation = textBox35.Text;
+            }
+        }
+
+        private void textBox33_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox33.Text))
+            {
+                pictureBox2.ImageLocation = textBox33.Text;
+            }
+        }
+
+        private void textBox31_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox31.Text))
+            {
+                pictureBox2.ImageLocation = textBox31.Text;
+            }
+        }
+
+        private void textBox30_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox30.Text))
+            {
+                pictureBox2.ImageLocation = textBox30.Text;
+            }
+        }
+
+        private void textBox32_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(textBox32.Text))
+            {
+                pictureBox2.ImageLocation = textBox32.Text;
+            }
+        }
+        #endregion
+
+        //法人　メールアドレス
+        private void textBox13_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox13.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox13.Text = stringBuilder.ToString();
+            textBox13.Select(textBox13.Text.Length, 0);
+        }
+
+        //法人　URL
+        private void textBox17_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox17.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox17.Text = stringBuilder.ToString();
+            textBox17.Select(textBox17.Text.Length, 0);
         }
     }
 }

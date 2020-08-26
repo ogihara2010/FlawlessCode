@@ -1467,9 +1467,6 @@ namespace Flawless_ex
             OtherPurchaseTextBox.BackColor = SystemColors.Control;
             OtherWholesaleTextBox.BackColor = SystemColors.Control;
             OtherProfitTextBox.BackColor = SystemColors.Control;
-            TotalPurchaseTextBox.BackColor = SystemColors.Control;
-            TotalWholesaleTextBox.BackColor = SystemColors.Control;
-            TotalProfitTextBox.BackColor = SystemColors.Control;
             PurchaseTotalTextBox.BackColor = SystemColors.Control;
             WholesaleTotalTextBox.BackColor = SystemColors.Control;
             ProfitTotalTextBox.BackColor = SystemColors.Control;
@@ -1542,7 +1539,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter1 = false;
                     }
@@ -1566,7 +1562,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1580,7 +1575,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter1 = false;
                     }
@@ -1604,7 +1598,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1618,7 +1611,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter1 = false;
                     }
@@ -1642,7 +1634,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1656,7 +1647,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter1 = false;
                     }
@@ -1680,7 +1670,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1694,7 +1683,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter1 = false;
                     }
@@ -1718,7 +1706,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1743,7 +1730,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter2 = false;
                     }
@@ -1767,7 +1753,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1781,7 +1766,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter2 = false;
                     }
@@ -1805,7 +1789,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1819,7 +1802,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter2 = false;
                     }
@@ -1843,7 +1825,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1857,7 +1838,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter2 = false;
                     }
@@ -1881,7 +1861,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1895,7 +1874,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox2.Text = string.Format("{0:C}", WholeSaleUnFormat2);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter2 = false;
                     }
@@ -1919,7 +1897,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox1.Text = string.Format("{0:C}", WholeSaleUnFormat1);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1944,7 +1921,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter3 = false;
                     }
@@ -1968,7 +1944,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -1982,7 +1957,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter3 = false;
                     }
@@ -2006,7 +1980,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2020,7 +1993,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter3 = false;
                     }
@@ -2044,7 +2016,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2058,7 +2029,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter3 = false;
                     }
@@ -2082,7 +2052,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2096,7 +2065,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter3 = false;
                     }
@@ -2120,7 +2088,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox3.Text = string.Format("{0:C}", WholeSaleUnFormat3);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2145,7 +2112,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter4 = false;
                     }
@@ -2169,7 +2135,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2183,7 +2148,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter4 = false;
                     }
@@ -2207,7 +2171,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2221,7 +2184,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter4 = false;
                     }
@@ -2245,7 +2207,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2259,7 +2220,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter4 = false;
                     }
@@ -2283,7 +2243,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2297,7 +2256,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter4 = false;
                     }
@@ -2321,7 +2279,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox4.Text = string.Format("{0:C}", WholeSaleUnFormat4);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2346,7 +2303,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter5 = false;
                     }
@@ -2369,7 +2325,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2383,7 +2338,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter5 = false;
                     }
@@ -2407,7 +2361,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2421,7 +2374,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter5 = false;
                     }
@@ -2445,7 +2397,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2459,7 +2410,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter5 = false;
                     }
@@ -2483,7 +2433,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2497,7 +2446,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter5 = false;
                     }
@@ -2521,7 +2469,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox5.Text = string.Format("{0:C}", WholeSaleUnFormat5);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2546,7 +2493,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter6 = false;
                     }
@@ -2570,7 +2516,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2584,7 +2529,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter6 = false;
                     }
@@ -2608,7 +2552,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2622,7 +2565,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter6 = false;
                     }
@@ -2646,7 +2588,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2660,7 +2601,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter6 = false;
                     }
@@ -2684,7 +2624,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2698,7 +2637,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter6 = false;
                     }
@@ -2722,7 +2660,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox6.Text = string.Format("{0:C}", WholeSaleUnFormat6);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -2747,7 +2684,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter7 = false;
                     }
@@ -2771,7 +2707,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2785,7 +2720,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter7 = false;
                     }
@@ -2809,7 +2743,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2823,7 +2756,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter7 = false;
                     }
@@ -2847,7 +2779,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2861,7 +2792,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter7 = false;
                     }
@@ -2885,7 +2815,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2899,7 +2828,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter7 = false;
                     }
@@ -2923,7 +2851,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox7.Text = string.Format("{0:C}", WholeSaleUnFormat7);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2948,7 +2875,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter8 = false;
                     }
@@ -2972,7 +2898,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -2986,7 +2911,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter8 = false;
                     }
@@ -3010,7 +2934,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3024,7 +2947,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter8 = false;
                     }
@@ -3048,7 +2970,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3062,7 +2983,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter8 = false;
                     }
@@ -3086,7 +3006,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3100,7 +3019,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter8 = false;
                     }
@@ -3124,7 +3042,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox8.Text = string.Format("{0:C}", WholeSaleUnFormat8);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3149,7 +3066,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter9 = false;
                     }
@@ -3173,7 +3089,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3187,7 +3102,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter9 = false;
                     }
@@ -3211,7 +3125,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3225,7 +3138,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter9 = false;
                     }
@@ -3249,7 +3161,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3263,7 +3174,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter9 = false;
                     }
@@ -3287,7 +3197,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3301,7 +3210,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter9 = false;
                     }
@@ -3325,7 +3233,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox9.Text = string.Format("{0:C}", WholeSaleUnFormat9);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3350,7 +3257,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter10 = false;
                     }
@@ -3374,7 +3280,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3388,7 +3293,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter10 = false;
                     }
@@ -3412,7 +3316,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3426,7 +3329,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter10 = false;
                     }
@@ -3450,7 +3352,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3464,7 +3365,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter10 = false;
                     }
@@ -3488,7 +3388,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3502,7 +3401,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter10 = false;
                     }
@@ -3526,7 +3424,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox10.Text = string.Format("{0:C}", WholeSaleUnFormat10);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3551,7 +3448,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter11 = false;
                     }
@@ -3575,7 +3471,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
@@ -3589,7 +3484,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter11 = false;
                     }
@@ -3613,7 +3507,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3627,7 +3520,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter11 = false;
                     }
@@ -3651,7 +3543,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3665,7 +3556,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter11 = false;
                     }
@@ -3689,7 +3579,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3702,7 +3591,6 @@ namespace Flawless_ex
                     //￥マーク表示
                     WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                     OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                    TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                     WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter11 = false;
                     }
@@ -3726,7 +3614,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox11.Text = string.Format("{0:C}", WholeSaleUnFormat11);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3751,7 +3638,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter12 = false;
                     }
@@ -3775,7 +3661,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3789,7 +3674,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter12 = false;
                     }
@@ -3813,7 +3697,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3827,7 +3710,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter12 = false;
                     }
@@ -3851,7 +3733,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3865,7 +3746,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter12 = false;
                     }
@@ -3889,7 +3769,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3903,7 +3782,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter12 = false;
                     }
@@ -3927,7 +3805,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox12.Text = string.Format("{0:C}", WholeSaleUnFormat12);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3952,7 +3829,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter13 = false;
                     }
@@ -3976,7 +3852,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         MetalWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleMetal);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -3990,7 +3865,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter13 = false;
                     }
@@ -4014,7 +3888,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         DiamondWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleDiamond);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -4028,7 +3901,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter13 = false;
                     }
@@ -4052,7 +3924,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         BrandWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleBrand);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -4066,7 +3937,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter13 = false;
                     }
@@ -4090,7 +3960,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         ProductWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleProduct);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     };
                     break;
@@ -4104,7 +3973,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                         ReEnter13 = false;
                     }
@@ -4128,7 +3996,6 @@ namespace Flawless_ex
                         //￥マーク表示
                         WholesalePriceTextBox13.Text = string.Format("{0:C}", WholeSaleUnFormat13);
                         OtherWholesaleTextBox.Text = string.Format("{0:C}", WholeSaleOther);
-                        TotalWholesaleTextBox.Text = string.Format("{0:C}", WholeSale);
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
@@ -4139,31 +4006,26 @@ namespace Flawless_ex
         #region"金額が下の表に表示されたら合計金額表示（￥マーク設定済み）TextChangedイベント"
         private void MetalPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
 
         private void DiamondPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
 
         private void BrandPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
 
         private void ProductPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
 
         private void OtherPurchaseTextBox_TextChanged(object sender, EventArgs e)
         {
-            TotalPurchaseTextBox.Text = string.Format("{0:C}", PurChase);
             PurchaseTotalTextBox.Text = string.Format("{0:C}", PurChase);
         }
 
@@ -4205,7 +4067,6 @@ namespace Flawless_ex
         private void TotalWholesaleTextBox_TextChanged(object sender, EventArgs e)
         {
             ProFit = WholeSale - PurChase;
-            TotalProfitTextBox.Text = string.Format("{0:C}", ProFit);
             ProfitTotalTextBox.Text = string.Format("{0:C}", ProFit);
         }
 
@@ -6724,21 +6585,68 @@ namespace Flawless_ex
             TotalWholesale = WholeSale;                             //合計卸値
             TotalProfit = WholeSale - PurChase;                     //合計利益
             DNumber = SlipNumber;                                   //伝票番号
+            #region"合計金額がnull or \0 のとき変数に 0 を代入"
+            //地金
+            if (string.IsNullOrEmpty(MetalPurchaseTextBox.Text) || MetalPurchaseTextBox.Text == "\0")
+            {
+                PurChaseMetal = 0;
+            }
+            if (string.IsNullOrEmpty(MetalWholesaleTextBox.Text) || MetalWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleMetal = 0;
+            }
+            //ダイヤ
+            if (string.IsNullOrEmpty(DiamondPurchaseTextBox.Text) || DiamondPurchaseTextBox.Text == "\0")
+            {
+                PurChaseDiamond = 0;
+            }
+            if (string.IsNullOrEmpty(DiamondWholesaleTextBox.Text) || DiamondWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleDiamond = 0;
+            }
+            //ブランド
+            if (string.IsNullOrEmpty(BrandPurchaseTextBox.Text) || BrandPurchaseTextBox.Text == "\0")
+            {
+                PurChaseBrand = 0;
+            }
+            if (string.IsNullOrEmpty(BrandWholesaleTextBox.Text) || BrandWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleBrand = 0;
+            }
+            //製品・ジュエリー
+            if (string.IsNullOrEmpty(ProductPurchaseTextBox.Text) || ProductPurchaseTextBox.Text == "\0")
+            {
+                PurChaseProduct = 0;
+            }
+            if (string.IsNullOrEmpty(ProductWholesaleTextBox.Text) || ProductWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleProduct = 0;
+            }
+            //その他
+            if (string.IsNullOrEmpty(OtherPurchaseTextBox.Text) || OtherPurchaseTextBox.Text == "\0")
+            {
+                PurChaseOther = 0;
+            }
+            if (string.IsNullOrEmpty(OtherWholesaleTextBox.Text) || OtherWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleOther = 0;
+            }
+            #endregion
             MetalPurchase = PurChaseMetal;                          //地金買取額
             MetalWholesale = WholeSaleMetal;                        //地金卸値
-            MetalProfit = ProFitMetal;                              //地金利益
+            MetalProfit = WholeSaleMetal - PurChaseMetal;                              //地金利益
             DiamondPurchase = PurChaseDiamond;                      //ダイヤ買取額
             DiamondWholesale = WholeSaleDiamond;                    //ダイヤ卸値
-            DiamondProfit = ProFitDiamond;                          //ダイヤ利益
+            DiamondProfit = WholeSaleDiamond - PurChaseDiamond;                          //ダイヤ利益
             BrandPurchase = PurChaseBrand;                          //ブランド買取額
             BrandWholesale = WholeSaleBrand;                        //ブランド卸値
-            BrandProfit = ProFitBrand;                              //ブランド利益
+            BrandProfit = WholeSaleBrand - PurChaseBrand;                              //ブランド利益
             ProductPurchase = PurChaseProduct;                      //製品買取額
             ProductWholesale = WholeSaleProduct;                    //製品卸値
-            ProductProfit = ProFitProduct;                          //製品利益
+            ProductProfit = WholeSaleProduct - PurChaseProduct;                          //製品利益
             OtherPurchase = PurChaseOther;                          //その他買取額
             OtherWholesale = WholeSaleOther;                        //その他卸値
-            OtherProfit = ProFitOther;                              //その他利益
+            OtherProfit = WholeSaleOther - PurChaseOther;                              //その他利益
 
             conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
@@ -8190,6 +8098,55 @@ namespace Flawless_ex
             TotalWholesale = WholeSale;                 //合計卸値
             TotalProfit = WholeSale - PurChase;         //合計利益
             DNumber = SlipNumber;                       //伝票番号
+
+            #region"合計金額がnull or \0 のとき変数に 0 を代入"
+            //地金
+            if (string.IsNullOrEmpty(MetalPurchaseTextBox.Text) || MetalPurchaseTextBox.Text == "\0")
+            {
+                PurChaseMetal = 0;
+            }
+            if (string.IsNullOrEmpty(MetalWholesaleTextBox.Text) || MetalWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleMetal = 0;
+            }
+            //ダイヤ
+            if (string.IsNullOrEmpty(DiamondPurchaseTextBox.Text) || DiamondPurchaseTextBox.Text == "\0")
+            {
+                PurChaseDiamond = 0;
+            }
+            if (string.IsNullOrEmpty(DiamondWholesaleTextBox.Text) || DiamondWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleDiamond = 0;
+            }
+            //ブランド
+            if (string.IsNullOrEmpty(BrandPurchaseTextBox.Text) || BrandPurchaseTextBox.Text == "\0")
+            {
+                PurChaseBrand = 0;
+            }
+            if (string.IsNullOrEmpty(BrandWholesaleTextBox.Text) || BrandWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleBrand = 0;
+            }
+            //製品・ジュエリー
+            if (string.IsNullOrEmpty(ProductPurchaseTextBox.Text) || ProductPurchaseTextBox.Text == "\0")
+            {
+                PurChaseProduct = 0;
+            }
+            if (string.IsNullOrEmpty(ProductWholesaleTextBox.Text) || ProductWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleProduct = 0;
+            }
+            //その他
+            if (string.IsNullOrEmpty(OtherPurchaseTextBox.Text) || OtherPurchaseTextBox.Text == "\0")
+            {
+                PurChaseOther = 0;
+            }
+            if (string.IsNullOrEmpty(OtherWholesaleTextBox.Text) || OtherWholesaleTextBox.Text == "\0")
+            {
+                WholeSaleOther = 0;
+            }
+            #endregion
+
             MetalPurchase = PurChaseMetal;              //地金買取額
             MetalWholesale = WholeSaleMetal;            //地金卸値
             MetalProfit = ProFitMetal;                  //地金利益
@@ -9478,6 +9435,55 @@ namespace Flawless_ex
                 TotalWholesale = WholeSale;                 //合計卸値
                 TotalProfit = WholeSale - PurChase;         //合計利益
                 DNumber = SlipNumber;                       //伝票番号
+
+                #region"合計金額がnull or \0 のとき変数に 0 を代入"
+                //地金
+                if (string.IsNullOrEmpty(MetalPurchaseTextBox.Text) || MetalPurchaseTextBox.Text == "\0")
+                {
+                    PurChaseMetal = 0;
+                }
+                if (string.IsNullOrEmpty(MetalWholesaleTextBox.Text) || MetalWholesaleTextBox.Text == "\0")
+                {
+                    WholeSaleMetal = 0;
+                }
+                //ダイヤ
+                if (string.IsNullOrEmpty(DiamondPurchaseTextBox.Text) || DiamondPurchaseTextBox.Text == "\0")
+                {
+                    PurChaseDiamond = 0;
+                }
+                if (string.IsNullOrEmpty(DiamondWholesaleTextBox.Text) || DiamondWholesaleTextBox.Text == "\0")
+                {
+                    WholeSaleDiamond = 0;
+                }
+                //ブランド
+                if (string.IsNullOrEmpty(BrandPurchaseTextBox.Text) || BrandPurchaseTextBox.Text == "\0")
+                {
+                    PurChaseBrand = 0;
+                }
+                if (string.IsNullOrEmpty(BrandWholesaleTextBox.Text) || BrandWholesaleTextBox.Text == "\0")
+                {
+                    WholeSaleBrand = 0;
+                }
+                //製品・ジュエリー
+                if (string.IsNullOrEmpty(ProductPurchaseTextBox.Text) || ProductPurchaseTextBox.Text == "\0")
+                {
+                    PurChaseProduct = 0;
+                }
+                if (string.IsNullOrEmpty(ProductWholesaleTextBox.Text) || ProductWholesaleTextBox.Text == "\0")
+                {
+                    WholeSaleProduct = 0;
+                }
+                //その他
+                if (string.IsNullOrEmpty(OtherPurchaseTextBox.Text) || OtherPurchaseTextBox.Text == "\0")
+                {
+                    PurChaseOther = 0;
+                }
+                if (string.IsNullOrEmpty(OtherWholesaleTextBox.Text) || OtherWholesaleTextBox.Text == "\0")
+                {
+                    WholeSaleOther = 0;
+                }
+                #endregion
+
                 MetalPurchase = PurChaseMetal;              //地金買取額
                 MetalWholesale = WholeSaleMetal;            //地金卸値
                 MetalProfit = ProFitMetal;                  //地金利益
