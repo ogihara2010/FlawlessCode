@@ -33,6 +33,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SettlementDayBox = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -212,6 +214,8 @@
             this.articlesTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.PayeeTextBox1 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -391,10 +395,6 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -479,6 +479,22 @@
             this.SettlementDayBox.Size = new System.Drawing.Size(2703, 1495);
             this.SettlementDayBox.TabIndex = 0;
             this.SettlementDayBox.Text = "計算書";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(852, 983);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(308, 33);
+            this.textBox1.TabIndex = 92;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(861, 943);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(116, 26);
+            this.label9.TabIndex = 91;
+            this.label9.Text = "変更理由";
             // 
             // button1
             // 
@@ -1387,6 +1403,7 @@
             this.countTextBox2.Size = new System.Drawing.Size(147, 33);
             this.countTextBox2.TabIndex = 39;
             this.countTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.countTextBox2.TextChanged += new System.EventHandler(this.CountTextBox2_TextChanged);
             this.countTextBox2.Leave += new System.EventHandler(this.countTextBox2_Leave);
             // 
             // countTextBox3
@@ -2626,6 +2643,22 @@
             this.tabPage2.Size = new System.Drawing.Size(2703, 1495);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "納品書";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(215, 1281);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(537, 33);
+            this.textBox2.TabIndex = 90;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(74, 1284);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(116, 26);
+            this.label10.TabIndex = 89;
+            this.label10.Text = "変更理由";
             // 
             // PayeeTextBox1
             // 
@@ -4723,38 +4756,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(861, 943);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(116, 26);
-            this.label9.TabIndex = 91;
-            this.label9.Text = "変更理由";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(852, 983);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(308, 33);
-            this.textBox1.TabIndex = 92;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(74, 1284);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(116, 26);
-            this.label10.TabIndex = 89;
-            this.label10.Text = "変更理由";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(215, 1281);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(537, 33);
-            this.textBox2.TabIndex = 90;
             // 
             // Statement
             // 

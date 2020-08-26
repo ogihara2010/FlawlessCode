@@ -1145,23 +1145,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt23 = new DataTable();
-                        string sql_document = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode0 + ";";
+                        string sql_document = "select * from main_category_m where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_document, conn);
                         adapter.Fill(dt23);
                         mainCategoryComboBox0.DataSource = dt23;
                         mainCategoryComboBox0.DisplayMember = "main_category_name";
                         mainCategoryComboBox0.ValueMember = "main_category_code";
                         mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox0.SelectedValue = itemMainCategoryCode0;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt24 = new DataTable();
-                        string sql_item1 = "select * from item_m  where invalid = 0 and item_code = " + itemCode0 + ";";
+                        string sql_item1 = "select * from item_m  where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_item1, conn);
                         adapter.Fill(dt24);
                         itemComboBox0.DataSource = dt24;
                         itemComboBox0.DisplayMember = "item_name";
                         itemComboBox0.ValueMember = "item_code";
+                        itemComboBox0.SelectedValue = itemCode0;
                         #endregion
                         #endregion
                         #region "入力された項目 1行目"
@@ -1189,23 +1191,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt231 = new DataTable();
-                        string sql_document1 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode1 + ";";
+                        string sql_document1 = "select * from main_category_m where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_document1, conn);
                         adapter.Fill(dt231);
                         mainCategoryComboBox1.DataSource = dt231;
                         mainCategoryComboBox1.DisplayMember = "main_category_name";
                         mainCategoryComboBox1.ValueMember = "main_category_code";
                         mainCategoryComboBox1.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox1.SelectedValue = itemMainCategoryCode1;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt241 = new DataTable();
-                        string sql_item2 = "select * from item_m  where invalid = 0 and item_code = " + itemCode1 + ";";
+                        string sql_item2 = "select * from item_m  where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_item2, conn);
                         adapter.Fill(dt241);
                         itemComboBox1.DataSource = dt241;
                         itemComboBox1.DisplayMember = "item_name";
                         itemComboBox1.ValueMember = "item_code";
+                        itemComboBox1.SelectedValue = itemCode1;
                         #endregion
                         #endregion
                         #region "入力された項目 2行目"
@@ -1233,23 +1237,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt232 = new DataTable();
-                        string sql_document2 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode2 + ";";
+                        string sql_document2 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document2, conn);
                         adapter.Fill(dt232);
                         mainCategoryComboBox2.DataSource = dt232;
                         mainCategoryComboBox2.DisplayMember = "main_category_name";
                         mainCategoryComboBox2.ValueMember = "main_category_code";
                         mainCategoryComboBox2.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox2.SelectedValue = itemMainCategoryCode2;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt242 = new DataTable();
-                        string sql_item3 = "select * from item_m  where invalid = 0 and item_code = " + itemCode2 + ";";
+                        string sql_item3 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item3, conn);
                         adapter.Fill(dt242);
                         itemComboBox2.DataSource = dt242;
                         itemComboBox2.DisplayMember = "item_name";
                         itemComboBox2.ValueMember = "item_code";
+                        itemComboBox2.SelectedValue = itemCode2;
                         #endregion
                         #endregion
                         #region "入力された項目 3行目"
@@ -1277,23 +1283,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt233 = new DataTable();
-                        string sql_document3 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode3 + ";";
+                        string sql_document3 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document3, conn);
                         adapter.Fill(dt233);
                         mainCategoryComboBox3.DataSource = dt233;
                         mainCategoryComboBox3.DisplayMember = "main_category_name";
                         mainCategoryComboBox3.ValueMember = "main_category_code";
                         mainCategoryComboBox3.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox3.SelectedValue = itemMainCategoryCode3;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt243 = new DataTable();
-                        string sql_item4 = "select * from item_m  where invalid = 0 and item_code = " + itemCode3 + ";";
+                        string sql_item4 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item4, conn);
                         adapter.Fill(dt243);
                         itemComboBox3.DataSource = dt243;
                         itemComboBox3.DisplayMember = "item_name";
                         itemComboBox3.ValueMember = "item_code";
+                        itemComboBox3.SelectedValue = itemCode3;
                         #endregion
                         #endregion
                         #region "入力された項目 4行目"
@@ -1321,23 +1329,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt234 = new DataTable();
-                        string sql_document4 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode4 + ";";
+                        string sql_document4 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document4, conn);
                         adapter.Fill(dt234);
                         mainCategoryComboBox4.DataSource = dt234;
                         mainCategoryComboBox4.DisplayMember = "main_category_name";
                         mainCategoryComboBox4.ValueMember = "main_category_code";
                         mainCategoryComboBox4.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox4.SelectedValue = itemMainCategoryCode4;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt244 = new DataTable();
-                        string sql_item5 = "select * from item_m  where invalid = 0 and item_code = " + itemCode4 + ";";
+                        string sql_item5 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item5, conn);
                         adapter.Fill(dt244);
                         itemComboBox4.DataSource = dt244;
                         itemComboBox4.DisplayMember = "item_name";
                         itemComboBox4.ValueMember = "item_code";
+                        itemComboBox4.SelectedValue = itemCode4;
                         #endregion
                         #endregion
                         #region "入力された項目 5行目"
@@ -1365,23 +1375,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt235 = new DataTable();
-                        string sql_document5 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode5 + ";";
+                        string sql_document5 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document5, conn);
                         adapter.Fill(dt235);
                         mainCategoryComboBox5.DataSource = dt235;
                         mainCategoryComboBox5.DisplayMember = "main_category_name";
                         mainCategoryComboBox5.ValueMember = "main_category_code";
                         mainCategoryComboBox5.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox5.SelectedValue = itemMainCategoryCode5;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt245 = new DataTable();
-                        string sql_item6 = "select * from item_m  where invalid = 0 and item_code = " + itemCode5 + ";";
+                        string sql_item6 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item6, conn);
                         adapter.Fill(dt245);
                         itemComboBox5.DataSource = dt245;
                         itemComboBox5.DisplayMember = "item_name";
                         itemComboBox5.ValueMember = "item_code";
+                        itemComboBox5.SelectedValue = itemCode5;
                         #endregion
                         #endregion
                         #region "入力された項目 6行目"
@@ -1409,23 +1421,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt236 = new DataTable();
-                        string sql_document6 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode6 + ";";
+                        string sql_document6 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document6, conn);
                         adapter.Fill(dt236);
                         mainCategoryComboBox6.DataSource = dt236;
                         mainCategoryComboBox6.DisplayMember = "main_category_name";
                         mainCategoryComboBox6.ValueMember = "main_category_code";
                         mainCategoryComboBox6.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox6.SelectedValue = itemMainCategoryCode6;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt246 = new DataTable();
-                        string sql_item7 = "select * from item_m  where invalid = 0 and item_code = " + itemCode6 + ";";
+                        string sql_item7 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item7, conn);
                         adapter.Fill(dt246);
                         itemComboBox6.DataSource = dt246;
                         itemComboBox6.DisplayMember = "item_name";
                         itemComboBox6.ValueMember = "item_code";
+                        itemComboBox6.SelectedValue = itemCode6;
                         #endregion
                         #endregion
                         #region "入力された項目 7行目"
@@ -1453,23 +1467,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt237 = new DataTable();
-                        string sql_document7 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode7 + ";";
+                        string sql_document7 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document7, conn);
                         adapter.Fill(dt237);
                         mainCategoryComboBox7.DataSource = dt237;
                         mainCategoryComboBox7.DisplayMember = "main_category_name";
                         mainCategoryComboBox7.ValueMember = "main_category_code";
                         mainCategoryComboBox7.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox7.SelectedValue = itemMainCategoryCode7;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt247 = new DataTable();
-                        string sql_item8 = "select * from item_m  where invalid = 0 and item_code = " + itemCode7 + ";";
+                        string sql_item8 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item8, conn);
                         adapter.Fill(dt247);
                         itemComboBox7.DataSource = dt247;
                         itemComboBox7.DisplayMember = "item_name";
                         itemComboBox7.ValueMember = "item_code";
+                        itemComboBox7.SelectedValue = itemCode7;
                         #endregion
                         #endregion
                         #region "入力された項目 8行目"
@@ -1497,23 +1513,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt238 = new DataTable();
-                        string sql_document8 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode8 + ";";
+                        string sql_document8 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document8, conn);
                         adapter.Fill(dt238);
                         mainCategoryComboBox8.DataSource = dt238;
                         mainCategoryComboBox8.DisplayMember = "main_category_name";
                         mainCategoryComboBox8.ValueMember = "main_category_code";
                         mainCategoryComboBox8.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox8.SelectedValue = itemMainCategoryCode8;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt248 = new DataTable();
-                        string sql_item9 = "select * from item_m  where invalid = 0 and item_code = " + itemCode8 + ";";
+                        string sql_item9 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item9, conn);
                         adapter.Fill(dt248);
                         itemComboBox8.DataSource = dt248;
                         itemComboBox8.DisplayMember = "item_name";
                         itemComboBox8.ValueMember = "item_code";
+                        itemComboBox8.SelectedValue = itemCode8;
                         #endregion
                         #endregion
                         #region "入力された項目 9行目"
@@ -1541,23 +1559,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt239 = new DataTable();
-                        string sql_document9 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode9 + ";";
+                        string sql_document9 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document9, conn);
                         adapter.Fill(dt239);
                         mainCategoryComboBox9.DataSource = dt239;
                         mainCategoryComboBox9.DisplayMember = "main_category_name";
                         mainCategoryComboBox9.ValueMember = "main_category_code";
                         mainCategoryComboBox9.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox9.SelectedValue = itemMainCategoryCode9;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt249 = new DataTable();
-                        string sql_item10 = "select * from item_m  where invalid = 0 and item_code = " + itemCode9 + ";";
+                        string sql_item10 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item10, conn);
                         adapter.Fill(dt249);
                         itemComboBox9.DataSource = dt249;
                         itemComboBox9.DisplayMember = "item_name";
                         itemComboBox9.ValueMember = "item_code";
+                        itemComboBox9.SelectedValue = itemCode9;
                         #endregion
                         #endregion
                         #region "入力された項目 10行目"
@@ -1585,23 +1605,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt2310 = new DataTable();
-                        string sql_document10 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode10 + ";";
+                        string sql_document10 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document10, conn);
                         adapter.Fill(dt2310);
                         mainCategoryComboBox10.DataSource = dt2310;
                         mainCategoryComboBox10.DisplayMember = "main_category_name";
                         mainCategoryComboBox10.ValueMember = "main_category_code";
                         mainCategoryComboBox10.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox10.SelectedValue = itemMainCategoryCode10;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt2410 = new DataTable();
-                        string sql_item11 = "select * from item_m  where invalid = 0 and item_code = " + itemCode10 + ";";
+                        string sql_item11 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item11, conn);
                         adapter.Fill(dt2410);
                         itemComboBox10.DataSource = dt2410;
                         itemComboBox10.DisplayMember = "item_name";
                         itemComboBox10.ValueMember = "item_code";
+                        itemComboBox10.SelectedValue = itemCode10;
                         #endregion
                         #endregion
                         #region "入力された項目 11行目"
@@ -1629,23 +1651,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt2311 = new DataTable();
-                        string sql_document11 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode11 + ";";
+                        string sql_document11 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document11, conn);
                         adapter.Fill(dt2311);
                         mainCategoryComboBox11.DataSource = dt2311;
                         mainCategoryComboBox11.DisplayMember = "main_category_name";
                         mainCategoryComboBox11.ValueMember = "main_category_code";
                         mainCategoryComboBox11.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox11.SelectedValue = itemMainCategoryCode11;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt2411 = new DataTable();
-                        string sql_item12 = "select * from item_m  where invalid = 0 and item_code = " + itemCode11 + ";";
+                        string sql_item12 = "select * from item_m  where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_item12, conn);
                         adapter.Fill(dt2411);
                         itemComboBox11.DataSource = dt2411;
                         itemComboBox11.DisplayMember = "item_name";
                         itemComboBox11.ValueMember = "item_code";
+                        itemComboBox11.SelectedValue = itemCode11;
                         #endregion
                         #endregion
                         #region "入力された項目 12行目"
@@ -1673,23 +1697,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt2312 = new DataTable();
-                        string sql_document12 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode12 + ";";
+                        string sql_document12 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_document12, conn);
                         adapter.Fill(dt2312);
                         mainCategoryComboBox12.DataSource = dt2312;
                         mainCategoryComboBox12.DisplayMember = "main_category_name";
                         mainCategoryComboBox12.ValueMember = "main_category_code";
                         mainCategoryComboBox12.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox12.SelectedValue = itemMainCategoryCode12;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt2412 = new DataTable();
-                        string sql_item13 = "select * from item_m  where invalid = 0 and item_code = " + itemCode12 + ";";
+                        string sql_item13 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item13, conn);
                         adapter.Fill(dt2412);
                         itemComboBox12.DataSource = dt2412;
                         itemComboBox12.DisplayMember = "item_name";
                         itemComboBox12.ValueMember = "item_code";
+                        itemComboBox12.SelectedValue = itemCode12;
                         #endregion
                         #endregion
                         #region "入力された項目 13行目"
@@ -1843,23 +1869,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt26 = new DataTable();
-                        string sql_control1 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode00 + ";";
+                        string sql_control1 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control1, conn);
                         adapter.Fill(dt26);
                         mainCategoryComboBox00.DataSource = dt26;
                         mainCategoryComboBox00.DisplayMember = "main_category_name";
                         mainCategoryComboBox00.ValueMember = "main_category_code";
                         mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox00.SelectedValue = itemMainCategoryCode00;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt27 = new DataTable();
-                        string sql_item1 = "select * from item_m  where invalid = 0 and item_code = " + itemCode00 + ";";
+                        string sql_item1 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item1, conn);
                         adapter.Fill(dt27);
                         itemComboBox00.DataSource = dt27;
                         itemComboBox00.DisplayMember = "item_name";
                         itemComboBox00.ValueMember = "item_code";
+                        itemComboBox00.SelectedValue = itemCode00;
                         #endregion
                         #endregion
                         #region "入力された項目 1行目"
@@ -1887,23 +1915,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt261 = new DataTable();
-                        string sql_control2 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode01 + ";";
+                        string sql_control2 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control2, conn);
                         adapter.Fill(dt261);
                         mainCategoryComboBox01.DataSource = dt261;
                         mainCategoryComboBox01.DisplayMember = "main_category_name";
                         mainCategoryComboBox01.ValueMember = "main_category_code";
                         mainCategoryComboBox01.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox01.SelectedValue = itemMainCategoryCode01;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt271 = new DataTable();
-                        string sql_item2 = "select * from item_m  where invalid = 0 and item_code = " + itemCode01 + ";";
+                        string sql_item2 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item2, conn);
                         adapter.Fill(dt271);
                         itemComboBox01.DataSource = dt271;
                         itemComboBox01.DisplayMember = "item_name";
                         itemComboBox01.ValueMember = "item_code";
+                        itemComboBox01.SelectedValue = itemCode01;
                         #endregion
                         #endregion
                         #region "入力された項目 2行目"
@@ -1931,23 +1961,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt262 = new DataTable();
-                        string sql_control3 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode02 + ";";
+                        string sql_control3 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control3, conn);
                         adapter.Fill(dt262);
                         mainCategoryComboBox02.DataSource = dt262;
                         mainCategoryComboBox02.DisplayMember = "main_category_name";
                         mainCategoryComboBox02.ValueMember = "main_category_code";
                         mainCategoryComboBox02.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox02.SelectedValue = itemMainCategoryCode02;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt272 = new DataTable();
-                        string sql_item3 = "select * from item_m  where invalid = 0 and item_code = " + itemCode02 + ";";
+                        string sql_item3 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item3, conn);
                         adapter.Fill(dt272);
                         itemComboBox02.DataSource = dt272;
                         itemComboBox02.DisplayMember = "item_name";
                         itemComboBox02.ValueMember = "item_code";
+                        itemComboBox02.SelectedValue = itemCode02;
                         #endregion
                         #endregion
                         #region "入力された項目 3行目"
@@ -1975,23 +2007,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt263 = new DataTable();
-                        string sql_control4 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode03 + ";";
+                        string sql_control4 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control4, conn);
                         adapter.Fill(dt263);
                         mainCategoryComboBox03.DataSource = dt263;
                         mainCategoryComboBox03.DisplayMember = "main_category_name";
                         mainCategoryComboBox03.ValueMember = "main_category_code";
                         mainCategoryComboBox03.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox03.SelectedValue = itemMainCategoryCode03;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt273 = new DataTable();
-                        string sql_item4 = "select * from item_m  where invalid = 0 and item_code = " + itemCode03 + ";";
+                        string sql_item4 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item4, conn);
                         adapter.Fill(dt273);
                         itemComboBox03.DataSource = dt273;
                         itemComboBox03.DisplayMember = "item_name";
                         itemComboBox03.ValueMember = "item_code";
+                        itemComboBox03.SelectedValue = itemCode03;
                         #endregion
                         #endregion
                         #region "入力された項目 4行目"
@@ -2019,23 +2053,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt264 = new DataTable();
-                        string sql_control5 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode04 + ";";
+                        string sql_control5 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control5, conn);
                         adapter.Fill(dt264);
                         mainCategoryComboBox04.DataSource = dt264;
                         mainCategoryComboBox04.DisplayMember = "main_category_name";
                         mainCategoryComboBox04.ValueMember = "main_category_code";
                         mainCategoryComboBox04.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox04.SelectedValue = itemMainCategoryCode04;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt274 = new DataTable();
-                        string sql_item4 = "select * from item_m  where invalid = 0 and item_code = " + itemCode04 + ";";
+                        string sql_item4 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item4, conn);
                         adapter.Fill(dt274);
                         itemComboBox04.DataSource = dt274;
                         itemComboBox04.DisplayMember = "item_name";
                         itemComboBox04.ValueMember = "item_code";
+                        itemComboBox04.SelectedValue = itemCode04;
                         #endregion
                         #endregion
                         #region "入力された項目 5行目"
@@ -2063,23 +2099,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt265 = new DataTable();
-                        string sql_control6 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode05 + ";";
+                        string sql_control6 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control6, conn);
                         adapter.Fill(dt265);
                         mainCategoryComboBox05.DataSource = dt265;
                         mainCategoryComboBox05.DisplayMember = "main_category_name";
                         mainCategoryComboBox05.ValueMember = "main_category_code";
                         mainCategoryComboBox05.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox05.SelectedValue = itemMainCategoryCode05;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt275 = new DataTable();
-                        string sql_item6 = "select * from item_m  where invalid = 0 and item_code = " + itemCode05 + ";";
+                        string sql_item6 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item6, conn);
                         adapter.Fill(dt275);
                         itemComboBox05.DataSource = dt275;
                         itemComboBox05.DisplayMember = "item_name";
                         itemComboBox05.ValueMember = "item_code";
+                        itemComboBox05.SelectedValue = itemCode05;
                         #endregion
                         #endregion
                         #region "入力された項目 6行目"
@@ -2107,23 +2145,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt266 = new DataTable();
-                        string sql_control7 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode06 + ";";
+                        string sql_control7 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control7, conn);
                         adapter.Fill(dt266);
                         mainCategoryComboBox06.DataSource = dt266;
                         mainCategoryComboBox06.DisplayMember = "main_category_name";
                         mainCategoryComboBox06.ValueMember = "main_category_code";
                         mainCategoryComboBox06.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox06.SelectedValue = itemMainCategoryCode06;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt276 = new DataTable();
-                        string sql_item7 = "select * from item_m  where invalid = 0 and item_code = " + itemCode06 + ";";
+                        string sql_item7 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item7, conn);
                         adapter.Fill(dt276);
                         itemComboBox06.DataSource = dt276;
                         itemComboBox06.DisplayMember = "item_name";
                         itemComboBox06.ValueMember = "item_code";
+                        itemComboBox06.SelectedValue = itemCode06;
                         #endregion
                         #endregion
                         #region "入力された項目 7行目"
@@ -2151,23 +2191,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt267 = new DataTable();
-                        string sql_control8 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode07 + ";";
+                        string sql_control8 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control8, conn);
                         adapter.Fill(dt267);
                         mainCategoryComboBox07.DataSource = dt267;
                         mainCategoryComboBox07.DisplayMember = "main_category_name";
                         mainCategoryComboBox07.ValueMember = "main_category_code";
                         mainCategoryComboBox07.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox07.SelectedValue = itemMainCategoryCode07;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt277 = new DataTable();
-                        string sql_item8 = "select * from item_m  where invalid = 0 and item_code = " + itemCode07 + ";";
+                        string sql_item8 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item8, conn);
                         adapter.Fill(dt277);
                         itemComboBox07.DataSource = dt277;
                         itemComboBox07.DisplayMember = "item_name";
                         itemComboBox07.ValueMember = "item_code";
+                        itemComboBox07.SelectedValue = itemCode07;
                         #endregion
                         #endregion
                         #region "入力された項目 8行目"
@@ -2195,23 +2237,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt268 = new DataTable();
-                        string sql_control9 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode08 + ";";
+                        string sql_control9 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control9, conn);
                         adapter.Fill(dt268);
                         mainCategoryComboBox08.DataSource = dt268;
                         mainCategoryComboBox08.DisplayMember = "main_category_name";
                         mainCategoryComboBox08.ValueMember = "main_category_code";
                         mainCategoryComboBox08.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox08.SelectedValue = itemMainCategoryCode08;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt278 = new DataTable();
-                        string sql_item9 = "select * from item_m  where invalid = 0 and item_code = " + itemCode08 + ";";
+                        string sql_item9 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item9, conn);
                         adapter.Fill(dt278);
                         itemComboBox08.DataSource = dt278;
                         itemComboBox08.DisplayMember = "item_name";
                         itemComboBox08.ValueMember = "item_code";
+                        itemComboBox08.SelectedValue = itemCode08;
                         #endregion
                         #endregion
                         #region "入力された項目 9行目"
@@ -2239,23 +2283,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt269 = new DataTable();
-                        string sql_control10 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode09 + ";";
+                        string sql_control10 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control10, conn);
                         adapter.Fill(dt269);
                         mainCategoryComboBox09.DataSource = dt269;
                         mainCategoryComboBox09.DisplayMember = "main_category_name";
                         mainCategoryComboBox09.ValueMember = "main_category_code";
                         mainCategoryComboBox09.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox09.SelectedValue = itemMainCategoryCode09;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt279 = new DataTable();
-                        string sql_item10 = "select * from item_m  where invalid = 0 and item_code = " + itemCode09 + ";";
+                        string sql_item10 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item10, conn);
                         adapter.Fill(dt279);
                         itemComboBox09.DataSource = dt279;
                         itemComboBox09.DisplayMember = "item_name";
                         itemComboBox09.ValueMember = "item_code";
+                        itemComboBox09.SelectedValue = itemCode09;
                         #endregion
                         #endregion
                         #region "入力された項目 10行目"
@@ -2283,23 +2329,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt2610 = new DataTable();
-                        string sql_control11 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode010 + ";";
+                        string sql_control11 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control11, conn);
                         adapter.Fill(dt2610);
                         mainCategoryComboBox010.DataSource = dt2610;
                         mainCategoryComboBox010.DisplayMember = "main_category_name";
                         mainCategoryComboBox010.ValueMember = "main_category_code";
                         mainCategoryComboBox010.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox010.SelectedValue = itemMainCategoryCode010;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt2710 = new DataTable();
-                        string sql_item11 = "select * from item_m  where invalid = 0 and item_code = " + itemCode010 + ";";
+                        string sql_item11 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item11, conn);
                         adapter.Fill(dt2710);
                         itemComboBox010.DataSource = dt2710;
                         itemComboBox010.DisplayMember = "item_name";
                         itemComboBox010.ValueMember = "item_code";
+                        itemComboBox010.SelectedValue = itemCode010;
                         #endregion
                         #endregion
                         #region "入力された項目 11行目"
@@ -2327,23 +2375,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt2611 = new DataTable();
-                        string sql_control12 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode011 + ";";
+                        string sql_control12 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control12, conn);
                         adapter.Fill(dt2611);
                         mainCategoryComboBox011.DataSource = dt2611;
                         mainCategoryComboBox011.DisplayMember = "main_category_name";
                         mainCategoryComboBox011.ValueMember = "main_category_code";
                         mainCategoryComboBox011.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox011.SelectedValue = itemMainCategoryCode011;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt2711 = new DataTable();
-                        string sql_item12 = "select * from item_m  where invalid = 0 and item_code = " + itemCode011 + ";";
+                        string sql_item12 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item12, conn);
                         adapter.Fill(dt2711);
                         itemComboBox011.DataSource = dt2711;
                         itemComboBox011.DisplayMember = "item_name";
                         itemComboBox011.ValueMember = "item_code";
+                        itemComboBox011.SelectedValue = itemCode011;
                         #endregion
                         #endregion
                         #region "入力された項目 12行目"
@@ -2371,23 +2421,25 @@ namespace Flawless_ex
                         #region "コンボボックス"
                         #region "大分類"
                         DataTable dt2612 = new DataTable();
-                        string sql_control13 = "select * from main_category_m where invalid = 0 and main_category_code = " + itemMainCategoryCode012 + ";";
+                        string sql_control13 = "select * from main_category_m where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_control13, conn);
                         adapter.Fill(dt2612);
                         mainCategoryComboBox012.DataSource = dt2612;
                         mainCategoryComboBox012.DisplayMember = "main_category_name";
                         mainCategoryComboBox012.ValueMember = "main_category_code";
                         mainCategoryComboBox012.SelectedIndex = 0;//担当者ごとの初期値設定
+                        mainCategoryComboBox012.SelectedValue = itemMainCategoryCode012;
                         #endregion
                         #region "品名"
                         //品名検索用
                         DataTable dt2712 = new DataTable();
-                        string sql_item13 = "select * from item_m  where invalid = 0 and item_code = " + itemCode012 + ";";
+                        string sql_item13 = "select * from item_m  where invalid = 0 ;";
                         adapter = new NpgsqlDataAdapter(sql_item13, conn);
                         adapter.Fill(dt2712);
                         itemComboBox012.DataSource = dt2712;
                         itemComboBox012.DisplayMember = "item_name";
                         itemComboBox012.ValueMember = "item_code";
+                        itemComboBox012.SelectedValue = itemCode012;
                         #endregion
                         #endregion
                         #region "入力された項目 13行目"
@@ -2407,6 +2459,7 @@ namespace Flawless_ex
             #region "顧客選択から計算書戻ってきた時に"
             if (amount10 != 0)
             {
+                Properties.Settings.Default.Reload();
                 DataTable upddt = new DataTable();
                 string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
                 adapter = new NpgsqlDataAdapter(str_sql_if, conn);
@@ -2475,7 +2528,7 @@ namespace Flawless_ex
                             this.sumTextBox.Text = dataRow1["total"].ToString();
                             sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
                             this.taxAmount.Text = dataRow1["tax_amount"].ToString();
-                            taxAmount.Text = string.Format("{0:C}", decimal.Parse(taxAmount.Text, System.Globalization.NumberStyles.Number));
+                            //taxAmount.Text = string.Format("{0:C}", decimal.Parse(taxAmount.Text, System.Globalization.NumberStyles.Number));
                             this.weightTextBox0.Text = dataRow1["weight"].ToString();
                             this.countTextBox0.Text = dataRow1["count"].ToString();
                             this.unitPriceTextBox0.Text = dataRow1["unit_price"].ToString();
@@ -3708,9 +3761,10 @@ namespace Flawless_ex
             CoinComboBox.SelectedIndex = 0;
             #region "これから選択する場合"
             if (count != 0)
-            {
+            {           
                 if (type == 0)
                 {
+                    
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
@@ -5441,14 +5495,16 @@ namespace Flawless_ex
 
                 }
             }
-            
-            
+            number = 0;
             using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document))
             {
-                screan = false;
-                this.Close();
+                Properties.Settings.Default.Save();
+                //screan = false;
+                //this.Hide();
                 search2.ShowDialog();
+                Properties.Settings.Default.Upgrade();
             }
+            //this.Show();            
         }
         #endregion
         #region "顧客選択メニュー（納品書）"
@@ -7642,7 +7698,8 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-
+                countsum0 = int.Parse(countTextBox0.Text);
+                weisum0 = decimal.Parse(weightTextBox0.Text);
             }
             else
             {
@@ -7658,8 +7715,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount10 != 0)
@@ -7756,8 +7812,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount11 != 0)
@@ -7853,8 +7908,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount12 != 0)
@@ -7949,8 +8003,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount13 != 0)
@@ -8045,8 +8098,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount14 != 0)
@@ -8141,8 +8193,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount15 != 0)
@@ -8237,8 +8288,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount16 != 0)
@@ -8333,8 +8383,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                   
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount17 != 0)
@@ -8428,8 +8477,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount18 != 0)
@@ -8523,8 +8571,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount19 != 0)
@@ -8619,8 +8666,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                    
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount110 != 0)
@@ -8714,8 +8760,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                   
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount111 != 0)
@@ -8810,8 +8855,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    MessageBox.Show("数値を入力してください");
-                    return;
+                   
                 }
                 #region "顧客選択から戻ってきた時"
                 if (amount112 != 0)
@@ -17032,5 +17076,10 @@ namespace Flawless_ex
            }
         }
         #endregion
+
+        private void CountTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

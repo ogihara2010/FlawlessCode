@@ -176,7 +176,7 @@ namespace Flawless_ex
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
             client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document);
-
+            
             this.Close();
             client_Search.Show();
         }
