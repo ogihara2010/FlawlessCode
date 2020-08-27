@@ -337,8 +337,11 @@ namespace Flawless_ex
 
         private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
-            customerHistory.Show();
+            if (screan)
+            {
+                CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
+                customerHistory.Show();
+            }           
         }
     }
 }

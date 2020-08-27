@@ -7,8 +7,9 @@ namespace Flawless_ex
 {
     public partial class client_search : Form
     {
-        //Statement statement;
+        Statement statement;
         MainMenu mainMenu;
+        client_search Client_Search;
         DataTable dt = new DataTable();
         public int count = 0;//計算書/納品書の顧客選択用
         int staff_id;
@@ -79,12 +80,12 @@ namespace Flawless_ex
         decimal amount111;
         decimal amount112;
         #endregion
-        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, int control, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012, decimal amount10, decimal amount11, decimal amount12, decimal amount13, decimal amount14, decimal amount15, decimal amount16, decimal amount17, decimal amount18, decimal amount19, decimal amount110, decimal amount111, decimal amount112, string document, string Access_auth, string pass)
+        public client_search(Statement statement, int id, int type, string staff_name, string address, decimal Total, int control, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012, decimal amount10, decimal amount11, decimal amount12, decimal amount13, decimal amount14, decimal amount15, decimal amount16, decimal amount17, decimal amount18, decimal amount19, decimal amount110, decimal amount111, decimal amount112, string document, string Access_auth, string pass)
         {
             InitializeComponent();
 
-            //this.statement = statement;
-            this.mainMenu = mainMenu;
+            this.statement = statement;
+            //this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;
             this.address = address;
@@ -197,10 +198,19 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -214,10 +224,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -237,10 +255,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -254,10 +280,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -284,9 +318,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -300,9 +342,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
 
@@ -323,9 +373,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -339,9 +397,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -373,10 +439,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -390,10 +464,19 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -413,10 +496,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -430,10 +521,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -459,10 +558,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -476,10 +583,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -499,9 +614,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -515,10 +638,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -556,10 +687,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -573,10 +712,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -596,10 +743,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -613,10 +768,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -642,10 +805,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -659,10 +830,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -682,9 +861,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -698,9 +885,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -732,10 +927,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -749,10 +952,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -772,10 +983,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -789,10 +1008,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -818,9 +1045,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -834,9 +1069,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -856,9 +1099,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -872,9 +1123,17 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -918,10 +1177,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -935,10 +1202,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -958,10 +1233,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -975,10 +1258,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1004,10 +1295,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "担当者、住所以外記入"
@@ -1020,10 +1319,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1043,10 +1350,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "担当者、住所以外記入"
@@ -1059,10 +1374,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1094,10 +1417,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -1111,10 +1442,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1134,10 +1473,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -1151,10 +1498,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1180,10 +1535,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "担当者、住所以外記入"
@@ -1196,10 +1559,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1220,10 +1591,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "住所、担当者以外記入"
@@ -1236,10 +1615,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1277,10 +1664,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "店舗名、住所未記入"
@@ -1293,10 +1688,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1316,10 +1719,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "住所、店舗名未記入"
@@ -1332,10 +1743,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1361,10 +1780,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "会社名以外名未記入"
@@ -1377,10 +1804,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1400,10 +1835,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "会社名以外未記入"
@@ -1416,10 +1859,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1451,10 +1902,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "店舗名、住所未記入"
@@ -1467,10 +1926,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1490,10 +1957,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -1507,10 +1982,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1536,10 +2019,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                         #region "会社名のみ記入"
@@ -1552,10 +2043,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1575,10 +2074,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
 
                                         }
                                         #endregion
@@ -1592,10 +2099,18 @@ namespace Flawless_ex
                                             adapter.Fill(dt);
 
                                             conn.Close();
-                                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                             screan = false;
                                             this.Close();
-                                            search_Result.Show();
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
                                         }
                                         #endregion
                                     }
@@ -1638,10 +2153,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
 
                                     }
                                     #endregion
@@ -1655,10 +2178,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1678,10 +2209,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
 
                                     }
                                     #endregion
@@ -1695,10 +2234,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1724,10 +2271,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                     #region "店舗名以外未記入"
@@ -1740,9 +2295,17 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1762,10 +2325,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
 
                                     }
                                     #endregion
@@ -1779,10 +2350,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1814,10 +2393,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                     #region "会社名、住所未記入"
@@ -1830,10 +2417,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1853,10 +2448,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                     #region "会社名、住所未記入"
@@ -1869,10 +2472,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1898,10 +2509,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                     #region "店舗名以外未記入"
@@ -1914,10 +2533,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1937,10 +2564,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                     #region "店舗名以外未記入"
@@ -1953,10 +2588,18 @@ namespace Flawless_ex
                                         adapter.Fill(dt);
 
                                         conn.Close();
-                                        client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                         screan = false;
                                         this.Close();
-                                        search_Result.Show();
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
                                     }
                                     #endregion
                                 }
@@ -1987,10 +2630,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "担当者以外未記入"
@@ -2003,10 +2654,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2026,10 +2685,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "担当者以外未記入"
@@ -2042,10 +2709,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2065,10 +2740,19 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                 screan = false;
                                 this.Close();
-                                search_Result.Show();
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
+                                
                             }
                             #endregion
                             #region "未記入"
@@ -2116,10 +2800,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2133,10 +2825,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2156,10 +2856,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2173,10 +2881,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2202,10 +2918,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2219,10 +2943,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2242,10 +2974,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2259,10 +2999,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2294,10 +3042,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2311,10 +3067,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2334,9 +3098,17 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2350,9 +3122,17 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2378,10 +3158,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2395,10 +3183,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2418,10 +3214,18 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                                 #region "古物商許可証なし"
@@ -2435,10 +3239,18 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                     screan = false;
                                     this.Close();
-                                    search_Result.Show();
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
                                 }
                                 #endregion
                             }
@@ -2468,10 +3280,18 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                 screan = false;
                                 this.Close();
-                                search_Result.Show();
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
                             }
                             #endregion
                             #region "古物商許可証なし"
@@ -2485,10 +3305,18 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                 screan = false;
                                 this.Close();
-                                search_Result.Show();
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
                             }
                             #endregion
                         }
@@ -2506,10 +3334,18 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                 screan = false;
                                 this.Close();
-                                search_Result.Show();
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
                             }
                             #endregion
                             #region "古物商許可証なし"
@@ -2523,10 +3359,18 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                                 screan = false;
                                 this.Close();
-                                search_Result.Show();
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
                             }
                             #endregion
                         }
@@ -2546,10 +3390,18 @@ namespace Flawless_ex
                             adapter.Fill(dt);
 
                             conn.Close();
-                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                             screan = false;
                             this.Close();
-                            search_Result.Show();
+                            if (statement.Visible == true)
+                            {
+                                this.Visible = false;
+                                search_Result.ShowDialog();
+                            }
+                            else
+                            {
+                                search_Result.Show();
+                            }
                         }
                         #endregion
                         #region "古物商許可証なし"
@@ -2563,10 +3415,18 @@ namespace Flawless_ex
                             adapter.Fill(dt);
 
                             conn.Close();
-                            client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
                             screan = false;
                             this.Close();
-                            search_Result.Show();
+                            if (statement.Visible == true)
+                            {
+                                this.Visible = false;
+                                search_Result.ShowDialog();
+                            }
+                            else
+                            {
+                                search_Result.Show();
+                            }
                         }
                         #endregion
                     }
