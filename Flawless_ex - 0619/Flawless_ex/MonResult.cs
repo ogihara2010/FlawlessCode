@@ -95,7 +95,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                                                                                                                                      //検索用
             #region "担当者権限"
             if (access_auth == "C")
@@ -206,7 +206,7 @@ namespace Flawless_ex
 
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn4.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "";
 
@@ -399,7 +399,7 @@ namespace Flawless_ex
         {
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn4.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (access_auth == "C")
             {

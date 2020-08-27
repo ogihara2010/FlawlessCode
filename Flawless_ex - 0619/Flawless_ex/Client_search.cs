@@ -156,7 +156,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
 
             if (tabControl1.SelectedIndex == 0)

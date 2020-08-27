@@ -60,7 +60,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.insert_date, C.staff_name, B.staff_name_before, B.staff_name_after, A.reason  from staff_m A inner join " +
                                  " staff_name_revisions B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code);";
@@ -82,7 +82,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.insert_date, C.staff_name, B.staff_password_before, B.staff_password_after, A.reason  from staff_m A inner join " +
                                  " staff_password_revisions B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code);";
@@ -104,7 +104,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.insert_date, C.staff_name, A.staff_name, B.access_auth_before, B.access_auth_after, A.reason  from staff_m A " +
                                  "inner join staff_access_auth_revisions B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code);";
@@ -127,7 +127,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.invalid_date, C.staff_name, A.staff_code, A.staff_name, A.access_auth, A.password, A.reason  from staff_m A " +
                                  "inner join staff_m_revisions_invalid B ON (A.staff_code = B.staff_code) inner join staff_m C ON (B.insert_name = C.staff_code) where A.invalid = 1;";
@@ -150,7 +150,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select registration_date, register_date, staff_name, shop_name, company_name, address from client_m_corporate ;";
                 conn.Open();
@@ -170,7 +170,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select registration_date, register_date, name, name_kana, phone_number, address from client_m_individual ;";
                 conn.Open();
@@ -191,7 +191,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.invalid_date, C.staff_name, A.item_code, A.main_category_code,A.item_name, A.reason from item_m A " +
                                  " inner join item_m_invalid_revisions B ON (A.item_code = B.item_code) inner join staff_m C ON (B.insert_name = C.staff_code) where A.invalid = 1;";
@@ -214,7 +214,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.change_date, C.staff_name, B.main_category_code_before, B.main_category_code_after, A.reason from item_m A " +
                                  " inner join item_m_main_category_code_revisions B ON (A.item_code = B.item_code) " +
@@ -237,7 +237,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.change, C.staff_name, B.item_name_before, B.item_name_after, A.reason from item_m A " +
                                  "inner join item_m_item_name_revisions B ON (A.item_code = B.item_code) inner join staff_m C" +
@@ -260,7 +260,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.invalid_date, C.staff_name, B.main_category_code, A.main_category_name, A.reason from main_category_m A " +
                     "inner join main_category_m_invalid_revisions B ON (A.main_category_code = B.main_category_code ) inner join staff_m C " +
@@ -283,7 +283,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.change_date, C.staff_name, B.main_category_name_before, B.main_category_name_after, A.reason from main_category_m A " +
                                  "inner join main_category_m_name_revisions B ON (A.main_category_code = B.main_category_code) inner join staff_m C ON ( A.insert_name = C.staff_code);";
@@ -305,7 +305,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select A.upd_date, B.staff_name, A.vat_rate from vat_m  A inner join staff_m  B ON (A.upd_name = B.staff_code);";
                 conn.Open();
@@ -324,7 +324,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select B.registration_date, C.staff_name, E.item_name, D.item_name, A.reason from list_result2  A inner join list_result  B " +
                                  "ON (A.grade_number = B.result) inner join staff_m C ON (B.staff_code = C.staff_code) inner join item_m D " +
@@ -348,7 +348,7 @@ namespace Flawless_ex
                 this.button1.Visible = true;
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter13;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select A.registration_date, C.staff_name, A.control_number, A.reason from delivery_m  A " +
                                  " inner join staff_m C ON (A.staff_code = C.staff_code) " +
@@ -373,7 +373,7 @@ namespace Flawless_ex
                 this.button1.Visible = false;
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter14;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select A.registration_date, B.staff_name, A.grade_number,C.item_name, D.item_name, A.reason from item_name_change_revisions  A " +
                                  " inner join staff_m B ON (A.staff_id = B.staff_code) inner join item_m C ON (A.before_item_code = C.item_code) inner join item_m D " +

@@ -238,7 +238,7 @@ namespace Flawless_ex
             date = DateTime.Now;
             Registration = date.ToLongDateString();
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
             string SQL = "";
             string sql = "";
@@ -548,7 +548,7 @@ namespace Flawless_ex
         {
             SlipNumberTextBox.Text = SlipNumber;
             GradeNumberTextBox.Text = Grade.ToString();
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             conn.Open();
 
@@ -901,7 +901,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox1.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -920,7 +920,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox2.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -939,7 +939,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox3.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -958,7 +958,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox4.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -977,7 +977,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox5.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -996,7 +996,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox6.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1015,7 +1015,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox7.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1034,7 +1034,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox8.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1053,7 +1053,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox9.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1072,7 +1072,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox10.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1091,7 +1091,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox11.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1110,7 +1110,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox12.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -1129,7 +1129,7 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox13.SelectedValue;
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
