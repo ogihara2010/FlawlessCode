@@ -398,7 +398,19 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            if (comboBox1.Text == "計算書")
+            {
+                document = (string)this.dataGridView1.CurrentRow.Cells[2].Value;
+            }
+            else if (comboBox1.Text == "納品書")
+            {
+                control = (int)this.dataGridView1.CurrentRow.Cells[2].Value;
+            }
 
+
+            Invoice invoice = new Invoice(mainMenu, staff_id, document, control, grade);
+            this.Close();
+            invoice.Show();
         }
     }
 }
