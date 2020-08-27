@@ -16,11 +16,29 @@ namespace Flawless_ex
         string phoneNumber1;
         string address1;
         string address;
+        string addresskana1;
+        string code1;
         string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        #region "買取販売履歴"
         string search1;
         string search2;
         string search3;
-
+        string search4;
+        string search5;
+        string search6;
+        string search7;
+        string search8;
+        string search9;
+        string search10;
+        string search11;
+        string search12;
+        #endregion
         string staff_name;
         int staff_id;
         string data;
@@ -30,7 +48,39 @@ namespace Flawless_ex
         string access_auth;
         string Pass;
         DataTable dt = new DataTable();
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass, string Access_auth)
+        bool screan = true;
+        string documentNumber;
+        #region "納品書"
+        decimal amount00;
+        decimal amount01;
+        decimal amount02;
+        decimal amount03;
+        decimal amount04;
+        decimal amount05;
+        decimal amount06;
+        decimal amount07;
+        decimal amount08;
+        decimal amount09;
+        decimal amount010;
+        decimal amount011;
+        decimal amount012;
+        #endregion
+        #region "計算書"
+        decimal amount10;
+        decimal amount11;
+        decimal amount12;
+        decimal amount13;
+        decimal amount14;
+        decimal amount15;
+        decimal amount16;
+        decimal amount17;
+        decimal amount18;
+        decimal amount19;
+        decimal amount110;
+        decimal amount111;
+        decimal amount112;
+        #endregion
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string search1, string search2, string search3, string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, string data, string pass, string document, int control, string antiqueNumber, string documentNumber, string access_auth)
         {
             InitializeComponent();
             mainMenu = main;
@@ -38,19 +88,44 @@ namespace Flawless_ex
             this.name1 = name1;
             this.phoneNumber1 = phoneNumber1;
             this.address1 = address1;
+            this.addresskana1 = addresskana1;
+            this.code1 = code1;
             this.item1 = item1;
+            this.date1 = date1;
+            this.date2 = date2;
+            this.method1 = method1;
+            this.amountA = amountA;
+            this.amountB = amountB;
+            this.antiqueNumber = antiqueNumber;
+            #region "買取販売履歴"
             this.search1 = search1;
             this.search2 = search2;
             this.search3 = search3;
+            this.search4 = search4;
+            this.search5 = search5;
+            this.search6 = search6;
+            this.search7 = search7;
+            this.search8 = search8;
+            this.search9 = search9;
+            this.search10 = search10;
+            this.search11 = search11;
+            this.search12 = search12;
+            #endregion
+            this.documentNumber = documentNumber;
             staff_id = id;
             this.data = data;
             this.Pass = pass;
-            this.access_auth = Access_auth;
+            this.document = document;
+            this.control = control;
+            this.access_auth = access_auth;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            screan = false;
             this.Close();
+            customerHistory.Show();
         }
 
         private void DataSearchResults_Load(object sender, EventArgs e)

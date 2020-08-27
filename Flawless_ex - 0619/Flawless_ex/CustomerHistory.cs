@@ -29,6 +29,10 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter3;
         string data;
         string Pass;
+        bool screan = true;
+        string document;
+        int control;
+        string antiqueNumber;
         string Access_auth;
 
         public CustomerHistory(MainMenu main, int id, string data, string pass, string access_auth)
@@ -76,10 +80,12 @@ namespace Flawless_ex
             comboBox1.DataSource = dt;
             comboBox1.DisplayMember = "main_category_name";
             comboBox1.ValueMember = "main_category_code";
+            comboBox1.SelectedIndex = -1;
 
             comboBox2.DataSource = dt2;
             comboBox2.DisplayMember = "item_name";
             comboBox2.ValueMember = "item_code";
+            comboBox2.SelectedIndex = -1;
         }
 
         private void dataSelectButton_Click(object sender, EventArgs e)//検索ボタン
