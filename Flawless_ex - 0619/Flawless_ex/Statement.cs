@@ -5496,7 +5496,7 @@ namespace Flawless_ex
                 }
             }
             number = 0;
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
             {
                 Properties.Settings.Default.Save();
                 //screan = false;
@@ -5514,7 +5514,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -13383,13 +13383,13 @@ namespace Flawless_ex
             if (screan && data == "S")
             {
                 document = documentNumberTextBox.Text;
-                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
                 dataSearchResults.Show();
             }
             else if (screan && data == "D")
             {
                 control = int.Parse(documentNumberTextBox2.Text);
-                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
                 dataSearchResults.Show();
             }
             else if (screan)
@@ -16493,7 +16493,7 @@ namespace Flawless_ex
         private void DeliveryPreviewButton_Click(object sender, EventArgs e)
         {
             control = int.Parse(documentNumberTextBox2.Text);
-            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type, control);
+            DeliveryPreview deliveryPreview = new DeliveryPreview(mainMenu, staff_id, type, control, access_auth, pass);
             screan = false;
             this.Close();
             deliveryPreview.Show();
@@ -16501,7 +16501,7 @@ namespace Flawless_ex
 
         private void Button2_Click(object sender, EventArgs e)
         {            
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
             screan = false;
             this.Close();
             mainMenu.Hide();
@@ -16510,7 +16510,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {            
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
             screan = false;
             this.Close();
             mainMenu.Hide();
@@ -17068,7 +17068,7 @@ namespace Flawless_ex
             }
             else { }
             
-           using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document))
+           using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
            {
                 screan = false;
                 this.Close();

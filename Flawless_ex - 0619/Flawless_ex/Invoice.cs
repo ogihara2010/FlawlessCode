@@ -13,7 +13,8 @@ namespace Flawless_ex
         int control;
         int grade;
         NpgsqlConnection conn = new NpgsqlConnection();
-        
+        string access_auth;
+        string pass;
         
         DataTable dt3 = new DataTable();
         DataTable dt4 = new DataTable();
@@ -42,7 +43,7 @@ namespace Flawless_ex
 
         private void Return5_Click(object sender, EventArgs e)
         {
-            Operatelog operatelog = new Operatelog(mainMenu, staff_id);
+            Operatelog operatelog = new Operatelog(mainMenu, staff_id, access_auth, pass);
             this.Close();
             operatelog.Show();
         }
