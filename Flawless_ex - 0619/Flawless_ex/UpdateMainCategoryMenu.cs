@@ -39,7 +39,7 @@ namespace Flawless_ex
 
         private void UpdateMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select* from main_category_m where main_category_code = " + mainCode + "";
 
@@ -85,7 +85,7 @@ namespace Flawless_ex
                 return;
             }
             //大分類名・理由入力済みかつYes
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             using (transaction = conn.BeginTransaction())
@@ -138,7 +138,7 @@ namespace Flawless_ex
                 mainName = mainCategoryNameTextBox.Text;
                 reason = reasonText.Text;
 
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string sql_str = "update main_category_m set main_category_name = '" + mainName + "' where main_category_code = " + mainCode + ";";
