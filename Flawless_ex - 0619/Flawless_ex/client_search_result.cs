@@ -210,6 +210,7 @@ namespace Flawless_ex
                     statement.staff_id = staff_id;
                     statement.client_staff_name = staff_name;
                     statement.address = address;
+                    statement.type = 0;
                     statement.count = 1;
                     this.Close();
                     statement.Show();
@@ -242,6 +243,7 @@ namespace Flawless_ex
                     statement.staff_id = staff_id;
                     statement.client_staff_name = staff_name;
                     statement.address = address;
+                    statement.type = 1;
                     statement.count = 1;
                     this.Close();
                     statement.Show();
@@ -252,6 +254,7 @@ namespace Flawless_ex
                     this.Close();
                     statement.clientDt = dt2;
                     statement.count = 1;
+                    statement.type = 1;
                     statement.Show();
                 }
             }

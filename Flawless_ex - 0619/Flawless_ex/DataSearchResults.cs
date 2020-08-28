@@ -324,10 +324,21 @@ namespace Flawless_ex
         #endregion
         #region "納品書"
         private void Button1_Click(object sender, EventArgs e)
-        {
-            control = (int)dataGridView1.CurrentRow.Cells[0].Value;
-            staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
-            address = (string)dataGridView1.CurrentRow.Cells[5].Value;
+        {            
+            if (type == 0)
+            {
+                type = 0;
+                control = (int)dataGridView1.CurrentRow.Cells[0].Value;
+                staff_name = (string)dataGridView1.CurrentRow.Cells[4].Value;
+                address = (string)dataGridView1.CurrentRow.Cells[6].Value;
+            }
+            if (type == 1)
+            {
+                type = 1;
+                control = (int)dataGridView1.CurrentRow.Cells[0].Value;
+                staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
+                address = (string)dataGridView1.CurrentRow.Cells[5].Value;
+            }
             Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
             screan = false;
             this.Close();

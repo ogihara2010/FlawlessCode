@@ -359,7 +359,7 @@ namespace Flawless_ex
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             #region"画面上の会社・個人情報と合計金額"
 
@@ -1558,8 +1558,9 @@ namespace Flawless_ex
             }
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移しないとき
             else if (screan)
-            {
+            {                
                 Statement statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1);
+                statement.document = SlipNumber;
                 statement.Show();
             }
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移したとき
