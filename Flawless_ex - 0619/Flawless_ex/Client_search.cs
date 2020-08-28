@@ -24,6 +24,7 @@ namespace Flawless_ex
         string search7;
         string search8;
         string Pass;
+        int grade;
 
         public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, string Access_auth, string pass)
         {
@@ -42,7 +43,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search6, search7, search8);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search6, search7, search8, grade);
             this.Close();
 
             statement.Show();
@@ -70,7 +71,7 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
 
             if (tabControl1.SelectedIndex == 0)

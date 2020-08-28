@@ -23,6 +23,7 @@ namespace Flawless_ex
         string search2;
         string search3;
         string pass;
+        int grade;
 
         public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, decimal Total, string Access_auth, string Pass)
         {
@@ -102,7 +103,7 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)//法人
             {
@@ -120,7 +121,7 @@ namespace Flawless_ex
                 conn.Close();
 
                 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;
@@ -139,7 +140,7 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3);
+                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
                 this.Close();
                 statement.clientDt = dt2;
                 statement.count = 1;

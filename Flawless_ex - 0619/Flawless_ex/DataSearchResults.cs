@@ -29,6 +29,8 @@ namespace Flawless_ex
         string document;
         string access_auth;
         string Pass;
+        int grade;
+
         DataTable dt = new DataTable();
         public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string item1, string search1, string search2, string search3, string data, string pass, string Access_auth)
         {
@@ -196,7 +198,7 @@ namespace Flawless_ex
             document = (string)dataGridView1.CurrentRow.Cells[0].Value;
             staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
             address = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3, grade);
             this.Close();
             statement.Show();
         }
@@ -207,7 +209,7 @@ namespace Flawless_ex
             control = (int)dataGridView1.CurrentRow.Cells[0].Value;
             staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
             address = (string)dataGridView1.CurrentRow.Cells[5].Value;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search1, search2, search3, grade);
             this.Close();
             statement.Show();
         }

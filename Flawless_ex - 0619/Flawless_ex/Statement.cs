@@ -132,43 +132,6 @@ namespace Flawless_ex
         string search3;
         string pass;
 
-        #region"コメントアウト"
-        /*
-        #region"単価が数値じゃないとき"
-        #region"計算書"
-        bool NotUnit0;
-        bool NotUnit1;
-        bool NotUnit2;
-        bool NotUnit3;
-        bool NotUnit4;
-        bool NotUnit5;
-        bool NotUnit6;
-        bool NotUnit7;
-        bool NotUnit8;
-        bool NotUnit9;
-        bool NotUnit10;
-        bool NotUnit11;
-        bool NotUnit12;
-        #endregion
-        #region"納品書"
-        bool NotUnit00;
-        bool NotUnit01;
-        bool NotUnit02;
-        bool NotUnit03;
-        bool NotUnit04;
-        bool NotUnit05;
-        bool NotUnit06;
-        bool NotUnit07;
-        bool NotUnit08;
-        bool NotUnit09;
-        bool NotUnit010;
-        bool NotUnit011;
-        bool NotUnit012;
-        #endregion
-        #endregion
-        */
-        #endregion
-        
         #region"数値のフォーマット未処理"
         #region"計算書　単価"
         decimal UnitUnformat0;
@@ -309,6 +272,7 @@ namespace Flawless_ex
 
         int number;     //伝票番号の数字五桁
 
+        TopMenu topMenu;
         MainMenu mainMenu;
 
         #region"DataTable"
@@ -370,7 +334,7 @@ namespace Flawless_ex
         NpgsqlTransaction transaction;
         NpgsqlCommandBuilder builder;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3, int grade)
         {
             InitializeComponent();
             staff_id = id;
@@ -387,48 +351,11 @@ namespace Flawless_ex
             this.search2 = search2;
             this.search3 = search3;
             this.pass = Pass;
+            this.Grade = grade;
         }
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            #region"コメントアウト"
-            /*
-            #region"単価が数値じゃないとき"
-            #region"計算書"
-            NotUnit0 = string.IsNullOrEmpty(unitPriceTextBox0.Text) || unitPriceTextBox0.Text == "単価 -> 重量 or 数量";
-            NotUnit1 = string.IsNullOrEmpty(unitPriceTextBox1.Text) || unitPriceTextBox1.Text == "単価 -> 重量 or 数量";
-            NotUnit2 = string.IsNullOrEmpty(unitPriceTextBox2.Text) || unitPriceTextBox2.Text == "単価 -> 重量 or 数量";
-            NotUnit3 = string.IsNullOrEmpty(unitPriceTextBox3.Text) || unitPriceTextBox3.Text == "単価 -> 重量 or 数量";
-            NotUnit4 = string.IsNullOrEmpty(unitPriceTextBox4.Text) || unitPriceTextBox4.Text == "単価 -> 重量 or 数量";
-            NotUnit5 = string.IsNullOrEmpty(unitPriceTextBox5.Text) || unitPriceTextBox5.Text == "単価 -> 重量 or 数量";
-            NotUnit6 = string.IsNullOrEmpty(unitPriceTextBox6.Text) || unitPriceTextBox6.Text == "単価 -> 重量 or 数量";
-            NotUnit7 = string.IsNullOrEmpty(unitPriceTextBox7.Text) || unitPriceTextBox7.Text == "単価 -> 重量 or 数量";
-            NotUnit8 = string.IsNullOrEmpty(unitPriceTextBox8.Text) || unitPriceTextBox8.Text == "単価 -> 重量 or 数量";
-            NotUnit9 = string.IsNullOrEmpty(unitPriceTextBox9.Text) || unitPriceTextBox9.Text == "単価 -> 重量 or 数量";
-            NotUnit10 = string.IsNullOrEmpty(unitPriceTextBox10.Text) || unitPriceTextBox10.Text == "単価 -> 重量 or 数量";
-            NotUnit11 = string.IsNullOrEmpty(unitPriceTextBox11.Text) || unitPriceTextBox11.Text == "単価 -> 重量 or 数量";
-            NotUnit12 = string.IsNullOrEmpty(unitPriceTextBox12.Text) || unitPriceTextBox12.Text == "単価 -> 重量 or 数量";
-            #endregion
-            #region"納品書"
-            NotUnit00 = string.IsNullOrEmpty(unitPriceTextBox00.Text) || unitPriceTextBox00.Text == "単価 -> 重量 or 数量";
-            NotUnit01 = string.IsNullOrEmpty(unitPriceTextBox01.Text) || unitPriceTextBox01.Text == "単価 -> 重量 or 数量";
-            NotUnit02 = string.IsNullOrEmpty(unitPriceTextBox02.Text) || unitPriceTextBox02.Text == "単価 -> 重量 or 数量";
-            NotUnit03 = string.IsNullOrEmpty(unitPriceTextBox03.Text) || unitPriceTextBox03.Text == "単価 -> 重量 or 数量";
-            NotUnit04 = string.IsNullOrEmpty(unitPriceTextBox04.Text) || unitPriceTextBox04.Text == "単価 -> 重量 or 数量";
-            NotUnit05 = string.IsNullOrEmpty(unitPriceTextBox05.Text) || unitPriceTextBox05.Text == "単価 -> 重量 or 数量";
-            NotUnit06 = string.IsNullOrEmpty(unitPriceTextBox06.Text) || unitPriceTextBox06.Text == "単価 -> 重量 or 数量";
-            NotUnit07 = string.IsNullOrEmpty(unitPriceTextBox07.Text) || unitPriceTextBox07.Text == "単価 -> 重量 or 数量";
-            NotUnit08 = string.IsNullOrEmpty(unitPriceTextBox08.Text) || unitPriceTextBox08.Text == "単価 -> 重量 or 数量";
-            NotUnit09 = string.IsNullOrEmpty(unitPriceTextBox09.Text) || unitPriceTextBox09.Text == "単価 -> 重量 or 数量";
-            NotUnit010 = string.IsNullOrEmpty(unitPriceTextBox010.Text) || unitPriceTextBox010.Text == "単価 -> 重量 or 数量";
-            NotUnit011 = string.IsNullOrEmpty(unitPriceTextBox011.Text) || unitPriceTextBox011.Text == "単価 -> 重量 or 数量";
-            NotUnit012 = string.IsNullOrEmpty(unitPriceTextBox012.Text) || unitPriceTextBox012.Text == "単価 -> 重量 or 数量";
-            #endregion
-            #endregion
-            */
-            #endregion
-
-
             #region "ボタン"
             if (data == "S")
             {
@@ -666,7 +593,7 @@ namespace Flawless_ex
                 this.button2.Enabled = false;
             }
             #endregion
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                 //伝票番号・管理番号取得
@@ -786,7 +713,6 @@ namespace Flawless_ex
             Tax = decimal.Parse(tax.Text.ToString());
             tax.Text = string.Format("{0:P}", Tax / 100);
 
-            conn.Close();
 
             if (data != "S")
             {
@@ -3169,9 +3095,6 @@ namespace Flawless_ex
             }
             #endregion
 
-            //タブのサイズ変更
-            //tabControl1.ItemSize = new Size(300, 40);
-
             //デフォルトで税込み表示
             comboBox11.SelectedIndex = 0;
 
@@ -3363,12 +3286,14 @@ namespace Flawless_ex
                 }
             }
             #endregion
+
+
+            conn.Close();
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
             this.Close();
-            mainMenu.Show();
         }
         //納品書戻る
         private void return2_Click(object sender, EventArgs e)
@@ -3385,7 +3310,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3406,7 +3331,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3431,7 +3356,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox1.SelectedValue;
                 dt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3452,7 +3377,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox1.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3477,7 +3402,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3498,7 +3423,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3523,7 +3448,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3544,7 +3469,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3569,7 +3494,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3590,7 +3515,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3615,7 +3540,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3636,7 +3561,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3661,7 +3586,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3682,7 +3607,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3707,7 +3632,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3728,7 +3653,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3753,7 +3678,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3774,7 +3699,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3799,7 +3724,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3820,7 +3745,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3845,7 +3770,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3866,7 +3791,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3891,7 +3816,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3912,7 +3837,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3937,7 +3862,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -3958,7 +3883,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
@@ -3990,7 +3915,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox00.SelectedValue;
                 deliverydt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4016,7 +3941,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox01.SelectedValue;
                 deliverydt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4046,7 +3971,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox02.SelectedValue;
                 deliverydt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4072,7 +3997,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox03.SelectedValue;
                 deliverydt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4098,7 +4023,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox04.SelectedValue;
                 deliverydt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4124,7 +4049,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox05.SelectedValue;
                 deliverydt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4150,7 +4075,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox06.SelectedValue;
                 deliverydt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4176,7 +4101,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox07.SelectedValue;
                 deliverydt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4202,7 +4127,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox08.SelectedValue;
                 deliverydt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4228,7 +4153,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox09.SelectedValue;
                 deliverydt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4254,7 +4179,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox010.SelectedValue;
                 deliverydt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4280,7 +4205,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox011.SelectedValue;
                 deliverydt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4306,7 +4231,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
                 deliverydt212.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4729,7 +4654,7 @@ namespace Flawless_ex
                 }
             }
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string DocumentNumber = documentNumberTextBox.Text;
@@ -9350,7 +9275,8 @@ namespace Flawless_ex
         #region"右上の×で戻る"
         private void Statement_FormClosed(object sender, FormClosedEventArgs e)
         {
-              mainMenu.Show();   
+            mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
+            mainMenu.Show();
         }
         #endregion
 
@@ -9416,7 +9342,7 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             string sql_str2 = "Insert into delivery_calc VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory + "','" + Detail + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -10016,7 +9942,7 @@ namespace Flawless_ex
 
             #region"ページ上のお客様情報"
             //法人の場合
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)
             {
@@ -10100,7 +10026,7 @@ namespace Flawless_ex
             #region"ページ下のお客様情報"
             //法人の場合
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)
             {

@@ -38,7 +38,7 @@ namespace Flawless_ex
 
         private void ProductChangeDeleteMenu_Load(object sender, EventArgs e)   //画面起動時
         {
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             productCodeTextBox.Text = puroductCode.ToString();
 
             string sql_item = "select * from item_m where item_code ='" + puroductCode + "';";
@@ -90,7 +90,7 @@ namespace Flawless_ex
             }
             // Yes かつ 理由あり
             DataTable item_mdt = new DataTable();
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             using (transaction = conn.BeginTransaction())
@@ -142,7 +142,7 @@ namespace Flawless_ex
             DataTable dt = new DataTable();
             reason = reasonText.Text;
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             //大分類コード履歴と品名履歴

@@ -2155,6 +2155,7 @@
             this.clientRemarksTextBox.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.clientRemarksTextBox.Multiline = true;
             this.clientRemarksTextBox.Name = "clientRemarksTextBox";
+            this.clientRemarksTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.clientRemarksTextBox.Size = new System.Drawing.Size(749, 212);
             this.clientRemarksTextBox.TabIndex = 28;
             // 
