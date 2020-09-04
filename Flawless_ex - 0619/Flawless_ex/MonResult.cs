@@ -356,7 +356,7 @@ namespace Flawless_ex
             {
                 if (access_auth == "C")
                 {
-                    conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     conn.Open();
                     //品名検索用
@@ -371,7 +371,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     conn.Open();
                     //品名検索用

@@ -17,22 +17,22 @@ namespace Flawless_ex
         DataTable dt6 = new DataTable();
         DataTable dt7 = new DataTable();
         int type;
-        int number;
+        //int number;
         int a = 0; // クリック数 
-        int itemMainCategoryCode;
+        //int itemMainCategoryCode;
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataAdapter adapter;
-        NpgsqlConnection conn2 = new NpgsqlConnection();
+        /*NpgsqlConnection conn2 = new NpgsqlConnection();
         NpgsqlDataAdapter adapter2;
         NpgsqlConnection conn3 = new NpgsqlConnection();
-        NpgsqlDataAdapter adapter3;
+        NpgsqlDataAdapter adapter3;*/
         string data;
         string Pass;
         bool screan = true;
         string document;
         int control;
-        string antiqueNumber;
+        //string antiqueNumber;
         string Access_auth;
 
         public CustomerHistory(MainMenu main, int id, string data, string pass, string access_auth)
@@ -101,9 +101,9 @@ namespace Flawless_ex
             string controlNumber;
             string antiqueNumber;
             string mainCategory;
-            string code;
+            //string code;
             string item;
-            string itemcode;
+            //string itemcode;
             string date1 = this.dateTimePicker1.Text;
             string date2 = this.settlementBox.Text;
             string method;
@@ -130,14 +130,14 @@ namespace Flawless_ex
 
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            NpgsqlConnection conn2 = new NpgsqlConnection();
+            /*NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
             NpgsqlConnection conn3 = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter3;
+            NpgsqlDataAdapter adapter3;*/
 
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn3.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //conn3.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             #region "検索条件 法人"
             if (radioButton1.Checked == true)
             {
@@ -185,31 +185,31 @@ namespace Flawless_ex
 
                 }
                 else { }
-                if (radioButton41.Checked == true)
+                if (radioButton43.Checked == true)
                 {
                     search8 = "and";
 
                 }
                 else { }
-                if (radioButton43.Checked == true)
+                if (radioButton45.Checked == true)
                 {
                     search9 = "and";
 
                 }
                 else { }
-                if (radioButton45.Checked == true)
+                if (radioButton47.Checked == true)
                 {
                     search10 = "and";
 
                 }
                 else { }
-                if (radioButton47.Checked == true)
+                if (radioButton49.Checked == true)
                 {
                     search11 = "and";
 
                 }
                 else { }
-                if (radioButton49.Checked == true)
+                if (radioButton51.Checked == true)
                 {
                     search12 = "and";
 
@@ -219,7 +219,7 @@ namespace Flawless_ex
                 #region "入力パラメーター"
                 if (!string.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    shopname = "B.shopname = '" + this.textBox1.Text + "'" + search1;
+                    shopname = "B.shop_name = '" + this.textBox1.Text + "'" + search1;
 
                 }
                 else
@@ -265,7 +265,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " A.document_number = '" + this.textBox7.Text + "' " + search7;
+                    documentNumber = " A.document_number = '" + this.textBox7.Text + "' " + search6;
                 }
                 else
                 {
@@ -362,8 +362,8 @@ namespace Flawless_ex
                 #endregion
                 #endregion
                 #region "繋げるSQL"
-                #region "大分類名をコードに変換"
-                if (comboBox1.SelectedIndex != -1)
+                #region "大分類名をコードに変換(コメントアウト)"
+                /*if (comboBox1.SelectedIndex != -1)
                 {
                     string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
                     conn2.Open();
@@ -393,7 +393,7 @@ namespace Flawless_ex
                 else
                 {
                     itemcode = "1000";
-                }
+                }*/
 
                 #endregion
 
@@ -401,7 +401,7 @@ namespace Flawless_ex
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where " + shopname + shopnamekana + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                            " where A.type = 0 and " + shopname + shopnamekana + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
                               method + amountA + amountB + ";";
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
@@ -655,8 +655,8 @@ namespace Flawless_ex
                 #endregion
                 #endregion
                 #region "繋げるSQL"
-                #region "大分類名をコードに変換"
-                if (comboBox1.SelectedIndex != -1)
+                #region "大分類名をコードに変換(コメントアウト)"
+                /*if (comboBox1.SelectedIndex != -1)
                 {
                     string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
                     conn2.Open();
@@ -671,7 +671,7 @@ namespace Flawless_ex
                     code = "100";
                 }
                 #endregion
-                #region "品名をコードに変換"
+                #region "品名をコードに変換(コメントアウト)"
                 if (comboBox2.SelectedIndex != -1)
                 {
                     string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
@@ -685,7 +685,7 @@ namespace Flawless_ex
                 else
                 {
                     itemcode = "1000";
-                }
+                }*/
                 #endregion
 
                 if (data == "S")

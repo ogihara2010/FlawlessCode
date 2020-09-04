@@ -295,7 +295,7 @@
             this.panel1.Controls.Add(this.StaffName);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1828, 72);
             this.panel1.TabIndex = 0;
@@ -305,7 +305,7 @@
             this.ClientInformationButton.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientInformationButton.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ClientInformationButton.Location = new System.Drawing.Point(1146, 10);
-            this.ClientInformationButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientInformationButton.Margin = new System.Windows.Forms.Padding(4);
             this.ClientInformationButton.Name = "ClientInformationButton";
             this.ClientInformationButton.Size = new System.Drawing.Size(220, 54);
             this.ClientInformationButton.TabIndex = 6;
@@ -318,7 +318,7 @@
             this.ReturnButton.BackColor = System.Drawing.Color.MistyRose;
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ReturnButton.Location = new System.Drawing.Point(1373, 10);
-            this.ReturnButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ReturnButton.Margin = new System.Windows.Forms.Padding(4);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Size = new System.Drawing.Size(150, 55);
             this.ReturnButton.TabIndex = 5;
@@ -331,7 +331,7 @@
             this.ItemNameChangeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ItemNameChangeButton.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ItemNameChangeButton.Location = new System.Drawing.Point(740, 9);
-            this.ItemNameChangeButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeButton.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeButton.Name = "ItemNameChangeButton";
             this.ItemNameChangeButton.Size = new System.Drawing.Size(173, 55);
             this.ItemNameChangeButton.TabIndex = 6;
@@ -345,7 +345,7 @@
             this.UpdateButton.Enabled = false;
             this.UpdateButton.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.UpdateButton.Location = new System.Drawing.Point(530, 10);
-            this.UpdateButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.UpdateButton.Margin = new System.Windows.Forms.Padding(4);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(201, 54);
             this.UpdateButton.TabIndex = 2;
@@ -358,7 +358,7 @@
             this.button3.BackColor = System.Drawing.Color.PaleTurquoise;
             this.button3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button3.Location = new System.Drawing.Point(946, 10);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(194, 54);
             this.button3.TabIndex = 2;
@@ -371,7 +371,7 @@
             this.RegisterButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.RegisterButton.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.RegisterButton.Location = new System.Drawing.Point(382, 10);
-            this.RegisterButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.RegisterButton.Margin = new System.Windows.Forms.Padding(4);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(140, 54);
             this.RegisterButton.TabIndex = 2;
@@ -395,7 +395,7 @@
             // 
             this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StaffNameTextBox.Location = new System.Drawing.Point(1656, 18);
-            this.StaffNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.StaffNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.StaffNameTextBox.Name = "StaffNameTextBox";
             this.StaffNameTextBox.ReadOnly = true;
             this.StaffNameTextBox.Size = new System.Drawing.Size(154, 41);
@@ -419,7 +419,7 @@
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 72);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1828, 18);
             this.panel2.TabIndex = 1;
@@ -427,9 +427,9 @@
             // groupBox1
             // 
             this.groupBox1.Location = new System.Drawing.Point(337, 39);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(140, 29);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
@@ -463,7 +463,7 @@
             // 
             this.NameOrCompanyNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.NameOrCompanyNameTextBox.Location = new System.Drawing.Point(97, 104);
-            this.NameOrCompanyNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NameOrCompanyNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.NameOrCompanyNameTextBox.Name = "NameOrCompanyNameTextBox";
             this.NameOrCompanyNameTextBox.ReadOnly = true;
             this.NameOrCompanyNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -474,7 +474,7 @@
             // 
             this.AddressOrClientStaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AddressOrClientStaffNameTextBox.Location = new System.Drawing.Point(698, 104);
-            this.AddressOrClientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AddressOrClientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AddressOrClientStaffNameTextBox.Name = "AddressOrClientStaffNameTextBox";
             this.AddressOrClientStaffNameTextBox.ReadOnly = true;
             this.AddressOrClientStaffNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -497,7 +497,7 @@
             // 
             this.OccupationOrShopNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.OccupationOrShopNameTextBox.Location = new System.Drawing.Point(390, 104);
-            this.OccupationOrShopNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OccupationOrShopNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.OccupationOrShopNameTextBox.Name = "OccupationOrShopNameTextBox";
             this.OccupationOrShopNameTextBox.ReadOnly = true;
             this.OccupationOrShopNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -714,7 +714,7 @@
             this.tableLayoutPanel1.Controls.Add(this.BuyDateTimePicker12, 11, 12);
             this.tableLayoutPanel1.Controls.Add(this.BuyDateTimePicker13, 11, 13);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(26, 237);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 14;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
@@ -739,7 +739,7 @@
             this.ItemNameChangeCheckBox1.AutoSize = true;
             this.ItemNameChangeCheckBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox1.Location = new System.Drawing.Point(130, 46);
-            this.ItemNameChangeCheckBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox1.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox1.Name = "ItemNameChangeCheckBox1";
             this.ItemNameChangeCheckBox1.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox1.TabIndex = 14;
@@ -752,7 +752,7 @@
             this.NextMonthCheckBox6.AutoSize = true;
             this.NextMonthCheckBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox6.Location = new System.Drawing.Point(4, 206);
-            this.NextMonthCheckBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox6.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox6.Name = "NextMonthCheckBox6";
             this.NextMonthCheckBox6.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox6.TabIndex = 12;
@@ -765,7 +765,7 @@
             this.NextMonthCheckBox7.AutoSize = true;
             this.NextMonthCheckBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox7.Location = new System.Drawing.Point(4, 238);
-            this.NextMonthCheckBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox7.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox7.Name = "NextMonthCheckBox7";
             this.NextMonthCheckBox7.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox7.TabIndex = 13;
@@ -778,7 +778,7 @@
             this.NextMonthCheckBox8.AutoSize = true;
             this.NextMonthCheckBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox8.Location = new System.Drawing.Point(4, 270);
-            this.NextMonthCheckBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox8.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox8.Name = "NextMonthCheckBox8";
             this.NextMonthCheckBox8.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox8.TabIndex = 13;
@@ -791,7 +791,7 @@
             this.NextMonthCheckBox9.AutoSize = true;
             this.NextMonthCheckBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox9.Location = new System.Drawing.Point(4, 302);
-            this.NextMonthCheckBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox9.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox9.Name = "NextMonthCheckBox9";
             this.NextMonthCheckBox9.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox9.TabIndex = 13;
@@ -804,7 +804,7 @@
             this.NextMonthCheckBox10.AutoSize = true;
             this.NextMonthCheckBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox10.Location = new System.Drawing.Point(4, 334);
-            this.NextMonthCheckBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox10.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox10.Name = "NextMonthCheckBox10";
             this.NextMonthCheckBox10.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox10.TabIndex = 13;
@@ -817,7 +817,7 @@
             this.NextMonthCheckBox11.AutoSize = true;
             this.NextMonthCheckBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox11.Location = new System.Drawing.Point(4, 366);
-            this.NextMonthCheckBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox11.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox11.Name = "NextMonthCheckBox11";
             this.NextMonthCheckBox11.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox11.TabIndex = 13;
@@ -830,7 +830,7 @@
             this.NextMonthCheckBox12.AutoSize = true;
             this.NextMonthCheckBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox12.Location = new System.Drawing.Point(4, 398);
-            this.NextMonthCheckBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox12.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox12.Name = "NextMonthCheckBox12";
             this.NextMonthCheckBox12.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox12.TabIndex = 13;
@@ -843,7 +843,7 @@
             this.NextMonthCheckBox13.AutoSize = true;
             this.NextMonthCheckBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox13.Location = new System.Drawing.Point(4, 430);
-            this.NextMonthCheckBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox13.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox13.Name = "NextMonthCheckBox13";
             this.NextMonthCheckBox13.Size = new System.Drawing.Size(118, 34);
             this.NextMonthCheckBox13.TabIndex = 13;
@@ -856,7 +856,7 @@
             this.NextMonthCheckBox2.AutoSize = true;
             this.NextMonthCheckBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox2.Location = new System.Drawing.Point(4, 78);
-            this.NextMonthCheckBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox2.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox2.Name = "NextMonthCheckBox2";
             this.NextMonthCheckBox2.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox2.TabIndex = 12;
@@ -869,7 +869,7 @@
             this.NextMonthCheckBox3.AutoSize = true;
             this.NextMonthCheckBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox3.Location = new System.Drawing.Point(4, 110);
-            this.NextMonthCheckBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox3.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox3.Name = "NextMonthCheckBox3";
             this.NextMonthCheckBox3.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox3.TabIndex = 12;
@@ -882,7 +882,7 @@
             this.NextMonthCheckBox4.AutoSize = true;
             this.NextMonthCheckBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox4.Location = new System.Drawing.Point(4, 142);
-            this.NextMonthCheckBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox4.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox4.Name = "NextMonthCheckBox4";
             this.NextMonthCheckBox4.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox4.TabIndex = 12;
@@ -895,7 +895,7 @@
             this.NextMonthCheckBox5.AutoSize = true;
             this.NextMonthCheckBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox5.Location = new System.Drawing.Point(4, 174);
-            this.NextMonthCheckBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox5.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox5.Name = "NextMonthCheckBox5";
             this.NextMonthCheckBox5.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox5.TabIndex = 12;
@@ -908,7 +908,7 @@
             this.NextMonthCheckBox1.AutoSize = true;
             this.NextMonthCheckBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NextMonthCheckBox1.Location = new System.Drawing.Point(4, 46);
-            this.NextMonthCheckBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.NextMonthCheckBox1.Margin = new System.Windows.Forms.Padding(4);
             this.NextMonthCheckBox1.Name = "NextMonthCheckBox1";
             this.NextMonthCheckBox1.Size = new System.Drawing.Size(118, 24);
             this.NextMonthCheckBox1.TabIndex = 12;
@@ -934,7 +934,7 @@
             this.BuyerTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox1.Location = new System.Drawing.Point(1642, 46);
-            this.BuyerTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox1.Name = "BuyerTextBox1";
             this.BuyerTextBox1.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox1.TabIndex = 16;
@@ -944,7 +944,7 @@
             this.BuyerTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox2.Location = new System.Drawing.Point(1642, 78);
-            this.BuyerTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox2.Name = "BuyerTextBox2";
             this.BuyerTextBox2.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox2.TabIndex = 16;
@@ -954,7 +954,7 @@
             this.BuyerTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox3.Location = new System.Drawing.Point(1642, 110);
-            this.BuyerTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox3.Name = "BuyerTextBox3";
             this.BuyerTextBox3.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox3.TabIndex = 16;
@@ -964,7 +964,7 @@
             this.BuyerTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox4.Location = new System.Drawing.Point(1642, 142);
-            this.BuyerTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox4.Name = "BuyerTextBox4";
             this.BuyerTextBox4.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox4.TabIndex = 16;
@@ -974,7 +974,7 @@
             this.BuyerTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox5.Location = new System.Drawing.Point(1642, 174);
-            this.BuyerTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox5.Name = "BuyerTextBox5";
             this.BuyerTextBox5.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox5.TabIndex = 16;
@@ -984,7 +984,7 @@
             this.BuyerTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox6.Location = new System.Drawing.Point(1642, 206);
-            this.BuyerTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox6.Name = "BuyerTextBox6";
             this.BuyerTextBox6.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox6.TabIndex = 16;
@@ -994,7 +994,7 @@
             this.BuyerTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox7.Location = new System.Drawing.Point(1642, 238);
-            this.BuyerTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox7.Name = "BuyerTextBox7";
             this.BuyerTextBox7.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox7.TabIndex = 16;
@@ -1004,7 +1004,7 @@
             this.BuyerTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox8.Location = new System.Drawing.Point(1642, 270);
-            this.BuyerTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox8.Name = "BuyerTextBox8";
             this.BuyerTextBox8.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox8.TabIndex = 16;
@@ -1014,7 +1014,7 @@
             this.BuyerTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox9.Location = new System.Drawing.Point(1642, 302);
-            this.BuyerTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox9.Name = "BuyerTextBox9";
             this.BuyerTextBox9.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox9.TabIndex = 16;
@@ -1024,7 +1024,7 @@
             this.BuyerTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox10.Location = new System.Drawing.Point(1642, 334);
-            this.BuyerTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox10.Name = "BuyerTextBox10";
             this.BuyerTextBox10.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox10.TabIndex = 16;
@@ -1034,7 +1034,7 @@
             this.BuyerTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox11.Location = new System.Drawing.Point(1642, 366);
-            this.BuyerTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox11.Name = "BuyerTextBox11";
             this.BuyerTextBox11.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox11.TabIndex = 16;
@@ -1044,7 +1044,7 @@
             this.BuyerTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox12.Location = new System.Drawing.Point(1642, 398);
-            this.BuyerTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox12.Name = "BuyerTextBox12";
             this.BuyerTextBox12.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox12.TabIndex = 16;
@@ -1054,7 +1054,7 @@
             this.BuyerTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyerTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyerTextBox13.Location = new System.Drawing.Point(1642, 430);
-            this.BuyerTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyerTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.BuyerTextBox13.Name = "BuyerTextBox13";
             this.BuyerTextBox13.Size = new System.Drawing.Size(156, 27);
             this.BuyerTextBox13.TabIndex = 16;
@@ -1077,7 +1077,7 @@
             this.remark1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark1.Location = new System.Drawing.Point(1300, 46);
-            this.remark1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark1.Margin = new System.Windows.Forms.Padding(4);
             this.remark1.Name = "remark1";
             this.remark1.Size = new System.Drawing.Size(154, 27);
             this.remark1.TabIndex = 15;
@@ -1087,7 +1087,7 @@
             this.remark2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark2.Location = new System.Drawing.Point(1300, 78);
-            this.remark2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark2.Margin = new System.Windows.Forms.Padding(4);
             this.remark2.Name = "remark2";
             this.remark2.Size = new System.Drawing.Size(154, 27);
             this.remark2.TabIndex = 15;
@@ -1097,7 +1097,7 @@
             this.remark3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark3.Location = new System.Drawing.Point(1300, 110);
-            this.remark3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark3.Margin = new System.Windows.Forms.Padding(4);
             this.remark3.Name = "remark3";
             this.remark3.Size = new System.Drawing.Size(154, 27);
             this.remark3.TabIndex = 15;
@@ -1107,7 +1107,7 @@
             this.remark4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark4.Location = new System.Drawing.Point(1300, 142);
-            this.remark4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark4.Margin = new System.Windows.Forms.Padding(4);
             this.remark4.Name = "remark4";
             this.remark4.Size = new System.Drawing.Size(154, 27);
             this.remark4.TabIndex = 15;
@@ -1117,7 +1117,7 @@
             this.remark5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark5.Location = new System.Drawing.Point(1300, 174);
-            this.remark5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark5.Margin = new System.Windows.Forms.Padding(4);
             this.remark5.Name = "remark5";
             this.remark5.Size = new System.Drawing.Size(154, 27);
             this.remark5.TabIndex = 15;
@@ -1127,7 +1127,7 @@
             this.remark6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark6.Location = new System.Drawing.Point(1300, 206);
-            this.remark6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark6.Margin = new System.Windows.Forms.Padding(4);
             this.remark6.Name = "remark6";
             this.remark6.Size = new System.Drawing.Size(154, 27);
             this.remark6.TabIndex = 15;
@@ -1137,7 +1137,7 @@
             this.remark7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark7.Location = new System.Drawing.Point(1300, 238);
-            this.remark7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark7.Margin = new System.Windows.Forms.Padding(4);
             this.remark7.Name = "remark7";
             this.remark7.Size = new System.Drawing.Size(154, 27);
             this.remark7.TabIndex = 15;
@@ -1147,7 +1147,7 @@
             this.remark8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark8.Location = new System.Drawing.Point(1300, 270);
-            this.remark8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark8.Margin = new System.Windows.Forms.Padding(4);
             this.remark8.Name = "remark8";
             this.remark8.Size = new System.Drawing.Size(154, 27);
             this.remark8.TabIndex = 15;
@@ -1157,7 +1157,7 @@
             this.remark9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark9.Location = new System.Drawing.Point(1300, 302);
-            this.remark9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark9.Margin = new System.Windows.Forms.Padding(4);
             this.remark9.Name = "remark9";
             this.remark9.Size = new System.Drawing.Size(154, 27);
             this.remark9.TabIndex = 15;
@@ -1167,7 +1167,7 @@
             this.remark10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark10.Location = new System.Drawing.Point(1300, 334);
-            this.remark10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark10.Margin = new System.Windows.Forms.Padding(4);
             this.remark10.Name = "remark10";
             this.remark10.Size = new System.Drawing.Size(154, 27);
             this.remark10.TabIndex = 15;
@@ -1177,7 +1177,7 @@
             this.remark11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark11.Location = new System.Drawing.Point(1300, 366);
-            this.remark11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark11.Margin = new System.Windows.Forms.Padding(4);
             this.remark11.Name = "remark11";
             this.remark11.Size = new System.Drawing.Size(154, 27);
             this.remark11.TabIndex = 15;
@@ -1187,7 +1187,7 @@
             this.remark12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark12.Location = new System.Drawing.Point(1300, 398);
-            this.remark12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark12.Margin = new System.Windows.Forms.Padding(4);
             this.remark12.Name = "remark12";
             this.remark12.Size = new System.Drawing.Size(154, 27);
             this.remark12.TabIndex = 15;
@@ -1197,7 +1197,7 @@
             this.remark13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.remark13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.remark13.Location = new System.Drawing.Point(1300, 430);
-            this.remark13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.remark13.Margin = new System.Windows.Forms.Padding(4);
             this.remark13.Name = "remark13";
             this.remark13.Size = new System.Drawing.Size(154, 27);
             this.remark13.TabIndex = 15;
@@ -1221,7 +1221,7 @@
             this.WholesalePriceTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox1.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox1.Location = new System.Drawing.Point(1138, 46);
-            this.WholesalePriceTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox1.Name = "WholesalePriceTextBox1";
             this.WholesalePriceTextBox1.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox1.TabIndex = 15;
@@ -1235,7 +1235,7 @@
             this.WholesalePriceTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox2.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox2.Location = new System.Drawing.Point(1138, 78);
-            this.WholesalePriceTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox2.Name = "WholesalePriceTextBox2";
             this.WholesalePriceTextBox2.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox2.TabIndex = 15;
@@ -1249,7 +1249,7 @@
             this.WholesalePriceTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox3.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox3.Location = new System.Drawing.Point(1138, 110);
-            this.WholesalePriceTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox3.Name = "WholesalePriceTextBox3";
             this.WholesalePriceTextBox3.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox3.TabIndex = 15;
@@ -1263,7 +1263,7 @@
             this.WholesalePriceTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox4.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox4.Location = new System.Drawing.Point(1138, 142);
-            this.WholesalePriceTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox4.Name = "WholesalePriceTextBox4";
             this.WholesalePriceTextBox4.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox4.TabIndex = 15;
@@ -1277,7 +1277,7 @@
             this.WholesalePriceTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox5.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox5.Location = new System.Drawing.Point(1138, 174);
-            this.WholesalePriceTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox5.Name = "WholesalePriceTextBox5";
             this.WholesalePriceTextBox5.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox5.TabIndex = 15;
@@ -1291,7 +1291,7 @@
             this.WholesalePriceTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox6.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox6.Location = new System.Drawing.Point(1138, 206);
-            this.WholesalePriceTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox6.Name = "WholesalePriceTextBox6";
             this.WholesalePriceTextBox6.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox6.TabIndex = 15;
@@ -1305,7 +1305,7 @@
             this.WholesalePriceTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox7.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox7.Location = new System.Drawing.Point(1138, 238);
-            this.WholesalePriceTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox7.Name = "WholesalePriceTextBox7";
             this.WholesalePriceTextBox7.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox7.TabIndex = 15;
@@ -1319,7 +1319,7 @@
             this.WholesalePriceTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox8.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox8.Location = new System.Drawing.Point(1138, 270);
-            this.WholesalePriceTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox8.Name = "WholesalePriceTextBox8";
             this.WholesalePriceTextBox8.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox8.TabIndex = 15;
@@ -1333,7 +1333,7 @@
             this.WholesalePriceTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox9.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox9.Location = new System.Drawing.Point(1138, 302);
-            this.WholesalePriceTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox9.Name = "WholesalePriceTextBox9";
             this.WholesalePriceTextBox9.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox9.TabIndex = 15;
@@ -1347,7 +1347,7 @@
             this.WholesalePriceTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox10.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox10.Location = new System.Drawing.Point(1138, 334);
-            this.WholesalePriceTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox10.Name = "WholesalePriceTextBox10";
             this.WholesalePriceTextBox10.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox10.TabIndex = 15;
@@ -1361,7 +1361,7 @@
             this.WholesalePriceTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox11.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox11.Location = new System.Drawing.Point(1138, 366);
-            this.WholesalePriceTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox11.Name = "WholesalePriceTextBox11";
             this.WholesalePriceTextBox11.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox11.TabIndex = 15;
@@ -1375,7 +1375,7 @@
             this.WholesalePriceTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox12.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox12.Location = new System.Drawing.Point(1138, 398);
-            this.WholesalePriceTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox12.Name = "WholesalePriceTextBox12";
             this.WholesalePriceTextBox12.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox12.TabIndex = 15;
@@ -1389,7 +1389,7 @@
             this.WholesalePriceTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesalePriceTextBox13.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.WholesalePriceTextBox13.Location = new System.Drawing.Point(1138, 430);
-            this.WholesalePriceTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesalePriceTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.WholesalePriceTextBox13.Name = "WholesalePriceTextBox13";
             this.WholesalePriceTextBox13.Size = new System.Drawing.Size(154, 27);
             this.WholesalePriceTextBox13.TabIndex = 15;
@@ -1493,7 +1493,7 @@
             this.purchaseTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox1.Location = new System.Drawing.Point(958, 46);
-            this.purchaseTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox1.Name = "purchaseTextBox1";
             this.purchaseTextBox1.ReadOnly = true;
             this.purchaseTextBox1.Size = new System.Drawing.Size(172, 27);
@@ -1506,7 +1506,7 @@
             this.purchaseTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox2.Location = new System.Drawing.Point(958, 78);
-            this.purchaseTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox2.Name = "purchaseTextBox2";
             this.purchaseTextBox2.ReadOnly = true;
             this.purchaseTextBox2.Size = new System.Drawing.Size(172, 27);
@@ -1519,7 +1519,7 @@
             this.purchaseTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox3.Location = new System.Drawing.Point(958, 110);
-            this.purchaseTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox3.Name = "purchaseTextBox3";
             this.purchaseTextBox3.ReadOnly = true;
             this.purchaseTextBox3.Size = new System.Drawing.Size(172, 27);
@@ -1532,7 +1532,7 @@
             this.purchaseTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox4.Location = new System.Drawing.Point(958, 142);
-            this.purchaseTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox4.Name = "purchaseTextBox4";
             this.purchaseTextBox4.ReadOnly = true;
             this.purchaseTextBox4.Size = new System.Drawing.Size(172, 27);
@@ -1545,7 +1545,7 @@
             this.purchaseTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox5.Location = new System.Drawing.Point(958, 174);
-            this.purchaseTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox5.Name = "purchaseTextBox5";
             this.purchaseTextBox5.ReadOnly = true;
             this.purchaseTextBox5.Size = new System.Drawing.Size(172, 27);
@@ -1558,7 +1558,7 @@
             this.purchaseTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox6.Location = new System.Drawing.Point(958, 206);
-            this.purchaseTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox6.Name = "purchaseTextBox6";
             this.purchaseTextBox6.ReadOnly = true;
             this.purchaseTextBox6.Size = new System.Drawing.Size(172, 27);
@@ -1571,7 +1571,7 @@
             this.purchaseTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox7.Location = new System.Drawing.Point(958, 238);
-            this.purchaseTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox7.Name = "purchaseTextBox7";
             this.purchaseTextBox7.ReadOnly = true;
             this.purchaseTextBox7.Size = new System.Drawing.Size(172, 27);
@@ -1584,7 +1584,7 @@
             this.purchaseTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox8.Location = new System.Drawing.Point(958, 270);
-            this.purchaseTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox8.Name = "purchaseTextBox8";
             this.purchaseTextBox8.ReadOnly = true;
             this.purchaseTextBox8.Size = new System.Drawing.Size(172, 27);
@@ -1597,7 +1597,7 @@
             this.purchaseTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox9.Location = new System.Drawing.Point(958, 302);
-            this.purchaseTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox9.Name = "purchaseTextBox9";
             this.purchaseTextBox9.ReadOnly = true;
             this.purchaseTextBox9.Size = new System.Drawing.Size(172, 27);
@@ -1610,7 +1610,7 @@
             this.purchaseTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox10.Location = new System.Drawing.Point(958, 334);
-            this.purchaseTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox10.Name = "purchaseTextBox10";
             this.purchaseTextBox10.ReadOnly = true;
             this.purchaseTextBox10.Size = new System.Drawing.Size(172, 27);
@@ -1623,7 +1623,7 @@
             this.purchaseTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox11.Location = new System.Drawing.Point(958, 366);
-            this.purchaseTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox11.Name = "purchaseTextBox11";
             this.purchaseTextBox11.ReadOnly = true;
             this.purchaseTextBox11.Size = new System.Drawing.Size(172, 27);
@@ -1636,7 +1636,7 @@
             this.purchaseTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox12.Location = new System.Drawing.Point(958, 398);
-            this.purchaseTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox12.Name = "purchaseTextBox12";
             this.purchaseTextBox12.ReadOnly = true;
             this.purchaseTextBox12.Size = new System.Drawing.Size(172, 27);
@@ -1649,7 +1649,7 @@
             this.purchaseTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.purchaseTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.purchaseTextBox13.Location = new System.Drawing.Point(958, 430);
-            this.purchaseTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.purchaseTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.purchaseTextBox13.Name = "purchaseTextBox13";
             this.purchaseTextBox13.ReadOnly = true;
             this.purchaseTextBox13.Size = new System.Drawing.Size(172, 27);
@@ -1662,7 +1662,7 @@
             this.countTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox1.Location = new System.Drawing.Point(868, 46);
-            this.countTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox1.Name = "countTextBox1";
             this.countTextBox1.ReadOnly = true;
             this.countTextBox1.Size = new System.Drawing.Size(82, 27);
@@ -1674,7 +1674,7 @@
             this.countTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox13.Location = new System.Drawing.Point(868, 430);
-            this.countTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox13.Name = "countTextBox13";
             this.countTextBox13.ReadOnly = true;
             this.countTextBox13.Size = new System.Drawing.Size(82, 27);
@@ -1686,7 +1686,7 @@
             this.countTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox11.Location = new System.Drawing.Point(868, 366);
-            this.countTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox11.Name = "countTextBox11";
             this.countTextBox11.ReadOnly = true;
             this.countTextBox11.Size = new System.Drawing.Size(82, 27);
@@ -1698,7 +1698,7 @@
             this.countTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox12.Location = new System.Drawing.Point(868, 398);
-            this.countTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox12.Name = "countTextBox12";
             this.countTextBox12.ReadOnly = true;
             this.countTextBox12.Size = new System.Drawing.Size(82, 27);
@@ -1710,7 +1710,7 @@
             this.countTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox9.Location = new System.Drawing.Point(868, 302);
-            this.countTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox9.Name = "countTextBox9";
             this.countTextBox9.ReadOnly = true;
             this.countTextBox9.Size = new System.Drawing.Size(82, 27);
@@ -1722,7 +1722,7 @@
             this.countTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox10.Location = new System.Drawing.Point(868, 334);
-            this.countTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox10.Name = "countTextBox10";
             this.countTextBox10.ReadOnly = true;
             this.countTextBox10.Size = new System.Drawing.Size(82, 27);
@@ -1734,7 +1734,7 @@
             this.countTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox7.Location = new System.Drawing.Point(868, 238);
-            this.countTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox7.Name = "countTextBox7";
             this.countTextBox7.ReadOnly = true;
             this.countTextBox7.Size = new System.Drawing.Size(82, 27);
@@ -1746,7 +1746,7 @@
             this.countTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox8.Location = new System.Drawing.Point(868, 270);
-            this.countTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox8.Name = "countTextBox8";
             this.countTextBox8.ReadOnly = true;
             this.countTextBox8.Size = new System.Drawing.Size(82, 27);
@@ -1758,7 +1758,7 @@
             this.countTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox6.Location = new System.Drawing.Point(868, 206);
-            this.countTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox6.Name = "countTextBox6";
             this.countTextBox6.ReadOnly = true;
             this.countTextBox6.Size = new System.Drawing.Size(82, 27);
@@ -1770,7 +1770,7 @@
             this.countTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox5.Location = new System.Drawing.Point(868, 174);
-            this.countTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox5.Name = "countTextBox5";
             this.countTextBox5.ReadOnly = true;
             this.countTextBox5.Size = new System.Drawing.Size(82, 27);
@@ -1782,7 +1782,7 @@
             this.countTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox4.Location = new System.Drawing.Point(868, 142);
-            this.countTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox4.Name = "countTextBox4";
             this.countTextBox4.ReadOnly = true;
             this.countTextBox4.Size = new System.Drawing.Size(82, 27);
@@ -1794,7 +1794,7 @@
             this.countTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox3.Location = new System.Drawing.Point(868, 110);
-            this.countTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox3.Name = "countTextBox3";
             this.countTextBox3.ReadOnly = true;
             this.countTextBox3.Size = new System.Drawing.Size(82, 27);
@@ -1806,7 +1806,7 @@
             this.countTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.countTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.countTextBox2.Location = new System.Drawing.Point(868, 78);
-            this.countTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.countTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.countTextBox2.Name = "countTextBox2";
             this.countTextBox2.ReadOnly = true;
             this.countTextBox2.Size = new System.Drawing.Size(82, 27);
@@ -1818,7 +1818,7 @@
             this.unitPriceText1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText1.Location = new System.Drawing.Point(724, 46);
-            this.unitPriceText1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText1.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText1.Name = "unitPriceText1";
             this.unitPriceText1.ReadOnly = true;
             this.unitPriceText1.Size = new System.Drawing.Size(136, 27);
@@ -1831,7 +1831,7 @@
             this.unitPriceText2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText2.Location = new System.Drawing.Point(724, 78);
-            this.unitPriceText2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText2.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText2.Name = "unitPriceText2";
             this.unitPriceText2.ReadOnly = true;
             this.unitPriceText2.Size = new System.Drawing.Size(136, 27);
@@ -1844,7 +1844,7 @@
             this.unitPriceText3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText3.Location = new System.Drawing.Point(724, 110);
-            this.unitPriceText3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText3.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText3.Name = "unitPriceText3";
             this.unitPriceText3.ReadOnly = true;
             this.unitPriceText3.Size = new System.Drawing.Size(136, 27);
@@ -1857,7 +1857,7 @@
             this.unitPriceText4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText4.Location = new System.Drawing.Point(724, 142);
-            this.unitPriceText4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText4.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText4.Name = "unitPriceText4";
             this.unitPriceText4.ReadOnly = true;
             this.unitPriceText4.Size = new System.Drawing.Size(136, 27);
@@ -1870,7 +1870,7 @@
             this.unitPriceText5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText5.Location = new System.Drawing.Point(724, 174);
-            this.unitPriceText5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText5.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText5.Name = "unitPriceText5";
             this.unitPriceText5.ReadOnly = true;
             this.unitPriceText5.Size = new System.Drawing.Size(136, 27);
@@ -1883,7 +1883,7 @@
             this.unitPriceText6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText6.Location = new System.Drawing.Point(724, 206);
-            this.unitPriceText6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText6.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText6.Name = "unitPriceText6";
             this.unitPriceText6.ReadOnly = true;
             this.unitPriceText6.Size = new System.Drawing.Size(136, 27);
@@ -1896,7 +1896,7 @@
             this.unitPriceText7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText7.Location = new System.Drawing.Point(724, 238);
-            this.unitPriceText7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText7.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText7.Name = "unitPriceText7";
             this.unitPriceText7.ReadOnly = true;
             this.unitPriceText7.Size = new System.Drawing.Size(136, 27);
@@ -1909,7 +1909,7 @@
             this.unitPriceText8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText8.Location = new System.Drawing.Point(724, 270);
-            this.unitPriceText8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText8.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText8.Name = "unitPriceText8";
             this.unitPriceText8.ReadOnly = true;
             this.unitPriceText8.Size = new System.Drawing.Size(136, 27);
@@ -1922,7 +1922,7 @@
             this.unitPriceText9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText9.Location = new System.Drawing.Point(724, 302);
-            this.unitPriceText9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText9.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText9.Name = "unitPriceText9";
             this.unitPriceText9.ReadOnly = true;
             this.unitPriceText9.Size = new System.Drawing.Size(136, 27);
@@ -1935,7 +1935,7 @@
             this.unitPriceText10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText10.Location = new System.Drawing.Point(724, 334);
-            this.unitPriceText10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText10.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText10.Name = "unitPriceText10";
             this.unitPriceText10.ReadOnly = true;
             this.unitPriceText10.Size = new System.Drawing.Size(136, 27);
@@ -1948,7 +1948,7 @@
             this.unitPriceText11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText11.Location = new System.Drawing.Point(724, 366);
-            this.unitPriceText11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText11.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText11.Name = "unitPriceText11";
             this.unitPriceText11.ReadOnly = true;
             this.unitPriceText11.Size = new System.Drawing.Size(136, 27);
@@ -1961,7 +1961,7 @@
             this.unitPriceText12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText12.Location = new System.Drawing.Point(724, 398);
-            this.unitPriceText12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText12.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText12.Name = "unitPriceText12";
             this.unitPriceText12.ReadOnly = true;
             this.unitPriceText12.Size = new System.Drawing.Size(136, 27);
@@ -1974,7 +1974,7 @@
             this.unitPriceText13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unitPriceText13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.unitPriceText13.Location = new System.Drawing.Point(724, 430);
-            this.unitPriceText13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.unitPriceText13.Margin = new System.Windows.Forms.Padding(4);
             this.unitPriceText13.Name = "unitPriceText13";
             this.unitPriceText13.ReadOnly = true;
             this.unitPriceText13.Size = new System.Drawing.Size(136, 27);
@@ -1987,7 +1987,7 @@
             this.weightTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox1.Location = new System.Drawing.Point(634, 46);
-            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox1.Name = "weightTextBox1";
             this.weightTextBox1.ReadOnly = true;
             this.weightTextBox1.Size = new System.Drawing.Size(82, 27);
@@ -1999,7 +1999,7 @@
             this.weightTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox2.Location = new System.Drawing.Point(634, 78);
-            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox2.Name = "weightTextBox2";
             this.weightTextBox2.ReadOnly = true;
             this.weightTextBox2.Size = new System.Drawing.Size(82, 27);
@@ -2011,7 +2011,7 @@
             this.weightTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox3.Location = new System.Drawing.Point(634, 110);
-            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox3.Name = "weightTextBox3";
             this.weightTextBox3.ReadOnly = true;
             this.weightTextBox3.Size = new System.Drawing.Size(82, 27);
@@ -2023,7 +2023,7 @@
             this.weightTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox4.Location = new System.Drawing.Point(634, 142);
-            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox4.Name = "weightTextBox4";
             this.weightTextBox4.ReadOnly = true;
             this.weightTextBox4.Size = new System.Drawing.Size(82, 27);
@@ -2035,7 +2035,7 @@
             this.weightTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox5.Location = new System.Drawing.Point(634, 174);
-            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox5.Name = "weightTextBox5";
             this.weightTextBox5.ReadOnly = true;
             this.weightTextBox5.Size = new System.Drawing.Size(82, 27);
@@ -2047,7 +2047,7 @@
             this.weightTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox6.Location = new System.Drawing.Point(634, 206);
-            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox6.Name = "weightTextBox6";
             this.weightTextBox6.ReadOnly = true;
             this.weightTextBox6.Size = new System.Drawing.Size(82, 27);
@@ -2059,7 +2059,7 @@
             this.weightTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox7.Location = new System.Drawing.Point(634, 238);
-            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox7.Name = "weightTextBox7";
             this.weightTextBox7.ReadOnly = true;
             this.weightTextBox7.Size = new System.Drawing.Size(82, 27);
@@ -2071,7 +2071,7 @@
             this.weightTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox8.Location = new System.Drawing.Point(634, 270);
-            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox8.Name = "weightTextBox8";
             this.weightTextBox8.ReadOnly = true;
             this.weightTextBox8.Size = new System.Drawing.Size(82, 27);
@@ -2083,7 +2083,7 @@
             this.weightTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox9.Location = new System.Drawing.Point(634, 302);
-            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox9.Name = "weightTextBox9";
             this.weightTextBox9.ReadOnly = true;
             this.weightTextBox9.Size = new System.Drawing.Size(82, 27);
@@ -2095,7 +2095,7 @@
             this.weightTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox10.Location = new System.Drawing.Point(634, 334);
-            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox10.Name = "weightTextBox10";
             this.weightTextBox10.ReadOnly = true;
             this.weightTextBox10.Size = new System.Drawing.Size(82, 27);
@@ -2107,7 +2107,7 @@
             this.weightTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox11.Location = new System.Drawing.Point(634, 366);
-            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox11.Name = "weightTextBox11";
             this.weightTextBox11.ReadOnly = true;
             this.weightTextBox11.Size = new System.Drawing.Size(82, 27);
@@ -2119,7 +2119,7 @@
             this.weightTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox12.Location = new System.Drawing.Point(634, 398);
-            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox12.Name = "weightTextBox12";
             this.weightTextBox12.ReadOnly = true;
             this.weightTextBox12.Size = new System.Drawing.Size(82, 27);
@@ -2131,7 +2131,7 @@
             this.weightTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.weightTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.weightTextBox13.Location = new System.Drawing.Point(634, 430);
-            this.weightTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.weightTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.weightTextBox13.Name = "weightTextBox13";
             this.weightTextBox13.ReadOnly = true;
             this.weightTextBox13.Size = new System.Drawing.Size(82, 27);
@@ -2143,7 +2143,7 @@
             this.itemDetailTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox1.Location = new System.Drawing.Point(490, 46);
-            this.itemDetailTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox1.Name = "itemDetailTextBox1";
             this.itemDetailTextBox1.ReadOnly = true;
             this.itemDetailTextBox1.Size = new System.Drawing.Size(136, 27);
@@ -2154,7 +2154,7 @@
             this.itemDetailTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox2.Location = new System.Drawing.Point(490, 78);
-            this.itemDetailTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox2.Name = "itemDetailTextBox2";
             this.itemDetailTextBox2.ReadOnly = true;
             this.itemDetailTextBox2.Size = new System.Drawing.Size(136, 27);
@@ -2165,7 +2165,7 @@
             this.itemDetailTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox3.Location = new System.Drawing.Point(490, 110);
-            this.itemDetailTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox3.Name = "itemDetailTextBox3";
             this.itemDetailTextBox3.ReadOnly = true;
             this.itemDetailTextBox3.Size = new System.Drawing.Size(136, 27);
@@ -2176,7 +2176,7 @@
             this.itemDetailTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox4.Location = new System.Drawing.Point(490, 142);
-            this.itemDetailTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox4.Name = "itemDetailTextBox4";
             this.itemDetailTextBox4.ReadOnly = true;
             this.itemDetailTextBox4.Size = new System.Drawing.Size(136, 27);
@@ -2187,7 +2187,7 @@
             this.itemDetailTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox5.Location = new System.Drawing.Point(490, 174);
-            this.itemDetailTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox5.Name = "itemDetailTextBox5";
             this.itemDetailTextBox5.ReadOnly = true;
             this.itemDetailTextBox5.Size = new System.Drawing.Size(136, 27);
@@ -2198,7 +2198,7 @@
             this.itemDetailTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox6.Location = new System.Drawing.Point(490, 206);
-            this.itemDetailTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox6.Name = "itemDetailTextBox6";
             this.itemDetailTextBox6.ReadOnly = true;
             this.itemDetailTextBox6.Size = new System.Drawing.Size(136, 27);
@@ -2209,7 +2209,7 @@
             this.itemDetailTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox7.Location = new System.Drawing.Point(490, 238);
-            this.itemDetailTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox7.Name = "itemDetailTextBox7";
             this.itemDetailTextBox7.ReadOnly = true;
             this.itemDetailTextBox7.Size = new System.Drawing.Size(136, 27);
@@ -2220,7 +2220,7 @@
             this.itemDetailTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox8.Location = new System.Drawing.Point(490, 270);
-            this.itemDetailTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox8.Name = "itemDetailTextBox8";
             this.itemDetailTextBox8.ReadOnly = true;
             this.itemDetailTextBox8.Size = new System.Drawing.Size(136, 27);
@@ -2231,7 +2231,7 @@
             this.itemDetailTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox9.Location = new System.Drawing.Point(490, 302);
-            this.itemDetailTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox9.Name = "itemDetailTextBox9";
             this.itemDetailTextBox9.ReadOnly = true;
             this.itemDetailTextBox9.Size = new System.Drawing.Size(136, 27);
@@ -2242,7 +2242,7 @@
             this.itemDetailTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox10.Location = new System.Drawing.Point(490, 334);
-            this.itemDetailTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox10.Name = "itemDetailTextBox10";
             this.itemDetailTextBox10.ReadOnly = true;
             this.itemDetailTextBox10.Size = new System.Drawing.Size(136, 27);
@@ -2253,7 +2253,7 @@
             this.itemDetailTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox11.Location = new System.Drawing.Point(490, 366);
-            this.itemDetailTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox11.Name = "itemDetailTextBox11";
             this.itemDetailTextBox11.ReadOnly = true;
             this.itemDetailTextBox11.Size = new System.Drawing.Size(136, 27);
@@ -2264,7 +2264,7 @@
             this.itemDetailTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox12.Location = new System.Drawing.Point(490, 398);
-            this.itemDetailTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox12.Name = "itemDetailTextBox12";
             this.itemDetailTextBox12.ReadOnly = true;
             this.itemDetailTextBox12.Size = new System.Drawing.Size(136, 27);
@@ -2275,7 +2275,7 @@
             this.itemDetailTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemDetailTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemDetailTextBox13.Location = new System.Drawing.Point(490, 430);
-            this.itemDetailTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemDetailTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.itemDetailTextBox13.Name = "itemDetailTextBox13";
             this.itemDetailTextBox13.ReadOnly = true;
             this.itemDetailTextBox13.Size = new System.Drawing.Size(136, 27);
@@ -2286,7 +2286,7 @@
             this.itemCategoryTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox1.Location = new System.Drawing.Point(364, 46);
-            this.itemCategoryTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox1.Name = "itemCategoryTextBox1";
             this.itemCategoryTextBox1.ReadOnly = true;
             this.itemCategoryTextBox1.Size = new System.Drawing.Size(118, 27);
@@ -2297,7 +2297,7 @@
             this.itemCategoryTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox2.Location = new System.Drawing.Point(364, 78);
-            this.itemCategoryTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox2.Name = "itemCategoryTextBox2";
             this.itemCategoryTextBox2.ReadOnly = true;
             this.itemCategoryTextBox2.Size = new System.Drawing.Size(118, 27);
@@ -2308,7 +2308,7 @@
             this.itemCategoryTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox3.Location = new System.Drawing.Point(364, 110);
-            this.itemCategoryTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox3.Name = "itemCategoryTextBox3";
             this.itemCategoryTextBox3.ReadOnly = true;
             this.itemCategoryTextBox3.Size = new System.Drawing.Size(118, 27);
@@ -2319,7 +2319,7 @@
             this.itemCategoryTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox4.Location = new System.Drawing.Point(364, 142);
-            this.itemCategoryTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox4.Name = "itemCategoryTextBox4";
             this.itemCategoryTextBox4.ReadOnly = true;
             this.itemCategoryTextBox4.Size = new System.Drawing.Size(118, 27);
@@ -2330,7 +2330,7 @@
             this.itemCategoryTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox5.Location = new System.Drawing.Point(364, 174);
-            this.itemCategoryTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox5.Name = "itemCategoryTextBox5";
             this.itemCategoryTextBox5.ReadOnly = true;
             this.itemCategoryTextBox5.Size = new System.Drawing.Size(118, 27);
@@ -2341,7 +2341,7 @@
             this.itemCategoryTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox6.Location = new System.Drawing.Point(364, 206);
-            this.itemCategoryTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox6.Name = "itemCategoryTextBox6";
             this.itemCategoryTextBox6.ReadOnly = true;
             this.itemCategoryTextBox6.Size = new System.Drawing.Size(118, 27);
@@ -2352,7 +2352,7 @@
             this.itemCategoryTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox7.Location = new System.Drawing.Point(364, 238);
-            this.itemCategoryTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox7.Name = "itemCategoryTextBox7";
             this.itemCategoryTextBox7.ReadOnly = true;
             this.itemCategoryTextBox7.Size = new System.Drawing.Size(118, 27);
@@ -2363,7 +2363,7 @@
             this.itemCategoryTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox8.Location = new System.Drawing.Point(364, 270);
-            this.itemCategoryTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox8.Name = "itemCategoryTextBox8";
             this.itemCategoryTextBox8.ReadOnly = true;
             this.itemCategoryTextBox8.Size = new System.Drawing.Size(118, 27);
@@ -2374,7 +2374,7 @@
             this.itemCategoryTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox9.Location = new System.Drawing.Point(364, 302);
-            this.itemCategoryTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox9.Name = "itemCategoryTextBox9";
             this.itemCategoryTextBox9.ReadOnly = true;
             this.itemCategoryTextBox9.Size = new System.Drawing.Size(118, 27);
@@ -2385,7 +2385,7 @@
             this.itemCategoryTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox10.Location = new System.Drawing.Point(364, 334);
-            this.itemCategoryTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox10.Name = "itemCategoryTextBox10";
             this.itemCategoryTextBox10.ReadOnly = true;
             this.itemCategoryTextBox10.Size = new System.Drawing.Size(118, 27);
@@ -2396,7 +2396,7 @@
             this.itemCategoryTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox11.Location = new System.Drawing.Point(364, 366);
-            this.itemCategoryTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox11.Name = "itemCategoryTextBox11";
             this.itemCategoryTextBox11.ReadOnly = true;
             this.itemCategoryTextBox11.Size = new System.Drawing.Size(118, 27);
@@ -2407,7 +2407,7 @@
             this.itemCategoryTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox12.Location = new System.Drawing.Point(364, 398);
-            this.itemCategoryTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox12.Name = "itemCategoryTextBox12";
             this.itemCategoryTextBox12.ReadOnly = true;
             this.itemCategoryTextBox12.Size = new System.Drawing.Size(118, 27);
@@ -2418,7 +2418,7 @@
             this.itemCategoryTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCategoryTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemCategoryTextBox13.Location = new System.Drawing.Point(364, 430);
-            this.itemCategoryTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemCategoryTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.itemCategoryTextBox13.Name = "itemCategoryTextBox13";
             this.itemCategoryTextBox13.ReadOnly = true;
             this.itemCategoryTextBox13.Size = new System.Drawing.Size(118, 27);
@@ -2429,7 +2429,7 @@
             this.itemMainCategoryTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox1.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox1.Location = new System.Drawing.Point(238, 46);
-            this.itemMainCategoryTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox1.Name = "itemMainCategoryTextBox1";
             this.itemMainCategoryTextBox1.ReadOnly = true;
             this.itemMainCategoryTextBox1.Size = new System.Drawing.Size(118, 27);
@@ -2440,7 +2440,7 @@
             this.itemMainCategoryTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox2.Location = new System.Drawing.Point(238, 78);
-            this.itemMainCategoryTextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox2.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox2.Name = "itemMainCategoryTextBox2";
             this.itemMainCategoryTextBox2.ReadOnly = true;
             this.itemMainCategoryTextBox2.Size = new System.Drawing.Size(118, 27);
@@ -2451,7 +2451,7 @@
             this.itemMainCategoryTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox3.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox3.Location = new System.Drawing.Point(238, 110);
-            this.itemMainCategoryTextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox3.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox3.Name = "itemMainCategoryTextBox3";
             this.itemMainCategoryTextBox3.ReadOnly = true;
             this.itemMainCategoryTextBox3.Size = new System.Drawing.Size(118, 27);
@@ -2462,7 +2462,7 @@
             this.itemMainCategoryTextBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox4.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox4.Location = new System.Drawing.Point(238, 142);
-            this.itemMainCategoryTextBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox4.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox4.Name = "itemMainCategoryTextBox4";
             this.itemMainCategoryTextBox4.ReadOnly = true;
             this.itemMainCategoryTextBox4.Size = new System.Drawing.Size(118, 27);
@@ -2473,7 +2473,7 @@
             this.itemMainCategoryTextBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox5.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox5.Location = new System.Drawing.Point(238, 174);
-            this.itemMainCategoryTextBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox5.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox5.Name = "itemMainCategoryTextBox5";
             this.itemMainCategoryTextBox5.ReadOnly = true;
             this.itemMainCategoryTextBox5.Size = new System.Drawing.Size(118, 27);
@@ -2484,7 +2484,7 @@
             this.itemMainCategoryTextBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox6.Location = new System.Drawing.Point(238, 206);
-            this.itemMainCategoryTextBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox6.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox6.Name = "itemMainCategoryTextBox6";
             this.itemMainCategoryTextBox6.ReadOnly = true;
             this.itemMainCategoryTextBox6.Size = new System.Drawing.Size(118, 27);
@@ -2495,7 +2495,7 @@
             this.itemMainCategoryTextBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox7.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox7.Location = new System.Drawing.Point(238, 238);
-            this.itemMainCategoryTextBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox7.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox7.Name = "itemMainCategoryTextBox7";
             this.itemMainCategoryTextBox7.ReadOnly = true;
             this.itemMainCategoryTextBox7.Size = new System.Drawing.Size(118, 27);
@@ -2506,7 +2506,7 @@
             this.itemMainCategoryTextBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox8.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox8.Location = new System.Drawing.Point(238, 270);
-            this.itemMainCategoryTextBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox8.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox8.Name = "itemMainCategoryTextBox8";
             this.itemMainCategoryTextBox8.ReadOnly = true;
             this.itemMainCategoryTextBox8.Size = new System.Drawing.Size(118, 27);
@@ -2517,7 +2517,7 @@
             this.itemMainCategoryTextBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox9.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox9.Location = new System.Drawing.Point(238, 302);
-            this.itemMainCategoryTextBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox9.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox9.Name = "itemMainCategoryTextBox9";
             this.itemMainCategoryTextBox9.ReadOnly = true;
             this.itemMainCategoryTextBox9.Size = new System.Drawing.Size(118, 27);
@@ -2528,7 +2528,7 @@
             this.itemMainCategoryTextBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox10.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox10.Location = new System.Drawing.Point(238, 334);
-            this.itemMainCategoryTextBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox10.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox10.Name = "itemMainCategoryTextBox10";
             this.itemMainCategoryTextBox10.ReadOnly = true;
             this.itemMainCategoryTextBox10.Size = new System.Drawing.Size(118, 27);
@@ -2539,7 +2539,7 @@
             this.itemMainCategoryTextBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox11.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox11.Location = new System.Drawing.Point(238, 366);
-            this.itemMainCategoryTextBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox11.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox11.Name = "itemMainCategoryTextBox11";
             this.itemMainCategoryTextBox11.ReadOnly = true;
             this.itemMainCategoryTextBox11.Size = new System.Drawing.Size(118, 27);
@@ -2550,7 +2550,7 @@
             this.itemMainCategoryTextBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox12.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox12.Location = new System.Drawing.Point(238, 398);
-            this.itemMainCategoryTextBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox12.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox12.Name = "itemMainCategoryTextBox12";
             this.itemMainCategoryTextBox12.ReadOnly = true;
             this.itemMainCategoryTextBox12.Size = new System.Drawing.Size(118, 27);
@@ -2561,7 +2561,7 @@
             this.itemMainCategoryTextBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemMainCategoryTextBox13.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.itemMainCategoryTextBox13.Location = new System.Drawing.Point(238, 430);
-            this.itemMainCategoryTextBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.itemMainCategoryTextBox13.Margin = new System.Windows.Forms.Padding(4);
             this.itemMainCategoryTextBox13.Name = "itemMainCategoryTextBox13";
             this.itemMainCategoryTextBox13.ReadOnly = true;
             this.itemMainCategoryTextBox13.Size = new System.Drawing.Size(118, 27);
@@ -2585,7 +2585,7 @@
             this.ItemNameChangeCheckBox2.AutoSize = true;
             this.ItemNameChangeCheckBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox2.Location = new System.Drawing.Point(130, 78);
-            this.ItemNameChangeCheckBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox2.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox2.Name = "ItemNameChangeCheckBox2";
             this.ItemNameChangeCheckBox2.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox2.TabIndex = 14;
@@ -2598,7 +2598,7 @@
             this.ItemNameChangeCheckBox3.AutoSize = true;
             this.ItemNameChangeCheckBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox3.Location = new System.Drawing.Point(130, 110);
-            this.ItemNameChangeCheckBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox3.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox3.Name = "ItemNameChangeCheckBox3";
             this.ItemNameChangeCheckBox3.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox3.TabIndex = 14;
@@ -2611,7 +2611,7 @@
             this.ItemNameChangeCheckBox4.AutoSize = true;
             this.ItemNameChangeCheckBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox4.Location = new System.Drawing.Point(130, 142);
-            this.ItemNameChangeCheckBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox4.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox4.Name = "ItemNameChangeCheckBox4";
             this.ItemNameChangeCheckBox4.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox4.TabIndex = 14;
@@ -2624,7 +2624,7 @@
             this.ItemNameChangeCheckBox5.AutoSize = true;
             this.ItemNameChangeCheckBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox5.Location = new System.Drawing.Point(130, 174);
-            this.ItemNameChangeCheckBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox5.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox5.Name = "ItemNameChangeCheckBox5";
             this.ItemNameChangeCheckBox5.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox5.TabIndex = 14;
@@ -2637,7 +2637,7 @@
             this.ItemNameChangeCheckBox6.AutoSize = true;
             this.ItemNameChangeCheckBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox6.Location = new System.Drawing.Point(130, 206);
-            this.ItemNameChangeCheckBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox6.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox6.Name = "ItemNameChangeCheckBox6";
             this.ItemNameChangeCheckBox6.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox6.TabIndex = 14;
@@ -2650,7 +2650,7 @@
             this.ItemNameChangeCheckBox7.AutoSize = true;
             this.ItemNameChangeCheckBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox7.Location = new System.Drawing.Point(130, 238);
-            this.ItemNameChangeCheckBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox7.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox7.Name = "ItemNameChangeCheckBox7";
             this.ItemNameChangeCheckBox7.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox7.TabIndex = 14;
@@ -2663,7 +2663,7 @@
             this.ItemNameChangeCheckBox8.AutoSize = true;
             this.ItemNameChangeCheckBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox8.Location = new System.Drawing.Point(130, 270);
-            this.ItemNameChangeCheckBox8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox8.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox8.Name = "ItemNameChangeCheckBox8";
             this.ItemNameChangeCheckBox8.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox8.TabIndex = 14;
@@ -2676,7 +2676,7 @@
             this.ItemNameChangeCheckBox9.AutoSize = true;
             this.ItemNameChangeCheckBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox9.Location = new System.Drawing.Point(130, 302);
-            this.ItemNameChangeCheckBox9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox9.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox9.Name = "ItemNameChangeCheckBox9";
             this.ItemNameChangeCheckBox9.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox9.TabIndex = 14;
@@ -2689,7 +2689,7 @@
             this.ItemNameChangeCheckBox10.AutoSize = true;
             this.ItemNameChangeCheckBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox10.Location = new System.Drawing.Point(130, 334);
-            this.ItemNameChangeCheckBox10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox10.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox10.Name = "ItemNameChangeCheckBox10";
             this.ItemNameChangeCheckBox10.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox10.TabIndex = 14;
@@ -2702,7 +2702,7 @@
             this.ItemNameChangeCheckBox11.AutoSize = true;
             this.ItemNameChangeCheckBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox11.Location = new System.Drawing.Point(130, 366);
-            this.ItemNameChangeCheckBox11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox11.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox11.Name = "ItemNameChangeCheckBox11";
             this.ItemNameChangeCheckBox11.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox11.TabIndex = 14;
@@ -2715,7 +2715,7 @@
             this.ItemNameChangeCheckBox12.AutoSize = true;
             this.ItemNameChangeCheckBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox12.Location = new System.Drawing.Point(130, 398);
-            this.ItemNameChangeCheckBox12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox12.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox12.Name = "ItemNameChangeCheckBox12";
             this.ItemNameChangeCheckBox12.Size = new System.Drawing.Size(100, 24);
             this.ItemNameChangeCheckBox12.TabIndex = 14;
@@ -2728,7 +2728,7 @@
             this.ItemNameChangeCheckBox13.AutoSize = true;
             this.ItemNameChangeCheckBox13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ItemNameChangeCheckBox13.Location = new System.Drawing.Point(130, 430);
-            this.ItemNameChangeCheckBox13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ItemNameChangeCheckBox13.Margin = new System.Windows.Forms.Padding(4);
             this.ItemNameChangeCheckBox13.Name = "ItemNameChangeCheckBox13";
             this.ItemNameChangeCheckBox13.Size = new System.Drawing.Size(100, 34);
             this.ItemNameChangeCheckBox13.TabIndex = 14;
@@ -2741,7 +2741,7 @@
             this.BuyDateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker1.Location = new System.Drawing.Point(1462, 46);
-            this.BuyDateTimePicker1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker1.Name = "BuyDateTimePicker1";
             this.BuyDateTimePicker1.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker1.TabIndex = 17;
@@ -2751,7 +2751,7 @@
             this.BuyDateTimePicker2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker2.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker2.Location = new System.Drawing.Point(1462, 78);
-            this.BuyDateTimePicker2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker2.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker2.Name = "BuyDateTimePicker2";
             this.BuyDateTimePicker2.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker2.TabIndex = 17;
@@ -2761,7 +2761,7 @@
             this.BuyDateTimePicker3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker3.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker3.Location = new System.Drawing.Point(1462, 110);
-            this.BuyDateTimePicker3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker3.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker3.Name = "BuyDateTimePicker3";
             this.BuyDateTimePicker3.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker3.TabIndex = 17;
@@ -2771,7 +2771,7 @@
             this.BuyDateTimePicker4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker4.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker4.Location = new System.Drawing.Point(1462, 142);
-            this.BuyDateTimePicker4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker4.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker4.Name = "BuyDateTimePicker4";
             this.BuyDateTimePicker4.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker4.TabIndex = 17;
@@ -2781,7 +2781,7 @@
             this.BuyDateTimePicker5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker5.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker5.Location = new System.Drawing.Point(1462, 174);
-            this.BuyDateTimePicker5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker5.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker5.Name = "BuyDateTimePicker5";
             this.BuyDateTimePicker5.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker5.TabIndex = 17;
@@ -2791,7 +2791,7 @@
             this.BuyDateTimePicker6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker6.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker6.Location = new System.Drawing.Point(1462, 206);
-            this.BuyDateTimePicker6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker6.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker6.Name = "BuyDateTimePicker6";
             this.BuyDateTimePicker6.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker6.TabIndex = 17;
@@ -2801,7 +2801,7 @@
             this.BuyDateTimePicker7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker7.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker7.Location = new System.Drawing.Point(1462, 238);
-            this.BuyDateTimePicker7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker7.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker7.Name = "BuyDateTimePicker7";
             this.BuyDateTimePicker7.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker7.TabIndex = 17;
@@ -2811,7 +2811,7 @@
             this.BuyDateTimePicker8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker8.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker8.Location = new System.Drawing.Point(1462, 270);
-            this.BuyDateTimePicker8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker8.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker8.Name = "BuyDateTimePicker8";
             this.BuyDateTimePicker8.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker8.TabIndex = 17;
@@ -2821,7 +2821,7 @@
             this.BuyDateTimePicker9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker9.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker9.Location = new System.Drawing.Point(1462, 302);
-            this.BuyDateTimePicker9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker9.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker9.Name = "BuyDateTimePicker9";
             this.BuyDateTimePicker9.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker9.TabIndex = 17;
@@ -2831,7 +2831,7 @@
             this.BuyDateTimePicker10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker10.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker10.Location = new System.Drawing.Point(1462, 334);
-            this.BuyDateTimePicker10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker10.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker10.Name = "BuyDateTimePicker10";
             this.BuyDateTimePicker10.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker10.TabIndex = 17;
@@ -2841,7 +2841,7 @@
             this.BuyDateTimePicker11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker11.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker11.Location = new System.Drawing.Point(1462, 366);
-            this.BuyDateTimePicker11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker11.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker11.Name = "BuyDateTimePicker11";
             this.BuyDateTimePicker11.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker11.TabIndex = 17;
@@ -2851,7 +2851,7 @@
             this.BuyDateTimePicker12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker12.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker12.Location = new System.Drawing.Point(1462, 398);
-            this.BuyDateTimePicker12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker12.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker12.Name = "BuyDateTimePicker12";
             this.BuyDateTimePicker12.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker12.TabIndex = 17;
@@ -2861,7 +2861,7 @@
             this.BuyDateTimePicker13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BuyDateTimePicker13.Font = new System.Drawing.Font("MS UI Gothic", 9.900001F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BuyDateTimePicker13.Location = new System.Drawing.Point(1462, 430);
-            this.BuyDateTimePicker13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BuyDateTimePicker13.Margin = new System.Windows.Forms.Padding(4);
             this.BuyDateTimePicker13.Name = "BuyDateTimePicker13";
             this.BuyDateTimePicker13.Size = new System.Drawing.Size(172, 24);
             this.BuyDateTimePicker13.TabIndex = 17;
@@ -2952,7 +2952,7 @@
             this.tableLayoutPanel2.Controls.Add(this.DiamondProfitTextBox, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.MetalProfitTextBox, 1, 3);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(26, 736);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -3023,7 +3023,7 @@
             this.MetalPurchaseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MetalPurchaseTextBox.ForeColor = System.Drawing.Color.Blue;
             this.MetalPurchaseTextBox.Location = new System.Drawing.Point(132, 54);
-            this.MetalPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MetalPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.MetalPurchaseTextBox.Name = "MetalPurchaseTextBox";
             this.MetalPurchaseTextBox.ReadOnly = true;
             this.MetalPurchaseTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3037,7 +3037,7 @@
             this.DiamondPurchaseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DiamondPurchaseTextBox.ForeColor = System.Drawing.Color.Blue;
             this.DiamondPurchaseTextBox.Location = new System.Drawing.Point(362, 54);
-            this.DiamondPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DiamondPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.DiamondPurchaseTextBox.Name = "DiamondPurchaseTextBox";
             this.DiamondPurchaseTextBox.ReadOnly = true;
             this.DiamondPurchaseTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3051,7 +3051,7 @@
             this.MetalWholesaleTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MetalWholesaleTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.MetalWholesaleTextBox.Location = new System.Drawing.Point(132, 104);
-            this.MetalWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MetalWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.MetalWholesaleTextBox.Name = "MetalWholesaleTextBox";
             this.MetalWholesaleTextBox.ReadOnly = true;
             this.MetalWholesaleTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3065,7 +3065,7 @@
             this.BrandPurchaseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BrandPurchaseTextBox.ForeColor = System.Drawing.Color.Blue;
             this.BrandPurchaseTextBox.Location = new System.Drawing.Point(592, 54);
-            this.BrandPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BrandPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.BrandPurchaseTextBox.Name = "BrandPurchaseTextBox";
             this.BrandPurchaseTextBox.ReadOnly = true;
             this.BrandPurchaseTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3079,7 +3079,7 @@
             this.ProductPurchaseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ProductPurchaseTextBox.ForeColor = System.Drawing.Color.Blue;
             this.ProductPurchaseTextBox.Location = new System.Drawing.Point(822, 54);
-            this.ProductPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProductPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProductPurchaseTextBox.Name = "ProductPurchaseTextBox";
             this.ProductPurchaseTextBox.ReadOnly = true;
             this.ProductPurchaseTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3093,7 +3093,7 @@
             this.OtherPurchaseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.OtherPurchaseTextBox.ForeColor = System.Drawing.Color.Blue;
             this.OtherPurchaseTextBox.Location = new System.Drawing.Point(1052, 54);
-            this.OtherPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OtherPurchaseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.OtherPurchaseTextBox.Name = "OtherPurchaseTextBox";
             this.OtherPurchaseTextBox.ReadOnly = true;
             this.OtherPurchaseTextBox.Size = new System.Drawing.Size(226, 37);
@@ -3107,7 +3107,7 @@
             this.OtherWholesaleTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.OtherWholesaleTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.OtherWholesaleTextBox.Location = new System.Drawing.Point(1052, 104);
-            this.OtherWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OtherWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.OtherWholesaleTextBox.Name = "OtherWholesaleTextBox";
             this.OtherWholesaleTextBox.ReadOnly = true;
             this.OtherWholesaleTextBox.Size = new System.Drawing.Size(226, 37);
@@ -3121,7 +3121,7 @@
             this.OtherProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.OtherProfitTextBox.ForeColor = System.Drawing.Color.Red;
             this.OtherProfitTextBox.Location = new System.Drawing.Point(1052, 154);
-            this.OtherProfitTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.OtherProfitTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.OtherProfitTextBox.Name = "OtherProfitTextBox";
             this.OtherProfitTextBox.ReadOnly = true;
             this.OtherProfitTextBox.Size = new System.Drawing.Size(226, 37);
@@ -3134,7 +3134,7 @@
             this.ProductWholesaleTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ProductWholesaleTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.ProductWholesaleTextBox.Location = new System.Drawing.Point(822, 104);
-            this.ProductWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProductWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProductWholesaleTextBox.Name = "ProductWholesaleTextBox";
             this.ProductWholesaleTextBox.ReadOnly = true;
             this.ProductWholesaleTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3148,7 +3148,7 @@
             this.ProductProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ProductProfitTextBox.ForeColor = System.Drawing.Color.Red;
             this.ProductProfitTextBox.Location = new System.Drawing.Point(822, 154);
-            this.ProductProfitTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProductProfitTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProductProfitTextBox.Name = "ProductProfitTextBox";
             this.ProductProfitTextBox.ReadOnly = true;
             this.ProductProfitTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3161,7 +3161,7 @@
             this.BrandWholesaleTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BrandWholesaleTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.BrandWholesaleTextBox.Location = new System.Drawing.Point(592, 104);
-            this.BrandWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BrandWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.BrandWholesaleTextBox.Name = "BrandWholesaleTextBox";
             this.BrandWholesaleTextBox.ReadOnly = true;
             this.BrandWholesaleTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3175,7 +3175,7 @@
             this.BrandProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BrandProfitTextBox.ForeColor = System.Drawing.Color.Red;
             this.BrandProfitTextBox.Location = new System.Drawing.Point(592, 154);
-            this.BrandProfitTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BrandProfitTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.BrandProfitTextBox.Name = "BrandProfitTextBox";
             this.BrandProfitTextBox.ReadOnly = true;
             this.BrandProfitTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3188,7 +3188,7 @@
             this.DiamondWholesaleTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DiamondWholesaleTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.DiamondWholesaleTextBox.Location = new System.Drawing.Point(362, 104);
-            this.DiamondWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DiamondWholesaleTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.DiamondWholesaleTextBox.Name = "DiamondWholesaleTextBox";
             this.DiamondWholesaleTextBox.ReadOnly = true;
             this.DiamondWholesaleTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3202,7 +3202,7 @@
             this.DiamondProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DiamondProfitTextBox.ForeColor = System.Drawing.Color.Red;
             this.DiamondProfitTextBox.Location = new System.Drawing.Point(362, 154);
-            this.DiamondProfitTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DiamondProfitTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.DiamondProfitTextBox.Name = "DiamondProfitTextBox";
             this.DiamondProfitTextBox.ReadOnly = true;
             this.DiamondProfitTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3215,7 +3215,7 @@
             this.MetalProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.MetalProfitTextBox.ForeColor = System.Drawing.Color.Red;
             this.MetalProfitTextBox.Location = new System.Drawing.Point(132, 154);
-            this.MetalProfitTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MetalProfitTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.MetalProfitTextBox.Name = "MetalProfitTextBox";
             this.MetalProfitTextBox.ReadOnly = true;
             this.MetalProfitTextBox.Size = new System.Drawing.Size(222, 37);
@@ -3235,7 +3235,7 @@
             this.tableLayoutPanel3.Controls.Add(this.WholesaleTotalTextBox, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.ProfitTotalTextBox, 1, 2);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(1338, 736);
-            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -3292,7 +3292,7 @@
             this.PurchaseTotalTextBox.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.PurchaseTotalTextBox.ForeColor = System.Drawing.Color.Blue;
             this.PurchaseTotalTextBox.Location = new System.Drawing.Point(150, 4);
-            this.PurchaseTotalTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PurchaseTotalTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PurchaseTotalTextBox.Name = "PurchaseTotalTextBox";
             this.PurchaseTotalTextBox.ReadOnly = true;
             this.PurchaseTotalTextBox.Size = new System.Drawing.Size(335, 47);
@@ -3305,7 +3305,7 @@
             this.WholesaleTotalTextBox.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.WholesaleTotalTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.WholesaleTotalTextBox.Location = new System.Drawing.Point(150, 70);
-            this.WholesaleTotalTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.WholesaleTotalTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.WholesaleTotalTextBox.Name = "WholesaleTotalTextBox";
             this.WholesaleTotalTextBox.ReadOnly = true;
             this.WholesaleTotalTextBox.Size = new System.Drawing.Size(335, 47);
@@ -3318,7 +3318,7 @@
             this.ProfitTotalTextBox.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ProfitTotalTextBox.ForeColor = System.Drawing.Color.Red;
             this.ProfitTotalTextBox.Location = new System.Drawing.Point(150, 136);
-            this.ProfitTotalTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ProfitTotalTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ProfitTotalTextBox.Name = "ProfitTotalTextBox";
             this.ProfitTotalTextBox.ReadOnly = true;
             this.ProfitTotalTextBox.Size = new System.Drawing.Size(335, 47);
@@ -3341,7 +3341,7 @@
             // 
             this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.SlipNumberTextBox.Location = new System.Drawing.Point(918, 181);
-            this.SlipNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SlipNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.SlipNumberTextBox.Name = "SlipNumberTextBox";
             this.SlipNumberTextBox.ReadOnly = true;
             this.SlipNumberTextBox.Size = new System.Drawing.Size(210, 34);
@@ -3364,7 +3364,7 @@
             // 
             this.GradeNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.GradeNumberTextBox.Location = new System.Drawing.Point(1266, 181);
-            this.GradeNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GradeNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.GradeNumberTextBox.Name = "GradeNumberTextBox";
             this.GradeNumberTextBox.ReadOnly = true;
             this.GradeNumberTextBox.Size = new System.Drawing.Size(202, 34);
@@ -3388,7 +3388,7 @@
             // 
             this.ManagementNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ManagementNumberTextBox.Location = new System.Drawing.Point(1620, 111);
-            this.ManagementNumberTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ManagementNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ManagementNumberTextBox.Name = "ManagementNumberTextBox";
             this.ManagementNumberTextBox.Size = new System.Drawing.Size(172, 34);
             this.ManagementNumberTextBox.TabIndex = 4;
@@ -3404,7 +3404,7 @@
             // 
             this.BirthdayTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.BirthdayTextBox.Location = new System.Drawing.Point(1270, 102);
-            this.BirthdayTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BirthdayTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.BirthdayTextBox.Name = "BirthdayTextBox";
             this.BirthdayTextBox.ReadOnly = true;
             this.BirthdayTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -3427,7 +3427,7 @@
             // 
             this.AssessmentDateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.AssessmentDateTextBox.Location = new System.Drawing.Point(565, 181);
-            this.AssessmentDateTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AssessmentDateTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AssessmentDateTextBox.Name = "AssessmentDateTextBox";
             this.AssessmentDateTextBox.ReadOnly = true;
             this.AssessmentDateTextBox.Size = new System.Drawing.Size(213, 34);
@@ -3438,7 +3438,7 @@
             this.DeliverySearchButton.BackColor = System.Drawing.Color.LightCyan;
             this.DeliverySearchButton.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.DeliverySearchButton.Location = new System.Drawing.Point(80, 64);
-            this.DeliverySearchButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DeliverySearchButton.Margin = new System.Windows.Forms.Padding(4);
             this.DeliverySearchButton.Name = "DeliverySearchButton";
             this.DeliverySearchButton.Size = new System.Drawing.Size(182, 57);
             this.DeliverySearchButton.TabIndex = 6;
@@ -3451,9 +3451,9 @@
             this.groupBox2.BackColor = System.Drawing.Color.OldLace;
             this.groupBox2.Controls.Add(this.DeliverySearchButton);
             this.groupBox2.Location = new System.Drawing.Point(1482, 91);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(326, 133);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
@@ -3487,7 +3487,7 @@
             this.Controls.Add(this.AddressOrClientStaffNameLabel);
             this.Controls.Add(this.NameOrCompanyNameLabel);
             this.Controls.Add(this.groupBox2);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RecordList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "RecordList";
