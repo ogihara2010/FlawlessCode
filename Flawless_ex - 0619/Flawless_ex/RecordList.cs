@@ -38,9 +38,6 @@ namespace Flawless_ex
         string Pass;
         int Control;
         string Data;
-        string Search1;
-        string Search2;
-        string Search3;
         bool screan = true;
         bool NameChange = false;                    //品名を変更したら true
         bool CarryOver;                      //次月持ち越しから画面遷移したとき

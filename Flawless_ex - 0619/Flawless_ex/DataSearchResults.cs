@@ -81,7 +81,7 @@ namespace Flawless_ex
         decimal amount111;
         decimal amount112;
         #endregion
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string search1, string search2, string search3, string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, string data, string pass, string document, int control, string antiqueNumber, string documentNumber)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string search1, string search2, string search3, string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, string data, string pass, string document, int control, string antiqueNumber, string documentNumber, string access_auth)
         {
             InitializeComponent();
             mainMenu = main;
@@ -118,11 +118,12 @@ namespace Flawless_ex
             this.Pass = pass;
             this.document = document;
             this.control = control;
+            this.access_auth = access_auth;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
             screan = false;
             this.Close();
             customerHistory.Show();
@@ -339,7 +340,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass);
+                CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
                 customerHistory.Show();
             }
         }

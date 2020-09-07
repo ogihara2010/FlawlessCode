@@ -33,18 +33,20 @@ namespace Flawless_ex
         string document;
         int control;
         string antiqueNumber;
-        public CustomerHistory(MainMenu main, int id, string data, string pass)
+        string access_auth;
+        public CustomerHistory(MainMenu main, int id, string data, string pass, string access_auth)
         {
             InitializeComponent();
             staff_id = id;
             mainMenu = main;
             this.data = data;
             this.Pass = pass;
+            this.access_auth = access_auth;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass);
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass, access_auth);
             screan = false;
             this.Close();
             customerHistorySelect.Show();
@@ -427,7 +429,7 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.Hide();
                     dataSearch.Show();
                 }
@@ -460,7 +462,7 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -716,7 +718,7 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -752,7 +754,7 @@ namespace Flawless_ex
                     amount1 = amt1;
 
                     //control = int.Parse(this.textBox8.Text);
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     screan = false;
                     this.Close();
                     dataSearch.Show();
@@ -786,7 +788,7 @@ namespace Flawless_ex
         {
             if (screan)
             {
-                CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass);
+                CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass, access_auth);
                 customerHistorySelect.Show();
             }
         }
