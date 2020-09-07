@@ -2750,7 +2750,15 @@ namespace Flawless_ex
                                 this.Close();
                                 screan = false;
                                 this.Close();
-                                search_Result.ShowDialog();
+                                search_Result.ShowDialog(); if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
                             }
                             #endregion
                             #region "未記入"
