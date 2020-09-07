@@ -220,6 +220,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -250,6 +251,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -274,6 +276,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -311,6 +314,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -335,6 +339,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -366,6 +371,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -390,6 +396,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -432,6 +439,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -456,6 +464,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -486,6 +495,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -510,6 +520,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -546,6 +557,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -570,6 +582,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -600,6 +613,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -624,6 +638,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -672,6 +687,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -696,6 +712,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -726,6 +743,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -750,6 +768,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -786,6 +805,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -810,6 +830,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -840,6 +861,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -864,6 +886,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -906,6 +929,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -930,6 +954,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -960,6 +985,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -984,6 +1010,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1020,6 +1047,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1044,6 +1072,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1074,6 +1103,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1098,6 +1128,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1152,6 +1183,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1176,6 +1208,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1206,6 +1239,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1230,6 +1264,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1266,6 +1301,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1289,6 +1325,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1319,6 +1356,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1342,6 +1380,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1384,6 +1423,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1408,6 +1448,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1438,6 +1479,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1462,6 +1504,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1498,6 +1541,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1521,6 +1565,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1552,6 +1597,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1575,6 +1621,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1623,6 +1670,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1646,6 +1694,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1676,6 +1725,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1699,6 +1749,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1735,6 +1786,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1758,6 +1810,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1788,6 +1841,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1811,6 +1865,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1853,6 +1908,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1876,6 +1932,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1906,6 +1963,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1930,6 +1988,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1966,6 +2025,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -1989,6 +2049,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -2019,6 +2080,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -2043,6 +2105,7 @@ namespace Flawless_ex
 
                                             conn.Close();
                                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                            this.Close();
                                             screan = false;
                                             if (statement.Visible == true)
                                             {
@@ -2096,6 +2159,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2120,6 +2184,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2150,6 +2215,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2174,6 +2240,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2210,6 +2277,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2233,6 +2301,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2263,6 +2332,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2287,6 +2357,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2329,6 +2400,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2352,6 +2424,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2382,6 +2455,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2405,6 +2479,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2441,6 +2516,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2464,6 +2540,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2494,6 +2571,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2517,6 +2595,7 @@ namespace Flawless_ex
 
                                         conn.Close();
                                         client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                        this.Close();
                                         screan = false;
                                         if (statement.Visible == true)
                                         {
@@ -2558,6 +2637,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2581,6 +2661,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2611,6 +2692,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2634,6 +2716,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2664,6 +2747,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                this.Close();
                                 screan = false;
                                 this.Close();
                                 search_Result.ShowDialog();
@@ -2715,6 +2799,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass); ;
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2739,6 +2824,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2767,8 +2853,8 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2793,6 +2879,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2827,8 +2914,8 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2853,6 +2940,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2883,6 +2971,7 @@ namespace Flawless_ex
                                     conn.Close();
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2907,6 +2996,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2947,8 +3037,8 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -2973,6 +3063,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3001,8 +3092,8 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3027,6 +3118,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3061,8 +3153,8 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3087,6 +3179,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3115,8 +3208,8 @@ namespace Flawless_ex
                                     adapter.Fill(dt);
 
                                     conn.Close();
-                                    conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3141,6 +3234,7 @@ namespace Flawless_ex
 
                                     conn.Close();
                                     client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                    this.Close();
                                     screan = false;
                                     if (statement.Visible == true)
                                     {
@@ -3181,6 +3275,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                this.Close();
                                 screan = false;
                                 if (statement.Visible == true)
                                 {
@@ -3205,6 +3300,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                this.Close();
                                 screan = false;
                                 if (statement.Visible == true)
                                 {
@@ -3231,8 +3327,8 @@ namespace Flawless_ex
                                 adapter.Fill(dt);
 
                                 conn.Close();
-                                conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                this.Close();
                                 screan = false;
                                 if (statement.Visible == true)
                                 {
@@ -3257,6 +3353,7 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                                this.Close();
                                 screan = false;
                                 if (statement.Visible == true)
                                 {
@@ -3287,6 +3384,7 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                            this.Close();
                             screan = false;
                             if (statement.Visible == true)
                             {
@@ -3311,6 +3409,7 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+                            this.Close();
                             screan = false;
                             if (statement.Visible == true)
                             {
