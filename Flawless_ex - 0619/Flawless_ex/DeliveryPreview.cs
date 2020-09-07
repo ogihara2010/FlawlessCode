@@ -37,7 +37,7 @@ namespace Flawless_ex
         string pass;
         int grade;
 
-        public DeliveryPreview(MainMenu mainMenu, int id, int type, string access_auth, string pass)
+        public DeliveryPreview(MainMenu mainMenu, int id, int type, int control, string access_auth, string pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
@@ -45,6 +45,7 @@ namespace Flawless_ex
             this.type = type;
             this.access_auth = access_auth;
             this.pass = pass;
+            this.control = control;
         }
 
         private void Button1_Click(object sender, EventArgs e)
