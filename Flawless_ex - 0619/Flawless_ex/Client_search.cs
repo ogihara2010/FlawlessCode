@@ -7,7 +7,7 @@ namespace Flawless_ex
 {
     public partial class client_search : Form
     {
-        //Statement statement;
+        Statement statement;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
         public int count = 0;//計算書/納品書の顧客選択用
@@ -26,11 +26,11 @@ namespace Flawless_ex
         string Pass;
         int grade;
 
-        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, string Access_auth, string pass)
+        public client_search(Statement statement, int id, int type, string staff_name, string address, decimal Total, string Access_auth, string pass)
         {
             InitializeComponent();
 
-            //this.statement = statement;
+            this.statement = statement;
             this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;

@@ -412,7 +412,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3,string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012, decimal amount10, decimal amount11, decimal amount12, decimal amount13, decimal amount14, decimal amount15, decimal amount16, decimal amount17, decimal amount18, decimal amount19, decimal amount110, decimal amount111, decimal amount112, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string antiqueNumber, string documentNumber, string address1)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3,string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012, decimal amount10, decimal amount11, decimal amount12, decimal amount13, decimal amount14, decimal amount15, decimal amount16, decimal amount17, decimal amount18, decimal amount19, decimal amount110, decimal amount111, decimal amount112, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string antiqueNumber, string documentNumber, string address1, int Grade)
         {
             InitializeComponent();
             staff_id = id;
@@ -425,6 +425,7 @@ namespace Flawless_ex
             this.document = document;
             this.control = control;
             this.data = data;
+            this.Grade = Grade;
             #region "買取販売履歴"
             this.search1 = search1;
             this.search2 = search2;
@@ -5515,7 +5516,7 @@ namespace Flawless_ex
                 }
             }*/
             #endregion
-            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, access_auth, pass);
 
             Properties.Settings.Default.Save();
             //this.Visible = true;
@@ -5724,7 +5725,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
+            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, access_auth, pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -13593,13 +13594,13 @@ namespace Flawless_ex
             if (screan && data == "S")
             {
                 document = documentNumberTextBox.Text;
-                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
                 dataSearchResults.Show();
             }
             else if (screan && data == "D")
             {
                 control = int.Parse(documentNumberTextBox2.Text);
-                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
                 dataSearchResults.Show();
             }
             else if (screan)
@@ -16720,7 +16721,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {            
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
             screan = false;
             this.Close();
             mainMenu.Hide();
@@ -17277,7 +17278,7 @@ namespace Flawless_ex
                 }}
                         else { }*/
             #endregion
-            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, access_auth, pass);
             Properties.Settings.Default.Save();
             //screan = false;
             //this.Close();
