@@ -14,9 +14,9 @@ namespace Flawless_ex
     {
         int a = 0;//大分類クリックカウント数（計算書）
         int b = 0;//大分類クリックカウント数（納品書）
-        int staff_id;
+        public int staff_id;
         int itemMainCategoryCode;
-        int type = 0;
+        public int type = 0;
         string path;
         decimal total;
         int Grade; 
@@ -303,8 +303,8 @@ namespace Flawless_ex
         string AntiqueLicence = "";
         #endregion
 
-        string client_staff_name;
-        string address;
+        public string client_staff_name;
+        public string address;
         string register_date;
         string remarks;
         string access_auth;
@@ -5516,7 +5516,7 @@ namespace Flawless_ex
                 }
             }*/
             #endregion
-            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, access_auth, pass);
+            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
 
             Properties.Settings.Default.Save();
             //this.Visible = true;
@@ -5725,7 +5725,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, access_auth, pass))
+            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -17278,7 +17278,7 @@ namespace Flawless_ex
                 }}
                         else { }*/
             #endregion
-            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, access_auth, pass);
+            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
             Properties.Settings.Default.Save();
             //screan = false;
             //this.Close();
