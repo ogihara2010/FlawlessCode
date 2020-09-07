@@ -5208,7 +5208,8 @@ namespace Flawless_ex
         #region "顧客選択メニュー（計算書）"
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            if (string.IsNullOrEmpty(sumTextBox.Text))
+            #region "コメントアウト"
+            /*if (string.IsNullOrEmpty(sumTextBox.Text))
             {
                 
             }
@@ -5494,9 +5495,10 @@ namespace Flawless_ex
                     }
 
                 }
-            }
+            }*/
+            #endregion
             number = 0;
-            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document))
+            using (client_search search2 = new client_search(mainMenu, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
             {
                 Properties.Settings.Default.Save();
                 //screan = false;
