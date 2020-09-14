@@ -7,19 +7,19 @@ namespace Flawless_ex
 {
     public partial class NextMonth : Form
     {
-        int staff_id;
+        public int staff_id;
         MainMenu mainMenu;
         Statement statement;
-        string staff_name;
-        int type;
-        string slipNumber;
-        int Grade;
+        public string staff_name;
+        public int type;
+        public string slipNumber;
+        public int Grade;
         DataTable dt = new DataTable();
-        string Pass;
+        public string Pass;
         TopMenu top;
-        string Access_auth;
-        int antique;
-        int id;
+        public string Access_auth;
+        public int antique;
+        public int id;
         bool NameChange;
         bool screan = true;
         bool CarryOver = true;

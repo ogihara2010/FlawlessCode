@@ -41,10 +41,10 @@
             // 
             this.button1.BackColor = System.Drawing.Color.LightCyan;
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(106, 1265);
-            this.button1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.button1.Location = new System.Drawing.Point(53, 632);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(448, 199);
+            this.button1.Size = new System.Drawing.Size(224, 100);
             this.button1.TabIndex = 0;
             this.button1.Text = "戻る";
             this.button1.UseVisualStyleBackColor = false;
@@ -54,10 +54,10 @@
             // 
             this.updateButton.BackColor = System.Drawing.Color.LightCyan;
             this.updateButton.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.updateButton.Location = new System.Drawing.Point(1567, 1265);
-            this.updateButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.updateButton.Location = new System.Drawing.Point(784, 632);
+            this.updateButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(515, 199);
+            this.updateButton.Size = new System.Drawing.Size(258, 100);
             this.updateButton.TabIndex = 2;
             this.updateButton.Text = "変更・削除";
             this.updateButton.UseVisualStyleBackColor = false;
@@ -67,10 +67,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(796, 47);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(398, 24);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(604, 93);
+            this.label1.Size = new System.Drawing.Size(308, 47);
             this.label1.TabIndex = 3;
             this.label1.Text = "検索結果一覧";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -101,31 +101,31 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(106, 188);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Location = new System.Drawing.Point(53, 94);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1976, 1028);
+            this.dataGridView1.Size = new System.Drawing.Size(988, 514);
             this.dataGridView1.TabIndex = 4;
             // 
             // ClientMaster_search
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(2157, 1529);
+            this.ClientSize = new System.Drawing.Size(1115, 753);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientMaster_search";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "顧客マスタメンテナンス検索";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_search_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_search_Load_1);

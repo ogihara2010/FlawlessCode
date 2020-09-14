@@ -40,7 +40,7 @@
             // return5
             // 
             this.return5.Location = new System.Drawing.Point(961, 629);
-            this.return5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.return5.Margin = new System.Windows.Forms.Padding(2);
             this.return5.Name = "return5";
             this.return5.Size = new System.Drawing.Size(74, 42);
             this.return5.TabIndex = 1;
@@ -88,14 +88,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1068, 659);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.return5);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Invoice";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "インボイス";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();

@@ -14,10 +14,10 @@ namespace Flawless_ex
     {
         TopMenu topMenu;
         MainMenu mainMenu;
-        int staff_id;
-        string data;
-        string Pass;
-        string Access_auth;
+        public int staff_id;
+        public string data;
+        public string Pass;
+        public string Access_auth;
         bool screan = true;
 
         public CustomerHistorySelect(MainMenu main, int id, string data, string pass, string access_auth)
@@ -36,6 +36,7 @@ namespace Flawless_ex
             CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, Access_auth);
             screan = false;
             this.Close();
+            this.data = customerHistory.data;
             customerHistory.Show();
         }
 
@@ -45,12 +46,16 @@ namespace Flawless_ex
             CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, Access_auth);
             screan = false;
             this.Close();
+            this.data = customerHistory.data;
             customerHistory.Show();
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            MainMenu mainMenu = new MainMenu(topMenu, staff_id, Pass, Access_auth);
+            screan = false;
             this.Close();
+            mainMenu.Show();
         }
 
         private void CustomerHistorySelect_FormClosed(object sender, FormClosedEventArgs e)

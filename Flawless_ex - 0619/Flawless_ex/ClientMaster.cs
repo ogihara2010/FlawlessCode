@@ -11,11 +11,11 @@ namespace Flawless_ex
         MasterMaintenanceMenu_BC masterMenu_BC;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
-        int staff_code;
-        string access_auth;
-        int type;
+        public int staff_code;
+        public string access_auth;
+        public int type;
         bool screan = true;
-        string Pass;
+        public string Pass;
 
         public ClientMaster(MasterMaintenanceMenu mster, int staff_code, string access_auth, string pass)
         {

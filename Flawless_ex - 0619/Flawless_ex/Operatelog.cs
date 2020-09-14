@@ -8,9 +8,9 @@ namespace Flawless_ex
     public partial class Operatelog : Form
     {
 
-        int staff_id;
-        string Access_auth;
-        string Pass;
+        public int staff_id;
+        public string Access_auth;
+        public string Pass;
 
         MainMenu mainMenu;
         DataTable dt = new DataTable();
@@ -293,7 +293,7 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select A.upd_date, B.staff_name, A.vat_rate from vat_m  A inner join staff_m  B ON (A.upd_name = B.staff_code);";
                 conn.Open();

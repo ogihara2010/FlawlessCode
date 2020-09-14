@@ -16,16 +16,16 @@ namespace Flawless_ex
     {
         RecordList RecordList;
         Statement Statement;
-        int Staff_id;
-        string Staff_Name;
-        int Type;
-        string SlipNumber;
-        int AntiqueNumber = 0;
-        int ID_Number = 0;
-        int Grade;
-        int invalid;
-        string Access_auth;
-        string Pass;
+        public int Staff_id;
+        public string Staff_Name;
+        public int Type;
+        public string SlipNumber;
+        public int AntiqueNumber = 0;
+        public int ID_Number = 0;
+        public int Grade;
+        public int invalid;
+        public string Access_auth;
+        public string Pass;
         bool NameChange;
         bool CarryOver;
         string PostalUpCode;

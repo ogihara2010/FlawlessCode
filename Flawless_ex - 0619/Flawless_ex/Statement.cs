@@ -17,9 +17,9 @@ namespace Flawless_ex
         public int staff_id;
         int itemMainCategoryCode;
         public int type = 0;
-        string path;
-        decimal total;
-        int Grade; 
+        public string path;
+        public decimal total;
+        public int Grade; 
         int AntiqueNumber;
         int ID_Number;
         bool screan = true;
@@ -31,18 +31,6 @@ namespace Flawless_ex
         string sql_str4;
         #endregion
         #region "買取販売履歴の引数"
-        string search1;
-        string search2;
-        string search3;
-        string search4;
-        string search5;
-        string search6;
-        string search7;
-        string search8;
-        string search9;
-        string search10;
-        string search11;
-        string search12;
         string name1;
         string phoneNumber1;
         string address1;
@@ -185,21 +173,6 @@ namespace Flawless_ex
         decimal subSum11;
         decimal subSum12;
         #endregion
-        #region "データ保持"
-        decimal amount10;
-        decimal amount11;
-        decimal amount12;
-        decimal amount13;
-        decimal amount14;
-        decimal amount15;
-        decimal amount16;
-        decimal amount17;
-        decimal amount18;
-        decimal amount19;
-        decimal amount110;
-        decimal amount111;
-        decimal amount112;
-        #endregion
         #endregion
         #region "納品書"
         #region "数量"
@@ -247,21 +220,6 @@ namespace Flawless_ex
         decimal subSum011;
         decimal subSum012;
         #endregion
-        #region "データ保持"
-        decimal amount00;
-        decimal amount01;
-        decimal amount02;
-        decimal amount03;
-        decimal amount04;
-        decimal amount05;
-        decimal amount06;
-        decimal amount07;
-        decimal amount08;
-        decimal amount09;
-        decimal amount010;
-        decimal amount011;
-        decimal amount012;
-        #endregion
         #region "税抜金額"
         decimal sub00;
         decimal sub01;
@@ -307,10 +265,10 @@ namespace Flawless_ex
         public string address;
         string register_date;
         string remarks;
-        string access_auth;
-        string document;
-        int control;
-        string data;
+        public string access_auth;
+        public string document;
+        public int control;
+        public string data;
         string item;
         string phone;
         string pass;
@@ -338,6 +296,7 @@ namespace Flawless_ex
         int number;     //伝票番号の数字五桁
 
         MainMenu mainMenu;
+        TopMenu topMenu;
 
         #region"DataTable"
         DataTable dt = new DataTable();//大分類
@@ -412,7 +371,7 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string search1, string search2, string search3,string search4, string search5, string search6, string search7, string search8, string search9, string search10, string search11, string search12, decimal amount00, decimal amount01, decimal amount02, decimal amount03, decimal amount04, decimal amount05, decimal amount06, decimal amount07, decimal amount08, decimal amount09, decimal amount010, decimal amount011, decimal amount012, decimal amount10, decimal amount11, decimal amount12, decimal amount13, decimal amount14, decimal amount15, decimal amount16, decimal amount17, decimal amount18, decimal amount19, decimal amount110, decimal amount111, decimal amount112, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string antiqueNumber, string documentNumber, string address1, int Grade)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string antiqueNumber, string documentNumber, string address1, int Grade)
         {
             InitializeComponent();
             staff_id = id;
@@ -427,18 +386,6 @@ namespace Flawless_ex
             this.data = data;
             this.Grade = Grade;
             #region "買取販売履歴"
-            this.search1 = search1;
-            this.search2 = search2;
-            this.search3 = search3;
-            this.search4 = search4;
-            this.search5 = search5;
-            this.search6 = search6;
-            this.search7 = search7;
-            this.search8 = search8;
-            this.search9 = search9;
-            this.search10 = search10;
-            this.search11 = search11;
-            this.search12 = search12;
             this.name1 = name1;
             this.phoneNumber1 = phoneNumber1;
             this.addresskana1 = addresskana1;
@@ -454,36 +401,6 @@ namespace Flawless_ex
             this.address1 = address1;
             #endregion
             this.pass = Pass;
-            #region "納品書の引数"
-            this.amount00 = amount00;
-            this.amount01 = amount01;
-            this.amount02 = amount02;
-            this.amount03 = amount03;
-            this.amount04 = amount04;
-            this.amount05 = amount05;
-            this.amount06 = amount06;
-            this.amount07 = amount07;
-            this.amount08 = amount08;
-            this.amount09 = amount09;
-            this.amount010 = amount010;
-            this.amount011 = amount011;
-            this.amount012 = amount012;
-            #endregion
-            #region "計算書の引数"
-            this.amount10 = amount10;
-            this.amount11 = amount11;
-            this.amount12 = amount12;
-            this.amount13 = amount13;
-            this.amount14 = amount14;
-            this.amount15 = amount15;
-            this.amount16 = amount16;
-            this.amount17 = amount17;
-            this.amount18 = amount18;
-            this.amount19 = amount19;
-            this.amount110 = amount110;
-            this.amount111 = amount111;
-            this.amount112 = amount112;
-            #endregion
         }
 
         private void Statement_Load(object sender, EventArgs e)
@@ -532,7 +449,7 @@ namespace Flawless_ex
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
-            string sql;                                                 //伝票番号・管理番号取得
+            string sql;                                                //伝票番号・管理番号取得
             sql = "select document_number from statement_data;";     //伝票番号の取得用
             cmd = new NpgsqlCommand(sql_str, conn);
 
@@ -2474,1248 +2391,6 @@ namespace Flawless_ex
                     #endregion
                 }
             }
-
-            #region "顧客選択から計算書戻ってきた時に"
-            if (amount10 != 0)
-            {
-                Properties.Settings.Default.Reload();
-                DataTable upddt = new DataTable();
-                string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                adapter.Fill(upddt);
-                DataRow dataRow2;
-                dataRow2 = upddt.Rows[0];
-                string date = dataRow2["registration_date"].ToString();
-                DataTable dt8 = new DataTable();
-                string str_sql_real = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "';";
-                adapter = new NpgsqlDataAdapter(str_sql_real, conn);
-                adapter.Fill(dt8);
-                int c = dt8.Rows.Count;
-                if (c >= 1)
-                {
-                    DataRow dataRow;
-                    dataRow = dt8.Rows[0];
-                    string totalweight = dataRow["totalweight"].ToString();
-                    string totalCount = dataRow["totalcount"].ToString();
-                    this.totalWeight.Text = totalweight;
-                    this.totalCount.Text = totalCount;
-                    #region "再度開く"
-                    DataTable dt9 = new DataTable();
-                    string str_sql_if2 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if2, conn);
-                    adapter.Fill(dt9);
-                    int d = dt9.Rows.Count;
-                    #endregion
-                    for (int i = 0; i <= (d - 1); i++)
-                    {
-                        #region "計算書1行目"
-                        if (i == 0)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode0 = (int)dataRow1["main_category_code"];
-                            int itemCode0 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str6 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str6, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox0.DataSource = dt16;
-                            mainCategoryComboBox0.DisplayMember = "main_category_name";
-                            mainCategoryComboBox0.ValueMember = "main_category_code";
-                            mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox0.SelectedValue = itemMainCategoryCode0;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str7 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str7, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox0.DataSource = dt17;
-                            itemComboBox0.DisplayMember = "item_name";
-                            itemComboBox0.ValueMember = "item_code";
-                            itemComboBox0.SelectedValue = itemCode0;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 1行目"
-                            this.subTotal.Text = dataRow1["subtotal"].ToString();
-                            subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
-                            this.sumTextBox.Text = dataRow1["total"].ToString();
-                            sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
-                            this.taxAmount.Text = dataRow1["tax_amount"].ToString();
-                            //taxAmount.Text = string.Format("{0:C}", decimal.Parse(taxAmount.Text, System.Globalization.NumberStyles.Number));
-                            this.weightTextBox0.Text = dataRow1["weight"].ToString();
-                            this.countTextBox0.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox0.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox0.Text = dataRow1["amount"].ToString();
-                            moneyTextBox0.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox0.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks0.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書2行目"
-                        else if (i == 1)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode1 = (int)dataRow1["main_category_code"];
-                            int itemCode1 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str8 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt161 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str8, conn);
-                            adapter.Fill(dt161);
-                            mainCategoryComboBox1.DataSource = dt161;
-                            mainCategoryComboBox1.DisplayMember = "main_category_name";
-                            mainCategoryComboBox1.ValueMember = "main_category_code";
-                            mainCategoryComboBox1.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox1.SelectedValue = itemMainCategoryCode1;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str9 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt171 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str9, conn);
-                            adapter.Fill(dt171);
-                            itemComboBox1.DataSource = dt171;
-                            itemComboBox1.DisplayMember = "item_name";
-                            itemComboBox1.ValueMember = "item_code";
-                            itemComboBox1.SelectedValue = itemCode1;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 2行目"
-                            this.weightTextBox1.Text = dataRow1["weight"].ToString();
-                            this.countTextBox1.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox1.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox1.Text = dataRow1["amount"].ToString();
-                            moneyTextBox1.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox1.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks1.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書3行目"
-                        else if (i == 2)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode2 = (int)dataRow1["main_category_code"];
-                            int itemCode2 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str10 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt162 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str10, conn);
-                            adapter.Fill(dt162);
-                            mainCategoryComboBox2.DataSource = dt162;
-                            mainCategoryComboBox2.DisplayMember = "main_category_name";
-                            mainCategoryComboBox2.ValueMember = "main_category_code";
-                            mainCategoryComboBox2.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox2.SelectedValue = itemMainCategoryCode2;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str11 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str11, conn);
-                            DataTable dt172 = new DataTable();
-                            adapter.Fill(dt172);
-                            itemComboBox2.DataSource = dt172;
-                            itemComboBox2.DisplayMember = "item_name";
-                            itemComboBox2.ValueMember = "item_code";
-                            itemComboBox2.SelectedValue = itemCode2;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 3行目"
-                            this.weightTextBox2.Text = dataRow1["weight"].ToString();
-                            this.countTextBox2.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox2.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox2.Text = dataRow1["amount"].ToString();
-                            moneyTextBox2.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox2.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks2.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書4行目"
-                        else if (i == 3)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode3 = (int)dataRow1["main_category_code"];
-                            int itemCode3 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str12 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str12, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox3.DataSource = dt16;
-                            mainCategoryComboBox3.DisplayMember = "main_category_name";
-                            mainCategoryComboBox3.ValueMember = "main_category_code";
-                            mainCategoryComboBox3.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox3.SelectedValue = itemMainCategoryCode3;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str13 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str13, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox3.DataSource = dt17;
-                            itemComboBox3.DisplayMember = "item_name";
-                            itemComboBox3.ValueMember = "item_code";
-                            itemComboBox3.SelectedValue = itemCode3;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 4行目"
-                            this.weightTextBox3.Text = dataRow1["weight"].ToString();
-                            this.countTextBox3.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox3.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox3.Text = dataRow1["amount"].ToString();
-                            moneyTextBox3.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox3.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks3.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書5行目"
-                        else if (i == 4)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode4 = (int)dataRow1["main_category_code"];
-                            int itemCode4 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str14 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str14, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox4.DataSource = dt16;
-                            mainCategoryComboBox4.DisplayMember = "main_category_name";
-                            mainCategoryComboBox4.ValueMember = "main_category_code";
-                            mainCategoryComboBox4.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox4.SelectedValue = itemMainCategoryCode4;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str15 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str15, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox4.DataSource = dt17;
-                            itemComboBox4.DisplayMember = "item_name";
-                            itemComboBox4.ValueMember = "item_code";
-                            itemComboBox4.SelectedValue = itemCode4;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 5行目"
-                            this.weightTextBox4.Text = dataRow1["weight"].ToString();
-                            this.countTextBox4.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox4.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox4.Text = dataRow1["amount"].ToString();
-                            moneyTextBox4.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox4.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks4.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書6行目"
-                        else if (i == 5)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode5 = (int)dataRow1["main_category_code"];
-                            int itemCode5 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str16 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str16, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox5.DataSource = dt16;
-                            mainCategoryComboBox5.DisplayMember = "main_category_name";
-                            mainCategoryComboBox5.ValueMember = "main_category_code";
-                            mainCategoryComboBox5.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox5.SelectedValue = itemMainCategoryCode5;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str17 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str17, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox5.DataSource = dt17;
-                            itemComboBox5.DisplayMember = "item_name";
-                            itemComboBox5.ValueMember = "item_code";
-                            itemComboBox5.SelectedValue = itemCode5;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 6行目"
-                            this.weightTextBox5.Text = dataRow1["weight"].ToString();
-                            this.countTextBox5.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox5.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox5.Text = dataRow1["amount"].ToString();
-                            moneyTextBox5.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox5.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks5.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書7行目"
-                        else if (i == 6)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode6 = (int)dataRow1["main_category_code"];
-                            int itemCode6 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str18 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str18, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox6.DataSource = dt16;
-                            mainCategoryComboBox6.DisplayMember = "main_category_name";
-                            mainCategoryComboBox6.ValueMember = "main_category_code";
-                            mainCategoryComboBox6.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox6.SelectedValue = itemMainCategoryCode6;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str19 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str19, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox6.DataSource = dt17;
-                            itemComboBox6.DisplayMember = "item_name";
-                            itemComboBox6.ValueMember = "item_code";
-                            itemComboBox6.SelectedValue = itemCode6;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 7行目"
-                            this.weightTextBox6.Text = dataRow1["weight"].ToString();
-                            this.countTextBox6.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox6.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox6.Text = dataRow1["amount"].ToString();
-                            moneyTextBox6.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox6.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks6.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書8行目"
-                        else if (i == 7)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode7 = (int)dataRow1["main_category_code"];
-                            int itemCode7 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str20 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str20, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox7.DataSource = dt16;
-                            mainCategoryComboBox7.DisplayMember = "main_category_name";
-                            mainCategoryComboBox7.ValueMember = "main_category_code";
-                            mainCategoryComboBox7.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox7.SelectedValue = itemMainCategoryCode7;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str21 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str21, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox7.DataSource = dt17;
-                            itemComboBox7.DisplayMember = "item_name";
-                            itemComboBox7.ValueMember = "item_code";
-                            itemComboBox7.SelectedValue = itemCode7;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 8行目"
-                            this.weightTextBox7.Text = dataRow1["weight"].ToString();
-                            this.countTextBox7.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox7.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox7.Text = dataRow1["amount"].ToString();
-                            moneyTextBox7.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox7.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks7.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書9行目"
-                        else if (i == 8)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode8 = (int)dataRow1["main_category_code"];
-                            int itemCode8 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str22 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str22, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox8.DataSource = dt16;
-                            mainCategoryComboBox8.DisplayMember = "main_category_name";
-                            mainCategoryComboBox8.ValueMember = "main_category_code";
-                            mainCategoryComboBox8.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox8.SelectedValue = itemMainCategoryCode8;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str23 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str23, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox8.DataSource = dt17;
-                            itemComboBox8.DisplayMember = "item_name";
-                            itemComboBox8.ValueMember = "item_code";
-                            itemComboBox8.SelectedValue = itemCode8;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 9行目"
-                            this.weightTextBox8.Text = dataRow1["weight"].ToString();
-                            this.countTextBox8.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox8.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox8.Text = dataRow1["amount"].ToString();
-                            moneyTextBox8.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox8.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks8.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書10行目"
-                        else if (i == 9)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode9 = (int)dataRow1["main_category_code"];
-                            int itemCode9 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str24 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str24, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox9.DataSource = dt16;
-                            mainCategoryComboBox9.DisplayMember = "main_category_name";
-                            mainCategoryComboBox9.ValueMember = "main_category_code";
-                            mainCategoryComboBox9.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox9.SelectedValue = itemMainCategoryCode9;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str25 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str25, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox9.DataSource = dt17;
-                            itemComboBox9.DisplayMember = "item_name";
-                            itemComboBox9.ValueMember = "item_code";
-                            itemComboBox9.SelectedValue = itemCode9;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 10行目"
-                            this.weightTextBox9.Text = dataRow1["weight"].ToString();
-                            this.countTextBox9.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox9.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox9.Text = dataRow1["amount"].ToString();
-                            moneyTextBox9.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox9.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks9.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書11行目"
-                        else if (i == 10)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode10 = (int)dataRow1["main_category_code"];
-                            int itemCode10 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str26 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str26, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox10.DataSource = dt16;
-                            mainCategoryComboBox10.DisplayMember = "main_category_name";
-                            mainCategoryComboBox10.ValueMember = "main_category_code";
-                            mainCategoryComboBox10.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox10.SelectedValue = itemMainCategoryCode10;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str27 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str27, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox10.DataSource = dt17;
-                            itemComboBox10.DisplayMember = "item_name";
-                            itemComboBox10.ValueMember = "item_code";
-                            itemComboBox10.SelectedValue = itemCode10;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 11行目"
-                            this.weightTextBox10.Text = dataRow1["weight"].ToString();
-                            this.countTextBox10.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox10.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox10.Text = dataRow1["amount"].ToString();
-                            moneyTextBox10.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox10.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks10.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書12行目"
-                        else if (i == 11)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode11 = (int)dataRow1["main_category_code"];
-                            int itemCode11 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str28 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str28, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox11.DataSource = dt16;
-                            mainCategoryComboBox11.DisplayMember = "main_category_name";
-                            mainCategoryComboBox11.ValueMember = "main_category_code";
-                            mainCategoryComboBox11.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox11.SelectedValue = itemMainCategoryCode11;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str29 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str29, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox11.DataSource = dt17;
-                            itemComboBox11.DisplayMember = "item_name";
-                            itemComboBox11.ValueMember = "item_code";
-                            itemComboBox11.SelectedValue = itemCode11;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 12行目"
-                            this.weightTextBox11.Text = dataRow1["weight"].ToString();
-                            this.countTextBox11.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox11.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox11.Text = dataRow1["amount"].ToString();
-                            moneyTextBox11.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox11.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks11.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "計算書13行目"
-                        else if (i == 12)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and registration_date = '" + date + "' and record_number = " + (i + 1) + ";";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode12 = (int)dataRow1["main_category_code"];
-                            int itemCode12 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str30 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str30, conn);
-                            adapter.Fill(dt16);
-                            mainCategoryComboBox12.DataSource = dt16;
-                            mainCategoryComboBox12.DisplayMember = "main_category_name";
-                            mainCategoryComboBox12.ValueMember = "main_category_code";
-                            mainCategoryComboBox12.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox12.SelectedValue = itemMainCategoryCode12;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str31 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str31, conn);
-                            adapter.Fill(dt17);
-                            itemComboBox12.DataSource = dt17;
-                            itemComboBox12.DisplayMember = "item_name";
-                            itemComboBox12.ValueMember = "item_code";
-                            itemComboBox12.SelectedValue = itemCode12;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 13行目"
-                            this.weightTextBox12.Text = dataRow1["weight"].ToString();
-                            this.countTextBox12.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox12.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox12.Text = dataRow1["amount"].ToString();
-                            moneyTextBox12.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox12.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks12.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                    }
-
-                }
-            }
-            #endregion
-            #region "顧客選択から納品書に戻ってきた時"
-            if (control != 0 && amount00 != 0)
-            {
-                DataTable upddt = new DataTable();
-                string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                adapter.Fill(upddt);
-                DataRow dataRow2;
-                dataRow2 = upddt.Rows[0];
-                string date = dataRow2["upd_date"].ToString();
-                DataTable dt8 = new DataTable();
-                string str_sql_if2= "select * from delivery_calc_if where control_number = " + control + "and upd_date = '" + date + "';";
-                adapter = new NpgsqlDataAdapter(str_sql_if2, conn);
-                adapter.Fill(dt8);
-                int c = dt8.Rows.Count;
-                if (c >= 1)
-                {
-                    for (int i = 0; i <= (c - 1); i++)
-                    {
-                        #region "納品書1行目"
-                        if (i == 0)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control  + " and record_number = " + (i + 1) + "and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode0 = (int)dataRow1["main_category_m"];
-                            int itemCode0 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str6 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str6, conn);
-                            adapter.Fill(dt18);
-                            mainCategoryComboBox00.DataSource = dt18;
-                            mainCategoryComboBox00.DisplayMember = "main_category_name";
-                            mainCategoryComboBox00.ValueMember = "main_category_code";
-                            mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox00.SelectedValue = itemMainCategoryCode0;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str7 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str7, conn);
-                            adapter.Fill(dt19);
-                            itemComboBox00.DataSource = dt19;
-                            itemComboBox00.DisplayMember = "item_name";
-                            itemComboBox00.ValueMember = "item_code";
-                            itemComboBox00.SelectedValue = itemCode0;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 1行目"
-                            this.weightTextBox00.Text = dataRow1["weight"].ToString();
-                            this.countTextBox00.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox00.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox00.Text = dataRow1["amount"].ToString();
-                            moneyTextBox00.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox00.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks00.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書2行目"
-                        else if (i == 1)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode1 = (int)dataRow1["main_category_m"];
-                            int itemCode1 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str8 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt181 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str8, conn);
-                            adapter.Fill(dt181);
-                            mainCategoryComboBox01.DataSource = dt181;
-                            mainCategoryComboBox01.DisplayMember = "main_category_name";
-                            mainCategoryComboBox01.ValueMember = "main_category_code";
-                            mainCategoryComboBox01.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox01.SelectedValue = itemMainCategoryCode1;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str9 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt191 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str9, conn);
-                            adapter.Fill(dt191);
-                            itemComboBox01.DataSource = dt191;
-                            itemComboBox01.DisplayMember = "item_name";
-                            itemComboBox01.ValueMember = "item_code";
-                            itemComboBox01.SelectedValue = itemCode1;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 2行目"
-                            this.weightTextBox01.Text = dataRow1["weight"].ToString();
-                            this.countTextBox01.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox01.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox01.Text = dataRow1["amount"].ToString();
-                            moneyTextBox01.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox01.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks01.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書3行目"
-                        else if (i == 2)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode2 = (int)dataRow1["main_category_m"];
-                            int itemCode2 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str10 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt182 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str10, conn);
-                            adapter.Fill(dt182);
-                            mainCategoryComboBox02.DataSource = dt182;
-                            mainCategoryComboBox02.DisplayMember = "main_category_name";
-                            mainCategoryComboBox02.ValueMember = "main_category_code";
-                            mainCategoryComboBox02.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox02.SelectedValue = itemMainCategoryCode2;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str11 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str11, conn);
-                            DataTable dt192 = new DataTable();
-                            adapter.Fill(dt192);
-                            itemComboBox02.DataSource = dt192;
-                            itemComboBox02.DisplayMember = "item_name";
-                            itemComboBox02.ValueMember = "item_code";
-                            itemComboBox02.SelectedValue = itemCode2;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 3行目"
-                            this.weightTextBox02.Text = dataRow1["weight"].ToString();
-                            this.countTextBox02.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox02.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox02.Text = dataRow1["amount"].ToString();
-                            moneyTextBox02.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox02.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks02.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書4行目"
-                        else if (i == 3)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode3 = (int)dataRow1["main_category_m"];
-                            int itemCode3 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str12 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str12, conn);
-                            DataTable dt183 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str12, conn);
-                            adapter.Fill(dt183);
-                            mainCategoryComboBox03.DataSource = dt183;
-                            mainCategoryComboBox03.DisplayMember = "main_category_name";
-                            mainCategoryComboBox03.ValueMember = "main_category_code";
-                            mainCategoryComboBox03.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox03.SelectedValue = itemMainCategoryCode3;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str13 = "select * from item_m where invalid = 0 order by main_category_code;";
-                            adapter = new NpgsqlDataAdapter(sql_str13, conn);
-                            DataTable dt193 = new DataTable();
-                            adapter.Fill(dt193);
-                            itemComboBox03.DataSource = dt193;
-                            itemComboBox03.DisplayMember = "item_name";
-                            itemComboBox03.ValueMember = "item_code";
-                            itemComboBox03.SelectedValue = itemCode3;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 4行目"
-                            this.weightTextBox03.Text = dataRow1["weight"].ToString();
-                            this.countTextBox03.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox03.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox03.Text = dataRow1["amount"].ToString();
-                            moneyTextBox03.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox03.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks03.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書5行目"
-                        else if (i == 4)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode4 = (int)dataRow1["main_category_m"];
-                            int itemCode4 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str14 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt184 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str14, conn);
-                            adapter.Fill(dt184);
-                            mainCategoryComboBox04.DataSource = dt184;
-                            mainCategoryComboBox04.DisplayMember = "main_category_name";
-                            mainCategoryComboBox04.ValueMember = "main_category_code";
-                            mainCategoryComboBox04.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox04.SelectedValue = itemMainCategoryCode4;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str15 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt194 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str15, conn);
-                            adapter.Fill(dt194);
-                            itemComboBox04.DataSource = dt194;
-                            itemComboBox04.DisplayMember = "item_name";
-                            itemComboBox04.ValueMember = "item_code";
-                            itemComboBox04.SelectedValue = itemCode4;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 5行目"
-                            this.weightTextBox04.Text = dataRow1["weight"].ToString();
-                            this.countTextBox04.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox04.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox04.Text = dataRow1["amount"].ToString();
-                            moneyTextBox04.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox04.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks04.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書6行目"
-                        else if (i == 5)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode5 = (int)dataRow1["main_category_m"];
-                            int itemCode5 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str16 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt185 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str16, conn);
-                            adapter.Fill(dt185);
-                            mainCategoryComboBox05.DataSource = dt185;
-                            mainCategoryComboBox05.DisplayMember = "main_category_name";
-                            mainCategoryComboBox05.ValueMember = "main_category_code";
-                            mainCategoryComboBox05.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox05.SelectedValue = itemMainCategoryCode5;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str17 = "select * from item_m where invalid = 0 order by main_category_code;";
-                            DataTable dt195 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str17, conn);
-                            adapter.Fill(dt195);
-                            itemComboBox05.DataSource = dt195;
-                            itemComboBox05.DisplayMember = "item_name";
-                            itemComboBox05.ValueMember = "item_code";
-                            itemComboBox05.SelectedValue = itemCode5;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 6行目"
-                            this.weightTextBox05.Text = dataRow1["weight"].ToString();
-                            this.countTextBox05.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox05.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox05.Text = dataRow1["amount"].ToString();
-                            moneyTextBox05.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox05.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks05.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書7行目"
-                        else if (i == 6)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode6 = (int)dataRow1["main_category_m"];
-                            int itemCode6 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str18 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt186 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str18, conn);
-                            adapter.Fill(dt186);
-                            mainCategoryComboBox06.DataSource = dt186;
-                            mainCategoryComboBox06.DisplayMember = "main_category_name";
-                            mainCategoryComboBox06.ValueMember = "main_category_code";
-                            mainCategoryComboBox06.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox06.SelectedValue = itemMainCategoryCode6;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str19 = "select * from item_m where invalid = 0 order by main_category_code;";
-                            DataTable dt196 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str19, conn);
-                            adapter.Fill(dt196);
-                            itemComboBox06.DataSource = dt196;
-                            itemComboBox06.DisplayMember = "item_name";
-                            itemComboBox06.ValueMember = "item_code";
-                            itemComboBox06.SelectedValue = itemCode6;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 7行目"
-                            this.weightTextBox06.Text = dataRow1["weight"].ToString();
-                            this.countTextBox06.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox06.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox06.Text = dataRow1["amount"].ToString();
-                            moneyTextBox06.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox06.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks06.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書8行目"
-                        else if (i == 7)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode7 = (int)dataRow1["main_category_m"];
-                            int itemCode7 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str20 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt187 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str20, conn);
-                            adapter.Fill(dt187);
-                            mainCategoryComboBox07.DataSource = dt187;
-                            mainCategoryComboBox07.DisplayMember = "main_category_name";
-                            mainCategoryComboBox07.ValueMember = "main_category_code";
-                            mainCategoryComboBox07.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox07.SelectedValue = itemMainCategoryCode7;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str21 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt197 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str21, conn);
-                            adapter.Fill(dt197);
-                            itemComboBox07.DataSource = dt197;
-                            itemComboBox07.DisplayMember = "item_name";
-                            itemComboBox07.ValueMember = "item_code";
-                            itemComboBox07.SelectedValue = itemCode7;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 8行目"
-                            this.weightTextBox07.Text = dataRow1["weight"].ToString();
-                            this.countTextBox07.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox07.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox07.Text = dataRow1["amount"].ToString();
-                            moneyTextBox07.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox07.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks07.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書9行目"
-                        else if (i == 8)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode8 = (int)dataRow1["main_category_m"];
-                            int itemCode8 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str22 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt188 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str22, conn);
-                            adapter.Fill(dt188);
-                            mainCategoryComboBox08.DataSource = dt188;
-                            mainCategoryComboBox08.DisplayMember = "main_category_name";
-                            mainCategoryComboBox08.ValueMember = "main_category_code";
-                            mainCategoryComboBox08.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox08.SelectedValue = itemMainCategoryCode8;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str23 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt198 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str23, conn);
-                            adapter.Fill(dt198);
-                            itemComboBox08.DataSource = dt198;
-                            itemComboBox08.DisplayMember = "item_name";
-                            itemComboBox08.ValueMember = "item_code";
-                            itemComboBox08.SelectedValue = itemCode8;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 9行目"
-                            this.weightTextBox08.Text = dataRow1["weight"].ToString();
-                            this.countTextBox08.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox08.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox08.Text = dataRow1["amount"].ToString();
-                            moneyTextBox08.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox08.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks08.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書10行目"
-                        else if (i == 9)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode9 = (int)dataRow1["main_category_m"];
-                            int itemCode9 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str24 = "select * from main_category_m where invalid = 0 order by main_category_code;";
-                            DataTable dt189 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str24, conn);
-                            adapter.Fill(dt189);
-                            mainCategoryComboBox09.DataSource = dt189;
-                            mainCategoryComboBox09.DisplayMember = "main_category_name";
-                            mainCategoryComboBox09.ValueMember = "main_category_code";
-                            mainCategoryComboBox09.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox09.SelectedValue = itemMainCategoryCode9;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str25 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt199 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str25, conn);
-                            adapter.Fill(dt199);
-                            itemComboBox09.DataSource = dt199;
-                            itemComboBox09.DisplayMember = "item_name";
-                            itemComboBox09.ValueMember = "item_code";
-                            itemComboBox09.SelectedValue = itemCode9;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 10行目"
-                            this.weightTextBox09.Text = dataRow1["weight"].ToString();
-                            this.countTextBox09.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox09.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox09.Text = dataRow1["amount"].ToString();
-                            moneyTextBox09.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox09.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks09.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書11行目"
-                        else if (i == 10)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode10 = (int)dataRow1["main_category_m"];
-                            int itemCode10 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str26 = "select * from main_category_m where invalid = 0 order by main_category_code ;";
-                            DataTable dt1810 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str26, conn);
-                            adapter.Fill(dt1810);
-                            mainCategoryComboBox010.DataSource = dt1810;
-                            mainCategoryComboBox010.DisplayMember = "main_category_name";
-                            mainCategoryComboBox010.ValueMember = "main_category_code";
-                            mainCategoryComboBox010.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox010.SelectedValue = itemMainCategoryCode10;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str27 = "select * from item_m where invalid = 0 order by main_category_code;";
-                            DataTable dt1910 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str27, conn);
-                            adapter.Fill(dt1910);
-                            itemComboBox010.DataSource = dt1910;
-                            itemComboBox010.DisplayMember = "item_name";
-                            itemComboBox010.ValueMember = "item_code";
-                            itemComboBox010.SelectedValue = itemCode10;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 11行目"
-                            this.weightTextBox010.Text = dataRow1["weight"].ToString();
-                            this.countTextBox010.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox010.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox010.Text = dataRow1["amount"].ToString();
-                            moneyTextBox010.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox010.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks010.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書12行目"
-                        else if (i == 11)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode11 = (int)dataRow1["main_category_m"];
-                            int itemCode11 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str28 = "select * from main_category_m where invalid = 0 order by main_category_code ;";
-                            DataTable dt1811 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str28, conn);
-                            adapter.Fill(dt1811);
-                            mainCategoryComboBox011.DataSource = dt1811;
-                            mainCategoryComboBox011.DisplayMember = "main_category_name";
-                            mainCategoryComboBox011.ValueMember = "main_category_code";
-                            mainCategoryComboBox011.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox011.SelectedValue = itemMainCategoryCode11;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str29 = "select * from item_m  where invalid = 0 order by main_category_code;";
-                            DataTable dt1911 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str29, conn);
-                            adapter.Fill(dt1911);
-                            itemComboBox011.DataSource = dt1911;
-                            itemComboBox011.DisplayMember = "item_name";
-                            itemComboBox011.ValueMember = "item_code";
-                            itemComboBox011.SelectedValue = itemCode11;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 12行目"
-                            this.weightTextBox011.Text = dataRow1["weight"].ToString();
-                            this.countTextBox011.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox011.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox011.Text = dataRow1["amount"].ToString();
-                            moneyTextBox011.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox011.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks011.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                        #region "納品書13行目"
-                        else if (i == 12)
-                        {
-                            DataTable dt10 = new DataTable();
-                            string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + (i + 1) + " and upd_date = '" + date + "';";
-                            adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                            adapter.Fill(dt10);
-                            DataRow dataRow1;
-                            dataRow1 = dt10.Rows[0];
-                            int itemMainCategoryCode12 = (int)dataRow1["main_category_m"];
-                            int itemCode12 = (int)dataRow1["item_code"];
-                            #region "コンボボックス"
-                            #region "大分類"
-                            string sql_str30 = "select * from main_category_m where invalid = 0 order by main_category_code ;";
-                            DataTable dt1812 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str30, conn);
-                            adapter.Fill(dt1812);
-                            mainCategoryComboBox012.DataSource = dt1812;
-                            mainCategoryComboBox012.DisplayMember = "main_category_name";
-                            mainCategoryComboBox012.ValueMember = "main_category_code";
-                            mainCategoryComboBox012.SelectedIndex = 0;//担当者ごとの初期値設定
-                            mainCategoryComboBox012.SelectedValue = itemMainCategoryCode12;
-                            #endregion
-                            #region "品名"
-                            //品名検索用
-                            string sql_str31 = "select * from item_m where invalid = 0 order by main_category_code;";
-                            DataTable dt1912 = new DataTable();
-                            adapter = new NpgsqlDataAdapter(sql_str31, conn);
-                            adapter.Fill(dt1912);
-                            itemComboBox012.DataSource = dt1912;
-                            itemComboBox012.DisplayMember = "item_name";
-                            itemComboBox012.ValueMember = "item_code";
-                            itemComboBox012.SelectedValue = itemCode12;
-                            #endregion
-                            #endregion
-                            #region "入力された項目 13行目"
-                            this.weightTextBox012.Text = dataRow1["weight"].ToString();
-                            this.countTextBox012.Text = dataRow1["count"].ToString();
-                            this.unitPriceTextBox012.Text = dataRow1["unit_price"].ToString();
-                            unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
-                            this.moneyTextBox012.Text = dataRow1["amount"].ToString();
-                            moneyTextBox012.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox012.Text, System.Globalization.NumberStyles.Number));
-                            this.remarks012.Text = dataRow1["remarks"].ToString();
-                            #endregion
-                        }
-                        #endregion
-                    }
-
-                }
-            }
-            #endregion
             if (subSum < 2000000)
             {
                 groupBox1.Hide();
@@ -3969,14 +2644,41 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            this.Close();
-            mainMenu.Show();
+            if (data == "S")
+            {
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
+                screan = false;
+                this.Close();
+                mainMenu.Hide();
+                dataSearchResults.Show();
+            }
+            else
+            {
+                MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
+                screan = false;
+                this.Close();
+                mainMenu.Show();
+            }
+            
         }
         //納品書戻る
         private void return2_Click(object sender, EventArgs e)
         {
-            this.Close();
-            mainMenu.Show();
+            if (data == "D")
+            {
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
+                screan = false;
+                this.Close();
+                mainMenu.Hide();
+                dataSearchResults.Show();
+            }
+            else
+            {
+                MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
+                screan = false;
+                this.Close();
+                mainMenu.Show();
+            }            
         }
 
         #region "計算書　大分類変更"
@@ -3988,7 +2690,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4005,26 +2707,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount10 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox0.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox0.DataSource = dt17;
-                itemComboBox0.DisplayMember = "item_name";
-                itemComboBox0.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode0 = (int)row["main_category_code"];
-                itemCode0 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "2行目"
@@ -4035,7 +2717,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox1.SelectedValue;
                 dt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4052,26 +2734,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount11 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox1.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox1.DataSource = dt17;
-                itemComboBox1.DisplayMember = "item_name";
-                itemComboBox1.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode1 = (int)row["main_category_code"];
-                itemCode1 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "3行目"
@@ -4082,7 +2744,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox2.SelectedValue;
                 dt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4099,26 +2761,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount12 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox2.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox2.DataSource = dt17;
-                itemComboBox2.DisplayMember = "item_name";
-                itemComboBox2.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode2 = (int)row["main_category_code"];
-                itemCode2 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "4行目"
@@ -4129,7 +2771,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox3.SelectedValue;
                 dt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4146,26 +2788,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount13 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox3.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox3.DataSource = dt17;
-                itemComboBox3.DisplayMember = "item_name";
-                itemComboBox3.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode3 = (int)row["main_category_code"];
-                itemCode3 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "5行目"
@@ -4176,7 +2798,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox4.SelectedValue;
                 dt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4193,26 +2815,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount14 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox4.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox4.DataSource = dt17;
-                itemComboBox4.DisplayMember = "item_name";
-                itemComboBox4.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode4 = (int)row["main_category_code"];
-                itemCode4 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "6行目"
@@ -4223,7 +2825,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox5.SelectedValue;
                 dt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4240,26 +2842,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount15 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox5.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox5.DataSource = dt17;
-                itemComboBox5.DisplayMember = "item_name";
-                itemComboBox5.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode5 = (int)row["main_category_code"];
-                itemCode5 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "7行目"
@@ -4270,7 +2852,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox6.SelectedValue;
                 dt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4287,26 +2869,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount16 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox6.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox6.DataSource = dt17;
-                itemComboBox6.DisplayMember = "item_name";
-                itemComboBox6.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode6 = (int)row["main_category_code"];
-                itemCode6 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "8行目"
@@ -4317,7 +2879,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox7.SelectedValue;
                 dt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4334,26 +2896,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount17 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox7.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox7.DataSource = dt17;
-                itemComboBox7.DisplayMember = "item_name";
-                itemComboBox7.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode7 = (int)row["main_category_code"];
-                itemCode7 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "9行目"
@@ -4364,7 +2906,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox8.SelectedValue;
                 dt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4381,26 +2923,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount18 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox8.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox8.DataSource = dt17;
-                itemComboBox8.DisplayMember = "item_name";
-                itemComboBox8.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode8 = (int)row["main_category_code"];
-                itemCode8 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "10行目"
@@ -4411,7 +2933,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox9.SelectedValue;
                 dt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4428,26 +2950,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount19 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox9.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox9.DataSource = dt17;
-                itemComboBox9.DisplayMember = "item_name";
-                itemComboBox9.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode9 = (int)row["main_category_code"];
-                itemCode9 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "11行目"
@@ -4458,7 +2960,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox10.SelectedValue;
                 dt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4475,26 +2977,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount110 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox10.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox10.DataSource = dt17;
-                itemComboBox10.DisplayMember = "item_name";
-                itemComboBox10.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode10 = (int)row["main_category_code"];
-                itemCode10 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "12行目"
@@ -4505,7 +2987,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox11.SelectedValue;
                 dt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4522,26 +3004,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (a > 1 && amount111 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox11.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox11.DataSource = dt17;
-                itemComboBox11.DisplayMember = "item_name";
-                itemComboBox11.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
-                mainCategoryCode11 = (int)row["main_category_code"];
-                itemCode11 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "13行目"
@@ -4552,7 +3014,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox12.SelectedValue;
                 dt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4564,26 +3026,6 @@ namespace Flawless_ex
                 itemComboBox12.ValueMember = "item_code";
 
                 DataRow row = dt211.Rows[0];
-                mainCategoryCode12 = (int)row["main_category_code"];
-                itemCode12 = (int)row["item_code"];
-
-                conn.Close();
-            }
-            else if (a > 1 && amount112 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox12.SelectedValue;
-                dt17.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt17);
-                itemComboBox12.DataSource = dt17;
-                itemComboBox12.DisplayMember = "item_name";
-                itemComboBox12.ValueMember = "item_code";
-
-                DataRow row = dt17.Rows[0];
                 mainCategoryCode12 = (int)row["main_category_code"];
                 itemCode12 = (int)row["item_code"];
 
@@ -4607,7 +3049,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox00.SelectedValue;
                 deliverydt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4624,26 +3066,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount00 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox00.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox00.DataSource = dt19;
-                itemComboBox00.DisplayMember = "item_name";
-                itemComboBox00.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode00 = (int)row["main_category_code"];
-                itemCode00 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "2行目"
@@ -4654,7 +3076,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox01.SelectedValue;
                 deliverydt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4666,26 +3088,6 @@ namespace Flawless_ex
                 itemComboBox01.ValueMember = "item_code";
 
                 DataRow row = deliverydt201.Rows[0];
-                mainCategoryCode01 = (int)row["main_category_code"];
-                itemCode01 = (int)row["item_code"];
-
-                conn.Close();
-            }
-            else if (b > 0 && amount01 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox01.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox01.DataSource = dt19;
-                itemComboBox01.DisplayMember = "item_name";
-                itemComboBox01.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
                 mainCategoryCode01 = (int)row["main_category_code"];
                 itemCode01 = (int)row["item_code"];
 
@@ -4705,7 +3107,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox02.SelectedValue;
                 deliverydt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4722,26 +3124,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount02 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox02.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox02.DataSource = dt19;
-                itemComboBox02.DisplayMember = "item_name";
-                itemComboBox02.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode02 = (int)row["main_category_code"];
-                itemCode02 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "4行目"
@@ -4752,7 +3134,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox03.SelectedValue;
                 deliverydt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4769,26 +3151,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount03 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox03.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox03.DataSource = dt19;
-                itemComboBox03.DisplayMember = "item_name";
-                itemComboBox03.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode03 = (int)row["main_category_code"];
-                itemCode03 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "5行目"
@@ -4799,7 +3161,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox04.SelectedValue;
                 deliverydt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4816,26 +3178,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount04 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox04.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox04.DataSource = dt19;
-                itemComboBox04.DisplayMember = "item_name";
-                itemComboBox04.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode04 = (int)row["main_category_code"];
-                itemCode04 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "6行目"
@@ -4846,7 +3188,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox05.SelectedValue;
                 deliverydt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4863,26 +3205,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount05 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox05.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox05.DataSource = dt19;
-                itemComboBox05.DisplayMember = "item_name";
-                itemComboBox05.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode05 = (int)row["main_category_code"];
-                itemCode05 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "7行目"
@@ -4893,7 +3215,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox06.SelectedValue;
                 deliverydt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4910,26 +3232,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount06 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox06.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox06.DataSource = dt19;
-                itemComboBox06.DisplayMember = "item_name";
-                itemComboBox06.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode06 = (int)row["main_category_code"];
-                itemCode06 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "8行目"
@@ -4940,7 +3242,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox07.SelectedValue;
                 deliverydt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -4957,26 +3259,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount07 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox07.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox07.DataSource = dt19;
-                itemComboBox07.DisplayMember = "item_name";
-                itemComboBox07.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode07 = (int)row["main_category_code"];
-                itemCode07 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "9行目"
@@ -4987,7 +3269,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox08.SelectedValue;
                 deliverydt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -5004,26 +3286,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount08 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox08.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox08.DataSource = dt19;
-                itemComboBox08.DisplayMember = "item_name";
-                itemComboBox08.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode08 = (int)row["main_category_code"];
-                itemCode08 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "10行目"
@@ -5034,7 +3296,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox09.SelectedValue;
                 deliverydt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -5051,26 +3313,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount09 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox09.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox09.DataSource = dt19;
-                itemComboBox09.DisplayMember = "item_name";
-                itemComboBox09.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode09 = (int)row["main_category_code"];
-                itemCode09 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "11行目"
@@ -5081,7 +3323,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox010.SelectedValue;
                 deliverydt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -5098,26 +3340,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount010 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox010.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox010.DataSource = dt19;
-                itemComboBox010.DisplayMember = "item_name";
-                itemComboBox010.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode010 = (int)row["main_category_code"];
-                itemCode010 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "12行目"
@@ -5128,7 +3350,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox011.SelectedValue;
                 deliverydt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -5145,26 +3367,6 @@ namespace Flawless_ex
 
                 conn.Close();
             }
-            else if (b > 0 && amount011 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox011.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox011.DataSource = dt19;
-                itemComboBox011.DisplayMember = "item_name";
-                itemComboBox011.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
-                mainCategoryCode011 = (int)row["main_category_code"];
-                itemCode011 = (int)row["item_code"];
-
-                conn.Close();
-            }
         }
         #endregion
         #region "13行目"
@@ -5175,7 +3377,7 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
                 deliverydt212.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 conn.Open();
                 //品名検索用
@@ -5187,26 +3389,6 @@ namespace Flawless_ex
                 itemComboBox012.ValueMember = "item_code";
 
                 DataRow row = deliverydt212.Rows[0];
-                mainCategoryCode012 = (int)row["main_category_code"];
-                itemCode012 = (int)row["item_code"];
-
-                conn.Close();
-            }
-            else if (b > 0 && amount012 != 0)
-            {
-                int codeNum = (int)mainCategoryComboBox012.SelectedValue;
-                dt19.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
-                //品名検索用
-                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-                adapter = new NpgsqlDataAdapter(sql_str3, conn);
-                adapter.Fill(dt19);
-                itemComboBox012.DataSource = dt19;
-                itemComboBox012.DisplayMember = "item_name";
-                itemComboBox012.ValueMember = "item_code";
-
-                DataRow row = dt19.Rows[0];
                 mainCategoryCode012 = (int)row["main_category_code"];
                 itemCode012 = (int)row["item_code"];
 
@@ -5227,299 +3409,9 @@ namespace Flawless_ex
         #region "顧客選択メニュー（計算書）"
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
-            #region "コメントアウト"
-            /*if (string.IsNullOrEmpty(sumTextBox.Text))
-            {
-                
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(moneyTextBox0.Text) || amount10 != 0)
-                {
-                    DialogResult result = MessageBox.Show("データを保持しますか?", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (result == DialogResult.Yes)
-                    {
-                        #region "データ一時置き場"
-                        string DocumentNumber = documentNumberTextBox.Text;
-                        decimal TotalWeight = decimal.Parse(this.totalWeight.Text);
-                        decimal SubTotal = Math.Round(subSum, MidpointRounding.AwayFromZero);
-                        total = Math.Round(subSum, MidpointRounding.AwayFromZero);
-                        //string subTotal = this.subTotal.Text;
-                        decimal TotalCount = decimal.Parse(this.totalCount.Text);
-                        string TaxAmount = this.taxAmount.Text;
-                        DateTime date = DateTime.Now;
-                        string dat = date.ToString("yyyy/MM/dd HH:mm:ss");
-                        document = DocumentNumber;
-                        #region "1行目"
-                        int record = 1;     //行数
-                        int mainCategory = (int)mainCategoryComboBox0.SelectedValue;
-                        int item = (int)itemComboBox0.SelectedValue;
-                        string Detail = itemDetail0.Text;
-                        decimal Weight = decimal.Parse(weightTextBox0.Text);
-                        int Count = int.Parse(countTextBox0.Text);
-                        decimal UnitPrice = decimal.Parse(unitPriceTextBox0.Text);
-                        decimal amount = money0;
-                        string Remarks = remarks0.Text;
-                        amount10 = amount;
-                        #endregion
-                        DataTable dt2 = new DataTable();
-                        string sql_str2 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "','" + TaxAmount + "','" + TotalCount + "');";
-
-                        adapter = new NpgsqlDataAdapter(sql_str2, conn);
-                        adapter.Fill(dt2);
-                        #region "2行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox1.Text) && !(unitPriceTextBox1.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 2;
-                            mainCategory = (int)mainCategoryComboBox1.SelectedValue;
-                            item = (int)itemComboBox1.SelectedValue;
-                            Detail = itemDetail1.Text;
-                            Weight = decimal.Parse(weightTextBox1.Text);
-                            Count = int.Parse(countTextBox1.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox1.Text);
-                            amount = money1;
-                            Remarks = remarks1.Text;
-                            amount11 = amount;
-
-                            string sql_str4 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str4, conn);
-                            adapter.Fill(dt4);
-                        }
-                        #endregion
-                        #region "3行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox2.Text) && !(unitPriceTextBox2.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 3;
-                            mainCategory = (int)mainCategoryComboBox2.SelectedValue;
-                            item = (int)itemComboBox2.SelectedValue;
-                            Detail = itemDetail2.Text;
-                            Weight = decimal.Parse(weightTextBox2.Text);
-                            Count = int.Parse(countTextBox2.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox2.Text);
-                            amount = money2;
-                            Remarks = remarks2.Text;
-                            amount12 = amount;
-
-                            string sql_str5 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str5, conn);
-                            adapter.Fill(dt5);
-                        }
-                        #endregion
-                        #region "4行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox3.Text) && !(unitPriceTextBox3.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 4;
-                            mainCategory = (int)mainCategoryComboBox3.SelectedValue;
-                            item = (int)itemComboBox3.SelectedValue;
-                            Detail = itemDetail3.Text;
-                            Weight = decimal.Parse(weightTextBox3.Text);
-                            Count = int.Parse(countTextBox3.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox3.Text);
-                            amount = money3;
-                            Remarks = remarks3.Text;
-                            amount13 = amount;
-
-                            string sql_str6 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "' );";
-
-                            adapter = new NpgsqlDataAdapter(sql_str6, conn);
-                            adapter.Fill(dt6);
-                        }
-                        #endregion
-                        #region "5行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox4.Text) && !(unitPriceTextBox4.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 5;
-                            mainCategory = (int)mainCategoryComboBox4.SelectedValue;
-                            item = (int)itemComboBox4.SelectedValue;
-                            Detail = itemDetail4.Text;
-                            Weight = decimal.Parse(weightTextBox4.Text);
-                            Count = int.Parse(countTextBox4.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox4.Text);
-                            amount = money4;
-                            Remarks = remarks4.Text;
-                            amount14 = amount;
-
-                            string sql_str7 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str7, conn);
-                            adapter.Fill(dt7);
-                        }
-                        #endregion
-                        #region "6行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox5.Text) && !(unitPriceTextBox5.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 6;
-                            mainCategory = (int)mainCategoryComboBox5.SelectedValue;
-                            item = (int)itemComboBox5.SelectedValue;
-                            Detail = itemDetail5.Text;
-                            Weight = decimal.Parse(weightTextBox5.Text);
-                            Count = int.Parse(countTextBox5.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox5.Text);
-                            amount = money5;
-                            Remarks = remarks5.Text;
-                            amount15 = amount;
-
-                            string sql_str8 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "' );";
-
-                            adapter = new NpgsqlDataAdapter(sql_str8, conn);
-                            adapter.Fill(dt8);
-                        }
-                        #endregion
-                        #region "7行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox6.Text) && !(unitPriceTextBox6.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 7;
-                            mainCategory = (int)mainCategoryComboBox6.SelectedValue;
-                            item = (int)itemComboBox6.SelectedValue;
-                            Detail = itemDetail6.Text;
-                            Weight = decimal.Parse(weightTextBox6.Text);
-                            Count = int.Parse(countTextBox6.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox6.Text);
-                            amount = money6;
-                            Remarks = remarks6.Text;
-                            amount16 = amount;
-
-                            string sql_str9 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str9, conn);
-                            adapter.Fill(dt9);
-                        }
-                        #endregion
-                        #region "8行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox7.Text) && !(unitPriceTextBox7.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 8;
-                            mainCategory = (int)mainCategoryComboBox7.SelectedValue;
-                            item = (int)itemComboBox7.SelectedValue;
-                            Detail = itemDetail7.Text;
-                            Weight = decimal.Parse(weightTextBox7.Text);
-                            Count = int.Parse(countTextBox7.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox7.Text);
-                            amount = money7;
-                            Remarks = remarks7.Text;
-                            amount17 = amount;
-
-                            string sql_str10 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str10, conn);
-                            adapter.Fill(dt10);
-                        }
-                        #endregion
-                        #region "9行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox8.Text) && !(unitPriceTextBox8.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 9;
-                            mainCategory = (int)mainCategoryComboBox8.SelectedValue;
-                            item = (int)itemComboBox8.SelectedValue;
-                            Detail = itemDetail8.Text;
-                            Weight = decimal.Parse(weightTextBox8.Text);
-                            Count = int.Parse(countTextBox8.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox8.Text);
-                            amount = money8;
-                            Remarks = remarks8.Text;
-                            amount18 = amount;
-
-                            string sql_str11 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str11, conn);
-                            adapter.Fill(dt11);
-                        }
-                        #endregion
-                        #region "10行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox9.Text) && !(unitPriceTextBox9.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 10;
-                            mainCategory = (int)mainCategoryComboBox9.SelectedValue;
-                            item = (int)itemComboBox9.SelectedValue;
-                            Detail = itemDetail9.Text;
-                            Weight = decimal.Parse(weightTextBox9.Text);
-                            Count = int.Parse(countTextBox9.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox9.Text);
-                            amount = money9;
-                            Remarks = remarks9.Text;
-                            amount19 = amount;
-
-                            string sql_str12 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "','" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str12, conn);
-                            adapter.Fill(dt12);
-                        }
-                        #endregion
-                        #region "11行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox10.Text) && !(unitPriceTextBox10.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 11;
-                            mainCategory = (int)mainCategoryComboBox10.SelectedValue;
-                            item = (int)itemComboBox10.SelectedValue;
-                            Detail = itemDetail10.Text;
-                            Weight = decimal.Parse(weightTextBox10.Text);
-                            Count = int.Parse(countTextBox10.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox10.Text);
-                            amount = money10;
-                            Remarks = remarks10.Text;
-                            amount110 = amount;
-
-                            string sql_str13 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str13, conn);
-                            adapter.Fill(dt13);
-                        }
-                        #endregion
-                        #region "12行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox11.Text) && !(unitPriceTextBox11.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 12;
-                            mainCategory = (int)mainCategoryComboBox11.SelectedValue;
-                            item = (int)itemComboBox11.SelectedValue;
-                            Detail = itemDetail11.Text;
-                            Weight = decimal.Parse(weightTextBox11.Text);
-                            Count = int.Parse(countTextBox11.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox11.Text);
-                            amount = money11;
-                            Remarks = remarks11.Text;
-                            amount111 = amount;
-
-                            string sql_str14 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str14, conn);
-                            adapter.Fill(dt14);
-                        }
-                        #endregion
-                        #region "13行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox12.Text) && !(unitPriceTextBox12.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 13;
-                            mainCategory = (int)mainCategoryComboBox12.SelectedValue;
-                            item = (int)itemComboBox12.SelectedValue;
-                            Detail = itemDetail12.Text;
-                            Weight = decimal.Parse(weightTextBox12.Text);
-                            Count = int.Parse(countTextBox12.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox12.Text);
-                            amount = money12;
-                            Remarks = remarks12.Text;
-                            amount112 = amount;
-
-                            string sql_str15 = "Insert into statement_calc_data_if VALUES ( '" + mainCategory + "','" + item + "', '" + Weight + "' ,  '" + Count + "' , '" + UnitPrice + "', '" + amount + "' , '" + Remarks + "','" + DocumentNumber + "', '" + record + "','" + Detail + "','" + TotalWeight + "','" + SubTotal + "','" + total + "','" + dat + "' );";
-                            adapter = new NpgsqlDataAdapter(sql_str15, conn);
-                            adapter.Fill(dt15);
-                        }
-                        #endregion
-                        #endregion
-                    }
-                    else
-                    {
-                        
-                    }
-
-                }
-            }*/
-            #endregion
-            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
-
+            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, document, access_auth, pass);
+            this.data = search2.data;
             Properties.Settings.Default.Save();
-            //this.Visible = true;
             search2.ShowDialog();
             #region "これから選択する場合"
             if (count != 0)
@@ -5547,7 +3439,7 @@ namespace Flawless_ex
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
-                    registerDateTextBox2.Text = antique_license;              //古物商許可証
+                    antiqueLicenceTextBox.Text = antique_license;              //古物商許可証
                     shopNameTextBox.Text = shopName;                    //店舗名
                     clientNameTextBox.Text = Staff_name;                //担当名
                     registerDateTextBox.Text = register_date;           //登録日
@@ -5712,10 +3604,6 @@ namespace Flawless_ex
                 }
             }
             #endregion
-
-            //Properties.Settings.Default.Upgrade();
-
-            //this.Show();             
         }
         #endregion
         #region "顧客選択メニュー（納品書）"
@@ -5725,7 +3613,7 @@ namespace Flawless_ex
             {
 
             }
-            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass))
+            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, document, access_auth, pass))
             {
                 this.Hide();
                 search2.ShowDialog();
@@ -6967,19 +4855,12 @@ namespace Flawless_ex
         #region "1行目"
         private void unitPriceTextBox0_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
 
             }
             else
             {
-                if (string.IsNullOrEmpty(typeTextBox.Text))
-                {
-                    MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    unitPriceTextBox0.Text = "";
-                    unitPriceTextBox0.ReadOnly = true;
-                    return;
-                }
                 if (unitPriceTextBox0.Text.ToString() == "単価 -> 重量 or 数量")
                 {
                     unitPriceTextBox0.Text = "";
@@ -6992,9 +4873,9 @@ namespace Flawless_ex
         #region "2行目"
         private void unitPriceTextBox1_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox1.ReadOnly = false;
             }
             else
             {
@@ -7013,9 +4894,9 @@ namespace Flawless_ex
         #region "3行目"
         private void unitPriceTextBox2_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox2.ReadOnly = false;
             }
             else
             {
@@ -7033,12 +4914,12 @@ namespace Flawless_ex
         #region "4行目"
         private void unitPriceTextBox3_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox3.ReadOnly = false;
             }
             else
-            {
+            { 
                 if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox2.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox2.Text, @"^[a-zA-Z]+$"))
                 {
 
@@ -7053,9 +4934,9 @@ namespace Flawless_ex
         #region "5行目"
         private void unitPriceTextBox4_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox4.ReadOnly = false;
             }
             else
             {
@@ -7073,9 +4954,9 @@ namespace Flawless_ex
         #region "6行目"
         private void unitPriceTextBox5_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox5.ReadOnly = false;
             }
             else
             {
@@ -7093,9 +4974,9 @@ namespace Flawless_ex
         #region "7行目"
         private void unitPriceTextBox6_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox6.ReadOnly = false;
             }
             else
             {
@@ -7113,9 +4994,9 @@ namespace Flawless_ex
         #region "8行目"
         private void unitPriceTextBox7_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox7.ReadOnly = false;
             }
             else
             {
@@ -7133,9 +5014,9 @@ namespace Flawless_ex
         #region "9行目"
         private void unitPriceTextBox8_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox8.ReadOnly = false;
             }
             else
             {
@@ -7153,9 +5034,9 @@ namespace Flawless_ex
         #region "10行目"
         private void unitPriceTextBox9_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox9.ReadOnly = false;
             }
             else
             {
@@ -7173,9 +5054,9 @@ namespace Flawless_ex
         #region "11行目"
         private void unitPriceTextBox10_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox10.ReadOnly = false;
             }
             else
             {
@@ -7193,9 +5074,9 @@ namespace Flawless_ex
         #region "12行目"
         private void unitPriceTextBox11_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox11.ReadOnly = false;
             }
             else
             {
@@ -7213,9 +5094,9 @@ namespace Flawless_ex
         #region "13行目"
         private void unitPriceTextBox12_Enter(object sender, EventArgs e)
         {
-            if (data == "S")
+            if (data == "S" || Grade != 0)
             {
-
+                unitPriceTextBox12.ReadOnly = false;
             }
             else
             {
@@ -7237,10 +5118,33 @@ namespace Flawless_ex
         #region "1行目"
         private void unitPriceTextBox0_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力画面"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox1.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox0.Text))
+                {
+                    unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox1.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox0.Text) && !(countTextBox0.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox0.Text) * decimal.Parse(unitPriceTextBox0.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money0 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox0.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox0.ReadOnly = true;
+                    }
+                    else if (!(weightTextBox0.Text == "0") && !string.IsNullOrEmpty(countTextBox0.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox0.Text) * decimal.Parse(unitPriceTextBox0.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money0 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox0.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox0.ReadOnly = true;
+                    }
+                    else { }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox0.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox0.Text, @"^[a-zA-Z]+$"))
             {
                 MessageBox.Show("正しく入力して下さい。");
@@ -7294,10 +5198,36 @@ namespace Flawless_ex
         #region "2行目"
         private void unitPriceTextBox1_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox2.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox1.Text))
+                {
+                    unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox2.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox1.Text) && !(countTextBox1.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox1.Text) * decimal.Parse(unitPriceTextBox1.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money1 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox1.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox1.ReadOnly = true;
+                        money1 = sub;
+                    }
+                    else if (!(weightTextBox1.Text == "0") && !string.IsNullOrEmpty(countTextBox1.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox1.Text) * decimal.Parse(unitPriceTextBox1.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money1 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox1.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox1.ReadOnly = true;
+                        money1 = sub;
+                    }
+                    else { }
+
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox0.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox0.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7348,10 +5278,35 @@ namespace Flawless_ex
         #region "3行目"
         private void unitPriceTextBox2_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox3.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox2.Text))
+                {
+                    unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox3.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox2.Text) && !(countTextBox2.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox2.Text) * decimal.Parse(unitPriceTextBox2.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money2 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox2.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox2.ReadOnly = true;
+                        money2 = sub;
+                    }
+                    else if (!(weightTextBox2.Text == "0") && !string.IsNullOrEmpty(countTextBox2.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox2.Text) * decimal.Parse(unitPriceTextBox2.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money2 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox2.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox2.ReadOnly = true;
+                        money2 = sub;
+                    }
+                    else { }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox1.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox1.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7402,10 +5357,35 @@ namespace Flawless_ex
         #region "4行目"
         private void unitPriceTextBox3_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox4.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox3.Text))
+                {
+                    unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox4.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox3.Text) && !(countTextBox3.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox3.Text) * decimal.Parse(unitPriceTextBox03.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money3 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox3.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox3.ReadOnly = true;
+                        money3 = sub;
+                    }
+                    else if (!(weightTextBox3.Text == "0") && !string.IsNullOrEmpty(countTextBox3.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox3.Text) * decimal.Parse(unitPriceTextBox3.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money3 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox3.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox3.ReadOnly = true;
+                        money3 = sub;
+                    }
+                    else { }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox2.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox2.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7456,10 +5436,35 @@ namespace Flawless_ex
         #region "5行目"
         private void unitPriceTextBox4_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox5.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox4.Text))
+                {
+                    unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox5.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox4.Text) && !(countTextBox4.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox4.Text) * decimal.Parse(unitPriceTextBox4.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money4 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox4.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox4.ReadOnly = true;
+                        money4 = sub;
+                    }
+                    else if (!(weightTextBox4.Text == "0") && !string.IsNullOrEmpty(countTextBox4.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox4.Text) * decimal.Parse(unitPriceTextBox4.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money4 = Math.Round(sub04, MidpointRounding.AwayFromZero);
+                        moneyTextBox4.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox4.ReadOnly = true;
+                        money4 = sub;
+                    }
+                    else { }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox3.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox3.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7509,10 +5514,35 @@ namespace Flawless_ex
         #region "6行目"
         private void unitPriceTextBox5_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox6.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox5.Text))
+                {
+                    unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox6.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox5.Text) && !(countTextBox5.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox5.Text) * decimal.Parse(unitPriceTextBox5.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money5 = Math.Round(sub05, MidpointRounding.AwayFromZero);
+                        moneyTextBox5.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox5.ReadOnly = true;
+                        money5 = sub;
+                    }
+                    else if (!(weightTextBox5.Text == "0") && !string.IsNullOrEmpty(countTextBox5.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox5.Text) * decimal.Parse(unitPriceTextBox5.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money5 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox5.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox5.ReadOnly = true;
+                        money5 = sub;
+                    }
+                    else { }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox4.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox4.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7562,10 +5592,35 @@ namespace Flawless_ex
         #region "7行目"
         private void unitPriceTextBox6_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox7.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox6.Text))
+                {
+                    unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox7.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox6.Text) && !(countTextBox6.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox6.Text) * decimal.Parse(unitPriceTextBox6.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money6 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox6.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox6.ReadOnly = true;
+                        money6 = sub;
+                    }
+                    else if (!(weightTextBox6.Text == "0") && !string.IsNullOrEmpty(countTextBox6.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox6.Text) * decimal.Parse(unitPriceTextBox6.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money6 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox6.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox6.ReadOnly = true;
+                        money6 = sub;
+                    }
+                    else { }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox5.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox5.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7615,10 +5670,38 @@ namespace Flawless_ex
         #region "8行目"
         private void unitPriceTextBox7_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox8.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox7.Text))
+                {
+                    unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox8.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox7.Text) && !(countTextBox7.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox7.Text) * decimal.Parse(unitPriceTextBox7.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money7 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox7.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox7.ReadOnly = true;
+                        money7 = sub;
+                    }
+                    else if (!(weightTextBox7.Text == "0") && !string.IsNullOrEmpty(countTextBox7.Text))
+                    {
+                        sub07 = decimal.Parse(weightTextBox7.Text) * decimal.Parse(unitPriceTextBox7.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money7 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox7.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox7.ReadOnly = true;
+                        money7 = sub;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox6.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox6.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7668,10 +5751,38 @@ namespace Flawless_ex
         #region "9行目"
         private void unitPriceTextBox8_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox9.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox8.Text))
+                {
+                    unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox9.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox8.Text) && !(countTextBox8.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox8.Text) * decimal.Parse(unitPriceTextBox8.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money8 = Math.Round(sub08, MidpointRounding.AwayFromZero);
+                        moneyTextBox8.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox8.ReadOnly = true;
+                        money8 = sub;
+                    }
+                    else if (!(weightTextBox8.Text == "0") && !string.IsNullOrEmpty(countTextBox8.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox8.Text) * decimal.Parse(unitPriceTextBox8.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money8 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox8.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox8.ReadOnly = true;
+                        money8 = sub;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox7.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox7.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7721,10 +5832,38 @@ namespace Flawless_ex
         #region "10行目"
         private void unitPriceTextBox9_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox10.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox9.Text))
+                {
+                    unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox10.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox9.Text) && !(countTextBox9.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox9.Text) * decimal.Parse(unitPriceTextBox9.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money9 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox9.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox9.ReadOnly = true;
+                        money9 = sub;
+                    }
+                    else if (!(weightTextBox9.Text == "0") && !string.IsNullOrEmpty(countTextBox9.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox9.Text) * decimal.Parse(unitPriceTextBox9.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money9 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox9.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox9.ReadOnly = true;
+                        money9 = sub;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox8.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox8.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7774,10 +5913,38 @@ namespace Flawless_ex
         #region "11行目"
         private void unitPriceTextBox10_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox11.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox10.Text))
+                {
+                    unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox11.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox10.Text) && !(countTextBox010.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox10.Text) * decimal.Parse(unitPriceTextBox10.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money10 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox10.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox10.ReadOnly = true;
+                        money10 = sub;
+                    }
+                    else if (!(weightTextBox10.Text == "0") && !string.IsNullOrEmpty(countTextBox10.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox10.Text) * decimal.Parse(unitPriceTextBox10.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money10 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox10.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox10.ReadOnly = true;
+                        money10 = sub;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox9.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox9.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7827,10 +5994,38 @@ namespace Flawless_ex
         #region "12行目"
         private void unitPriceTextBox11_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                unitPriceTextBox12.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox11.Text))
+                {
+                    unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox12.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox11.Text) && !(countTextBox11.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox11.Text) * decimal.Parse(unitPriceTextBox11.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money11 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox11.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox11.ReadOnly = true;
+                        money11 = sub;
+                    }
+                    else if (!(weightTextBox11.Text == "0") && !string.IsNullOrEmpty(countTextBox11.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox11.Text) * decimal.Parse(unitPriceTextBox11.Text);
+                        sub1 = sub + sub * Tax / 100;
+                        money11 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox11.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox11.ReadOnly = true;
+                        money11 = sub;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox10.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox10.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7880,10 +6075,39 @@ namespace Flawless_ex
         #region "13行目"
         private void unitPriceTextBox12_Leave(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売　or　成績入力"
+            if (data == "S" || Grade != 0)
             {
+                if (!string.IsNullOrEmpty(unitPriceTextBox12.Text))
+                {
 
+                    if (!string.IsNullOrEmpty(weightTextBox12.Text) && !(countTextBox12.Text == "0"))
+                    {
+                        sub = decimal.Parse(countTextBox12.Text) * decimal.Parse(unitPriceTextBox12.Text);
+                        unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
+                        sub1 = sub + sub * Tax / 100;
+                        money12 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox12.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        weightTextBox12.ReadOnly = true;
+                        money12 = sub;
+                    }
+                    else if (!(weightTextBox12.Text == "0") && !string.IsNullOrEmpty(countTextBox12.Text))
+                    {
+                        sub = decimal.Parse(weightTextBox12.Text) * decimal.Parse(unitPriceTextBox12.Text);
+                        unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
+                        sub1 = sub + sub * Tax / 100;
+                        money12 = Math.Round(sub, MidpointRounding.AwayFromZero);
+                        moneyTextBox12.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
+                        countTextBox12.ReadOnly = true;
+                        money12 = sub;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox11.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox11.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -7907,14 +6131,9 @@ namespace Flawless_ex
         #region "1行目"
         private void moneyTextBox0_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
-                countsum0 = int.Parse(countTextBox0.Text);
-                weisum0 = decimal.Parse(weightTextBox0.Text);
-            }
-            else
-            {
-                //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox0.Text) && string.IsNullOrEmpty(countTextBox0.Text))
                 {
                     countTextBox0.Text = 0.ToString();
@@ -7924,33 +6143,6 @@ namespace Flawless_ex
                 {
                     weightTextBox0.Text = 0.ToString();
                 }
-                else
-                {
-
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount10 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 1 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money0 = decimal.Parse(dataRow1["amount"].ToString());
-
-                }
-                #endregion
                 countsum0 = int.Parse(countTextBox0.Text);
                 weisum0 = decimal.Parse(weightTextBox0.Text);
                 subSum0 = money0;//計算書は税込み
@@ -7986,7 +6178,7 @@ namespace Flawless_ex
                 }
                 #endregion
 
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
                 totalCount.Text = string.Format("{0:#,0}", countsum);
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
@@ -7998,6 +6190,79 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox0.Text) && string.IsNullOrEmpty(countTextBox0.Text))
+                {
+                    countTextBox0.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox0.Text) && string.IsNullOrEmpty(weightTextBox0.Text))
+                {
+                    weightTextBox0.Text = 0.ToString();
+                }
+                else
+                {
+
+                }
+                countsum0 = int.Parse(countTextBox0.Text);
+                weisum0 = decimal.Parse(weightTextBox0.Text);
+                subSum0 = money0;//計算書は税込み
+                #region "数量の場合わけ"
+                if (countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum0;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum0;
+                }
+                #endregion
+
+                #region "金額合計の場合わけ"
+                if (subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum0;
+                }
+                #endregion
+
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
             
         }
@@ -8005,13 +6270,9 @@ namespace Flawless_ex
         #region "2行目"
         private void moneyTextBox1_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
-
-            }
-            else
-            {
-                //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox1.Text) && string.IsNullOrEmpty(countTextBox1.Text))
                 {
                     countTextBox1.Text = 0.ToString();
@@ -8021,33 +6282,6 @@ namespace Flawless_ex
                 {
                     weightTextBox1.Text = 0.ToString();
                 }
-                else
-                {
-
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount11 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 2 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money1 = decimal.Parse(dataRow1["amount"].ToString());
-
-                }
-                #endregion
                 countsum1 = int.Parse(countTextBox1.Text);
                 weisum1 = decimal.Parse(weightTextBox1.Text);
                 subSum1 = money1;
@@ -8081,7 +6315,7 @@ namespace Flawless_ex
                     subSum = subSum1;
                 }
                 #endregion
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
                 totalCount.Text = string.Format("{0:#,0}", countsum);
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
@@ -8094,6 +6328,78 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox1.Text) && string.IsNullOrEmpty(countTextBox1.Text))
+                {
+                    countTextBox1.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox1.Text) && string.IsNullOrEmpty(weightTextBox1.Text))
+                {
+                    weightTextBox1.Text = 0.ToString();
+                }
+                else
+                {
+
+                }
+                countsum1 = int.Parse(countTextBox1.Text);
+                weisum1 = decimal.Parse(weightTextBox1.Text);
+                subSum1 = money1;
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum1;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum1;
+                }
+                #endregion
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum1;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
             
         }
@@ -8101,11 +6407,8 @@ namespace Flawless_ex
         #region "3行目"
         private void moneyTextBox2_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox2.Text) && string.IsNullOrEmpty(countTextBox2.Text))
@@ -8119,31 +6422,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount12 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 3 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money2 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum2 = int.Parse(countTextBox2.Text);
                 weisum2 = decimal.Parse(weightTextBox2.Text);
                 #region "数量の場合わけ"
@@ -8177,7 +6457,7 @@ namespace Flawless_ex
                     subSum = subSum2;
                 }
                 #endregion
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
                 totalCount.Text = string.Format("{0:#,0}", countsum);
                 subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
@@ -8189,6 +6469,77 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox2.Text) && string.IsNullOrEmpty(countTextBox2.Text))
+                {
+                    countTextBox2.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox2.Text) && string.IsNullOrEmpty(weightTextBox2.Text))
+                {
+                    weightTextBox2.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum2 = int.Parse(countTextBox2.Text);
+                weisum2 = decimal.Parse(weightTextBox2.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum2;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum2;
+                }
+                #endregion
+                subSum2 = money2;
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum2;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
 
         }
@@ -8196,11 +6547,8 @@ namespace Flawless_ex
         #region "4行目"
         private void moneyTextBox3_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox3.Text) && string.IsNullOrEmpty(countTextBox3.Text))
@@ -8214,31 +6562,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount13 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 4 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money3 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum3 = int.Parse(countTextBox3.Text);
                 weisum3 = decimal.Parse(weightTextBox3.Text);
                 #region "数量の場合わけ"
@@ -8262,7 +6587,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum3 = money3;     //増やしていく
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8284,6 +6609,77 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox3.Text) && string.IsNullOrEmpty(countTextBox3.Text))
+                {
+                    countTextBox3.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox3.Text) && string.IsNullOrEmpty(weightTextBox3.Text))
+                {
+                    weightTextBox3.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum3 = int.Parse(countTextBox3.Text);
+                weisum3 = decimal.Parse(weightTextBox3.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum3;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum3;
+                }
+                #endregion
+                subSum3 = money3;     //増やしていく
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum3;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
  
         }
@@ -8291,11 +6687,8 @@ namespace Flawless_ex
         #region "5行目"
         private void moneyTextBox4_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox4.Text) && string.IsNullOrEmpty(countTextBox4.Text))
@@ -8309,31 +6702,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount14 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 5 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money4 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum4 = int.Parse(countTextBox4.Text);
                 weisum4 = decimal.Parse(weightTextBox4.Text);
                 #region "数量の場合わけ"
@@ -8357,7 +6727,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum4 = money4;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8379,18 +6749,85 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox4.Text) && string.IsNullOrEmpty(countTextBox4.Text))
+                {
+                    countTextBox4.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox4.Text) && string.IsNullOrEmpty(weightTextBox4.Text))
+                {
+                    weightTextBox4.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum4 = int.Parse(countTextBox4.Text);
+                weisum4 = decimal.Parse(weightTextBox4.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum4;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum4;
+                }
+                #endregion
+                subSum4 = money4;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum4;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
 
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
         }
         #endregion
         #region "6行目"
         private void moneyTextBox5_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売 or　成績入力"
             if (data == "S")
-            {
-
-            }
-            else
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox5.Text) && string.IsNullOrEmpty(countTextBox5.Text))
@@ -8404,31 +6841,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount15 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 6 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money5 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum5 = int.Parse(countTextBox5.Text);
                 weisum5 = decimal.Parse(weightTextBox5.Text);
                 #region "数量の場合わけ"
@@ -8452,7 +6866,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum5 = money5;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8474,6 +6888,77 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox5.Text) && string.IsNullOrEmpty(countTextBox5.Text))
+                {
+                    countTextBox5.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox5.Text) && string.IsNullOrEmpty(weightTextBox5.Text))
+                {
+                    weightTextBox5.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum5 = int.Parse(countTextBox5.Text);
+                weisum5 = decimal.Parse(weightTextBox5.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum5;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum5;
+                }
+                #endregion
+                subSum5 = money5;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum5;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
 
         }
@@ -8481,11 +6966,8 @@ namespace Flawless_ex
         #region "7行目"
         private void moneyTextBox6_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox6.Text) && string.IsNullOrEmpty(countTextBox6.Text))
@@ -8499,31 +6981,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount16 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 7 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money6 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum6 = int.Parse(countTextBox6.Text);
                 weisum6 = decimal.Parse(weightTextBox6.Text);
                 #region "数量の場合わけ"
@@ -8547,7 +7006,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum6 = money6;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8569,6 +7028,77 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox6.Text) && string.IsNullOrEmpty(countTextBox6.Text))
+                {
+                    countTextBox6.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox6.Text) && string.IsNullOrEmpty(weightTextBox6.Text))
+                {
+                    weightTextBox6.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum6 = int.Parse(countTextBox6.Text);
+                weisum6 = decimal.Parse(weightTextBox6.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum6;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum6;
+                }
+                #endregion
+                subSum6 = money6;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum6;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
 
         }
@@ -8576,11 +7106,8 @@ namespace Flawless_ex
         #region "8行目"
         private void moneyTextBox7_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox7.Text) && string.IsNullOrEmpty(countTextBox7.Text))
@@ -8594,31 +7121,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                   
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount17 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 8 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money7 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum7 = int.Parse(countTextBox7.Text);
                 weisum7 = decimal.Parse(weightTextBox7.Text);
                 #region "数量の場合わけ"
@@ -8642,7 +7146,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum7 = money7;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8664,17 +7168,85 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox7.Text) && string.IsNullOrEmpty(countTextBox7.Text))
+                {
+                    countTextBox7.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox7.Text) && string.IsNullOrEmpty(weightTextBox7.Text))
+                {
+                    weightTextBox7.Text = 0.ToString();
+                }
+                else
+                {
+                   
+                }
+                countsum7 = int.Parse(countTextBox7.Text);
+                weisum7 = decimal.Parse(weightTextBox7.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum7;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum7;
+                }
+                #endregion
+                subSum7 = money7;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum7;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
         }
         #endregion
         #region "9行目"
         private void moneyTextBox8_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox8.Text) && string.IsNullOrEmpty(countTextBox8.Text))
@@ -8688,31 +7260,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount18 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 9 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money8 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum8 = int.Parse(countTextBox8.Text);
                 weisum8 = decimal.Parse(weightTextBox8.Text);
                 #region "数量の場合わけ"
@@ -8736,7 +7285,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum8 = money8;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8758,17 +7307,85 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox8.Text) && string.IsNullOrEmpty(countTextBox8.Text))
+                {
+                    countTextBox8.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox8.Text) && string.IsNullOrEmpty(weightTextBox8.Text))
+                {
+                    weightTextBox8.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum8 = int.Parse(countTextBox8.Text);
+                weisum8 = decimal.Parse(weightTextBox8.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum8;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum8;
+                }
+                #endregion
+                subSum8 = money8;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum8;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
         }
         #endregion
         #region "10行目"
         private void moneyTextBox9_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox9.Text) && string.IsNullOrEmpty(countTextBox9.Text))
@@ -8782,31 +7399,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount19 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 10 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money9 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum9 = int.Parse(countTextBox9.Text);
                 weisum9 = decimal.Parse(weightTextBox9.Text);
                 #region "数量の場合わけ"
@@ -8830,7 +7424,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum9 = money9;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8852,6 +7446,77 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox9.Text) && string.IsNullOrEmpty(countTextBox9.Text))
+                {
+                    countTextBox9.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox9.Text) && string.IsNullOrEmpty(weightTextBox9.Text))
+                {
+                    weightTextBox9.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum9 = int.Parse(countTextBox9.Text);
+                weisum9 = decimal.Parse(weightTextBox9.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum10 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum9;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum10 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum9;
+                }
+                #endregion
+                subSum9 = money9;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum10 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum9;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
 
         }
@@ -8859,11 +7524,8 @@ namespace Flawless_ex
         #region "11行目"
         private void moneyTextBox10_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox10.Text) && string.IsNullOrEmpty(countTextBox10.Text))
@@ -8877,31 +7539,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount110 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 11 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money10 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum10 = int.Parse(countTextBox10.Text);
                 weisum10 = decimal.Parse(weightTextBox10.Text);
                 #region "数量の場合わけ"
@@ -8925,7 +7564,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum10 = money10;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum11 != 0 || subSum12 != 0)
                 {
@@ -8947,17 +7586,85 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox10.Text) && string.IsNullOrEmpty(countTextBox10.Text))
+                {
+                    countTextBox10.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox10.Text) && string.IsNullOrEmpty(weightTextBox10.Text))
+                {
+                    weightTextBox10.Text = 0.ToString();
+                }
+                else
+                {
+                    
+                }
+                countsum10 = int.Parse(countTextBox10.Text);
+                weisum10 = decimal.Parse(weightTextBox10.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum11 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum10;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum11 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum10;
+                }
+                #endregion
+                subSum10 = money10;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum11 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum10;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
         }
         #endregion
         #region "12行目"
         private void moneyTextBox11_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or 成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox11.Text) && string.IsNullOrEmpty(countTextBox11.Text))
@@ -8971,31 +7678,9 @@ namespace Flawless_ex
                 }
                 else
                 {
-                   
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount111 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 12 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money11 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
+
                 countsum11 = int.Parse(countTextBox11.Text);
                 weisum11 = decimal.Parse(weightTextBox11.Text);
                 #region "数量の場合わけ"
@@ -9019,7 +7704,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum11 = money11;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum12 != 0)
                 {
@@ -9041,6 +7726,77 @@ namespace Flawless_ex
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
                 }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox11.Text) && string.IsNullOrEmpty(countTextBox11.Text))
+                {
+                    countTextBox11.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox11.Text) && string.IsNullOrEmpty(weightTextBox11.Text))
+                {
+                    weightTextBox11.Text = 0.ToString();
+                }
+                else
+                {
+                   
+                }
+                countsum11 = int.Parse(countTextBox11.Text);
+                weisum11 = decimal.Parse(weightTextBox11.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum12 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum11;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum12 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum11;
+                }
+                #endregion
+                subSum11 = money11;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum12 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum11;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
             
         }
@@ -9048,11 +7804,8 @@ namespace Flawless_ex
         #region "13行目"
         private void moneyTextBox12_TextChanged(object sender, EventArgs e)
         {
-            if (data == "S")
-            {
-
-            }
-            else
+            #region "買取販売 or　成績入力"
+            if (data == "S" || Grade != 0)
             {
                 //重量×単価
                 if (!string.IsNullOrEmpty(weightTextBox12.Text) && string.IsNullOrEmpty(countTextBox12.Text))
@@ -9066,31 +7819,8 @@ namespace Flawless_ex
                 }
                 else
                 {
-                   
-                }
-                #region "顧客選択から戻ってきた時"
-                if (amount112 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from statement_calc_data_if where document_number = '" + document + "' ORDER BY registration_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["registration_date"].ToString();
-                    #endregion
-
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from statement_calc_data_if where document_number = '" + document + "' and record_number = " + 13 + " and registration_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money12 = decimal.Parse(dataRow1["amount"].ToString());
 
                 }
-                #endregion
                 countsum12 = int.Parse(countTextBox12.Text);
                 weisum12 = decimal.Parse(weightTextBox12.Text);
                 #region "数量の場合わけ"
@@ -9114,7 +7844,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 subSum12 = money12;
-                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
                 #region "金額合計の場合わけ"
                 if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0)
                 {
@@ -9135,6 +7865,77 @@ namespace Flawless_ex
                 {
                     groupBox1.Show();
                     groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
+            }
+            #endregion
+            else
+            {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox12.Text) && string.IsNullOrEmpty(countTextBox12.Text))
+                {
+                    countTextBox12.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox12.Text) && string.IsNullOrEmpty(weightTextBox12.Text))
+                {
+                    weightTextBox12.Text = 0.ToString();
+                }
+                else
+                {
+                   
+                }
+                countsum12 = int.Parse(countTextBox12.Text);
+                weisum12 = decimal.Parse(weightTextBox12.Text);
+                #region "数量の場合わけ"
+                if (countsum0 != 0 || countsum1 != 0 || countsum2 != 0 || countsum3 != 0 || countsum4 != 0 || countsum5 != 0 || countsum6 != 0 || countsum7 != 0 || countsum8 != 0 || countsum9 != 0 || countsum10 != 0 || countsum11 != 0)
+                {
+                    countsum = countsum0 + countsum1 + countsum2 + countsum3 + countsum4 + countsum5 + countsum6 + countsum7 + countsum8 + countsum9 + countsum10 + countsum11 + countsum12;
+                }
+                else
+                {
+                    countsum = countsum12;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum0 != 0 || weisum1 != 0 || weisum2 != 0 || weisum3 != 0 || weisum4 != 0 || weisum5 != 0 || weisum6 != 0 || weisum7 != 0 || weisum8 != 0 || weisum9 != 0 || weisum10 != 0 || weisum11 != 0)
+                {
+                    weisum = weisum0 + weisum1 + weisum2 + weisum3 + weisum4 + weisum5 + weisum6 + weisum7 + weisum8 + weisum9 + weisum10 + weisum11 + weisum12;
+                }
+                else
+                {
+                    weisum = weisum12;
+                }
+                #endregion
+                subSum12 = money12;
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                #region "金額合計の場合わけ"
+                if (subSum0 != 0 || subSum1 != 0 || subSum2 != 0 || subSum3 != 0 || subSum4 != 0 || subSum5 != 0 || subSum6 != 0 || subSum7 != 0 || subSum8 != 0 || subSum9 != 0 || subSum10 != 0 || subSum11 != 0)
+                {
+                    subSum = subSum0 + subSum1 + subSum2 + subSum3 + subSum4 + subSum5 + subSum6 + subSum7 + subSum8 + subSum9 + subSum10 + subSum11 + subSum12;
+                }
+                else
+                {
+                    subSum = subSum12;
+                }
+                #endregion
+                totalWeight.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount.Text = string.Format("{0:#,0}", countsum);
+                subTotal.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+
+                if (subSum >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
                 }
             }
             
@@ -9427,13 +8228,6 @@ namespace Flawless_ex
             }
             else
             {
-                if (string.IsNullOrEmpty(typeTextBox.Text))
-                {
-                    MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    unitPriceTextBox00.Text = "";
-                    unitPriceTextBox00.ReadOnly = true;
-                    return;
-                }
                 if (unitPriceTextBox00.Text.ToString() == "単価 -> 重量 or 数量")
                 {
                     unitPriceTextBox00.Text = "";
@@ -9446,7 +8240,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox01.ReadOnly = false;
             }
             else
             {
@@ -9466,7 +8260,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox02.ReadOnly = false;
             }
             else
             {
@@ -9486,7 +8280,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox03.ReadOnly = false;
             }
             else
             {
@@ -9506,7 +8300,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox04.ReadOnly = false;
             }
             else
             {
@@ -9526,7 +8320,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox05.ReadOnly = false;
             }
             else
             {
@@ -9546,7 +8340,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox06.ReadOnly = false;
             }
             else
             {
@@ -9566,7 +8360,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox07.ReadOnly = false;
             }
             else
             {
@@ -9586,7 +8380,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox08.ReadOnly = false;
             }
             else
             {
@@ -9606,7 +8400,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox09.ReadOnly = false;
             }
             else
             {
@@ -9626,7 +8420,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox10.ReadOnly = false;
             }
             else
             {
@@ -9646,7 +8440,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox011.ReadOnly = false;
             }
             else
             {
@@ -9666,7 +8460,7 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
-
+                unitPriceTextBox012.ReadOnly = false;
             }
             else
             {
@@ -10026,21 +8820,21 @@ namespace Flawless_ex
 
                 if (comboBox11.SelectedIndex == 1)      //税抜き選択
                 {
-                    subSum = decimal.Parse(sub00.ToString()) + decimal.Parse(sub01.ToString()) + decimal.Parse(sub02.ToString()) + decimal.Parse(sub03.ToString()) + decimal.Parse(sub04.ToString())
-                            + decimal.Parse(sub05.ToString()) + decimal.Parse(sub06.ToString()) + decimal.Parse(sub07.ToString()) + decimal.Parse(sub08.ToString()) + decimal.Parse(sub09.ToString())
-                            + decimal.Parse(sub010.ToString()) + decimal.Parse(sub011.ToString()) + decimal.Parse(sub012.ToString());
-
-                    subTotal2.Text = string.Format("{0:#,0}", Math.Round(subSum, MidpointRounding.AwayFromZero));    //税抜き表記
-                }
-                else        //税込み選択
-                {
                     subSum = decimal.Parse(sub10.ToString()) + decimal.Parse(sub11.ToString()) + decimal.Parse(sub12.ToString()) + decimal.Parse(sub13.ToString()) + decimal.Parse(sub14.ToString())
                             + decimal.Parse(sub15.ToString()) + decimal.Parse(sub16.ToString()) + decimal.Parse(sub17.ToString()) + decimal.Parse(sub18.ToString()) + decimal.Parse(sub19.ToString())
                             + decimal.Parse(sub110.ToString()) + decimal.Parse(sub111.ToString()) + decimal.Parse(sub112.ToString());
 
-                    sum =  subSum ;
+                    sum = subSum + subSum * Tax / 100;
+                    subTotal2.Text = string.Format("{0:#,0}", Math.Round(subSum, MidpointRounding.AwayFromZero));    //税抜き表記
+                }
+                else        //税込み選択
+                {
+                    subSum = decimal.Parse(sub00.ToString()) + decimal.Parse(sub01.ToString()) + decimal.Parse(sub02.ToString()) + decimal.Parse(sub03.ToString()) + decimal.Parse(sub04.ToString())
+                            + decimal.Parse(sub05.ToString()) + decimal.Parse(sub06.ToString()) + decimal.Parse(sub07.ToString()) + decimal.Parse(sub08.ToString()) + decimal.Parse(sub09.ToString())
+                            + decimal.Parse(sub010.ToString()) + decimal.Parse(sub011.ToString()) + decimal.Parse(sub012.ToString());
 
-                    subTotal2.Text = string.Format("{0:#,0}", Math.Round(sum, MidpointRounding.AwayFromZero));    //税込み表記
+                    sum =  subSum ;
+                    subTotal2.Text = string.Format("{0:#,0}", Math.Round(subSum, MidpointRounding.AwayFromZero));    //税込み表記
                 }
                 sumTextBox2.Text = string.Format("{0:#,0}", Math.Round(sum, MidpointRounding.AwayFromZero));
                 taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
@@ -10052,10 +8846,36 @@ namespace Flawless_ex
         #region "1行目"
         private void unitPriceTextBox00_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox01.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox00.Text))
+                {
+                    unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox01.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox00.Text) && !(countTextBox00.Text == "0"))
+                    {
+                        sub00 = decimal.Parse(countTextBox00.Text) * decimal.Parse(unitPriceTextBox00.Text);
+                        sub10 = sub00 + sub00 * Tax / 100;
+                        money0 = Math.Round(sub00, MidpointRounding.AwayFromZero);
+                        moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub10, MidpointRounding.AwayFromZero));
+                        weightTextBox00.ReadOnly = true;
+                    }
+                    else if (!(weightTextBox00.Text == "0") && !string.IsNullOrEmpty(countTextBox00.Text))
+                    {
+                        sub00 = decimal.Parse(weightTextBox00.Text) * decimal.Parse(unitPriceTextBox00.Text);
+                        sub10 = sub00 + sub00 * Tax / 100;
+                        money0 = Math.Round(sub00, MidpointRounding.AwayFromZero);
+                        moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub10, MidpointRounding.AwayFromZero));
+                        countTextBox00.ReadOnly = true;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox00.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox00.Text, @"^[a-zA-Z]+$"))
             {
                 MessageBox.Show("正しく入力して下さい。");
@@ -10104,10 +8924,38 @@ namespace Flawless_ex
         #region "2行目"
         private void unitPriceTextBox01_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox02.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox01.Text))
+                {
+                    unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox02.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox01.Text) && !(countTextBox01.Text == "0"))
+                    {
+                        sub01 = decimal.Parse(countTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
+                        sub11 = sub01 + sub01 * Tax / 100;
+                        money1 = Math.Round(sub01, MidpointRounding.AwayFromZero);
+                        moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub11, MidpointRounding.AwayFromZero));
+                        weightTextBox01.ReadOnly = true;
+                        money1 = sub01;
+                    }
+                    else if (!(weightTextBox01.Text == "0") && !string.IsNullOrEmpty(countTextBox01.Text))
+                    {
+                        sub01 = decimal.Parse(weightTextBox01.Text) * decimal.Parse(unitPriceTextBox01.Text);
+                        sub11 = sub01 + sub01 * Tax / 100;
+                        money1 = Math.Round(sub01, MidpointRounding.AwayFromZero);
+                        moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub11, MidpointRounding.AwayFromZero));
+                        countTextBox01.ReadOnly = true;
+                        money1 = sub01;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox00.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox00.Text, @"^[a-zA-Z]+$"))
             {
                 //MessageBox.Show("正しく入力して下さい。");
@@ -10158,10 +9006,38 @@ namespace Flawless_ex
         #region "3行目"
         private void unitPriceTextBox02_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox03.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox02.Text))
+                {
+                    unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox03.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox02.Text) && !(countTextBox02.Text == "0"))
+                    {
+                        sub02 = decimal.Parse(countTextBox02.Text) * decimal.Parse(unitPriceTextBox02.Text);
+                        sub12 = sub02 + sub02 * Tax / 100;
+                        money2 = Math.Round(sub02, MidpointRounding.AwayFromZero);
+                        moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub12, MidpointRounding.AwayFromZero));
+                        weightTextBox02.ReadOnly = true;
+                        money2 = sub02;
+                    }
+                    else if (!(weightTextBox02.Text == "0") && !string.IsNullOrEmpty(countTextBox02.Text))
+                    {
+                        sub02 = decimal.Parse(weightTextBox02.Text) * decimal.Parse(unitPriceTextBox02.Text);
+                        sub12 = sub02 + sub02 * Tax / 100;
+                        money2 = Math.Round(sub02, MidpointRounding.AwayFromZero);
+                        moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub12, MidpointRounding.AwayFromZero));
+                        countTextBox02.ReadOnly = true;
+                        money2 = sub02;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox01.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox01.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10211,10 +9087,38 @@ namespace Flawless_ex
         #region "4行目"
         private void unitPriceTextBox03_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox04.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox03.Text))
+                {
+                    unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox04.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox03.Text) && !(countTextBox03.Text == "0"))
+                    {
+                        sub03 = decimal.Parse(countTextBox03.Text) * decimal.Parse(unitPriceTextBox03.Text);
+                        sub13 = sub03 + sub03 * Tax / 100;
+                        money3 = Math.Round(sub03, MidpointRounding.AwayFromZero);
+                        moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub13, MidpointRounding.AwayFromZero));
+                        weightTextBox03.ReadOnly = true;
+                        money3 = sub03;
+                    }
+                    else if (!(weightTextBox03.Text == "0") && !string.IsNullOrEmpty(countTextBox03.Text))
+                    {
+                        sub03 = decimal.Parse(weightTextBox03.Text) * decimal.Parse(unitPriceTextBox03.Text);
+                        sub13 = sub03 + sub03 * Tax / 100;
+                        money3 = Math.Round(sub03, MidpointRounding.AwayFromZero);
+                        moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub13, MidpointRounding.AwayFromZero));
+                        countTextBox03.ReadOnly = true;
+                        money3 = sub03;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox02.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox02.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10265,10 +9169,38 @@ namespace Flawless_ex
         #region "5行目"
         private void unitPriceTextBox04_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox05.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox04.Text))
+                {
+                    unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox05.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox04.Text) && !(countTextBox04.Text == "0"))
+                    {
+                        sub04 = decimal.Parse(countTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
+                        sub14 = sub04 + sub04 * Tax / 100;
+                        money4 = Math.Round(sub04, MidpointRounding.AwayFromZero);
+                        moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub14, MidpointRounding.AwayFromZero));
+                        weightTextBox04.ReadOnly = true;
+                        money4 = sub04;
+                    }
+                    else if (!(weightTextBox04.Text == "0") && !string.IsNullOrEmpty(countTextBox04.Text))
+                    {
+                        sub04 = decimal.Parse(weightTextBox04.Text) * decimal.Parse(unitPriceTextBox04.Text);
+                        sub14 = sub04 + sub04 * Tax / 100;
+                        money4 = Math.Round(sub04, MidpointRounding.AwayFromZero);
+                        moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub14, MidpointRounding.AwayFromZero));
+                        countTextBox04.ReadOnly = true;
+                        money4 = sub04;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox03.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox03.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10318,10 +9250,38 @@ namespace Flawless_ex
         #region "6行目"
         private void unitPriceTextBox05_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox06.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox05.Text))
+                {
+                    unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox06.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox05.Text) && !(countTextBox05.Text == "0"))
+                    {
+                        sub05 = decimal.Parse(countTextBox05.Text) * decimal.Parse(unitPriceTextBox05.Text);
+                        sub15 = sub05 + sub05 * Tax / 100;
+                        money5 = Math.Round(sub05, MidpointRounding.AwayFromZero);
+                        moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub15, MidpointRounding.AwayFromZero));
+                        weightTextBox05.ReadOnly = true;
+                        money5 = sub05;
+                    }
+                    else if (!(weightTextBox05.Text == "0") && !string.IsNullOrEmpty(countTextBox05.Text))
+                    {
+                        sub05 = decimal.Parse(weightTextBox05.Text) * decimal.Parse(unitPriceTextBox05.Text);
+                        sub15 = sub05 + sub05 * Tax / 100;
+                        money5 = Math.Round(sub05, MidpointRounding.AwayFromZero);
+                        moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub15, MidpointRounding.AwayFromZero));
+                        countTextBox05.ReadOnly = true;
+                        money5 = sub05;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox04.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox04.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10371,10 +9331,38 @@ namespace Flawless_ex
         #region "7行目"
         private void unitPriceTextBox06_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox07.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox06.Text))
+                {
+                    unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox07.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox06.Text) && !(countTextBox06.Text == "0"))
+                    {
+                        sub06 = decimal.Parse(countTextBox06.Text) * decimal.Parse(unitPriceTextBox06.Text);
+                        sub16 = sub06 + sub06 * Tax / 100;
+                        money6 = Math.Round(sub06, MidpointRounding.AwayFromZero);
+                        moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub16, MidpointRounding.AwayFromZero));
+                        weightTextBox06.ReadOnly = true;
+                        money6 = sub06;
+                    }
+                    else if (!(weightTextBox06.Text == "0") && !string.IsNullOrEmpty(countTextBox06.Text))
+                    {
+                        sub06 = decimal.Parse(weightTextBox06.Text) * decimal.Parse(unitPriceTextBox06.Text);
+                        sub16 = sub06 + sub06 * Tax / 100;
+                        money6 = Math.Round(sub06, MidpointRounding.AwayFromZero);
+                        moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub16, MidpointRounding.AwayFromZero));
+                        countTextBox06.ReadOnly = true;
+                        money6 = sub06;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox05.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox05.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10424,10 +9412,38 @@ namespace Flawless_ex
         #region "8行目"
         private void unitPriceTextBox07_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox08.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox07.Text))
+                {
+                    unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox08.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox07.Text) && !(countTextBox07.Text == "0"))
+                    {
+                        sub07 = decimal.Parse(countTextBox07.Text) * decimal.Parse(unitPriceTextBox07.Text);
+                        sub17 = sub07 + sub07 * Tax / 100;
+                        money7 = Math.Round(sub07, MidpointRounding.AwayFromZero);
+                        moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub17, MidpointRounding.AwayFromZero));
+                        weightTextBox07.ReadOnly = true;
+                        money7 = sub07;
+                    }
+                    else if (!(weightTextBox07.Text == "0") && !string.IsNullOrEmpty(countTextBox07.Text))
+                    {
+                        sub07 = decimal.Parse(weightTextBox07.Text) * decimal.Parse(unitPriceTextBox07.Text);
+                        sub17 = sub07 + sub07 * Tax / 100;
+                        money7 = Math.Round(sub07, MidpointRounding.AwayFromZero);
+                        moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub17, MidpointRounding.AwayFromZero));
+                        countTextBox07.ReadOnly = true;
+                        money7 = sub07;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox06.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox06.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10477,10 +9493,38 @@ namespace Flawless_ex
         #region "9行目"
         private void unitPriceTextBox08_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox09.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox08.Text))
+                {
+                    unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox09.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox08.Text) && !(countTextBox08.Text == "0"))
+                    {
+                        sub08 = decimal.Parse(countTextBox08.Text) * decimal.Parse(unitPriceTextBox08.Text);
+                        sub18 = sub08 + sub08 * Tax / 100;
+                        money8 = Math.Round(sub08, MidpointRounding.AwayFromZero);
+                        moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub18, MidpointRounding.AwayFromZero));
+                        weightTextBox08.ReadOnly = true;
+                        money8 = sub08;
+                    }
+                    else if (!(weightTextBox08.Text == "0") && !string.IsNullOrEmpty(countTextBox08.Text))
+                    {
+                        sub08 = decimal.Parse(weightTextBox08.Text) * decimal.Parse(unitPriceTextBox08.Text);
+                        sub18 = sub08 + sub08 * Tax / 100;
+                        money8 = Math.Round(sub08, MidpointRounding.AwayFromZero);
+                        moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub18, MidpointRounding.AwayFromZero));
+                        countTextBox08.ReadOnly = true;
+                        money8 = sub08;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox07.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox07.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10530,10 +9574,38 @@ namespace Flawless_ex
         #region "10行目"
         private void unitPriceTextBox09_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox10.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox09.Text))
+                {
+                    unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox010.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox09.Text) && !(countTextBox09.Text == "0"))
+                    {
+                        sub09 = decimal.Parse(countTextBox09.Text) * decimal.Parse(unitPriceTextBox09.Text);
+                        sub19 = sub09 + sub09 * Tax / 100;
+                        money9 = Math.Round(sub09, MidpointRounding.AwayFromZero);
+                        moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub19, MidpointRounding.AwayFromZero));
+                        weightTextBox09.ReadOnly = true;
+                        money9 = sub09;
+                    }
+                    else if (!(weightTextBox09.Text == "0") && !string.IsNullOrEmpty(countTextBox09.Text))
+                    {
+                        sub09 = decimal.Parse(weightTextBox09.Text) * decimal.Parse(unitPriceTextBox09.Text);
+                        sub19 = sub09 + sub09 * Tax / 100;
+                        money9 = Math.Round(sub09, MidpointRounding.AwayFromZero);
+                        moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub19, MidpointRounding.AwayFromZero));
+                        countTextBox09.ReadOnly = true;
+                        money9 = sub09;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox08.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox08.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10583,10 +9655,38 @@ namespace Flawless_ex
         #region "11行目"
         private void unitPriceTextBox010_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox011.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox010.Text))
+                {
+                    unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox011.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox010.Text) && !(countTextBox010.Text == "0"))
+                    {
+                        sub010 = decimal.Parse(countTextBox010.Text) * decimal.Parse(unitPriceTextBox010.Text);
+                        sub110 = sub010 + sub010 * Tax / 100;
+                        money10 = Math.Round(sub010, MidpointRounding.AwayFromZero);
+                        moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub110, MidpointRounding.AwayFromZero));
+                        weightTextBox010.ReadOnly = true;
+                        money10 = sub010;
+                    }
+                    else if (!(weightTextBox010.Text == "0") && !string.IsNullOrEmpty(countTextBox010.Text))
+                    {
+                        sub010 = decimal.Parse(weightTextBox010.Text) * decimal.Parse(unitPriceTextBox010.Text);
+                        sub110 = sub010 + sub010 * Tax / 100;
+                        money10 = Math.Round(sub010, MidpointRounding.AwayFromZero);
+                        moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub110, MidpointRounding.AwayFromZero));
+                        countTextBox010.ReadOnly = true;
+                        money10 = sub010;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox09.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox09.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10636,10 +9736,38 @@ namespace Flawless_ex
         #region "12行目"
         private void unitPriceTextBox011_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
-                unitPriceTextBox012.ReadOnly = false;
+                if (!string.IsNullOrEmpty(unitPriceTextBox011.Text))
+                {
+                    unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
+                    unitPriceTextBox012.ReadOnly = false;
+                    if (!string.IsNullOrEmpty(weightTextBox011.Text) && !(countTextBox011.Text == "0"))
+                    {
+                        sub011 = decimal.Parse(countTextBox011.Text) * decimal.Parse(unitPriceTextBox011.Text);
+                        sub111 = sub011 + sub011 * Tax / 100;
+                        money11 = Math.Round(sub011, MidpointRounding.AwayFromZero);
+                        moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub111, MidpointRounding.AwayFromZero));
+                        weightTextBox011.ReadOnly = true;
+                        money11 = sub011;
+                    }
+                    else if (!(weightTextBox011.Text == "0") && !string.IsNullOrEmpty(countTextBox011.Text))
+                    {
+                        sub011 = decimal.Parse(weightTextBox011.Text) * decimal.Parse(unitPriceTextBox011.Text);
+                        sub111 = sub011 + sub011 * Tax / 100;
+                        money11 = Math.Round(sub011, MidpointRounding.AwayFromZero);
+                        moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub111, MidpointRounding.AwayFromZero));
+                        countTextBox011.ReadOnly = true;
+                        money11 = sub011;
+                    }
+                    else
+                    {
+
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox010.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox010.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10689,10 +9817,38 @@ namespace Flawless_ex
         #region "13行目"
         private void unitPriceTextBox012_Leave(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                if (!string.IsNullOrEmpty(unitPriceTextBox012.Text))
+                {
+                    if (!string.IsNullOrEmpty(weightTextBox012.Text) && !(countTextBox012.Text == "0"))
+                    {
+                        sub012 = decimal.Parse(countTextBox012.Text) * decimal.Parse(unitPriceTextBox012.Text);
+                        sub112 = sub012 + sub012 * Tax / 100;
+                        unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
+                        money12 = Math.Round(sub012, MidpointRounding.AwayFromZero);
+                        moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub112, MidpointRounding.AwayFromZero));
+                        weightTextBox012.ReadOnly = true;
+                        money12 = sub012;
+                    }
+                    else if (!(weightTextBox012.Text == "0") && !string.IsNullOrEmpty(countTextBox012.Text))
+                    {
+                        sub012 = decimal.Parse(weightTextBox012.Text) * decimal.Parse(unitPriceTextBox012.Text);
+                        sub112 = sub012 + sub012 * Tax / 100;
+                        unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
+                        money12 = Math.Round(sub012, MidpointRounding.AwayFromZero);
+                        moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub112, MidpointRounding.AwayFromZero));
+                        countTextBox012.ReadOnly = true;
+                        money12 = sub012;
+                    }
+                    else
+                    {
 
+                    }
+                }
             }
+            #endregion
             else if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox011.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox011.Text, @"^[a-zA-Z]+$"))
             {
 
@@ -10743,7 +9899,7 @@ namespace Flawless_ex
             {
                 countTextBox0.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money0 = Math.Round(sub, MidpointRounding.AwayFromZero);       //計算書は税込み
             moneyTextBox0.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10778,7 +9934,7 @@ namespace Flawless_ex
             {
                 countTextBox1.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money1 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox1.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10813,7 +9969,7 @@ namespace Flawless_ex
             {
                 countTextBox2.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money2 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox2.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10848,7 +10004,7 @@ namespace Flawless_ex
             {
                 countTextBox3.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money3 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox3.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10883,7 +10039,7 @@ namespace Flawless_ex
             {
                 countTextBox4.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money4 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox4.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10918,7 +10074,7 @@ namespace Flawless_ex
             {
                 countTextBox5.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money5 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox5.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10953,7 +10109,7 @@ namespace Flawless_ex
             {
                 countTextBox6.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money6 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox6.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -10988,7 +10144,7 @@ namespace Flawless_ex
             {
                 countTextBox7.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money7 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox7.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -11023,7 +10179,7 @@ namespace Flawless_ex
             {
                 countTextBox8.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money8 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox8.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -11058,7 +10214,7 @@ namespace Flawless_ex
             {
                 countTextBox9.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money9 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox9.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -11093,7 +10249,7 @@ namespace Flawless_ex
             {
                 countTextBox10.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money10 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox10.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -11128,7 +10284,7 @@ namespace Flawless_ex
             {
                 countTextBox11.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money11 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox11.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -11163,7 +10319,7 @@ namespace Flawless_ex
             {
                 countTextBox12.ReadOnly = false;
             }
-            sub += sub * Tax / 100;
+            //sub += sub * Tax / 100;
             money12 = Math.Round(sub, MidpointRounding.AwayFromZero);
             moneyTextBox12.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
         }
@@ -11188,7 +10344,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox0.Text) && !(countTextBox0.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox0.Text) * decimal.Parse(unitPriceTextBox0.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money0 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox0.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox0.ReadOnly = true;
@@ -11216,7 +10372,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox1.Text) && !(countTextBox1.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox1.Text) * decimal.Parse(unitPriceTextBox1.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money1 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox1.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox1.ReadOnly = true;
@@ -11244,7 +10400,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox2.Text) && !(countTextBox2.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox2.Text) * decimal.Parse(unitPriceTextBox2.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money2 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox2.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox2.ReadOnly = true;
@@ -11272,7 +10428,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox3.Text) && !(countTextBox3.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox3.Text) * decimal.Parse(unitPriceTextBox3.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money3 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox3.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox3.ReadOnly = true;
@@ -11300,7 +10456,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox4.Text) && !(countTextBox4.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox4.Text) * decimal.Parse(unitPriceTextBox4.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money4 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox4.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox4.ReadOnly = true;
@@ -11328,7 +10484,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox5.Text) && !(countTextBox5.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox5.Text) * decimal.Parse(unitPriceTextBox5.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money5 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox5.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox5.ReadOnly = true;
@@ -11356,7 +10512,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox6.Text) && !(countTextBox6.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox6.Text) * decimal.Parse(unitPriceTextBox6.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money6 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox6.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox6.ReadOnly = true;
@@ -11384,7 +10540,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox7.Text) && !(countTextBox7.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox7.Text) * decimal.Parse(unitPriceTextBox7.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money7 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox7.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox7.ReadOnly = true;
@@ -11412,7 +10568,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox8.Text) && !(countTextBox8.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox8.Text) * decimal.Parse(unitPriceTextBox8.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money8 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox8.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox8.ReadOnly = true;
@@ -11440,7 +10596,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox9.Text) && !(countTextBox9.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox9.Text) * decimal.Parse(unitPriceTextBox9.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money9 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox9.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox9.ReadOnly = true;
@@ -11468,7 +10624,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox10.Text) && !(countTextBox10.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox10.Text) * decimal.Parse(unitPriceTextBox10.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money10 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox10.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox10.ReadOnly = true;
@@ -11496,7 +10652,7 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(countTextBox11.Text) && !(countTextBox11.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox11.Text) * decimal.Parse(unitPriceTextBox11.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money11 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox11.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox11.ReadOnly = true;
@@ -11524,7 +10680,7 @@ namespace Flawless_ex
             else if (!string.IsNullOrEmpty(countTextBox12.Text) && !(countTextBox12.Text == "0"))
             {
                 sub = decimal.Parse(countTextBox12.Text) * decimal.Parse(unitPriceTextBox12.Text);
-                sub += sub * Tax / 100;
+                //sub += sub * Tax / 100;
                 money12 = Math.Round(sub, MidpointRounding.AwayFromZero);
                 moneyTextBox12.Text = string.Format("{0:C}", Math.Round(sub, MidpointRounding.AwayFromZero));
                 weightTextBox12.ReadOnly = true;
@@ -11570,7 +10726,7 @@ namespace Flawless_ex
             }
             money0 = sub00;
             sub10 = sub00 + sub00 * Tax / 100;
-            moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub10, MidpointRounding.AwayFromZero));
+            moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub00, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量2行目"
@@ -11605,7 +10761,7 @@ namespace Flawless_ex
             }
             money1 = sub01;
             sub11 = sub01 + sub01 * Tax / 100;
-            moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub11, MidpointRounding.AwayFromZero));
+            moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub01, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量3行目"
@@ -11640,7 +10796,7 @@ namespace Flawless_ex
             }
             money2 = sub02;
             sub12 = sub02 + sub02 * Tax / 100;
-            moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub12, MidpointRounding.AwayFromZero));
+            moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub02, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量4行目"
@@ -11675,7 +10831,7 @@ namespace Flawless_ex
             }
             money3 = sub03;
             sub13 = sub03 + sub03 * Tax / 100;
-            moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub13, MidpointRounding.AwayFromZero));
+            moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub03, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量5行目"
@@ -11705,7 +10861,7 @@ namespace Flawless_ex
             }
             money4 = sub04;
             sub14 = sub04 + sub04 * Tax / 100;
-            moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub14, MidpointRounding.AwayFromZero));
+            moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub04, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量6行目"
@@ -11735,7 +10891,7 @@ namespace Flawless_ex
             }
             money5 = sub05;
             sub15 = sub05 + sub05 * Tax / 100;
-            moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub15, MidpointRounding.AwayFromZero));
+            moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub05, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量7行目"
@@ -11765,7 +10921,7 @@ namespace Flawless_ex
             }
             money6 = sub06;
             sub16 = sub06 + sub06 * Tax / 100;
-            moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub16, MidpointRounding.AwayFromZero));
+            moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub06, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量8行目"
@@ -11795,7 +10951,7 @@ namespace Flawless_ex
             }
             money7 = sub07;
             sub17 = sub07 + sub07 * Tax / 100;
-            moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub17, MidpointRounding.AwayFromZero));
+            moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub07, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量9行目"
@@ -11825,7 +10981,7 @@ namespace Flawless_ex
             }
             money8 = sub08;
             sub18 = sub08 + sub08 * Tax / 100;
-            moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub18, MidpointRounding.AwayFromZero));
+            moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub08, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量10行目"
@@ -11855,7 +11011,7 @@ namespace Flawless_ex
             }
             money9 = sub09;
             sub19 = sub09 + sub09 * Tax / 100;
-            moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub19, MidpointRounding.AwayFromZero));
+            moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub09, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量11行目"
@@ -11885,7 +11041,7 @@ namespace Flawless_ex
             }
             money10 = sub010;
             sub110 = sub010 + sub010 * Tax / 100;
-            moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub110, MidpointRounding.AwayFromZero));
+            moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub010, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量12行目"
@@ -11915,7 +11071,7 @@ namespace Flawless_ex
             }
             money11 = sub011;
             sub111 = sub011 + sub011 * Tax / 100;
-            moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub111, MidpointRounding.AwayFromZero));
+            moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub011, MidpointRounding.AwayFromZero));
         }
         #endregion
         #region "重量13行目"
@@ -11945,7 +11101,7 @@ namespace Flawless_ex
             }
             money12 = sub012;
             sub112 = sub012 + sub012 * Tax / 100;
-            moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub112, MidpointRounding.AwayFromZero));
+            moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub012, MidpointRounding.AwayFromZero));
         }
         #endregion
         #endregion
@@ -11982,7 +11138,7 @@ namespace Flawless_ex
                 }
                 money0 = sub00;
                 sub10 = sub00 + sub00 * Tax / 100;
-                moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub10, MidpointRounding.AwayFromZero));
+                moneyTextBox00.Text = string.Format("{0:C}", Math.Round(sub00, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12017,7 +11173,7 @@ namespace Flawless_ex
                 }
                 money1 = sub01;
                 sub11 = sub01 + sub01 * Tax / 100;
-                moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub11, MidpointRounding.AwayFromZero));
+                moneyTextBox01.Text = string.Format("{0:C}", Math.Round(sub01, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12052,7 +11208,7 @@ namespace Flawless_ex
                 }
                 money2 = sub02;
                 sub12 = sub02 + sub02 * Tax / 100;
-                moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub12, MidpointRounding.AwayFromZero));
+                moneyTextBox02.Text = string.Format("{0:C}", Math.Round(sub02, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12087,7 +11243,7 @@ namespace Flawless_ex
                 }
                 money3 = sub03;
                 sub13 = sub03 + sub03 * Tax / 100;
-                moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub13, MidpointRounding.AwayFromZero));
+                moneyTextBox03.Text = string.Format("{0:C}", Math.Round(sub03, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12122,7 +11278,7 @@ namespace Flawless_ex
                 }
                 money4 = sub04;
                 sub14 = sub04 + sub04 * Tax / 100;
-                moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub14, MidpointRounding.AwayFromZero));
+                moneyTextBox04.Text = string.Format("{0:C}", Math.Round(sub04, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12157,7 +11313,7 @@ namespace Flawless_ex
                 }
                 money5 = sub05;
                 sub15 = sub05 + sub05 * Tax / 100;
-                moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub15, MidpointRounding.AwayFromZero));
+                moneyTextBox05.Text = string.Format("{0:C}", Math.Round(sub05, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12192,7 +11348,7 @@ namespace Flawless_ex
                 }
                 money6 = sub06;
                 sub16 = sub06 + sub06 * Tax / 100;
-                moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub16, MidpointRounding.AwayFromZero));
+                moneyTextBox06.Text = string.Format("{0:C}", Math.Round(sub06, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12227,7 +11383,7 @@ namespace Flawless_ex
                 }
                 money7 = sub07;
                 sub17 = sub07 + sub07 * Tax / 100;
-                moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub17, MidpointRounding.AwayFromZero));
+                moneyTextBox07.Text = string.Format("{0:C}", Math.Round(sub07, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12262,7 +11418,7 @@ namespace Flawless_ex
                 }
                 money8 = sub08;
                 sub18 = sub08 + sub08 * Tax / 100;
-                moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub18, MidpointRounding.AwayFromZero));
+                moneyTextBox08.Text = string.Format("{0:C}", Math.Round(sub08, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12297,7 +11453,7 @@ namespace Flawless_ex
                 }
                 money9 = sub09;
                 sub19 = sub09 + sub09 * Tax / 100;
-                moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub19, MidpointRounding.AwayFromZero));
+                moneyTextBox09.Text = string.Format("{0:C}", Math.Round(sub09, MidpointRounding.AwayFromZero));
             }
             
         }
@@ -12333,7 +11489,7 @@ namespace Flawless_ex
                 }
                 money10 = sub010;
                 sub110 = sub010 + sub010 * Tax / 100;
-                moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub110, MidpointRounding.AwayFromZero));
+                moneyTextBox010.Text = string.Format("{0:C}", Math.Round(sub010, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12368,7 +11524,7 @@ namespace Flawless_ex
                 }
                 money11 = sub011;
                 sub111 = sub011 + sub011 * Tax / 100;
-                moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub111, MidpointRounding.AwayFromZero));
+                moneyTextBox011.Text = string.Format("{0:C}", Math.Round(sub011, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12403,7 +11559,7 @@ namespace Flawless_ex
                 }
                 money12 = sub012;
                 sub112 = sub012 + sub012 * Tax / 100;
-                moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub112, MidpointRounding.AwayFromZero));
+                moneyTextBox012.Text = string.Format("{0:C}", Math.Round(sub012, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -12413,10 +11569,72 @@ namespace Flawless_ex
         #region "1行目"
         private void moneyTextBox00_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox00.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox00.Text, @"^[a-zA-Z]+$"))
+                {
+                    MessageBox.Show("正しく入力して下さい。");
+                    return;
+                }
+                //重量×単価
+                else if (!string.IsNullOrEmpty(weightTextBox00.Text) && string.IsNullOrEmpty(countTextBox00.Text))
+                {
+                    countTextBox00.Text = 0.ToString();
 
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox00.Text) && string.IsNullOrEmpty(weightTextBox00.Text))
+                {
+                    weightTextBox00.Text = 0.ToString();
+                }
+                else
+                {
+
+                }
+                countsum00 = int.Parse(countTextBox00.Text);
+                weisum00 = decimal.Parse(weightTextBox00.Text);
+                subSum00 = money0;
+                #region "金額合計の場合わけ"
+                if (subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum00;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum00;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum00;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(countTextBox00.Text, @"^[a-zA-Z]+$") || System.Text.RegularExpressions.Regex.IsMatch(weightTextBox00.Text, @"^[a-zA-Z]+$"))
@@ -12440,8 +11658,8 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount00 != 0)
+                #region "顧客選択から戻ってきた時(コメントアウト)"
+                /*if (amount00 != 0)
                 {
                     #region "日付呼び出し"
                     DataTable upddt = new DataTable();
@@ -12461,7 +11679,7 @@ namespace Flawless_ex
                     dataRow1 = dt10.Rows[0];
                     money0 = (decimal)dataRow1["amount"] / 1.1m;
 
-                }
+                }*/
                 #endregion
                 countsum00 = int.Parse(countTextBox00.Text);
                 weisum00 = decimal.Parse(weightTextBox00.Text);
@@ -12510,10 +11728,67 @@ namespace Flawless_ex
         #region "2行目"
         private void moneyTextBox01_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox01.Text) && string.IsNullOrEmpty(countTextBox01.Text))
+                {
+                    countTextBox01.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox01.Text) && string.IsNullOrEmpty(weightTextBox01.Text))
+                {
+                    weightTextBox01.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum01 = int.Parse(countTextBox01.Text);
+                weisum01 = decimal.Parse(weightTextBox01.Text);
+                subSum01 = money1;       //納品書は税抜き
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum01;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum01;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum01;
+                }
+                #endregion
+
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -12531,8 +11806,8 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount01 != 0)
+                #region "顧客選択から戻ってきた時(コメントアウト)"
+                /*if (amount01 != 0)
                 {
                     #region "日付呼び出し"
                     DataTable upddt = new DataTable();
@@ -12550,7 +11825,7 @@ namespace Flawless_ex
                     DataRow dataRow1;
                     dataRow1 = dt10.Rows[0];
                     money1 = (decimal)dataRow1["amount"] / 1.1m;
-                }
+                }*/
                 #endregion
 
                 countsum01 = int.Parse(countTextBox01.Text);
@@ -12602,10 +11877,67 @@ namespace Flawless_ex
         #region "3行目"
         private void moneyTextBox02_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox02.Text) && string.IsNullOrEmpty(countTextBox02.Text))
+                {
+                    countTextBox02.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox02.Text) && string.IsNullOrEmpty(weightTextBox02.Text))
+                {
+                    weightTextBox02.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum02 = int.Parse(countTextBox02.Text);
+                weisum02 = decimal.Parse(weightTextBox02.Text);
+                subSum02 = money2;
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum02;
+                }
+                #endregion
+
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum02;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum02;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -12623,8 +11955,8 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount02 != 0)
+                #region "顧客選択から戻ってきた時(コメントアウト)"
+                /*if (amount02 != 0)
                 {
                     #region "日付呼び出し"
                     DataTable upddt = new DataTable();
@@ -12642,7 +11974,7 @@ namespace Flawless_ex
                     DataRow dataRow1;
                     dataRow1 = dt10.Rows[0];
                     money2 = (decimal)dataRow1["amount"] / 1.1m;
-                }
+                }*/
                 #endregion
                 countsum02 = int.Parse(countTextBox02.Text);
                 weisum02 = decimal.Parse(weightTextBox02.Text);
@@ -12693,10 +12025,67 @@ namespace Flawless_ex
         #region "4行目"
         private void moneyTextBox03_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox03.Text) && string.IsNullOrEmpty(countTextBox03.Text))
+                {
+                    countTextBox03.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox03.Text) && string.IsNullOrEmpty(weightTextBox03.Text))
+                {
+                    weightTextBox03.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum03 = int.Parse(countTextBox03.Text);
+                weisum03 = decimal.Parse(weightTextBox03.Text);
+                subSum03 = money3;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum03;
+                }
+                #endregion
+
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum03;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum03;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -12714,8 +12103,8 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount03 != 0)
+                #region "顧客選択から戻ってきた時(コメントアウト)"
+                /*if (amount03 != 0)
                 {
                     #region "日付呼び出し"
                     DataTable upddt = new DataTable();
@@ -12733,7 +12122,7 @@ namespace Flawless_ex
                     DataRow dataRow1;
                     dataRow1 = dt10.Rows[0];
                     money3 = (decimal)dataRow1["amount"] / 1.1m;
-                }
+                }*/
                 #endregion
                 countsum03 = int.Parse(countTextBox03.Text);
                 weisum03 = decimal.Parse(weightTextBox03.Text);
@@ -12783,10 +12172,66 @@ namespace Flawless_ex
         #region "5行目"
         private void moneyTextBox04_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox04.Text) && string.IsNullOrEmpty(countTextBox04.Text))
+                {
+                    countTextBox04.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox04.Text) && string.IsNullOrEmpty(weightTextBox04.Text))
+                {
+                    weightTextBox04.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum04 = int.Parse(countTextBox04.Text);
+                weisum04 = decimal.Parse(weightTextBox04.Text);
+                subSum04 = money4;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum04;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 100, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum04;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum04;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -12804,27 +12249,6 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount04 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["upd_date"].ToString();
-                    #endregion
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 5 + " and upd_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money4 = (decimal)dataRow1["amount"] / 1.1m;
-                }
-                #endregion
                 countsum04 = int.Parse(countTextBox04.Text);
                 weisum04 = decimal.Parse(weightTextBox04.Text);
                 subSum04 = money4;     //増やしていく
@@ -12872,10 +12296,66 @@ namespace Flawless_ex
         #region "6行目"
         private void moneyTextBox05_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox05.Text) && string.IsNullOrEmpty(countTextBox05.Text))
+                {
+                    countTextBox05.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox05.Text) && string.IsNullOrEmpty(weightTextBox05.Text))
+                {
+                    weightTextBox05.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum05 = int.Parse(countTextBox05.Text);
+                weisum05 = decimal.Parse(weightTextBox05.Text);
+                subSum05 = money5;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum05;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum05;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum05;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -12893,8 +12373,8 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount05 != 0)
+                #region "顧客選択から戻ってきた時(コメントアウト)"
+                /*if (amount05 != 0)
                 {
                     #region "日付呼び出し"
                     DataTable upddt = new DataTable();
@@ -12912,7 +12392,7 @@ namespace Flawless_ex
                     DataRow dataRow1;
                     dataRow1 = dt10.Rows[0];
                     money5 = (decimal)dataRow1["amount"] / 1.1m;
-                }
+                }*/
                 #endregion
                 countsum05 = int.Parse(countTextBox05.Text);
                 weisum05 = decimal.Parse(weightTextBox05.Text);
@@ -12961,10 +12441,66 @@ namespace Flawless_ex
         #region "7行目"
         private void moneyTextBox06_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox06.Text) && string.IsNullOrEmpty(countTextBox06.Text))
+                {
+                    countTextBox06.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox06.Text) && string.IsNullOrEmpty(weightTextBox06.Text))
+                {
+                    weightTextBox06.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum06 = int.Parse(countTextBox06.Text);
+                weisum06 = decimal.Parse(weightTextBox06.Text);
+                subSum06 = money6;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum06;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum06;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum06;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -12982,8 +12518,8 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount06 != 0)
+                #region "顧客選択から戻ってきた時(コメントアウト)"
+                /*if (amount06 != 0)
                 {
                     #region "日付呼び出し"
                     DataTable upddt = new DataTable();
@@ -13001,7 +12537,7 @@ namespace Flawless_ex
                     DataRow dataRow1;
                     dataRow1 = dt10.Rows[0];
                     money6 = (decimal)dataRow1["amount"] / 1.1m;
-                }
+                }*/
                 #endregion
                 countsum06 = int.Parse(countTextBox06.Text);
                 weisum06 = decimal.Parse(weightTextBox06.Text);
@@ -13050,10 +12586,66 @@ namespace Flawless_ex
         #region "8行目"
         private void moneyTextBox07_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox07.Text) && string.IsNullOrEmpty(countTextBox07.Text))
+                {
+                    countTextBox07.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox07.Text) && string.IsNullOrEmpty(weightTextBox07.Text))
+                {
+                    weightTextBox07.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum07 = int.Parse(countTextBox07.Text);
+                weisum07 = decimal.Parse(weightTextBox07.Text);
+                subSum07 = money7;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum07;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum07;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum07;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
 
@@ -13073,27 +12665,6 @@ namespace Flawless_ex
                 MessageBox.Show("数値を入力してください");
                 return;
             }
-            #region "顧客選択から戻ってきた時"
-            if (amount07 != 0)
-            {
-                #region "日付呼び出し"
-                DataTable upddt = new DataTable();
-                string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                adapter.Fill(upddt);
-                DataRow dataRow2;
-                dataRow2 = upddt.Rows[0];
-                string date = dataRow2["upd_date"].ToString();
-                #endregion
-                DataTable dt10 = new DataTable();
-                string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 8 + " and upd_date = '" + date + "';";
-                adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                adapter.Fill(dt10);
-                DataRow dataRow1;
-                dataRow1 = dt10.Rows[0];
-                money7 = (decimal)dataRow1["amount"] / 1.1m;
-            }
-            #endregion
             countsum07 = int.Parse(countTextBox07.Text);
             weisum07 = decimal.Parse(weightTextBox07.Text);
             subSum07 = money7;     //増やしていく
@@ -13140,10 +12711,66 @@ namespace Flawless_ex
         #region "9行目"
         private void moneyTextBox08_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox08.Text) && string.IsNullOrEmpty(countTextBox08.Text))
+                {
+                    countTextBox08.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox08.Text) && string.IsNullOrEmpty(weightTextBox08.Text))
+                {
+                    weightTextBox08.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum08 = int.Parse(countTextBox08.Text);
+                weisum08 = decimal.Parse(weightTextBox08.Text);
+                subSum08 = money8;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum08;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum08;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum08;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
 
@@ -13163,27 +12790,6 @@ namespace Flawless_ex
                 MessageBox.Show("数値を入力してください");
                 return;
             }
-            #region "顧客選択から戻ってきた時"
-            if (amount08 != 0)
-            {
-                #region "日付呼び出し"
-                DataTable upddt = new DataTable();
-                string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                adapter.Fill(upddt);
-                DataRow dataRow2;
-                dataRow2 = upddt.Rows[0];
-                string date = dataRow2["upd_date"].ToString();
-                #endregion
-                DataTable dt10 = new DataTable();
-                string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 9 + " and upd_date = '" + date + "';";
-                adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                adapter.Fill(dt10);
-                DataRow dataRow1;
-                dataRow1 = dt10.Rows[0];
-                money8 = (decimal)dataRow1["amount"] / 1.1m;
-            }
-            #endregion
             countsum08 = int.Parse(countTextBox08.Text);
             weisum08 = decimal.Parse(weightTextBox08.Text);
             subSum08 = money8;     //増やしていく
@@ -13230,10 +12836,66 @@ namespace Flawless_ex
         #region "10行目"
         private void moneyTextBox09_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox09.Text) && string.IsNullOrEmpty(countTextBox09.Text))
+                {
+                    countTextBox09.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox09.Text) && string.IsNullOrEmpty(weightTextBox09.Text))
+                {
+                    weightTextBox09.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum09 = int.Parse(countTextBox09.Text);
+                weisum09 = decimal.Parse(weightTextBox09.Text);
+                subSum09 = money9;
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum010 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum09;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum010 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum09;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum010 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum09;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -13251,27 +12913,6 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount09 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["upd_date"].ToString();
-                    #endregion
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 10 + " and upd_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money9 = (decimal)dataRow1["amount"] / 1.1m;
-                }
-                #endregion
                 countsum09 = int.Parse(countTextBox09.Text);
                 weisum09 = decimal.Parse(weightTextBox09.Text);
                 subSum09 = money9;
@@ -13319,10 +12960,66 @@ namespace Flawless_ex
         #region "11行目"
         private void moneyTextBox010_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox010.Text) && string.IsNullOrEmpty(countTextBox010.Text))
+                {
+                    countTextBox010.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox010.Text) && string.IsNullOrEmpty(weightTextBox010.Text))
+                {
+                    weightTextBox010.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum010 = int.Parse(countTextBox010.Text);
+                weisum010 = decimal.Parse(weightTextBox010.Text);
+                subSum010 = money10;
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum011 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum010;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum011 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum010;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum011 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum010;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -13340,27 +13037,6 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount010 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["upd_date"].ToString();
-                    #endregion
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 11 + " and upd_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money10 = (decimal)dataRow1["amount"] / 1.1m;
-                }
-                #endregion
                 countsum010 = int.Parse(countTextBox010.Text);
                 weisum010 = decimal.Parse(weightTextBox010.Text);
                 subSum010 = money10;
@@ -13408,10 +13084,66 @@ namespace Flawless_ex
         #region "12行目"
         private void moneyTextBox011_TextChanged(object sender, EventArgs e)
         {
+            #region "買取販売"
             if (data == "D")
             {
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox011.Text) && string.IsNullOrEmpty(countTextBox011.Text))
+                {
+                    countTextBox011.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox011.Text) && string.IsNullOrEmpty(weightTextBox011.Text))
+                {
+                    weightTextBox011.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum011 = int.Parse(countTextBox011.Text);
+                weisum011 = decimal.Parse(weightTextBox011.Text);
+                subSum011 = money11;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum012 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum011;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum012 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum011;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum012 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum011;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -13429,27 +13161,6 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount011 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["upd_date"].ToString();
-                    #endregion
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 12 + " and upd_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money11 = (decimal)dataRow1["amount"] / 1.1m;
-                }
-                #endregion
                 countsum011 = int.Parse(countTextBox011.Text);
                 weisum011 = decimal.Parse(weightTextBox011.Text);
                 subSum011 = money11;     //増やしていく
@@ -13499,8 +13210,64 @@ namespace Flawless_ex
         {
             if (data == "D")
             {
+                #region "買取販売"
+                //重量×単価
+                if (!string.IsNullOrEmpty(weightTextBox012.Text) && string.IsNullOrEmpty(countTextBox012.Text))
+                {
+                    countTextBox012.Text = 0.ToString();
+                }
+                //数量×単価
+                else if (!string.IsNullOrEmpty(countTextBox012.Text) && string.IsNullOrEmpty(weightTextBox012.Text))
+                {
+                    weightTextBox012.Text = 0.ToString();
+                }
+                else
+                {
 
+                }
+                countsum012 = int.Parse(countTextBox012.Text);
+                weisum012 = decimal.Parse(weightTextBox012.Text);
+                subSum012 = money12;     //増やしていく
+                #region "金額合計の場合わけ"
+                if (subSum00 != 0 || subSum01 != 0 || subSum02 != 0 || subSum03 != 0 || subSum04 != 0 || subSum05 != 0 || subSum06 != 0 || subSum07 != 0 || subSum08 != 0 || subSum09 != 0 || subSum010 != 0 || subSum011 != 0)
+                {
+                    subSum = subSum00 + subSum01 + subSum02 + subSum03 + subSum04 + subSum05 + subSum06 + subSum07 + subSum08 + subSum09 + subSum010 + subSum011 + subSum012;
+                }
+                else
+                {
+                    subSum = subSum012;
+                }
+                #endregion
+                TaxAmount = Math.Round(subSum * Tax / 110, MidpointRounding.AwayFromZero);
+                //sum = subSum + TaxAmount;
+                #region "数量の場合わけ"
+                if (countsum00 != 0 || countsum01 != 0 || countsum02 != 0 || countsum03 != 0 || countsum04 != 0 || countsum05 != 0 || countsum06 != 0 || countsum07 != 0 || countsum08 != 0 || countsum09 != 0 || countsum010 != 0 || countsum011 != 0)
+                {
+                    countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                }
+                else
+                {
+                    countsum = countsum012;
+                }
+                #endregion
+                #region "重量の場合わけ"
+                if (weisum00 != 0 || weisum01 != 0 || weisum02 != 0 || weisum03 != 0 || weisum04 != 0 || weisum05 != 0 || weisum06 != 0 || weisum07 != 0 || weisum08 != 0 || weisum09 != 0 || weisum010 != 0 || weisum011 != 0)
+                {
+                    weisum = weisum00 + weisum01 + weisum02 + weisum03 + weisum04 + weisum05 + weisum06 + weisum07 + weisum08 + weisum09 + weisum010 + weisum011 + weisum012;
+                }
+                else
+                {
+                    weisum = weisum012;
+                }
+                #endregion
+
+                totalWeight2.Text = string.Format("{0:#,0}", Math.Round(weisum, 1, MidpointRounding.AwayFromZero));
+                totalCount2.Text = string.Format("{0:#,0}", countsum);
+                subTotal2.Text = string.Format("{0:C}", Math.Round(subSum + TaxAmount, MidpointRounding.AwayFromZero));
+                taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
+                sumTextBox2.Text = string.Format("{0:C}", Math.Round(subSum, MidpointRounding.AwayFromZero));
             }
+            #endregion
             else
             {
                 //重量×単価
@@ -13518,28 +13285,6 @@ namespace Flawless_ex
                     MessageBox.Show("数値を入力してください");
                     return;
                 }
-                #region "顧客選択から戻ってきた時"
-                if (amount012 != 0)
-                {
-                    #region "日付呼び出し"
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from delivery_calc_if where control_number = " + control + "ORDER BY upd_date DESC;";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                    DataRow dataRow2;
-                    dataRow2 = upddt.Rows[0];
-                    string date = dataRow2["upd_date"].ToString();
-                    #endregion
-                    DataTable dt10 = new DataTable();
-                    string str_sql_if3 = "select * from delivery_calc_if where control_number = " + control + " and record_number = " + 13 + " and upd_date = '" + date + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_if3, conn);
-                    adapter.Fill(dt10);
-                    DataRow dataRow1;
-                    dataRow1 = dt10.Rows[0];
-                    money12 = (decimal)dataRow1["amount"] / 1.1m;
-
-                }
-                #endregion
                 countsum012 = int.Parse(countTextBox012.Text);
                 weisum012 = decimal.Parse(weightTextBox012.Text);
                 subSum012 = money12;     //増やしていく
@@ -13594,17 +13339,18 @@ namespace Flawless_ex
             if (screan && data == "S")
             {
                 document = documentNumberTextBox.Text;
-                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
                 dataSearchResults.Show();
             }
             else if (screan && data == "D")
             {
                 control = int.Parse(documentNumberTextBox2.Text);
-                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
+                DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
                 dataSearchResults.Show();
             }
             else if (screan)
             {
+                MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
                 mainMenu.Show();
             }              
         }
@@ -16712,7 +16458,7 @@ namespace Flawless_ex
 
         private void Button2_Click(object sender, EventArgs e)
         {            
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
             screan = false;
             this.Close();
             mainMenu.Hide();
@@ -16721,7 +16467,7 @@ namespace Flawless_ex
 
         private void Button1_Click(object sender, EventArgs e)
         {            
-            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
+            DataSearchResults dataSearchResults = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, pass, document, control, antiqueNumber, documentNumber, access_auth);
             screan = false;
             this.Close();
             mainMenu.Hide();
@@ -16730,558 +16476,11 @@ namespace Flawless_ex
         #region "納品書　顧客選択"
         private void Client_searchButton1_Click(object sender, EventArgs e)
         {
-            #region "仕様変更に伴うコメントアウト"
-            /*if (!string.IsNullOrEmpty(moneyTextBox00.Text) || amount00 != 0)
-            {
-                DialogResult result = MessageBox.Show("データを保持しますか?", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (result == DialogResult.Yes)
-                {
-                    DataTable upddt = new DataTable();
-                    string str_sql_if = "select * from delivery_calc_if where control_number = " + control + ";";
-                    adapter = new NpgsqlDataAdapter(str_sql_if, conn);
-                    adapter.Fill(upddt);
-                   #region "データ一時置き場"
-                        int ControlNumber = number;
-                        total = Math.Round(subSum, MidpointRounding.AwayFromZero);
-                        DateTime date = DateTime.Now;
-                        string dat = date.ToString("yyyy/MM/dd HH:mm:ss");
-                        #region "1行目"
-                        //管理番号：ControlNumber
-                        int record = 1;     //行数
-                                            //int mainCategory = mainCategoryCode00;
-                                            //int item = itemCode00;
-                        #region "大分類コード"
-                        DataTable maindt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                        string sql_main = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox00.Text + "';";
-                        adapter = new NpgsqlDataAdapter(sql_main, conn);
-                        adapter.Fill(maindt);
-                        DataRow dataRow;
-                        dataRow = maindt.Rows[0];
-                        int mainCategory = (int)dataRow["main_category_code"];
-                        #endregion
-                        #region "品名コード"
-                        DataTable itemdt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                        string sql_item = "select * from item_m where item_name = '" + itemComboBox00.Text + "';";
-                        adapter = new NpgsqlDataAdapter(sql_item, conn);
-                        adapter.Fill(itemdt);
-                        DataRow dataRow1;
-                        dataRow1 = itemdt.Rows[0];
-                        int item = (int)dataRow1["item_code"];
-                        #endregion
-                        string Detail = itemDetail00.Text;
-                        decimal Weight = decimal.Parse(weightTextBox00.Text);
-                        int Count = int.Parse(countTextBox00.Text);
-                        decimal UnitPrice = decimal.Parse(unitPriceTextBox00.Text);
-                        decimal amount = money0 + money0 * Tax / 100;
-                        string Remarks = remarks00.Text;
-
-                        DataTable dt2 = new DataTable();
-                        string sql_str2 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + mainCategory + "','" + Detail + "','" + dat + "');";
-
-                        conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                        conn.Open();
-                        adapter = new NpgsqlDataAdapter(sql_str2, conn);
-                        adapter.Fill(dt2);
-                        amount00 = amount;
-                        #endregion
-                        #region "2行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox01.Text) && !(unitPriceTextBox01.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 2;
-                            //mainCategory = mainCategoryCode01;
-                            //item = itemCode01;
-                            #region "大分類コード"
-                            DataTable main1dt = new DataTable();
-                            string sql_main1 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox01.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main1, conn);
-                            adapter.Fill(main1dt);
-                            DataRow dataRow2;
-                            dataRow2 = main1dt.Rows[0];
-                            int mainCategory1 = (int)dataRow2["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item1dt = new DataTable();
-                            string sql_item1 = "select * from item_m where item_name = '" + itemComboBox01.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item1, conn);
-                            adapter.Fill(item1dt);
-                            DataRow dataRow3;
-                            dataRow3 = item1dt.Rows[0];
-                            int item1 = (int)dataRow3["item_code"];
-                            #endregion
-                            Detail = itemDetail01.Text;
-                            Weight = decimal.Parse(weightTextBox01.Text);
-                            Count = int.Parse(countTextBox01.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox01.Text);
-                            amount = money1 + money1 * Tax / 100;  //decimal.Parse(moneyTextBox01.Text);
-                            Remarks = remarks01.Text;
-
-                            DataTable dt4 = new DataTable();
-                            string sql_str4 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item1 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory1 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str4, conn);
-                            adapter.Fill(dt4);
-                            amount01 = amount;
-                        }
-                        #endregion
-                        #region "3行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox02.Text) && !(unitPriceTextBox02.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 3;
-                            //mainCategory = mainCategoryCode02;
-                            //item = itemCode02;
-                            #region "大分類コード"
-                            DataTable main2dt = new DataTable();
-                            string sql_main2 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox02.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main2, conn);
-                            adapter.Fill(main2dt);
-                            DataRow dataRow4;
-                            dataRow4 = main2dt.Rows[0];
-                            int mainCategory2 = (int)dataRow4["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item1dt = new DataTable();
-                            string sql_item2 = "select * from item_m where item_name = '" + itemComboBox02.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item2, conn);
-                            adapter.Fill(item1dt);
-                            DataRow dataRow5;
-                            dataRow5 = item1dt.Rows[0];
-                            int item2 = (int)dataRow5["item_code"];
-                            #endregion
-                            Detail = itemDetail02.Text;
-                            Weight = decimal.Parse(weightTextBox02.Text);
-                            Count = int.Parse(countTextBox02.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox02.Text);
-                            amount = money2 + money2 * Tax / 100;  //decimal.Parse(moneyTextBox02.Text);
-                            Remarks = remarks02.Text;
-
-                            DataTable dt5 = new DataTable();
-                            string sql_str5 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item2 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory2 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str5, conn);
-                            adapter.Fill(dt5);
-                            amount02 = amount;
-                        }
-                        #endregion
-                        #region "4行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox03.Text) && !(unitPriceTextBox03.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 4;
-                            //mainCategory = mainCategoryCode03;
-                            //item = itemCode03;
-                            #region "大分類コード"
-                            DataTable main3dt = new DataTable();
-                            string sql_main3 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox03.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main3, conn);
-                            adapter.Fill(main3dt);
-                            DataRow dataRow6;
-                            dataRow6 = main3dt.Rows[0];
-                            int mainCategory3 = (int)dataRow6["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item3dt = new DataTable();
-                            string sql_item3 = "select * from item_m where item_name = '" + itemComboBox03.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item3, conn);
-                            adapter.Fill(item3dt);
-                            DataRow dataRow7;
-                            dataRow7 = item3dt.Rows[0];
-                            int item3 = (int)dataRow7["item_code"];
-                            #endregion
-                            Detail = itemDetail03.Text;
-                            Weight = decimal.Parse(weightTextBox03.Text);
-                            Count = int.Parse(countTextBox03.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox03.Text);
-                            amount = money3 + money3 * Tax / 100;  //decimal.Parse(moneyTextBox03.Text);
-                            Remarks = remarks03.Text;
-
-                            DataTable dt6 = new DataTable();
-                            string sql_str6 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item3 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory3 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str6, conn);
-                            adapter.Fill(dt6);
-                            amount03 = amount;
-                        }
-                        #endregion
-                        #region "5行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox04.Text) && !(unitPriceTextBox04.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 5;
-                            //mainCategory = mainCategoryCode04;
-                            //item = itemCode04;
-                            #region "大分類コード"
-                            DataTable main4dt = new DataTable();
-                            string sql_main4 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox04.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main4, conn);
-                            adapter.Fill(main4dt);
-                            DataRow dataRow8;
-                            dataRow8 = main4dt.Rows[0];
-                            int mainCategory4 = (int)dataRow8["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item4dt = new DataTable();
-                            string sql_item4 = "select * from item_m where item_name = '" + itemComboBox04.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item4, conn);
-                            adapter.Fill(item4dt);
-                            DataRow dataRow9;
-                            dataRow9 = item4dt.Rows[0];
-                            int item4 = (int)dataRow9["item_code"];
-                            #endregion
-                            Detail = itemDetail04.Text;
-                            Weight = decimal.Parse(weightTextBox04.Text);
-                            Count = int.Parse(countTextBox04.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox04.Text);
-                            amount = money4 + money4 * Tax / 100; //decimal.Parse(moneyTextBox04.Text);
-                            Remarks = remarks04.Text;
-
-                            DataTable dt7 = new DataTable();
-                            string sql_str7 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item4 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory4 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str7, conn);
-                            adapter.Fill(dt7);
-                            amount04 = amount;
-                        }
-                        #endregion
-                        #region "6行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox05.Text) && !(unitPriceTextBox05.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 6;
-                            //mainCategory = mainCategoryCode05;
-                            //item = itemCode05;
-                            #region "大分類コード"
-                            DataTable main5dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main5 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox05.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main5, conn);
-                            adapter.Fill(main5dt);
-                            DataRow dataRow10;
-                            dataRow10 = main5dt.Rows[0];
-                            int mainCategory5 = (int)dataRow10["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item5dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item5 = "select * from item_m where item_name = '" + itemComboBox05.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item5, conn);
-                            adapter.Fill(item5dt);
-                            DataRow dataRow11;
-                            dataRow11 = item5dt.Rows[0];
-                            int item5 = (int)dataRow11["item_code"];
-                            #endregion
-                            Detail = itemDetail05.Text;
-                            Weight = decimal.Parse(weightTextBox05.Text);
-                            Count = int.Parse(countTextBox05.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox05.Text);
-                            amount = money5 + money5 * Tax / 100; //decimal.Parse(moneyTextBox05.Text);
-                            Remarks = remarks05.Text;
-
-                            DataTable dt8 = new DataTable();
-                            string sql_str8 = "Insert into delivery_calc_if VALUES  ( '" + ControlNumber + "' ,'" + record + "' , " + item5 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory5 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str8, conn);
-                            adapter.Fill(dt8);
-                            amount05 = amount;
-                        }
-                        #endregion
-                        #region "7行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox06.Text) && !(unitPriceTextBox06.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 7;
-                            //mainCategory = mainCategoryCode06;
-                            //item = itemCode06;
-                            #region "大分類コード"
-                            DataTable main6dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main6 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox06.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main6, conn);
-                            adapter.Fill(main6dt);
-                            DataRow dataRow12;
-                            dataRow12 = main6dt.Rows[0];
-                            int mainCategory6 = (int)dataRow12["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item6dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item6 = "select * from item_m where item_name = '" + itemComboBox06.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item6, conn);
-                            adapter.Fill(item6dt);
-                            DataRow dataRow13;
-                            dataRow13 = item6dt.Rows[0];
-                            int item6 = (int)dataRow13["item_code"];
-                            #endregion
-                            Detail = itemDetail06.Text;
-                            Weight = decimal.Parse(weightTextBox06.Text);
-                            Count = int.Parse(countTextBox06.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox06.Text);
-                            amount = money6 + money6 * Tax / 100; //decimal.Parse(moneyTextBox06.Text);
-                            Remarks = remarks06.Text;
-
-                            DataTable dt9 = new DataTable();
-                            string sql_str9 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item6 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory6 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str9, conn);
-                            adapter.Fill(dt9);
-                            amount06 = amount;
-                        }
-                        #endregion
-                        #region "8行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox07.Text) && !(unitPriceTextBox07.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 8;
-                            //mainCategory = mainCategoryCode07;
-                            //item = itemCode07;
-                            #region "大分類コード"
-                            DataTable main7dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main7 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox07.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main7, conn);
-                            adapter.Fill(main7dt);
-                            DataRow dataRow13;
-                            dataRow13 = main7dt.Rows[0];
-                            int mainCategory7 = (int)dataRow13["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item7dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item7 = "select * from item_m where item_name = '" + itemComboBox07.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item7, conn);
-                            adapter.Fill(item7dt);
-                            DataRow dataRow14;
-                            dataRow14 = item7dt.Rows[0];
-                            int item7 = (int)dataRow14["item_code"];
-                            #endregion
-                            Detail = itemDetail07.Text;
-                            Weight = decimal.Parse(weightTextBox07.Text);
-                            Count = int.Parse(countTextBox07.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox07.Text);
-                            amount = money7 + money7 * Tax / 100; //decimal.Parse(moneyTextBox07.Text);
-                            Remarks = remarks07.Text;
-
-                            DataTable dt10 = new DataTable();
-                            string sql_str10 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item7 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory7 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str10, conn);
-                            adapter.Fill(dt10);
-                            amount07 = amount;
-                        }
-                        #endregion
-                        #region "9行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox08.Text) && !(unitPriceTextBox08.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 9;
-                            //mainCategory = mainCategoryCode08;
-                            //item = itemCode08;
-                            #region "大分類コード"
-                            DataTable main8dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main8 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox08.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main8, conn);
-                            adapter.Fill(main8dt);
-                            DataRow dataRow15;
-                            dataRow15 = main8dt.Rows[0];
-                            int mainCategory8 = (int)dataRow15["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item8dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item8 = "select * from item_m where item_name = '" + itemComboBox08.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item8, conn);
-                            adapter.Fill(item8dt);
-                            DataRow dataRow16;
-                            dataRow16 = item8dt.Rows[0];
-                            int item8 = (int)dataRow16["item_code"];
-                            #endregion
-                            Detail = itemDetail08.Text;
-                            Weight = decimal.Parse(weightTextBox08.Text);
-                            Count = int.Parse(countTextBox08.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox08.Text);
-                            amount = money8 + money8 * Tax / 100; //decimal.Parse(moneyTextBox08.Text);
-                            Remarks = remarks08.Text;
-
-                            DataTable dt11 = new DataTable();
-                            string sql_str11 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item8 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory8 + ",'" + Detail + "','" + dat + ");";
-
-                            adapter = new NpgsqlDataAdapter(sql_str11, conn);
-                            adapter.Fill(dt11);
-                            amount08 = amount;
-                        }
-                        #endregion
-                        #region "10行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox09.Text) && !(unitPriceTextBox09.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 10;
-                            //mainCategory = mainCategoryCode09;
-                            //item = itemCode09;
-                            #region "大分類コード"
-                            DataTable main9dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main9 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox09.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main9, conn);
-                            adapter.Fill(main9dt);
-                            DataRow dataRow17;
-                            dataRow17 = main9dt.Rows[0];
-                            int mainCategory9 = (int)dataRow17["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item9dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item9 = "select * from item_m where item_name = '" + itemComboBox09.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item9, conn);
-                            adapter.Fill(item9dt);
-                            DataRow dataRow18;
-                            dataRow18 = item9dt.Rows[0];
-                            int item9 = (int)dataRow18["item_code"];
-                            #endregion
-                            Detail = itemDetail09.Text;
-                            Weight = decimal.Parse(weightTextBox09.Text);
-                            Count = int.Parse(countTextBox09.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox09.Text);
-                            amount = money9 + money9 * Tax / 100; //decimal.Parse(moneyTextBox09.Text);
-                            Remarks = remarks09.Text;
-
-                            DataTable dt12 = new DataTable();
-                            string sql_str12 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item9 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory9 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str12, conn);
-                            adapter.Fill(dt12);
-                            amount09 = amount;
-                        }
-                        #endregion
-                        #region "11行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox010.Text) && !(unitPriceTextBox010.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 11;
-                            //mainCategory = mainCategoryCode010;
-                            //item = itemCode010;
-                            #region "大分類コード"
-                            DataTable main10dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main10 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox010.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main10, conn);
-                            adapter.Fill(main10dt);
-                            DataRow dataRow19;
-                            dataRow19 = main10dt.Rows[0];
-                            int mainCategory10 = (int)dataRow19["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item10dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item10 = "select * from item_m where item_name = '" + itemComboBox010.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item10, conn);
-                            adapter.Fill(item10dt);
-                            DataRow dataRow20;
-                            dataRow20 = item10dt.Rows[0];
-                            int item10 = (int)dataRow20["item_code"];
-                            #endregion
-                            Detail = itemDetail010.Text;
-                            Weight = decimal.Parse(weightTextBox010.Text);
-                            Count = int.Parse(countTextBox010.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox010.Text);
-                            amount = money10 + money10 * Tax / 100; //decimal.Parse(moneyTextBox010.Text);
-                            Remarks = remarks010.Text;
-
-                            DataTable dt13 = new DataTable();
-                            string sql_str13 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item10 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory10 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str13, conn);
-                            adapter.Fill(dt13);
-                            amount010 = amount;
-                        }
-                        #endregion
-                        #region "12行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox011.Text) && !(unitPriceTextBox011.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 12;
-                            //mainCategory = mainCategoryCode011;
-                            //item = itemCode011;
-                            #region "大分類コード"
-                            DataTable main11dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main11 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox011.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main11, conn);
-                            adapter.Fill(main11dt);
-                            DataRow dataRow21;
-                            dataRow21 = main11dt.Rows[0];
-                            int mainCategory11 = (int)dataRow21["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item11dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item11 = "select * from item_m where item_name = '" + itemComboBox011.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item11, conn);
-                            adapter.Fill(item11dt);
-                            DataRow dataRow22;
-                            dataRow22 = item11dt.Rows[0];
-                            int item11 = (int)dataRow22["item_code"];
-                            #endregion
-                            Detail = itemDetail011.Text;
-                            Weight = decimal.Parse(weightTextBox011.Text);
-                            Count = int.Parse(countTextBox011.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox011.Text);
-                            amount = money11 + money11 * Tax / 100; //decimal.Parse(moneyTextBox011.Text);
-                            Remarks = remarks011.Text;
-
-                            DataTable dt14 = new DataTable();
-                            string sql_str14 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item11 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory11 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str14, conn);
-                            adapter.Fill(dt14);
-                            amount011 = amount;
-                        }
-                        #endregion
-                        #region "13行目"
-                        if (!string.IsNullOrEmpty(unitPriceTextBox012.Text) && !(unitPriceTextBox012.Text == "単価 -> 重量 or 数量"))
-                        {
-                            record = 13;
-                            //mainCategory = mainCategoryCode012;
-                            //item = itemCode012;
-                            #region "大分類コード"
-                            DataTable main12dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_main12 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox012.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_main12, conn);
-                            adapter.Fill(main12dt);
-                            DataRow dataRow23;
-                            dataRow23 = main12dt.Rows[0];
-                            int mainCategory12 = (int)dataRow23["main_category_code"];
-                            #endregion
-                            #region "品名コード"
-                            DataTable item12dt = new DataTable();
-                            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                            string sql_item12 = "select * from item_m where item_name = '" + itemComboBox012.Text + "';";
-                            adapter = new NpgsqlDataAdapter(sql_item12, conn);
-                            adapter.Fill(item12dt);
-                            DataRow dataRow24;
-                            dataRow24 = item12dt.Rows[0];
-                            int item12 = (int)dataRow24["item_code"];
-                            #endregion
-                            Detail = itemDetail012.Text;
-                            Weight = decimal.Parse(weightTextBox012.Text);
-                            Count = int.Parse(countTextBox012.Text);
-                            UnitPrice = decimal.Parse(unitPriceTextBox012.Text);
-                            amount = money12 + money12 * Tax / 100; //decimal.Parse(moneyTextBox012.Text);
-                            Remarks = remarks012.Text;
-
-                            DataTable dt15 = new DataTable();
-                            string sql_str15 = "Insert into delivery_calc_if VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item12 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory12 + ",'" + Detail + "','" + dat + "');";
-
-                            adapter = new NpgsqlDataAdapter(sql_str15, conn);
-                            adapter.Fill(dt15);
-                            amount012 = amount;
-                        }
-                        #endregion
-                        #endregion
-                }
-                else
-                {
-
-                }}
-                        else { }*/
-            #endregion
-            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, amount00, amount01, amount02, amount03, amount04, amount05, amount06, amount07, amount08, amount09, amount010, amount011, amount012, amount10, amount11, amount12, amount13, amount14, amount15, amount16, amount17, amount18, amount19, amount110, amount111, amount112, document, access_auth, pass);
+            client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, document, access_auth, pass);
             Properties.Settings.Default.Save();
             //screan = false;
             //this.Close();
+            this.data = search2.data;
             search2.ShowDialog();
 
             #region "これから選択する場合"

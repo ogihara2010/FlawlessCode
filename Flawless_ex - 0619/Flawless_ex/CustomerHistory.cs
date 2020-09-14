@@ -27,7 +27,7 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter2;
         NpgsqlConnection conn3 = new NpgsqlConnection();
         NpgsqlDataAdapter adapter3;
-        string data;
+        public string data;
         string Pass;
         bool screan = true;
         string document;
@@ -57,14 +57,12 @@ namespace Flawless_ex
             if (data == "S")
             {
                 this.textBox8.Enabled = false;
-                this.groupBox9.Enabled = false;
             }
             else if (data == "D")
             {
                 this.textBox7.Enabled = false;
-                this.groupBox8.Enabled = false;
             }
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //大分類検索用
             string sql_str = "select * from main_category_m where invalid = 0 order by main_category_code;";
@@ -116,18 +114,6 @@ namespace Flawless_ex
             int ant;
             int amt;
             int amt1;
-            string search1 = "or";
-            string search2 = "or";
-            string search3 = "or";
-            string search4 = "or";
-            string search5 = "or";
-            string search6 = "or";
-            string search7 = "or";
-            string search8 = "or";
-            string search9 = "or";
-            string search10 = "or";
-            string search11 = "or";
-            string search12 = "or";
             #endregion
 
             NpgsqlConnection conn = new NpgsqlConnection();
@@ -137,91 +123,17 @@ namespace Flawless_ex
             NpgsqlConnection conn3 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter3;
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn3.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn3.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             #region "検索条件 法人"
             if (radioButton1.Checked == true)
             {
                 type = 0;
-                #region "ラジオボタン"
-                if (radioButton3.Checked == true)
-                {
-                    search1 = "and";
-
-                }
-                else { }
-                if (radioButton6.Checked == true)
-                {
-                    search2 = "and";
-
-                }
-                else { }
-                if (radioButton31.Checked == true)
-                {
-                    search3 = "and";
-
-                }
-                else { }
-                if (radioButton33.Checked == true)
-                {
-                    search4 = "and";
-
-                }
-                else { }
-                if (radioButton35.Checked == true)
-                {
-                    search5 = "and";
-
-                }
-                else { }
-                if (radioButton37.Checked == true)
-                {
-                    search6 = "and";
-
-                }
-                else { }
-                if (radioButton39.Checked == true)
-                {
-                    search7 = "and";
-
-                }
-                else { }
-                if (radioButton41.Checked == true)
-                {
-                    search8 = "and";
-
-                }
-                else { }
-                if (radioButton43.Checked == true)
-                {
-                    search9 = "and";
-
-                }
-                else { }
-                if (radioButton45.Checked == true)
-                {
-                    search10 = "and";
-
-                }
-                else { }
-                if (radioButton47.Checked == true)
-                {
-                    search11 = "and";
-
-                }
-                else { }
-                if (radioButton49.Checked == true)
-                {
-                    search12 = "and";
-
-                }
-                else { }
-                #endregion
                 #region "入力パラメーター"
                 if (!string.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    shopname = "B.shopname = '" + this.textBox1.Text + "'" + search1;
+                    shopname = "B.shopname = '" + this.textBox1.Text + "'";
 
                 }
                 else
@@ -230,7 +142,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox2.Text))
                 {
-                    shopnamekana = " B.shop_name_kana = '" + this.textBox2.Text + "'" + search2;
+                    shopnamekana = " B.shop_name_kana = '" + this.textBox2.Text + "'";
                 }
                 else
                 {
@@ -243,7 +155,7 @@ namespace Flawless_ex
                 else { }
                 if (!string.IsNullOrWhiteSpace(textBox4.Text))
                 {
-                    address = " B.address like '% " + this.textBox4.Text + "%'" + search3;
+                    address = " B.address like '% " + this.textBox4.Text + "%'";
                 }
                 else
                 {
@@ -251,7 +163,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox5.Text))
                 {
-                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'" + search4;
+                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'";
                 }
                 else
                 {
@@ -259,7 +171,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox6.Text))
                 {
-                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'" + search5;
+                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'";
                 }
                 else
                 {
@@ -267,7 +179,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " A.document_number = '" + this.textBox7.Text + "' " + search7;
+                    documentNumber = " A.document_number = '" + this.textBox7.Text + "' ";
                 }
                 else
                 {
@@ -275,7 +187,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " " + search7;
+                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " ";
                 }
                 else
                 {
@@ -283,7 +195,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox9.Text))
                 {
-                    antiqueNumber = " B.antique_number = " + int.Parse(this.textBox9.Text) + " " + search8;
+                    antiqueNumber = " B.antique_number = " + int.Parse(this.textBox9.Text) + " ";
                 }
                 else
                 {
@@ -291,7 +203,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox1.Text))
                 {
-                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "'" + search9;
+                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "'";
                 }
                 else
                 {
@@ -299,7 +211,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox2.Text))
                 {
-                    item = " D.item_name = '" + this.comboBox2.Text + "'" + search10;
+                    item = " D.item_name = '" + this.comboBox2.Text + "'";
                 }
                 else
                 {
@@ -307,7 +219,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = search11 + " A.payment_method = '" + this.comboBox3.Text + "'" + search12;
+                    method = " A.payment_method = '" + this.comboBox3.Text + "'";
                 }
                 else
                 {
@@ -429,8 +341,10 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
-                    this.Hide();
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    screan = false;
+                    this.Close();
+                    this.data = dataSearch.data;
                     dataSearch.Show();
                 }
                 else if (data == "D")
@@ -462,9 +376,10 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     screan = false;
                     this.Close();
+                    this.data = dataSearch.data;
                     dataSearch.Show();
                 }
             }
@@ -472,72 +387,10 @@ namespace Flawless_ex
             if (radioButton2.Checked == true)
             {
                 type = 1;
-                #region "ラジオボタン"
-                if (radioButton31.Checked == true)
-                {
-                    search3 = "and";
-
-                }
-                else { }
-                if (radioButton33.Checked == true)
-                {
-                    search4 = "and";
-
-                }
-                else { }
-                if (radioButton35.Checked == true)
-                {
-                    search5 = "and";
-
-                }
-                else { }
-                if (radioButton37.Checked == true)
-                {
-                    search6 = "and";
-
-                }
-                else { }
-                if (radioButton39.Checked == true)
-                {
-                    search7 = "and";
-
-                }
-                else { }
-                if (radioButton41.Checked == true)
-                {
-                    search8 = "and";
-
-                }
-                else { }
-                if (radioButton43.Checked == true)
-                {
-                    search9 = "and";
-
-                }
-                else { }
-                if (radioButton45.Checked == true)
-                {
-                    search10 = "and";
-
-                }
-                else { }
-                if (radioButton47.Checked == true)
-                {
-                    search11 = "and";
-
-                }
-                else { }
-                if (radioButton49.Checked == true)
-                {
-                    search12 = "and";
-
-                }
-                else { }
-                #endregion
                 #region "パラメーター"
                 if (!string.IsNullOrWhiteSpace(textBox3.Text))
                 {
-                    name = "B.name = '" + this.textBox3.Text + "'" + search3;
+                    name = "B.name = '" + this.textBox3.Text + "'";
                 }
                 else
                 {
@@ -546,7 +399,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox4.Text))
                 {
-                    address = " B.address like '% " + this.textBox4.Text + "%'" + search4;
+                    address = " B.address like '% " + this.textBox4.Text + "%'";
                 }
                 else
                 {
@@ -555,7 +408,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox5.Text))
                 {
-                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'" + search5;
+                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'";
                 }
                 else
                 {
@@ -564,7 +417,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox6.Text))
                 {
-                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'" + search7;
+                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'";
                 }
                 else
                 {
@@ -573,7 +426,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " A.document_number = '" + this.textBox7.Text + "'" + search8;
+                    documentNumber = " A.document_number = '" + this.textBox7.Text + "'";
                 }
                 else
                 {
@@ -582,7 +435,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " " + search8;
+                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " ";
                 }
                 else
                 {
@@ -590,7 +443,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox1.Text))
                 {
-                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "' " + search10;
+                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "' ";
                 }
                 else
                 {
@@ -599,7 +452,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(comboBox2.Text))
                 {
-                    item = " D.item_name = '" + this.comboBox2.Text + "'" + search11;
+                    item = " D.item_name = '" + this.comboBox2.Text + "'";
                 }
                 else
                 {
@@ -607,7 +460,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = search11 + " A.payment_method = '" + this.comboBox3.Text + "'" + search12;
+                    method =" A.payment_method = '" + this.comboBox3.Text + "'";
                 }
                 else
                 {
@@ -718,9 +571,10 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     screan = false;
                     this.Close();
+                    this.data = dataSearch.data;
                     dataSearch.Show();
                 }
                 if (data == "D")
@@ -754,9 +608,10 @@ namespace Flawless_ex
                     amount1 = amt1;
 
                     //control = int.Parse(this.textBox8.Text);
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, search1, search2, search3, search4, search5, search6, search7, search8, search9, search10, search11, search12, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     screan = false;
                     this.Close();
+                    this.data = dataSearch.data;
                     dataSearch.Show();
                 }
             }
@@ -767,10 +622,6 @@ namespace Flawless_ex
             label4.Text = "氏名";
             textBox1.Enabled = false;
             textBox2.Enabled = false;
-            radioButton3.Enabled = false;
-            radioButton4.Enabled = false;
-            radioButton5.Enabled = false;
-            radioButton6.Enabled = false;
         }
 
         private void RadioButton1_CheckedChanged(object sender, EventArgs e)
@@ -778,10 +629,6 @@ namespace Flawless_ex
             label4.Text = "担当者名";
             textBox1.Enabled = true;
             textBox2.Enabled = true;
-            radioButton3.Enabled = true;
-            radioButton4.Enabled = true;
-            radioButton5.Enabled = true;
-            radioButton6.Enabled = true;
         }
 
         private void CustomerHistory_FormClosed(object sender, FormClosedEventArgs e)
