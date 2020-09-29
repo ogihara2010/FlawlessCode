@@ -12,17 +12,18 @@ namespace Flawless_ex
         MasterMaintenanceMenu master;
         DataTable dt = new DataTable(); //選択した担当者コード全ての情報
 
-        int staffCode;//担当者コード
-        string staffName;//担当者名
-        string staffNameKana;//担当者名カナ
-        int main_category;//大分類初期値
-        string password;//パスワード
-        string rePassword;//パスワード再入力
-        string access_auth;//アクセス権限
-        int code;//ログイン担当者コード
+        public int staffCode;//担当者コード
+        public string staffName;//担当者名
+        public string staffNameKana;//担当者名カナ
+        public int main_category;//大分類初期値
+        public string password;//パスワード
+        public string rePassword;//パスワード再入力
+        public string access_auth;//アクセス権限
+        public string access_auth1; //更新用
+        public int code;//ログイン担当者コード
         bool screan = true;
-        string Pass;
-        string kana;
+        public string Pass;
+        public string kana;
 
         public StaffUpdateMenu(MasterMaintenanceMenu master, int staff_code, int code, string access_auth, string pass)
         {
@@ -110,10 +111,10 @@ namespace Flawless_ex
                 #endregion
 
 
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
-                string remove_sql = "update staff_m set invalid = 1, reason = '" +  reason +"' where staff_code = " + staffCode + "";
+                string remove_sql = "update staff_m set invalid = 1, reason = '" + reason + "' where staff_code = " + staffCode + "";
 
                 adapter = new NpgsqlDataAdapter(remove_sql, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
@@ -122,7 +123,7 @@ namespace Flawless_ex
 
                 //履歴
                 DateTime dateTime = DateTime.Now;
-                string remove_rivisions_sql = "insert into staff_m_revisions_invalid values(" + staffCode + ",'" + dateTime + "'," + code + ");";
+                string remove_rivisions_sql = "insert into revisions values(" + 1 + ",'" + dateTime + "'," + code + ",'" +　"有効" +　"','" + "無効" + "','" + reason + "');";
                 NpgsqlCommand cmd = new NpgsqlCommand(remove_rivisions_sql, conn);
                 NpgsqlDataReader dtr = cmd.ExecuteReader();
 
@@ -159,13 +160,13 @@ namespace Flawless_ex
             pass = password;
             password = this.passwordText.Text;//パスワード
             rePassword = this.passwordReText.Text;//パスワード再入力
-            access = access_auth;
-            access_auth = this.accessButton.Text;//アクセス権限
+            access = access_auth1;
+            access_auth1 = this.accessButton.Text;//アクセス権限
             reason = this.reason.Text;
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
-            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ;";
+            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth1 + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ;";
 
 
             #region "起こりうるミス"
@@ -178,9 +179,9 @@ namespace Flawless_ex
                     return;
                 }
             }
-            else if (pass != rePassword)
+            else if (password != rePassword)
             {
-                MessageBox.Show("パスワードを確認してください。");
+                MessageBox.Show("パスワードを確認して下さい。");
                 return;
             }
             else if (string.IsNullOrEmpty(parsonNameText.Text))
@@ -235,35 +236,38 @@ namespace Flawless_ex
 
             //履歴
             DateTime dateTime = DateTime.Now;
-            //担当者名
+            #region "担当者名変更"
             if (this.parsonNameText.Text != name)
             {
-                string sql_staffNameRevisions = "insert into staff_name_revisions values('" + dateTime + "'," + staffCode + ",'" + name + "','" + name_kana + "','" + staffName + "', '" + staffNameKana + "'," + code + ");";
+                string sql_staffNameRevisions = "insert into revisions values(" + 1 + ",'" + dateTime + "'," + code + ",'" + name + "','" + staffName + "','" + reason  + "');";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_staffNameRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
-            //パスワード
+            #endregion
+            #region "パスワード"
             else if (this.passwordText.Text != pass)
             {
-                string sql_passwordRevisions = "insert into staff_password_revisions values('" + dateTime + "', " + staffCode + ",'" + pass + "','" + password + "', " + code + ")";
+                string sql_passwordRevisions = "insert into revisions values(" + 1 + ",'" + dateTime + "', " + code + ",'" + pass + "','" + password + "','" + reason + "')";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_passwordRevisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
-            //大分類コード
+            #endregion
+            #region "大分類コード"
             else if (main_category != main_code)
             {
-                string sql_main_category_code_revisions = "insert into staff_main_category_code_revisions values('" + dateTime + "'," + staffCode + "," + main_code + ", " + main_category + ", " + code + ")";
+                string sql_main_category_code_revisions = "insert into revisions values(" + 1 + ",'" + dateTime + "'," + code + "," + main_category + ", " + main_code + ",'" + reason + "')";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_main_category_code_revisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
-            //アクセス権限
-            else if (access_auth != access)
+            #endregion
+            #region "アクセス権限"
+            else if (access_auth1 != access)
             {
-                string sql_access_revisions = "insert into staff_access_auth_revisions values('" + dateTime + "', " + staffCode + ", '" + access + "', '" + access_auth + "', " + code + ")";
+                string sql_access_revisions = "insert into revisions values(" + 1 + ",'" + dateTime + "', " + code + ", '" + access + "', '" + access_auth1 + "','" + reason + "')";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_access_revisions, conn);
                 NpgsqlDataReader reader = cmd.ExecuteReader();
             }
-
+            #endregion
             this.Close();
         }
 
@@ -273,7 +277,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from staff_m where staff_code = " + staffCode + ";";
 
@@ -287,7 +291,7 @@ namespace Flawless_ex
             staffNameKana = row["staff_name_kana"].ToString();
             main_category = (int)row["main_category_code"];
             password = row["password"].ToString();
-            access_auth = row["access_auth"].ToString();
+            access_auth1 = row["access_auth"].ToString();
 
             //担当者ごとの大分類の初期値を先頭に
             DataTable dt1 = new DataTable();
@@ -304,7 +308,7 @@ namespace Flawless_ex
             this.parsonNameText.Text = staffName;
             this.parsonNamt2Text.Text = staffNameKana;
             this.passwordText.Text = password;
-            this.accessButton.Text = access_auth;
+            this.accessButton.Text = access_auth1;
 
             conn.Close();
         }

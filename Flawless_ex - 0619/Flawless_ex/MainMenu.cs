@@ -6,21 +6,33 @@ namespace Flawless_ex
 {
     public partial class MainMenu : Form　//メインメニュー
     {
-        int type;
-        string staff_name;
-        string address;
+        public int type;
+        public string staff_name;
+        public string address;
         TopMenu top = new TopMenu();
-        string access_auth;
-        int staff_id;
-        string data;
-        string slipNumber;
+        public string access_auth;
+        public int staff_id;
+        public string data;
+        public string slipNumber;
         decimal Total;
-        int control;
-        string search1;
-        string search2;
-        string search3;
-        string Pass;
-        int grade;
+        public int control;
+        #region "買取販売履歴"
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
+        public string Pass;
+        public int grade;
         bool CarryOver;
         bool MonthCatalog;
         bool screan = true;
@@ -55,7 +67,7 @@ namespace Flawless_ex
         private void MainMenu_Load(object sender, EventArgs e)
         {
             conn = new NpgsqlConnection();
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "select* from staff_m where staff_code = " + staff_id + " and password = '" + Pass + "'";
             cmd = new NpgsqlCommand(sql_str2, conn);
@@ -73,7 +85,7 @@ namespace Flawless_ex
         #region "計算書・納品書"
         private void Statement_DeliveryButton_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, search1, search2, search3, grade);
+            Statement statement = new Statement(this, staff_id, type, staff_name, address, access_auth, Total, Pass, slipNumber, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             screan = false;
             this.Close();
             statement.Show();
@@ -126,6 +138,6 @@ namespace Flawless_ex
             {
                 screan = true;
             }
-        }
+        }       
     }
 }

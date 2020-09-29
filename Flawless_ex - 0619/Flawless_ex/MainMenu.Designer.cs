@@ -43,10 +43,10 @@
             this.Statement_DeliveryButton.AutoSize = true;
             this.Statement_DeliveryButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.Statement_DeliveryButton.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Statement_DeliveryButton.Location = new System.Drawing.Point(229, 192);
-            this.Statement_DeliveryButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.Statement_DeliveryButton.Location = new System.Drawing.Point(114, 96);
+            this.Statement_DeliveryButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Statement_DeliveryButton.Name = "Statement_DeliveryButton";
-            this.Statement_DeliveryButton.Size = new System.Drawing.Size(892, 150);
+            this.Statement_DeliveryButton.Size = new System.Drawing.Size(446, 75);
             this.Statement_DeliveryButton.TabIndex = 0;
             this.Statement_DeliveryButton.Text = "計算書/納品書作成";
             this.Statement_DeliveryButton.UseVisualStyleBackColor = false;
@@ -57,10 +57,10 @@
             this.CustomerHistoriButton.AutoSize = true;
             this.CustomerHistoriButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.CustomerHistoriButton.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.CustomerHistoriButton.Location = new System.Drawing.Point(229, 371);
-            this.CustomerHistoriButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.CustomerHistoriButton.Location = new System.Drawing.Point(114, 186);
+            this.CustomerHistoriButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.CustomerHistoriButton.Name = "CustomerHistoriButton";
-            this.CustomerHistoriButton.Size = new System.Drawing.Size(892, 148);
+            this.CustomerHistoriButton.Size = new System.Drawing.Size(446, 74);
             this.CustomerHistoriButton.TabIndex = 1;
             this.CustomerHistoriButton.Text = "買取販売データ検索";
             this.CustomerHistoriButton.UseVisualStyleBackColor = false;
@@ -71,10 +71,10 @@
             this.MonResults.AutoSize = true;
             this.MonResults.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.MonResults.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MonResults.Location = new System.Drawing.Point(229, 557);
-            this.MonResults.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.MonResults.Location = new System.Drawing.Point(114, 278);
+            this.MonResults.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.MonResults.Name = "MonResults";
-            this.MonResults.Size = new System.Drawing.Size(892, 139);
+            this.MonResults.Size = new System.Drawing.Size(446, 70);
             this.MonResults.TabIndex = 2;
             this.MonResults.Text = "月間成績表";
             this.MonResults.UseVisualStyleBackColor = false;
@@ -85,10 +85,10 @@
             this.MasterMainte.AutoSize = true;
             this.MasterMainte.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.MasterMainte.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MasterMainte.Location = new System.Drawing.Point(229, 1121);
-            this.MasterMainte.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.MasterMainte.Location = new System.Drawing.Point(114, 560);
+            this.MasterMainte.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.MasterMainte.Name = "MasterMainte";
-            this.MasterMainte.Size = new System.Drawing.Size(892, 150);
+            this.MasterMainte.Size = new System.Drawing.Size(446, 75);
             this.MasterMainte.TabIndex = 3;
             this.MasterMainte.Text = "マスタメンテナンス";
             this.MasterMainte.UseVisualStyleBackColor = false;
@@ -98,10 +98,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(827, 45);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(414, 22);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(264, 93);
+            this.label1.Size = new System.Drawing.Size(133, 47);
             this.label1.TabIndex = 4;
             this.label1.Text = "label1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -112,10 +112,10 @@
             this.CloseButton.BackColor = System.Drawing.Color.MistyRose;
             this.CloseButton.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.CloseButton.ForeColor = System.Drawing.Color.Black;
-            this.CloseButton.Location = new System.Drawing.Point(93, 1323);
-            this.CloseButton.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.CloseButton.Location = new System.Drawing.Point(46, 662);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(384, 175);
+            this.CloseButton.Size = new System.Drawing.Size(192, 88);
             this.CloseButton.TabIndex = 5;
             this.CloseButton.Text = "閉じる";
             this.CloseButton.UseVisualStyleBackColor = false;
@@ -126,10 +126,10 @@
             this.operatelog.AutoSize = true;
             this.operatelog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.operatelog.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.operatelog.Location = new System.Drawing.Point(229, 926);
-            this.operatelog.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.operatelog.Location = new System.Drawing.Point(114, 463);
+            this.operatelog.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.operatelog.Name = "operatelog";
-            this.operatelog.Size = new System.Drawing.Size(892, 128);
+            this.operatelog.Size = new System.Drawing.Size(446, 64);
             this.operatelog.TabIndex = 6;
             this.operatelog.Text = "操作履歴";
             this.operatelog.UseVisualStyleBackColor = false;
@@ -140,10 +140,10 @@
             this.button3.AutoSize = true;
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.button3.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button3.Location = new System.Drawing.Point(229, 728);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button3.Location = new System.Drawing.Point(114, 364);
+            this.button3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(892, 138);
+            this.button3.Size = new System.Drawing.Size(446, 69);
             this.button3.TabIndex = 8;
             this.button3.Text = "卸値/未入力・次月持越し";
             this.button3.UseVisualStyleBackColor = false;
@@ -151,10 +151,11 @@
             // 
             // MainMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1356, 1537);
+            this.ClientSize = new System.Drawing.Size(678, 772);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.operatelog);
             this.Controls.Add(this.CloseButton);
@@ -163,9 +164,9 @@
             this.Controls.Add(this.MonResults);
             this.Controls.Add(this.CustomerHistoriButton);
             this.Controls.Add(this.Statement_DeliveryButton);
-            this.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.Name = "MainMenu";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "メインメニュー";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainMenu_FormClosed);
             this.Load += new System.EventHandler(this.MainMenu_Load);

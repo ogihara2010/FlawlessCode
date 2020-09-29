@@ -8,10 +8,10 @@ namespace Flawless_ex
     public partial class MasterMaintenanceMenu : Form //マスタメンテナンスメニュー(A権限者)
     {
         MainMenu mainMenu;
-        int staff_code;
-        string access_auth;
+        public int staff_code;
+        public string access_auth;
         TopMenu top;
-        string Pass;
+        public string Pass;
         bool screan = true;
 
         public MasterMaintenanceMenu(MainMenu mainMenu, int staff_code, string access_auth, string pass)

@@ -7,42 +7,58 @@ namespace Flawless_ex
     public partial class client_search_result : Form
     {
         DataTable dt = new DataTable();
-        int type;
-        int check;
-        //Statement statement;
+        public int type;
+        public int check;
+        Statement statement;
         MainMenu mainMenu;
-        int staff_id;
-        string address;
-        string staff_name;
-        decimal Total;
-        string access_auth;
-        string document;
-        int control;
-        string data;
-        string search1;
-        string search2;
-        string search3;
-        string pass;
-        int grade;
+        public int staff_id;
+        public string address;
+        public string staff_name;
+        public string shop_name;
+        public string name;
+        public string company_name;
+        public decimal Total;
+        public string access_auth;
+        public string document;
+        public int control;
+        public string data;
+        public int grade;
+        #region "買取販売履歴"
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
+        public string pass;
 
-        public client_search_result(DataTable dt, int type, int check, MainMenu mainMenu, int id, decimal Total, string Access_auth, string Pass)
+        public client_search_result(DataTable dt, int type, int check, Statement statement, int id, decimal Total, int control, string document, string Access_auth, string Pass)
         {
             InitializeComponent();
 
             this.dt = dt;
             this.type = type;
             this.check = check;
-            this.mainMenu = mainMenu;
-            //this.statement = statement;
+            //this.mainMenu = mainMenu;
+            this.statement = statement;
             staff_id = id;
             this.Total = Total;
+            this.control = control;
+            this.document = document;
             this.access_auth = Access_auth;
             this.pass = Pass;
         }
 
         private void client_search_result_Load(object sender, EventArgs e)
         {
-
             if (type == 0)
             {
                 dataGridView1.DataSource = dt;
@@ -51,8 +67,6 @@ namespace Flawless_ex
                 dataGridView1.Columns[2].HeaderText = "担当者名";
                 dataGridView1.Columns[3].HeaderText = "住所";
                 dataGridView1.Columns["antique_number"].Visible = false;
-
-
             }
             else if (type == 1)
             {
@@ -92,8 +106,21 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, access_auth, pass);
-
+            client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
+            if (type == 0)
+            {
+                this.company_name = client_Search.clientName;
+                this.shop_name = client_Search.shopName;
+                this.staff_name = client_Search.clientStaff;
+                this.address = client_Search.address;
+            }
+            else if (type == 1)
+            {
+                this.name = client_Search.iname;
+                this.address = client_Search.iaddress;
+                this.check = client_Search.check;
+            }
+            else { }
             this.Close();
             client_Search.Show();
         }
@@ -103,7 +130,7 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)//法人
             {
@@ -120,12 +147,25 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
-                this.Close();
-                statement.clientDt = dt2;
-                statement.count = 1;
-                statement.Show();
+                if (statement.Visible == true)
+                {
+                    statement.staff_id = staff_id;
+                    statement.client_staff_name = staff_name;
+                    statement.address = address;
+                    statement.type = 0;
+                    statement.count = 1;
+                    this.Close();
+                    statement.Show();
+                }
+                else
+                {
+                    statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
+                    this.Close();
+                    statement.clientDt = dt2;
+                    statement.count = 1;
+                    statement.Show();
+                }
+
             }
             else if (type == 1)
             {
@@ -140,11 +180,25 @@ namespace Flawless_ex
 
                 conn.Close();
 
-                Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
-                this.Close();
-                statement.clientDt = dt2;
-                statement.count = 1;
-                statement.Show();
+                if (statement.Visible == true)
+                {
+                    statement.staff_id = staff_id;
+                    statement.client_staff_name = staff_name;
+                    statement.address = address;
+                    statement.type = 1;
+                    statement.count = 1;
+                    this.Close();
+                    statement.Show();
+                }
+                else
+                {
+                    statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
+                    this.Close();
+                    statement.clientDt = dt2;
+                    statement.count = 1;
+                    statement.type = 1;
+                    statement.Show();
+                }
             }
         }
     }

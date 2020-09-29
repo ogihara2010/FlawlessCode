@@ -22,6 +22,7 @@ namespace Flawless_ex
         DataTable dt5 = new DataTable();
         DataTable dt6 = new DataTable();
         int a; // record_numberの数
+        int b; // 2巡目
         int staff_id;
         int type;
         string staff_name;
@@ -31,13 +32,25 @@ namespace Flawless_ex
         string document;
         int control;
         string data;
-        string search1;
-        string search2;
-        string search3;
+        int print;
+        #region "買取販売履歴"
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
         string pass;
         int grade;
-
-        public DeliveryPreview(MainMenu mainMenu, int id, int type, string access_auth, string pass)
+        public DeliveryPreview(MainMenu mainMenu, int id, int type, int control, string access_auth, string pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
@@ -45,11 +58,12 @@ namespace Flawless_ex
             this.type = type;
             this.access_auth = access_auth;
             this.pass = pass;
+            this.control = control;
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
         }
@@ -63,7 +77,7 @@ namespace Flawless_ex
                 //NpgsqlDataAdapter adapter2;
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select * from delivery_m where id_number =" + staff_id +";";
+                string sql_str = "select * from delivery_m where control_number =" + control + ";";
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt);
 
@@ -83,13 +97,13 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter;
                 conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str = "select * from delivery_m;";
+                string sql_str = "select * from delivery_m where control_number = " + control + ";";
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt);
 
                 conn.Close();
             }
-           
+
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -110,11 +124,9 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select * from delivery_m where staff_code =" + staff_id + ";";
+            string sql_str = "select * from delivery_m where control_number =" + control + ";";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
-
-            conn.Close();
 
             DataRow row;
             row = dt.Rows[0];
@@ -130,29 +142,30 @@ namespace Flawless_ex
             string total = row["total"].ToString();
             string customer = row["honorific_title"].ToString();
             string name = row["name"].ToString();
-            string controlNumber = row["control_number"].ToString();
             string sealPrint = row["seaal_print"].ToString();
             string TotalWeight = row["total_weight"].ToString();
             string TotalCount = row["total_count"].ToString();
-            int ID = (int)row["id_number"];
             int types = (int)row["types1"];
             string kind = row["type"].ToString();
-            int AntiqueNumber = (int)row["antique_number"];
+
             #endregion
             #region "納品書　表の部分"
             NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
             conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str2 = "select * from delivery_calc where control_number =" + controlNumber + ";";
+            string sql_str2 = "select * from delivery_calc where control_number =" + control + ";";
             adapter2 = new NpgsqlDataAdapter(sql_str2, conn2);
             adapter2.Fill(dt2);
 
-            conn2.Close();
             int a = dt2.Rows.Count;
-            /*DataRow row2;
-            row2 = dt2.Rows[0];*/
-            
+
+            if (print >= 1)
+            {
+                a = a / (print + 1);
+            }
+            else { }
+
             for (int b = 1; b <= a; b++)
             {
                 #region "再度開く"
@@ -160,22 +173,20 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter5;
                 conn5.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str5 = "select * from delivery_calc where control_number =" + controlNumber + "and record_number = "+ b + ";";
+                string sql_str5 = "select * from delivery_calc where control_number =" + control + " and record_number = " + b + ";";
                 adapter5 = new NpgsqlDataAdapter(sql_str5, conn5);
                 adapter5.Fill(dt5);
-
-                conn5.Close();
 
                 int c = b - 1;
                 DataRow row5;
                 row5 = dt5.Rows[c];
                 string weight = row5["weight"].ToString();
-                    string count = row5["count"].ToString();
-                    string remark = row5["remarks"].ToString();
-                    string unit_price = row5["unit_price"].ToString();
-                    string amount = row5["amount"].ToString();
-                    string category = row5["main_category_code"].ToString();
-                    string item = row5["item_code"].ToString();
+                string count = row5["count"].ToString();
+                string remark = row5["remarks"].ToString();
+                string unit_price = row5["unit_price"].ToString();
+                string amount = row5["amount"].ToString();
+                string category = row5["main_category_code"].ToString();
+                string item = row5["item_code"].ToString();
                 #endregion
 
                 #region "大分類"
@@ -197,22 +208,21 @@ namespace Flawless_ex
                 NpgsqlDataAdapter adapter4;
                 conn4.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str4 = "select * from item_m where main_category_code =" + category + " and item_code =" + item + ";";
+                string sql_str4 = "select * from item_m where item_code =" + item + ";";
                 adapter4 = new NpgsqlDataAdapter(sql_str4, conn4);
                 adapter4.Fill(dt4);
-
                 conn4.Close();
-                DataRow row4;
-                row4 = dt4.Rows[c];
-                
-                string itemName = row4["item_name"].ToString();
+
                 #endregion
                 #region "表の中身"
                 if (b == 1)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName1 = row4["item_name"].ToString();
                     #region "納品書1行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 430));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 430));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 430));
+                    e.Graphics.DrawString(itemName1, font, brush, new PointF(200, 430));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 430));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 430));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 430));
@@ -222,9 +232,12 @@ namespace Flawless_ex
                 }
                 else if (b == 2)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[1];
+                    string itemName2 = row4["item_name"].ToString();
                     #region "納品書2行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 480));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 480));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 480));
+                    e.Graphics.DrawString(itemName2, font, brush, new PointF(200, 480));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 480));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 480));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 480));
@@ -234,9 +247,12 @@ namespace Flawless_ex
                 }
                 else if (b == 3)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[2];
+                    string itemName3 = row4["item_name"].ToString();
                     #region "納品書3行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 530));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 530));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 530));
+                    e.Graphics.DrawString(itemName3, font, brush, new PointF(200, 530));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 530));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 530));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 530));
@@ -246,9 +262,12 @@ namespace Flawless_ex
                 }
                 if (b == 4)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName4 = row4["item_name"].ToString();
                     #region "納品書4行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 580));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 580));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 580));
+                    e.Graphics.DrawString(itemName4, font, brush, new PointF(200, 580));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 580));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 580));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 580));
@@ -258,9 +277,12 @@ namespace Flawless_ex
                 }
                 else if (b == 5)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName5 = row4["item_name"].ToString();
                     #region "納品書5行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 630));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 630));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 630));
+                    e.Graphics.DrawString(itemName5, font, brush, new PointF(200, 630));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 630));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 630));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 630));
@@ -270,9 +292,12 @@ namespace Flawless_ex
                 }
                 else if (b == 6)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName6 = row4["item_name"].ToString();
                     #region "納品書6行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 680));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 680));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 680));
+                    e.Graphics.DrawString(itemName6, font, brush, new PointF(200, 680));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 680));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 680));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 680));
@@ -282,9 +307,12 @@ namespace Flawless_ex
                 }
                 if (b == 7)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName7 = row4["item_name"].ToString();
                     #region "納品書7行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 730));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 730));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 730));
+                    e.Graphics.DrawString(itemName7, font, brush, new PointF(200, 730));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 730));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 730));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 730));
@@ -294,9 +322,12 @@ namespace Flawless_ex
                 }
                 else if (b == 8)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName8 = row4["item_name"].ToString();
                     #region "納品書8行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 780));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 780));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 780));
+                    e.Graphics.DrawString(itemName8, font, brush, new PointF(200, 780));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 780));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 780));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 780));
@@ -306,9 +337,12 @@ namespace Flawless_ex
                 }
                 else if (b == 9)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName9 = row4["item_name"].ToString();
                     #region "納品書9行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 830));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 830));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 830));
+                    e.Graphics.DrawString(itemName9, font, brush, new PointF(200, 830));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 830));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 830));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 830));
@@ -318,9 +352,12 @@ namespace Flawless_ex
                 }
                 if (b == 10)
                 {
+                    DataRow row4;
+                    row4 = dt4.Rows[0];
+                    string itemName10 = row4["item_name"].ToString();
                     #region "納品書10行目"
-                    e.Graphics.DrawString(categoryName, font, brush, new PointF(50, 880));
-                    e.Graphics.DrawString(itemName, font, brush, new PointF(200, 880));
+                    e.Graphics.DrawString(categoryName, font, brush, new PointF(30, 880));
+                    e.Graphics.DrawString(itemName10, font, brush, new PointF(200, 880));
                     e.Graphics.DrawString(weight, font, brush, new PointF(330, 880));
                     e.Graphics.DrawString(count, font, brush, new PointF(490, 880));
                     e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 880));
@@ -338,24 +375,35 @@ namespace Flawless_ex
             #region "顧客情報"
             if (types == 0)
             {
+                NpgsqlConnection connA = new NpgsqlConnection();
+                NpgsqlDataAdapter adapterA;
+                connA.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                string sql_antique = "select * from delivery_m where staff_code =" + staff_id + ";";
+                adapterA = new NpgsqlDataAdapter(sql_antique, connA);
+                adapterA.Fill(dt);
+
+                DataRow rowA;
+                rowA = dt.Rows[0];
+                string AntiqueNumber = rowA["antique_number"].ToString();
+
                 NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
                 conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + types  + " and staff_name = " + name + " and antique_number = " + AntiqueNumber + ";";
+                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + types + " and antique_number = " + AntiqueNumber + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
-
-                conn6.Close();
 
                 DataRow row6;
                 row6 = dt6.Rows[0];
                 string address = row6["address"].ToString();
                 string phoneNumber = row6["phone_number"].ToString();
                 string faxNumber = row6["fax_number"].ToString();
-                string PostalCode = row6["postal_code"].ToString();
+                string PostalCode1 = row6["postal_code1"].ToString();
+                string PostalCode2 = row6["postal_code2"].ToString();
                 #region"個人情報記入"
-                e.Graphics.DrawString("〒" + PostalCode, font, brush, new PointF(360, 80));
+                e.Graphics.DrawString("〒" + PostalCode1 + PostalCode2, font, brush, new PointF(360, 80));
                 e.Graphics.DrawString(address, font, brush, new PointF(360, 100));
                 e.Graphics.DrawString("(TEL)" + phoneNumber, font, brush, new PointF(360, 120));
                 e.Graphics.DrawString("(FAX)" + faxNumber, font, brush, new PointF(520, 120));
@@ -363,24 +411,35 @@ namespace Flawless_ex
             }
             if (types == 1)
             {
+                NpgsqlConnection connI = new NpgsqlConnection();
+                NpgsqlDataAdapter adapterI;
+                connI.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                string sql_id = "select * from delivery_m where staff_code =" + staff_id + ";";
+                adapterI = new NpgsqlDataAdapter(sql_id, connI);
+                adapterI.Fill(dt);
+
+                DataRow rowI;
+                rowI = dt.Rows[0];
+                string ID = rowI["id_number"].ToString();
+
                 NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
                 conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + types + "and name = '" + name + "' and id_number = "+ ID + ";";
+                string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + types + " and id_number = " + ID + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
                 adapter6.Fill(dt6);
-
-                conn6.Close();
 
                 DataRow row6;
                 row6 = dt6.Rows[0];
                 string address = row6["address"].ToString();
                 string phoneNumber = row6["phone_number"].ToString();
                 string faxNumber = row6["fax_number"].ToString();
-                string PostalCode = row6["postal_code"].ToString();
+                string PostalCode1 = row6["postal_code1"].ToString();
+                string PostalCode2 = row6["postal_code2"].ToString();
                 #region"個人情報記入"
-                e.Graphics.DrawString("〒" + PostalCode, font, brush, new PointF(360, 80));
+                e.Graphics.DrawString("〒" + PostalCode1 + PostalCode2, font, brush, new PointF(360, 80));
                 e.Graphics.DrawString(address, font, brush, new PointF(360, 100));
                 e.Graphics.DrawString("(TEL)" + phoneNumber, font, brush, new PointF(360, 120));
                 e.Graphics.DrawString("(FAX)" + faxNumber, font, brush, new PointF(520, 120));
@@ -417,7 +476,7 @@ namespace Flawless_ex
             #region "記入事項"
             e.Graphics.DrawString(name, font, brush, new PointF(70, 50));
             e.Graphics.DrawString(customer, font, brush, new PointF(260, 50));
-            e.Graphics.DrawString(controlNumber, font, brush, new PointF(200, 220));
+            e.Graphics.DrawString(control.ToString(), font, brush, new PointF(200, 220));
             e.Graphics.DrawString(orderDate, font, brush, new PointF(620, 220));
             e.Graphics.DrawString(deliveryDate, font, brush, new PointF(620, 270));
             e.Graphics.DrawString(settlementDate, font, brush, new PointF(620, 320));
@@ -436,7 +495,7 @@ namespace Flawless_ex
             }
             else { }
             //e.Graphics.DrawString(remark, font, brush, new PointF(690, 430));
-           
+
             #endregion
             Pen p = new Pen(Color.Black);
             e.Graphics.DrawRectangle(p, new Rectangle(20, 30, 200, 50)); // 座標(20,100)に幅200，高さ50の四角形
@@ -446,9 +505,9 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(120, 200, 150, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(380, 220, 30, 30));
             #region "注文日"
-            e.Graphics.DrawRectangle(p, new Rectangle(600, 200, 200, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(600, 250, 200, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(600, 300, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(600, 200, 170, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(600, 250, 170, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(600, 300, 170, 50));
             #endregion
             #region"枠"
             #region "見出し"
@@ -458,7 +517,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 370, 80, 30));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 370, 80, 30));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 370, 80, 30));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 370, 200, 30));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 370, 150, 30));
             #endregion
             #region "1行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 400, 120, 50));
@@ -467,7 +526,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 400, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 400, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 400, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 400, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 400, 150, 50));
             #endregion
             #region "2行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 450, 120, 50));
@@ -476,7 +535,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 450, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 450, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 450, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 450, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 450, 150, 50));
             #endregion
             #region "3行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 500, 120, 50));
@@ -485,7 +544,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 500, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 500, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 500, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 500, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 500, 150, 50));
             #endregion
             #region "4行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 550, 120, 50));
@@ -494,7 +553,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 550, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 550, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 550, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 550, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 550, 150, 50));
             #endregion
             #region "5行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 600, 120, 50));
@@ -503,7 +562,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 600, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 600, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 600, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 600, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 600, 150, 50));
             #endregion
             #region "6行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 650, 120, 50));
@@ -512,7 +571,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 650, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 650, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 650, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 650, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 650, 150, 50));
             #endregion
             #region "7行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 700, 120, 50));
@@ -521,7 +580,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 700, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 700, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 700, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 700, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 700, 150, 50));
             #endregion
             #region "8行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 750, 120, 50));
@@ -530,7 +589,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 750, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 750, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 750, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 750, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 750, 150, 50));
             #endregion
             #region "9行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 800, 120, 50));
@@ -539,7 +598,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 800, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 800, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 800, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 800, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 800, 150, 50));
             #endregion
             #region "10行目"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 850, 120, 50));
@@ -548,7 +607,7 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 850, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 850, 80, 50));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 850, 80, 50));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 850, 200, 50));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 850, 150, 50));
             #endregion
             #region "総数"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 900, 270, 30));
@@ -556,31 +615,31 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, new Rectangle(370, 900, 80, 30));
             e.Graphics.DrawRectangle(p, new Rectangle(450, 900, 80, 30));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 900, 80, 30));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 900, 200, 30));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 900, 150, 30));
             #endregion
             #region　"お支払方法"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 930, 120, 40));
             e.Graphics.DrawRectangle(p, new Rectangle(140, 930, 150, 40));
             e.Graphics.DrawRectangle(p, new Rectangle(290, 930, 240, 40));
             e.Graphics.DrawRectangle(p, new Rectangle(530, 930, 80, 40));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 930, 200, 40));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 930, 150, 40));
             #endregion
             #region "振込先"
             e.Graphics.DrawRectangle(p, new Rectangle(20, 970, 120, 160));
             e.Graphics.DrawRectangle(p, new Rectangle(140, 970, 150, 160));
             e.Graphics.DrawRectangle(p, new Rectangle(290, 970, 320, 40));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 970, 200, 40));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 970, 150, 40));
             e.Graphics.DrawRectangle(p, new Rectangle(290, 1010, 320, 40));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 1010, 200, 40));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 1010, 150, 40));
             e.Graphics.DrawRectangle(p, new Rectangle(290, 1050, 320, 40));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 1050, 200, 40));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 1050, 150, 40));
             e.Graphics.DrawRectangle(p, new Rectangle(290, 1090, 320, 40));
-            e.Graphics.DrawRectangle(p, new Rectangle(610, 1090, 200, 40));
+            e.Graphics.DrawRectangle(p, new Rectangle(610, 1090, 150, 40));
             #endregion
             #endregion
             #region "ロゴ"
             Image newImage = Image.FromFile(@"C:\Users\Flawlessロゴ.png");
-            Rectangle destRect = new Rectangle(350, 20, 400, 50); 
+            Rectangle destRect = new Rectangle(350, 20, 400, 50);
             e.Graphics.DrawImage(newImage, destRect);
             #endregion
             #region "印鑑"
@@ -588,6 +647,7 @@ namespace Flawless_ex
             Rectangle destRect2 = new Rectangle(580, -50, 300, 300);
             e.Graphics.DrawImage(newImage1, destRect2);
             #endregion
+            print++;
         }
     }
 }

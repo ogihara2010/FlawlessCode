@@ -7,19 +7,19 @@ namespace Flawless_ex
 {
     public partial class NextMonth : Form
     {
-        int staff_id;
+        public int staff_id;
         MainMenu mainMenu;
         Statement statement;
-        string staff_name;
-        int type;
-        string slipNumber;
-        int Grade;
+        public string staff_name;
+        public int type;
+        public string slipNumber;
+        public int Grade;
         DataTable dt = new DataTable();
-        string Pass;
+        public string Pass;
         TopMenu top;
-        string Access_auth;
-        int antique;
-        int id;
+        public string Access_auth;
+        public int antique;
+        public int id;
         bool NameChange;
         bool screan = true;
         bool CarryOver = true;
@@ -56,7 +56,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select A.document_number, A.grade_number, A.assessment_date, B.delivery_method, B.payment_method, C.staff_name, A.buyer from list_result2 A " +
                              "inner join statement_data B ON (A.document_number = B.document_number ) " +

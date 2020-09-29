@@ -12,11 +12,11 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter = new NpgsqlDataAdapter();
         MasterMaintenanceMenu master;
         DataTable dt;
-        int staff_code;
+        public int staff_code;
         bool screan = true;
-        string Pass;
-        string access_auth;
-        string kana;
+        public string Pass;
+        public string access_auth;
+        public string kana;
 
         public StaffAddStaff(DataTable dt, MasterMaintenanceMenu master, int staff_code, string pass, string access_auth)
         {
@@ -96,7 +96,7 @@ namespace Flawless_ex
 
                 string sql_str = "insert into staff_m values(" + staffCode1 + " , '" + staffName + "', '" + staffNameKana + "'," + mainCategoryCode + ",'" + password + "', '" + access_auth + "','" + d + "'," + 0 + ")";
 
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -124,7 +124,7 @@ namespace Flawless_ex
         {
             DataTable dt2 = new DataTable();
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code;";

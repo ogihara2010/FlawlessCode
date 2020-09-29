@@ -239,8 +239,8 @@
             this.tableLayoutPanel1.Controls.Add(this.CompanyKanaLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ComPanyKanaTextBox, 1, 1);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 22);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 11);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 15;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
@@ -258,7 +258,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(2354, 2779);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1177, 1390);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // RegistrationLabel
@@ -266,10 +266,10 @@
             this.RegistrationLabel.AutoSize = true;
             this.RegistrationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegistrationLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegistrationLabel.Location = new System.Drawing.Point(7, 0);
-            this.RegistrationLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.RegistrationLabel.Location = new System.Drawing.Point(4, 0);
+            this.RegistrationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.RegistrationLabel.Name = "RegistrationLabel";
-            this.RegistrationLabel.Size = new System.Drawing.Size(456, 185);
+            this.RegistrationLabel.Size = new System.Drawing.Size(227, 92);
             this.RegistrationLabel.TabIndex = 0;
             this.RegistrationLabel.Text = "顧客情報登録日";
             this.RegistrationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -278,24 +278,24 @@
             // 
             this.RegistrationDateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegistrationDateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegistrationDateTextBox.Location = new System.Drawing.Point(477, 8);
-            this.RegistrationDateTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.RegistrationDateTextBox.Location = new System.Drawing.Point(239, 4);
+            this.RegistrationDateTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.RegistrationDateTextBox.Multiline = true;
             this.RegistrationDateTextBox.Name = "RegistrationDateTextBox";
             this.RegistrationDateTextBox.ReadOnly = true;
-            this.RegistrationDateTextBox.Size = new System.Drawing.Size(692, 169);
+            this.RegistrationDateTextBox.Size = new System.Drawing.Size(345, 84);
             this.RegistrationDateTextBox.TabIndex = 1;
             // 
             // CompanyNameTextBox
             // 
             this.CompanyNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CompanyNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.CompanyNameTextBox.Location = new System.Drawing.Point(1653, 8);
-            this.CompanyNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.CompanyNameTextBox.Location = new System.Drawing.Point(827, 4);
+            this.CompanyNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.CompanyNameTextBox.Multiline = true;
             this.CompanyNameTextBox.Name = "CompanyNameTextBox";
             this.CompanyNameTextBox.ReadOnly = true;
-            this.CompanyNameTextBox.Size = new System.Drawing.Size(694, 169);
+            this.CompanyNameTextBox.Size = new System.Drawing.Size(346, 84);
             this.CompanyNameTextBox.TabIndex = 1;
             // 
             // CompanyNameLabel
@@ -303,10 +303,10 @@
             this.CompanyNameLabel.AutoSize = true;
             this.CompanyNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CompanyNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.CompanyNameLabel.Location = new System.Drawing.Point(1183, 0);
-            this.CompanyNameLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.CompanyNameLabel.Location = new System.Drawing.Point(592, 0);
+            this.CompanyNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CompanyNameLabel.Name = "CompanyNameLabel";
-            this.CompanyNameLabel.Size = new System.Drawing.Size(456, 185);
+            this.CompanyNameLabel.Size = new System.Drawing.Size(227, 92);
             this.CompanyNameLabel.TabIndex = 0;
             this.CompanyNameLabel.Text = "会社名";
             this.CompanyNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -315,12 +315,12 @@
             // 
             this.SealCetificationTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SealCetificationTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SealCetificationTextBox.Location = new System.Drawing.Point(1653, 2598);
-            this.SealCetificationTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.SealCetificationTextBox.Location = new System.Drawing.Point(827, 1292);
+            this.SealCetificationTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.SealCetificationTextBox.Multiline = true;
             this.SealCetificationTextBox.Name = "SealCetificationTextBox";
             this.SealCetificationTextBox.ReadOnly = true;
-            this.SealCetificationTextBox.Size = new System.Drawing.Size(694, 173);
+            this.SealCetificationTextBox.Size = new System.Drawing.Size(346, 94);
             this.SealCetificationTextBox.TabIndex = 1;
             this.SealCetificationTextBox.DoubleClick += new System.EventHandler(this.SealCetificationTextBox_DoubleClick);
             // 
@@ -329,10 +329,10 @@
             this.SealCertificateLabel.AutoSize = true;
             this.SealCertificateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SealCertificateLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SealCertificateLabel.Location = new System.Drawing.Point(1183, 2590);
-            this.SealCertificateLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.SealCertificateLabel.Location = new System.Drawing.Point(592, 1288);
+            this.SealCertificateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SealCertificateLabel.Name = "SealCertificateLabel";
-            this.SealCertificateLabel.Size = new System.Drawing.Size(456, 189);
+            this.SealCertificateLabel.Size = new System.Drawing.Size(227, 102);
             this.SealCertificateLabel.TabIndex = 0;
             this.SealCertificateLabel.Text = "印鑑証明書";
             this.SealCertificateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -342,10 +342,10 @@
             this.PeriodStayLabel.AutoSize = true;
             this.PeriodStayLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PeriodStayLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PeriodStayLabel.Location = new System.Drawing.Point(7, 2590);
-            this.PeriodStayLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.PeriodStayLabel.Location = new System.Drawing.Point(4, 1288);
+            this.PeriodStayLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PeriodStayLabel.Name = "PeriodStayLabel";
-            this.PeriodStayLabel.Size = new System.Drawing.Size(456, 189);
+            this.PeriodStayLabel.Size = new System.Drawing.Size(227, 102);
             this.PeriodStayLabel.TabIndex = 0;
             this.PeriodStayLabel.Text = "在留期限";
             this.PeriodStayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -354,24 +354,24 @@
             // 
             this.PeriodStayTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PeriodStayTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PeriodStayTextBox.Location = new System.Drawing.Point(477, 2598);
-            this.PeriodStayTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.PeriodStayTextBox.Location = new System.Drawing.Point(239, 1292);
+            this.PeriodStayTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PeriodStayTextBox.Multiline = true;
             this.PeriodStayTextBox.Name = "PeriodStayTextBox";
             this.PeriodStayTextBox.ReadOnly = true;
-            this.PeriodStayTextBox.Size = new System.Drawing.Size(692, 173);
+            this.PeriodStayTextBox.Size = new System.Drawing.Size(345, 94);
             this.PeriodStayTextBox.TabIndex = 1;
             // 
             // ResidenceCardTextBox
             // 
             this.ResidenceCardTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ResidenceCardTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ResidenceCardTextBox.Location = new System.Drawing.Point(1653, 2413);
-            this.ResidenceCardTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.ResidenceCardTextBox.Location = new System.Drawing.Point(827, 1200);
+            this.ResidenceCardTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ResidenceCardTextBox.Multiline = true;
             this.ResidenceCardTextBox.Name = "ResidenceCardTextBox";
             this.ResidenceCardTextBox.ReadOnly = true;
-            this.ResidenceCardTextBox.Size = new System.Drawing.Size(694, 169);
+            this.ResidenceCardTextBox.Size = new System.Drawing.Size(346, 84);
             this.ResidenceCardTextBox.TabIndex = 1;
             this.ResidenceCardTextBox.DoubleClick += new System.EventHandler(this.ResidenceCardTextBox_DoubleClick);
             // 
@@ -380,10 +380,10 @@
             this.ResidenceCardLabel.AutoSize = true;
             this.ResidenceCardLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ResidenceCardLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ResidenceCardLabel.Location = new System.Drawing.Point(1183, 2405);
-            this.ResidenceCardLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.ResidenceCardLabel.Location = new System.Drawing.Point(592, 1196);
+            this.ResidenceCardLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ResidenceCardLabel.Name = "ResidenceCardLabel";
-            this.ResidenceCardLabel.Size = new System.Drawing.Size(456, 185);
+            this.ResidenceCardLabel.Size = new System.Drawing.Size(227, 92);
             this.ResidenceCardLabel.TabIndex = 0;
             this.ResidenceCardLabel.Text = "在留カード";
             this.ResidenceCardLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -393,10 +393,10 @@
             this.TaxCertificateLabel.AutoSize = true;
             this.TaxCertificateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaxCertificateLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TaxCertificateLabel.Location = new System.Drawing.Point(7, 2405);
-            this.TaxCertificateLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.TaxCertificateLabel.Location = new System.Drawing.Point(4, 1196);
+            this.TaxCertificateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TaxCertificateLabel.Name = "TaxCertificateLabel";
-            this.TaxCertificateLabel.Size = new System.Drawing.Size(456, 185);
+            this.TaxCertificateLabel.Size = new System.Drawing.Size(227, 92);
             this.TaxCertificateLabel.TabIndex = 0;
             this.TaxCertificateLabel.Text = "納税証明書";
             this.TaxCertificateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -405,12 +405,12 @@
             // 
             this.TaxCertificateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaxCertificateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TaxCertificateTextBox.Location = new System.Drawing.Point(477, 2413);
-            this.TaxCertificateTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.TaxCertificateTextBox.Location = new System.Drawing.Point(239, 1200);
+            this.TaxCertificateTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.TaxCertificateTextBox.Multiline = true;
             this.TaxCertificateTextBox.Name = "TaxCertificateTextBox";
             this.TaxCertificateTextBox.ReadOnly = true;
-            this.TaxCertificateTextBox.Size = new System.Drawing.Size(692, 169);
+            this.TaxCertificateTextBox.Size = new System.Drawing.Size(345, 84);
             this.TaxCertificateTextBox.TabIndex = 1;
             this.TaxCertificateTextBox.DoubleClick += new System.EventHandler(this.TaxCertificateTextBox_DoubleClick);
             // 
@@ -418,12 +418,12 @@
             // 
             this.AolFinancialShareholderTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AolFinancialShareholderTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AolFinancialShareholderTextBox.Location = new System.Drawing.Point(1653, 2228);
-            this.AolFinancialShareholderTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AolFinancialShareholderTextBox.Location = new System.Drawing.Point(827, 1108);
+            this.AolFinancialShareholderTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AolFinancialShareholderTextBox.Multiline = true;
             this.AolFinancialShareholderTextBox.Name = "AolFinancialShareholderTextBox";
             this.AolFinancialShareholderTextBox.ReadOnly = true;
-            this.AolFinancialShareholderTextBox.Size = new System.Drawing.Size(694, 169);
+            this.AolFinancialShareholderTextBox.Size = new System.Drawing.Size(346, 84);
             this.AolFinancialShareholderTextBox.TabIndex = 1;
             this.AolFinancialShareholderTextBox.DoubleClick += new System.EventHandler(this.AolFinancialShareholderTextBox_DoubleClick);
             // 
@@ -432,10 +432,10 @@
             this.AolLabel.AutoSize = true;
             this.AolLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AolLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AolLabel.Location = new System.Drawing.Point(1183, 2220);
-            this.AolLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AolLabel.Location = new System.Drawing.Point(592, 1104);
+            this.AolLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AolLabel.Name = "AolLabel";
-            this.AolLabel.Size = new System.Drawing.Size(456, 185);
+            this.AolLabel.Size = new System.Drawing.Size(227, 92);
             this.AolLabel.TabIndex = 0;
             this.AolLabel.Text = "定款、決算書、\r\n株主構成";
             this.AolLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -445,10 +445,10 @@
             this.AntiqueLicenseLabel.AutoSize = true;
             this.AntiqueLicenseLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueLicenseLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueLicenseLabel.Location = new System.Drawing.Point(7, 2220);
-            this.AntiqueLicenseLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AntiqueLicenseLabel.Location = new System.Drawing.Point(4, 1104);
+            this.AntiqueLicenseLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AntiqueLicenseLabel.Name = "AntiqueLicenseLabel";
-            this.AntiqueLicenseLabel.Size = new System.Drawing.Size(456, 185);
+            this.AntiqueLicenseLabel.Size = new System.Drawing.Size(227, 92);
             this.AntiqueLicenseLabel.TabIndex = 0;
             this.AntiqueLicenseLabel.Text = "古物商許可証";
             this.AntiqueLicenseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -457,12 +457,12 @@
             // 
             this.AntiqueLicenseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueLicenseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueLicenseTextBox.Location = new System.Drawing.Point(477, 2228);
-            this.AntiqueLicenseTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AntiqueLicenseTextBox.Location = new System.Drawing.Point(239, 1108);
+            this.AntiqueLicenseTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AntiqueLicenseTextBox.Multiline = true;
             this.AntiqueLicenseTextBox.Name = "AntiqueLicenseTextBox";
             this.AntiqueLicenseTextBox.ReadOnly = true;
-            this.AntiqueLicenseTextBox.Size = new System.Drawing.Size(692, 169);
+            this.AntiqueLicenseTextBox.Size = new System.Drawing.Size(345, 84);
             this.AntiqueLicenseTextBox.TabIndex = 1;
             this.AntiqueLicenseTextBox.DoubleClick += new System.EventHandler(this.AntiqueLicenseTextBox_DoubleClick);
             // 
@@ -471,10 +471,10 @@
             this.RegisterDateLabel.AutoSize = true;
             this.RegisterDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegisterDateLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterDateLabel.Location = new System.Drawing.Point(1183, 2035);
-            this.RegisterDateLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.RegisterDateLabel.Location = new System.Drawing.Point(592, 1012);
+            this.RegisterDateLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.RegisterDateLabel.Name = "RegisterDateLabel";
-            this.RegisterDateLabel.Size = new System.Drawing.Size(456, 185);
+            this.RegisterDateLabel.Size = new System.Drawing.Size(227, 92);
             this.RegisterDateLabel.TabIndex = 0;
             this.RegisterDateLabel.Text = "登記簿謄本\r\n登録日";
             this.RegisterDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -483,24 +483,24 @@
             // 
             this.RegisterDateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegisterDateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterDateTextBox.Location = new System.Drawing.Point(1653, 2043);
-            this.RegisterDateTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.RegisterDateTextBox.Location = new System.Drawing.Point(827, 1016);
+            this.RegisterDateTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.RegisterDateTextBox.Multiline = true;
             this.RegisterDateTextBox.Name = "RegisterDateTextBox";
             this.RegisterDateTextBox.ReadOnly = true;
-            this.RegisterDateTextBox.Size = new System.Drawing.Size(694, 169);
+            this.RegisterDateTextBox.Size = new System.Drawing.Size(346, 84);
             this.RegisterDateTextBox.TabIndex = 1;
             // 
             // RegisterCopyTextBox
             // 
             this.RegisterCopyTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegisterCopyTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterCopyTextBox.Location = new System.Drawing.Point(477, 2043);
-            this.RegisterCopyTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.RegisterCopyTextBox.Location = new System.Drawing.Point(239, 1016);
+            this.RegisterCopyTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.RegisterCopyTextBox.Multiline = true;
             this.RegisterCopyTextBox.Name = "RegisterCopyTextBox";
             this.RegisterCopyTextBox.ReadOnly = true;
-            this.RegisterCopyTextBox.Size = new System.Drawing.Size(692, 169);
+            this.RegisterCopyTextBox.Size = new System.Drawing.Size(345, 84);
             this.RegisterCopyTextBox.TabIndex = 1;
             this.RegisterCopyTextBox.DoubleClick += new System.EventHandler(this.RegisterCopyTextBox_DoubleClick);
             // 
@@ -509,10 +509,10 @@
             this.RegisterCopyLabel.AutoSize = true;
             this.RegisterCopyLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegisterCopyLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterCopyLabel.Location = new System.Drawing.Point(7, 2035);
-            this.RegisterCopyLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.RegisterCopyLabel.Location = new System.Drawing.Point(4, 1012);
+            this.RegisterCopyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.RegisterCopyLabel.Name = "RegisterCopyLabel";
-            this.RegisterCopyLabel.Size = new System.Drawing.Size(456, 185);
+            this.RegisterCopyLabel.Size = new System.Drawing.Size(227, 92);
             this.RegisterCopyLabel.TabIndex = 0;
             this.RegisterCopyLabel.Text = "登記簿謄本";
             this.RegisterCopyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -522,10 +522,10 @@
             this.IdLabel.AutoSize = true;
             this.IdLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IdLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.IdLabel.Location = new System.Drawing.Point(1183, 1850);
-            this.IdLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.IdLabel.Location = new System.Drawing.Point(592, 920);
+            this.IdLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.IdLabel.Name = "IdLabel";
-            this.IdLabel.Size = new System.Drawing.Size(456, 185);
+            this.IdLabel.Size = new System.Drawing.Size(227, 92);
             this.IdLabel.TabIndex = 0;
             this.IdLabel.Text = "身分証明書";
             this.IdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -534,12 +534,12 @@
             // 
             this.IdTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IdTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.IdTextBox.Location = new System.Drawing.Point(1653, 1858);
-            this.IdTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.IdTextBox.Location = new System.Drawing.Point(827, 924);
+            this.IdTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.IdTextBox.Multiline = true;
             this.IdTextBox.Name = "IdTextBox";
             this.IdTextBox.ReadOnly = true;
-            this.IdTextBox.Size = new System.Drawing.Size(694, 169);
+            this.IdTextBox.Size = new System.Drawing.Size(346, 84);
             this.IdTextBox.TabIndex = 1;
             this.IdTextBox.DoubleClick += new System.EventHandler(this.IdTextBox_DoubleClick);
             // 
@@ -548,10 +548,10 @@
             this.AccountNameKanaLabel.AutoSize = true;
             this.AccountNameKanaLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNameKanaLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNameKanaLabel.Location = new System.Drawing.Point(7, 1850);
-            this.AccountNameKanaLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AccountNameKanaLabel.Location = new System.Drawing.Point(4, 920);
+            this.AccountNameKanaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AccountNameKanaLabel.Name = "AccountNameKanaLabel";
-            this.AccountNameKanaLabel.Size = new System.Drawing.Size(456, 185);
+            this.AccountNameKanaLabel.Size = new System.Drawing.Size(227, 92);
             this.AccountNameKanaLabel.TabIndex = 0;
             this.AccountNameKanaLabel.Text = "口座名義（カタカナ）";
             this.AccountNameKanaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -560,24 +560,24 @@
             // 
             this.AccountNameKanaTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNameKanaTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNameKanaTextBox.Location = new System.Drawing.Point(477, 1858);
-            this.AccountNameKanaTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AccountNameKanaTextBox.Location = new System.Drawing.Point(239, 924);
+            this.AccountNameKanaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AccountNameKanaTextBox.Multiline = true;
             this.AccountNameKanaTextBox.Name = "AccountNameKanaTextBox";
             this.AccountNameKanaTextBox.ReadOnly = true;
-            this.AccountNameKanaTextBox.Size = new System.Drawing.Size(692, 169);
+            this.AccountNameKanaTextBox.Size = new System.Drawing.Size(345, 84);
             this.AccountNameKanaTextBox.TabIndex = 1;
             // 
             // AccountNameTextBox
             // 
             this.AccountNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNameTextBox.Location = new System.Drawing.Point(1653, 1673);
-            this.AccountNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AccountNameTextBox.Location = new System.Drawing.Point(827, 832);
+            this.AccountNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AccountNameTextBox.Multiline = true;
             this.AccountNameTextBox.Name = "AccountNameTextBox";
             this.AccountNameTextBox.ReadOnly = true;
-            this.AccountNameTextBox.Size = new System.Drawing.Size(694, 169);
+            this.AccountNameTextBox.Size = new System.Drawing.Size(346, 84);
             this.AccountNameTextBox.TabIndex = 1;
             // 
             // AccountNameLabel
@@ -585,10 +585,10 @@
             this.AccountNameLabel.AutoSize = true;
             this.AccountNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNameLabel.Location = new System.Drawing.Point(1183, 1665);
-            this.AccountNameLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AccountNameLabel.Location = new System.Drawing.Point(592, 828);
+            this.AccountNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AccountNameLabel.Name = "AccountNameLabel";
-            this.AccountNameLabel.Size = new System.Drawing.Size(456, 185);
+            this.AccountNameLabel.Size = new System.Drawing.Size(227, 92);
             this.AccountNameLabel.TabIndex = 0;
             this.AccountNameLabel.Text = "口座名義";
             this.AccountNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -598,10 +598,10 @@
             this.AccountNumberLabel.AutoSize = true;
             this.AccountNumberLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNumberLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNumberLabel.Location = new System.Drawing.Point(7, 1665);
-            this.AccountNumberLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AccountNumberLabel.Location = new System.Drawing.Point(4, 828);
+            this.AccountNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AccountNumberLabel.Name = "AccountNumberLabel";
-            this.AccountNumberLabel.Size = new System.Drawing.Size(456, 185);
+            this.AccountNumberLabel.Size = new System.Drawing.Size(227, 92);
             this.AccountNumberLabel.TabIndex = 0;
             this.AccountNumberLabel.Text = "口座番号";
             this.AccountNumberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -610,24 +610,24 @@
             // 
             this.AccountNumberTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNumberTextBox.Location = new System.Drawing.Point(477, 1673);
-            this.AccountNumberTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AccountNumberTextBox.Location = new System.Drawing.Point(239, 832);
+            this.AccountNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AccountNumberTextBox.Multiline = true;
             this.AccountNumberTextBox.Name = "AccountNumberTextBox";
             this.AccountNumberTextBox.ReadOnly = true;
-            this.AccountNumberTextBox.Size = new System.Drawing.Size(692, 169);
+            this.AccountNumberTextBox.Size = new System.Drawing.Size(345, 84);
             this.AccountNumberTextBox.TabIndex = 1;
             // 
             // DepositTypeTextBox
             // 
             this.DepositTypeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DepositTypeTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.DepositTypeTextBox.Location = new System.Drawing.Point(1653, 1488);
-            this.DepositTypeTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.DepositTypeTextBox.Location = new System.Drawing.Point(827, 740);
+            this.DepositTypeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.DepositTypeTextBox.Multiline = true;
             this.DepositTypeTextBox.Name = "DepositTypeTextBox";
             this.DepositTypeTextBox.ReadOnly = true;
-            this.DepositTypeTextBox.Size = new System.Drawing.Size(694, 169);
+            this.DepositTypeTextBox.Size = new System.Drawing.Size(346, 84);
             this.DepositTypeTextBox.TabIndex = 1;
             // 
             // DepositLabel
@@ -635,10 +635,10 @@
             this.DepositLabel.AutoSize = true;
             this.DepositLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DepositLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.DepositLabel.Location = new System.Drawing.Point(1183, 1480);
-            this.DepositLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.DepositLabel.Location = new System.Drawing.Point(592, 736);
+            this.DepositLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DepositLabel.Name = "DepositLabel";
-            this.DepositLabel.Size = new System.Drawing.Size(456, 185);
+            this.DepositLabel.Size = new System.Drawing.Size(227, 92);
             this.DepositLabel.TabIndex = 0;
             this.DepositLabel.Text = "預金種別";
             this.DepositLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -648,10 +648,10 @@
             this.BranchLabel.AutoSize = true;
             this.BranchLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BranchLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BranchLabel.Location = new System.Drawing.Point(7, 1480);
-            this.BranchLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.BranchLabel.Location = new System.Drawing.Point(4, 736);
+            this.BranchLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.BranchLabel.Name = "BranchLabel";
-            this.BranchLabel.Size = new System.Drawing.Size(456, 185);
+            this.BranchLabel.Size = new System.Drawing.Size(227, 92);
             this.BranchLabel.TabIndex = 0;
             this.BranchLabel.Text = "支店名";
             this.BranchLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -660,24 +660,24 @@
             // 
             this.BranchNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BranchNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BranchNameTextBox.Location = new System.Drawing.Point(477, 1488);
-            this.BranchNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.BranchNameTextBox.Location = new System.Drawing.Point(239, 740);
+            this.BranchNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.BranchNameTextBox.Multiline = true;
             this.BranchNameTextBox.Name = "BranchNameTextBox";
             this.BranchNameTextBox.ReadOnly = true;
-            this.BranchNameTextBox.Size = new System.Drawing.Size(692, 169);
+            this.BranchNameTextBox.Size = new System.Drawing.Size(345, 84);
             this.BranchNameTextBox.TabIndex = 1;
             // 
             // BankNameTextBox
             // 
             this.BankNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BankNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BankNameTextBox.Location = new System.Drawing.Point(1653, 1303);
-            this.BankNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.BankNameTextBox.Location = new System.Drawing.Point(827, 648);
+            this.BankNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.BankNameTextBox.Multiline = true;
             this.BankNameTextBox.Name = "BankNameTextBox";
             this.BankNameTextBox.ReadOnly = true;
-            this.BankNameTextBox.Size = new System.Drawing.Size(694, 169);
+            this.BankNameTextBox.Size = new System.Drawing.Size(346, 84);
             this.BankNameTextBox.TabIndex = 1;
             // 
             // BankNameLabel
@@ -685,10 +685,10 @@
             this.BankNameLabel.AutoSize = true;
             this.BankNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BankNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BankNameLabel.Location = new System.Drawing.Point(1183, 1295);
-            this.BankNameLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.BankNameLabel.Location = new System.Drawing.Point(592, 644);
+            this.BankNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.BankNameLabel.Name = "BankNameLabel";
-            this.BankNameLabel.Size = new System.Drawing.Size(456, 185);
+            this.BankNameLabel.Size = new System.Drawing.Size(227, 92);
             this.BankNameLabel.TabIndex = 0;
             this.BankNameLabel.Text = "金融機関名";
             this.BankNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -698,10 +698,10 @@
             this.UrlLabel.AutoSize = true;
             this.UrlLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UrlLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.UrlLabel.Location = new System.Drawing.Point(7, 1295);
-            this.UrlLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.UrlLabel.Location = new System.Drawing.Point(4, 644);
+            this.UrlLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.UrlLabel.Name = "UrlLabel";
-            this.UrlLabel.Size = new System.Drawing.Size(456, 185);
+            this.UrlLabel.Size = new System.Drawing.Size(227, 92);
             this.UrlLabel.TabIndex = 0;
             this.UrlLabel.Text = "URL";
             this.UrlLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -710,24 +710,24 @@
             // 
             this.UrlTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UrlTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.UrlTextBox.Location = new System.Drawing.Point(477, 1303);
-            this.UrlTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.UrlTextBox.Location = new System.Drawing.Point(239, 648);
+            this.UrlTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.UrlTextBox.Multiline = true;
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.ReadOnly = true;
-            this.UrlTextBox.Size = new System.Drawing.Size(692, 169);
+            this.UrlTextBox.Size = new System.Drawing.Size(345, 84);
             this.UrlTextBox.TabIndex = 1;
             // 
             // MailAddressTextBox
             // 
             this.MailAddressTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MailAddressTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MailAddressTextBox.Location = new System.Drawing.Point(1653, 1118);
-            this.MailAddressTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.MailAddressTextBox.Location = new System.Drawing.Point(827, 556);
+            this.MailAddressTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.MailAddressTextBox.Multiline = true;
             this.MailAddressTextBox.Name = "MailAddressTextBox";
             this.MailAddressTextBox.ReadOnly = true;
-            this.MailAddressTextBox.Size = new System.Drawing.Size(694, 169);
+            this.MailAddressTextBox.Size = new System.Drawing.Size(346, 84);
             this.MailAddressTextBox.TabIndex = 1;
             // 
             // MailLabel
@@ -735,10 +735,10 @@
             this.MailLabel.AutoSize = true;
             this.MailLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MailLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MailLabel.Location = new System.Drawing.Point(1183, 1110);
-            this.MailLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.MailLabel.Location = new System.Drawing.Point(592, 552);
+            this.MailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.MailLabel.Name = "MailLabel";
-            this.MailLabel.Size = new System.Drawing.Size(456, 185);
+            this.MailLabel.Size = new System.Drawing.Size(227, 92);
             this.MailLabel.TabIndex = 0;
             this.MailLabel.Text = "メールアドレス";
             this.MailLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -748,10 +748,10 @@
             this.ClientLabel.AutoSize = true;
             this.ClientLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ClientLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ClientLabel.Location = new System.Drawing.Point(7, 1110);
-            this.ClientLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.ClientLabel.Location = new System.Drawing.Point(4, 552);
+            this.ClientLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ClientLabel.Name = "ClientLabel";
-            this.ClientLabel.Size = new System.Drawing.Size(456, 185);
+            this.ClientLabel.Size = new System.Drawing.Size(227, 92);
             this.ClientLabel.TabIndex = 0;
             this.ClientLabel.Text = "担当者名義";
             this.ClientLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -760,24 +760,24 @@
             // 
             this.ClientStaffNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ClientStaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ClientStaffNameTextBox.Location = new System.Drawing.Point(477, 1118);
-            this.ClientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.ClientStaffNameTextBox.Location = new System.Drawing.Point(239, 556);
+            this.ClientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ClientStaffNameTextBox.Multiline = true;
             this.ClientStaffNameTextBox.Name = "ClientStaffNameTextBox";
             this.ClientStaffNameTextBox.ReadOnly = true;
-            this.ClientStaffNameTextBox.Size = new System.Drawing.Size(692, 169);
+            this.ClientStaffNameTextBox.Size = new System.Drawing.Size(345, 84);
             this.ClientStaffNameTextBox.TabIndex = 1;
             // 
             // PositionTextBox
             // 
             this.PositionTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PositionTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PositionTextBox.Location = new System.Drawing.Point(1653, 933);
-            this.PositionTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.PositionTextBox.Location = new System.Drawing.Point(827, 464);
+            this.PositionTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PositionTextBox.Multiline = true;
             this.PositionTextBox.Name = "PositionTextBox";
             this.PositionTextBox.ReadOnly = true;
-            this.PositionTextBox.Size = new System.Drawing.Size(694, 169);
+            this.PositionTextBox.Size = new System.Drawing.Size(346, 84);
             this.PositionTextBox.TabIndex = 1;
             // 
             // PositionLabel
@@ -785,10 +785,10 @@
             this.PositionLabel.AutoSize = true;
             this.PositionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PositionLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PositionLabel.Location = new System.Drawing.Point(1183, 925);
-            this.PositionLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.PositionLabel.Location = new System.Drawing.Point(592, 460);
+            this.PositionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PositionLabel.Name = "PositionLabel";
-            this.PositionLabel.Size = new System.Drawing.Size(456, 185);
+            this.PositionLabel.Size = new System.Drawing.Size(227, 92);
             this.PositionLabel.TabIndex = 0;
             this.PositionLabel.Text = "役職";
             this.PositionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -798,10 +798,10 @@
             this.FaxLabel.AutoSize = true;
             this.FaxLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FaxLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.FaxLabel.Location = new System.Drawing.Point(7, 925);
-            this.FaxLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.FaxLabel.Location = new System.Drawing.Point(4, 460);
+            this.FaxLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.FaxLabel.Name = "FaxLabel";
-            this.FaxLabel.Size = new System.Drawing.Size(456, 185);
+            this.FaxLabel.Size = new System.Drawing.Size(227, 92);
             this.FaxLabel.TabIndex = 0;
             this.FaxLabel.Text = "FAX 番号";
             this.FaxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -810,24 +810,24 @@
             // 
             this.FaxTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FaxTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.FaxTextBox.Location = new System.Drawing.Point(477, 933);
-            this.FaxTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.FaxTextBox.Location = new System.Drawing.Point(239, 464);
+            this.FaxTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.FaxTextBox.Multiline = true;
             this.FaxTextBox.Name = "FaxTextBox";
             this.FaxTextBox.ReadOnly = true;
-            this.FaxTextBox.Size = new System.Drawing.Size(692, 169);
+            this.FaxTextBox.Size = new System.Drawing.Size(345, 84);
             this.FaxTextBox.TabIndex = 1;
             // 
             // TelTextBox
             // 
             this.TelTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TelTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TelTextBox.Location = new System.Drawing.Point(1653, 748);
-            this.TelTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.TelTextBox.Location = new System.Drawing.Point(827, 372);
+            this.TelTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.TelTextBox.Multiline = true;
             this.TelTextBox.Name = "TelTextBox";
             this.TelTextBox.ReadOnly = true;
-            this.TelTextBox.Size = new System.Drawing.Size(694, 169);
+            this.TelTextBox.Size = new System.Drawing.Size(346, 84);
             this.TelTextBox.TabIndex = 1;
             // 
             // TelLabel
@@ -835,10 +835,10 @@
             this.TelLabel.AutoSize = true;
             this.TelLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TelLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TelLabel.Location = new System.Drawing.Point(1183, 740);
-            this.TelLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.TelLabel.Location = new System.Drawing.Point(592, 368);
+            this.TelLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TelLabel.Name = "TelLabel";
-            this.TelLabel.Size = new System.Drawing.Size(456, 185);
+            this.TelLabel.Size = new System.Drawing.Size(227, 92);
             this.TelLabel.TabIndex = 0;
             this.TelLabel.Text = "電話番号";
             this.TelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -848,10 +848,10 @@
             this.AddressKaneLabel.AutoSize = true;
             this.AddressKaneLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressKaneLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressKaneLabel.Location = new System.Drawing.Point(7, 740);
-            this.AddressKaneLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AddressKaneLabel.Location = new System.Drawing.Point(4, 368);
+            this.AddressKaneLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AddressKaneLabel.Name = "AddressKaneLabel";
-            this.AddressKaneLabel.Size = new System.Drawing.Size(456, 185);
+            this.AddressKaneLabel.Size = new System.Drawing.Size(227, 92);
             this.AddressKaneLabel.TabIndex = 0;
             this.AddressKaneLabel.Text = "住所（カタカナ）";
             this.AddressKaneLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -860,24 +860,24 @@
             // 
             this.AddressKanaTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressKanaTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressKanaTextBox.Location = new System.Drawing.Point(477, 748);
-            this.AddressKanaTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AddressKanaTextBox.Location = new System.Drawing.Point(239, 372);
+            this.AddressKanaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AddressKanaTextBox.Multiline = true;
             this.AddressKanaTextBox.Name = "AddressKanaTextBox";
             this.AddressKanaTextBox.ReadOnly = true;
-            this.AddressKanaTextBox.Size = new System.Drawing.Size(692, 169);
+            this.AddressKanaTextBox.Size = new System.Drawing.Size(345, 84);
             this.AddressKanaTextBox.TabIndex = 1;
             // 
             // AddressTextBox
             // 
             this.AddressTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressTextBox.Location = new System.Drawing.Point(1653, 563);
-            this.AddressTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AddressTextBox.Location = new System.Drawing.Point(827, 280);
+            this.AddressTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AddressTextBox.Multiline = true;
             this.AddressTextBox.Name = "AddressTextBox";
             this.AddressTextBox.ReadOnly = true;
-            this.AddressTextBox.Size = new System.Drawing.Size(694, 169);
+            this.AddressTextBox.Size = new System.Drawing.Size(346, 84);
             this.AddressTextBox.TabIndex = 1;
             // 
             // AddressLabel
@@ -885,10 +885,10 @@
             this.AddressLabel.AutoSize = true;
             this.AddressLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressLabel.Location = new System.Drawing.Point(1183, 555);
-            this.AddressLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AddressLabel.Location = new System.Drawing.Point(592, 276);
+            this.AddressLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AddressLabel.Name = "AddressLabel";
-            this.AddressLabel.Size = new System.Drawing.Size(456, 185);
+            this.AddressLabel.Size = new System.Drawing.Size(227, 92);
             this.AddressLabel.TabIndex = 0;
             this.AddressLabel.Text = "住所";
             this.AddressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -898,10 +898,10 @@
             this.PostalLabel.AutoSize = true;
             this.PostalLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PostalLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PostalLabel.Location = new System.Drawing.Point(7, 555);
-            this.PostalLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.PostalLabel.Location = new System.Drawing.Point(4, 276);
+            this.PostalLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.PostalLabel.Name = "PostalLabel";
-            this.PostalLabel.Size = new System.Drawing.Size(456, 185);
+            this.PostalLabel.Size = new System.Drawing.Size(227, 92);
             this.PostalLabel.TabIndex = 0;
             this.PostalLabel.Text = "郵便番号";
             this.PostalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -910,24 +910,24 @@
             // 
             this.PostalCodeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PostalCodeTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PostalCodeTextBox.Location = new System.Drawing.Point(477, 563);
-            this.PostalCodeTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.PostalCodeTextBox.Location = new System.Drawing.Point(239, 280);
+            this.PostalCodeTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PostalCodeTextBox.Multiline = true;
             this.PostalCodeTextBox.Name = "PostalCodeTextBox";
             this.PostalCodeTextBox.ReadOnly = true;
-            this.PostalCodeTextBox.Size = new System.Drawing.Size(692, 169);
+            this.PostalCodeTextBox.Size = new System.Drawing.Size(345, 84);
             this.PostalCodeTextBox.TabIndex = 1;
             // 
             // AntiqueNumberTextBox
             // 
             this.AntiqueNumberTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueNumberTextBox.Location = new System.Drawing.Point(1653, 378);
-            this.AntiqueNumberTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.AntiqueNumberTextBox.Location = new System.Drawing.Point(827, 188);
+            this.AntiqueNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.AntiqueNumberTextBox.Multiline = true;
             this.AntiqueNumberTextBox.Name = "AntiqueNumberTextBox";
             this.AntiqueNumberTextBox.ReadOnly = true;
-            this.AntiqueNumberTextBox.Size = new System.Drawing.Size(694, 169);
+            this.AntiqueNumberTextBox.Size = new System.Drawing.Size(346, 84);
             this.AntiqueNumberTextBox.TabIndex = 1;
             // 
             // AntiqueLabel
@@ -935,10 +935,10 @@
             this.AntiqueLabel.AutoSize = true;
             this.AntiqueLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueLabel.Location = new System.Drawing.Point(1183, 370);
-            this.AntiqueLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.AntiqueLabel.Location = new System.Drawing.Point(592, 184);
+            this.AntiqueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AntiqueLabel.Name = "AntiqueLabel";
-            this.AntiqueLabel.Size = new System.Drawing.Size(456, 185);
+            this.AntiqueLabel.Size = new System.Drawing.Size(227, 92);
             this.AntiqueLabel.TabIndex = 0;
             this.AntiqueLabel.Text = "古物番号";
             this.AntiqueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -948,10 +948,10 @@
             this.ShopNameKanaLabel.AutoSize = true;
             this.ShopNameKanaLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShopNameKanaLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ShopNameKanaLabel.Location = new System.Drawing.Point(7, 370);
-            this.ShopNameKanaLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.ShopNameKanaLabel.Location = new System.Drawing.Point(4, 184);
+            this.ShopNameKanaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ShopNameKanaLabel.Name = "ShopNameKanaLabel";
-            this.ShopNameKanaLabel.Size = new System.Drawing.Size(456, 185);
+            this.ShopNameKanaLabel.Size = new System.Drawing.Size(227, 92);
             this.ShopNameKanaLabel.TabIndex = 0;
             this.ShopNameKanaLabel.Text = "店舗名（カタカナ）";
             this.ShopNameKanaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -960,24 +960,24 @@
             // 
             this.ShopKanaTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShopKanaTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ShopKanaTextBox.Location = new System.Drawing.Point(477, 378);
-            this.ShopKanaTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.ShopKanaTextBox.Location = new System.Drawing.Point(239, 188);
+            this.ShopKanaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ShopKanaTextBox.Multiline = true;
             this.ShopKanaTextBox.Name = "ShopKanaTextBox";
             this.ShopKanaTextBox.ReadOnly = true;
-            this.ShopKanaTextBox.Size = new System.Drawing.Size(692, 169);
+            this.ShopKanaTextBox.Size = new System.Drawing.Size(345, 84);
             this.ShopKanaTextBox.TabIndex = 1;
             // 
             // ShopNameTextBox
             // 
             this.ShopNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShopNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ShopNameTextBox.Location = new System.Drawing.Point(1653, 193);
-            this.ShopNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.ShopNameTextBox.Location = new System.Drawing.Point(827, 96);
+            this.ShopNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ShopNameTextBox.Multiline = true;
             this.ShopNameTextBox.Name = "ShopNameTextBox";
             this.ShopNameTextBox.ReadOnly = true;
-            this.ShopNameTextBox.Size = new System.Drawing.Size(694, 169);
+            this.ShopNameTextBox.Size = new System.Drawing.Size(346, 84);
             this.ShopNameTextBox.TabIndex = 1;
             // 
             // ShopNameLabel
@@ -985,10 +985,10 @@
             this.ShopNameLabel.AutoSize = true;
             this.ShopNameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShopNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ShopNameLabel.Location = new System.Drawing.Point(1183, 185);
-            this.ShopNameLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.ShopNameLabel.Location = new System.Drawing.Point(592, 92);
+            this.ShopNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ShopNameLabel.Name = "ShopNameLabel";
-            this.ShopNameLabel.Size = new System.Drawing.Size(456, 185);
+            this.ShopNameLabel.Size = new System.Drawing.Size(227, 92);
             this.ShopNameLabel.TabIndex = 0;
             this.ShopNameLabel.Text = "店舗名";
             this.ShopNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -998,10 +998,10 @@
             this.CompanyKanaLabel.AutoSize = true;
             this.CompanyKanaLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CompanyKanaLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.CompanyKanaLabel.Location = new System.Drawing.Point(7, 185);
-            this.CompanyKanaLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.CompanyKanaLabel.Location = new System.Drawing.Point(4, 92);
+            this.CompanyKanaLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.CompanyKanaLabel.Name = "CompanyKanaLabel";
-            this.CompanyKanaLabel.Size = new System.Drawing.Size(456, 185);
+            this.CompanyKanaLabel.Size = new System.Drawing.Size(227, 92);
             this.CompanyKanaLabel.TabIndex = 0;
             this.CompanyKanaLabel.Text = "会社名（カタカナ）";
             this.CompanyKanaLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1010,22 +1010,22 @@
             // 
             this.ComPanyKanaTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ComPanyKanaTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ComPanyKanaTextBox.Location = new System.Drawing.Point(477, 193);
-            this.ComPanyKanaTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.ComPanyKanaTextBox.Location = new System.Drawing.Point(239, 96);
+            this.ComPanyKanaTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ComPanyKanaTextBox.Multiline = true;
             this.ComPanyKanaTextBox.Name = "ComPanyKanaTextBox";
             this.ComPanyKanaTextBox.ReadOnly = true;
-            this.ComPanyKanaTextBox.Size = new System.Drawing.Size(692, 169);
+            this.ComPanyKanaTextBox.Size = new System.Drawing.Size(345, 84);
             this.ComPanyKanaTextBox.TabIndex = 1;
             // 
             // RemarkLabel
             // 
             this.RemarkLabel.AutoSize = true;
             this.RemarkLabel.Font = new System.Drawing.Font("MS UI Gothic", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RemarkLabel.Location = new System.Drawing.Point(2396, 2528);
-            this.RemarkLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.RemarkLabel.Location = new System.Drawing.Point(1198, 1264);
+            this.RemarkLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.RemarkLabel.Name = "RemarkLabel";
-            this.RemarkLabel.Size = new System.Drawing.Size(165, 67);
+            this.RemarkLabel.Size = new System.Drawing.Size(85, 34);
             this.RemarkLabel.TabIndex = 0;
             this.RemarkLabel.Text = "備考";
             this.RemarkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1033,23 +1033,23 @@
             // RemarksTextBox
             // 
             this.RemarksTextBox.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RemarksTextBox.Location = new System.Drawing.Point(2408, 2618);
-            this.RemarksTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.RemarksTextBox.Location = new System.Drawing.Point(1204, 1309);
+            this.RemarksTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.RemarksTextBox.Multiline = true;
             this.RemarksTextBox.Name = "RemarksTextBox";
             this.RemarksTextBox.ReadOnly = true;
             this.RemarksTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.RemarksTextBox.Size = new System.Drawing.Size(1230, 183);
+            this.RemarksTextBox.Size = new System.Drawing.Size(617, 94);
             this.RemarksTextBox.TabIndex = 1;
             // 
             // ReturnButton
             // 
             this.ReturnButton.BackColor = System.Drawing.Color.LightCyan;
             this.ReturnButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ReturnButton.Location = new System.Drawing.Point(2737, 1720);
-            this.ReturnButton.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.ReturnButton.Location = new System.Drawing.Point(1641, 1032);
+            this.ReturnButton.Margin = new System.Windows.Forms.Padding(4);
             this.ReturnButton.Name = "ReturnButton";
-            this.ReturnButton.Size = new System.Drawing.Size(1004, 165);
+            this.ReturnButton.Size = new System.Drawing.Size(602, 98);
             this.ReturnButton.TabIndex = 1;
             this.ReturnButton.Text = "成績入力画面へ";
             this.ReturnButton.UseVisualStyleBackColor = false;
@@ -1059,10 +1059,10 @@
             // 
             this.StaffNameLabel.AutoSize = true;
             this.StaffNameLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.StaffNameLabel.Location = new System.Drawing.Point(79, 32);
-            this.StaffNameLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.StaffNameLabel.Location = new System.Drawing.Point(33, 13);
+            this.StaffNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StaffNameLabel.Name = "StaffNameLabel";
-            this.StaffNameLabel.Size = new System.Drawing.Size(145, 60);
+            this.StaffNameLabel.Size = new System.Drawing.Size(61, 25);
             this.StaffNameLabel.TabIndex = 2;
             this.StaffNameLabel.Text = "担当";
             // 
@@ -1070,10 +1070,10 @@
             // 
             this.SlipNumberLabel.AutoSize = true;
             this.SlipNumberLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SlipNumberLabel.Location = new System.Drawing.Point(597, 31);
-            this.SlipNumberLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.SlipNumberLabel.Location = new System.Drawing.Point(248, 13);
+            this.SlipNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SlipNumberLabel.Name = "SlipNumberLabel";
-            this.SlipNumberLabel.Size = new System.Drawing.Size(265, 60);
+            this.SlipNumberLabel.Size = new System.Drawing.Size(111, 25);
             this.SlipNumberLabel.TabIndex = 2;
             this.SlipNumberLabel.Text = "伝票番号";
             // 
@@ -1081,50 +1081,51 @@
             // 
             this.GradeNumberLabel.AutoSize = true;
             this.GradeNumberLabel.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.GradeNumberLabel.Location = new System.Drawing.Point(1450, 27);
-            this.GradeNumberLabel.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.GradeNumberLabel.Location = new System.Drawing.Point(604, 12);
+            this.GradeNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.GradeNumberLabel.Name = "GradeNumberLabel";
-            this.GradeNumberLabel.Size = new System.Drawing.Size(265, 60);
+            this.GradeNumberLabel.Size = new System.Drawing.Size(111, 25);
             this.GradeNumberLabel.TabIndex = 2;
             this.GradeNumberLabel.Text = "成績番号";
             // 
             // StaffNameTextBox
             // 
             this.StaffNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.StaffNameTextBox.Location = new System.Drawing.Point(251, 24);
-            this.StaffNameTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.StaffNameTextBox.Location = new System.Drawing.Point(151, 14);
+            this.StaffNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.StaffNameTextBox.Name = "StaffNameTextBox";
             this.StaffNameTextBox.ReadOnly = true;
-            this.StaffNameTextBox.Size = new System.Drawing.Size(294, 67);
+            this.StaffNameTextBox.Size = new System.Drawing.Size(179, 44);
             this.StaffNameTextBox.TabIndex = 3;
             // 
             // SlipNumberTextBox
             // 
             this.SlipNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SlipNumberTextBox.Location = new System.Drawing.Point(901, 25);
-            this.SlipNumberTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.SlipNumberTextBox.Location = new System.Drawing.Point(540, 14);
+            this.SlipNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.SlipNumberTextBox.Name = "SlipNumberTextBox";
             this.SlipNumberTextBox.ReadOnly = true;
-            this.SlipNumberTextBox.Size = new System.Drawing.Size(474, 67);
+            this.SlipNumberTextBox.Size = new System.Drawing.Size(287, 44);
             this.SlipNumberTextBox.TabIndex = 3;
             this.SlipNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // GradeNumberTextBox
             // 
             this.GradeNumberTextBox.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.GradeNumberTextBox.Location = new System.Drawing.Point(1729, 24);
-            this.GradeNumberTextBox.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.GradeNumberTextBox.Location = new System.Drawing.Point(1036, 14);
+            this.GradeNumberTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.GradeNumberTextBox.Name = "GradeNumberTextBox";
             this.GradeNumberTextBox.ReadOnly = true;
-            this.GradeNumberTextBox.Size = new System.Drawing.Size(479, 67);
+            this.GradeNumberTextBox.Size = new System.Drawing.Size(290, 44);
             this.GradeNumberTextBox.TabIndex = 3;
             this.GradeNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(2408, 30);
+            this.pictureBox2.Location = new System.Drawing.Point(1204, 15);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1176, 2445);
+            this.pictureBox2.Size = new System.Drawing.Size(588, 1222);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;
@@ -1135,10 +1136,11 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tabControl1.ItemSize = new System.Drawing.Size(300, 86);
-            this.tabControl1.Location = new System.Drawing.Point(41, 138);
+            this.tabControl1.Location = new System.Drawing.Point(24, 83);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(3700, 1500);
+            this.tabControl1.Size = new System.Drawing.Size(2220, 900);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 6;
             // 
@@ -1151,19 +1153,21 @@
             this.tabPage1.Controls.Add(this.RemarkLabel);
             this.tabPage1.Controls.Add(this.pictureBox2);
             this.tabPage1.Controls.Add(this.RemarksTextBox);
-            this.tabPage1.Location = new System.Drawing.Point(10, 96);
+            this.tabPage1.Location = new System.Drawing.Point(4, 90);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(3680, 1394);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Size = new System.Drawing.Size(1843, 672);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 2798);
+            this.panel1.Location = new System.Drawing.Point(2, 1401);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(3632, 50);
+            this.panel1.Size = new System.Drawing.Size(1818, 25);
             this.panel1.TabIndex = 6;
             // 
             // tabPage2
@@ -1175,47 +1179,52 @@
             this.tabPage2.Controls.Add(this.label28);
             this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage2.Location = new System.Drawing.Point(10, 96);
+            this.tabPage2.Location = new System.Drawing.Point(4, 90);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(3680, 1394);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Size = new System.Drawing.Size(1842, 656);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             // 
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(3, 2320);
+            this.panel2.Location = new System.Drawing.Point(2, 1162);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(3631, 50);
+            this.panel2.Size = new System.Drawing.Size(1817, 25);
             this.panel2.TabIndex = 4;
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1.Location = new System.Drawing.Point(2354, 2155);
+            this.textBox1.Location = new System.Drawing.Point(1177, 1078);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(1230, 168);
+            this.textBox1.Size = new System.Drawing.Size(617, 86);
             this.textBox1.TabIndex = 3;
             // 
             // label28
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("MS UI Gothic", 20.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label28.Location = new System.Drawing.Point(2367, 2066);
+            this.label28.Location = new System.Drawing.Point(1184, 1033);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(165, 68);
+            this.label28.Size = new System.Drawing.Size(83, 34);
             this.label28.TabIndex = 2;
             this.label28.Text = "備考";
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(2354, 30);
+            this.pictureBox1.Location = new System.Drawing.Point(1177, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1230, 1959);
+            this.pictureBox1.Size = new System.Drawing.Size(615, 980);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -1279,7 +1288,8 @@
             this.tableLayoutPanel2.Controls.Add(this.label24, 2, 11);
             this.tableLayoutPanel2.Controls.Add(this.label25, 0, 12);
             this.tableLayoutPanel2.Controls.Add(this.label27, 2, 12);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(33, 22);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(16, 11);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 13;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692307F));
@@ -1295,7 +1305,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692307F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692307F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.692307F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(2293, 2301);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1146, 1150);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -1303,9 +1313,10 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(2, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(452, 177);
+            this.label1.Size = new System.Drawing.Size(225, 88);
             this.label1.TabIndex = 0;
             this.label1.Text = "顧客情報登録日";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1315,9 +1326,10 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(1148, 0);
+            this.label2.Location = new System.Drawing.Point(574, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(452, 177);
+            this.label2.Size = new System.Drawing.Size(225, 88);
             this.label2.TabIndex = 0;
             this.label2.Text = "氏名";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1327,9 +1339,10 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(3, 177);
+            this.label3.Location = new System.Drawing.Point(2, 88);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(452, 177);
+            this.label3.Size = new System.Drawing.Size(225, 88);
             this.label3.TabIndex = 0;
             this.label3.Text = "氏名（カタカナ）";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1339,9 +1352,10 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(1148, 177);
+            this.label4.Location = new System.Drawing.Point(574, 88);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(452, 177);
+            this.label4.Size = new System.Drawing.Size(225, 88);
             this.label4.TabIndex = 0;
             this.label4.Text = "生年月日（西暦）";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1351,9 +1365,10 @@
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(3, 354);
+            this.label5.Location = new System.Drawing.Point(2, 176);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(452, 177);
+            this.label5.Size = new System.Drawing.Size(225, 88);
             this.label5.TabIndex = 0;
             this.label5.Text = "郵便番号";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1363,9 +1378,10 @@
             this.label6.AutoSize = true;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(1148, 354);
+            this.label6.Location = new System.Drawing.Point(574, 176);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(452, 177);
+            this.label6.Size = new System.Drawing.Size(225, 88);
             this.label6.TabIndex = 0;
             this.label6.Text = "住所";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1375,9 +1391,10 @@
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(3, 531);
+            this.label7.Location = new System.Drawing.Point(2, 264);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(452, 177);
+            this.label7.Size = new System.Drawing.Size(225, 88);
             this.label7.TabIndex = 0;
             this.label7.Text = "住所（カタカナ）";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1387,9 +1404,10 @@
             this.label8.AutoSize = true;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(1148, 531);
+            this.label8.Location = new System.Drawing.Point(574, 264);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(452, 177);
+            this.label8.Size = new System.Drawing.Size(225, 88);
             this.label8.TabIndex = 0;
             this.label8.Text = "電話番号";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1399,9 +1417,10 @@
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(3, 708);
+            this.label9.Location = new System.Drawing.Point(2, 352);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(452, 177);
+            this.label9.Size = new System.Drawing.Size(225, 88);
             this.label9.TabIndex = 0;
             this.label9.Text = "FAX 番号";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1411,9 +1430,10 @@
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(1148, 708);
+            this.label10.Location = new System.Drawing.Point(574, 352);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(452, 177);
+            this.label10.Size = new System.Drawing.Size(225, 88);
             this.label10.TabIndex = 0;
             this.label10.Text = "メールアドレス";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1423,9 +1443,10 @@
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label11.Location = new System.Drawing.Point(3, 885);
+            this.label11.Location = new System.Drawing.Point(2, 440);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(452, 177);
+            this.label11.Size = new System.Drawing.Size(225, 88);
             this.label11.TabIndex = 0;
             this.label11.Text = "職業";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1435,9 +1456,10 @@
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label12.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.Location = new System.Drawing.Point(1148, 885);
+            this.label12.Location = new System.Drawing.Point(574, 440);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(452, 177);
+            this.label12.Size = new System.Drawing.Size(225, 88);
             this.label12.TabIndex = 0;
             this.label12.Text = "金融機関名";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1447,9 +1469,10 @@
             this.label13.AutoSize = true;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label13.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label13.Location = new System.Drawing.Point(3, 1062);
+            this.label13.Location = new System.Drawing.Point(2, 528);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(452, 177);
+            this.label13.Size = new System.Drawing.Size(225, 88);
             this.label13.TabIndex = 0;
             this.label13.Text = "支店名";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1459,9 +1482,10 @@
             this.label14.AutoSize = true;
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label14.Location = new System.Drawing.Point(1148, 1062);
+            this.label14.Location = new System.Drawing.Point(574, 528);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(452, 177);
+            this.label14.Size = new System.Drawing.Size(225, 88);
             this.label14.TabIndex = 0;
             this.label14.Text = "預金種別";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1471,9 +1495,10 @@
             this.label15.AutoSize = true;
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label15.Location = new System.Drawing.Point(3, 1239);
+            this.label15.Location = new System.Drawing.Point(2, 616);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(452, 177);
+            this.label15.Size = new System.Drawing.Size(225, 88);
             this.label15.TabIndex = 0;
             this.label15.Text = "口座番号";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1483,9 +1508,10 @@
             this.label16.AutoSize = true;
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label16.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label16.Location = new System.Drawing.Point(1148, 1239);
+            this.label16.Location = new System.Drawing.Point(574, 616);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(452, 177);
+            this.label16.Size = new System.Drawing.Size(225, 88);
             this.label16.TabIndex = 0;
             this.label16.Text = "口座名義";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1495,9 +1521,10 @@
             this.label17.AutoSize = true;
             this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label17.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label17.Location = new System.Drawing.Point(3, 1416);
+            this.label17.Location = new System.Drawing.Point(2, 704);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(452, 177);
+            this.label17.Size = new System.Drawing.Size(225, 88);
             this.label17.TabIndex = 0;
             this.label17.Text = "口座名義（カタカナ）";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1507,9 +1534,10 @@
             this.label18.AutoSize = true;
             this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label18.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label18.Location = new System.Drawing.Point(1148, 1416);
+            this.label18.Location = new System.Drawing.Point(574, 704);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(452, 177);
+            this.label18.Size = new System.Drawing.Size(225, 88);
             this.label18.TabIndex = 0;
             this.label18.Text = "身分証番号";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1519,9 +1547,10 @@
             this.label19.AutoSize = true;
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label19.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label19.Location = new System.Drawing.Point(3, 1593);
+            this.label19.Location = new System.Drawing.Point(2, 792);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(452, 177);
+            this.label19.Size = new System.Drawing.Size(225, 88);
             this.label19.TabIndex = 0;
             this.label19.Text = "登記簿謄本";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1530,209 +1559,228 @@
             // 
             this.RegistrationDateTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegistrationDateTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegistrationDateTextBox2.Location = new System.Drawing.Point(461, 3);
+            this.RegistrationDateTextBox2.Location = new System.Drawing.Point(231, 2);
+            this.RegistrationDateTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.RegistrationDateTextBox2.Multiline = true;
             this.RegistrationDateTextBox2.Name = "RegistrationDateTextBox2";
             this.RegistrationDateTextBox2.ReadOnly = true;
-            this.RegistrationDateTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.RegistrationDateTextBox2.Size = new System.Drawing.Size(339, 84);
             this.RegistrationDateTextBox2.TabIndex = 1;
             // 
             // NameTextBox2
             // 
             this.NameTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NameTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.NameTextBox2.Location = new System.Drawing.Point(1606, 3);
+            this.NameTextBox2.Location = new System.Drawing.Point(803, 2);
+            this.NameTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.NameTextBox2.Multiline = true;
             this.NameTextBox2.Name = "NameTextBox2";
             this.NameTextBox2.ReadOnly = true;
-            this.NameTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.NameTextBox2.Size = new System.Drawing.Size(341, 84);
             this.NameTextBox2.TabIndex = 1;
             // 
             // NameKanaTextBox2
             // 
             this.NameKanaTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NameKanaTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.NameKanaTextBox2.Location = new System.Drawing.Point(461, 180);
+            this.NameKanaTextBox2.Location = new System.Drawing.Point(231, 90);
+            this.NameKanaTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.NameKanaTextBox2.Multiline = true;
             this.NameKanaTextBox2.Name = "NameKanaTextBox2";
             this.NameKanaTextBox2.ReadOnly = true;
-            this.NameKanaTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.NameKanaTextBox2.Size = new System.Drawing.Size(339, 84);
             this.NameKanaTextBox2.TabIndex = 1;
             // 
             // BirthdayTextBox2
             // 
             this.BirthdayTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BirthdayTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BirthdayTextBox2.Location = new System.Drawing.Point(1606, 180);
+            this.BirthdayTextBox2.Location = new System.Drawing.Point(803, 90);
+            this.BirthdayTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.BirthdayTextBox2.Multiline = true;
             this.BirthdayTextBox2.Name = "BirthdayTextBox2";
             this.BirthdayTextBox2.ReadOnly = true;
-            this.BirthdayTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.BirthdayTextBox2.Size = new System.Drawing.Size(341, 84);
             this.BirthdayTextBox2.TabIndex = 1;
             // 
             // PostalCodeTextBox2
             // 
             this.PostalCodeTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PostalCodeTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PostalCodeTextBox2.Location = new System.Drawing.Point(461, 357);
+            this.PostalCodeTextBox2.Location = new System.Drawing.Point(231, 178);
+            this.PostalCodeTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.PostalCodeTextBox2.Multiline = true;
             this.PostalCodeTextBox2.Name = "PostalCodeTextBox2";
             this.PostalCodeTextBox2.ReadOnly = true;
-            this.PostalCodeTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.PostalCodeTextBox2.Size = new System.Drawing.Size(339, 84);
             this.PostalCodeTextBox2.TabIndex = 1;
             // 
             // AddressTextBox2
             // 
             this.AddressTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressTextBox2.Location = new System.Drawing.Point(1606, 357);
+            this.AddressTextBox2.Location = new System.Drawing.Point(803, 178);
+            this.AddressTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AddressTextBox2.Multiline = true;
             this.AddressTextBox2.Name = "AddressTextBox2";
             this.AddressTextBox2.ReadOnly = true;
-            this.AddressTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.AddressTextBox2.Size = new System.Drawing.Size(341, 84);
             this.AddressTextBox2.TabIndex = 1;
             // 
             // AddressKanaTextBox2
             // 
             this.AddressKanaTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AddressKanaTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AddressKanaTextBox2.Location = new System.Drawing.Point(461, 534);
+            this.AddressKanaTextBox2.Location = new System.Drawing.Point(231, 266);
+            this.AddressKanaTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AddressKanaTextBox2.Multiline = true;
             this.AddressKanaTextBox2.Name = "AddressKanaTextBox2";
             this.AddressKanaTextBox2.ReadOnly = true;
-            this.AddressKanaTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.AddressKanaTextBox2.Size = new System.Drawing.Size(339, 84);
             this.AddressKanaTextBox2.TabIndex = 1;
             // 
             // TelTextBox2
             // 
             this.TelTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TelTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TelTextBox2.Location = new System.Drawing.Point(1606, 534);
+            this.TelTextBox2.Location = new System.Drawing.Point(803, 266);
+            this.TelTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.TelTextBox2.Multiline = true;
             this.TelTextBox2.Name = "TelTextBox2";
             this.TelTextBox2.ReadOnly = true;
-            this.TelTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.TelTextBox2.Size = new System.Drawing.Size(341, 84);
             this.TelTextBox2.TabIndex = 1;
             // 
             // FaxTextBox2
             // 
             this.FaxTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FaxTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.FaxTextBox2.Location = new System.Drawing.Point(461, 711);
+            this.FaxTextBox2.Location = new System.Drawing.Point(231, 354);
+            this.FaxTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.FaxTextBox2.Multiline = true;
             this.FaxTextBox2.Name = "FaxTextBox2";
             this.FaxTextBox2.ReadOnly = true;
-            this.FaxTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.FaxTextBox2.Size = new System.Drawing.Size(339, 84);
             this.FaxTextBox2.TabIndex = 1;
             // 
             // MailTextBox2
             // 
             this.MailTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MailTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.MailTextBox2.Location = new System.Drawing.Point(1606, 711);
+            this.MailTextBox2.Location = new System.Drawing.Point(803, 354);
+            this.MailTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.MailTextBox2.Multiline = true;
             this.MailTextBox2.Name = "MailTextBox2";
             this.MailTextBox2.ReadOnly = true;
-            this.MailTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.MailTextBox2.Size = new System.Drawing.Size(341, 84);
             this.MailTextBox2.TabIndex = 1;
             // 
             // OccupationTextBox2
             // 
             this.OccupationTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OccupationTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.OccupationTextBox2.Location = new System.Drawing.Point(461, 888);
+            this.OccupationTextBox2.Location = new System.Drawing.Point(231, 442);
+            this.OccupationTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.OccupationTextBox2.Multiline = true;
             this.OccupationTextBox2.Name = "OccupationTextBox2";
             this.OccupationTextBox2.ReadOnly = true;
-            this.OccupationTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.OccupationTextBox2.Size = new System.Drawing.Size(339, 84);
             this.OccupationTextBox2.TabIndex = 1;
             // 
             // BankNameTextBox2
             // 
             this.BankNameTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BankNameTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BankNameTextBox2.Location = new System.Drawing.Point(1606, 888);
+            this.BankNameTextBox2.Location = new System.Drawing.Point(803, 442);
+            this.BankNameTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.BankNameTextBox2.Multiline = true;
             this.BankNameTextBox2.Name = "BankNameTextBox2";
             this.BankNameTextBox2.ReadOnly = true;
-            this.BankNameTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.BankNameTextBox2.Size = new System.Drawing.Size(341, 84);
             this.BankNameTextBox2.TabIndex = 1;
             // 
             // BranchNameTextBox2
             // 
             this.BranchNameTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BranchNameTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BranchNameTextBox2.Location = new System.Drawing.Point(461, 1065);
+            this.BranchNameTextBox2.Location = new System.Drawing.Point(231, 530);
+            this.BranchNameTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.BranchNameTextBox2.Multiline = true;
             this.BranchNameTextBox2.Name = "BranchNameTextBox2";
             this.BranchNameTextBox2.ReadOnly = true;
-            this.BranchNameTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.BranchNameTextBox2.Size = new System.Drawing.Size(339, 84);
             this.BranchNameTextBox2.TabIndex = 1;
             // 
             // DepositTypeTextBox2
             // 
             this.DepositTypeTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DepositTypeTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.DepositTypeTextBox2.Location = new System.Drawing.Point(1606, 1065);
+            this.DepositTypeTextBox2.Location = new System.Drawing.Point(803, 530);
+            this.DepositTypeTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.DepositTypeTextBox2.Multiline = true;
             this.DepositTypeTextBox2.Name = "DepositTypeTextBox2";
             this.DepositTypeTextBox2.ReadOnly = true;
-            this.DepositTypeTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.DepositTypeTextBox2.Size = new System.Drawing.Size(341, 84);
             this.DepositTypeTextBox2.TabIndex = 1;
             // 
             // AccountNumberTextBox2
             // 
             this.AccountNumberTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNumberTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNumberTextBox2.Location = new System.Drawing.Point(461, 1242);
+            this.AccountNumberTextBox2.Location = new System.Drawing.Point(231, 618);
+            this.AccountNumberTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AccountNumberTextBox2.Multiline = true;
             this.AccountNumberTextBox2.Name = "AccountNumberTextBox2";
             this.AccountNumberTextBox2.ReadOnly = true;
-            this.AccountNumberTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.AccountNumberTextBox2.Size = new System.Drawing.Size(339, 84);
             this.AccountNumberTextBox2.TabIndex = 1;
             // 
             // AccountNameTextBox2
             // 
             this.AccountNameTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNameTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNameTextBox2.Location = new System.Drawing.Point(1606, 1242);
+            this.AccountNameTextBox2.Location = new System.Drawing.Point(803, 618);
+            this.AccountNameTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AccountNameTextBox2.Multiline = true;
             this.AccountNameTextBox2.Name = "AccountNameTextBox2";
             this.AccountNameTextBox2.ReadOnly = true;
-            this.AccountNameTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.AccountNameTextBox2.Size = new System.Drawing.Size(341, 84);
             this.AccountNameTextBox2.TabIndex = 1;
             // 
             // AccountNameKanaTextBox2
             // 
             this.AccountNameKanaTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AccountNameKanaTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AccountNameKanaTextBox2.Location = new System.Drawing.Point(461, 1419);
+            this.AccountNameKanaTextBox2.Location = new System.Drawing.Point(231, 706);
+            this.AccountNameKanaTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AccountNameKanaTextBox2.Multiline = true;
             this.AccountNameKanaTextBox2.Name = "AccountNameKanaTextBox2";
             this.AccountNameKanaTextBox2.ReadOnly = true;
-            this.AccountNameKanaTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.AccountNameKanaTextBox2.Size = new System.Drawing.Size(339, 84);
             this.AccountNameKanaTextBox2.TabIndex = 1;
             // 
             // IdTextBox2
             // 
             this.IdTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IdTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.IdTextBox2.Location = new System.Drawing.Point(1606, 1419);
+            this.IdTextBox2.Location = new System.Drawing.Point(803, 706);
+            this.IdTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.IdTextBox2.Multiline = true;
             this.IdTextBox2.Name = "IdTextBox2";
             this.IdTextBox2.ReadOnly = true;
-            this.IdTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.IdTextBox2.Size = new System.Drawing.Size(341, 84);
             this.IdTextBox2.TabIndex = 1;
             // 
             // RegisterCopyTextBox2
             // 
             this.RegisterCopyTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegisterCopyTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterCopyTextBox2.Location = new System.Drawing.Point(461, 1596);
+            this.RegisterCopyTextBox2.Location = new System.Drawing.Point(231, 794);
+            this.RegisterCopyTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.RegisterCopyTextBox2.Multiline = true;
             this.RegisterCopyTextBox2.Name = "RegisterCopyTextBox2";
             this.RegisterCopyTextBox2.ReadOnly = true;
-            this.RegisterCopyTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.RegisterCopyTextBox2.Size = new System.Drawing.Size(339, 84);
             this.RegisterCopyTextBox2.TabIndex = 1;
             this.RegisterCopyTextBox2.DoubleClick += new System.EventHandler(this.RegisterCopyTextBox2_DoubleClick);
             // 
@@ -1740,11 +1788,12 @@
             // 
             this.AntiqueLicenseTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueLicenseTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueLicenseTextBox2.Location = new System.Drawing.Point(1606, 1596);
+            this.AntiqueLicenseTextBox2.Location = new System.Drawing.Point(803, 794);
+            this.AntiqueLicenseTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AntiqueLicenseTextBox2.Multiline = true;
             this.AntiqueLicenseTextBox2.Name = "AntiqueLicenseTextBox2";
             this.AntiqueLicenseTextBox2.ReadOnly = true;
-            this.AntiqueLicenseTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.AntiqueLicenseTextBox2.Size = new System.Drawing.Size(341, 84);
             this.AntiqueLicenseTextBox2.TabIndex = 1;
             this.AntiqueLicenseTextBox2.DoubleClick += new System.EventHandler(this.AntiqueLicenseTextBox2_DoubleClick);
             // 
@@ -1752,11 +1801,12 @@
             // 
             this.PhotoIdTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PhotoIdTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PhotoIdTextBox2.Location = new System.Drawing.Point(461, 1773);
+            this.PhotoIdTextBox2.Location = new System.Drawing.Point(231, 882);
+            this.PhotoIdTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.PhotoIdTextBox2.Multiline = true;
             this.PhotoIdTextBox2.Name = "PhotoIdTextBox2";
             this.PhotoIdTextBox2.ReadOnly = true;
-            this.PhotoIdTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.PhotoIdTextBox2.Size = new System.Drawing.Size(339, 84);
             this.PhotoIdTextBox2.TabIndex = 1;
             this.PhotoIdTextBox2.DoubleClick += new System.EventHandler(this.PhotoIdTextBox2_DoubleClick);
             // 
@@ -1764,11 +1814,12 @@
             // 
             this.AolFinancialShareholderTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AolFinancialShareholderTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AolFinancialShareholderTextBox2.Location = new System.Drawing.Point(1606, 1773);
+            this.AolFinancialShareholderTextBox2.Location = new System.Drawing.Point(803, 882);
+            this.AolFinancialShareholderTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.AolFinancialShareholderTextBox2.Multiline = true;
             this.AolFinancialShareholderTextBox2.Name = "AolFinancialShareholderTextBox2";
             this.AolFinancialShareholderTextBox2.ReadOnly = true;
-            this.AolFinancialShareholderTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.AolFinancialShareholderTextBox2.Size = new System.Drawing.Size(341, 84);
             this.AolFinancialShareholderTextBox2.TabIndex = 1;
             this.AolFinancialShareholderTextBox2.DoubleClick += new System.EventHandler(this.AolFinancialShareholderTextBox2_DoubleClick);
             // 
@@ -1776,11 +1827,12 @@
             // 
             this.TaxCertificateTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaxCertificateTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TaxCertificateTextBox2.Location = new System.Drawing.Point(461, 1950);
+            this.TaxCertificateTextBox2.Location = new System.Drawing.Point(231, 970);
+            this.TaxCertificateTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.TaxCertificateTextBox2.Multiline = true;
             this.TaxCertificateTextBox2.Name = "TaxCertificateTextBox2";
             this.TaxCertificateTextBox2.ReadOnly = true;
-            this.TaxCertificateTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.TaxCertificateTextBox2.Size = new System.Drawing.Size(339, 84);
             this.TaxCertificateTextBox2.TabIndex = 1;
             this.TaxCertificateTextBox2.DoubleClick += new System.EventHandler(this.TaxCertificateTextBox2_DoubleClick);
             // 
@@ -1788,11 +1840,12 @@
             // 
             this.ResidenceCardTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ResidenceCardTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ResidenceCardTextBox2.Location = new System.Drawing.Point(1606, 1950);
+            this.ResidenceCardTextBox2.Location = new System.Drawing.Point(803, 970);
+            this.ResidenceCardTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.ResidenceCardTextBox2.Multiline = true;
             this.ResidenceCardTextBox2.Name = "ResidenceCardTextBox2";
             this.ResidenceCardTextBox2.ReadOnly = true;
-            this.ResidenceCardTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.ResidenceCardTextBox2.Size = new System.Drawing.Size(341, 84);
             this.ResidenceCardTextBox2.TabIndex = 1;
             this.ResidenceCardTextBox2.DoubleClick += new System.EventHandler(this.ResidenceCardTextBox2_DoubleClick);
             // 
@@ -1800,22 +1853,24 @@
             // 
             this.PeriodStayTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PeriodStayTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PeriodStayTextBox2.Location = new System.Drawing.Point(461, 2127);
+            this.PeriodStayTextBox2.Location = new System.Drawing.Point(231, 1058);
+            this.PeriodStayTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.PeriodStayTextBox2.Multiline = true;
             this.PeriodStayTextBox2.Name = "PeriodStayTextBox2";
             this.PeriodStayTextBox2.ReadOnly = true;
-            this.PeriodStayTextBox2.Size = new System.Drawing.Size(681, 171);
+            this.PeriodStayTextBox2.Size = new System.Drawing.Size(339, 90);
             this.PeriodStayTextBox2.TabIndex = 1;
             // 
             // SealCetificationTextBox2
             // 
             this.SealCetificationTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SealCetificationTextBox2.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SealCetificationTextBox2.Location = new System.Drawing.Point(1606, 2127);
+            this.SealCetificationTextBox2.Location = new System.Drawing.Point(803, 1058);
+            this.SealCetificationTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.SealCetificationTextBox2.Multiline = true;
             this.SealCetificationTextBox2.Name = "SealCetificationTextBox2";
             this.SealCetificationTextBox2.ReadOnly = true;
-            this.SealCetificationTextBox2.Size = new System.Drawing.Size(684, 171);
+            this.SealCetificationTextBox2.Size = new System.Drawing.Size(341, 90);
             this.SealCetificationTextBox2.TabIndex = 1;
             this.SealCetificationTextBox2.DoubleClick += new System.EventHandler(this.SealCetificationTextBox2_DoubleClick);
             // 
@@ -1824,9 +1879,10 @@
             this.label20.AutoSize = true;
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label20.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label20.Location = new System.Drawing.Point(1148, 1593);
+            this.label20.Location = new System.Drawing.Point(574, 792);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(452, 177);
+            this.label20.Size = new System.Drawing.Size(225, 88);
             this.label20.TabIndex = 0;
             this.label20.Text = "古物商許可証";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1836,9 +1892,10 @@
             this.label21.AutoSize = true;
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label21.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label21.Location = new System.Drawing.Point(3, 1770);
+            this.label21.Location = new System.Drawing.Point(2, 880);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(452, 177);
+            this.label21.Size = new System.Drawing.Size(225, 88);
             this.label21.TabIndex = 0;
             this.label21.Text = "顔つき身分証";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1848,9 +1905,10 @@
             this.label22.AutoSize = true;
             this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label22.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label22.Location = new System.Drawing.Point(1148, 1770);
+            this.label22.Location = new System.Drawing.Point(574, 880);
+            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(452, 177);
+            this.label22.Size = new System.Drawing.Size(225, 88);
             this.label22.TabIndex = 0;
             this.label22.Text = "定款、決算書、\r\n株主構成";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1860,9 +1918,10 @@
             this.label23.AutoSize = true;
             this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label23.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label23.Location = new System.Drawing.Point(3, 1947);
+            this.label23.Location = new System.Drawing.Point(2, 968);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(452, 177);
+            this.label23.Size = new System.Drawing.Size(225, 88);
             this.label23.TabIndex = 0;
             this.label23.Text = "納税証明書";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1872,9 +1931,10 @@
             this.label24.AutoSize = true;
             this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label24.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label24.Location = new System.Drawing.Point(1148, 1947);
+            this.label24.Location = new System.Drawing.Point(574, 968);
+            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(452, 177);
+            this.label24.Size = new System.Drawing.Size(225, 88);
             this.label24.TabIndex = 0;
             this.label24.Text = "在留カード";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1884,9 +1944,10 @@
             this.label25.AutoSize = true;
             this.label25.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label25.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label25.Location = new System.Drawing.Point(3, 2124);
+            this.label25.Location = new System.Drawing.Point(2, 1056);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(452, 177);
+            this.label25.Size = new System.Drawing.Size(225, 94);
             this.label25.TabIndex = 0;
             this.label25.Text = "在留期限";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1896,9 +1957,10 @@
             this.label27.AutoSize = true;
             this.label27.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label27.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label27.Location = new System.Drawing.Point(1148, 2124);
+            this.label27.Location = new System.Drawing.Point(574, 1056);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(452, 177);
+            this.label27.Size = new System.Drawing.Size(225, 94);
             this.label27.TabIndex = 0;
             this.label27.Text = "印鑑証明";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1908,20 +1970,21 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label26.ForeColor = System.Drawing.Color.Red;
-            this.label26.Location = new System.Drawing.Point(2338, 45);
-            this.label26.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label26.Location = new System.Drawing.Point(974, 18);
+            this.label26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(1322, 60);
+            this.label26.Size = new System.Drawing.Size(553, 25);
             this.label26.TabIndex = 2;
             this.label26.Text = "画像の PATH をダブルクリックすると画像を確認できます";
             // 
             // ClientInformation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(3768, 1912);
+            this.ClientSize = new System.Drawing.Size(2288, 1144);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.GradeNumberTextBox);
             this.Controls.Add(this.SlipNumberTextBox);
@@ -1931,9 +1994,9 @@
             this.Controls.Add(this.SlipNumberLabel);
             this.Controls.Add(this.StaffNameLabel);
             this.Controls.Add(this.ReturnButton);
-            this.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ClientInformation";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "お客様情報";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientInformation_FormClosed);
             this.Load += new System.EventHandler(this.ClientInformation_Load);

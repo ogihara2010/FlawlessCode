@@ -7,290 +7,828 @@ namespace Flawless_ex
 {
     public partial class client_search : Form
     {
-        //Statement statement;
+        Statement statement;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
         public int count = 0;//計算書/納品書の顧客選択用
-        int staff_id;
-        int type;
-        string staff_name;
-        string address;
+        public int staff_id;
+        public int type;
+        public string staff_name;
+        public string address;
         decimal Total;
-        string access_auth;
-        string document;
-        int control;
-        string data;
-        string search6;
-        string search7;
-        string search8;
-        string Pass;
-        int grade;
-
-        public client_search(MainMenu mainMenu, int id, int type, string staff_name, string address, decimal Total, string Access_auth, string pass)
+        public string access_auth;
+        public string document;
+        public int control;
+        public string data;
+        public string pass;
+        public int grade;
+        public string clientName;
+        public string shopName;
+        public string clientStaff;
+        public string iname;
+        public string iaddress;
+        public int check;
+        #region "買取販売履歴"
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
+        bool screan = true;
+        public client_search(Statement statement, int id, int type, string staff_name, string address, decimal Total, int control, string document, string access_suth, string pass)
         {
             InitializeComponent();
 
-            //this.statement = statement;
-            this.mainMenu = mainMenu;
+            this.statement = statement;
+            //this.mainMenu = mainMenu;
             staff_id = id;
             this.type = type;
             this.address = address;
             this.staff_name = staff_name;
             this.Total = Total;
-            this.Pass = pass;
-            this.access_auth = Access_auth;
+            this.control = control;
+            this.document = document;
         }
 
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, search6, search7, search8, grade);
             this.Close();
-
-            statement.Show();
         }
 
         private void client_search2_Load(object sender, EventArgs e)
         {
+            if (type == 0)
+            {
+                clientName = this.clientNameTextBox.Text;
+                shopName = this.shopNameTextBox.Text;
+                clientStaff = this.clientStaffNameTextBox.Text;
+                address = this.addressTextBox.Text;
+            }
+            else if (type == 1)
+            {
 
+            }
 
         }
 
         private void search1_Click(object sender, EventArgs e)
-        {
-            string clientName;
-            string shopName;
-            string clientStaff;
-            string address;
-            string search1 = "or";
-            string search2 = "or";
-            string search3 = "or";
-            string search4 = "or";
-            string search5 = "or";
-            int check = 0;
+        {                       
+            
             int type;
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
 
             if (tabControl1.SelectedIndex == 0)
             {
                 type = 0;
+                #region "会社名あり"
                 if (!string.IsNullOrWhiteSpace(clientNameTextBox.Text))
                 {
                     clientName = this.clientNameTextBox.Text;
+                        #region "店舗名あり"
+                        if (!string.IsNullOrWhiteSpace(shopNameTextBox.Text))
+                        {
+                            shopName = this.shopNameTextBox.Text;                           
+                                #region "担当者名あり"
+                                if (!string.IsNullOrWhiteSpace(clientStaffNameTextBox.Text))
+                                {
+                                    clientStaff = this.clientStaffNameTextBox.Text;
+                                        #region "全部記入"
+                                        if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                        {
+                                            address = this.addressTextBox.Text;
+
+                                            string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' "  + " and staff_name like '%" + clientStaff + "%' "  + " and address like '%" + address + "%' )"; //住所部分一致検索　　全部記入
+                                            conn.Open();
+
+                                            adapter = new NpgsqlDataAdapter(sql2, conn);
+                                            adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            shopName = search_Result.name;
+                                            clientStaff = search_Result.staff_name;
+                                            address = search_Result.address;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+
+                                        }
+                                        #endregion
+                                        #region "住所以外記入"
+                                        else
+                                        {
+                                            string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '%" + clientName + "%' " + " and shop_name = '%" + shopName + "%'" + " and staff_name like '%" + clientStaff + "%')"; //住所のみ無記入
+                                            conn.Open();
+
+                                            adapter = new NpgsqlDataAdapter(sql2, conn);
+                                            adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            this.Close();
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            shopName = search_Result.name;
+                                            clientStaff = search_Result.staff_name;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+                                        }
+                                        #endregion                                    
+                                }
+                                #endregion
+                                #region "担当者名未記入"
+                                else
+                                {
+                                        #region "担当者名が未記入"
+                                        if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                        {
+                                            address = this.addressTextBox.Text;
+
+                                            string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' " + " and address like '%" + address + "%' )"; //住所部分一致検索
+                                            conn.Open();
+
+                                            adapter = new NpgsqlDataAdapter(sql2, conn);
+                                            adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            this.Close();
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            shopName = search_Result.name;
+                                            address = search_Result.address;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+
+                                        }
+                                        #endregion
+                                        #region "担当者名、住所が未記入"
+                                        else
+                                        {
+                                            string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' )";
+                                            conn.Open();
+
+                                            adapter = new NpgsqlDataAdapter(sql, conn);
+                                            adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            this.Close();
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            shopName = search_Result.name;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+                                        }
+                                        #endregion
+                                }
+                                #endregion                                                                                                                
+                        }
+                        #endregion
+                        #region "店舗名未記入"
+                        else
+                        {
+                                #region "担当者名あり"
+                                if (!string.IsNullOrWhiteSpace(clientStaffNameTextBox.Text))
+                                {
+                                    clientStaff = this.clientStaffNameTextBox.Text;                                    
+                                        #region "店舗名以外記入"
+                                        if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                        {
+                                            address = this.addressTextBox.Text;
+
+                                            string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and staff_name like '%" + clientStaff + "%' " +  " address like '%" + address + "%' )"; //住所部分一致検索
+                                            conn.Open();
+
+                                            adapter = new NpgsqlDataAdapter(sql2, conn);
+                                            adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            this.Close();
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            clientStaff = search_Result.staff_name;
+                                            address = search_Result.address;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+
+                                        }
+                                        #endregion
+                                        #region "店舗名、住所以外記入"
+                                        else
+                                        {
+                                            string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and staff_name like '%" + clientStaff + "%' )";
+                                            conn.Open();
+
+                                            adapter = new NpgsqlDataAdapter(sql, conn);
+                                            adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            this.Close();
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            clientStaff = search_Result.staff_name;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+                                        }
+                                        #endregion                                                                                                                                               
+                                }
+                                #endregion
+                                #region "担当者名未記入"
+                                else
+                                {
+                                        #region "会社名、住所以外未記入"
+                                      if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                      {
+                                          address = this.addressTextBox.Text;
+                                          string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' and address like '%" + address + "%' )";
+                                          conn.Open();
+
+                                          adapter = new NpgsqlDataAdapter(sql, conn);
+                                          adapter.Fill(dt);
+
+                                          conn.Close();
+                                          client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                          this.Close();
+                                          screan = false;
+                                          search_Result.company_name = this.clientName;
+                                          search_Result.address = this.address;
+                                          if (statement.Visible == true)
+                                          {
+                                             this.Visible = false;
+                                             search_Result.ShowDialog();
+                                          }
+                                          else
+                                          {
+                                             search_Result.Show();
+                                          }
+                                      }       
+                                     #endregion
+                                        #region "会社名以外未記入"
+                                     else
+                                     {
+                                           string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' )";
+                                           conn.Open();
+
+                                           adapter = new NpgsqlDataAdapter(sql, conn);
+                                           adapter.Fill(dt);
+
+                                            conn.Close();
+                                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                            this.Close();
+                                            screan = false;
+                                            clientName = search_Result.company_name;
+                                            if (statement.Visible == true)
+                                            {
+                                                this.Visible = false;
+                                                search_Result.ShowDialog();
+                                            }
+                                            else
+                                            {
+                                                search_Result.Show();
+                                            }
+                                     }                                                                                    
+                                     #endregion                                                                                                                                                
+                                }
+                                #endregion
+                        }
+                        #endregion                        
                 }
+                #endregion
+                #region "会社名なし"
                 else
                 {
-                    clientName = "";
-                }
-
-                if (andRadioButton1.Checked == true)
-                {
-                    search1 = "and";
-                }
-                else { }
-
-                if (!string.IsNullOrWhiteSpace(shopNameTextBox.Text))
-                {
-                    shopName = this.shopNameTextBox.Text;
-                }
-                else
-                {
-                    shopName = "";
-                }
-
-                if (andRadioButton2.Checked == true)
-                {
-                    search2 = "and";
-                }
-                else { }
-
-                if (!string.IsNullOrWhiteSpace(clientStaffNameTextBox.Text))
-                {
-                    clientStaff = this.clientStaffNameTextBox.Text;
-                }
-                else
-                {
-                    clientStaff = "";
-                }
-
-                if (andRadioButton3.Checked == true)
-                {
-                    search3 = "and";
-                }
-                else { }
-
-                if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
-                {
-                    address = this.addressTextBox.Text;
-
-                    string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address like '%" + address + "%' )"; //住所部分一致検索
-
-
-                    conn.Open();
-                    adapter = new NpgsqlDataAdapter(sql2, conn);
-                    adapter.Fill(dt);
-
-                    conn.Close();
-                    client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, access_auth, Pass);
-                    this.Close();
-                    search_Result.Show();
-
-                }
-                else
-                {
-                    address = "";
-
-                    string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and company_name = '" + clientName + "' " + search1 + " shop_name = '" + shopName + "' " + search2 + " staff_name = '" + clientStaff + "' " + search3 + " address = '" + address + "' )";
-
-
-                    conn.Open();
-
-                    adapter = new NpgsqlDataAdapter(sql, conn);
-                    adapter.Fill(dt);
-
-                    conn.Close();
-
-                    using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, access_auth, Pass))
+                    if (!string.IsNullOrWhiteSpace(shopNameTextBox.Text))
                     {
-                        this.Close();
-                        search_Result.Show();
+                        shopName = this.shopNameTextBox.Text;
+                            #region "担当者名あり"
+                            if (!string.IsNullOrWhiteSpace(clientStaffNameTextBox.Text))
+                            {
+                                clientStaff = this.clientStaffNameTextBox.Text;
+                                    #region "会社名のみ未記入"
+                                    if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                    {
+                                        address = this.addressTextBox.Text;
+
+                                        string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and  shop_name like '%" + shopName + "%' " + " staff_name like '%" + clientStaff + "%' " + " address like '%" + address + "%' )"; //住所部分一致検索
+                                        conn.Open();
+
+                                        adapter = new NpgsqlDataAdapter(sql2, conn);
+                                        adapter.Fill(dt);
+
+                                        conn.Close();
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                        this.Close();
+                                        screan = false;
+                                        shopName = search_Result.name;
+                                        clientStaff = search_Result.staff_name;
+                                        address = search_Result.address;
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
+
+                                    }
+                                    #endregion
+                                    #region "会社名、住所未記入"
+                                    else
+                                    {
+                                        string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and  shop_name like '%" + shopName + "%' " + " staff_name like '%" + clientStaff + "%' )";
+                                        conn.Open();
+
+                                        adapter = new NpgsqlDataAdapter(sql, conn);
+                                        adapter.Fill(dt);
+
+                                        conn.Close();
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                        this.Close();
+                                        screan = false;
+                                        shopName = search_Result.name;
+                                        clientStaff = search_Result.staff_name;
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
+                                    }
+                                    #endregion
+                            }
+                            else
+                            #endregion
+                            #region "担当者名未記入"
+                            {
+                                   #region "会社名、担当者名未記入"
+                                    if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                    {
+                                        address = this.addressTextBox.Text;
+
+                                        string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and shop_name like '%" + shopName + "%' " + " and address like '%" + address + "%' )"; //住所部分一致検索
+                                        conn.Open();
+
+                                        adapter = new NpgsqlDataAdapter(sql2, conn);
+                                        adapter.Fill(dt);
+
+                                        conn.Close();
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                        this.Close();
+                                        screan = false;
+                                        shopName = search_Result.name;
+                                        address = search_Result.address;
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
+                                    }
+                                    #endregion
+                                   #region "店舗名以外未記入"
+                                    else
+                                    {
+                                        string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and shop_name like '%" + shopName + "%' )";
+                                        conn.Open();
+
+                                        adapter = new NpgsqlDataAdapter(sql, conn);
+                                        adapter.Fill(dt);
+
+                                        conn.Close();
+                                        client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                        this.Close();
+                                        screan = false;
+                                        shopName = search_Result.name;
+                                        if (statement.Visible == true)
+                                        {
+                                            this.Visible = false;
+                                            search_Result.ShowDialog();
+                                        }
+                                        else
+                                        {
+                                            search_Result.Show();
+                                        }
+                                    }
+                                    #endregion
+                            }
+                            #endregion
                     }
+                    else
+                    {
+                        if (!string.IsNullOrWhiteSpace(clientStaffNameTextBox.Text))
+                        {
+                            clientStaff = this.clientStaffNameTextBox.Text;
+                                #region "担当者、住所のみ記入"
+                                if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                                {
+                                    address = this.addressTextBox.Text;
 
-                }//法人終了
+                                    string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and staff_name like '%" + clientStaff + "%' "  + " and address like '%" + address + "%' )"; //住所部分一致検索
+                                    conn.Open();
 
+                                    adapter = new NpgsqlDataAdapter(sql2, conn);
+                                    adapter.Fill(dt);
+
+                                    conn.Close();
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                    this.Close();
+                                    screan = false;
+                                    search_Result.staff_name = clientStaff;
+                                    search_Result.address = address;
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
+                                }
+                                #endregion
+                                #region "担当者以外未記入"
+                                else
+                                {
+                                    string sql = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and staff_name like '%" + clientStaff + "%' )";
+                                    conn.Open();
+
+                                    adapter = new NpgsqlDataAdapter(sql, conn);
+                                    adapter.Fill(dt);
+
+                                    conn.Close();
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                    this.Close();
+                                    screan = false;
+                                    search_Result.staff_name = clientStaff;
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
+                                }
+                                #endregion
+                        }
+                        else
+                        {
+                            #region "住所のみ"
+                            if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
+                            {
+                                address = this.addressTextBox.Text;
+
+                                string sql2 = "select company_name, shop_name, staff_name, address, antique_number from client_m_corporate where invalid = 0 and (type = 0 and  address like '%" + address + "%' )"; //住所部分一致検索
+                                conn.Open();
+
+                                adapter = new NpgsqlDataAdapter(sql2, conn);
+                                adapter.Fill(dt);
+
+                                conn.Close();
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                this.Close();
+                                screan = false;
+                                search_Result.address = address;
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
+                            }
+                            #endregion
+                            #region "未記入"
+                            else
+                            {
+                                MessageBox.Show("検索条件を入力して下さい。");
+                                return;
+                            }
+                            #endregion
+                        }
+                    }
+                }
+                #endregion
+                //法人終了
                 //個人
             }
             else if (tabControl1.SelectedIndex == 1)
-            {
-                string iname;
-                string iaddress;
+            {                
                 type = 1;
-
+                #region "名前あり"
                 if (!string.IsNullOrWhiteSpace(inameTextBox.Text))
                 {
                     iname = inameTextBox.Text;
+                        #region "住所あり"
+                        if (!string.IsNullOrWhiteSpace(iaddressTextBox.Text))
+                        {
+                            iaddress = iaddressTextBox.Text;
+                                #region "古物商許可証あり"
+                                if (radioButton1.Checked == true)//古物商許可証あり
+                                {
+                                    check = 0;
+                                    string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name like '%" + iname + "%' " + " and address like '%" + iaddress + "%' " + " and antique_license is not null )"; //住所部分一致検索
+                                    conn.Open();
+
+                                    adapter = new NpgsqlDataAdapter(sql2, conn);
+                                    adapter.Fill(dt);
+
+                                    conn.Close();
+                                    conn.Close();
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                    this.Close();
+                                    screan = false;
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
+                                }
+                                #endregion
+                                #region "古物商許可証なし"
+                                else if (radioButton2.Checked == true)//古物商許可証なし
+                                {
+                                    check = 1;
+                                    string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name like '%" + iname + "%' " + " address like '%" + iaddress + "%' " + " and (antique_license is null or antique_license = 'なし')"; //住所部分一致検索
+                                    conn.Open();
+
+                                    adapter = new NpgsqlDataAdapter(sql2, conn);
+                                    adapter.Fill(dt);
+
+                                    conn.Close();
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                    this.Close();
+                                    screan = false;
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
+                                }
+                                #endregion
+                        }
+                        #endregion
+                        #region "住所なし"
+                        else
+                        {
+                                #region "古物商許可証あり"
+                                if (radioButton1.Checked == true)//古物商許可証あり
+                                {
+                                    check = 0;
+                                    string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name like '%" + iname + "%' " + " and antique_license is not null )"; //住所部分一致検索
+                                    conn.Open();
+
+                                    adapter = new NpgsqlDataAdapter(sql2, conn);
+                                    adapter.Fill(dt);
+
+                                    conn.Close();
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                    this.Close();
+                                    screan = false;
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
+                                }
+                                #endregion
+                                #region "古物商許可証なし"
+                                else if (radioButton2.Checked == true)//古物商許可証なし
+                                {
+                                    check = 1;
+                                    string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name like '%" + iname + "%' " + " and (antique_license is null or antique_license = 'なし') )"; //住所部分一致検索
+                                    conn.Open();
+
+                                    adapter = new NpgsqlDataAdapter(sql2, conn);
+                                    adapter.Fill(dt);
+
+                                    conn.Close();
+                                    client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                    this.Close();
+                                    screan = false;
+                                    if (statement.Visible == true)
+                                    {
+                                        this.Visible = false;
+                                        search_Result.ShowDialog();
+                                    }
+                                    else
+                                    {
+                                        search_Result.Show();
+                                    }
+                                }
+                                #endregion
+                        }
+                        #endregion
                 }
+                #endregion
+                #region "名前なし"
                 else
                 {
-                    iname = "";
-                }
-
-                if (andRadioButton4.Checked == true)
-                {
-                    search4 = "and";
-                }
-
-
-
-                if (!string.IsNullOrWhiteSpace(iaddressTextBox.Text))
-                {
-                    iaddress = iaddressTextBox.Text;
-                    if (andRadioButton5.Checked == true)
+                    #region "住所あり"
+                    if (!string.IsNullOrWhiteSpace(iaddressTextBox.Text))
                     {
-                        search5 = "and";
+                        iaddress = iaddressTextBox.Text;
+                            #region "古物商許可証あり"
+                            if (radioButton1.Checked == true)//古物商許可証あり
+                            {
+                                check = 0;
+                                string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and  address like '%" + iaddress + "%' " + " and antique_license is not null )"; //住所部分一致検索
+                                conn.Open();
+
+                                adapter = new NpgsqlDataAdapter(sql2, conn);
+                                adapter.Fill(dt);
+
+                                conn.Close();
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                this.Close();
+                                screan = false;
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
+                            }
+                            #endregion
+                            #region "古物商許可証なし"
+                            else if (radioButton2.Checked == true)//古物商許可証なし
+                            {
+                                check = 1;
+                                string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and address like '%" + iaddress + "%' "  + " and (antique_license is null or antique_license = 'なし') )"; //住所部分一致検索
+                                conn.Open();
+
+                                adapter = new NpgsqlDataAdapter(sql2, conn);
+                                adapter.Fill(dt);
+
+                                conn.Close();
+                                client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
+                                this.Close();
+                                screan = false;
+                                if (statement.Visible == true)
+                                {
+                                    this.Visible = false;
+                                    search_Result.ShowDialog();
+                                }
+                                else
+                                {
+                                    search_Result.Show();
+                                }
+                            }
+                            #endregion
                     }
-
-                    if (radioButton1.Checked == true)//古物商許可証あり
+                    #endregion
+                    #region "住所なし"
+                    else
                     {
-                        check = 0;
-                        string sql2 = "select name,address, antique_license, id_number, remarks from client_m_individual where invalid = 0 and (type = 1 and  name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is not null )"; //住所部分一致検索
-
-                        conn.Open();
-
-                        adapter = new NpgsqlDataAdapter(sql2, conn);
-                        adapter.Fill(dt);
-
-                        conn.Close();
-
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, access_auth, Pass))
+                        #region "古物商許可証あり"
+                        if (radioButton1.Checked == true)//古物商許可証あり
                         {
+                            check = 0;
+                            string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and  antique_license is not null )"; //住所部分一致検索
+                            conn.Open();
+
+                            adapter = new NpgsqlDataAdapter(sql2, conn);
+                            adapter.Fill(dt);
+
+                            conn.Close();
+                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
                             this.Close();
-                            search_Result.ShowDialog();
+                            screan = false;
+                            if (statement.Visible == true)
+                            {
+                                this.Visible = false;
+                                search_Result.ShowDialog();
+                            }
+                            else
+                            {
+                                search_Result.Show();
+                            }
                         }
-
-
-                    }
-                    else if (radioButton2.Checked == true)//古物商許可証なし
-                    {
-                        check = 1;
-                        string sql2 = "select name,address, antique_license, id_number,remarks from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " address like '%" + iaddress + "%' " + search5 + " antique_license is null )"; //住所部分一致検索
-
-                        conn.Open();
-
-                        adapter = new NpgsqlDataAdapter(sql2, conn);
-                        adapter.Fill(dt);
-
-
-                        conn.Close();
-
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, access_auth, Pass))
+                        #endregion
+                        #region "古物商許可証なし"
+                        else if (radioButton2.Checked == true)//古物商許可証なし
                         {
+                            check = 1;
+                            string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and (antique_license is null or antique_license = 'なし') )"; //住所部分一致検索
+                            conn.Open();
+
+                            adapter = new NpgsqlDataAdapter(sql2, conn);
+                            adapter.Fill(dt);
+
+                            conn.Close();
+                            client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
                             this.Close();
-                            search_Result.ShowDialog();
+                            screan = false;
+                            if (statement.Visible == true)
+                            {
+                                this.Visible = false;
+                                search_Result.ShowDialog();
+                            }
+                            else
+                            {
+                                search_Result.Show();
+                            }
                         }
-
-
+                        #endregion
                     }
+                    #endregion
                 }
-                else
-                {
-                    iaddress = "";
-                    if (andRadioButton5.Checked == true)
-                    {
-                        search5 = "and";
-                    }
-
-                    if (radioButton1.Checked == true)//古物商許可証あり
-                    {
-                        check = 0;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + "  antique_license is not null )";
-                        conn.Open();
-
-                        adapter = new NpgsqlDataAdapter(sql2, conn);
-                        adapter.Fill(dt);
-
-                        conn.Close();
-
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, access_auth, Pass))
-                        {
-                            this.Close();
-                            search_Result.ShowDialog();
-                        }
-
-
-                    }
-                    else if (radioButton2.Checked == true)//古物商許可証なし
-                    {
-                        check = 1;
-                        string sql2 = "select name,address, antique_license, id_number from client_m_individual where invalid = 0 and (type = 1 and name = '" + iname + "' " + search4 + " antique_license is null )";
-                        conn.Open();
-
-                        adapter = new NpgsqlDataAdapter(sql2, conn);
-                        adapter.Fill(dt);
-
-                        conn.Close();
-
-                        using (client_search_result search_Result = new client_search_result(dt, type, check, mainMenu, staff_id, Total, access_auth, Pass))
-                        {
-                            this.Close();
-                            search_Result.ShowDialog();
-                        }
-
-
-                    }
-                }
+                #endregion
             }
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            client_add client_Add = new client_add(mainMenu, staff_id, type, access_auth, Pass);
-                this.Close();
-                client_Add.Show();
-            
+            client_add client_Add = new client_add(mainMenu, staff_id, type, access_auth, pass);
+            screan = false;
+            this.Close();
+            this.data = client_Add.data;
+            client_Add.ShowDialog();
         }
     }
 }

@@ -16,16 +16,16 @@ namespace Flawless_ex
     {
         RecordList RecordList;
         Statement Statement;
-        int Staff_id;
-        string Staff_Name;
-        int Type;
-        string SlipNumber;
-        int AntiqueNumber = 0;
-        int ID_Number = 0;
-        int Grade;
-        int invalid;
-        string Access_auth;
-        string Pass;
+        public int Staff_id;
+        public string Staff_Name;
+        public int Type;
+        public string SlipNumber;
+        public int AntiqueNumber = 0;
+        public int ID_Number = 0;
+        public int Grade;
+        public int invalid;
+        public string Access_auth;
+        public string Pass;
         bool NameChange;
         bool CarryOver;
         string PostalUpCode;
@@ -60,7 +60,7 @@ namespace Flawless_ex
             SlipNumberTextBox.Text = SlipNumber;
             GradeNumberTextBox.Text = SlipNumber.Trim('F');
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string sql = "select * from statement_data where document_number = '" + SlipNumber + "';";

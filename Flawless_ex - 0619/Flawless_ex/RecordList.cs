@@ -38,9 +38,21 @@ namespace Flawless_ex
         string Pass;
         int Control;
         string Data;
-        string Search1;
-        string Search2;
-        string Search3;
+        #region "買取販売履歴の引数"
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date01;
+        string date02;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
         bool screan = true;
         bool NameChange = false;                    //品名を変更したら true
         bool CarryOver;                      //次月持ち越しから画面遷移したとき
@@ -326,7 +338,7 @@ namespace Flawless_ex
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             #region"画面上の会社・個人情報と合計金額"
 
@@ -1552,7 +1564,7 @@ namespace Flawless_ex
         {
             if (DeliveryButton)
             {
-                statement=new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3, grade);
+                Statement statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, name1, phoneNumber1, addresskana1, code1, item1, date01, date02, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
                 statement.Show();
             }
             //次月持ち越しから画面遷移したとき
@@ -1564,7 +1576,7 @@ namespace Flawless_ex
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移しないとき
             else if (screan)
             {
-                statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, Search1, Search2, Search3, grade);
+                Statement statement = new Statement(mainmenu, staff_id, type, staff_name, address, Access_auth, total, Pass, SlipNumber, Control, Data, name1, phoneNumber1, addresskana1, code1, item1, date01, date02, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
                 statement.Show();
             }
             //計算書から画面遷移してお客様情報・月間成績一覧・品名変更画面に画面遷移したとき

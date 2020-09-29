@@ -9,10 +9,10 @@ namespace Flawless_ex
         MasterMaintenanceMenu masterMenu;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
-        int staff_code;
-        string access_auth;
+        public int staff_code;
+        public string access_auth;
         bool screan = true;
-        string Pass;
+        public string Pass;
 
         public StaffMaster(MasterMaintenanceMenu mster, int staff_code, string pass, string access_auth)
         {
@@ -50,7 +50,7 @@ namespace Flawless_ex
         {
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code where staff_m.invalid = 0 order by staff_code;";
             conn.Open();

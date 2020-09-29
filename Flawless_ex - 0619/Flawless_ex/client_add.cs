@@ -13,7 +13,7 @@ namespace Flawless_ex
 {
     public partial class client_add : Form
     {
-        //Statement statement;
+        Statement statement;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
         int staff_id;
@@ -24,10 +24,23 @@ namespace Flawless_ex
         string access_auth;
         string document;
         int control;
-        string data;
-        string search1;
-        string search2;
-        string search3;
+        bool screan;
+        public string data;
+        #region "買取販売履歴"
+        string name1;
+        string phoneNumber1;
+        string address1;
+        string addresskana1;
+        string code1;
+        string item1;
+        string date1;
+        string date2;
+        string method1;
+        string amountA;
+        string amountB;
+        string antiqueNumber;
+        string documentNumber;
+        #endregion
         string pass;
         string kana;
         int grade;
@@ -45,15 +58,19 @@ namespace Flawless_ex
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, access_auth, pass);
+            client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
+            screan = false;
             this.Close();
+            this.data = client_Search.data;
             client_Search.Show();
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(mainMenu, staff_id, type, staff_name, address, Total, access_auth, pass);
+            client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
+            screan = false;
             this.Close();
+            this.data = client_Search.data;
             client_Search.Show();
         }
         #region "法人　登録"
@@ -112,7 +129,7 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
         }
@@ -177,7 +194,7 @@ namespace Flawless_ex
             type = 1;
             staff_name = Name;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, search1, search2, search3, grade);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
         }
