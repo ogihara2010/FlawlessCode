@@ -338,7 +338,7 @@ namespace Flawless_ex
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             #region"画面上の会社・個人情報と合計金額"
 
@@ -6747,7 +6747,7 @@ namespace Flawless_ex
             DateTime date = DateTime.Now;
             Registration = date.ToLongDateString();         //登録日
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_str = "select * from list_result order by result;";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
@@ -9517,7 +9517,7 @@ namespace Flawless_ex
             DateTime date = DateTime.Now;
             Registration = date.ToLongDateString();         //登録日
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_str = "select * from list_result order by result;";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
