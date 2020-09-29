@@ -67,7 +67,7 @@ namespace Flawless_ex
         private void MainMenu_Load(object sender, EventArgs e)
         {
             conn = new NpgsqlConnection();
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "select* from staff_m where staff_code = " + staff_id + " and password = '" + Pass + "'";
             cmd = new NpgsqlCommand(sql_str2, conn);
@@ -138,6 +138,6 @@ namespace Flawless_ex
             {
                 screan = true;
             }
-        }
+        }       
     }
 }

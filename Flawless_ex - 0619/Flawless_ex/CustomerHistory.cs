@@ -19,13 +19,10 @@ namespace Flawless_ex
         int type;
         int number;
         int a = 0; // クリック数 
-        int itemMainCategoryCode;
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
         NpgsqlDataAdapter adapter;
-        NpgsqlConnection conn2 = new NpgsqlConnection();
         NpgsqlDataAdapter adapter2;
-        NpgsqlConnection conn3 = new NpgsqlConnection();
         NpgsqlDataAdapter adapter3;
         public string data;
         string Pass;
@@ -56,13 +53,15 @@ namespace Flawless_ex
         {
             if (data == "S")
             {
-                this.textBox8.Enabled = false;
+                this.textBox8.Visible = false;
+                this.label9.Visible = false;
             }
             else if (data == "D")
             {
-                this.textBox7.Enabled = false;
+                this.textBox7.Visible = false;
+                this.label8.Visible = false;
             }
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //大分類検索用
             string sql_str = "select * from main_category_m where invalid = 0 order by main_category_code;";
@@ -115,7 +114,6 @@ namespace Flawless_ex
             int amt;
             int amt1;
             #endregion
-
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn2 = new NpgsqlConnection();
@@ -123,9 +121,7 @@ namespace Flawless_ex
             NpgsqlConnection conn3 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter3;
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn3.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             #region "検索条件 法人"
             if (radioButton1.Checked == true)
             {
@@ -133,8 +129,7 @@ namespace Flawless_ex
                 #region "入力パラメーター"
                 if (!string.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    shopname = "B.shopname = '" + this.textBox1.Text + "'";
-
+                    shopname = " and B.shop_name like '%" + this.textBox1.Text + "%'";
                 }
                 else
                 {
@@ -142,7 +137,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox2.Text))
                 {
-                    shopnamekana = " B.shop_name_kana = '" + this.textBox2.Text + "'";
+                    shopnamekana = " and B.shop_name_kana like '%" + this.textBox2.Text + "%'";
                 }
                 else
                 {
@@ -150,12 +145,15 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox3.Text))
                 {
-                    name = this.textBox3.Text;
+                    name = "and B.staff_name like '%" + this.textBox3.Text + "%'";
                 }
-                else { }
+                else
+                {
+                    name = "";
+                }
                 if (!string.IsNullOrWhiteSpace(textBox4.Text))
                 {
-                    address = " B.address like '% " + this.textBox4.Text + "%'";
+                    address = " and B.address like '% " + this.textBox4.Text + "%'";
                 }
                 else
                 {
@@ -163,7 +161,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox5.Text))
                 {
-                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'";
+                    addresskana = " and B.address_kana like '%" + this.textBox5.Text + "%'";
                 }
                 else
                 {
@@ -171,7 +169,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox6.Text))
                 {
-                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'";
+                    phoneNumber = " and B.phone_number = '" + this.textBox6.Text + "'";
                 }
                 else
                 {
@@ -179,7 +177,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " A.document_number = '" + this.textBox7.Text + "' ";
+                    documentNumber = " and A.document_number = '" + this.textBox7.Text + "' ";
                 }
                 else
                 {
@@ -187,7 +185,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " ";
+                    controlNumber = " and A.control_number = " + int.Parse(this.textBox8.Text) + " ";
                 }
                 else
                 {
@@ -195,7 +193,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox9.Text))
                 {
-                    antiqueNumber = " B.antique_number = " + int.Parse(this.textBox9.Text) + " ";
+                    antiqueNumber = " and B.antique_number = " + int.Parse(this.textBox9.Text) + " ";
                 }
                 else
                 {
@@ -203,7 +201,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox1.Text))
                 {
-                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "'";
+                    mainCategory = " and E.main_category_name = '" + this.comboBox1.Text + "'";
                 }
                 else
                 {
@@ -211,7 +209,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox2.Text))
                 {
-                    item = " D.item_name = '" + this.comboBox2.Text + "'";
+                    item = " and D.item_name = '" + this.comboBox2.Text + "'";
                 }
                 else
                 {
@@ -219,7 +217,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = " A.payment_method = '" + this.comboBox3.Text + "'";
+                    method = " and A.payment_method = '" + this.comboBox3.Text + "'";
                 }
                 else
                 {
@@ -227,7 +225,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amountA = " A.total >= " + int.Parse(this.textBox10.Text);
+                    amountA = " and A.total >= " + int.Parse(this.textBox10.Text);
                 }
                 else
                 {
@@ -275,7 +273,7 @@ namespace Flawless_ex
                 }
                 #endregion
                 #endregion
-                #region "繋げるSQL"
+            #region "繋げるSQL"
                 #region "大分類名をコードに変換"
                 if (comboBox1.SelectedIndex != -1)
                 {
@@ -297,8 +295,8 @@ namespace Flawless_ex
                 if (comboBox2.SelectedIndex != -1)
                 {
                     string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
-                    conn3.Open();
-                    adapter3 = new NpgsqlDataAdapter(sql3, conn3);
+                    conn.Open();
+                    adapter3 = new NpgsqlDataAdapter(sql3, conn);
                     adapter3.Fill(dt6);
                     DataRow row2;
                     row2 = dt6.Rows[0];
@@ -315,9 +313,9 @@ namespace Flawless_ex
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where " + shopname + shopnamekana + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                            "where A.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
                               method + amountA + amountB + ";";
-                    conn.Open();
+
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
                     #endregion
@@ -342,16 +340,14 @@ namespace Flawless_ex
                     amount1 = amt1;
 
                     DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
-                    screan = false;
-                    this.Close();
                     this.data = dataSearch.data;
-                    dataSearch.Show();
+                    dataSearch.ShowDialog();
                 }
                 else if (data == "D")
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                           "where " + shopname + shopnamekana + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                           "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
                               method + amountA + amountB + ";";
                     conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
@@ -377,20 +373,18 @@ namespace Flawless_ex
                     amount1 = amt1;
 
                     DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
-                    screan = false;
-                    this.Close();
                     this.data = dataSearch.data;
-                    dataSearch.Show();
+                    dataSearch.ShowDialog();
                 }
             }
-            #region "検索条件　個人"
+                #region "検索条件　個人"
             if (radioButton2.Checked == true)
             {
                 type = 1;
                 #region "パラメーター"
                 if (!string.IsNullOrWhiteSpace(textBox3.Text))
                 {
-                    name = "B.name = '" + this.textBox3.Text + "'";
+                    name = " and B.name like '%" + this.textBox3.Text + "%'";
                 }
                 else
                 {
@@ -399,7 +393,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox4.Text))
                 {
-                    address = " B.address like '% " + this.textBox4.Text + "%'";
+                    address = " and B.address like '% " + this.textBox4.Text + "%'";
                 }
                 else
                 {
@@ -408,7 +402,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox5.Text))
                 {
-                    addresskana = " B.address_kana = '" + this.textBox5.Text + "'";
+                    addresskana = " and B.address_kana like '%" + this.textBox5.Text + "%'";
                 }
                 else
                 {
@@ -417,7 +411,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox6.Text))
                 {
-                    phoneNumber = " B.phone_number = '" + this.textBox6.Text + "'";
+                    phoneNumber = " and B.phone_number = '" + this.textBox6.Text + "'";
                 }
                 else
                 {
@@ -426,7 +420,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " A.document_number = '" + this.textBox7.Text + "'";
+                    documentNumber = " and A.document_number = '" + this.textBox7.Text + "'";
                 }
                 else
                 {
@@ -435,7 +429,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " A.control_number = " + int.Parse(this.textBox8.Text) + " ";
+                    controlNumber = " and A.control_number = " + int.Parse(this.textBox8.Text) + " ";
                 }
                 else
                 {
@@ -443,7 +437,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox1.Text))
                 {
-                    mainCategory = " E.main_category_name = '" + this.comboBox1.Text + "' ";
+                    mainCategory = " and E.main_category_name = '" + this.comboBox1.Text + "' ";
                 }
                 else
                 {
@@ -452,7 +446,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(comboBox2.Text))
                 {
-                    item = " D.item_name = '" + this.comboBox2.Text + "'";
+                    item = " and D.item_name = '" + this.comboBox2.Text + "'";
                 }
                 else
                 {
@@ -460,7 +454,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method =" A.payment_method = '" + this.comboBox3.Text + "'";
+                    method =" and A.payment_method = '" + this.comboBox3.Text + "'";
                 }
                 else
                 {
@@ -468,7 +462,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amountA = " (A.total >= " + int.Parse(this.textBox10.Text);
+                    amountA = " and (A.total >= " + int.Parse(this.textBox10.Text);
                 }
                 else
                 {
@@ -529,8 +523,8 @@ namespace Flawless_ex
                 if (comboBox2.SelectedIndex != -1)
                 {
                     string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
-                    conn3.Open();
-                    adapter3 = new NpgsqlDataAdapter(sql3, conn3);
+                    conn.Open();
+                    adapter3 = new NpgsqlDataAdapter(sql3, conn);
                     adapter3.Fill(dt6);
                     DataRow row2;
                     row2 = dt6.Rows[0];
@@ -546,9 +540,8 @@ namespace Flawless_ex
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where A.type = 1 and " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method + amountA + amountB + ";";
+                            "where A.type = 1 " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " and (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method + amountA + amountB + ";";
 
-                    conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
                     #endregion
@@ -572,16 +565,14 @@ namespace Flawless_ex
                     amount1 = amt1;
 
                     DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
-                    screan = false;
-                    this.Close();
                     this.data = dataSearch.data;
-                    dataSearch.Show();
+                    dataSearch.ShowDialog();
                 }
                 if (data == "D")
                 {
                     string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
-                            "where " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
+                            "where A.types1 = 0 " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " and (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
                              + method + amountA + amountB + ";";
 
                     conn.Open();
@@ -609,10 +600,8 @@ namespace Flawless_ex
 
                     //control = int.Parse(this.textBox8.Text);
                     DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
-                    screan = false;
-                    this.Close();
                     this.data = dataSearch.data;
-                    dataSearch.Show();
+                    dataSearch.ShowDialog();
                 }
             }
         }

@@ -33,6 +33,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SettlementDayBox = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -50,121 +53,21 @@
             this.label29 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.itemComboBox0 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox1 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox2 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox3 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox4 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox5 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox6 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox7 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox8 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox9 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox10 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox11 = new System.Windows.Forms.ComboBox();
-            this.itemComboBox12 = new System.Windows.Forms.ComboBox();
             this.mainCategoryComboBox0 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox1 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox2 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox3 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox4 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox5 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox6 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox7 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox8 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox9 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox10 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox11 = new System.Windows.Forms.ComboBox();
-            this.mainCategoryComboBox12 = new System.Windows.Forms.ComboBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.remarks0 = new System.Windows.Forms.TextBox();
-            this.remarks1 = new System.Windows.Forms.TextBox();
-            this.remarks2 = new System.Windows.Forms.TextBox();
-            this.remarks3 = new System.Windows.Forms.TextBox();
-            this.remarks4 = new System.Windows.Forms.TextBox();
-            this.remarks5 = new System.Windows.Forms.TextBox();
-            this.remarks6 = new System.Windows.Forms.TextBox();
-            this.remarks7 = new System.Windows.Forms.TextBox();
-            this.remarks8 = new System.Windows.Forms.TextBox();
-            this.remarks9 = new System.Windows.Forms.TextBox();
-            this.remarks10 = new System.Windows.Forms.TextBox();
-            this.remarks11 = new System.Windows.Forms.TextBox();
-            this.remarks12 = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.moneyTextBox0 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox1 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox2 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox3 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox4 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox5 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox6 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox7 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox8 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox9 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox10 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox11 = new System.Windows.Forms.TextBox();
-            this.moneyTextBox12 = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.countTextBox0 = new System.Windows.Forms.TextBox();
-            this.countTextBox1 = new System.Windows.Forms.TextBox();
-            this.countTextBox2 = new System.Windows.Forms.TextBox();
-            this.countTextBox3 = new System.Windows.Forms.TextBox();
-            this.countTextBox4 = new System.Windows.Forms.TextBox();
-            this.countTextBox7 = new System.Windows.Forms.TextBox();
-            this.countTextBox8 = new System.Windows.Forms.TextBox();
-            this.countTextBox9 = new System.Windows.Forms.TextBox();
-            this.countTextBox10 = new System.Windows.Forms.TextBox();
-            this.countTextBox11 = new System.Windows.Forms.TextBox();
-            this.countTextBox12 = new System.Windows.Forms.TextBox();
-            this.totalCount = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.totalWeight = new System.Windows.Forms.TextBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.unitPriceTextBox12 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox11 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox10 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox9 = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.unitPriceTextBox0 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox1 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox2 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox3 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox4 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox5 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox6 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox7 = new System.Windows.Forms.TextBox();
-            this.unitPriceTextBox8 = new System.Windows.Forms.TextBox();
-            this.weightTextBox12 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.weightTextBox0 = new System.Windows.Forms.TextBox();
-            this.weightTextBox1 = new System.Windows.Forms.TextBox();
-            this.weightTextBox2 = new System.Windows.Forms.TextBox();
-            this.weightTextBox3 = new System.Windows.Forms.TextBox();
-            this.weightTextBox4 = new System.Windows.Forms.TextBox();
-            this.weightTextBox5 = new System.Windows.Forms.TextBox();
-            this.weightTextBox6 = new System.Windows.Forms.TextBox();
-            this.weightTextBox7 = new System.Windows.Forms.TextBox();
-            this.weightTextBox8 = new System.Windows.Forms.TextBox();
-            this.weightTextBox9 = new System.Windows.Forms.TextBox();
-            this.weightTextBox10 = new System.Windows.Forms.TextBox();
-            this.weightTextBox11 = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.itemDetail0 = new System.Windows.Forms.TextBox();
-            this.itemDetail1 = new System.Windows.Forms.TextBox();
-            this.itemDetail2 = new System.Windows.Forms.TextBox();
-            this.itemDetail3 = new System.Windows.Forms.TextBox();
-            this.itemDetail4 = new System.Windows.Forms.TextBox();
-            this.itemDetail5 = new System.Windows.Forms.TextBox();
-            this.itemDetail6 = new System.Windows.Forms.TextBox();
-            this.itemDetail7 = new System.Windows.Forms.TextBox();
-            this.itemDetail8 = new System.Windows.Forms.TextBox();
-            this.itemDetail9 = new System.Windows.Forms.TextBox();
-            this.itemDetail10 = new System.Windows.Forms.TextBox();
-            this.itemDetail11 = new System.Windows.Forms.TextBox();
-            this.itemDetail12 = new System.Windows.Forms.TextBox();
-            this.countTextBox5 = new System.Windows.Forms.TextBox();
-            this.countTextBox6 = new System.Windows.Forms.TextBox();
             this.returnButton = new System.Windows.Forms.Button();
             this.previewButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -395,6 +298,15 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -409,6 +321,7 @@
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.sealGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -449,6 +362,10 @@
             // SettlementDayBox
             // 
             this.SettlementDayBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.SettlementDayBox.Controls.Add(this.button5);
+            this.SettlementDayBox.Controls.Add(this.button4);
+            this.SettlementDayBox.Controls.Add(this.dataGridView1);
+            this.SettlementDayBox.Controls.Add(this.button3);
             this.SettlementDayBox.Controls.Add(this.textBox1);
             this.SettlementDayBox.Controls.Add(this.label9);
             this.SettlementDayBox.Controls.Add(this.button1);
@@ -479,6 +396,39 @@
             this.SettlementDayBox.Size = new System.Drawing.Size(1665, 935);
             this.SettlementDayBox.TabIndex = 0;
             this.SettlementDayBox.Text = "計算書";
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button5.Location = new System.Drawing.Point(278, 104);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(112, 42);
+            this.button5.TabIndex = 94;
+            this.button5.Text = "確定";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button4.Location = new System.Drawing.Point(129, 104);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(117, 42);
+            this.button4.TabIndex = 93;
+            this.button4.Text = "取り消し";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button3.Location = new System.Drawing.Point(15, 104);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(94, 42);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "入力";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // textBox1
             // 
@@ -665,141 +615,35 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.itemComboBox0, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox2, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox3, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox4, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox5, 1, 6);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox6, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox7, 1, 8);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox8, 1, 9);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox9, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox10, 1, 11);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox11, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.itemComboBox12, 1, 13);
             this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox0, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox2, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox3, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox4, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox5, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox6, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox7, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox8, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox9, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox10, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox11, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.mainCategoryComboBox12, 0, 13);
             this.tableLayoutPanel1.Controls.Add(this.label33, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label21, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label28, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.remarks0, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.remarks1, 7, 2);
-            this.tableLayoutPanel1.Controls.Add(this.remarks2, 7, 3);
-            this.tableLayoutPanel1.Controls.Add(this.remarks3, 7, 4);
-            this.tableLayoutPanel1.Controls.Add(this.remarks4, 7, 5);
-            this.tableLayoutPanel1.Controls.Add(this.remarks5, 7, 6);
-            this.tableLayoutPanel1.Controls.Add(this.remarks6, 7, 7);
-            this.tableLayoutPanel1.Controls.Add(this.remarks7, 7, 8);
-            this.tableLayoutPanel1.Controls.Add(this.remarks8, 7, 9);
-            this.tableLayoutPanel1.Controls.Add(this.remarks9, 7, 10);
-            this.tableLayoutPanel1.Controls.Add(this.remarks10, 7, 11);
-            this.tableLayoutPanel1.Controls.Add(this.remarks11, 7, 12);
-            this.tableLayoutPanel1.Controls.Add(this.remarks12, 7, 13);
             this.tableLayoutPanel1.Controls.Add(this.label35, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.moneyTextBox0, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox1, 6, 2);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox2, 6, 3);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox3, 6, 4);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox4, 6, 5);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox5, 6, 6);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox6, 6, 7);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox7, 6, 8);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox8, 6, 9);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox9, 6, 10);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox10, 6, 11);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox11, 6, 12);
-            this.tableLayoutPanel1.Controls.Add(this.moneyTextBox12, 6, 13);
             this.tableLayoutPanel1.Controls.Add(this.label24, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.countTextBox0, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox1, 5, 2);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox2, 5, 3);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox3, 5, 4);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox4, 5, 5);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox7, 5, 8);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox8, 5, 9);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox9, 5, 10);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox10, 5, 11);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox11, 5, 12);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox12, 5, 13);
-            this.tableLayoutPanel1.Controls.Add(this.totalCount, 5, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label31, 4, 14);
-            this.tableLayoutPanel1.Controls.Add(this.totalWeight, 3, 14);
-            this.tableLayoutPanel1.Controls.Add(this.label32, 2, 14);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox12, 4, 13);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox11, 4, 12);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox10, 4, 11);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox9, 4, 10);
             this.tableLayoutPanel1.Controls.Add(this.label34, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox0, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox1, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox2, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox3, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox4, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox5, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox6, 4, 7);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox7, 4, 8);
-            this.tableLayoutPanel1.Controls.Add(this.unitPriceTextBox8, 4, 9);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox12, 3, 13);
             this.tableLayoutPanel1.Controls.Add(this.label23, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.weightTextBox0, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox1, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox2, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox3, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox4, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox5, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox6, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox7, 3, 8);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox8, 3, 9);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox9, 3, 10);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox10, 3, 11);
-            this.tableLayoutPanel1.Controls.Add(this.weightTextBox11, 3, 12);
             this.tableLayoutPanel1.Controls.Add(this.label22, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.itemDetail0, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail1, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail2, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail3, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail4, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail5, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail6, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail7, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail8, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail9, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail10, 2, 11);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail11, 2, 12);
-            this.tableLayoutPanel1.Controls.Add(this.itemDetail12, 2, 13);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox5, 5, 6);
-            this.tableLayoutPanel1.Controls.Add(this.countTextBox6, 5, 7);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(2, 15);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 19);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 15;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1232, 522);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1232, 69);
             this.tableLayoutPanel1.TabIndex = 35;
             // 
             // itemComboBox0
@@ -812,126 +656,6 @@
             this.itemComboBox0.Size = new System.Drawing.Size(116, 24);
             this.itemComboBox0.TabIndex = 0;
             // 
-            // itemComboBox1
-            // 
-            this.itemComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox1.FormattingEnabled = true;
-            this.itemComboBox1.Location = new System.Drawing.Point(126, 70);
-            this.itemComboBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox1.Name = "itemComboBox1";
-            this.itemComboBox1.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox1.TabIndex = 38;
-            // 
-            // itemComboBox2
-            // 
-            this.itemComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox2.FormattingEnabled = true;
-            this.itemComboBox2.Location = new System.Drawing.Point(126, 103);
-            this.itemComboBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox2.Name = "itemComboBox2";
-            this.itemComboBox2.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox2.TabIndex = 39;
-            // 
-            // itemComboBox3
-            // 
-            this.itemComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox3.FormattingEnabled = true;
-            this.itemComboBox3.Location = new System.Drawing.Point(126, 136);
-            this.itemComboBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox3.Name = "itemComboBox3";
-            this.itemComboBox3.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox3.TabIndex = 39;
-            // 
-            // itemComboBox4
-            // 
-            this.itemComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox4.FormattingEnabled = true;
-            this.itemComboBox4.Location = new System.Drawing.Point(126, 169);
-            this.itemComboBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox4.Name = "itemComboBox4";
-            this.itemComboBox4.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox4.TabIndex = 39;
-            // 
-            // itemComboBox5
-            // 
-            this.itemComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox5.FormattingEnabled = true;
-            this.itemComboBox5.Location = new System.Drawing.Point(126, 202);
-            this.itemComboBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox5.Name = "itemComboBox5";
-            this.itemComboBox5.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox5.TabIndex = 39;
-            // 
-            // itemComboBox6
-            // 
-            this.itemComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox6.FormattingEnabled = true;
-            this.itemComboBox6.Location = new System.Drawing.Point(126, 235);
-            this.itemComboBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox6.Name = "itemComboBox6";
-            this.itemComboBox6.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox6.TabIndex = 39;
-            // 
-            // itemComboBox7
-            // 
-            this.itemComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox7.FormattingEnabled = true;
-            this.itemComboBox7.Location = new System.Drawing.Point(126, 268);
-            this.itemComboBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox7.Name = "itemComboBox7";
-            this.itemComboBox7.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox7.TabIndex = 39;
-            // 
-            // itemComboBox8
-            // 
-            this.itemComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox8.FormattingEnabled = true;
-            this.itemComboBox8.Location = new System.Drawing.Point(126, 301);
-            this.itemComboBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox8.Name = "itemComboBox8";
-            this.itemComboBox8.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox8.TabIndex = 39;
-            // 
-            // itemComboBox9
-            // 
-            this.itemComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox9.FormattingEnabled = true;
-            this.itemComboBox9.Location = new System.Drawing.Point(126, 334);
-            this.itemComboBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox9.Name = "itemComboBox9";
-            this.itemComboBox9.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox9.TabIndex = 39;
-            // 
-            // itemComboBox10
-            // 
-            this.itemComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox10.FormattingEnabled = true;
-            this.itemComboBox10.Location = new System.Drawing.Point(126, 370);
-            this.itemComboBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox10.Name = "itemComboBox10";
-            this.itemComboBox10.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox10.TabIndex = 39;
-            // 
-            // itemComboBox11
-            // 
-            this.itemComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox11.FormattingEnabled = true;
-            this.itemComboBox11.Location = new System.Drawing.Point(126, 401);
-            this.itemComboBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox11.Name = "itemComboBox11";
-            this.itemComboBox11.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox11.TabIndex = 39;
-            // 
-            // itemComboBox12
-            // 
-            this.itemComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.itemComboBox12.FormattingEnabled = true;
-            this.itemComboBox12.Location = new System.Drawing.Point(126, 434);
-            this.itemComboBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemComboBox12.Name = "itemComboBox12";
-            this.itemComboBox12.Size = new System.Drawing.Size(116, 24);
-            this.itemComboBox12.TabIndex = 39;
-            // 
             // mainCategoryComboBox0
             // 
             this.mainCategoryComboBox0.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -942,138 +666,6 @@
             this.mainCategoryComboBox0.Size = new System.Drawing.Size(116, 24);
             this.mainCategoryComboBox0.TabIndex = 36;
             this.mainCategoryComboBox0.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox1
-            // 
-            this.mainCategoryComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox1.FormattingEnabled = true;
-            this.mainCategoryComboBox1.Location = new System.Drawing.Point(3, 70);
-            this.mainCategoryComboBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox1.Name = "mainCategoryComboBox1";
-            this.mainCategoryComboBox1.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox1.TabIndex = 38;
-            this.mainCategoryComboBox1.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox1_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox2
-            // 
-            this.mainCategoryComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox2.FormattingEnabled = true;
-            this.mainCategoryComboBox2.Location = new System.Drawing.Point(3, 103);
-            this.mainCategoryComboBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox2.Name = "mainCategoryComboBox2";
-            this.mainCategoryComboBox2.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox2.TabIndex = 39;
-            this.mainCategoryComboBox2.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox2_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox3
-            // 
-            this.mainCategoryComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox3.FormattingEnabled = true;
-            this.mainCategoryComboBox3.Location = new System.Drawing.Point(3, 136);
-            this.mainCategoryComboBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox3.Name = "mainCategoryComboBox3";
-            this.mainCategoryComboBox3.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox3.TabIndex = 39;
-            this.mainCategoryComboBox3.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox3_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox4
-            // 
-            this.mainCategoryComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox4.FormattingEnabled = true;
-            this.mainCategoryComboBox4.Location = new System.Drawing.Point(3, 169);
-            this.mainCategoryComboBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox4.Name = "mainCategoryComboBox4";
-            this.mainCategoryComboBox4.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox4.TabIndex = 39;
-            this.mainCategoryComboBox4.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox4_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox5
-            // 
-            this.mainCategoryComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox5.FormattingEnabled = true;
-            this.mainCategoryComboBox5.Location = new System.Drawing.Point(3, 202);
-            this.mainCategoryComboBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox5.Name = "mainCategoryComboBox5";
-            this.mainCategoryComboBox5.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox5.TabIndex = 39;
-            this.mainCategoryComboBox5.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox5_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox6
-            // 
-            this.mainCategoryComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox6.FormattingEnabled = true;
-            this.mainCategoryComboBox6.Location = new System.Drawing.Point(3, 235);
-            this.mainCategoryComboBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox6.Name = "mainCategoryComboBox6";
-            this.mainCategoryComboBox6.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox6.TabIndex = 39;
-            this.mainCategoryComboBox6.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox6_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox7
-            // 
-            this.mainCategoryComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox7.FormattingEnabled = true;
-            this.mainCategoryComboBox7.Location = new System.Drawing.Point(3, 268);
-            this.mainCategoryComboBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox7.Name = "mainCategoryComboBox7";
-            this.mainCategoryComboBox7.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox7.TabIndex = 39;
-            this.mainCategoryComboBox7.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox7_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox8
-            // 
-            this.mainCategoryComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox8.FormattingEnabled = true;
-            this.mainCategoryComboBox8.Location = new System.Drawing.Point(3, 301);
-            this.mainCategoryComboBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox8.Name = "mainCategoryComboBox8";
-            this.mainCategoryComboBox8.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox8.TabIndex = 39;
-            this.mainCategoryComboBox8.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox8_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox9
-            // 
-            this.mainCategoryComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox9.FormattingEnabled = true;
-            this.mainCategoryComboBox9.Location = new System.Drawing.Point(3, 334);
-            this.mainCategoryComboBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox9.Name = "mainCategoryComboBox9";
-            this.mainCategoryComboBox9.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox9.TabIndex = 39;
-            this.mainCategoryComboBox9.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox9_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox10
-            // 
-            this.mainCategoryComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox10.FormattingEnabled = true;
-            this.mainCategoryComboBox10.Location = new System.Drawing.Point(3, 370);
-            this.mainCategoryComboBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox10.Name = "mainCategoryComboBox10";
-            this.mainCategoryComboBox10.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox10.TabIndex = 39;
-            this.mainCategoryComboBox10.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox10_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox11
-            // 
-            this.mainCategoryComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox11.FormattingEnabled = true;
-            this.mainCategoryComboBox11.Location = new System.Drawing.Point(3, 401);
-            this.mainCategoryComboBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox11.Name = "mainCategoryComboBox11";
-            this.mainCategoryComboBox11.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox11.TabIndex = 39;
-            this.mainCategoryComboBox11.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox11_SelectedIndexChanged);
-            // 
-            // mainCategoryComboBox12
-            // 
-            this.mainCategoryComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mainCategoryComboBox12.FormattingEnabled = true;
-            this.mainCategoryComboBox12.Location = new System.Drawing.Point(3, 434);
-            this.mainCategoryComboBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.mainCategoryComboBox12.Name = "mainCategoryComboBox12";
-            this.mainCategoryComboBox12.Size = new System.Drawing.Size(116, 24);
-            this.mainCategoryComboBox12.TabIndex = 39;
-            this.mainCategoryComboBox12.SelectedIndexChanged += new System.EventHandler(this.mainCategoryComboBox12_SelectedIndexChanged);
             // 
             // label33
             // 
@@ -1114,102 +706,6 @@
             this.remarks0.Size = new System.Drawing.Size(243, 24);
             this.remarks0.TabIndex = 36;
             // 
-            // remarks1
-            // 
-            this.remarks1.Location = new System.Drawing.Point(986, 70);
-            this.remarks1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks1.Name = "remarks1";
-            this.remarks1.Size = new System.Drawing.Size(243, 24);
-            this.remarks1.TabIndex = 38;
-            // 
-            // remarks2
-            // 
-            this.remarks2.Location = new System.Drawing.Point(986, 103);
-            this.remarks2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks2.Name = "remarks2";
-            this.remarks2.Size = new System.Drawing.Size(243, 24);
-            this.remarks2.TabIndex = 39;
-            // 
-            // remarks3
-            // 
-            this.remarks3.Location = new System.Drawing.Point(986, 136);
-            this.remarks3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks3.Name = "remarks3";
-            this.remarks3.Size = new System.Drawing.Size(243, 24);
-            this.remarks3.TabIndex = 39;
-            // 
-            // remarks4
-            // 
-            this.remarks4.Location = new System.Drawing.Point(986, 169);
-            this.remarks4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks4.Name = "remarks4";
-            this.remarks4.Size = new System.Drawing.Size(243, 24);
-            this.remarks4.TabIndex = 0;
-            // 
-            // remarks5
-            // 
-            this.remarks5.Location = new System.Drawing.Point(986, 202);
-            this.remarks5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks5.Name = "remarks5";
-            this.remarks5.Size = new System.Drawing.Size(243, 24);
-            this.remarks5.TabIndex = 0;
-            // 
-            // remarks6
-            // 
-            this.remarks6.Location = new System.Drawing.Point(986, 235);
-            this.remarks6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks6.Name = "remarks6";
-            this.remarks6.Size = new System.Drawing.Size(243, 24);
-            this.remarks6.TabIndex = 0;
-            // 
-            // remarks7
-            // 
-            this.remarks7.Location = new System.Drawing.Point(986, 268);
-            this.remarks7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks7.Name = "remarks7";
-            this.remarks7.Size = new System.Drawing.Size(243, 24);
-            this.remarks7.TabIndex = 0;
-            // 
-            // remarks8
-            // 
-            this.remarks8.Location = new System.Drawing.Point(986, 301);
-            this.remarks8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks8.Name = "remarks8";
-            this.remarks8.Size = new System.Drawing.Size(243, 24);
-            this.remarks8.TabIndex = 0;
-            // 
-            // remarks9
-            // 
-            this.remarks9.Location = new System.Drawing.Point(986, 334);
-            this.remarks9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks9.Name = "remarks9";
-            this.remarks9.Size = new System.Drawing.Size(243, 24);
-            this.remarks9.TabIndex = 0;
-            // 
-            // remarks10
-            // 
-            this.remarks10.Location = new System.Drawing.Point(986, 370);
-            this.remarks10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks10.Name = "remarks10";
-            this.remarks10.Size = new System.Drawing.Size(243, 24);
-            this.remarks10.TabIndex = 0;
-            // 
-            // remarks11
-            // 
-            this.remarks11.Location = new System.Drawing.Point(986, 401);
-            this.remarks11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks11.Name = "remarks11";
-            this.remarks11.Size = new System.Drawing.Size(243, 24);
-            this.remarks11.TabIndex = 0;
-            // 
-            // remarks12
-            // 
-            this.remarks12.Location = new System.Drawing.Point(986, 434);
-            this.remarks12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.remarks12.Name = "remarks12";
-            this.remarks12.Size = new System.Drawing.Size(243, 24);
-            this.remarks12.TabIndex = 0;
-            // 
             // label35
             // 
             this.label35.Location = new System.Drawing.Point(801, 2);
@@ -1231,137 +727,6 @@
             this.moneyTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.moneyTextBox0.TextChanged += new System.EventHandler(this.moneyTextBox0_TextChanged);
             // 
-            // moneyTextBox1
-            // 
-            this.moneyTextBox1.Location = new System.Drawing.Point(802, 70);
-            this.moneyTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox1.Name = "moneyTextBox1";
-            this.moneyTextBox1.ReadOnly = true;
-            this.moneyTextBox1.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox1.TabIndex = 38;
-            this.moneyTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox1.TextChanged += new System.EventHandler(this.moneyTextBox1_TextChanged);
-            // 
-            // moneyTextBox2
-            // 
-            this.moneyTextBox2.Location = new System.Drawing.Point(802, 103);
-            this.moneyTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox2.Name = "moneyTextBox2";
-            this.moneyTextBox2.ReadOnly = true;
-            this.moneyTextBox2.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox2.TabIndex = 39;
-            this.moneyTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox2.TextChanged += new System.EventHandler(this.moneyTextBox2_TextChanged);
-            // 
-            // moneyTextBox3
-            // 
-            this.moneyTextBox3.Location = new System.Drawing.Point(802, 136);
-            this.moneyTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox3.Name = "moneyTextBox3";
-            this.moneyTextBox3.ReadOnly = true;
-            this.moneyTextBox3.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox3.TabIndex = 39;
-            this.moneyTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox3.TextChanged += new System.EventHandler(this.moneyTextBox3_TextChanged);
-            // 
-            // moneyTextBox4
-            // 
-            this.moneyTextBox4.Location = new System.Drawing.Point(802, 169);
-            this.moneyTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox4.Name = "moneyTextBox4";
-            this.moneyTextBox4.ReadOnly = true;
-            this.moneyTextBox4.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox4.TabIndex = 0;
-            this.moneyTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox4.TextChanged += new System.EventHandler(this.moneyTextBox4_TextChanged);
-            // 
-            // moneyTextBox5
-            // 
-            this.moneyTextBox5.Location = new System.Drawing.Point(802, 202);
-            this.moneyTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox5.Name = "moneyTextBox5";
-            this.moneyTextBox5.ReadOnly = true;
-            this.moneyTextBox5.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox5.TabIndex = 0;
-            this.moneyTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox5.TextChanged += new System.EventHandler(this.moneyTextBox5_TextChanged);
-            // 
-            // moneyTextBox6
-            // 
-            this.moneyTextBox6.Location = new System.Drawing.Point(802, 235);
-            this.moneyTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox6.Name = "moneyTextBox6";
-            this.moneyTextBox6.ReadOnly = true;
-            this.moneyTextBox6.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox6.TabIndex = 0;
-            this.moneyTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox6.TextChanged += new System.EventHandler(this.moneyTextBox6_TextChanged);
-            // 
-            // moneyTextBox7
-            // 
-            this.moneyTextBox7.Location = new System.Drawing.Point(802, 268);
-            this.moneyTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox7.Name = "moneyTextBox7";
-            this.moneyTextBox7.ReadOnly = true;
-            this.moneyTextBox7.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox7.TabIndex = 0;
-            this.moneyTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox7.TextChanged += new System.EventHandler(this.moneyTextBox7_TextChanged);
-            // 
-            // moneyTextBox8
-            // 
-            this.moneyTextBox8.Location = new System.Drawing.Point(802, 301);
-            this.moneyTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox8.Name = "moneyTextBox8";
-            this.moneyTextBox8.ReadOnly = true;
-            this.moneyTextBox8.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox8.TabIndex = 0;
-            this.moneyTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox8.TextChanged += new System.EventHandler(this.moneyTextBox8_TextChanged);
-            // 
-            // moneyTextBox9
-            // 
-            this.moneyTextBox9.Location = new System.Drawing.Point(802, 334);
-            this.moneyTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox9.Name = "moneyTextBox9";
-            this.moneyTextBox9.ReadOnly = true;
-            this.moneyTextBox9.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox9.TabIndex = 0;
-            this.moneyTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox9.TextChanged += new System.EventHandler(this.moneyTextBox9_TextChanged);
-            // 
-            // moneyTextBox10
-            // 
-            this.moneyTextBox10.Location = new System.Drawing.Point(802, 370);
-            this.moneyTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox10.Name = "moneyTextBox10";
-            this.moneyTextBox10.ReadOnly = true;
-            this.moneyTextBox10.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox10.TabIndex = 0;
-            this.moneyTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox10.TextChanged += new System.EventHandler(this.moneyTextBox10_TextChanged);
-            // 
-            // moneyTextBox11
-            // 
-            this.moneyTextBox11.Location = new System.Drawing.Point(802, 401);
-            this.moneyTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox11.Name = "moneyTextBox11";
-            this.moneyTextBox11.ReadOnly = true;
-            this.moneyTextBox11.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox11.TabIndex = 0;
-            this.moneyTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.moneyTextBox11.TextChanged += new System.EventHandler(this.moneyTextBox11_TextChanged);
-            // 
-            // moneyTextBox12
-            // 
-            this.moneyTextBox12.Location = new System.Drawing.Point(802, 434);
-            this.moneyTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.moneyTextBox12.Name = "moneyTextBox12";
-            this.moneyTextBox12.ReadOnly = true;
-            this.moneyTextBox12.Size = new System.Drawing.Size(176, 24);
-            this.moneyTextBox12.TabIndex = 0;
-            this.moneyTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // label24
             // 
             this.label24.Location = new System.Drawing.Point(702, 2);
@@ -1378,230 +743,10 @@
             this.countTextBox0.Location = new System.Drawing.Point(703, 37);
             this.countTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.countTextBox0.Name = "countTextBox0";
-            this.countTextBox0.ReadOnly = true;
             this.countTextBox0.Size = new System.Drawing.Size(92, 24);
             this.countTextBox0.TabIndex = 36;
             this.countTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.countTextBox0.Leave += new System.EventHandler(this.countTextBox0_Leave);
-            // 
-            // countTextBox1
-            // 
-            this.countTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox1.Location = new System.Drawing.Point(703, 70);
-            this.countTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox1.Name = "countTextBox1";
-            this.countTextBox1.ReadOnly = true;
-            this.countTextBox1.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox1.TabIndex = 38;
-            this.countTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox1.Leave += new System.EventHandler(this.countTextBox1_Leave);
-            // 
-            // countTextBox2
-            // 
-            this.countTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox2.Location = new System.Drawing.Point(703, 103);
-            this.countTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox2.Name = "countTextBox2";
-            this.countTextBox2.ReadOnly = true;
-            this.countTextBox2.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox2.TabIndex = 39;
-            this.countTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox2.TextChanged += new System.EventHandler(this.CountTextBox2_TextChanged);
-            this.countTextBox2.Leave += new System.EventHandler(this.countTextBox2_Leave);
-            // 
-            // countTextBox3
-            // 
-            this.countTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox3.Location = new System.Drawing.Point(703, 136);
-            this.countTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox3.Name = "countTextBox3";
-            this.countTextBox3.ReadOnly = true;
-            this.countTextBox3.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox3.TabIndex = 39;
-            this.countTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox3.Leave += new System.EventHandler(this.countTextBox3_Leave);
-            // 
-            // countTextBox4
-            // 
-            this.countTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox4.Location = new System.Drawing.Point(703, 169);
-            this.countTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox4.Name = "countTextBox4";
-            this.countTextBox4.ReadOnly = true;
-            this.countTextBox4.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox4.TabIndex = 39;
-            this.countTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox4.Leave += new System.EventHandler(this.countTextBox4_Leave);
-            // 
-            // countTextBox7
-            // 
-            this.countTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox7.Location = new System.Drawing.Point(703, 268);
-            this.countTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox7.Name = "countTextBox7";
-            this.countTextBox7.ReadOnly = true;
-            this.countTextBox7.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox7.TabIndex = 0;
-            this.countTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox7.Leave += new System.EventHandler(this.countTextBox7_Leave);
-            // 
-            // countTextBox8
-            // 
-            this.countTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox8.Location = new System.Drawing.Point(703, 301);
-            this.countTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox8.Name = "countTextBox8";
-            this.countTextBox8.ReadOnly = true;
-            this.countTextBox8.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox8.TabIndex = 0;
-            this.countTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox8.Leave += new System.EventHandler(this.countTextBox8_Leave);
-            // 
-            // countTextBox9
-            // 
-            this.countTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox9.Location = new System.Drawing.Point(703, 334);
-            this.countTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox9.Name = "countTextBox9";
-            this.countTextBox9.ReadOnly = true;
-            this.countTextBox9.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox9.TabIndex = 0;
-            this.countTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox9.Leave += new System.EventHandler(this.countTextBox9_Leave);
-            // 
-            // countTextBox10
-            // 
-            this.countTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox10.Location = new System.Drawing.Point(703, 370);
-            this.countTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox10.Name = "countTextBox10";
-            this.countTextBox10.ReadOnly = true;
-            this.countTextBox10.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox10.TabIndex = 0;
-            this.countTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox10.Leave += new System.EventHandler(this.countTextBox10_Leave);
-            // 
-            // countTextBox11
-            // 
-            this.countTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox11.Location = new System.Drawing.Point(703, 401);
-            this.countTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox11.Name = "countTextBox11";
-            this.countTextBox11.ReadOnly = true;
-            this.countTextBox11.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox11.TabIndex = 0;
-            this.countTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox11.Leave += new System.EventHandler(this.countTextBox11_Leave);
-            // 
-            // countTextBox12
-            // 
-            this.countTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox12.Location = new System.Drawing.Point(703, 434);
-            this.countTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox12.Name = "countTextBox12";
-            this.countTextBox12.ReadOnly = true;
-            this.countTextBox12.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox12.TabIndex = 0;
-            this.countTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox12.Leave += new System.EventHandler(this.countTextBox12_Leave);
-            // 
-            // totalCount
-            // 
-            this.totalCount.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.totalCount.Location = new System.Drawing.Point(703, 467);
-            this.totalCount.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.totalCount.Name = "totalCount";
-            this.totalCount.ReadOnly = true;
-            this.totalCount.Size = new System.Drawing.Size(92, 37);
-            this.totalCount.TabIndex = 38;
-            this.totalCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label31
-            // 
-            this.label31.Location = new System.Drawing.Point(519, 465);
-            this.label31.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(177, 45);
-            this.label31.TabIndex = 38;
-            this.label31.Text = "総数";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // totalWeight
-            // 
-            this.totalWeight.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.totalWeight.Location = new System.Drawing.Point(420, 467);
-            this.totalWeight.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.totalWeight.Name = "totalWeight";
-            this.totalWeight.ReadOnly = true;
-            this.totalWeight.Size = new System.Drawing.Size(92, 37);
-            this.totalWeight.TabIndex = 38;
-            this.totalWeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label32
-            // 
-            this.label32.Location = new System.Drawing.Point(249, 465);
-            this.label32.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(166, 44);
-            this.label32.TabIndex = 38;
-            this.label32.Text = "総重量";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // unitPriceTextBox12
-            // 
-            this.unitPriceTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox12.Location = new System.Drawing.Point(519, 434);
-            this.unitPriceTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox12.Name = "unitPriceTextBox12";
-            this.unitPriceTextBox12.ReadOnly = true;
-            this.unitPriceTextBox12.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox12.TabIndex = 0;
-            this.unitPriceTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox12.TextChanged += new System.EventHandler(this.unitPriceTextBox12_TextChanged);
-            this.unitPriceTextBox12.Enter += new System.EventHandler(this.unitPriceTextBox12_Enter);
-            this.unitPriceTextBox12.Leave += new System.EventHandler(this.unitPriceTextBox12_Leave);
-            // 
-            // unitPriceTextBox11
-            // 
-            this.unitPriceTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox11.Location = new System.Drawing.Point(519, 401);
-            this.unitPriceTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox11.Name = "unitPriceTextBox11";
-            this.unitPriceTextBox11.ReadOnly = true;
-            this.unitPriceTextBox11.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox11.TabIndex = 0;
-            this.unitPriceTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox11.TextChanged += new System.EventHandler(this.unitPriceTextBox11_TextChanged);
-            this.unitPriceTextBox11.Enter += new System.EventHandler(this.unitPriceTextBox11_TextChanged);
-            this.unitPriceTextBox11.Leave += new System.EventHandler(this.unitPriceTextBox11_Leave);
-            // 
-            // unitPriceTextBox10
-            // 
-            this.unitPriceTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox10.Location = new System.Drawing.Point(519, 370);
-            this.unitPriceTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox10.Name = "unitPriceTextBox10";
-            this.unitPriceTextBox10.ReadOnly = true;
-            this.unitPriceTextBox10.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox10.TabIndex = 0;
-            this.unitPriceTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox10.TextChanged += new System.EventHandler(this.unitPriceTextBox10_TextChanged);
-            this.unitPriceTextBox10.Enter += new System.EventHandler(this.unitPriceTextBox10_Enter);
-            this.unitPriceTextBox10.Leave += new System.EventHandler(this.unitPriceTextBox10_Leave);
-            // 
-            // unitPriceTextBox9
-            // 
-            this.unitPriceTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox9.Location = new System.Drawing.Point(519, 334);
-            this.unitPriceTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox9.Name = "unitPriceTextBox9";
-            this.unitPriceTextBox9.ReadOnly = true;
-            this.unitPriceTextBox9.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox9.TabIndex = 0;
-            this.unitPriceTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox9.TextChanged += new System.EventHandler(this.unitPriceTextBox9_TextChanged);
-            this.unitPriceTextBox9.Enter += new System.EventHandler(this.unitPriceTextBox9_Enter);
-            this.unitPriceTextBox9.Leave += new System.EventHandler(this.unitPriceTextBox9_Leave);
             // 
             // label34
             // 
@@ -1626,130 +771,6 @@
             this.unitPriceTextBox0.Enter += new System.EventHandler(this.unitPriceTextBox0_Enter);
             this.unitPriceTextBox0.Leave += new System.EventHandler(this.unitPriceTextBox0_Leave);
             // 
-            // unitPriceTextBox1
-            // 
-            this.unitPriceTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox1.Location = new System.Drawing.Point(519, 70);
-            this.unitPriceTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox1.Name = "unitPriceTextBox1";
-            this.unitPriceTextBox1.ReadOnly = true;
-            this.unitPriceTextBox1.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox1.TabIndex = 38;
-            this.unitPriceTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox1.TextChanged += new System.EventHandler(this.unitPriceTextBox1_TextChanged);
-            this.unitPriceTextBox1.Enter += new System.EventHandler(this.unitPriceTextBox1_Enter);
-            this.unitPriceTextBox1.Leave += new System.EventHandler(this.unitPriceTextBox1_Leave);
-            // 
-            // unitPriceTextBox2
-            // 
-            this.unitPriceTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox2.Location = new System.Drawing.Point(519, 103);
-            this.unitPriceTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox2.Name = "unitPriceTextBox2";
-            this.unitPriceTextBox2.ReadOnly = true;
-            this.unitPriceTextBox2.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox2.TabIndex = 39;
-            this.unitPriceTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox2.TextChanged += new System.EventHandler(this.unitPriceTextBox2_TextChanged);
-            this.unitPriceTextBox2.Enter += new System.EventHandler(this.unitPriceTextBox2_Enter);
-            this.unitPriceTextBox2.Leave += new System.EventHandler(this.unitPriceTextBox2_Leave);
-            // 
-            // unitPriceTextBox3
-            // 
-            this.unitPriceTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox3.Location = new System.Drawing.Point(519, 136);
-            this.unitPriceTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox3.Name = "unitPriceTextBox3";
-            this.unitPriceTextBox3.ReadOnly = true;
-            this.unitPriceTextBox3.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox3.TabIndex = 39;
-            this.unitPriceTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox3.TextChanged += new System.EventHandler(this.unitPriceTextBox3_TextChanged);
-            this.unitPriceTextBox3.Enter += new System.EventHandler(this.unitPriceTextBox3_Enter);
-            this.unitPriceTextBox3.Leave += new System.EventHandler(this.unitPriceTextBox3_Leave);
-            // 
-            // unitPriceTextBox4
-            // 
-            this.unitPriceTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox4.Location = new System.Drawing.Point(519, 169);
-            this.unitPriceTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox4.Name = "unitPriceTextBox4";
-            this.unitPriceTextBox4.ReadOnly = true;
-            this.unitPriceTextBox4.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox4.TabIndex = 0;
-            this.unitPriceTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox4.TextChanged += new System.EventHandler(this.unitPriceTextBox4_TextChanged);
-            this.unitPriceTextBox4.Enter += new System.EventHandler(this.unitPriceTextBox4_Enter);
-            this.unitPriceTextBox4.Leave += new System.EventHandler(this.unitPriceTextBox4_Leave);
-            // 
-            // unitPriceTextBox5
-            // 
-            this.unitPriceTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox5.Location = new System.Drawing.Point(519, 202);
-            this.unitPriceTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox5.Name = "unitPriceTextBox5";
-            this.unitPriceTextBox5.ReadOnly = true;
-            this.unitPriceTextBox5.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox5.TabIndex = 39;
-            this.unitPriceTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox5.TextChanged += new System.EventHandler(this.unitPriceTextBox5_TextChanged);
-            this.unitPriceTextBox5.Enter += new System.EventHandler(this.unitPriceTextBox5_Enter);
-            this.unitPriceTextBox5.Leave += new System.EventHandler(this.unitPriceTextBox5_Leave);
-            // 
-            // unitPriceTextBox6
-            // 
-            this.unitPriceTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox6.Location = new System.Drawing.Point(519, 235);
-            this.unitPriceTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox6.Name = "unitPriceTextBox6";
-            this.unitPriceTextBox6.ReadOnly = true;
-            this.unitPriceTextBox6.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox6.TabIndex = 0;
-            this.unitPriceTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox6.TextChanged += new System.EventHandler(this.unitPriceTextBox6_TextChanged);
-            this.unitPriceTextBox6.Enter += new System.EventHandler(this.unitPriceTextBox6_Enter);
-            this.unitPriceTextBox6.Leave += new System.EventHandler(this.unitPriceTextBox6_Leave);
-            // 
-            // unitPriceTextBox7
-            // 
-            this.unitPriceTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox7.Location = new System.Drawing.Point(519, 268);
-            this.unitPriceTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox7.Name = "unitPriceTextBox7";
-            this.unitPriceTextBox7.ReadOnly = true;
-            this.unitPriceTextBox7.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox7.TabIndex = 0;
-            this.unitPriceTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox7.TextChanged += new System.EventHandler(this.unitPriceTextBox7_TextChanged);
-            this.unitPriceTextBox7.Enter += new System.EventHandler(this.unitPriceTextBox7_TextChanged);
-            this.unitPriceTextBox7.Leave += new System.EventHandler(this.unitPriceTextBox7_Leave);
-            // 
-            // unitPriceTextBox8
-            // 
-            this.unitPriceTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.unitPriceTextBox8.Location = new System.Drawing.Point(519, 301);
-            this.unitPriceTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.unitPriceTextBox8.Name = "unitPriceTextBox8";
-            this.unitPriceTextBox8.ReadOnly = true;
-            this.unitPriceTextBox8.Size = new System.Drawing.Size(176, 24);
-            this.unitPriceTextBox8.TabIndex = 0;
-            this.unitPriceTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.unitPriceTextBox8.TextChanged += new System.EventHandler(this.unitPriceTextBox8_TextChanged);
-            this.unitPriceTextBox8.Enter += new System.EventHandler(this.unitPriceTextBox8_Enter);
-            this.unitPriceTextBox8.Leave += new System.EventHandler(this.unitPriceTextBox8_Leave);
-            // 
-            // weightTextBox12
-            // 
-            this.weightTextBox12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox12.Location = new System.Drawing.Point(420, 434);
-            this.weightTextBox12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox12.Name = "weightTextBox12";
-            this.weightTextBox12.ReadOnly = true;
-            this.weightTextBox12.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox12.TabIndex = 0;
-            this.weightTextBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox12.Leave += new System.EventHandler(this.weightTextBox12_Leave);
-            // 
             // label23
             // 
             this.label23.Location = new System.Drawing.Point(419, 2);
@@ -1766,143 +787,10 @@
             this.weightTextBox0.Location = new System.Drawing.Point(420, 37);
             this.weightTextBox0.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.weightTextBox0.Name = "weightTextBox0";
-            this.weightTextBox0.ReadOnly = true;
             this.weightTextBox0.Size = new System.Drawing.Size(92, 24);
             this.weightTextBox0.TabIndex = 36;
             this.weightTextBox0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.weightTextBox0.Leave += new System.EventHandler(this.weightTextBox0_Leave);
-            // 
-            // weightTextBox1
-            // 
-            this.weightTextBox1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox1.Location = new System.Drawing.Point(420, 70);
-            this.weightTextBox1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox1.Name = "weightTextBox1";
-            this.weightTextBox1.ReadOnly = true;
-            this.weightTextBox1.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox1.TabIndex = 38;
-            this.weightTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox1.Leave += new System.EventHandler(this.weightTextBox1_Leave);
-            // 
-            // weightTextBox2
-            // 
-            this.weightTextBox2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox2.Location = new System.Drawing.Point(420, 103);
-            this.weightTextBox2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox2.Name = "weightTextBox2";
-            this.weightTextBox2.ReadOnly = true;
-            this.weightTextBox2.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox2.TabIndex = 39;
-            this.weightTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox2.Leave += new System.EventHandler(this.weightTextBox2_Leave);
-            // 
-            // weightTextBox3
-            // 
-            this.weightTextBox3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox3.Location = new System.Drawing.Point(420, 136);
-            this.weightTextBox3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox3.Name = "weightTextBox3";
-            this.weightTextBox3.ReadOnly = true;
-            this.weightTextBox3.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox3.TabIndex = 39;
-            this.weightTextBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox3.Leave += new System.EventHandler(this.weightTextBox3_Leave);
-            // 
-            // weightTextBox4
-            // 
-            this.weightTextBox4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox4.Location = new System.Drawing.Point(420, 169);
-            this.weightTextBox4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox4.Name = "weightTextBox4";
-            this.weightTextBox4.ReadOnly = true;
-            this.weightTextBox4.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox4.TabIndex = 39;
-            this.weightTextBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox4.Leave += new System.EventHandler(this.weightTextBox4_Leave);
-            // 
-            // weightTextBox5
-            // 
-            this.weightTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox5.Location = new System.Drawing.Point(420, 202);
-            this.weightTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox5.Name = "weightTextBox5";
-            this.weightTextBox5.ReadOnly = true;
-            this.weightTextBox5.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox5.TabIndex = 0;
-            this.weightTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox5.Leave += new System.EventHandler(this.weightTextBox5_Leave);
-            // 
-            // weightTextBox6
-            // 
-            this.weightTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox6.Location = new System.Drawing.Point(420, 235);
-            this.weightTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox6.Name = "weightTextBox6";
-            this.weightTextBox6.ReadOnly = true;
-            this.weightTextBox6.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox6.TabIndex = 0;
-            this.weightTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox6.Leave += new System.EventHandler(this.weightTextBox6_Leave);
-            // 
-            // weightTextBox7
-            // 
-            this.weightTextBox7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox7.Location = new System.Drawing.Point(420, 268);
-            this.weightTextBox7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox7.Name = "weightTextBox7";
-            this.weightTextBox7.ReadOnly = true;
-            this.weightTextBox7.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox7.TabIndex = 0;
-            this.weightTextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox7.Leave += new System.EventHandler(this.weightTextBox7_Leave);
-            // 
-            // weightTextBox8
-            // 
-            this.weightTextBox8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox8.Location = new System.Drawing.Point(420, 301);
-            this.weightTextBox8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox8.Name = "weightTextBox8";
-            this.weightTextBox8.ReadOnly = true;
-            this.weightTextBox8.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox8.TabIndex = 0;
-            this.weightTextBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox8.Leave += new System.EventHandler(this.weightTextBox8_Leave);
-            // 
-            // weightTextBox9
-            // 
-            this.weightTextBox9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox9.Location = new System.Drawing.Point(420, 334);
-            this.weightTextBox9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox9.Name = "weightTextBox9";
-            this.weightTextBox9.ReadOnly = true;
-            this.weightTextBox9.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox9.TabIndex = 0;
-            this.weightTextBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox9.Leave += new System.EventHandler(this.weightTextBox9_Leave);
-            // 
-            // weightTextBox10
-            // 
-            this.weightTextBox10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox10.Location = new System.Drawing.Point(420, 370);
-            this.weightTextBox10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox10.Name = "weightTextBox10";
-            this.weightTextBox10.ReadOnly = true;
-            this.weightTextBox10.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox10.TabIndex = 0;
-            this.weightTextBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox10.Leave += new System.EventHandler(this.weightTextBox10_Leave);
-            // 
-            // weightTextBox11
-            // 
-            this.weightTextBox11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.weightTextBox11.Location = new System.Drawing.Point(420, 401);
-            this.weightTextBox11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.weightTextBox11.Name = "weightTextBox11";
-            this.weightTextBox11.ReadOnly = true;
-            this.weightTextBox11.Size = new System.Drawing.Size(92, 24);
-            this.weightTextBox11.TabIndex = 0;
-            this.weightTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.weightTextBox11.Leave += new System.EventHandler(this.weightTextBox11_Leave);
             // 
             // label22
             // 
@@ -1923,150 +811,6 @@
             this.itemDetail0.Size = new System.Drawing.Size(164, 24);
             this.itemDetail0.TabIndex = 36;
             this.itemDetail0.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail1
-            // 
-            this.itemDetail1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail1.Location = new System.Drawing.Point(249, 70);
-            this.itemDetail1.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail1.Name = "itemDetail1";
-            this.itemDetail1.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail1.TabIndex = 38;
-            this.itemDetail1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail2
-            // 
-            this.itemDetail2.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail2.Location = new System.Drawing.Point(249, 103);
-            this.itemDetail2.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail2.Name = "itemDetail2";
-            this.itemDetail2.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail2.TabIndex = 39;
-            this.itemDetail2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail3
-            // 
-            this.itemDetail3.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail3.Location = new System.Drawing.Point(249, 136);
-            this.itemDetail3.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail3.Name = "itemDetail3";
-            this.itemDetail3.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail3.TabIndex = 39;
-            this.itemDetail3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail4
-            // 
-            this.itemDetail4.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail4.Location = new System.Drawing.Point(249, 169);
-            this.itemDetail4.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail4.Name = "itemDetail4";
-            this.itemDetail4.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail4.TabIndex = 39;
-            this.itemDetail4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail5
-            // 
-            this.itemDetail5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail5.Location = new System.Drawing.Point(249, 202);
-            this.itemDetail5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail5.Name = "itemDetail5";
-            this.itemDetail5.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail5.TabIndex = 0;
-            this.itemDetail5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail6
-            // 
-            this.itemDetail6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail6.Location = new System.Drawing.Point(249, 235);
-            this.itemDetail6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail6.Name = "itemDetail6";
-            this.itemDetail6.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail6.TabIndex = 0;
-            this.itemDetail6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail7
-            // 
-            this.itemDetail7.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail7.Location = new System.Drawing.Point(249, 268);
-            this.itemDetail7.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail7.Name = "itemDetail7";
-            this.itemDetail7.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail7.TabIndex = 0;
-            this.itemDetail7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail8
-            // 
-            this.itemDetail8.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail8.Location = new System.Drawing.Point(249, 301);
-            this.itemDetail8.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail8.Name = "itemDetail8";
-            this.itemDetail8.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail8.TabIndex = 0;
-            this.itemDetail8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail9
-            // 
-            this.itemDetail9.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail9.Location = new System.Drawing.Point(249, 334);
-            this.itemDetail9.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail9.Name = "itemDetail9";
-            this.itemDetail9.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail9.TabIndex = 0;
-            this.itemDetail9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail10
-            // 
-            this.itemDetail10.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail10.Location = new System.Drawing.Point(249, 370);
-            this.itemDetail10.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail10.Name = "itemDetail10";
-            this.itemDetail10.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail10.TabIndex = 0;
-            this.itemDetail10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail11
-            // 
-            this.itemDetail11.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail11.Location = new System.Drawing.Point(249, 401);
-            this.itemDetail11.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail11.Name = "itemDetail11";
-            this.itemDetail11.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail11.TabIndex = 0;
-            this.itemDetail11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // itemDetail12
-            // 
-            this.itemDetail12.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.itemDetail12.Location = new System.Drawing.Point(249, 434);
-            this.itemDetail12.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemDetail12.Name = "itemDetail12";
-            this.itemDetail12.Size = new System.Drawing.Size(164, 24);
-            this.itemDetail12.TabIndex = 0;
-            this.itemDetail12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // countTextBox5
-            // 
-            this.countTextBox5.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox5.Location = new System.Drawing.Point(703, 202);
-            this.countTextBox5.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox5.Name = "countTextBox5";
-            this.countTextBox5.ReadOnly = true;
-            this.countTextBox5.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox5.TabIndex = 39;
-            this.countTextBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox5.Leave += new System.EventHandler(this.countTextBox5_Leave);
-            // 
-            // countTextBox6
-            // 
-            this.countTextBox6.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.countTextBox6.Location = new System.Drawing.Point(703, 235);
-            this.countTextBox6.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.countTextBox6.Name = "countTextBox6";
-            this.countTextBox6.ReadOnly = true;
-            this.countTextBox6.Size = new System.Drawing.Size(92, 24);
-            this.countTextBox6.TabIndex = 0;
-            this.countTextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.countTextBox6.Leave += new System.EventHandler(this.countTextBox6_Leave);
             // 
             // returnButton
             // 
@@ -4764,6 +3508,89 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "備考";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 200;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "金額";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 150;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "数量";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 125;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "単価";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 125;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "重量";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 125;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "品物詳細";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 180;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "品名";
+            this.Column2.MaxDropDownItems = 100;
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "大分類";
+            this.Column1.MaxDropDownItems = 100;
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8});
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 160);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(1227, 371);
+            this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellContentClick);
+            this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView1_DataError);
+            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView1_EditingControlShowing);
+            this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridView1_RowsAdded);
+            // 
             // Statement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -4807,6 +3634,7 @@
             this.tableLayoutPanel13.PerformLayout();
             this.sealGroup.ResumeLayout(false);
             this.sealGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4871,69 +3699,6 @@
         private System.Windows.Forms.TextBox taxAmount;
         private System.Windows.Forms.TextBox subTotal;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox totalCount;
-        private System.Windows.Forms.TextBox totalWeight;
-        private System.Windows.Forms.ComboBox itemComboBox1;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox1;
-        private System.Windows.Forms.TextBox remarks1;
-        private System.Windows.Forms.TextBox moneyTextBox1;
-        private System.Windows.Forms.TextBox countTextBox1;
-        private System.Windows.Forms.TextBox remarks2;
-        private System.Windows.Forms.TextBox moneyTextBox2;
-        private System.Windows.Forms.TextBox countTextBox2;
-        private System.Windows.Forms.ComboBox itemComboBox2;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox2;
-        private System.Windows.Forms.TextBox remarks3;
-        private System.Windows.Forms.TextBox moneyTextBox3;
-        private System.Windows.Forms.TextBox countTextBox3;
-        private System.Windows.Forms.ComboBox itemComboBox3;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox3;
-        private System.Windows.Forms.TextBox remarks4;
-        private System.Windows.Forms.TextBox countTextBox4;
-        private System.Windows.Forms.ComboBox itemComboBox4;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox4;
-        private System.Windows.Forms.TextBox moneyTextBox4;
-        private System.Windows.Forms.TextBox remarks5;
-        private System.Windows.Forms.TextBox moneyTextBox5;
-        private System.Windows.Forms.TextBox countTextBox5;
-        private System.Windows.Forms.ComboBox itemComboBox5;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox5;
-        private System.Windows.Forms.TextBox countTextBox6;
-        private System.Windows.Forms.ComboBox itemComboBox6;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox6;
-        private System.Windows.Forms.TextBox moneyTextBox6;
-        private System.Windows.Forms.TextBox remarks6;
-        private System.Windows.Forms.ComboBox itemComboBox7;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox7;
-        private System.Windows.Forms.TextBox countTextBox7;
-        private System.Windows.Forms.TextBox moneyTextBox7;
-        private System.Windows.Forms.TextBox remarks7;
-        private System.Windows.Forms.ComboBox itemComboBox8;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox8;
-        private System.Windows.Forms.TextBox countTextBox8;
-        private System.Windows.Forms.TextBox moneyTextBox8;
-        private System.Windows.Forms.TextBox remarks8;
-        private System.Windows.Forms.ComboBox itemComboBox9;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox9;
-        private System.Windows.Forms.TextBox countTextBox9;
-        private System.Windows.Forms.TextBox moneyTextBox9;
-        private System.Windows.Forms.TextBox remarks9;
-        private System.Windows.Forms.ComboBox itemComboBox10;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox10;
-        private System.Windows.Forms.TextBox countTextBox10;
-        private System.Windows.Forms.TextBox moneyTextBox10;
-        private System.Windows.Forms.TextBox remarks10;
-        private System.Windows.Forms.ComboBox itemComboBox11;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox11;
-        private System.Windows.Forms.TextBox countTextBox11;
-        private System.Windows.Forms.TextBox moneyTextBox11;
-        private System.Windows.Forms.TextBox remarks11;
-        private System.Windows.Forms.ComboBox itemComboBox12;
-        private System.Windows.Forms.ComboBox mainCategoryComboBox12;
-        private System.Windows.Forms.TextBox countTextBox12;
-        private System.Windows.Forms.TextBox moneyTextBox12;
-        private System.Windows.Forms.TextBox remarks12;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
         private System.Windows.Forms.TextBox sumTextBox2;
         private System.Windows.Forms.TextBox taxAmount2;
@@ -5096,34 +3861,9 @@
         private System.Windows.Forms.TextBox registerDateTextBox;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox weightTextBox2;
-        private System.Windows.Forms.TextBox weightTextBox1;
         private System.Windows.Forms.TextBox weightTextBox0;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox weightTextBox3;
-        private System.Windows.Forms.TextBox weightTextBox4;
-        private System.Windows.Forms.TextBox weightTextBox5;
-        private System.Windows.Forms.TextBox weightTextBox6;
-        private System.Windows.Forms.TextBox weightTextBox7;
-        private System.Windows.Forms.TextBox weightTextBox8;
-        private System.Windows.Forms.TextBox weightTextBox9;
-        private System.Windows.Forms.TextBox weightTextBox10;
-        private System.Windows.Forms.TextBox weightTextBox11;
-        private System.Windows.Forms.TextBox weightTextBox12;
         private System.Windows.Forms.TextBox unitPriceTextBox0;
-        private System.Windows.Forms.TextBox unitPriceTextBox1;
-        private System.Windows.Forms.TextBox unitPriceTextBox2;
-        private System.Windows.Forms.TextBox unitPriceTextBox3;
-        private System.Windows.Forms.TextBox unitPriceTextBox4;
-        private System.Windows.Forms.TextBox unitPriceTextBox5;
-        private System.Windows.Forms.TextBox unitPriceTextBox6;
-        private System.Windows.Forms.TextBox unitPriceTextBox7;
-        private System.Windows.Forms.TextBox unitPriceTextBox8;
-        private System.Windows.Forms.TextBox unitPriceTextBox9;
-        private System.Windows.Forms.TextBox unitPriceTextBox10;
-        private System.Windows.Forms.TextBox unitPriceTextBox11;
-        private System.Windows.Forms.TextBox unitPriceTextBox12;
-        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label34;
@@ -5131,18 +3871,6 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.TextBox itemDetail0;
-        private System.Windows.Forms.TextBox itemDetail1;
-        private System.Windows.Forms.TextBox itemDetail2;
-        private System.Windows.Forms.TextBox itemDetail3;
-        private System.Windows.Forms.TextBox itemDetail4;
-        private System.Windows.Forms.TextBox itemDetail5;
-        private System.Windows.Forms.TextBox itemDetail6;
-        private System.Windows.Forms.TextBox itemDetail7;
-        private System.Windows.Forms.TextBox itemDetail8;
-        private System.Windows.Forms.TextBox itemDetail9;
-        private System.Windows.Forms.TextBox itemDetail10;
-        private System.Windows.Forms.TextBox itemDetail11;
-        private System.Windows.Forms.TextBox itemDetail12;
         private System.Windows.Forms.TextBox itemDetail00;
         private System.Windows.Forms.TextBox itemDetail01;
         private System.Windows.Forms.TextBox itemDetail02;
@@ -5180,5 +3908,17 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
     }
 }

@@ -224,7 +224,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(1847, 843);
+            this.tabPage2.Size = new System.Drawing.Size(2218, 1023);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             // 
@@ -234,7 +234,7 @@
             this.panel4.Location = new System.Drawing.Point(2, 1414);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1822, 25);
+            this.panel4.Size = new System.Drawing.Size(2193, 25);
             this.panel4.TabIndex = 148;
             // 
             // pictureBox2
@@ -1297,7 +1297,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(1848, 853);
+            this.tabPage1.Size = new System.Drawing.Size(2218, 1023);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             // 
@@ -1308,7 +1308,7 @@
             this.panel3.Location = new System.Drawing.Point(2, 1414);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1823, 25);
+            this.panel3.Size = new System.Drawing.Size(2193, 25);
             this.panel3.TabIndex = 81;
             // 
             // pictureBox1
@@ -2452,7 +2452,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(2263, 1118);
+            this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientMaster_UPD";

@@ -7,19 +7,22 @@ namespace Flawless_ex
     public partial class client_search_result : Form
     {
         DataTable dt = new DataTable();
-        int type;
-        int check;
+        public int type;
+        public int check;
         Statement statement;
         MainMenu mainMenu;
-        int staff_id;
-        string address;
-        string staff_name;
-        decimal Total;
-        string access_auth;
-        string document;
-        int control;
-        string data;
-        int grade;
+        public int staff_id;
+        public string address;
+        public string staff_name;
+        public string shop_name;
+        public string name;
+        public string company_name;
+        public decimal Total;
+        public string access_auth;
+        public string document;
+        public int control;
+        public string data;
+        public int grade;
         #region "買取販売履歴"
         string name1;
         string phoneNumber1;
@@ -35,7 +38,7 @@ namespace Flawless_ex
         string antiqueNumber;
         string documentNumber;
         #endregion
-        string pass;
+        public string pass;
 
         public client_search_result(DataTable dt, int type, int check, Statement statement, int id, decimal Total, int control, string document, string Access_auth, string Pass)
         {
@@ -56,7 +59,6 @@ namespace Flawless_ex
 
         private void client_search_result_Load(object sender, EventArgs e)
         {
-
             if (type == 0)
             {
                 dataGridView1.DataSource = dt;
@@ -65,8 +67,6 @@ namespace Flawless_ex
                 dataGridView1.Columns[2].HeaderText = "担当者名";
                 dataGridView1.Columns[3].HeaderText = "住所";
                 dataGridView1.Columns["antique_number"].Visible = false;
-
-
             }
             else if (type == 1)
             {
@@ -107,7 +107,20 @@ namespace Flawless_ex
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
             client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
-
+            if (type == 0)
+            {
+                this.company_name = client_Search.clientName;
+                this.shop_name = client_Search.shopName;
+                this.staff_name = client_Search.clientStaff;
+                this.address = client_Search.address;
+            }
+            else if (type == 1)
+            {
+                this.name = client_Search.iname;
+                this.address = client_Search.iaddress;
+                this.check = client_Search.check;
+            }
+            else { }
             this.Close();
             client_Search.Show();
         }
@@ -117,7 +130,7 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)//法人
             {

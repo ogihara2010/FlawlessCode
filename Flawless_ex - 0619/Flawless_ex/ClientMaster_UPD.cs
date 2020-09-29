@@ -13,14 +13,16 @@ namespace Flawless_ex
         DataTable dt = new DataTable();
         DataTable dt2 = new DataTable();
         DataTable dt3 = new DataTable();
-        int type;
-        string name;
-        string address;
-        int staff_code;
-        string access_auth;
-        string path;
-        string pass;
-        string kana;
+        DataTable dt4 = new DataTable();
+        DataTable dt5 = new DataTable();
+        public int type;
+        public string name;
+        public string address;
+        public int staff_code;
+        public string access_auth;
+        public string path;
+        public string pass;
+        public string kana;
 
         public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code, string access_auth, string Pass)
         {
@@ -208,7 +210,7 @@ namespace Flawless_ex
             #region "旧データ"
             NpgsqlConnection conn1 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
-            conn1.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_old = "select * from client_m_corporate where invalid = 0 and (staff_name = '" + name + "' and address = '" + address + "');";
             conn1.Open();
             adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
@@ -247,29 +249,14 @@ namespace Flawless_ex
             string ResidenceCard_old = row1["residence_card"].ToString();
             string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
             DateTime dat1 = DateTime.Now;
-            string c = dat1.ToString("yyyy/MM/dd");
-            #region "履歴へ"
-            NpgsqlConnection conn2 = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter2;
-            string sql_in = "Insert into client_m_corporate_revisions VALUES (" + 0 + " , '" + RegistrationDate2_old + "' , '" + CompanyName_old + "' ,'" + CompanyNameKana_old + "' , '" + ShopName_old + "' , '" + ShopNameKana_old + "'," + Antique_old + " ,'" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "','" + Position_old +
-               "' , '" + ClientStaffName_old + "','" + EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "' , '" + PeriodStay_old + "','" + SealCertification_old + "'," +
-              0 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
-
-            conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.Open();
-
-            adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-            adapter2.Fill(dt3);
-            #endregion
+            
             #endregion
             #region "更新するパラメータ"
             string RegistrationDate = this.dateTimePicker1.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
-
             int PostalCode1 = int.Parse(this.textBox4.Text);
-            string PostalCode2 = this.textBox1.Text;
-            
+            string PostalCode2 = this.textBox1.Text;            
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
             string ShopName = this.textBox7.Text;
@@ -290,7 +277,7 @@ namespace Flawless_ex
             string Antiquelicense = this.textBox22.Text;
             int AntiqueNumber = int.Parse(this.textBox23.Text);
             string ID = this.textBox24.Text;
-            string PeriodStay = this.textBox6.Text;
+            string PeriodStay = this.textBox47.Text;
             string SealCertification = this.textBox26.Text;
             string TaxCertification = this.textBox27.Text;
             string Remarks = this.textBox28.Text;
@@ -308,11 +295,274 @@ namespace Flawless_ex
                 "' ,email_address = '" + EmailAddress + "',url_infor = '" + URLinfor + "',bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name_kana = '" + AccountNameKana + "' ,account_name = '" + AccountName + "' ,remarks = '" + Remarks + "' ,id = '" + ID + "' ,register_date = '" + b + "',antique_license = '" + Antiquelicense + "',tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification +
                 "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 + "' where antique_number = " + AntiqueNumber + "; ";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
+
+            #region "履歴へ"
+            NpgsqlConnection conn2 = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter2;
+            conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.Open();
+            #region "絶対入力する項目"
+            #region "登記簿謄本登録日"
+            if (RegistrationDate2_old != RegistrationDate)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + RegistrationDate2_old + "' , '" + RegistrationDate + "' ,'" + reason1 + "');";
+                
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "住所変更"
+            if (Address_old != Address)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Address_old + "' , '" + Address + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "住所フリガナ変更(住所変更に伴う)"
+            if (AddressKana_old != AddressKana)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + AddressKana_old + "' , '" + AddressKana + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "郵便番号変更"
+            if ((PostalCode1_old != PostalCode1) || (PostalCode2_old != PostalCode2))
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PostalCode1_old + "-" + PostalCode2_old + "' , '" + PostalCode1 + "-" + PostalCode2 + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "担当者名義変更"
+            if (ClientStaffName_old != ClientStaffName)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ClientStaffName_old + "' , '" + ClientStaffName + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion            
+            #region "電話番号変更"
+            if (PhoneNumber_old != PhoneNumber)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PhoneNumber_old + "' , '" + PhoneNumber + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "登記簿謄本変更"
+            if (RegisterCopy_old != RegisterCopy)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + RegisterCopy_old + "' , '" + RegisterCopy + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "身分証明書変更"
+            if (ID_old != ID)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ID_old + "' , '" + ID + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "古物商許可証変更"
+            if (Antiquelicense_old != Antiquelicense)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Antiquelicense_old + "' , '" + Antiquelicense + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "会社名変更"
+            if (CompanyName_old != CompanyName)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + CompanyName_old + "' , '" + CompanyName + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "会社名フリガナ変更(会社名変更に伴う)"
+            if (CompanyNameKana_old != CompanyNameKana)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + CompanyNameKana_old + "' , '" + CompanyNameKana + "' ,'" + reason1 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #endregion
+            #region "必須項目以外"            
+            #region "店舗名変更"
+                if (ShopName_old != ShopName)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ShopName_old + "' , '" + ShopName + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "店舗名フリガナ変更(店舗名変更に伴う)"
+                if (ShopNameKana_old != ShopNameKana)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ShopNameKana_old + "' , '" + ShopNameKana + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "FAX番号変更"
+                if (FaxNumber_old != FaxNumber)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + FaxNumber_old + "' , '" + FaxNumber + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "URL変更"
+                if (URL_old != URLinfor)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + URL_old + "' , '" + URLinfor + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "役職変更"
+                if (Position_old != Position)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Position_old + "' , '" + Position + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "メールアドレス変更"
+                if (EmailAddress_old != EmailAddress)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + EmailAddress_old + "' , '" + EmailAddress + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "銀行名変更"
+                if (BankName_old != BankName)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + BankName_old + "' , '" + BankName + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "預金種別変更"
+                if (DepositType_old != DepositType)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + DepositType_old + "','" + DepositType + "','" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "口座名義変更"
+                if (AccountName_old != AccountName)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + AccountName_old + "' , '" + AccountName + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "支店名変更"
+                if (BranchName_old != BranchName)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "口座番号変更"
+                if (AccountNumber_old != AccountNumber)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNumber_old + "','" + AccountNumber + "','" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "口座名義人フリガナ変更(口座名義人変更に伴う)"
+                if (AccountNameKana_old != AccountNameKana)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNameKana_old + "','" + AccountNameKana + "','" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "在留期限変更"
+                if (PeriodStay_old != PeriodStay)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PeriodStay_old + "' , '" + PeriodStay + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "印鑑証明変更"
+                if (SealCertification_old != SealCertification)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + SealCertification_old + "' , '" + SealCertification + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "納税証明書変更"
+                if (TaxCertification_old != TaxCertification)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + TaxCertification_old + "' , '" + TaxCertification + "' ,'" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "在留カード"
+                if (ResidenceCard_old != ResidenceCard)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion
+            #region "定款等変更"
+                if (AolFinancialShareholder_old != AolFinancialShareholder)
+                {
+                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AolFinancialShareholder_old + "','" + AolFinancialShareholder + "','" + reason1 + "');";
+
+                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                    adapter2.Fill(dt3);
+                }
+                #endregion            
+            #endregion
+            #endregion
             MessageBox.Show("更新しました。");
 
             this.Close();
@@ -332,18 +582,25 @@ namespace Flawless_ex
 
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
+                NpgsqlDataAdapter adapter2;
                 NpgsqlCommandBuilder builder;
+                NpgsqlCommandBuilder builder2;
+                DateTime dat = DateTime.Now;
 
-
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update client_m_corporate set invalid = 1 where staff_name = '" + name + "'" + "and address = '" + address + "'";
+                string revisions = "insert into revisions values (" + 4 +  ",'" + dat + "'," + staff_code +  ",'" +  "有効" + "','" + "無効" + "','" + reasonText1.Text + "');";
 
                 adapter = new NpgsqlDataAdapter(remove_sql, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
                 adapter.Fill(dt);
                 adapter.Update(dt);
+                adapter2 = new NpgsqlDataAdapter(revisions, conn);
+                builder2 = new NpgsqlCommandBuilder(adapter2);
+                adapter2.Fill(dt4);
+
                 MessageBox.Show("無効にしました。");
                 return;
             }
@@ -374,72 +631,13 @@ namespace Flawless_ex
                 this.button5.Enabled = true;
                 this.button20.Enabled = true;
             }
-            #region"コメントアウト"
-            //#region "旧データ"
-            //NpgsqlConnection conn1 = new NpgsqlConnection();
-            //NpgsqlDataAdapter adapter1;
-            //conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            //string sql_old = "select * from client_m_individual where invalid = 0 and (name = '" + name + "' and address = '" + address + "');";
-            //conn1.Open();
-            //adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
-            //adapter1.Fill(dt2);
-            //DataRow row1;
-            //row1 = dt2.Rows[0];
-            //string RegistrationDate2_old = row1["registration_date"].ToString();
-            //int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
-            //string PostalCode2_old = row1["postal_code2"].ToString();
-            //string Address_old = row1["address"].ToString();
-            //string AddressKana_old = row1["address_kana"].ToString();
-            //string CompanyName_old = row1["company_name"].ToString();
-            //string CompanyNameKana_old = row1["company_kana"].ToString();
-            //string ShopName_old = row1["shop_name"].ToString();
-            //string ShopNameKana_old = row1["shop_name_kana"].ToString();
-            //int Antique_old = (int)row1["antique_number"];
-            //string PhoneNumber_old = row1["phone_number"].ToString();
-            //string FaxNumber_old = row1["fax_number"].ToString();
-            //string URL_old = row1["url_infor"].ToString();
-            //string ClientStaffName_old = row1["staff_name"].ToString();
-            //string Position_old = row1["position"].ToString();
-            //string EmailAddress_old = row1["email_address"].ToString();
-            //string BankName_old = row1["bank_name"].ToString();
-            //string DepositType_old = row1["deposit_type"].ToString();
-            //string AccountName_old = row1["account_name"].ToString();
-            //string BranchName_old = row1["branch_name"].ToString();
-            //string AccountNumber_old = row1["account_number"].ToString();
-            //string AccountNameKana_old = row1["account_name_kana"].ToString();
-            //string RegisterCopy_old = row1["register_copy"].ToString();
-            //string Antiquelicense_old = row1["antique_license"].ToString();
-            //string ID_old = row1["id"].ToString();
-            //string PeriodStay_old = row1["period_stay"].ToString();
-            //string SealCertification_old = row1["seal_certification"].ToString();
-            //string TaxCertification_old = row1["tax_certificate"].ToString();
-            //string Remarks_old = row1["remarks"].ToString();
-            //string ResidenceCard_old = row1["residence_card"].ToString();
-            //string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
-            //DateTime dat1 = DateTime.Now;
-            //string c = dat1.ToString("yyyy/MM/dd");
-            //#region "履歴へ"
-            //NpgsqlConnection conn2 = new NpgsqlConnection();
-            //NpgsqlDataAdapter adapter2;
-            //string sql_in = "Insert into client_m_corporate_revisions VALUES (" + 0 + " , '" + RegistrationDate2_old + "' , '" + CompanyName_old + "' ,'" + CompanyNameKana_old + "' , '" + ShopName_old + "' , '" + ShopNameKana_old + "'," + Antique_old + " ,'" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "','" + Position_old +
-            //   "' , '" + ClientStaffName_old + "','" + EmailAddress_old + "','" + URL_old + "','" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountNameKana_old + "' , '" + AccountName_old + "' , '" + Remarks_old + "' , '" + ID_old + "','" + c + "','" + Antiquelicense_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "' , '" + PeriodStay_old + "','" + SealCertification_old + "'," +
-            //  1 + ",'" + AolFinancialShareholder_old + "','" + RegisterCopy_old + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
-
-            //conn2.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            //conn2.Open();
-
-            //adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-            //adapter2.Fill(dt3);
-            //#endregion
-            //#endregion
-            #endregion"コメントアウト"
 
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
             DataRow row;
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             if (type == 0)
             {
                 //法人
@@ -522,10 +720,8 @@ namespace Flawless_ex
                 this.dateTimePicker1.Text = RegistrationDate1;
                 this.textBox2.Text = CompanyName;
                 this.textBox3.Text = CompanyNameKana;
-
                 this.textBox4.Text = PostalCode1.ToString();
-                this.textBox1.Text = PostalCode2.ToString();
-                
+                this.textBox1.Text = PostalCode2.ToString();                
                 this.textBox5.Text = Address;
                 this.textBox6.Text = AddressKana;
                 this.textBox7.Text = ShopName;
@@ -547,9 +743,7 @@ namespace Flawless_ex
                 this.textBox23.Text = AntiqueNumber.ToString();
                 this.textBox24.Text = ID;
                 this.textBox25.Text = AolFinancialShareholder;
-
-                this.textBox47.Text = PeriodStay;
-                
+                this.textBox47.Text = PeriodStay;                
                 this.textBox26.Text = SealCertification;
                 this.textBox27.Text = TaxCertification;
                 this.textBox28.Text = Remarks;
@@ -564,7 +758,6 @@ namespace Flawless_ex
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt);
                 row = dt.Rows[0];
-
                 #region "入力データ"
                 string RegistrationDate2;
                 string Name;
@@ -805,7 +998,7 @@ namespace Flawless_ex
             NpgsqlConnection conn1 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
             string sql_old = "select * from client_m_individual where invalid = 0 and (name = '" + name + "' and address = '" + address + "');";
-            conn1.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn1.Open();
             adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
             adapter1.Fill(dt2);
@@ -845,31 +1038,15 @@ namespace Flawless_ex
             string Remarks_old = row1["remarks"].ToString();
             string ResidenceCard_old = row1["residence_card"].ToString();
             string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
-            DateTime dat1 = DateTime.Now;
-            string c = dat1.ToString("yyyy/MM/dd");
-            #region "履歴へ"
-            NpgsqlConnection conn2 = new NpgsqlConnection();
-            NpgsqlDataAdapter adapter2;
-            string sql_in = "Insert into client_m_individual_revisions VALUES (" + 1 + " , '" + RegistrationDate2_old + "' , '" + Name_old + "' ,'" + NameKana_old + "' , '" + Birthday_old + "' , '" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "' , '" + EmailAddress_old + "', '" + Occupation_old +
-               "' , '" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountName_old + "' , '" + AccountNameKana_old + "' , '" + ID_old + "' , '" + Remarks_old + "','" + RegisterCopy_old + "' , '" + Antiquelicense_old + "','" + PhotoID_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "','" + PeriodStay_old + "','" + SealCertification_old + "'," +
-              0 + ",'" + AolFinancialShareholder_old + "','" + c + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
-
-            conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.Open();
-
-            adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-            adapter2.Fill(dt3);
-            #endregion
+            DateTime dat1 = DateTime.Now;           
             #endregion
             #region "更新するパラメータ"
             string RegistrationDate = this.deliveryDateBox.Text;
             string Name = this.textBox56.Text;
             string NameKana = this.textBox55.Text;
-            string Birthday = this.textBox50.Text;
-            
+            string Birthday = this.textBox50.Text;            
             int PostalCode1 = int.Parse(this.textBox54.Text);
-            string PostalCode2 = this.textBox51.Text;
-            
+            string PostalCode2 = this.textBox51.Text;            
             string Address = this.textBox53.Text;
             string AddressKana = this.textBox52.Text;
             string PhoneNumber = this.textBox49.Text;
@@ -885,10 +1062,8 @@ namespace Flawless_ex
             string RegisterCopy = this.textBox37.Text;
             string Antiquelicense = this.textBox36.Text;
             string PhotoID = this.textBox35.Text;
-            string ID = this.textBox34.Text;
-            
-            string PeriodStay = this.textBox46.Text;
-            
+            string ID = this.textBox34.Text;            
+            string PeriodStay = this.textBox46.Text;            
             string SealCertification = this.textBox32.Text;
             string TaxCertification = this.textBox31.Text;
             string Remarks = this.textBox58.Text;
@@ -905,11 +1080,257 @@ namespace Flawless_ex
                "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '" + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "',photo_id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
               0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason2 + "'where id_number = " + ID + ";";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
+
+            #region "履歴へ"
+            NpgsqlConnection conn2 = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter2;
+            conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2.Open();
+            #region "絶対入力する項目"
+            #region "登記簿謄本登録日"
+            if (RegistrationDate2_old != RegistrationDate)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + RegistrationDate2_old + "' , '" + RegistrationDate + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "住所変更"
+            if (Address_old != Address)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Address_old + "' , '" + Address + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "住所フリガナ変更(住所変更に伴う)"
+            if (AddressKana_old != AddressKana)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + AddressKana_old + "' , '" + AddressKana + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "郵便番号変更"
+            if ((PostalCode1_old != PostalCode1) || (PostalCode2_old != PostalCode2))
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PostalCode1_old + "-" + PostalCode2_old + "' , '" + PostalCode1 + "-" + PostalCode2 + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion                      
+            #region "電話番号変更"
+            if (PhoneNumber_old != PhoneNumber)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PhoneNumber_old + "' , '" + PhoneNumber + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "登記簿謄本変更"
+            if (RegisterCopy_old != RegisterCopy)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + RegisterCopy_old + "' , '" + RegisterCopy + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "身分証明書変更"
+            if (ID_old != ID)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + ID_old + "' , '" + ID + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "古物商許可証変更"
+            if (Antiquelicense_old != Antiquelicense)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Antiquelicense_old + "' , '" + Antiquelicense + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "氏名変更"
+            if (Name_old != Name)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Name_old + "' , '" + Name + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "氏名フリガナ変更(氏名変更に伴う)"
+            if (NameKana_old != NameKana)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + NameKana_old + "' , '" + NameKana + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "役職変更"
+            if (Occupation_old != Occupation)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Occupation_old + "' , '" + Occupation + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "生年月日変更(氏名変更に伴う)"
+            if (Birthday_old != Birthday)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Birthday_old + "' , '" + Birthday + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "顔写真変更"
+            if (PhotoID_old != PhotoID)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PhotoID_old + "' , '" + PhotoID + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #endregion
+            #region "必須項目以外"
+            #region "FAX番号変更"
+            if (FaxNumber_old != FaxNumber)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + FaxNumber_old + "' , '" + FaxNumber + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion                        
+            #region "メールアドレス変更"
+            if (EmailAddress_old != EmailAddress)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + EmailAddress_old + "' , '" + EmailAddress + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "銀行名変更"
+            if (BankName_old != BankName)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + BankName_old + "' , '" + BankName + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "預金種別変更"
+            if (DepositType_old != DepositType)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + DepositType_old + "','" + DepositType + "','" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "口座名義変更"
+            if (AccountName_old != AccountName)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + AccountName_old + "' , '" + AccountName + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "支店名変更"
+            if (BranchName_old != BranchName)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "口座番号変更"
+            if (AccountNumber_old != AccountNumber)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNumber_old + "','" + AccountNumber + "','" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "口座名義人フリガナ変更(口座名義人変更に伴う)"
+            if (AccountNameKana_old != AccountNameKana)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNameKana_old + "','" + AccountNameKana + "','" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "在留期限変更"
+            if (PeriodStay_old != PeriodStay)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PeriodStay_old + "' , '" + PeriodStay + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "印鑑証明変更"
+            if (SealCertification_old != SealCertification)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + SealCertification_old + "' , '" + SealCertification + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "納税証明書変更"
+            if (TaxCertification_old != TaxCertification)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + TaxCertification_old + "' , '" + TaxCertification + "' ,'" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "在留カード"
+            if (ResidenceCard_old != ResidenceCard)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region "定款等変更"
+            if (AolFinancialShareholder_old != AolFinancialShareholder)
+            {
+                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AolFinancialShareholder_old + "','" + AolFinancialShareholder + "','" + reason2 + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #endregion
+            #endregion
+
             MessageBox.Show("更新しました。");
 
             this.Close();
@@ -930,7 +1351,7 @@ namespace Flawless_ex
                 NpgsqlConnection conn1 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter1;
                 string sql_old = "select * from client_m_individual where name = '" + name + "' and address = '" + address + "';";
-                conn1.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn1.Open();
                 adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
                 adapter1.Fill(dt2);
@@ -982,18 +1403,26 @@ namespace Flawless_ex
                 #endregion
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
+                NpgsqlDataAdapter adapter3;
                 NpgsqlCommandBuilder builder;
+                NpgsqlCommandBuilder builder2;
+                DateTime dat = DateTime.Now;
 
-
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 string remove_sql = "update client_m_individual set invalid = 1 where name = '" + name + "'" + "and address = '" + address + "'";
+                string revisions = "insert into revisions values (" + 5 + ",'" + dat + "'," + staff_code + ",'" + "有効" + "','" + "無効" + "','" + reasonText2.Text + "');";
 
                 adapter = new NpgsqlDataAdapter(remove_sql, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
                 adapter.Fill(dt);
                 adapter.Update(dt);
+                adapter3 = new NpgsqlDataAdapter(revisions, conn);
+                builder2 = new NpgsqlCommandBuilder(adapter3);
+                adapter3.Fill(dt5);
+                adapter3.Update(dt5);
+
                 MessageBox.Show("無効にしました。");
                 return;
             }

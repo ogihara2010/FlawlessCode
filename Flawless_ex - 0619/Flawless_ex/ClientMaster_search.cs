@@ -8,12 +8,12 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu master;
         DataTable dt = new DataTable();
-        int type;
-        int check;
-        int staff_code;
-        string access_auth;
+        public int type;
+        public int check;
+        public int staff_code;
+        public string access_auth;
         bool screan = true;
-        string Pass;
+        public string Pass;
 
         public ClientMaster_search(MasterMaintenanceMenu master, DataTable dt, int type, int check, int staff_code, string access_auth, string pass)
         {

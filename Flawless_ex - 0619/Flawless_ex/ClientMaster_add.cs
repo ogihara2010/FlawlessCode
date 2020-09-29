@@ -15,13 +15,13 @@ namespace Flawless_ex
     {
         MasterMaintenanceMenu master;
         DataTable dt = new DataTable();
-        int staff_code;
-        string access_auth;
-        string path;
-        int type;
-        bool screan = true;
-        string Pass;
-        string kana;
+        public int staff_code;
+        public string access_auth;
+        public string path;
+        public int type;
+        public bool screan = true;
+        public string Pass;
+        public string kana;
 
         public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth, int type, string pass)
         {
@@ -243,7 +243,7 @@ namespace Flawless_ex
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks +  "' , '" + ID + "' , '" + b  +  "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
                0 +  ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_code + "," + PostalCode1 + ",'" + PostalCode2 + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);

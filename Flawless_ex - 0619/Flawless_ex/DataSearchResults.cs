@@ -12,31 +12,31 @@ namespace Flawless_ex
         CustomerHistory customerHistory;
         MainMenu mainMenu;
         int type;
-        string name1;
-        string phoneNumber1;
-        string address1;
-        string address;
-        string addresskana1;
-        string code1;
-        string item1;
-        string date1;
-        string date2;
-        string method1;
-        string amountA;
-        string amountB;
-        string antiqueNumber;
-        string staff_name;
-        int staff_id;
+        public string name1;
+        public string phoneNumber1;
+        public string address1;
+        public string address;
+        public string addresskana1;
+        public string code1;
+        public string item1;
+        public string date1;
+        public string date2;
+        public string method1;
+        public string amountA;
+        public string amountB;
+        public string antiqueNumber;
+        public string staff_name;
+        public int staff_id;
         public string data;
         decimal Total;
-        int control;
-        string document;
-        string access_auth;
-        string Pass;
+        public int control;
+        public string document;
+        public string access_auth;
+        public string Pass;
         DataTable dt = new DataTable();
-        bool screan = true;
-        string documentNumber;
-        int grade;
+        //bool screan = true;
+        public string documentNumber;
+        public int grade;
         #region "納品書"
         decimal amount00;
         decimal amount01;
@@ -95,10 +95,7 @@ namespace Flawless_ex
 
         private void returnButton_Click(object sender, EventArgs e)//戻るボタン
         {
-            CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
-            screan = false;
             this.Close();
-            customerHistory.Show();
         }
 
         private void DataSearchResults_Load(object sender, EventArgs e)
@@ -111,11 +108,11 @@ namespace Flawless_ex
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
-                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where B.type = 0 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                            "where B.type = 0 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + " and ( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
                               method1 + amountA + amountB + ";";
                     /*"select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                      "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
@@ -152,11 +149,11 @@ namespace Flawless_ex
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
-                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where B.type = 1 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method1 + amountA + amountB + ";";
+                            "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method1 + amountA + amountB + ";";
 
                     /*"select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                              "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
@@ -194,11 +191,11 @@ namespace Flawless_ex
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
-                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, A.antique_number from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                           "where B.type = 0 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + "( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                           "where B.type = 0 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + " and ( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
                               method1 + amountA + amountB + ";";
 
                     /*"select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount,  A.antique_number from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
@@ -235,11 +232,11 @@ namespace Flawless_ex
                 {
                     NpgsqlConnection conn = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter;
-                    conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
-                            "where B.type = 1 and " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
+                            "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
                              + method1 + amountA + amountB + ";";
                     /* "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.id_number from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
                               "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
@@ -288,13 +285,13 @@ namespace Flawless_ex
                 address = (string)dataGridView1.CurrentRow.Cells[5].Value;
             }
             Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
-            screan = false;
-            this.Close();
+            //screan = false;
+            //this.Close();
             this.data = statement.data;
-            statement.Show();
+            statement.ShowDialog();
         }
         #endregion
-        #region "納品書"
+        #region "詳細表示"
         private void Button1_Click(object sender, EventArgs e)
         {
             if (data == "S")
@@ -314,10 +311,11 @@ namespace Flawless_ex
                     address = (string)dataGridView1.CurrentRow.Cells[5].Value;
                 }
                 Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
-                screan = false;
-                this.Close();
+                //screan = false;
+                //this.Close();
                 this.data = statement.data;
-                statement.Show();
+                this.document = statement.document;
+                statement.ShowDialog();
             }
             else if (data == "D")
             {
@@ -325,21 +323,17 @@ namespace Flawless_ex
                 staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
                 address = (string)dataGridView1.CurrentRow.Cells[5].Value;
                 Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, Pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
-                screan = false;
-                this.Close();
+                //screan = false;
+                //this.Close();
                 this.data = statement.data;
-                statement.Show();
+                statement.ShowDialog();
             }            
         }
         #endregion
 
         private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (screan)
-            {
-                CustomerHistory customerHistory = new CustomerHistory(mainMenu, staff_id, data, Pass, access_auth);
-                customerHistory.Show();
-            }
+            this.Close();
         }
     }
 }
