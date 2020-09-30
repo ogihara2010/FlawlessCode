@@ -33,9 +33,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.SettlementDayBox = new System.Windows.Forms.TabPage();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -298,6 +295,7 @@
             this.sealN = new System.Windows.Forms.RadioButton();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.ZenginData = new System.Windows.Forms.Button();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -307,6 +305,9 @@
             this.Column2 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.SettlementDayBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -362,6 +363,7 @@
             // SettlementDayBox
             // 
             this.SettlementDayBox.BackColor = System.Drawing.Color.AliceBlue;
+            this.SettlementDayBox.Controls.Add(this.ZenginData);
             this.SettlementDayBox.Controls.Add(this.button5);
             this.SettlementDayBox.Controls.Add(this.button4);
             this.SettlementDayBox.Controls.Add(this.dataGridView1);
@@ -397,39 +399,6 @@
             this.SettlementDayBox.TabIndex = 0;
             this.SettlementDayBox.Text = "計算書";
             // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button5.Location = new System.Drawing.Point(278, 104);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(112, 42);
-            this.button5.TabIndex = 94;
-            this.button5.Text = "確定";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button4.Location = new System.Drawing.Point(129, 104);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(117, 42);
-            this.button4.TabIndex = 93;
-            this.button4.Text = "取り消し";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("MS UI Gothic", 14F);
-            this.button3.Location = new System.Drawing.Point(15, 104);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 42);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "入力";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
-            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(524, 614);
@@ -450,10 +419,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(524, 826);
+            this.button1.Location = new System.Drawing.Point(520, 865);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 74);
+            this.button1.Size = new System.Drawing.Size(190, 55);
             this.button1.TabIndex = 90;
             this.button1.Text = "買取販売データ画面へ";
             this.button1.UseVisualStyleBackColor = true;
@@ -814,10 +783,10 @@
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(524, 749);
+            this.returnButton.Location = new System.Drawing.Point(520, 803);
             this.returnButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(190, 62);
+            this.returnButton.Size = new System.Drawing.Size(190, 44);
             this.returnButton.TabIndex = 32;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = true;
@@ -836,10 +805,10 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(524, 668);
+            this.addButton.Location = new System.Drawing.Point(520, 738);
             this.addButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(190, 59);
+            this.addButton.Size = new System.Drawing.Size(190, 47);
             this.addButton.TabIndex = 30;
             this.addButton.Text = "登録";
             this.addButton.UseVisualStyleBackColor = true;
@@ -3508,6 +3477,16 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // ZenginData
+            // 
+            this.ZenginData.Location = new System.Drawing.Point(522, 679);
+            this.ZenginData.Name = "ZenginData";
+            this.ZenginData.Size = new System.Drawing.Size(188, 42);
+            this.ZenginData.TabIndex = 95;
+            this.ZenginData.Text = "全銀データ";
+            this.ZenginData.UseVisualStyleBackColor = true;
+            this.ZenginData.Click += new System.EventHandler(this.ZenginData_Click);
+            // 
             // Column8
             // 
             this.Column8.HeaderText = "備考";
@@ -3590,6 +3569,40 @@
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DataGridView1_DataError);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridView1_EditingControlShowing);
             this.dataGridView1.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.DataGridView1_RowsAdded);
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button3.Location = new System.Drawing.Point(15, 104);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(94, 42);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "入力";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button4.Location = new System.Drawing.Point(129, 104);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(117, 42);
+            this.button4.TabIndex = 93;
+            this.button4.Text = "取り消し";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("MS UI Gothic", 14F);
+            this.button5.Location = new System.Drawing.Point(278, 104);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(112, 42);
+            this.button5.TabIndex = 94;
+            this.button5.Text = "確定";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Button5_Click);
             // 
             // Statement
             // 
@@ -3908,9 +3921,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button ZenginData;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column1;
         private System.Windows.Forms.DataGridViewComboBoxColumn Column2;
@@ -3920,5 +3933,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.Button button3;
     }
 }

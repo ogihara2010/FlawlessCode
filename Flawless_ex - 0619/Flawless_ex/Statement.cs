@@ -351,6 +351,11 @@ namespace Flawless_ex
         DataTable deliverydt212 = new DataTable();
 
         DataTable dt3 = new DataTable();// 品名情報全て
+        DataTable dt300 = new DataTable();//地金
+        DataTable dt400 = new DataTable();//ダイヤ
+        DataTable dt500 = new DataTable();//ブランド
+        DataTable dt600 = new DataTable();//製品・ジュエリー
+        DataTable dt700 = new DataTable();//その他
         #region "計算書履歴"
         DataTable redt4 = new DataTable();
         DataTable redt5 = new DataTable();
@@ -2232,8 +2237,8 @@ namespace Flawless_ex
             {
                 
             }
-            
 
+            #region "初期値の取得"
             #region "大分類の中身"
             string sql_str6 = "select * from main_category_m where invalid = 0 order by main_category_code asc;";
             adapter = new NpgsqlDataAdapter(sql_str6, conn);
@@ -2242,66 +2247,56 @@ namespace Flawless_ex
             row4 = dt4.Rows[0];
             itemMainCategoryCode = (int)row4["main_category_code"];
             #endregion
-
             #region "品名の中身"
-            string sql_str7 = "select * from item_m where invalid = 0 and main_category_code =" + itemMainCategoryCode + ";";
-            adapter2 = new NpgsqlDataAdapter(sql_str7, conn);
-            adapter2.Fill(dt5);
+            string sql_stritem = "select * from item_m where invalid = 0 and main_category_code = " + itemMainCategoryCode + ";";
+            adapter = new NpgsqlDataAdapter(sql_stritem, conn);
+            adapter.Fill(dt5);
             DataRow row5;
             row5 = dt5.Rows[0];
-            itemCode = (int)row5["item_code"];            
+            itemCode = (int)row5["item_code"];
             #endregion
-            
+            #endregion
+            #region "リスト"
+            string sql_strlist = "select distinct on(B.main_category_name) B.main_category_code, B.main_category_name, A.item_code, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code ;";
+            adapter2 = new NpgsqlDataAdapter(sql_strlist, conn);
+            adapter2.Fill(dt6);
+            #endregion
+
             dataGridView1[0, 0].Value = itemMainCategoryCode;
             dataGridView1[1, 0].Value = itemCode;
-
-            //DataGridViewComboBoxColumn Column = (DataGridViewComboBoxColumn)this.Column1;
-            Column1.DataSource = dt4;
+            
+            Column1.DataSource = dt6;
             Column1.DisplayMember = "main_category_name";
             Column1.ValueMember = "main_category_code";
-            DataGridViewComboBoxCell column1 = new DataGridViewComboBoxCell();
-            column1.DataSource = dt4;
-            column1.DisplayMember = "main_category_name";
-            column1.ValueMember = "main_category_code";
 
-            Column2.DataSource = dt5;
+            Column2.DataSource = dt6;
             Column2.DisplayMember = "item_name";
             Column2.ValueMember = "item_code";
-            DataGridViewComboBoxCell column2 = new DataGridViewComboBoxCell();
-            column2.DataSource = dt5;
-            column2.DisplayMember = "item_name";
-            column2.ValueMember = "item_code";
 
             //左の入力項目処理
             //string itemDisplay = "item_name";
             //string itemValue = "item_code";
-            //地金
-            DataTable dt300 = new DataTable();
+            //地金            
             string str_sql_metal = "select * from item_m where main_category_code = 100";
             adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
             adapter.Fill(dt300);
 
-            //ダイヤ
-            DataTable dt400 = new DataTable();
+            //ダイヤ            
             string str_sql_diamond = "select * from item_m where main_category_code = 101";
-
             adapter = new NpgsqlDataAdapter(str_sql_diamond, conn);
             adapter.Fill(dt400);
 
-            //ブランド
-            DataTable dt500 = new DataTable();
+            //ブランド            
             string str_sql_brand = "select * from item_m where main_category_code = 102";
             adapter = new NpgsqlDataAdapter(str_sql_brand, conn);
             adapter.Fill(dt500);
 
-            //製品・ジュエリー
-            DataTable dt600 = new DataTable();
+            //製品・ジュエリー            
             string str_sql_jewelry = "select * from item_m where main_category_code = 103";
             adapter = new NpgsqlDataAdapter(str_sql_jewelry, conn);
             adapter.Fill(dt600);
 
-            //その他
-            DataTable dt700 = new DataTable();
+            //その他            
             string str_sql_other = "select * from item_m where main_category_code = 104";
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
@@ -15760,22 +15755,23 @@ namespace Flawless_ex
         #region "データグリッドビュー"
         private void DataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            ComboBox combo = e.Control as ComboBox;
+            /*ComboBox combo = e.Control as ComboBox;
             if (combo != null)
             {
-                combo.SelectedIndexChanged -= new EventHandler(DataGridViewComboBoxColumn1_SelectedIndexChanged);
-                combo.SelectedIndexChanged += new EventHandler(DataGridViewComboBoxColumn1_SelectedIndexChanged);
-            }
+                combo.SelectedIndexChanged -= new EventHandler(DataGridViewComboBoxColumn_SelectedIndexChanged);
+                combo.SelectedIndexChanged += new EventHandler(DataGridViewComboBoxColumn_SelectedIndexChanged);
+            }*/
         }
         #endregion
 
-        /*private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             
-        }*/
+        }
 
-        private void DataGridViewComboBoxColumn1_SelectedIndexChanged(object sender,EventArgs e)
+        private void DataGridViewComboBoxColumn_SelectedIndexChanged(object sender,EventArgs e)
         {
+            /*
             if(a > 1)
             {
                 int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;
@@ -15787,7 +15783,8 @@ namespace Flawless_ex
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum1 + ";";
                 adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
                 adapter2.Fill(dt5);
-                DataGridViewComboBoxColumn Column2 = (DataGridViewComboBoxColumn)this.Column2;
+
+                DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
                 Column2.DataSource = dt5;
                 Column2.DisplayMember = "item_name";
                 Column2.ValueMember = "item_code";
@@ -15799,13 +15796,55 @@ namespace Flawless_ex
                 DataRow row = dt5.Rows[0];
                 itemMainCategoryCode = (int)row["main_category_code"];
                 itemCode = (int)row["item_code"];
+                string mainCategoryName = row["main_category_name"].ToString();
+                string itemName = row["item_name"].ToString();
                 conn.Close();
-            }            
+            }*/            
         }
 
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
+            e.Cancel = false;
+        }
 
+        private void ZenginData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (a > 1)
+            {                               
+                int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;                
+                dt5.Clear();
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                conn.Open();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum1 + ";";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt5);
+                #endregion
+
+
+                DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
+                Column2.DataSource = dt5;
+                Column2.DisplayMember = "item_name";
+                Column2.ValueMember = "item_code";
+                DataGridViewComboBoxCell column2 = new DataGridViewComboBoxCell();
+                column2.DataSource = dt5;
+                column2.DisplayMember = "item_name";
+                column2.ValueMember = "item_code";
+
+                DataRow row = dt5.Rows[0];
+                itemMainCategoryCode = (int)row["main_category_code"];
+                itemCode1 = (int)row["item_code"];
+                //string mainCategoryName = row["main_category_name"].ToString();
+                //string itemName = row["item_name"].ToString();
+                conn.Close();                                 
+            }
         }
     }
 }
