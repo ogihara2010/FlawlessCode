@@ -60,7 +60,9 @@ namespace Flawless_ex
             SlipNumberTextBox.Text = SlipNumber;
             GradeNumberTextBox.Text = SlipNumber.Trim('F');
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string sql = "select * from statement_data where document_number = '" + SlipNumber + "';";

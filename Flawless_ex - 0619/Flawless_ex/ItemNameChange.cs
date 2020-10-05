@@ -33,44 +33,26 @@ namespace Flawless_ex
         string Registration;
         DateTime date;
 
-        #region"変更前の大分類名"
-        string BeforeMainCategoryName1;
-        string BeforeMainCategoryName2;
-        string BeforeMainCategoryName3;
-        string BeforeMainCategoryName4;
-        string BeforeMainCategoryName5;
-        string BeforeMainCategoryName6;
-        string BeforeMainCategoryName7;
-        string BeforeMainCategoryName8;
-        string BeforeMainCategoryName9;
-        string BeforeMainCategoryName10;
-        string BeforeMainCategoryName11;
-        string BeforeMainCategoryName12;
-        string BeforeMainCategoryName13;
-        #endregion
-        #region"変更前の品名"
-        int BeforeItemName1;
-        int BeforeItemName2;
-        int BeforeItemName3;
-        int BeforeItemName4;
-        int BeforeItemName5;
-        int BeforeItemName6;
-        int BeforeItemName7;
-        int BeforeItemName8;
-        int BeforeItemName9;
-        int BeforeItemName10;
-        int BeforeItemName11;
-        int BeforeItemName12;
-        int BeforeItemName13;
+        #region"変更前の品名コード"
+        int BeforeItemCode1;
+        int BeforeItemCode2;
+        int BeforeItemCode3;
+        int BeforeItemCode4;
+        int BeforeItemCode5;
+        int BeforeItemCode6;
+        int BeforeItemCode7;
+        int BeforeItemCode8;
+        int BeforeItemCode9;
+        int BeforeItemCode10;
+        int BeforeItemCode11;
+        int BeforeItemCode12;
+        int BeforeItemCode13;
         #endregion
         #region"品名変更時"
         string REASON;
         int ItemCategoryCode;
         int MainCategoryCode;
-        string BeforeItemName;
-        string ItemName;
-        string BeforeMainCategoryName;
-        string MainCategoryName;
+        int BeforeItemCode;
         #region"DBに入っている行数"
         int record1;
         int record2;
@@ -254,8 +236,11 @@ namespace Flawless_ex
             #endregion
 
             date = DateTime.Now;
+            Registration = date.ToLongDateString();
 
-            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
             string SQL = "";
             string sql = "";
@@ -266,12 +251,9 @@ namespace Flawless_ex
                 {
                     #region"１行目"
                     case 0:
-                        BeforeItemName = BeforeChangeTextBox1.Text;
+                        BeforeItemCode = BeforeItemCode1;
                         MainCategoryCode = (int)MainCategoryComboBox1.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox1.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName1;
-                        ItemName = AfterChangeComboBox1.Text;
-                        MainCategoryName = MainCategoryComboBox1.Text;
                         REASON = ChangeReasonTextBox1.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -282,26 +264,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record1 + "','" + REASON + "', '" + staff_id + "');";
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable1);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record1 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable1);
 
                         break;
                     #endregion
                     #region"２行目"
                     case 1:
-                        BeforeItemName = BeforeChangeTextBox2.Text;
+                        BeforeItemCode = BeforeItemCode2;
                         MainCategoryCode = (int)MainCategoryComboBox2.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox2.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName2;
-                        ItemName = AfterChangeComboBox2.Text;
-                        MainCategoryName = MainCategoryComboBox2.Text;
                         REASON = ChangeReasonTextBox2.Text;
                        
                         using (transaction = conn.BeginTransaction())
@@ -312,26 +285,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record2 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable2);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record2 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable2);
 
                         break;
                     #endregion
                     #region"３行目"
                     case 2:
-                        BeforeItemName = BeforeChangeTextBox3.Text;
+                        BeforeItemCode = BeforeItemCode3;
                         MainCategoryCode = (int)MainCategoryComboBox3.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox3.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName3;
-                        ItemName = AfterChangeComboBox3.Text;
-                        MainCategoryName = MainCategoryComboBox3.Text;
                         REASON = ChangeReasonTextBox3.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -342,26 +306,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record3 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable3);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record3 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable3);
 
                         break;
                     #endregion
                     #region"４行目"
                     case 3:
-                        BeforeItemName = BeforeChangeTextBox4.Text;
+                        BeforeItemCode = BeforeItemCode4;
                         MainCategoryCode = (int)MainCategoryComboBox4.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox4.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName4;
-                        ItemName = AfterChangeComboBox4.Text;
-                        MainCategoryName = MainCategoryComboBox4.Text;
                         REASON = ChangeReasonTextBox4.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -372,26 +327,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record4 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable4);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record4 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable4);
 
                         break;
                     #endregion
                     #region"５行目"
                     case 4:
-                        BeforeItemName = BeforeChangeTextBox5.Text;
+                        BeforeItemCode = BeforeItemCode5;
                         MainCategoryCode = (int)MainCategoryComboBox5.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox5.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName5;
-                        ItemName = AfterChangeComboBox5.Text;
-                        MainCategoryName = MainCategoryComboBox5.Text;
                         REASON = ChangeReasonTextBox5.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -402,26 +348,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record5 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable5);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record5 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable5);
 
                         break;
                     #endregion
                     #region"６行目"
                     case 5:
-                        BeforeItemName = BeforeChangeTextBox6.Text;
+                        BeforeItemCode = BeforeItemCode6;
                         MainCategoryCode = (int)MainCategoryComboBox6.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox6.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName6;
-                        ItemName = AfterChangeComboBox6.Text;
-                        MainCategoryName = MainCategoryComboBox6.Text;
                         REASON = ChangeReasonTextBox6.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -432,26 +369,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record6 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable6);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record6 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable6);
 
                         break;
                     #endregion
                     #region"７行目"
                     case 6:
-                        BeforeItemName = BeforeChangeTextBox7.Text;
+                        BeforeItemCode = BeforeItemCode7;
                         MainCategoryCode = (int)MainCategoryComboBox7.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox7.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName7;
-                        ItemName = AfterChangeComboBox7.Text;
-                        MainCategoryName = MainCategoryComboBox7.Text;
                         REASON = ChangeReasonTextBox7.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -462,26 +390,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record7 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable7);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record7 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable7);
 
                         break;
                     #endregion
                     #region"８行目"
                     case 7:
-                        BeforeItemName = BeforeChangeTextBox8.Text;
+                        BeforeItemCode = BeforeItemCode8;
                         MainCategoryCode = (int)MainCategoryComboBox8.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox8.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName8;
-                        ItemName = AfterChangeComboBox8.Text;
-                        MainCategoryName = MainCategoryComboBox8.Text;
                         REASON = ChangeReasonTextBox8.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -492,26 +411,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record8 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable8);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record8 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable8);
 
                         break;
                     #endregion
                     #region"９行目"
                     case 8:
-                        BeforeItemName = BeforeChangeTextBox9.Text;
+                        BeforeItemCode = BeforeItemCode9;
                         MainCategoryCode = (int)MainCategoryComboBox9.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox9.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName9;
-                        ItemName = AfterChangeComboBox9.Text;
-                        MainCategoryName = MainCategoryComboBox9.Text;
                         REASON = ChangeReasonTextBox9.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -522,26 +432,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record9 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable9);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record9 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable9);
 
                         break;
                     #endregion
                     #region"１０行目"
                     case 9:
-                        BeforeItemName = BeforeChangeTextBox10.Text;
+                        BeforeItemCode = BeforeItemCode10;
                         MainCategoryCode = (int)MainCategoryComboBox10.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox10.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName10;
-                        ItemName = AfterChangeComboBox10.Text;
-                        MainCategoryName = MainCategoryComboBox10.Text;
                         REASON = ChangeReasonTextBox10.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -552,26 +453,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record10 + "','" + REASON + ", '" + staff_id + "'');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable10);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record10 + "','" + REASON + ", '" + staff_id + "'');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable10);
 
                         break;
                     #endregion
                     #region"１１行目"
                     case 10:
-                        BeforeItemName = BeforeChangeTextBox11.Text;
+                        BeforeItemCode = BeforeItemCode11;
                         MainCategoryCode = (int)MainCategoryComboBox11.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox11.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName11;
-                        ItemName = AfterChangeComboBox11.Text;
-                        MainCategoryName = MainCategoryComboBox11.Text;
                         REASON = ChangeReasonTextBox11.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -582,26 +474,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record11 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable11);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record11 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable11);
 
                         break;
                     #endregion
                     #region"１２行目"
                     case 11:
-                        BeforeItemName = BeforeChangeTextBox12.Text;
+                        BeforeItemCode = BeforeItemCode12;
                         MainCategoryCode = (int)MainCategoryComboBox12.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox12.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName12;
-                        ItemName = AfterChangeComboBox12.Text;
-                        MainCategoryName = MainCategoryComboBox12.Text;
                         REASON = ChangeReasonTextBox12.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -612,26 +495,17 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record12 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable12);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record12 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable12);
 
                         break;
                     #endregion
                     #region"１３行目"
                     case 12:
-                        BeforeItemName = BeforeChangeTextBox13.Text;
+                        BeforeItemCode = BeforeItemCode13;
                         MainCategoryCode = (int)MainCategoryComboBox13.SelectedValue;
                         ItemCategoryCode = (int)AfterChangeComboBox13.SelectedValue;
-                        BeforeMainCategoryName = BeforeMainCategoryName13;
-                        ItemName = AfterChangeComboBox13.Text;
-                        MainCategoryName = MainCategoryComboBox13.Text;
                         REASON = ChangeReasonTextBox13.Text;
                         
                         using (transaction = conn.BeginTransaction())
@@ -642,15 +516,9 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeMainCategoryName + "','" + MainCategoryName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        sql = "insert into revisions (data, upd_date, insert_code, upd_code, before_data, after_data, reason) values ('" + 8 + "','" + date + "','" + staff_id + "','" + Grade + "','" + BeforeItemName + "','" + ItemName + "','" + REASON + "');";
-                        cmd = new NpgsqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();
-                        //sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record13 + "','" + REASON + "', '" + staff_id + "');";
-                        //adapter = new NpgsqlDataAdapter(sql, conn);
-                        //adapter.Fill(dataTable13);
+                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record13 + "','" + REASON + "', '" + staff_id + "');";
+                        adapter = new NpgsqlDataAdapter(sql, conn);
+                        adapter.Fill(dataTable13);
 
                         break;
                     #endregion
@@ -682,8 +550,8 @@ namespace Flawless_ex
         {
             SlipNumberTextBox.Text = SlipNumber;
             GradeNumberTextBox.Text = Grade.ToString();
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
             conn.Open();
 
             string SQL = "select * from staff_m where staff_code = '" + staff_id + "';";
@@ -705,7 +573,7 @@ namespace Flawless_ex
             ChangeCount = int.Parse(cmd.ExecuteScalar().ToString());        //カウントは１から
 
             #region"左の表"
-            sql_str = "select * from list_result2 inner join item_m on item_m.item_code = list_result2.item_code inner join main_category_m on list_result2.main_category_code = main_category_m.main_category_code where document_number = '" + SlipNumber + "' and item_name_change = 1 order by record_number;";
+            sql_str = "select * from list_result2 inner join item_m on item_m.item_code = list_result2.item_code where document_number = '" + SlipNumber + "' and item_name_change = 1 order by record_number;";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
             
@@ -715,67 +583,67 @@ namespace Flawless_ex
 
                 switch(i){
                     case 0:
-                        BeforeMainCategoryName1 = row["main_category_name"].ToString();
+                        BeforeItemCode1 = (int)row["item_code"];
                         BeforeChangeTextBox1.Text = row["item_name"].ToString();
                         record1 = (int)row["record_number"];
                         break;
                     case 1:
-                        BeforeMainCategoryName2 = row["main_category_name"].ToString();
+                        BeforeItemCode2 = (int)row["item_code"];
                         BeforeChangeTextBox2.Text = row["item_name"].ToString();
                         record2 = (int)row["record_number"];
                         break;
                     case 2:
-                        BeforeMainCategoryName3 = row["main_category_name"].ToString();
+                        BeforeItemCode3 = (int)row["item_code"];
                         BeforeChangeTextBox3.Text = row["item_name"].ToString();
                         record3 = (int)row["record_number"];
                         break;
                     case 3:
-                        BeforeMainCategoryName4 = row["main_category_name"].ToString();
+                        BeforeItemCode4 = (int)row["item_code"];
                         BeforeChangeTextBox4.Text = row["item_name"].ToString();
                         record4 = (int)row["record_number"];
                         break;
                     case 4:
-                        BeforeMainCategoryName5 = row["main_category_name"].ToString();
+                        BeforeItemCode5 = (int)row["item_code"];
                         BeforeChangeTextBox5.Text = row["item_name"].ToString();
                         record5 = (int)row["record_number"];
                         break;
                     case 5:
-                        BeforeMainCategoryName6 = row["main_category_name"].ToString();
+                        BeforeItemCode6 = (int)row["item_code"];
                         BeforeChangeTextBox6.Text = row["item_name"].ToString();
                         record6 = (int)row["record_number"];
                         break;
                     case 6:
-                        BeforeMainCategoryName7 = row["main_category_name"].ToString();
+                        BeforeItemCode7 = (int)row["item_code"];
                         BeforeChangeTextBox7.Text = row["item_name"].ToString();
                         record7 = (int)row["record_number"];
                         break;
                     case 7:
-                        BeforeMainCategoryName8 = row["main_category_name"].ToString();
+                        BeforeItemCode8 = (int)row["item_code"];
                         BeforeChangeTextBox8.Text = row["item_name"].ToString();
                         record8 = (int)row["record_number"];
                         break;
                     case 8:
-                        BeforeMainCategoryName9 = row["main_category_name"].ToString();
+                        BeforeItemCode9 = (int)row["item_code"];
                         BeforeChangeTextBox9.Text = row["item_name"].ToString();
                         record9 = (int)row["record_number"];
                         break;
                     case 9:
-                        BeforeMainCategoryName10 = row["main_category_name"].ToString();
+                        BeforeItemCode10 = (int)row["item_code"];
                         BeforeChangeTextBox10.Text = row["item_name"].ToString();
                         record10 = (int)row["record_number"];
                         break;
                     case 10:
-                        BeforeMainCategoryName11 = row["main_category_name"].ToString();
+                        BeforeItemCode11 = (int)row["item_code"];
                         BeforeChangeTextBox11.Text = row["item_name"].ToString();
                         record11 = (int)row["record_number"];
                         break;
                     case 11:
-                        BeforeMainCategoryName12 = row["main_category_name"].ToString();
+                        BeforeItemCode12 = (int)row["item_code"];
                         BeforeChangeTextBox12.Text = row["item_name"].ToString();
                         record12 = (int)row["record_number"];
                         break;
                     case 12:
-                        BeforeMainCategoryName13 = row["main_category_name"].ToString();
+                        BeforeItemCode13 = (int)row["item_code"];
                         BeforeChangeTextBox13.Text = row["item_name"].ToString();
                         record13 = (int)row["record_number"];
                         break;
@@ -1035,8 +903,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox1.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data1.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1054,8 +923,8 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox2.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data2.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1073,8 +942,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox3.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data3.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1092,8 +962,8 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox4.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data4.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1111,8 +981,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox5.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data5.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1130,8 +1001,10 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox6.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data6.Clear();
+
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1149,8 +1022,10 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox7.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data7.Clear();
+
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1168,8 +1043,10 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox8.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data8.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1187,8 +1064,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox9.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data9.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1206,8 +1084,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox10.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data10.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1225,8 +1104,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox11.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data11.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1244,8 +1124,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox12.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data12.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
@@ -1263,8 +1144,9 @@ namespace Flawless_ex
             if (notLoad)
             {
                 MainCategoryCode = (int)MainCategoryComboBox13.SelectedValue;
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                data13.Clear();
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
                 //品名検索用
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";

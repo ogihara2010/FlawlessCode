@@ -30,7 +30,9 @@ namespace Flawless_ex
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             dt = new DataTable();
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select main_category_name, main_category_code from main_category_m where invalid = 0 order by main_category_code";
             conn.Open();

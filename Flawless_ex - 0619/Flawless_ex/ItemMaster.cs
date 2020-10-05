@@ -31,7 +31,9 @@ namespace Flawless_ex
         private void ProductNameMenu_Load(object sender, EventArgs e)
         {
             dt = new DataTable();
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0 order by main_category_m ;";
             conn.Open();
@@ -65,7 +67,9 @@ namespace Flawless_ex
         {
             int code = (int)dataGridView1.CurrentRow.Cells[2].Value; //選択した品名コードを取得
 
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string sql = "select * from main_category_m where main_category_name = '" + dataGridView1.CurrentRow.Cells[0].Value + "';";

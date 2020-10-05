@@ -301,19 +301,19 @@ namespace Flawless_ex
         //list_result_revisions に登録する際のデータテイブル                         < - 登録時・再登録時・品名変更の新規登録時・品名変更の再登録時で分ける必要があるかも？
         DataTable DATATable = new DataTable();
         #region"list_result_revisions2 に登録する際の各行のデータテイブル"
-        //DataTable DATA1 = new DataTable();
-        //DataTable DATA2 = new DataTable();
-        //DataTable DATA3 = new DataTable();
-        //DataTable DATA4 = new DataTable();
-        //DataTable DATA5 = new DataTable();
-        //DataTable DATA6 = new DataTable();
-        //DataTable DATA7 = new DataTable();
-        //DataTable DATA8 = new DataTable();
-        //DataTable DATA9 = new DataTable();
-        //DataTable DATA10 = new DataTable();
-        //DataTable DATA11 = new DataTable();
-        //DataTable DATA12 = new DataTable();
-        //DataTable DATA13 = new DataTable();
+        DataTable DATA1 = new DataTable();
+        DataTable DATA2 = new DataTable();
+        DataTable DATA3 = new DataTable();
+        DataTable DATA4 = new DataTable();
+        DataTable DATA5 = new DataTable();
+        DataTable DATA6 = new DataTable();
+        DataTable DATA7 = new DataTable();
+        DataTable DATA8 = new DataTable();
+        DataTable DATA9 = new DataTable();
+        DataTable DATA10 = new DataTable();
+        DataTable DATA11 = new DataTable();
+        DataTable DATA12 = new DataTable();
+        DataTable DATA13 = new DataTable();
         #endregion
         
 
@@ -338,7 +338,8 @@ namespace Flawless_ex
 
         private void RecordList_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             #region"画面上の会社・個人情報と合計金額"
 
@@ -6747,7 +6748,9 @@ namespace Flawless_ex
             DateTime date = DateTime.Now;
             Registration = date.ToLongDateString();         //登録日
 
-            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+
             string sql_str = "select * from list_result order by result;";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
@@ -6899,10 +6902,10 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA1);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA1);
 
                             break;
                         #endregion
@@ -6952,9 +6955,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA2);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA2);
 
                             break;
                         #endregion
@@ -7004,9 +7007,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA3);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA3);
 
                             break;
                         #endregion
@@ -7056,9 +7059,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA4);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA4);
 
                             break;
                         #endregion
@@ -7108,9 +7111,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA5);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA5);
 
                             break;
                         #endregion
@@ -7160,9 +7163,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA6);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA6);
 
                             break;
                         #endregion
@@ -7212,9 +7215,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA7);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA7);
 
                             break;
                         #endregion
@@ -7264,9 +7267,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA8);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA8);
 
                             break;
                         #endregion
@@ -7316,9 +7319,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA9);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA9);
 
                             break;
                         #endregion
@@ -7368,9 +7371,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA10);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA10);
 
                             break;
                         #endregion
@@ -7420,9 +7423,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA11);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA11);
 
                             break;
                         #endregion
@@ -7472,9 +7475,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA12);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA12);
 
                             break;
                         #endregion
@@ -7524,9 +7527,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA13);
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA13);
 
                             break;
                             #endregion
@@ -7633,10 +7636,10 @@ namespace Flawless_ex
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(DataTable);
 
-                ////履歴用に登録
-                //sql_str = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
-                //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //adapter.Fill(DATATable);
+                //履歴用に登録
+                sql_str = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
+                adapter = new NpgsqlDataAdapter(sql_str, conn);
+                adapter.Fill(DATATable);
                 #endregion
 
                 #region"list_result2 への登録"
@@ -8314,10 +8317,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data1);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA1);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA1);
                             break;
                         #endregion
                         #region"２行目"
@@ -8369,10 +8372,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data2);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA2);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA2);
                             break;
                         #endregion
                         #region"３行目"
@@ -8424,10 +8427,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data3);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA3);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA3);
                             break;
                         #endregion
                         #region"４行目"
@@ -8479,10 +8482,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data4);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA4);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA4);
                             break;
                         #endregion
                         #region"５行目"
@@ -8534,10 +8537,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data5);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA5);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA5);
                             break;
                         #endregion
                         #region"６行目"
@@ -8589,10 +8592,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data6);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA6);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA6);
                             break;
                         #endregion
                         #region"７行目"
@@ -8644,10 +8647,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data7);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA7);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA7);
                             break;
                         #endregion
                         #region"８行目"
@@ -8699,10 +8702,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data8);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA8);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA8);
                             break;
                         #endregion
                         #region"９行目"
@@ -8754,10 +8757,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data9);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA9);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA9);
                             break;
                         #endregion
                         #region"１０行目"
@@ -8809,10 +8812,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data10);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA10);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA10);
                             break;
                         #endregion
                         #region"１１行目"
@@ -8864,10 +8867,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data11);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA11);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA11);
                             break;
                         #endregion
                         #region"１２行目"
@@ -8919,10 +8922,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data12);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA12);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA12);
                             break;
                         #endregion
                         #region"１３行目"
@@ -8974,10 +8977,10 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data13);
 
-                            ////履歴に登録
-                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            //adapter.Fill(DATA13);
+                            //履歴に登録
+                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            adapter.Fill(DATA13);
                             break;
                             #endregion
                     }
@@ -9516,8 +9519,9 @@ namespace Flawless_ex
 
             DateTime date = DateTime.Now;
             Registration = date.ToLongDateString();         //登録日
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
 
-            conn.ConnectionString = @"Server = 192.168.152.164; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             string sql_str = "select * from list_result order by result;";
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();

@@ -19,7 +19,7 @@ namespace Flawless_ex
 
         private void roginButton_Click(object sender, EventArgs e)
         {
-            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlConnection conn;
             NpgsqlCommand cmd = new NpgsqlCommand();
             NpgsqlDataAdapter adapter;
             DataTable dt = new DataTable();
@@ -51,7 +51,9 @@ namespace Flawless_ex
                 else
                 {
                     string sql_str = "select* from staff_m where staff_code = " + id + " ";
-                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                    PostgreSQL postgre = new PostgreSQL();
+                    conn = postgre.connection();
                     conn.Open();
 
                     //検索結果の数

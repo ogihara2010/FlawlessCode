@@ -95,8 +95,10 @@ namespace Flawless_ex
         {
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                                                                                                                                     //検索用
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //検索用
             #region "担当者権限"
             if (access_auth == "C")
             {
@@ -206,7 +208,9 @@ namespace Flawless_ex
 
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn4 = postgre.connection();
+            //conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "";
 
@@ -356,7 +360,9 @@ namespace Flawless_ex
             {
                 if (access_auth == "C")
                 {
-                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    PostgreSQL postgre = new PostgreSQL();
+                    conn = postgre.connection();
+                    //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     conn.Open();
                     //品名検索用
@@ -371,7 +377,9 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    PostgreSQL postgre = new PostgreSQL();
+                    conn = postgre.connection();
+                    //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                     conn.Open();
                     //品名検索用
@@ -399,7 +407,9 @@ namespace Flawless_ex
         {
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
-            conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn4 = postgre.connection();
+            //conn4.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (access_auth == "C")
             {

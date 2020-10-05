@@ -211,6 +211,7 @@
     <Compile Include="Operatelog.Designer.cs">
       <DependentUpon>Operatelog.cs</DependentUpon>
     </Compile>
+    <Compile Include="PostgreSQL.cs" />
     <Compile Include="RecordList.cs">
       <SubType>Form</SubType>
     </Compile>

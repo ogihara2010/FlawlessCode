@@ -272,6 +272,7 @@ namespace Flawless_ex
         public int control;
         public string data;
         string item;
+        string main;
         string phone;
         string pass;
         int regist;
@@ -351,6 +352,11 @@ namespace Flawless_ex
         DataTable deliverydt212 = new DataTable();
 
         DataTable dt3 = new DataTable();// 品名情報全て
+        DataTable dt300 = new DataTable();//地金
+        DataTable dt400 = new DataTable();//ダイヤ
+        DataTable dt500 = new DataTable();//ブランド
+        DataTable dt600 = new DataTable();//製品・ジュエリー
+        DataTable dt700 = new DataTable();//その他
         #region "計算書履歴"
         DataTable redt4 = new DataTable();
         DataTable redt5 = new DataTable();
@@ -449,7 +455,9 @@ namespace Flawless_ex
                 this.button2.Enabled = false;
             }
             #endregion
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
 
             string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                //伝票番号・管理番号取得
@@ -961,11 +969,10 @@ namespace Flawless_ex
                         string sql_document1 = "select * from main_category_m where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_document1, conn);
                         adapter.Fill(dt231);
-                        mainCategoryComboBox1.DataSource = dt231;
-                        mainCategoryComboBox1.DisplayMember = "main_category_name";
-                        mainCategoryComboBox1.ValueMember = "main_category_code";
-                        mainCategoryComboBox1.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox1.SelectedValue = itemMainCategoryCode1;
+                        Column1.DataSource = dt231;
+                        Column1.DisplayMember = "main_category_name";
+                        Column1.ValueMember = "main_category_code";
+                        dataGridView1[0, 1].Value = itemMainCategoryCode1;
                         #endregion
                         #region "品名"
                         //品名検索用
@@ -973,12 +980,13 @@ namespace Flawless_ex
                         string sql_item2 = "select * from item_m  where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_item2, conn);
                         adapter.Fill(dt241);
-                        itemComboBox1.DataSource = dt241;
-                        itemComboBox1.DisplayMember = "item_name";
-                        itemComboBox1.ValueMember = "item_code";
-                        itemComboBox1.SelectedValue = itemCode1;
+                        Column2.DataSource = dt241;
+                        Column2.DisplayMember = "item_name";
+                        Column2.ValueMember = "item_code";
+                        dataGridView1[1, 1].Value = itemCode1;
                         #endregion
                         #endregion
+                        
                         #region "入力された項目 2行目"
                         this.weightTextBox1.Text = dataRow1["weight"].ToString();
                         this.countTextBox1.Text = dataRow1["count"].ToString();
@@ -988,8 +996,13 @@ namespace Flawless_ex
                         moneyTextBox1.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox1.Text, System.Globalization.NumberStyles.Number));
                         this.remarks1.Text = dataRow1["remarks"].ToString();
                         #endregion
+                        
                     }
                     #endregion
+                    */
+                    #endregion
+                    #region "一時コメントアウト"
+                    /*                    
                     #region "3行目"
                     if (St == 2)
                     {
@@ -2232,8 +2245,8 @@ namespace Flawless_ex
             {
                 
             }
-            
 
+            #region "初期値の取得"
             #region "大分類の中身"
             string sql_str6 = "select * from main_category_m where invalid = 0 order by main_category_code asc;";
             adapter = new NpgsqlDataAdapter(sql_str6, conn);
@@ -2242,66 +2255,59 @@ namespace Flawless_ex
             row4 = dt4.Rows[0];
             itemMainCategoryCode = (int)row4["main_category_code"];
             #endregion
-
             #region "品名の中身"
-            string sql_str7 = "select * from item_m where invalid = 0 and main_category_code =" + itemMainCategoryCode + ";";
-            adapter2 = new NpgsqlDataAdapter(sql_str7, conn);
-            adapter2.Fill(dt5);
+            string sql_stritem = "select * from item_m where invalid = 0 and main_category_code = " + itemMainCategoryCode + ";";
+            adapter = new NpgsqlDataAdapter(sql_stritem, conn);
+            adapter.Fill(dt5);
             DataRow row5;
             row5 = dt5.Rows[0];
-            itemCode = (int)row5["item_code"];            
+            itemCode = (int)row5["item_code"];
             #endregion
-            
+            #endregion
+            #region "リスト"
+            string sql_strlist = "select B.main_category_code, B.main_category_name, A.item_code, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code ;";
+            adapter2 = new NpgsqlDataAdapter(sql_strlist, conn);
+            adapter2.Fill(dt6);
+            #endregion
+
             dataGridView1[0, 0].Value = itemMainCategoryCode;
             dataGridView1[1, 0].Value = itemCode;
-
-            //DataGridViewComboBoxColumn Column = (DataGridViewComboBoxColumn)this.Column1;
+            
             Column1.DataSource = dt4;
             Column1.DisplayMember = "main_category_name";
             Column1.ValueMember = "main_category_code";
-            DataGridViewComboBoxCell column1 = new DataGridViewComboBoxCell();
-            column1.DataSource = dt4;
-            column1.DisplayMember = "main_category_name";
-            column1.ValueMember = "main_category_code";
 
-            Column2.DataSource = dt5;
+            Column2.DataSource = dt6;
             Column2.DisplayMember = "item_name";
             Column2.ValueMember = "item_code";
-            DataGridViewComboBoxCell column2 = new DataGridViewComboBoxCell();
-            column2.DataSource = dt5;
-            column2.DisplayMember = "item_name";
-            column2.ValueMember = "item_code";
+
+            //dataGridView1.Columns[4] = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
 
             //左の入力項目処理
             //string itemDisplay = "item_name";
             //string itemValue = "item_code";
-            //地金
-            DataTable dt300 = new DataTable();
+
+            //地金            
             string str_sql_metal = "select * from item_m where main_category_code = 100";
             adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
             adapter.Fill(dt300);
 
-            //ダイヤ
-            DataTable dt400 = new DataTable();
+            //ダイヤ            
             string str_sql_diamond = "select * from item_m where main_category_code = 101";
-
             adapter = new NpgsqlDataAdapter(str_sql_diamond, conn);
             adapter.Fill(dt400);
 
-            //ブランド
-            DataTable dt500 = new DataTable();
+            //ブランド            
             string str_sql_brand = "select * from item_m where main_category_code = 102";
             adapter = new NpgsqlDataAdapter(str_sql_brand, conn);
             adapter.Fill(dt500);
 
-            //製品・ジュエリー
-            DataTable dt600 = new DataTable();
+            //製品・ジュエリー            
             string str_sql_jewelry = "select * from item_m where main_category_code = 103";
             adapter = new NpgsqlDataAdapter(str_sql_jewelry, conn);
             adapter.Fill(dt600);
 
-            //その他
-            DataTable dt700 = new DataTable();
+            //その他            
             string str_sql_other = "select * from item_m where main_category_code = 104";
             adapter = new NpgsqlDataAdapter(str_sql_other, conn);
             adapter.Fill(dt700);
@@ -2402,7 +2408,6 @@ namespace Flawless_ex
                     label38.Visible = false;
                     registerDateTextBox.Visible = false;
                     #endregion
-
                     #region "納品書"
                     typeTextBox2.Text = "個人";
                     label75.Text = "氏名";
@@ -2555,7 +2560,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox0.SelectedValue;
                 dt2.Clear();
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2588,7 +2594,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox00.SelectedValue;
                 deliverydt200.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2615,7 +2622,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox01.SelectedValue;
                 deliverydt201.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2646,7 +2654,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox02.SelectedValue;
                 deliverydt202.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2673,7 +2682,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox03.SelectedValue;
                 deliverydt203.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2700,7 +2710,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox04.SelectedValue;
                 deliverydt204.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2727,7 +2738,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox05.SelectedValue;
                 deliverydt205.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2754,7 +2766,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox06.SelectedValue;
                 deliverydt206.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2781,7 +2794,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox07.SelectedValue;
                 deliverydt207.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2808,7 +2822,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox08.SelectedValue;
                 deliverydt208.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2835,7 +2850,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox09.SelectedValue;
                 deliverydt209.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2862,7 +2878,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox010.SelectedValue;
                 deliverydt210.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2889,7 +2906,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox011.SelectedValue;
                 deliverydt211.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -2916,7 +2934,8 @@ namespace Flawless_ex
             {
                 int codeNum = (int)mainCategoryComboBox012.SelectedValue;
                 deliverydt212.Clear();
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
 
                 conn.Open();
                 //品名検索用
@@ -3193,7 +3212,8 @@ namespace Flawless_ex
                 }
             }
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
             conn.Open();
 
             string DocumentNumber = documentNumberTextBox.Text;
@@ -3432,7 +3452,9 @@ namespace Flawless_ex
             //int item = itemCode0;
            #region "大分類コード"
            DataTable maindt = new DataTable();
-           conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+           //conn.ConnectionString = @"Server = 192.168.152.168; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+           
            string sql_main = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox0.Text + "';";
            adapter = new NpgsqlDataAdapter(sql_main, conn);
            adapter.Fill(maindt);
@@ -3442,7 +3464,9 @@ namespace Flawless_ex
            #endregion
            #region "品名コード"
            DataTable itemdt = new DataTable();
-           conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+           
+           //conn.ConnectionString = @"Server = 192.168.152.168; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+           
            string sql_item = "select * from item_m where item_name = '" + itemComboBox0.Text + "';";
            adapter = new NpgsqlDataAdapter(sql_item, conn);
            adapter.Fill(itemdt);
@@ -12464,7 +12488,8 @@ namespace Flawless_ex
                 }
                 #region "再登録用に繋げる"
                 NpgsqlConnection connDelivery = new NpgsqlConnection();
-                connDelivery.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                connDelivery = postgre.connection();
                 NpgsqlDataAdapter adapterDelivery;
                 DataTable DeliveryDt = new DataTable();
                 string str_sql_re = "select * from delivery_calc where control_number = " + number + ";";
@@ -12491,7 +12516,10 @@ namespace Flawless_ex
                 if (type == 0)
                 {
                     NpgsqlConnection connA = new NpgsqlConnection();
-                    connA.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    connA = postgre.connection();
+
+                    //connA.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
                     NpgsqlDataAdapter adapterA;
                     DataTable clientDt = new DataTable();
                     string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
@@ -12504,7 +12532,8 @@ namespace Flawless_ex
 
                     NpgsqlConnection conn0 = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter0;
-                    conn0.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn0 = postgre.connection();
+                    //conn0.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                     DataTable dt = new DataTable();
                     string sql_str = "UPDATE delivery_m SET staff_code = " + staff_id + ", sub_total = '" + SubTotal + "', vat = '" + vat + "', vat_rate = '" + vat_rate + "', vat_amount = '" + TaxAmount + "', total = '" + Total + "', name = '" + Name + "', honorific_title = '" + Title + "', type = '" + Type + "', order_date = '" + OrderDate + "', delivery_date = '" + DeliveryDate + "', settlement_date = '" + SettlementDate + "', seaal_print = '" + seaal + "', payment_method = '" + PaymentMethod + "', account_payble = '" + payee + "', currency = '" + coin + "', remarks2 = '" + remark + "', total_count = '" + Amount + "', total_weight = '" + TotalWeight + "', types1 = 0, reason = '" + Reason + "', registration_date = '" + c + "' where control_number = " + ControlNumber + " and antique_number = " + antique + ";";
                     adapter0 = new NpgsqlDataAdapter(sql_str, conn0);
@@ -12516,7 +12545,8 @@ namespace Flawless_ex
                 if (type == 1)
                 {
                     NpgsqlConnection connI = new NpgsqlConnection();
-                    connI.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    connI = postgre.connection();
+                    //connI.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                     NpgsqlDataAdapter adapterI;
                     DataTable clientDt = new DataTable();
                     string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
@@ -12529,7 +12559,8 @@ namespace Flawless_ex
 
                     NpgsqlConnection conn1 = new NpgsqlConnection();
                     NpgsqlDataAdapter adapter1;
-                    conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    conn1 = postgre.connection();
+                    //conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                     DataTable dt = new DataTable();
                     string sql_str = "UPDATE delivery_m SET staff_code = " + staff_id + ", sub_total = '" + SubTotal + "', vat = '" + vat + "', vat_rate = '" + vat_rate + "', vat_amount = '" + TaxAmount + "', total = '" + Total + "', name  = '" + Name + "', honorific_title = '" + Title + "', type = '" + Type + "', order_date '" + OrderDate + "', delivery_date = '" + DeliveryDate + "', settlement_date = '" + SettlementDate + "', seaal_print = '" + seaal + "', payment_method = '" + PaymentMethod + "', account_payble  = '" + payee + "', currency = '" + coin + "', remarks2 = '" + remark + "', total_count = '" + Amount + "', total_weight = '" + TotalWeight + "', types1 = 1, reason = '" + Reason + "', registration_date = '" + c + "' where control_number = " + ControlNumber + " and id_number = " + ID + ";";
                     adapter1 = new NpgsqlDataAdapter(sql_str, conn1);
@@ -12551,7 +12582,8 @@ namespace Flawless_ex
                                     //int item = itemCode00;
                 #region "大分類コード"
                 DataTable maindt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 string sql_main = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox00.Text + "';";
                 adapter = new NpgsqlDataAdapter(sql_main, conn);
                 adapter.Fill(maindt);
@@ -12561,7 +12593,8 @@ namespace Flawless_ex
                 #endregion
                 #region "品名コード"
                 DataTable itemdt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 string sql_item = "select * from item_m where item_name = '" + itemComboBox00.Text + "';";
                 adapter = new NpgsqlDataAdapter(sql_item, conn);
                 adapter.Fill(itemdt);
@@ -12577,9 +12610,10 @@ namespace Flawless_ex
                 string Remarks = remarks00.Text;
 
                 DataTable dt2 = new DataTable();
-                string sql_str2 = "UPDATE delivery_calc SET item_code = " + item + " ,weight = " + Weight + " , count = " + Count + " ,unit_price = " + UnitPrice + " ,amount = " + amount + " ,remarks = '" + Remarks + "',main_category_code = '" + mainCategory + "',detail = '" + Detail + "' , reason = ' " + Reason + "' where control_number = " + ControlNumber +" and record_number = " + record + ";";
+                string sql_str2 = "UPDATE delivery_calc SET item_code = " + item + " ,weight = " + Weight + " , count = " + Count + " ,unit_price = " + UnitPrice + " ,amount = " + amount + " ,remarks = '" + Remarks + "',main_category_code = '" + mainCategory + "',detail = '" + Detail + "' , reason = ' " + Reason + "' where control_number = " + ControlNumber + " and record_number = " + record + ";";
 
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
                 adapter = new NpgsqlDataAdapter(sql_str2, conn);
                 adapter.Fill(dt2);
@@ -12651,7 +12685,7 @@ namespace Flawless_ex
                         Count = int.Parse(countTextBox01.Text);
                         UnitPrice = decimal.Parse(unitPriceTextBox01.Text);
                         amount = money1 + money1 * Tax / 100;  //decimal.Parse(moneyTextBox01.Text);
-                        Remarks = remarks01.Text;                        
+                        Remarks = remarks01.Text;
 
                         DataTable dt4 = new DataTable();
                         string sql_str4 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item1 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory1 + ",'" + Detail + "');";
@@ -12659,7 +12693,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str4, conn);
                         adapter.Fill(dt4);
                     }
-                    
+
                 }
                 #endregion
                 #region "3行目"
@@ -12737,7 +12771,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str5, conn);
                         adapter.Fill(dt5);
                     }
-                    
+
                 }
                 #endregion
                 #region "4行目"
@@ -12815,7 +12849,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str6, conn);
                         adapter.Fill(dt6);
                     }
-                    
+
                 }
                 #endregion
                 #region "5行目"
@@ -12892,7 +12926,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str7, conn);
                         adapter.Fill(dt7);
                     }
-                    
+
                 }
                 #endregion
                 #region "6行目"
@@ -12905,7 +12939,8 @@ namespace Flawless_ex
                         //item = itemCode05;
                         #region "大分類コード"
                         DataTable main5dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        conn = postgre.connection();
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main5 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox05.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main5, conn);
                         adapter.Fill(main5dt);
@@ -12915,7 +12950,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item5dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item5 = "select * from item_m where item_name = '" + itemComboBox05.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item5, conn);
                         adapter.Fill(item5dt);
@@ -12943,7 +12978,7 @@ namespace Flawless_ex
                         //item = itemCode05;
                         #region "大分類コード"
                         DataTable main5dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main5 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox05.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main5, conn);
                         adapter.Fill(main5dt);
@@ -12953,7 +12988,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item5dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item5 = "select * from item_m where item_name = '" + itemComboBox05.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item5, conn);
                         adapter.Fill(item5dt);
@@ -12974,7 +13009,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str8, conn);
                         adapter.Fill(dt8);
                     }
-                    
+
                 }
                 #endregion
                 #region "7行目"
@@ -12987,7 +13022,7 @@ namespace Flawless_ex
                         //item = itemCode06;
                         #region "大分類コード"
                         DataTable main6dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main6 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox06.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main6, conn);
                         adapter.Fill(main6dt);
@@ -12997,7 +13032,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item6dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item6 = "select * from item_m where item_name = '" + itemComboBox06.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item6, conn);
                         adapter.Fill(item6dt);
@@ -13025,7 +13060,7 @@ namespace Flawless_ex
                         //item = itemCode06;
                         #region "大分類コード"
                         DataTable main6dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main6 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox06.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main6, conn);
                         adapter.Fill(main6dt);
@@ -13035,7 +13070,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item6dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item6 = "select * from item_m where item_name = '" + itemComboBox06.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item6, conn);
                         adapter.Fill(item6dt);
@@ -13056,7 +13091,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str9, conn);
                         adapter.Fill(dt9);
                     }
-                    
+
                 }
                 #endregion
                 #region "8行目"
@@ -13069,7 +13104,7 @@ namespace Flawless_ex
                         //item = itemCode07;
                         #region "大分類コード"
                         DataTable main7dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main7 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox07.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main7, conn);
                         adapter.Fill(main7dt);
@@ -13079,7 +13114,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item7dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item7 = "select * from item_m where item_name = '" + itemComboBox07.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item7, conn);
                         adapter.Fill(item7dt);
@@ -13107,7 +13142,7 @@ namespace Flawless_ex
                         //item = itemCode07;
                         #region "大分類コード"
                         DataTable main7dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main7 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox07.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main7, conn);
                         adapter.Fill(main7dt);
@@ -13117,7 +13152,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item7dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item7 = "select * from item_m where item_name = '" + itemComboBox07.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item7, conn);
                         adapter.Fill(item7dt);
@@ -13138,7 +13173,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str10, conn);
                         adapter.Fill(dt10);
                     }
-                    
+
                 }
                 #endregion
                 #region "9行目"
@@ -13151,7 +13186,7 @@ namespace Flawless_ex
                         //item = itemCode08;
                         #region "大分類コード"
                         DataTable main8dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main8 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox08.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main8, conn);
                         adapter.Fill(main8dt);
@@ -13161,7 +13196,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item8dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item8 = "select * from item_m where item_name = '" + itemComboBox08.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item8, conn);
                         adapter.Fill(item8dt);
@@ -13189,7 +13224,7 @@ namespace Flawless_ex
                         //item = itemCode08;
                         #region "大分類コード"
                         DataTable main8dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main8 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox08.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main8, conn);
                         adapter.Fill(main8dt);
@@ -13199,7 +13234,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item8dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item8 = "select * from item_m where item_name = '" + itemComboBox08.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item8, conn);
                         adapter.Fill(item8dt);
@@ -13220,7 +13255,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str11, conn);
                         adapter.Fill(dt11);
                     }
-                    
+
                 }
                 #endregion
                 #region "10行目"
@@ -13233,7 +13268,7 @@ namespace Flawless_ex
                         //item = itemCode09;
                         #region "大分類コード"
                         DataTable main9dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main9 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox09.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main9, conn);
                         adapter.Fill(main9dt);
@@ -13243,7 +13278,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item9dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item9 = "select * from item_m where item_name = '" + itemComboBox09.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item9, conn);
                         adapter.Fill(item9dt);
@@ -13271,7 +13306,7 @@ namespace Flawless_ex
                         //item = itemCode09;
                         #region "大分類コード"
                         DataTable main9dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main9 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox09.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main9, conn);
                         adapter.Fill(main9dt);
@@ -13281,7 +13316,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item9dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item9 = "select * from item_m where item_name = '" + itemComboBox09.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item9, conn);
                         adapter.Fill(item9dt);
@@ -13302,7 +13337,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str12, conn);
                         adapter.Fill(dt12);
                     }
-                    
+
                 }
                 #endregion
                 #region "11行目"
@@ -13315,7 +13350,7 @@ namespace Flawless_ex
                         //item = itemCode010;
                         #region "大分類コード"
                         DataTable main10dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main10 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox010.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main10, conn);
                         adapter.Fill(main10dt);
@@ -13325,7 +13360,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item10dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item10 = "select * from item_m where item_name = '" + itemComboBox010.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item10, conn);
                         adapter.Fill(item10dt);
@@ -13353,7 +13388,7 @@ namespace Flawless_ex
                         //item = itemCode010;
                         #region "大分類コード"
                         DataTable main10dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main10 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox010.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main10, conn);
                         adapter.Fill(main10dt);
@@ -13363,7 +13398,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item10dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item10 = "select * from item_m where item_name = '" + itemComboBox010.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item10, conn);
                         adapter.Fill(item10dt);
@@ -13384,7 +13419,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str13, conn);
                         adapter.Fill(dt13);
                     }
-                    
+
                 }
                 #endregion
                 #region "12行目"
@@ -13397,7 +13432,7 @@ namespace Flawless_ex
                         //item = itemCode011;
                         #region "大分類コード"
                         DataTable main11dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main11 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox011.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main11, conn);
                         adapter.Fill(main11dt);
@@ -13407,7 +13442,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item11dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item11 = "select * from item_m where item_name = '" + itemComboBox011.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item11, conn);
                         adapter.Fill(item11dt);
@@ -13435,7 +13470,7 @@ namespace Flawless_ex
                         //item = itemCode011;
                         #region "大分類コード"
                         DataTable main11dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main11 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox011.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main11, conn);
                         adapter.Fill(main11dt);
@@ -13445,7 +13480,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item11dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item11 = "select * from item_m where item_name = '" + itemComboBox011.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item11, conn);
                         adapter.Fill(item11dt);
@@ -13466,7 +13501,7 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str14, conn);
                         adapter.Fill(dt14);
                     }
-                    
+
                 }
                 #endregion
                 #region "13行目"
@@ -13479,7 +13514,7 @@ namespace Flawless_ex
                         //item = itemCode012;
                         #region "大分類コード"
                         DataTable main12dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main12 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox012.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main12, conn);
                         adapter.Fill(main12dt);
@@ -13489,7 +13524,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item12dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item12 = "select * from item_m where item_name = '" + itemComboBox012.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item12, conn);
                         adapter.Fill(item12dt);
@@ -13517,7 +13552,7 @@ namespace Flawless_ex
                         //item = itemCode012;
                         #region "大分類コード"
                         DataTable main12dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_main12 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox012.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_main12, conn);
                         adapter.Fill(main12dt);
@@ -13527,7 +13562,7 @@ namespace Flawless_ex
                         #endregion
                         #region "品名コード"
                         DataTable item12dt = new DataTable();
-                        conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                        //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                         string sql_item12 = "select * from item_m where item_name = '" + itemComboBox012.Text + "';";
                         adapter = new NpgsqlDataAdapter(sql_item12, conn);
                         adapter.Fill(item12dt);
@@ -13548,110 +13583,116 @@ namespace Flawless_ex
                         adapter = new NpgsqlDataAdapter(sql_str15, conn);
                         adapter.Fill(dt15);
                     }
-                    
+
                 }
                 #endregion
             }
             #region "新規登録"
             else
-            {            
-            int ControlNumber = number;
-
-            decimal TotalWeight = weisum;
-            //countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
-            int Amount = countsum;
-            //int Amount = int.Parse(totalCount2.Text);
-            decimal SubTotal = subSum + TaxAmount;
-            decimal Total = sum;
-            //vat（税込み税抜きどちらか）, vat_rate（税率）
-            string vat = this.comboBox11.SelectedItem.ToString();
-            int vat_rate = (int)Tax;
-
-            string seaal = "";
-            //印鑑印刷
-            if (sealY.Checked == true)
             {
-                seaal = "する";
-            }
-            if (sealN.Checked == true)
-            {
-                seaal = "しない";
-            }
+                int ControlNumber = number;
 
-            string OrderDate = orderDateTimePicker.Text;
-            string DeliveryDate = DeliveryDateTimePicker.Text;
-            string SettlementDate = SettlementDateTimePicker.Text;
-            string PaymentMethod = paymentMethodComboBox.SelectedItem.ToString();
-            string Name = name.Text;                                           //宛名
-            string Title = titleComboBox.SelectedItem.ToString();              //敬称
-            string Type = typeComboBox.SelectedItem.ToString();                //納品書or請求書
-            string payee = PayeeTextBox1.Text;                                 //振り込み先
-            string coin = CoinComboBox.SelectedItem.ToString();                //通貨
-            string remark = RemarkRegister.Text;
-            DateTime dat1 = DateTime.Now;
-            DateTime dtToday = dat1.Date;
-            string c = dtToday.ToString("yyyy年MM月dd日");
+                decimal TotalWeight = weisum;
+                //countsum = countsum00 + countsum01 + countsum02 + countsum03 + countsum04 + countsum05 + countsum06 + countsum07 + countsum08 + countsum09 + countsum010 + countsum011 + countsum012;
+                int Amount = countsum;
+                //int Amount = int.Parse(totalCount2.Text);
+                decimal SubTotal = subSum + TaxAmount;
+                decimal Total = sum;
+                //vat（税込み税抜きどちらか）, vat_rate（税率）
+                string vat = this.comboBox11.SelectedItem.ToString();
+                int vat_rate = (int)Tax;
+
+                string seaal = "";
+                //印鑑印刷
+                if (sealY.Checked == true)
+                {
+                    seaal = "する";
+                }
+                if (sealN.Checked == true)
+                {
+                    seaal = "しない";
+                }
+
+                string OrderDate = orderDateTimePicker.Text;
+                string DeliveryDate = DeliveryDateTimePicker.Text;
+                string SettlementDate = SettlementDateTimePicker.Text;
+                string PaymentMethod = paymentMethodComboBox.SelectedItem.ToString();
+                string Name = name.Text;                                           //宛名
+                string Title = titleComboBox.SelectedItem.ToString();              //敬称
+                string Type = typeComboBox.SelectedItem.ToString();                //納品書or請求書
+                string payee = PayeeTextBox1.Text;                                 //振り込み先
+                string coin = CoinComboBox.SelectedItem.ToString();                //通貨
+                string remark = RemarkRegister.Text;
+                DateTime dat1 = DateTime.Now;
+                DateTime dtToday = dat1.Date;
+                string c = dtToday.ToString("yyyy年MM月dd日");
+
+                PostgreSQL postgre = new PostgreSQL();
 
                 #region "法人"
                 if (type == 0)
-            {
-                NpgsqlConnection connA = new NpgsqlConnection();
-                connA.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                NpgsqlDataAdapter adapterA;
-                DataTable clientDt = new DataTable();
-                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
-                adapterA = new NpgsqlDataAdapter(str_sql_corporate, connA);
-                adapterA.Fill(clientDt);
+                {
+                    NpgsqlConnection connA = new NpgsqlConnection();
+                    connA = postgre.connection();
+                    //connA.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    NpgsqlDataAdapter adapterA;
+                    DataTable clientDt = new DataTable();
+                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    adapterA = new NpgsqlDataAdapter(str_sql_corporate, connA);
+                    adapterA.Fill(clientDt);
 
-                DataRow row2;
-                row2 = clientDt.Rows[0];
-                int antique = (int)row2["antique_number"];
-                #region "使用する"
-                NpgsqlConnection conn0 = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter0;
-                conn0.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                DataTable dt = new DataTable();
-                string sql_str = "Insert into delivery_m (control_number, antique_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, remarks2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "'," + antique + ",'" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + 0 + ");";
-                adapter0 = new NpgsqlDataAdapter(sql_str, conn0);
-                adapter0.Fill(dt);
-                #endregion
-                #region "履歴"
-                DataTable dtre = new DataTable();
-                string sql_str_re = "Insert into delivery_m_revisions (control_number, antique_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seal_print, payment_method, account_payable, currency, remarks2, registration_date, insert_name ) VALUES ( '" + ControlNumber + "'," + antique + ",'" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + c + "'," + staff_id + ");";
-                adapter0 = new NpgsqlDataAdapter(sql_str_re, conn);
-                adapter0.Fill(dtre);
-                #endregion
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    int antique = (int)row2["antique_number"];
+                    #region "使用する"
+                    NpgsqlConnection conn0 = new NpgsqlConnection();
+                    conn0 = postgre.connection();
+                    NpgsqlDataAdapter adapter0;
+                    //conn0.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    DataTable dt = new DataTable();
+                    string sql_str = "Insert into delivery_m (control_number, antique_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, remarks2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "'," + antique + ",'" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + 0 + ");";
+                    adapter0 = new NpgsqlDataAdapter(sql_str, conn0);
+                    adapter0.Fill(dt);
+                    #endregion
+                    #region "履歴"
+                    DataTable dtre = new DataTable();
+                    string sql_str_re = "Insert into delivery_m_revisions (control_number, antique_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seal_print, payment_method, account_payable, currency, remarks2, registration_date, insert_name ) VALUES ( '" + ControlNumber + "'," + antique + ",'" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + c + "'," + staff_id + ");";
+                    adapter0 = new NpgsqlDataAdapter(sql_str_re, conn);
+                    adapter0.Fill(dtre);
+                    #endregion
                 }
                 #endregion
                 #region "個人"
                 if (type == 1)
-            {
-                NpgsqlConnection connI = new NpgsqlConnection();
-                connI.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                NpgsqlDataAdapter adapterI;
-                DataTable clientDt = new DataTable();
-                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
-                adapterI = new NpgsqlDataAdapter(str_sql_individual, connI);
-                adapterI.Fill(clientDt);
+                {
+                    NpgsqlConnection connI = new NpgsqlConnection();
+                    connI = postgre.connection();
+                    //connI.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    NpgsqlDataAdapter adapterI;
+                    DataTable clientDt = new DataTable();
+                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    adapterI = new NpgsqlDataAdapter(str_sql_individual, connI);
+                    adapterI.Fill(clientDt);
 
-                DataRow row2;
-                row2 = clientDt.Rows[0];
-                int ID = (int)row2["id_number"];
-                #region "使用する"
-                NpgsqlConnection conn1 = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter1;
-                conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                DataTable dt = new DataTable();
-                string sql_str = "Insert into delivery_m (control_number, id_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, remarks2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "','" + ID + "','" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + 1 + ");";
-                adapter1 = new NpgsqlDataAdapter(sql_str, conn1);
-                adapter1.Fill(dt);
+                    DataRow row2;
+                    row2 = clientDt.Rows[0];
+                    int ID = (int)row2["id_number"];
+                    #region "使用する"
+                    NpgsqlConnection conn1 = new NpgsqlConnection();
+                    NpgsqlDataAdapter adapter1;
+                    conn1 = postgre.connection();
+                    //conn1.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    DataTable dt = new DataTable();
+                    string sql_str = "Insert into delivery_m (control_number, id_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, remarks2, total_count, total_weight, types1) VALUES ( '" + ControlNumber + "','" + ID + "','" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + Amount + "','" + TotalWeight + "'," + 1 + ");";
+                    adapter1 = new NpgsqlDataAdapter(sql_str, conn1);
+                    adapter1.Fill(dt);
                     #endregion
-                #region "履歴"
-                DataTable dtre = new DataTable();
-                string sql_str_re = "Insert into delivery_m_revisions (control_number, id_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seal_print, payment_method, account_payable, currency, remarks2, registration_date, insert_name ) VALUES ( '" + ControlNumber + "'," + ID + ",'" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + c + "'," + staff_id + ");";
-                adapter1 = new NpgsqlDataAdapter(sql_str_re, conn);
-                adapter1.Fill(dtre);
-                #endregion
+                    #region "履歴"
+                    DataTable dtre = new DataTable();
+                    string sql_str_re = "Insert into delivery_m_revisions (control_number, id_number, staff_code, sub_total, vat, vat_rate, vat_amount, total, name, honorific_title, type, order_date, delivery_date, settlement_date, seal_print, payment_method, account_payable, currency, remarks2, registration_date, insert_name ) VALUES ( '" + ControlNumber + "'," + ID + ",'" + staff_id + " ', '" + SubTotal + "','" + vat + "','" + vat_rate + "','" + TaxAmount + "' , '" + Total + "','" + Name + "' ,'" + Title + "','" + Type + "', '" + OrderDate + "' , '" + DeliveryDate + "','" + SettlementDate + "' ,'" + seaal + "', '" + PaymentMethod + "' , '" + payee + "','" + coin + "','" + remark + "','" + c + "'," + staff_id + ");";
+                    adapter1 = new NpgsqlDataAdapter(sql_str_re, conn);
+                    adapter1.Fill(dtre);
+                    #endregion
                 }
                 #endregion
 
@@ -13663,630 +13704,631 @@ namespace Flawless_ex
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt);*/
 
-            #region "1行目"
-           //管理番号：ControlNumber
-            int record = 1;     //行数
-            //int mainCategory = mainCategoryCode00;
-            //int item = itemCode00;
-            #region "大分類コード"
-            DataTable maindt = new DataTable();
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            string sql_main = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox00.Text + "';";
-            adapter = new NpgsqlDataAdapter(sql_main, conn);
-            adapter.Fill(maindt);
-            DataRow dataRow;
-            dataRow = maindt.Rows[0];
-            int mainCategory = (int)dataRow["main_category_code"];
-            #endregion
-            #region "品名コード"
-            DataTable itemdt = new DataTable();
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            string sql_item = "select * from item_m where item_name = '" + itemComboBox00.Text + "';";
-            adapter = new NpgsqlDataAdapter(sql_item, conn);
-            adapter.Fill(itemdt);
-            DataRow dataRow1;
-            dataRow1 = itemdt.Rows[0];
-            int item = (int)dataRow1["item_code"];
-            #endregion
-            string Detail = itemDetail00.Text;
-            decimal Weight = decimal.Parse(weightTextBox00.Text);
-            int Count = int.Parse(countTextBox00.Text);
-            decimal UnitPrice = decimal.Parse(unitPriceTextBox00.Text);
-            decimal amount = money0 + money0 * Tax / 100;
-            string Remarks = remarks00.Text;
-
-            DataTable dt2 = new DataTable();
-            string sql_str2 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + mainCategory + "','" + Detail + "');";
-
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn.Open();
-            adapter = new NpgsqlDataAdapter(sql_str2, conn);
-            adapter.Fill(dt2);
-            #region "履歴"
-            DataTable dt2re = new DataTable();
-            string sql_str2_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory  + "," +  item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','"  + Detail + "');";
-
-            adapter = new NpgsqlDataAdapter(sql_str2_re, conn);
-            adapter.Fill(dt2re);
-            #endregion
-            #endregion
-            #region "2行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox01.Text) && !(unitPriceTextBox01.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 2;
-                //mainCategory = mainCategoryCode01;
-                //item = itemCode01;
+                #region "1行目"
+                //管理番号：ControlNumber
+                int record = 1;     //行数
+                                    //int mainCategory = mainCategoryCode00;
+                                    //int item = itemCode00;
                 #region "大分類コード"
-                DataTable main1dt = new DataTable();
-                string sql_main1 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox01.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main1, conn);
-                adapter.Fill(main1dt);
-                DataRow dataRow2;
-                dataRow2 = main1dt.Rows[0];
-                int mainCategory1 = (int)dataRow2["main_category_code"];
+                DataTable maindt = new DataTable();
+
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                string sql_main = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox00.Text + "';";
+                adapter = new NpgsqlDataAdapter(sql_main, conn);
+                adapter.Fill(maindt);
+                DataRow dataRow;
+                dataRow = maindt.Rows[0];
+                int mainCategory = (int)dataRow["main_category_code"];
                 #endregion
                 #region "品名コード"
-                DataTable item1dt = new DataTable();
-                string sql_item1 = "select * from item_m where item_name = '" + itemComboBox01.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item1, conn);
-                adapter.Fill(item1dt);
-                DataRow dataRow3;
-                dataRow3 = item1dt.Rows[0];
-                int item1 = (int)dataRow3["item_code"];
+                DataTable itemdt = new DataTable();
+                //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                string sql_item = "select * from item_m where item_name = '" + itemComboBox00.Text + "';";
+                adapter = new NpgsqlDataAdapter(sql_item, conn);
+                adapter.Fill(itemdt);
+                DataRow dataRow1;
+                dataRow1 = itemdt.Rows[0];
+                int item = (int)dataRow1["item_code"];
                 #endregion
-                Detail = itemDetail01.Text;
-                Weight = decimal.Parse(weightTextBox01.Text);
-                Count = int.Parse(countTextBox01.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox01.Text);
-                amount = money1 + money1 * Tax / 100;  //decimal.Parse(moneyTextBox01.Text);
-                Remarks = remarks01.Text;
+                string Detail = itemDetail00.Text;
+                decimal Weight = decimal.Parse(weightTextBox00.Text);
+                int Count = int.Parse(countTextBox00.Text);
+                decimal UnitPrice = decimal.Parse(unitPriceTextBox00.Text);
+                decimal amount = money0 + money0 * Tax / 100;
+                string Remarks = remarks00.Text;
 
-                DataTable dt4 = new DataTable();
-                string sql_str4 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item1 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory1 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str4, conn);
-                adapter.Fill(dt4);
-
+                DataTable dt2 = new DataTable();
+                string sql_str2 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + mainCategory + "','" + Detail + "');";
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn.Open();
+                adapter = new NpgsqlDataAdapter(sql_str2, conn);
+                adapter.Fill(dt2);
                 #region "履歴"
-                DataTable dt4re = new DataTable();
-                string sql_str4_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+                DataTable dt2re = new DataTable();
+                string sql_str2_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
 
-                    
+                adapter = new NpgsqlDataAdapter(sql_str2_re, conn);
+                adapter.Fill(dt2re);
+                #endregion
+                #endregion
+                #region "2行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox01.Text) && !(unitPriceTextBox01.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 2;
+                    //mainCategory = mainCategoryCode01;
+                    //item = itemCode01;
+                    #region "大分類コード"
+                    DataTable main1dt = new DataTable();
+                    string sql_main1 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox01.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main1, conn);
+                    adapter.Fill(main1dt);
+                    DataRow dataRow2;
+                    dataRow2 = main1dt.Rows[0];
+                    int mainCategory1 = (int)dataRow2["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item1dt = new DataTable();
+                    string sql_item1 = "select * from item_m where item_name = '" + itemComboBox01.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item1, conn);
+                    adapter.Fill(item1dt);
+                    DataRow dataRow3;
+                    dataRow3 = item1dt.Rows[0];
+                    int item1 = (int)dataRow3["item_code"];
+                    #endregion
+                    Detail = itemDetail01.Text;
+                    Weight = decimal.Parse(weightTextBox01.Text);
+                    Count = int.Parse(countTextBox01.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox01.Text);
+                    amount = money1 + money1 * Tax / 100;  //decimal.Parse(moneyTextBox01.Text);
+                    Remarks = remarks01.Text;
+
+                    DataTable dt4 = new DataTable();
+                    string sql_str4 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item1 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory1 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str4, conn);
+                    adapter.Fill(dt4);
+
+                    #region "履歴"
+                    DataTable dt4re = new DataTable();
+                    string sql_str4_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
                     adapter = new NpgsqlDataAdapter(sql_str4_re, conn);
                     adapter.Fill(dt4re);
-                #endregion
-                }
-                #endregion
-            #region "3行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox02.Text) && !(unitPriceTextBox02.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 3;
-                //mainCategory = mainCategoryCode02;
-                //item = itemCode02;
-                #region "大分類コード"
-                DataTable main2dt = new DataTable();
-                string sql_main2 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox02.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main2, conn);
-                adapter.Fill(main2dt);
-                DataRow dataRow4;
-                dataRow4 = main2dt.Rows[0];
-                int mainCategory2 = (int)dataRow4["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item1dt = new DataTable();
-                string sql_item2 = "select * from item_m where item_name = '" + itemComboBox02.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item2, conn);
-                adapter.Fill(item1dt);
-                DataRow dataRow5;
-                dataRow5 = item1dt.Rows[0];
-                int item2 = (int)dataRow5["item_code"];
-                #endregion
-                Detail = itemDetail02.Text;
-                Weight = decimal.Parse(weightTextBox02.Text);
-                Count = int.Parse(countTextBox02.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox02.Text);
-                amount = money2 + money2 * Tax / 100;  //decimal.Parse(moneyTextBox02.Text);
-                Remarks = remarks02.Text;
-
-                DataTable dt5 = new DataTable();
-                string sql_str5 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item2 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory2 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str5, conn);
-                adapter.Fill(dt5);
-
-                #region "履歴"
-                DataTable dt5re = new DataTable();
-                string sql_str5_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str5_re, conn);
-                adapter.Fill(dt5re);
-                #endregion
-                }
-                #endregion
-            #region "4行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox03.Text) && !(unitPriceTextBox03.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 4;
-                //mainCategory = mainCategoryCode03;
-                //item = itemCode03;
-                #region "大分類コード"
-                DataTable main3dt = new DataTable();
-                string sql_main3 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox03.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main3, conn);
-                adapter.Fill(main3dt);
-                DataRow dataRow6;
-                dataRow6 = main3dt.Rows[0];
-                int mainCategory3 = (int)dataRow6["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item3dt = new DataTable();
-                string sql_item3 = "select * from item_m where item_name = '" + itemComboBox03.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item3, conn);
-                adapter.Fill(item3dt);
-                DataRow dataRow7;
-                dataRow7 = item3dt.Rows[0];
-                int item3 = (int)dataRow7["item_code"];
-                #endregion
-                Detail = itemDetail03.Text;
-                Weight = decimal.Parse(weightTextBox03.Text);
-                Count = int.Parse(countTextBox03.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox03.Text);
-                amount = money3 + money3 * Tax / 100;  //decimal.Parse(moneyTextBox03.Text);
-                Remarks = remarks03.Text;
-
-                DataTable dt6 = new DataTable();
-                string sql_str6 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item3 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory3 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str6, conn);
-                adapter.Fill(dt6);
-
-                #region "履歴"
-                DataTable dt6re = new DataTable();
-                string sql_str6_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str6_re, conn);
-                adapter.Fill(dt6re);
-                #endregion
-                }
-                #endregion
-            #region "5行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox04.Text) && !(unitPriceTextBox04.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 5;
-                //mainCategory = mainCategoryCode04;
-                //item = itemCode04;
-                #region "大分類コード"
-                DataTable main4dt = new DataTable();
-                string sql_main4 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox04.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main4, conn);
-                adapter.Fill(main4dt);
-                DataRow dataRow8;
-                dataRow8 = main4dt.Rows[0];
-                int mainCategory4 = (int)dataRow8["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item4dt = new DataTable();
-                string sql_item4 = "select * from item_m where item_name = '" + itemComboBox04.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item4, conn);
-                adapter.Fill(item4dt);
-                DataRow dataRow9;
-                dataRow9 = item4dt.Rows[0];
-                int item4 = (int)dataRow9["item_code"];
-                #endregion
-                Detail = itemDetail04.Text;
-                Weight = decimal.Parse(weightTextBox04.Text);
-                Count = int.Parse(countTextBox04.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox04.Text);
-                amount = money4 + money4 * Tax / 100; //decimal.Parse(moneyTextBox04.Text);
-                Remarks = remarks04.Text;
-
-                DataTable dt7 = new DataTable();
-                string sql_str7 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item4 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory4 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str7, conn);
-                adapter.Fill(dt7);
-                #region "履歴"
-                DataTable dt7re = new DataTable();
-                string sql_str7_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str7_re, conn);
-                adapter.Fill(dt7re);
-                #endregion
-                }
-                #endregion
-            #region "6行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox05.Text) && !(unitPriceTextBox05.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 6;
-                //mainCategory = mainCategoryCode05;
-                //item = itemCode05;
-                #region "大分類コード"
-                DataTable main5dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main5 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox05.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main5, conn);
-                adapter.Fill(main5dt);
-                DataRow dataRow10;
-                dataRow10 = main5dt.Rows[0];
-                int mainCategory5 = (int)dataRow10["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item5dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item5 = "select * from item_m where item_name = '" + itemComboBox05.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item5, conn);
-                adapter.Fill(item5dt);
-                DataRow dataRow11;
-                dataRow11 = item5dt.Rows[0];
-                int item5 = (int)dataRow11["item_code"];
-                #endregion
-                Detail = itemDetail05.Text;
-                Weight = decimal.Parse(weightTextBox05.Text);
-                Count = int.Parse(countTextBox05.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox05.Text);
-                amount = money5 + money5 * Tax / 100; //decimal.Parse(moneyTextBox05.Text);
-                Remarks = remarks05.Text;
-
-                DataTable dt8 = new DataTable();
-                string sql_str8 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES  ( '" + ControlNumber + "' ,'" + record + "' , " + item5 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory5 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str8, conn);
-                adapter.Fill(dt8);
-
-                #region "履歴"
-                 DataTable dt8re = new DataTable();
-                 string sql_str8_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                 
-                  adapter = new NpgsqlDataAdapter(sql_str8_re, conn);
-                  adapter.Fill(dt8re);
-                 #endregion
-                }
-                #endregion
-            #region "7行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox06.Text) && !(unitPriceTextBox06.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 7;
-                //mainCategory = mainCategoryCode06;
-                //item = itemCode06;
-                #region "大分類コード"
-                DataTable main6dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main6 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox06.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main6, conn);
-                adapter.Fill(main6dt);
-                DataRow dataRow12;
-                dataRow12 = main6dt.Rows[0];
-                int mainCategory6 = (int)dataRow12["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item6dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item6 = "select * from item_m where item_name = '" + itemComboBox06.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item6, conn);
-                adapter.Fill(item6dt);
-                DataRow dataRow13;
-                dataRow13 = item6dt.Rows[0];
-                int item6 = (int)dataRow13["item_code"];
-                #endregion
-                Detail = itemDetail06.Text;
-                Weight = decimal.Parse(weightTextBox06.Text);
-                Count = int.Parse(countTextBox06.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox06.Text);
-                amount = money6 + money6 * Tax / 100; //decimal.Parse(moneyTextBox06.Text);
-                Remarks = remarks06.Text;
-
-                DataTable dt9 = new DataTable();
-                string sql_str9 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item6 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory6 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str9, conn);
-                adapter.Fill(dt9);
-
-                #region "履歴"
-                DataTable dt9re = new DataTable();
-                string sql_str9_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str9_re, conn);
-                adapter.Fill(dt9re);
-                #endregion
-                }
-                #endregion
-            #region "8行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox07.Text) && !(unitPriceTextBox07.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 8;
-                //mainCategory = mainCategoryCode07;
-                //item = itemCode07;
-                #region "大分類コード"
-                DataTable main7dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main7 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox07.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main7, conn);
-                adapter.Fill(main7dt);
-                DataRow dataRow13;
-                dataRow13 = main7dt.Rows[0];
-                int mainCategory7 = (int)dataRow13["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item7dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item7 = "select * from item_m where item_name = '" + itemComboBox07.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item7, conn);
-                adapter.Fill(item7dt);
-                DataRow dataRow14;
-                dataRow14 = item7dt.Rows[0];
-                int item7 = (int)dataRow14["item_code"];
-                #endregion
-                Detail = itemDetail07.Text;
-                Weight = decimal.Parse(weightTextBox07.Text);
-                Count = int.Parse(countTextBox07.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox07.Text);
-                amount = money7 + money7 * Tax / 100; //decimal.Parse(moneyTextBox07.Text);
-                Remarks = remarks07.Text;
-
-                DataTable dt10 = new DataTable();
-                string sql_str10 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item7 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory7 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str10, conn);
-                adapter.Fill(dt10);
-
-                #region "履歴"
-                DataTable dt10re = new DataTable();
-                string sql_str10_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-               
-                adapter = new NpgsqlDataAdapter(sql_str10_re, conn);
-                adapter.Fill(dt10re);
-                #endregion
-                }
-                #endregion
-            #region "9行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox08.Text) && !(unitPriceTextBox08.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 9;
-                //mainCategory = mainCategoryCode08;
-                //item = itemCode08;
-                #region "大分類コード"
-                DataTable main8dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main8 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox08.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main8, conn);
-                adapter.Fill(main8dt);
-                DataRow dataRow15;
-                dataRow15 = main8dt.Rows[0];
-                int mainCategory8 = (int)dataRow15["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item8dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item8 = "select * from item_m where item_name = '" + itemComboBox08.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item8, conn);
-                adapter.Fill(item8dt);
-                DataRow dataRow16;
-                dataRow16 = item8dt.Rows[0];
-                int item8 = (int)dataRow16["item_code"];
-                #endregion
-                Detail = itemDetail08.Text;
-                Weight = decimal.Parse(weightTextBox08.Text);
-                Count = int.Parse(countTextBox08.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox08.Text);
-                amount = money8 + money8 * Tax / 100; //decimal.Parse(moneyTextBox08.Text);
-                Remarks = remarks08.Text;
-
-                DataTable dt11 = new DataTable();
-                string sql_str11 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item8 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory8 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str11, conn);
-                adapter.Fill(dt11);
-
-                #region "履歴"
-                DataTable dt11re = new DataTable();
-                string sql_str11_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str11_re, conn);
-                adapter.Fill(dt11re);
-                #endregion
-                }
-                #endregion
-            #region "10行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox09.Text) && !(unitPriceTextBox09.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 10;
-                //mainCategory = mainCategoryCode09;
-                //item = itemCode09;
-                #region "大分類コード"
-                DataTable main9dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main9 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox09.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main9, conn);
-                adapter.Fill(main9dt);
-                DataRow dataRow17;
-                dataRow17 = main9dt.Rows[0];
-                int mainCategory9 = (int)dataRow17["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item9dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item9 = "select * from item_m where item_name = '" + itemComboBox09.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item9, conn);
-                adapter.Fill(item9dt);
-                DataRow dataRow18;
-                dataRow18 = item9dt.Rows[0];
-                int item9 = (int)dataRow18["item_code"];
-                #endregion
-                Detail = itemDetail09.Text;
-                Weight = decimal.Parse(weightTextBox09.Text);
-                Count = int.Parse(countTextBox09.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox09.Text);
-                amount = money9 + money9 * Tax / 100; //decimal.Parse(moneyTextBox09.Text);
-                Remarks = remarks09.Text;
-
-                DataTable dt12 = new DataTable();
-                string sql_str12 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item9 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory9 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str12, conn);
-                adapter.Fill(dt12);
-
-                #region "履歴"
-                DataTable dt12re = new DataTable();
-                string sql_str12_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str12_re, conn);
-                adapter.Fill(dt12re);
-                #endregion
-                }
-                #endregion
-            #region "11行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox010.Text) && !(unitPriceTextBox010.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 11;
-                //mainCategory = mainCategoryCode010;
-                //item = itemCode010;
-                #region "大分類コード"
-                DataTable main10dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main10 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox010.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main10, conn);
-                adapter.Fill(main10dt);
-                DataRow dataRow19;
-                dataRow19 = main10dt.Rows[0];
-                int mainCategory10 = (int)dataRow19["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item10dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item10 = "select * from item_m where item_name = '" + itemComboBox010.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item10, conn);
-                adapter.Fill(item10dt);
-                DataRow dataRow20;
-                dataRow20 = item10dt.Rows[0];
-                int item10 = (int)dataRow20["item_code"];
-                #endregion
-                Detail = itemDetail010.Text;
-                Weight = decimal.Parse(weightTextBox010.Text);
-                Count = int.Parse(countTextBox010.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox010.Text);
-                amount = money10 + money10 * Tax / 100; //decimal.Parse(moneyTextBox010.Text);
-                Remarks = remarks010.Text;
-
-                DataTable dt13 = new DataTable();
-                string sql_str13 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item10 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory10 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str13, conn);
-                adapter.Fill(dt13);
-
-                #region "履歴"
-                DataTable dt13re = new DataTable();
-                string sql_str13_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str13_re, conn);
-                adapter.Fill(dt13re);
-                #endregion
-                }
-                #endregion
-            #region "12行目"
-                if (!string.IsNullOrEmpty(unitPriceTextBox011.Text) && !(unitPriceTextBox011.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 12;
-                //mainCategory = mainCategoryCode011;
-                //item = itemCode011;
-                #region "大分類コード"
-                DataTable main11dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main11 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox011.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main11, conn);
-                adapter.Fill(main11dt);
-                DataRow dataRow21;
-                dataRow21 = main11dt.Rows[0];
-                int mainCategory11 = (int)dataRow21["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item11dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item11 = "select * from item_m where item_name = '" + itemComboBox011.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item11, conn);
-                adapter.Fill(item11dt);
-                DataRow dataRow22;
-                dataRow22 = item11dt.Rows[0];
-                int item11 = (int)dataRow22["item_code"];
-                #endregion
-                Detail = itemDetail011.Text;
-                Weight = decimal.Parse(weightTextBox011.Text);
-                Count = int.Parse(countTextBox011.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox011.Text);
-                amount = money11 + money11 * Tax / 100; //decimal.Parse(moneyTextBox011.Text);
-                Remarks = remarks011.Text;
-
-                DataTable dt14 = new DataTable();
-                string sql_str14 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item11 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory11 + ",'" + Detail + "');";
-
-                adapter = new NpgsqlDataAdapter(sql_str14, conn);
-                adapter.Fill(dt14);
-
-                #region "履歴"
-                DataTable dt14re = new DataTable();
-                string sql_str14_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
-
-                
-                adapter = new NpgsqlDataAdapter(sql_str14_re, conn);
-                adapter.Fill(dt14re);
                     #endregion
                 }
                 #endregion
-            #region "13行目"
+                #region "3行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox02.Text) && !(unitPriceTextBox02.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 3;
+                    //mainCategory = mainCategoryCode02;
+                    //item = itemCode02;
+                    #region "大分類コード"
+                    DataTable main2dt = new DataTable();
+                    string sql_main2 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox02.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main2, conn);
+                    adapter.Fill(main2dt);
+                    DataRow dataRow4;
+                    dataRow4 = main2dt.Rows[0];
+                    int mainCategory2 = (int)dataRow4["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item1dt = new DataTable();
+                    string sql_item2 = "select * from item_m where item_name = '" + itemComboBox02.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item2, conn);
+                    adapter.Fill(item1dt);
+                    DataRow dataRow5;
+                    dataRow5 = item1dt.Rows[0];
+                    int item2 = (int)dataRow5["item_code"];
+                    #endregion
+                    Detail = itemDetail02.Text;
+                    Weight = decimal.Parse(weightTextBox02.Text);
+                    Count = int.Parse(countTextBox02.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox02.Text);
+                    amount = money2 + money2 * Tax / 100;  //decimal.Parse(moneyTextBox02.Text);
+                    Remarks = remarks02.Text;
+
+                    DataTable dt5 = new DataTable();
+                    string sql_str5 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item2 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory2 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str5, conn);
+                    adapter.Fill(dt5);
+
+                    #region "履歴"
+                    DataTable dt5re = new DataTable();
+                    string sql_str5_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str5_re, conn);
+                    adapter.Fill(dt5re);
+                    #endregion
+                }
+                #endregion
+                #region "4行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox03.Text) && !(unitPriceTextBox03.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 4;
+                    //mainCategory = mainCategoryCode03;
+                    //item = itemCode03;
+                    #region "大分類コード"
+                    DataTable main3dt = new DataTable();
+                    string sql_main3 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox03.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main3, conn);
+                    adapter.Fill(main3dt);
+                    DataRow dataRow6;
+                    dataRow6 = main3dt.Rows[0];
+                    int mainCategory3 = (int)dataRow6["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item3dt = new DataTable();
+                    string sql_item3 = "select * from item_m where item_name = '" + itemComboBox03.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item3, conn);
+                    adapter.Fill(item3dt);
+                    DataRow dataRow7;
+                    dataRow7 = item3dt.Rows[0];
+                    int item3 = (int)dataRow7["item_code"];
+                    #endregion
+                    Detail = itemDetail03.Text;
+                    Weight = decimal.Parse(weightTextBox03.Text);
+                    Count = int.Parse(countTextBox03.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox03.Text);
+                    amount = money3 + money3 * Tax / 100;  //decimal.Parse(moneyTextBox03.Text);
+                    Remarks = remarks03.Text;
+
+                    DataTable dt6 = new DataTable();
+                    string sql_str6 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item3 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory3 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str6, conn);
+                    adapter.Fill(dt6);
+
+                    #region "履歴"
+                    DataTable dt6re = new DataTable();
+                    string sql_str6_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str6_re, conn);
+                    adapter.Fill(dt6re);
+                    #endregion
+                }
+                #endregion
+                #region "5行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox04.Text) && !(unitPriceTextBox04.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 5;
+                    //mainCategory = mainCategoryCode04;
+                    //item = itemCode04;
+                    #region "大分類コード"
+                    DataTable main4dt = new DataTable();
+                    string sql_main4 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox04.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main4, conn);
+                    adapter.Fill(main4dt);
+                    DataRow dataRow8;
+                    dataRow8 = main4dt.Rows[0];
+                    int mainCategory4 = (int)dataRow8["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item4dt = new DataTable();
+                    string sql_item4 = "select * from item_m where item_name = '" + itemComboBox04.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item4, conn);
+                    adapter.Fill(item4dt);
+                    DataRow dataRow9;
+                    dataRow9 = item4dt.Rows[0];
+                    int item4 = (int)dataRow9["item_code"];
+                    #endregion
+                    Detail = itemDetail04.Text;
+                    Weight = decimal.Parse(weightTextBox04.Text);
+                    Count = int.Parse(countTextBox04.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox04.Text);
+                    amount = money4 + money4 * Tax / 100; //decimal.Parse(moneyTextBox04.Text);
+                    Remarks = remarks04.Text;
+
+                    DataTable dt7 = new DataTable();
+                    string sql_str7 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item4 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory4 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str7, conn);
+                    adapter.Fill(dt7);
+                    #region "履歴"
+                    DataTable dt7re = new DataTable();
+                    string sql_str7_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str7_re, conn);
+                    adapter.Fill(dt7re);
+                    #endregion
+                }
+                #endregion
+                #region "6行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox05.Text) && !(unitPriceTextBox05.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 6;
+                    //mainCategory = mainCategoryCode05;
+                    //item = itemCode05;
+                    #region "大分類コード"
+                    DataTable main5dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main5 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox05.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main5, conn);
+                    adapter.Fill(main5dt);
+                    DataRow dataRow10;
+                    dataRow10 = main5dt.Rows[0];
+                    int mainCategory5 = (int)dataRow10["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item5dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item5 = "select * from item_m where item_name = '" + itemComboBox05.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item5, conn);
+                    adapter.Fill(item5dt);
+                    DataRow dataRow11;
+                    dataRow11 = item5dt.Rows[0];
+                    int item5 = (int)dataRow11["item_code"];
+                    #endregion
+                    Detail = itemDetail05.Text;
+                    Weight = decimal.Parse(weightTextBox05.Text);
+                    Count = int.Parse(countTextBox05.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox05.Text);
+                    amount = money5 + money5 * Tax / 100; //decimal.Parse(moneyTextBox05.Text);
+                    Remarks = remarks05.Text;
+
+                    DataTable dt8 = new DataTable();
+                    string sql_str8 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES  ( '" + ControlNumber + "' ,'" + record + "' , " + item5 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory5 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str8, conn);
+                    adapter.Fill(dt8);
+
+                    #region "履歴"
+                    DataTable dt8re = new DataTable();
+                    string sql_str8_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str8_re, conn);
+                    adapter.Fill(dt8re);
+                    #endregion
+                }
+                #endregion
+                #region "7行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox06.Text) && !(unitPriceTextBox06.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 7;
+                    //mainCategory = mainCategoryCode06;
+                    //item = itemCode06;
+                    #region "大分類コード"
+                    DataTable main6dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main6 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox06.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main6, conn);
+                    adapter.Fill(main6dt);
+                    DataRow dataRow12;
+                    dataRow12 = main6dt.Rows[0];
+                    int mainCategory6 = (int)dataRow12["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item6dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item6 = "select * from item_m where item_name = '" + itemComboBox06.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item6, conn);
+                    adapter.Fill(item6dt);
+                    DataRow dataRow13;
+                    dataRow13 = item6dt.Rows[0];
+                    int item6 = (int)dataRow13["item_code"];
+                    #endregion
+                    Detail = itemDetail06.Text;
+                    Weight = decimal.Parse(weightTextBox06.Text);
+                    Count = int.Parse(countTextBox06.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox06.Text);
+                    amount = money6 + money6 * Tax / 100; //decimal.Parse(moneyTextBox06.Text);
+                    Remarks = remarks06.Text;
+
+                    DataTable dt9 = new DataTable();
+                    string sql_str9 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item6 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory6 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str9, conn);
+                    adapter.Fill(dt9);
+
+                    #region "履歴"
+                    DataTable dt9re = new DataTable();
+                    string sql_str9_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str9_re, conn);
+                    adapter.Fill(dt9re);
+                    #endregion
+                }
+                #endregion
+                #region "8行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox07.Text) && !(unitPriceTextBox07.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 8;
+                    //mainCategory = mainCategoryCode07;
+                    //item = itemCode07;
+                    #region "大分類コード"
+                    DataTable main7dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main7 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox07.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main7, conn);
+                    adapter.Fill(main7dt);
+                    DataRow dataRow13;
+                    dataRow13 = main7dt.Rows[0];
+                    int mainCategory7 = (int)dataRow13["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item7dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item7 = "select * from item_m where item_name = '" + itemComboBox07.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item7, conn);
+                    adapter.Fill(item7dt);
+                    DataRow dataRow14;
+                    dataRow14 = item7dt.Rows[0];
+                    int item7 = (int)dataRow14["item_code"];
+                    #endregion
+                    Detail = itemDetail07.Text;
+                    Weight = decimal.Parse(weightTextBox07.Text);
+                    Count = int.Parse(countTextBox07.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox07.Text);
+                    amount = money7 + money7 * Tax / 100; //decimal.Parse(moneyTextBox07.Text);
+                    Remarks = remarks07.Text;
+
+                    DataTable dt10 = new DataTable();
+                    string sql_str10 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item7 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory7 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str10, conn);
+                    adapter.Fill(dt10);
+
+                    #region "履歴"
+                    DataTable dt10re = new DataTable();
+                    string sql_str10_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str10_re, conn);
+                    adapter.Fill(dt10re);
+                    #endregion
+                }
+                #endregion
+                #region "9行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox08.Text) && !(unitPriceTextBox08.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 9;
+                    //mainCategory = mainCategoryCode08;
+                    //item = itemCode08;
+                    #region "大分類コード"
+                    DataTable main8dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main8 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox08.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main8, conn);
+                    adapter.Fill(main8dt);
+                    DataRow dataRow15;
+                    dataRow15 = main8dt.Rows[0];
+                    int mainCategory8 = (int)dataRow15["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item8dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item8 = "select * from item_m where item_name = '" + itemComboBox08.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item8, conn);
+                    adapter.Fill(item8dt);
+                    DataRow dataRow16;
+                    dataRow16 = item8dt.Rows[0];
+                    int item8 = (int)dataRow16["item_code"];
+                    #endregion
+                    Detail = itemDetail08.Text;
+                    Weight = decimal.Parse(weightTextBox08.Text);
+                    Count = int.Parse(countTextBox08.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox08.Text);
+                    amount = money8 + money8 * Tax / 100; //decimal.Parse(moneyTextBox08.Text);
+                    Remarks = remarks08.Text;
+
+                    DataTable dt11 = new DataTable();
+                    string sql_str11 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item8 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory8 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str11, conn);
+                    adapter.Fill(dt11);
+
+                    #region "履歴"
+                    DataTable dt11re = new DataTable();
+                    string sql_str11_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str11_re, conn);
+                    adapter.Fill(dt11re);
+                    #endregion
+                }
+                #endregion
+                #region "10行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox09.Text) && !(unitPriceTextBox09.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 10;
+                    //mainCategory = mainCategoryCode09;
+                    //item = itemCode09;
+                    #region "大分類コード"
+                    DataTable main9dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main9 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox09.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main9, conn);
+                    adapter.Fill(main9dt);
+                    DataRow dataRow17;
+                    dataRow17 = main9dt.Rows[0];
+                    int mainCategory9 = (int)dataRow17["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item9dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item9 = "select * from item_m where item_name = '" + itemComboBox09.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item9, conn);
+                    adapter.Fill(item9dt);
+                    DataRow dataRow18;
+                    dataRow18 = item9dt.Rows[0];
+                    int item9 = (int)dataRow18["item_code"];
+                    #endregion
+                    Detail = itemDetail09.Text;
+                    Weight = decimal.Parse(weightTextBox09.Text);
+                    Count = int.Parse(countTextBox09.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox09.Text);
+                    amount = money9 + money9 * Tax / 100; //decimal.Parse(moneyTextBox09.Text);
+                    Remarks = remarks09.Text;
+
+                    DataTable dt12 = new DataTable();
+                    string sql_str12 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item9 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory9 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str12, conn);
+                    adapter.Fill(dt12);
+
+                    #region "履歴"
+                    DataTable dt12re = new DataTable();
+                    string sql_str12_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str12_re, conn);
+                    adapter.Fill(dt12re);
+                    #endregion
+                }
+                #endregion
+                #region "11行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox010.Text) && !(unitPriceTextBox010.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 11;
+                    //mainCategory = mainCategoryCode010;
+                    //item = itemCode010;
+                    #region "大分類コード"
+                    DataTable main10dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main10 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox010.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main10, conn);
+                    adapter.Fill(main10dt);
+                    DataRow dataRow19;
+                    dataRow19 = main10dt.Rows[0];
+                    int mainCategory10 = (int)dataRow19["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item10dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item10 = "select * from item_m where item_name = '" + itemComboBox010.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item10, conn);
+                    adapter.Fill(item10dt);
+                    DataRow dataRow20;
+                    dataRow20 = item10dt.Rows[0];
+                    int item10 = (int)dataRow20["item_code"];
+                    #endregion
+                    Detail = itemDetail010.Text;
+                    Weight = decimal.Parse(weightTextBox010.Text);
+                    Count = int.Parse(countTextBox010.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox010.Text);
+                    amount = money10 + money10 * Tax / 100; //decimal.Parse(moneyTextBox010.Text);
+                    Remarks = remarks010.Text;
+
+                    DataTable dt13 = new DataTable();
+                    string sql_str13 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item10 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory10 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str13, conn);
+                    adapter.Fill(dt13);
+
+                    #region "履歴"
+                    DataTable dt13re = new DataTable();
+                    string sql_str13_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str13_re, conn);
+                    adapter.Fill(dt13re);
+                    #endregion
+                }
+                #endregion
+                #region "12行目"
+                if (!string.IsNullOrEmpty(unitPriceTextBox011.Text) && !(unitPriceTextBox011.Text == "単価 -> 重量 or 数量"))
+                {
+                    record = 12;
+                    //mainCategory = mainCategoryCode011;
+                    //item = itemCode011;
+                    #region "大分類コード"
+                    DataTable main11dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main11 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox011.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main11, conn);
+                    adapter.Fill(main11dt);
+                    DataRow dataRow21;
+                    dataRow21 = main11dt.Rows[0];
+                    int mainCategory11 = (int)dataRow21["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item11dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item11 = "select * from item_m where item_name = '" + itemComboBox011.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item11, conn);
+                    adapter.Fill(item11dt);
+                    DataRow dataRow22;
+                    dataRow22 = item11dt.Rows[0];
+                    int item11 = (int)dataRow22["item_code"];
+                    #endregion
+                    Detail = itemDetail011.Text;
+                    Weight = decimal.Parse(weightTextBox011.Text);
+                    Count = int.Parse(countTextBox011.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox011.Text);
+                    amount = money11 + money11 * Tax / 100; //decimal.Parse(moneyTextBox011.Text);
+                    Remarks = remarks011.Text;
+
+                    DataTable dt14 = new DataTable();
+                    string sql_str14 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item11 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory11 + ",'" + Detail + "');";
+
+                    adapter = new NpgsqlDataAdapter(sql_str14, conn);
+                    adapter.Fill(dt14);
+
+                    #region "履歴"
+                    DataTable dt14re = new DataTable();
+                    string sql_str14_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+
+
+                    adapter = new NpgsqlDataAdapter(sql_str14_re, conn);
+                    adapter.Fill(dt14re);
+                    #endregion
+                }
+                #endregion
+                #region "13行目"
                 if (!string.IsNullOrEmpty(unitPriceTextBox012.Text) && !(unitPriceTextBox012.Text == "単価 -> 重量 or 数量"))
-            {
-                record = 13;
-                //mainCategory = mainCategoryCode012;
-                //item = itemCode012;
-                #region "大分類コード"
-                DataTable main12dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_main12 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox012.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_main12, conn);
-                adapter.Fill(main12dt);
-                DataRow dataRow23;
-                dataRow23 = main12dt.Rows[0];
-                int mainCategory12 = (int)dataRow23["main_category_code"];
-                #endregion
-                #region "品名コード"
-                DataTable item12dt = new DataTable();
-                conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                string sql_item12 = "select * from item_m where item_name = '" + itemComboBox012.Text + "';";
-                adapter = new NpgsqlDataAdapter(sql_item12, conn);
-                adapter.Fill(item12dt);
-                DataRow dataRow24;
-                dataRow24 = item12dt.Rows[0];
-                int item12 = (int)dataRow24["item_code"];
-                #endregion
-                Detail = itemDetail012.Text;
-                Weight = decimal.Parse(weightTextBox012.Text);
-                Count = int.Parse(countTextBox012.Text);
-                UnitPrice = decimal.Parse(unitPriceTextBox012.Text);
-                amount = money12 + money12 * Tax / 100; //decimal.Parse(moneyTextBox012.Text);
-                Remarks = remarks012.Text;
+                {
+                    record = 13;
+                    //mainCategory = mainCategoryCode012;
+                    //item = itemCode012;
+                    #region "大分類コード"
+                    DataTable main12dt = new DataTable();
+                    //conn.ConnectionString = @"/*Server*/ = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_main12 = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox012.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_main12, conn);
+                    adapter.Fill(main12dt);
+                    DataRow dataRow23;
+                    dataRow23 = main12dt.Rows[0];
+                    int mainCategory12 = (int)dataRow23["main_category_code"];
+                    #endregion
+                    #region "品名コード"
+                    DataTable item12dt = new DataTable();
+                    //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                    string sql_item12 = "select * from item_m where item_name = '" + itemComboBox012.Text + "';";
+                    adapter = new NpgsqlDataAdapter(sql_item12, conn);
+                    adapter.Fill(item12dt);
+                    DataRow dataRow24;
+                    dataRow24 = item12dt.Rows[0];
+                    int item12 = (int)dataRow24["item_code"];
+                    #endregion
+                    Detail = itemDetail012.Text;
+                    Weight = decimal.Parse(weightTextBox012.Text);
+                    Count = int.Parse(countTextBox012.Text);
+                    UnitPrice = decimal.Parse(unitPriceTextBox012.Text);
+                    amount = money12 + money12 * Tax / 100; //decimal.Parse(moneyTextBox012.Text);
+                    Remarks = remarks012.Text;
 
-                DataTable dt15 = new DataTable();
-                string sql_str15 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item12 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory12 + ",'" + Detail + "');";
+                    DataTable dt15 = new DataTable();
+                    string sql_str15 = "Insert into delivery_calc (control_number, record_number, item_code, weight, count, unit_price, amount, remarks, main_category_code, detail ) VALUES ( '" + ControlNumber + "' ,'" + record + "' , " + item12 + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "'," + mainCategory12 + ",'" + Detail + "');";
 
-                adapter = new NpgsqlDataAdapter(sql_str15, conn);
-                adapter.Fill(dt15);
+                    adapter = new NpgsqlDataAdapter(sql_str15, conn);
+                    adapter.Fill(dt15);
 
-                #region "履歴"
-                DataTable dt15re = new DataTable();
-                string sql_str15_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
+                    #region "履歴"
+                    DataTable dt15re = new DataTable();
+                    string sql_str15_re = "Insert into delivery_calc_revisions VALUES ( " + ControlNumber + " ," + record + " , " + mainCategory + "," + item + " , " + Weight + " ,  " + Count + " , " + UnitPrice + " , " + amount + " , '" + Remarks + "','" + Detail + "');";
 
-               
-                adapter = new NpgsqlDataAdapter(sql_str15_re, conn);
-                adapter.Fill(dt15re);
-                #endregion
+                    adapter = new NpgsqlDataAdapter(sql_str15_re, conn);
+                    adapter.Fill(dt15re);
+                    #endregion
                 }
                 #endregion
             }
@@ -14299,7 +14341,7 @@ namespace Flawless_ex
                 this.textBox2.Visible = true;
                 this.label10.Visible = true;
             }
-            
+
             regist++;
         }
 
@@ -14662,7 +14704,9 @@ namespace Flawless_ex
 
             #region"ページ上のお客様情報"
             //法人の場合
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)
             {
@@ -14745,8 +14789,8 @@ namespace Flawless_ex
 
             #region"ページ下のお客様情報"
             //法人の場合
-
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            //conn = postgre.connection();
+            //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)
             {
@@ -15741,7 +15785,21 @@ namespace Flawless_ex
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add( "", "", "総重量", "(SUM)", "総数量", "(SUM)", "", "");
+            //DataTableオブジェクトの作成
+            DataTable dt;
+            dt = new DataTable("DataTable1");
+
+            //はじめの列を作成
+            DataColumn dc;
+            dc = new DataColumn("Column4", typeof(int));
+            dt.Columns.Add(dc);
+
+            //計算列の作成
+            //"Column1"を2倍した値の列とする
+            dc = new DataColumn("Column5", typeof(int));
+            dc.Expression = "Column4 * 2";
+            dt.Columns.Add(dc);
+            //dataGridView1.Rows.Add( "", "", "総重量", "(SUM)", "総数量", "(SUM)", "", "");
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -15760,25 +15818,86 @@ namespace Flawless_ex
         #region "データグリッドビュー"
         private void DataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            ComboBox combo = e.Control as ComboBox;
-            if (combo != null)
+            //表示されているコントロールがDataGridViewComboBoxEditingControlか調べる
+            if (e.Control is DataGridViewComboBoxEditingControl)
             {
-                combo.SelectedIndexChanged -= new EventHandler(DataGridViewComboBoxColumn1_SelectedIndexChanged);
-                combo.SelectedIndexChanged += new EventHandler(DataGridViewComboBoxColumn1_SelectedIndexChanged);
+                DataGridView dgv = (DataGridView)sender;
+
+                //該当する列か調べる
+                if (dgv.CurrentCell.OwningColumn.Name == "Column1")
+                {
+                    //編集のために表示されているコントロールを取得
+                    this.dataGridViewComboBox1 =
+                        (DataGridViewComboBoxEditingControl)e.Control;
+                    //SelectedIndexChangedイベントハンドラを追加
+                    this.dataGridViewComboBox1.SelectedIndexChanged +=
+                        new EventHandler(dataGridViewComboBox1_SelectedIndexChanged);
+                }
+                if (dgv.CurrentCell.OwningColumn.Name == "Column2")
+                {
+                    //編集のために表示されているコントロールを取得
+                    this.dataGridViewComboBox2 =
+                        (DataGridViewComboBoxEditingControl)e.Control;
+                    //SelectedIndexChangedイベントハンドラを追加
+                    this.dataGridViewComboBox2.SelectedIndexChanged +=
+                        new EventHandler(dataGridViewComboBox2_SelectedIndexChanged);
+                }
             }
         }
         #endregion
 
-        /*private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private DataGridViewComboBoxEditingControl dataGridViewComboBox1 = null;
+        private DataGridViewComboBoxEditingControl dataGridViewComboBox2 = null;
+        private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            
-        }*/
-
-        private void DataGridViewComboBoxColumn1_SelectedIndexChanged(object sender,EventArgs e)
-        {
-            if(a > 1)
+            //SelectedIndexChangedイベントハンドラを削除
+            if (this.dataGridViewComboBox1 != null)
             {
-                int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;
+                this.dataGridViewComboBox1.SelectedIndexChanged -=
+                    new EventHandler(dataGridViewComboBox1_SelectedIndexChanged);
+                this.dataGridViewComboBox1 = null;
+            }
+            if (this.dataGridViewComboBox2 != null)
+            {
+                this.dataGridViewComboBox2.SelectedIndexChanged -=
+                    new EventHandler(dataGridViewComboBox2_SelectedIndexChanged);
+                this.dataGridViewComboBox2 = null;
+            }
+        }
+
+        private void dataGridViewComboBox1_SelectedIndexChanged(object sender,EventArgs e)
+        {
+            //選択されたアイテムを表示
+            DataGridViewComboBoxEditingControl cb =
+                (DataGridViewComboBoxEditingControl)sender;
+            main = cb.EditingControlFormattedValue.ToString();
+
+            dt5.Clear();
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+            #region "品名検索"
+            string sql_str3 = "select B.main_category_name, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+            adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+            adapter2.Fill(dt5);
+            #endregion
+        }
+
+        private void dataGridViewComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //選択されたアイテムを表示
+            DataGridViewComboBoxEditingControl cb =
+                (DataGridViewComboBoxEditingControl)sender;
+            item = cb.EditingControlFormattedValue.ToString();
+        }
+
+        private void DataGridViewComboBoxColumn_SelectedIndexChanged(object sender,EventArgs e)
+        {
+            #region "不要"
+            if (a > 1)
+            {
+                /*int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;
                 dt5.Clear();
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
@@ -15787,7 +15906,8 @@ namespace Flawless_ex
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum1 + ";";
                 adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
                 adapter2.Fill(dt5);
-                DataGridViewComboBoxColumn Column2 = (DataGridViewComboBoxColumn)this.Column2;
+
+                //DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
                 Column2.DataSource = dt5;
                 Column2.DisplayMember = "item_name";
                 Column2.ValueMember = "item_code";
@@ -15799,11 +15919,64 @@ namespace Flawless_ex
                 DataRow row = dt5.Rows[0];
                 itemMainCategoryCode = (int)row["main_category_code"];
                 itemCode = (int)row["item_code"];
-                conn.Close();
-            }            
+                string mainCategoryName = row["main_category_name"].ToString();
+                string itemName = row["item_name"].ToString();
+                conn.Close();*/
+            }
+            #endregion
         }
 
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = false;
+        }
+
+        private void ZenginData_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            #region "保留"
+            /*
+            if (a > 1)
+            {                               
+                int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;                
+                dt5.Clear();
+                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+                conn.Open();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum1 + ";";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt5);
+                #endregion                
+
+                //DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
+                Column2.DataSource = dt5;
+                Column2.DisplayMember = "item_name";
+                Column2.ValueMember = "item_code";
+                //DataGridViewComboBoxCell column2 = new DataGridViewComboBoxCell();
+                //column2.DataSource = dt5;
+                //column2.DisplayMember = "item_name";
+                //column2.ValueMember = "item_code";
+                
+                DataRow row = dt5.Rows[0];
+                itemMainCategoryCode = (int)row["main_category_code"];
+                itemCode1 = (int)row["item_code"];
+
+                //itemCode1 = (int)dataGridView1.CurrentRow.Cells[1].Value ;
+                //string mainCategoryName = row["main_category_name"].ToString();
+                //string itemName = row["item_name"].ToString();
+                conn.Close();                
+            }
+            */
+            #endregion
+        }
+
+        private void DataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
 
         }

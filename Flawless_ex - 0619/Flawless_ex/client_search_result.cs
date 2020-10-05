@@ -122,6 +122,7 @@ namespace Flawless_ex
             }
             else { }
             this.Close();
+            statement.AddOwnedForm(client_Search);
             client_Search.Show();
         }
 
@@ -130,7 +131,9 @@ namespace Flawless_ex
             DataTable dt2 = new DataTable();
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             if (type == 0)//法人
             {

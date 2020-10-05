@@ -32,7 +32,8 @@ namespace Flawless_ex
 
         private void AddMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
             conn.Open();
 
             //大分類コード取得
@@ -75,7 +76,9 @@ namespace Flawless_ex
                 DateTime dat = DateTime.Now;
                 dt = new DataTable();
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
 
                 using (transaction = conn.BeginTransaction())
