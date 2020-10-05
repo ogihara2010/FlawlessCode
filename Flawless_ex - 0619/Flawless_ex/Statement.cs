@@ -272,6 +272,7 @@ namespace Flawless_ex
         public int control;
         public string data;
         string item;
+        string main;
         string phone;
         string pass;
         int regist;
@@ -966,11 +967,10 @@ namespace Flawless_ex
                         string sql_document1 = "select * from main_category_m where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_document1, conn);
                         adapter.Fill(dt231);
-                        mainCategoryComboBox1.DataSource = dt231;
-                        mainCategoryComboBox1.DisplayMember = "main_category_name";
-                        mainCategoryComboBox1.ValueMember = "main_category_code";
-                        mainCategoryComboBox1.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox1.SelectedValue = itemMainCategoryCode1;
+                        Column1.DataSource = dt231;
+                        Column1.DisplayMember = "main_category_name";
+                        Column1.ValueMember = "main_category_code";
+                        dataGridView1[0, 1].Value = itemMainCategoryCode1;
                         #endregion
                         #region "品名"
                         //品名検索用
@@ -978,12 +978,13 @@ namespace Flawless_ex
                         string sql_item2 = "select * from item_m  where invalid = 0;";
                         adapter = new NpgsqlDataAdapter(sql_item2, conn);
                         adapter.Fill(dt241);
-                        itemComboBox1.DataSource = dt241;
-                        itemComboBox1.DisplayMember = "item_name";
-                        itemComboBox1.ValueMember = "item_code";
-                        itemComboBox1.SelectedValue = itemCode1;
+                        Column2.DataSource = dt241;
+                        Column2.DisplayMember = "item_name";
+                        Column2.ValueMember = "item_code";
+                        dataGridView1[1, 1].Value = itemCode1;
                         #endregion
                         #endregion
+                        
                         #region "入力された項目 2行目"
                         this.weightTextBox1.Text = dataRow1["weight"].ToString();
                         this.countTextBox1.Text = dataRow1["count"].ToString();
@@ -993,8 +994,13 @@ namespace Flawless_ex
                         moneyTextBox1.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox1.Text, System.Globalization.NumberStyles.Number));
                         this.remarks1.Text = dataRow1["remarks"].ToString();
                         #endregion
+                        
                     }
                     #endregion
+                    */
+                    #endregion
+                    #region "一時コメントアウト"
+                    /*                    
                     #region "3行目"
                     if (St == 2)
                     {
@@ -2257,7 +2263,7 @@ namespace Flawless_ex
             #endregion
             #endregion
             #region "リスト"
-            string sql_strlist = "select distinct on(B.main_category_name) B.main_category_code, B.main_category_name, A.item_code, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code ;";
+            string sql_strlist = "select B.main_category_code, B.main_category_name, A.item_code, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code ;";
             adapter2 = new NpgsqlDataAdapter(sql_strlist, conn);
             adapter2.Fill(dt6);
             #endregion
@@ -2265,7 +2271,7 @@ namespace Flawless_ex
             dataGridView1[0, 0].Value = itemMainCategoryCode;
             dataGridView1[1, 0].Value = itemCode;
             
-            Column1.DataSource = dt6;
+            Column1.DataSource = dt4;
             Column1.DisplayMember = "main_category_name";
             Column1.ValueMember = "main_category_code";
 
@@ -2273,9 +2279,12 @@ namespace Flawless_ex
             Column2.DisplayMember = "item_name";
             Column2.ValueMember = "item_code";
 
+            //dataGridView1.Columns[4] = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+
             //左の入力項目処理
             //string itemDisplay = "item_name";
             //string itemValue = "item_code";
+
             //地金            
             string str_sql_metal = "select * from item_m where main_category_code = 100";
             adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
@@ -2397,7 +2406,6 @@ namespace Flawless_ex
                     label38.Visible = false;
                     registerDateTextBox.Visible = false;
                     #endregion
-
                     #region "納品書"
                     typeTextBox2.Text = "個人";
                     label75.Text = "氏名";
@@ -3188,7 +3196,7 @@ namespace Flawless_ex
                 }
             }
 
-            conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             string DocumentNumber = documentNumberTextBox.Text;
@@ -3427,7 +3435,7 @@ namespace Flawless_ex
             //int item = itemCode0;
            #region "大分類コード"
            DataTable maindt = new DataTable();
-           conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+           conn.ConnectionString = @"Server = 192.168.152.168; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
            string sql_main = "select * from main_category_m where main_category_name = '" + mainCategoryComboBox0.Text + "';";
            adapter = new NpgsqlDataAdapter(sql_main, conn);
            adapter.Fill(maindt);
@@ -3437,7 +3445,7 @@ namespace Flawless_ex
            #endregion
            #region "品名コード"
            DataTable itemdt = new DataTable();
-           conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+           conn.ConnectionString = @"Server = 192.168.152.168; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
            string sql_item = "select * from item_m where item_name = '" + itemComboBox0.Text + "';";
            adapter = new NpgsqlDataAdapter(sql_item, conn);
            adapter.Fill(itemdt);
@@ -15736,7 +15744,21 @@ namespace Flawless_ex
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Add( "", "", "総重量", "(SUM)", "総数量", "(SUM)", "", "");
+            //DataTableオブジェクトの作成
+            DataTable dt;
+            dt = new DataTable("DataTable1");
+
+            //はじめの列を作成
+            DataColumn dc;
+            dc = new DataColumn("Column4", typeof(int));
+            dt.Columns.Add(dc);
+
+            //計算列の作成
+            //"Column1"を2倍した値の列とする
+            dc = new DataColumn("Column5", typeof(int));
+            dc.Expression = "Column4 * 2";
+            dt.Columns.Add(dc);
+            //dataGridView1.Rows.Add( "", "", "総重量", "(SUM)", "総数量", "(SUM)", "", "");
         }
 
         private void DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -15755,26 +15777,84 @@ namespace Flawless_ex
         #region "データグリッドビュー"
         private void DataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            /*ComboBox combo = e.Control as ComboBox;
-            if (combo != null)
+            //表示されているコントロールがDataGridViewComboBoxEditingControlか調べる
+            if (e.Control is DataGridViewComboBoxEditingControl)
             {
-                combo.SelectedIndexChanged -= new EventHandler(DataGridViewComboBoxColumn_SelectedIndexChanged);
-                combo.SelectedIndexChanged += new EventHandler(DataGridViewComboBoxColumn_SelectedIndexChanged);
-            }*/
+                DataGridView dgv = (DataGridView)sender;
+
+                //該当する列か調べる
+                if (dgv.CurrentCell.OwningColumn.Name == "Column1")
+                {
+                    //編集のために表示されているコントロールを取得
+                    this.dataGridViewComboBox1 =
+                        (DataGridViewComboBoxEditingControl)e.Control;
+                    //SelectedIndexChangedイベントハンドラを追加
+                    this.dataGridViewComboBox1.SelectedIndexChanged +=
+                        new EventHandler(dataGridViewComboBox1_SelectedIndexChanged);
+                }
+                if (dgv.CurrentCell.OwningColumn.Name == "Column2")
+                {
+                    //編集のために表示されているコントロールを取得
+                    this.dataGridViewComboBox2 =
+                        (DataGridViewComboBoxEditingControl)e.Control;
+                    //SelectedIndexChangedイベントハンドラを追加
+                    this.dataGridViewComboBox2.SelectedIndexChanged +=
+                        new EventHandler(dataGridViewComboBox2_SelectedIndexChanged);
+                }
+            }
         }
         #endregion
 
+        private DataGridViewComboBoxEditingControl dataGridViewComboBox1 = null;
+        private DataGridViewComboBoxEditingControl dataGridViewComboBox2 = null;
         private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            
+            //SelectedIndexChangedイベントハンドラを削除
+            if (this.dataGridViewComboBox1 != null)
+            {
+                this.dataGridViewComboBox1.SelectedIndexChanged -=
+                    new EventHandler(dataGridViewComboBox1_SelectedIndexChanged);
+                this.dataGridViewComboBox1 = null;
+            }
+            if (this.dataGridViewComboBox2 != null)
+            {
+                this.dataGridViewComboBox2.SelectedIndexChanged -=
+                    new EventHandler(dataGridViewComboBox2_SelectedIndexChanged);
+                this.dataGridViewComboBox2 = null;
+            }
+        }
+
+        private void dataGridViewComboBox1_SelectedIndexChanged(object sender,EventArgs e)
+        {
+            //選択されたアイテムを表示
+            DataGridViewComboBoxEditingControl cb =
+                (DataGridViewComboBoxEditingControl)sender;
+            main = cb.EditingControlFormattedValue.ToString();
+
+            dt5.Clear();
+            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
+            #region "品名検索"
+            string sql_str3 = "select B.main_category_name, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+            adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+            adapter2.Fill(dt5);
+            #endregion
+        }
+
+        private void dataGridViewComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //選択されたアイテムを表示
+            DataGridViewComboBoxEditingControl cb =
+                (DataGridViewComboBoxEditingControl)sender;
+            item = cb.EditingControlFormattedValue.ToString();
         }
 
         private void DataGridViewComboBoxColumn_SelectedIndexChanged(object sender,EventArgs e)
         {
-            /*
-            if(a > 1)
+            #region "不要"
+            if (a > 1)
             {
-                int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;
+                /*int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;
                 dt5.Clear();
                 conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
@@ -15784,7 +15864,7 @@ namespace Flawless_ex
                 adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
                 adapter2.Fill(dt5);
 
-                DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
+                //DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
                 Column2.DataSource = dt5;
                 Column2.DisplayMember = "item_name";
                 Column2.ValueMember = "item_code";
@@ -15798,8 +15878,9 @@ namespace Flawless_ex
                 itemCode = (int)row["item_code"];
                 string mainCategoryName = row["main_category_name"].ToString();
                 string itemName = row["item_name"].ToString();
-                conn.Close();
-            }*/            
+                conn.Close();*/
+            }
+            #endregion
         }
 
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -15814,6 +15895,8 @@ namespace Flawless_ex
 
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            #region "保留"
+            /*
             if (a > 1)
             {                               
                 int codeNum1 = (int)dataGridView1.CurrentRow.Cells[0].Value;                
@@ -15826,25 +15909,33 @@ namespace Flawless_ex
                 string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum1 + ";";
                 adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
                 adapter2.Fill(dt5);
-                #endregion
+                #endregion                
 
-
-                DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
+                //DataGridViewComboBoxColumn Column2 = new DataGridViewComboBoxColumn();
                 Column2.DataSource = dt5;
                 Column2.DisplayMember = "item_name";
                 Column2.ValueMember = "item_code";
-                DataGridViewComboBoxCell column2 = new DataGridViewComboBoxCell();
-                column2.DataSource = dt5;
-                column2.DisplayMember = "item_name";
-                column2.ValueMember = "item_code";
-
+                //DataGridViewComboBoxCell column2 = new DataGridViewComboBoxCell();
+                //column2.DataSource = dt5;
+                //column2.DisplayMember = "item_name";
+                //column2.ValueMember = "item_code";
+                
                 DataRow row = dt5.Rows[0];
                 itemMainCategoryCode = (int)row["main_category_code"];
                 itemCode1 = (int)row["item_code"];
+
+                //itemCode1 = (int)dataGridView1.CurrentRow.Cells[1].Value ;
                 //string mainCategoryName = row["main_category_name"].ToString();
                 //string itemName = row["item_name"].ToString();
-                conn.Close();                                 
+                conn.Close();                
             }
+            */
+            #endregion
+        }
+
+        private void DataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+
         }
     }
 }

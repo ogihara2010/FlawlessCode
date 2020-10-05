@@ -45,11 +45,11 @@ namespace Flawless_ex
         string kana;
         int grade;
 
-        public client_add(MainMenu mainMenu, int id, int type, string Access_auth, string Pass)
+        public client_add(Statement statement, int id, int type, string Access_auth, string Pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
-            //this.statement = statement;
+            this.statement = statement;
             staff_id = id;
             this.access_auth = Access_auth;
             this.pass = Pass;
@@ -62,6 +62,7 @@ namespace Flawless_ex
             screan = false;
             this.Close();
             this.data = client_Search.data;
+            statement.AddOwnedForm(client_Search);
             client_Search.Show();
         }
 

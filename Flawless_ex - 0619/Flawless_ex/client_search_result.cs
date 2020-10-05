@@ -122,6 +122,7 @@ namespace Flawless_ex
             }
             else { }
             this.Close();
+            statement.AddOwnedForm(client_Search);
             client_Search.Show();
         }
 
