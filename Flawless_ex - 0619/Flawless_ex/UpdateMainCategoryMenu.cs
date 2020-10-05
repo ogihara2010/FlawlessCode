@@ -39,7 +39,8 @@ namespace Flawless_ex
 
         private void UpdateMainCategoryMenu_Load(object sender, EventArgs e)
         {
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
 
             string sql_str = "select* from main_category_m where main_category_code = " + mainCode + "";
 
@@ -85,7 +86,8 @@ namespace Flawless_ex
                 return;
             }
             //大分類名・理由入力済みかつYes
-            conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
             conn.Open();
 
             using (transaction = conn.BeginTransaction())
@@ -136,7 +138,9 @@ namespace Flawless_ex
                 mainName = mainCategoryNameTextBox.Text;
                 reason = reasonText.Text;
 
-                conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
                 conn.Open();
 
                 string sql_str = "update main_category_m set main_category_name = '" + mainName + "' where main_category_code = " + mainCode + ";";

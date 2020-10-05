@@ -45,11 +45,11 @@ namespace Flawless_ex
         string kana;
         int grade;
 
-        public client_add(MainMenu mainMenu, int id, int type, string Access_auth, string Pass)
+        public client_add(Statement statement, int id, int type, string Access_auth, string Pass)
         {
             InitializeComponent();
             this.mainMenu = mainMenu;
-            //this.statement = statement;
+            this.statement = statement;
             staff_id = id;
             this.access_auth = Access_auth;
             this.pass = Pass;
@@ -62,6 +62,7 @@ namespace Flawless_ex
             screan = false;
             this.Close();
             this.data = client_Search.data;
+            statement.AddOwnedForm(client_Search);
             client_Search.Show();
         }
 
@@ -120,7 +121,9 @@ namespace Flawless_ex
                 "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
                0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_id + ");";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -185,7 +188,9 @@ namespace Flawless_ex
                "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
               0 + ",'" + AolFinancialShareholder + "');";
 
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);

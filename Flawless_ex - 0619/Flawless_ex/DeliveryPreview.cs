@@ -75,7 +75,9 @@ namespace Flawless_ex
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
                 //NpgsqlDataAdapter adapter2;
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select * from delivery_m where control_number =" + control + ";";
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -95,7 +97,9 @@ namespace Flawless_ex
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
-                conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+                //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str = "select * from delivery_m where control_number = " + control + ";";
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -122,7 +126,9 @@ namespace Flawless_ex
             #region "納品書 下の部分"
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
-            conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from delivery_m where control_number =" + control + ";";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -152,7 +158,8 @@ namespace Flawless_ex
             #region "納品書　表の部分"
             NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
-            conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn2 = postgre.connection();
+            //conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str2 = "select * from delivery_calc where control_number =" + control + ";";
             adapter2 = new NpgsqlDataAdapter(sql_str2, conn2);
@@ -171,7 +178,8 @@ namespace Flawless_ex
                 #region "再度開く"
                 NpgsqlConnection conn5 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter5;
-                conn5.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn5 = postgre.connection();
+                //conn5.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str5 = "select * from delivery_calc where control_number =" + control + " and record_number = " + b + ";";
                 adapter5 = new NpgsqlDataAdapter(sql_str5, conn5);
@@ -192,7 +200,8 @@ namespace Flawless_ex
                 #region "大分類"
                 NpgsqlConnection conn3 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter3;
-                conn3.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn3 = postgre.connection();
+                //conn3.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str3 = "select * from main_category_m where main_category_code =" + category + ";";
                 adapter3 = new NpgsqlDataAdapter(sql_str3, conn3);
@@ -206,7 +215,8 @@ namespace Flawless_ex
                 #region "品名"
                 NpgsqlConnection conn4 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter4;
-                conn4.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn4 = postgre.connection();
+                //conn4.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str4 = "select * from item_m where item_code =" + item + ";";
                 adapter4 = new NpgsqlDataAdapter(sql_str4, conn4);
@@ -377,7 +387,8 @@ namespace Flawless_ex
             {
                 NpgsqlConnection connA = new NpgsqlConnection();
                 NpgsqlDataAdapter adapterA;
-                connA.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                connA = postgre.connection();
+                //connA.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_antique = "select * from delivery_m where staff_code =" + staff_id + ";";
                 adapterA = new NpgsqlDataAdapter(sql_antique, connA);
@@ -389,7 +400,8 @@ namespace Flawless_ex
 
                 NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
-                conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn6 = postgre.connection();
+                //conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + types + " and antique_number = " + AntiqueNumber + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
@@ -413,7 +425,8 @@ namespace Flawless_ex
             {
                 NpgsqlConnection connI = new NpgsqlConnection();
                 NpgsqlDataAdapter adapterI;
-                connI.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                connI = postgre.connection();
+                //connI.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_id = "select * from delivery_m where staff_code =" + staff_id + ";";
                 adapterI = new NpgsqlDataAdapter(sql_id, connI);
@@ -425,7 +438,8 @@ namespace Flawless_ex
 
                 NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
-                conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                conn6 = postgre.connection();
+                //conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
                 string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + types + " and id_number = " + ID + ";";
                 adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
