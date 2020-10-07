@@ -653,7 +653,6 @@ namespace Flawless_ex
 
             #region"右の表"
 
-
             //担当者ごとの大分類の初期値を先頭に
             #region"大分類出力"
             sql_str = "select * from main_category_m where invalid = 0 order by main_category_code;";
@@ -770,14 +769,13 @@ namespace Flawless_ex
             }
             #endregion
 
-
             //品名検索用
             string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + MainCategoryCode + ";";
             adapter = new NpgsqlDataAdapter(sql_str3, conn);
             adapter.Fill(data);
 
             #region"品名出力"
-            sql_str = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where main_category_m.main_category_code = '100' order by main_category_m.main_category_code;";
+            sql_str = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where main_category_m.main_category_code = '"+MainCategoryCode+"' order by main_category_m.main_category_code;";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt1);
             for (int i = 0; i < ChangeCount; i++)
