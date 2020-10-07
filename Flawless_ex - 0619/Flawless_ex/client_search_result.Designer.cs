@@ -63,25 +63,25 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 109);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridView1.Location = new System.Drawing.Point(59, 200);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1065, 427);
+            this.dataGridView1.Size = new System.Drawing.Size(2130, 854);
             this.dataGridView1.TabIndex = 8;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(349, 26);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(698, 52);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(391, 60);
+            this.label1.Size = new System.Drawing.Size(776, 120);
             this.label1.TabIndex = 7;
             this.label1.Text = "検索結果一覧";
             // 
@@ -89,10 +89,10 @@
             // 
             this.selectionButton.BackColor = System.Drawing.Color.LightCyan;
             this.selectionButton.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.selectionButton.Location = new System.Drawing.Point(854, 567);
-            this.selectionButton.Margin = new System.Windows.Forms.Padding(2);
+            this.selectionButton.Location = new System.Drawing.Point(1708, 1134);
+            this.selectionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.selectionButton.Name = "selectionButton";
-            this.selectionButton.Size = new System.Drawing.Size(233, 92);
+            this.selectionButton.Size = new System.Drawing.Size(466, 184);
             this.selectionButton.TabIndex = 6;
             this.selectionButton.Text = "選択";
             this.selectionButton.UseVisualStyleBackColor = false;
@@ -102,10 +102,10 @@
             // 
             this.returnButton.BackColor = System.Drawing.Color.LightCyan;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.returnButton.Location = new System.Drawing.Point(22, 567);
-            this.returnButton.Margin = new System.Windows.Forms.Padding(2);
+            this.returnButton.Location = new System.Drawing.Point(44, 1134);
+            this.returnButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(207, 92);
+            this.returnButton.Size = new System.Drawing.Size(414, 184);
             this.returnButton.TabIndex = 5;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = false;
@@ -113,16 +113,16 @@
             // 
             // client_search_result
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1111, 684);
+            this.ClientSize = new System.Drawing.Size(2222, 1368);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.selectionButton);
             this.Controls.Add(this.returnButton);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "client_search_result";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "顧客選択メニュー　検索結果一覧";

@@ -64,10 +64,10 @@
             // 
             this.search1.BackColor = System.Drawing.Color.LightCyan;
             this.search1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.search1.Location = new System.Drawing.Point(694, 274);
-            this.search1.Margin = new System.Windows.Forms.Padding(2);
+            this.search1.Location = new System.Drawing.Point(1388, 548);
+            this.search1.Margin = new System.Windows.Forms.Padding(4);
             this.search1.Name = "search1";
-            this.search1.Size = new System.Drawing.Size(166, 80);
+            this.search1.Size = new System.Drawing.Size(332, 160);
             this.search1.TabIndex = 11;
             this.search1.Text = "検索";
             this.search1.UseVisualStyleBackColor = false;
@@ -78,11 +78,11 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tabControl1.Location = new System.Drawing.Point(2, 15);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Location = new System.Drawing.Point(4, 30);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(858, 246);
+            this.tabControl1.Size = new System.Drawing.Size(1716, 492);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 10;
             // 
@@ -90,11 +90,11 @@
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 36);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage1.Location = new System.Drawing.Point(10, 71);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(850, 206);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1696, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "法人";
             // 
@@ -113,51 +113,51 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 8);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(842, 190);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1684, 380);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // clientNameTextBox
             // 
             this.clientNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clientNameTextBox.Location = new System.Drawing.Point(250, 3);
-            this.clientNameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.clientNameTextBox.Location = new System.Drawing.Point(499, 5);
+            this.clientNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.clientNameTextBox.Name = "clientNameTextBox";
-            this.clientNameTextBox.Size = new System.Drawing.Size(589, 34);
+            this.clientNameTextBox.Size = new System.Drawing.Size(1180, 60);
             this.clientNameTextBox.TabIndex = 3;
             // 
             // shopNameTextBox
             // 
             this.shopNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.shopNameTextBox.Location = new System.Drawing.Point(250, 50);
-            this.shopNameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.shopNameTextBox.Location = new System.Drawing.Point(499, 99);
+            this.shopNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.shopNameTextBox.Name = "shopNameTextBox";
-            this.shopNameTextBox.Size = new System.Drawing.Size(589, 34);
+            this.shopNameTextBox.Size = new System.Drawing.Size(1180, 60);
             this.shopNameTextBox.TabIndex = 3;
             // 
             // clientStaffNameTextBox
             // 
             this.clientStaffNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clientStaffNameTextBox.Location = new System.Drawing.Point(250, 97);
-            this.clientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.clientStaffNameTextBox.Location = new System.Drawing.Point(499, 193);
+            this.clientStaffNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.clientStaffNameTextBox.Name = "clientStaffNameTextBox";
-            this.clientStaffNameTextBox.Size = new System.Drawing.Size(589, 34);
+            this.clientStaffNameTextBox.Size = new System.Drawing.Size(1180, 60);
             this.clientStaffNameTextBox.TabIndex = 3;
             // 
             // addressTextBox
             // 
             this.addressTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.addressTextBox.Location = new System.Drawing.Point(250, 144);
-            this.addressTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.addressTextBox.Location = new System.Drawing.Point(499, 287);
+            this.addressTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.addressTextBox.Name = "addressTextBox";
-            this.addressTextBox.Size = new System.Drawing.Size(589, 34);
+            this.addressTextBox.Size = new System.Drawing.Size(1180, 60);
             this.addressTextBox.TabIndex = 3;
             // 
             // label1
@@ -165,10 +165,10 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(3, 1);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(5, 1);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(242, 46);
+            this.label1.Size = new System.Drawing.Size(485, 93);
             this.label1.TabIndex = 3;
             this.label1.Text = "会社名";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -176,10 +176,10 @@
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 95);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(5, 189);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(242, 46);
+            this.label3.Size = new System.Drawing.Size(485, 93);
             this.label3.TabIndex = 3;
             this.label3.Text = "担当者名";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -187,10 +187,10 @@
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 48);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(5, 95);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(242, 46);
+            this.label2.Size = new System.Drawing.Size(485, 93);
             this.label2.TabIndex = 3;
             this.label2.Text = "店舗名";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -198,10 +198,10 @@
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 142);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(5, 283);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(242, 47);
+            this.label4.Size = new System.Drawing.Size(485, 96);
             this.label4.TabIndex = 3;
             this.label4.Text = "住所";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -210,11 +210,11 @@
             // 
             this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.tabPage2.Controls.Add(this.tableLayoutPanel2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 36);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage2.Location = new System.Drawing.Point(10, 71);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(850, 206);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1696, 411);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "個人";
             // 
@@ -231,23 +231,23 @@
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.groupBox1, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(8, 8);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(842, 178);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1684, 356);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 60);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(5, 119);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(242, 58);
+            this.label6.Size = new System.Drawing.Size(485, 117);
             this.label6.TabIndex = 0;
             this.label6.Text = "住所";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -255,28 +255,28 @@
             // inameTextBox
             // 
             this.inameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inameTextBox.Location = new System.Drawing.Point(250, 3);
-            this.inameTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.inameTextBox.Location = new System.Drawing.Point(499, 5);
+            this.inameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.inameTextBox.Name = "inameTextBox";
-            this.inameTextBox.Size = new System.Drawing.Size(589, 34);
+            this.inameTextBox.Size = new System.Drawing.Size(1180, 60);
             this.inameTextBox.TabIndex = 0;
             // 
             // iaddressTextBox
             // 
             this.iaddressTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.iaddressTextBox.Location = new System.Drawing.Point(250, 62);
-            this.iaddressTextBox.Margin = new System.Windows.Forms.Padding(2);
+            this.iaddressTextBox.Location = new System.Drawing.Point(499, 123);
+            this.iaddressTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.iaddressTextBox.Name = "iaddressTextBox";
-            this.iaddressTextBox.Size = new System.Drawing.Size(589, 34);
+            this.iaddressTextBox.Size = new System.Drawing.Size(1180, 60);
             this.iaddressTextBox.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 119);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Location = new System.Drawing.Point(5, 237);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(242, 58);
+            this.label7.Size = new System.Drawing.Size(485, 118);
             this.label7.TabIndex = 0;
             this.label7.Text = "古物商許可証";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -285,11 +285,11 @@
             // 
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(250, 121);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(499, 241);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(271, 54);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(542, 108);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
@@ -297,10 +297,10 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(91, 18);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton2.Location = new System.Drawing.Point(182, 36);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(76, 31);
+            this.radioButton2.Size = new System.Drawing.Size(143, 57);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "なし";
@@ -309,10 +309,10 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(4, 18);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
+            this.radioButton1.Location = new System.Drawing.Point(8, 36);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(72, 31);
+            this.radioButton1.Size = new System.Drawing.Size(136, 57);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.Text = "あり";
             this.radioButton1.UseVisualStyleBackColor = true;
@@ -320,10 +320,10 @@
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 1);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(5, 1);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(242, 58);
+            this.label5.Size = new System.Drawing.Size(485, 117);
             this.label5.TabIndex = 0;
             this.label5.Text = "氏名";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -332,10 +332,10 @@
             // 
             this.returnButton.BackColor = System.Drawing.Color.MistyRose;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.returnButton.Location = new System.Drawing.Point(10, 274);
-            this.returnButton.Margin = new System.Windows.Forms.Padding(2);
+            this.returnButton.Location = new System.Drawing.Point(20, 548);
+            this.returnButton.Margin = new System.Windows.Forms.Padding(4);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(150, 80);
+            this.returnButton.Size = new System.Drawing.Size(300, 160);
             this.returnButton.TabIndex = 9;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = false;
@@ -345,10 +345,10 @@
             // 
             this.button1.BackColor = System.Drawing.Color.LightCyan;
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(336, 274);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(672, 548);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(210, 80);
+            this.button1.Size = new System.Drawing.Size(420, 160);
             this.button1.TabIndex = 12;
             this.button1.Text = "新規登録";
             this.button1.UseVisualStyleBackColor = false;
@@ -356,20 +356,19 @@
             // 
             // client_search
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(867, 360);
+            this.ClientSize = new System.Drawing.Size(1734, 720);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.search1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.returnButton);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "client_search";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "顧客選択メニュー";
-            this.Load += new System.EventHandler(this.client_search2_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

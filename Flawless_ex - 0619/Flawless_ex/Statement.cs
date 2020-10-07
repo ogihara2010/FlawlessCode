@@ -121,6 +121,7 @@ namespace Flawless_ex
         decimal subSum;     //税抜き時の合計金額用
         decimal sub;          //計算書の小計、合計
         decimal SUB;           //納品書の小計、合計
+        decimal taxAmount;
         decimal sum;          //税込み時の合計金額用
         decimal TaxAmount;  //税額
         public DataTable clientDt = new DataTable();//顧客情報
@@ -398,7 +399,9 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
 
-        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control, string data, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string antiqueNumber, string documentNumber, string address1, int Grade)
+        public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control,
+            string data, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA,
+            string amountB, string antiqueNumber, string documentNumber, string address1, int Grade)
         {
             InitializeComponent();
             staff_id = id;
@@ -7932,27 +7935,14 @@ namespace Flawless_ex
             }
             else
             {
-
                 if (comboBox11.SelectedIndex == 1)      //税抜き選択
                 {
-                    //subSum = decimal.Parse(sub10.ToString()) + decimal.Parse(sub11.ToString()) + decimal.Parse(sub12.ToString()) + decimal.Parse(sub13.ToString()) + decimal.Parse(sub14.ToString())
-                    //        + decimal.Parse(sub15.ToString()) + decimal.Parse(sub16.ToString()) + decimal.Parse(sub17.ToString()) + decimal.Parse(sub18.ToString()) + decimal.Parse(sub19.ToString())
-                    //        + decimal.Parse(sub110.ToString()) + decimal.Parse(sub111.ToString()) + decimal.Parse(sub112.ToString());
-
-                    //sum = subSum + subSum * Tax / 100;
-                    //subTotal2.Text = string.Format("{0:#,0}", Math.Round(subSum, MidpointRounding.AwayFromZero));    //税抜き表記
+                    subTotal2.Text = (SUB - taxAmount).ToString("n0");
                 }
                 else        //税込み選択
                 {
-                    //subSum = decimal.Parse(sub00.ToString()) + decimal.Parse(sub01.ToString()) + decimal.Parse(sub02.ToString()) + decimal.Parse(sub03.ToString()) + decimal.Parse(sub04.ToString())
-                    //        + decimal.Parse(sub05.ToString()) + decimal.Parse(sub06.ToString()) + decimal.Parse(sub07.ToString()) + decimal.Parse(sub08.ToString()) + decimal.Parse(sub09.ToString())
-                    //        + decimal.Parse(sub010.ToString()) + decimal.Parse(sub011.ToString()) + decimal.Parse(sub012.ToString());
-
-                    //sum = subSum;
-                    //subTotal2.Text = string.Format("{0:#,0}", Math.Round(subSum, MidpointRounding.AwayFromZero));    //税込み表記
+                    subTotal2.Text = SUB.ToString("n0");
                 }
-                //sumTextBox2.Text = string.Format("{0:#,0}", Math.Round(sum, MidpointRounding.AwayFromZero));
-                //taxAmount2.Text = string.Format("{0:C}", Math.Round(TaxAmount, MidpointRounding.AwayFromZero));
             }
         }
         #endregion
@@ -16093,7 +16083,8 @@ namespace Flawless_ex
                         SUB += weight * unitprice;
                         subTotal2.Text = SUB.ToString("c0");
                         sumTextBox2.Text = SUB.ToString("c0");
-                        taxAmount2.Text = (SUB - (SUB * 10 / 11)).ToString("n0");
+                        taxAmount = SUB - (SUB * 10 / 11);
+                        taxAmount2.Text = taxAmount.ToString("n0");
                     }
                     cellfirst = true;
                 }
@@ -16111,7 +16102,8 @@ namespace Flawless_ex
                         SUB += Count * unitprice;
                         subTotal2.Text = SUB.ToString("c0");
                         sumTextBox2.Text = SUB.ToString("c0");
-                        taxAmount2.Text = (SUB - (SUB * 10 / 11)).ToString("n0");
+                        taxAmount = SUB - (SUB * 10 / 11);
+                        taxAmount2.Text = taxAmount.ToString("n0");
                     }
                     cellfirst = true;
                 }
@@ -16120,7 +16112,8 @@ namespace Flawless_ex
                 if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value == null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[7, e.RowIndex].Value != null)
                 {
                     SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(0));
-                    taxAmount2.Text = (SUB - (SUB * 10 / 11)).ToString("n0");
+                    taxAmount = SUB - (SUB * 10 / 11);
+                    taxAmount2.Text = taxAmount.ToString("n0");
                     subTotal2.Text = SUB.ToString("c0");
                     sumTextBox2.Text = SUB.ToString("c0");
                     dataGridView2[7, e.RowIndex].Value = null;
@@ -16188,7 +16181,8 @@ namespace Flawless_ex
                         SUB -= decimal.Parse(dataGridView2.Rows[i].Cells[7].Value.ToString().Substring(1));
                         subTotal2.Text = SUB.ToString("c0");
                         sumTextBox2.Text = SUB.ToString("c0");
-                        taxAmount2.Text = (SUB - (SUB * 10 / 11)).ToString("n0");
+                        taxAmount = SUB - (SUB * 10 / 11);
+                        taxAmount2.Text = taxAmount.ToString("n0");
                     }
                         dataGridView2.Rows.RemoveAt(i);
                     i--;
