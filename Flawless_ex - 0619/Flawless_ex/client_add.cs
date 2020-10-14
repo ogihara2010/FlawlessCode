@@ -16,6 +16,8 @@ namespace Flawless_ex
         Statement statement;
         MainMenu mainMenu;
         DataTable dt = new DataTable();
+        NpgsqlCommand cmd;
+        NpgsqlDataReader reader;
         int staff_id;
         int type;
         string staff_name;
@@ -26,6 +28,10 @@ namespace Flawless_ex
         int control;
         bool screan;
         public string data;
+        string path = "";
+
+        int ClientCode;             //顧客コード
+
         #region "買取販売履歴"
         string name1;
         string phoneNumber1;
@@ -48,7 +54,7 @@ namespace Flawless_ex
         public client_add(Statement statement, int id, int type, string Access_auth, string Pass)
         {
             InitializeComponent();
-            this.mainMenu = mainMenu;
+            //this.mainMenu = mainMenu;
             this.statement = statement;
             staff_id = id;
             this.access_auth = Access_auth;
@@ -77,11 +83,87 @@ namespace Flawless_ex
         #region "法人　登録"
         private void Button5_Click(object sender, EventArgs e)
         {
+            #region"必須項目"
+            if (string.IsNullOrEmpty(textBox2.Text))
+            {
+                MessageBox.Show("会社名を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox3.Text))
+            {
+                MessageBox.Show("会社名のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox23.Text))
+            {
+                MessageBox.Show("古物番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(PostalUpCordTextBox.Text))
+            {
+                MessageBox.Show("郵便番号の上半分を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(PostalDownCordTextBox.Text))
+            {
+                MessageBox.Show("郵便番号の下半分を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox5.Text))
+            {
+                MessageBox.Show("住所を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox6.Text))
+            {
+                MessageBox.Show("住所のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox9.Text))
+            {
+                MessageBox.Show("電話番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox12.Text))
+            {
+                MessageBox.Show("担当者名義を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox24.Text))
+            {
+                MessageBox.Show("身分証明書を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox21.Text))
+            {
+                MessageBox.Show("登記簿謄本を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox22.Text))
+            {
+                MessageBox.Show("古物商許可証を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            #endregion
+
             string RegistrationDate = this.deliveryDateBox.Text;
             string CompanyName = this.textBox2.Text;
             string CompanyNameKana = this.textBox3.Text;
             
-            string PostalCodeNumber = this.PostalUpCordTextBox.Text;
+            string PostalUPCoreNumber = PostalUpCordTextBox.Text;
+            string PostalDownCordNumber = PostalDownCordTextBox.Text;
             
             string Address = this.textBox5.Text;
             string AddressKana = this.textBox6.Text;
@@ -104,7 +186,7 @@ namespace Flawless_ex
             int AntiqueNumber = int.Parse(this.textBox23.Text);
             string ID = this.textBox24.Text;
 
-            string PeriodStay = this.textBox46.Text;
+            string PeriodStay = periodStayDateTimePicker.Text;
             
             string SealCertification = this.textBox26.Text;
             string TaxCertification = this.textBox27.Text;
@@ -113,18 +195,44 @@ namespace Flawless_ex
             string AolFinancialShareholder = textBox25.Text;
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
+
+            if (string.IsNullOrEmpty(ResidenceCard))
+            {
+                PeriodStay = "";
+            }
+
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-
-            string sql_str = "Insert into client_m_corporate VALUES (" + 0 + " , '" + RegistrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' , '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' , '" + PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName +
-                "' , '" + EmailAddress + "', '" + URLinfor + "', '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
-               0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_id + ");";
-
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
             conn.Open();
+
+            string sql = "select code from client_m order by code;";
+            cmd = new NpgsqlCommand(sql, conn);
+
+            using(reader=cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ClientCode = (int)reader["code"];
+                }
+            }
+
+            ClientCode++;
+
+            string sql_str = "Insert into client_m (type, registration_date, company_name, company_kana, shop_name, shop_name_kana, antique_number," +
+                " address, address_kana, phone_number, fax_number, position, staff_name, email_address, url_infor, bank_name, branch_name, deposit_type," +
+                " account_number, account_name, account_name_kana, remarks, id, register_date, antique_license, tax_certificate, residence_card, period_stay," +
+                " seal_certification, invalid, aol_financial_shareholder, register_copy, insert_name, postal_code1, postal_code2, code)" +
+                " VALUES (" + 0 + " , '" + RegistrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' ," +
+                " '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' , '" + Address + "' , '" + AddressKana + "' ," +
+                " '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName + "' , '" + EmailAddress + "', '" + URLinfor + "'," +
+                " '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' ," +
+                " '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "'," +
+                "'" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_id + ",'" + PostalUPCoreNumber + "'," +
+                "'" + PostalDownCordNumber + "','" + ClientCode + "');";
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
@@ -132,7 +240,8 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
+            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1,
+                phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
         }
@@ -140,6 +249,74 @@ namespace Flawless_ex
         #region "個人　登録"
         private void Button18_Click(object sender, EventArgs e)
         {
+            #region"必須項目"
+            if (string.IsNullOrEmpty(textBox56.Text))
+            {
+                MessageBox.Show("氏名を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox55.Text))
+            {
+                MessageBox.Show("氏名のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox50.Text))
+            {
+                MessageBox.Show("生年月日を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(PostalUpCordTextBox2.Text))
+            {
+                MessageBox.Show("郵便番号の上半分を入力しください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(PostalDownCordTextBox2.Text))
+            {
+                MessageBox.Show("郵便番号の下半分を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox53.Text))
+            {
+                MessageBox.Show("住所を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox52.Text))
+            {
+                MessageBox.Show("住所のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox49.Text))
+            {
+                MessageBox.Show("電話番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox41.Text))
+            {
+                MessageBox.Show("職業を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox34.Text))
+            {
+                MessageBox.Show("身分証番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(textBox35.Text))
+            {
+                MessageBox.Show("顔つき身分証を登録してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            #endregion
+
             DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
 
             if (dr == DialogResult.No)
@@ -153,7 +330,8 @@ namespace Flawless_ex
 
             string Birthday = this.textBox50.Text;
 
-            string PostalCodeNumber = this.PostalUpCordTextBox2.Text;
+            string PostalCodeUpNumber = this.PostalUpCordTextBox2.Text;
+            string PostalCodeDownNumber = PostalDownCordTextBox2.Text;
             
             string Address = this.textBox53.Text;
             string AddressKana = this.textBox52.Text;
@@ -171,27 +349,52 @@ namespace Flawless_ex
             string Antiquelicense = this.textBox36.Text;
             string PhotoID = this.textBox35.Text;
             string ID = this.textBox34.Text;
-            
-            string PeriodStay = this.textBox47.Text;
+
+            string PeriodStay = periodStayDateTimePicker1.Text;
             
             string SealCertification = this.textBox32.Text;
             string TaxCertification = this.textBox31.Text;
             string Remarks = this.textBox58.Text;
             string ResidenceCard = this.textBox30.Text;
             string AolFinancialShareholder = textBox33.Text;
+
+            if (string.IsNullOrEmpty(ResidenceCard))
+            {
+                PeriodStay = "";
+            }
+
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
+
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            string sql_str = "Insert into client_m_individual VALUES (" + 1 + " , '" + RegistrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + Birthday + "' , '" + PostalCodeNumber + "', '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation +
-               "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," +
-              0 + ",'" + AolFinancialShareholder + "');";
-
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
             conn.Open();
+
+            string sql = "select code from client_m order by code;";
+            cmd = new NpgsqlCommand(sql, conn);
+
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ClientCode = (int)reader["code"];
+                }
+            }
+
+            ClientCode++;
+
+            string sql_str = "Insert into client_m (type, registration_date, name, name_kana, birthday, address, address_kana, phone_number, fax_number, email_address, occupation," +
+                " bank_name, branch_name, deposit_type, account_number, account_name, account_name_kana, id_number, remarks, register_copy, antique_license, id, tax_certificate, residence_card," +
+                " period_stay, seal_certification, invalid, aol_financial_shareholder, postal_code1, postal_code2, code, insert_name )" +
+                " VALUES (" + 1 + " , '" + RegistrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + Birthday + "' , '" + Address + "' , '" + AddressKana + "' ," +
+                " '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation + "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , " +
+                "'" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "'," +
+                "'" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "'," +
+                "'"+PostalCodeUpNumber+"','"+PostalCodeDownNumber+"','"+ClientCode+"','"+staff_id+"');";
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
@@ -199,7 +402,8 @@ namespace Flawless_ex
             type = 1;
             staff_name = Name;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
+            statement.ClientCode = ClientCode;
+            //Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
         }
@@ -457,6 +661,303 @@ namespace Flawless_ex
 
             textBox17.Text = stringBuilder.ToString();
             textBox17.Select(textBox17.Text.Length, 0);
+        }
+
+
+        //画像選択（法人）
+        private void IdentificationButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox24.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox22.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void registeredCopyButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox21.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void taxCertificateButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox27.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void aolButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox25.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void residenceCardButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox29.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void sealCertificateButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox26.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        //画像の選択（個人）
+        private void registerCopyButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox37.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void antiqueLicenseButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox36.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void IdentificationButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox35.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void taxCertificateButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox31.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void aolButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox33.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void residenceButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox30.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void sealCertificateButton1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+
+            op.Title = "ファイルを開く";
+            op.InitialDirectory = @"C:\Users\fpadmin\Desktop";
+            op.Filter = "すべてのファイル(*.*)|*.*";
+            op.FilterIndex = 1;
+
+            DialogResult dialog = op.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                path = op.FileName;
+                textBox32.Text = path;
+            }
+            else if (dialog == DialogResult.Cancel)
+            {
+                return;
+            }
         }
     }
 }

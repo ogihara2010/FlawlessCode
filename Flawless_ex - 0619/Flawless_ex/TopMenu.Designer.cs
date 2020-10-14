@@ -43,10 +43,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(10, 54);
+            this.label1.Location = new System.Drawing.Point(8, 43);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(265, 47);
+            this.label1.Size = new System.Drawing.Size(215, 38);
             this.label1.TabIndex = 0;
             this.label1.Text = "担当者コード";
             // 
@@ -54,29 +54,29 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(16, 134);
+            this.label2.Location = new System.Drawing.Point(12, 107);
             this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(202, 47);
+            this.label2.Size = new System.Drawing.Size(165, 38);
             this.label2.TabIndex = 1;
             this.label2.Text = "パスワード";
             // 
             // roginIdTextBox
             // 
             this.roginIdTextBox.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.roginIdTextBox.Location = new System.Drawing.Point(323, 54);
+            this.roginIdTextBox.Location = new System.Drawing.Point(262, 44);
             this.roginIdTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.roginIdTextBox.Name = "roginIdTextBox";
-            this.roginIdTextBox.Size = new System.Drawing.Size(428, 54);
+            this.roginIdTextBox.Size = new System.Drawing.Size(322, 45);
             this.roginIdTextBox.TabIndex = 2;
             // 
             // passwordTextBox
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.passwordTextBox.Location = new System.Drawing.Point(323, 132);
+            this.passwordTextBox.Location = new System.Drawing.Point(262, 107);
             this.passwordTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(428, 54);
+            this.passwordTextBox.Size = new System.Drawing.Size(322, 45);
             this.passwordTextBox.TabIndex = 3;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
@@ -85,10 +85,10 @@
             this.closeButton.AutoSize = true;
             this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.closeButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.closeButton.Location = new System.Drawing.Point(24, 222);
+            this.closeButton.Location = new System.Drawing.Point(18, 178);
             this.closeButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(232, 130);
+            this.closeButton.Size = new System.Drawing.Size(174, 104);
             this.closeButton.TabIndex = 4;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = false;
@@ -99,10 +99,10 @@
             this.roginButton.AutoSize = true;
             this.roginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.roginButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.roginButton.Location = new System.Drawing.Point(506, 222);
+            this.roginButton.Location = new System.Drawing.Point(407, 178);
             this.roginButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.roginButton.Name = "roginButton";
-            this.roginButton.Size = new System.Drawing.Size(233, 130);
+            this.roginButton.Size = new System.Drawing.Size(177, 104);
             this.roginButton.TabIndex = 5;
             this.roginButton.Text = "ログイン";
             this.roginButton.UseVisualStyleBackColor = false;
@@ -112,10 +112,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(277, 54);
+            this.label3.Location = new System.Drawing.Point(208, 43);
             this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 47);
+            this.label3.Size = new System.Drawing.Size(36, 38);
             this.label3.TabIndex = 6;
             this.label3.Text = "：";
             // 
@@ -123,10 +123,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 28.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(277, 134);
+            this.label4.Location = new System.Drawing.Point(208, 107);
             this.label4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(44, 47);
+            this.label4.Size = new System.Drawing.Size(36, 38);
             this.label4.TabIndex = 7;
             this.label4.Text = "：";
             // 
@@ -139,11 +139,11 @@
             // TopMenu
             // 
             this.AcceptButton = this.roginButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(772, 373);
+            this.ClientSize = new System.Drawing.Size(609, 298);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.roginButton);

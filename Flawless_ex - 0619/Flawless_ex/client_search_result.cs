@@ -23,6 +23,7 @@ namespace Flawless_ex
         public int control;
         public string data;
         public int grade;
+        public int ClientCode;
         #region "買取販売履歴"
         string name1;
         string phoneNumber1;
@@ -40,7 +41,7 @@ namespace Flawless_ex
         #endregion
         public string pass;
 
-        public client_search_result(DataTable dt, int type, int check, Statement statement, int id, decimal Total, int control, string document, string Access_auth, string Pass)
+        public client_search_result(DataTable dt, int type, int check, Statement statement, int id, decimal Total, int control, string document, string Access_auth, string Pass) 
         {
             InitializeComponent();
 
@@ -66,7 +67,7 @@ namespace Flawless_ex
                 dataGridView1.Columns[1].HeaderText = "店舗名";
                 dataGridView1.Columns[2].HeaderText = "担当者名";
                 dataGridView1.Columns[3].HeaderText = "住所";
-                dataGridView1.Columns["antique_number"].Visible = false;
+                dataGridView1.Columns["code"].Visible = false;
             }
             else if (type == 1)
             {
@@ -84,7 +85,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[0].HeaderText = "氏名";
                     dataGridView1.Columns[1].HeaderText = "住所";
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
-                    dataGridView1.Columns["id_number"].Visible = false;
+                    dataGridView1.Columns["code"].Visible = false;
                 }
                 else if (check == 1)
                 {
@@ -97,7 +98,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[0].HeaderText = "氏名";
                     dataGridView1.Columns[1].HeaderText = "住所";
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
-                    dataGridView1.Columns["id_number"].Visible = false;
+                    dataGridView1.Columns["code"].Visible = false;
                 }
 
             }
@@ -107,23 +108,23 @@ namespace Flawless_ex
         private void returnButton_Click(object sender, EventArgs e)//戻る
         {
             client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
-            if (type == 0)
-            {
-                this.company_name = client_Search.clientName;
-                this.shop_name = client_Search.shopName;
-                this.staff_name = client_Search.clientStaff;
-                this.address = client_Search.address;
-            }
-            else if (type == 1)
-            {
-                this.name = client_Search.iname;
-                this.address = client_Search.iaddress;
-                this.check = client_Search.check;
-            }
-            else { }
+            //if (type == 0)
+            //{
+            //    this.company_name = client_Search.clientName;
+            //    this.shop_name = client_Search.shopName;
+            //    this.staff_name = client_Search.clientStaff;
+            //    this.address = client_Search.address;
+            //}
+            //else if (type == 1)
+            //{
+            //    this.name = client_Search.iname;
+            //    this.address = client_Search.iaddress;
+            //    this.check = client_Search.check;
+            //}
+            //else { }
             this.Close();
             statement.AddOwnedForm(client_Search);
-            client_Search.Show();
+            client_Search.ShowDialog();
         }
 
         private void selectionButton_Click(object sender, EventArgs e)//選択
@@ -137,33 +138,37 @@ namespace Flawless_ex
 
             if (type == 0)//法人
             {
-                int anumber = (int)dataGridView1.CurrentRow.Cells[4].Value;//選択したPKを取得
+                ClientCode = (int)dataGridView1.CurrentRow.Cells[4].Value;//選択したPKを取得
 
                 string staff_name = (string)this.dataGridView1.CurrentRow.Cells[2].Value;
                 string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value;
 
-                string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks  from client_m_corporate where antique_number = '" + anumber + "';";
-                conn.Open();
-
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(dt2);
-
-                conn.Close();
-
+                
                 if (statement.Visible == true)
                 {
                     statement.staff_id = staff_id;
+                    statement.ClientCode = ClientCode;
                     statement.client_staff_name = staff_name;
                     statement.address = address;
                     statement.type = 0;
+                    //statement.clientDt = dt2;
                     statement.count = 1;
                     this.Close();
                     statement.Show();
                 }
                 else
                 {
+                    string sql_str = "select type,company_name,shop_name, staff_name,address, register_date, remarks, code  from client_m where code = '" + ClientCode + "';";
+                    conn.Open();
+
+                    adapter = new NpgsqlDataAdapter(sql_str, conn);
+                    adapter.Fill(dt2);
+
+                    conn.Close();
+
                     statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
                     this.Close();
+                    statement.ClientCode = ClientCode;
                     statement.clientDt = dt2;
                     statement.count = 1;
                     statement.Show();
@@ -172,20 +177,14 @@ namespace Flawless_ex
             }
             else if (type == 1)
             {
-                int id_number = (int)dataGridView1.CurrentRow.Cells[3].Value;//選択したPKを取得
+                ClientCode = (int)dataGridView1.CurrentRow.Cells[3].Value;//選択したPKを取得
                 string staff_name = (string)this.dataGridView1.CurrentRow.Cells[0].Value;
                 string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value;
-
-                string sql_str2 = "select type,name, address,register_date, remarks from client_m_individual where id_number = " + id_number + "  ";
-                conn.Open();
-                adapter = new NpgsqlDataAdapter(sql_str2, conn);
-                adapter.Fill(dt2);
-
-                conn.Close();
 
                 if (statement.Visible == true)
                 {
                     statement.staff_id = staff_id;
+                    statement.ClientCode = ClientCode;
                     statement.client_staff_name = staff_name;
                     statement.address = address;
                     statement.type = 1;
@@ -195,8 +194,16 @@ namespace Flawless_ex
                 }
                 else
                 {
+                    string sql_str2 = "select type,name, address,register_date, remarks, code from client_m where code = " + ClientCode + "  ";
+                    conn.Open();
+                    adapter = new NpgsqlDataAdapter(sql_str2, conn);
+                    adapter.Fill(dt2);
+
+                    conn.Close();
+
                     statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
                     this.Close();
+                    statement.ClientCode = ClientCode;
                     statement.clientDt = dt2;
                     statement.count = 1;
                     statement.type = 1;
