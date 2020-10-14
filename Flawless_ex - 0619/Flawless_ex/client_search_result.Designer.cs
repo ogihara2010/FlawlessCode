@@ -64,7 +64,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(59, 200);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -90,7 +90,7 @@
             this.selectionButton.BackColor = System.Drawing.Color.LightCyan;
             this.selectionButton.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.selectionButton.Location = new System.Drawing.Point(1708, 1134);
-            this.selectionButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.selectionButton.Margin = new System.Windows.Forms.Padding(4);
             this.selectionButton.Name = "selectionButton";
             this.selectionButton.Size = new System.Drawing.Size(466, 184);
             this.selectionButton.TabIndex = 6;
@@ -100,10 +100,10 @@
             // 
             // returnButton
             // 
-            this.returnButton.BackColor = System.Drawing.Color.LightCyan;
+            this.returnButton.BackColor = System.Drawing.Color.LavenderBlush;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.returnButton.Location = new System.Drawing.Point(44, 1134);
-            this.returnButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.returnButton.Margin = new System.Windows.Forms.Padding(4);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(414, 184);
             this.returnButton.TabIndex = 5;
@@ -122,7 +122,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.selectionButton);
             this.Controls.Add(this.returnButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "client_search_result";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "顧客選択メニュー　検索結果一覧";

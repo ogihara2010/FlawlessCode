@@ -339,6 +339,7 @@ namespace Flawless_ex
         private void RecordList_Load(object sender, EventArgs e)
         {
             PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             #region"画面上の会社・個人情報と合計金額"
@@ -370,11 +371,11 @@ namespace Flawless_ex
 
             string sql_str1 = "";
             if (type == 0)
-            {   //法人用   合計金額, 会社名, 店舗名, 担当者名を取得
+            {   //法人用   顧客番号と査定日を取得
                 sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 0 + "';";
             }
             else if (type == 1)
-            {   //個人用    合計金額、名前、職業、住所、生年月日を取得
+            {   //個人用    顧客番号と査定日を取得
                 sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 1 + "';";
             }
 

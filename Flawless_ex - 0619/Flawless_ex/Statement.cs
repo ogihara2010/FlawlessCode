@@ -12,14 +12,27 @@ namespace Flawless_ex
 {
     public partial class Statement : Form //計算書/納品書作成メニュー
     {
-        int a = 0;//大分類クリックカウント数（計算書）
-        int b = 0;//大分類クリックカウント数（納品書）
         public int staff_id;
         int itemMainCategoryCode;       //担当者ごとの大分類
-        int MainCategoryCode;           //表の大分類
-        int itemCode;                   
+        int MainCategoryCode;           //大分類コード（コンボボックスの初期値）
+        int mainCategoryCode;           //大分類コード（登録用）
+        int itemCode;                   //品名コード
+        string ItemDetail;              //品物詳細
+        decimal Weight;                 //重量
+        decimal UnitPrice;              //単価
+        int COUNT;                      //数量
+        decimal Money;                  //金額
+        string Remark;                  //備考
         int code = 1;                   //計算書用
         int CODE = 1;                   //納品書用
+        public int ClientCode;                 //顧客コード
+        decimal unitWeight;             //総重量を計算する用
+        int unitCount;                  //総数を計算する用
+        decimal unitMoney;              //小計を計算するため
+        decimal TotalMoney;
+
+        decimal WeightTotal;            //計算した総重量用
+        int CountTotal;                 //計算した総数用
         public int type = 0;
         public string path;
         public decimal total;
@@ -27,6 +40,28 @@ namespace Flawless_ex
         int AntiqueNumber;
         int ID_Number;
         bool screan = true;
+        string Sql;                     //計算書登録
+        string SQL;                     //画像登録（更新）
+        string deliveryRemarks;                 //納品書の表の下にある備考
+        int record = 0;
+        string ArticleText;
+        string taxCertificateText;
+        string sealCertificateText;
+        string residenceCardText;
+        string residencePeriodStay;
+
+        #region"計算書・納品書の共通する枠外"
+        decimal TotalWeight;            //総重量
+        decimal TotalCount;             //総数
+        decimal sum;                    //小計
+        decimal TaxAmount;              //税額
+        string SettlementMethod;        //決済方法（支払方法）
+        string SettlementDate;          //決済日
+        string DeliveryDate;            //受渡日
+        string remarks = "";            //顧客マスタの備考（計算書）
+        string remarks1 = "";           //顧客マスタの備考（納品書）
+        #endregion
+
         #region "再登録"
         int Re;
         string sql_str;
@@ -50,70 +85,6 @@ namespace Flawless_ex
         string documentNumber;
         #endregion
 
-        #region"計算書　各大分類コード"
-        int mainCategoryCode0;      //大分類コード（1行目）
-        int mainCategoryCode1;      //大分類コード（2行目）
-        int mainCategoryCode2;      //大分類コード（3行目）
-        int mainCategoryCode3;      //大分類コード（4行目）
-        int mainCategoryCode4;      //大分類コード（5行目）
-        int mainCategoryCode5;      //大分類コード（6行目）
-        int mainCategoryCode6;      //大分類コード（7行目）
-        int mainCategoryCode7;      //大分類コード（8行目）
-        int mainCategoryCode8;      //大分類コード（9行目）
-        int mainCategoryCode9;      //大分類コード（10行目）
-        int mainCategoryCode10;      //大分類コード（11行目）
-        int mainCategoryCode11;      //大分類コード（12行目）
-        int mainCategoryCode12;      //大分類コード（13行目）
-        #endregion
-
-        #region"納品書　各大分類コード"
-        int mainCategoryCode00;      //大分類コード（1行目）
-        int mainCategoryCode01;      //大分類コード（2行目）
-        int mainCategoryCode02;      //大分類コード（3行目）
-        int mainCategoryCode03;      //大分類コード（4行目）
-        int mainCategoryCode04;      //大分類コード（5行目）
-        int mainCategoryCode05;      //大分類コード（6行目）
-        int mainCategoryCode06;      //大分類コード（7行目）
-        int mainCategoryCode07;      //大分類コード（8行目）
-        int mainCategoryCode08;      //大分類コード（9行目）
-        int mainCategoryCode09;      //大分類コード（10行目）
-        int mainCategoryCode010;      //大分類コード（11行目）
-        int mainCategoryCode011;      //大分類コード（12行目）
-        int mainCategoryCode012;      //大分類コード（13行目）
-        #endregion
-
-        #region"計算書　各品目コード"
-        int itemCode0;      //品目コード（1行目）
-        int itemCode1;      //品目コード（2行目）
-        int itemCode2;      //品目コード（3行目）
-        int itemCode3;      //品目コード（4行目）
-        int itemCode4;      //品目コード（5行目）
-        int itemCode5;      //品目コード（6行目）
-        int itemCode6;      //品目コード（7行目）
-        int itemCode7;      //品目コード（8行目）
-        int itemCode8;      //品目コード（9行目）
-        int itemCode9;      //品目コード（10行目）
-        int itemCode10;      //品目コード（11行目）
-        int itemCode11;      //品目コード（12行目）
-        int itemCode12;      //品目コード（13行目）
-        #endregion
-
-        #region"納品書　各品目コード"
-        int itemCode00;      //品目コード（1行目）
-        int itemCode01;      //品目コード（2行目）
-        int itemCode02;      //品目コード（3行目）
-        int itemCode03;      //品目コード（4行目）
-        int itemCode04;      //品目コード（5行目）
-        int itemCode05;      //品目コード（6行目）
-        int itemCode06;      //品目コード（7行目）
-        int itemCode07;      //品目コード（8行目）
-        int itemCode08;      //品目コード（9行目）
-        int itemCode09;      //品目コード（10行目）
-        int itemCode010;      //品目コード（11行目）
-        int itemCode011;      //品目コード（12行目）
-        int itemCode012;      //品目コード（13行目）
-        #endregion
-
         #region"変数"
         decimal Tax;        //計算用の税（表示用を別に用意）        
         int countsum;        //総数計算用
@@ -122,8 +93,6 @@ namespace Flawless_ex
         decimal sub;          //計算書の小計、合計
         decimal SUB;           //納品書の小計、合計
         decimal taxAmount;
-        decimal sum;          //税込み時の合計金額用
-        decimal TaxAmount;  //税額
         public DataTable clientDt = new DataTable();//顧客情報
         public int count = 0;
         public int count1 = 0;
@@ -134,59 +103,9 @@ namespace Flawless_ex
         bool NotLoad = false;       //ロード時に通過するため（計算書）
         bool NotLoad1 = false;      //ロード時に通過するため（納品書）
         bool cellfirst = false;
+        bool Delivery = true;       //納品書を開いた一番最初のときだけ管理番号を登録
         #endregion
-        #region "計算書"
-        #region "数量"
-        int countsum0;
 
-        int countsum1;
-        int countsum2;
-        int countsum3;
-        int countsum4;
-        int countsum5;
-        int countsum6;
-        int countsum7;
-        int countsum8;
-        int countsum9;
-        int countsum10;
-        int countsum11;
-        int countsum12;
-        #endregion
-        #region "重量"
-        decimal weisum0;
-
-        decimal weisum1;
-        decimal weisum2;
-        decimal weisum3;
-        decimal weisum4;
-        decimal weisum5;
-        decimal weisum6;
-        decimal weisum7;
-        decimal weisum8;
-        decimal weisum9;
-        decimal weisum10;
-        decimal weisum11;
-        decimal weisum12;
-        #endregion
-        //単価
-        decimal unitPrice;
-        #region "金額"
-        decimal subSum0;
-
-        decimal subSum1;
-        decimal subSum2;
-        decimal subSum3;
-        decimal subSum4;
-        decimal subSum5;
-        decimal subSum6;
-        decimal subSum7;
-        decimal subSum8;
-        decimal subSum9;
-        decimal subSum10;
-        decimal subSum11;
-        decimal subSum12;
-        #endregion
-        #endregion
         #region "納品書"
         #region "数量"
         int countsum00;
@@ -280,12 +199,13 @@ namespace Flawless_ex
 
         #region"datagridview"
         DataGridView dataGridView;
+        DataGridViewComboBoxCell dataGridViewComboBoxCell;
+        int RowNumber;
         #endregion
 
         public string client_staff_name;
         public string address;
         string register_date;
-        string remarks;
         public string access_auth;
         public string document;
         public int control;
@@ -315,7 +235,8 @@ namespace Flawless_ex
         decimal money12;
         #endregion
 
-        int number;     //伝票番号の数字五桁
+        int number;     //伝票番号の数字五桁（計算書）
+        int Number;     //管理番号の数字（納品書）
 
         MainMenu mainMenu;
         TopMenu topMenu;
@@ -331,44 +252,33 @@ namespace Flawless_ex
         DataTable dt7 = new DataTable();//5行目
         DataTable dt8 = new DataTable();//6行目
         DataTable dt9 = new DataTable();//7行目
-        DataTable dt10 = new DataTable();//8行目
-        DataTable dt11 = new DataTable();//9行目
-        DataTable dt12 = new DataTable();//10行目
-        DataTable dt13 = new DataTable();//11行目
-        DataTable dt14 = new DataTable();//12行目
-        DataTable dt15 = new DataTable();//13行目
 
+        //計算書の datagridview の品名のコンボボックス
+        DataTable dt12 = new DataTable();
+        DataTable dt13 = new DataTable();
+        DataTable dt14 = new DataTable();
+        DataTable dt15 = new DataTable();
         DataTable dt16 = new DataTable();
         DataTable dt17 = new DataTable();
         DataTable dt18 = new DataTable();
         DataTable dt19 = new DataTable();
-        //計算書用
-        DataTable dt200 = new DataTable();
-        DataTable dt201 = new DataTable();
-        DataTable dt202 = new DataTable();
-        DataTable dt203 = new DataTable();
-        DataTable dt204 = new DataTable();
-        DataTable dt205 = new DataTable();
-        DataTable dt206 = new DataTable();
-        DataTable dt207 = new DataTable();
-        DataTable dt208 = new DataTable();
-        DataTable dt209 = new DataTable();
-        DataTable dt210 = new DataTable();
-        DataTable dt211 = new DataTable();
-        //納品書用
-        DataTable deliverydt200 = new DataTable();
-        DataTable deliverydt201 = new DataTable();
-        DataTable deliverydt202 = new DataTable();
-        DataTable deliverydt203 = new DataTable();
-        DataTable deliverydt204 = new DataTable();
-        DataTable deliverydt205 = new DataTable();
-        DataTable deliverydt206 = new DataTable();
-        DataTable deliverydt207 = new DataTable();
-        DataTable deliverydt208 = new DataTable();
-        DataTable deliverydt209 = new DataTable();
-        DataTable deliverydt210 = new DataTable();
-        DataTable deliverydt211 = new DataTable();
-        DataTable deliverydt212 = new DataTable();
+        DataTable dt20 = new DataTable();
+        DataTable dt21 = new DataTable();
+        DataTable dt22 = new DataTable();
+        DataTable dt23 = new DataTable();
+
+        //納品書の datagridview の品名のコンボボックス
+        DataTable dt32 = new DataTable();
+        DataTable dt33 = new DataTable();
+        DataTable dt34 = new DataTable();
+        DataTable dt35 = new DataTable();
+        DataTable dt36 = new DataTable();
+        DataTable dt37 = new DataTable();
+        DataTable dt38 = new DataTable();
+        DataTable dt39 = new DataTable();
+        DataTable dt40 = new DataTable();
+
+
 
         DataTable dt3 = new DataTable();// 品名情報全て
         DataTable dt300 = new DataTable();//地金
@@ -398,6 +308,7 @@ namespace Flawless_ex
         NpgsqlDataAdapter adapter2;
         NpgsqlDataReader reader;
         NpgsqlTransaction transaction;
+        DataRow row;
 
         public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control,
             string data, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA,
@@ -458,7 +369,7 @@ namespace Flawless_ex
                 this.previewButton.Enabled = true;
                 this.RecordListButton.Enabled = true;
                 this.label9.Visible = true;
-                this.textBox1.Visible = true;
+                this.reasonTextBox.Visible = true;
                 this.DeliveryPreviewButton.Enabled = false;
                 this.button1.Enabled = false;
                 this.button2.Enabled = false;
@@ -468,7 +379,7 @@ namespace Flawless_ex
                 this.label10.Visible = false;
                 this.textBox2.Visible = false;
                 this.label9.Visible = false;
-                this.textBox1.Visible = false;
+                this.reasonTextBox.Visible = false;
                 this.previewButton.Enabled = false;
                 this.RecordListButton.Enabled = false;
                 this.DeliveryPreviewButton.Enabled = false;
@@ -482,7 +393,7 @@ namespace Flawless_ex
 
             string sql_str = "select * from staff_m where staff_code = " + staff_id + ";";　//担当者名取得用
             string sql;                                                //伝票番号・管理番号取得
-            sql = "select document_number from statement_data;";     //伝票番号の取得用
+            sql = "select document_number from statement_data order by NotFNumber;";     //伝票番号の取得用
             cmd = new NpgsqlCommand(sql_str, conn);
 
             conn.Open();
@@ -523,12 +434,12 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrEmpty(docuNum))
                 {
-                    Num = docuNum.Trim('F');        //伝票番号の数字部分
+                    Num = docuNum.Substring(1);        //伝票番号の数字部分
                 }
                 else
                 {
                     docuNum = "F0";
-                    Num = docuNum.Trim('F');       //伝票番号の数字部分
+                    Num = docuNum.Substring(1);       //伝票番号の数字部分
                 }
 
                 number = int.Parse(Num) + 1;
@@ -546,7 +457,7 @@ namespace Flawless_ex
             #endregion
             else
             {
-                sql = "select control_number from delivery_m;";         //管理番号取得
+                sql = "select control_number from delivery_m order by control_number;";         //管理番号取得
                 cmd = new NpgsqlCommand(sql, conn);
 
                 using (reader = cmd.ExecuteReader())
@@ -562,10 +473,24 @@ namespace Flawless_ex
                     conNum = 0;
                 }
 
-                number = conNum + 1;
-                documentNumberTextBox2.Text = number.ToString();
+                Number = conNum + 1;
+                documentNumberTextBox2.Text = Number.ToString();
             }
             #endregion
+
+            if (data != "S" || data != "D" || antiqueNumber != null || documentNumber != null || Grade != 0)
+            {
+                string Str = "insert into statement_data (document_number, NotFNumber, staff_code) values ('" + documentNumberTextBox.Text + "','" + number + "', '" + staff_id + "');";
+                cmd = new NpgsqlCommand(Str, conn);
+                cmd.ExecuteNonQuery();
+            }
+
+            if ((data != "S" || data != "D" || antiqueNumber != null || documentNumber != null || Grade != 0) && tabControl1.SelectedIndex != 0)
+            {
+                string Str = "insert into delivery_m (control_number, staff_code) values ('" + Number + "', '" + staff_id + "');";
+                cmd = new NpgsqlCommand(Str, conn);
+                cmd.ExecuteNonQuery();
+            }
 
             //担当者ごとの大分類の初期値を先頭に
             string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code asc;";
@@ -850,7 +775,7 @@ namespace Flawless_ex
                     this.shopNameTextBox.Text = row1["shop_name"].ToString();
                     this.clientNameTextBox.Text = row1["staff_name"].ToString();
                     DataTable dt25 = new DataTable();
-                    string str_client = "select * from client_m_corporate where type = 0 and company_name = '" + this.companyTextBox.Text + "' and shop_name = '" + this.shopNameTextBox.Text + "' and staff_name = '" + this.clientNameTextBox.Text + "';";
+                    string str_client = "select * from client_m where type = 0 and company_name = '" + this.companyTextBox.Text + "' and shop_name = '" + this.shopNameTextBox.Text + "' and staff_name = '" + this.clientNameTextBox.Text + "';";
                     adapter = new NpgsqlDataAdapter(str_client, conn);
                     adapter.Fill(dt25);
                     DataRow row2;
@@ -899,7 +824,7 @@ namespace Flawless_ex
                     this.shopNameTextBox.Text = row1["birthday"].ToString();
                     this.clientNameTextBox.Text = row1["occupation"].ToString();
                     DataTable dt25 = new DataTable();
-                    string str_client = "select * from client_m_individual where type = 1 and name = '" + this.companyTextBox.Text + "' and birthday = '" + this.shopNameTextBox.Text + "' and occupation = '" + this.clientNameTextBox.Text + "';";
+                    string str_client = "select * from client_m where type = 1 and name = '" + this.companyTextBox.Text + "' and birthday = '" + this.shopNameTextBox.Text + "' and occupation = '" + this.clientNameTextBox.Text + "';";
                     adapter = new NpgsqlDataAdapter(str_client, conn);
                     adapter.Fill(dt25);
                     DataRow row2;
@@ -2299,11 +2224,20 @@ namespace Flawless_ex
             itemCode = (int)row5["item_code"];
             #endregion
             #endregion
-            //#region "リスト"
-            //string sql_strlist = "select B.main_category_code, B.main_category_name, A.item_code, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code ;";
-            //adapter2 = new NpgsqlDataAdapter(sql_strlist, conn);
-            //adapter2.Fill(dt6);
-            //#endregion
+
+
+            //計算書
+            dataGridView1[1, 0].Value = MainCategoryCode;
+            dataGridView1[2, 0].Value = itemCode;
+
+            MainCategoryColumn.DataSource = dt4;
+            MainCategoryColumn.DisplayMember = "main_category_name";
+            MainCategoryColumn.ValueMember = "main_category_code";
+
+            dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[0].Cells[2];
+            dataGridViewComboBoxCell.DataSource = dt5;
+            dataGridViewComboBoxCell.DisplayMember = "item_name";
+            dataGridViewComboBoxCell.ValueMember = "item_code";
 
             #region"初期値の取得（納品書）"
             #region "大分類の中身"
@@ -2324,18 +2258,6 @@ namespace Flawless_ex
             #endregion
             #endregion
 
-            //計算書
-            dataGridView1[1, 0].Value = MainCategoryCode;
-            dataGridView1[2, 0].Value = itemCode;
-
-            MainCategoryColumn.DataSource = dt4;
-            MainCategoryColumn.DisplayMember = "main_category_name";
-            MainCategoryColumn.ValueMember = "main_category_code";
-
-            ItemCategoryColumn.DataSource = dt5;
-            ItemCategoryColumn.DisplayMember = "item_name";
-            ItemCategoryColumn.ValueMember = "item_code";
-
             //納品書
             dataGridView2[1, 0].Value = MainCategoryCode;
             dataGridView2[2, 0].Value = itemCode;
@@ -2343,45 +2265,11 @@ namespace Flawless_ex
             MainCategoryColumn1.DataSource = dt6;
             MainCategoryColumn1.DisplayMember = "main_category_name";
             MainCategoryColumn1.ValueMember = "main_category_code";
-            
-            ItemCategoryColumn1.DataSource = dt7;
-            ItemCategoryColumn1.DisplayMember = "item_name";
-            ItemCategoryColumn1.ValueMember = "item_code";
 
-
-            //dataGridView1.Columns[4] = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
-
-            //左の入力項目処理
-            //string itemDisplay = "item_name";
-            //string itemValue = "item_code";
-
-            //地金            
-            string str_sql_metal = "select * from item_m where main_category_code = 100";
-            adapter = new NpgsqlDataAdapter(str_sql_metal, conn);
-            adapter.Fill(dt300);
-
-            //ダイヤ            
-            string str_sql_diamond = "select * from item_m where main_category_code = 101";
-            adapter = new NpgsqlDataAdapter(str_sql_diamond, conn);
-            adapter.Fill(dt400);
-
-            //ブランド            
-            string str_sql_brand = "select * from item_m where main_category_code = 102";
-            adapter = new NpgsqlDataAdapter(str_sql_brand, conn);
-            adapter.Fill(dt500);
-
-            //製品・ジュエリー            
-            string str_sql_jewelry = "select * from item_m where main_category_code = 103";
-            adapter = new NpgsqlDataAdapter(str_sql_jewelry, conn);
-            adapter.Fill(dt600);
-
-            //その他            
-            string str_sql_other = "select * from item_m where main_category_code = 104";
-            adapter = new NpgsqlDataAdapter(str_sql_other, conn);
-            adapter.Fill(dt700);
-
-            //タブのサイズ変更
-            tabControl1.ItemSize = new Size(300, 40);
+            dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 0];
+            dataGridViewComboBoxCell.DataSource = dt7;
+            dataGridViewComboBoxCell.DisplayMember = "item_name";
+            dataGridViewComboBoxCell.ValueMember = "item_code";
 
             //デフォルトで税込み表示
             comboBox11.SelectedIndex = 0;
@@ -2396,7 +2284,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -2435,7 +2323,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -2488,7 +2376,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -2527,7 +2415,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -2582,7 +2470,9 @@ namespace Flawless_ex
             dataGridView2.Columns["UnitPriceColumn1"].DefaultCellStyle.Format = "n0";
             dataGridView2.Columns["CountColumn1"].DefaultCellStyle.Format = "n0";
 
-            MessageBox.Show("ロード処理終了");
+            NotLoad = true;
+            NotLoad1 = true;
+            sealN.Checked = true;
         }
 
 
@@ -2617,420 +2507,6 @@ namespace Flawless_ex
             }
         }
 
-        #region"一時コメントアウト"
-        //#region "計算書　大分類変更"
-        //private void mainCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e) //大分類選択分岐
-        //{
-        //    //大分類によって品名変更　1行目
-        //    if (a > 1)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox0.SelectedValue;
-        //        dt2.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(dt2);
-        //        itemComboBox0.DataSource = dt2;
-        //        itemComboBox0.DisplayMember = "item_name";
-        //        itemComboBox0.ValueMember = "item_code";
-
-        //        DataRow row = dt2.Rows[0];
-        //        mainCategoryCode0 = (int)row["main_category_code"];
-        //        itemCode0 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //    else
-        //    {
-        //        a++;
-        //    }                            
-        //}
-        //#endregion
-
-        //#region "納品書　大分類変更"
-        //#region "1行目"
-        //private void mainCategoryComboBox00_SelectedIndexChanged(object sender, EventArgs e) //大分類選択分岐
-        //{
-        //    //大分類によって品名変更　1行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox00.SelectedValue;
-        //        deliverydt200.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt200);
-        //        itemComboBox00.DataSource = deliverydt200;
-        //        itemComboBox00.DisplayMember = "item_name";
-        //        itemComboBox00.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt200.Rows[0];
-        //        mainCategoryCode00 = (int)row["main_category_code"];
-        //        itemCode00 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "2行目"
-        //private void mainCategoryComboBox01_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 2行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox01.SelectedValue;
-        //        deliverydt201.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt201);
-        //        itemComboBox01.DataSource = deliverydt201;
-        //        itemComboBox01.DisplayMember = "item_name";
-        //        itemComboBox01.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt201.Rows[0];
-        //        mainCategoryCode01 = (int)row["main_category_code"];
-        //        itemCode01 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //    else
-        //    {
-
-        //    }
-        //}
-        //#endregion
-        //#region "3行目"
-        //private void mainCategoryComboBox02_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 3行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox02.SelectedValue;
-        //        deliverydt202.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt202);
-        //        itemComboBox02.DataSource = deliverydt202;
-        //        itemComboBox02.DisplayMember = "item_name";
-        //        itemComboBox02.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt202.Rows[0];
-        //        mainCategoryCode02 = (int)row["main_category_code"];
-        //        itemCode02 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "4行目"
-        //private void mainCategoryComboBox03_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 4行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox03.SelectedValue;
-        //        deliverydt203.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt203);
-        //        itemComboBox03.DataSource = deliverydt203;
-        //        itemComboBox03.DisplayMember = "item_name";
-        //        itemComboBox03.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt203.Rows[0];
-        //        mainCategoryCode03 = (int)row["main_category_code"];
-        //        itemCode03 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "5行目"
-        //private void mainCategoryComboBox04_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 5行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox04.SelectedValue;
-        //        deliverydt204.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt204);
-        //        itemComboBox04.DataSource = deliverydt204;
-        //        itemComboBox04.DisplayMember = "item_name";
-        //        itemComboBox04.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt204.Rows[0];
-        //        mainCategoryCode04 = (int)row["main_category_code"];
-        //        itemCode04 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "6行目"
-        //private void mainCategoryComboBox05_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 6行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox05.SelectedValue;
-        //        deliverydt205.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt205);
-        //        itemComboBox05.DataSource = deliverydt205;
-        //        itemComboBox05.DisplayMember = "item_name";
-        //        itemComboBox05.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt205.Rows[0];
-        //        mainCategoryCode05 = (int)row["main_category_code"];
-        //        itemCode05 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "7行目"
-        //private void mainCategoryComboBox06_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 7行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox06.SelectedValue;
-        //        deliverydt206.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt206);
-        //        itemComboBox06.DataSource = deliverydt206;
-        //        itemComboBox06.DisplayMember = "item_name";
-        //        itemComboBox06.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt206.Rows[0];
-        //        mainCategoryCode06 = (int)row["main_category_code"];
-        //        itemCode06 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "8行目"
-        //private void mainCategoryComboBox07_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 8行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox07.SelectedValue;
-        //        deliverydt207.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt207);
-        //        itemComboBox07.DataSource = deliverydt207;
-        //        itemComboBox07.DisplayMember = "item_name";
-        //        itemComboBox07.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt207.Rows[0];
-        //        mainCategoryCode07 = (int)row["main_category_code"];
-        //        itemCode07 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "9行目"
-        //private void mainCategoryComboBox08_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 9行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox08.SelectedValue;
-        //        deliverydt208.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt208);
-        //        itemComboBox08.DataSource = deliverydt208;
-        //        itemComboBox08.DisplayMember = "item_name";
-        //        itemComboBox08.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt208.Rows[0];
-        //        mainCategoryCode08 = (int)row["main_category_code"];
-        //        itemCode08 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "10行目"
-        //private void mainCategoryComboBox09_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 10行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox09.SelectedValue;
-        //        deliverydt209.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt209);
-        //        itemComboBox09.DataSource = deliverydt209;
-        //        itemComboBox09.DisplayMember = "item_name";
-        //        itemComboBox09.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt209.Rows[0];
-        //        mainCategoryCode09 = (int)row["main_category_code"];
-        //        itemCode09 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "11行目"
-        //private void mainCategoryComboBox010_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 11行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox010.SelectedValue;
-        //        deliverydt210.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt210);
-        //        itemComboBox010.DataSource = deliverydt210;
-        //        itemComboBox010.DisplayMember = "item_name";
-        //        itemComboBox010.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt210.Rows[0];
-        //        mainCategoryCode010 = (int)row["main_category_code"];
-        //        itemCode010 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "12行目"
-        //private void mainCategoryComboBox011_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 12行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox011.SelectedValue;
-        //        deliverydt211.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt211);
-        //        itemComboBox011.DataSource = deliverydt211;
-        //        itemComboBox011.DisplayMember = "item_name";
-        //        itemComboBox011.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt211.Rows[0];
-        //        mainCategoryCode011 = (int)row["main_category_code"];
-        //        itemCode011 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //}
-        //#endregion
-        //#region "13行目"
-        //private void mainCategoryComboBox012_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //大分類によって品名変更 13行目
-        //    if (b > 0)
-        //    {
-        //        int codeNum = (int)mainCategoryComboBox012.SelectedValue;
-        //        deliverydt212.Clear();
-        //        PostgreSQL postgre = new PostgreSQL();
-        //        conn = postgre.connection();
-
-        //        conn.Open();
-        //        //品名検索用
-        //        string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + codeNum + ";";
-        //        adapter = new NpgsqlDataAdapter(sql_str3, conn);
-        //        adapter.Fill(deliverydt212);
-        //        itemComboBox012.DataSource = deliverydt212;
-        //        itemComboBox012.DisplayMember = "item_name";
-        //        itemComboBox012.ValueMember = "item_code";
-
-        //        DataRow row = deliverydt212.Rows[0];
-        //        mainCategoryCode012 = (int)row["main_category_code"];
-        //        itemCode012 = (int)row["item_code"];
-
-        //        conn.Close();
-        //    }
-        //    else if (data == "D")
-        //    {
-
-        //    }
-        //    else
-        //    {
-        //        b++;
-        //    }
-        //}
-        //#endregion
-        //#endregion
-        #endregion
-
         #region "顧客選択メニュー（計算書）"
         private void client_Button_Click(object sender, EventArgs e)//顧客選択メニュー（計算書）
         {
@@ -3043,11 +2519,9 @@ namespace Flawless_ex
             {
                 if (type == 0)
                 {
-
                     //顧客情報 法人
-                    #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and code = '" + ClientCode + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -3059,8 +2533,15 @@ namespace Flawless_ex
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["staff_name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    ArticleText = row2["aol_financial_shareholder"].ToString();
+                    taxCertificateText = row2["tax_certificate"].ToString();
+                    sealCertificateText = row2["seal_certification"].ToString();
+                    residenceCardText = row2["residence_card"].ToString();
+                    residencePeriodStay = row2["period_stay"].ToString();
+                    //ClientCode = (int)row2["code"];
+                    #region "計算書"
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -3069,6 +2550,11 @@ namespace Flawless_ex
                     clientNameTextBox.Text = Staff_name;                //担当名
                     registerDateTextBox.Text = register_date;           //登録日
                     clientRemarksTextBox.Text = remarks;                //備考
+                    articlesTextBox.Text = ArticleText;                                                 //定款など
+                    taxCertificateTextBox.Text = taxCertificateText;                                    //納税
+                    sealCertificationTextBox.Text = sealCertificateText;                                //印鑑
+                    residenceCardTextBox.Text = residenceCardText;                                      //在留カード
+                    residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);          //在留期限
                     #endregion
                     #region "納品書"
                     this.client_searchButton1.Text = "顧客変更";
@@ -3086,7 +2572,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and code = '" + ClientCode + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -3095,10 +2581,16 @@ namespace Flawless_ex
 
                     string name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks = row2["remarks"].ToString();
                     string occupation = row2["occupation"].ToString();
                     string birthday = row2["birthday"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    ArticleText = row2["aol_financial_shareholder"].ToString();
+                    taxCertificateText = row2["tax_certificate"].ToString();
+                    sealCertificateText = row2["seal_certification"].ToString();
+                    residenceCardText = row2["residence_card"].ToString();
+                    residencePeriodStay = row2["period_stay"].ToString();
+                    //ClientCode = (int)row2["code"];
 
                     #region "計算書"
                     label16.Text = "氏名";
@@ -3114,6 +2606,11 @@ namespace Flawless_ex
                     label38.Visible = false;
                     registerDateTextBox.Visible = false;
                     this.client_Button.Text = "顧客変更";
+                    articlesTextBox.Text = ArticleText;                                                 //定款など
+                    taxCertificateTextBox.Text = taxCertificateText;                                    //納税
+                    sealCertificationTextBox.Text = sealCertificateText;                                //印鑑
+                    residenceCardTextBox.Text = residenceCardText;                                      //在留カード
+                    residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);          //在留期限
                     #endregion
 
                     #region "納品書"
@@ -3142,7 +2639,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -3154,8 +2651,9 @@ namespace Flawless_ex
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["staff_name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    ClientCode = (int)row2["code"];
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -3181,7 +2679,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -3190,10 +2688,11 @@ namespace Flawless_ex
 
                     string name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks = row2["remarks"].ToString();
                     string occupation = row2["occupation"].ToString();
                     string birthday = row2["birthday"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    ClientCode = (int)row2["code"];
 
                     #region "計算書"
                     label16.Text = "氏名";
@@ -3231,37 +2730,282 @@ namespace Flawless_ex
             #endregion
         }
         #endregion
-        #region "顧客選択メニュー（納品書）"
-        private void clientSelectButton_Click(object sender, EventArgs e)//顧客選択メニュー（納品書）
-        {
-            if (string.IsNullOrEmpty(sumTextBox2.Text))
-            {
-
-            }
-            using (client_search search2 = new client_search(this, staff_id, type, client_staff_name, address, total, number, document, access_auth, pass))
-            {
-                this.Hide();
-                search2.ShowDialog();
-            }
-        }
-        #endregion
 
         #region"計算書　登録ボタン"
         private void AddButton_Click(object sender, EventArgs e)        //計算書用登録ボタン
         {
+            #region"確認事項"
+            if (string.IsNullOrEmpty(typeTextBox.Text))
+            {
+                MessageBox.Show("顧客選択をしてください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (paymentMethodsComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("決済方法を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (deliveryComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("受け渡し方法を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (sub >= 2000000)
+            {
+                MessageBox.Show("200 万を超える取引です。" + "\r\n" + "入力不備がないか確認してください。", "入力内容の確認", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            }
+
+            DialogResult result = MessageBox.Show("計算書の登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
+            #endregion
+
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+
+            conn.Open();
+
+            #region"計算書　枠外"
+            //顧客番号は ClientCode、担当者コードは staff_id、身分は type、伝票番号は documentNumberTextBox
+            if (!string.IsNullOrEmpty(totalWeightTextBox.Text))
+            {
+                TotalWeight = decimal.Parse(totalWeightTextBox.Text);
+            }
+            if (!string.IsNullOrEmpty(totalCountTextBox.Text))
+            {
+                TotalCount = decimal.Parse(totalCountTextBox.Text);
+            }
+            sum = sub;              //計算書は小計・合計ともに同じ変数を使用
+            if (!string.IsNullOrEmpty(taxAmount0.Text))
+            {
+                TaxAmount = decimal.Parse(taxAmount0.Text.Substring(1));
+            }
+            else
+            {
+                TaxAmount = 0;
+            }
+            string DeliveyMethod = deliveryComboBox.Text;
+            SettlementMethod = paymentMethodsComboBox.Text;
+            SettlementDate = settlementBox.Text;
+            DeliveryDate = deliveryDateBox.Text;
+            DateTime date = DateTime.Now;
+            DateTime AssessmentDate = date.Date;
+
+            using (transaction = conn.BeginTransaction())
+            {
+                Sql = "update statement_data set (code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, type, assessment_date)" +
+                    " = ('" + ClientCode + "','" + TotalWeight + "','" + TotalCount + "','" + sum + "','" + TaxAmount + "','" + sum + "','" + DeliveyMethod + "','" + SettlementMethod + "','" + SettlementDate + "','" + DeliveryDate + "','" + type + "','" + AssessmentDate + "')" +
+                    "where document_number = '" + documentNumberTextBox.Text + "';";
+                cmd = new NpgsqlCommand(Sql, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+
+            if (!string.IsNullOrEmpty(antiqueLicenceTextBox.Text))
+            {
+                AntiqueLicence = antiqueLicenceTextBox.Text;
+
+                using (transaction = conn.BeginTransaction())
+                {
+                    if (type == 0)
+                    {
+                        string SQL_STR = @"update client_m set antique_license ='" + AntiqueLicence + "' where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                    else if (type == 1)
+                    {
+                        string SQL_STR = @"update client_m set antique_license ='" + AntiqueLicence + "'  where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+                    }
+                }
+            }
+
+            if (remarks != clientRemarksTextBox.Text)
+            {
+                using (transaction = conn.BeginTransaction())
+                {
+                    string SQL_STR = @"update client_m set remarks = '" + remarks + "'where code = '" + ClientCode + "';";
+                    cmd = new NpgsqlCommand(SQL_STR, conn);
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+            }
+
+            #region"200万以上の場合に画像更新"
+            if (sub >= 2000000)
+            {
+                if (!string.IsNullOrEmpty(articlesTextBox.Text))
+                {
+                    AolFinancialShareholder = articlesTextBox.Text;
+
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (type == 0)
+                        {
+                            string SQL_STR = @"update client_m set aol_financial_shareholder='" + AolFinancialShareholder + "' where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+
+                        }
+                        else if (type == 1)
+                        {
+                            string SQL_STR = @"update client_m set aol_financial_shareholder='" + AolFinancialShareholder + "' where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(taxCertificateTextBox.Text))
+                {
+                    TaxCertification = taxCertificateTextBox.Text;
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (type == 0)
+                        {
+                            string SQL_STR = @"update client_m set tax_certificate='" + TaxCertification + "' where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        else if (type == 1)
+                        {
+                            string SQL_STR = @"update client_m set tax_certificate='" + TaxCertification + "'  where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(sealCertificationTextBox.Text))
+                {
+                    SealCertification = sealCertificationTextBox.Text;
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (type == 0)
+                        {
+                            string SQL_STR = @"update client_m set seal_certification='" + SealCertification + "' where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        else if (type == 1)
+                        {
+                            string SQL_STR = @"update client_m set seal_certification='" + SealCertification + "' where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
+                {
+                    ResidenceCard = residenceCardTextBox.Text;
+                    ResidencePeriod = residencePerioddatetimepicker.Value.ToShortDateString();
+                    using (transaction = conn.BeginTransaction())
+                    {
+                        if (type == 0)
+                        {
+                            string SQL_STR = @"update client_m set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                        else if (type == 1)
+                        {
+                            string SQL_STR = @"update client_m set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "')  where code = '" + ClientCode + "';";
+                            cmd = new NpgsqlCommand(SQL_STR, conn);
+                            cmd.ExecuteNonQuery();
+                            transaction.Commit();
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #endregion
+            #region"計算書　表のデータ"
+            int index = dataGridView1.Rows.Count;
+
+            #region"計算書　表のデータ　初回登録"
+            if (index == 1)
+            {
+                index--;
+            }
+
+            if (dataGridView1.Rows[index - 1].IsNewRow)
+            {
+                index--;
+            }
+
+
+            for (int i = 0; i < index; i++)
+            {
+                mainCategoryCode = int.Parse(dataGridView1[1, i].Value.ToString());
+
+                itemCode = int.Parse(dataGridView1[2, i].Value.ToString());
+
+                if (dataGridView1.Rows[i].Cells[3].Value != null && dataGridView1.Rows[i].Cells[3].Value.ToString() != "")
+                {
+                    ItemDetail = dataGridView1[3, i].Value.ToString();
+                }
+
+                if (dataGridView1.Rows[i].Cells[4].Value != null && dataGridView1.Rows[i].Cells[4].Value.ToString() != "")
+                {
+                    Weight = decimal.Parse(dataGridView1[4, i].Value.ToString());
+                }
+
+                if (dataGridView1.Rows[i].Cells[5].Value != null && dataGridView1.Rows[i].Cells[5].Value.ToString() != "")
+                {
+                    UnitPrice = decimal.Parse(dataGridView1[5, i].Value.ToString());
+                }
+
+                if (dataGridView1.Rows[i].Cells[6].Value != null && dataGridView1.Rows[i].Cells[6].Value.ToString() != "")
+                {
+                    COUNT = int.Parse(dataGridView1[6, i].Value.ToString());
+                }
+
+                if (dataGridView1.Rows[i].Cells[7].Value != null && dataGridView1.Rows[i].Cells[7].Value.ToString() != "")
+                {
+                    Money = decimal.Parse(dataGridView1[7, i].Value.ToString().Substring(1));
+                }
+
+                if (dataGridView1.Rows[i].Cells[8].Value != null && dataGridView1.Rows[i].Cells[8].Value.ToString() != "")
+                {
+                    Remark = dataGridView1[8, i].Value.ToString();
+                }
+
+                record = i + 1;
+
+                Sql = "insert into statement_calc_data (main_category_code, item_code, weight, count, unit_price, amount, remarks, document_number, detail, record_number)" +
+                    " values ('" + mainCategoryCode + "','" + itemCode + "','" + Weight + "','" + COUNT + "','" + UnitPrice + "','" + Money + "','" + Remark + "','" + documentNumberTextBox.Text + "', '" + ItemDetail + "', '" + record + "');";
+                cmd = new NpgsqlCommand(Sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            #endregion
+            #endregion
+
+            conn.Close();
+            MessageBox.Show("計算書の登録をしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            addButton.Enabled = false;
+            previewButton.Enabled = true;
+
             #region"一時コメントアウト"
-            //    #region "ありうるミス"
-            //    if (paymentMethodsComboBox.SelectedIndex == -1)
-            //    {
-            //        MessageBox.Show("決済方法を選んで下さい。");
-            //        return;
-            //    }
-            //    if (deliveryComboBox.SelectedIndex == -1)
-            //    {
-            //        MessageBox.Show("受渡方法を選んで下さい。");
-            //        return;
-            //    }
-            //    #endregion
+
             //    DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
 
             //    if (dr == DialogResult.No)
@@ -4210,9 +3954,7 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region"計算書・納品書　計算処理"
-
-        #region"一時コメントアウト"
+        #region"一時コメントアウト（計算書、買取販売や成績入力から戻ってきたときの以前の処理）"
         //#region "計算書　フォーカス時初期状態ならnull"
         //private void unitPriceTextBox0_Enter(object sender, EventArgs e)
         //{
@@ -7938,16 +7680,17 @@ namespace Flawless_ex
                 if (comboBox11.SelectedIndex == 1)      //税抜き選択
                 {
                     subTotal2.Text = (SUB - taxAmount).ToString("n0");
+                    taxAmount2.Text = taxAmount.ToString("c0");
                 }
                 else        //税込み選択
                 {
-                    subTotal2.Text = SUB.ToString("n0");
+                    taxAmount2.Text = "";
                 }
             }
         }
         #endregion
 
-        #region"一時コメントアウト"
+        #region"一時コメントアウト（納品書、買取販売からきたとき）"
         //#region"納品書　単価３桁区切り＋フォーカスが外れた時"
         //#region "1行目"
         //private void unitPriceTextBox00_Leave(object sender, EventArgs e)
@@ -12453,14 +12196,13 @@ namespace Flawless_ex
         //#endregion
 
         #endregion
-        #endregion
 
         #region"右上の×で戻る"
         private void Statement_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (data == "S" || data == "D")
             {
-                this.Close();
+                //this.Close();
             }
             else if (screan)
             {
@@ -12473,8 +12215,211 @@ namespace Flawless_ex
         #region"納品書　登録ボタン"
         private void Register_Click(object sender, EventArgs e)
         {
+            #region"確認事項"
+            if (string.IsNullOrEmpty(name.Text))
+            {
+                MessageBox.Show("宛名を入力して下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (titleComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("敬称を選んで下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (typeComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("種別を選んで下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (paymentMethodComboBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("お支払方法を選んで下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (paymentMethodComboBox.Text == "振込")
+            {
+                if (string.IsNullOrEmpty(PayeeTextBox1.Text))
+                {
+                    MessageBox.Show("振込先を入力して下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            if (string.IsNullOrEmpty(typeTextBox2.Text))
+            {
+                MessageBox.Show("顧客選択をしてください。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult dialog = MessageBox.Show("納品書の登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialog == DialogResult.No)
+            {
+                return;
+            }
+
+            #endregion
+
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+
+            conn.Open();
+
+            #region"納品書枠外"
+            //管理番号は Number、区分（法人 or 個人は type）、顧客番号は ClientCode、担当者コードは staff_id、小計・合計は sum、消費税額は TaxAmount、納品日は DeliveryDate、
+            //決済日は SettlementDate、支払方法は SettlementMethod、総数は TotalCount、総重量は TotalWeight
+
+            sum = SUB;                                      //小計・合計
+            string vatType = comboBox11.Text;               //消費税区分
+            string taxRate = tax.Text;                      //消費税率
+            if (!string.IsNullOrEmpty(taxAmount2.Text))
+            {
+                TaxAmount = decimal.Parse(taxAmount2.Text);     //消費税額
+            }
+            string honorificTitle = titleComboBox.Text;
+            string deliveryOrbill = typeComboBox.Text;
+            string orderDate = orderDateTimePicker.Text;
+            DeliveryDate = DeliveryDateTimePicker.Text;
+            SettlementDate = SettlementDateTimePicker.Text;
+            string SeaalPrint = "";
+            if (sealY.Checked)
+            {
+                SeaalPrint = "する";
+            }
+            if (sealN.Checked)
+            {
+                SeaalPrint = "しない";
+            }
+            SettlementMethod = paymentMethodComboBox.Text;
+            string accountPayable = PayeeTextBox1.Text;
+            string Coin = CoinComboBox.Text;
+            
+            if (!string.IsNullOrEmpty(totalCountTextBox1.Text))
+            {
+                TotalCount = decimal.Parse(totalCountTextBox1.Text);
+            }
+
+            if (!string.IsNullOrEmpty(totalWeightTextBox1.Text))
+            {
+                TotalWeight = decimal.Parse(totalWeightTextBox1.Text);
+            }
+
+            deliveryRemarks = RemarkRegister.Text;
+
+            if (!string.IsNullOrEmpty(antiqueLicenceTextBox2.Text))
+            {
+                AntiqueLicence = antiqueLicenceTextBox2.Text;
+
+                using (transaction = conn.BeginTransaction())
+                {
+                    if (type == 0)
+                    {
+                        string SQL_STR = @"update client_m set antique_license ='" + AntiqueLicence + "' where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteReader();
+                    }
+                    else if (type == 1)
+                    {
+                        string SQL_STR = @"update client_m set antique_license ='" + AntiqueLicence + "'  where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteReader();
+                    }
+                }
+            }
+
+            if (remarks1 != clientRemarksTextBox2.Text)
+            {
+                using (transaction = conn.BeginTransaction())
+                {
+                    string SQL_STR = @"update client_m set remarks = '" + remarks1 + "'where code = '" + ClientCode + "';";
+                    cmd = new NpgsqlCommand(SQL_STR, conn);
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+            }
+
+            using (transaction = conn.BeginTransaction())
+            {
+                Sql = "update delivery_m set (control_number, code, sub_total, vat, vat_rate, vat_amount, total, honorific_title, type, order_date," +
+                    " delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, total_count, total_weight, types1, remark)" +
+                    " = ('"+Number+"','"+ClientCode+"','"+sum+"','"+vatType+ "','"+taxRate+ "','"+TaxAmount+ "','"+sum+ "','"+honorificTitle+ "','"+deliveryOrbill+ "','"+orderDate+"'" +
+                    ",'"+DeliveryDate+ "','"+SettlementDate+ "','"+SeaalPrint+ "','"+SettlementMethod+ "','"+accountPayable+ "','"+Coin+ "','"+TotalCount+ "','"+TotalWeight+ "','"+type+"', '"+deliveryRemarks+"')" +
+                    "where control_number = '" + Number + "';";
+                cmd = new NpgsqlCommand(Sql, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            #endregion
+
+            #region"納品書表"
+            foreach (DataGridViewRow Row in dataGridView2.Rows)
+            {
+                int index = dataGridView2.Rows.Count;
+
+                #region"計算書　表のデータ　初回登録"
+                if (index == 1)
+                {
+                    index--;
+                }
+
+                if (dataGridView2.Rows[index - 1].IsNewRow)
+                {
+                    index--;
+                }
+
+                for (int i = 0; i < index; i++)
+                {
+                    mainCategoryCode = int.Parse(dataGridView2[1, i].Value.ToString());
+
+                    itemCode = int.Parse(dataGridView2[2, i].Value.ToString());
+
+                    if (dataGridView2.Rows[i].Cells[3].Value != null && dataGridView2.Rows[i].Cells[3].Value.ToString() != "")
+                    {
+                        ItemDetail = dataGridView2[3, i].Value.ToString();
+                    }
+
+                    if (dataGridView2.Rows[i].Cells[4].Value != null && dataGridView2.Rows[i].Cells[4].Value.ToString() != "")
+                    {
+                        Weight = decimal.Parse(dataGridView2[4, i].Value.ToString());
+                    }
+
+                    if (dataGridView2.Rows[i].Cells[5].Value != null && dataGridView2.Rows[i].Cells[5].Value.ToString() != "")
+                    {
+                        UnitPrice = decimal.Parse(dataGridView2[5, i].Value.ToString());
+                    }
+
+                    if (dataGridView2.Rows[i].Cells[6].Value != null && dataGridView2.Rows[i].Cells[6].Value.ToString() != "") 
+                    {
+                        COUNT = int.Parse(dataGridView2[6, i].Value.ToString());
+                    }
+
+                    if (dataGridView2.Rows[i].Cells[7].Value != null && dataGridView2.Rows[i].Cells[7].Value.ToString() != "") 
+                    {
+                        Money = decimal.Parse(dataGridView2[7, i].Value.ToString().Substring(1));
+                    }
+
+                    if (dataGridView2.Rows[i].Cells[8].Value != null && dataGridView2.Rows[i].Cells[8].Value.ToString() != "")
+                    {
+                        Remark = dataGridView2[8, i].Value.ToString();
+                    }
+
+                    record = i + 1;
+
+                    Sql = "insert into statement_calc_data (main_category_code, item_code, weight, count, unit_price, amount, remarks, document_number, detail, record_number)" +
+                        " values ('" + MainCategoryCode + "','" + itemCode + "','" + Weight + "','" + COUNT + "','" + UnitPrice + "','" + Money + "','" + Remark + "'," +
+                        "'" + documentNumberTextBox.Text + "', '" + ItemDetail + "','" + record + "');";
+                    cmd = new NpgsqlCommand(Sql, conn);
+                    cmd.ExecuteNonQuery();
+                }
+                #endregion
+            }
+            #endregion
+
+            conn.Close();
+            MessageBox.Show("納品書の登録をしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Register.Enabled = false;
             #region"一時コメントアウト"
-            //#region "ありうるミス"
+            #region "ありうるミス"
             //if (string.IsNullOrEmpty(name.Text))
             //{
             //    MessageBox.Show("宛名を入力して下さい。");
@@ -12504,7 +12449,7 @@ namespace Flawless_ex
             //        return;
             //    }
             //}
-            //#endregion
+            #endregion
             //DialogResult dr = MessageBox.Show("登録しますか？", "登録確認", MessageBoxButtons.YesNo);
 
             //if (dr == DialogResult.No)
@@ -14400,7 +14345,7 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -14418,7 +14363,6 @@ namespace Flawless_ex
                     path = op.FileName;
 
                     articlesTextBox.Text = path;
-
                 }
                 else if (dialog == DialogResult.Cancel)
                 {
@@ -14431,7 +14375,7 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -14460,7 +14404,7 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -14477,6 +14421,20 @@ namespace Flawless_ex
                 {
                     path = op.FileName;
                     sealCertificationTextBox.Text = path;
+
+                    //PostgreSQL postgre = new PostgreSQL();
+                    //conn = postgre.connection();
+
+                    //conn.Open();
+
+                    //using (transaction = conn.BeginTransaction())
+                    //{
+                    //    SQL = "update client_m set seal_certification = '" + sealCertificationTextBox.Text + "' where code = '" + ClientCode + "';";
+                    //    cmd = new NpgsqlCommand(SQL, conn);
+                    //    cmd.ExecuteNonQuery();
+                    //    transaction.Commit();
+                    //}
+                    //conn.Close();
                 }
                 else if (dialog == DialogResult.Cancel)
                 {
@@ -14489,7 +14447,7 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -14506,6 +14464,21 @@ namespace Flawless_ex
                 {
                     path = op.FileName;
                     residenceCardTextBox.Text = path;
+
+                    //PostgreSQL postgre = new PostgreSQL();
+                    //conn = postgre.connection();
+
+                    //conn.Open();
+
+                    //using (transaction = conn.BeginTransaction())
+                    //{
+                    //    SQL = "update client_m set residence_card = '" + residenceCardTextBox.Text + "' where code = '" + ClientCode + "';";
+                    //    cmd = new NpgsqlCommand(SQL, conn);
+                    //    cmd.ExecuteNonQuery();
+                    //    transaction.Commit();
+                    //}
+                    //conn.Close();
+
                 }
                 else if (dialog == DialogResult.Cancel)
                 {
@@ -14518,7 +14491,7 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -14535,6 +14508,20 @@ namespace Flawless_ex
                 {
                     path = op.FileName;
                     antiqueLicenceTextBox.Text = path;
+
+                    //PostgreSQL postgre = new PostgreSQL();
+                    //conn = postgre.connection();
+
+                    //conn.Open();
+
+                    //using (transaction = conn.BeginTransaction())
+                    //{
+                    //    SQL = "update client_m set antique_license = '" + antiqueLicenceTextBox.Text + "' where code = '" + ClientCode + "';";
+                    //    cmd = new NpgsqlCommand(SQL, conn);
+                    //    cmd.ExecuteNonQuery();
+                    //    transaction.Commit();
+                    //}
+                    //conn.Close();
                 }
                 else if (dialog == DialogResult.Cancel)
                 {
@@ -14547,7 +14534,7 @@ namespace Flawless_ex
         {
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
-                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("顧客選択を先にしてください", "入力不備", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -14564,6 +14551,20 @@ namespace Flawless_ex
                 {
                     path = op.FileName;
                     antiqueLicenceTextBox2.Text = path;
+
+                    //PostgreSQL postgre = new PostgreSQL();
+                    //conn = postgre.connection();
+
+                    //conn.Open();
+
+                    //using (transaction = conn.BeginTransaction())
+                    //{
+                    //    SQL = "update client_m set antique_license = '" + antiqueLicenceTextBox2.Text + "' where code = '" + ClientCode + "';";
+                    //    cmd = new NpgsqlCommand(SQL, conn);
+                    //    cmd.ExecuteNonQuery();
+                    //    transaction.Commit();
+                    //}
+                    //conn.Close();
                 }
                 else if (dialog == DialogResult.Cancel)
                 {
@@ -14660,7 +14661,10 @@ namespace Flawless_ex
             #endregion
 
             #region"表の変数"
-            int width = 100;
+            int width = 100;                        
+            int widthLong = 130;                    //品物詳細と備考の幅
+            int widthWeight = 80;                   //重量の幅
+            int countWidth = 60;                    //数量の幅
             int d = 50;
             int d3 = 60;
             int height = 20;
@@ -14750,17 +14754,16 @@ namespace Flawless_ex
             e.Graphics.DrawRectangle(p, 730 - d2, 1000 - d2, d2 * 2 + 10, d2 * 2 + 10);         //印の枠
             #endregion
 
-            #region"ページ上のお客様情報"
-            //法人の場合
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            conn.Open();
+            #region"ページ上のお客様情報"
+            //法人の場合
 
             if (type == 0)
             {
                 DataTable clientDt1 = new DataTable();
-                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
-                conn.Open();
+                string str_sql_corporate = "select * from client_m where code = '" + ClientCode + "';";
 
                 NpgsqlDataAdapter adapter1 = new NpgsqlDataAdapter(str_sql_corporate, conn);
                 adapter1.Fill(clientDt1);
@@ -14768,10 +14771,12 @@ namespace Flawless_ex
                 DataRow row2;
                 row2 = clientDt1.Rows[0];
 
+                string CompanyName = row2["company_name"].ToString();
+                string ShopName = row2["shop_name"].ToString();
+                string ClientName = row2["staff_name"].ToString();
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
 
-                conn.Close();
 
                 e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 80));
                 e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 100));
@@ -14779,9 +14784,9 @@ namespace Flawless_ex
                 e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 140));
                 e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 160));
 
-                e.Graphics.DrawString("：" + companyTextBox.Text, font, brush, new PointF(x1 + d, 80));
-                e.Graphics.DrawString("：" + shopNameTextBox.Text, font, brush, new PointF(x1 + d, 100));
-                e.Graphics.DrawString("：" + clientNameTextBox.Text + "様", font, brush, new PointF(x1 + d, 120));
+                e.Graphics.DrawString("：" + CompanyName, font, brush, new PointF(x1 + d, 80));
+                e.Graphics.DrawString("：" + ShopName, font, brush, new PointF(x1 + d, 100));
+                e.Graphics.DrawString("：" + ClientName + "様", font, brush, new PointF(x1 + d, 120));
                 e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 140));
                 e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 160));
             }
@@ -14790,21 +14795,18 @@ namespace Flawless_ex
             else if (type == 1)
             {
                 DataTable clientDt2 = new DataTable();
-                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
-
-                conn.Open();
+                string str_sql_individual = "select * from client_m where code = '" + ClientCode + "';";
 
                 NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(str_sql_individual, conn);
                 adapter2.Fill(clientDt2);
 
                 DataRow row2;
                 row2 = clientDt2.Rows[0];
+
+                string NAME = row2["name"].ToString();
                 address = row2["address"].ToString();
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
-
-
-                conn.Close();
 
                 if (!string.IsNullOrEmpty(registerDateTextBox2.Text))     //個人事業主の場合
                 {
@@ -14812,7 +14814,7 @@ namespace Flawless_ex
                     e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 100));
                     e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 120));
 
-                    e.Graphics.DrawString("：" + companyTextBox.Text + "様", font, brush, new PointF(x1 + d, 80));
+                    e.Graphics.DrawString("：" + NAME + "様", font, brush, new PointF(x1 + d, 80));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 100));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 120));
                 }
@@ -14843,8 +14845,7 @@ namespace Flawless_ex
             if (type == 0)
             {
                 DataTable clientDt1 = new DataTable();
-                string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
-                conn.Open();
+                string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
 
                 NpgsqlDataAdapter adapter1 = new NpgsqlDataAdapter(str_sql_corporate, conn);
                 adapter1.Fill(clientDt1);
@@ -14854,9 +14855,6 @@ namespace Flawless_ex
 
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
-
-
-                conn.Close();
 
                 e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 950));
                 e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 970));
@@ -14874,9 +14872,7 @@ namespace Flawless_ex
             else if (type == 1)
             {
                 DataTable clientDt2 = new DataTable();
-                string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
-
-                conn.Open();
+                string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
 
                 NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(str_sql_individual, conn);
                 adapter2.Fill(clientDt2);
@@ -14886,9 +14882,6 @@ namespace Flawless_ex
                 address = row2["address"].ToString();
                 string tel = row2["phone_number"].ToString();
                 string fax = row2["fax_number"].ToString();
-
-
-                conn.Close();
 
                 if (!string.IsNullOrEmpty(registerDateTextBox2.Text))     //個人事業主の場合
                 {
@@ -14920,371 +14913,449 @@ namespace Flawless_ex
             }
             #endregion
 
-            #region"印刷プレビュー：上の表の中身"
+            #region"印刷プレビュー：表の中身（上と下両方）"
+            //Rectangle((左上座標),幅,高さ,フォーマット)：フォーマットで位置・形式を指定
 
-            #region"１行目"
-            e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y1, width, height), stringFormat);
-            e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y1, width, height), stringFormat);
-            e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y1, width, height), stringFormat);
-            e.Graphics.DrawString("単価", font3, brush, new RectangleF(x4, y1, width, height), stringFormat);
-            e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y1, width, height), stringFormat);
-            e.Graphics.DrawString("金額", font3, brush, new RectangleF(x6, y1, width, height), stringFormat);
-            e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y1, width, height), stringFormat);
-            #endregion
+            string sql_PreviewCount = "select count(*) from statement_calc_data where document_number = '" + documentNumberTextBox.Text + "';";
+            cmd = new NpgsqlCommand(sql_PreviewCount, conn);
+            int PreviewRow = int.Parse(cmd.ExecuteScalar().ToString());
 
-            #region "一時コメントアウト"
+            DataTable dtStatementPreview = new DataTable();
+            string sql_StatementPreview = "select * from statement_calc_data A inner join item_m B on A.item_code = B.item_code" +
+                " where document_number = '" + documentNumberTextBox.Text + "' order by A.record_number;";
+            adapter = new NpgsqlDataAdapter(sql_StatementPreview, conn);
+            adapter.Fill(dtStatementPreview);
 
-            //#region"２行目"
-            //e.Graphics.DrawString(itemComboBox0.Text, font, brush, new RectangleF(x1, y12 + h, width, height), stringFormat);
-            //e.Graphics.DrawString(itemDetail0.Text, font, brush, new RectangleF(x2, y12 + h, width, height), stringFormat);
-            //e.Graphics.DrawString(weightTextBox0.Text, font, brush, new RectangleF(x3, y12 + h, width, height), stringFormat1);
-            //e.Graphics.DrawString(unitPriceTextBox0.Text, font, brush, new RectangleF(x4, y12 + h, width, height), stringFormat1);
-            //e.Graphics.DrawString(countTextBox0.Text, font, brush, new RectangleF(x5, y12 + h, width, height), stringFormat1);
-            //e.Graphics.DrawString(moneyTextBox0.Text, font, brush, new RectangleF(x6, y12 + h, width, height), stringFormat1);
-            //e.Graphics.DrawString(remarks0.Text, font, brush, new RectangleF(x7, y12 + h, width, height), stringFormat2);
-            //#endregion
+            DataRow rowStatementPreview;
+            rowStatementPreview = dtStatementPreview.Rows[0];
 
-            /*
-            #region"３行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox1.Text) && unitPriceTextBox1.Text != "0" && unitPriceTextBox1.Text != "単価 -> 重量 or 数量")
+            //１行目の表の中身
+            string ItemNamePreview = rowStatementPreview["item_name"].ToString();
+            string ItemDetailPreview = rowStatementPreview["detail"].ToString();
+            string WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+            string UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+            string CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+            string MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+            string RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+            for (int i = 1; i <= PreviewRow; i++)
             {
-                e.Graphics.DrawString(itemComboBox1.Text, font, brush, new RectangleF(x1, y13 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail1.Text, font, brush, new RectangleF(x2, y13 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox1.Text, font, brush, new RectangleF(x3, y13 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox0.Text, font, brush, new RectangleF(x4, y13 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox1.Text, font, brush, new RectangleF(x5, y13 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox1.Text, font, brush, new RectangleF(x6, y13 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks1.Text, font, brush, new RectangleF(x7, y13 + h, width, height), stringFormat2);
-            }
-            #endregion
+                #region"１行目（ヘッダー）"
+                e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y1, width, height), stringFormat);
+                e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y1, width, height), stringFormat);
+                e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y1, width, height), stringFormat);
+                e.Graphics.DrawString("単価", font3, brush, new RectangleF(x4, y1, width, height), stringFormat);
+                e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y1, width, height), stringFormat);
+                e.Graphics.DrawString("金額", font3, brush, new RectangleF(x6, y1, width, height), stringFormat);
+                e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y1, width, height), stringFormat);
 
-            #region"４行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox2.Text) && unitPriceTextBox2.Text != "0" && unitPriceTextBox2.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox2.Text, font, brush, new RectangleF(x1, y14 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail2.Text, font, brush, new RectangleF(x2, y14 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox2.Text, font, brush, new RectangleF(x3, y14 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox2.Text, font, brush, new RectangleF(x4, y14 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox2.Text, font, brush, new RectangleF(x5, y14 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox2.Text, font, brush, new RectangleF(x6, y14 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks2.Text, font, brush, new RectangleF(x7, y14 + h, width, height), stringFormat2);
-            }
-            #endregion
+                e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y2, width, height), stringFormat);
+                e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y2, width, height), stringFormat);
+                e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y2, width, height), stringFormat);
+                e.Graphics.DrawString("単価", font3, brush, new RectangleF(x4, y2, width, height), stringFormat);
+                e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y2, width, height), stringFormat);
+                e.Graphics.DrawString("金額", font3, brush, new RectangleF(x6, y2, width, height), stringFormat);
+                e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y2, width, height), stringFormat);
+                #endregion
 
-            #region"５行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox3.Text) && unitPriceTextBox3.Text != "0" && unitPriceTextBox3.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox3.Text, font, brush, new RectangleF(x1, y15 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail3.Text, font, brush, new RectangleF(x2, y15 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox3.Text, font, brush, new RectangleF(x3, y15 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox3.Text, font, brush, new RectangleF(x4, y15 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox3.Text, font, brush, new RectangleF(x5, y15 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox3.Text, font, brush, new RectangleF(x6, y15 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks3.Text, font, brush, new RectangleF(x7, y15 + h, width, height), stringFormat2);
-            }
-            #endregion
+                #region "ヘッダー以下"
+                switch (i)
+                {
+                    #region"２行目"
+                    case 1:
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y12 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y12 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y12 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y12 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y12 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y12 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y12 + h, width, height), stringFormat2);
 
-            #region"６行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox4.Text) && unitPriceTextBox4.Text != "0" && unitPriceTextBox4.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox4.Text, font, brush, new RectangleF(x1, y16 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail4.Text, font, brush, new RectangleF(x2, y16 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox4.Text, font, brush, new RectangleF(x3, y16 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox4.Text, font, brush, new RectangleF(x4, y16 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox4.Text, font, brush, new RectangleF(x5, y16 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox4.Text, font, brush, new RectangleF(x6, y16 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks4.Text, font, brush, new RectangleF(x7, y16 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y22 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y22 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y22 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y22 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y22 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y22 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y22 + h, width, height), stringFormat2);
+                        break;
+                    #endregion
 
-            #region"７行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox5.Text) && unitPriceTextBox5.Text != "0" && unitPriceTextBox5.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox5.Text, font, brush, new RectangleF(x1, y17 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail5.Text, font, brush, new RectangleF(x2, y17 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox5.Text, font, brush, new RectangleF(x3, y17 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox5.Text, font, brush, new RectangleF(x4, y17 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox5.Text, font, brush, new RectangleF(x5, y17 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox5.Text, font, brush, new RectangleF(x6, y17 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks5.Text, font, brush, new RectangleF(x7, y17 + h, width, height), stringFormat2);
-            }
-            #endregion
+                    #region"３行目"
+                    case 2:
+                        rowStatementPreview = dtStatementPreview.Rows[1];
 
-            #region"８行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox6.Text) && unitPriceTextBox6.Text != "0" && unitPriceTextBox6.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox6.Text, font, brush, new RectangleF(x1, y18 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail6.Text, font, brush, new RectangleF(x2, y18 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox6.Text, font, brush, new RectangleF(x3, y18 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox6.Text, font, brush, new RectangleF(x4, y18 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox6.Text, font, brush, new RectangleF(x5, y18 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox6.Text, font, brush, new RectangleF(x6, y18 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks6.Text, font, brush, new RectangleF(x7, y18 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-            #region"９行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox7.Text) && unitPriceTextBox7.Text != "0" && unitPriceTextBox7.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox7.Text, font, brush, new RectangleF(x1, y19 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail7.Text, font, brush, new RectangleF(x2, y19 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox7.Text, font, brush, new RectangleF(x3, y19 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox7.Text, font, brush, new RectangleF(x4, y19 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox7.Text, font, brush, new RectangleF(x5, y19 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox7.Text, font, brush, new RectangleF(x6, y19 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks7.Text, font, brush, new RectangleF(x7, y19 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y13 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y13 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y13 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y13 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y13 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y13 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y13 + h, width, height), stringFormat2);
 
-            #region"１０行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox8.Text) && unitPriceTextBox8.Text != "0" && unitPriceTextBox8.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox8.Text, font, brush, new RectangleF(x1, y110 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail8.Text, font, brush, new RectangleF(x2, y110 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox8.Text, font, brush, new RectangleF(x3, y110 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox8.Text, font, brush, new RectangleF(x4, y110 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox8.Text, font, brush, new RectangleF(x5, y110 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox8.Text, font, brush, new RectangleF(x6, y110 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks8.Text, font, brush, new RectangleF(x7, y110 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y23 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y23 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y23 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y23 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y23 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y23 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y23 + h, width, height), stringFormat2);
 
-            #region"１１行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox9.Text) && unitPriceTextBox9.Text != "0" && unitPriceTextBox9.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox9.Text, font, brush, new RectangleF(x1, y111 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail9.Text, font, brush, new RectangleF(x2, y111 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(weightTextBox9.Text, font, brush, new RectangleF(x3, y111 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox9.Text, font, brush, new RectangleF(x4, y111 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox9.Text, font, brush, new RectangleF(x5, y111 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox9.Text, font, brush, new RectangleF(x6, y111 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks9.Text, font, brush, new RectangleF(x7, y111 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        break;
+                    #endregion
 
-            #region"１２行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox10.Text) && unitPriceTextBox10.Text != "0" && unitPriceTextBox10.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox10.Text, font, brush, new RectangleF(x1, y112 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail10.Text, font, brush, new RectangleF(x2, y112 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox10.Text, font, brush, new RectangleF(x3, y112 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox10.Text, font, brush, new RectangleF(x4, y112 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox10.Text, font, brush, new RectangleF(x5, y112 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox10.Text, font, brush, new RectangleF(x6, y112 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks10.Text, font, brush, new RectangleF(x7, y112 + h, width, height), stringFormat2);
-            }
-            #endregion
+                    #region"４行目"
+                    case 3:
+                        rowStatementPreview = dtStatementPreview.Rows[2];
 
-            #region"１３行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox11.Text) && unitPriceTextBox11.Text != "0" && unitPriceTextBox11.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox11.Text, font, brush, new RectangleF(x1, y113 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail11.Text, font, brush, new RectangleF(x2, y113 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox11.Text, font, brush, new RectangleF(x3, y113 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox11.Text, font, brush, new RectangleF(x4, y113 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox11.Text, font, brush, new RectangleF(x5, y113 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox11.Text, font, brush, new RectangleF(x6, y113 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks11.Text, font, brush, new RectangleF(x7, y113 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-            #region"１４行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox12.Text) && unitPriceTextBox12.Text != "0" && unitPriceTextBox12.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox12.Text, font, brush, new RectangleF(x1, y114 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail12.Text, font, brush, new RectangleF(x2, y114 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox12.Text, font, brush, new RectangleF(x3, y114 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox12.Text, font, brush, new RectangleF(x4, y114 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox12.Text, font, brush, new RectangleF(x5, y114 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox12.Text, font, brush, new RectangleF(x6, y114 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks12.Text, font, brush, new RectangleF(x7, y114 + h, width, height), stringFormat2);
-            }
-            #endregion
-            */
-            #endregion
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y14 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y14 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y14 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y14 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y14 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y14 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y14 + h, width, height), stringFormat2);
 
-            #region"印刷プレビュー：下の表の中身"
-            //Rectangle((左上座標),幅,高さ,フォーマット)：フォーマットで位置・形式を指
-            #region"１行目"
-            e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y2, width, height), stringFormat);
-            e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y2, width, height), stringFormat);
-            e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y2, width, height), stringFormat);
-            e.Graphics.DrawString("単価", font3, brush, new RectangleF(x4, y2, width, height), stringFormat);
-            e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y2, width, height), stringFormat);
-            e.Graphics.DrawString("金額", font3, brush, new RectangleF(x6, y2, width, height), stringFormat);
-            e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y2, width, height), stringFormat);
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y24 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y24 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y24 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y24 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y24 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y24 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y24 + h, width, height), stringFormat2);
 
-            #region "一時コメントアウト"
-            /*
-            #region"２行目"
-            e.Graphics.DrawString(itemComboBox0.Text, font, brush, new RectangleF(x1, y22 + h, width, height), stringFormat);
-            e.Graphics.DrawString(itemDetail0.Text, font, brush, new RectangleF(x2, y22 + h, width, height), stringFormat);
-            e.Graphics.DrawString(weightTextBox0.Text, font, brush, new RectangleF(x3, y22 + h, width, height), stringFormat1);
-            e.Graphics.DrawString(unitPriceTextBox0.Text, font, brush, new RectangleF(x4, y22 + h, width, height), stringFormat1);
-            e.Graphics.DrawString(countTextBox0.Text, font, brush, new RectangleF(x5, y22 + h, width, height), stringFormat1);
-            e.Graphics.DrawString(moneyTextBox0.Text, font, brush, new RectangleF(x6, y22 + h, width, height), stringFormat1);
-            e.Graphics.DrawString(remarks0.Text, font, brush, new RectangleF(x7, y22 + h, width, height), stringFormat2);
-            #endregion
-            
-            #region"３行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox1.Text) && unitPriceTextBox1.Text != "0" && unitPriceTextBox1.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox1.Text, font, brush, new RectangleF(x1, y23 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail1.Text, font, brush, new RectangleF(x2, y23 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox1.Text, font, brush, new RectangleF(x3, y23 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox0.Text, font, brush, new RectangleF(x4, y23 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox1.Text, font, brush, new RectangleF(x5, y23 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox1.Text, font, brush, new RectangleF(x6, y23 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks1.Text, font, brush, new RectangleF(x7, y23 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        break;
+                    #endregion
 
-            #region"４行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox2.Text) && unitPriceTextBox2.Text != "0" && unitPriceTextBox2.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox2.Text, font, brush, new RectangleF(x1, y24 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail2.Text, font, brush, new RectangleF(x2, y24 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox2.Text, font, brush, new RectangleF(x3, y24 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox2.Text, font, brush, new RectangleF(x4, y24 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox2.Text, font, brush, new RectangleF(x5, y24 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox2.Text, font, brush, new RectangleF(x6, y24 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks2.Text, font, brush, new RectangleF(x7, y24 + h, width, height), stringFormat2);
-            }
-            #endregion
+                    #region"５行目"
+                    case 4:
+                        rowStatementPreview = dtStatementPreview.Rows[3];
 
-            #region"５行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox3.Text) && unitPriceTextBox3.Text != "0" && unitPriceTextBox3.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox3.Text, font, brush, new RectangleF(x1, y25 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail3.Text, font, brush, new RectangleF(x2, y25 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox3.Text, font, brush, new RectangleF(x3, y25 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox3.Text, font, brush, new RectangleF(x4, y25 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox3.Text, font, brush, new RectangleF(x5, y25 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox3.Text, font, brush, new RectangleF(x6, y25 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks3.Text, font, brush, new RectangleF(x7, y25 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-            #region"６行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox4.Text) && unitPriceTextBox4.Text != "0" && unitPriceTextBox4.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox4.Text, font, brush, new RectangleF(x1, y26 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail4.Text, font, brush, new RectangleF(x2, y26 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox4.Text, font, brush, new RectangleF(x3, y26 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox4.Text, font, brush, new RectangleF(x4, y26 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox4.Text, font, brush, new RectangleF(x5, y26 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox4.Text, font, brush, new RectangleF(x6, y26 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks4.Text, font, brush, new RectangleF(x7, y26 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y15 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y15 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y15 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y15 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y15 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y15 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y15 + h, width, height), stringFormat2);
 
-            #region"７行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox5.Text) && unitPriceTextBox5.Text != "0" && unitPriceTextBox5.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox5.Text, font, brush, new RectangleF(x1, y27 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail5.Text, font, brush, new RectangleF(x2, y27 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox5.Text, font, brush, new RectangleF(x3, y27 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox5.Text, font, brush, new RectangleF(x4, y27 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox5.Text, font, brush, new RectangleF(x5, y27 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox5.Text, font, brush, new RectangleF(x6, y27 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks5.Text, font, brush, new RectangleF(x7, y27 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y25 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y25 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y25 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y25 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y25 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y25 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y25 + h, width, height), stringFormat2);
 
-            #region"８行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox6.Text) && unitPriceTextBox6.Text != "0" && unitPriceTextBox6.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox6.Text, font, brush, new RectangleF(x1, y28 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail6.Text, font, brush, new RectangleF(x2, y28 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox6.Text, font, brush, new RectangleF(x3, y28 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox6.Text, font, brush, new RectangleF(x4, y28 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox6.Text, font, brush, new RectangleF(x5, y28 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox6.Text, font, brush, new RectangleF(x6, y28 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks6.Text, font, brush, new RectangleF(x7, y28 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        break;
 
-            #region"９行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox7.Text) && unitPriceTextBox7.Text != "0" && unitPriceTextBox7.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox7.Text, font, brush, new RectangleF(x1, y29 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail7.Text, font, brush, new RectangleF(x2, y29 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox7.Text, font, brush, new RectangleF(x3, y29 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox7.Text, font, brush, new RectangleF(x4, y29 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox7.Text, font, brush, new RectangleF(x5, y29 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox7.Text, font, brush, new RectangleF(x6, y29 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks7.Text, font, brush, new RectangleF(x7, y29 + h, width, height), stringFormat2);
-            }
-            #endregion
+                    #endregion
 
-            #region"１０行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox8.Text) && unitPriceTextBox8.Text != "0" && unitPriceTextBox8.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox8.Text, font, brush, new RectangleF(x1, y210 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail8.Text, font, brush, new RectangleF(x2, y210 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox8.Text, font, brush, new RectangleF(x3, y210 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox8.Text, font, brush, new RectangleF(x4, y210 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox8.Text, font, brush, new RectangleF(x5, y210 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox8.Text, font, brush, new RectangleF(x6, y210 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks8.Text, font, brush, new RectangleF(x7, y210 + h, width, height), stringFormat2);
-            }
-            #endregion
+                    #region"６行目"
+                    case 5:
+                        rowStatementPreview = dtStatementPreview.Rows[4];
 
-            #region"１１行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox9.Text) && unitPriceTextBox9.Text != "0" && unitPriceTextBox9.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox9.Text, font, brush, new RectangleF(x1, y211 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail9.Text, font, brush, new RectangleF(x2, y211 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(weightTextBox9.Text, font, brush, new RectangleF(x3, y211 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox9.Text, font, brush, new RectangleF(x4, y211 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox9.Text, font, brush, new RectangleF(x5, y211 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox9.Text, font, brush, new RectangleF(x6, y211 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks9.Text, font, brush, new RectangleF(x7, y211 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-            #region"１２行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox10.Text) && unitPriceTextBox10.Text != "0" && unitPriceTextBox10.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox10.Text, font, brush, new RectangleF(x1, y212 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail10.Text, font, brush, new RectangleF(x2, y212 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox10.Text, font, brush, new RectangleF(x3, y212 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox10.Text, font, brush, new RectangleF(x4, y212 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox10.Text, font, brush, new RectangleF(x5, y212 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox10.Text, font, brush, new RectangleF(x6, y212 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks10.Text, font, brush, new RectangleF(x7, y212 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y16 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y16 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y16 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y16 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y16 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y16 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y16 + h, width, height), stringFormat2);
 
-            #region"１３行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox11.Text) && unitPriceTextBox11.Text != "0" && unitPriceTextBox11.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox11.Text, font, brush, new RectangleF(x1, y213 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail11.Text, font, brush, new RectangleF(x2, y213 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox11.Text, font, brush, new RectangleF(x3, y213 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox11.Text, font, brush, new RectangleF(x4, y213 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox11.Text, font, brush, new RectangleF(x5, y213 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox11.Text, font, brush, new RectangleF(x6, y213 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks11.Text, font, brush, new RectangleF(x7, y213 + h, width, height), stringFormat2);
-            }
-            #endregion
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y26 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y26 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y26 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y26 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y26 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y26 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y26 + h, width, height), stringFormat2);
 
-            #region"１４行目"
-            if (!string.IsNullOrEmpty(unitPriceTextBox12.Text) && unitPriceTextBox12.Text != "0" && unitPriceTextBox12.Text != "単価 -> 重量 or 数量")
-            {
-                e.Graphics.DrawString(itemComboBox12.Text, font, brush, new RectangleF(x1, y214 + h, width, height), stringFormat);
-                e.Graphics.DrawString(itemDetail12.Text, font, brush, new RectangleF(x2, y214 + h, width, height), stringFormat);
-                e.Graphics.DrawString(weightTextBox12.Text, font, brush, new RectangleF(x3, y214 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(unitPriceTextBox12.Text, font, brush, new RectangleF(x4, y214 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(countTextBox12.Text, font, brush, new RectangleF(x5, y214 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(moneyTextBox12.Text, font, brush, new RectangleF(x6, y214 + h, width, height), stringFormat1);
-                e.Graphics.DrawString(remarks12.Text, font, brush, new RectangleF(x7, y214 + h, width, height), stringFormat2);
+                        break;
+                    #endregion
+
+                    #region"７行目"
+                    case 6:
+                        rowStatementPreview = dtStatementPreview.Rows[5];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y17 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y17 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y17 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y17 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y17 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y17 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y17 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y27 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y27 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y27 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y27 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y27 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y27 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y27 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"８行目"
+                    case 7:
+                        rowStatementPreview = dtStatementPreview.Rows[6];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y18 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y18 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y18 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y18 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y18 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y18 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y18 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y28 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y28 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y28 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y28 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y28 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y28 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y28 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"９行目"
+                    case 8:
+                        rowStatementPreview = dtStatementPreview.Rows[7];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y19 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y19 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y19 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y19 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y19 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y19 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y19 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y29 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y29 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y29 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y29 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y29 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y29 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y29 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"１０行目"
+                    case 9:
+                        rowStatementPreview = dtStatementPreview.Rows[8];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y110 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y110 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y110 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y110 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y110 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y110 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y110 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y210 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y210 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y210 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y210 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y210 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y210 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y210 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"１１行目"
+                    case 10:
+                        rowStatementPreview = dtStatementPreview.Rows[9];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y111 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y111 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y111 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y111 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y111 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y111 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y111 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y211 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y211 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y211 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y211 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y211 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y211 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y211 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"１２行目"
+                    case 11:
+                        rowStatementPreview = dtStatementPreview.Rows[10];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y112 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y112 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y112 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y112 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y112 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y112 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y112 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y212 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y212 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y212 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y212 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y212 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y212 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y212 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"１３行目"
+                    case 12:
+                        rowStatementPreview = dtStatementPreview.Rows[11];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y113 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y113 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y113 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y113 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y113 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y113 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y113 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y213 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y213 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y213 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y213 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y213 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y213 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y213 + h, width, height), stringFormat2);
+
+                        break;
+                    #endregion
+
+                    #region"１４行目"
+                    case 13:
+                        rowStatementPreview = dtStatementPreview.Rows[12];
+
+                        ItemNamePreview = rowStatementPreview["item_name"].ToString();
+                        ItemDetailPreview = rowStatementPreview["detail"].ToString();
+                        WeightPreview = ((decimal)rowStatementPreview["weight"]).ToString("n1");
+                        UnitPricePreview = ((decimal)rowStatementPreview["unit_price"]).ToString("n0");
+                        CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
+                        MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
+                        RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y114 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y114 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y114 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y114 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y114 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y114 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y114 + h, width, height), stringFormat2);
+
+                        e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y214 + h, width, height), stringFormat);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y214 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y214 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y214 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y214 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y214 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y214 + h, width, height), stringFormat2);
+
+                        break;
+                        #endregion
+                }
+                #endregion
             }
-            #endregion
-            */
-            #endregion
             #endregion
 
             #region"上の表　枠線"
@@ -15575,6 +15646,7 @@ namespace Flawless_ex
 
             #endregion
 
+            conn.Close();
         }
 
         #endregion
@@ -15623,11 +15695,10 @@ namespace Flawless_ex
             {
                 if (type == 0)
                 {
-
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and code = '" + ClientCode + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -15639,8 +15710,10 @@ namespace Flawless_ex
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["staff_name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks1 = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    //ClientCode = (int)row2["code"];
+
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -15666,7 +15739,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and code = '" + ClientCode + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -15675,10 +15748,11 @@ namespace Flawless_ex
 
                     string name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks1 = row2["remarks"].ToString();
                     string occupation = row2["occupation"].ToString();
                     string birthday = row2["birthday"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    //ClientCode = (int)row2["code"];
 
                     #region "計算書"
                     label16.Text = "氏名";
@@ -15722,7 +15796,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -15734,8 +15808,9 @@ namespace Flawless_ex
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["staff_name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    ClientCode = (int)row2["code"];
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -15761,7 +15836,7 @@ namespace Flawless_ex
                 {
                     //顧客情報 個人
                     DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m_individual where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
                     adapter.Fill(clientDt);
 
@@ -15770,10 +15845,11 @@ namespace Flawless_ex
 
                     string name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
+                    remarks = row2["remarks"].ToString();
                     string occupation = row2["occupation"].ToString();
                     string birthday = row2["birthday"].ToString();
                     string antique_license = row2["antique_license"].ToString();
+                    ClientCode = (int)row2["code"];
 
                     #region "計算書"
                     label16.Text = "氏名";
@@ -15812,15 +15888,287 @@ namespace Flawless_ex
         }
         #endregion
 
-        #region "データグリッドビュー行追加"
+        #region"datagridview"
+
+        private DataGridViewComboBoxEditingControl dataGridViewComboBox1 = null;            //計算書の大分類
+        private DataGridViewComboBoxEditingControl dataGridViewComboBox2 = null;            //納品書の大分類
+
+        #region "データグリッドビュー行追加（計算書）"
         private void DataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             dataGridView1[1, code].Value = itemMainCategoryCode;
-            dataGridView1[2, code].Value = itemCode;
+
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            
+            //２行目追加時
+            if (dataGridView1.CurrentCell.RowIndex == 0)
+            {
+                dt12.Clear();
+                //dt12 = dt5.Copy();
+                //品名検索
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt12);
+
+                row = dt12.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 1].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[1].Cells[2];
+                dataGridViewComboBoxCell.DataSource = dt12;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //３行目追加時
+            if (dataGridView1.CurrentCell.RowIndex == 1)
+            {
+                dt13.Clear();
+
+                //品名検索
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt13);
+
+                row = dt13.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 2].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1.Rows[2].Cells[2];
+                dataGridViewComboBoxCell.DataSource = dt13;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //４行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 2)
+            {
+                dt14.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt14);
+
+                row = dt14.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 3].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 3];
+                dataGridViewComboBoxCell.DataSource = dt14;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //５行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 3)
+            {
+                dt15.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt15);
+
+                row = dt15.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 4].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 4];
+                dataGridViewComboBoxCell.DataSource = dt15;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //６行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 4)
+            {
+                dt16.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt16);
+
+                row = dt16.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 5].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 5];
+                dataGridViewComboBoxCell.DataSource = dt16;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //７行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 5)
+            {
+                dt17.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt17);
+
+                row = dt17.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 6].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 6];
+                dataGridViewComboBoxCell.DataSource = dt17;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //８行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 6)
+            {
+                dt18.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt18);
+
+                row = dt18.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 7].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 7];
+                dataGridViewComboBoxCell.DataSource = dt18;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //９行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 7)
+            {
+                dt19.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt19);
+
+                row = dt19.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 8].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 8];
+                dataGridViewComboBoxCell.DataSource = dt19;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１０行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 8)
+            {
+                dt20.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt20);
+
+                row = dt20.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 9].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 9];
+                dataGridViewComboBoxCell.DataSource = dt20;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１１行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 9)
+            {
+                dt21.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt21);
+
+                row = dt21.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 10].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 10];
+                dataGridViewComboBoxCell.DataSource = dt21;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１２行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 10)
+            {
+                dt22.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt22);
+
+                row = dt22.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 11].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 11];
+                dataGridViewComboBoxCell.DataSource = dt22;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１３行目追加
+            if (dataGridView1.CurrentCell.RowIndex == 11)
+            {
+                dt23.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt23);
+
+                row = dt23.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 12].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 12];
+                dataGridViewComboBoxCell.DataSource = dt23;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
             code++;
+
+            conn.Close();
         }
         #endregion
-        #region "データグリッドビュー"
+
         private void DataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             #region"コンボボックスの処理"
@@ -15850,24 +16198,22 @@ namespace Flawless_ex
 
                 //イベントハンドラを削除
                 control.KeyPress -= new KeyPressEventHandler(dataGridView1_KeyPress);
+                control.KeyPress -= new KeyPressEventHandler(dataGridView1_KeyPressIntOnly);
 
                 //該当する列か調べる
-                if (dataGridView.CurrentCell.OwningColumn.Name == "WeightColumn" || dataGridView.CurrentCell.OwningColumn.Name == "UnitPriceColumn")
+                if (dataGridView.CurrentCell.OwningColumn.Name == "WeightColumn")
                 {
                     control.KeyPress += new KeyPressEventHandler(dataGridView1_KeyPress);
                 }
 
-                if (dataGridView.CurrentCell.OwningColumn.Name == "CountColumn")
+                if (dataGridView.CurrentCell.OwningColumn.Name == "CountColumn" || dataGridView.CurrentCell.OwningColumn.Name == "UnitPriceColumn")
                 {
                     control.KeyPress += new KeyPressEventHandler(dataGridView1_KeyPressIntOnly);
                 }
             }
             #endregion
         }
-        #endregion
 
-        private DataGridViewComboBoxEditingControl dataGridViewComboBox1 = null;            //計算書の大分類
-        private DataGridViewComboBoxEditingControl dataGridViewComboBox2 = null;            //納品書の大分類
         private void DataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             //SelectedIndexChangedイベントハンドラを削除
@@ -15880,42 +16226,607 @@ namespace Flawless_ex
 
         private void dataGridViewComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //選択されたアイテムを表示
-            DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
-            main = cb.EditingControlFormattedValue.ToString();
-
-            dt5.Clear();
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
+            //１行目
+            if (dataGridView1.CurrentCell.RowIndex == 0)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
 
-            #region "品名検索"
-            string sql_str3 = "select B.main_category_name, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
-            adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
-            adapter2.Fill(dt5);
-            #endregion
+                dt5.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt5);
+
+                row = dt5.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2,0].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2,0];
+                dataGridViewComboBoxCell.DataSource = dt5;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //２行目
+            if (dataGridView1.CurrentCell.RowIndex == 1)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt12.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt12);
+
+                row = dt12.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 1].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 1];
+                dataGridViewComboBoxCell.DataSource = dt12;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //３行目
+            if (dataGridView1.CurrentCell.RowIndex == 2)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt13.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt13);
+
+                row = dt13.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 2].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 2];
+                dataGridViewComboBoxCell.DataSource = dt13;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //４行目
+            if (dataGridView1.CurrentCell.RowIndex == 3)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt14.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt14);
+
+                row = dt14.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 3].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 3];
+                dataGridViewComboBoxCell.DataSource = dt14;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //５行目
+            if (dataGridView1.CurrentCell.RowIndex == 4)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt15.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt15);
+
+                row = dt15.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 4].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 4];
+                dataGridViewComboBoxCell.DataSource = dt15;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //６行目
+            if (dataGridView1.CurrentCell.RowIndex == 5)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt16.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt16);
+
+                row = dt16.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 5].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 5];
+                dataGridViewComboBoxCell.DataSource = dt16;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //７行目
+            if (dataGridView1.CurrentCell.RowIndex == 6)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt17.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt17);
+
+                row = dt17.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 6].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 6];
+                dataGridViewComboBoxCell.DataSource = dt17;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //８行目
+            if (dataGridView1.CurrentCell.RowIndex == 7)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt18.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt18);
+
+                row = dt18.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 7].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 7];
+                dataGridViewComboBoxCell.DataSource = dt18;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //９行目
+            if (dataGridView1.CurrentCell.RowIndex == 8)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt19.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt19);
+
+                row = dt19.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 8].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 8];
+                dataGridViewComboBoxCell.DataSource = dt19;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１０行目
+            if (dataGridView1.CurrentCell.RowIndex == 9)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt20.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt20);
+
+                row = dt20.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 9].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 9];
+                dataGridViewComboBoxCell.DataSource = dt20;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１１行目
+            if (dataGridView1.CurrentCell.RowIndex == 10)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt21.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt21);
+
+                row = dt21.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 10].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 10];
+                dataGridViewComboBoxCell.DataSource = dt21;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１２行目
+            if (dataGridView1.CurrentCell.RowIndex == 11)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt22.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt22);
+
+                row = dt22.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 11].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 11];
+                dataGridViewComboBoxCell.DataSource = dt22;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１３行目
+            if (dataGridView1.CurrentCell.RowIndex == 12)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt23.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt23);
+
+                row = dt23.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView1[2, 12].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 12];
+                dataGridViewComboBoxCell.DataSource = dt23;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
 
             conn.Close();
         }
 
         private void dataGridViewComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //選択されたアイテムを表示
-            DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
-            main = cb.EditingControlFormattedValue.ToString();
-
-            dt7.Clear();
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
 
-            #region "品名検索"
-            string sql_str3 = "select B.main_category_name, A.item_name from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
-            adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
-            adapter2.Fill(dt7);
-            #endregion
+            //１行目
+            if (dataGridView2.CurrentCell.RowIndex == 0)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt7.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt7);
+
+                row = dt7.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 0].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 0];
+                dataGridViewComboBoxCell.DataSource = dt7;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //２行目
+            if (dataGridView2.CurrentCell.RowIndex == 1)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt32.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt32);
+
+                row = dt32.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 1].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 1];
+                dataGridViewComboBoxCell.DataSource = dt32;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //３行目
+            if (dataGridView2.CurrentCell.RowIndex == 2)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt33.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt33);
+
+                row = dt33.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 2].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 2];
+                dataGridViewComboBoxCell.DataSource = dt33;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //４行目
+            if (dataGridView2.CurrentCell.RowIndex == 3)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt34.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt34);
+
+                row = dt34.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 3].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 3];
+                dataGridViewComboBoxCell.DataSource = dt34;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //５行目
+            if (dataGridView2.CurrentCell.RowIndex == 4)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt35.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt35);
+
+                row = dt35.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 4].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 4];
+                dataGridViewComboBoxCell.DataSource = dt35;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //６行目
+            if (dataGridView2.CurrentCell.RowIndex == 5)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt36.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt36);
+
+                row = dt36.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 5].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 5];
+                dataGridViewComboBoxCell.DataSource = dt36;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //７行目
+            if (dataGridView2.CurrentCell.RowIndex == 6)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt37.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt37);
+
+                row = dt37.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 6].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 6];
+                dataGridViewComboBoxCell.DataSource = dt37;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //８行目
+            if (dataGridView2.CurrentCell.RowIndex == 7)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt38.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt38);
+
+                row = dt38.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 7].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 7];
+                dataGridViewComboBoxCell.DataSource = dt38;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //９行目
+            if (dataGridView2.CurrentCell.RowIndex == 8)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt39.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt39);
+
+                row = dt39.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 8].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 8];
+                dataGridViewComboBoxCell.DataSource = dt39;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
+            //１０行目
+            if (dataGridView2.CurrentCell.RowIndex == 9)
+            {
+                //選択されたアイテムを表示
+                DataGridViewComboBoxEditingControl cb = (DataGridViewComboBoxEditingControl)sender;
+                main = cb.EditingControlFormattedValue.ToString();
+
+                dt40.Clear();
+
+                #region "品名検索"
+                string sql_str3 = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_name = '" + main + "';";
+                adapter2 = new NpgsqlDataAdapter(sql_str3, conn);
+                adapter2.Fill(dt40);
+
+                row = dt40.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 9].Value = itemCode;
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 9];
+                dataGridViewComboBoxCell.DataSource = dt40;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+                #endregion
+            }
+
 
             conn.Close();
         }
-
 
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
@@ -15929,10 +16840,76 @@ namespace Flawless_ex
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            NotLoad = true;
+            #region"重量変更時"
+            int rowNumber = dataGridView1.Rows.Count;
+            TotalWeight = 0;
 
+            for (int i = 0; i < rowNumber; i++)
+            {
+                if (dataGridView1[4, i].Value != null && dataGridView1[4, i].Value.ToString() != "")
+                {
+                    unitWeight = decimal.Parse(dataGridView1[4, i].Value.ToString());
+                    TotalWeight += unitWeight;
+                }
+            }
+
+            totalWeightTextBox.Text = TotalWeight.ToString("n1");
+            #endregion
+
+            #region"数量変更時"
+            TotalCount = 0;
+
+            for (int i = 0; i < rowNumber; i++)
+            {
+                if (dataGridView1[6, i].Value != null && dataGridView1[6, i].Value.ToString() != "")
+                {
+                    unitCount = int.Parse(dataGridView1[6, i].Value.ToString());
+                    TotalCount += unitCount;
+                }
+            }
+
+            totalCountTextBox.Text = TotalCount.ToString("n0");
+            #endregion
+
+            #region"金額変更時"
+            TotalMoney = 0;
+
+            for (int i = 0; i < rowNumber; i++)
+            {
+                if (dataGridView1[7, i].Value != null && dataGridView1[7, i].Value.ToString() != "")
+                {
+                    unitMoney = decimal.Parse(dataGridView1[7, i].Value.ToString().Substring(1));
+                    TotalMoney += unitMoney;
+                }
+            }
+            subTotal.Text = TotalMoney.ToString("c0");
+            sumTextBox.Text = TotalMoney.ToString("c0");
+            #endregion
+
+            #region"計算列"
+            //重量×単価（数量は空白）
+            if (dataGridView1[4, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value == null &&
+                dataGridView1[4, e.RowIndex].Value.ToString() != "" && dataGridView1[5, e.RowIndex].Value.ToString() != "")
+            {
+                weight = decimal.Parse(dataGridView1[4, e.RowIndex].Value.ToString());
+                unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
+
+                dataGridView1[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
+            }
+
+            //数量×単価（重量は空白）
+            if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value != null &&
+                dataGridView1[5, e.RowIndex].Value.ToString() != "" && dataGridView1[6, e.RowIndex].Value.ToString() != "")
+            {
+                unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
+                count = int.Parse(dataGridView1[6, e.RowIndex].Value.ToString());
+
+                dataGridView1[7, e.RowIndex].Value = (unitprice * count).ToString("c0");
+            }
+            #endregion
         }
 
+        #region"計算書の datagridview の入力制御"
         //datagridview において数値、'.'、'バックスペース'のみ入力可
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -15950,6 +16927,7 @@ namespace Flawless_ex
                 e.Handled = true;
             }
         }
+        #endregion
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
@@ -15959,7 +16937,7 @@ namespace Flawless_ex
                 {
                     if (dataGridView1.Rows[i].Cells[7].Value != null)
                     {
-                        sub -= decimal.Parse(dataGridView1.Rows[i].Cells[7].Value.ToString().Substring(1));
+                        sub -= decimal.Parse((dataGridView1.Rows[i].Cells[7].Value.ToString()).Substring(1));
                         subTotal.Text = sub.ToString("c0");
                         sumTextBox.Text = sub.ToString("c0");
                     }
@@ -15974,73 +16952,255 @@ namespace Flawless_ex
         private void dataGridView2_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             dataGridView2[1, CODE].Value = itemMainCategoryCode;
-            dataGridView2[2, CODE].Value = itemCode;
+
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+
+            string sql_RowsAdded = "";
+
+            //２行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 0)
+            {
+                dt32.Clear();
+                sql_RowsAdded= "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt32);
+
+                row = dt32.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 1].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 1];
+                dataGridViewComboBoxCell.DataSource = dt32;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //３行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 1)
+            {
+                dt33.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt33);
+
+                row = dt33.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 2].Value = itemCode;
+
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 2];
+                dataGridViewComboBoxCell.DataSource = dt33;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //４行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 2)
+            {
+                dt34.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt34);
+
+                row = dt34.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 3].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 3];
+                dataGridViewComboBoxCell.DataSource = dt34;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //５行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 3)
+            {
+                dt35.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt35);
+
+                row = dt35.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 4].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 4];
+                dataGridViewComboBoxCell.DataSource = dt35;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //６行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 4)
+            {
+                dt36.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt36);
+
+                row = dt36.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 5].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 5];
+                dataGridViewComboBoxCell.DataSource = dt36;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //７行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 5)
+            {
+                dt37.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt37);
+
+                row = dt37.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 6].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 6];
+                dataGridViewComboBoxCell.DataSource = dt37;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //８行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 6)
+            {
+                dt38.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt38);
+
+                row = dt38.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 7].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 7];
+                dataGridViewComboBoxCell.DataSource = dt38;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //９行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 7)
+            {
+                dt39.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt39);
+
+                row = dt39.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 8].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 8];
+                dataGridViewComboBoxCell.DataSource = dt39;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
+            //１０行目追加
+            if (dataGridView2.CurrentCell.RowIndex == 8)
+            {
+                dt40.Clear();
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
+                adapter.Fill(dt40);
+
+                row = dt40.Rows[0];
+                itemCode = (int)row["item_code"];
+
+                dataGridView2[2, 9].Value = itemCode;
+
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView2[2, 9];
+                dataGridViewComboBoxCell.DataSource = dt40;
+                dataGridViewComboBoxCell.DisplayMember = "item_name";
+                dataGridViewComboBoxCell.ValueMember = "item_code";
+            }
+
             CODE++;
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (NotLoad)
-            {
-                //単価 × 重量（数量は空白）
-                if (dataGridView1[4, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value == null && dataGridView1[4, e.RowIndex].Value.ToString() != "" && dataGridView1[5, e.RowIndex].Value.ToString() != "") 
-                {
-                    if (dataGridView1[7, e.RowIndex].Value != null && cellfirst)
-                    {
-                        sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(1));
-                    }
-                    cellfirst = false;
+            //if (NotLoad)
+            //{
+            //    //単価 × 重量（数量は空白）
+            //    if (dataGridView1[4, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value == null && dataGridView1[4, e.RowIndex].Value.ToString() != "" && dataGridView1[5, e.RowIndex].Value.ToString() != "")
+            //    {
+            //        if (dataGridView1[7, e.RowIndex].Value != null && cellfirst)
+            //        {
+            //            sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(1));
+            //        }
+            //        cellfirst = false;
 
-                    weight = decimal.Parse(dataGridView1[4, e.RowIndex].Value.ToString());
-                    unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
+            //        weight = decimal.Parse(dataGridView1[4, e.RowIndex].Value.ToString());
+            //        unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
 
-                    dataGridView1[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
-                    if (cellfirst)
-                    {
-                        sub += weight * unitprice;
-                        subTotal.Text = sub.ToString("c0");
-                        sumTextBox.Text = sub.ToString("c0");
-                    }
-                    cellfirst = true;
-                }
+            //        dataGridView1[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
+            //        if (cellfirst)
+            //        {
+            //            sub += weight * unitprice;
+            //            subTotal.Text = sub.ToString("c0");
+            //            sumTextBox.Text = sub.ToString("c0");
+                        
+            //        }
+            //        cellfirst = true;
+            //    }
 
-                //単価 × 数量（重量は空白）
-                if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value.ToString() != "" && dataGridView1[6, e.RowIndex].Value.ToString() != "")
-                {
-                    cellfirst = false;
-                    unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
-                    Count = int.Parse(dataGridView1[6, e.RowIndex].Value.ToString());
+            //    //単価 × 数量（重量は空白）
+            //    if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value.ToString() != "" && dataGridView1[6, e.RowIndex].Value.ToString() != "")
+            //    {
+            //        if (dataGridView1[7, e.RowIndex].Value != null && cellfirst)
+            //        {
+            //            sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(1));
+            //        }
 
-                    dataGridView1[7, e.RowIndex].Value = (unitprice * Count).ToString("c0");
-                    if (cellfirst)
-                    {
-                        sub += Count * unitprice;
-                        subTotal.Text = sub.ToString("c0");
-                        sumTextBox.Text = sub.ToString("c0");
-                        cellfirst = false;
-                    }
-                    cellfirst = true;
-                }
+            //        cellfirst = false;
+            //        unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
+            //        Count = int.Parse(dataGridView1[6, e.RowIndex].Value.ToString());
 
-                //重量・単価・数量が無記入だったら金額クリア
-                if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value == null && dataGridView1[6, e.RowIndex].Value == null && dataGridView1[7, e.RowIndex].Value != null)
-                {
-                    sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(0));
-                    subTotal.Text = sub.ToString("c0");
-                    sumTextBox.Text = sub.ToString("c0");
-                    dataGridView1[7, e.RowIndex].Value = null;
-                }
+            //        dataGridView1[7, e.RowIndex].Value = (unitprice * Count).ToString("c0");
+            //        if (cellfirst)
+            //        {
+            //            sub += Count * unitprice;
+            //            subTotal.Text = sub.ToString("c0");
+            //            sumTextBox.Text = sub.ToString("c0");
+            //            //cellfirst = false;
+            //        }
+            //        cellfirst = true;
+            //    }
 
-            }
+            //    //重量・単価・数量が無記入だったら金額クリア
+            //    if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value == null && dataGridView1[6, e.RowIndex].Value == null && dataGridView1[7, e.RowIndex].Value != null)
+            //    {
+            //        sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(0));
+            //        subTotal.Text = sub.ToString("c0");
+            //        sumTextBox.Text = sub.ToString("c0");
+            //        dataGridView1[7, e.RowIndex].Value = null;
+            //    }
+
+            //}
         }
 
-        
         private void dataGridView1_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             dataGridView1 = (DataGridView)sender;
             if (dataGridView1.Columns[e.ColumnIndex].Name == "WeightColumn" && e.DesiredType == typeof(Object))
             {
-                if (dataGridView1.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "") 
+                if (dataGridView1.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")
                 {
                     e.Value = decimal.Parse(e.Value.ToString());
                     e.ParsingApplied = true;
@@ -16051,7 +17211,6 @@ namespace Flawless_ex
             {
                 if (dataGridView1.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")
                 {
-                    MessageBox.Show(e.Value.ToString());
                     e.Value = decimal.Parse(e.Value.ToString());
                     e.ParsingApplied = true;
                 }
@@ -16059,68 +17218,101 @@ namespace Flawless_ex
 
             if (dataGridView1.Columns[e.ColumnIndex].Name == "CountColumn" && e.DesiredType == typeof(Object))
             {
-                if (dataGridView1.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "") 
+                if (dataGridView1.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")
                 {
                     e.Value = int.Parse(e.Value.ToString());
                     e.ParsingApplied = true;
                 }
             }
         }
+
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (NotLoad1)
-            {
-                //単価 × 重量（数量は空白）
-                if (dataGridView2[4, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[4, e.RowIndex].Value.ToString() != "" && dataGridView2[5, e.RowIndex].Value.ToString() != "")
-                {
-                    cellfirst = false;
-                    weight = decimal.Parse(dataGridView2[4, e.RowIndex].Value.ToString());
-                    unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
+            //if (NotLoad1)
+            //{
+            //    //単価 × 重量（数量は空白）
+            //    if (dataGridView2[4, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[4, e.RowIndex].Value.ToString() != "" && dataGridView2[5, e.RowIndex].Value.ToString() != "")
+            //    {
+            //        if (dataGridView2[7, e.RowIndex].Value != null && cellfirst)
+            //        {
+            //            SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(1));
+            //        }
+            //        cellfirst = false;
+                    
+            //        weight = decimal.Parse(dataGridView2[4, e.RowIndex].Value.ToString());
+            //        unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
 
-                    dataGridView2[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
-                    if (cellfirst)
-                    {
-                        SUB += weight * unitprice;
-                        subTotal2.Text = SUB.ToString("c0");
-                        sumTextBox2.Text = SUB.ToString("c0");
-                        taxAmount = SUB - (SUB * 10 / 11);
-                        taxAmount2.Text = taxAmount.ToString("n0");
-                    }
-                    cellfirst = true;
-                }
+            //        dataGridView2[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
+            //        if (cellfirst)
+            //        {
+            //            SUB += weight * unitprice;
+            //            subTotal2.Text = SUB.ToString("c0");
+            //            sumTextBox2.Text = SUB.ToString("c0");
+            //            taxAmount = SUB * Tax / (100 + Tax);
+            //            if (comboBox11.SelectedIndex == 1)
+            //            {
+            //                taxAmount2.Text = taxAmount.ToString("n0");
+            //            }
+            //            else
+            //            {
+            //                taxAmount2.Text = "";
+            //            }
+            //        }
+            //        cellfirst = true;
+            //    }
 
-                //単価 × 数量（重量は空白）
-                if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value.ToString() != "" && dataGridView2[6, e.RowIndex].Value.ToString() != "")
-                {
-                    cellfirst = false;
-                    unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
-                    Count = int.Parse(dataGridView2[6, e.RowIndex].Value.ToString());
+            //    //単価 × 数量（重量は空白）
+            //    if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value.ToString() != "" && dataGridView2[6, e.RowIndex].Value.ToString() != "")
+            //    {
+            //        if (dataGridView2[7, e.RowIndex].Value != null && cellfirst)
+            //        {
+            //            SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(1));
+            //        }
+            //        cellfirst = false;
+                    
+            //        unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
+            //        Count = int.Parse(dataGridView2[6, e.RowIndex].Value.ToString());
 
-                    dataGridView2[7, e.RowIndex].Value = (unitprice * Count).ToString("c0");
-                    if (cellfirst)
-                    {
-                        SUB += Count * unitprice;
-                        subTotal2.Text = SUB.ToString("c0");
-                        sumTextBox2.Text = SUB.ToString("c0");
-                        taxAmount = SUB - (SUB * 10 / 11);
-                        taxAmount2.Text = taxAmount.ToString("n0");
-                    }
-                    cellfirst = true;
-                }
+            //        dataGridView2[7, e.RowIndex].Value = (unitprice * Count).ToString("c0");
+            //        if (cellfirst)
+            //        {
+            //            SUB += Count * unitprice;
+            //            subTotal2.Text = SUB.ToString("c0");
+            //            sumTextBox2.Text = SUB.ToString("c0");
+            //            taxAmount = SUB * Tax / (100 + Tax);
+            //            if (comboBox11.SelectedIndex == 1)
+            //            {
+            //                taxAmount2.Text = taxAmount.ToString("n0");
+            //            }
+            //            else
+            //            {
+            //                taxAmount2.Text = "";
+            //            }
+            //        }
+            //        cellfirst = true;
+            //    }
 
-                //重量・単価・数量が無記入だったら金額クリア
-                if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value == null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[7, e.RowIndex].Value != null)
-                {
-                    SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(0));
-                    taxAmount = SUB - (SUB * 10 / 11);
-                    taxAmount2.Text = taxAmount.ToString("n0");
-                    subTotal2.Text = SUB.ToString("c0");
-                    sumTextBox2.Text = SUB.ToString("c0");
-                    dataGridView2[7, e.RowIndex].Value = null;
-                }
-            }
+            //    //重量・単価・数量が無記入だったら金額クリア
+            //    if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value == null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[7, e.RowIndex].Value != null)
+            //    {
+            //        SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(0));
+            //        taxAmount = SUB * Tax / (100 + Tax);
+            //        if (comboBox11.SelectedIndex == 1)
+            //        {
+            //            taxAmount2.Text = taxAmount.ToString("n0");
+            //        }
+            //        else
+            //        {
+            //            taxAmount2.Text = "";
+            //        }
+            //        subTotal2.Text = SUB.ToString("c0");
+            //        sumTextBox2.Text = SUB.ToString("c0");
+            //        dataGridView2[7, e.RowIndex].Value = null;
+            //    }
+                
+            //}
         }
-    
+
         private void dataGridView2_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             #region"コンボボックスの処理"
@@ -16150,25 +17342,104 @@ namespace Flawless_ex
 
                 //イベントハンドラを削除
                 control.KeyPress -= new KeyPressEventHandler(dataGridView2_KeyPress);
+                control.KeyPress -= new KeyPressEventHandler(dataGridView2_KeyPressIntOnly);
 
                 //該当する列か調べる
-                if (dataGridView.CurrentCell.OwningColumn.Name == "WeightColumn1" || dataGridView.CurrentCell.OwningColumn.Name == "UnitPriceColumn1")
+                if (dataGridView.CurrentCell.OwningColumn.Name == "WeightColumn1")
                 {
                     control.KeyPress += new KeyPressEventHandler(dataGridView2_KeyPress);
                 }
 
-                if (dataGridView.CurrentCell.OwningColumn.Name == "CountColumn1")
+                if (dataGridView.CurrentCell.OwningColumn.Name == "CountColumn1" || dataGridView.CurrentCell.OwningColumn.Name == "UnitPriceColumn1")
                 {
                     control.KeyPress += new KeyPressEventHandler(dataGridView2_KeyPressIntOnly);
                 }
             }
             #endregion
         }
+
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            NotLoad1 = true;
-        }
+            #region"重量変更時"
+            int rowNumber = dataGridView2.Rows.Count;
+            TotalWeight = 0;
 
+            for (int i = 0; i < rowNumber; i++)
+            {
+                if (dataGridView2[4, i].Value != null && dataGridView2[4, i].Value.ToString() != "")
+                {
+                    unitWeight = decimal.Parse(dataGridView2[4, i].Value.ToString());
+                    TotalWeight += unitWeight;
+                }
+            }
+
+            totalWeightTextBox1.Text = TotalWeight.ToString("n1");
+            #endregion
+
+            #region"数量変更時"
+            TotalCount = 0;
+
+            for (int i = 0; i < rowNumber; i++)
+            {
+                if (dataGridView2[6, i].Value != null && dataGridView2[6, i].Value.ToString() != "")
+                {
+                    unitCount = int.Parse(dataGridView2[6, i].Value.ToString());
+                    TotalCount += unitCount;
+                }
+            }
+
+            totalCountTextBox1.Text = TotalCount.ToString("n0");
+            #endregion
+
+            #region"金額変更時"
+            TotalMoney = 0;
+
+            for (int i = 0; i < rowNumber; i++)
+            {
+                if (dataGridView2[7, i].Value != null && dataGridView2[7, i].Value.ToString() != "")
+                {
+                    unitMoney = decimal.Parse(dataGridView2[7, i].Value.ToString().Substring(1));
+                    TotalMoney += unitMoney;
+                }
+            }
+            SUB = TotalMoney;
+            taxAmount = SUB * Tax / (100 + Tax);
+            if (comboBox11.SelectedIndex == 1)
+            {
+                subTotal2.Text = (TotalMoney - taxAmount).ToString("c0");
+                taxAmount2.Text = taxAmount.ToString("c0");
+            }
+            else
+            {
+                subTotal2.Text = TotalMoney.ToString("c0");
+                taxAmount2.Text = "";
+            }
+            
+            sumTextBox2.Text = TotalMoney.ToString("c0");
+            #endregion
+
+            #region"計算列"
+            //重量×単価（数量は空白）
+            if (dataGridView2[4, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value == null &&
+                dataGridView2[4, e.RowIndex].Value.ToString() != "" && dataGridView2[5, e.RowIndex].Value.ToString() != "")
+            {
+                weight = decimal.Parse(dataGridView2[4, e.RowIndex].Value.ToString());
+                unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
+
+                dataGridView2[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
+            }
+
+            //数量×単価（重量は空白）
+            if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value != null &&
+                dataGridView2[5, e.RowIndex].Value.ToString() != "" && dataGridView2[6, e.RowIndex].Value.ToString() != "")
+            {
+                unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
+                count = int.Parse(dataGridView2[6, e.RowIndex].Value.ToString());
+
+                dataGridView2[7, e.RowIndex].Value = (unitprice * count).ToString("c0");
+            }
+            #endregion
+        }
 
         private void RemoveButton1_Click(object sender, EventArgs e)
         {
@@ -16184,7 +17455,7 @@ namespace Flawless_ex
                         taxAmount = SUB - (SUB * 10 / 11);
                         taxAmount2.Text = taxAmount.ToString("n0");
                     }
-                        dataGridView2.Rows.RemoveAt(i);
+                    dataGridView2.Rows.RemoveAt(i);
                     i--;
                     CODE--;
                 }
@@ -16206,7 +17477,7 @@ namespace Flawless_ex
             dataGridView2 = (DataGridView)sender;
             if (dataGridView2.Columns[e.ColumnIndex].Name == "WeightColumn1" && e.DesiredType == typeof(Object))
             {
-                if (dataGridView2.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")   
+                if (dataGridView2.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")
                 {
                     e.Value = decimal.Parse(e.Value.ToString());
                     e.ParsingApplied = true;
@@ -16215,7 +17486,7 @@ namespace Flawless_ex
 
             if (dataGridView2.Columns[e.ColumnIndex].Name == "UnitPriceColumn1" && e.DesiredType == typeof(Object))
             {
-                if (dataGridView2.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "") 
+                if (dataGridView2.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")
                 {
                     e.Value = decimal.Parse(e.Value.ToString());
                     e.ParsingApplied = true;
@@ -16224,7 +17495,7 @@ namespace Flawless_ex
 
             if (dataGridView2.Columns[e.ColumnIndex].Name == "CountColumn1" && e.DesiredType == typeof(Object))
             {
-                if (dataGridView2.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "") 
+                if (dataGridView2.Rows[e.RowIndex].Cells != null && e.Value.ToString() != "")
                 {
                     e.Value = int.Parse(e.Value.ToString());
                     e.ParsingApplied = true;
@@ -16253,6 +17524,7 @@ namespace Flawless_ex
             }
         }
 
+        #region"datagridview の行数制限"
         private void dataGridView1_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
             if (dataGridView1.Rows.Count > 13)
@@ -16273,9 +17545,44 @@ namespace Flawless_ex
 
         private void dataGridView2_RowValidated(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridView2.Rows.Count > 13)
+            if (dataGridView2.Rows.Count > 10)
             {
                 dataGridView2.AllowUserToAddRows = false;
+            }
+        }
+        #endregion
+
+        #endregion
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((data != "S" || data != "D" || antiqueNumber != null || documentNumber != null || Grade != 0) && tabControl1.SelectedIndex != 0 && Delivery)
+            {
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
+                conn.Open();
+
+                string Str = "insert into delivery_m (control_number, staff_code) values ('" + Number + "', '" + staff_id + "');";
+                cmd = new NpgsqlCommand(Str, conn);
+                cmd.ExecuteNonQuery();
+                Delivery = false;
+
+                conn.Close();
+            }
+        }
+
+        private void subTotal_TextChanged(object sender, EventArgs e)
+        {
+            sub = decimal.Parse(subTotal.Text.Substring(1));
+            if (sub >= 2000000) 
+            {
+                groupBox1.Show();
+                groupBox1.BackColor = Color.OrangeRed;
+            }
+            else
+            {
+                groupBox1.Hide();
             }
         }
     }
