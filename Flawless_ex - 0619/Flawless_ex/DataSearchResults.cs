@@ -64,6 +64,7 @@ namespace Flawless_ex
         List<DataTable> statementDataTable = new List<DataTable>();     //計算書の合計・総数の datatable
         List<DataTable> clientDataTable = new List<DataTable>();        //計算書の顧客情報の datatable
         List<string> DNumber = new List<string>();                      //計算書の伝票番号
+        List<int> previewRow = new List<int>();                         //各計算書の行数
 
         DataTable table = new DataTable();                              //計算書の表用
         DataTable statementTotalTable = new DataTable();                //計算書の合計・決算方法・受取方法など用
@@ -163,10 +164,10 @@ namespace Flawless_ex
                     PostgreSQL postgre = new PostgreSQL();
                     conn = postgre.connection();
 
-                    string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m B ON (A.code = B.code )" +
+                    string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
                             "where B.type = 0 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
-                              method1 + amountA + amountB + ";";
+                              method1 + amountA + amountB + "order by notfnumber;";
                     conn.Open();
 
                     adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -217,9 +218,9 @@ namespace Flawless_ex
                     PostgreSQL postgre = new PostgreSQL();
                     conn = postgre.connection();
 
-                    string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m B ON ( A.code = B.code )" +
+                    string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.notfnumber from statement_data A inner join client_m B ON ( A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method1 + amountA + amountB + ";";
+                            "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method1 + amountA + amountB + " order by notfnumber;";
 
                     conn.Open();
 
@@ -275,7 +276,7 @@ namespace Flawless_ex
                         "inner join client_m B ON (A.code = B.code ) inner join delivery_calc C ON (A.control_number = C.control_number ) " +
                         "inner join item_m D ON (C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
                            "where B.type = 0 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + " and " +
-                           "( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" + method1 + amountA + amountB + ";";
+                           "( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" + method1 + amountA + amountB + " order by control_number;";
 
                     conn.Open();
 
@@ -328,7 +329,7 @@ namespace Flawless_ex
                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
                             "inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
                             "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') "
-                             + method1 + amountA + amountB + ";";
+                             + method1 + amountA + amountB + " order by control_number;";
 
                     conn.Open();
 
@@ -428,6 +429,7 @@ namespace Flawless_ex
                         string sql_PreviewCount = "select count(*) from statement_calc_data where document_number = '" + dataGridView1.Rows[i].Cells[1].Value.ToString() + "';";
                         cmd = new NpgsqlCommand(sql_PreviewCount, conn);
                         PreviewRow = int.Parse(cmd.ExecuteScalar().ToString());
+                        previewRow.Add(PreviewRow);
 
                         string sql_StatementPreview = "select * from statement_calc_data A inner join item_m B on A.item_code = B.item_code" +
                             " where document_number = '" + dataGridView1.Rows[i].Cells[1].Value.ToString() + "' order by A.record_number;";
@@ -805,7 +807,7 @@ namespace Flawless_ex
                     #region"値の挿入"
                     DataRow row = statementDataTable[pageNumber].Rows[0];
                     deliveryDate = DateTime.Parse(row["delivery_date"].ToString()).ToShortDateString();
-                    settlementData = DateTime.Parse(row["settlement_date"].ToString()).ToShortTimeString();
+                    settlementData = ((DateTime)row["settlement_date"]).ToString("yyyy/MM/dd");
                     settlementMethod = row["payment_method"].ToString();
                     totalMoney = ((decimal)row["total"]).ToString("c0");
                     totalWeight = ((decimal)row["total_weight"]).ToString("n1");
@@ -987,7 +989,7 @@ namespace Flawless_ex
                     string MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                     string RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                    for (int i = 1; i <= PreviewRow; i++)
+                    for (int i = 1; i <= previewRow[pageNumber]; i++)
                     {
                         #region"１行目（ヘッダー）"
                         e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y1, width, height), stringFormat);
@@ -1843,7 +1845,7 @@ namespace Flawless_ex
                     string method = row["payment_method"].ToString();
                     string orderDate = row["order_date"].ToString();
                     string deliveryDate = row["delivery_date"].ToString();
-                    string settlementDate = row["settlement_date"].ToString();
+                    string settlementDate = ((DateTime)row["settlement_date"]).ToString("yyyy/MM/dd");
                     string bank = row["account_payble"].ToString();
                     string vat = row["vat"].ToString();
                     string vat_rate = row["vat_rate"].ToString();

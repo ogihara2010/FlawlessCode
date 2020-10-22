@@ -2482,60 +2482,74 @@ namespace Flawless_ex
                 //conn.Open();
                 sql = "select * from delivery_m left outer join revisions on upd_code = cast(control_number as text) where control_number = '" + control + "';";
                 cmd = new NpgsqlCommand(sql, conn);
+                
+                string clientCode = "";
 
                 using (reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        ClientCode = (int)reader["code"];
-                        totalWeightTextBox1.Text = ((decimal)reader["total_weight"]).ToString("n1");
-                        totalCountTextBox1.Text = ((int)reader["total_count"]).ToString("n0");
-                        name.Text = reader["name"].ToString();
-                        titleComboBox.Text = reader["honorific_title"].ToString();
-                        typeComboBox.Text = reader["type"].ToString();
-                        string sealPrint = reader["seaal_print"].ToString();
-                        if (sealPrint == "する")
-                        {
-                            sealY.Checked = true;
-                        }
-                        else if (sealPrint == "しない")
-                        {
-                            sealN.Checked = true;
-                        }
-                        paymentMethodsComboBox.Text = reader["payment_method"].ToString();
-                        PayeeTextBox1.Text = reader["account_payble"].ToString();
-                        string orderDate = reader["order_date"].ToString();
-                        if (!string.IsNullOrEmpty(orderDate))
-                        {
-                            orderDateTimePicker.Value = DateTime.Parse(orderDate);
-                        }
-                        string deliveryDate = reader["delivery_date"].ToString();
-                        if (!string.IsNullOrEmpty(deliveryDate))
-                        {
-                            DeliveryDateTimePicker.Value = DateTime.Parse(deliveryDate);
-                        }
-                        string settlementDate = reader["settlement_date"].ToString();
-                        if (!string.IsNullOrEmpty(settlementDate))
-                        {
-                            SettlementDateTimePicker.Value = DateTime.Parse(settlementDate);
-                        }
-                        CoinComboBox.Text = reader["currency"].ToString();
-                        RemarkRegister.Text = reader["remark"].ToString();
-                        textBox2.Text = reader["reason"].ToString();
+                        clientCode = reader["code"].ToString();
+                    }
+                }
 
-                        subTotal2.Text = ((decimal)reader["sub_total"]).ToString("c0");
-                        comboBox11.Text = reader["vat"].ToString();
-                        tax.Text = ((decimal)reader["vat_rate"] / 100).ToString("p");
-                        taxAmount = (decimal)reader["vat_amount"];
-                        if (taxAmount != 0)
+                if (!string.IsNullOrEmpty(clientCode))
+                {
+                    using (reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            taxAmount2.Text = taxAmount.ToString();
+                            documentNumberTextBox2.Text = reader["control_number"].ToString();
+                            ClientCode = (int)reader["code"];
+                            totalWeightTextBox1.Text = ((decimal)reader["total_weight"]).ToString("n1");
+                            totalCountTextBox1.Text = ((int)reader["total_count"]).ToString("n0");
+                            name.Text = reader["name"].ToString();
+                            titleComboBox.Text = reader["honorific_title"].ToString();
+                            typeComboBox.Text = reader["type"].ToString();
+                            string sealPrint = reader["seaal_print"].ToString();
+                            if (sealPrint == "する")
+                            {
+                                sealY.Checked = true;
+                            }
+                            else if (sealPrint == "しない")
+                            {
+                                sealN.Checked = true;
+                            }
+                            paymentMethodsComboBox.Text = reader["payment_method"].ToString();
+                            PayeeTextBox1.Text = reader["account_payble"].ToString();
+                            string orderDate = reader["order_date"].ToString();
+                            if (!string.IsNullOrEmpty(orderDate))
+                            {
+                                orderDateTimePicker.Value = DateTime.Parse(orderDate);
+                            }
+                            string deliveryDate = reader["delivery_date"].ToString();
+                            if (!string.IsNullOrEmpty(deliveryDate))
+                            {
+                                DeliveryDateTimePicker.Value = DateTime.Parse(deliveryDate);
+                            }
+                            string settlementDate = reader["settlement_date"].ToString();
+                            if (!string.IsNullOrEmpty(settlementDate))
+                            {
+                                SettlementDateTimePicker.Value = DateTime.Parse(settlementDate);
+                            }
+                            CoinComboBox.Text = reader["currency"].ToString();
+                            RemarkRegister.Text = reader["remark"].ToString();
+                            textBox2.Text = reader["reason"].ToString();
+
+                            subTotal2.Text = ((decimal)reader["sub_total"]).ToString("c0");
+                            comboBox11.Text = reader["vat"].ToString();
+                            tax.Text = ((int)reader["vat_rate"] / 100).ToString("P");
+                            taxAmount = (decimal)reader["vat_amount"];
+                            if (taxAmount != 0)
+                            {
+                                taxAmount2.Text = taxAmount.ToString();
+                            }
+                            else
+                            {
+                                taxAmount2.Text = "";
+                            }
+                            sumTextBox2.Text = ((decimal)reader["total"]).ToString("c0");
                         }
-                        else
-                        {
-                            taxAmount2.Text = "";
-                        }
-                        sumTextBox2.Text = ((decimal)reader["total"]).ToString("c0");
                     }
                 }
                 #endregion
@@ -2606,23 +2620,23 @@ namespace Flawless_ex
                         clientRemarksTextBox2.Text = reader["remarks"].ToString();                      //備考
                         antiqueLicenceTextBox2.Text = reader["antique_license"].ToString();             //古物商許可証
                         #endregion
-                        totalWeightTextBox.Text = ((decimal)reader["total_weight"]).ToString("n0");
-                        totalCountTextBox.Text = ((int)reader["total_amount"]).ToString("n0");
-                        SettlementDate = reader["settlement_date"].ToString();
-                        if (!string.IsNullOrEmpty(SettlementDate))
-                        {
-                            settlementBox.Value = DateTime.Parse(SettlementDate);
-                        }
-                        paymentMethodsComboBox.Text = reader["payment_method"].ToString();
-                        DeliveryDate = reader["delivery_date"].ToString();
-                        if (!string.IsNullOrEmpty(DeliveryDate))
-                        {
-                            deliveryDateBox.Value = DateTime.Parse(DeliveryDate);
-                        }
-                        deliveryComboBox.Text = reader["delivery_method"].ToString();
-                        subTotal.Text = ((decimal)reader["sub_total"]).ToString("c0");
-                        sumTextBox.Text = ((decimal)reader["total"]).ToString("c0");
-                        reasonTextBox.Text = reader["reason"].ToString();
+                        //totalWeightTextBox1.Text = ((decimal)reader["total_weight"]).ToString("n0");
+                        //totalCountTextBox1.Text = ((int)reader["total_amount"]).ToString("n0");
+                        //SettlementDate = reader["settlement_date"].ToString();
+                        //if (!string.IsNullOrEmpty(SettlementDate))
+                        //{
+                        //    SettlementDateTimePicker.Value = DateTime.Parse(SettlementDate);
+                        //}
+                        //paymentMethodsComboBox.Text = reader["payment_method"].ToString();
+                        //DeliveryDate = reader["delivery_date"].ToString();
+                        //if (!string.IsNullOrEmpty(DeliveryDate))
+                        //{
+                        //    deliveryDateBox.Value = DateTime.Parse(DeliveryDate);
+                        //}
+                        //deliveryComboBox.Text = reader["delivery_method"].ToString();
+                        //subTotal.Text = ((decimal)reader["sub_total"]).ToString("c0");
+                        //sumTextBox.Text = ((decimal)reader["total"]).ToString("c0");
+                        //reasonTextBox.Text = reader["reason"].ToString();
                     }
                 }
                 #endregion
@@ -2632,8 +2646,8 @@ namespace Flawless_ex
                 dataGridView2.Rows.Clear();
                 dataGridView2.AllowUserToAddRows = false;
                 dataGridView2.RowHeadersVisible = false;
-                dataGridView2.RowsAdded -= DataGridView1_RowsAdded;
-                dataGridView2.CellFormatting -= dataGridView1_CellFormatting;
+                dataGridView2.RowsAdded -= dataGridView2_RowsAdded;
+                dataGridView2.CellFormatting -= dataGridView2_CellFormatting;
                 dataGridView2.ReadOnly = true;
 
                 sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from delivery_calc A inner join main_category_m B on B.main_category_code = A.main_category_code " +
@@ -2641,7 +2655,7 @@ namespace Flawless_ex
                 adapter = new NpgsqlDataAdapter(sql, conn);
                 adapter.Fill(dtDelivery);
 
-                dataGridView1.DataSource = dtDelivery;
+                dataGridView2.DataSource = dtDelivery;
                 #region"ヘッダー名"
                 dataGridView2.Columns[0].HeaderText = "大分類";
                 dataGridView2.Columns[1].HeaderText = "品名";
@@ -15196,7 +15210,7 @@ namespace Flawless_ex
             #region"値の挿入"
             DataRow row = statementTotalTable.Rows[0];
             string deliveryDate = DateTime.Parse(row["delivery_date"].ToString()).ToShortDateString();
-            string settlementData = DateTime.Parse(row["settlement_date"].ToString()).ToShortTimeString();
+            string settlementData = ((DateTime)row["settlement_date"]).ToString("yyyy/MM/dd");
             string settlementMethod = row["payment_method"].ToString();
             totalMoney = ((decimal)row["total"]).ToString("c0");
             totalWeight = ((decimal)row["total_weight"]).ToString("n1");

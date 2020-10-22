@@ -389,12 +389,12 @@ namespace Flawless_ex
 
             string sql_str = "Insert into client_m (type, registration_date, name, name_kana, birthday, address, address_kana, phone_number, fax_number, email_address, occupation," +
                 " bank_name, branch_name, deposit_type, account_number, account_name, account_name_kana, id_number, remarks, register_copy, antique_license, id, tax_certificate, residence_card," +
-                " period_stay, seal_certification, invalid, aol_financial_shareholder, postal_code1, postal_code2, code, insert_name )" +
+                " period_stay, seal_certification, invalid, aol_financial_shareholder, postal_code1, postal_code2, code, insert_name, register_date )" +
                 " VALUES (" + 1 + " , '" + RegistrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + Birthday + "' , '" + Address + "' , '" + AddressKana + "' ," +
                 " '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation + "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , " +
                 "'" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "'," +
                 "'" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "'," +
-                "'"+PostalCodeUpNumber+"','"+PostalCodeDownNumber+"','"+ClientCode+"','"+staff_id+"');";
+                "'" + PostalCodeUpNumber + "','" + PostalCodeDownNumber + "','" + ClientCode + "','" + staff_id + "','" + b + "');";
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
