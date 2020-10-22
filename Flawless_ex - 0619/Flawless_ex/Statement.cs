@@ -2426,6 +2426,8 @@ namespace Flawless_ex
                 dataGridView1.CellFormatting -= dataGridView1_CellFormatting;
                 dataGridView1.ReadOnly = true;
 
+                RemoveButton.Enabled = false;
+
                 sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from statement_calc_data A inner join main_category_m B on B.main_category_code = A.main_category_code inner join item_m C on A.item_code = C.item_code" +
                     " where document_number = '" + document + "' order by record_number;";
                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -2960,6 +2962,9 @@ namespace Flawless_ex
                     residencePeriodStay = row2["period_stay"].ToString();
                     //ClientCode = (int)row2["code"];
                     #region "計算書"
+                    label16.Text = "会社名";
+                    label17.Text = "店舗名";
+                    label18.Text = "担当者名・個人名";
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -2978,6 +2983,9 @@ namespace Flawless_ex
                     }
                     #endregion
                     #region "納品書"
+                    label75.Text = "会社名";
+                    label77.Text = "店舗名";
+                    label76.Text = "担当者名・個人名";
                     this.client_searchButton1.Text = "顧客変更";
                     typeTextBox2.Text = "法人";                   //種別
                     companyTextBox2.Text = companyNmae;             //会社名
@@ -3078,6 +3086,9 @@ namespace Flawless_ex
                     remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
                     ClientCode = (int)row2["code"];
+                    label16.Text = "会社名";
+                    label17.Text = "店舗名";
+                    label18.Text = "担当者名・個人名";
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -3087,7 +3098,11 @@ namespace Flawless_ex
                     registerDateTextBox.Text = register_date;           //登録日
                     clientRemarksTextBox.Text = remarks;                //備考
                     #endregion
+
                     #region "納品書"
+                    label75.Text = "会社名";
+                    label77.Text = "店舗名";
+                    label76.Text = "担当者名・個人名";
                     this.client_searchButton1.Text = "顧客変更";
                     typeTextBox2.Text = "法人";                     //種別
                     companyTextBox2.Text = companyNmae;             //会社名
@@ -15417,7 +15432,7 @@ namespace Flawless_ex
                 {
                     #region"２行目"
                     case 1:
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15455,7 +15470,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15494,7 +15509,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15533,7 +15548,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15573,7 +15588,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15612,7 +15627,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15651,7 +15666,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15690,7 +15705,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15729,7 +15744,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15768,7 +15783,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15807,7 +15822,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15846,7 +15861,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15885,7 +15900,7 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                        if (WeightPreview == "0")
+                        if (WeightPreview == "0.0")
                         {
                             WeightPreview = "";
                         }
@@ -15916,6 +15931,16 @@ namespace Flawless_ex
                 #endregion
             }
             #region"１５行目（上の表は総重量と総数、下の表は小計と合計）"
+
+            if (totalWeight == "0.0")
+            {
+                totalWeight = "";
+            }
+            if(totalCount == "0")
+            {
+                totalCount = "";
+            }
+
             e.Graphics.DrawString("", font, brush, new RectangleF(x1, y115 + h, width, height), stringFormat);
             e.Graphics.DrawString("総重量", font, brush, new RectangleF(x2, y115 + h, widthLong, height), stringFormat);
             e.Graphics.DrawString(totalWeight, font, brush, new RectangleF(x3, y115 + h, widthWeight, height), stringFormat1);
@@ -16291,6 +16316,9 @@ namespace Flawless_ex
                     string antique_license = row2["antique_license"].ToString();
                     //ClientCode = (int)row2["code"];
 
+                    label16.Text = "会社名";
+                    label17.Text = "店舗名";
+                    label18.Text = "担当者名・個人名";
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -16301,6 +16329,9 @@ namespace Flawless_ex
                     clientRemarksTextBox.Text = remarks;                //備考
                     #endregion
                     #region "納品書"
+                    label75.Text = "会社名";
+                    label77.Text = "店舗名";
+                    label76.Text = "担当者名・個人名";
                     this.client_searchButton1.Text = "顧客変更";
                     typeTextBox2.Text = "法人";                   //種別
                     companyTextBox2.Text = companyNmae;             //会社名
@@ -16388,6 +16419,9 @@ namespace Flawless_ex
                     remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
                     ClientCode = (int)row2["code"];
+                    label16.Text = "会社名";
+                    label17.Text = "店舗名";
+                    label18.Text = "担当者名・個人名";
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
@@ -16398,6 +16432,9 @@ namespace Flawless_ex
                     clientRemarksTextBox.Text = remarks;                //備考
                     #endregion
                     #region "納品書"
+                    label75.Text = "会社名";
+                    label77.Text = "店舗名";
+                    label76.Text = "担当者名・個人名";
                     this.client_searchButton1.Text = "顧客変更";
                     typeTextBox2.Text = "法人";                     //種別
                     companyTextBox2.Text = companyNmae;             //会社名
@@ -18012,11 +18049,18 @@ namespace Flawless_ex
 
         private void subTotal_TextChanged(object sender, EventArgs e)
         {
-            sub = decimal.Parse(subTotal.Text.Substring(1));
-            if (sub >= 2000000) 
+            if (subTotal.Text != "0")
             {
-                groupBox1.Show();
-                groupBox1.BackColor = Color.OrangeRed;
+                sub = decimal.Parse(subTotal.Text.Substring(1));
+                if (sub >= 2000000)
+                {
+                    groupBox1.Show();
+                    groupBox1.BackColor = Color.OrangeRed;
+                }
+                else
+                {
+                    groupBox1.Hide();
+                }
             }
             else
             {
