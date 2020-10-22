@@ -265,7 +265,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record1 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable1);
@@ -287,7 +287,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record2 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable2);
@@ -309,7 +309,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record3 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable3);
@@ -331,7 +331,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record4 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable4);
@@ -354,7 +354,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record5 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable5);
@@ -377,7 +377,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record6 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable6);
@@ -400,7 +400,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record7 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable7);
@@ -423,7 +423,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record8 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable8);
@@ -446,7 +446,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record9 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable9);
@@ -469,7 +469,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record10 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable10);
@@ -492,7 +492,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record11 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable11);
@@ -515,7 +515,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record12 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable12);
@@ -538,7 +538,7 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                        sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code, record)" +
                             " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record13 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable13);

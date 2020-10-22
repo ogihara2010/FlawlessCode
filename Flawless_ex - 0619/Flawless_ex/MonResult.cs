@@ -468,7 +468,7 @@ namespace Flawless_ex
             #region"メレの合計をフォーマット処理して表示"
             MerePurChaseTextBox.Text = MerePurchase2.ToString("c0");
             MereWholesaleTextBox.Text = MereWholesale2.ToString("c0");
-            MereProfitTextBox.Text += MereProfit2.ToString("c0");
+            MereProfitTextBox.Text = MereProfit2.ToString("c0");
             #endregion
 
             #endregion

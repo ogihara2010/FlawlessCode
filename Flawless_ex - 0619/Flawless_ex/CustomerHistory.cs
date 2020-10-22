@@ -65,7 +65,6 @@ namespace Flawless_ex
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
             conn.Open();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //大分類検索用
             string sql_str = "select * from main_category_m where invalid = 0 order by main_category_code;";
@@ -326,7 +325,7 @@ namespace Flawless_ex
                     string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m B ON (A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
                             "where B.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
-                              method + amountA + amountB + ";";
+                              method + amountA + amountB + " ;";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
@@ -358,8 +357,8 @@ namespace Flawless_ex
                 {
                     string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m B ON (A.code = B.code )" +
                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                           "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
-                              method + amountA + amountB + ";";
+                           "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " +
+                              method + amountA + amountB + " order by control_number;";
                     
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
@@ -550,9 +549,9 @@ namespace Flawless_ex
 
                 if (data == "S")
                 {
-                    string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m B ON ( A.code = B.code )" +
+                    string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m B ON ( A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where A.type = 1 " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method + amountA + amountB + ";";
+                            "where A.type = 1 " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method + amountA + amountB + " order by notfnumber;";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
@@ -583,8 +582,8 @@ namespace Flawless_ex
                 {
                     string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m B ON ( A.code = B.code )" +
                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
-                            "where A.types1 = 0 " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') "
-                             + method + amountA + amountB + ";";
+                            "where A.types1 = 0 " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')  "
+                             + method + amountA + amountB + "order by control_number;";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
