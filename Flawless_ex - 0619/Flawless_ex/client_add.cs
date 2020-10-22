@@ -223,7 +223,7 @@ namespace Flawless_ex
             ClientCode++;
 
             string sql_str = "Insert into client_m (type, registration_date, company_name, company_kana, shop_name, shop_name_kana, antique_number," +
-                " address, address_kana, phone_number, fax_number, position, staff_name, email_address, url_infor, bank_name, branch_name, deposit_type," +
+                " address, address_kana, phone_number, fax_number, position, name, email_address, url_infor, bank_name, branch_name, deposit_type," +
                 " account_number, account_name, account_name_kana, remarks, id, register_date, antique_license, tax_certificate, residence_card, period_stay," +
                 " seal_certification, invalid, aol_financial_shareholder, register_copy, insert_name, postal_code1, postal_code2, code)" +
                 " VALUES (" + 0 + " , '" + RegistrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' ," +

@@ -236,7 +236,7 @@ namespace Flawless_ex
             #endregion
 
             date = DateTime.Now;
-            Registration = date.ToLongDateString();
+            //Registration = date.ToLongDateString();
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
@@ -258,13 +258,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "',item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record1 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "',item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record1 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record1 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record1 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable1);
 
@@ -285,7 +287,8 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record2 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record2 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable2);
 
@@ -306,7 +309,8 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record3 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record3 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable3);
 
@@ -327,7 +331,8 @@ namespace Flawless_ex
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record4 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record4 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable4);
 
@@ -342,13 +347,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record5 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record5 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record5 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record5 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable5);
 
@@ -363,13 +370,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record6 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record6 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record6 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record6 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable6);
 
@@ -384,13 +393,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record7 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record7 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record7 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record7 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable7);
 
@@ -405,13 +416,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record8 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record8 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record8 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record8 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable8);
 
@@ -426,13 +439,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record9 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record9 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record9 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record9 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable9);
 
@@ -447,13 +462,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record10 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record10 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record10 + "','" + REASON + ", '" + staff_id + "'');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record10 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable10);
 
@@ -468,13 +485,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record11 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record11 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record11 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record11 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable11);
 
@@ -489,13 +508,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record12 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record12 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record12 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record12 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable12);
 
@@ -510,13 +531,15 @@ namespace Flawless_ex
                         
                         using (transaction = conn.BeginTransaction())
                         {
-                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "' where record_number = '" + record13 + "' and grade_number = '" + Grade + "';";
+                            SQL = @"update list_result2 set main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', reason = '" + REASON + "'" +
+                                " where record_number = '" + record13 + "' and grade_number = '" + Grade + "';";
                             cmd = new NpgsqlCommand(SQL, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
                         //履歴用の表に登録
-                        sql = "insert into item_name_change_revisions values('" + SlipNumber + "','" + Grade + "','" + Registration + "','" + BeforeItemCode + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + record13 + "','" + REASON + "', '" + staff_id + "');";
+                        sql = "insert into revisions (data, upd_date, insert_code, before_code, after_code, reason, upd_code, record)" +
+                            " values('" + 7 + "','" + date + "','" + staff_id + "','" + BeforeItemCode + "','" + ItemCategoryCode + "','" + REASON + "', '" + Grade + "','" + record13 + "');";
                         adapter = new NpgsqlDataAdapter(sql, conn);
                         adapter.Fill(dataTable13);
 
@@ -562,6 +585,7 @@ namespace Flawless_ex
                 while (reader.Read())
                 {
                     StaffName = reader["staff_name"].ToString();
+                    MainCategoryCode = (int)reader["main_category_code"];
                 }
             }
             StaffNameTextBox.Text = StaffName;
@@ -775,7 +799,8 @@ namespace Flawless_ex
             adapter.Fill(data);
 
             #region"品名出力"
-            sql_str = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where main_category_m.main_category_code = '"+MainCategoryCode+"' order by main_category_m.main_category_code;";
+            sql_str = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where main_category_m.main_category_code = '"+MainCategoryCode+"'" +
+                " order by main_category_m.main_category_code;";
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt1);
             for (int i = 0; i < ChangeCount; i++)

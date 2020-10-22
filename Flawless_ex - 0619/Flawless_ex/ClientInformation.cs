@@ -31,6 +31,7 @@ namespace Flawless_ex
         string PostalUpCode;
         string PostalDownCode;
         bool MonthCatalog;
+        int ClientCode;
 
         NpgsqlConnection conn = new NpgsqlConnection();
         NpgsqlCommand cmd;
@@ -62,28 +63,19 @@ namespace Flawless_ex
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
             conn.Open();
 
             string sql = "select * from statement_data where document_number = '" + SlipNumber + "';";
             cmd = new NpgsqlCommand(sql, conn);
             using (reader = cmd.ExecuteReader())
             {
-                if (Type == 0)
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        AntiqueNumber = (int)reader["antique_number"];
-                    }
-                }
-                else if (Type == 1)
-                {
-                    while (reader.Read())
-                    {
-                        ID_Number = (int)reader["id_number"];
-                    }
+                    ClientCode = (int)reader["code"];
                 }
             }
+
             string SQL = "";
             if (Type == 0)
             {
@@ -91,7 +83,7 @@ namespace Flawless_ex
                 tabControl1.TabPages.Remove(tabPage2);
                 AntiqueNumberTextBox.Text = AntiqueNumber.ToString();
 
-                SQL = "select * from client_m_corporate where antique_number = '" + AntiqueNumber + "';";
+                SQL = "select * from client_m where code = '" + ClientCode + "';";
                 cmd = new NpgsqlCommand(SQL, conn);
                 using (reader = cmd.ExecuteReader())
                 {
@@ -102,15 +94,17 @@ namespace Flawless_ex
                         ComPanyKanaTextBox.Text = reader["company_kana"].ToString();
                         ShopNameTextBox.Text = reader["shop_name"].ToString();
                         ShopKanaTextBox.Text = reader["shop_name_kana"].ToString();
+
                         PostalUpCode = reader["postal_code1"].ToString();
                         PostalDownCode = reader["postal_code2"].ToString();
                         PostalCodeTextBox.Text = PostalUpCode + PostalDownCode;
+                        
                         AddressTextBox.Text = reader["address"].ToString();
                         AddressKanaTextBox.Text = reader["address_kana"].ToString();
                         TelTextBox.Text = reader["phone_number"].ToString();
                         FaxTextBox.Text = reader["fax_number"].ToString();
                         PositionTextBox.Text = reader["position"].ToString();
-                        ClientStaffNameTextBox.Text = reader["staff_name"].ToString();
+                        ClientStaffNameTextBox.Text = reader["name"].ToString();
                         MailAddressTextBox.Text = reader["email_address"].ToString();
                         UrlTextBox.Text = reader["url_infor"].ToString();
                         BankNameTextBox.Text = reader["bank_name"].ToString();
@@ -122,7 +116,9 @@ namespace Flawless_ex
                         RemarksTextBox.Text = reader["remarks"].ToString();
                         IdTextBox.Text = reader["id"].ToString();
                         RegisterCopyTextBox.Text = reader["register_copy"].ToString();
-                        RegisterDateTextBox.Text = (DateTime.Parse(reader["register_date"].ToString())).ToLongDateString();
+
+                        RegisterDateTextBox.Text = reader["register_date"].ToString();
+                        
                         AntiqueLicenseTextBox.Text = reader["antique_license"].ToString();
                         AolFinancialShareholderTextBox.Text = reader["aol_financial_shareholder"].ToString();
                         TaxCertificateTextBox.Text = reader["tax_certificate"].ToString();
@@ -178,6 +174,8 @@ namespace Flawless_ex
                     }
                 }
             }
+
+            conn.Close();
         }
 
         #region"戻る"
