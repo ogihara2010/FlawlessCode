@@ -32,12 +32,15 @@ namespace Flawless_ex
         string address;
         decimal total;
         int grade;
+        int ClientCode;                     //顧客番号
+        string ClientCodeString;            //顧客番号（文字列）
         RecordList recordList;
         int AntiqueNumber;
         int ID_Number;
         string Pass;
         int Control;
         string Data;
+        int notFirst;                       //成績番号が既に登録されているかどうか
         #region "買取販売履歴の引数"
         string name1;
         string phoneNumber1;
@@ -61,6 +64,7 @@ namespace Flawless_ex
         bool NameChangeButton = false;                   //品名変更画面に移動する際は true
         bool DeliveryButton = false;            //納品書検索
         DialogResult result;
+        bool Return = false;                    //画面終了時にクローズキャンセル用
         #region"各行の datetimepicker"
         DateTime? date1;
         DateTime? date2;
@@ -340,11 +344,10 @@ namespace Flawless_ex
         {
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            
+            conn.Open();
 
             #region"画面上の会社・個人情報と合計金額"
-
-            conn.Open();
 
             string sql = "select * from staff_m where staff_code = " + staff_id + ";";
             cmd = new NpgsqlCommand(sql, conn);
@@ -369,20 +372,22 @@ namespace Flawless_ex
 
             #region"法人・個人情報"
 
-            string sql_str1 = "";
-            if (type == 0)
-            {   //法人用   顧客番号と査定日を取得
-                sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 0 + "';";
-            }
-            else if (type == 1)
-            {   //個人用    顧客番号と査定日を取得
-                sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "' and type = '" + 1 + "';";
-            }
-
-            #endregion
+            //顧客番号を取得
+            string sql_str1 = "select * from statement_data where document_number = '" + SlipNumber + "';";
             cmd = new NpgsqlCommand(sql_str1, conn);
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ClientCode = (int)reader["code"];
+                }
+            }
 
             //会社名、店舗名、担当者名、名前、職業、住所取得
+            //sql_str1 = "select * from client_m where code = '" + ClientCode + "';";
+            sql_str1 = "select * from statement_data A inner join client_m B on A.code = B.code ;";
+            cmd = new NpgsqlCommand(sql_str1, conn);
+
 
             using (reader = cmd.ExecuteReader())
             {
@@ -390,14 +395,19 @@ namespace Flawless_ex
                 {
                     NameOrCompanyNameLabel.Text = "会社名";
                     OccupationOrShopNameLabel.Text = "店舗名";
-                    AddressOrClientStaffNameLabel.Text = "担当者名";
-                    AddressOrClientStaffNameTextBox.Size = new Size(400, 60);
-                    NameOrCompanyNameTextBox.Size = new Size(466, 60);
-                    NameOrCompanyNameTextBox.Location = new Point(240, 205);
-                    OccupationOrShopNameLabel.Location = new Point(720, 210);
-                    OccupationOrShopNameTextBox.Location = new Point(920, 205);
-                    AddressOrClientStaffNameLabel.Location = new Point(1300, 210);
-                    AddressOrClientStaffNameTextBox.Location = new Point(1540, 205);
+                    AddressOrClientStaffNameLabel.Text = "担当者名";                    
+                    AddressOrClientStaffNameTextBox.Size = new Size(200, 60);
+                    NameOrCompanyNameTextBox.Size = new Size(200, 60);
+
+                    NameOrCompanyNameTextBox.Location = new Point(110, 79);
+
+                    OccupationOrShopNameLabel.Location = new Point(254, 85);
+                    
+                    OccupationOrShopNameTextBox.Location = new Point(315, 79);
+                    
+                    AddressOrClientStaffNameLabel.Location = new Point(500, 85);
+                    
+                    AddressOrClientStaffNameTextBox.Location = new Point(550, 79);
                     BirthdayLabel.Visible = false;
                     BirthdayTextBox.Visible = false;
 
@@ -405,8 +415,8 @@ namespace Flawless_ex
                     {
                         NameOrCompanyNameTextBox.Text = reader["company_name"].ToString();
                         OccupationOrShopNameTextBox.Text = reader["shop_name"].ToString();
-                        AddressOrClientStaffNameTextBox.Text = reader["staff_name"].ToString();
-                        AssessmentDateTextBox.Text = reader["assessment_date"].ToString();
+                        AddressOrClientStaffNameTextBox.Text = reader["name"].ToString();
+                        AssessmentDateTextBox.Text = DateTime.Parse(reader["assessment_date"].ToString()).ToLongDateString();
                     }
                 }
                 else if (type == 1)
@@ -419,10 +429,11 @@ namespace Flawless_ex
                         Birthday = reader["birthday"].ToString();
                         BirthdayDate = DateTime.Parse(Birthday);
                         BirthdayTextBox.Text = BirthdayDate.ToString("yyyy年MM月dd日");
-                        AssessmentDateTextBox.Text = reader["assessment_date"].ToString();
+                        AssessmentDateTextBox.Text = DateTime.Parse(reader["assessment_date"].ToString()).ToLongDateString();
                     }
                 }
             }
+            #endregion
 
             #endregion
 
@@ -431,11 +442,14 @@ namespace Flawless_ex
             //伝票番号から表の行番号を取得
             string Sql_Str = "select * from statement_calc_data where document_number = '" + SlipNumber + "' order by record_number;";
             //伝票番号と表の行番号から表のデータを取得し、大分類マスタと品名マスタを結合
-            string Sql_Str1 = "select * from statement_calc_data inner join main_category_m on statement_calc_data.main_category_code = main_category_m.main_category_code inner join item_m on statement_calc_data.item_code = item_m.item_code where document_number = '" + SlipNumber + "' order by  record_number;";
+            string Sql_Str1 = "select * from statement_calc_data A inner join main_category_m B on A.main_category_code = B.main_category_code inner join item_m C on A.item_code = C.item_code" +
+                " where document_number = '" + SlipNumber + "' order by  record_number;";
 
             cmd = new NpgsqlCommand(Sql_Str, conn);
             adapter = new NpgsqlDataAdapter(Sql_Str1, conn);
             adapter.Fill(dataTable);
+
+            #region"計算書で登録したデータを表示"
 
             #region"計算書で登録した表の行数を取得"
             using (reader = cmd.ExecuteReader())
@@ -447,7 +461,6 @@ namespace Flawless_ex
             }
             #endregion
 
-            #region"計算書で登録したデータを表示"
             for (int i = 0; i < record; i++)
             {
                 DataRow row = dataTable.Rows[i];
@@ -644,429 +657,11 @@ namespace Flawless_ex
             setDateTimePicker13(date13);
             #endregion
 
-            #region"大分類ごとの買取金額"
-
-            if (record >= 1)
-            {
-                switch (MainCategoryCode1)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat1;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat1;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat1;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat1;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat1;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 2)
-            {
-                switch (MainCategoryCode2)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat2 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat2 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat2 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat2 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat2 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 3)
-            {
-                switch (MainCategoryCode3)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat3 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat3 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat3 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat3 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat3 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 4)
-            {
-                switch (MainCategoryCode4)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat4 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat4 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat4 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat4 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat4 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 5)
-            {
-                switch (MainCategoryCode5)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat5 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat5 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat5 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat5 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat5 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 6)
-            {
-                switch (MainCategoryCode6)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat6 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat6 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat6 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat6 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat6 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 7)
-            {
-                switch (MainCategoryCode7)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat7 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat7 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat7 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat7 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat7 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 8)
-            {
-                switch (MainCategoryCode8)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat8 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat8 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat8 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat8 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat8 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 9)
-            {
-                switch (MainCategoryCode9)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat9 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat9 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat9 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat9 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat9 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 10)
-            {
-                switch (MainCategoryCode10)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat10 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat10 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat10 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat10 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat10 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 11)
-            {
-                switch (MainCategoryCode11)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat11 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat11 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat11 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat11 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat11 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 12)
-            {
-                switch (MainCategoryCode12)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat12 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat12 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat12 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat12 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat12 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-
-            if (record >= 13)
-            {
-                switch (MainCategoryCode13)
-                {
-                    case 100:
-                        PurChaseMetal = PurchaseUnFormat13 + PurChaseMetal;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
-                        break;
-                    case 101:
-                        PurChaseDiamond = PurchaseUnFormat13 + PurChaseDiamond;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
-                        break;
-                    case 102:
-                        PurChaseBrand = PurchaseUnFormat13 + PurChaseBrand;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
-                        break;
-                    case 103:
-                        PurChaseProduct = PurchaseUnFormat13 + PurChaseProduct;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
-                        break;
-                    case 104:
-                        PurChaseOther = PurchaseUnFormat13 + PurChaseOther;
-                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
-                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
-                        break;
-                }
-            }
-            #endregion
-
             #region"計算書以外から成績入力に画面遷移したとき"
             if (grade != 0)
             {
-                string Sql_Str2 = "select * from list_result2 inner join main_category_m on list_result2.main_category_code = main_category_m.main_category_code inner join item_m on list_result2.item_code = item_m.item_code where grade_number = '" + grade + "' order by record_number;";
+                string Sql_Str2 = "select * from list_result2 A inner join main_category_m B on A.main_category_code = B.main_category_code inner join item_m C on A.item_code = C.item_code" +
+                    " where grade_number = '" + grade + "' order by record_number;";
                 adapter = new NpgsqlDataAdapter(Sql_Str2, conn);
                 adapter.Fill(data);
 
@@ -1405,9 +1000,434 @@ namespace Flawless_ex
             }
             #endregion
 
+            #region"大分類ごとの買取金額"
+
+            if (record >= 1)
+            {
+                switch (MainCategoryCode1)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat1;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 2)
+            {
+                switch (MainCategoryCode2)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat2 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat2 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat2 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat2 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat2 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 3)
+            {
+                switch (MainCategoryCode3)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat3 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat3 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat3 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat3 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat3 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 4)
+            {
+                switch (MainCategoryCode4)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat4 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat4 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat4 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat4 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat4 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 5)
+            {
+                switch (MainCategoryCode5)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat5 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat5 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat5 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat5 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat5 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 6)
+            {
+                switch (MainCategoryCode6)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat6 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat6 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat6 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat6 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat6 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 7)
+            {
+                switch (MainCategoryCode7)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat7 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat7 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat7 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat7 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat7 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 8)
+            {
+                switch (MainCategoryCode8)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat8 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat8 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat8 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat8 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat8 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 9)
+            {
+                switch (MainCategoryCode9)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat9 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat9 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat9 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat9 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat9 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 10)
+            {
+                switch (MainCategoryCode10)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat10 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat10 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat10 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat10 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat10 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 11)
+            {
+                switch (MainCategoryCode11)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat11 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat11 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat11 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat11 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat11 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 12)
+            {
+                switch (MainCategoryCode12)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat12 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat12 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat12 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat12 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat12 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+
+            if (record >= 13)
+            {
+                switch (MainCategoryCode13)
+                {
+                    case 1:
+                        PurChaseMetal = PurchaseUnFormat13 + PurChaseMetal;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        MetalPurchaseTextBox.Text = string.Format("{0:C}", PurChaseMetal);
+                        break;
+                    case 2:
+                        PurChaseDiamond = PurchaseUnFormat13 + PurChaseDiamond;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        DiamondPurchaseTextBox.Text = string.Format("{0:C}", PurChaseDiamond);
+                        break;
+                    case 3:
+                        PurChaseBrand = PurchaseUnFormat13 + PurChaseBrand;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        BrandPurchaseTextBox.Text = string.Format("{0:C}", PurChaseBrand);
+                        break;
+                    case 4:
+                        PurChaseProduct = PurchaseUnFormat13 + PurChaseProduct;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        ProductPurchaseTextBox.Text = string.Format("{0:C}", PurChaseProduct);
+                        break;
+                    case 5:
+                        PurChaseOther = PurchaseUnFormat13 + PurChaseOther;
+                        PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
+                        OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
+                        break;
+                }
+            }
+            #endregion
+
             #endregion
 
             conn.Close();
+
+            if (grade == 0)
+            {
+                grade = int.Parse(GradeNumberTextBox.Text);
+            }
+
             #region"色"
             #region"1"
             itemMainCategoryTextBox1.BackColor = SystemColors.Control;
@@ -1552,10 +1572,10 @@ namespace Flawless_ex
         #region"成績入力画面から計算書 or 次月持ち越しへ"
         private void ReturnButton_Click(object sender, EventArgs e)
         {
-            //品名変更時、再登録をまだしていない場合
+            //品名変更時、登録をまだしていない場合
             if (NameChange)
             {
-                MessageBox.Show("再登録ボタンをクリックして登録をしてください。", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("登録ボタンをクリックして登録をしてください。", "登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             this.Close();
@@ -1602,7 +1622,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode1)
             {
-                case 100:
+                case 1:
                     if (ReEnter1)
                     {
                         WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
@@ -1638,7 +1658,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter1)
                     {
                         WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
@@ -1674,7 +1694,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter1)
                     {
                         WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
@@ -1710,7 +1730,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter1)
                     {
                         WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
@@ -1746,7 +1766,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter1)
                     {
                         WholeSaleUnFormat1 = decimal.Parse(WholesalePriceTextBox1.Text);
@@ -1799,7 +1819,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode2)
             {
-                case 100:
+                case 1:
                     if (ReEnter2)
                     {
                         WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
@@ -1835,7 +1855,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter2)
                     {
                         WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
@@ -1871,7 +1891,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter2)
                     {
                         WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
@@ -1907,7 +1927,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter2)
                     {
                         WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
@@ -1943,7 +1963,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter2)
                     {
                         WholeSaleUnFormat2 = decimal.Parse(WholesalePriceTextBox2.Text);
@@ -1995,7 +2015,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode3)
             {
-                case 100:
+                case 1:
                     if (ReEnter3)
                     {
                         WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
@@ -2031,7 +2051,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter3)
                     {
                         WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
@@ -2067,7 +2087,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter3)
                     {
                         WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
@@ -2103,7 +2123,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter3)
                     {
                         WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
@@ -2139,7 +2159,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter3)
                     {
                         WholeSaleUnFormat3 = decimal.Parse(WholesalePriceTextBox3.Text);
@@ -2191,7 +2211,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode4)
             {
-                case 100:
+                case 1:
                     if (ReEnter4)
                     {
                         WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
@@ -2227,7 +2247,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter4)
                     {
                         WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
@@ -2263,7 +2283,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 102:
+                case 3:
                     if (ReEnter4)
                     {
                         WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
@@ -2299,7 +2319,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 103:
+                case 4:
                     if (ReEnter4)
                     {
                         WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
@@ -2335,7 +2355,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 104:
+                case 5:
                     if (ReEnter4)
                     {
                         WholeSaleUnFormat4 = decimal.Parse(WholesalePriceTextBox4.Text);
@@ -2387,7 +2407,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode5)
             {
-                case 100:
+                case 1:
                     if (ReEnter5)
                     {
                         WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
@@ -2422,7 +2442,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 101:
+                case 2:
                     if (ReEnter5)
                     {
                         WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
@@ -2458,7 +2478,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 102:
+                case 3:
                     if (ReEnter5)
                     {
                         WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
@@ -2494,7 +2514,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 103:
+                case 4:
                     if (ReEnter5)
                     {
                         WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
@@ -2530,7 +2550,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 104:
+                case 5:
                     if (ReEnter5)
                     {
                         WholeSaleUnFormat5 = decimal.Parse(WholesalePriceTextBox5.Text);
@@ -2582,7 +2602,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode6)
             {
-                case 100:
+                case 1:
                     if (ReEnter6)
                     {
                         WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
@@ -2618,7 +2638,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 101:
+                case 2:
                     if (ReEnter6)
                     {
                         WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
@@ -2654,7 +2674,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 102:
+                case 3:
                     if (ReEnter6)
                     {
                         WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
@@ -2690,7 +2710,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 103:
+                case 4:
                     if (ReEnter6)
                     {
                         WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
@@ -2726,7 +2746,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 104:
+                case 5:
                     if (ReEnter6)
                     {
                         WholeSaleUnFormat6 = decimal.Parse(WholesalePriceTextBox6.Text);
@@ -2778,7 +2798,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode7)
             {
-                case 100:
+                case 1:
                     if (ReEnter7)
                     {
                         WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
@@ -2814,7 +2834,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter7)
                     {
                         WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
@@ -2850,7 +2870,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter7)
                     {
                         WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
@@ -2886,7 +2906,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter7)
                     {
                         WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
@@ -2922,7 +2942,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter7)
                     {
                         WholeSaleUnFormat7 = decimal.Parse(WholesalePriceTextBox7.Text);
@@ -2974,7 +2994,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode8)
             {
-                case 100:
+                case 1:
                     if (ReEnter8)
                     {
                         WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
@@ -3010,7 +3030,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter8)
                     {
                         WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
@@ -3046,7 +3066,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter8)
                     {
                         WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
@@ -3082,7 +3102,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter8)
                     {
                         WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
@@ -3118,7 +3138,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter8)
                     {
                         WholeSaleUnFormat8 = decimal.Parse(WholesalePriceTextBox8.Text);
@@ -3170,7 +3190,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode9)
             {
-                case 100:
+                case 1:
                     if (ReEnter9)
                     {
                         WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
@@ -3206,7 +3226,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter9)
                     {
                         WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
@@ -3242,7 +3262,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter9)
                     {
                         WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
@@ -3278,7 +3298,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter9)
                     {
                         WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
@@ -3314,7 +3334,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter9)
                     {
                         WholeSaleUnFormat9 = decimal.Parse(WholesalePriceTextBox9.Text);
@@ -3366,7 +3386,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode10)
             {
-                case 100:
+                case 1:
                     if (ReEnter10)
                     {
                         WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
@@ -3402,7 +3422,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter10)
                     {
                         WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
@@ -3438,7 +3458,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter10)
                     {
                         WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
@@ -3474,7 +3494,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter10)
                     {
                         WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
@@ -3510,7 +3530,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter10)
                     {
                         WholeSaleUnFormat10 = decimal.Parse(WholesalePriceTextBox10.Text);
@@ -3562,7 +3582,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode11)
             {
-                case 100:
+                case 1:
                     if (ReEnter11)
                     {
                         WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
@@ -3598,7 +3618,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                         break;
-                case 101:
+                case 2:
                     if (ReEnter11)
                     {
                         WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
@@ -3634,7 +3654,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter11)
                     {
                         WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
@@ -3670,7 +3690,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter11)
                     {
                         WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
@@ -3706,7 +3726,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter11) {
                     WholeSaleUnFormat11 = decimal.Parse(WholesalePriceTextBox11.Text);
                     WholeSaleOther = WholeSaleUnFormat11 + WholeSaleOther;                            //左下表の地金の卸値に入力
@@ -3757,7 +3777,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode12)
             {
-                case 100:
+                case 1:
                     if (ReEnter12)
                     {
                         WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
@@ -3793,7 +3813,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter12)
                     {
                         WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
@@ -3829,7 +3849,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter12)
                     {
                         WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
@@ -3865,7 +3885,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter12)
                     {
                         WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
@@ -3901,7 +3921,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 104:
+                case 5:
                     if (ReEnter12)
                     {
                         WholeSaleUnFormat12 = decimal.Parse(WholesalePriceTextBox12.Text);
@@ -3953,7 +3973,7 @@ namespace Flawless_ex
 
             switch (MainCategoryCode13)
             {
-                case 100:
+                case 1:
                     if (ReEnter13)
                     {
                         WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
@@ -3989,7 +4009,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 101:
+                case 2:
                     if (ReEnter13)
                     {
                         WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
@@ -4025,7 +4045,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 102:
+                case 3:
                     if (ReEnter13)
                     {
                         WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
@@ -4061,7 +4081,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     }
                     break;
-                case 103:
+                case 4:
                     if (ReEnter13)
                     {
                         WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
@@ -4097,7 +4117,7 @@ namespace Flawless_ex
                         WholesaleTotalTextBox.Text = string.Format("{0:C}", WholeSale);
                     };
                     break;
-                case 104:
+                case 5:
                     if (ReEnter13)
                     {
                         WholeSaleUnFormat13 = decimal.Parse(WholesalePriceTextBox13.Text);
@@ -6067,677 +6087,677 @@ namespace Flawless_ex
         #region"登録ボタンクリック"
         private void RegisterButton_Click(object sender, EventArgs e)
         {
-            #region"次月と品名変更の両方にチェックが入ってることを通知"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (itemMainCategoryTextBox1.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (itemMainCategoryTextBox2.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (itemMainCategoryTextBox3.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (itemMainCategoryTextBox4.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("４行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (itemMainCategoryTextBox5.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("５行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (itemMainCategoryTextBox6.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("６行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (itemMainCategoryTextBox7.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("７行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (itemMainCategoryTextBox8.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("８行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (itemMainCategoryTextBox9.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("９行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (itemMainCategoryTextBox10.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("１０行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (itemMainCategoryTextBox11.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("１１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (itemMainCategoryTextBox12.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("１２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (itemMainCategoryTextBox13.ForeColor == Color.Purple)
-                        {
-                            MessageBox.Show("１３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                        #endregion
-                }
-            }
-            #endregion
-
-            #region"次月にチェックが入っていて卸値にも入力されているとき"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && WholesalePriceTextBox1.Text != @"\0") 
-                        {
-                            MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && WholesalePriceTextBox2.Text != @"\0")
-                        {
-                            MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && WholesalePriceTextBox3.Text != @"\0")
-                        {
-                            MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && WholesalePriceTextBox4.Text != @"\0")
-                        {
-                            MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && WholesalePriceTextBox5.Text != @"\0")
-                        {
-                            MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && WholesalePriceTextBox6.Text != @"\0")
-                        {
-                            MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && WholesalePriceTextBox7.Text != @"\0")
-                        {
-                            MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && WholesalePriceTextBox8.Text != @"\0")
-                        {
-                            MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && WholesalePriceTextBox9.Text != @"\0")
-                        {
-                            MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && WholesalePriceTextBox10.Text != @"\0")
-                        {
-                            MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && WholesalePriceTextBox11.Text != @"\0")
-                        {
-                            MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && WholesalePriceTextBox12.Text != @"\0")
-                        {
-                            MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && WholesalePriceTextBox13.Text != @"\0")
-                        {
-                            MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                        #endregion
-                }
-            }
-            #endregion
-
-            #region"品名変更のみチェックが入っているとき"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
-                        {
-                            result = MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (result == DialogResult.No)
-                            {
-                                return;
-                            }
-                        }
-                        break;
-                        #endregion
-                }
-            }
-            #endregion
-
-            #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
-                        {
-                            MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
-                        {
-                            MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
-                        {
-                            MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
-                        {
-                            MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
-                        {
-                            MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
-                        {
-                            MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
-                        {
-                            MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
-                        {
-                            MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
-                        {
-                            MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
-                        {
-                            MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
-                        {
-                            MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
-                        {
-                            MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
-                        {
-                            MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                        #endregion
-                }
-            }
-            #endregion
-
-            #region"卸値に値が入力されていて売却先が無記入のとき"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
-                        {
-                            MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
-                        {
-                            MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
-                        {
-                            MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
-                        {
-                            MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
-                        {
-                            MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
-                        {
-                            MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
-                        {
-                            MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
-                        {
-                            MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
-                        {
-                            MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
-                        {
-                            MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
-                        {
-                            MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
-                        {
-                            MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
-                        {
-                            MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                     #endregion
-                }
-            }
-            #endregion
-
             if (NotFinish)
             {
+                #region"次月と品名変更の両方にチェックが入ってることを通知"
+                //for (int i = 1; i <= record; i++)
+                //{
+                //    switch (i)
+                //    {
+                //        #region"１行目"
+                //        case 1:
+                //            if (itemMainCategoryTextBox1.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"２行目"
+                //        case 2:
+                //            if (itemMainCategoryTextBox2.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"３行目"
+                //        case 3:
+                //            if (itemMainCategoryTextBox3.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"４行目"
+                //        case 4:
+                //            if (itemMainCategoryTextBox4.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("４行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"５行目"
+                //        case 5:
+                //            if (itemMainCategoryTextBox5.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("５行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"６行目"
+                //        case 6:
+                //            if (itemMainCategoryTextBox6.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("６行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"７行目"
+                //        case 7:
+                //            if (itemMainCategoryTextBox7.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("７行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"８行目"
+                //        case 8:
+                //            if (itemMainCategoryTextBox8.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("８行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"９行目"
+                //        case 9:
+                //            if (itemMainCategoryTextBox9.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("９行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１０行目"
+                //        case 10:
+                //            if (itemMainCategoryTextBox10.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("１０行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１１行目"
+                //        case 11:
+                //            if (itemMainCategoryTextBox11.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("１１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１２行目"
+                //        case 12:
+                //            if (itemMainCategoryTextBox12.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("１２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１３行目"
+                //        case 13:
+                //            if (itemMainCategoryTextBox13.ForeColor == Color.Purple)
+                //            {
+                //                MessageBox.Show("１３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //                return;
+                //            }
+                //            break;
+                //            #endregion
+                //    }
+                //}
+                #endregion
+
+                #region"次月にチェックが入っていて卸値にも入力されているとき"
+                for (int i = 1; i <= record; i++)
+                {
+                    switch (i)
+                    {
+                        #region"１行目"
+                        case 1:
+                            if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && WholesalePriceTextBox1.Text != @"\0")
+                            {
+                                MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"２行目"
+                        case 2:
+                            if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && WholesalePriceTextBox2.Text != @"\0")
+                            {
+                                MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"３行目"
+                        case 3:
+                            if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && WholesalePriceTextBox3.Text != @"\0")
+                            {
+                                MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"４行目"
+                        case 4:
+                            if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && WholesalePriceTextBox4.Text != @"\0")
+                            {
+                                MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"５行目"
+                        case 5:
+                            if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && WholesalePriceTextBox5.Text != @"\0")
+                            {
+                                MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"６行目"
+                        case 6:
+                            if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && WholesalePriceTextBox6.Text != @"\0")
+                            {
+                                MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"７行目"
+                        case 7:
+                            if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && WholesalePriceTextBox7.Text != @"\0")
+                            {
+                                MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"８行目"
+                        case 8:
+                            if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && WholesalePriceTextBox8.Text != @"\0")
+                            {
+                                MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"９行目"
+                        case 9:
+                            if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && WholesalePriceTextBox9.Text != @"\0")
+                            {
+                                MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１０行目"
+                        case 10:
+                            if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && WholesalePriceTextBox10.Text != @"\0")
+                            {
+                                MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１１行目"
+                        case 11:
+                            if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && WholesalePriceTextBox11.Text != @"\0")
+                            {
+                                MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１２行目"
+                        case 12:
+                            if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && WholesalePriceTextBox12.Text != @"\0")
+                            {
+                                MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１３行目"
+                        case 13:
+                            if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && WholesalePriceTextBox13.Text != @"\0")
+                            {
+                                MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                            #endregion
+                    }
+                }
+                #endregion
+
+                #region"品名変更のみチェックが入っているとき"
+                //for (int i = 1; i <= record; i++)
+                //{
+                //    switch (i)
+                //    {
+                //        #region"１行目"
+                //        case 1:
+                //            if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"２行目"
+                //        case 2:
+                //            if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"３行目"
+                //        case 3:
+                //            if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"４行目"
+                //        case 4:
+                //            if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"５行目"
+                //        case 5:
+                //            if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"６行目"
+                //        case 6:
+                //            if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"７行目"
+                //        case 7:
+                //            if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"８行目"
+                //        case 8:
+                //            if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"９行目"
+                //        case 9:
+                //            if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１０行目"
+                //        case 10:
+                //            if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１１行目"
+                //        case 11:
+                //            if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１２行目"
+                //        case 12:
+                //            if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //        #endregion
+                //        #region"１３行目"
+                //        case 13:
+                //            if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
+                //            {
+                //                result = MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //                if (result == DialogResult.No)
+                //                {
+                //                    return;
+                //                }
+                //            }
+                //            break;
+                //            #endregion
+                //    }
+                //}
+                #endregion
+
+                #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
+                for (int i = 1; i <= record; i++)
+                {
+                    switch (i)
+                    {
+                        #region"１行目"
+                        case 1:
+                            if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                            {
+                                MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"２行目"
+                        case 2:
+                            if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                            {
+                                MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"３行目"
+                        case 3:
+                            if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                            {
+                                MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"４行目"
+                        case 4:
+                            if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                            {
+                                MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"５行目"
+                        case 5:
+                            if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                            {
+                                MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"６行目"
+                        case 6:
+                            if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                            {
+                                MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"７行目"
+                        case 7:
+                            if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                            {
+                                MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"８行目"
+                        case 8:
+                            if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                            {
+                                MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"９行目"
+                        case 9:
+                            if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                            {
+                                MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１０行目"
+                        case 10:
+                            if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                            {
+                                MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１１行目"
+                        case 11:
+                            if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                            {
+                                MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１２行目"
+                        case 12:
+                            if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                            {
+                                MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１３行目"
+                        case 13:
+                            if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                            {
+                                MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                return;
+                            }
+                            break;
+                            #endregion
+                    }
+                }
+                #endregion
+
+                #region"卸値に値が入力されていて売却先が無記入のとき"
+                for (int i = 1; i <= record; i++)
+                {
+                    switch (i)
+                    {
+                        #region"１行目"
+                        case 1:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
+                            {
+                                MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"２行目"
+                        case 2:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
+                            {
+                                MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"３行目"
+                        case 3:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
+                            {
+                                MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"４行目"
+                        case 4:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
+                            {
+                                MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"５行目"
+                        case 5:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
+                            {
+                                MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"６行目"
+                        case 6:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
+                            {
+                                MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"７行目"
+                        case 7:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
+                            {
+                                MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"８行目"
+                        case 8:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
+                            {
+                                MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"９行目"
+                        case 9:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
+                            {
+                                MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１０行目"
+                        case 10:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
+                            {
+                                MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１１行目"
+                        case 11:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
+                            {
+                                MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１２行目"
+                        case 12:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
+                            {
+                                MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                        #endregion
+                        #region"１３行目"
+                        case 13:
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
+                            {
+                                MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            break;
+                            #endregion
+                    }
+                }
+                #endregion
+
                 DialogResult dialogResult = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.No)
                 {
@@ -6748,24 +6768,20 @@ namespace Flawless_ex
             #region"登録・再登録のコード"
             DateTime date = DateTime.Now;
             Registration = date.ToLongDateString();         //登録日
+            //顧客番号は ClientCode
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
 
-            string sql_str = "select * from list_result order by result;";
+            string sql_str = "select count(*) from list_result where result = '" + grade + "';";
+
             cmd = new NpgsqlCommand(sql_str, conn);
             conn.Open();
-            string DocumentNumber = "";
 
-            using (reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    DocumentNumber = reader["document_number"].ToString();
-                }
-            }
+            notFirst = int.Parse(cmd.ExecuteScalar().ToString());       //一度登録してある場合は 1
 
-            if (DocumentNumber == SlipNumber || CarryOver)    //一度登録済み・再登録
+           
+            if (notFirst == 1)     //一度登録済み・再登録
             {
                 #region"list_resultへの更新"
                 TotalPurchase = PurChase;                   //合計買取金額
@@ -6845,11 +6861,10 @@ namespace Flawless_ex
                     cmd.ExecuteNonQuery();
                     transaction.Commit();
                 }
-                //履歴に登録
-                
-                sql_str = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(DATATable);
+                ////履歴に登録
+                //sql_str = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
+                //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                //adapter.Fill(DATATable);
 
                 #endregion
                 #region"list_result2への更新"
@@ -6903,10 +6918,10 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA1);
+                            ////履歴に登録
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA1);
 
                             break;
                         #endregion
@@ -6956,9 +6971,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA2);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA2);
 
                             break;
                         #endregion
@@ -7008,9 +7023,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA3);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA3);
 
                             break;
                         #endregion
@@ -7060,9 +7075,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA4);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA4);
 
                             break;
                         #endregion
@@ -7112,9 +7127,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA5);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA5);
 
                             break;
                         #endregion
@@ -7164,9 +7179,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA6);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA6);
 
                             break;
                         #endregion
@@ -7216,9 +7231,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA7);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA7);
 
                             break;
                         #endregion
@@ -7268,9 +7283,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA8);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA8);
 
                             break;
                         #endregion
@@ -7320,9 +7335,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA9);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA9);
 
                             break;
                         #endregion
@@ -7372,9 +7387,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA10);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA10);
 
                             break;
                         #endregion
@@ -7424,9 +7439,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA11);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA11);
 
                             break;
                         #endregion
@@ -7476,9 +7491,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA12);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA12);
 
                             break;
                         #endregion
@@ -7528,9 +7543,9 @@ namespace Flawless_ex
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
                             }
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA13);
+                            //sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
+                            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+                            //adapter.Fill(DATA13);
 
                             break;
                             #endregion
@@ -7538,9 +7553,9 @@ namespace Flawless_ex
                 }
                 #endregion
             }
-            //初登録
             else
             {
+                //初登録   notFirst == 0
                 #region"list_result への登録と履歴への登録"
                 GradeNumber = int.Parse(GradeNumberTextBox.Text);       //成績番号
                 TotalPurchase = PurChase;                               //合計買取金額
@@ -7616,654 +7631,19 @@ namespace Flawless_ex
                 GRADE = int.Parse(GradeNumberTextBox.Text);             //list_result2 への登録時
                 AssessmentDate = AssessmentDateTextBox.Text;
 
-                if (type == 0)
-                {
-                    CName = NameOrCompanyNameTextBox.Text;
-                    CShop = OccupationOrShopNameTextBox.Text;
-                    CStaff = AddressOrClientStaffNameTextBox.Text;
+                sql_str = "Insert into list_result(code, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale," +
+                    " metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale," +
+                    " other_profit) values ('" + ClientCode + "','" + 0 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "'," +
+                    "'" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "'," +
+                    "'" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "'," +
+                    "'" + OtherProfit + "');";
 
-                    sql_str = "Insert into list_result(company_name, shop_name, staff_name, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + CName + "','" + CShop + "','" + CStaff + "','" + 0 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
-
-                }
-                else if (type == 1)
-                {
-                    name = NameOrCompanyNameTextBox.Text;
-                    Occupation = OccupationOrShopNameTextBox.Text;
-                    Address = AddressOrClientStaffNameTextBox.Text;
-                    BirthDay = BirthdayTextBox.Text;
-
-                    sql_str = "Insert into list_result(name, address, occupation, birthday, type, staff_code, registration_date, result, sum_money, sum_wholesale_price, profit, document_number, metal_purchase, metal_wholesale, metal_profit, diamond_purchase, diamond_wholesale, diamond_profit, brand_purchase, brand_wholesale, brand_profit, product_purchase, product_wholesale, product_profit, other_purchase, other_wholesale, other_profit) values ('" + name + "','" + Address + "','" + Occupation + "','" + BirthDay + "','" + 1 + "','" + staff_id + "','" + Registration + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
-                }
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(DataTable);
 
-                //履歴用に登録
-                sql_str = "Insert into list_result_revisions values ('" + type + "', '" + staff_id + "','" + Registration + "','" + GradeNumber + "', '" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "','" + MetalPurchase + "','" + MetalWholesale + "','" + MetalProfit + "','" + DiamondPurchase + "','" + DiamondWholesale + "','" + DiamondProfit + "','" + BrandPurchase + "','" + BrandWholesale + "','" + BrandProfit + "','" + ProductPurchase + "','" + ProductWholesale + "','" + ProductProfit + "','" + OtherPurchase + "','" + OtherWholesale + "','" + OtherProfit + "');";
-                adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter.Fill(DATATable);
                 #endregion
 
                 #region"list_result2 への登録"
-
-                #region"コメントアウト"
-                //for (int i = 1; i <= record; i++)
-                //{
-                //    switch (i)
-                //    {
-                //        #region"１行目"
-                //        case 1:
-                //            REMARK = remark1.Text;
-                //            MainCategoryCode = MainCategoryCode1;
-                //            ItemCategoryCode = ItemCategoryCode1;
-                //            Record = 1;
-                //            UnitPrice = UnitPriceUnFormat1;
-                //            Purchase = PurchaseUnFormat1;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox1.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox1.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat1;
-                //                PROFIT = WholeSaleUnFormat1 - PurchaseUnFormat1;
-                //                BUYDATE = BuyDateTimePicker1.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox1.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat1 - PurchaseUnFormat1;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data1);
-                //            break;
-                //        #endregion
-                //        #region"２行目"
-                //        case 2:
-                //            REMARK = remark2.Text;
-                //            MainCategoryCode = MainCategoryCode2;
-                //            ItemCategoryCode = ItemCategoryCode2;
-                //            Record = 2;
-                //            UnitPrice = UnitPriceUnFormat2;
-                //            Purchase = PurchaseUnFormat2;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox2.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox2.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat2;
-                //                PROFIT = WholeSaleUnFormat2 - PurchaseUnFormat2;
-                //                BUYDATE = BuyDateTimePicker2.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox2.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat2 - PurchaseUnFormat2;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data2);
-                //            break;
-                //        #endregion
-                //        #region"３行目"
-                //        case 3:
-                //            REMARK = remark3.Text;
-                //            MainCategoryCode = MainCategoryCode3;
-                //            ItemCategoryCode = ItemCategoryCode3;
-                //            Record = 3;
-                //            UnitPrice = UnitPriceUnFormat3;
-                //            Purchase = PurchaseUnFormat3;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox3.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox3.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat3;
-                //                PROFIT = WholeSaleUnFormat3 - PurchaseUnFormat3;
-                //                BUYDATE = BuyDateTimePicker3.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox3.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat3 - PurchaseUnFormat3;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data3);
-                //            break;
-                //        #endregion
-                //        #region"４行目"
-                //        case 4:
-                //            REMARK = remark4.Text;
-                //            MainCategoryCode = MainCategoryCode4;
-                //            ItemCategoryCode = ItemCategoryCode4;
-                //            Record = 4;
-                //            UnitPrice = UnitPriceUnFormat4;
-                //            Purchase = PurchaseUnFormat4;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox4.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox4.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat4;
-                //                PROFIT = WholeSaleUnFormat4 - PurchaseUnFormat4;
-                //                BUYDATE = BuyDateTimePicker4.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox4.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat4 - PurchaseUnFormat4;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data4);
-                //            break;
-                //        #endregion
-                //        #region"５行目"
-                //        case 5:
-                //            REMARK = remark5.Text;
-                //            MainCategoryCode = MainCategoryCode5;
-                //            ItemCategoryCode = ItemCategoryCode5;
-                //            Record = 5;
-                //            UnitPrice = UnitPriceUnFormat5;
-                //            Purchase = PurchaseUnFormat5;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox5.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox5.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat5;
-                //                PROFIT = WholeSaleUnFormat5 - PurchaseUnFormat5;
-                //                BUYDATE = BuyDateTimePicker5.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox5.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat5 - PurchaseUnFormat5;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data5);
-                //            break;
-                //        #endregion
-                //        #region"６行目"
-                //        case 6:
-                //            REMARK = remark6.Text;
-                //            MainCategoryCode = MainCategoryCode6;
-                //            ItemCategoryCode = ItemCategoryCode6;
-                //            Record = 6;
-                //            UnitPrice = UnitPriceUnFormat6;
-                //            Purchase = PurchaseUnFormat6;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox6.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox6.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat6;
-                //                PROFIT = WholeSaleUnFormat6 - PurchaseUnFormat6;
-                //                BUYDATE = BuyDateTimePicker6.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox6.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat6 - PurchaseUnFormat6;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data6);
-                //            break;
-                //        #endregion
-                //        #region"７行目"
-                //        case 7:
-                //            REMARK = remark7.Text;
-                //            MainCategoryCode = MainCategoryCode7;
-                //            ItemCategoryCode = ItemCategoryCode7;
-                //            Record = 7;
-                //            UnitPrice = UnitPriceUnFormat7;
-                //            Purchase = PurchaseUnFormat7;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox7.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox7.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat7;
-                //                PROFIT = WholeSaleUnFormat7 - PurchaseUnFormat7;
-                //                BUYDATE = BuyDateTimePicker7.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox7.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat7 - PurchaseUnFormat7;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data7);
-                //            break;
-                //        #endregion
-                //        #region"８行目"
-                //        case 8:
-                //            REMARK = remark8.Text;
-                //            MainCategoryCode = MainCategoryCode8;
-                //            ItemCategoryCode = ItemCategoryCode8;
-                //            Record = 8;
-                //            UnitPrice = UnitPriceUnFormat8;
-                //            Purchase = PurchaseUnFormat8;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox8.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox8.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat8;
-                //                PROFIT = WholeSaleUnFormat8 - PurchaseUnFormat8;
-                //                BUYDATE = BuyDateTimePicker8.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox8.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat8 - PurchaseUnFormat8;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data8);
-                //            break;
-                //        #endregion
-                //        #region"９行目"
-                //        case 9:
-                //            REMARK = remark9.Text;
-                //            MainCategoryCode = MainCategoryCode9;
-                //            ItemCategoryCode = ItemCategoryCode9;
-                //            Record = 9;
-                //            UnitPrice = UnitPriceUnFormat9;
-                //            Purchase = PurchaseUnFormat9;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox9.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox9.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat9;
-                //                PROFIT = WholeSaleUnFormat9 - PurchaseUnFormat9;
-                //                BUYDATE = BuyDateTimePicker9.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox9.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat9 - PurchaseUnFormat9;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data9);
-                //            break;
-                //        #endregion
-                //        #region"１０行目"
-                //        case 10:
-                //            REMARK = remark10.Text;
-                //            MainCategoryCode = MainCategoryCode10;
-                //            ItemCategoryCode = ItemCategoryCode10;
-                //            Record = 10;
-                //            UnitPrice = UnitPriceUnFormat10;
-                //            Purchase = PurchaseUnFormat10;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox10.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox10.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat10;
-                //                PROFIT = WholeSaleUnFormat10 - PurchaseUnFormat10;
-                //                BUYDATE = BuyDateTimePicker10.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox10.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat10 - PurchaseUnFormat10;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data10);
-                //            break;
-                //        #endregion
-                //        #region"１１行目"
-                //        case 11:
-                //            REMARK = remark11.Text;
-                //            MainCategoryCode = MainCategoryCode11;
-                //            ItemCategoryCode = ItemCategoryCode11;
-                //            Record = 11;
-                //            UnitPrice = UnitPriceUnFormat11;
-                //            Purchase = PurchaseUnFormat11;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox11.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox11.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat11;
-                //                PROFIT = WholeSaleUnFormat11 - PurchaseUnFormat11;
-                //                BUYDATE = BuyDateTimePicker11.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox11.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat11 - PurchaseUnFormat11;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data11);
-                //            break;
-                //        #endregion
-                //        #region"１２行目"
-                //        case 12:
-                //            REMARK = remark12.Text;
-                //            MainCategoryCode = MainCategoryCode12;
-                //            ItemCategoryCode = ItemCategoryCode12;
-                //            Record = 12;
-                //            UnitPrice = UnitPriceUnFormat12;
-                //            Purchase = PurchaseUnFormat12;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox12.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox12.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat12;
-                //                PROFIT = WholeSaleUnFormat12 - PurchaseUnFormat12;
-                //                BUYDATE = BuyDateTimePicker12.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox12.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat12 - PurchaseUnFormat12;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data12);
-                //            break;
-                //        #endregion
-                //        #region"１３行目"
-                //        case 13:
-                //            REMARK = remark13.Text;
-                //            MainCategoryCode = MainCategoryCode13;
-                //            ItemCategoryCode = ItemCategoryCode13;
-                //            Record = 13;
-                //            UnitPrice = UnitPriceUnFormat13;
-                //            Purchase = PurchaseUnFormat13;
-                //            #region"チェックボックス"
-                //            if (NextMonthCheckBox13.Checked)
-                //            {
-                //                NextMonth = 1;
-                //            }
-                //            else
-                //            {
-                //                NextMonth = 0;
-                //            }
-
-                //            if (ItemNameChangeCheckBox13.Checked)
-                //            {
-                //                ChangeCheck = 1;
-                //            }
-                //            else
-                //            {
-                //                ChangeCheck = 0;
-                //            }
-                //            #endregion
-                //            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
-                //            {
-                //                WHOLESALE = WholeSaleUnFormat13;
-                //                PROFIT = WholeSaleUnFormat13 - PurchaseUnFormat13;
-                //                BUYDATE = BuyDateTimePicker13.Value.ToLongDateString();
-                //                BUYER = BuyerTextBox13.Text;
-                //            }
-                //            else
-                //            {
-                //                WHOLESALE = 0;
-                //                PROFIT = WholeSaleUnFormat13 - PurchaseUnFormat13;
-                //                BUYDATE = "";
-                //                BUYER = "";
-                //            }
-
-                //            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
-                //            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                //            adapter.Fill(Data13);
-                //            break;
-                //            #endregion
-                //    }
-                //}
-                #endregion
 
                 for (int i = 1; i <= record; i++)
                 {
@@ -8318,10 +7698,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data1);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA1);
                             break;
                         #endregion
                         #region"２行目"
@@ -8373,10 +7749,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data2);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA2);
                             break;
                         #endregion
                         #region"３行目"
@@ -8428,10 +7800,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data3);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA3);
                             break;
                         #endregion
                         #region"４行目"
@@ -8483,10 +7851,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data4);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA4);
                             break;
                         #endregion
                         #region"５行目"
@@ -8538,10 +7902,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data5);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA5);
                             break;
                         #endregion
                         #region"６行目"
@@ -8593,10 +7953,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data6);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA6);
                             break;
                         #endregion
                         #region"７行目"
@@ -8648,10 +8004,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data7);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA7);
                             break;
                         #endregion
                         #region"８行目"
@@ -8703,10 +8055,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data8);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA8);
                             break;
                         #endregion
                         #region"９行目"
@@ -8758,10 +8106,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data9);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA9);
                             break;
                         #endregion
                         #region"１０行目"
@@ -8813,10 +8157,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data10);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA10);
                             break;
                         #endregion
                         #region"１１行目"
@@ -8868,10 +8208,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data11);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA11);
                             break;
                         #endregion
                         #region"１２行目"
@@ -8923,10 +8259,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data12);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA12);
                             break;
                         #endregion
                         #region"１３行目"
@@ -8978,10 +8310,6 @@ namespace Flawless_ex
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data13);
 
-                            //履歴に登録
-                            sql_str = "Insert into list_result_revisions2 values ('" + SaleDate + "','" + ItemCategoryCode + "','" + Wholesale + "','" + Buyer + "','" + Remark + "','" + NextMonth + "','" + GradeNumber + "','" + Record + "','" + Registration + "','" + DNumber + "','" + Profit + "','" + MainCategoryCode + "','" + ChangeCheck + "');";
-                            adapter = new NpgsqlDataAdapter(sql_str, conn);
-                            adapter.Fill(DATA13);
                             break;
                             #endregion
                     }
@@ -9609,7 +8937,11 @@ namespace Flawless_ex
 
                 using (transaction = conn.BeginTransaction())
                 {
-                    sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "', metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "', diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "', product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "', other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "' where document_number = '" + DNumber + "';";
+                    sql_str = "update list_result set sum_money = '" + TotalPurchase + "', sum_wholesale_price = '" + TotalWholesale + "', profit = '" + TotalProfit + "', metal_purchase = '" + MetalPurchase + "'," +
+                        " metal_wholesale = '" + MetalWholesale + "', metal_profit = '" + MetalProfit + "', diamond_purchase = '" + DiamondPurchase + "', diamond_wholesale = '" + DiamondWholesale + "'," +
+                        " diamond_profit = '" + DiamondProfit + "', brand_purchase = '" + BrandPurchase + "', brand_wholesale = '" + BrandWholesale + "', brand_profit = '" + BrandProfit + "'," +
+                        " product_purchase = '" + ProductPurchase + "', product_wholesale = '" + ProductWholesale + "', product_profit = '" + ProductProfit + "', other_purchase = '" + OtherPurchase + "'," +
+                        " other_wholesale = '" + OtherWholesale + "', other_profit = '" + OtherProfit + "' where document_number = '" + DNumber + "';";
                     cmd = new NpgsqlCommand(sql_str, conn);
                     cmd.ExecuteNonQuery();
                     transaction.Commit();
@@ -9661,7 +8993,8 @@ namespace Flawless_ex
                             #endregion
                             using (transaction = conn.BeginTransaction())
                             {
-                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "', buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
+                                sql_str = "update list_result2 set sale_date = '" + SaleDate + "', main_category_code = '" + MainCategoryCode + "', item_code = '" + ItemCategoryCode + "', wholesale_price = '" + Wholesale + "'," +
+                                    " buyer = '" + Buyer + "', remarks = '" + Remark + "', carry_over_month = '" + NextMonth + "', profit = '" + Profit + "', item_name_change = '" + ChangeCheck + "' where document_number = '" + SlipNumber + "' and record_number = '" + Record + "';";
                                 cmd = new NpgsqlCommand(sql_str, conn);
                                 cmd.ExecuteNonQuery();
                                 transaction.Commit();
@@ -10259,7 +9592,8 @@ namespace Flawless_ex
                 Document = SlipNumber;                                  //list_result2 への登録時
                 GRADE = int.Parse(GradeNumberTextBox.Text);             //list_result2 への登録時
                 AssessmentDate = AssessmentDateTextBox.Text;
-                string SQL = "insert into list_result (type, staff_code, result, sum_money, sum_wholesale_price, profit, document_number, registration_date) values('" + type + "','" + staff_id + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "', '"+Registration+"');";
+                string SQL = "insert into list_result (code, type, staff_code, result, sum_money, sum_wholesale_price, profit, document_number, registration_date)" +
+                    " values('" + ClientCode + "','" + type + "','" + staff_id + "','" + GradeNumber + "','" + TotalPurchase + "','" + TotalWholesale + "','" + TotalProfit + "','" + DNumber + "', '" + Registration + "');";
                 adapter = new NpgsqlDataAdapter(SQL, conn);
                 adapter.Fill(DataTable);
 
@@ -10309,7 +9643,10 @@ namespace Flawless_ex
                                 BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number," +
+                                " wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "'," +
+                                "'" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
+
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data1);
                             break;
@@ -10403,7 +9740,8 @@ namespace Flawless_ex
                                 BUYER = "";
                             }
 
-                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number, wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
+                            sql_str = "insert into list_result2 (assessment_date, main_category_code, item_code, carry_over_month, record_number, unit_price, money, item_name_change, document_number, grade_number," +
+                                " wholesale_price, profit, remarks, sale_date, buyer) values ('" + AssessmentDate + "','" + MainCategoryCode + "','" + ItemCategoryCode + "','" + NextMonth + "','" + Record + "','" + UnitPrice + "','" + Purchase + "','" + ChangeCheck + "','" + Document + "','" + GRADE + "','" + WHOLESALE + "','" + PROFIT + "','" + REMARK + "','" + BUYDATE + "','" + BUYER + "');";
                             adapter = new NpgsqlDataAdapter(sql_str, conn);
                             adapter.Fill(Data3);
                             break;
@@ -11045,9 +10383,47 @@ namespace Flawless_ex
         #region"納品書検索"
         private void DeliverySearchButton_Click(object sender, EventArgs e)
         {
-            Control = int.Parse(ManagementNumberTextBox.Text);
-            DeliveryButton = true;
-            this.Close();
+            if (!string.IsNullOrEmpty(ManagementNumberTextBox.Text))
+            {
+                Control = int.Parse(ManagementNumberTextBox.Text);
+
+                PostgreSQL postgre = new PostgreSQL();
+                conn = postgre.connection();
+
+                conn.Open();
+
+                string sql = "select count(*) from delivery_m where control_number = '" + Control + "';";
+                cmd = new NpgsqlCommand(sql, conn);
+
+                int DeliveryDataRow = int.Parse(cmd.ExecuteScalar().ToString());
+
+                sql = "select * from delivery_m where control_number = '" + Control + "';";
+                cmd = new NpgsqlCommand(sql, conn);
+
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ClientCodeString = reader["code"].ToString();
+                    }
+                }
+
+                conn.Close();
+
+                if (DeliveryDataRow == 0|| string.IsNullOrEmpty(ClientCodeString))
+                {
+                    MessageBox.Show("該当する納品書がありません。" + "\r\n" + "入力した管理番号を見直してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    DeliveryButton = true;
+                    this.Close();
+                }
+            }
+            else
+            {
+                MessageBox.Show("検索する納品書の管理番号を入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
 
@@ -11059,9 +10435,388 @@ namespace Flawless_ex
                 result = MessageBox.Show("入力されている項目を登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
+                    #region"次月にチェックが入っていて卸値にも入力されているとき"
+                    for (int i = 1; i <= record; i++)
+                    {
+                        switch (i)
+                        {
+                            #region"１行目"
+                            case 1:
+                                if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && WholesalePriceTextBox1.Text != @"\0")
+                                {
+                                    MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"２行目"
+                            case 2:
+                                if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && WholesalePriceTextBox2.Text != @"\0")
+                                {
+                                    MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"３行目"
+                            case 3:
+                                if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && WholesalePriceTextBox3.Text != @"\0")
+                                {
+                                    MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"４行目"
+                            case 4:
+                                if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && WholesalePriceTextBox4.Text != @"\0")
+                                {
+                                    MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"５行目"
+                            case 5:
+                                if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && WholesalePriceTextBox5.Text != @"\0")
+                                {
+                                    MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"６行目"
+                            case 6:
+                                if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && WholesalePriceTextBox6.Text != @"\0")
+                                {
+                                    MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"７行目"
+                            case 7:
+                                if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && WholesalePriceTextBox7.Text != @"\0")
+                                {
+                                    MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"８行目"
+                            case 8:
+                                if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && WholesalePriceTextBox8.Text != @"\0")
+                                {
+                                    MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"９行目"
+                            case 9:
+                                if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && WholesalePriceTextBox9.Text != @"\0")
+                                {
+                                    MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１０行目"
+                            case 10:
+                                if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && WholesalePriceTextBox10.Text != @"\0")
+                                {
+                                    MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１１行目"
+                            case 11:
+                                if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && WholesalePriceTextBox11.Text != @"\0")
+                                {
+                                    MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１２行目"
+                            case 12:
+                                if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && WholesalePriceTextBox12.Text != @"\0")
+                                {
+                                    MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１３行目"
+                            case 13:
+                                if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && WholesalePriceTextBox13.Text != @"\0")
+                                {
+                                    MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                                #endregion
+                        }
+                    }
+                    #endregion
+
+                    #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
+                    for (int i = 1; i <= record; i++)
+                    {
+                        switch (i)
+                        {
+                            #region"１行目"
+                            case 1:
+                                if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                                {
+                                    MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"２行目"
+                            case 2:
+                                if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                                {
+                                    MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"３行目"
+                            case 3:
+                                if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                                {
+                                    MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"４行目"
+                            case 4:
+                                if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                                {
+                                    MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"５行目"
+                            case 5:
+                                if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                                {
+                                    MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"６行目"
+                            case 6:
+                                if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                                {
+                                    MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"７行目"
+                            case 7:
+                                if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                                {
+                                    MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"８行目"
+                            case 8:
+                                if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                                {
+                                    MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"９行目"
+                            case 9:
+                                if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                                {
+                                    MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１０行目"
+                            case 10:
+                                if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                                {
+                                    MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１１行目"
+                            case 11:
+                                if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                                {
+                                    MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１２行目"
+                            case 12:
+                                if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                                {
+                                    MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１３行目"
+                            case 13:
+                                if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                                {
+                                    MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    e.Cancel = true;
+                                }
+                                break;
+                                #endregion
+                        }
+                    }
+                    #endregion
+
+                    #region"卸値に値が入力されていて売却先が無記入のとき"
+                    for (int i = 1; i <= record; i++)
+                    {
+                        switch (i)
+                        {
+                            #region"１行目"
+                            case 1:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
+                                {
+                                    MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"２行目"
+                            case 2:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
+                                {
+                                    MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"３行目"
+                            case 3:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
+                                {
+                                    MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"４行目"
+                            case 4:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
+                                {
+                                    MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"５行目"
+                            case 5:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
+                                {
+                                    MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"６行目"
+                            case 6:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
+                                {
+                                    MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"７行目"
+                            case 7:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
+                                {
+                                    MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"８行目"
+                            case 8:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
+                                {
+                                    MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"９行目"
+                            case 9:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
+                                {
+                                    MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１０行目"
+                            case 10:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
+                                {
+                                    MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１１行目"
+                            case 11:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
+                                {
+                                    MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１２行目"
+                            case 12:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
+                                {
+                                    MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１３行目"
+                            case 13:
+                                if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
+                                {
+                                    MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    e.Cancel = true;
+                                }
+                                break;
+                                #endregion
+                        }
+                    }
+                    #endregion
+
                     NotFinish = false;
                     RegisterButton_Click(sender, e);
                 }
+
             }
 
             //品名を変更してまだ登録をしていないとき

@@ -58,11 +58,10 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select A.document_number, A.grade_number, A.assessment_date, B.delivery_method, B.payment_method, C.staff_name, A.buyer from list_result2 A " +
+            string sql_str = "select A.document_number, A.grade_number, B.assessment_date, B.delivery_method, B.payment_method, C.staff_name, A.buyer from list_result2 A " +
                              "inner join statement_data B ON (A.document_number = B.document_number ) " +
-                             "inner join staff_m C ON (B.staff_code = C.staff_code ) where carry_over_month = '" + 1 + "' order by grade_number;";
+                             "inner join staff_m C ON (B.staff_code = C.staff_code ) where carry_over_month = '" + 1 + "' order by A.grade_number;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);

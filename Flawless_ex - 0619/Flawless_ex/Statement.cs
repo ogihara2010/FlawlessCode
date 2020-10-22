@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Drawing.Printing;
+using System.Collections.Generic;
 
 namespace Flawless_ex
 {
@@ -105,6 +106,17 @@ namespace Flawless_ex
         bool cellfirst = false;
         bool Delivery = true;       //納品書を開いた一番最初のときだけ管理番号を登録
         #endregion
+
+        int PreviewRow;
+
+        DataTable table = new DataTable();                              //計算書の表用
+        DataTable statementTotalTable = new DataTable();                //計算書の合計・決算方法・受取方法など用
+        DataTable clientTable = new DataTable();                        //計算書の顧客情報用
+
+        string antiqueLicense;
+        string totalMoney;
+        string totalCount;
+        string totalWeight;
 
         #region "納品書"
         #region "数量"
@@ -245,13 +257,14 @@ namespace Flawless_ex
         DataTable dt = new DataTable();//大分類
 
         DataTable dt2 = new DataTable();//品名と大分類関連付け
-
-        DataTable dt4 = new DataTable();//2行目
-        DataTable dt5 = new DataTable();//3行目
-        DataTable dt6 = new DataTable();//4行目
-        DataTable dt7 = new DataTable();//5行目
         DataTable dt8 = new DataTable();//6行目
         DataTable dt9 = new DataTable();//7行目
+
+        #region"datagridview 大分類と各行の品名のコンボボックス"
+        DataTable dt4 = new DataTable();        //計算書の大分類
+        DataTable dt5 = new DataTable();        //計算書の一行目の品名
+        DataTable dt6 = new DataTable();        //納品書の大分類
+        DataTable dt7 = new DataTable();        //納品書の一行目の品名
 
         //計算書の datagridview の品名のコンボボックス
         DataTable dt12 = new DataTable();
@@ -277,8 +290,7 @@ namespace Flawless_ex
         DataTable dt38 = new DataTable();
         DataTable dt39 = new DataTable();
         DataTable dt40 = new DataTable();
-
-
+        #endregion
 
         DataTable dt3 = new DataTable();// 品名情報全て
         DataTable dt300 = new DataTable();//地金
@@ -286,6 +298,14 @@ namespace Flawless_ex
         DataTable dt500 = new DataTable();//ブランド
         DataTable dt600 = new DataTable();//製品・ジュエリー
         DataTable dt700 = new DataTable();//その他
+
+        #region"既存の計算書の各列"
+        DataTable dtStatement = new DataTable();
+        #endregion
+        #region"既存の納品書の各列"
+        DataTable dtDelivery = new DataTable();
+        #endregion
+
         #region "計算書履歴"
         DataTable redt4 = new DataTable();
         DataTable redt5 = new DataTable();
@@ -478,37 +498,42 @@ namespace Flawless_ex
             }
             #endregion
 
-            if (data != "S" || data != "D" || antiqueNumber != null || documentNumber != null || Grade != 0)
+            DateTime date = DateTime.Now;
+            DateTime AssessmentDate = date.Date;
+
+            if (data != "S" && data != "D" && antiqueNumber == null && documentNumber == null && Grade == 0)
             {
-                string Str = "insert into statement_data (document_number, NotFNumber, staff_code) values ('" + documentNumberTextBox.Text + "','" + number + "', '" + staff_id + "');";
+                string Str = "insert into statement_data (document_number, NotFNumber, staff_code, assessment_date) values ('" + documentNumberTextBox.Text + "','" + number + "', '" + staff_id + "','"+AssessmentDate+"');";
                 cmd = new NpgsqlCommand(Str, conn);
                 cmd.ExecuteNonQuery();
             }
 
-            if ((data != "S" || data != "D" || antiqueNumber != null || documentNumber != null || Grade != 0) && tabControl1.SelectedIndex != 0)
+            if ((data != "S" && data != "D" && antiqueNumber == null && documentNumber == null && Grade == 0 && control == 0) && tabControl1.SelectedIndex != 0) 
             {
                 string Str = "insert into delivery_m (control_number, staff_code) values ('" + Number + "', '" + staff_id + "');";
                 cmd = new NpgsqlCommand(Str, conn);
                 cmd.ExecuteNonQuery();
             }
 
-            //担当者ごとの大分類の初期値を先頭に
-            string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code asc;";
-            adapter = new NpgsqlDataAdapter(sql_str2, conn);
-            adapter.Fill(dt);
+            #region"コメントアウト"
+            ////担当者ごとの大分類の初期値を先頭に
+            //string sql_str2 = "select * from main_category_m where invalid = 0 order by main_category_code asc;";
+            //adapter = new NpgsqlDataAdapter(sql_str2, conn);
+            //adapter.Fill(dt);
 
-            //品名検索用
-            string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + itemMainCategoryCode + ";";
-            adapter = new NpgsqlDataAdapter(sql_str3, conn);
-            adapter.Fill(dt2);
+            ////品名検索用
+            //string sql_str3 = "select * from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.main_category_code = " + itemMainCategoryCode + ";";
+            //adapter = new NpgsqlDataAdapter(sql_str3, conn);
+            //adapter.Fill(dt2);
 
-            string sql_str4 = "select main_category_name from main_category_m where main_category_code = " + itemMainCategoryCode + ";";
-            adapter = new NpgsqlDataAdapter(sql_str4, conn);
-            adapter.Fill(dt3);
+            //string sql_str4 = "select main_category_name from main_category_m where main_category_code = " + itemMainCategoryCode + ";";
+            //adapter = new NpgsqlDataAdapter(sql_str4, conn);
+            //adapter.Fill(dt3);
 
-            DataRow row;
-            row = dt3.Rows[0];
-            string MainName = row["main_category_name"].ToString();
+            //DataRow row;
+            //row = dt3.Rows[0];
+            //string MainName = row["main_category_name"].ToString();
+            #endregion
 
             //税率取得
             string sql_str5 = "select vat_rate from vat_m;";
@@ -527,1685 +552,1692 @@ namespace Flawless_ex
             Tax = decimal.Parse(tax.Text.ToString());
             tax.Text = string.Format("{0:P}", Tax / 100);
 
-            conn.Close();
+            //デフォルトで税込み表示
+            comboBox11.SelectedIndex = 0;
 
-            if (data != "S")
-            {
-                #region"一時コメントアウト"
-                //#region "納品書"
-                //#region "納品書　大分類"
-                //#region "納品書1行目"
-                //DataTable deliverydt = new DataTable();
-                //deliverydt = dt.Copy();
-                //mainCategoryComboBox00.DataSource = deliverydt;
-                //mainCategoryComboBox00.DisplayMember = "main_category_name";
-                //mainCategoryComboBox00.ValueMember = "main_category_code";
-                //mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
-                //#endregion
-                //#region "納品書2行目"
-                //DataTable deliverydt100 = new DataTable();
-                //deliverydt100 = dt.Copy();
-                //mainCategoryComboBox01.DataSource = deliverydt100;
-                //mainCategoryComboBox01.DisplayMember = "main_category_name";
-                //mainCategoryComboBox01.ValueMember = "main_category_code";
-                //mainCategoryComboBox01.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書3行目"
-                //DataTable deliverydt101 = new DataTable();
-                //deliverydt101 = dt.Copy();
-                //mainCategoryComboBox02.DataSource = deliverydt101;
-                //mainCategoryComboBox02.DisplayMember = "main_category_name";
-                //mainCategoryComboBox02.ValueMember = "main_category_code";
-                //mainCategoryComboBox02.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書4行目"
-                //DataTable deliverydt102 = new DataTable();
-                //deliverydt102 = dt.Copy();
-                //mainCategoryComboBox03.DataSource = deliverydt102;
-                //mainCategoryComboBox03.DisplayMember = "main_category_name";
-                //mainCategoryComboBox03.ValueMember = "main_category_code";
-                //mainCategoryComboBox03.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書5行目"
-                //DataTable deliverydt103 = new DataTable();
-                //deliverydt103 = dt.Copy();
-                //mainCategoryComboBox04.DataSource = deliverydt103;
-                //mainCategoryComboBox04.DisplayMember = "main_category_name";
-                //mainCategoryComboBox04.ValueMember = "main_category_code";
-                //mainCategoryComboBox04.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書6行目"
-                //DataTable deliverydt104 = new DataTable();
-                //deliverydt104 = dt.Copy();
-                //mainCategoryComboBox05.DataSource = deliverydt104;
-                //mainCategoryComboBox05.DisplayMember = "main_category_name";
-                //mainCategoryComboBox05.ValueMember = "main_category_code";
-                //mainCategoryComboBox05.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書7行目"
-                //DataTable deliverydt105 = new DataTable();
-                //deliverydt105 = dt.Copy();
-                //mainCategoryComboBox06.DataSource = deliverydt105;
-                //mainCategoryComboBox06.DisplayMember = "main_category_name";
-                //mainCategoryComboBox06.ValueMember = "main_category_code";
-                //mainCategoryComboBox06.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書8行目"
-                //DataTable deliverydt106 = new DataTable();
-                //deliverydt106 = dt.Copy();
-                //mainCategoryComboBox07.DataSource = deliverydt106;
-                //mainCategoryComboBox07.DisplayMember = "main_category_name";
-                //mainCategoryComboBox07.ValueMember = "main_category_code";
-                //mainCategoryComboBox07.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書9行目"
-                //DataTable deliverydt107 = new DataTable();
-                //deliverydt107 = dt.Copy();
-                //mainCategoryComboBox08.DataSource = deliverydt107;
-                //mainCategoryComboBox08.DisplayMember = "main_category_name";
-                //mainCategoryComboBox08.ValueMember = "main_category_code";
-                //mainCategoryComboBox08.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書10行目"
-                //DataTable deliverydt108 = new DataTable();
-                //deliverydt108 = dt.Copy();
-                //mainCategoryComboBox09.DataSource = deliverydt108;
-                //mainCategoryComboBox09.DisplayMember = "main_category_name";
-                //mainCategoryComboBox09.ValueMember = "main_category_code";
-                //mainCategoryComboBox09.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書11行目"
-                //DataTable deliverydt109 = new DataTable();
-                //deliverydt109 = dt.Copy();
-                //mainCategoryComboBox010.DataSource = deliverydt109;
-                //mainCategoryComboBox010.DisplayMember = "main_category_name";
-                //mainCategoryComboBox010.ValueMember = "main_category_code";
-                //mainCategoryComboBox010.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書12行目"
-                //DataTable deliverydt110 = new DataTable();
-                //deliverydt110 = dt.Copy();
-                //mainCategoryComboBox011.DataSource = deliverydt110;
-                //mainCategoryComboBox011.DisplayMember = "main_category_name";
-                //mainCategoryComboBox011.ValueMember = "main_category_code";
-                //mainCategoryComboBox011.SelectedIndex = 0;
-                //#endregion
-                //#region "納品書13行目"
-                //DataTable deliverydt112 = new DataTable();
-                //deliverydt112 = dt.Copy();
-                //mainCategoryComboBox012.DataSource = deliverydt112;
-                //mainCategoryComboBox012.DisplayMember = "main_category_name";
-                //mainCategoryComboBox012.ValueMember = "main_category_code";
-                //mainCategoryComboBox012.SelectedIndex = 0;
-                //#endregion
-                //#endregion
-                //#region "納品書　品名"
-                //#region "納品書1行目"
-                //deliverydt200 = dt2.Copy();
-                //itemComboBox00.DataSource = deliverydt200;
-                //itemComboBox00.DisplayMember = "item_name";
-                //itemComboBox00.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書2行目"
-                //deliverydt201 = dt2.Copy();
-                //itemComboBox01.DataSource = deliverydt201;
-                //itemComboBox01.DisplayMember = "item_name";
-                //itemComboBox01.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書3行目"
-                //deliverydt202 = dt2.Copy();
-                //itemComboBox02.DataSource = deliverydt202;
-                //itemComboBox02.DisplayMember = "item_name";
-                //itemComboBox02.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書4行目"
-                //deliverydt203 = dt2.Copy();
-                //itemComboBox03.DataSource = deliverydt203;
-                //itemComboBox03.DisplayMember = "item_name";
-                //itemComboBox03.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書5行目"
-                //deliverydt204 = dt2.Copy();
-                //itemComboBox04.DataSource = deliverydt204;
-                //itemComboBox04.DisplayMember = "item_name";
-                //itemComboBox04.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書6行目"
-                //deliverydt205 = dt2.Copy();
-                //itemComboBox05.DataSource = deliverydt205;
-                //itemComboBox05.DisplayMember = "item_name";
-                //itemComboBox05.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書7行目"
-                //deliverydt206 = dt2.Copy();
-                //itemComboBox06.DataSource = deliverydt206;
-                //itemComboBox06.DisplayMember = "item_name";
-                //itemComboBox06.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書8行目"
-                //deliverydt207 = dt2.Copy();
-                //itemComboBox07.DataSource = deliverydt207;
-                //itemComboBox07.DisplayMember = "item_name";
-                //itemComboBox07.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書9行目"
-                //deliverydt208 = dt2.Copy();
-                //itemComboBox08.DataSource = deliverydt208;
-                //itemComboBox08.DisplayMember = "item_name";
-                //itemComboBox08.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書10行目"
-                //deliverydt209 = dt2.Copy();
-                //itemComboBox09.DataSource = deliverydt209;
-                //itemComboBox09.DisplayMember = "item_name";
-                //itemComboBox09.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書11行目"
-                //deliverydt210 = dt2.Copy();
-                //itemComboBox010.DataSource = deliverydt210;
-                //itemComboBox010.DisplayMember = "item_name";
-                //itemComboBox010.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書12行目"
-                //deliverydt211 = dt2.Copy();
-                //itemComboBox011.DataSource = deliverydt211;
-                //itemComboBox011.DisplayMember = "item_name";
-                //itemComboBox011.ValueMember = "item_code";
-                //#endregion
-                //#region "納品書13行目"
-                ////納品書
-                //deliverydt212 = dt2.Copy();
-                //itemComboBox012.DataSource = deliverydt212;
-                //itemComboBox012.DisplayMember = "item_name";
-                //itemComboBox012.ValueMember = "item_code";
-                //#endregion
-                //#endregion
-                //#endregion
-                #endregion
-            }
-            if (data != "D")
-            {
-                #region "計算書"
-                #region "計算書　大分類コンボボックス"
+            //デフォルトで円表示
+            CoinComboBox.SelectedIndex = 0;
 
-                #region"一時コメントアウト"
-                //mainCategoryComboBox0.DataSource = dt;
-                //mainCategoryComboBox0.DisplayMember = "main_category_name";
-                //mainCategoryComboBox0.ValueMember = "main_category_code";
-                //mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定                
-                #endregion
+            #region"コメントアウト"
+            //if (data != "S")
+            //{
+            //    #region"一時コメントアウト"
+            //    //#region "納品書"
+            //    //#region "納品書　大分類"
+            //    //#region "納品書1行目"
+            //    //DataTable deliverydt = new DataTable();
+            //    //deliverydt = dt.Copy();
+            //    //mainCategoryComboBox00.DataSource = deliverydt;
+            //    //mainCategoryComboBox00.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox00.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //#endregion
+            //    //#region "納品書2行目"
+            //    //DataTable deliverydt100 = new DataTable();
+            //    //deliverydt100 = dt.Copy();
+            //    //mainCategoryComboBox01.DataSource = deliverydt100;
+            //    //mainCategoryComboBox01.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox01.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox01.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書3行目"
+            //    //DataTable deliverydt101 = new DataTable();
+            //    //deliverydt101 = dt.Copy();
+            //    //mainCategoryComboBox02.DataSource = deliverydt101;
+            //    //mainCategoryComboBox02.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox02.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox02.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書4行目"
+            //    //DataTable deliverydt102 = new DataTable();
+            //    //deliverydt102 = dt.Copy();
+            //    //mainCategoryComboBox03.DataSource = deliverydt102;
+            //    //mainCategoryComboBox03.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox03.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox03.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書5行目"
+            //    //DataTable deliverydt103 = new DataTable();
+            //    //deliverydt103 = dt.Copy();
+            //    //mainCategoryComboBox04.DataSource = deliverydt103;
+            //    //mainCategoryComboBox04.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox04.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox04.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書6行目"
+            //    //DataTable deliverydt104 = new DataTable();
+            //    //deliverydt104 = dt.Copy();
+            //    //mainCategoryComboBox05.DataSource = deliverydt104;
+            //    //mainCategoryComboBox05.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox05.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox05.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書7行目"
+            //    //DataTable deliverydt105 = new DataTable();
+            //    //deliverydt105 = dt.Copy();
+            //    //mainCategoryComboBox06.DataSource = deliverydt105;
+            //    //mainCategoryComboBox06.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox06.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox06.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書8行目"
+            //    //DataTable deliverydt106 = new DataTable();
+            //    //deliverydt106 = dt.Copy();
+            //    //mainCategoryComboBox07.DataSource = deliverydt106;
+            //    //mainCategoryComboBox07.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox07.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox07.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書9行目"
+            //    //DataTable deliverydt107 = new DataTable();
+            //    //deliverydt107 = dt.Copy();
+            //    //mainCategoryComboBox08.DataSource = deliverydt107;
+            //    //mainCategoryComboBox08.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox08.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox08.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書10行目"
+            //    //DataTable deliverydt108 = new DataTable();
+            //    //deliverydt108 = dt.Copy();
+            //    //mainCategoryComboBox09.DataSource = deliverydt108;
+            //    //mainCategoryComboBox09.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox09.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox09.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書11行目"
+            //    //DataTable deliverydt109 = new DataTable();
+            //    //deliverydt109 = dt.Copy();
+            //    //mainCategoryComboBox010.DataSource = deliverydt109;
+            //    //mainCategoryComboBox010.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox010.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox010.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書12行目"
+            //    //DataTable deliverydt110 = new DataTable();
+            //    //deliverydt110 = dt.Copy();
+            //    //mainCategoryComboBox011.DataSource = deliverydt110;
+            //    //mainCategoryComboBox011.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox011.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox011.SelectedIndex = 0;
+            //    //#endregion
+            //    //#region "納品書13行目"
+            //    //DataTable deliverydt112 = new DataTable();
+            //    //deliverydt112 = dt.Copy();
+            //    //mainCategoryComboBox012.DataSource = deliverydt112;
+            //    //mainCategoryComboBox012.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox012.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox012.SelectedIndex = 0;
+            //    //#endregion
+            //    //#endregion
+            //    //#region "納品書　品名"
+            //    //#region "納品書1行目"
+            //    //deliverydt200 = dt2.Copy();
+            //    //itemComboBox00.DataSource = deliverydt200;
+            //    //itemComboBox00.DisplayMember = "item_name";
+            //    //itemComboBox00.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書2行目"
+            //    //deliverydt201 = dt2.Copy();
+            //    //itemComboBox01.DataSource = deliverydt201;
+            //    //itemComboBox01.DisplayMember = "item_name";
+            //    //itemComboBox01.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書3行目"
+            //    //deliverydt202 = dt2.Copy();
+            //    //itemComboBox02.DataSource = deliverydt202;
+            //    //itemComboBox02.DisplayMember = "item_name";
+            //    //itemComboBox02.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書4行目"
+            //    //deliverydt203 = dt2.Copy();
+            //    //itemComboBox03.DataSource = deliverydt203;
+            //    //itemComboBox03.DisplayMember = "item_name";
+            //    //itemComboBox03.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書5行目"
+            //    //deliverydt204 = dt2.Copy();
+            //    //itemComboBox04.DataSource = deliverydt204;
+            //    //itemComboBox04.DisplayMember = "item_name";
+            //    //itemComboBox04.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書6行目"
+            //    //deliverydt205 = dt2.Copy();
+            //    //itemComboBox05.DataSource = deliverydt205;
+            //    //itemComboBox05.DisplayMember = "item_name";
+            //    //itemComboBox05.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書7行目"
+            //    //deliverydt206 = dt2.Copy();
+            //    //itemComboBox06.DataSource = deliverydt206;
+            //    //itemComboBox06.DisplayMember = "item_name";
+            //    //itemComboBox06.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書8行目"
+            //    //deliverydt207 = dt2.Copy();
+            //    //itemComboBox07.DataSource = deliverydt207;
+            //    //itemComboBox07.DisplayMember = "item_name";
+            //    //itemComboBox07.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書9行目"
+            //    //deliverydt208 = dt2.Copy();
+            //    //itemComboBox08.DataSource = deliverydt208;
+            //    //itemComboBox08.DisplayMember = "item_name";
+            //    //itemComboBox08.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書10行目"
+            //    //deliverydt209 = dt2.Copy();
+            //    //itemComboBox09.DataSource = deliverydt209;
+            //    //itemComboBox09.DisplayMember = "item_name";
+            //    //itemComboBox09.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書11行目"
+            //    //deliverydt210 = dt2.Copy();
+            //    //itemComboBox010.DataSource = deliverydt210;
+            //    //itemComboBox010.DisplayMember = "item_name";
+            //    //itemComboBox010.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書12行目"
+            //    //deliverydt211 = dt2.Copy();
+            //    //itemComboBox011.DataSource = deliverydt211;
+            //    //itemComboBox011.DisplayMember = "item_name";
+            //    //itemComboBox011.ValueMember = "item_code";
+            //    //#endregion
+            //    //#region "納品書13行目"
+            //    ////納品書
+            //    //deliverydt212 = dt2.Copy();
+            //    //itemComboBox012.DataSource = deliverydt212;
+            //    //itemComboBox012.DisplayMember = "item_name";
+            //    //itemComboBox012.ValueMember = "item_code";
+            //    //#endregion
+            //    //#endregion
+            //    //#endregion
+            //    #endregion
+            //}
+            //if (data != "D")
+            //{
+            //    #region "計算書"
+            //    #region "計算書　大分類コンボボックス"
 
-                #endregion
-                #region "計算書　品名コンボボックス"
+            //    #region"一時コメントアウト"
+            //    //mainCategoryComboBox0.DataSource = dt;
+            //    //mainCategoryComboBox0.DisplayMember = "main_category_name";
+            //    //mainCategoryComboBox0.ValueMember = "main_category_code";
+            //    //mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定                
+            //    #endregion
 
-                #region"一時コメントアウト"
-                //itemComboBox0.DataSource = dt2;
-                //itemComboBox0.DisplayMember = "item_name";
-                //itemComboBox0.ValueMember = "item_code";
-                #endregion
+            //    #endregion
+            //    #region "計算書　品名コンボボックス"
 
-                #endregion
-                #endregion
-            }
+            //    #region"一時コメントアウト"
+            //    //itemComboBox0.DataSource = dt2;
+            //    //itemComboBox0.DisplayMember = "item_name";
+            //    //itemComboBox0.ValueMember = "item_code";
+            //    #endregion
 
-            if (data == "S")
-            {
-                #region "計算書の表の入力を呼び出し"
-                DataTable dt19 = new DataTable();
-                string str_document = "select * from statement_calc_data where document_number = '" + document + "';";
-                adapter = new NpgsqlDataAdapter(str_document, conn);
-                adapter.Fill(dt19);
-                int st = dt19.Rows.Count;
-                #endregion
-                #region "計算書の表の外部の入力データを呼び出し"
-                DataTable dt21 = new DataTable();
-                string str_document1 = "select * from statement_data where document_number = '" + document + "';";
-                adapter = new NpgsqlDataAdapter(str_document1, conn);
-                adapter.Fill(dt21);
-                DataRow row1;
-                row1 = dt21.Rows[0];
-                int types = (int)row1["type"];  //法人か個人か
-                #region "法人"
-                if (types == 0)
-                {
-                    typeTextBox.Text = "法人";
-                    #region "入力する値"
-                    #region "顧客"
-                    this.companyTextBox.Text = row1["company_name"].ToString();
-                    this.shopNameTextBox.Text = row1["shop_name"].ToString();
-                    this.clientNameTextBox.Text = row1["staff_name"].ToString();
-                    DataTable dt25 = new DataTable();
-                    string str_client = "select * from client_m where type = 0 and company_name = '" + this.companyTextBox.Text + "' and shop_name = '" + this.shopNameTextBox.Text + "' and staff_name = '" + this.clientNameTextBox.Text + "';";
-                    adapter = new NpgsqlDataAdapter(str_client, conn);
-                    adapter.Fill(dt25);
-                    DataRow row2;
-                    row2 = dt25.Rows[0];
-                    this.antiqueLicenceTextBox.Text = row2["antique_license"].ToString();
-                    this.registerDateTextBox.Text = row2["registration_date"].ToString();
-                    this.clientRemarksTextBox.Text = row2["remarks"].ToString();
-                    #endregion
-                    #region "枠外"
-                    this.subTotal.Text = row1["sub_total"].ToString();
-                    subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
-                    int sum = int.Parse(row1["total"].ToString());
-                    this.sumTextBox.Text = row1["total"].ToString();
-                    sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
-                    this.taxAmount0.Text = row1["tax_amount"].ToString();
-                    taxAmount0.Text = string.Format("{0:C}", decimal.Parse(taxAmount0.Text, System.Globalization.NumberStyles.Number));
-                    this.paymentMethodsComboBox.SelectedItem = row1["payment_method"].ToString();
-                    this.deliveryComboBox.SelectedItem = row1["delivery_method"].ToString();
-                    /*this.totalCount.Text = row1["total_amount"].ToString();
-                    int cou = int.Parse(row1["total_amount"].ToString());
-                    totalCount.Text = string.Format("{0:#,0}", cou);
-                    decimal wei = decimal.Parse(row1["total_weight"].ToString());
-                    this.totalWeight.Text = row1["total_weight"].ToString();
-                    totalWeight.Text = string.Format("{0:#,0}", Math.Round(wei, 1, MidpointRounding.AwayFromZero));*/
-                    if (sum >= 2000000)
-                    {
-                        groupBox1.Show();
-                        groupBox1.BackColor = Color.OrangeRed;
-                    }
-                    #endregion
-                    #endregion
-                }
-                #endregion
-                #region "個人"
-                if (types == 1)
-                {
-                    #region "入力する値"
-                    #region "顧客"
-                    label16.Text = "氏名";
-                    label17.Text = "生年月日";
-                    label18.Text = "職業";
-                    label38.Visible = false;
-                    registerDateTextBox.Visible = false;
-                    typeTextBox.Text = "個人";
-                    this.companyTextBox.Text = row1["name"].ToString();
-                    this.shopNameTextBox.Text = row1["birthday"].ToString();
-                    this.clientNameTextBox.Text = row1["occupation"].ToString();
-                    DataTable dt25 = new DataTable();
-                    string str_client = "select * from client_m where type = 1 and name = '" + this.companyTextBox.Text + "' and birthday = '" + this.shopNameTextBox.Text + "' and occupation = '" + this.clientNameTextBox.Text + "';";
-                    adapter = new NpgsqlDataAdapter(str_client, conn);
-                    adapter.Fill(dt25);
-                    DataRow row2;
-                    row2 = dt25.Rows[0];
-                    this.antiqueLicenceTextBox.Text = row2["antique_license"].ToString();
-                    this.clientRemarksTextBox.Text = row2["remarks"].ToString();
-                    #endregion
-                    #region "枠外"
-                    this.subTotal.Text = row1["sub_total"].ToString();
-                    subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
-                    this.sumTextBox.Text = row1["total"].ToString();
-                    int sum = int.Parse(row1["total"].ToString());
-                    sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
-                    this.taxAmount0.Text = row1["tax_amount"].ToString();
-                    taxAmount0.Text = string.Format("{0:C}", decimal.Parse(taxAmount0.Text, System.Globalization.NumberStyles.Number));
-                    this.paymentMethodsComboBox.SelectedItem = row1["payment_method"].ToString();
-                    this.deliveryComboBox.SelectedItem = row1["delivery_method"].ToString();
-                    /*this.totalCount.Text = row1["total_amount"].ToString();
-                    int cou = int.Parse(row1["total_amount"].ToString());
-                    totalCount.Text = string.Format("{0:#,0}", cou);
-                    decimal wei = decimal.Parse(row1["total_weight"].ToString());
-                    this.totalWeight.Text = row1["total_weight"].ToString();
-                    totalWeight.Text = string.Format("{0:#,0}", Math.Round(wei, 1, MidpointRounding.AwayFromZero));*/
-                    if (sum >= 2000000)
-                    {
-                        groupBox1.Show();
-                        groupBox1.BackColor = Color.OrangeRed;
-                    }
-                    #endregion
-                    #endregion
-                }
-                #endregion
-                #endregion
-                for (int St = 0; St <= (st - 1); St++)
-                {
-                    #region"一時コメントアウト"
-                    //#region "1行目"
-                    //if (St == 0)
-                    //{
-                    //    DataTable dt22 = new DataTable();
-                    //    string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                    //    adapter = new NpgsqlDataAdapter(str_document2, conn);
-                    //    adapter.Fill(dt22);
-                    //    DataRow dataRow1;
-                    //    dataRow1 = dt22.Rows[0];
-                    //    int itemMainCategoryCode0 = (int)dataRow1["main_category_code"]; //大分類
-                    //    int itemCode0 = (int)dataRow1["item_code"];　　//品名
-                    //    #region "コンボボックス"
-                    //    #region "大分類"
-                    //    DataTable dt23 = new DataTable();
-                    //    string sql_document = "select * from main_category_m where invalid = 0;";
-                    //    adapter = new NpgsqlDataAdapter(sql_document, conn);
-                    //    adapter.Fill(dt23);
-                    //    mainCategoryComboBox0.DataSource = dt23;
-                    //    mainCategoryComboBox0.DisplayMember = "main_category_name";
-                    //    mainCategoryComboBox0.ValueMember = "main_category_code";
-                    //    mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
-                    //    mainCategoryComboBox0.SelectedValue = itemMainCategoryCode0;
-                    //    #endregion
-                    //    #region "品名"
-                    //    //品名検索用
-                    //    DataTable dt24 = new DataTable();
-                    //    string sql_item1 = "select * from item_m  where invalid = 0;";
-                    //    adapter = new NpgsqlDataAdapter(sql_item1, conn);
-                    //    adapter.Fill(dt24);
-                    //    itemComboBox0.DataSource = dt24;
-                    //    itemComboBox0.DisplayMember = "item_name";
-                    //    itemComboBox0.ValueMember = "item_code";
-                    //    itemComboBox0.SelectedValue = itemCode0;
-                    //    #endregion
-                    //    #endregion
-                    //    #region "入力された項目 1行目"
-                    //    this.weightTextBox0.Text = dataRow1["weight"].ToString();
-                    //    this.countTextBox0.Text = dataRow1["count"].ToString();
-                    //    this.unitPriceTextBox0.Text = dataRow1["unit_price"].ToString();
-                    //    unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
-                    //    this.moneyTextBox0.Text = dataRow1["amount"].ToString();
-                    //    moneyTextBox0.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox0.Text, System.Globalization.NumberStyles.Number));
-                    //    this.remarks0.Text = dataRow1["remarks"].ToString();
-                    //    #endregion
-                    //}
-                    //#endregion
-                    #endregion
-                    #region "一時コメントアウト"
-                    /*
-                    #region "2行目"
-                    if (St == 1)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode1 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode1 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt231 = new DataTable();
-                        string sql_document1 = "select * from main_category_m where invalid = 0;";
-                        adapter = new NpgsqlDataAdapter(sql_document1, conn);
-                        adapter.Fill(dt231);
-                        Column1.DataSource = dt231;
-                        Column1.DisplayMember = "main_category_name";
-                        Column1.ValueMember = "main_category_code";
-                        dataGridView1[0, 1].Value = itemMainCategoryCode1;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt241 = new DataTable();
-                        string sql_item2 = "select * from item_m  where invalid = 0;";
-                        adapter = new NpgsqlDataAdapter(sql_item2, conn);
-                        adapter.Fill(dt241);
-                        Column2.DataSource = dt241;
-                        Column2.DisplayMember = "item_name";
-                        Column2.ValueMember = "item_code";
-                        dataGridView1[1, 1].Value = itemCode1;
-                        #endregion
-                        #endregion
-                        
-                        #region "入力された項目 2行目"
-                        this.weightTextBox1.Text = dataRow1["weight"].ToString();
-                        this.countTextBox1.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox1.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox1.Text = dataRow1["amount"].ToString();
-                        moneyTextBox1.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox1.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks1.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                        
-                    }
-                    #endregion
-                    */
-                    #endregion
-                    #region "一時コメントアウト"
-                    /*                    
-                    #region "3行目"
-                    if (St == 2)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode2 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode2 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt232 = new DataTable();
-                        string sql_document2 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document2, conn);
-                        adapter.Fill(dt232);
-                        mainCategoryComboBox2.DataSource = dt232;
-                        mainCategoryComboBox2.DisplayMember = "main_category_name";
-                        mainCategoryComboBox2.ValueMember = "main_category_code";
-                        mainCategoryComboBox2.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox2.SelectedValue = itemMainCategoryCode2;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt242 = new DataTable();
-                        string sql_item3 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item3, conn);
-                        adapter.Fill(dt242);
-                        itemComboBox2.DataSource = dt242;
-                        itemComboBox2.DisplayMember = "item_name";
-                        itemComboBox2.ValueMember = "item_code";
-                        itemComboBox2.SelectedValue = itemCode2;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 3行目"
-                        this.weightTextBox2.Text = dataRow1["weight"].ToString();
-                        this.countTextBox2.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox2.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox2.Text = dataRow1["amount"].ToString();
-                        moneyTextBox2.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox2.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks2.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "4行目"
-                    if (St == 3)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode3 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode3 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt233 = new DataTable();
-                        string sql_document3 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document3, conn);
-                        adapter.Fill(dt233);
-                        mainCategoryComboBox3.DataSource = dt233;
-                        mainCategoryComboBox3.DisplayMember = "main_category_name";
-                        mainCategoryComboBox3.ValueMember = "main_category_code";
-                        mainCategoryComboBox3.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox3.SelectedValue = itemMainCategoryCode3;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt243 = new DataTable();
-                        string sql_item4 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item4, conn);
-                        adapter.Fill(dt243);
-                        itemComboBox3.DataSource = dt243;
-                        itemComboBox3.DisplayMember = "item_name";
-                        itemComboBox3.ValueMember = "item_code";
-                        itemComboBox3.SelectedValue = itemCode3;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 4行目"
-                        this.weightTextBox3.Text = dataRow1["weight"].ToString();
-                        this.countTextBox3.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox3.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox3.Text = dataRow1["amount"].ToString();
-                        moneyTextBox3.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox3.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks3.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "5行目"
-                    if (St == 4)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document4 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document4, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode4 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode4 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt234 = new DataTable();
-                        string sql_document4 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document4, conn);
-                        adapter.Fill(dt234);
-                        mainCategoryComboBox4.DataSource = dt234;
-                        mainCategoryComboBox4.DisplayMember = "main_category_name";
-                        mainCategoryComboBox4.ValueMember = "main_category_code";
-                        mainCategoryComboBox4.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox4.SelectedValue = itemMainCategoryCode4;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt244 = new DataTable();
-                        string sql_item5 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item5, conn);
-                        adapter.Fill(dt244);
-                        itemComboBox4.DataSource = dt244;
-                        itemComboBox4.DisplayMember = "item_name";
-                        itemComboBox4.ValueMember = "item_code";
-                        itemComboBox4.SelectedValue = itemCode4;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 5行目"
-                        this.weightTextBox4.Text = dataRow1["weight"].ToString();
-                        this.countTextBox4.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox4.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox4.Text = dataRow1["amount"].ToString();
-                        moneyTextBox4.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox4.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks4.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "6行目"
-                    if (St == 5)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode5 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode5 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt235 = new DataTable();
-                        string sql_document5 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document5, conn);
-                        adapter.Fill(dt235);
-                        mainCategoryComboBox5.DataSource = dt235;
-                        mainCategoryComboBox5.DisplayMember = "main_category_name";
-                        mainCategoryComboBox5.ValueMember = "main_category_code";
-                        mainCategoryComboBox5.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox5.SelectedValue = itemMainCategoryCode5;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt245 = new DataTable();
-                        string sql_item6 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item6, conn);
-                        adapter.Fill(dt245);
-                        itemComboBox5.DataSource = dt245;
-                        itemComboBox5.DisplayMember = "item_name";
-                        itemComboBox5.ValueMember = "item_code";
-                        itemComboBox5.SelectedValue = itemCode5;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 6行目"
-                        this.weightTextBox5.Text = dataRow1["weight"].ToString();
-                        this.countTextBox5.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox5.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox5.Text = dataRow1["amount"].ToString();
-                        moneyTextBox5.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox5.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks5.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "7行目"
-                    if (St == 6)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode6 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode6 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt236 = new DataTable();
-                        string sql_document6 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document6, conn);
-                        adapter.Fill(dt236);
-                        mainCategoryComboBox6.DataSource = dt236;
-                        mainCategoryComboBox6.DisplayMember = "main_category_name";
-                        mainCategoryComboBox6.ValueMember = "main_category_code";
-                        mainCategoryComboBox6.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox6.SelectedValue = itemMainCategoryCode6;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt246 = new DataTable();
-                        string sql_item7 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item7, conn);
-                        adapter.Fill(dt246);
-                        itemComboBox6.DataSource = dt246;
-                        itemComboBox6.DisplayMember = "item_name";
-                        itemComboBox6.ValueMember = "item_code";
-                        itemComboBox6.SelectedValue = itemCode6;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 7行目"
-                        this.weightTextBox6.Text = dataRow1["weight"].ToString();
-                        this.countTextBox6.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox6.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox6.Text = dataRow1["amount"].ToString();
-                        moneyTextBox6.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox6.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks6.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "8行目"
-                    if (St == 7)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode7 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode7 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt237 = new DataTable();
-                        string sql_document7 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document7, conn);
-                        adapter.Fill(dt237);
-                        mainCategoryComboBox7.DataSource = dt237;
-                        mainCategoryComboBox7.DisplayMember = "main_category_name";
-                        mainCategoryComboBox7.ValueMember = "main_category_code";
-                        mainCategoryComboBox7.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox7.SelectedValue = itemMainCategoryCode7;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt247 = new DataTable();
-                        string sql_item8 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item8, conn);
-                        adapter.Fill(dt247);
-                        itemComboBox7.DataSource = dt247;
-                        itemComboBox7.DisplayMember = "item_name";
-                        itemComboBox7.ValueMember = "item_code";
-                        itemComboBox7.SelectedValue = itemCode7;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 8行目"
-                        this.weightTextBox7.Text = dataRow1["weight"].ToString();
-                        this.countTextBox7.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox7.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox7.Text = dataRow1["amount"].ToString();
-                        moneyTextBox7.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox7.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks7.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "9行目"
-                    if (St == 8)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode8 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode8 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt238 = new DataTable();
-                        string sql_document8 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document8, conn);
-                        adapter.Fill(dt238);
-                        mainCategoryComboBox8.DataSource = dt238;
-                        mainCategoryComboBox8.DisplayMember = "main_category_name";
-                        mainCategoryComboBox8.ValueMember = "main_category_code";
-                        mainCategoryComboBox8.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox8.SelectedValue = itemMainCategoryCode8;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt248 = new DataTable();
-                        string sql_item9 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item9, conn);
-                        adapter.Fill(dt248);
-                        itemComboBox8.DataSource = dt248;
-                        itemComboBox8.DisplayMember = "item_name";
-                        itemComboBox8.ValueMember = "item_code";
-                        itemComboBox8.SelectedValue = itemCode8;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 9行目"
-                        this.weightTextBox8.Text = dataRow1["weight"].ToString();
-                        this.countTextBox8.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox8.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox8.Text = dataRow1["amount"].ToString();
-                        moneyTextBox8.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox8.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks8.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "10行目"
-                    if (St == 9)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode9 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode9 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt239 = new DataTable();
-                        string sql_document9 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document9, conn);
-                        adapter.Fill(dt239);
-                        mainCategoryComboBox9.DataSource = dt239;
-                        mainCategoryComboBox9.DisplayMember = "main_category_name";
-                        mainCategoryComboBox9.ValueMember = "main_category_code";
-                        mainCategoryComboBox9.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox9.SelectedValue = itemMainCategoryCode9;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt249 = new DataTable();
-                        string sql_item10 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item10, conn);
-                        adapter.Fill(dt249);
-                        itemComboBox9.DataSource = dt249;
-                        itemComboBox9.DisplayMember = "item_name";
-                        itemComboBox9.ValueMember = "item_code";
-                        itemComboBox9.SelectedValue = itemCode9;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 10行目"
-                        this.weightTextBox9.Text = dataRow1["weight"].ToString();
-                        this.countTextBox9.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox9.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox9.Text = dataRow1["amount"].ToString();
-                        moneyTextBox9.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox9.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks9.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "11行目"
-                    if (St == 10)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode10 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode10 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt2310 = new DataTable();
-                        string sql_document10 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document10, conn);
-                        adapter.Fill(dt2310);
-                        mainCategoryComboBox10.DataSource = dt2310;
-                        mainCategoryComboBox10.DisplayMember = "main_category_name";
-                        mainCategoryComboBox10.ValueMember = "main_category_code";
-                        mainCategoryComboBox10.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox10.SelectedValue = itemMainCategoryCode10;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt2410 = new DataTable();
-                        string sql_item11 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item11, conn);
-                        adapter.Fill(dt2410);
-                        itemComboBox10.DataSource = dt2410;
-                        itemComboBox10.DisplayMember = "item_name";
-                        itemComboBox10.ValueMember = "item_code";
-                        itemComboBox10.SelectedValue = itemCode10;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 11行目"
-                        this.weightTextBox10.Text = dataRow1["weight"].ToString();
-                        this.countTextBox10.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox10.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox10.Text = dataRow1["amount"].ToString();
-                        moneyTextBox10.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox10.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks10.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "12行目"
-                    if (St == 11)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode11 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode11 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt2311 = new DataTable();
-                        string sql_document11 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document11, conn);
-                        adapter.Fill(dt2311);
-                        mainCategoryComboBox11.DataSource = dt2311;
-                        mainCategoryComboBox11.DisplayMember = "main_category_name";
-                        mainCategoryComboBox11.ValueMember = "main_category_code";
-                        mainCategoryComboBox11.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox11.SelectedValue = itemMainCategoryCode11;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt2411 = new DataTable();
-                        string sql_item12 = "select * from item_m  where invalid = 0;";
-                        adapter = new NpgsqlDataAdapter(sql_item12, conn);
-                        adapter.Fill(dt2411);
-                        itemComboBox11.DataSource = dt2411;
-                        itemComboBox11.DisplayMember = "item_name";
-                        itemComboBox11.ValueMember = "item_code";
-                        itemComboBox11.SelectedValue = itemCode11;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 12行目"
-                        this.weightTextBox11.Text = dataRow1["weight"].ToString();
-                        this.countTextBox11.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox11.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox1.Text = dataRow1["amount"].ToString();
-                        moneyTextBox11.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox11.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks11.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    #region "13行目"
-                    if (St == 12)
-                    {
-                        DataTable dt22 = new DataTable();
-                        string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
-                        adapter = new NpgsqlDataAdapter(str_document2, conn);
-                        adapter.Fill(dt22);
-                        DataRow dataRow1;
-                        dataRow1 = dt22.Rows[0];
-                        int itemMainCategoryCode12 = (int)dataRow1["main_category_code"]; //大分類
-                        int itemCode12 = (int)dataRow1["item_code"];　　//品名
-                        #region "コンボボックス"
-                        #region "大分類"
-                        DataTable dt2312 = new DataTable();
-                        string sql_document12 = "select * from main_category_m where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_document12, conn);
-                        adapter.Fill(dt2312);
-                        mainCategoryComboBox12.DataSource = dt2312;
-                        mainCategoryComboBox12.DisplayMember = "main_category_name";
-                        mainCategoryComboBox12.ValueMember = "main_category_code";
-                        mainCategoryComboBox12.SelectedIndex = 0;//担当者ごとの初期値設定
-                        mainCategoryComboBox12.SelectedValue = itemMainCategoryCode12;
-                        #endregion
-                        #region "品名"
-                        //品名検索用
-                        DataTable dt2412 = new DataTable();
-                        string sql_item13 = "select * from item_m  where invalid = 0 ;";
-                        adapter = new NpgsqlDataAdapter(sql_item13, conn);
-                        adapter.Fill(dt2412);
-                        itemComboBox12.DataSource = dt2412;
-                        itemComboBox12.DisplayMember = "item_name";
-                        itemComboBox12.ValueMember = "item_code";
-                        itemComboBox12.SelectedValue = itemCode12;
-                        #endregion
-                        #endregion
-                        #region "入力された項目 13行目"
-                        this.weightTextBox12.Text = dataRow1["weight"].ToString();
-                        this.countTextBox12.Text = dataRow1["count"].ToString();
-                        this.unitPriceTextBox12.Text = dataRow1["unit_price"].ToString();
-                        unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
-                        this.moneyTextBox12.Text = dataRow1["amount"].ToString();
-                        moneyTextBox12.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox12.Text, System.Globalization.NumberStyles.Number));
-                        this.remarks12.Text = dataRow1["remarks"].ToString();
-                        #endregion
-                    }
-                    #endregion
-                    */
-                    #endregion
-                }
-            }
-            if (data == "D")
-            {
-                #region"一時コメントアウト"
-                //#region "納品書の表の入力を呼び出し"
-                //DataTable dt20 = new DataTable();
-                //string str_control = "select * from delivery_calc where control_number = " + control + ";";
-                //adapter = new NpgsqlDataAdapter(str_control, conn);
-                //adapter.Fill(dt20);
-                //int de = dt20.Rows.Count;
-                //#endregion
-                //#region "納品書の表の外のデータを呼び出し"
-                //DataTable dt21 = new DataTable();
-                //string sql_control = "select * from delivery_m where control_number = " + control + ";";
-                //adapter = new NpgsqlDataAdapter(sql_control, conn);
-                //adapter.Fill(dt21);
-                //DataRow row1;
-                //row1 = dt21.Rows[0];
-                //int type1 = (int)row1["types1"];
-                //string yes = row1["seaal_print"].ToString();
-                //if (type1 == 0)
-                //{
-                //    #region "枠外"
-                //    this.name.Text = row1["name"].ToString();
-                //    this.titleComboBox.SelectedItem = row1["honorific_title"].ToString();
-                //    this.RemarkRegister.Text = row1["remarks2"].ToString();
-                //    this.typeComboBox.SelectedItem = row1["type"].ToString();
-                //    this.paymentMethodComboBox.SelectedItem = row1["payment_method"].ToString();
-                //    this.PayeeTextBox1.Text = row1["account_payble"].ToString();
-                //    this.CoinComboBox.SelectedItem = row1["currency"].ToString();
-                //    this.comboBox11.SelectedItem = row1["vat"].ToString();
-                //    if (yes == "する")
-                //    {
-                //        sealY.Checked = true;
-                //    }
-                //    if (yes == "しない")
-                //    {
-                //        sealN.Checked = true;
-                //    }
-                //    this.totalCount2.Text = row1["total_count"].ToString();
-                //    totalCount2.Text = string.Format("{0:#,0}", this.totalCount2.Text);
-                //    this.totalWeight2.Text = row1["total_weight"].ToString();
-                //    totalWeight2.Text = string.Format("{0:#,0}", Math.Round(decimal.Parse(this.totalWeight2.Text), 1, MidpointRounding.AwayFromZero));
-                //    this.sumTextBox2.Text = row1["total"].ToString();
-                //    sumTextBox2.Text = string.Format("{0:C}", decimal.Parse(sumTextBox2.Text, System.Globalization.NumberStyles.Number));
-                //    this.subTotal2.Text = row1["sub_total"].ToString();
-                //    subTotal2.Text = string.Format("{0:C}", decimal.Parse(subTotal2.Text, System.Globalization.NumberStyles.Number));
-                //    this.taxAmount2.Text = row1["vat_amount"].ToString();
-                //    taxAmount2.Text = string.Format("{0:C}", decimal.Parse(taxAmount2.Text, System.Globalization.NumberStyles.Number));
-                //    this.tax.Text = row1["vat_rate"].ToString() + ".00%";
-                //    #endregion
-                //    #region "顧客"
-                //    int antique = (int)row1["antique_number"];
-                //    typeTextBox2.Text = "法人";
-                //    DataTable dt25 = new DataTable();
-                //    string str_client = "select * from client_m_corporate where type = 0 and antique_number = " + antique + " ;";
-                //    adapter = new NpgsqlDataAdapter(str_client, conn);
-                //    adapter.Fill(dt25);
-                //    DataRow row2;
-                //    row2 = dt25.Rows[0];
-                //    this.companyTextBox2.Text = row2["company_name"].ToString();
-                //    this.shopNameTextBox2.Text = row2["shop_name"].ToString();
-                //    this.clientNameTextBox2.Text = row2["staff_name"].ToString();
-                //    this.antiqueLicenceTextBox2.Text = row2["antique_license"].ToString();
-                //    this.registerDateTextBox2.Text = row2["registration_date"].ToString();
-                //    this.clientRemarksTextBox2.Text = row2["remarks"].ToString();
-                //    #endregion
-                //}
-                //if (type1 == 1)
-                //{
-                //    typeTextBox2.Text = "個人";
-                //    #region "枠外"
-                //    this.name.Text = row1["name"].ToString();
-                //    this.titleComboBox.SelectedItem = row1["honorific_title"].ToString();
-                //    this.RemarkRegister.Text = row1["remarks2"].ToString();
-                //    this.typeComboBox.SelectedItem = row1["type"].ToString();
-                //    this.paymentMethodComboBox.SelectedItem = row1["payment_method"].ToString();
-                //    this.PayeeTextBox1.Text = row1["account_payble"].ToString();
-                //    this.CoinComboBox.SelectedItem = row1["currency"].ToString();
-                //    this.comboBox11.SelectedItem = row1["vat"].ToString();
-                //    if (yes == "する")
-                //    {
-                //        sealY.Checked = true;
-                //    }
-                //    if (yes == "しない")
-                //    {
-                //        sealN.Checked = true;
-                //    }
-                //    this.totalCount2.Text = row1["total_count"].ToString();
-                //    totalCount2.Text = string.Format("{0:#,0}", this.totalCount2.Text);
-                //    this.totalWeight2.Text = row1["total_weight"].ToString();
-                //    totalWeight2.Text = string.Format("{0:#,0}", Math.Round(decimal.Parse(this.totalWeight2.Text), 1, MidpointRounding.AwayFromZero));
-                //    this.sumTextBox2.Text = row1["total"].ToString();
-                //    sumTextBox2.Text = string.Format("{0:C}", decimal.Parse(sumTextBox2.Text, System.Globalization.NumberStyles.Number));
-                //    this.subTotal2.Text = row1["sub_total"].ToString();
-                //    subTotal2.Text = string.Format("{0:C}", decimal.Parse(subTotal2.Text, System.Globalization.NumberStyles.Number));
-                //    this.taxAmount2.Text = row1["vat_amount"].ToString();
-                //    taxAmount2.Text = string.Format("{0:C}", decimal.Parse(taxAmount2.Text, System.Globalization.NumberStyles.Number));
-                //    this.tax.Text = row1["vat_rate"].ToString() + ".00%";
-                //    #endregion
-                //    #region "顧客"
-                //    typeTextBox2.Text = "個人";
-                //    label75.Text = "氏名";
-                //    label76.Text = "職業";
-                //    label77.Text = "生年月日";
-                //    label36.Visible = false;
-                //    registerDateTextBox2.Visible = false;
-                //    int idNumber = (int)row1["id_number"];
-                //    typeTextBox2.Text = "法人";
-                //    DataTable dt25 = new DataTable();
-                //    string str_client = "select * from client_m_individual where type = 1 and id_number = " + idNumber + " ;";
-                //    adapter = new NpgsqlDataAdapter(str_client, conn);
-                //    adapter.Fill(dt25);
-                //    DataRow row2;
-                //    row2 = dt25.Rows[0];
-                //    this.companyTextBox2.Text = row2["name"].ToString();
-                //    this.shopNameTextBox2.Text = row2["birthday"].ToString();
-                //    this.clientNameTextBox2.Text = row2["occupation"].ToString();
-                //    this.antiqueLicenceTextBox2.Text = row2["antique_license"].ToString();
-                //    this.clientRemarksTextBox2.Text = row2["remarks"].ToString();
-                //    #endregion
-                //}
-                //#endregion
+            //    #endregion
+            //    #endregion
+            //}
 
-                //for (int De = 0; De <= (de - 1); De++)
-                //{
-                //    #region "1行目"
-                //    if (De ==0)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode00 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode00 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt26 = new DataTable();
-                //        string sql_control1 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control1, conn);
-                //        adapter.Fill(dt26);
-                //        mainCategoryComboBox00.DataSource = dt26;
-                //        mainCategoryComboBox00.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox00.ValueMember = "main_category_code";
-                //        mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox00.SelectedValue = itemMainCategoryCode00;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt27 = new DataTable();
-                //        string sql_item1 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item1, conn);
-                //        adapter.Fill(dt27);
-                //        itemComboBox00.DataSource = dt27;
-                //        itemComboBox00.DisplayMember = "item_name";
-                //        itemComboBox00.ValueMember = "item_code";
-                //        itemComboBox00.SelectedValue = itemCode00;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 1行目"
-                //        this.weightTextBox00.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox00.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox00.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox00.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox00.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox00.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks00.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "2行目"
-                //    if (De == 1)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode01 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode01 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt261 = new DataTable();
-                //        string sql_control2 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control2, conn);
-                //        adapter.Fill(dt261);
-                //        mainCategoryComboBox01.DataSource = dt261;
-                //        mainCategoryComboBox01.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox01.ValueMember = "main_category_code";
-                //        mainCategoryComboBox01.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox01.SelectedValue = itemMainCategoryCode01;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt271 = new DataTable();
-                //        string sql_item2 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item2, conn);
-                //        adapter.Fill(dt271);
-                //        itemComboBox01.DataSource = dt271;
-                //        itemComboBox01.DisplayMember = "item_name";
-                //        itemComboBox01.ValueMember = "item_code";
-                //        itemComboBox01.SelectedValue = itemCode01;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 2行目"
-                //        this.weightTextBox01.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox01.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox01.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox01.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox01.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox01.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks01.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "3行目"
-                //    if (De == 2)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode02 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode02 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt262 = new DataTable();
-                //        string sql_control3 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control3, conn);
-                //        adapter.Fill(dt262);
-                //        mainCategoryComboBox02.DataSource = dt262;
-                //        mainCategoryComboBox02.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox02.ValueMember = "main_category_code";
-                //        mainCategoryComboBox02.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox02.SelectedValue = itemMainCategoryCode02;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt272 = new DataTable();
-                //        string sql_item3 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item3, conn);
-                //        adapter.Fill(dt272);
-                //        itemComboBox02.DataSource = dt272;
-                //        itemComboBox02.DisplayMember = "item_name";
-                //        itemComboBox02.ValueMember = "item_code";
-                //        itemComboBox02.SelectedValue = itemCode02;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 3行目"
-                //        this.weightTextBox02.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox02.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox02.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox02.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox02.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox02.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks02.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "4行目"
-                //    if (De == 3)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode03 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode03 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt263 = new DataTable();
-                //        string sql_control4 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control4, conn);
-                //        adapter.Fill(dt263);
-                //        mainCategoryComboBox03.DataSource = dt263;
-                //        mainCategoryComboBox03.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox03.ValueMember = "main_category_code";
-                //        mainCategoryComboBox03.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox03.SelectedValue = itemMainCategoryCode03;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt273 = new DataTable();
-                //        string sql_item4 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item4, conn);
-                //        adapter.Fill(dt273);
-                //        itemComboBox03.DataSource = dt273;
-                //        itemComboBox03.DisplayMember = "item_name";
-                //        itemComboBox03.ValueMember = "item_code";
-                //        itemComboBox03.SelectedValue = itemCode03;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 4行目"
-                //        this.weightTextBox03.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox03.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox03.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox03.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox03.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox03.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks03.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "5行目"
-                //    if (De == 4)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode04 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode04 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt264 = new DataTable();
-                //        string sql_control5 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control5, conn);
-                //        adapter.Fill(dt264);
-                //        mainCategoryComboBox04.DataSource = dt264;
-                //        mainCategoryComboBox04.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox04.ValueMember = "main_category_code";
-                //        mainCategoryComboBox04.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox04.SelectedValue = itemMainCategoryCode04;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt274 = new DataTable();
-                //        string sql_item4 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item4, conn);
-                //        adapter.Fill(dt274);
-                //        itemComboBox04.DataSource = dt274;
-                //        itemComboBox04.DisplayMember = "item_name";
-                //        itemComboBox04.ValueMember = "item_code";
-                //        itemComboBox04.SelectedValue = itemCode04;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 5行目"
-                //        this.weightTextBox04.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox04.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox04.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox04.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox04.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox04.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks04.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "6行目"
-                //    if (De == 5)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode05 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode05 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt265 = new DataTable();
-                //        string sql_control6 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control6, conn);
-                //        adapter.Fill(dt265);
-                //        mainCategoryComboBox05.DataSource = dt265;
-                //        mainCategoryComboBox05.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox05.ValueMember = "main_category_code";
-                //        mainCategoryComboBox05.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox05.SelectedValue = itemMainCategoryCode05;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt275 = new DataTable();
-                //        string sql_item6 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item6, conn);
-                //        adapter.Fill(dt275);
-                //        itemComboBox05.DataSource = dt275;
-                //        itemComboBox05.DisplayMember = "item_name";
-                //        itemComboBox05.ValueMember = "item_code";
-                //        itemComboBox05.SelectedValue = itemCode05;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 6行目"
-                //        this.weightTextBox05.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox05.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox05.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox05.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox05.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox05.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks05.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "7行目"
-                //    if (De == 6)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode06 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode06 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt266 = new DataTable();
-                //        string sql_control7 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control7, conn);
-                //        adapter.Fill(dt266);
-                //        mainCategoryComboBox06.DataSource = dt266;
-                //        mainCategoryComboBox06.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox06.ValueMember = "main_category_code";
-                //        mainCategoryComboBox06.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox06.SelectedValue = itemMainCategoryCode06;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt276 = new DataTable();
-                //        string sql_item7 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item7, conn);
-                //        adapter.Fill(dt276);
-                //        itemComboBox06.DataSource = dt276;
-                //        itemComboBox06.DisplayMember = "item_name";
-                //        itemComboBox06.ValueMember = "item_code";
-                //        itemComboBox06.SelectedValue = itemCode06;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 7行目"
-                //        this.weightTextBox06.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox06.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox06.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox06.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox06.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox06.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks06.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "8行目"
-                //    if (De == 7)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode07 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode07 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt267 = new DataTable();
-                //        string sql_control8 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control8, conn);
-                //        adapter.Fill(dt267);
-                //        mainCategoryComboBox07.DataSource = dt267;
-                //        mainCategoryComboBox07.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox07.ValueMember = "main_category_code";
-                //        mainCategoryComboBox07.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox07.SelectedValue = itemMainCategoryCode07;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt277 = new DataTable();
-                //        string sql_item8 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item8, conn);
-                //        adapter.Fill(dt277);
-                //        itemComboBox07.DataSource = dt277;
-                //        itemComboBox07.DisplayMember = "item_name";
-                //        itemComboBox07.ValueMember = "item_code";
-                //        itemComboBox07.SelectedValue = itemCode07;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 8行目"
-                //        this.weightTextBox07.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox07.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox07.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox07.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox07.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox07.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks07.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "9行目"
-                //    if (De == 8)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode08 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode08 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt268 = new DataTable();
-                //        string sql_control9 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control9, conn);
-                //        adapter.Fill(dt268);
-                //        mainCategoryComboBox08.DataSource = dt268;
-                //        mainCategoryComboBox08.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox08.ValueMember = "main_category_code";
-                //        mainCategoryComboBox08.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox08.SelectedValue = itemMainCategoryCode08;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt278 = new DataTable();
-                //        string sql_item9 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item9, conn);
-                //        adapter.Fill(dt278);
-                //        itemComboBox08.DataSource = dt278;
-                //        itemComboBox08.DisplayMember = "item_name";
-                //        itemComboBox08.ValueMember = "item_code";
-                //        itemComboBox08.SelectedValue = itemCode08;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 9行目"
-                //        this.weightTextBox08.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox08.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox08.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox08.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox08.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox08.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks08.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "10行目"
-                //    if (De == 9)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode09 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode09 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt269 = new DataTable();
-                //        string sql_control10 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control10, conn);
-                //        adapter.Fill(dt269);
-                //        mainCategoryComboBox09.DataSource = dt269;
-                //        mainCategoryComboBox09.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox09.ValueMember = "main_category_code";
-                //        mainCategoryComboBox09.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox09.SelectedValue = itemMainCategoryCode09;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt279 = new DataTable();
-                //        string sql_item10 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item10, conn);
-                //        adapter.Fill(dt279);
-                //        itemComboBox09.DataSource = dt279;
-                //        itemComboBox09.DisplayMember = "item_name";
-                //        itemComboBox09.ValueMember = "item_code";
-                //        itemComboBox09.SelectedValue = itemCode09;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 10行目"
-                //        this.weightTextBox09.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox09.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox09.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox09.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox09.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox09.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks09.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "11行目"
-                //    if (De == 10)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode010 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode010 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt2610 = new DataTable();
-                //        string sql_control11 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control11, conn);
-                //        adapter.Fill(dt2610);
-                //        mainCategoryComboBox010.DataSource = dt2610;
-                //        mainCategoryComboBox010.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox010.ValueMember = "main_category_code";
-                //        mainCategoryComboBox010.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox010.SelectedValue = itemMainCategoryCode010;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt2710 = new DataTable();
-                //        string sql_item11 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item11, conn);
-                //        adapter.Fill(dt2710);
-                //        itemComboBox010.DataSource = dt2710;
-                //        itemComboBox010.DisplayMember = "item_name";
-                //        itemComboBox010.ValueMember = "item_code";
-                //        itemComboBox010.SelectedValue = itemCode010;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 11行目"
-                //        this.weightTextBox010.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox010.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox010.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox010.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox010.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox010.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks010.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "12行目"
-                //    if (De == 11)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode011 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode011 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt2611 = new DataTable();
-                //        string sql_control12 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control12, conn);
-                //        adapter.Fill(dt2611);
-                //        mainCategoryComboBox011.DataSource = dt2611;
-                //        mainCategoryComboBox011.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox011.ValueMember = "main_category_code";
-                //        mainCategoryComboBox011.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox011.SelectedValue = itemMainCategoryCode011;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt2711 = new DataTable();
-                //        string sql_item12 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item12, conn);
-                //        adapter.Fill(dt2711);
-                //        itemComboBox011.DataSource = dt2711;
-                //        itemComboBox011.DisplayMember = "item_name";
-                //        itemComboBox011.ValueMember = "item_code";
-                //        itemComboBox011.SelectedValue = itemCode011;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 12行目"
-                //        this.weightTextBox011.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox011.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox011.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox011.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox011.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox011.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks011.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //    #region "13行目"
-                //    if (De == 12)
-                //    {
-                //        DataTable dt25 = new DataTable();
-                //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
-                //        adapter = new NpgsqlDataAdapter(str_control0, conn);
-                //        adapter.Fill(dt25);
-                //        DataRow dataRow1;
-                //        dataRow1 = dt25.Rows[0];
-                //        int itemMainCategoryCode012 = (int)dataRow1["main_category_code"]; //大分類
-                //        int itemCode012 = (int)dataRow1["item_code"];　　//品名
-                //        #region "コンボボックス"
-                //        #region "大分類"
-                //        DataTable dt2612 = new DataTable();
-                //        string sql_control13 = "select * from main_category_m where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_control13, conn);
-                //        adapter.Fill(dt2612);
-                //        mainCategoryComboBox012.DataSource = dt2612;
-                //        mainCategoryComboBox012.DisplayMember = "main_category_name";
-                //        mainCategoryComboBox012.ValueMember = "main_category_code";
-                //        mainCategoryComboBox012.SelectedIndex = 0;//担当者ごとの初期値設定
-                //        mainCategoryComboBox012.SelectedValue = itemMainCategoryCode012;
-                //        #endregion
-                //        #region "品名"
-                //        //品名検索用
-                //        DataTable dt2712 = new DataTable();
-                //        string sql_item13 = "select * from item_m  where invalid = 0 ;";
-                //        adapter = new NpgsqlDataAdapter(sql_item13, conn);
-                //        adapter.Fill(dt2712);
-                //        itemComboBox012.DataSource = dt2712;
-                //        itemComboBox012.DisplayMember = "item_name";
-                //        itemComboBox012.ValueMember = "item_code";
-                //        itemComboBox012.SelectedValue = itemCode012;
-                //        #endregion
-                //        #endregion
-                //        #region "入力された項目 13行目"
-                //        this.weightTextBox012.Text = dataRow1["weight"].ToString();
-                //        this.countTextBox012.Text = dataRow1["count"].ToString();
-                //        this.unitPriceTextBox012.Text = dataRow1["unit_price"].ToString();
-                //        unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
-                //        this.moneyTextBox012.Text = dataRow1["amount"].ToString();
-                //        moneyTextBox012.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox012.Text, System.Globalization.NumberStyles.Number));
-                //        this.remarks012.Text = dataRow1["remarks"].ToString();
-                //        #endregion
-                //    }
-                //    #endregion
-                //}
-                #endregion
-            }
-            if (subSum < 2000000)
-            {
-                groupBox1.Hide();
-            }
-            else
-            {
+            //if (data == "S")
+            //{
+            //    #region "計算書の表の入力を呼び出し"
+            //    DataTable dt19 = new DataTable();
+            //    string str_document = "select * from statement_calc_data where document_number = '" + document + "';";
+            //    adapter = new NpgsqlDataAdapter(str_document, conn);
+            //    adapter.Fill(dt19);
+            //    int st = dt19.Rows.Count;
+            //    #endregion
+            //    #region "計算書の表の外部の入力データを呼び出し"
+            //    DataTable dt21 = new DataTable();
+            //    string str_document1 = "select * from statement_data where document_number = '" + document + "';";
+            //    adapter = new NpgsqlDataAdapter(str_document1, conn);
+            //    adapter.Fill(dt21);
+            //    DataRow row1;
+            //    row1 = dt21.Rows[0];
+            //    int types = (int)row1["type"];  //法人か個人か
+            //    #region "法人"
+            //    if (types == 0)
+            //    {
+            //        typeTextBox.Text = "法人";
+            //        #region "入力する値"
+            //        #region "顧客"
+            //        this.companyTextBox.Text = row1["company_name"].ToString();
+            //        this.shopNameTextBox.Text = row1["shop_name"].ToString();
+            //        this.clientNameTextBox.Text = row1["name"].ToString();
+            //        DataTable dt25 = new DataTable();
+            //        string str_client = "select * from client_m where type = 0 and company_name = '" + this.companyTextBox.Text + "' and shop_name = '" + this.shopNameTextBox.Text + "' and name = '" + this.clientNameTextBox.Text + "';";
+            //        adapter = new NpgsqlDataAdapter(str_client, conn);
+            //        adapter.Fill(dt25);
+            //        DataRow row2;
+            //        row2 = dt25.Rows[0];
+            //        this.antiqueLicenceTextBox.Text = row2["antique_license"].ToString();
+            //        this.registerDateTextBox.Text = row2["registration_date"].ToString();
+            //        this.clientRemarksTextBox.Text = row2["remarks"].ToString();
+            //        #endregion
+            //        #region "枠外"
+            //        this.subTotal.Text = row1["sub_total"].ToString();
+            //        subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
+            //        int sum = int.Parse(row1["total"].ToString());
+            //        this.sumTextBox.Text = row1["total"].ToString();
+            //        sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
+            //        this.taxAmount0.Text = row1["tax_amount"].ToString();
+            //        taxAmount0.Text = string.Format("{0:C}", decimal.Parse(taxAmount0.Text, System.Globalization.NumberStyles.Number));
+            //        this.paymentMethodsComboBox.SelectedItem = row1["payment_method"].ToString();
+            //        this.deliveryComboBox.SelectedItem = row1["delivery_method"].ToString();
+            //        /*this.totalCount.Text = row1["total_amount"].ToString();
+            //        int cou = int.Parse(row1["total_amount"].ToString());
+            //        totalCount.Text = string.Format("{0:#,0}", cou);
+            //        decimal wei = decimal.Parse(row1["total_weight"].ToString());
+            //        this.totalWeight.Text = row1["total_weight"].ToString();
+            //        totalWeight.Text = string.Format("{0:#,0}", Math.Round(wei, 1, MidpointRounding.AwayFromZero));*/
+            //        if (sum >= 2000000)
+            //        {
+            //            groupBox1.Show();
+            //            groupBox1.BackColor = Color.OrangeRed;
+            //        }
+            //        #endregion
+            //        #endregion
+            //    }
+            //    #endregion
+            //    #region "個人"
+            //    if (types == 1)
+            //    {
+            //        #region "入力する値"
+            //        #region "顧客"
+            //        label16.Text = "氏名";
+            //        label17.Text = "生年月日";
+            //        label18.Text = "職業";
+            //        label38.Visible = false;
+            //        registerDateTextBox.Visible = false;
+            //        typeTextBox.Text = "個人";
+            //        this.companyTextBox.Text = row1["name"].ToString();
+            //        this.shopNameTextBox.Text = row1["birthday"].ToString();
+            //        this.clientNameTextBox.Text = row1["occupation"].ToString();
+            //        DataTable dt25 = new DataTable();
+            //        string str_client = "select * from client_m where type = 1 and name = '" + this.companyTextBox.Text + "' and birthday = '" + this.shopNameTextBox.Text + "' and occupation = '" + this.clientNameTextBox.Text + "';";
+            //        adapter = new NpgsqlDataAdapter(str_client, conn);
+            //        adapter.Fill(dt25);
+            //        DataRow row2;
+            //        row2 = dt25.Rows[0];
+            //        this.antiqueLicenceTextBox.Text = row2["antique_license"].ToString();
+            //        this.clientRemarksTextBox.Text = row2["remarks"].ToString();
+            //        #endregion
+            //        #region "枠外"
+            //        this.subTotal.Text = row1["sub_total"].ToString();
+            //        subTotal.Text = string.Format("{0:C}", decimal.Parse(subTotal.Text, System.Globalization.NumberStyles.Number));
+            //        this.sumTextBox.Text = row1["total"].ToString();
+            //        int sum = int.Parse(row1["total"].ToString());
+            //        sumTextBox.Text = string.Format("{0:C}", decimal.Parse(sumTextBox.Text, System.Globalization.NumberStyles.Number));
+            //        this.taxAmount0.Text = row1["tax_amount"].ToString();
+            //        taxAmount0.Text = string.Format("{0:C}", decimal.Parse(taxAmount0.Text, System.Globalization.NumberStyles.Number));
+            //        this.paymentMethodsComboBox.SelectedItem = row1["payment_method"].ToString();
+            //        this.deliveryComboBox.SelectedItem = row1["delivery_method"].ToString();
+            //        /*this.totalCount.Text = row1["total_amount"].ToString();
+            //        int cou = int.Parse(row1["total_amount"].ToString());
+            //        totalCount.Text = string.Format("{0:#,0}", cou);
+            //        decimal wei = decimal.Parse(row1["total_weight"].ToString());
+            //        this.totalWeight.Text = row1["total_weight"].ToString();
+            //        totalWeight.Text = string.Format("{0:#,0}", Math.Round(wei, 1, MidpointRounding.AwayFromZero));*/
+            //        if (sum >= 2000000)
+            //        {
+            //            groupBox1.Show();
+            //            groupBox1.BackColor = Color.OrangeRed;
+            //        }
+            //        #endregion
+            //        #endregion
+            //    }
+            //    #endregion
+            //    #endregion
+            //    for (int St = 0; St <= (st - 1); St++)
+            //    {
+            //        #region"一時コメントアウト"
+            //        //#region "1行目"
+            //        //if (St == 0)
+            //        //{
+            //        //    DataTable dt22 = new DataTable();
+            //        //    string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //        //    adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //        //    adapter.Fill(dt22);
+            //        //    DataRow dataRow1;
+            //        //    dataRow1 = dt22.Rows[0];
+            //        //    int itemMainCategoryCode0 = (int)dataRow1["main_category_code"]; //大分類
+            //        //    int itemCode0 = (int)dataRow1["item_code"];　　//品名
+            //        //    #region "コンボボックス"
+            //        //    #region "大分類"
+            //        //    DataTable dt23 = new DataTable();
+            //        //    string sql_document = "select * from main_category_m where invalid = 0;";
+            //        //    adapter = new NpgsqlDataAdapter(sql_document, conn);
+            //        //    adapter.Fill(dt23);
+            //        //    mainCategoryComboBox0.DataSource = dt23;
+            //        //    mainCategoryComboBox0.DisplayMember = "main_category_name";
+            //        //    mainCategoryComboBox0.ValueMember = "main_category_code";
+            //        //    mainCategoryComboBox0.SelectedIndex = 0;//担当者ごとの初期値設定
+            //        //    mainCategoryComboBox0.SelectedValue = itemMainCategoryCode0;
+            //        //    #endregion
+            //        //    #region "品名"
+            //        //    //品名検索用
+            //        //    DataTable dt24 = new DataTable();
+            //        //    string sql_item1 = "select * from item_m  where invalid = 0;";
+            //        //    adapter = new NpgsqlDataAdapter(sql_item1, conn);
+            //        //    adapter.Fill(dt24);
+            //        //    itemComboBox0.DataSource = dt24;
+            //        //    itemComboBox0.DisplayMember = "item_name";
+            //        //    itemComboBox0.ValueMember = "item_code";
+            //        //    itemComboBox0.SelectedValue = itemCode0;
+            //        //    #endregion
+            //        //    #endregion
+            //        //    #region "入力された項目 1行目"
+            //        //    this.weightTextBox0.Text = dataRow1["weight"].ToString();
+            //        //    this.countTextBox0.Text = dataRow1["count"].ToString();
+            //        //    this.unitPriceTextBox0.Text = dataRow1["unit_price"].ToString();
+            //        //    unitPriceTextBox0.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox0.Text, System.Globalization.NumberStyles.Number));
+            //        //    this.moneyTextBox0.Text = dataRow1["amount"].ToString();
+            //        //    moneyTextBox0.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox0.Text, System.Globalization.NumberStyles.Number));
+            //        //    this.remarks0.Text = dataRow1["remarks"].ToString();
+            //        //    #endregion
+            //        //}
+            //        //#endregion
+            //        #endregion
+            //        #region "一時コメントアウト"
+            //        /*
+            //        #region "2行目"
+            //        if (St == 1)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode1 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode1 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt231 = new DataTable();
+            //            string sql_document1 = "select * from main_category_m where invalid = 0;";
+            //            adapter = new NpgsqlDataAdapter(sql_document1, conn);
+            //            adapter.Fill(dt231);
+            //            Column1.DataSource = dt231;
+            //            Column1.DisplayMember = "main_category_name";
+            //            Column1.ValueMember = "main_category_code";
+            //            dataGridView1[0, 1].Value = itemMainCategoryCode1;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt241 = new DataTable();
+            //            string sql_item2 = "select * from item_m  where invalid = 0;";
+            //            adapter = new NpgsqlDataAdapter(sql_item2, conn);
+            //            adapter.Fill(dt241);
+            //            Column2.DataSource = dt241;
+            //            Column2.DisplayMember = "item_name";
+            //            Column2.ValueMember = "item_code";
+            //            dataGridView1[1, 1].Value = itemCode1;
+            //            #endregion
+            //            #endregion
 
-            }
+            //            #region "入力された項目 2行目"
+            //            this.weightTextBox1.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox1.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox1.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox1.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox1.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox1.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox1.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox1.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks1.Text = dataRow1["remarks"].ToString();
+            //            #endregion
 
+            //        }
+            //        #endregion
+            //        */
+            //        #endregion
+            //        #region "一時コメントアウト"
+            //        /*                    
+            //        #region "3行目"
+            //        if (St == 2)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode2 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode2 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt232 = new DataTable();
+            //            string sql_document2 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document2, conn);
+            //            adapter.Fill(dt232);
+            //            mainCategoryComboBox2.DataSource = dt232;
+            //            mainCategoryComboBox2.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox2.ValueMember = "main_category_code";
+            //            mainCategoryComboBox2.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox2.SelectedValue = itemMainCategoryCode2;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt242 = new DataTable();
+            //            string sql_item3 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item3, conn);
+            //            adapter.Fill(dt242);
+            //            itemComboBox2.DataSource = dt242;
+            //            itemComboBox2.DisplayMember = "item_name";
+            //            itemComboBox2.ValueMember = "item_code";
+            //            itemComboBox2.SelectedValue = itemCode2;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 3行目"
+            //            this.weightTextBox2.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox2.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox2.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox2.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox2.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox2.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox2.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox2.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks2.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "4行目"
+            //        if (St == 3)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode3 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode3 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt233 = new DataTable();
+            //            string sql_document3 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document3, conn);
+            //            adapter.Fill(dt233);
+            //            mainCategoryComboBox3.DataSource = dt233;
+            //            mainCategoryComboBox3.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox3.ValueMember = "main_category_code";
+            //            mainCategoryComboBox3.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox3.SelectedValue = itemMainCategoryCode3;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt243 = new DataTable();
+            //            string sql_item4 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item4, conn);
+            //            adapter.Fill(dt243);
+            //            itemComboBox3.DataSource = dt243;
+            //            itemComboBox3.DisplayMember = "item_name";
+            //            itemComboBox3.ValueMember = "item_code";
+            //            itemComboBox3.SelectedValue = itemCode3;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 4行目"
+            //            this.weightTextBox3.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox3.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox3.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox3.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox3.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox3.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox3.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox3.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks3.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "5行目"
+            //        if (St == 4)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document4 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document4, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode4 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode4 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt234 = new DataTable();
+            //            string sql_document4 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document4, conn);
+            //            adapter.Fill(dt234);
+            //            mainCategoryComboBox4.DataSource = dt234;
+            //            mainCategoryComboBox4.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox4.ValueMember = "main_category_code";
+            //            mainCategoryComboBox4.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox4.SelectedValue = itemMainCategoryCode4;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt244 = new DataTable();
+            //            string sql_item5 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item5, conn);
+            //            adapter.Fill(dt244);
+            //            itemComboBox4.DataSource = dt244;
+            //            itemComboBox4.DisplayMember = "item_name";
+            //            itemComboBox4.ValueMember = "item_code";
+            //            itemComboBox4.SelectedValue = itemCode4;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 5行目"
+            //            this.weightTextBox4.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox4.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox4.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox4.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox4.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox4.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox4.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox4.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks4.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "6行目"
+            //        if (St == 5)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode5 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode5 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt235 = new DataTable();
+            //            string sql_document5 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document5, conn);
+            //            adapter.Fill(dt235);
+            //            mainCategoryComboBox5.DataSource = dt235;
+            //            mainCategoryComboBox5.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox5.ValueMember = "main_category_code";
+            //            mainCategoryComboBox5.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox5.SelectedValue = itemMainCategoryCode5;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt245 = new DataTable();
+            //            string sql_item6 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item6, conn);
+            //            adapter.Fill(dt245);
+            //            itemComboBox5.DataSource = dt245;
+            //            itemComboBox5.DisplayMember = "item_name";
+            //            itemComboBox5.ValueMember = "item_code";
+            //            itemComboBox5.SelectedValue = itemCode5;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 6行目"
+            //            this.weightTextBox5.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox5.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox5.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox5.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox5.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox5.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox5.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox5.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks5.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "7行目"
+            //        if (St == 6)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode6 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode6 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt236 = new DataTable();
+            //            string sql_document6 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document6, conn);
+            //            adapter.Fill(dt236);
+            //            mainCategoryComboBox6.DataSource = dt236;
+            //            mainCategoryComboBox6.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox6.ValueMember = "main_category_code";
+            //            mainCategoryComboBox6.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox6.SelectedValue = itemMainCategoryCode6;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt246 = new DataTable();
+            //            string sql_item7 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item7, conn);
+            //            adapter.Fill(dt246);
+            //            itemComboBox6.DataSource = dt246;
+            //            itemComboBox6.DisplayMember = "item_name";
+            //            itemComboBox6.ValueMember = "item_code";
+            //            itemComboBox6.SelectedValue = itemCode6;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 7行目"
+            //            this.weightTextBox6.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox6.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox6.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox6.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox6.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox6.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox6.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox6.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks6.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "8行目"
+            //        if (St == 7)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode7 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode7 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt237 = new DataTable();
+            //            string sql_document7 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document7, conn);
+            //            adapter.Fill(dt237);
+            //            mainCategoryComboBox7.DataSource = dt237;
+            //            mainCategoryComboBox7.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox7.ValueMember = "main_category_code";
+            //            mainCategoryComboBox7.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox7.SelectedValue = itemMainCategoryCode7;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt247 = new DataTable();
+            //            string sql_item8 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item8, conn);
+            //            adapter.Fill(dt247);
+            //            itemComboBox7.DataSource = dt247;
+            //            itemComboBox7.DisplayMember = "item_name";
+            //            itemComboBox7.ValueMember = "item_code";
+            //            itemComboBox7.SelectedValue = itemCode7;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 8行目"
+            //            this.weightTextBox7.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox7.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox7.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox7.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox7.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox7.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox7.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox7.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks7.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "9行目"
+            //        if (St == 8)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode8 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode8 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt238 = new DataTable();
+            //            string sql_document8 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document8, conn);
+            //            adapter.Fill(dt238);
+            //            mainCategoryComboBox8.DataSource = dt238;
+            //            mainCategoryComboBox8.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox8.ValueMember = "main_category_code";
+            //            mainCategoryComboBox8.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox8.SelectedValue = itemMainCategoryCode8;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt248 = new DataTable();
+            //            string sql_item9 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item9, conn);
+            //            adapter.Fill(dt248);
+            //            itemComboBox8.DataSource = dt248;
+            //            itemComboBox8.DisplayMember = "item_name";
+            //            itemComboBox8.ValueMember = "item_code";
+            //            itemComboBox8.SelectedValue = itemCode8;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 9行目"
+            //            this.weightTextBox8.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox8.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox8.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox8.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox8.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox8.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox8.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox8.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks8.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "10行目"
+            //        if (St == 9)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode9 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode9 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt239 = new DataTable();
+            //            string sql_document9 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document9, conn);
+            //            adapter.Fill(dt239);
+            //            mainCategoryComboBox9.DataSource = dt239;
+            //            mainCategoryComboBox9.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox9.ValueMember = "main_category_code";
+            //            mainCategoryComboBox9.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox9.SelectedValue = itemMainCategoryCode9;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt249 = new DataTable();
+            //            string sql_item10 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item10, conn);
+            //            adapter.Fill(dt249);
+            //            itemComboBox9.DataSource = dt249;
+            //            itemComboBox9.DisplayMember = "item_name";
+            //            itemComboBox9.ValueMember = "item_code";
+            //            itemComboBox9.SelectedValue = itemCode9;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 10行目"
+            //            this.weightTextBox9.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox9.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox9.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox9.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox9.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox9.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox9.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox9.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks9.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "11行目"
+            //        if (St == 10)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode10 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode10 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt2310 = new DataTable();
+            //            string sql_document10 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document10, conn);
+            //            adapter.Fill(dt2310);
+            //            mainCategoryComboBox10.DataSource = dt2310;
+            //            mainCategoryComboBox10.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox10.ValueMember = "main_category_code";
+            //            mainCategoryComboBox10.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox10.SelectedValue = itemMainCategoryCode10;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt2410 = new DataTable();
+            //            string sql_item11 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item11, conn);
+            //            adapter.Fill(dt2410);
+            //            itemComboBox10.DataSource = dt2410;
+            //            itemComboBox10.DisplayMember = "item_name";
+            //            itemComboBox10.ValueMember = "item_code";
+            //            itemComboBox10.SelectedValue = itemCode10;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 11行目"
+            //            this.weightTextBox10.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox10.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox10.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox10.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox10.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox10.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox10.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox10.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks10.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "12行目"
+            //        if (St == 11)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode11 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode11 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt2311 = new DataTable();
+            //            string sql_document11 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document11, conn);
+            //            adapter.Fill(dt2311);
+            //            mainCategoryComboBox11.DataSource = dt2311;
+            //            mainCategoryComboBox11.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox11.ValueMember = "main_category_code";
+            //            mainCategoryComboBox11.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox11.SelectedValue = itemMainCategoryCode11;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt2411 = new DataTable();
+            //            string sql_item12 = "select * from item_m  where invalid = 0;";
+            //            adapter = new NpgsqlDataAdapter(sql_item12, conn);
+            //            adapter.Fill(dt2411);
+            //            itemComboBox11.DataSource = dt2411;
+            //            itemComboBox11.DisplayMember = "item_name";
+            //            itemComboBox11.ValueMember = "item_code";
+            //            itemComboBox11.SelectedValue = itemCode11;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 12行目"
+            //            this.weightTextBox11.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox11.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox11.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox11.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox11.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox1.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox11.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox11.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks11.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        #region "13行目"
+            //        if (St == 12)
+            //        {
+            //            DataTable dt22 = new DataTable();
+            //            string str_document2 = "select * from statement_calc_data where document_number = '" + document + "' and record_number = " + (St + 1) + ";";
+            //            adapter = new NpgsqlDataAdapter(str_document2, conn);
+            //            adapter.Fill(dt22);
+            //            DataRow dataRow1;
+            //            dataRow1 = dt22.Rows[0];
+            //            int itemMainCategoryCode12 = (int)dataRow1["main_category_code"]; //大分類
+            //            int itemCode12 = (int)dataRow1["item_code"];　　//品名
+            //            #region "コンボボックス"
+            //            #region "大分類"
+            //            DataTable dt2312 = new DataTable();
+            //            string sql_document12 = "select * from main_category_m where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_document12, conn);
+            //            adapter.Fill(dt2312);
+            //            mainCategoryComboBox12.DataSource = dt2312;
+            //            mainCategoryComboBox12.DisplayMember = "main_category_name";
+            //            mainCategoryComboBox12.ValueMember = "main_category_code";
+            //            mainCategoryComboBox12.SelectedIndex = 0;//担当者ごとの初期値設定
+            //            mainCategoryComboBox12.SelectedValue = itemMainCategoryCode12;
+            //            #endregion
+            //            #region "品名"
+            //            //品名検索用
+            //            DataTable dt2412 = new DataTable();
+            //            string sql_item13 = "select * from item_m  where invalid = 0 ;";
+            //            adapter = new NpgsqlDataAdapter(sql_item13, conn);
+            //            adapter.Fill(dt2412);
+            //            itemComboBox12.DataSource = dt2412;
+            //            itemComboBox12.DisplayMember = "item_name";
+            //            itemComboBox12.ValueMember = "item_code";
+            //            itemComboBox12.SelectedValue = itemCode12;
+            //            #endregion
+            //            #endregion
+            //            #region "入力された項目 13行目"
+            //            this.weightTextBox12.Text = dataRow1["weight"].ToString();
+            //            this.countTextBox12.Text = dataRow1["count"].ToString();
+            //            this.unitPriceTextBox12.Text = dataRow1["unit_price"].ToString();
+            //            unitPriceTextBox12.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox12.Text, System.Globalization.NumberStyles.Number));
+            //            this.moneyTextBox12.Text = dataRow1["amount"].ToString();
+            //            moneyTextBox12.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox12.Text, System.Globalization.NumberStyles.Number));
+            //            this.remarks12.Text = dataRow1["remarks"].ToString();
+            //            #endregion
+            //        }
+            //        #endregion
+            //        */
+            //        #endregion
+            //    }
+            //}
+            //if (data == "D")
+            //{
+            //    #region"一時コメントアウト"
+            //    //#region "納品書の表の入力を呼び出し"
+            //    //DataTable dt20 = new DataTable();
+            //    //string str_control = "select * from delivery_calc where control_number = " + control + ";";
+            //    //adapter = new NpgsqlDataAdapter(str_control, conn);
+            //    //adapter.Fill(dt20);
+            //    //int de = dt20.Rows.Count;
+            //    //#endregion
+            //    //#region "納品書の表の外のデータを呼び出し"
+            //    //DataTable dt21 = new DataTable();
+            //    //string sql_control = "select * from delivery_m where control_number = " + control + ";";
+            //    //adapter = new NpgsqlDataAdapter(sql_control, conn);
+            //    //adapter.Fill(dt21);
+            //    //DataRow row1;
+            //    //row1 = dt21.Rows[0];
+            //    //int type1 = (int)row1["types1"];
+            //    //string yes = row1["seaal_print"].ToString();
+            //    //if (type1 == 0)
+            //    //{
+            //    //    #region "枠外"
+            //    //    this.name.Text = row1["name"].ToString();
+            //    //    this.titleComboBox.SelectedItem = row1["honorific_title"].ToString();
+            //    //    this.RemarkRegister.Text = row1["remarks2"].ToString();
+            //    //    this.typeComboBox.SelectedItem = row1["type"].ToString();
+            //    //    this.paymentMethodComboBox.SelectedItem = row1["payment_method"].ToString();
+            //    //    this.PayeeTextBox1.Text = row1["account_payble"].ToString();
+            //    //    this.CoinComboBox.SelectedItem = row1["currency"].ToString();
+            //    //    this.comboBox11.SelectedItem = row1["vat"].ToString();
+            //    //    if (yes == "する")
+            //    //    {
+            //    //        sealY.Checked = true;
+            //    //    }
+            //    //    if (yes == "しない")
+            //    //    {
+            //    //        sealN.Checked = true;
+            //    //    }
+            //    //    this.totalCount2.Text = row1["total_count"].ToString();
+            //    //    totalCount2.Text = string.Format("{0:#,0}", this.totalCount2.Text);
+            //    //    this.totalWeight2.Text = row1["total_weight"].ToString();
+            //    //    totalWeight2.Text = string.Format("{0:#,0}", Math.Round(decimal.Parse(this.totalWeight2.Text), 1, MidpointRounding.AwayFromZero));
+            //    //    this.sumTextBox2.Text = row1["total"].ToString();
+            //    //    sumTextBox2.Text = string.Format("{0:C}", decimal.Parse(sumTextBox2.Text, System.Globalization.NumberStyles.Number));
+            //    //    this.subTotal2.Text = row1["sub_total"].ToString();
+            //    //    subTotal2.Text = string.Format("{0:C}", decimal.Parse(subTotal2.Text, System.Globalization.NumberStyles.Number));
+            //    //    this.taxAmount2.Text = row1["vat_amount"].ToString();
+            //    //    taxAmount2.Text = string.Format("{0:C}", decimal.Parse(taxAmount2.Text, System.Globalization.NumberStyles.Number));
+            //    //    this.tax.Text = row1["vat_rate"].ToString() + ".00%";
+            //    //    #endregion
+            //    //    #region "顧客"
+            //    //    int antique = (int)row1["antique_number"];
+            //    //    typeTextBox2.Text = "法人";
+            //    //    DataTable dt25 = new DataTable();
+            //    //    string str_client = "select * from client_m_corporate where type = 0 and antique_number = " + antique + " ;";
+            //    //    adapter = new NpgsqlDataAdapter(str_client, conn);
+            //    //    adapter.Fill(dt25);
+            //    //    DataRow row2;
+            //    //    row2 = dt25.Rows[0];
+            //    //    this.companyTextBox2.Text = row2["company_name"].ToString();
+            //    //    this.shopNameTextBox2.Text = row2["shop_name"].ToString();
+            //    //    this.clientNameTextBox2.Text = row2["name"].ToString();
+            //    //    this.antiqueLicenceTextBox2.Text = row2["antique_license"].ToString();
+            //    //    this.registerDateTextBox2.Text = row2["registration_date"].ToString();
+            //    //    this.clientRemarksTextBox2.Text = row2["remarks"].ToString();
+            //    //    #endregion
+            //    //}
+            //    //if (type1 == 1)
+            //    //{
+            //    //    typeTextBox2.Text = "個人";
+            //    //    #region "枠外"
+            //    //    this.name.Text = row1["name"].ToString();
+            //    //    this.titleComboBox.SelectedItem = row1["honorific_title"].ToString();
+            //    //    this.RemarkRegister.Text = row1["remarks2"].ToString();
+            //    //    this.typeComboBox.SelectedItem = row1["type"].ToString();
+            //    //    this.paymentMethodComboBox.SelectedItem = row1["payment_method"].ToString();
+            //    //    this.PayeeTextBox1.Text = row1["account_payble"].ToString();
+            //    //    this.CoinComboBox.SelectedItem = row1["currency"].ToString();
+            //    //    this.comboBox11.SelectedItem = row1["vat"].ToString();
+            //    //    if (yes == "する")
+            //    //    {
+            //    //        sealY.Checked = true;
+            //    //    }
+            //    //    if (yes == "しない")
+            //    //    {
+            //    //        sealN.Checked = true;
+            //    //    }
+            //    //    this.totalCount2.Text = row1["total_count"].ToString();
+            //    //    totalCount2.Text = string.Format("{0:#,0}", this.totalCount2.Text);
+            //    //    this.totalWeight2.Text = row1["total_weight"].ToString();
+            //    //    totalWeight2.Text = string.Format("{0:#,0}", Math.Round(decimal.Parse(this.totalWeight2.Text), 1, MidpointRounding.AwayFromZero));
+            //    //    this.sumTextBox2.Text = row1["total"].ToString();
+            //    //    sumTextBox2.Text = string.Format("{0:C}", decimal.Parse(sumTextBox2.Text, System.Globalization.NumberStyles.Number));
+            //    //    this.subTotal2.Text = row1["sub_total"].ToString();
+            //    //    subTotal2.Text = string.Format("{0:C}", decimal.Parse(subTotal2.Text, System.Globalization.NumberStyles.Number));
+            //    //    this.taxAmount2.Text = row1["vat_amount"].ToString();
+            //    //    taxAmount2.Text = string.Format("{0:C}", decimal.Parse(taxAmount2.Text, System.Globalization.NumberStyles.Number));
+            //    //    this.tax.Text = row1["vat_rate"].ToString() + ".00%";
+            //    //    #endregion
+            //    //    #region "顧客"
+            //    //    typeTextBox2.Text = "個人";
+            //    //    label75.Text = "氏名";
+            //    //    label76.Text = "職業";
+            //    //    label77.Text = "生年月日";
+            //    //    label36.Visible = false;
+            //    //    registerDateTextBox2.Visible = false;
+            //    //    int idNumber = (int)row1["id_number"];
+            //    //    typeTextBox2.Text = "法人";
+            //    //    DataTable dt25 = new DataTable();
+            //    //    string str_client = "select * from client_m_individual where type = 1 and id_number = " + idNumber + " ;";
+            //    //    adapter = new NpgsqlDataAdapter(str_client, conn);
+            //    //    adapter.Fill(dt25);
+            //    //    DataRow row2;
+            //    //    row2 = dt25.Rows[0];
+            //    //    this.companyTextBox2.Text = row2["name"].ToString();
+            //    //    this.shopNameTextBox2.Text = row2["birthday"].ToString();
+            //    //    this.clientNameTextBox2.Text = row2["occupation"].ToString();
+            //    //    this.antiqueLicenceTextBox2.Text = row2["antique_license"].ToString();
+            //    //    this.clientRemarksTextBox2.Text = row2["remarks"].ToString();
+            //    //    #endregion
+            //    //}
+            //    //#endregion
+
+            //    //for (int De = 0; De <= (de - 1); De++)
+            //    //{
+            //    //    #region "1行目"
+            //    //    if (De ==0)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode00 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode00 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt26 = new DataTable();
+            //    //        string sql_control1 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control1, conn);
+            //    //        adapter.Fill(dt26);
+            //    //        mainCategoryComboBox00.DataSource = dt26;
+            //    //        mainCategoryComboBox00.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox00.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox00.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox00.SelectedValue = itemMainCategoryCode00;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt27 = new DataTable();
+            //    //        string sql_item1 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item1, conn);
+            //    //        adapter.Fill(dt27);
+            //    //        itemComboBox00.DataSource = dt27;
+            //    //        itemComboBox00.DisplayMember = "item_name";
+            //    //        itemComboBox00.ValueMember = "item_code";
+            //    //        itemComboBox00.SelectedValue = itemCode00;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 1行目"
+            //    //        this.weightTextBox00.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox00.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox00.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox00.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox00.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox00.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox00.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox00.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks00.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "2行目"
+            //    //    if (De == 1)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode01 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode01 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt261 = new DataTable();
+            //    //        string sql_control2 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control2, conn);
+            //    //        adapter.Fill(dt261);
+            //    //        mainCategoryComboBox01.DataSource = dt261;
+            //    //        mainCategoryComboBox01.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox01.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox01.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox01.SelectedValue = itemMainCategoryCode01;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt271 = new DataTable();
+            //    //        string sql_item2 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item2, conn);
+            //    //        adapter.Fill(dt271);
+            //    //        itemComboBox01.DataSource = dt271;
+            //    //        itemComboBox01.DisplayMember = "item_name";
+            //    //        itemComboBox01.ValueMember = "item_code";
+            //    //        itemComboBox01.SelectedValue = itemCode01;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 2行目"
+            //    //        this.weightTextBox01.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox01.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox01.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox01.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox01.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox01.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox01.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox01.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks01.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "3行目"
+            //    //    if (De == 2)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode02 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode02 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt262 = new DataTable();
+            //    //        string sql_control3 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control3, conn);
+            //    //        adapter.Fill(dt262);
+            //    //        mainCategoryComboBox02.DataSource = dt262;
+            //    //        mainCategoryComboBox02.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox02.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox02.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox02.SelectedValue = itemMainCategoryCode02;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt272 = new DataTable();
+            //    //        string sql_item3 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item3, conn);
+            //    //        adapter.Fill(dt272);
+            //    //        itemComboBox02.DataSource = dt272;
+            //    //        itemComboBox02.DisplayMember = "item_name";
+            //    //        itemComboBox02.ValueMember = "item_code";
+            //    //        itemComboBox02.SelectedValue = itemCode02;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 3行目"
+            //    //        this.weightTextBox02.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox02.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox02.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox02.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox02.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox02.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox02.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox02.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks02.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "4行目"
+            //    //    if (De == 3)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode03 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode03 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt263 = new DataTable();
+            //    //        string sql_control4 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control4, conn);
+            //    //        adapter.Fill(dt263);
+            //    //        mainCategoryComboBox03.DataSource = dt263;
+            //    //        mainCategoryComboBox03.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox03.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox03.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox03.SelectedValue = itemMainCategoryCode03;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt273 = new DataTable();
+            //    //        string sql_item4 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item4, conn);
+            //    //        adapter.Fill(dt273);
+            //    //        itemComboBox03.DataSource = dt273;
+            //    //        itemComboBox03.DisplayMember = "item_name";
+            //    //        itemComboBox03.ValueMember = "item_code";
+            //    //        itemComboBox03.SelectedValue = itemCode03;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 4行目"
+            //    //        this.weightTextBox03.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox03.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox03.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox03.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox03.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox03.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox03.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox03.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks03.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "5行目"
+            //    //    if (De == 4)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode04 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode04 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt264 = new DataTable();
+            //    //        string sql_control5 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control5, conn);
+            //    //        adapter.Fill(dt264);
+            //    //        mainCategoryComboBox04.DataSource = dt264;
+            //    //        mainCategoryComboBox04.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox04.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox04.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox04.SelectedValue = itemMainCategoryCode04;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt274 = new DataTable();
+            //    //        string sql_item4 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item4, conn);
+            //    //        adapter.Fill(dt274);
+            //    //        itemComboBox04.DataSource = dt274;
+            //    //        itemComboBox04.DisplayMember = "item_name";
+            //    //        itemComboBox04.ValueMember = "item_code";
+            //    //        itemComboBox04.SelectedValue = itemCode04;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 5行目"
+            //    //        this.weightTextBox04.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox04.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox04.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox04.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox04.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox04.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox04.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox04.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks04.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "6行目"
+            //    //    if (De == 5)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode05 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode05 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt265 = new DataTable();
+            //    //        string sql_control6 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control6, conn);
+            //    //        adapter.Fill(dt265);
+            //    //        mainCategoryComboBox05.DataSource = dt265;
+            //    //        mainCategoryComboBox05.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox05.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox05.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox05.SelectedValue = itemMainCategoryCode05;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt275 = new DataTable();
+            //    //        string sql_item6 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item6, conn);
+            //    //        adapter.Fill(dt275);
+            //    //        itemComboBox05.DataSource = dt275;
+            //    //        itemComboBox05.DisplayMember = "item_name";
+            //    //        itemComboBox05.ValueMember = "item_code";
+            //    //        itemComboBox05.SelectedValue = itemCode05;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 6行目"
+            //    //        this.weightTextBox05.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox05.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox05.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox05.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox05.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox05.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox05.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox05.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks05.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "7行目"
+            //    //    if (De == 6)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode06 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode06 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt266 = new DataTable();
+            //    //        string sql_control7 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control7, conn);
+            //    //        adapter.Fill(dt266);
+            //    //        mainCategoryComboBox06.DataSource = dt266;
+            //    //        mainCategoryComboBox06.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox06.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox06.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox06.SelectedValue = itemMainCategoryCode06;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt276 = new DataTable();
+            //    //        string sql_item7 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item7, conn);
+            //    //        adapter.Fill(dt276);
+            //    //        itemComboBox06.DataSource = dt276;
+            //    //        itemComboBox06.DisplayMember = "item_name";
+            //    //        itemComboBox06.ValueMember = "item_code";
+            //    //        itemComboBox06.SelectedValue = itemCode06;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 7行目"
+            //    //        this.weightTextBox06.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox06.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox06.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox06.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox06.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox06.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox06.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox06.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks06.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "8行目"
+            //    //    if (De == 7)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode07 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode07 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt267 = new DataTable();
+            //    //        string sql_control8 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control8, conn);
+            //    //        adapter.Fill(dt267);
+            //    //        mainCategoryComboBox07.DataSource = dt267;
+            //    //        mainCategoryComboBox07.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox07.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox07.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox07.SelectedValue = itemMainCategoryCode07;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt277 = new DataTable();
+            //    //        string sql_item8 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item8, conn);
+            //    //        adapter.Fill(dt277);
+            //    //        itemComboBox07.DataSource = dt277;
+            //    //        itemComboBox07.DisplayMember = "item_name";
+            //    //        itemComboBox07.ValueMember = "item_code";
+            //    //        itemComboBox07.SelectedValue = itemCode07;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 8行目"
+            //    //        this.weightTextBox07.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox07.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox07.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox07.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox07.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox07.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox07.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox07.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks07.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "9行目"
+            //    //    if (De == 8)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode08 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode08 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt268 = new DataTable();
+            //    //        string sql_control9 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control9, conn);
+            //    //        adapter.Fill(dt268);
+            //    //        mainCategoryComboBox08.DataSource = dt268;
+            //    //        mainCategoryComboBox08.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox08.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox08.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox08.SelectedValue = itemMainCategoryCode08;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt278 = new DataTable();
+            //    //        string sql_item9 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item9, conn);
+            //    //        adapter.Fill(dt278);
+            //    //        itemComboBox08.DataSource = dt278;
+            //    //        itemComboBox08.DisplayMember = "item_name";
+            //    //        itemComboBox08.ValueMember = "item_code";
+            //    //        itemComboBox08.SelectedValue = itemCode08;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 9行目"
+            //    //        this.weightTextBox08.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox08.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox08.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox08.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox08.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox08.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox08.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox08.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks08.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "10行目"
+            //    //    if (De == 9)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode09 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode09 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt269 = new DataTable();
+            //    //        string sql_control10 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control10, conn);
+            //    //        adapter.Fill(dt269);
+            //    //        mainCategoryComboBox09.DataSource = dt269;
+            //    //        mainCategoryComboBox09.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox09.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox09.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox09.SelectedValue = itemMainCategoryCode09;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt279 = new DataTable();
+            //    //        string sql_item10 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item10, conn);
+            //    //        adapter.Fill(dt279);
+            //    //        itemComboBox09.DataSource = dt279;
+            //    //        itemComboBox09.DisplayMember = "item_name";
+            //    //        itemComboBox09.ValueMember = "item_code";
+            //    //        itemComboBox09.SelectedValue = itemCode09;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 10行目"
+            //    //        this.weightTextBox09.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox09.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox09.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox09.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox09.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox09.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox09.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox09.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks09.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "11行目"
+            //    //    if (De == 10)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode010 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode010 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt2610 = new DataTable();
+            //    //        string sql_control11 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control11, conn);
+            //    //        adapter.Fill(dt2610);
+            //    //        mainCategoryComboBox010.DataSource = dt2610;
+            //    //        mainCategoryComboBox010.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox010.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox010.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox010.SelectedValue = itemMainCategoryCode010;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt2710 = new DataTable();
+            //    //        string sql_item11 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item11, conn);
+            //    //        adapter.Fill(dt2710);
+            //    //        itemComboBox010.DataSource = dt2710;
+            //    //        itemComboBox010.DisplayMember = "item_name";
+            //    //        itemComboBox010.ValueMember = "item_code";
+            //    //        itemComboBox010.SelectedValue = itemCode010;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 11行目"
+            //    //        this.weightTextBox010.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox010.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox010.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox010.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox010.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox010.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox010.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox010.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks010.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "12行目"
+            //    //    if (De == 11)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode011 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode011 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt2611 = new DataTable();
+            //    //        string sql_control12 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control12, conn);
+            //    //        adapter.Fill(dt2611);
+            //    //        mainCategoryComboBox011.DataSource = dt2611;
+            //    //        mainCategoryComboBox011.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox011.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox011.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox011.SelectedValue = itemMainCategoryCode011;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt2711 = new DataTable();
+            //    //        string sql_item12 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item12, conn);
+            //    //        adapter.Fill(dt2711);
+            //    //        itemComboBox011.DataSource = dt2711;
+            //    //        itemComboBox011.DisplayMember = "item_name";
+            //    //        itemComboBox011.ValueMember = "item_code";
+            //    //        itemComboBox011.SelectedValue = itemCode011;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 12行目"
+            //    //        this.weightTextBox011.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox011.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox011.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox011.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox011.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox011.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox011.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox011.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks011.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //    #region "13行目"
+            //    //    if (De == 12)
+            //    //    {
+            //    //        DataTable dt25 = new DataTable();
+            //    //        string str_control0 = "select * from delivery_calc where control_number = " + control + " and record_number = " + (De + 1) + ";";
+            //    //        adapter = new NpgsqlDataAdapter(str_control0, conn);
+            //    //        adapter.Fill(dt25);
+            //    //        DataRow dataRow1;
+            //    //        dataRow1 = dt25.Rows[0];
+            //    //        int itemMainCategoryCode012 = (int)dataRow1["main_category_code"]; //大分類
+            //    //        int itemCode012 = (int)dataRow1["item_code"];　　//品名
+            //    //        #region "コンボボックス"
+            //    //        #region "大分類"
+            //    //        DataTable dt2612 = new DataTable();
+            //    //        string sql_control13 = "select * from main_category_m where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_control13, conn);
+            //    //        adapter.Fill(dt2612);
+            //    //        mainCategoryComboBox012.DataSource = dt2612;
+            //    //        mainCategoryComboBox012.DisplayMember = "main_category_name";
+            //    //        mainCategoryComboBox012.ValueMember = "main_category_code";
+            //    //        mainCategoryComboBox012.SelectedIndex = 0;//担当者ごとの初期値設定
+            //    //        mainCategoryComboBox012.SelectedValue = itemMainCategoryCode012;
+            //    //        #endregion
+            //    //        #region "品名"
+            //    //        //品名検索用
+            //    //        DataTable dt2712 = new DataTable();
+            //    //        string sql_item13 = "select * from item_m  where invalid = 0 ;";
+            //    //        adapter = new NpgsqlDataAdapter(sql_item13, conn);
+            //    //        adapter.Fill(dt2712);
+            //    //        itemComboBox012.DataSource = dt2712;
+            //    //        itemComboBox012.DisplayMember = "item_name";
+            //    //        itemComboBox012.ValueMember = "item_code";
+            //    //        itemComboBox012.SelectedValue = itemCode012;
+            //    //        #endregion
+            //    //        #endregion
+            //    //        #region "入力された項目 13行目"
+            //    //        this.weightTextBox012.Text = dataRow1["weight"].ToString();
+            //    //        this.countTextBox012.Text = dataRow1["count"].ToString();
+            //    //        this.unitPriceTextBox012.Text = dataRow1["unit_price"].ToString();
+            //    //        unitPriceTextBox012.Text = string.Format("{0:#,0}", decimal.Parse(unitPriceTextBox012.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.moneyTextBox012.Text = dataRow1["amount"].ToString();
+            //    //        moneyTextBox012.Text = string.Format("{0:C}", decimal.Parse(moneyTextBox012.Text, System.Globalization.NumberStyles.Number));
+            //    //        this.remarks012.Text = dataRow1["remarks"].ToString();
+            //    //        #endregion
+            //    //    }
+            //    //    #endregion
+            //    //}
+            //    #endregion
+            //}
+            //if (subSum < 2000000)
+            //{
+            //    groupBox1.Hide();
+            //}
+            //else
+            //{
+
+            //}
+            #endregion
+
+            #region"datagridview"
             #region "初期値の取得（計算書）"
             #region "大分類の中身"
             string sql_str6 = "select * from main_category_m where invalid = 0 order by main_category_code asc;";
@@ -2224,7 +2256,6 @@ namespace Flawless_ex
             itemCode = (int)row5["item_code"];
             #endregion
             #endregion
-
 
             //計算書
             dataGridView1[1, 0].Value = MainCategoryCode;
@@ -2271,196 +2302,6 @@ namespace Flawless_ex
             dataGridViewComboBoxCell.DisplayMember = "item_name";
             dataGridViewComboBoxCell.ValueMember = "item_code";
 
-            //デフォルトで税込み表示
-            comboBox11.SelectedIndex = 0;
-
-            //デフォルトで円表示
-            CoinComboBox.SelectedIndex = 0;
-            #region "これから選択する場合"
-            if (count != 0)
-            {
-                if (type == 0)
-                {
-                    //顧客情報 法人
-                    #region "計算書"
-                    DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
-                    adapter.Fill(clientDt);
-
-                    DataRow row2;
-                    row2 = clientDt.Rows[0];
-                    //int type = (int)row2["type"];
-
-                    string companyNmae = row2["company_name"].ToString();
-                    string shopName = row2["shop_name"].ToString();
-                    string Staff_name = row2["staff_name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
-                    string antique_license = row2["antique_license"].ToString();
-                    this.client_Button.Text = "顧客変更";
-                    typeTextBox.Text = "法人";                    //種別
-                    companyTextBox.Text = companyNmae;              //会社名   
-                    registerDateTextBox2.Text = antique_license;              //古物商許可証
-                    shopNameTextBox.Text = shopName;                    //店舗名
-                    clientNameTextBox.Text = Staff_name;                //担当名
-                    registerDateTextBox.Text = register_date;           //登録日
-                    clientRemarksTextBox.Text = remarks;                //備考
-                    #endregion
-                    #region "納品書"
-                    this.client_searchButton1.Text = "顧客変更";
-                    typeTextBox2.Text = "法人";                   //種別
-                    companyTextBox2.Text = companyNmae;             //会社名
-                    shopNameTextBox2.Text = shopName;               //店舗名
-                    clientNameTextBox2.Text = Staff_name;           //担当名
-                    registerDateTextBox2.Text = register_date;      //登録日
-                    clientRemarksTextBox2.Text = remarks;           //備考
-                    antiqueLicenceTextBox2.Text = antique_license;                //古物商許可証
-                    #endregion
-
-                }
-                else if (type == 1)
-                {
-                    //顧客情報 個人
-                    DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
-                    adapter.Fill(clientDt);
-
-                    DataRow row2;
-                    row2 = clientDt.Rows[0];
-
-                    string name = row2["name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
-                    string occupation = row2["occupation"].ToString();
-                    string birthday = row2["birthday"].ToString();
-                    string antique_license = row2["antique_license"].ToString();
-
-                    #region "計算書"
-                    label16.Text = "氏名";
-                    label17.Text = "生年月日";
-                    label18.Text = "職業";
-                    typeTextBox.Text = "個人";
-                    companyTextBox.Text = name;
-                    shopNameTextBox.Text = birthday;
-                    clientNameTextBox.Text = occupation;
-                    registerDateTextBox.Text = register_date;
-                    clientRemarksTextBox.Text = remarks;
-                    registerDateTextBox2.Text = antique_license;
-                    label38.Visible = false;
-                    registerDateTextBox.Visible = false;
-                    #endregion
-                    #region "納品書"
-                    typeTextBox2.Text = "個人";
-                    label75.Text = "氏名";
-                    label76.Text = "職業";
-                    label77.Text = "生年月日";
-                    clientNameTextBox2.Text = occupation;
-                    companyTextBox2.Text = name;
-                    shopNameTextBox2.Text = birthday;
-                    registerDateTextBox2.Text = register_date;
-                    clientRemarksTextBox2.Text = remarks;
-                    antiqueLicenceTextBox2.Text = antique_license;
-                    label36.Visible = false;
-                    registerDateTextBox2.Visible = false;
-                    #endregion
-                }
-            }
-            #endregion
-            #region "１度選択して戻る場合"
-            else if (count == 0 && (address != null && client_staff_name != null) && data == null)
-            {
-                if (type == 0)
-                {
-                    //顧客情報 法人
-                    #region "計算書"
-                    DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
-                    adapter.Fill(clientDt);
-
-                    DataRow row2;
-                    row2 = clientDt.Rows[0];
-                    //int type = (int)row2["type"];
-
-                    string companyNmae = row2["company_name"].ToString();
-                    string shopName = row2["shop_name"].ToString();
-                    string Staff_name = row2["staff_name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
-                    string antique_license = row2["antique_license"].ToString();
-                    this.client_Button.Text = "顧客変更";
-                    typeTextBox.Text = "法人";                    //種別
-                    companyTextBox.Text = companyNmae;              //会社名   
-                    registerDateTextBox2.Text = antique_license;              //古物商許可証
-                    shopNameTextBox.Text = shopName;                    //店舗名
-                    clientNameTextBox.Text = Staff_name;                //担当名
-                    registerDateTextBox.Text = register_date;           //登録日
-                    clientRemarksTextBox.Text = remarks;                //備考
-                    #endregion
-                    #region "納品書"
-                    this.client_searchButton1.Text = "顧客変更";
-                    typeTextBox2.Text = "法人";                     //種別
-                    companyTextBox2.Text = companyNmae;             //会社名
-                    shopNameTextBox2.Text = shopName;               //店舗名
-                    clientNameTextBox2.Text = Staff_name;           //担当名
-                    registerDateTextBox2.Text = register_date;      //登録日
-                    clientRemarksTextBox2.Text = remarks;           //備考
-                    antiqueLicenceTextBox2.Text = antique_license;                //古物商許可証
-                    #endregion
-
-                }
-                else if (type == 1)
-                {
-                    //顧客情報 個人
-                    DataTable clientDt = new DataTable();
-                    string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
-                    adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
-                    adapter.Fill(clientDt);
-
-                    DataRow row2;
-                    row2 = clientDt.Rows[0];
-
-                    string name = row2["name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
-                    string remarks = row2["remarks"].ToString();
-                    string occupation = row2["occupation"].ToString();
-                    string birthday = row2["birthday"].ToString();
-                    string antique_license = row2["antique_license"].ToString();
-
-                    #region "計算書"
-                    label16.Text = "氏名";
-                    label17.Text = "生年月日";
-                    label18.Text = "職業";
-                    typeTextBox.Text = "個人";
-                    companyTextBox.Text = name;
-                    shopNameTextBox.Text = birthday;
-                    clientNameTextBox.Text = occupation;
-                    registerDateTextBox.Text = register_date;
-                    clientRemarksTextBox.Text = remarks;
-                    registerDateTextBox2.Text = antique_license;
-                    label38.Visible = false;
-                    registerDateTextBox.Visible = false;
-                    #endregion
-
-                    #region "納品書"
-                    typeTextBox2.Text = "個人";
-                    label75.Text = "氏名";
-                    label76.Text = "職業";
-                    label77.Text = "生年月日";
-                    clientNameTextBox2.Text = occupation;
-                    companyTextBox2.Text = name;
-                    shopNameTextBox2.Text = birthday;
-                    registerDateTextBox2.Text = register_date;
-                    clientRemarksTextBox2.Text = remarks;
-                    antiqueLicenceTextBox2.Text = antique_license;
-                    label36.Visible = false;
-                    registerDateTextBox2.Visible = false;
-                    #endregion
-                }
-            }
-            #endregion
 
             dataGridView1.Columns["WeightColumn"].DefaultCellStyle.Format = "n1";
             dataGridView1.Columns["UnitPriceColumn"].DefaultCellStyle.Format = "n0";
@@ -2469,10 +2310,573 @@ namespace Flawless_ex
             dataGridView2.Columns["WeightColumn1"].DefaultCellStyle.Format = "n1";
             dataGridView2.Columns["UnitPriceColumn1"].DefaultCellStyle.Format = "n0";
             dataGridView2.Columns["CountColumn1"].DefaultCellStyle.Format = "n0";
+            #endregion
+
+
+            #region"成績入力から計算書への遷移時"
+            if (Grade != 0)
+            {
+                //該当する計算書の顧客番号取得
+                sql = "select * from statement_data where document_number = '" + document + "';";
+                cmd = new NpgsqlCommand(sql, conn);
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ClientCode = (int)reader["code"];
+                    }
+                }
+
+                client_Button.Text = "顧客変更";
+                client_searchButton1.Text = "顧客変更";
+
+                //計算書枠外の情報を取得
+                sql = "select* from statement_data A inner join client_m B on B.code = A.code left outer join revisions on upd_code = document_number where B.code = '" + ClientCode + "' and document_number = '" + document + "';";
+                cmd = new NpgsqlCommand(sql, conn);
+
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        type = (int)reader["type"];
+                        if (type == 0)  //法人のとき
+                        {
+                            #region"計算書の顧客情報（法人）"
+                            typeTextBox.Text = "法人";
+                            companyTextBox.Text = reader["company_name"].ToString();
+                            shopNameTextBox.Text = reader["shop_name"].ToString();
+                            clientNameTextBox.Text = reader["name"].ToString();
+                            #endregion
+                            #region"納品書の顧客情報（法人）"
+                            typeTextBox2.Text = "法人";                                         //種別
+                            companyTextBox2.Text = reader["company_name"].ToString();           //会社名
+                            shopNameTextBox2.Text = reader["shop_name"].ToString();             //店舗名
+                            clientNameTextBox2.Text = reader["name"].ToString();                //担当名
+                            #endregion
+                        }
+                        else if (type == 1)     //個人のとき
+                        {
+                            #region"計算書の顧客情報（個人）"
+                            label16.Text = "氏名";
+                            label17.Text = "生年月日";
+                            label18.Text = "職業";
+                            typeTextBox.Text = "個人";
+                            companyTextBox.Text = reader["name"].ToString();
+                            shopNameTextBox.Text = reader["birthday"].ToString();
+                            clientNameTextBox.Text = reader["occupation"].ToString();
+                            label38.Visible = false;
+                            //registerDateTextBox.Visible = false;
+                            #endregion
+                            #region"納品書の顧客情報（個人）"
+                            typeTextBox2.Text = "個人";
+                            label75.Text = "氏名";
+                            label76.Text = "職業";
+                            label77.Text = "生年月日";
+                            clientNameTextBox2.Text = reader["occupation"].ToString();
+                            companyTextBox2.Text = reader["name"].ToString();
+                            shopNameTextBox2.Text = reader["birthday"].ToString();
+                            label36.Visible = false;
+                            //registerDateTextBox2.Visible = false;
+                            #endregion
+                        }
+                        #region"計算書の顧客情報（法人・個人で共通）"
+                        antiqueLicenceTextBox.Text = reader["antique_license"].ToString();
+                        registerDateTextBox.Text = reader["registration_date"].ToString();
+                        articlesTextBox.Text = reader["aol_financial_shareholder"].ToString();
+                        taxCertificateTextBox.Text = reader["tax_certificate"].ToString();
+                        sealCertificationTextBox.Text = reader["seal_certification"].ToString();
+                        residenceCardTextBox.Text = reader["residence_card"].ToString();
+                        residencePeriodStay = reader["period_stay"].ToString();
+                        if (!string.IsNullOrEmpty(residencePeriodStay))
+                        {
+                            residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);
+                        }
+                        clientRemarksTextBox.Text = reader["remarks"].ToString();
+                        #endregion
+                        #region"納品書の顧客情報（法人・個人で共通）"
+                        registerDateTextBox2.Text = reader["registration_date"].ToString();             //登録日
+                        clientRemarksTextBox2.Text = reader["remarks"].ToString();                      //備考
+                        antiqueLicenceTextBox2.Text = reader["antique_license"].ToString();             //古物商許可証
+                        #endregion
+                        totalWeightTextBox.Text = ((decimal)reader["total_weight"]).ToString("n0");
+                        totalCountTextBox.Text = ((int)reader["total_amount"]).ToString("n0");
+                        SettlementDate = reader["settlement_date"].ToString();
+                        if (!string.IsNullOrEmpty(SettlementDate))
+                        {
+                            settlementBox.Value = DateTime.Parse(SettlementDate);
+                        }
+                        paymentMethodsComboBox.Text = reader["payment_method"].ToString();
+                        DeliveryDate = reader["delivery_date"].ToString();
+                        if (!string.IsNullOrEmpty(DeliveryDate))
+                        {
+                            deliveryDateBox.Value = DateTime.Parse(DeliveryDate);
+                        }
+                        deliveryComboBox.Text = reader["delivery_method"].ToString();
+                        subTotal.Text = ((decimal)reader["sub_total"]).ToString("c0");
+                        sumTextBox.Text = ((decimal)reader["total"]).ToString("c0");
+                        reasonTextBox.Text = reader["reason"].ToString();
+                    }
+                }
+
+                dataGridView1.Columns.Clear();
+                dataGridView1.Rows.Clear();
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.RowHeadersVisible = false;
+                dataGridView1.RowsAdded -= DataGridView1_RowsAdded;
+                dataGridView1.CellFormatting -= dataGridView1_CellFormatting;
+                dataGridView1.ReadOnly = true;
+
+                sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from statement_calc_data A inner join main_category_m B on B.main_category_code = A.main_category_code inner join item_m C on A.item_code = C.item_code" +
+                    " where document_number = '" + document + "' order by record_number;";
+                adapter = new NpgsqlDataAdapter(sql, conn);
+                adapter.Fill(dtStatement);
+
+                dataGridView1.DataSource = dtStatement;
+                #region"ヘッダー名"
+                dataGridView1.Columns[0].HeaderText = "大分類";
+                dataGridView1.Columns[1].HeaderText = "品名";
+                dataGridView1.Columns[2].HeaderText = "品物詳細";
+                dataGridView1.Columns[3].HeaderText = "重量";
+                dataGridView1.Columns[4].HeaderText = "単価";
+                dataGridView1.Columns[5].HeaderText = "数量";
+                dataGridView1.Columns[6].HeaderText = "金額";
+                dataGridView1.Columns[7].HeaderText = "備考";
+                #endregion
+
+                #region"フォーマット処理"
+                dataGridView1.Columns[3].DefaultCellStyle.Format = "n1";
+                dataGridView1.Columns[4].DefaultCellStyle.Format = "n0";
+                dataGridView1.Columns[5].DefaultCellStyle.Format = "n0";
+                dataGridView1.Columns[6].DefaultCellStyle.Format = "c0";
+                #endregion
+
+                #region"datagridview の列幅"
+                dataGridView1.Columns[0].Width = 120;
+                dataGridView1.Columns[1].Width = 120;
+                dataGridView1.Columns[2].Width = 250;
+                dataGridView1.Columns[3].Width = 80;
+                dataGridView1.Columns[4].Width = 200;
+                dataGridView1.Columns[5].Width = 60;
+                dataGridView1.Columns[6].Width = 200;
+                dataGridView1.Columns[7].Width = 300;
+                #endregion
+
+                #region"文字の右寄せ"
+                dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView1.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView1.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView1.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                #endregion
+            }
+            #endregion
+
+            #region"成績入力で納品書検索をした際"
+            if (control != 0)
+            {
+                tabControl1.SelectedIndex = 1;
+                client_Button.Text = "顧客変更";
+                client_searchButton1.Text = "顧客変更";
+
+                #region"納品書の表の下"
+
+                //conn.Open();
+                sql = "select * from delivery_m left outer join revisions on upd_code = cast(control_number as text) where control_number = '" + control + "';";
+                cmd = new NpgsqlCommand(sql, conn);
+
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ClientCode = (int)reader["code"];
+                        totalWeightTextBox1.Text = ((decimal)reader["total_weight"]).ToString("n1");
+                        totalCountTextBox1.Text = ((int)reader["total_count"]).ToString("n0");
+                        name.Text = reader["name"].ToString();
+                        titleComboBox.Text = reader["honorific_title"].ToString();
+                        typeComboBox.Text = reader["type"].ToString();
+                        string sealPrint = reader["seaal_print"].ToString();
+                        if (sealPrint == "する")
+                        {
+                            sealY.Checked = true;
+                        }
+                        else if (sealPrint == "しない")
+                        {
+                            sealN.Checked = true;
+                        }
+                        paymentMethodsComboBox.Text = reader["payment_method"].ToString();
+                        PayeeTextBox1.Text = reader["account_payble"].ToString();
+                        string orderDate = reader["order_date"].ToString();
+                        if (!string.IsNullOrEmpty(orderDate))
+                        {
+                            orderDateTimePicker.Value = DateTime.Parse(orderDate);
+                        }
+                        string deliveryDate = reader["delivery_date"].ToString();
+                        if (!string.IsNullOrEmpty(deliveryDate))
+                        {
+                            DeliveryDateTimePicker.Value = DateTime.Parse(deliveryDate);
+                        }
+                        string settlementDate = reader["settlement_date"].ToString();
+                        if (!string.IsNullOrEmpty(settlementDate))
+                        {
+                            SettlementDateTimePicker.Value = DateTime.Parse(settlementDate);
+                        }
+                        CoinComboBox.Text = reader["currency"].ToString();
+                        RemarkRegister.Text = reader["remark"].ToString();
+                        textBox2.Text = reader["reason"].ToString();
+
+                        subTotal2.Text = ((decimal)reader["sub_total"]).ToString("c0");
+                        comboBox11.Text = reader["vat"].ToString();
+                        tax.Text = ((decimal)reader["vat_rate"] / 100).ToString("p");
+                        taxAmount = (decimal)reader["vat_amount"];
+                        if (taxAmount != 0)
+                        {
+                            taxAmount2.Text = taxAmount.ToString();
+                        }
+                        else
+                        {
+                            taxAmount2.Text = "";
+                        }
+                        sumTextBox2.Text = ((decimal)reader["total"]).ToString("c0");
+                    }
+                }
+                #endregion
+                #region"納品書の顧客選択の下"
+                sql = "select * from client_m where code = '" + ClientCode + "';";
+                cmd = new NpgsqlCommand(sql, conn);
+                using (reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        type = (int)reader["type"];
+                        if (type == 0)  //法人のとき
+                        {
+                            #region"計算書の顧客情報（法人）"
+                            typeTextBox.Text = "法人";
+                            companyTextBox.Text = reader["company_name"].ToString();
+                            shopNameTextBox.Text = reader["shop_name"].ToString();
+                            clientNameTextBox.Text = reader["name"].ToString();
+                            #endregion
+                            #region"納品書の顧客情報（法人）"
+                            typeTextBox2.Text = "法人";                                         //種別
+                            companyTextBox2.Text = reader["company_name"].ToString();           //会社名
+                            shopNameTextBox2.Text = reader["shop_name"].ToString();             //店舗名
+                            clientNameTextBox2.Text = reader["name"].ToString();                //担当名
+                            #endregion
+                        }
+                        else if (type == 1)     //個人のとき
+                        {
+                            #region"計算書の顧客情報（個人）"
+                            label16.Text = "氏名";
+                            label17.Text = "生年月日";
+                            label18.Text = "職業";
+                            typeTextBox.Text = "個人";
+                            companyTextBox.Text = reader["name"].ToString();
+                            shopNameTextBox.Text = reader["birthday"].ToString();
+                            clientNameTextBox.Text = reader["occupation"].ToString();
+                            label38.Visible = false;
+                            //registerDateTextBox.Visible = false;
+                            #endregion
+                            #region"納品書の顧客情報（個人）"
+                            typeTextBox2.Text = "個人";
+                            label75.Text = "氏名";
+                            label76.Text = "職業";
+                            label77.Text = "生年月日";
+                            clientNameTextBox2.Text = reader["occupation"].ToString();
+                            companyTextBox2.Text = reader["name"].ToString();
+                            shopNameTextBox2.Text = reader["birthday"].ToString();
+                            label36.Visible = false;
+                            //registerDateTextBox2.Visible = false;
+                            #endregion
+                        }
+                        #region"計算書の顧客情報（法人・個人で共通）"
+                        antiqueLicenceTextBox.Text = reader["antique_license"].ToString();
+                        registerDateTextBox.Text = reader["registration_date"].ToString();
+                        articlesTextBox.Text = reader["aol_financial_shareholder"].ToString();
+                        taxCertificateTextBox.Text = reader["tax_certificate"].ToString();
+                        sealCertificationTextBox.Text = reader["seal_certification"].ToString();
+                        residenceCardTextBox.Text = reader["residence_card"].ToString();
+                        residencePeriodStay = reader["period_stay"].ToString();
+                        if (!string.IsNullOrEmpty(residencePeriodStay))
+                        {
+                            residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);
+                        }
+                        clientRemarksTextBox.Text = reader["remarks"].ToString();
+                        #endregion
+                        #region"納品書の顧客情報（法人・個人で共通）"
+                        registerDateTextBox2.Text = reader["registration_date"].ToString();             //登録日
+                        clientRemarksTextBox2.Text = reader["remarks"].ToString();                      //備考
+                        antiqueLicenceTextBox2.Text = reader["antique_license"].ToString();             //古物商許可証
+                        #endregion
+                        totalWeightTextBox.Text = ((decimal)reader["total_weight"]).ToString("n0");
+                        totalCountTextBox.Text = ((int)reader["total_amount"]).ToString("n0");
+                        SettlementDate = reader["settlement_date"].ToString();
+                        if (!string.IsNullOrEmpty(SettlementDate))
+                        {
+                            settlementBox.Value = DateTime.Parse(SettlementDate);
+                        }
+                        paymentMethodsComboBox.Text = reader["payment_method"].ToString();
+                        DeliveryDate = reader["delivery_date"].ToString();
+                        if (!string.IsNullOrEmpty(DeliveryDate))
+                        {
+                            deliveryDateBox.Value = DateTime.Parse(DeliveryDate);
+                        }
+                        deliveryComboBox.Text = reader["delivery_method"].ToString();
+                        subTotal.Text = ((decimal)reader["sub_total"]).ToString("c0");
+                        sumTextBox.Text = ((decimal)reader["total"]).ToString("c0");
+                        reasonTextBox.Text = reader["reason"].ToString();
+                    }
+                }
+                #endregion
+                #region"納品書の datagridview"
+
+                dataGridView2.Columns.Clear();
+                dataGridView2.Rows.Clear();
+                dataGridView2.AllowUserToAddRows = false;
+                dataGridView2.RowHeadersVisible = false;
+                dataGridView2.RowsAdded -= DataGridView1_RowsAdded;
+                dataGridView2.CellFormatting -= dataGridView1_CellFormatting;
+                dataGridView2.ReadOnly = true;
+
+                sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from delivery_calc A inner join main_category_m B on B.main_category_code = A.main_category_code " +
+                    "inner join item_m C on A.item_code = C.item_code where control_number = '" + control + "' order by record_number;";
+                adapter = new NpgsqlDataAdapter(sql, conn);
+                adapter.Fill(dtDelivery);
+
+                dataGridView1.DataSource = dtDelivery;
+                #region"ヘッダー名"
+                dataGridView2.Columns[0].HeaderText = "大分類";
+                dataGridView2.Columns[1].HeaderText = "品名";
+                dataGridView2.Columns[2].HeaderText = "品物詳細";
+                dataGridView2.Columns[3].HeaderText = "重量";
+                dataGridView2.Columns[4].HeaderText = "単価";
+                dataGridView2.Columns[5].HeaderText = "数量";
+                dataGridView2.Columns[6].HeaderText = "金額";
+                dataGridView2.Columns[7].HeaderText = "備考";
+                #endregion
+
+                #region"フォーマット処理"
+                dataGridView2.Columns[3].DefaultCellStyle.Format = "n1";
+                dataGridView2.Columns[4].DefaultCellStyle.Format = "n0";
+                dataGridView2.Columns[5].DefaultCellStyle.Format = "n0";
+                dataGridView2.Columns[6].DefaultCellStyle.Format = "c0";
+                #endregion
+
+                #region"datagridview の列幅"
+                dataGridView2.Columns[0].Width = 120;
+                dataGridView2.Columns[1].Width = 120;
+                dataGridView2.Columns[2].Width = 250;
+                dataGridView2.Columns[3].Width = 80;
+                dataGridView2.Columns[4].Width = 200;
+                dataGridView2.Columns[5].Width = 60;
+                dataGridView2.Columns[6].Width = 200;
+                dataGridView2.Columns[7].Width = 300;
+                #endregion
+
+                #region"文字の右寄せ"
+                dataGridView2.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView2.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView2.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView2.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                #endregion
+
+                #endregion
+            }
+
+            #endregion
+
+            #region"コメントアウト"
+            //#region "これから選択する場合"
+            //if (count != 0)
+            //{
+            //    if (type == 0)
+            //    {
+            //        //顧客情報 法人
+            //        #region "計算書"
+            //        DataTable clientDt = new DataTable();
+            //        string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and name = '" + client_staff_name + "' and address = '" + address + "';";
+            //        adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
+            //        adapter.Fill(clientDt);
+
+            //        DataRow row2;
+            //        row2 = clientDt.Rows[0];
+            //        //int type = (int)row2["type"];
+
+            //        string companyNmae = row2["company_name"].ToString();
+            //        string shopName = row2["shop_name"].ToString();
+            //        string Staff_name = row2["name"].ToString();
+            //        string register_date = row2["registration_date"].ToString();
+            //        string remarks = row2["remarks"].ToString();
+            //        string antique_license = row2["antique_license"].ToString();
+            //        this.client_Button.Text = "顧客変更";
+            //        typeTextBox.Text = "法人";                    //種別
+            //        companyTextBox.Text = companyNmae;              //会社名   
+            //        registerDateTextBox2.Text = antique_license;              //古物商許可証
+            //        shopNameTextBox.Text = shopName;                    //店舗名
+            //        clientNameTextBox.Text = Staff_name;                //担当名
+            //        registerDateTextBox.Text = register_date;           //登録日
+            //        clientRemarksTextBox.Text = remarks;                //備考
+            //        #endregion
+            //        #region "納品書"
+            //        this.client_searchButton1.Text = "顧客変更";
+            //        typeTextBox2.Text = "法人";                   //種別
+            //        companyTextBox2.Text = companyNmae;             //会社名
+            //        shopNameTextBox2.Text = shopName;               //店舗名
+            //        clientNameTextBox2.Text = Staff_name;           //担当名
+            //        registerDateTextBox2.Text = register_date;      //登録日
+            //        clientRemarksTextBox2.Text = remarks;           //備考
+            //        antiqueLicenceTextBox2.Text = antique_license;                //古物商許可証
+            //        #endregion
+
+            //    }
+            //    else if (type == 1)
+            //    {
+            //        //顧客情報 個人
+            //        DataTable clientDt = new DataTable();
+            //        string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+            //        adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
+            //        adapter.Fill(clientDt);
+
+            //        DataRow row2;
+            //        row2 = clientDt.Rows[0];
+
+            //        string name = row2["name"].ToString();
+            //        string register_date = row2["registration_date"].ToString();
+            //        string remarks = row2["remarks"].ToString();
+            //        string occupation = row2["occupation"].ToString();
+            //        string birthday = row2["birthday"].ToString();
+            //        string antique_license = row2["antique_license"].ToString();
+
+            //        #region "計算書"
+            //        label16.Text = "氏名";
+            //        label17.Text = "生年月日";
+            //        label18.Text = "職業";
+            //        typeTextBox.Text = "個人";
+            //        companyTextBox.Text = name;
+            //        shopNameTextBox.Text = birthday;
+            //        clientNameTextBox.Text = occupation;
+            //        registerDateTextBox.Text = register_date;
+            //        clientRemarksTextBox.Text = remarks;
+            //        registerDateTextBox2.Text = antique_license;
+            //        label38.Visible = false;
+            //        registerDateTextBox.Visible = false;
+            //        #endregion
+            //        #region "納品書"
+            //        typeTextBox2.Text = "個人";
+            //        label75.Text = "氏名";
+            //        label76.Text = "職業";
+            //        label77.Text = "生年月日";
+            //        clientNameTextBox2.Text = occupation;
+            //        companyTextBox2.Text = name;
+            //        shopNameTextBox2.Text = birthday;
+            //        registerDateTextBox2.Text = register_date;
+            //        clientRemarksTextBox2.Text = remarks;
+            //        antiqueLicenceTextBox2.Text = antique_license;
+            //        label36.Visible = false;
+            //        registerDateTextBox2.Visible = false;
+            //        #endregion
+            //    }
+            //}
+            //#endregion
+            //#region "１度選択して戻る場合"
+            //else if (count == 0 && (address != null && client_staff_name != null) && data == null)
+            //{
+            //    if (type == 0)
+            //    {
+            //        //顧客情報 法人
+            //        #region "計算書"
+            //        DataTable clientDt = new DataTable();
+            //        string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and name = '" + client_staff_name + "' and address = '" + address + "';";
+            //        adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
+            //        adapter.Fill(clientDt);
+
+            //        DataRow row2;
+            //        row2 = clientDt.Rows[0];
+            //        //int type = (int)row2["type"];
+
+            //        string companyNmae = row2["company_name"].ToString();
+            //        string shopName = row2["shop_name"].ToString();
+            //        string Staff_name = row2["name"].ToString();
+            //        string register_date = row2["registration_date"].ToString();
+            //        string remarks = row2["remarks"].ToString();
+            //        string antique_license = row2["antique_license"].ToString();
+            //        this.client_Button.Text = "顧客変更";
+            //        typeTextBox.Text = "法人";                    //種別
+            //        companyTextBox.Text = companyNmae;              //会社名   
+            //        registerDateTextBox2.Text = antique_license;              //古物商許可証
+            //        shopNameTextBox.Text = shopName;                    //店舗名
+            //        clientNameTextBox.Text = Staff_name;                //担当名
+            //        registerDateTextBox.Text = register_date;           //登録日
+            //        clientRemarksTextBox.Text = remarks;                //備考
+            //        #endregion
+            //        #region "納品書"
+            //        this.client_searchButton1.Text = "顧客変更";
+            //        typeTextBox2.Text = "法人";                     //種別
+            //        companyTextBox2.Text = companyNmae;             //会社名
+            //        shopNameTextBox2.Text = shopName;               //店舗名
+            //        clientNameTextBox2.Text = Staff_name;           //担当名
+            //        registerDateTextBox2.Text = register_date;      //登録日
+            //        clientRemarksTextBox2.Text = remarks;           //備考
+            //        antiqueLicenceTextBox2.Text = antique_license;                //古物商許可証
+            //        #endregion
+
+            //    }
+            //    else if (type == 1)
+            //    {
+            //        //顧客情報 個人
+            //        DataTable clientDt = new DataTable();
+            //        string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
+            //        adapter = new NpgsqlDataAdapter(str_sql_individual, conn);
+            //        adapter.Fill(clientDt);
+
+            //        DataRow row2;
+            //        row2 = clientDt.Rows[0];
+
+            //        string name = row2["name"].ToString();
+            //        string register_date = row2["registration_date"].ToString();
+            //        string remarks = row2["remarks"].ToString();
+            //        string occupation = row2["occupation"].ToString();
+            //        string birthday = row2["birthday"].ToString();
+            //        string antique_license = row2["antique_license"].ToString();
+
+            //        #region "計算書"
+            //        label16.Text = "氏名";
+            //        label17.Text = "生年月日";
+            //        label18.Text = "職業";
+            //        typeTextBox.Text = "個人";
+            //        companyTextBox.Text = name;
+            //        shopNameTextBox.Text = birthday;
+            //        clientNameTextBox.Text = occupation;
+            //        registerDateTextBox.Text = register_date;
+            //        clientRemarksTextBox.Text = remarks;
+            //        registerDateTextBox2.Text = antique_license;
+            //        label38.Visible = false;
+            //        registerDateTextBox.Visible = false;
+            //        #endregion
+
+            //        #region "納品書"
+            //        typeTextBox2.Text = "個人";
+            //        label75.Text = "氏名";
+            //        label76.Text = "職業";
+            //        label77.Text = "生年月日";
+            //        clientNameTextBox2.Text = occupation;
+            //        companyTextBox2.Text = name;
+            //        shopNameTextBox2.Text = birthday;
+            //        registerDateTextBox2.Text = register_date;
+            //        clientRemarksTextBox2.Text = remarks;
+            //        antiqueLicenceTextBox2.Text = antique_license;
+            //        label36.Visible = false;
+            //        registerDateTextBox2.Visible = false;
+            //        #endregion
+            //    }
+            //}
+            //#endregion
+            #endregion
 
             NotLoad = true;
             NotLoad1 = true;
             sealN.Checked = true;
+
+            conn.Close();
+
         }
 
 
@@ -2531,7 +2935,7 @@ namespace Flawless_ex
 
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
-                    string Staff_name = row2["staff_name"].ToString();
+                    string Staff_name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
                     remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
@@ -2554,7 +2958,10 @@ namespace Flawless_ex
                     taxCertificateTextBox.Text = taxCertificateText;                                    //納税
                     sealCertificationTextBox.Text = sealCertificateText;                                //印鑑
                     residenceCardTextBox.Text = residenceCardText;                                      //在留カード
-                    residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);          //在留期限
+                    if (!string.IsNullOrEmpty(residencePeriodStay))
+                    {
+                        residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);          //在留期限
+                    }
                     #endregion
                     #region "納品書"
                     this.client_searchButton1.Text = "顧客変更";
@@ -2610,7 +3017,10 @@ namespace Flawless_ex
                     taxCertificateTextBox.Text = taxCertificateText;                                    //納税
                     sealCertificationTextBox.Text = sealCertificateText;                                //印鑑
                     residenceCardTextBox.Text = residenceCardText;                                      //在留カード
-                    residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);          //在留期限
+                    if (!string.IsNullOrEmpty(residencePeriodStay))
+                    {
+                        residencePerioddatetimepicker.Value = DateTime.Parse(residencePeriodStay);          //在留期限
+                    }
                     #endregion
 
                     #region "納品書"
@@ -2639,7 +3049,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -2649,7 +3059,7 @@ namespace Flawless_ex
 
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
-                    string Staff_name = row2["staff_name"].ToString();
+                    string Staff_name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
                     remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
@@ -2793,6 +3203,7 @@ namespace Flawless_ex
             string DeliveyMethod = deliveryComboBox.Text;
             SettlementMethod = paymentMethodsComboBox.Text;
             SettlementDate = settlementBox.Text;
+            DateTime settlementDate = DateTime.Parse(SettlementDate);
             DeliveryDate = deliveryDateBox.Text;
             DateTime date = DateTime.Now;
             DateTime AssessmentDate = date.Date;
@@ -2800,7 +3211,7 @@ namespace Flawless_ex
             using (transaction = conn.BeginTransaction())
             {
                 Sql = "update statement_data set (code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, type, assessment_date)" +
-                    " = ('" + ClientCode + "','" + TotalWeight + "','" + TotalCount + "','" + sum + "','" + TaxAmount + "','" + sum + "','" + DeliveyMethod + "','" + SettlementMethod + "','" + SettlementDate + "','" + DeliveryDate + "','" + type + "','" + AssessmentDate + "')" +
+                    " = ('" + ClientCode + "','" + TotalWeight + "','" + TotalCount + "','" + sum + "','" + TaxAmount + "','" + sum + "','" + DeliveyMethod + "','" + SettlementMethod + "','" + settlementDate + "','" + DeliveryDate + "','" + type + "','" + AssessmentDate + "')" +
                     "where document_number = '" + documentNumberTextBox.Text + "';";
                 cmd = new NpgsqlCommand(Sql, conn);
                 cmd.ExecuteNonQuery();
@@ -2942,7 +3353,7 @@ namespace Flawless_ex
             int index = dataGridView1.Rows.Count;
 
             #region"計算書　表のデータ　初回登録"
-            if (index == 1)
+            if (index == 2)
             {
                 index--;
             }
@@ -2955,6 +3366,15 @@ namespace Flawless_ex
 
             for (int i = 0; i < index; i++)
             {
+                #region"値の初期化"
+                ItemDetail = "";
+                Weight = 0;
+                UnitPrice = 0;
+                COUNT = 0;
+                Money = 0;
+                Remark = "";
+                #endregion
+
                 mainCategoryCode = int.Parse(dataGridView1[1, i].Value.ToString());
 
                 itemCode = int.Parse(dataGridView1[2, i].Value.ToString());
@@ -3003,6 +3423,7 @@ namespace Flawless_ex
             MessageBox.Show("計算書の登録をしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             addButton.Enabled = false;
             previewButton.Enabled = true;
+            RecordListButton.Enabled=true;
 
             #region"一時コメントアウト"
 
@@ -3075,7 +3496,7 @@ namespace Flawless_ex
             //        if (!string.IsNullOrEmpty(typeTextBox.Text)) {
             //            if (typeTextBox.Text == "法人")
             //            {
-            //                NUMBER = @"select antique_number, phone_number from client_m_corporate where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+            //                NUMBER = @"select antique_number, phone_number from client_m_corporate where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
             //                cmd = new NpgsqlCommand(NUMBER, conn);
             //                using (reader = cmd.ExecuteReader())
             //                {
@@ -3120,7 +3541,7 @@ namespace Flawless_ex
             //            {
             //                if (typeTextBox.Text == "法人")
             //                {
-            //                    string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+            //                    string SQL_STR = @"update client_m_corporate set aol_financial_shareholder='" + AolFinancialShareholder + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
             //                    cmd = new NpgsqlCommand(SQL_STR, conn);
             //                    cmd.ExecuteReader();
 
@@ -3141,7 +3562,7 @@ namespace Flawless_ex
             //            {
             //                if (typeTextBox.Text == "法人")
             //                {
-            //                    string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+            //                    string SQL_STR = @"update client_m_corporate set tax_certificate='" + TaxCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
             //                    cmd = new NpgsqlCommand(SQL_STR, conn);
             //                    cmd.ExecuteReader();
             //                }
@@ -3161,7 +3582,7 @@ namespace Flawless_ex
             //            {
             //                if (typeTextBox.Text == "法人")
             //                {
-            //                    string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+            //                    string SQL_STR = @"update client_m_corporate set seal_certification='" + SealCertification + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
             //                    cmd = new NpgsqlCommand(SQL_STR, conn);
             //                    cmd.ExecuteReader();
             //                }
@@ -3182,7 +3603,7 @@ namespace Flawless_ex
             //            {
             //                if (typeTextBox.Text == "法人")
             //                {
-            //                    string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+            //                    string SQL_STR = @"update client_m_corporate set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
             //                    cmd = new NpgsqlCommand(SQL_STR, conn);
             //                    cmd.ExecuteReader();
             //                }
@@ -3203,7 +3624,7 @@ namespace Flawless_ex
             //            {
             //                if (typeTextBox.Text == "法人")
             //                {
-            //                    string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and staff_name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
+            //                    string SQL_STR = @"update client_m_corporate set antique_license ='" + AntiqueLicence + "' where company_name ='" + CompanyName + "' and shop_name ='" + ShopName + "' and name ='" + client_staff_name + "' and registration_date='" + registerDateTextBox.Text + "';";
             //                    cmd = new NpgsqlCommand(SQL_STR, conn);
             //                    cmd.ExecuteReader();
             //                }
@@ -3245,7 +3666,7 @@ namespace Flawless_ex
             //        DateTime dat1 = DateTime.Now;
             //        DateTime dtToday = dat1.Date;
             //        string c = dtToday.ToString("yyyy年MM月dd日");
-            //        sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, staff_name, name, type, birthday, occupation, address, assessment_date) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "','" + c + "');";
+            //        sql_str = "Insert into statement_data (antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, delivery_method, payment_method, settlement_date, delivery_date, document_number, company_name, shop_name, name, name, type, birthday, occupation, address, assessment_date) VALUES ('" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + DeliveryMethod + "' , '" + PaymentMethod + "' , '" + SettlementDate + "' , '" + DeliveryDate + "', '" + DocumentNumber + "','" + CompanyName + "','" + ShopName + "','" + StaffName + "','" + Name + "','" + TYPE + "','" + Birthday + "','" + Work + "', '" + address + "','" + c + "');";
             //        sql_str3 = "Insert into statement_data_revisions (document_number, antique_number, id_number, staff_code, total_weight, total_amount, sub_total, tax_amount, total, settlement_date, delivery_date, delivery_method, payment_method, registration_date, insert_name ) VALUES ('" + DocumentNumber +  "','" + AntiqueNumber + "','" + ID_Number + "' , '" + staff_id + "' , '" + TotalWeight + "' ,  '" + Amount + "' , '" + SubTotal + "', '" + TaxAmount + "' , '" + Total + "' , '" + SettlementDate + "','" + DeliveryDate  +  "','" + DeliveryMethod + "' , '" + PaymentMethod + "' , '"  + c + "' , "  +  staff_id +  ");";
             //    }
             //    else
@@ -3253,7 +3674,7 @@ namespace Flawless_ex
             //        DateTime dat1 = DateTime.Now;
             //        DateTime dtToday = dat1.Date;
             //        string c = dtToday.ToString("yyyy年MM月dd日");
-            //        sql_str = "UPDATE statement_data SET antique_number = " + AntiqueNumber + ", id_number = "+ ID_Number + ", staff_code = " + staff_id + ", total_weight = " + TotalWeight + " , total_amount = " + Amount + ", sub_total = " + SubTotal + ", tax_amount = " + TaxAmount + ", total = " + Total + ", delivery_method = '" + DeliveryMethod + "', payment_method = '" + PaymentMethod + "', settlement_date = '" + SettlementDate + "', delivery_date = '" + DeliveryDate + "',  company_name = '" + CompanyName + "', shop_name = '" + ShopName + "', staff_name = '" + StaffName + "', name = '" + Name  + "', type = " + TYPE + ", birthday = '" + Birthday + "', occupation = '" + Work  + "', address = '" + address + "', assessment_date = '" + c + "' , reason = '" + Reason + "' Where document_number = '" + DocumentNumber + "';";
+            //        sql_str = "UPDATE statement_data SET antique_number = " + AntiqueNumber + ", id_number = "+ ID_Number + ", staff_code = " + staff_id + ", total_weight = " + TotalWeight + " , total_amount = " + Amount + ", sub_total = " + SubTotal + ", tax_amount = " + TaxAmount + ", total = " + Total + ", delivery_method = '" + DeliveryMethod + "', payment_method = '" + PaymentMethod + "', settlement_date = '" + SettlementDate + "', delivery_date = '" + DeliveryDate + "',  company_name = '" + CompanyName + "', shop_name = '" + ShopName + "', name = '" + StaffName + "', name = '" + Name  + "', type = " + TYPE + ", birthday = '" + Birthday + "', occupation = '" + Work  + "', address = '" + address + "', assessment_date = '" + c + "' , reason = '" + Reason + "' Where document_number = '" + DocumentNumber + "';";
             //    }
 
 
@@ -12267,20 +12688,22 @@ namespace Flawless_ex
 
             #region"納品書枠外"
             //管理番号は Number、区分（法人 or 個人は type）、顧客番号は ClientCode、担当者コードは staff_id、小計・合計は sum、消費税額は TaxAmount、納品日は DeliveryDate、
-            //決済日は SettlementDate、支払方法は SettlementMethod、総数は TotalCount、総重量は TotalWeight
+            //決済日は SettlementDate、支払方法は SettlementMethod、総数は TotalCount、総重量は TotalWeight、消費税率は Tax
 
             sum = SUB;                                      //小計・合計
             string vatType = comboBox11.Text;               //消費税区分
-            string taxRate = tax.Text;                      //消費税率
             if (!string.IsNullOrEmpty(taxAmount2.Text))
             {
                 TaxAmount = decimal.Parse(taxAmount2.Text);     //消費税額
             }
+
+            string Name = name.Text;
             string honorificTitle = titleComboBox.Text;
             string deliveryOrbill = typeComboBox.Text;
             string orderDate = orderDateTimePicker.Text;
             DeliveryDate = DeliveryDateTimePicker.Text;
             SettlementDate = SettlementDateTimePicker.Text;
+            DateTime settlementDate = DateTime.Parse(SettlementDate);
             string SeaalPrint = "";
             if (sealY.Checked)
             {
@@ -12293,7 +12716,7 @@ namespace Flawless_ex
             SettlementMethod = paymentMethodComboBox.Text;
             string accountPayable = PayeeTextBox1.Text;
             string Coin = CoinComboBox.Text;
-            
+
             if (!string.IsNullOrEmpty(totalCountTextBox1.Text))
             {
                 TotalCount = decimal.Parse(totalCountTextBox1.Text);
@@ -12341,9 +12764,9 @@ namespace Flawless_ex
             using (transaction = conn.BeginTransaction())
             {
                 Sql = "update delivery_m set (control_number, code, sub_total, vat, vat_rate, vat_amount, total, honorific_title, type, order_date," +
-                    " delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, total_count, total_weight, types1, remark)" +
-                    " = ('"+Number+"','"+ClientCode+"','"+sum+"','"+vatType+ "','"+taxRate+ "','"+TaxAmount+ "','"+sum+ "','"+honorificTitle+ "','"+deliveryOrbill+ "','"+orderDate+"'" +
-                    ",'"+DeliveryDate+ "','"+SettlementDate+ "','"+SeaalPrint+ "','"+SettlementMethod+ "','"+accountPayable+ "','"+Coin+ "','"+TotalCount+ "','"+TotalWeight+ "','"+type+"', '"+deliveryRemarks+"')" +
+                    " delivery_date, settlement_date, seaal_print, payment_method, account_payble, currency, total_count, total_weight, types1, remark, name)" +
+                    " = ('" + Number + "','" + ClientCode + "','" + sum + "','" + vatType + "','" + Tax + "','" + TaxAmount + "','" + sum + "','" + honorificTitle + "','" + deliveryOrbill + "','" + orderDate + "','" + DeliveryDate + "'," +
+                    "'" + settlementDate + "','" + SeaalPrint + "','" + SettlementMethod + "','" + accountPayable + "','" + Coin + "','" + TotalCount + "','" + TotalWeight + "','" + type + "', '" + deliveryRemarks + "', '" + Name + "')" +
                     "where control_number = '" + Number + "';";
                 cmd = new NpgsqlCommand(Sql, conn);
                 cmd.ExecuteNonQuery();
@@ -12352,67 +12775,72 @@ namespace Flawless_ex
             #endregion
 
             #region"納品書表"
-            foreach (DataGridViewRow Row in dataGridView2.Rows)
+            int index = dataGridView2.Rows.Count;
+            #region"納品書　表のデータ　初回登録"
+            if (index == 2)
             {
-                int index = dataGridView2.Rows.Count;
-
-                #region"計算書　表のデータ　初回登録"
-                if (index == 1)
-                {
-                    index--;
-                }
-
-                if (dataGridView2.Rows[index - 1].IsNewRow)
-                {
-                    index--;
-                }
-
-                for (int i = 0; i < index; i++)
-                {
-                    mainCategoryCode = int.Parse(dataGridView2[1, i].Value.ToString());
-
-                    itemCode = int.Parse(dataGridView2[2, i].Value.ToString());
-
-                    if (dataGridView2.Rows[i].Cells[3].Value != null && dataGridView2.Rows[i].Cells[3].Value.ToString() != "")
-                    {
-                        ItemDetail = dataGridView2[3, i].Value.ToString();
-                    }
-
-                    if (dataGridView2.Rows[i].Cells[4].Value != null && dataGridView2.Rows[i].Cells[4].Value.ToString() != "")
-                    {
-                        Weight = decimal.Parse(dataGridView2[4, i].Value.ToString());
-                    }
-
-                    if (dataGridView2.Rows[i].Cells[5].Value != null && dataGridView2.Rows[i].Cells[5].Value.ToString() != "")
-                    {
-                        UnitPrice = decimal.Parse(dataGridView2[5, i].Value.ToString());
-                    }
-
-                    if (dataGridView2.Rows[i].Cells[6].Value != null && dataGridView2.Rows[i].Cells[6].Value.ToString() != "") 
-                    {
-                        COUNT = int.Parse(dataGridView2[6, i].Value.ToString());
-                    }
-
-                    if (dataGridView2.Rows[i].Cells[7].Value != null && dataGridView2.Rows[i].Cells[7].Value.ToString() != "") 
-                    {
-                        Money = decimal.Parse(dataGridView2[7, i].Value.ToString().Substring(1));
-                    }
-
-                    if (dataGridView2.Rows[i].Cells[8].Value != null && dataGridView2.Rows[i].Cells[8].Value.ToString() != "")
-                    {
-                        Remark = dataGridView2[8, i].Value.ToString();
-                    }
-
-                    record = i + 1;
-
-                    Sql = "insert into statement_calc_data (main_category_code, item_code, weight, count, unit_price, amount, remarks, document_number, detail, record_number)" +
-                        " values ('" + MainCategoryCode + "','" + itemCode + "','" + Weight + "','" + COUNT + "','" + UnitPrice + "','" + Money + "','" + Remark + "'," +
-                        "'" + documentNumberTextBox.Text + "', '" + ItemDetail + "','" + record + "');";
-                    cmd = new NpgsqlCommand(Sql, conn);
-                    cmd.ExecuteNonQuery();
-                }
-                #endregion
+                index--;
             }
+
+            if (dataGridView2.Rows[index - 1].IsNewRow)
+            {
+                index--;
+            }
+
+            for (int i = 0; i < index; i++)
+            {
+                #region"値の初期化"
+                ItemDetail = "";
+                Weight = 0;
+                UnitPrice = 0;
+                COUNT = 0;
+                Money = 0;
+                Remark = "";
+                #endregion
+
+                mainCategoryCode = int.Parse(dataGridView2[1, i].Value.ToString());
+
+                itemCode = int.Parse(dataGridView2[2, i].Value.ToString());
+
+                if (dataGridView2.Rows[i].Cells[3].Value != null && dataGridView2.Rows[i].Cells[3].Value.ToString() != "")
+                {
+                    ItemDetail = dataGridView2[3, i].Value.ToString();
+                }
+
+                if (dataGridView2.Rows[i].Cells[4].Value != null && dataGridView2.Rows[i].Cells[4].Value.ToString() != "")
+                {
+                    Weight = decimal.Parse(dataGridView2[4, i].Value.ToString());
+                }
+
+                if (dataGridView2.Rows[i].Cells[5].Value != null && dataGridView2.Rows[i].Cells[5].Value.ToString() != "")
+                {
+                    UnitPrice = decimal.Parse(dataGridView2[5, i].Value.ToString());
+                }
+
+                if (dataGridView2.Rows[i].Cells[6].Value != null && dataGridView2.Rows[i].Cells[6].Value.ToString() != "")
+                {
+                    COUNT = int.Parse(dataGridView2[6, i].Value.ToString());
+                }
+
+                if (dataGridView2.Rows[i].Cells[7].Value != null && dataGridView2.Rows[i].Cells[7].Value.ToString() != "")
+                {
+                    Money = decimal.Parse(dataGridView2[7, i].Value.ToString().Substring(1));
+                }
+
+                if (dataGridView2.Rows[i].Cells[8].Value != null && dataGridView2.Rows[i].Cells[8].Value.ToString() != "")
+                {
+                    Remark = dataGridView2[8, i].Value.ToString();
+                }
+
+                record = i + 1;
+
+                Sql = "insert into delivery_calc (main_category_code, item_code, weight, count, unit_price, amount, remarks, control_number, detail, record_number)" +
+                    " values ('" + MainCategoryCode + "','" + itemCode + "','" + Weight + "','" + COUNT + "','" + UnitPrice + "','" + Money + "','" + Remark + "'," +
+                    "'" + documentNumberTextBox2.Text + "', '" + ItemDetail + "','" + record + "');";
+                cmd = new NpgsqlCommand(Sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+            #endregion
             #endregion
 
             conn.Close();
@@ -12514,7 +12942,7 @@ namespace Flawless_ex
 
             //        NpgsqlDataAdapter adapterA;
             //        DataTable clientDt = new DataTable();
-            //        string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+            //        string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and name = '" + client_staff_name + "' and address = '" + address + "';";
             //        adapterA = new NpgsqlDataAdapter(str_sql_corporate, connA);
             //        adapterA.Fill(clientDt);
 
@@ -13629,7 +14057,7 @@ namespace Flawless_ex
             //        //connA.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             //        NpgsqlDataAdapter adapterA;
             //        DataTable clientDt = new DataTable();
-            //        string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+            //        string str_sql_corporate = "select * from client_m_corporate where invalid = 0 and type = 0 and name = '" + client_staff_name + "' and address = '" + address + "';";
             //        adapterA = new NpgsqlDataAdapter(str_sql_corporate, connA);
             //        adapterA.Fill(clientDt);
 
@@ -14619,11 +15047,51 @@ namespace Flawless_ex
         #region"計算書　印刷プレビュー"
         private void previewButton_Click(object sender, EventArgs e)
         {
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+
+            conn.Open();
+
             //計算書印刷プレビュー
             PrintDocument pd = new PrintDocument();
             pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
             //pd.Print();
             printPreviewDialog1.Document = pd;
+
+
+            string sql = "";
+
+            #region"顧客番号、受渡日、決済日、決済方法、合計金額、総数"
+            sql = "select * from statement_data where document_number = '" + documentNumberTextBox.Text + "';";
+            adapter = new NpgsqlDataAdapter(sql, conn);
+            adapter.Fill(statementTotalTable);
+
+            cmd = new NpgsqlCommand(sql, conn);
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    ClientCode = (int)reader["code"];
+                }
+            }
+            #endregion
+
+            #region"顧客情報"
+            sql = "select * from client_m where code = '" + ClientCode + "';";
+            adapter = new NpgsqlDataAdapter(sql, conn);
+            adapter.Fill(clientTable);
+            #endregion
+
+            string sql_PreviewCount = "select count(*) from statement_calc_data where document_number = '" + documentNumberTextBox.Text + "';";
+            cmd = new NpgsqlCommand(sql_PreviewCount, conn);
+            PreviewRow = int.Parse(cmd.ExecuteScalar().ToString());
+
+            string sql_StatementPreview = "select * from statement_calc_data A inner join item_m B on A.item_code = B.item_code" +
+                " where document_number = '" + documentNumberTextBox.Text + "' order by A.record_number;";
+            adapter = new NpgsqlDataAdapter(sql_StatementPreview, conn);
+            adapter.Fill(table);
+
+            conn.Close();
             DialogResult dr = printPreviewDialog1.ShowDialog();
         }
 
@@ -14637,6 +15105,7 @@ namespace Flawless_ex
 
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
+
             //標準テキスト
             Font font = new Font("MS Pゴシック", 10.5f, 0, GraphicsUnit.Pixel);
             Font font1 = new Font("MS Pゴシック", 20f, FontStyle.Bold);
@@ -14659,12 +15128,13 @@ namespace Flawless_ex
             StringFormat stringFormat2 = new StringFormat();
             stringFormat2.Alignment = StringAlignment.Near;
             #endregion
-
             #region"表の変数"
-            int width = 100;                        
+            int width = 100;
             int widthLong = 130;                    //品物詳細と備考の幅
             int widthWeight = 80;                   //重量の幅
             int countWidth = 60;                    //数量の幅
+            int widthLong1 = 120;                   //税額金額の幅
+            int widthLong2 = 140;                   //小計と合計金額の幅
             int d = 50;
             int d3 = 60;
             int height = 20;
@@ -14674,11 +15144,19 @@ namespace Flawless_ex
 
             int x1 = 50;           //表の x 座標
             int x2 = x1 + width;
-            int x3 = x2 + width;
-            int x4 = x3 + width;
+            int x3 = x2 + widthLong;
+            int x4 = x3 + widthWeight;
             int x5 = x4 + width;
-            int x6 = x5 + width;
+            int x6 = x5 + countWidth;
             int x7 = x6 + width;
+
+            int x01 = 50;
+            int x02 = x01 + width;
+            int x03 = x02 + widthLong2;
+            int x04 = x03 + width;
+            int x05 = x04 + widthLong1;
+            int x06 = x05 + width;
+
 
             int y1 = 200;               //上表の y 座標（１行目）
             int y12 = y1 + height;      //上表のy 座標（２行目）
@@ -14694,6 +15172,8 @@ namespace Flawless_ex
             int y112 = y111 + height;
             int y113 = y112 + height;
             int y114 = y113 + height;
+            int y115 = y114 + height;
+            int y116 = y115 + height;
 
             int y2 = 650;               //下表の y 座標（１行目）
             int y22 = y2 + height;      //下表のy 座標（２行目）
@@ -14709,16 +15189,41 @@ namespace Flawless_ex
             int y212 = y211 + height;
             int y213 = y212 + height;
             int y214 = y213 + height;
+            int y215 = y214 + height;
 
+            #endregion
+
+            #region"値の挿入"
+            DataRow row = statementTotalTable.Rows[0];
+            string deliveryDate = DateTime.Parse(row["delivery_date"].ToString()).ToShortDateString();
+            string settlementData = DateTime.Parse(row["settlement_date"].ToString()).ToShortTimeString();
+            string settlementMethod = row["payment_method"].ToString();
+            totalMoney = ((decimal)row["total"]).ToString("c0");
+            totalWeight = ((decimal)row["total_weight"]).ToString("n1");
+            totalCount = ((int)row["total_amount"]).ToString("n0");
+
+            DataRow row1 = clientTable.Rows[0];
+            int Type = (int)row1["type"];
+            string companyName = row1["company_name"].ToString();
+            string shopName = row1["shop_name"].ToString();
+            string name = row1["name"].ToString();
+            string tel = row1["phone_number"].ToString();
+            string fax = row1["fax_number"].ToString();
+            string Address = row1["address"].ToString();
+            string birthday = row1["birthday"].ToString();
+            string occupation = row1["occupation"].ToString();
+            antiqueLicense = row1["antique_license"].ToString();
             #endregion
 
             #region"法人、個人事業主、一般で共通"
             //一番上
-
             e.Graphics.DrawString("計算書（お客様控え）", font1, brush, new PointF(280, 30));
 
-            //右上
+            //伝票番号
+            e.Graphics.DrawString(documentNumberTextBox.Text, font, brush, new PointF(680, 40));
+            e.Graphics.DrawString(documentNumberTextBox.Text, font, brush, new PointF(680, 600));
 
+            //右上
             e.Graphics.DrawString("株式会社 Flawless", font, brush, new PointF(550, 80));
             e.Graphics.DrawString("〒110-0005", font, brush, new PointF(550, 100));
             e.Graphics.DrawString("東京都台東区上野5-8-5 フロンティア秋葉原３階", font, brush, new PointF(550, 120));
@@ -14726,98 +15231,65 @@ namespace Flawless_ex
             e.Graphics.DrawString("決済日", font, brush, new PointF(600, 160));
             e.Graphics.DrawString("決済方法", font, brush, new PointF(600, 180));
 
-            e.Graphics.DrawString("：" + deliveryDateBox.Value.ToShortDateString(), font, brush, new PointF(600 + d3, 140));    //受け渡し日
-            e.Graphics.DrawString("：" + settlementBox.Value.ToShortDateString(), font, brush, new PointF(600 + d3, 160));    //決済日
-            e.Graphics.DrawString("：" + paymentMethodsComboBox.Text, font, brush, new PointF(600 + d3, 180));    //決済方法
+            e.Graphics.DrawString("：" + deliveryDate, font, brush, new PointF(600 + d3, 140));    //受け渡し日
+            e.Graphics.DrawString("：" + settlementData, font, brush, new PointF(600 + d3, 160));    //決済日
+            e.Graphics.DrawString("：" + settlementMethod, font, brush, new PointF(600 + d3, 180));    //決済方法
 
             //真ん中
 
-            e.Graphics.DrawString("計算書（兼領収書）", font1, brush, new PointF(280, 530));
+            e.Graphics.DrawString("計算書（兼領収書）", font1, brush, new PointF(280, 550));
             e.Graphics.DrawString("株式会社 Flawless 御中", font2, brush, new PointF(x1, 600));
 
             //右下
 
-            e.Graphics.DrawString("受け渡し日", font, brush, new PointF(570, 950));
-            e.Graphics.DrawString("決済日", font, brush, new PointF(570, 970));
-            e.Graphics.DrawString("決済方法", font, brush, new PointF(570, 990));
-            e.Graphics.DrawString("上記の通り領収致しました。", font, brush, new PointF(520, 1010));
-            e.Graphics.DrawString("署名", font3, brush, new PointF(470, 1050));
-            e.Graphics.DrawString("印", font, brush, new PointF(730, 1000));
-            e.Graphics.DrawString("署名のないものは無効", font, brush, new PointF(570, 1080));
+            e.Graphics.DrawString("受け渡し日", font, brush, new PointF(570, 970));
+            e.Graphics.DrawString("決済日", font, brush, new PointF(570, 990));
+            e.Graphics.DrawString("決済方法", font, brush, new PointF(570, 1010));
+            e.Graphics.DrawString("上記の通り領収致しました。", font, brush, new PointF(520, 1030));
+            e.Graphics.DrawString("署名", font3, brush, new PointF(470, 1070));
+            e.Graphics.DrawString("印", font, brush, new PointF(730, 1020));
+            e.Graphics.DrawString("署名のないものは無効", font, brush, new PointF(570, 1100));
 
-            e.Graphics.DrawString("：" + deliveryDateBox.Value.ToShortDateString(), font, brush, new PointF(570 + d3, 950));    //受け渡し日
-            e.Graphics.DrawString("：" + settlementBox.Value.ToShortDateString(), font, brush, new PointF(570 + d3, 970));    //決済日
-            e.Graphics.DrawString("：" + paymentMethodsComboBox.Text, font, brush, new PointF(570 + d3, 990));    //決済方法
-            e.Graphics.DrawString("：", font3, brush, new PointF(450 + d, 1050));   //署名
+            e.Graphics.DrawString("：" + deliveryDate, font, brush, new PointF(570 + d3, 970));    //受け渡し日
+            e.Graphics.DrawString("：" + settlementData, font, brush, new PointF(570 + d3, 990));    //決済日
+            e.Graphics.DrawString("：" + settlementMethod, font, brush, new PointF(570 + d3, 1010));    //決済方法
+            e.Graphics.DrawString("：", font3, brush, new PointF(450 + d, 1070));   //署名
 
-            e.Graphics.DrawRectangle(p, 470, 1070, 250, 0.1f);            //署名下の下線
-            e.Graphics.DrawRectangle(p, 730 - d2, 1000 - d2, d2 * 2 + 10, d2 * 2 + 10);         //印の枠
+            e.Graphics.DrawRectangle(p, 470, 1090, 250, 0.1f);            //署名下の下線
+            e.Graphics.DrawRectangle(p, 730 - d2, 1020 - d2, d2 * 2 + 10, d2 * 2 + 10);         //印の枠
             #endregion
 
-            PostgreSQL postgre = new PostgreSQL();
-            conn = postgre.connection();
-            conn.Open();
             #region"ページ上のお客様情報"
             //法人の場合
 
-            if (type == 0)
+            if (Type == 0)
             {
-                DataTable clientDt1 = new DataTable();
-                string str_sql_corporate = "select * from client_m where code = '" + ClientCode + "';";
-
-                NpgsqlDataAdapter adapter1 = new NpgsqlDataAdapter(str_sql_corporate, conn);
-                adapter1.Fill(clientDt1);
-
-                DataRow row2;
-                row2 = clientDt1.Rows[0];
-
-                string CompanyName = row2["company_name"].ToString();
-                string ShopName = row2["shop_name"].ToString();
-                string ClientName = row2["staff_name"].ToString();
-                string tel = row2["phone_number"].ToString();
-                string fax = row2["fax_number"].ToString();
-
-
                 e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 80));
                 e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 100));
                 e.Graphics.DrawString("担当者名", font, brush, new PointF(x1, 120));
                 e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 140));
                 e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 160));
 
-                e.Graphics.DrawString("：" + CompanyName, font, brush, new PointF(x1 + d, 80));
-                e.Graphics.DrawString("：" + ShopName, font, brush, new PointF(x1 + d, 100));
-                e.Graphics.DrawString("：" + ClientName + "様", font, brush, new PointF(x1 + d, 120));
+                e.Graphics.DrawString("：" + companyName, font, brush, new PointF(x1 + d, 80));
+                e.Graphics.DrawString("：" + shopName, font, brush, new PointF(x1 + d, 100));
+                e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 120));
                 e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 140));
                 e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 160));
             }
-
-            //個人の場合
-            else if (type == 1)
+            #region"個人の場合"
+            else if (Type == 1)
             {
-                DataTable clientDt2 = new DataTable();
-                string str_sql_individual = "select * from client_m where code = '" + ClientCode + "';";
-
-                NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(str_sql_individual, conn);
-                adapter2.Fill(clientDt2);
-
-                DataRow row2;
-                row2 = clientDt2.Rows[0];
-
-                string NAME = row2["name"].ToString();
-                address = row2["address"].ToString();
-                string tel = row2["phone_number"].ToString();
-                string fax = row2["fax_number"].ToString();
-
-                if (!string.IsNullOrEmpty(registerDateTextBox2.Text))     //個人事業主の場合
+                if (!string.IsNullOrEmpty(antiqueLicense))     //個人事業主の場合
                 {
                     e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 80));
                     e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 100));
                     e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 120));
 
-                    e.Graphics.DrawString("：" + NAME + "様", font, brush, new PointF(x1 + d, 80));
+                    e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 80));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 100));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 120));
                 }
+
                 else
                 {                   //個人
                     e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 80));
@@ -14827,69 +15299,46 @@ namespace Flawless_ex
                     e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 160)); ;
                     e.Graphics.DrawString("職業", font, brush, new PointF(x1, 180));
 
-                    e.Graphics.DrawString("：" + companyTextBox.Text + "様", font, brush, new PointF(x1 + d, 80));
-                    e.Graphics.DrawString("：" + address, font, brush, new PointF(x1 + d, 100));
+                    e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 80));
+                    e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 100));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 120));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 140));
-                    e.Graphics.DrawString("：" + shopNameTextBox.Text, font, brush, new PointF(x1 + d, 160)); ;
-                    e.Graphics.DrawString("：" + clientNameTextBox.Text, font, brush, new PointF(x1 + d, 180));
+                    e.Graphics.DrawString("：" + birthday, font, brush, new PointF(x1 + d, 160)); ;
+                    e.Graphics.DrawString("：" + occupation, font, brush, new PointF(x1 + d, 180));
                 }
             }
+            #endregion
             #endregion
 
             #region"ページ下のお客様情報"
             //法人の場合
-            //conn = postgre.connection();
-            //conn.ConnectionString = @"Server = 192.168.152.157; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            if (type == 0)
+            if (Type == 0)
             {
-                DataTable clientDt1 = new DataTable();
-                string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
-
-                NpgsqlDataAdapter adapter1 = new NpgsqlDataAdapter(str_sql_corporate, conn);
-                adapter1.Fill(clientDt1);
-
-                DataRow row2;
-                row2 = clientDt1.Rows[0];
-
-                string tel = row2["phone_number"].ToString();
-                string fax = row2["fax_number"].ToString();
-
                 e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 950));
                 e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 970));
                 e.Graphics.DrawString("担当者名", font, brush, new PointF(x1, 990));
                 e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1010));
                 e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1030));
 
-                e.Graphics.DrawString("：" + companyTextBox.Text, font, brush, new PointF(x1 + d, 950));
-                e.Graphics.DrawString("：" + shopNameTextBox.Text, font, brush, new PointF(x1 + d, 970));
-                e.Graphics.DrawString("：" + clientNameTextBox.Text, font, brush, new PointF(x1 + d, 990));
-                e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 1010));
-                e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1030));
+                e.Graphics.DrawString("：" + companyName, font, brush, new PointF(x1 + d, 970));
+                e.Graphics.DrawString("：" + shopName, font, brush, new PointF(x1 + d, 990));
+                e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 1010));
+                e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 1030));
+                e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1050));
             }
 
-            else if (type == 1)
+            #region"個人の場合"
+            else if (Type == 1)
             {
-                DataTable clientDt2 = new DataTable();
-                string str_sql_individual = "select * from client_m where invalid = 0 and type = 1 and name = '" + client_staff_name + "' and address = '" + address + "';";
 
-                NpgsqlDataAdapter adapter2 = new NpgsqlDataAdapter(str_sql_individual, conn);
-                adapter2.Fill(clientDt2);
-
-                DataRow row2;
-                row2 = clientDt2.Rows[0];
-                address = row2["address"].ToString();
-                string tel = row2["phone_number"].ToString();
-                string fax = row2["fax_number"].ToString();
-
-                if (!string.IsNullOrEmpty(registerDateTextBox2.Text))     //個人事業主の場合
+                if (!string.IsNullOrEmpty(antiqueLicense))     //個人事業主の場合
                 {
                     e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 950));
                     e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 970));
                     e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 990));
 
-                    e.Graphics.DrawString("：" + companyTextBox.Text, font, brush, new PointF(x1 + d, 950));
+                    e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 950));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 970));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 990));
                 }
@@ -14903,31 +15352,22 @@ namespace Flawless_ex
                     e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 1030));
                     e.Graphics.DrawString("職業", font, brush, new PointF(x1, 1050));
 
-                    e.Graphics.DrawString("：" + companyTextBox.Text, font, brush, new PointF(x1 + d, 950));
-                    e.Graphics.DrawString("：" + address, font, brush, new PointF(x1 + d, 970));
+                    e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 950));
+                    e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 970));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 990));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1010));
-                    e.Graphics.DrawString("：" + shopNameTextBox.Text, font, brush, new PointF(x1 + d, 1030)); ;
-                    e.Graphics.DrawString("：" + clientNameTextBox.Text, font, brush, new PointF(x1 + d, 1050));
+                    e.Graphics.DrawString("：" + birthday, font, brush, new PointF(x1 + d, 1030)); ;
+                    e.Graphics.DrawString("：" + occupation, font, brush, new PointF(x1 + d, 1050));
                 }
             }
+            #endregion
             #endregion
 
             #region"印刷プレビュー：表の中身（上と下両方）"
             //Rectangle((左上座標),幅,高さ,フォーマット)：フォーマットで位置・形式を指定
 
-            string sql_PreviewCount = "select count(*) from statement_calc_data where document_number = '" + documentNumberTextBox.Text + "';";
-            cmd = new NpgsqlCommand(sql_PreviewCount, conn);
-            int PreviewRow = int.Parse(cmd.ExecuteScalar().ToString());
-
-            DataTable dtStatementPreview = new DataTable();
-            string sql_StatementPreview = "select * from statement_calc_data A inner join item_m B on A.item_code = B.item_code" +
-                " where document_number = '" + documentNumberTextBox.Text + "' order by A.record_number;";
-            adapter = new NpgsqlDataAdapter(sql_StatementPreview, conn);
-            adapter.Fill(dtStatementPreview);
-
             DataRow rowStatementPreview;
-            rowStatementPreview = dtStatementPreview.Rows[0];
+            rowStatementPreview = table.Rows[0];
 
             //１行目の表の中身
             string ItemNamePreview = rowStatementPreview["item_name"].ToString();
@@ -14942,20 +15382,20 @@ namespace Flawless_ex
             {
                 #region"１行目（ヘッダー）"
                 e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y1, width, height), stringFormat);
-                e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y1, width, height), stringFormat);
-                e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y1, width, height), stringFormat);
+                e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y1, widthLong, height), stringFormat);
+                e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y1, widthWeight, height), stringFormat);
                 e.Graphics.DrawString("単価", font3, brush, new RectangleF(x4, y1, width, height), stringFormat);
-                e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y1, width, height), stringFormat);
+                e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y1, countWidth, height), stringFormat);
                 e.Graphics.DrawString("金額", font3, brush, new RectangleF(x6, y1, width, height), stringFormat);
-                e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y1, width, height), stringFormat);
+                e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y1, widthLong, height), stringFormat);
 
                 e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y2, width, height), stringFormat);
-                e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y2, width, height), stringFormat);
-                e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y2, width, height), stringFormat);
+                e.Graphics.DrawString("品物詳細", font3, brush, new RectangleF(x2, y2, widthLong, height), stringFormat);
+                e.Graphics.DrawString("重量", font3, brush, new RectangleF(x3, y2, widthWeight, height), stringFormat);
                 e.Graphics.DrawString("単価", font3, brush, new RectangleF(x4, y2, width, height), stringFormat);
-                e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y2, width, height), stringFormat);
+                e.Graphics.DrawString("数量", font3, brush, new RectangleF(x5, y2, countWidth, height), stringFormat);
                 e.Graphics.DrawString("金額", font3, brush, new RectangleF(x6, y2, width, height), stringFormat);
-                e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y2, width, height), stringFormat);
+                e.Graphics.DrawString("備考", font3, brush, new RectangleF(x7, y2, widthLong, height), stringFormat);
                 #endregion
 
                 #region "ヘッダー以下"
@@ -14963,27 +15403,35 @@ namespace Flawless_ex
                 {
                     #region"２行目"
                     case 1:
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
+
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y12 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y12 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y12 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y12 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y12 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y12 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y12 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y12 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y12 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y12 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y12 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y22 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y22 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y22 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y22 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y22 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y22 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y22 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y22 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y22 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y22 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y22 + h, widthLong, height), stringFormat2);
                         break;
                     #endregion
-
                     #region"３行目"
                     case 2:
-                        rowStatementPreview = dtStatementPreview.Rows[1];
+                        rowStatementPreview = table.Rows[1];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -14992,29 +15440,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y13 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y13 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y13 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y13 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y13 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y13 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y13 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y13 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y13 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y13 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y13 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y23 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y23 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y23 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y23 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y23 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y23 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y23 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y23 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y23 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y23 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y23 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"４行目"
                     case 3:
-                        rowStatementPreview = dtStatementPreview.Rows[2];
+                        rowStatementPreview = table.Rows[2];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15023,29 +15479,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y14 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y14 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y14 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y14 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y14 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y14 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y14 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y14 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y14 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y14 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y14 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y24 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y24 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y24 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y24 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y24 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y24 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y24 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y24 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y24 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y24 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y24 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"５行目"
                     case 4:
-                        rowStatementPreview = dtStatementPreview.Rows[3];
+                        rowStatementPreview = table.Rows[3];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15054,30 +15518,38 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y15 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y15 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y15 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y15 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y15 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y15 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y15 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y15 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y15 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y15 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y15 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y25 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y25 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y25 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y25 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y25 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y25 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y25 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y25 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y25 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y25 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y25 + h, widthLong, height), stringFormat2);
 
                         break;
 
                     #endregion
-
                     #region"６行目"
                     case 5:
-                        rowStatementPreview = dtStatementPreview.Rows[4];
+                        rowStatementPreview = table.Rows[4];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15086,29 +15558,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y16 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y16 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y16 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y16 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y16 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y16 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y16 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y16 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y16 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y16 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y16 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y26 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y26 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y26 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y26 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y26 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y26 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y26 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y26 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y26 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y26 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y26 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"７行目"
                     case 6:
-                        rowStatementPreview = dtStatementPreview.Rows[5];
+                        rowStatementPreview = table.Rows[5];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15117,29 +15597,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y17 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y17 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y17 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y17 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y17 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y17 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y17 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y17 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y17 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y17 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y17 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y27 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y27 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y27 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y27 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y27 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y27 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y27 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y27 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y27 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y27 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y27 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"８行目"
                     case 7:
-                        rowStatementPreview = dtStatementPreview.Rows[6];
+                        rowStatementPreview = table.Rows[6];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15148,29 +15636,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y18 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y18 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y18 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y18 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y18 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y18 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y18 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y18 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y18 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y18 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y18 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y28 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y28 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y28 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y28 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y28 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y28 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y28 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y28 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y28 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y28 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y28 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"９行目"
                     case 8:
-                        rowStatementPreview = dtStatementPreview.Rows[7];
+                        rowStatementPreview = table.Rows[7];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15179,29 +15675,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y19 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y19 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y19 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y19 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y19 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y19 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y19 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y19 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y19 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y19 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y19 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y29 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y29 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y29 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y29 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y29 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y29 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y29 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y29 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y29 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y29 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y29 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"１０行目"
                     case 9:
-                        rowStatementPreview = dtStatementPreview.Rows[8];
+                        rowStatementPreview = table.Rows[8];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15210,29 +15714,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y110 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y110 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y110 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y110 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y110 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y110 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y110 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y110 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y110 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y110 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y110 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y210 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y210 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y210 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y210 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y210 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y210 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y210 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y210 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y210 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y210 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y210 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"１１行目"
                     case 10:
-                        rowStatementPreview = dtStatementPreview.Rows[9];
+                        rowStatementPreview = table.Rows[9];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15241,29 +15753,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y111 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y111 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y111 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y111 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y111 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y111 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y111 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y111 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y111 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y111 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y111 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y211 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y211 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y211 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y211 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y211 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y211 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y211 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y211 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y211 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y211 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y211 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"１２行目"
                     case 11:
-                        rowStatementPreview = dtStatementPreview.Rows[10];
+                        rowStatementPreview = table.Rows[10];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15272,29 +15792,37 @@ namespace Flawless_ex
                         CountPreview = ((int)rowStatementPreview["count"]).ToString("n0");
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
+
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y112 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y112 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y112 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y112 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y112 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y112 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y112 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y112 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y112 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y112 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y112 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y212 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y212 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y212 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y212 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y212 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y212 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y212 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y212 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y212 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y212 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y212 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"１３行目"
                     case 12:
-                        rowStatementPreview = dtStatementPreview.Rows[11];
+                        rowStatementPreview = table.Rows[11];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15304,28 +15832,36 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
+
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y113 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y113 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y113 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y113 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y113 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y113 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y113 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y113 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y113 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y113 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y113 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y213 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y213 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y213 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y213 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y213 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y213 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y213 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y213 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y213 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y213 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y213 + h, widthLong, height), stringFormat2);
 
                         break;
                     #endregion
-
                     #region"１４行目"
                     case 13:
-                        rowStatementPreview = dtStatementPreview.Rows[12];
+                        rowStatementPreview = table.Rows[12];
 
                         ItemNamePreview = rowStatementPreview["item_name"].ToString();
                         ItemDetailPreview = rowStatementPreview["detail"].ToString();
@@ -15335,169 +15871,202 @@ namespace Flawless_ex
                         MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                         RemarkPreview = rowStatementPreview["remarks"].ToString();
 
+                        if (WeightPreview == "0")
+                        {
+                            WeightPreview = "";
+                        }
+                        if (CountPreview == "0")
+                        {
+                            CountPreview = "";
+                        }
+
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y114 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y114 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y114 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y114 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y114 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y114 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y114 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y114 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y114 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y114 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y114 + h, widthLong, height), stringFormat2);
 
                         e.Graphics.DrawString(ItemNamePreview, font, brush, new RectangleF(x1, y214 + h, width, height), stringFormat);
-                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y214 + h, width, height), stringFormat2);
-                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y214 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(ItemDetailPreview, font, brush, new RectangleF(x2, y214 + h, widthLong, height), stringFormat2);
+                        e.Graphics.DrawString(WeightPreview, font, brush, new RectangleF(x3, y214 + h, widthWeight, height), stringFormat1);
                         e.Graphics.DrawString(UnitPricePreview, font, brush, new RectangleF(x4, y214 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y214 + h, width, height), stringFormat1);
+                        e.Graphics.DrawString(CountPreview, font, brush, new RectangleF(x5, y214 + h, countWidth, height), stringFormat1);
                         e.Graphics.DrawString(MoneyPreview, font, brush, new RectangleF(x6, y214 + h, width, height), stringFormat1);
-                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y214 + h, width, height), stringFormat2);
+                        e.Graphics.DrawString(RemarkPreview, font, brush, new RectangleF(x7, y214 + h, widthLong, height), stringFormat2);
 
                         break;
                         #endregion
                 }
                 #endregion
             }
+            #region"１５行目（上の表は総重量と総数、下の表は小計と合計）"
+            e.Graphics.DrawString("", font, brush, new RectangleF(x1, y115 + h, width, height), stringFormat);
+            e.Graphics.DrawString("総重量", font, brush, new RectangleF(x2, y115 + h, widthLong, height), stringFormat);
+            e.Graphics.DrawString(totalWeight, font, brush, new RectangleF(x3, y115 + h, widthWeight, height), stringFormat1);
+            e.Graphics.DrawString("総数", font, brush, new RectangleF(x4, y115 + h, width, height), stringFormat);
+            e.Graphics.DrawString(totalCount, font, brush, new RectangleF(x5, y115 + h, countWidth, height), stringFormat1);
+
+            e.Graphics.DrawString("小計", font, brush, new RectangleF(x01, y215 + h, width, height), stringFormat);
+            e.Graphics.DrawString(totalMoney, font, brush, new RectangleF(x02, y215 + h, widthLong2, height), stringFormat1);
+            e.Graphics.DrawString("税額", font, brush, new RectangleF(x03, y215 + h, width, height), stringFormat);
+            e.Graphics.DrawString("", font, brush, new RectangleF(x04, y215 + h, widthLong1, height), stringFormat1);
+            e.Graphics.DrawString("合計", font, brush, new RectangleF(x05, y215 + h, width, height), stringFormat);
+            e.Graphics.DrawString(totalMoney, font, brush, new RectangleF(x06, y215 + h, widthLong2, height), stringFormat1);
+            #endregion
+            #region"１６行目（上の表は小計と合計のみ）"
+            e.Graphics.DrawString("小計", font, brush, new RectangleF(x01, y116 + h, width, height), stringFormat);
+            e.Graphics.DrawString(totalMoney, font, brush, new RectangleF(x02, y116 + h, widthLong2, height), stringFormat1);
+            e.Graphics.DrawString("税額", font, brush, new RectangleF(x03, y116 + h, width, height), stringFormat);
+            e.Graphics.DrawString("", font, brush, new RectangleF(x04, y116 + h, widthLong1, height), stringFormat1);
+            e.Graphics.DrawString("合計", font, brush, new RectangleF(x05, y116 + h, width, height), stringFormat);
+            e.Graphics.DrawString(totalMoney, font, brush, new RectangleF(x06, y116 + h, widthLong2, height), stringFormat1);
+            #endregion
             #endregion
 
             #region"上の表　枠線"
             //Rectangle(左上隅の x 座標, 左上隅の y 座標, 四角形の幅, 四角形の高さ)
             #region"１行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y1, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y1, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y1, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y1, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y1, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y1, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y1, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y1, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y1, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y1, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y1, widthLong, height));
             #endregion
-
             #region"２行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y12, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y12, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y12, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y12, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y12, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y12, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y12, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y12, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y12, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y12, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y12, widthLong, height));
             #endregion
-
             #region"３行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y13, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y13, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y13, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y13, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y13, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y13, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y13, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y13, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y13, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y13, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y13, widthLong, height));
             #endregion
-
             #region"４行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y14, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y14, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y14, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y14, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y14, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y14, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y14, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y14, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y14, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y14, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y14, widthLong, height));
             #endregion
-
             #region"５行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y15, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y15, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y15, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y15, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y15, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y15, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y15, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y15, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y15, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y15, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y15, widthLong, height));
             #endregion
-
             #region"６行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y16, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y16, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y16, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y16, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y16, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y16, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y16, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y16, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y16, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y16, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y16, widthLong, height));
             #endregion
-
             #region"７行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y17, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y17, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y17, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y17, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y17, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y17, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y17, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y17, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y17, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y17, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y17, widthLong, height));
             #endregion
-
             #region"８行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y18, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y18, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y18, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y18, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y18, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y18, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y18, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y18, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y18, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y18, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y18, widthLong, height));
             #endregion
-
             #region"９行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y19, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y19, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y19, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y19, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y19, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y19, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y19, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y19, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y19, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y19, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y19, widthLong, height));
             #endregion
-
             #region"１０行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y110, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y110, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y110, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y110, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y110, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y110, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y110, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y110, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y110, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y110, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y110, widthLong, height));
             #endregion
-
             #region"１１行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y111, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y111, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y111, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y111, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y111, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y111, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y111, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y111, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y111, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y111, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y111, widthLong, height));
             #endregion
-
             #region"１２行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y112, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y112, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y112, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y112, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y112, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y112, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y112, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y112, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y112, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y112, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y112, widthLong, height));
             #endregion
-
             #region"１３行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y113, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y113, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y113, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y113, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y113, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y113, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y113, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y113, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y113, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y113, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y113, widthLong, height));
             #endregion
-
             #region"１４行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y114, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y114, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y114, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y114, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y114, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y114, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y114, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y114, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y114, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y114, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y114, widthLong, height));
+            #endregion
+            #region"１５行目（総重量と総数）"
+            e.Graphics.DrawRectangle(p, new Rectangle(x1, y115, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y115, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y115, widthWeight, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x4, y115, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y115, countWidth, height));
+            #endregion
+            #region"１６行目（小計・税額・合計）"
+            e.Graphics.DrawRectangle(p, new Rectangle(x01, y116, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x02, y116, widthLong2, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x03, y116, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x04, y116, widthLong1, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x05, y116, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x06, y116, widthLong2, height));
             #endregion
 
             #endregion
@@ -15506,147 +16075,141 @@ namespace Flawless_ex
 
             #region"１行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y2, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y2, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y2, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y2, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y2, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y2, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y2, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y2, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y2, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y2, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y2, widthLong, height));
             #endregion
-
             #region"２行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y22, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y22, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y22, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y22, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y22, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y22, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y22, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y22, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y22, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y22, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y22, widthLong, height));
             #endregion
-
             #region"３行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y23, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y23, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y23, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y23, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y23, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y23, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y23, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y23, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y23, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y23, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y23, widthLong, height));
             #endregion
-
             #region"４行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y24, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y24, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y24, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y24, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y24, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y24, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y24, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y24, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y24, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y24, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y24, widthLong, height));
             #endregion
-
             #region"５行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y25, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y25, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y25, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y25, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y25, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y25, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y25, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y25, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y25, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y25, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y25, widthLong, height));
             #endregion
-
             #region"６行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y26, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y26, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y26, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y26, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y26, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y26, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y26, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y26, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y26, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y26, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y26, widthLong, height));
             #endregion
-
             #region"７行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y27, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y27, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y27, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y27, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y27, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y27, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y27, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y27, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y27, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y27, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y27, widthLong, height));
             #endregion
-
             #region"８行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y28, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y28, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y28, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y28, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y28, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y28, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y28, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y28, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y28, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y28, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y28, widthLong, height));
             #endregion
-
             #region"９行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y29, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y29, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y29, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y29, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y29, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y29, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y29, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y29, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y29, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y29, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y29, widthLong, height));
             #endregion
-
             #region"１０行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y210, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y210, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y210, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y210, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y210, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y210, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y210, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y210, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y210, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y210, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y210, widthLong, height));
             #endregion
-
             #region"１１行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y211, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y211, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y211, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y211, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y211, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y211, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y211, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y211, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y211, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y211, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y211, widthLong, height));
             #endregion
-
             #region"１２行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y212, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y212, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y212, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y212, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y212, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y212, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y212, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y212, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y212, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y212, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y212, widthLong, height));
             #endregion
-
             #region"１３行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y213, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y213, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y213, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y213, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y213, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y213, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y213, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y213, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y213, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y213, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y213, widthLong, height));
             #endregion
-
             #region"１４行目"
             e.Graphics.DrawRectangle(p, new Rectangle(x1, y214, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x2, y214, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x3, y214, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x2, y214, widthLong, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x3, y214, widthWeight, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x4, y214, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x5, y214, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x5, y214, countWidth, height));
             e.Graphics.DrawRectangle(p, new Rectangle(x6, y214, width, height));
-            e.Graphics.DrawRectangle(p, new Rectangle(x7, y214, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x7, y214, widthLong, height));
+            #endregion
+            #region"１５行目（小計・総額・合計）"
+            e.Graphics.DrawRectangle(p, new Rectangle(x01, y215, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x02, y215, widthLong2, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x03, y215, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x04, y215, widthLong1, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x05, y215, width, height));
+            e.Graphics.DrawRectangle(p, new Rectangle(x06, y215, widthLong2, height));
             #endregion
 
             #endregion
 
-            conn.Close();
         }
 
         #endregion
@@ -15708,7 +16271,7 @@ namespace Flawless_ex
 
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
-                    string Staff_name = row2["staff_name"].ToString();
+                    string Staff_name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
                     remarks1 = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
@@ -15796,7 +16359,7 @@ namespace Flawless_ex
                     //顧客情報 法人
                     #region "計算書"
                     DataTable clientDt = new DataTable();
-                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and staff_name = '" + client_staff_name + "' and address = '" + address + "';";
+                    string str_sql_corporate = "select * from client_m where invalid = 0 and type = 0 and name = '" + client_staff_name + "' and address = '" + address + "';";
                     adapter = new NpgsqlDataAdapter(str_sql_corporate, conn);
                     adapter.Fill(clientDt);
 
@@ -15806,7 +16369,7 @@ namespace Flawless_ex
 
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
-                    string Staff_name = row2["staff_name"].ToString();
+                    string Staff_name = row2["name"].ToString();
                     string register_date = row2["registration_date"].ToString();
                     remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
@@ -17135,64 +17698,7 @@ namespace Flawless_ex
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //if (NotLoad)
-            //{
-            //    //単価 × 重量（数量は空白）
-            //    if (dataGridView1[4, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value == null && dataGridView1[4, e.RowIndex].Value.ToString() != "" && dataGridView1[5, e.RowIndex].Value.ToString() != "")
-            //    {
-            //        if (dataGridView1[7, e.RowIndex].Value != null && cellfirst)
-            //        {
-            //            sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(1));
-            //        }
-            //        cellfirst = false;
-
-            //        weight = decimal.Parse(dataGridView1[4, e.RowIndex].Value.ToString());
-            //        unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
-
-            //        dataGridView1[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
-            //        if (cellfirst)
-            //        {
-            //            sub += weight * unitprice;
-            //            subTotal.Text = sub.ToString("c0");
-            //            sumTextBox.Text = sub.ToString("c0");
-                        
-            //        }
-            //        cellfirst = true;
-            //    }
-
-            //    //単価 × 数量（重量は空白）
-            //    if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value.ToString() != "" && dataGridView1[6, e.RowIndex].Value.ToString() != "")
-            //    {
-            //        if (dataGridView1[7, e.RowIndex].Value != null && cellfirst)
-            //        {
-            //            sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(1));
-            //        }
-
-            //        cellfirst = false;
-            //        unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
-            //        Count = int.Parse(dataGridView1[6, e.RowIndex].Value.ToString());
-
-            //        dataGridView1[7, e.RowIndex].Value = (unitprice * Count).ToString("c0");
-            //        if (cellfirst)
-            //        {
-            //            sub += Count * unitprice;
-            //            subTotal.Text = sub.ToString("c0");
-            //            sumTextBox.Text = sub.ToString("c0");
-            //            //cellfirst = false;
-            //        }
-            //        cellfirst = true;
-            //    }
-
-            //    //重量・単価・数量が無記入だったら金額クリア
-            //    if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value == null && dataGridView1[6, e.RowIndex].Value == null && dataGridView1[7, e.RowIndex].Value != null)
-            //    {
-            //        sub -= decimal.Parse(dataGridView1[7, e.RowIndex].Value.ToString().Substring(0));
-            //        subTotal.Text = sub.ToString("c0");
-            //        sumTextBox.Text = sub.ToString("c0");
-            //        dataGridView1[7, e.RowIndex].Value = null;
-            //    }
-
-            //}
+            
         }
 
         private void dataGridView1_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
@@ -17228,89 +17734,7 @@ namespace Flawless_ex
 
         private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            //if (NotLoad1)
-            //{
-            //    //単価 × 重量（数量は空白）
-            //    if (dataGridView2[4, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[4, e.RowIndex].Value.ToString() != "" && dataGridView2[5, e.RowIndex].Value.ToString() != "")
-            //    {
-            //        if (dataGridView2[7, e.RowIndex].Value != null && cellfirst)
-            //        {
-            //            SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(1));
-            //        }
-            //        cellfirst = false;
-                    
-            //        weight = decimal.Parse(dataGridView2[4, e.RowIndex].Value.ToString());
-            //        unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
-
-            //        dataGridView2[7, e.RowIndex].Value = (weight * unitprice).ToString("c0");
-            //        if (cellfirst)
-            //        {
-            //            SUB += weight * unitprice;
-            //            subTotal2.Text = SUB.ToString("c0");
-            //            sumTextBox2.Text = SUB.ToString("c0");
-            //            taxAmount = SUB * Tax / (100 + Tax);
-            //            if (comboBox11.SelectedIndex == 1)
-            //            {
-            //                taxAmount2.Text = taxAmount.ToString("n0");
-            //            }
-            //            else
-            //            {
-            //                taxAmount2.Text = "";
-            //            }
-            //        }
-            //        cellfirst = true;
-            //    }
-
-            //    //単価 × 数量（重量は空白）
-            //    if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value.ToString() != "" && dataGridView2[6, e.RowIndex].Value.ToString() != "")
-            //    {
-            //        if (dataGridView2[7, e.RowIndex].Value != null && cellfirst)
-            //        {
-            //            SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(1));
-            //        }
-            //        cellfirst = false;
-                    
-            //        unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
-            //        Count = int.Parse(dataGridView2[6, e.RowIndex].Value.ToString());
-
-            //        dataGridView2[7, e.RowIndex].Value = (unitprice * Count).ToString("c0");
-            //        if (cellfirst)
-            //        {
-            //            SUB += Count * unitprice;
-            //            subTotal2.Text = SUB.ToString("c0");
-            //            sumTextBox2.Text = SUB.ToString("c0");
-            //            taxAmount = SUB * Tax / (100 + Tax);
-            //            if (comboBox11.SelectedIndex == 1)
-            //            {
-            //                taxAmount2.Text = taxAmount.ToString("n0");
-            //            }
-            //            else
-            //            {
-            //                taxAmount2.Text = "";
-            //            }
-            //        }
-            //        cellfirst = true;
-            //    }
-
-            //    //重量・単価・数量が無記入だったら金額クリア
-            //    if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value == null && dataGridView2[6, e.RowIndex].Value == null && dataGridView2[7, e.RowIndex].Value != null)
-            //    {
-            //        SUB -= decimal.Parse(dataGridView2[7, e.RowIndex].Value.ToString().Substring(0));
-            //        taxAmount = SUB * Tax / (100 + Tax);
-            //        if (comboBox11.SelectedIndex == 1)
-            //        {
-            //            taxAmount2.Text = taxAmount.ToString("n0");
-            //        }
-            //        else
-            //        {
-            //            taxAmount2.Text = "";
-            //        }
-            //        subTotal2.Text = SUB.ToString("c0");
-            //        sumTextBox2.Text = SUB.ToString("c0");
-            //        dataGridView2[7, e.RowIndex].Value = null;
-            //    }
-                
-            //}
+            
         }
 
         private void dataGridView2_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
@@ -17556,7 +17980,7 @@ namespace Flawless_ex
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((data != "S" || data != "D" || antiqueNumber != null || documentNumber != null || Grade != 0) && tabControl1.SelectedIndex != 0 && Delivery)
+            if ((data != "S" && data != "D" && antiqueNumber == null && documentNumber == null && Grade == 0) && tabControl1.SelectedIndex != 0 && Delivery)
             {
                 PostgreSQL postgre = new PostgreSQL();
                 conn = postgre.connection();

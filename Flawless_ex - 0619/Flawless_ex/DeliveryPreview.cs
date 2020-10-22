@@ -123,6 +123,7 @@ namespace Flawless_ex
             Font font = new Font("MS Pゴシック", 10.5f);
             Font font1 = new Font("メイリオ", 36f);
             Brush brush = new SolidBrush(Color.Black);
+
             #region "納品書 下の部分"
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
@@ -155,6 +156,7 @@ namespace Flawless_ex
             string kind = row["type"].ToString();
 
             #endregion
+
             #region "納品書　表の部分"
             NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
@@ -463,6 +465,7 @@ namespace Flawless_ex
 
             #endregion
             #endregion
+
             #region "タイトル"
             e.Graphics.DrawString("納品書", font, brush, new PointF(40, 120));
             e.Graphics.DrawString("管理番号", font, brush, new PointF(40, 220));

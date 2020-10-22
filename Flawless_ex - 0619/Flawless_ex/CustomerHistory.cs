@@ -64,6 +64,7 @@ namespace Flawless_ex
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
+            conn.Open();
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             //大分類検索用
@@ -106,8 +107,13 @@ namespace Flawless_ex
             string code;
             string item;
             string itemcode;
-            string date1 = this.dateTimePicker1.Text;
-            string date2 = this.settlementBox.Text;
+            
+            string date1 = dateTimePicker1.Text;            //引数用
+            string date2 = settlementBox.Text;              //引数用
+
+            DateTime Date1 = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());                                                     //検索用
+            DateTime Date2 = DateTime.Parse(settlementBox.Value.ToShortDateString()).AddHours(23).AddMinutes(59).AddSeconds(59);             //検索用
+
             string method;
             int amount1;
             int amount2;
@@ -126,6 +132,8 @@ namespace Flawless_ex
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
+            conn.Open();
+
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             #region "検索条件 法人"
             if (radioButton1.Checked == true)
@@ -277,8 +285,7 @@ namespace Flawless_ex
                     control = int.Parse(textBox8.Text);
                 }
                 #endregion
-                #endregion
-            #region "繋げるSQL"
+                #region "繋げるSQL"
                 #region "大分類名をコードに変換"
                 if (comboBox1.SelectedIndex != -1)
                 {
@@ -292,7 +299,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    code = "100";
+                    code = "1";
                 }
 
                 #endregion
@@ -309,21 +316,20 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    itemcode = "1000";
+                    itemcode = "1";
                 }
 
                 #endregion
 
                 if (data == "S")
                 {
-                    string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                    string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m B ON (A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where A.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                            "where B.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
                               method + amountA + amountB + ";";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
-                    #endregion
 
                     int a = dt7.Rows.Count;
                     if (a == 0)
@@ -350,11 +356,11 @@ namespace Flawless_ex
                 }
                 else if (data == "D")
                 {
-                    string sql = "select A.settlement_date, A.delivery_date, B.shop_name, B.staff_name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_corporate B ON (A.antique_number = B.antique_number )" +
+                    string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m B ON (A.code = B.code )" +
                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                           "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "')" +
+                           "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
                               method + amountA + amountB + ";";
-                    conn.Open();
+                    
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
 
@@ -381,8 +387,10 @@ namespace Flawless_ex
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
+                #endregion
             }
-                #region "検索条件　個人"
+            #endregion
+            #region "検索条件　個人"
             if (radioButton2.Checked == true)
             {
                 type = 1;
@@ -459,7 +467,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method =" and A.payment_method = '" + this.comboBox3.Text + "'";
+                    method = " and A.payment_method = '" + this.comboBox3.Text + "'";
                 }
                 else
                 {
@@ -506,7 +514,6 @@ namespace Flawless_ex
                     amt1 = int.Parse(textBox10.Text);
                 }
                 #endregion
-                #endregion
                 #region "繋げるSQL"
                 #region "大分類名をコードに変換"
                 if (comboBox1.SelectedIndex != -1)
@@ -543,13 +550,12 @@ namespace Flawless_ex
 
                 if (data == "S")
                 {
-                    string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                    string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m B ON ( A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where A.type = 1 " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " and (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') " + method + amountA + amountB + ";";
+                            "where A.type = 1 " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method + amountA + amountB + ";";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
-                    #endregion
 
                     int a = dt7.Rows.Count;
                     if (a == 0)
@@ -575,12 +581,11 @@ namespace Flawless_ex
                 }
                 if (data == "D")
                 {
-                    string sql = "select A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m_individual B ON ( A.id_number = B.id_number )" +
+                    string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m B ON ( A.code = B.code )" +
                             "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
-                            "where A.types1 = 0 " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " and (A.settlement_date >= '" + date1 + "' and A.settlement_date <= '" + date2 + "') "
+                            "where A.types1 = 0 " + name + address + addresskana + phoneNumber + controlNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') "
                              + method + amountA + amountB + ";";
 
-                    conn.Open();
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
 
@@ -608,7 +613,10 @@ namespace Flawless_ex
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
+                #endregion
             }
+            #endregion
+            conn.Close();
         }
 
         private void RadioButton2_CheckedChanged(object sender, EventArgs e)
@@ -632,6 +640,17 @@ namespace Flawless_ex
                 CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, Pass, access_auth);
                 customerHistorySelect.Show();
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NpgsqlConnection conn = new NpgsqlConnection();
+            NpgsqlDataAdapter adapter;
+            
+
+            PostgreSQL postgre = new PostgreSQL();
+            conn = postgre.connection();
+            conn.Open();
         }
     }
 }

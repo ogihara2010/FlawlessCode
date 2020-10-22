@@ -96,7 +96,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' " + " and staff_name like '%" + clientStaff + "%' " + " and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索　　全部記入
+                                string sql2 = "select company_name, shop_name, name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' " + " and name like '%" + clientStaff + "%' " + " and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索　　全部記入
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -119,7 +119,7 @@ namespace Flawless_ex
                             #region "住所以外記入"
                             else
                             {
-                                string sql2 = "select company_name, shop_name, staff_name, address,  code from client_m where invalid = 0 and (type = 0 and company_name = '%" + clientName + "%' " + " and shop_name = '%" + shopName + "%'" + " and staff_name like '%" + clientStaff + "%') order by company_kana, shop_name_kana ASC"; //住所のみ無記入
+                                string sql2 = "select company_name, shop_name, name, address,  code from client_m where invalid = 0 and (type = 0 and company_name = '%" + clientName + "%' " + " and shop_name = '%" + shopName + "%'" + " and name like '%" + clientStaff + "%') order by company_kana, shop_name_kana ASC"; //住所のみ無記入
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -149,7 +149,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' " + " and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
+                                string sql2 = "select company_name, shop_name, name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' " + " and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -173,7 +173,7 @@ namespace Flawless_ex
                             #region "担当者名と住所が未記入"
                             else
                             {
-                                string sql = "select company_name, shop_name, staff_name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' ) order by company_kana, shop_name_kana ASC";
+                                string sql = "select company_name, shop_name, name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and shop_name like '%" + shopName + "%' ) order by company_kana, shop_name_kana ASC";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -209,7 +209,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and staff_name like '%" + clientStaff + "%' " + " address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
+                                string sql2 = "select company_name, shop_name, name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and name like '%" + clientStaff + "%' " + " address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -233,7 +233,7 @@ namespace Flawless_ex
                             #region "店舗名と住所が未記入"
                             else
                             {
-                                string sql = "select company_name, shop_name, staff_name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and staff_name like '%" + clientStaff + "%' ) order by company_kana, shop_name_kana ASC";
+                                string sql = "select company_name, shop_name, name, address,  code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' " + " and name like '%" + clientStaff + "%' ) order by company_kana, shop_name_kana ASC";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -262,7 +262,7 @@ namespace Flawless_ex
                             if (!string.IsNullOrWhiteSpace(addressTextBox.Text))
                             {
                                 address = this.addressTextBox.Text;
-                                string sql = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC;";
+                                string sql = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC;";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -285,7 +285,7 @@ namespace Flawless_ex
                             #region "会社名以外未記入"
                             else
                             {
-                                string sql = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' ) order by company_kana, shop_name_kana ASC";
+                                string sql = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' ) order by company_kana, shop_name_kana ASC";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -327,7 +327,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and  shop_name like '%" + shopName + "%' " + " staff_name like '%" + clientStaff + "%' " + " address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
+                                string sql2 = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and  shop_name like '%" + shopName + "%' " + " name like '%" + clientStaff + "%' " + " address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -351,7 +351,7 @@ namespace Flawless_ex
                             #region "会社名、住所未記入"
                             else
                             {
-                                string sql = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and  shop_name like '%" + shopName + "%' " + " staff_name like '%" + clientStaff + "%' ) order by company_kana, shop_name_kana ASC";
+                                string sql = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and  shop_name like '%" + shopName + "%' " + " name like '%" + clientStaff + "%' ) order by company_kana, shop_name_kana ASC";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -381,7 +381,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and shop_name like '%" + shopName + "%' and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
+                                string sql2 = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and shop_name like '%" + shopName + "%' and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -404,7 +404,7 @@ namespace Flawless_ex
                             #region "店舗名以外未記入"
                             else
                             {
-                                string sql = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and shop_name like '%" + shopName + "%' ) order by company_kana, shop_name_kana ASC";
+                                string sql = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and shop_name like '%" + shopName + "%' ) order by company_kana, shop_name_kana ASC";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -438,7 +438,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and staff_name like '%" + clientStaff + "%' and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
+                                string sql2 = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and name like '%" + clientStaff + "%' and address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
@@ -461,7 +461,7 @@ namespace Flawless_ex
                             #region "担当者以外未記入"
                             else
                             {
-                                string sql = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and staff_name like '%" + clientStaff + "%' ) order by company_kana, shop_name_kana ASC";
+                                string sql = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and name like '%" + clientStaff + "%' ) order by company_kana, shop_name_kana ASC";
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -489,7 +489,7 @@ namespace Flawless_ex
                             {
                                 address = this.addressTextBox.Text;
 
-                                string sql2 = "select company_name, shop_name, staff_name, address, code from client_m where invalid = 0 and (type = 0 and  address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
+                                string sql2 = "select company_name, shop_name, name, address, code from client_m where invalid = 0 and (type = 0 and  address like '%" + address + "%' ) order by company_kana, shop_name_kana ASC"; //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);
