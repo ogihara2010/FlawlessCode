@@ -179,6 +179,7 @@
     <Compile Include="DeliveryPreview.Designer.cs">
       <DependentUpon>DeliveryPreview.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileServer.cs" />
     <Compile Include="Invoice.cs">
       <SubType>Form</SubType>
     </Compile>

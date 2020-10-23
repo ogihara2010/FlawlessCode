@@ -330,6 +330,8 @@ namespace Flawless_ex
         NpgsqlTransaction transaction;
         DataRow row;
 
+        private FileServer fileServer = new FileServer();
+
         public Statement(MainMenu main, int id, int type, string client_staff_name, string address, string access_auth, decimal Total, string Pass, string document, int control,
             string data, string name1, string phoneNumber1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA,
             string amountB, string antiqueNumber, string documentNumber, string address1, int Grade)
@@ -3173,6 +3175,7 @@ namespace Flawless_ex
         #region"計算書　登録ボタン"
         private void AddButton_Click(object sender, EventArgs e)        //計算書用登録ボタン
         {
+
             #region"確認事項"
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
@@ -3249,7 +3252,7 @@ namespace Flawless_ex
 
             if (!string.IsNullOrEmpty(antiqueLicenceTextBox.Text))
             {
-                AntiqueLicence = antiqueLicenceTextBox.Text;
+                AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox.Text,FileServer.Filetype.Antiquelicense);
 
                 using (transaction = conn.BeginTransaction())
                 {
@@ -3284,94 +3287,55 @@ namespace Flawless_ex
             #region"200万以上の場合に画像更新"
             if (sub >= 2000000)
             {
+
                 if (!string.IsNullOrEmpty(articlesTextBox.Text))
                 {
-                    AolFinancialShareholder = articlesTextBox.Text;
+                    AolFinancialShareholder = fileServer.UploadImage(articlesTextBox.Text,FileServer.Filetype.AolFinancialShareholder);
 
                     using (transaction = conn.BeginTransaction())
                     {
-                        if (type == 0)
-                        {
                             string SQL_STR = @"update client_m set aol_financial_shareholder='" + AolFinancialShareholder + "' where code = '" + ClientCode + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
-
-                        }
-                        else if (type == 1)
-                        {
-                            string SQL_STR = @"update client_m set aol_financial_shareholder='" + AolFinancialShareholder + "' where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
-                        }
                     }
                 }
 
                 if (!string.IsNullOrEmpty(taxCertificateTextBox.Text))
                 {
-                    TaxCertification = taxCertificateTextBox.Text;
+                    TaxCertification = fileServer.UploadImage(taxCertificateTextBox.Text,FileServer.Filetype.TaxCertification);
                     using (transaction = conn.BeginTransaction())
                     {
-                        if (type == 0)
-                        {
                             string SQL_STR = @"update client_m set tax_certificate='" + TaxCertification + "' where code = '" + ClientCode + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
-                        }
-                        else if (type == 1)
-                        {
-                            string SQL_STR = @"update client_m set tax_certificate='" + TaxCertification + "'  where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
-                        }
                     }
                 }
 
                 if (!string.IsNullOrEmpty(sealCertificationTextBox.Text))
                 {
-                    SealCertification = sealCertificationTextBox.Text;
+                    SealCertification = fileServer.UploadImage(sealCertificationTextBox.Text, FileServer.Filetype.SealCertification);
                     using (transaction = conn.BeginTransaction())
                     {
-                        if (type == 0)
-                        {
                             string SQL_STR = @"update client_m set seal_certification='" + SealCertification + "' where code = '" + ClientCode + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
-                        }
-                        else if (type == 1)
-                        {
-                            string SQL_STR = @"update client_m set seal_certification='" + SealCertification + "' where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
-                        }
+                        
                     }
                 }
 
                 if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
                 {
-                    ResidenceCard = residenceCardTextBox.Text;
+                    ResidenceCard = fileServer.UploadImage(residenceCardTextBox.Text,FileServer.Filetype.ResidenceCard);
                     ResidencePeriod = residencePerioddatetimepicker.Value.ToShortDateString();
                     using (transaction = conn.BeginTransaction())
                     {
-                        if (type == 0)
-                        {
                             string SQL_STR = @"update client_m set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where code = '" + ClientCode + "';";
                             cmd = new NpgsqlCommand(SQL_STR, conn);
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
-                        }
-                        else if (type == 1)
-                        {
-                            string SQL_STR = @"update client_m set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "')  where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
-                        }
                     }
                 }
             }
@@ -12665,6 +12629,7 @@ namespace Flawless_ex
         #region"納品書　登録ボタン"
         private void Register_Click(object sender, EventArgs e)
         {
+
             #region"確認事項"
             if (string.IsNullOrEmpty(name.Text))
             {
@@ -12760,7 +12725,7 @@ namespace Flawless_ex
 
             if (!string.IsNullOrEmpty(antiqueLicenceTextBox2.Text))
             {
-                AntiqueLicence = antiqueLicenceTextBox2.Text;
+                AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox2.Text,FileServer.Filetype.Antiquelicense);
 
                 using (transaction = conn.BeginTransaction())
                 {
@@ -18067,5 +18032,5 @@ namespace Flawless_ex
                 groupBox1.Hide();
             }
         }
-    }
+    }   
 }
