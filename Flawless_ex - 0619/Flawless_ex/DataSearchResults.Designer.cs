@@ -43,7 +43,7 @@
             this.returnButton.AutoSize = true;
             this.returnButton.BackColor = System.Drawing.Color.MistyRose;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 21.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.returnButton.Location = new System.Drawing.Point(22, 384);
+            this.returnButton.Location = new System.Drawing.Point(54, 603);
             this.returnButton.Margin = new System.Windows.Forms.Padding(2);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(159, 75);
@@ -57,7 +57,7 @@
             this.button1.AutoSize = true;
             this.button1.BackColor = System.Drawing.Color.LightCyan;
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 21.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(591, 384);
+            this.button1.Location = new System.Drawing.Point(1326, 603);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(196, 75);
@@ -92,13 +92,13 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 24);
+            this.dataGridView1.Location = new System.Drawing.Point(23, 11);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(765, 334);
+            this.dataGridView1.Size = new System.Drawing.Size(1515, 575);
             this.dataGridView1.TabIndex = 3;
             // 
             // printPreviewDialog1
@@ -117,7 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(812, 482);
+            this.ClientSize = new System.Drawing.Size(1567, 700);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.returnButton);

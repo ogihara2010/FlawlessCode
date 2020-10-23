@@ -117,22 +117,24 @@ namespace Flawless_ex
         decimal amount111;
         decimal amount112;
         #endregion
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, DateTime date2, string method1, string amountA, string amountB, string data, string pass, string document, int control, string antiqueNumber, string documentNumber, string access_auth)
+        public DataSearchResults(MainMenu main, int type, int id, DataTable table, string data, string pass, string document, int control, string antiqueNumber, string documentNumber, string access_auth)
         {
             InitializeComponent();
             mainMenu = main;
             this.type = type;
-            this.name1 = name1;
-            this.phoneNumber1 = phoneNumber1;
-            this.address1 = address1;
-            this.addresskana1 = addresskana1;
-            this.code1 = code1;
-            this.item1 = item1;
-            this.date1 = date1;
-            this.date2 = date2;
-            this.method1 = method1;
-            this.amountA = amountA;
-            this.amountB = amountB;
+
+            dt = table;
+            //this.name1 = name1;
+            //this.phoneNumber1 = phoneNumber1;
+            //this.address1 = address1;
+            //this.addresskana1 = addresskana1;
+            //this.code1 = code1;
+            //this.item1 = item1;
+            //this.date1 = date1;
+            //this.date2 = date2;
+            //this.method1 = method1;
+            //this.amountA = amountA;
+            //this.amountB = amountB;
             this.antiqueNumber = antiqueNumber;
             this.documentNumber = documentNumber;
             staff_id = id;
@@ -150,29 +152,12 @@ namespace Flawless_ex
 
         private void DataSearchResults_Load(object sender, EventArgs e)
         {
-            DateTime Date1 = DateTime.Parse(DateTime.Parse(date1).ToShortDateString());
-            //DateTime Date2 = DateTime.Parse(DateTime.Parse(date2).ToShortTimeString()).AddHours(23).AddMinutes(59).AddSeconds(59);
-            DateTime Date2 = date2;
-
             #region "計算書"
             if (data == "S")
             {                
                 #region "法人"
                 if (type == 0)
                 {
-                    NpgsqlConnection conn = new NpgsqlConnection();
-                    NpgsqlDataAdapter adapter;
-                    PostgreSQL postgre = new PostgreSQL();
-                    conn = postgre.connection();
-
-                    string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
-                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where B.type = 0 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
-                              method1 + amountA + amountB + "order by notfnumber;";
-                    conn.Open();
-
-                    adapter = new NpgsqlDataAdapter(sql_str, conn);
-                    adapter.Fill(dt);
                     dataGridView1.DataSource = dt;
 
                     DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
@@ -189,6 +174,9 @@ namespace Flawless_ex
                     dataGridView1.Columns[8].HeaderText = "品名";
                     dataGridView1.Columns[9].HeaderText = "金額";
                     #endregion
+
+                    dataGridView1.Columns[10].Visible = false;
+
                     #region"読み取り専用"
                     dataGridView1.Columns[1].ReadOnly = true;
                     dataGridView1.Columns[2].ReadOnly = true;
@@ -201,7 +189,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[9].ReadOnly = true;
                     #endregion
 
-                    conn.Close();
+                    //conn.Close();
                     if (data == null)
                     {
                         document = (string)dataGridView1.CurrentRow.Cells[1].Value;
@@ -214,19 +202,6 @@ namespace Flawless_ex
                 #region "個人"
                 if (type == 1)
                 {
-                    NpgsqlConnection conn = new NpgsqlConnection();
-                    NpgsqlDataAdapter adapter;
-                    PostgreSQL postgre = new PostgreSQL();
-                    conn = postgre.connection();
-
-                    string sql_str = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.notfnumber from statement_data A inner join client_m B ON ( A.code = B.code )" +
-                            "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                            "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method1 + amountA + amountB + " order by notfnumber;";
-
-                    conn.Open();
-
-                    adapter = new NpgsqlDataAdapter(sql_str, conn);
-                    adapter.Fill(dt);
                     dataGridView1.DataSource = dt;
 
                     DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
@@ -243,6 +218,8 @@ namespace Flawless_ex
                     dataGridView1.Columns[8].HeaderText = "金額";
                     #endregion
 
+                    dataGridView1.Columns[9].Visible = false;
+
                     #region"読み取り専用"
                     dataGridView1.Columns[1].ReadOnly = true;
                     dataGridView1.Columns[2].ReadOnly = true;
@@ -254,7 +231,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[8].ReadOnly = true;
                     #endregion
 
-                    conn.Close();
+                    //conn.Close();
                     document = (string)dataGridView1.CurrentRow.Cells[1].Value;
                     staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
                     address = (string)dataGridView1.CurrentRow.Cells[5].Value;
@@ -268,21 +245,6 @@ namespace Flawless_ex
                 #region "法人"
                 if (type == 0)
                 {
-                    NpgsqlConnection conn = new NpgsqlConnection();
-                    NpgsqlDataAdapter adapter;
-                    PostgreSQL postgre = new PostgreSQL();
-                    conn = postgre.connection();
-
-                    string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, A.code from delivery_m A " +
-                        "inner join client_m B ON (A.code = B.code ) inner join delivery_calc C ON (A.control_number = C.control_number ) " +
-                        "inner join item_m D ON (C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
-                           "where B.type = 0 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + antiqueNumber + code1 + item1 + " and " +
-                           "( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" + method1 + amountA + amountB + " order by control_number;";
-
-                    conn.Open();
-
-                    adapter = new NpgsqlDataAdapter(sql_str, conn);
-                    adapter.Fill(dt);
                     dataGridView1.DataSource = dt;
 
                     DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
@@ -299,6 +261,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[8].HeaderText = "品名";
                     dataGridView1.Columns[9].HeaderText = "金額";
                     #endregion
+
                     #region"読み取り専用"
                     dataGridView1.Columns[1].ReadOnly = true;
                     dataGridView1.Columns[2].ReadOnly = true;
@@ -311,7 +274,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[9].ReadOnly = true;
                     #endregion
 
-                    conn.Close();
+                    //conn.Close();
 
                     control = (int)dataGridView1.CurrentRow.Cells[1].Value;
                     staff_name = (string)dataGridView1.CurrentRow.Cells[3].Value;
@@ -321,21 +284,6 @@ namespace Flawless_ex
                 #region "個人"
                 if (type == 1)
                 {
-                    NpgsqlConnection conn = new NpgsqlConnection();
-                    NpgsqlDataAdapter adapter;
-                    PostgreSQL postgre = new PostgreSQL();
-                    conn = postgre.connection();
-
-                    string sql_str = "select A.control_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from delivery_m A inner join client_m B ON ( A.code = B.code )" +
-                            "inner join delivery_calc C ON (A.control_number = C.control_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) " +
-                            "inner join main_category_m E ON (D.main_category_code = E.main_category_code) " +
-                            "where B.type = 1 " + name1 + address1 + addresskana1 + phoneNumber1 + documentNumber + code1 + item1 + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') "
-                             + method1 + amountA + amountB + " order by control_number;";
-
-                    conn.Open();
-
-                    adapter = new NpgsqlDataAdapter(sql_str, conn);
-                    adapter.Fill(dt);
                     dataGridView1.DataSource = dt;
 
                     DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
@@ -362,7 +310,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[8].ReadOnly = true;
                     #endregion
 
-                    conn.Close();
+                    //conn.Close();
                     control = (int)dataGridView1.CurrentRow.Cells[1].Value;
                     staff_name = (string)dataGridView1.CurrentRow.Cells[4].Value;
                     address = (string)dataGridView1.CurrentRow.Cells[6].Value;

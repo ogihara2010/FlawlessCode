@@ -114,7 +114,7 @@ namespace Flawless_ex
             string item;
             string itemcode;
             
-            string date1 = dateTimePicker1.Text;            //引数用
+            //string date1 = dateTimePicker1.Text;            //引数用
             //string date2 = settlementBox.Text;              //引数用
 
             DateTime Date1 = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());                                                     //検索用
@@ -125,7 +125,7 @@ namespace Flawless_ex
             decimal amount2;
             string amountA;
             string amountB;
-            int ant;
+            decimal ant;
             decimal amt;
             decimal amt1;
             #endregion
@@ -295,36 +295,36 @@ namespace Flawless_ex
                 #endregion
                 #region "繋げるSQL"
                 #region "大分類名をコードに変換"
-                if (comboBox1.SelectedIndex != -1)
-                {
-                    string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
+                //if (comboBox1.SelectedIndex != -1)
+                //{
+                //    string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
                     
-                    adapter2 = new NpgsqlDataAdapter(sql2, conn);
-                    adapter2.Fill(dt5);
-                    DataRow row;
-                    row = dt5.Rows[0];
-                    code = row["main_category_code"].ToString();
-                }
-                else
-                {
-                    code = "1";
-                }
+                //    adapter2 = new NpgsqlDataAdapter(sql2, conn);
+                //    adapter2.Fill(dt5);
+                //    DataRow row;
+                //    row = dt5.Rows[0];
+                //    code = row["main_category_code"].ToString();
+                //}
+                //else
+                //{
+                //    code = "1";
+                //}
 
                 #endregion
                 #region "品名をコードに変換"
-                if (comboBox2.SelectedIndex != -1)
-                {
-                    string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
-                    adapter3 = new NpgsqlDataAdapter(sql3, conn);
-                    adapter3.Fill(dt6);
-                    DataRow row2;
-                    row2 = dt6.Rows[0];
-                    itemcode = row2["item_code"].ToString();
-                }
-                else
-                {
-                    itemcode = "1";
-                }
+                //if (comboBox2.SelectedIndex != -1)
+                //{
+                //    string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
+                //    adapter3 = new NpgsqlDataAdapter(sql3, conn);
+                //    adapter3.Fill(dt6);
+                //    DataRow row2;
+                //    row2 = dt6.Rows[0];
+                //    itemcode = row2["item_code"].ToString();
+                //}
+                //else
+                //{
+                //    itemcode = "1";
+                //}
 
                 #endregion
 
@@ -345,19 +345,20 @@ namespace Flawless_ex
                         return;
                     }
 
-                    string name1 = shopname;
-                    string phoneNumber1 = phoneNumber;
-                    string address1 = address;
-                    string addresskana1 = addresskana;
-                    string item1 = item;
-                    string code1 = mainCategory;
-                    string method1 = method;
-                    int antique = ant;
+                    //string name1 = shopname;
+                    //string phoneNumber1 = phoneNumber;
+                    //string address1 = address;
+                    //string addresskana1 = addresskana;
+                    //string item1 = item;
+                    //string code1 = mainCategory;
+                    //string method1 = method;
+                    //int antique = ant;
                     document = this.textBox7.Text;
-                    amount2 = amt;
-                    amount1 = amt1;
+                    //amount2 = amt;
+                    //amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt7, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    //DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -377,20 +378,20 @@ namespace Flawless_ex
                         MessageBox.Show("検索データがありません。");
                         return;
                     }
-                    string name1 = shopname;
-                    string phoneNumber1 = phoneNumber;
-                    string address1 = address;
-                    string addresskana1 = addresskana;
-                    string item1 = item;
-                    string code1 = mainCategory;
+                    //string name1 = shopname;
+                    //string phoneNumber1 = phoneNumber;
+                    //string address1 = address;
+                    //string addresskana1 = addresskana;
+                    //string item1 = item;
+                    //string code1 = mainCategory;
                     //control = int.Parse(this.textBox8.Text);
-                    string method1 = method;
+                    //string method1 = method;
                     documentNumber = controlNumber;
-                    int antique = ant;
-                    amount2 = amt;
-                    amount1 = amt1;
+                    //int antique = ant;
+                    //amount2 = amt;
+                    //amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt7, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -502,7 +503,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    ant = int.Parse(textBox9.Text);
+                    ant = decimal.Parse(textBox9.Text);
                 }
                 if (string.IsNullOrWhiteSpace(textBox11.Text))
                 {
@@ -510,7 +511,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    amt = int.Parse(textBox11.Text);
+                    amt = decimal.Parse(textBox11.Text);
                 }
                 if (string.IsNullOrWhiteSpace(textBox10.Text))
                 {
@@ -518,39 +519,39 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    amt1 = int.Parse(textBox10.Text);
+                    amt1 = decimal.Parse(textBox10.Text);
                 }
                 #endregion
                 #region "繋げるSQL"
                 #region "大分類名をコードに変換"
-                if (comboBox1.SelectedIndex != -1)
-                {
-                    string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
-                    adapter2 = new NpgsqlDataAdapter(sql2, conn);
-                    adapter2.Fill(dt5);
-                    DataRow row;
-                    row = dt5.Rows[0];
-                    code = row["main_category_code"].ToString();
-                }
-                else
-                {
-                    code = "100";
-                }
+                //if (comboBox1.SelectedIndex != -1)
+                //{
+                //    string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
+                //    adapter2 = new NpgsqlDataAdapter(sql2, conn);
+                //    adapter2.Fill(dt5);
+                //    DataRow row;
+                //    row = dt5.Rows[0];
+                //    code = row["main_category_code"].ToString();
+                //}
+                //else
+                //{
+                //    code = "100";
+                //}
                 #endregion
                 #region "品名をコードに変換"
-                if (comboBox2.SelectedIndex != -1)
-                {
-                    string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
-                    adapter3 = new NpgsqlDataAdapter(sql3, conn);
-                    adapter3.Fill(dt6);
-                    DataRow row2;
-                    row2 = dt6.Rows[0];
-                    itemcode = row2["item_code"].ToString();
-                }
-                else
-                {
-                    itemcode = "1000";
-                }
+                //if (comboBox2.SelectedIndex != -1)
+                //{
+                //    string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
+                //    adapter3 = new NpgsqlDataAdapter(sql3, conn);
+                //    adapter3.Fill(dt6);
+                //    DataRow row2;
+                //    row2 = dt6.Rows[0];
+                //    itemcode = row2["item_code"].ToString();
+                //}
+                //else
+                //{
+                //    itemcode = "1000";
+                //}
                 #endregion
 
                 if (data == "S")
@@ -569,18 +570,18 @@ namespace Flawless_ex
                         return;
                     }
 
-                    string name1 = name;
-                    string phoneNumber1 = phoneNumber;
-                    string address1 = address;
-                    string addresskana1 = addresskana;
-                    string item1 = item;
-                    string code1 = mainCategory;
-                    string method1 = method;
+                    //string name1 = name;
+                    //string phoneNumber1 = phoneNumber;
+                    //string address1 = address;
+                    //string addresskana1 = addresskana;
+                    //string item1 = item;
+                    //string code1 = mainCategory;
+                    //string method1 = method;
                     antiqueNumber = null;
-                    amount2 = amt;
-                    amount1 = amt1;
+                    //amount2 = amt;
+                    //amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt7, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -601,20 +602,20 @@ namespace Flawless_ex
                         return;
                     }
 
-                    string name1 = name;
-                    string phoneNumber1 = phoneNumber;
-                    string address1 = address;
-                    string addresskana1 = addresskana;
-                    string item1 = item;
-                    string code1 = mainCategory;
-                    string method1 = method;
+                    //string name1 = name;
+                    //string phoneNumber1 = phoneNumber;
+                    //string address1 = address;
+                    //string addresskana1 = addresskana;
+                    //string item1 = item;
+                    //string code1 = mainCategory;
+                    //string method1 = method;
                     antiqueNumber = null;
                     documentNumber = controlNumber;
-                    amount2 = amt;
-                    amount1 = amt1;
+                    //amount2 = amt;
+                    //amount1 = amt1;
 
                     //control = int.Parse(this.textBox8.Text);
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt7, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
