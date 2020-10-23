@@ -19,6 +19,7 @@ namespace Flawless_ex
         DataTable dt5 = new DataTable();
         DataTable dt6 = new DataTable();
         DataTable dt7 = new DataTable();
+        DataTable dt8 = new DataTable();
         int type;
         int number;
         int a = 0; // クリック数 
@@ -137,6 +138,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter3;
 
             dt7.Clear();
+            dt8.Clear();
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
@@ -330,10 +332,10 @@ namespace Flawless_ex
 
                 if (data == "S")
                 {
-                    string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, E.main_category_name from statement_data A inner join client_m B ON (A.code = B.code )" +
+                    string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, D.item_name, C.amount, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
                             "where B.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + mainCategory + item + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
-                              method + amountA + amountB + " ;";
+                              method + amountA + amountB + " order by A.notfnumber ;";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
                     adapter.Fill(dt7);
@@ -556,14 +558,14 @@ namespace Flawless_ex
 
                 if (data == "S")
                 {
-                    string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount from statement_data A inner join client_m B ON ( A.code = B.code )" +
+                    string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.name, B.phone_number, B.address, D.item_name, C.amount, A.notfnumber from statement_data A inner join client_m B ON ( A.code = B.code )" +
                             "inner join statement_calc_data C ON (A.document_number = C.document_number ) inner join item_m D ON (C.main_category_code = D.main_category_code and C.item_code = D.item_code ) inner join main_category_m E ON (D.main_category_code = E.main_category_code)" +
                             "where A.type = 1 " + name + address + addresskana + phoneNumber + documentNumber + mainCategory + item + " and (A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " + method + amountA + amountB + " order by notfnumber;";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
-                    adapter.Fill(dt7);
+                    adapter.Fill(dt8);
 
-                    int a = dt7.Rows.Count;
+                    int a = dt8.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
@@ -581,7 +583,7 @@ namespace Flawless_ex
                     //amount2 = amt;
                     //amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt7, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt8, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -593,9 +595,9 @@ namespace Flawless_ex
                              + method + amountA + amountB + "order by control_number;";
 
                     adapter = new NpgsqlDataAdapter(sql, conn);
-                    adapter.Fill(dt7);
+                    adapter.Fill(dt8);
 
-                    int a = dt7.Rows.Count;
+                    int a = dt8.Rows.Count;
                     if (a == 0)
                     {
                         MessageBox.Show("検索データがありません。");
@@ -615,7 +617,7 @@ namespace Flawless_ex
                     //amount1 = amt1;
 
                     //control = int.Parse(this.textBox8.Text);
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt7, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, dt8, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }

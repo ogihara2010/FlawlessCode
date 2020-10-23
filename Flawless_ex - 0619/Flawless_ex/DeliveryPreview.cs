@@ -655,12 +655,12 @@ namespace Flawless_ex
             #endregion
             #endregion
             #region "ロゴ"
-            Image newImage = Image.FromFile(@"C:\Users\Flawlessロゴ.png");
+            Image newImage = Image.FromFile(@"\\192.168.152.164\Flawless_test\Flawlessロゴ.png");
             Rectangle destRect = new Rectangle(350, 20, 400, 50);
             e.Graphics.DrawImage(newImage, destRect);
             #endregion
             #region "印鑑"
-            Image newImage1 = Image.FromFile(@"C:\Users\印鑑.png");
+            Image newImage1 = Image.FromFile(@"\\192.168.152.164\Flawless_test\印鑑.png");
             Rectangle destRect2 = new Rectangle(580, -50, 300, 300);
             e.Graphics.DrawImage(newImage1, destRect2);
             #endregion

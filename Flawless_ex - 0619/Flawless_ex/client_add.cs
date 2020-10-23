@@ -51,6 +51,9 @@ namespace Flawless_ex
         string kana;
         int grade;
 
+        private FileServer fileServer = new FileServer();
+
+
         public client_add(Statement statement, int id, int type, string Access_auth, string Pass)
         {
             InitializeComponent();
@@ -181,20 +184,21 @@ namespace Flawless_ex
             string BranchName = this.textBox18.Text;
             string AccountNumber = this.textBox19.Text;
             string AccountNameKana = this.textBox20.Text;
-            string RegisterCopy = this.textBox21.Text;
-            string Antiquelicense = this.textBox22.Text;
+            string RegisterCopy = fileServer.UploadImage(textBox21.Text, FileServer.Filetype.RegisterCopy);
+            string Antiquelicense = fileServer.UploadImage(this.textBox22.Text, FileServer.Filetype.Antiquelicense);
             int AntiqueNumber = int.Parse(this.textBox23.Text);
-            string ID = this.textBox24.Text;
+            string ID = fileServer.UploadImage(this.textBox24.Text, FileServer.Filetype.ID);
 
             string PeriodStay = periodStayDateTimePicker.Text;
             
-            string SealCertification = this.textBox26.Text;
-            string TaxCertification = this.textBox27.Text;
+            string SealCertification = fileServer.UploadImage(this.textBox26.Text, FileServer.Filetype.SealCertification);
+            string TaxCertification = fileServer.UploadImage(this.textBox27.Text, FileServer.Filetype.TaxCertification);
             string Remarks = this.textBox28.Text;
-            string ResidenceCard = this.textBox29.Text;
-            string AolFinancialShareholder = textBox25.Text;
+            string ResidenceCard = fileServer.UploadImage(this.textBox29.Text, FileServer.Filetype.ResidenceCard);
+            string AolFinancialShareholder = fileServer.UploadImage(textBox25.Text, FileServer.Filetype.AolFinancialShareholder);
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
+
 
             if (string.IsNullOrEmpty(ResidenceCard))
             {
@@ -345,18 +349,18 @@ namespace Flawless_ex
             string BranchName = this.textBox40.Text;
             string AccountNumber = this.textBox39.Text;
             string AccountNameKana = this.textBox38.Text;
-            string RegisterCopy = this.textBox37.Text;
-            string Antiquelicense = this.textBox36.Text;
+            string RegisterCopy = fileServer.UploadImage(this.textBox37.Text, FileServer.Filetype.RegisterCopy);
+            string Antiquelicense = fileServer.UploadImage(this.textBox36.Text, FileServer.Filetype.Antiquelicense);
             string PhotoID = this.textBox35.Text;
-            string ID = this.textBox34.Text;
+            string ID = fileServer.UploadImage(this.textBox34.Text, FileServer.Filetype.ID);
 
             string PeriodStay = periodStayDateTimePicker1.Text;
             
-            string SealCertification = this.textBox32.Text;
-            string TaxCertification = this.textBox31.Text;
+            string SealCertification = SealCertification = fileServer.UploadImage(this.textBox32.Text, FileServer.Filetype.SealCertification);
+            string TaxCertification = TaxCertification = fileServer.UploadImage(this.textBox31.Text, FileServer.Filetype.TaxCertification);
             string Remarks = this.textBox58.Text;
-            string ResidenceCard = this.textBox30.Text;
-            string AolFinancialShareholder = textBox33.Text;
+            string ResidenceCard = fileServer.UploadImage(this.textBox30.Text, FileServer.Filetype.ResidenceCard);
+            string AolFinancialShareholder = fileServer.UploadImage(textBox33.Text, FileServer.Filetype.AolFinancialShareholder);
 
             if (string.IsNullOrEmpty(ResidenceCard))
             {
@@ -464,7 +468,6 @@ namespace Flawless_ex
         }
 
         #endregion
-
         #region"法人　値の検証"
         private void PostalUpCordTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -524,7 +527,6 @@ namespace Flawless_ex
             textBox20.Select(textBox20.Text.Length, 0);
         }
         #endregion
-
         #region"法人　画像確認"
         private void textBox24_DoubleClick(object sender, EventArgs e)
         {
@@ -582,7 +584,6 @@ namespace Flawless_ex
             }
         }
         #endregion
-
         #region"個人　画像確認"
         private void textBox37_DoubleClick(object sender, EventArgs e)
         {
