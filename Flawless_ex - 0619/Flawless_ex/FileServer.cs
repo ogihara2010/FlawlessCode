@@ -19,6 +19,13 @@ namespace Flawless_ex
             RegisterCopy = 7
         };
 
+        public string ShowImage(Filetype type)
+        {
+            string path;
+            path = "";
+            return path;
+        }
+
         public string UploadImage(string path, Filetype type)
         {
             string path1 = path;
@@ -63,7 +70,7 @@ namespace Flawless_ex
 
             if (dir != "")
             {
-                path2 = @"\\192.168.152.164\Flawless_test\" + dir + @"\test" + timestamp + ".png";
+                path2 = @"\\192.168.152.164\Flawless_test\" + dir + @"\" +dir + timestamp + ".png";
             }
             System.IO.File.Copy(path1, path2, true);
             return path2;
