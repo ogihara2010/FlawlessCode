@@ -65,7 +65,9 @@ namespace Flawless_ex
         bool NameChangeButton = false;                   //品名変更画面に移動する際は true
         bool DeliveryButton = false;            //納品書検索
         DialogResult result;
-        bool Return = false;                    //画面終了時にクローズキャンセル用
+        bool registerError = false;                    //登録内容に不備があったとき true
+        bool clientInfor = false;                   //お客様情報ボタンクリックしたら true
+        bool monthResult = false;                   //月間成績一覧ボタンをクリックしたら true
         #region"各行の datetimepicker"
         DateTime? date1;
         DateTime? date2;
@@ -6091,674 +6093,12 @@ namespace Flawless_ex
         {
             if (NotFinish)
             {
-                #region"次月と品名変更の両方にチェックが入ってることを通知"
-                //for (int i = 1; i <= record; i++)
-                //{
-                //    switch (i)
-                //    {
-                //        #region"１行目"
-                //        case 1:
-                //            if (itemMainCategoryTextBox1.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"２行目"
-                //        case 2:
-                //            if (itemMainCategoryTextBox2.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"３行目"
-                //        case 3:
-                //            if (itemMainCategoryTextBox3.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"４行目"
-                //        case 4:
-                //            if (itemMainCategoryTextBox4.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("４行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"５行目"
-                //        case 5:
-                //            if (itemMainCategoryTextBox5.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("５行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"６行目"
-                //        case 6:
-                //            if (itemMainCategoryTextBox6.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("６行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"７行目"
-                //        case 7:
-                //            if (itemMainCategoryTextBox7.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("７行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"８行目"
-                //        case 8:
-                //            if (itemMainCategoryTextBox8.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("８行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"９行目"
-                //        case 9:
-                //            if (itemMainCategoryTextBox9.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("９行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１０行目"
-                //        case 10:
-                //            if (itemMainCategoryTextBox10.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("１０行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１１行目"
-                //        case 11:
-                //            if (itemMainCategoryTextBox11.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("１１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１２行目"
-                //        case 12:
-                //            if (itemMainCategoryTextBox12.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("１２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１３行目"
-                //        case 13:
-                //            if (itemMainCategoryTextBox13.ForeColor == Color.Purple)
-                //            {
-                //                MessageBox.Show("１３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //                return;
-                //            }
-                //            break;
-                //            #endregion
-                //    }
-                //}
-                #endregion
+                RegisterCheck();
 
-                #region"次月にチェックが入っていて卸値にも入力されているとき"
-                for (int i = 1; i <= record; i++)
+                if (registerError)
                 {
-                    switch (i)
-                    {
-                        #region"１行目"
-                        case 1:
-                            if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && WholesalePriceTextBox1.Text != @"\0")
-                            {
-                                MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"２行目"
-                        case 2:
-                            if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && WholesalePriceTextBox2.Text != @"\0")
-                            {
-                                MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"３行目"
-                        case 3:
-                            if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && WholesalePriceTextBox3.Text != @"\0")
-                            {
-                                MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"４行目"
-                        case 4:
-                            if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && WholesalePriceTextBox4.Text != @"\0")
-                            {
-                                MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"５行目"
-                        case 5:
-                            if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && WholesalePriceTextBox5.Text != @"\0")
-                            {
-                                MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"６行目"
-                        case 6:
-                            if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && WholesalePriceTextBox6.Text != @"\0")
-                            {
-                                MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"７行目"
-                        case 7:
-                            if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && WholesalePriceTextBox7.Text != @"\0")
-                            {
-                                MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"８行目"
-                        case 8:
-                            if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && WholesalePriceTextBox8.Text != @"\0")
-                            {
-                                MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"９行目"
-                        case 9:
-                            if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && WholesalePriceTextBox9.Text != @"\0")
-                            {
-                                MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１０行目"
-                        case 10:
-                            if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && WholesalePriceTextBox10.Text != @"\0")
-                            {
-                                MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１１行目"
-                        case 11:
-                            if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && WholesalePriceTextBox11.Text != @"\0")
-                            {
-                                MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１２行目"
-                        case 12:
-                            if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && WholesalePriceTextBox12.Text != @"\0")
-                            {
-                                MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１３行目"
-                        case 13:
-                            if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && WholesalePriceTextBox13.Text != @"\0")
-                            {
-                                MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                            #endregion
-                    }
+                    return;
                 }
-                #endregion
-
-                #region"品名変更のみチェックが入っているとき"
-                //for (int i = 1; i <= record; i++)
-                //{
-                //    switch (i)
-                //    {
-                //        #region"１行目"
-                //        case 1:
-                //            if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"２行目"
-                //        case 2:
-                //            if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"３行目"
-                //        case 3:
-                //            if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"４行目"
-                //        case 4:
-                //            if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"５行目"
-                //        case 5:
-                //            if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"６行目"
-                //        case 6:
-                //            if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"７行目"
-                //        case 7:
-                //            if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"８行目"
-                //        case 8:
-                //            if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"９行目"
-                //        case 9:
-                //            if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１０行目"
-                //        case 10:
-                //            if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１１行目"
-                //        case 11:
-                //            if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１２行目"
-                //        case 12:
-                //            if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //        #endregion
-                //        #region"１３行目"
-                //        case 13:
-                //            if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
-                //            {
-                //                result = MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //                if (result == DialogResult.No)
-                //                {
-                //                    return;
-                //                }
-                //            }
-                //            break;
-                //            #endregion
-                //    }
-                //}
-                #endregion
-
-                #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
-                for (int i = 1; i <= record; i++)
-                {
-                    switch (i)
-                    {
-                        #region"１行目"
-                        case 1:
-                            if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
-                            {
-                                MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"２行目"
-                        case 2:
-                            if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
-                            {
-                                MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"３行目"
-                        case 3:
-                            if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
-                            {
-                                MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"４行目"
-                        case 4:
-                            if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
-                            {
-                                MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"５行目"
-                        case 5:
-                            if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
-                            {
-                                MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"６行目"
-                        case 6:
-                            if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
-                            {
-                                MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"７行目"
-                        case 7:
-                            if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
-                            {
-                                MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"８行目"
-                        case 8:
-                            if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
-                            {
-                                MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"９行目"
-                        case 9:
-                            if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
-                            {
-                                MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１０行目"
-                        case 10:
-                            if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
-                            {
-                                MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１１行目"
-                        case 11:
-                            if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
-                            {
-                                MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１２行目"
-                        case 12:
-                            if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
-                            {
-                                MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１３行目"
-                        case 13:
-                            if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
-                            {
-                                MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return;
-                            }
-                            break;
-                            #endregion
-                    }
-                }
-                #endregion
-
-                #region"卸値に値が入力されていて売却先が無記入のとき"
-                for (int i = 1; i <= record; i++)
-                {
-                    switch (i)
-                    {
-                        #region"１行目"
-                        case 1:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
-                            {
-                                MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"２行目"
-                        case 2:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
-                            {
-                                MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"３行目"
-                        case 3:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
-                            {
-                                MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"４行目"
-                        case 4:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
-                            {
-                                MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"５行目"
-                        case 5:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
-                            {
-                                MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"６行目"
-                        case 6:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
-                            {
-                                MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"７行目"
-                        case 7:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
-                            {
-                                MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"８行目"
-                        case 8:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
-                            {
-                                MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"９行目"
-                        case 9:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
-                            {
-                                MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１０行目"
-                        case 10:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
-                            {
-                                MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１１行目"
-                        case 11:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
-                            {
-                                MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１２行目"
-                        case 12:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
-                            {
-                                MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                        #endregion
-                        #region"１３行目"
-                        case 13:
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
-                            {
-                                MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                            break;
-                            #endregion
-                    }
-                }
-                #endregion
 
                 DialogResult dialogResult = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.No)
@@ -6883,7 +6223,7 @@ namespace Flawless_ex
                             Remark = remark1.Text;
                             Profit = WholeSaleUnFormat1 - PurchaseUnFormat1;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || WholesalePriceTextBox1.Text != @"\0") 
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || WholesalePriceTextBox1.Text != "¥0") 
                             {
                                 SaleDate = BuyDateTimePicker1.Value.ToLongDateString();
                                 Buyer = BuyerTextBox1.Text;
@@ -6936,7 +6276,7 @@ namespace Flawless_ex
                             Remark = remark2.Text;
                             Profit = WholeSaleUnFormat2 - PurchaseUnFormat2;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text)|| WholesalePriceTextBox2.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text)|| WholesalePriceTextBox2.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker2.Value.ToLongDateString();
                                 Buyer = BuyerTextBox2.Text;
@@ -6988,7 +6328,7 @@ namespace Flawless_ex
                             Remark = remark3.Text;
                             Profit = WholeSaleUnFormat3 - PurchaseUnFormat3;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) || WholesalePriceTextBox3.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) || WholesalePriceTextBox3.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker3.Value.ToLongDateString();
                                 Buyer = BuyerTextBox3.Text;
@@ -7040,7 +6380,7 @@ namespace Flawless_ex
                             Remark = remark4.Text;
                             Profit = WholeSaleUnFormat4 - PurchaseUnFormat4;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) || WholesalePriceTextBox4.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) || WholesalePriceTextBox4.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker4.Value.ToLongDateString();
                                 Buyer = BuyerTextBox4.Text;
@@ -7092,7 +6432,7 @@ namespace Flawless_ex
                             Remark = remark5.Text;
                             Profit = WholeSaleUnFormat5 - PurchaseUnFormat5;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) || WholesalePriceTextBox5.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) || WholesalePriceTextBox5.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker5.Value.ToLongDateString();
                                 Buyer = BuyerTextBox5.Text;
@@ -7144,7 +6484,7 @@ namespace Flawless_ex
                             Remark = remark6.Text;
                             Profit = WholeSaleUnFormat6 - PurchaseUnFormat6;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) || WholesalePriceTextBox6.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) || WholesalePriceTextBox6.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker6.Value.ToLongDateString();
                                 Buyer = BuyerTextBox6.Text;
@@ -7196,7 +6536,7 @@ namespace Flawless_ex
                             Remark = remark7.Text;
                             Profit = WholeSaleUnFormat7 - PurchaseUnFormat7;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) || WholesalePriceTextBox7.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) || WholesalePriceTextBox7.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker7.Value.ToLongDateString();
                                 Buyer = BuyerTextBox7.Text;
@@ -7248,7 +6588,7 @@ namespace Flawless_ex
                             Remark = remark8.Text;
                             Profit = WholeSaleUnFormat8 - PurchaseUnFormat8;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) || WholesalePriceTextBox8.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) || WholesalePriceTextBox8.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker8.Value.ToLongDateString();
                                 Buyer = BuyerTextBox8.Text;
@@ -7300,7 +6640,7 @@ namespace Flawless_ex
                             Remark = remark9.Text;
                             Profit = WholeSaleUnFormat9 - PurchaseUnFormat9;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) || WholesalePriceTextBox9.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) || WholesalePriceTextBox9.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker9.Value.ToLongDateString();
                                 Buyer = BuyerTextBox9.Text;
@@ -7352,7 +6692,7 @@ namespace Flawless_ex
                             Remark = remark10.Text;
                             Profit = WholeSaleUnFormat10 - PurchaseUnFormat10;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) || WholesalePriceTextBox10.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) || WholesalePriceTextBox10.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker10.Value.ToLongDateString();
                                 Buyer = BuyerTextBox10.Text;
@@ -7404,7 +6744,7 @@ namespace Flawless_ex
                             Remark = remark11.Text;
                             Profit = WholeSaleUnFormat11 - PurchaseUnFormat11;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) || WholesalePriceTextBox11.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) || WholesalePriceTextBox11.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker11.Value.ToLongDateString();
                                 Buyer = BuyerTextBox11.Text;
@@ -7456,7 +6796,7 @@ namespace Flawless_ex
                             Remark = remark12.Text;
                             Profit = WholeSaleUnFormat12 - PurchaseUnFormat12;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) || WholesalePriceTextBox12.Text != @"\0")
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) || WholesalePriceTextBox12.Text != "¥0")
                             {
                                 SaleDate = BuyDateTimePicker12.Value.ToLongDateString();
                                 Buyer = BuyerTextBox12.Text;
@@ -7508,7 +6848,7 @@ namespace Flawless_ex
                             Remark = remark13.Text;
                             Profit = WholeSaleUnFormat13 - PurchaseUnFormat13;
 
-                            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) || WholesalePriceTextBox13.Text != @"\0") 
+                            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) || WholesalePriceTextBox13.Text != "¥0") 
                             {
                                 SaleDate = BuyDateTimePicker13.Value.ToLongDateString();
                                 Buyer = BuyerTextBox13.Text;
@@ -8451,396 +7791,12 @@ namespace Flawless_ex
             }
             #endregion
 
-            #region"次月にチェックが入っていて卸値にも入力されているとき"
-            for (int i = 1; i <= record; i++)
+            RegisterCheck();
+
+            if (registerError)
             {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text)) 
-                        {
-                            MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
-                        {
-                            MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
-                        {
-                            MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
-                        {
-                            MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
-                        {
-                            MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
-                        {
-                            MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
-                        {
-                            MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
-                        {
-                            MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
-                        {
-                            MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
-                        {
-                            MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
-                        {
-                            MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
-                        {
-                            MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
-                        {
-                            MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            return;
-                        }
-                        break;
-                        #endregion
-                }
+                return;
             }
-            #endregion
-
-            #region"卸値に値が入力されていて売却先が無記入のとき"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
-                        {
-                            MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
-                        {
-                            MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
-                        {
-                            MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
-                        {
-                            MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
-                        {
-                            MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
-                        {
-                            MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
-                        {
-                            MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
-                        {
-                            MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
-                        {
-                            MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
-                        {
-                            MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
-                        {
-                            MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
-                        {
-                            MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
-                        {
-                            MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        break;
-                        #endregion
-                }
-            }
-            #endregion
-
-            #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
-            for (int i = 1; i <= record; i++)
-            {
-                switch (i)
-                {
-                    #region"１行目"
-                    case 1:
-                        if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && !ItemNameChangeCheckBox1.Checked)
-                        {
-                            MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"２行目"
-                    case 2:
-                        if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && !ItemNameChangeCheckBox2.Checked)
-                        {
-                            MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"３行目"
-                    case 3:
-                        if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && !ItemNameChangeCheckBox3.Checked)
-                        {
-                            MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"４行目"
-                    case 4:
-                        if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && !ItemNameChangeCheckBox4.Checked)
-                        {
-                            MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"５行目"
-                    case 5:
-                        if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && !ItemNameChangeCheckBox5.Checked)
-                        {
-                            MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"６行目"
-                    case 6:
-                        if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && !ItemNameChangeCheckBox6.Checked)
-                        {
-                            MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"７行目"
-                    case 7:
-                        if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && !ItemNameChangeCheckBox7.Checked)
-                        {
-                            MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"８行目"
-                    case 8:
-                        if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && !ItemNameChangeCheckBox8.Checked)
-                        {
-                            MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"９行目"
-                    case 9:
-                        if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && !ItemNameChangeCheckBox9.Checked)
-                        {
-                            MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１０行目"
-                    case 10:
-                        if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && !ItemNameChangeCheckBox10.Checked)
-                        {
-                            MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１１行目"
-                    case 11:
-                        if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && !ItemNameChangeCheckBox11.Checked)
-                        {
-                            MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１２行目"
-                    case 12:
-                        if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && !ItemNameChangeCheckBox12.Checked)
-                        {
-                            MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                    #endregion
-                    #region"１３行目"
-                    case 13:
-                        if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && !ItemNameChangeCheckBox13.Checked)
-                        {
-                            MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                            return;
-                        }
-                        break;
-                        #endregion
-                }
-            }
-            #endregion
 
             DialogResult dialogResult = MessageBox.Show("選択した品名を変更しますか？", "変更確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
@@ -10240,10 +9196,9 @@ namespace Flawless_ex
                 MessageBox.Show("再登録を行ってください", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth, MonthCatalog, CarryOver);
             screan = false;
+            clientInfor = true;
             this.Close();
-            clientInformation.Show();
         }
         #endregion
 
@@ -10255,11 +9210,9 @@ namespace Flawless_ex
                 MessageBox.Show("再登録を行っていください。", "再登録を行う必要があります", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            MonthCatalog = true;
-            MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade, CarryOver, MonthCatalog);
             screan = false;
+            monthResult = true;
             this.Close();
-            monResult.Show();
         }
         #endregion
 
@@ -10583,10 +9536,9 @@ namespace Flawless_ex
                         {
                             #region"１行目"
                             case 1:
-                                if (!NextMonthCheckBox1.Checked && string.IsNullOrEmpty(WholesalePriceTextBox1.Text))
+                                if (!NextMonthCheckBox1.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || WholesalePriceTextBox1.Text == "¥0")) 
                                 {
                                     MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                    //return;
                                     e.Cancel = true;
                                     return;
                                 }
@@ -10594,7 +9546,7 @@ namespace Flawless_ex
                             #endregion
                             #region"２行目"
                             case 2:
-                                if (!NextMonthCheckBox2.Checked && string.IsNullOrEmpty(WholesalePriceTextBox2.Text))
+                                if (!NextMonthCheckBox2.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox2.Text) || WholesalePriceTextBox2.Text == "¥0"))
                                 {
                                     MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10604,7 +9556,7 @@ namespace Flawless_ex
                             #endregion
                             #region"３行目"
                             case 3:
-                                if (!NextMonthCheckBox3.Checked && string.IsNullOrEmpty(WholesalePriceTextBox3.Text))
+                                if (!NextMonthCheckBox3.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox3.Text) || WholesalePriceTextBox3.Text == "¥0"))
                                 {
                                     MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10614,7 +9566,7 @@ namespace Flawless_ex
                             #endregion
                             #region"４行目"
                             case 4:
-                                if (!NextMonthCheckBox4.Checked && string.IsNullOrEmpty(WholesalePriceTextBox4.Text))
+                                if (!NextMonthCheckBox4.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox4.Text) || WholesalePriceTextBox4.Text == "¥0"))
                                 {
                                     MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10624,7 +9576,7 @@ namespace Flawless_ex
                             #endregion
                             #region"５行目"
                             case 5:
-                                if (!NextMonthCheckBox5.Checked && string.IsNullOrEmpty(WholesalePriceTextBox5.Text))
+                                if (!NextMonthCheckBox5.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox5.Text) || WholesalePriceTextBox5.Text == "¥0"))
                                 {
                                     MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10634,7 +9586,7 @@ namespace Flawless_ex
                             #endregion
                             #region"６行目"
                             case 6:
-                                if (!NextMonthCheckBox6.Checked && string.IsNullOrEmpty(WholesalePriceTextBox6.Text))
+                                if (!NextMonthCheckBox6.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox6.Text) || WholesalePriceTextBox6.Text == "¥0"))
                                 {
                                     MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10644,7 +9596,7 @@ namespace Flawless_ex
                             #endregion
                             #region"７行目"
                             case 7:
-                                if (!NextMonthCheckBox7.Checked && string.IsNullOrEmpty(WholesalePriceTextBox7.Text))
+                                if (!NextMonthCheckBox7.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox7.Text) || WholesalePriceTextBox7.Text == "¥0"))
                                 {
                                     MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10654,7 +9606,7 @@ namespace Flawless_ex
                             #endregion
                             #region"８行目"
                             case 8:
-                                if (!NextMonthCheckBox8.Checked && string.IsNullOrEmpty(WholesalePriceTextBox8.Text))
+                                if (!NextMonthCheckBox8.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox8.Text) || WholesalePriceTextBox8.Text == "¥0"))
                                 {
                                     MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10664,7 +9616,7 @@ namespace Flawless_ex
                             #endregion
                             #region"９行目"
                             case 9:
-                                if (!NextMonthCheckBox9.Checked && string.IsNullOrEmpty(WholesalePriceTextBox9.Text))
+                                if (!NextMonthCheckBox9.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox9.Text) || WholesalePriceTextBox9.Text == "¥0"))
                                 {
                                     MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10674,7 +9626,7 @@ namespace Flawless_ex
                             #endregion
                             #region"１０行目"
                             case 10:
-                                if (!NextMonthCheckBox10.Checked && string.IsNullOrEmpty(WholesalePriceTextBox10.Text))
+                                if (!NextMonthCheckBox10.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox10.Text) || WholesalePriceTextBox10.Text == "¥0"))
                                 {
                                     MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10684,7 +9636,7 @@ namespace Flawless_ex
                             #endregion
                             #region"１１行目"
                             case 11:
-                                if (!NextMonthCheckBox11.Checked && string.IsNullOrEmpty(WholesalePriceTextBox11.Text))
+                                if (!NextMonthCheckBox11.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox11.Text) || WholesalePriceTextBox11.Text == "¥0"))
                                 {
                                     MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10694,7 +9646,7 @@ namespace Flawless_ex
                             #endregion
                             #region"１２行目"
                             case 12:
-                                if (!NextMonthCheckBox12.Checked && string.IsNullOrEmpty(WholesalePriceTextBox12.Text))
+                                if (!NextMonthCheckBox12.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox12.Text) || WholesalePriceTextBox12.Text == "¥0"))
                                 {
                                     MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10704,7 +9656,7 @@ namespace Flawless_ex
                             #endregion
                             #region"１３行目"
                             case 13:
-                                if (!NextMonthCheckBox13.Checked && string.IsNullOrEmpty(WholesalePriceTextBox13.Text))
+                                if (!NextMonthCheckBox13.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox13.Text) || WholesalePriceTextBox13.Text == "¥0"))
                                 {
                                     MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     e.Cancel = true;
@@ -10716,147 +9668,21 @@ namespace Flawless_ex
                     }
                     #endregion
 
-                    //#region"卸値に値が入力されていて売却先が無記入のとき"
-                    //for (int i = 1; i <= record; i++)
-                    //{
-                    //    switch (i)
-                    //    {
-                    //        #region"１行目"
-                    //        case 1:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
-                    //            {
-                    //                MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"２行目"
-                    //        case 2:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
-                    //            {
-                    //                MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"３行目"
-                    //        case 3:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
-                    //            {
-                    //                MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"４行目"
-                    //        case 4:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
-                    //            {
-                    //                MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"５行目"
-                    //        case 5:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
-                    //            {
-                    //                MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"６行目"
-                    //        case 6:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
-                    //            {
-                    //                MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"７行目"
-                    //        case 7:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
-                    //            {
-                    //                MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"８行目"
-                    //        case 8:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
-                    //            {
-                    //                MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"９行目"
-                    //        case 9:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
-                    //            {
-                    //                MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"１０行目"
-                    //        case 10:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
-                    //            {
-                    //                MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"１１行目"
-                    //        case 11:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
-                    //            {
-                    //                MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"１２行目"
-                    //        case 12:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
-                    //            {
-                    //                MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //        #endregion
-                    //        #region"１３行目"
-                    //        case 13:
-                    //            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
-                    //            {
-                    //                MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //                e.Cancel = true;
-                    //                return;
-                    //            }
-                    //            break;
-                    //            #endregion
-                    //    }
-                    //}
-                    //#endregion
-
                     NotFinish = false;
                     RegisterButton_Click(sender, e);
+                }
+
+                if (clientInfor)
+                {
+                    ClientInformation clientInformation = new ClientInformation(recordList, staff_id, staff_name, type, SlipNumber, AntiqueNumber, ID_Number, Pass, grade, Access_auth, MonthCatalog, CarryOver);
+                    clientInformation.Show();
+                }
+
+                if (monthResult)
+                {
+                    MonthCatalog = true;
+                    MonResult monResult = new MonResult(mainmenu, staff_id, Access_auth, staff_name, type, SlipNumber, Pass, grade, CarryOver, MonthCatalog);
+                    monResult.Show();
                 }
 
             }
@@ -11384,6 +10210,678 @@ namespace Flawless_ex
         }
         #endregion
 
+        #endregion
+
+        #region"登録時の確認"
+        private void RegisterCheck()
+        {
+            #region"次月にチェックが入っていて卸値にも入力されているとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (WholesalePriceTextBox1.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && WholesalePriceTextBox1.Text != "¥0")
+                        {
+                            MessageBox.Show("１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (WholesalePriceTextBox2.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && WholesalePriceTextBox2.Text != "¥0")
+                        {
+                            MessageBox.Show("２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (WholesalePriceTextBox3.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && WholesalePriceTextBox3.Text != "¥0")
+                        {
+                            MessageBox.Show("３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (WholesalePriceTextBox4.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && WholesalePriceTextBox4.Text != "¥0")
+                        {
+                            MessageBox.Show("４行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (WholesalePriceTextBox5.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && WholesalePriceTextBox5.Text != "¥0")
+                        {
+                            MessageBox.Show("５行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (WholesalePriceTextBox6.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && WholesalePriceTextBox6.Text != "¥0")
+                        {
+                            MessageBox.Show("６行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (WholesalePriceTextBox7.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && WholesalePriceTextBox7.Text != "¥0")
+                        {
+                            MessageBox.Show("７行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (WholesalePriceTextBox8.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && WholesalePriceTextBox8.Text != "¥0")
+                        {
+                            MessageBox.Show("８行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (WholesalePriceTextBox9.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && WholesalePriceTextBox9.Text != "¥0")
+                        {
+                            MessageBox.Show("９行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (WholesalePriceTextBox10.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && WholesalePriceTextBox10.Text != "¥0")
+                        {
+                            MessageBox.Show("１０行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (WholesalePriceTextBox11.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && WholesalePriceTextBox11.Text != "¥0")
+                        {
+                            MessageBox.Show("１１行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (WholesalePriceTextBox12.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && WholesalePriceTextBox12.Text != "¥0")
+                        {
+                            MessageBox.Show("１２行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (WholesalePriceTextBox13.ForeColor == Color.Red && !string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && WholesalePriceTextBox13.Text != "¥0")
+                        {
+                            MessageBox.Show("１３行目に卸値が入力されています。" + "\r\n" + "「次月持ち越し」にするのかどうかよく確認してください", "入力項目をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+            #region"卸値が無記入で次月持ち越しにチェックが入っていないとき"
+            for (int i = 1; i <= record; i++)
+            {
+                switch (i)
+                {
+                    #region"１行目"
+                    case 1:
+                        if (!NextMonthCheckBox1.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox1.Text) || WholesalePriceTextBox1.Text == "¥0"))
+                        {
+                            MessageBox.Show("１行目の卸値が無記入ですが" + "\r\n" + "１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"２行目"
+                    case 2:
+                        if (!NextMonthCheckBox2.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox2.Text) || WholesalePriceTextBox2.Text == "¥0"))
+                        {
+                            MessageBox.Show("２行目の卸値が無記入ですが" + "\r\n" + "２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"３行目"
+                    case 3:
+                        if (!NextMonthCheckBox3.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox3.Text) || WholesalePriceTextBox3.Text == "¥0"))
+                        {
+                            MessageBox.Show("３行目の卸値が無記入ですが" + "\r\n" + "３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"４行目"
+                    case 4:
+                        if (!NextMonthCheckBox4.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox4.Text) || WholesalePriceTextBox4.Text == "¥0"))
+                        {
+                            MessageBox.Show("４行目の卸値が無記入ですが" + "\r\n" + "４行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"５行目"
+                    case 5:
+                        if (!NextMonthCheckBox5.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox5.Text) || WholesalePriceTextBox5.Text == "¥0"))
+                        {
+                            MessageBox.Show("５行目の卸値が無記入ですが" + "\r\n" + "５行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"６行目"
+                    case 6:
+                        if (!NextMonthCheckBox6.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox6.Text) || WholesalePriceTextBox6.Text == "¥0"))
+                        {
+                            MessageBox.Show("６行目の卸値が無記入ですが" + "\r\n" + "６行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"７行目"
+                    case 7:
+                        if (!NextMonthCheckBox7.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox7.Text) || WholesalePriceTextBox7.Text == "¥0"))
+                        {
+                            MessageBox.Show("７行目の卸値が無記入ですが" + "\r\n" + "７行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"８行目"
+                    case 8:
+                        if (!NextMonthCheckBox8.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox8.Text) || WholesalePriceTextBox8.Text == "¥0"))
+                        {
+                            MessageBox.Show("８行目の卸値が無記入ですが" + "\r\n" + "８行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"９行目"
+                    case 9:
+                        if (!NextMonthCheckBox9.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox9.Text) || WholesalePriceTextBox9.Text == "¥0"))
+                        {
+                            MessageBox.Show("９行目の卸値が無記入ですが" + "\r\n" + "９行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１０行目"
+                    case 10:
+                        if (!NextMonthCheckBox10.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox10.Text) || WholesalePriceTextBox10.Text == "¥0"))
+                        {
+                            MessageBox.Show("１０行目の卸値が無記入ですが" + "\r\n" + "１０行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１１行目"
+                    case 11:
+                        if (!NextMonthCheckBox11.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox11.Text) || WholesalePriceTextBox11.Text == "¥0"))
+                        {
+                            MessageBox.Show("１１行目の卸値が無記入ですが" + "\r\n" + "１１行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１２行目"
+                    case 12:
+                        if (!NextMonthCheckBox12.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox12.Text) || WholesalePriceTextBox12.Text == "¥0"))
+                        {
+                            MessageBox.Show("１２行目の卸値が無記入ですが" + "\r\n" + "１２行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                    #endregion
+                    #region"１３行目"
+                    case 13:
+                        if (!NextMonthCheckBox13.Checked && (string.IsNullOrEmpty(WholesalePriceTextBox13.Text) || WholesalePriceTextBox13.Text == "¥0"))
+                        {
+                            MessageBox.Show("１３行目の卸値が無記入ですが" + "\r\n" + "１３行目の次月持ち越しにチェックが入っておりません。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            registerError = true;
+                        }
+                        break;
+                        #endregion
+                }
+            }
+            #endregion
+
+            #region"品名変更のみチェックが入っているとき（コメントアウト）"
+            //for (int i = 1; i <= record; i++)
+            //{
+            //    switch (i)
+            //    {
+            //        #region"１行目"
+            //        case 1:
+            //            if (itemMainCategoryTextBox1.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"２行目"
+            //        case 2:
+            //            if (itemMainCategoryTextBox2.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"３行目"
+            //        case 3:
+            //            if (itemMainCategoryTextBox3.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"４行目"
+            //        case 4:
+            //            if (itemMainCategoryTextBox4.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("４行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"５行目"
+            //        case 5:
+            //            if (itemMainCategoryTextBox5.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("５行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"６行目"
+            //        case 6:
+            //            if (itemMainCategoryTextBox6.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("６行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"７行目"
+            //        case 7:
+            //            if (itemMainCategoryTextBox7.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("７行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"８行目"
+            //        case 8:
+            //            if (itemMainCategoryTextBox8.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("８行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"９行目"
+            //        case 9:
+            //            if (itemMainCategoryTextBox9.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("９行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１０行目"
+            //        case 10:
+            //            if (itemMainCategoryTextBox10.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("１０行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１１行目"
+            //        case 11:
+            //            if (itemMainCategoryTextBox11.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("１１行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１２行目"
+            //        case 12:
+            //            if (itemMainCategoryTextBox12.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("１２行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１３行目"
+            //        case 13:
+            //            if (itemMainCategoryTextBox13.ForeColor == Color.Blue)
+            //            {
+            //                result = MessageBox.Show("１３行目の品名変更にチェックが入っています" + "\r\n" + "このままでよろしいですか？", "入力項目確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //                if (result == DialogResult.No)
+            //                {
+            //                    return;
+            //                }
+            //            }
+            //            break;
+            //            #endregion
+            //    }
+            //}
+            #endregion
+            #region"卸値に値が入力されていて売却先が無記入のとき（コメントアウト）"
+            //for (int i = 1; i <= record; i++)
+            //{
+            //    switch (i)
+            //    {
+            //        #region"１行目"
+            //        case 1:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox1.Text) && string.IsNullOrEmpty(BuyerTextBox1.Text))
+            //            {
+            //                MessageBox.Show("１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"２行目"
+            //        case 2:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox2.Text) && string.IsNullOrEmpty(BuyerTextBox2.Text))
+            //            {
+            //                MessageBox.Show("２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"３行目"
+            //        case 3:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox3.Text) && string.IsNullOrEmpty(BuyerTextBox3.Text))
+            //            {
+            //                MessageBox.Show("３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"４行目"
+            //        case 4:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox4.Text) && string.IsNullOrEmpty(BuyerTextBox4.Text))
+            //            {
+            //                MessageBox.Show("４行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"５行目"
+            //        case 5:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox5.Text) && string.IsNullOrEmpty(BuyerTextBox5.Text))
+            //            {
+            //                MessageBox.Show("５行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"６行目"
+            //        case 6:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox6.Text) && string.IsNullOrEmpty(BuyerTextBox6.Text))
+            //            {
+            //                MessageBox.Show("６行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"７行目"
+            //        case 7:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox7.Text) && string.IsNullOrEmpty(BuyerTextBox7.Text))
+            //            {
+            //                MessageBox.Show("７行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"８行目"
+            //        case 8:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox8.Text) && string.IsNullOrEmpty(BuyerTextBox8.Text))
+            //            {
+            //                MessageBox.Show("８行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"９行目"
+            //        case 9:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox9.Text) && string.IsNullOrEmpty(BuyerTextBox9.Text))
+            //            {
+            //                MessageBox.Show("９行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１０行目"
+            //        case 10:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox10.Text) && string.IsNullOrEmpty(BuyerTextBox10.Text))
+            //            {
+            //                MessageBox.Show("１０行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１１行目"
+            //        case 11:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox11.Text) && string.IsNullOrEmpty(BuyerTextBox11.Text))
+            //            {
+            //                MessageBox.Show("１１行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１２行目"
+            //        case 12:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox12.Text) && string.IsNullOrEmpty(BuyerTextBox12.Text))
+            //            {
+            //                MessageBox.Show("１２行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１３行目"
+            //        case 13:
+            //            if (!string.IsNullOrEmpty(WholesalePriceTextBox13.Text) && string.IsNullOrEmpty(BuyerTextBox13.Text))
+            //            {
+            //                MessageBox.Show("１３行目に卸値が入力されていますが売却先が無記入です。" + "\r\n" + "入力項目を確認してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
+            //            break;
+            //            #endregion
+            //    }
+            //}
+            #endregion
+            #region"次月と品名変更の両方にチェックが入ってることを通知（コメントアウト）"
+            //for (int i = 1; i <= record; i++)
+            //{
+            //    switch (i)
+            //    {
+            //        #region"１行目"
+            //        case 1:
+            //            if (itemMainCategoryTextBox1.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"２行目"
+            //        case 2:
+            //            if (itemMainCategoryTextBox2.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"３行目"
+            //        case 3:
+            //            if (itemMainCategoryTextBox3.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"４行目"
+            //        case 4:
+            //            if (itemMainCategoryTextBox4.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("４行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"５行目"
+            //        case 5:
+            //            if (itemMainCategoryTextBox5.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("５行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"６行目"
+            //        case 6:
+            //            if (itemMainCategoryTextBox6.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("６行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"７行目"
+            //        case 7:
+            //            if (itemMainCategoryTextBox7.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("７行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"８行目"
+            //        case 8:
+            //            if (itemMainCategoryTextBox8.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("８行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"９行目"
+            //        case 9:
+            //            if (itemMainCategoryTextBox9.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("９行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１０行目"
+            //        case 10:
+            //            if (itemMainCategoryTextBox10.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("１０行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１１行目"
+            //        case 11:
+            //            if (itemMainCategoryTextBox11.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("１１行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１２行目"
+            //        case 12:
+            //            if (itemMainCategoryTextBox12.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("１２行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //        #endregion
+            //        #region"１３行目"
+            //        case 13:
+            //            if (itemMainCategoryTextBox13.ForeColor == Color.Purple)
+            //            {
+            //                MessageBox.Show("１３行目に「次月持ち越し」と「品名変更」の両方にチェックが入っています" + "\r\n" + "入力項目を確認してください", "入力内容をご確認ください", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //                return;
+            //            }
+            //            break;
+            //            #endregion
+            //    }
+            //}
+            #endregion
+
+        }
         #endregion
     }
 }

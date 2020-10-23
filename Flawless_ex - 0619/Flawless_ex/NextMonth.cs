@@ -75,6 +75,10 @@ namespace Flawless_ex
             dataGridView1.Columns[5].HeaderText = "担当者";
             dataGridView1.Columns[6].HeaderText = "買取先";
 
+            dataGridView1.Columns[2].DefaultCellStyle.Format = "yyyy/MM/dd";
+
+            //MessageBox.Show(dataGridView1.Rows[1].Cells[2].Value.ToString());
+
             conn.Close();
         }
 
