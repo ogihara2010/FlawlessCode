@@ -74,6 +74,10 @@ namespace Flawless_ex
                     adapter.Fill(dt);
                     adapter.Update(dt);
 
+                    sql_str = "insert into revisions (data, upd_date, insert_code, before_data. after_data) " +
+                        "values ('" + 8 + "','" + time + "','" + staff_code + "','" + Tax.ToString() + "','" + tax.ToString() + "');";
+
+
                     db.Close();
                     MessageBox.Show("税率を変更しました。", "変更確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     this.Close();
