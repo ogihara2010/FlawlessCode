@@ -2367,7 +2367,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientMaster_add";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "顧客マスタメンテナンス　新規登録";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClientMaster_add_FormClosed);
             this.Load += new System.EventHandler(this.ClientMaster_add_Load);
             this.tabControl1.ResumeLayout(false);
