@@ -57,7 +57,6 @@ namespace Flawless_ex
 
         private void ClientInformation_Load(object sender, EventArgs e)
         {
-            StaffNameTextBox.Text = Staff_Name;
             SlipNumberTextBox.Text = SlipNumber;
             GradeNumberTextBox.Text = SlipNumber.Trim('F');
 
@@ -66,7 +65,19 @@ namespace Flawless_ex
 
             conn.Open();
 
-            string sql = "select * from statement_data where document_number = '" + SlipNumber + "';";
+            string sql = "select * from staff_m where staff_code = " + Staff_id + ";";
+            cmd = new NpgsqlCommand(sql, conn);
+            using (reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    StaffNameTextBox.Text = reader["staff_name"].ToString();
+                }
+            }
+
+            sql = "";
+
+            sql = "select * from statement_data where document_number = '" + SlipNumber + "';";
             cmd = new NpgsqlCommand(sql, conn);
             using (reader = cmd.ExecuteReader())
             {
@@ -135,7 +146,7 @@ namespace Flawless_ex
                 tabControl1.TabPages.Remove(tabPage1);
                 IdTextBox2.Text = ID_Number.ToString();
 
-                SQL = "select * from client_m_individual where id_number = '" + ID_Number + "';";
+                SQL = "select * from client_m where where code = '" + ClientCode + "';";
                 cmd = new NpgsqlCommand(SQL, conn);
                 using (reader = cmd.ExecuteReader())
                 {
@@ -164,7 +175,7 @@ namespace Flawless_ex
                         AccountNameKanaTextBox2.Text = reader["account_name_kana"].ToString();
                         RegisterCopyTextBox2.Text = reader["register_copy"].ToString();
                         AntiqueLicenseTextBox2.Text = reader["antique_license"].ToString();
-                        PhotoIdTextBox2.Text = reader["photo_id"].ToString();
+                        PhotoIdTextBox2.Text = reader["id"].ToString();
                         AolFinancialShareholderTextBox2.Text = reader["aol_financial_shareholder"].ToString();
                         TaxCertificateTextBox2.Text = reader["tax_certificate"].ToString();
                         ResidenceCardTextBox2.Text = reader["residence_card"].ToString();
@@ -197,6 +208,10 @@ namespace Flawless_ex
             {
                 pictureBox2.ImageLocation = ResidenceCardTextBox.Text;
             }
+            else
+            {
+                MessageBox.Show("在留カードが登録されていません。", "在留カード表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void RegisterCopyTextBox_DoubleClick(object sender, EventArgs e)
@@ -204,6 +219,10 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(RegisterCopyTextBox.Text))
             {
                 pictureBox2.ImageLocation = RegisterCopyTextBox.Text;
+            }
+            else
+            {
+                MessageBox.Show("登記簿謄本が登録されていません。", "登記簿謄本表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -213,6 +232,10 @@ namespace Flawless_ex
             {
                 pictureBox2.ImageLocation = IdTextBox.Text;
             }
+            else
+            {
+                MessageBox.Show("身分証明書または顔つき身分証が登録されていません。", "身分証明書表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void AntiqueLicenseTextBox_DoubleClick(object sender, EventArgs e)
@@ -221,6 +244,10 @@ namespace Flawless_ex
             {
                 pictureBox2.ImageLocation = AntiqueLicenseTextBox.Text;
             }
+            else
+            {
+                MessageBox.Show("古物商許可証が登録されていません。", "古物商許可証表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void AolFinancialShareholderTextBox_DoubleClick(object sender, EventArgs e)
@@ -228,6 +255,10 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(AolFinancialShareholderTextBox.Text))
             {
                 pictureBox2.ImageLocation = AolFinancialShareholderTextBox.Text;
+            }
+            else
+            {
+                MessageBox.Show("定款、決算書、株主構成が登録されていません。", "定款、決算書、株主構成表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -238,6 +269,10 @@ namespace Flawless_ex
             {
                 pictureBox2.ImageLocation = TaxCertificateTextBox.Text;
             }
+            else
+            {
+                MessageBox.Show("納税証明書が登録されていません。", "納税証明書表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void SealCetificationTextBox_DoubleClick(object sender, EventArgs e)
@@ -245,6 +280,10 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(SealCetificationTextBox.Text))
             {
                 pictureBox2.ImageLocation = SealCetificationTextBox.Text;
+            }
+            else
+            {
+                MessageBox.Show("印鑑証明書が登録されていません。", "印鑑証明書表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -258,6 +297,10 @@ namespace Flawless_ex
             {
                 pictureBox1.ImageLocation = RegisterCopyTextBox2.Text;
             }
+            else
+            {
+                MessageBox.Show("登記簿謄本が登録されていません。", "登記簿謄本表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void AntiqueLicenseTextBox2_DoubleClick(object sender, EventArgs e)
@@ -265,6 +308,10 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(AntiqueLicenseTextBox2.Text))
             {
                 pictureBox1.ImageLocation = AntiqueLicenseTextBox2.Text;
+            }
+            else
+            {
+                MessageBox.Show("古物商許可証が登録されていません。", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -274,6 +321,10 @@ namespace Flawless_ex
             {
                 pictureBox1.ImageLocation = PhotoIdTextBox2.Text;
             }
+            else
+            {
+                MessageBox.Show("身分証明書または顔つき身分証が登録されていません。", "身分証明書表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void TaxCertificateTextBox2_DoubleClick(object sender, EventArgs e)
@@ -281,6 +332,10 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(TaxCertificateTextBox2.Text))
             {
                 pictureBox1.ImageLocation = TaxCertificateTextBox2.Text;
+            }
+            else
+            {
+                MessageBox.Show("納税証明書が登録されていません。", "納税証明書表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -290,6 +345,10 @@ namespace Flawless_ex
             {
                 pictureBox1.ImageLocation = AolFinancialShareholderTextBox2.Text;
             }
+            else
+            {
+                MessageBox.Show("定款、決算書、株主構成が登録されていません。", "定款、決算書、株主構成表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void ResidenceCardTextBox2_DoubleClick(object sender, EventArgs e)
@@ -298,6 +357,10 @@ namespace Flawless_ex
             {
                 pictureBox1.ImageLocation = ResidenceCardTextBox2.Text;
             }
+            else
+            {
+                MessageBox.Show("在留カードが登録されていません。", "在留カード表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void SealCetificationTextBox2_DoubleClick(object sender, EventArgs e)
@@ -305,6 +368,10 @@ namespace Flawless_ex
             if (!string.IsNullOrEmpty(SealCetificationTextBox2.Text))
             {
                 pictureBox1.ImageLocation = SealCetificationTextBox2.Text;
+            }
+            else
+            {
+                MessageBox.Show("印鑑証明書が登録されていません。", "印鑑証明書表示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

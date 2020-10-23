@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Windows.Forms;
 
 namespace Flawless_ex
@@ -13,7 +14,14 @@ namespace Flawless_ex
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TopMenu());
+            try
+            {
+                Application.Run(new TopMenu());
+            }catch(Npgsql.NpgsqlException ex)
+            {
+                MessageBox.Show("サーバーとの接続が切断された可能性があります。\r\nシステムを再起動してください。", "接続エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Console.WriteLine(ex);
+            }
         }
     }
 }
