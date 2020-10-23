@@ -21,7 +21,7 @@ namespace Flawless_ex
         public string code1;
         public string item1;
         public string date1;
-        public string date2;
+        public DateTime date2;
         public string method1;
         public string amountA;
         public string amountB;
@@ -117,7 +117,7 @@ namespace Flawless_ex
         decimal amount111;
         decimal amount112;
         #endregion
-        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, string date2, string method1, string amountA, string amountB, string data, string pass, string document, int control, string antiqueNumber, string documentNumber, string access_auth)
+        public DataSearchResults(MainMenu main, int type, int id, string name1, string phoneNumber1, string address1, string addresskana1, string code1, string item1, string date1, DateTime date2, string method1, string amountA, string amountB, string data, string pass, string document, int control, string antiqueNumber, string documentNumber, string access_auth)
         {
             InitializeComponent();
             mainMenu = main;
@@ -151,7 +151,8 @@ namespace Flawless_ex
         private void DataSearchResults_Load(object sender, EventArgs e)
         {
             DateTime Date1 = DateTime.Parse(DateTime.Parse(date1).ToShortDateString());
-            DateTime Date2 = DateTime.Parse(DateTime.Parse(date2).ToShortTimeString()).AddHours(23).AddMinutes(59).AddSeconds(59);
+            //DateTime Date2 = DateTime.Parse(DateTime.Parse(date2).ToShortTimeString()).AddHours(23).AddMinutes(59).AddSeconds(59);
+            DateTime Date2 = date2;
 
             #region "計算書"
             if (data == "S")
@@ -813,6 +814,16 @@ namespace Flawless_ex
                     totalWeight = ((decimal)row["total_weight"]).ToString("n1");
                     totalCount = ((int)row["total_amount"]).ToString("n0");
 
+                    if (totalWeight == "0.0") 
+                    {
+                        totalWeight = "";
+                    }
+
+                    if (totalCount == "0") 
+                    {
+                        totalCount = "";
+                    }
+
                     DataRow row1 = clientDataTable[pageNumber].Rows[0];
                     Type = (int)row1["type"];
                     companyName = row1["company_name"].ToString();
@@ -1014,7 +1025,7 @@ namespace Flawless_ex
                         {
                             #region"２行目"
                             case 1:
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1052,7 +1063,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1091,7 +1102,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1130,7 +1141,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1170,7 +1181,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1209,7 +1220,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1287,7 +1298,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1326,7 +1337,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1365,7 +1376,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1404,7 +1415,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1443,7 +1454,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1482,7 +1493,7 @@ namespace Flawless_ex
                                 MoneyPreview = ((decimal)rowStatementPreview["amount"]).ToString("c0");
                                 RemarkPreview = rowStatementPreview["remarks"].ToString();
 
-                                if (WeightPreview == "0")
+                                if (WeightPreview == "0.0")
                                 {
                                     WeightPreview = "";
                                 }
@@ -1879,6 +1890,15 @@ namespace Flawless_ex
                         {
                             #region "納品書1行目"
                             case 0:
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
+
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 430));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 430));
                                 e.Graphics.DrawString(weight, font, brush, new PointF(330, 430));
@@ -1898,6 +1918,15 @@ namespace Flawless_ex
                                 amount = ((decimal)row5["amount"]).ToString("c0");
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
+
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
 
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 480));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 480));
@@ -1919,6 +1948,15 @@ namespace Flawless_ex
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
 
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
+
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 530));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 530));
                                 e.Graphics.DrawString(weight, font, brush, new PointF(330, 530));
@@ -1939,6 +1977,15 @@ namespace Flawless_ex
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
 
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
+
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 580));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 580));
                                 e.Graphics.DrawString(weight, font, brush, new PointF(330, 580));
@@ -1958,6 +2005,15 @@ namespace Flawless_ex
                                 amount = ((decimal)row5["amount"]).ToString("c0");
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
+
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
 
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 630));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 630));
@@ -1980,6 +2036,15 @@ namespace Flawless_ex
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
 
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
+
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 680));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 680));
                                 e.Graphics.DrawString(weight, font, brush, new PointF(330, 680));
@@ -1999,6 +2064,15 @@ namespace Flawless_ex
                                 amount = ((decimal)row5["amount"]).ToString("c0");
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
+
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
 
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 730));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 730));
@@ -2020,6 +2094,15 @@ namespace Flawless_ex
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
 
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
+
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 780));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 780));
                                 e.Graphics.DrawString(weight, font, brush, new PointF(330, 780));
@@ -2040,6 +2123,15 @@ namespace Flawless_ex
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
 
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
+
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 830));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 830));
                                 e.Graphics.DrawString(weight, font, brush, new PointF(330, 830));
@@ -2059,6 +2151,15 @@ namespace Flawless_ex
                                 amount = ((decimal)row5["amount"]).ToString("c0");
                                 itemName = row5["item_name"].ToString();
                                 detail = row5["detail"].ToString();
+
+                                if (weight == "0.0")
+                                {
+                                    weight = "";
+                                }
+                                if (count == "0")
+                                {
+                                    count = "";
+                                }
 
                                 e.Graphics.DrawString(itemName, font, brush, new PointF(30, 880));
                                 e.Graphics.DrawString(detail, font, brush, new PointF(200, 880));
