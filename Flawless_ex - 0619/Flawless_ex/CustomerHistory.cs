@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using Npgsql;
 using System.Data;
+using System.Text;
+
+
 
 namespace Flawless_ex
 {
@@ -31,6 +34,10 @@ namespace Flawless_ex
         int control;
         string antiqueNumber;
         string access_auth;
+        string kana;
+
+
+
         public CustomerHistory(MainMenu main, int id, string data, string pass, string access_auth)
         {
             InitializeComponent();
@@ -108,19 +115,19 @@ namespace Flawless_ex
             string itemcode;
             
             string date1 = dateTimePicker1.Text;            //引数用
-            string date2 = settlementBox.Text;              //引数用
+            //string date2 = settlementBox.Text;              //引数用
 
             DateTime Date1 = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());                                                     //検索用
             DateTime Date2 = DateTime.Parse(settlementBox.Value.ToShortDateString()).AddHours(23).AddMinutes(59).AddSeconds(59);             //検索用
 
             string method;
-            int amount1;
-            int amount2;
+            decimal amount1;
+            decimal amount2;
             string amountA;
             string amountB;
             int ant;
-            int amt;
-            int amt1;
+            decimal amt;
+            decimal amt1;
             #endregion
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
@@ -128,6 +135,8 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter2;
             NpgsqlConnection conn3 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter3;
+
+            dt7.Clear();
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
@@ -157,7 +166,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox3.Text))
                 {
-                    name = "and B.staff_name like '%" + this.textBox3.Text + "%'";
+                    name = "and B.name like '%" + this.textBox3.Text + "%'";
                 }
                 else
                 {
@@ -165,7 +174,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox4.Text))
                 {
-                    address = " and B.address like '% " + this.textBox4.Text + "%'";
+                    address = " and B.address like '%" + this.textBox4.Text + "%'";
                 }
                 else
                 {
@@ -181,7 +190,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox6.Text))
                 {
-                    phoneNumber = " and B.phone_number = '" + this.textBox6.Text + "'";
+                    phoneNumber = " and B.phone_number like '%" + this.textBox6.Text + "%'";
                 }
                 else
                 {
@@ -189,7 +198,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " and A.document_number = '" + this.textBox7.Text + "' ";
+                    documentNumber = " and A.document_number like '%" + this.textBox7.Text + "%' ";
                 }
                 else
                 {
@@ -197,7 +206,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " and A.control_number = " + int.Parse(this.textBox8.Text) + " ";
+                    controlNumber = " and cast(A.control_number as text) like '%" + int.Parse(this.textBox8.Text) + "%' ";
                 }
                 else
                 {
@@ -205,7 +214,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox9.Text))
                 {
-                    antiqueNumber = " and B.antique_number = " + int.Parse(this.textBox9.Text) + " ";
+                    antiqueNumber = " and cast(B.antique_number as text) like '%" + int.Parse(this.textBox9.Text) + "%' ";
                 }
                 else
                 {
@@ -213,7 +222,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox1.Text))
                 {
-                    mainCategory = " and E.main_category_name = '" + this.comboBox1.Text + "'";
+                    mainCategory = " and E.main_category_name like '%" + this.comboBox1.Text + "%'";
                 }
                 else
                 {
@@ -221,7 +230,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox2.Text))
                 {
-                    item = " and D.item_name = '" + this.comboBox2.Text + "'";
+                    item = " and D.item_name like '%" + this.comboBox2.Text + "%'";
                 }
                 else
                 {
@@ -229,7 +238,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = " and A.payment_method = '" + this.comboBox3.Text + "'";
+                    method = " and A.payment_method like '%" + this.comboBox3.Text + "%'";
                 }
                 else
                 {
@@ -237,7 +246,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amountA = " and A.total >= " + int.Parse(this.textBox10.Text);
+                    amountA = " and A.total >= " + decimal.Parse(this.textBox10.Text);
                 }
                 else
                 {
@@ -245,7 +254,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox11.Text))
                 {
-                    amountB = " and A.total <= " + int.Parse(this.textBox11.Text);
+                    amountB = " and A.total <= " + decimal.Parse(this.textBox11.Text);
                 }
                 else
                 {
@@ -265,7 +274,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    amt = int.Parse(textBox11.Text);
+                    amt = decimal.Parse(textBox11.Text);
                 }
                 if (string.IsNullOrWhiteSpace(textBox10.Text))
                 {
@@ -273,7 +282,7 @@ namespace Flawless_ex
                 }
                 else
                 {
-                    amt1 = int.Parse(textBox11.Text);
+                    amt1 = int.Parse(textBox10.Text);
                 }
                 if (string.IsNullOrWhiteSpace(textBox8.Text))
                 {
@@ -289,8 +298,8 @@ namespace Flawless_ex
                 if (comboBox1.SelectedIndex != -1)
                 {
                     string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
-                    conn2.Open();
-                    adapter2 = new NpgsqlDataAdapter(sql2, conn2);
+                    
+                    adapter2 = new NpgsqlDataAdapter(sql2, conn);
                     adapter2.Fill(dt5);
                     DataRow row;
                     row = dt5.Rows[0];
@@ -306,7 +315,6 @@ namespace Flawless_ex
                 if (comboBox2.SelectedIndex != -1)
                 {
                     string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
-                    conn.Open();
                     adapter3 = new NpgsqlDataAdapter(sql3, conn);
                     adapter3.Fill(dt6);
                     DataRow row2;
@@ -349,7 +357,7 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -382,7 +390,7 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -405,7 +413,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox4.Text))
                 {
-                    address = " and B.address like '% " + this.textBox4.Text + "%'";
+                    address = " and B.address like '%" + this.textBox4.Text + "%'";
                 }
                 else
                 {
@@ -423,7 +431,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox6.Text))
                 {
-                    phoneNumber = " and B.phone_number = '" + this.textBox6.Text + "'";
+                    phoneNumber = " and B.phone_number like '%" + this.textBox6.Text + "%'";
                 }
                 else
                 {
@@ -432,7 +440,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox7.Text))
                 {
-                    documentNumber = " and A.document_number = '" + this.textBox7.Text + "'";
+                    documentNumber = " and A.document_number like '%" + this.textBox7.Text + "%'";
                 }
                 else
                 {
@@ -441,7 +449,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(textBox8.Text))
                 {
-                    controlNumber = " and A.control_number = " + int.Parse(this.textBox8.Text) + " ";
+                    controlNumber = " and cast(A.control_number as text) like '%" + int.Parse(this.textBox8.Text) + "%' ";
                 }
                 else
                 {
@@ -449,7 +457,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox1.Text))
                 {
-                    mainCategory = " and E.main_category_name = '" + this.comboBox1.Text + "' ";
+                    mainCategory = " and E.main_category_name like '%" + this.comboBox1.Text + "%' ";
                 }
                 else
                 {
@@ -458,7 +466,7 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrWhiteSpace(comboBox2.Text))
                 {
-                    item = " and D.item_name = '" + this.comboBox2.Text + "'";
+                    item = " and D.item_name like '%" + this.comboBox2.Text + "%'";
                 }
                 else
                 {
@@ -466,7 +474,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(comboBox3.Text))
                 {
-                    method = " and A.payment_method = '" + this.comboBox3.Text + "'";
+                    method = " and A.payment_method like '%" + this.comboBox3.Text + "%'";
                 }
                 else
                 {
@@ -474,7 +482,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox10.Text))
                 {
-                    amountA = " and (A.total >= " + int.Parse(this.textBox10.Text);
+                    amountA = " and (A.total >= " + decimal.Parse(this.textBox10.Text);
                 }
                 else
                 {
@@ -482,7 +490,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox11.Text))
                 {
-                    amountB = " and A.total <= " + int.Parse(this.textBox11.Text);
+                    amountB = " and A.total <= " + decimal.Parse(this.textBox11.Text);
                 }
                 else
                 {
@@ -518,8 +526,7 @@ namespace Flawless_ex
                 if (comboBox1.SelectedIndex != -1)
                 {
                     string sql2 = "select * from main_category_m where main_category_name = '" + this.comboBox1.Text + "';";
-                    conn2.Open();
-                    adapter2 = new NpgsqlDataAdapter(sql2, conn2);
+                    adapter2 = new NpgsqlDataAdapter(sql2, conn);
                     adapter2.Fill(dt5);
                     DataRow row;
                     row = dt5.Rows[0];
@@ -534,7 +541,6 @@ namespace Flawless_ex
                 if (comboBox2.SelectedIndex != -1)
                 {
                     string sql3 = "select * from item_m where item_name = '" + this.comboBox2.Text + "';";
-                    conn.Open();
                     adapter3 = new NpgsqlDataAdapter(sql3, conn);
                     adapter3.Fill(dt6);
                     DataRow row2;
@@ -574,7 +580,7 @@ namespace Flawless_ex
                     amount2 = amt;
                     amount1 = amt1;
 
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -608,7 +614,7 @@ namespace Flawless_ex
                     amount1 = amt1;
 
                     //control = int.Parse(this.textBox8.Text);
-                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
+                    DataSearchResults dataSearch = new DataSearchResults(mainMenu, type, staff_id, name1, phoneNumber1, address1, addresskana1, code1, item1, date1, Date2, method1, amountA, amountB, data, Pass, document, control, antiqueNumber, documentNumber, access_auth);
                     this.data = dataSearch.data;
                     dataSearch.ShowDialog();
                 }
@@ -651,5 +657,27 @@ namespace Flawless_ex
             conn = postgre.connection();
             conn.Open();
         }
+
+        #region"カタカナを半角に変換"
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox2.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox2.Text = stringBuilder.ToString();
+            textBox2.Select(textBox2.Text.Length, 0);
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            kana = Microsoft.VisualBasic.Strings.StrConv(textBox5.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(kana);
+
+            textBox5.Text = stringBuilder.ToString();
+            textBox5.Select(textBox5.Text.Length, 0);
+        }
+        #endregion
     }
 }
