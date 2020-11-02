@@ -68,11 +68,12 @@ namespace Flawless_ex
                     break;
             }
 
-            if (dir != "")
+            if (dir != "" && path1 != "")
             {
-                path2 = @"\\192.168.152.164\Flawless_test\" + dir + @"\" +dir + timestamp + ".png";
+                path2 = @"\\192.168.152.81\Flawless_test\" + dir + @"\" + dir + timestamp + ".png";
+                System.IO.File.Copy(path1, path2, true);
             }
-            System.IO.File.Copy(path1, path2, true);
+
             return path2;
         }
     }

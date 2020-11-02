@@ -33,9 +33,9 @@ namespace Flawless_ex
             dt = new DataTable();
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select main_category_name, item_name, item_code from item_m inner join main_category_m on item_m.main_category_code = main_category_m.main_category_code where item_m.invalid = 0 and main_category_m.invalid = 0 order by main_category_m ;";
+            string sql_str = "select main_category_name, item_name, item_code, B.main_category_code from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code " +
+                "where A.invalid = 0 and B.invalid = 0 order by main_category_code, item_code ;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -44,8 +44,9 @@ namespace Flawless_ex
             dataGridView1.Columns[0].HeaderText = "大分類名";
             dataGridView1.Columns[1].HeaderText = "品名";
             dataGridView1.Columns[2].HeaderText = "品名コード";
-            dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
             dataGridView1.Columns[2].DefaultCellStyle.Format = "#,0";
+            dataGridView1.Columns[3].Visible = false;
 
             conn.Close();
         }
@@ -65,22 +66,8 @@ namespace Flawless_ex
 
         private void changeDeleteButton_Click(object sender, EventArgs e)
         {
-            int code = (int)dataGridView1.CurrentRow.Cells[2].Value; //選択した品名コードを取得
-
-            PostgreSQL postgre = new PostgreSQL();
-            conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn.Open();
-
-            string sql = "select * from main_category_m where main_category_name = '" + dataGridView1.CurrentRow.Cells[0].Value + "';";
-            cmd = new NpgsqlCommand(sql, conn);
-            using(reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    MainCode = (int)reader["main_category_code"];
-                }
-            }
+            int code = (int)dataGridView1.CurrentRow.Cells[2].Value;        //選択した品名コードを取得
+            MainCode = (int)dataGridView1.CurrentRow.Cells[3].Value;        //選択した大分類コードを取得
 
             ProductChangeDeleteMenu changeDeleteMenu = new ProductChangeDeleteMenu(this, master, code, staff_code, Access_auth, Pass, MainCode);
             screan = false;

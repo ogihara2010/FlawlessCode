@@ -369,22 +369,22 @@ namespace Flawless_ex
         private void Statement_Load(object sender, EventArgs e)
         {
             #region "ボタン"
-            if (data == "S")
-            {
-                #region "計算書のタブのみ表示"
-                tabControl1.SelectedTab = SettlementDayBox;
-                tabControl1.TabPages.Remove(tabPage2);
-                #endregion
+            //if (data == "S")
+            //{
+            //    #region "計算書のタブのみ表示"
+            //    tabControl1.SelectedTab = SettlementDayBox;
+            //    tabControl1.TabPages.Remove(tabPage2);
+            //    #endregion
 
-            }
-            else if (data == "D")
-            {
-                #region "納品書のタブのみ表示"
-                tabControl1.SelectedTab = tabPage2;
-                tabControl1.TabPages.Remove(SettlementDayBox);
-                #endregion
-            }
-            else if (Grade != 0)
+            //}
+            //else if (data == "D")
+            //{
+            //    #region "納品書のタブのみ表示"
+            //    tabControl1.SelectedTab = tabPage2;
+            //    tabControl1.TabPages.Remove(SettlementDayBox);
+            //    #endregion
+            //}
+            if (Grade != 0)
             {
                 this.label10.Visible = false;
                 this.textBox2.Visible = false;
@@ -393,8 +393,8 @@ namespace Flawless_ex
                 this.label9.Visible = true;
                 this.reasonTextBox.Visible = true;
                 this.DeliveryPreviewButton.Enabled = false;
-                this.button1.Enabled = false;
-                this.button2.Enabled = false;
+                this.button1.Enabled = true;
+                this.button2.Enabled = true;
             }
             else
             {
@@ -2314,7 +2314,6 @@ namespace Flawless_ex
             dataGridView2.Columns["CountColumn1"].DefaultCellStyle.Format = "n0";
             #endregion
 
-
             #region"成績入力から計算書への遷移時"
             if (Grade != 0)
             {
@@ -2654,6 +2653,8 @@ namespace Flawless_ex
                 dataGridView2.CellFormatting -= dataGridView2_CellFormatting;
                 dataGridView2.ReadOnly = true;
 
+                RemoveButton1.Enabled = false;
+
                 sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from delivery_calc A inner join main_category_m B on B.main_category_code = A.main_category_code " +
                     "inner join item_m C on A.item_code = C.item_code where control_number = '" + control + "' order by record_number;";
                 adapter = new NpgsqlDataAdapter(sql, conn);
@@ -2894,7 +2895,6 @@ namespace Flawless_ex
             sealN.Checked = true;
 
             conn.Close();
-
         }
 
 
@@ -2906,10 +2906,10 @@ namespace Flawless_ex
             }
             else
             {
-                MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
-                screan = false;
+                //MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
+                //screan = false;
                 this.Close();
-                mainMenu.Show();
+                //mainMenu.Show();
             }
 
         }
@@ -2922,10 +2922,10 @@ namespace Flawless_ex
             }
             else
             {
-                MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
-                screan = false;
+                //MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
+                //screan = false;
                 this.Close();
-                mainMenu.Show();
+                //mainMenu.Show();
             }
         }
 
@@ -2954,14 +2954,14 @@ namespace Flawless_ex
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
+                    string register_date = ((DateTime)row2["registration_date"]).ToString("yyyy/MM/dd");
                     remarks = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
                     ArticleText = row2["aol_financial_shareholder"].ToString();
                     taxCertificateText = row2["tax_certificate"].ToString();
                     sealCertificateText = row2["seal_certification"].ToString();
                     residenceCardText = row2["residence_card"].ToString();
-                    residencePeriodStay = row2["period_stay"].ToString();
+                    residencePeriodStay = DateTime.Parse(row2["period_stay"].ToString()).ToString("yyyy/MM/dd");
                     //ClientCode = (int)row2["code"];
                     #region "計算書"
                     label16.Text = "会社名";
@@ -2969,6 +2969,8 @@ namespace Flawless_ex
                     label18.Text = "担当者名・個人名";
                     this.client_Button.Text = "顧客変更";
                     typeTextBox.Text = "法人";                    //種別
+                    label38.Visible = true;
+                    registerDateTextBox.Visible = true;
                     companyTextBox.Text = companyNmae;              //会社名   
                     antiqueLicenceTextBox.Text = antique_license;              //古物商許可証
                     shopNameTextBox.Text = shopName;                    //店舗名
@@ -2989,6 +2991,8 @@ namespace Flawless_ex
                     label77.Text = "店舗名";
                     label76.Text = "担当者名・個人名";
                     this.client_searchButton1.Text = "顧客変更";
+                    label36.Visible = true;
+                    registerDateTextBox2.Visible = true;
                     typeTextBox2.Text = "法人";                   //種別
                     companyTextBox2.Text = companyNmae;             //会社名
                     shopNameTextBox2.Text = shopName;               //店舗名
@@ -3011,10 +3015,10 @@ namespace Flawless_ex
                     row2 = clientDt.Rows[0];
 
                     string name = row2["name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
+                    string register_date = ((DateTime)row2["registration_date"]).ToString("yyyy/MM/dd");
                     remarks = row2["remarks"].ToString();
                     string occupation = row2["occupation"].ToString();
-                    string birthday = row2["birthday"].ToString();
+                    string birthday = DateTime.Parse(row2["birthday"].ToString()).ToString("yyyy/MM/dd");
                     string antique_license = row2["antique_license"].ToString();
                     ArticleText = row2["aol_financial_shareholder"].ToString();
                     taxCertificateText = row2["tax_certificate"].ToString();
@@ -3033,7 +3037,7 @@ namespace Flawless_ex
                     clientNameTextBox.Text = occupation;
                     registerDateTextBox.Text = register_date;
                     clientRemarksTextBox.Text = remarks;
-                    registerDateTextBox2.Text = antique_license;
+                    antiqueLicenceTextBox.Text = antique_license;
                     label38.Visible = false;
                     registerDateTextBox.Visible = false;
                     this.client_Button.Text = "顧客変更";
@@ -3175,11 +3179,18 @@ namespace Flawless_ex
         #region"計算書　登録ボタン"
         private void AddButton_Click(object sender, EventArgs e)        //計算書用登録ボタン
         {
+            int index = dataGridView1.Rows.Count;
 
             #region"確認事項"
             if (string.IsNullOrEmpty(typeTextBox.Text))
             {
                 MessageBox.Show("顧客選択をしてください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (index == 1)
+            {
+                MessageBox.Show("表に何も入力されていません", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -3197,7 +3208,7 @@ namespace Flawless_ex
 
             if (sub >= 2000000)
             {
-                MessageBox.Show("200 万を超える取引です。" + "\r\n" + "入力不備がないか確認してください。", "入力内容の確認", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                MessageBox.Show("200 万を超える取引です。" + "\r\n" + "入力不備がないか確認してください。", "入力内容の確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             DialogResult result = MessageBox.Show("計算書の登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -3250,6 +3261,15 @@ namespace Flawless_ex
                 transaction.Commit();
             }
 
+            using(transaction = conn.BeginTransaction())
+            {
+                Sql = "update client_m set remarks = '" + clientRemarksTextBox.Text + "' where code = '" + ClientCode + "';";
+                cmd = new NpgsqlCommand(Sql, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+
+
             if (!string.IsNullOrEmpty(antiqueLicenceTextBox.Text))
             {
                 AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox.Text,FileServer.Filetype.Antiquelicense);
@@ -3273,16 +3293,6 @@ namespace Flawless_ex
                 }
             }
 
-            if (remarks != clientRemarksTextBox.Text)
-            {
-                using (transaction = conn.BeginTransaction())
-                {
-                    string SQL_STR = @"update client_m set remarks = '" + remarks + "'where code = '" + ClientCode + "';";
-                    cmd = new NpgsqlCommand(SQL_STR, conn);
-                    cmd.ExecuteNonQuery();
-                    transaction.Commit();
-                }
-            }
 
             #region"200万以上の場合に画像更新"
             if (sub >= 2000000)
@@ -3343,7 +3353,6 @@ namespace Flawless_ex
 
             #endregion
             #region"計算書　表のデータ"
-            int index = dataGridView1.Rows.Count;
 
             #region"計算書　表のデータ　初回登録"
             if (index == 2)
@@ -3415,8 +3424,11 @@ namespace Flawless_ex
             conn.Close();
             MessageBox.Show("計算書の登録をしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             addButton.Enabled = false;
+            RemoveButton.Enabled = false;
+
             previewButton.Enabled = true;
             RecordListButton.Enabled=true;
+            button1.Enabled = true;
 
             #region"一時コメントアウト"
 
@@ -8093,11 +8105,12 @@ namespace Flawless_ex
             {
                 if (comboBox11.SelectedIndex == 1)      //税抜き選択
                 {
-                    subTotal2.Text = (SUB - taxAmount).ToString("n0");
+                    subTotal2.Text = (SUB - taxAmount).ToString("c0");
                     taxAmount2.Text = taxAmount.ToString("c0");
                 }
                 else        //税込み選択
                 {
+                    subTotal2.Text = SUB.ToString("c0");
                     taxAmount2.Text = "";
                 }
             }
@@ -12614,11 +12627,7 @@ namespace Flawless_ex
         #region"右上の×で戻る"
         private void Statement_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (data == "S" || data == "D")
-            {
-                //this.Close();
-            }
-            else if (screan)
+            if (screan)
             {
                 MainMenu mainMenu = new MainMenu(topMenu, staff_id, pass, access_auth);
                 mainMenu.Show();
@@ -12629,8 +12638,21 @@ namespace Flawless_ex
         #region"納品書　登録ボタン"
         private void Register_Click(object sender, EventArgs e)
         {
+            int index = dataGridView2.Rows.Count;
 
             #region"確認事項"
+            if (string.IsNullOrEmpty(typeTextBox2.Text))
+            {
+                MessageBox.Show("顧客選択をしてください。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (index == 1)
+            {
+                MessageBox.Show("表に何も入力されておりません。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (string.IsNullOrEmpty(name.Text))
             {
                 MessageBox.Show("宛名を入力して下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -12659,12 +12681,6 @@ namespace Flawless_ex
                     MessageBox.Show("振込先を入力して下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-            }
-
-            if (string.IsNullOrEmpty(typeTextBox2.Text))
-            {
-                MessageBox.Show("顧客選択をしてください。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
 
             DialogResult dialog = MessageBox.Show("納品書の登録をしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -12748,7 +12764,7 @@ namespace Flawless_ex
             {
                 using (transaction = conn.BeginTransaction())
                 {
-                    string SQL_STR = @"update client_m set remarks = '" + remarks1 + "'where code = '" + ClientCode + "';";
+                    string SQL_STR = @"update client_m set remarks = '" + clientRemarksTextBox2.Text + "' where code = '" + ClientCode + "';";
                     cmd = new NpgsqlCommand(SQL_STR, conn);
                     cmd.ExecuteNonQuery();
                     transaction.Commit();
@@ -12769,7 +12785,6 @@ namespace Flawless_ex
             #endregion
 
             #region"納品書表"
-            int index = dataGridView2.Rows.Count;
             #region"納品書　表のデータ　初回登録"
             if (index == 2)
             {
@@ -12840,6 +12855,11 @@ namespace Flawless_ex
             conn.Close();
             MessageBox.Show("納品書の登録をしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Register.Enabled = false;
+            RemoveButton1.Enabled = false;
+
+            DeliveryPreviewButton.Enabled = true;
+            button2.Enabled = true;
+
             #region"一時コメントアウト"
             #region "ありうるミス"
             //if (string.IsNullOrEmpty(name.Text))
@@ -16240,13 +16260,20 @@ namespace Flawless_ex
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, pass, access_auth);
+            screan = false;
             this.Close();
+            customerHistorySelect.Show();
         }
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            CustomerHistorySelect customerHistorySelect = new CustomerHistorySelect(mainMenu, staff_id, data, pass, access_auth);
+            screan = false;
             this.Close();
+            customerHistorySelect.Show();
         }
+
         #region "納品書　顧客選択"
         private void Client_searchButton1_Click(object sender, EventArgs e)
         {
@@ -16276,7 +16303,7 @@ namespace Flawless_ex
                     string companyNmae = row2["company_name"].ToString();
                     string shopName = row2["shop_name"].ToString();
                     string Staff_name = row2["name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
+                    string register_date = ((DateTime)row2["registration_date"]).ToString("yyyy/MM/dd");
                     remarks1 = row2["remarks"].ToString();
                     string antique_license = row2["antique_license"].ToString();
                     //ClientCode = (int)row2["code"];
@@ -16285,6 +16312,8 @@ namespace Flawless_ex
                     label17.Text = "店舗名";
                     label18.Text = "担当者名・個人名";
                     this.client_Button.Text = "顧客変更";
+                    label38.Visible = true;
+                    registerDateTextBox.Visible = true;
                     typeTextBox.Text = "法人";                    //種別
                     companyTextBox.Text = companyNmae;              //会社名   
                     registerDateTextBox2.Text = antique_license;              //古物商許可証
@@ -16298,6 +16327,8 @@ namespace Flawless_ex
                     label77.Text = "店舗名";
                     label76.Text = "担当者名・個人名";
                     this.client_searchButton1.Text = "顧客変更";
+                    label36.Visible = true;
+                    registerDateTextBox2.Visible = true;
                     typeTextBox2.Text = "法人";                   //種別
                     companyTextBox2.Text = companyNmae;             //会社名
                     shopNameTextBox2.Text = shopName;               //店舗名
@@ -16320,10 +16351,10 @@ namespace Flawless_ex
                     row2 = clientDt.Rows[0];
 
                     string name = row2["name"].ToString();
-                    string register_date = row2["registration_date"].ToString();
+                    string register_date = ((DateTime)row2["registration_date"]).ToString("yyyy/MM/dd");
                     remarks1 = row2["remarks"].ToString();
                     string occupation = row2["occupation"].ToString();
-                    string birthday = row2["birthday"].ToString();
+                    string birthday = DateTime.Parse(row2["birthday"].ToString()).ToString("yyyy/MM/dd");
                     string antique_license = row2["antique_license"].ToString();
                     //ClientCode = (int)row2["code"];
 
@@ -16342,7 +16373,6 @@ namespace Flawless_ex
                     registerDateTextBox.Visible = false;
                     this.client_Button.Text = "顧客変更";
                     #endregion
-
                     #region "納品書"
                     typeTextBox2.Text = "個人";
                     label75.Text = "氏名";
@@ -16466,6 +16496,11 @@ namespace Flawless_ex
             #endregion
         }
         #endregion
+
+        private void ZenginData_Click(object sender, EventArgs e)
+        {
+
+        }
 
         #region"datagridview"
 
@@ -17412,10 +17447,6 @@ namespace Flawless_ex
             e.Cancel = false;
         }
 
-        private void ZenginData_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -17712,11 +17743,6 @@ namespace Flawless_ex
             CODE++;
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
         private void dataGridView1_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
         {
             dataGridView1 = (DataGridView)sender;
@@ -17746,11 +17772,6 @@ namespace Flawless_ex
                     e.ParsingApplied = true;
                 }
             }
-        }
-
-        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            
         }
 
         private void dataGridView2_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

@@ -180,6 +180,7 @@
       <DependentUpon>DeliveryPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="FileServer.cs" />
+    <Compile Include="InputControl.cs" />
     <Compile Include="Invoice.cs">
       <SubType>Form</SubType>
     </Compile>

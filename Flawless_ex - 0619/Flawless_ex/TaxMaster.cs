@@ -74,9 +74,10 @@ namespace Flawless_ex
                     adapter.Fill(dt);
                     adapter.Update(dt);
 
-                    sql_str = "insert into revisions (data, upd_date, insert_code, before_data. after_data) " +
+                    sql_str = "insert into revisions (data, upd_date, insert_code, before_data, after_data)" +
                         "values ('" + 8 + "','" + time + "','" + staff_code + "','" + Tax.ToString() + "','" + tax.ToString() + "');";
-
+                    cmd = new NpgsqlCommand(sql_str, db);
+                    cmd.ExecuteNonQuery();
 
                     db.Close();
                     MessageBox.Show("税率を変更しました。", "変更確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -111,7 +112,7 @@ namespace Flawless_ex
         {
             if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
             {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;
             }
         }
@@ -122,5 +123,19 @@ namespace Flawless_ex
             master.Show();
         }
 
+        private void taxPercent_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(taxPercent.Text))
+            {
+                if (int.Parse(taxPercent.Text) <= Tax)
+                {
+                    update.Enabled = false;
+                }
+                else
+                {
+                    update.Enabled = true;
+                }
+            }
+        }
     }
 }

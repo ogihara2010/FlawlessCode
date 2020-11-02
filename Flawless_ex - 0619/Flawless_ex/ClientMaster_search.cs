@@ -38,13 +38,13 @@ namespace Flawless_ex
             if (type == 0)
             {
                 dataGridView1.DataSource = dt;
-                dataGridView1.Columns[0].HeaderText = "会社名";
-                dataGridView1.Columns[1].HeaderText = "店舗名";
-                dataGridView1.Columns[2].HeaderText = "担当者名";
-                dataGridView1.Columns[3].HeaderText = "住所";
-                dataGridView1.Columns["antique_number"].Visible = false;
-
-
+                dataGridView1.Columns[0].HeaderText = "会社名";                //0
+                dataGridView1.Columns[1].HeaderText = "店舗名";                //1
+                dataGridView1.Columns[2].HeaderText = "担当者名";               //2
+                dataGridView1.Columns[3].HeaderText = "住所";                 //3
+                dataGridView1.Columns["code"].Visible = false;                  //4
+                dataGridView1.Columns["company_kana"].Visible = false;
+                dataGridView1.Columns["shop_name_kana"].Visible = false;
             }
             else if (type == 1)
             {
@@ -55,27 +55,31 @@ namespace Flawless_ex
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        dt.Rows[i]["antique_license"] = "あり";
+                        dt.Rows[i]["antique_license"] = "登録済み";
                     }
 
                     dataGridView1.DataSource = dt;
-                    dataGridView1.Columns[0].HeaderText = "氏名";
-                    dataGridView1.Columns[1].HeaderText = "住所";
-                    dataGridView1.Columns[2].HeaderText = "古物商許可証";
-                    dataGridView1.Columns["id_number"].Visible = false;
+                    dataGridView1.Columns[0].HeaderText = "氏名";                 //0
+                    dataGridView1.Columns[1].HeaderText = "住所";                 //1
+                    dataGridView1.Columns[2].HeaderText = "古物商許可証";         //2
+                    dataGridView1.Columns["code"].Visible = false;                  //3
+                    dataGridView1.Columns["name_kana"].Visible = false;
+                    dataGridView1.Columns["address_kana"].Visible = false;
                 }
                 else if (check == 1)
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        dt.Rows[i]["antique_license"] = "なし";
+                        dt.Rows[i]["antique_license"] = "未登録";
                     }
 
                     dataGridView1.DataSource = dt;
                     dataGridView1.Columns[0].HeaderText = "氏名";
                     dataGridView1.Columns[1].HeaderText = "住所";
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
-                    dataGridView1.Columns["id_number"].Visible = false;
+                    dataGridView1.Columns["code"].Visible = false;
+                    dataGridView1.Columns["name_kana"].Visible = false;
+                    dataGridView1.Columns["address_kana"].Visible = false;
                 }
 
             }
@@ -90,7 +94,9 @@ namespace Flawless_ex
                 string name = (string)this.dataGridView1.CurrentRow.Cells[2].Value; //担当者名
                 string address = (string)this.dataGridView1.CurrentRow.Cells[3].Value; //住所
 
-                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code, access_auth, Pass);
+                int ClientCode = (int)dataGridView1.CurrentRow.Cells[4].Value;          //顧客番号
+
+                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, ClientCode, staff_code, access_auth, Pass);
                 screan = false;
                 this.Close();
                 clientMaster_UPD.Show();
@@ -100,7 +106,9 @@ namespace Flawless_ex
                 string name = (string)this.dataGridView1.CurrentRow.Cells[0].Value; // 氏名
                 string address = (string)this.dataGridView1.CurrentRow.Cells[1].Value; //住所
 
-                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, name, address, staff_code, access_auth, Pass);
+                int ClientCode = (int)dataGridView1.CurrentRow.Cells[3].Value;          //顧客番号
+
+                ClientMaster_UPD clientMaster_UPD = new ClientMaster_UPD(master, type, ClientCode, staff_code, access_auth, Pass);
                 screan = false;
                 this.Close();
                 clientMaster_UPD.Show();

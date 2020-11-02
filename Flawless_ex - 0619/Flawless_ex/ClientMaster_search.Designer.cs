@@ -39,12 +39,12 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.Color.LightCyan;
+            this.button1.BackColor = System.Drawing.Color.LavenderBlush;
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(53, 632);
+            this.button1.Location = new System.Drawing.Point(40, 769);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(224, 100);
+            this.button1.Size = new System.Drawing.Size(168, 80);
             this.button1.TabIndex = 0;
             this.button1.Text = "戻る";
             this.button1.UseVisualStyleBackColor = false;
@@ -54,12 +54,12 @@
             // 
             this.updateButton.BackColor = System.Drawing.Color.LightCyan;
             this.updateButton.Font = new System.Drawing.Font("MS UI Gothic", 26.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.updateButton.Location = new System.Drawing.Point(784, 632);
+            this.updateButton.Location = new System.Drawing.Point(1120, 769);
             this.updateButton.Margin = new System.Windows.Forms.Padding(2);
             this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(258, 100);
+            this.updateButton.Size = new System.Drawing.Size(194, 80);
             this.updateButton.TabIndex = 2;
-            this.updateButton.Text = "変更・削除";
+            this.updateButton.Text = "変更・無効";
             this.updateButton.UseVisualStyleBackColor = false;
             this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
@@ -67,10 +67,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(398, 24);
+            this.label1.Location = new System.Drawing.Point(454, 21);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(308, 47);
+            this.label1.Size = new System.Drawing.Size(251, 38);
             this.label1.TabIndex = 3;
             this.label1.Text = "検索結果一覧";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -101,7 +101,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(53, 94);
+            this.dataGridView1.Location = new System.Drawing.Point(40, 75);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -109,16 +109,16 @@
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(988, 514);
+            this.dataGridView1.Size = new System.Drawing.Size(1274, 671);
             this.dataGridView1.TabIndex = 4;
             // 
             // ClientMaster_search
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1115, 753);
+            this.ClientSize = new System.Drawing.Size(1356, 879);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.updateButton);

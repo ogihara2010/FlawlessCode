@@ -67,7 +67,7 @@
             this.roginIdTextBox.Location = new System.Drawing.Point(262, 44);
             this.roginIdTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.roginIdTextBox.Name = "roginIdTextBox";
-            this.roginIdTextBox.Size = new System.Drawing.Size(322, 45);
+            this.roginIdTextBox.Size = new System.Drawing.Size(461, 45);
             this.roginIdTextBox.TabIndex = 2;
             // 
             // passwordTextBox
@@ -76,19 +76,19 @@
             this.passwordTextBox.Location = new System.Drawing.Point(262, 107);
             this.passwordTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(322, 45);
+            this.passwordTextBox.Size = new System.Drawing.Size(461, 45);
             this.passwordTextBox.TabIndex = 3;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // closeButton
             // 
             this.closeButton.AutoSize = true;
-            this.closeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.closeButton.BackColor = System.Drawing.Color.LavenderBlush;
             this.closeButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.closeButton.Location = new System.Drawing.Point(18, 178);
             this.closeButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(174, 104);
+            this.closeButton.Size = new System.Drawing.Size(192, 104);
             this.closeButton.TabIndex = 4;
             this.closeButton.Text = "閉じる";
             this.closeButton.UseVisualStyleBackColor = false;
@@ -99,10 +99,10 @@
             this.roginButton.AutoSize = true;
             this.roginButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.roginButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.roginButton.Location = new System.Drawing.Point(407, 178);
+            this.roginButton.Location = new System.Drawing.Point(519, 178);
             this.roginButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.roginButton.Name = "roginButton";
-            this.roginButton.Size = new System.Drawing.Size(177, 104);
+            this.roginButton.Size = new System.Drawing.Size(198, 104);
             this.roginButton.TabIndex = 5;
             this.roginButton.Text = "ログイン";
             this.roginButton.UseVisualStyleBackColor = false;
@@ -143,7 +143,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(609, 298);
+            this.ClientSize = new System.Drawing.Size(746, 298);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.roginButton);

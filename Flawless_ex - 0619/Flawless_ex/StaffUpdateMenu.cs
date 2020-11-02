@@ -44,67 +44,23 @@ namespace Flawless_ex
 
         private void removeButton_Click(object sender, EventArgs e)//無効ボタン
         {
-            DialogResult result = MessageBox.Show("無効をしますか？", "確認", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            string reasonn = this.reason.Text;              //変更理由
+
+            DialogResult result = MessageBox.Show("無効にしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 NpgsqlConnection conn = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter;
                 NpgsqlCommandBuilder builder;
-                string reason = this.reason.Text;
+                DataTable dt = new DataTable();
+                dt.Clear();
+
                 #region "起こりうるミス"
-                if (string.IsNullOrEmpty(password))//パスワード未入力
+                
+                if (string.IsNullOrEmpty(this.reason.Text))
                 {
-                    if (string.IsNullOrEmpty(rePassword))
-                    {
-                        MessageBox.Show("パスワードを入力してください");
-                        conn.Close();
-                        return;
-                    }
-                }
-                else if (this.passwordText.Text != this.passwordReText.Text)
-                {
-                    MessageBox.Show("パスワードを確認してください。");
-                    return;
-                }
-                else if (string.IsNullOrEmpty(parsonNameText.Text))
-                {
-                    MessageBox.Show("担当者名を入力して下さい。");
-                    return;
-                }
-                else if (string.IsNullOrEmpty(parsonNamt2Text.Text))
-                {
-                    MessageBox.Show("担当者のカナを入力して下さい。");
-                    return;
-                }
-                else if (!System.Text.RegularExpressions.Regex.IsMatch(staffNameKana, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
-                {
-                    MessageBox.Show("カタカナを入力して下さい。");
-                    return;
-                }
-                else if (string.IsNullOrEmpty(passwordText.Text))
-                {
-                    MessageBox.Show("パスワードを入力して下さい。");
-                    return;
-                }
-                else if (string.IsNullOrEmpty(passwordReText.Text))
-                {
-                    MessageBox.Show("パスワードを再入力して下さい。");
-                    return;
-                }
-                else if (this.accessButton.SelectedIndex == -1)
-                {
-                    MessageBox.Show("アクセス権限を選択して下さい。");
-                    return;
-                }
-                else if (this.mainCategoryComboBox.SelectedIndex == -1)
-                {
-                    MessageBox.Show("大分類名を選択して下さい。");
-                    return;
-                }
-                else if (string.IsNullOrEmpty(this.reason.Text))
-                {
-                    MessageBox.Show("理由を入力して下さい。");
+                    MessageBox.Show("理由を入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 else { }
@@ -112,10 +68,10 @@ namespace Flawless_ex
 
                 PostgreSQL postgre = new PostgreSQL();
                 conn = postgre.connection();
-                //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+
                 conn.Open();
 
-                string remove_sql = "update staff_m set invalid = 1, reason = '" + reason + "' where staff_code = " + staffCode + "";
+                string remove_sql = "update staff_m set invalid = 1 where staff_code = " + staffCode + "";
 
                 adapter = new NpgsqlDataAdapter(remove_sql, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
@@ -124,9 +80,10 @@ namespace Flawless_ex
 
                 //履歴
                 DateTime dateTime = DateTime.Now;
-                string remove_rivisions_sql = "insert into revisions values(" + 1 + ",'" + dateTime + "'," + code + ",'" +　"有効" +　"','" + "無効" + "','" + reason + "');";
+                string remove_rivisions_sql = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    " values(" + 1 + ",'" + dateTime + "'," + code + ",'" + "有効" + "','" + "無効" + "','" + reason + "', '" + staffCode + "');";
                 NpgsqlCommand cmd = new NpgsqlCommand(remove_rivisions_sql, conn);
-                NpgsqlDataReader dtr = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
 
                 conn.Close();
                 MessageBox.Show("選択した担当者を無効にしました", "無効処理完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); ;
@@ -144,6 +101,8 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
             NpgsqlCommandBuilder builder;
             DataTable dt = new DataTable();
+
+            dt.Clear();
 
             string name; //担当者名　履歴
             string name_kana;//担当者名カナ履歴
@@ -166,68 +125,69 @@ namespace Flawless_ex
             reason = this.reason.Text;
 
             PostgreSQL postgre = new PostgreSQL();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn.Open();
-            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ",password = '" + password + "', access_auth = '" + access_auth1 + "' , reason = '" + reason +"' where staff_code =" + staffCode + " ;";
+            conn = postgre.connection();
 
+            string sql_str = " update staff_m set  staff_name = '" + staffName + "', staff_name_kana = '" + staffNameKana + "', main_category_code =" + main_category + ", password = '" + password + "'," +
+                " access_auth = '" + access_auth1 + "' where staff_code =" + staffCode + " ;";
 
             #region "起こりうるミス"
             if (string.IsNullOrEmpty(password))//パスワード未入力
             {
                 if (string.IsNullOrEmpty(rePassword))
                 {
-                    MessageBox.Show("パスワードを入力してください");
-                    conn.Close();
+                    MessageBox.Show("パスワードを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
             else if (password != rePassword)
             {
-                MessageBox.Show("パスワードを確認して下さい。");
+                MessageBox.Show("パスワードを確認して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrEmpty(parsonNameText.Text))
             {
-                MessageBox.Show("担当者名を入力して下さい。");
+                MessageBox.Show("担当者名を入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrEmpty(parsonNamt2Text.Text))
             {
-                MessageBox.Show("担当者のカナを入力して下さい。");
+                MessageBox.Show("担当者のカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(staffNameKana, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
             {
-                MessageBox.Show("カタカナを入力して下さい。");
+                MessageBox.Show("「担当者カナ」の欄にカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrEmpty(passwordText.Text))
             {
-                MessageBox.Show("パスワードを入力して下さい。");
+                MessageBox.Show("パスワードを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrEmpty(passwordReText.Text))
             {
-                MessageBox.Show("パスワードを再入力して下さい。");
+                MessageBox.Show("パスワードを再入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (this.accessButton.SelectedIndex == -1)
             {
-                MessageBox.Show("アクセス権限を選択して下さい。");
+                MessageBox.Show("アクセス権限を選択して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (this.mainCategoryComboBox.SelectedIndex == -1)
             {
-                MessageBox.Show("大分類名を選択して下さい。");
+                MessageBox.Show("大分類名を選択して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (string.IsNullOrEmpty(this.reason.Text))
             {
-                MessageBox.Show("理由を入力して下さい。");
+                MessageBox.Show("理由を入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else { }
             #endregion
+
+            conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             builder = new NpgsqlCommandBuilder(adapter);
@@ -241,35 +201,41 @@ namespace Flawless_ex
             #region "担当者名変更"
             if (this.parsonNameText.Text != name)
             {
-                string sql_staffNameRevisions = "insert into revisions values(" + 1 + ",'" + dateTime + "'," + code + ",'" + name + "','" + staffName + "','" + reason  + "');";
+                string sql_staffNameRevisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "values(" + 1 + ",'" + dateTime + "'," + code + ",'" + name + "','" + staffName + "','" + reason + "', '" + staffCode + "');";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_staffNameRevisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
             }
             #endregion
             #region "パスワード"
-            else if (this.passwordText.Text != pass)
+            if (this.passwordText.Text != pass)
             {
-                string sql_passwordRevisions = "insert into revisions values(" + 1 + ",'" + dateTime + "', " + code + ",'" + pass + "','" + password + "','" + reason + "')";
+                string sql_passwordRevisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "values(" + 1 + ",'" + dateTime + "', " + code + ",'" + pass + "','" + password + "','" + reason + "', '"+staffCode+"')";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_passwordRevisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
             }
             #endregion
             #region "大分類コード"
-            else if (main_category != main_code)
+            if (main_category != main_code)
             {
-                string sql_main_category_code_revisions = "insert into revisions values(" + 1 + ",'" + dateTime + "'," + code + "," + main_category + ", " + main_code + ",'" + reason + "')";
+                string sql_main_category_code_revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "values(" + 1 + ",'" + dateTime + "'," + code + "," + main_category + ", " + main_code + ",'" + reason + "', '" + staffCode + "')";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_main_category_code_revisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
             }
             #endregion
             #region "アクセス権限"
-            else if (access_auth1 != access)
+            if (access_auth1 != access)
             {
-                string sql_access_revisions = "insert into revisions values(" + 1 + ",'" + dateTime + "', " + code + ", '" + access + "', '" + access_auth1 + "','" + reason + "')";
+                string sql_access_revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "values(" + 1 + ",'" + dateTime + "', " + code + ", '" + access + "', '" + access_auth1 + "','" + reason + "', '" + staffCode + "')";
                 NpgsqlCommand cmd = new NpgsqlCommand(sql_access_revisions, conn);
-                NpgsqlDataReader reader = cmd.ExecuteReader();
+                cmd.ExecuteNonQuery();
             }
             #endregion
+
+            conn.Close();
             this.Close();
         }
 
@@ -281,7 +247,6 @@ namespace Flawless_ex
             DataRow row;
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             string sql_str = "select * from staff_m where staff_code = " + staffCode + ";";
 
@@ -333,5 +298,19 @@ namespace Flawless_ex
             parsonNamt2Text.Select(parsonNamt2Text.Text.Length, 0);
         }
 
+        private void passwordText_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(passwordText.Text))
+            {
+                label6.Visible = true;
+                passwordReText.Visible = true;
+            }
+            else
+            {
+                label6.Visible = false;
+                passwordReText.Visible = false;
+
+            }
+        }
     }
 }

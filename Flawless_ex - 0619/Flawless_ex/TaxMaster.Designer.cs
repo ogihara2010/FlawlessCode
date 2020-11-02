@@ -83,6 +83,7 @@
             this.taxPercent.Size = new System.Drawing.Size(166, 55);
             this.taxPercent.TabIndex = 3;
             this.taxPercent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.taxPercent.TextChanged += new System.EventHandler(this.taxPercent_TextChanged);
             this.taxPercent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.taxPercent_KeyPress);
             // 
             // label2

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Npgsql;
 using System.Data;
 using System.Text;
+using System.IO.Packaging;
 
 namespace Flawless_ex
 {
@@ -23,19 +24,23 @@ namespace Flawless_ex
         public string path;
         public string pass;
         public string kana;
+        int ClientCode;
+        InputControl InputControl = new InputControl();
+
+        NpgsqlTransaction transaction;
+        NpgsqlCommand cmd;
 
         private FileServer fileServer = new FileServer();
 
-        public ClientMaster_UPD(MasterMaintenanceMenu master, int type, string name, string address, int staff_code, string access_auth, string Pass)
+        public ClientMaster_UPD(MasterMaintenanceMenu master, int type, int code, int staff_code, string access_auth, string Pass)
         {
             InitializeComponent();
             this.master = master;
             this.staff_code = staff_code;
-            this.name = name;　//担当者名または氏名
-            this.address = address; // 住所
             this.type = type;  //  法人・個人
             this.access_auth = access_auth;
             this.pass = Pass;
+            ClientCode = code;              //顧客番号
         }
 
         private void Button18_Click(object sender, EventArgs e)
@@ -53,153 +58,166 @@ namespace Flawless_ex
         {
             #region "起こりうるミス"
             #region "必須項目"
-            if (string.IsNullOrEmpty(textBox2.Text))
+            if (string.IsNullOrEmpty(companyNameTextBox.Text))
             {
-                MessageBox.Show("会社名を入力してください。");
+                MessageBox.Show("会社名を入力してください。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox3.Text))
+            else if (string.IsNullOrEmpty(companyKanaTextBox.Text))
             {
-                MessageBox.Show("会社名のフリガナを入力して下さい。");
+                MessageBox.Show("会社名のフリガナを入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox3.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(companyKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
             {
-                MessageBox.Show("カタカナを入力して下さい。");
+                MessageBox.Show("会社名カナにはカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox4.Text, @"^[a-zA-Z]+$"))
+
+            //else if (System.Text.RegularExpressions.Regex.IsMatch(postalUpCodeTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(postalUpCodeTextBox.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(postalUpCodeTextBox.Text, @"^[a-zA-Z]+$"))
+            //{
+            //    MessageBox.Show("正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            //else if (System.Text.RegularExpressions.Regex.IsMatch(postalDownCodeTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(postalDownCodeTextBox.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(postalDownCodeTextBox.Text, @"^[a-zA-Z]+$"))
+            //{
+            //    MessageBox.Show("正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+
+            else if (string.IsNullOrEmpty(postalDownCodeTextBox.Text) || string.IsNullOrEmpty(postalUpCodeTextBox.Text))
             {
-                MessageBox.Show("正しく入力して下さい。");
+                MessageBox.Show("郵便番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, @"^[a-zA-Z]+$"))
+
+            //else if (int.Parse(postalDownCodeTextBox.Text) >= 10000 || int.Parse(postalUpCodeTextBox.Text) >= 1000)
+            //{
+            //    MessageBox.Show("郵便番号を正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+
+            else if (string.IsNullOrEmpty(addressTextBox.Text))
             {
-                MessageBox.Show("正しく入力して下さい。");
+                MessageBox.Show("住所を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox4.Text))
+            else if (string.IsNullOrEmpty(addressKanaTextBox.Text))
             {
-                MessageBox.Show("郵便番号を入力して下さい。");
+                MessageBox.Show("住所のフリガナを入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (int.Parse(textBox1.Text) >= 10000 || int.Parse(textBox4.Text) >= 1000)
+
+            //else if (!System.Text.RegularExpressions.Regex.IsMatch(addressKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            //{
+            //    MessageBox.Show("住所カナにはカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            else if (string.IsNullOrEmpty(nameTextBox.Text))
             {
-                MessageBox.Show("郵便番号を正しく入力して下さい。");
+                MessageBox.Show("担当者名義を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox5.Text))
+            else if (string.IsNullOrEmpty(telTextBox.Text))
             {
-                MessageBox.Show("住所を入力して下さい。");
+                MessageBox.Show("電話番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox6.Text))
+            else if (string.IsNullOrEmpty(registerCopyTextBox.Text))
             {
-                MessageBox.Show("住所のフリガナを入力して下さい。");
+                MessageBox.Show("登記簿謄本を選んで下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox6.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            else if (string.IsNullOrEmpty(antiqueLicenseTextBox.Text))
             {
-                MessageBox.Show("カタカナを入力して下さい。");
+                MessageBox.Show("古物商許可証を選んで下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox12.Text))
+            else if (string.IsNullOrEmpty(antiqueNumberTextBox.Text))
             {
-                MessageBox.Show("担当者名義を入力して下さい。");
+                MessageBox.Show("古物番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox9.Text))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(antiqueNumberTextBox.Text, @"^\p{N}+$"))
             {
-                MessageBox.Show("電話番号を入力して下さい。");
+                MessageBox.Show("古物番号には数字を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox21.Text))
+            else if (string.IsNullOrEmpty(photoIDTextBox.Text))
             {
-                MessageBox.Show("登記簿謄本を選んで下さい。");
+                MessageBox.Show("身分証明書もしくは顔つき身分証明証を選択して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox22.Text))
+            if (string.IsNullOrWhiteSpace(reasonTextBox.Text))
             {
-                MessageBox.Show("古物商許可証を選んで下さい。");
-                return;
-            }
-            else if (string.IsNullOrEmpty(textBox23.Text))
-            {
-                MessageBox.Show("古物番号を入力して下さい。");
-                return;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox23.Text, @"^\p{N}+$"))
-            {
-                MessageBox.Show("数字を入力して下さい。");
-                return;
-            }
-            else if (string.IsNullOrEmpty(textBox24.Text))
-            {
-                MessageBox.Show("身分証明書もしくは顔つき身分証明証を選択して下さい。");
+                MessageBox.Show("変更する理由を記入してください", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             #endregion
             #region "その他の項目"
             else
             {
-                if (!string.IsNullOrEmpty(textBox8.Text))
+                if (!string.IsNullOrEmpty(shopKanaTextBox.Text))
                 {
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(textBox8.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(shopKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
                     {
-                        MessageBox.Show("カタカナを入力して下さい。");
+                        MessageBox.Show("店舗名カナにはカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
-                if (!string.IsNullOrEmpty(textBox20.Text))
+
+                if (!string.IsNullOrEmpty(accountKanaTextBox.Text))
                 {
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(textBox20.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(accountKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
                     {
-                        MessageBox.Show("カタカナを入力して下さい。");
+                        MessageBox.Show("口座名義カナにはカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
-                if (!string.IsNullOrEmpty(textBox29.Text) && string.IsNullOrEmpty(textBox46.Text))
-                {
-                    MessageBox.Show("在留期限を入力して下さい。");
-                    return;
-                }
-                if (!string.IsNullOrEmpty(textBox46.Text) && string.IsNullOrEmpty(textBox29.Text))
-                {
-                    MessageBox.Show("正しく入力して下さい。");
-                    return;
-                }
-                if (!string.IsNullOrEmpty(textBox10.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox10.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox10.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox10.Text, @"^[a-zA-Z]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
-                if (!string.IsNullOrEmpty(textBox19.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox19.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox19.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox19.Text, @"^[a-zA-Z]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
-                if (!string.IsNullOrEmpty(textBox13.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox13.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox13.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox13.Text, @"^[ａ-ｚＡ-Ｚ]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
-                if (!string.IsNullOrEmpty(textBox17.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox17.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox17.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox17.Text, @"^[ａ-ｚＡ-Ｚ]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
+
+                //if (!string.IsNullOrEmpty(textBox29.Text) && string.IsNullOrEmpty(textBox46.Text))
+                //{
+                //    MessageBox.Show("在留期限を入力して下さい。");
+                //    return;
+                //}
+                //if (!string.IsNullOrEmpty(textBox46.Text) && string.IsNullOrEmpty(textBox29.Text))
+                //{
+                //    MessageBox.Show("正しく入力して下さい。");
+                //    return;
+                //}
+
+                //if (!string.IsNullOrEmpty(faxTextBox.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(faxTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(faxTextBox.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(faxTextBox.Text, @"^[a-zA-Z]+$"))
+                //    {
+                //        MessageBox.Show("fax 番号に正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        return;
+                //    }
+                //}
+                //if (!string.IsNullOrEmpty(accountNumberTextBox.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(accountNumberTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(accountNumberTextBox.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(accountNumberTextBox.Text, @"^[a-zA-Z]+$"))
+                //    {
+                //        MessageBox.Show("正しく入力して下さい。");
+                //        return;
+                //    }
+                //}
+                //if (!string.IsNullOrEmpty(mailTextBox.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(mailTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(mailTextBox.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(mailTextBox.Text, @"^[ａ-ｚＡ-Ｚ]+$"))
+                //    {
+                //        MessageBox.Show("メールアドレスを正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        return;
+                //    }
+                //}
+                //if (!string.IsNullOrEmpty(urlTextBox.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(urlTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(urlTextBox.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(urlTextBox.Text, @"^[ａ-ｚＡ-Ｚ]+$"))
+                //    {
+                //        MessageBox.Show("URL を正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        return;
+                //    }
+                //}
             }
             #endregion
             #endregion
@@ -215,14 +233,15 @@ namespace Flawless_ex
             PostgreSQL postgre = new PostgreSQL();
             conn1 = postgre.connection();
             //conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            string sql_old = "select * from client_m_corporate where invalid = 0 and (staff_name = '" + name + "' and address = '" + address + "');";
+            string sql_old = "select * from client_m where code = '" + ClientCode + "';";
             conn1.Open();
             adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
             adapter1.Fill(dt2);
             DataRow row1;
             row1 = dt2.Rows[0];
-            string RegistrationDate2_old = row1["registration_date"].ToString();
-            int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
+            string RegistrationDate2_old = ((DateTime)row1["registration_date"]).ToString("yyyy/MM/dd");
+
+            string PostalCode1_old = row1["postal_code1"].ToString();
             string PostalCode2_old = row1["postal_code2"].ToString();
             string Address_old = row1["address"].ToString();
             string AddressKana_old = row1["address_kana"].ToString();
@@ -230,11 +249,11 @@ namespace Flawless_ex
             string CompanyNameKana_old = row1["company_kana"].ToString();
             string ShopName_old = row1["shop_name"].ToString();
             string ShopNameKana_old = row1["shop_name_kana"].ToString();
-            int Antique_old = (int)row1["antique_number"];
+            decimal Antique_old = (decimal)row1["antique_number"];
             string PhoneNumber_old = row1["phone_number"].ToString();
             string FaxNumber_old = row1["fax_number"].ToString();
             string URL_old = row1["url_infor"].ToString();
-            string ClientStaffName_old = row1["staff_name"].ToString();
+            string ClientStaffName_old = row1["name"].ToString();
             string Position_old = row1["position"].ToString();
             string EmailAddress_old = row1["email_address"].ToString();
             string BankName_old = row1["bank_name"].ToString();
@@ -253,49 +272,116 @@ namespace Flawless_ex
             string ResidenceCard_old = row1["residence_card"].ToString();
             string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
             DateTime dat1 = DateTime.Now;
-            
+
             #endregion
             #region "更新するパラメータ"
-            string RegistrationDate = this.dateTimePicker1.Text;
-            string CompanyName = this.textBox2.Text;
-            string CompanyNameKana = this.textBox3.Text;
-            int PostalCode1 = int.Parse(this.textBox4.Text);
-            string PostalCode2 = this.textBox1.Text;            
-            string Address = this.textBox5.Text;
-            string AddressKana = this.textBox6.Text;
-            string ShopName = this.textBox7.Text;
-            string ShopNameKana = this.textBox8.Text;
-            string PhoneNumber = this.textBox9.Text;
-            string FaxNumber = this.textBox10.Text;
-            string Position = this.textBox11.Text;
-            string ClientStaffName = this.textBox12.Text;
-            string EmailAddress = this.textBox13.Text;
-            string BankName = this.textBox14.Text;
-            string DepositType = this.textBox15.Text;
-            string AccountName = this.textBox16.Text;
-            string URLinfor = this.textBox17.Text;
-            string BranchName = this.textBox18.Text;
-            string AccountNumber = this.textBox19.Text;
-            string AccountNameKana = this.textBox20.Text;
-            string RegisterCopy = fileServer.UploadImage(this.textBox21.Text,FileServer.Filetype.RegisterCopy);
-            string Antiquelicense = fileServer.UploadImage(this.textBox22.Text, FileServer.Filetype.Antiquelicense);
-            int AntiqueNumber = int.Parse(this.textBox23.Text);
-            string ID = fileServer.UploadImage(this.textBox24.Text, FileServer.Filetype.ID);
-            string PeriodStay = this.textBox47.Text;
-            string SealCertification = fileServer.UploadImage(this.textBox26.Text,FileServer.Filetype.SealCertification);
-            string TaxCertification = fileServer.UploadImage(this.textBox27.Text,FileServer.Filetype.TaxCertification);
-            string Remarks = this.textBox28.Text;
-            string ResidenceCard = fileServer.UploadImage(this.textBox29.Text,FileServer.Filetype.ResidenceCard);
-            string AolFinancialShareholder = fileServer.UploadImage(this.textBox25.Text,FileServer.Filetype.AolFinancialShareholder);
+            string RegistrationDate = this.dateTimePicker1.Value.ToString("yyyy/MM/dd");
+
+            string CompanyName = this.companyNameTextBox.Text;
+            string CompanyNameKana = this.companyKanaTextBox.Text;
+            string PostalCode1 = this.postalUpCodeTextBox.Text;
+            string PostalCode2 = this.postalDownCodeTextBox.Text;
+            string Address = this.addressTextBox.Text;
+            string AddressKana = this.addressKanaTextBox.Text;
+            string ShopName = this.shopNameTextBox.Text;
+            string ShopNameKana = this.shopKanaTextBox.Text;
+            string PhoneNumber = this.telTextBox.Text;
+            string FaxNumber = this.faxTextBox.Text;
+            string Position = this.positionTextBox.Text;
+            string ClientStaffName = this.nameTextBox.Text;
+            string EmailAddress = this.mailTextBox.Text;
+            string BankName = this.bankNameTextBox.Text;
+            string DepositType = this.depositTypeTextBox.Text;
+            string AccountName = this.accountNameTextBox.Text;
+            string URLinfor = this.urlTextBox.Text;
+            string BranchName = this.branchTextBox.Text;
+            string AccountNumber = this.accountNumberTextBox.Text;
+            string AccountNameKana = this.accountKanaTextBox.Text;
+
+            #region"画像が変更されているか確認"
+            string RegisterCopy = "";
+            string Antiquelicense = "";
+            string ID = "";
+            string SealCertification = "";
+            string TaxCertification = "";
+            string ResidenceCard = "";
+            string AolFinancialShareholder = "";
+
+            if (registerCopyTextBox.Text != RegisterCopy_old) 
+            {
+                RegisterCopy = fileServer.UploadImage(this.registerCopyTextBox.Text, FileServer.Filetype.RegisterCopy);
+            }
+            else
+            {
+                RegisterCopy = RegisterCopy_old;
+            }
+
+            if (Antiquelicense_old != antiqueLicenseTextBox.Text)
+            {
+                Antiquelicense = fileServer.UploadImage(this.antiqueLicenseTextBox.Text, FileServer.Filetype.Antiquelicense);
+            }
+            else
+            {
+                Antiquelicense = Antiquelicense_old;
+            }
+
+            if (photoIDTextBox.Text != ID_old)
+            {
+                ID = fileServer.UploadImage(this.photoIDTextBox.Text, FileServer.Filetype.ID);
+            }
+            else
+            {
+                ID = ID_old;
+            }
+            if (SealCertification_old != sealCertificationTextBox.Text)
+            {
+                SealCertification = fileServer.UploadImage(this.sealCertificationTextBox.Text, FileServer.Filetype.SealCertification);
+            }
+            else
+            {
+                SealCertification = SealCertification_old;
+            }
+
+            if (TaxCertification_old != taxCertificationTextBox.Text)
+            {
+                TaxCertification = fileServer.UploadImage(this.taxCertificationTextBox.Text, FileServer.Filetype.TaxCertification);
+            }
+            else
+            {
+                TaxCertification = TaxCertification_old;
+            }
+
+            if (ResidenceCard_old != residenceCardTextBox.Text)
+            {
+                ResidenceCard = fileServer.UploadImage(this.residenceCardTextBox.Text, FileServer.Filetype.ResidenceCard);
+            }
+            else
+            {
+                ResidenceCard = ResidenceCard_old;
+            }
+
+            if (AolFinancialShareholder_old != aolFinancialShareholderTextBox.Text)
+            {
+                AolFinancialShareholder = fileServer.UploadImage(this.aolFinancialShareholderTextBox.Text, FileServer.Filetype.AolFinancialShareholder);
+            }
+            else
+            {
+                AolFinancialShareholder = AolFinancialShareholder_old;
+            }
+            #endregion
+
+            decimal AntiqueNumber = decimal.Parse(this.antiqueNumberTextBox.Text);
+            string Remarks = this.remarksTextBox.Text;
+            string PeriodStay = periodStayCompanyDateTimePicker.Value.ToString("yyyy/MM/dd");
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
-            string reason1 = this.reasonText1.Text;
+            string reason1 = this.reasonTextBox.Text;
             #endregion
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
 
-            string sql_str = "UPDATE client_m_corporate SET type = " + 0 + " ,registration_date = '" + RegistrationDate + "' ,company_name =  '" + CompanyName + "' ,company_kana = '" + CompanyNameKana + "' ,shop_name =  '" + ShopName + "' ,shop_name_kana = '" + ShopNameKana + " ',address =  '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,position = '" + Position + "' ,staff_name = '" + ClientStaffName +
+            string sql_str = "UPDATE client_m SET type = " + 0 + " ,registration_date = '" + RegistrationDate + "' ,company_name =  '" + CompanyName + "' ,company_kana = '" + CompanyNameKana + "' ,shop_name =  '" + ShopName + "' ,shop_name_kana = '" + ShopNameKana + " ',address =  '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,position = '" + Position + "' , name = '" + ClientStaffName +
                 "' ,email_address = '" + EmailAddress + "',url_infor = '" + URLinfor + "',bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name_kana = '" + AccountNameKana + "' ,account_name = '" + AccountName + "' ,remarks = '" + Remarks + "' ,id = '" + ID + "' ,register_date = '" + b + "',antique_license = '" + Antiquelicense + "',tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification +
                 "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 + "' where antique_number = " + AntiqueNumber + "; ";
 
@@ -303,270 +389,318 @@ namespace Flawless_ex
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
             conn.Open();
 
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            adapter.Fill(dt);
+            using (transaction = conn.BeginTransaction())
+            {
+                cmd = new NpgsqlCommand(sql_str, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
 
             #region "履歴へ"
-            NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
-            conn2 = postgre.connection();
-            //conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.Open();
             #region "絶対入力する項目"
             #region "登記簿謄本登録日"
             if (RegistrationDate2_old != RegistrationDate)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + RegistrationDate2_old + "' , '" + RegistrationDate + "' ,'" + reason1 + "');";
-                
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + RegistrationDate2_old + "' , '" + RegistrationDate + "' ,'" + reason1 + "','" + ClientCode + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "住所変更"
             if (Address_old != Address)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Address_old + "' , '" + Address + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    " VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Address_old + "' , '" + Address + "' ,'" + reason1 + "', '" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "住所フリガナ変更(住所変更に伴う)"
             if (AddressKana_old != AddressKana)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + AddressKana_old + "' , '" + AddressKana + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + AddressKana_old + "' , '" + AddressKana + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "郵便番号変更"
             if ((PostalCode1_old != PostalCode1) || (PostalCode2_old != PostalCode2))
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PostalCode1_old + "-" + PostalCode2_old + "' , '" + PostalCode1 + "-" + PostalCode2 + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    " VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PostalCode1_old + "-" + PostalCode2_old + "' , '" + PostalCode1 + "-" + PostalCode2 + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "担当者名義変更"
             if (ClientStaffName_old != ClientStaffName)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ClientStaffName_old + "' , '" + ClientStaffName + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ClientStaffName_old + "' , '" + ClientStaffName + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion            
             #region "電話番号変更"
             if (PhoneNumber_old != PhoneNumber)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PhoneNumber_old + "' , '" + PhoneNumber + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PhoneNumber_old + "' , '" + PhoneNumber + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "登記簿謄本変更"
             if (RegisterCopy_old != RegisterCopy)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + RegisterCopy_old + "' , '" + RegisterCopy + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + RegisterCopy_old + "' , '" + RegisterCopy + "' ,'" + reason1 + "', '" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "身分証明書変更"
             if (ID_old != ID)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ID_old + "' , '" + ID + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ID_old + "' , '" + ID + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "古物商許可証変更"
             if (Antiquelicense_old != Antiquelicense)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Antiquelicense_old + "' , '" + Antiquelicense + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Antiquelicense_old + "' , '" + Antiquelicense + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "会社名変更"
             if (CompanyName_old != CompanyName)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + CompanyName_old + "' , '" + CompanyName + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + CompanyName_old + "' , '" + CompanyName + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "会社名フリガナ変更(会社名変更に伴う)"
             if (CompanyNameKana_old != CompanyNameKana)
             {
-                string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + CompanyNameKana_old + "' , '" + CompanyNameKana + "' ,'" + reason1 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + CompanyNameKana_old + "' , '" + CompanyNameKana + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region"古物番号"
+            if (Antique_old != AntiqueNumber)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Antique_old + "' , '" + AntiqueNumber + "' ,'" + reason1 + "','" + ClientCode + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #endregion
             #region "必須項目以外"            
             #region "店舗名変更"
-                if (ShopName_old != ShopName)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ShopName_old + "' , '" + ShopName + "' ,'" + reason1 + "');";
+            if (ShopName_old != ShopName)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ShopName_old + "' , '" + ShopName + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "店舗名フリガナ変更(店舗名変更に伴う)"
-                if (ShopNameKana_old != ShopNameKana)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ShopNameKana_old + "' , '" + ShopNameKana + "' ,'" + reason1 + "');";
+            if (ShopNameKana_old != ShopNameKana)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + ShopNameKana_old + "' , '" + ShopNameKana + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "FAX番号変更"
-                if (FaxNumber_old != FaxNumber)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + FaxNumber_old + "' , '" + FaxNumber + "' ,'" + reason1 + "');";
+            if (FaxNumber_old != FaxNumber)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + FaxNumber_old + "' , '" + FaxNumber + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "URL変更"
-                if (URL_old != URLinfor)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + URL_old + "' , '" + URLinfor + "' ,'" + reason1 + "');";
+            if (URL_old != URLinfor)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + URL_old + "' , '" + URLinfor + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "役職変更"
-                if (Position_old != Position)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Position_old + "' , '" + Position + "' ,'" + reason1 + "');";
+            if (Position_old != Position)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Position_old + "' , '" + Position + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "メールアドレス変更"
-                if (EmailAddress_old != EmailAddress)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + EmailAddress_old + "' , '" + EmailAddress + "' ,'" + reason1 + "');";
+            if (EmailAddress_old != EmailAddress)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + EmailAddress_old + "' , '" + EmailAddress + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "銀行名変更"
-                if (BankName_old != BankName)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + BankName_old + "' , '" + BankName + "' ,'" + reason1 + "');";
+            if (BankName_old != BankName)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                " VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + BankName_old + "' , '" + BankName + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "預金種別変更"
-                if (DepositType_old != DepositType)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + DepositType_old + "','" + DepositType + "','" + reason1 + "');";
+            if (DepositType_old != DepositType)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + DepositType_old + "','" + DepositType + "','" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "口座名義変更"
-                if (AccountName_old != AccountName)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + AccountName_old + "' , '" + AccountName + "' ,'" + reason1 + "');";
+            if (AccountName_old != AccountName)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + AccountName_old + "' , '" + AccountName + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "支店名変更"
-                if (BranchName_old != BranchName)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason1 + "');";
+            if (BranchName_old != BranchName)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "口座番号変更"
-                if (AccountNumber_old != AccountNumber)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNumber_old + "','" + AccountNumber + "','" + reason1 + "');";
+            if (AccountNumber_old != AccountNumber)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNumber_old + "','" + AccountNumber + "','" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "口座名義人フリガナ変更(口座名義人変更に伴う)"
-                if (AccountNameKana_old != AccountNameKana)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNameKana_old + "','" + AccountNameKana + "','" + reason1 + "');";
+            if (AccountNameKana_old != AccountNameKana)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNameKana_old + "','" + AccountNameKana + "','" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "在留期限変更"
-                if (PeriodStay_old != PeriodStay)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PeriodStay_old + "' , '" + PeriodStay + "' ,'" + reason1 + "');";
+            if (PeriodStay_old != PeriodStay)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + PeriodStay_old + "' , '" + PeriodStay + "' ,'" + reason1 + "', '" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "印鑑証明変更"
-                if (SealCertification_old != SealCertification)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + SealCertification_old + "' , '" + SealCertification + "' ,'" + reason1 + "');";
+            if (SealCertification_old != SealCertification)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + SealCertification_old + "' , '" + SealCertification + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "納税証明書変更"
-                if (TaxCertification_old != TaxCertification)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + TaxCertification_old + "' , '" + TaxCertification + "' ,'" + reason1 + "');";
+            if (TaxCertification_old != TaxCertification)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + TaxCertification_old + "' , '" + TaxCertification + "' ,'" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "在留カード"
-                if (ResidenceCard_old != ResidenceCard)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason1 + "');";
+            if (ResidenceCard_old != ResidenceCard)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #region "定款等変更"
-                if (AolFinancialShareholder_old != AolFinancialShareholder)
-                {
-                    string sql_in = "Insert into revisions VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AolFinancialShareholder_old + "','" + AolFinancialShareholder + "','" + reason1 + "');";
+            if (AolFinancialShareholder_old != AolFinancialShareholder)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                "VALUES (" + 4 + ",'" + dat1 + "'," + staff_code + ",'" + AolFinancialShareholder_old + "','" + AolFinancialShareholder + "','" + reason1 + "','" + ClientCode + "');";
 
-                    adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                    adapter2.Fill(dt3);
-                }
-                #endregion            
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region"備考"
+            if (Remarks_old != Remarks)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 4 + ",'" + dat1 + "' ," + staff_code + ",'" + Remarks_old + "' , '" + Remarks + "' ,'" + reason1 + "','" + ClientCode + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
             #endregion
             #endregion
             MessageBox.Show("更新しました。");
@@ -574,6 +708,7 @@ namespace Flawless_ex
             this.Close();
         }
         #endregion
+
         #region "法人　無効"
         private void Button19_Click(object sender, EventArgs e)
         {
@@ -586,11 +721,11 @@ namespace Flawless_ex
             else if (result == DialogResult.Yes)
             {
 
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                NpgsqlDataAdapter adapter2;
-                NpgsqlCommandBuilder builder;
-                NpgsqlCommandBuilder builder2;
+                NpgsqlConnection conn;
+                //NpgsqlDataAdapter adapter;
+                //NpgsqlDataAdapter adapter2;
+                //NpgsqlCommandBuilder builder;
+                //NpgsqlCommandBuilder builder2;
                 DateTime dat = DateTime.Now;
 
                 PostgreSQL postgre = new PostgreSQL();
@@ -598,16 +733,27 @@ namespace Flawless_ex
                 //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
-                string remove_sql = "update client_m_corporate set invalid = 1 where staff_name = '" + name + "'" + "and address = '" + address + "'";
-                string revisions = "insert into revisions values (" + 4 +  ",'" + dat + "'," + staff_code +  ",'" +  "有効" + "','" + "無効" + "','" + reasonText1.Text + "');";
+                string remove_sql = "update client_m set invalid = 1 where code = '" + ClientCode + "';";
+                string revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "values (" + 4 + ",'" + dat + "'," + staff_code + ",'" + "有効" + "','" + "無効" + "','" + reasonTextBox.Text + "','" + ClientCode + "');";
 
-                adapter = new NpgsqlDataAdapter(remove_sql, conn);
-                builder = new NpgsqlCommandBuilder(adapter);
-                adapter.Fill(dt);
-                adapter.Update(dt);
-                adapter2 = new NpgsqlDataAdapter(revisions, conn);
-                builder2 = new NpgsqlCommandBuilder(adapter2);
-                adapter2.Fill(dt4);
+                using (transaction = conn.BeginTransaction())
+                {
+                    cmd = new NpgsqlCommand(remove_sql, conn);
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();
+                }
+
+                cmd = new NpgsqlCommand(revisions, conn);
+                cmd.ExecuteNonQuery();
+
+                //adapter = new NpgsqlDataAdapter(remove_sql, conn);
+                //builder = new NpgsqlCommandBuilder(adapter);
+                //adapter.Fill(dt);
+                //adapter.Update(dt);
+                //adapter2 = new NpgsqlDataAdapter(revisions, conn);
+                //builder2 = new NpgsqlCommandBuilder(adapter2);
+                //adapter2.Fill(dt4);
 
                 MessageBox.Show("無効にしました。");
                 return;
@@ -618,6 +764,7 @@ namespace Flawless_ex
             }
         }
         #endregion
+
         private void ClientMaster_UPD_Load(object sender, EventArgs e)
         {
             if (type == 0)
@@ -651,7 +798,7 @@ namespace Flawless_ex
             if (type == 0)
             {
                 //法人
-                string sql_str = "select * from client_m_corporate where  address = '" + address + "' and staff_name = '" + name + "';";
+                string sql_str = "select * from client_m where  code = '" + ClientCode + "';";
                 conn.Open();
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt);
@@ -680,7 +827,7 @@ namespace Flawless_ex
                 string AccountNameKana;
                 string RegisterCopy;
                 string Antiquelicense;
-                int AntiqueNumber;
+                decimal AntiqueNumber;
                 string ID;
                 string PeriodStay;
                 string SealCertification;
@@ -704,7 +851,7 @@ namespace Flawless_ex
                 PhoneNumber = row["phone_number"].ToString();
                 FaxNumber = row["fax_number"].ToString();
                 Position = row["position"].ToString();
-                StaffName = row["staff_name"].ToString();
+                StaffName = row["name"].ToString();
                 EmailAddress = row["email_address"].ToString();
                 BankName = row["bank_name"].ToString();
                 DepositType = row["deposit_type"].ToString();
@@ -717,7 +864,7 @@ namespace Flawless_ex
                 RegisterCopy = row["register_copy"].ToString();
                 
                 Antiquelicense = row["antique_license"].ToString();
-                AntiqueNumber = (int)row["antique_number"];
+                AntiqueNumber = (decimal)row["antique_number"];
                 ID = row["id"].ToString();
                 PeriodStay = row["period_stay"].ToString();
                 SealCertification = row["seal_certification"].ToString();
@@ -728,42 +875,45 @@ namespace Flawless_ex
                 #endregion
                 #region "出力データ"
                 this.dateTimePicker1.Text = RegistrationDate1;
-                this.textBox2.Text = CompanyName;
-                this.textBox3.Text = CompanyNameKana;
-                this.textBox4.Text = PostalCode1.ToString();
-                this.textBox1.Text = PostalCode2.ToString();                
-                this.textBox5.Text = Address;
-                this.textBox6.Text = AddressKana;
-                this.textBox7.Text = ShopName;
-                this.textBox8.Text = ShopNameKana;
-                this.textBox9.Text = PhoneNumber;
-                this.textBox10.Text = FaxNumber;
-                this.textBox11.Text = Position;
-                this.textBox12.Text = StaffName;
-                this.textBox13.Text = EmailAddress;
-                this.textBox14.Text = BankName;
-                this.textBox15.Text = DepositType;
-                this.textBox16.Text = AccountName;
-                this.textBox17.Text = URLinfor;
-                this.textBox18.Text = BranchName;
-                this.textBox19.Text = AccountNumber;
-                this.textBox20.Text = AccountNameKana;
-                this.textBox21.Text = RegisterCopy;
-                this.textBox22.Text = Antiquelicense;
-                this.textBox23.Text = AntiqueNumber.ToString();
-                this.textBox24.Text = ID;
-                this.textBox25.Text = AolFinancialShareholder;
-                this.textBox47.Text = PeriodStay;                
-                this.textBox26.Text = SealCertification;
-                this.textBox27.Text = TaxCertification;
-                this.textBox28.Text = Remarks;
-                this.textBox29.Text = ResidenceCard;
+
+                this.companyNameTextBox.Text = CompanyName;
+                this.companyKanaTextBox.Text = CompanyNameKana;
+                this.postalUpCodeTextBox.Text = PostalCode1.ToString();
+                this.postalDownCodeTextBox.Text = PostalCode2.ToString();                
+                this.addressTextBox.Text = Address;
+                this.addressKanaTextBox.Text = AddressKana;
+                this.shopNameTextBox.Text = ShopName;
+                this.shopKanaTextBox.Text = ShopNameKana;
+                this.telTextBox.Text = PhoneNumber;
+                this.faxTextBox.Text = FaxNumber;
+                this.positionTextBox.Text = Position;
+                this.nameTextBox.Text = StaffName;
+                this.mailTextBox.Text = EmailAddress;
+                this.bankNameTextBox.Text = BankName;
+                this.depositTypeTextBox.Text = DepositType;
+                this.accountNameTextBox.Text = AccountName;
+                this.urlTextBox.Text = URLinfor;
+                this.branchTextBox.Text = BranchName;
+                this.accountNumberTextBox.Text = AccountNumber;
+                this.accountKanaTextBox.Text = AccountNameKana;
+                this.registerCopyTextBox.Text = RegisterCopy;
+                this.antiqueLicenseTextBox.Text = Antiquelicense;
+                this.antiqueNumberTextBox.Text = AntiqueNumber.ToString();
+                this.photoIDTextBox.Text = ID;
+                this.aolFinancialShareholderTextBox.Text = AolFinancialShareholder;
+
+                periodStayCompanyDateTimePicker.Text = PeriodStay;
+
+                this.sealCertificationTextBox.Text = SealCertification;
+                this.taxCertificationTextBox.Text = TaxCertification;
+                this.remarksTextBox.Text = Remarks;
+                this.residenceCardTextBox.Text = ResidenceCard;
                 #endregion
             }
             else if (type == 1)
             {
                 //個人
-                string sql_str = "select * from client_m_individual where name = '" + name + "' and address = '" + address + "';";
+                string sql_str = "select * from client_m where code = '" + ClientCode + "';";
                 conn.Open();
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 adapter.Fill(dt);
@@ -832,33 +982,39 @@ namespace Flawless_ex
                 #endregion
                 #region "出力データ"
                 this.deliveryDateBox.Text = RegistrationDate2;
-                this.textBox56.Text = Name;
-                this.textBox55.Text = NameKana;
-                this.textBox50.Text = Birthday;
-                this.textBox54.Text = PostalCode1.ToString();
-                this.textBox51.Text = PostalCode2;
-                this.textBox53.Text = Address;
-                this.textBox52.Text = AddressKana;
-                this.textBox49.Text = PhoneNumber;
-                this.textBox48.Text = FaxNumber;
-                this.textBox41.Text = Occupation;
-                this.textBox45.Text = EmailAddress;
-                this.textBox44.Text = BankName;
-                this.textBox43.Text = DepositType;
-                this.textBox42.Text = AccountName;
-                this.textBox40.Text = BranchName;
-                this.textBox39.Text = AccountNumber;
-                this.textBox38.Text = AccountNameKana;
-                this.textBox37.Text = RegisterCopy;
-                this.textBox36.Text = Antiquelicense;
-                this.textBox35.Text = PhotoID;
-                this.textBox34.Text = ID;
-                this.textBox33.Text = AolFinancialShareholder;
-                this.textBox46.Text = PeriodStay;
-                this.textBox32.Text = SealCertification;
-                this.textBox31.Text = TaxCertification;
-                this.textBox58.Text = Remarks;
-                this.textBox30.Text = ResidenceCard;
+
+                this.nameTextBox1.Text = Name;
+                this.nameKanaTextBox1.Text = NameKana;
+
+                birthdayDateTimePicker.Text = Birthday;
+
+                this.postalUpCodeTextBox1.Text = PostalCode1.ToString();
+                this.postalDownCodeTextBox1.Text = PostalCode2;
+                this.addressTextBox1.Text = Address;
+                this.addressKanaTextBox1.Text = AddressKana;
+                this.telTextBox1.Text = PhoneNumber;
+                this.faxTextBox1.Text = FaxNumber;
+                this.occupationTextBox1.Text = Occupation;
+                this.mailTextBox1.Text = EmailAddress;
+                this.bankNameTextBox1.Text = BankName;
+                this.depositTypeTextBox1.Text = DepositType;
+                this.accountNameTextBox1.Text = AccountName;
+                this.branchNameTextBox1.Text = BranchName;
+                this.accountNumberTextBox1.Text = AccountNumber;
+                this.accountKanaTextBox1.Text = AccountNameKana;
+                this.registerCopyTextBox1.Text = RegisterCopy;
+                this.antiqueLicenseTextBox1.Text = Antiquelicense;
+                this.photoIDTextBox1.Text = PhotoID;
+                this.idNumberTextBox1.Text = ID;
+                this.aolFinancialShareholderTextBox1.Text = AolFinancialShareholder;
+
+                //this.textBox46.Text = PeriodStay;
+                periodStayindividualDateTimePicker.Value = DateTime.Parse(PeriodStay);
+
+                this.sealCertificationTextBox1.Text = SealCertification;
+                this.taxCertificationTextBox1.Text = TaxCertification;
+                this.remarksTextBox1.Text = Remarks;
+                this.residenceCardTextBox1.Text = ResidenceCard;
                 #endregion
             }
             conn.Close();
@@ -866,134 +1022,141 @@ namespace Flawless_ex
         #region "個人 更新"
         private void Button5_Click(object sender, EventArgs e)
         {
+            string Year;
+            string Month;
+            string Day;
+
             #region "起こりうるミス"
             #region "必須項目"
-            if (string.IsNullOrEmpty(textBox56.Text))
+            if (string.IsNullOrEmpty(nameTextBox1.Text))
             {
-                MessageBox.Show("名前を入力してください。");
+                MessageBox.Show("名前を入力してください。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox55.Text))
+            else if (string.IsNullOrEmpty(nameKanaTextBox1.Text))
             {
-                MessageBox.Show("名前のフリガナを入力して下さい。");
+                MessageBox.Show("名前のフリガナを入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox55.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(nameKanaTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
             {
-                MessageBox.Show("カタカナを入力して下さい。");
+                MessageBox.Show("氏名カナにはカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(textBox54.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox54.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox54.Text, @"^[a-zA-Z]+$"))
+            //else if (System.Text.RegularExpressions.Regex.IsMatch(postalUpCodeTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(postalUpCodeTextBox1.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(postalUpCodeTextBox1.Text, @"^[a-zA-Z]+$"))
+            //{
+            //    MessageBox.Show("正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            //else if (System.Text.RegularExpressions.Regex.IsMatch(postalDownCodeTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(postalDownCodeTextBox1.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(postalDownCodeTextBox1.Text, @"^[a-zA-Z]+$"))
+            //{
+            //    MessageBox.Show("正しく入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            else if (string.IsNullOrEmpty(postalDownCodeTextBox1.Text) || string.IsNullOrEmpty(postalUpCodeTextBox1.Text))
             {
-                MessageBox.Show("正しく入力して下さい。");
+                MessageBox.Show("郵便番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(textBox51.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox51.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox51.Text, @"^[a-zA-Z]+$"))
+            //else if (int.Parse(postalDownCodeTextBox1.Text) >= 10000 || int.Parse(postalUpCodeTextBox1.Text) >= 1000)
+            //{
+            //    MessageBox.Show("郵便番号を正しく入力して下さい。");
+            //    return;
+            //}
+            else if (string.IsNullOrEmpty(addressTextBox1.Text))
             {
-                MessageBox.Show("正しく入力して下さい。");
+                MessageBox.Show("住所を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox51.Text) || string.IsNullOrEmpty(textBox54.Text))
+            else if (string.IsNullOrEmpty(addressKanaTextBox1.Text))
             {
-                MessageBox.Show("郵便番号を入力して下さい。");
+                MessageBox.Show("住所のフリガナを入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (int.Parse(textBox51.Text) >= 10000 || int.Parse(textBox54.Text) >= 1000)
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(addressKanaTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
             {
-                MessageBox.Show("郵便番号を正しく入力して下さい。");
+                MessageBox.Show("住所カナにはカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox53.Text))
+            else if (string.IsNullOrEmpty(telTextBox1.Text))
             {
-                MessageBox.Show("住所を入力して下さい。");
+                MessageBox.Show("電話番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox52.Text))
+            else if (string.IsNullOrEmpty(registerCopyTextBox1.Text))
             {
-                MessageBox.Show("住所のフリガナを入力して下さい。");
+                MessageBox.Show("登記簿謄本を選んで下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox52.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+            else if (string.IsNullOrEmpty(antiqueLicenseTextBox1.Text))
             {
-                MessageBox.Show("カタカナを入力して下さい。");
+                MessageBox.Show("古物商許可証を選んで下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox49.Text))
+            else if (string.IsNullOrEmpty(idNumberTextBox1.Text))
             {
-                MessageBox.Show("電話番号を入力して下さい。");
+                MessageBox.Show("身分証番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(textBox37.Text))
+            //else if (!System.Text.RegularExpressions.Regex.IsMatch(idNumberTextBox1.Text, @"^\p{N}+$"))
+            //{
+            //    MessageBox.Show("数字を入力して下さい。");
+            //    return;
+            //}
+            else if (string.IsNullOrEmpty(photoIDTextBox1.Text))
             {
-                MessageBox.Show("登記簿謄本を選んで下さい。");
-                return;
-            }
-            else if (string.IsNullOrEmpty(textBox36.Text))
-            {
-                MessageBox.Show("古物商許可証を選んで下さい。");
-                return;
-            }
-            else if (string.IsNullOrEmpty(textBox34.Text))
-            {
-                MessageBox.Show("身分証番号を入力して下さい。");
-                return;
-            }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(textBox34.Text, @"^\p{N}+$"))
-            {
-                MessageBox.Show("数字を入力して下さい。");
-                return;
-            }
-            else if (string.IsNullOrEmpty(textBox35.Text))
-            {
-                MessageBox.Show("顔つき身分証明証を選択して下さい。");
+                MessageBox.Show("顔つき身分証明証を選択して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             #endregion
             #region "その他の項目"
             else
             {
-                if (!string.IsNullOrEmpty(textBox38.Text))
+                if (!string.IsNullOrEmpty(accountKanaTextBox1.Text))
                 {
-                    if (!System.Text.RegularExpressions.Regex.IsMatch(textBox38.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(accountKanaTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
                     {
-                        MessageBox.Show("カタカナを入力して下さい。");
+                        MessageBox.Show("口座名義カナにカタカナのみ入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
-                if (!string.IsNullOrEmpty(textBox30.Text) && string.IsNullOrEmpty(textBox47.Text))
-                {
-                    MessageBox.Show("在留期限を入力して下さい。");
-                    return;
-                }
-                if (!string.IsNullOrEmpty(textBox47.Text) && string.IsNullOrEmpty(textBox30.Text))
-                {
-                    MessageBox.Show("正しく入力して下さい。");
-                    return;
-                }
-                if (!string.IsNullOrEmpty(textBox39.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox39.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox39.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox39.Text, @"^[a-zA-Z]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
-                if (!string.IsNullOrEmpty(textBox48.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox48.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox48.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox48.Text, @"^[a-zA-Z]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
-                if (!string.IsNullOrEmpty(textBox45.Text))
-                {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(textBox45.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox45.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(textBox45.Text, @"^[ａ-ｚＡ-Ｚ]+$"))
-                    {
-                        MessageBox.Show("正しく入力して下さい。");
-                        return;
-                    }
-                }
+
+                //if (!string.IsNullOrEmpty(textBox30.Text) && string.IsNullOrEmpty(textBox47.Text))
+                //{
+                //    MessageBox.Show("在留期限を入力して下さい。");
+                //    return;
+                //}
+                //if (!string.IsNullOrEmpty(textBox47.Text) && string.IsNullOrEmpty(textBox30.Text))
+                //{
+                //    MessageBox.Show("正しく入力して下さい。");
+                //    return;
+                //}
+
+                //if (!string.IsNullOrEmpty(accountNumberTextBox1.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(accountNumberTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(accountNumberTextBox1.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(accountNumberTextBox1.Text, @"^[a-zA-Z]+$"))
+                //    {
+                //        MessageBox.Show("正しく入力して下さい。");
+                //        return;
+                //    }
+                //}
+                //if (!string.IsNullOrEmpty(faxTextBox1.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(faxTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(faxTextBox1.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(faxTextBox1.Text, @"^[a-zA-Z]+$"))
+                //    {
+                //        MessageBox.Show("正しく入力して下さい。");
+                //        return;
+                //    }
+                //}
+
+                //if (!string.IsNullOrEmpty(mailTextBox1.Text))
+                //{
+                //    if (System.Text.RegularExpressions.Regex.IsMatch(mailTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$") || System.Text.RegularExpressions.Regex.IsMatch(mailTextBox1.Text, @"^\p{IsHiragana}+$") || System.Text.RegularExpressions.Regex.IsMatch(mailTextBox1.Text, @"^[ａ-ｚＡ-Ｚ]+$"))
+                //    {
+                //        MessageBox.Show("正しく入力して下さい。");
+                //        return;
+                //    }
+                //}
             }
             #endregion
             #endregion
@@ -1005,22 +1168,22 @@ namespace Flawless_ex
             }
 
             #region "旧データ"
-            NpgsqlConnection conn1 = new NpgsqlConnection();
+            NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter1;
-            string sql_old = "select * from client_m_individual where invalid = 0 and (name = '" + name + "' and address = '" + address + "');";
+            string sql_old = "select * from client_m where code = '" + ClientCode + "';";
 
             PostgreSQL postgre = new PostgreSQL();
-            conn1 = postgre.connection();
+            conn = postgre.connection();
             
-            //conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn1.Open();
-            adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
+            conn.Open();
+            adapter1 = new NpgsqlDataAdapter(sql_old, conn);
             adapter1.Fill(dt2);
             DataRow row1;
             row1 = dt2.Rows[0];
-            string RegistrationDate2_old = row1["registration_date"].ToString();
+
+            DateTime RegistrationDate2_old = (DateTime)row1["registration_date"];
             
-            int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
+            string PostalCode1_old = row1["postal_code1"].ToString();
             string PostalCode2_old = row1["postal_code2"].ToString();
             
             string Address_old = row1["address"].ToString();
@@ -1043,7 +1206,7 @@ namespace Flawless_ex
             string RegisterCopy_old = row1["register_copy"].ToString();
             string Antiquelicense_old = row1["antique_license"].ToString();
             string PhotoID_old = row1["photo_id"].ToString();
-            string ID_old = row1["id_number"].ToString();
+            decimal ID_old = (decimal)row1["id_number"];
             
             string PeriodStay_old = row1["period_stay"].ToString();
             
@@ -1052,178 +1215,251 @@ namespace Flawless_ex
             string Remarks_old = row1["remarks"].ToString();
             string ResidenceCard_old = row1["residence_card"].ToString();
             string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
-            DateTime dat1 = DateTime.Now;           
+            DateTime dat1 = DateTime.Now;
             #endregion
             #region "更新するパラメータ"
-            string RegistrationDate = this.deliveryDateBox.Text;
-            string Name = this.textBox56.Text;
-            string NameKana = this.textBox55.Text;
-            string Birthday = this.textBox50.Text;            
-            int PostalCode1 = int.Parse(this.textBox54.Text);
-            string PostalCode2 = this.textBox51.Text;            
-            string Address = this.textBox53.Text;
-            string AddressKana = this.textBox52.Text;
-            string PhoneNumber = this.textBox49.Text;
-            string FaxNumber = this.textBox48.Text;
-            string Occupation = this.textBox41.Text;
-            string EmailAddress = this.textBox45.Text;
-            string BankName = this.textBox44.Text;
-            string DepositType = this.textBox43.Text;
-            string AccountName = this.textBox42.Text;
-            string BranchName = this.textBox40.Text;
-            string AccountNumber = this.textBox39.Text;
-            string AccountNameKana = this.textBox38.Text;
-            string RegisterCopy = fileServer.UploadImage(this.textBox37.Text,FileServer.Filetype.RegisterCopy);
-            string Antiquelicense = fileServer.UploadImage(this.textBox36.Text,FileServer.Filetype.Antiquelicense);
-            string PhotoID = this.textBox35.Text;
-            string ID = fileServer.UploadImage(this.textBox34.Text,FileServer.Filetype.ID);            
-            string PeriodStay = this.textBox46.Text;            
-            string SealCertification = fileServer.UploadImage(this.textBox32.Text, FileServer.Filetype.SealCertification);
-            string TaxCertification = fileServer.UploadImage(this.textBox31.Text,FileServer.Filetype.TaxCertification);
-            string Remarks = this.textBox58.Text;
-            string ResidenceCard = fileServer.UploadImage(this.textBox30.Text,FileServer.Filetype.ResidenceCard);
-            string AolFinancialShareholder = fileServer.UploadImage(this.textBox33.Text,FileServer.Filetype.AolFinancialShareholder);
+            DateTime RegistrationDate = DateTime.Parse(deliveryDateBox.Value.ToString());
+
+            string Name = this.nameTextBox1.Text;
+            string NameKana = this.nameKanaTextBox1.Text;
+
+            string Birthday = birthdayDateTimePicker.Value.ToLongDateString();            
+            
+            string PostalCode1 = this.postalUpCodeTextBox1.Text;
+            string PostalCode2 = this.postalDownCodeTextBox1.Text;            
+            string Address = this.addressTextBox1.Text;
+            string AddressKana = this.addressKanaTextBox1.Text;
+            string PhoneNumber = this.telTextBox1.Text;
+            string FaxNumber = this.faxTextBox1.Text;
+            string Occupation = this.occupationTextBox1.Text;
+            string EmailAddress = this.mailTextBox1.Text;
+            string BankName = this.bankNameTextBox1.Text;
+            string DepositType = this.depositTypeTextBox1.Text;
+            string AccountName = this.accountNameTextBox1.Text;
+            string BranchName = this.branchNameTextBox1.Text;
+            string AccountNumber = this.accountNumberTextBox1.Text;
+            string AccountNameKana = this.accountKanaTextBox1.Text;
+            string RegisterCopy = "";
+            string Antiquelicense = "";
+            string PhotoID = "";
+            string SealCertification = "";
+            string TaxCertification = "";
+            string ResidenceCard = "";
+            string AolFinancialShareholder = "";
+
+            #region"画像が変更されているかの確認"
+            if (RegisterCopy_old != registerCopyTextBox1.Text)
+            {
+                RegisterCopy = fileServer.UploadImage(this.registerCopyTextBox1.Text, FileServer.Filetype.RegisterCopy);
+            }
+            else
+            {
+                RegisterCopy = RegisterCopy_old;
+            }
+
+            if (Antiquelicense_old != antiqueLicenseTextBox1.Text)
+            {
+                Antiquelicense = fileServer.UploadImage(this.antiqueLicenseTextBox1.Text, FileServer.Filetype.Antiquelicense);
+            }
+            else
+            {
+                Antiquelicense = Antiquelicense_old;
+            }
+
+            if (PhotoID_old != photoIDTextBox1.Text)
+            {
+                PhotoID = fileServer.UploadImage(this.photoIDTextBox1.Text, FileServer.Filetype.ID);
+            }
+            else
+            {
+                PhotoID = PhotoID_old;
+            }
+
+            if (SealCertification_old != sealCertificationTextBox1.Text)
+            {
+                SealCertification = fileServer.UploadImage(this.sealCertificationTextBox1.Text, FileServer.Filetype.SealCertification);
+            }
+            else
+            {
+                SealCertification = SealCertification_old;
+            }
+            
+            if (TaxCertification_old != taxCertificationTextBox1.Text)
+            {
+                TaxCertification = fileServer.UploadImage(this.taxCertificationTextBox1.Text, FileServer.Filetype.TaxCertification);
+            }
+            else
+            {
+                TaxCertification = TaxCertification_old;
+            }
+
+            if (ResidenceCard_old != residenceCardTextBox1.Text)
+            {
+                ResidenceCard = fileServer.UploadImage(this.residenceCardTextBox1.Text, FileServer.Filetype.ResidenceCard);
+            }
+            else
+            {
+                ResidenceCard = ResidenceCard_old;
+            }
+
+            if (AolFinancialShareholder_old != aolFinancialShareholderTextBox1.Text)
+            {
+                AolFinancialShareholder = fileServer.UploadImage(this.aolFinancialShareholderTextBox1.Text, FileServer.Filetype.AolFinancialShareholder);
+            }
+            else
+            {
+                AolFinancialShareholder = AolFinancialShareholder_old;
+            }
+            #endregion
+
+            decimal ID = decimal.Parse(idNumberTextBox1.Text);
+            string PeriodStay = periodStayindividualDateTimePicker.Value.ToString("yyyy/MM/dd");
+            string Remarks = this.remarksTextBox1.Text;
+
+
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
             string reason2 = this.reasonText2.Text;
             #endregion
-            NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
 
-            string sql_str = "UPDATE client_m_individual SET type = " + 1 + " , registration_date = '" + RegistrationDate + "' , name = '" + Name + "' ,name_kana = '" + NameKana + "' ,birthday = '" + Birthday + "' ,address = '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,email_address = '" + EmailAddress + "',occupation = '" + Occupation +
+            string sql_str = "UPDATE client_m SET type = " + 1 + " , registration_date = '" + RegistrationDate + "' , name = '" + Name + "' ,name_kana = '" + NameKana + "' ,birthday = '" + Birthday + "' ,address = '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,email_address = '" + EmailAddress + "',occupation = '" + Occupation +
                "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '" + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "',photo_id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
-              0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason2 + "'where id_number = " + ID + ";";
-
-            conn = postgre.connection();
-            
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            
-            conn.Open();
+              0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason2 + "'where code = " + ClientCode + ";";
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
 
             #region "履歴へ"
-            NpgsqlConnection conn2 = new NpgsqlConnection();
             NpgsqlDataAdapter adapter2;
-            conn2 = postgre.connection();
-            //conn2.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-            conn2.Open();
             #region "絶対入力する項目"
             #region "登記簿謄本登録日"
             if (RegistrationDate2_old != RegistrationDate)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + RegistrationDate2_old + "' , '" + RegistrationDate + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + RegistrationDate2_old + "' , '" + RegistrationDate + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "住所変更"
             if (Address_old != Address)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Address_old + "' , '" + Address + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Address_old + "' , '" + Address + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "住所フリガナ変更(住所変更に伴う)"
             if (AddressKana_old != AddressKana)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + AddressKana_old + "' , '" + AddressKana + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + AddressKana_old + "' , '" + AddressKana + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "郵便番号変更"
             if ((PostalCode1_old != PostalCode1) || (PostalCode2_old != PostalCode2))
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PostalCode1_old + "-" + PostalCode2_old + "' , '" + PostalCode1 + "-" + PostalCode2 + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PostalCode1_old + "-" + PostalCode2_old + "' , '" + PostalCode1 + "-" + PostalCode2 + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion                      
             #region "電話番号変更"
             if (PhoneNumber_old != PhoneNumber)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PhoneNumber_old + "' , '" + PhoneNumber + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PhoneNumber_old + "' , '" + PhoneNumber + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "登記簿謄本変更"
             if (RegisterCopy_old != RegisterCopy)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + RegisterCopy_old + "' , '" + RegisterCopy + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + RegisterCopy_old + "' , '" + RegisterCopy + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
-            #region "身分証明書変更"
+            #region "身分証番号変更"
             if (ID_old != ID)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + ID_old + "' , '" + ID + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + ID_old + "' , '" + ID + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "古物商許可証変更"
             if (Antiquelicense_old != Antiquelicense)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Antiquelicense_old + "' , '" + Antiquelicense + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Antiquelicense_old + "' , '" + Antiquelicense + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "氏名変更"
             if (Name_old != Name)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Name_old + "' , '" + Name + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Name_old + "' , '" + Name + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "氏名フリガナ変更(氏名変更に伴う)"
             if (NameKana_old != NameKana)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + NameKana_old + "' , '" + NameKana + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + NameKana_old + "' , '" + NameKana + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
-            #region "役職変更"
+            #region "職業変更"
             if (Occupation_old != Occupation)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Occupation_old + "' , '" + Occupation + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Occupation_old + "' , '" + Occupation + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "生年月日変更(氏名変更に伴う)"
             if (Birthday_old != Birthday)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Birthday_old + "' , '" + Birthday + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + Birthday_old + "' , '" + Birthday + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "顔写真変更"
             if (PhotoID_old != PhotoID)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PhotoID_old + "' , '" + PhotoID + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PhotoID_old + "' , '" + PhotoID + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
@@ -1232,117 +1468,140 @@ namespace Flawless_ex
             #region "FAX番号変更"
             if (FaxNumber_old != FaxNumber)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + FaxNumber_old + "' , '" + FaxNumber + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + FaxNumber_old + "' , '" + FaxNumber + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion                        
             #region "メールアドレス変更"
             if (EmailAddress_old != EmailAddress)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + EmailAddress_old + "' , '" + EmailAddress + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + EmailAddress_old + "' , '" + EmailAddress + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "銀行名変更"
             if (BankName_old != BankName)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + BankName_old + "' , '" + BankName + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + BankName_old + "' , '" + BankName + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "預金種別変更"
             if (DepositType_old != DepositType)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + DepositType_old + "','" + DepositType + "','" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + DepositType_old + "','" + DepositType + "','" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "口座名義変更"
             if (AccountName_old != AccountName)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + AccountName_old + "' , '" + AccountName + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + AccountName_old + "' , '" + AccountName + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "支店名変更"
             if (BranchName_old != BranchName)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "口座番号変更"
             if (AccountNumber_old != AccountNumber)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNumber_old + "','" + AccountNumber + "','" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNumber_old + "','" + AccountNumber + "','" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "口座名義人フリガナ変更(口座名義人変更に伴う)"
             if (AccountNameKana_old != AccountNameKana)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNameKana_old + "','" + AccountNameKana + "','" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AccountNameKana_old + "','" + AccountNameKana + "','" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "在留期限変更"
             if (PeriodStay_old != PeriodStay)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PeriodStay_old + "' , '" + PeriodStay + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + PeriodStay_old + "' , '" + PeriodStay + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "印鑑証明変更"
             if (SealCertification_old != SealCertification)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + SealCertification_old + "' , '" + SealCertification + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + SealCertification_old + "' , '" + SealCertification + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "納税証明書変更"
             if (TaxCertification_old != TaxCertification)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + TaxCertification_old + "' , '" + TaxCertification + "' ,'" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "' ," + staff_code + ",'" + TaxCertification_old + "' , '" + TaxCertification + "' ,'" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "在留カード"
             if (ResidenceCard_old != ResidenceCard)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + ResidenceCard_old + "','" + ResidenceCard + "','" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
             #region "定款等変更"
             if (AolFinancialShareholder_old != AolFinancialShareholder)
             {
-                string sql_in = "Insert into revisions VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AolFinancialShareholder_old + "','" + AolFinancialShareholder + "','" + reason2 + "');";
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + AolFinancialShareholder_old + "','" + AolFinancialShareholder + "','" + reason2 + "','" + ClientCode + "');";
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                adapter2.Fill(dt3);
+            }
+            #endregion
+            #region"備考変更"
+            if (Remarks_old != Remarks)
+            {
+                string sql_in = "Insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "VALUES (" + 5 + ",'" + dat1 + "'," + staff_code + ",'" + Remarks_old + "','" + Remarks + "','" + reason2 + "','" + ClientCode + "');";
+
+                adapter2 = new NpgsqlDataAdapter(sql_in, conn);
                 adapter2.Fill(dt3);
             }
             #endregion
@@ -1365,88 +1624,90 @@ namespace Flawless_ex
             }
             else if (result == DialogResult.Yes)
             {
-                #region "旧データ"
-                NpgsqlConnection conn1 = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter1;
-                string sql_old = "select * from client_m_individual where name = '" + name + "' and address = '" + address + "';";
                 PostgreSQL postgre = new PostgreSQL();
-                conn1 = postgre.connection();
-                //conn1.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn1.Open();
-                adapter1 = new NpgsqlDataAdapter(sql_old, conn1);
-                adapter1.Fill(dt2);
-                DataRow row1;
-                row1 = dt2.Rows[0];
-                string RegistrationDate2_old = row1["registration_date"].ToString();
-                int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
-                string PostalCode2_old = row1["postal_code2"].ToString();
-                string Address_old = row1["address"].ToString();
-                string AddressKana_old = row1["address_kana"].ToString();
-                string Name_old = row1["name"].ToString();
-                string NameKana_old = row1["name_kana"].ToString();
-                string Birthday_old = row1["birthday"].ToString();
-                string PhoneNumber_old = row1["phone_number"].ToString();
-                string FaxNumber_old = row1["fax_number"].ToString();
-                string Occupation_old = row1["occupation"].ToString();
-                string EmailAddress_old = row1["email_address"].ToString();
-                string BankName_old = row1["bank_name"].ToString();
-                string DepositType_old = row1["deposit_type"].ToString();
-                string AccountName_old = row1["account_name"].ToString();
-                string BranchName_old = row1["branch_name"].ToString();
-                string AccountNumber_old = row1["account_number"].ToString();
-                string AccountNameKana_old = row1["account_name_kana"].ToString();
-                string RegisterCopy_old = row1["register_copy"].ToString();
-                string Antiquelicense_old = row1["antique_license"].ToString();
-                string PhotoID_old = row1["photo_id"].ToString();
-                string ID_old = row1["id_number"].ToString();
-                string PeriodStay_old = row1["period_stay"].ToString();
-                string SealCertification_old = row1["seal_certification"].ToString();
-                string TaxCertification_old = row1["tax_certificate"].ToString();
-                string Remarks_old = row1["remarks"].ToString();
-                string ResidenceCard_old = row1["residence_card"].ToString();
-                string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
-                DateTime dat1 = DateTime.Now;
-                string c = dat1.ToString("yyyy/MM/dd");
-                #region "履歴へ"
-                NpgsqlConnection conn2 = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter2;
-                string sql_in = "Insert into client_m_individual_revisions VALUES (" + 1 + " , '" + RegistrationDate2_old + "' , '" + Name_old + "' ,'" + NameKana_old + "' , '" + Birthday_old + "' , '" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "' , '" + EmailAddress_old + "', '" + Occupation_old +
-                   "' , '" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountName_old + "' , '" + AccountNameKana_old + "' , '" + ID_old + "' , '" + Remarks_old + "','" + RegisterCopy_old + "' , '" + Antiquelicense_old + "','" + PhotoID_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "','" + PeriodStay_old + "','" + SealCertification_old + "'," +
-                  1 + ",'" + AolFinancialShareholder_old + "','" + c + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
+                NpgsqlConnection conn = postgre.connection();
+                
+                conn.Open();
+                #region "旧データ（コメントアウト）"
+                //NpgsqlDataAdapter adapter1;
+                //string sql_old = "select * from client_m where code = '" + ClientCode + "';";
+                //adapter1 = new NpgsqlDataAdapter(sql_old, conn);
+                //adapter1.Fill(dt2);
+                //DataRow row1;
+                //row1 = dt2.Rows[0];
+                //string RegistrationDate2_old = row1["registration_date"].ToString();
+                //int PostalCode1_old = int.Parse(row1["postal_code1"].ToString());
+                //string PostalCode2_old = row1["postal_code2"].ToString();
+                //string Address_old = row1["address"].ToString();
+                //string AddressKana_old = row1["address_kana"].ToString();
+                //string Name_old = row1["name"].ToString();
+                //string NameKana_old = row1["name_kana"].ToString();
+                //string Birthday_old = row1["birthday"].ToString();
+                //string PhoneNumber_old = row1["phone_number"].ToString();
+                //string FaxNumber_old = row1["fax_number"].ToString();
+                //string Occupation_old = row1["occupation"].ToString();
+                //string EmailAddress_old = row1["email_address"].ToString();
+                //string BankName_old = row1["bank_name"].ToString();
+                //string DepositType_old = row1["deposit_type"].ToString();
+                //string AccountName_old = row1["account_name"].ToString();
+                //string BranchName_old = row1["branch_name"].ToString();
+                //string AccountNumber_old = row1["account_number"].ToString();
+                //string AccountNameKana_old = row1["account_name_kana"].ToString();
+                //string RegisterCopy_old = row1["register_copy"].ToString();
+                //string Antiquelicense_old = row1["antique_license"].ToString();
+                //string PhotoID_old = row1["photo_id"].ToString();
+                //string ID_old = row1["id_number"].ToString();
+                //string PeriodStay_old = row1["period_stay"].ToString();
+                //string SealCertification_old = row1["seal_certification"].ToString();
+                //string TaxCertification_old = row1["tax_certificate"].ToString();
+                //string Remarks_old = row1["remarks"].ToString();
+                //string ResidenceCard_old = row1["residence_card"].ToString();
+                //string AolFinancialShareholder_old = row1["aol_financial_shareholder"].ToString();
+                //DateTime dat1 = DateTime.Now;
+                //string c = dat1.ToString("yyyy/MM/dd");
+                //#region "履歴へ"
+                //NpgsqlDataAdapter adapter2;
+                //string sql_in = "Insert into revisions VALUES (" + 1 + " , '" + RegistrationDate2_old + "' , '" + Name_old + "' ,'" + NameKana_old + "' , '" + Birthday_old + "' , '" + Address_old + "' , '" + AddressKana_old + "' , '" + PhoneNumber_old + "' , '" + FaxNumber_old + "' , '" + EmailAddress_old + "', '" + Occupation_old +
+                //   "' , '" + BankName_old + "' , '" + BranchName_old + "' , '" + DepositType_old + "' , '" + AccountNumber_old + "' , '" + AccountName_old + "' , '" + AccountNameKana_old + "' , '" + ID_old + "' , '" + Remarks_old + "','" + RegisterCopy_old + "' , '" + Antiquelicense_old + "','" + PhotoID_old + "' , '" + TaxCertification_old + "','" + ResidenceCard_old + "','" + PeriodStay_old + "','" + SealCertification_old + "'," +
+                //  1 + ",'" + AolFinancialShareholder_old + "','" + c + "'," + staff_code + "," + PostalCode1_old + ",'" + PostalCode2_old + "');";
 
-                conn2 = postgre.connection();
-                //conn2.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn2.Open();
 
-                adapter2 = new NpgsqlDataAdapter(sql_in, conn2);
-                adapter2.Fill(dt3);
+                //adapter2 = new NpgsqlDataAdapter(sql_in, conn);
+                //adapter2.Fill(dt3);
+                //#endregion
                 #endregion
-                #endregion
-                NpgsqlConnection conn = new NpgsqlConnection();
-                NpgsqlDataAdapter adapter;
-                NpgsqlDataAdapter adapter3;
-                NpgsqlCommandBuilder builder;
-                NpgsqlCommandBuilder builder2;
+                //NpgsqlDataAdapter adapter;
+                //NpgsqlDataAdapter adapter3;
+                //NpgsqlCommandBuilder builder;
+                //NpgsqlCommandBuilder builder2;
                 DateTime dat = DateTime.Now;
 
-                conn = postgre.connection();
-                //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-                conn.Open();
+                string remove_sql = "update client_m set invalid = 1 where code = '" + ClientCode + "'";
+                string revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code) " +
+                    "values (" + 4 + ",'" + dat + "'," + staff_code + ",'" + "有効" + "','" + "無効" + "','" + reasonText2.Text + "','" + ClientCode + "');";
 
-                string remove_sql = "update client_m_individual set invalid = 1 where name = '" + name + "'" + "and address = '" + address + "'";
-                string revisions = "insert into revisions values (" + 5 + ",'" + dat + "'," + staff_code + ",'" + "有効" + "','" + "無効" + "','" + reasonText2.Text + "');";
+                using (transaction = conn.BeginTransaction())
+                {
+                    cmd = new NpgsqlCommand(remove_sql, conn);
+                    cmd.ExecuteNonQuery();
+                    transaction.Commit();
+                }
 
-                adapter = new NpgsqlDataAdapter(remove_sql, conn);
-                builder = new NpgsqlCommandBuilder(adapter);
-                adapter.Fill(dt);
-                adapter.Update(dt);
-                adapter3 = new NpgsqlDataAdapter(revisions, conn);
-                builder2 = new NpgsqlCommandBuilder(adapter3);
-                adapter3.Fill(dt5);
-                adapter3.Update(dt5);
+                cmd = new NpgsqlCommand(revisions, conn);
+                cmd.ExecuteNonQuery();
+
+                //adapter = new NpgsqlDataAdapter(remove_sql, conn);
+                //builder = new NpgsqlCommandBuilder(adapter);
+                //adapter.Fill(dt);
+                //adapter.Update(dt);
+                //adapter3 = new NpgsqlDataAdapter(revisions, conn);
+                //builder2 = new NpgsqlCommandBuilder(adapter3);
+                //adapter3.Fill(dt5);
+                //adapter3.Update(dt5);
+
+                conn.Close();
 
                 MessageBox.Show("無効にしました。");
-                return;
             }
             else
             {
@@ -1473,7 +1734,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox21.Text = path;
+                registerCopyTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1495,7 +1756,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox22.Text = path;
+                antiqueLicenseTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1517,7 +1778,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox24.Text = path;
+                photoIDTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1539,7 +1800,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox25.Text = path;
+                aolFinancialShareholderTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1561,7 +1822,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox26.Text = path;
+                sealCertificationTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1583,7 +1844,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox27.Text = path;
+                taxCertificationTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1605,7 +1866,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox29.Text = path;
+                residenceCardTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1629,7 +1890,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox37.Text = path;
+                registerCopyTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1651,7 +1912,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox36.Text = path;
+                antiqueLicenseTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1673,7 +1934,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox35.Text = path;
+                photoIDTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1695,7 +1956,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox33.Text = path;
+                aolFinancialShareholderTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1717,7 +1978,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox32.Text = path;
+                sealCertificationTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1739,7 +2000,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox32.Text = path;
+                sealCertificationTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1761,7 +2022,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox30.Text = path;
+                residenceCardTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -1777,181 +2038,172 @@ namespace Flawless_ex
             clientmaster.Show();
         }
 
-        
+        #region"画像の表示"
         private void textBox24_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox24.Text;
+            if (!string.IsNullOrEmpty(photoIDTextBox.Text))
+            {
+                pictureBox1.ImageLocation = photoIDTextBox.Text;
+            }
         }
 
         private void textBox21_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox21.Text;
+            if (!string.IsNullOrEmpty(registerCopyTextBox.Text))
+            {
+                pictureBox1.ImageLocation = registerCopyTextBox.Text;
+            }
         }
 
         private void textBox22_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox22.Text;
+            if (!string.IsNullOrEmpty(antiqueLicenseTextBox.Text))
+            {
+                pictureBox1.ImageLocation = antiqueLicenseTextBox.Text;
+            }
         }
 
         private void textBox25_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox25.Text;
+            if (!string.IsNullOrEmpty(aolFinancialShareholderTextBox.Text))
+            {
+                pictureBox1.ImageLocation = aolFinancialShareholderTextBox.Text;
+            }
         }
 
         private void textBox27_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox27.Text;
+            if (!string.IsNullOrEmpty(taxCertificationTextBox.Text))
+            {
+                pictureBox1.ImageLocation = taxCertificationTextBox.Text;
+            }
         }
 
         private void textBox29_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox29.Text;
+            if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
+            {
+                pictureBox1.ImageLocation = residenceCardTextBox.Text;
+            }
         }
 
         private void textBox26_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox1.ImageLocation = textBox26.Text;
+            if (!string.IsNullOrEmpty(sealCertificationTextBox.Text))
+            {
+                pictureBox1.ImageLocation = sealCertificationTextBox.Text;
+            }
         }
 
         private void textBox37_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox37.Text;
+            if (!string.IsNullOrEmpty(registerCopyTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = registerCopyTextBox1.Text;
+            }
         }
 
         private void textBox33_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox33.Text;
+            if (!string.IsNullOrEmpty(aolFinancialShareholderTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = aolFinancialShareholderTextBox1.Text;
+            }
         }
 
         private void textBox35_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox35.Text;
+            if (!string.IsNullOrEmpty(photoIDTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = photoIDTextBox1.Text;
+            }
         }
 
         private void textBox36_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox36.Text;
+            if (!string.IsNullOrEmpty(antiqueLicenseTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = antiqueLicenseTextBox1.Text;
+            }
         }
 
         private void textBox31_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox31.Text;
+            if (!string.IsNullOrEmpty(taxCertificationTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = taxCertificationTextBox1.Text;
+            }
         }
 
         private void textBox30_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox30.Text;
+            if (!string.IsNullOrEmpty(residenceCardTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = residenceCardTextBox1.Text;
+            }
         }
 
         private void textBox32_DoubleClick(object sender, EventArgs e)
         {
-            pictureBox2.ImageLocation = textBox32.Text;
+            if (!string.IsNullOrEmpty(sealCertificationTextBox1.Text))
+            {
+                pictureBox2.ImageLocation = sealCertificationTextBox1.Text;
+            }
         }
+        #endregion
 
+        #region"半角"
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox3.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox3.Text = stringBuilder.ToString();
-            textBox3.Select(textBox3.Text.Length, 0);
+            companyKanaTextBox.Text = InputControl.Kana(companyKanaTextBox.Text);
+            companyKanaTextBox.Select(companyKanaTextBox.Text.Length, 0);
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox8.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox8.Text = stringBuilder.ToString();
-            textBox8.Select(textBox8.Text.Length, 0);
+            shopNameTextBox.Text = InputControl.Kana(shopNameTextBox.Text);
+            shopKanaTextBox.Select(shopKanaTextBox.Text.Length, 0);
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox6.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox6.Text = stringBuilder.ToString();
-            textBox6.Select(textBox6.Text.Length, 0);
+            addressKanaTextBox.Text = InputControl.Kana(addressKanaTextBox.Text);
+            addressKanaTextBox.Select(addressKanaTextBox.Text.Length, 0);
         }
 
         private void textBox20_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox20.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox20.Text = stringBuilder.ToString();
-            textBox20.Select(textBox20.Text.Length, 0);
+            accountKanaTextBox.Text = InputControl.Kana(accountKanaTextBox.Text);
+            accountKanaTextBox.Select(accountKanaTextBox.Text.Length, 0);
         }
 
         private void textBox55_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox55.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox55.Text = stringBuilder.ToString();
-            textBox55.Select(textBox55.Text.Length, 0);
+            nameKanaTextBox1.Text = InputControl.Kana(nameKanaTextBox1.Text);
+            nameKanaTextBox1.Select(nameKanaTextBox1.Text.Length, 0);
         }
 
         private void textBox52_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox52.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox52.Text = stringBuilder.ToString();
-            textBox52.Select(textBox52.Text.Length, 0);
+            addressKanaTextBox1.Text = InputControl.Kana(addressKanaTextBox1.Text);
+            addressKanaTextBox1.Select(addressKanaTextBox1.Text.Length, 0);
         }
 
         private void textBox38_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox38.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox38.Text = stringBuilder.ToString();
-            textBox38.Select(textBox38.Text.Length, 0);
+            accountKanaTextBox1.Text = InputControl.Kana(accountKanaTextBox1.Text);
+            accountKanaTextBox1.Select(accountKanaTextBox1.Text.Length, 0);
         }
+        #endregion
 
-        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
             {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                //MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;
             }
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
-
-        private void textBox51_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
-
-        private void textBox54_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
     }
 }

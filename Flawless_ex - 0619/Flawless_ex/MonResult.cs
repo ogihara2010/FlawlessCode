@@ -28,6 +28,8 @@ namespace Flawless_ex
         bool screan = true;
         bool CarryOver;
         bool MonthCatalog;
+        bool notLoad = false;
+
         #region"表の合計、合計の変数"
         decimal TotalPurchase;
         decimal TotalWholesale;
@@ -93,6 +95,9 @@ namespace Flawless_ex
 
         private void MonResult_Load(object sender, EventArgs e)
         {
+            companyCheckBox.Checked = true;
+            individualCheckBox.Checked = true;
+
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
             PostgreSQL postgre = new PostgreSQL();
@@ -147,7 +152,8 @@ namespace Flawless_ex
             #endregion
             if (slipNumber == null )
             {
-                this.button2.Enabled = false;
+                //this.button2.Enabled = false;
+                button2.Visible = false;
             }
             conn.Close();
 
@@ -186,6 +192,8 @@ namespace Flawless_ex
             MereWholesaleTextBox.BackColor = SystemColors.Control;
             MereProfitTextBox.BackColor = SystemColors.Control;
             #endregion
+
+            notLoad = true;
         }
 
         private void Search1_Click(object sender, EventArgs e)
@@ -243,9 +251,10 @@ namespace Flawless_ex
             decimal MereWholesale2 = 0;
             decimal MereProfit2 = 0;
             #endregion
-            string staff = comboBox1.Text;
-            string date = yearComboBox.Text + "年" + monthComboBox.Text + "月";
-            
+            int staff = (int)comboBox1.SelectedValue;
+            string date = yearComboBox.Text + "-" + monthComboBox.Text;
+            string date1 = yearComboBox.Text + "年" + monthComboBox.Text + "月";
+            //DateTime Date = DateTime.Parse(date);
 
             NpgsqlDataAdapter adapter;
             NpgsqlConnection conn4 = new NpgsqlConnection();
@@ -259,32 +268,32 @@ namespace Flawless_ex
             string sql_mere = "";                   //メレの合計金額取得用
 
             //法人のラジオボタンにチェック
-            if (radioButton1.Checked == true)
+            if (companyCheckBox.Checked == true && individualCheckBox.Checked == false)
             {
                 type = 0;
 
                 sql_str = "select B.assessment_date, A.sum_money, A.sum_wholesale_price, A.profit, B.delivery_method, B.payment_method, C.staff_name, D.name, E.type_name, A.metal_purchase, A.metal_wholesale, " +
-                              "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale " +
+                              "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale, A.result " +
                               "from list_result A inner join statement_data B on (A.document_number = B.document_number) inner join staff_m C on (A.staff_code = C.staff_code) inner join client_m D on (D.code = A.code)" +
-                              "inner join type E ON (A.type = E.type) where C.staff_name = '" + staff + "' and B.assessment_date like '%" + date + "%' and A.type = '" + type + "' order by A.result;";
+                              "inner join type E ON (A.type = E.type) where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' and A.type = '" + type + "' order by A.result;";
             }
             //個人のラジオボタンにチェック
-            else if (radioButton2.Checked == true)
+            else if (individualCheckBox.Checked == true && companyCheckBox.Checked == false) 
             {
                 type = 1;
 
                 sql_str = "select B.assessment_date, A.sum_money, A.sum_wholesale_price, A.profit, B.delivery_method, B.payment_method, C.staff_name, D.name, E.type_name, A.metal_purchase, A.metal_wholesale, " +
-                              "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale " +
+                              "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale, A.result " +
                               "from list_result A inner join statement_data B on (A.document_number = B.document_number) inner join staff_m C on (A.staff_code = C.staff_code) inner join client_m D on (D.code = A.code)" +
-                              "inner join type E ON (A.type = E.type) where C.staff_name = '" + staff + "' and B.assessment_date like '%" + date + "%' and A.type = '" + type + "' order by A.result;";
+                              "inner join type E ON (A.type = E.type) where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' and A.type = '" + type + "' order by A.result;";
             }
-            //法人と個人どちらも選択していない時
+            //法人と個人どちらも選択していない時 or 両方チェック
             else
             {
                 sql_str = "select B.assessment_date, A.sum_money, A.sum_wholesale_price, A.profit, B.delivery_method, B.payment_method, C.staff_name, D.name, E.type_name, A.metal_purchase, A.metal_wholesale, " +
-                              "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale " +
+                              "A.diamond_purchase, A.diamond_wholesale, A.brand_purchase, A.brand_wholesale, A.product_purchase ,A.product_wholesale, A.other_purchase, A.other_wholesale, A.result " +
                               "from list_result A inner join statement_data B on (A.document_number = B.document_number) inner join staff_m C on (A.staff_code = C.staff_code) inner join client_m D on (D.code = A.code)" +
-                              "inner join type E ON (A.type = E.type) where C.staff_name = '" + staff + "' and B.assessment_date like '%" + date + "%' order by A.result;";
+                              "inner join type E ON (A.type = E.type) where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' order by A.result;";
             }
 
             adapter = new NpgsqlDataAdapter(sql_str, conn4);
@@ -325,38 +334,40 @@ namespace Flawless_ex
             dataGridView1.Columns[16].DefaultCellStyle.Format = "c";        //製品・ジュエリー卸値
             dataGridView1.Columns[17].DefaultCellStyle.Format = "c";        //その他買取額
             dataGridView1.Columns[18].DefaultCellStyle.Format = "c";        //その他卸値
+
+            dataGridView1.Columns[19].Visible = false;
             #endregion
 
             //合計取得用（法人のみ選択）
-            if (radioButton1.Checked == true) 
+            if (companyCheckBox.Checked == true && individualCheckBox.Checked == false)
             {
                 type = 0;
 
                 sql_str2 = "select A.sum_money, A.sum_wholesale_price, A.profit, A.metal_purchase, A.metal_wholesale, A.metal_profit, A.diamond_purchase, A.diamond_wholesale, A.diamond_profit," +
                 " A.brand_purchase, A.brand_wholesale, A.brand_profit, A.product_purchase ,A.product_wholesale, A.product_profit, A.other_purchase, A.other_wholesale, A.other_profit " +
                 "from list_result A inner join statement_data B ON (A.document_number = B.document_number ) inner join staff_m C ON (B.staff_code = C.staff_code )" +
-                " where C.staff_name = '" + staff + "' and B.assessment_date like '%" + date + "' and A.type = '" + type + "' order by A.result;";
+                " where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' and A.type = '" + type + "' ;";
 
                 //メレの合計取得用（品名マスタ、担当者マスタ、成績一覧情報、成績一覧入力データ結合）
                 sql_mere = "select A.profit, A.money, A.wholesale_price from list_result2 A inner join item_m B on A.item_code = B.item_code inner join list_result C on A.grade_number = C.result " +
                     "inner join staff_m D on C.staff_code = D.staff_code" +
-                    " where D.staff_name = '" + staff + "' and A.assessment_date like'%" + date + "%' and A.item_code = '" + 35 + "' and C.type = '" + type + "' order by A.grade_number, A.record_number;";
+                    " where D.staff_code = '" + staff + "' and cast(A.assessment_date as text) like'%" + date1 + "%' and A.item_code = '" + 35 + "' and C.type = '" + type + "' ;";
 
             }
             //合計取得用（個人のみ選択）
-            else if (radioButton2.Checked == true)
+            else if (individualCheckBox.Checked == true && companyCheckBox.Checked == false)
             {
                 type = 1;
 
                 sql_str2 = "select A.sum_money, A.sum_wholesale_price, A.profit, A.metal_purchase, A.metal_wholesale, A.metal_profit, A.diamond_purchase, A.diamond_wholesale, A.diamond_profit," +
                 " A.brand_purchase, A.brand_wholesale, A.brand_profit, A.product_purchase ,A.product_wholesale, A.product_profit, A.other_purchase, A.other_wholesale, A.other_profit " +
                 "from list_result A inner join statement_data B ON (A.document_number = B.document_number ) inner join staff_m C ON (B.staff_code = C.staff_code )" +
-                " where C.staff_name = '" + staff + "' and B.assessment_date like '%" + date + "' and A.type = '" + type + "' order by A.result;";
+                " where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' and A.type = '" + type + "' order by A.result;";
 
                 //メレの合計取得用（品名マスタ、担当者マスタ、成績一覧情報、成績一覧入力データ結合）
                 sql_mere = "select A.profit, A.money, A.wholesale_price from list_result2 A inner join item_m B on A.item_code = B.item_code inner join list_result C on A.grade_number = C.result " +
                     "inner join staff_m D on C.staff_code = D.staff_code" +
-                    " where D.staff_name = '" + staff + "' and A.assessment_date like'%" + date + "%' and A.item_code = '" + 35 + "' and C.type = '" + type + "' order by A.grade_number, A.record_number;";
+                    " where D.staff_code = '" + staff + "' and cast(A.assessment_date as text) like'%" + date1 + "%' and A.item_code = '" + 35 + "' and C.type = '" + type + "' order by A.grade_number, A.record_number;";
             }
             //合計取得用（法人と個人未選択）
             else
@@ -364,12 +375,12 @@ namespace Flawless_ex
                 sql_str2 = "select A.sum_money, A.sum_wholesale_price, A.profit, A.metal_purchase, A.metal_wholesale, A.metal_profit, A.diamond_purchase, A.diamond_wholesale, A.diamond_profit," +
                 " A.brand_purchase, A.brand_wholesale, A.brand_profit, A.product_purchase ,A.product_wholesale, A.product_profit, A.other_purchase, A.other_wholesale, A.other_profit " +
                 "from list_result A inner join statement_data B ON (A.document_number = B.document_number ) inner join staff_m C ON (B.staff_code = C.staff_code )" +
-                " where C.staff_name = '" + staff + "' and B.assessment_date like '%" + date + "' order by A.result;";
+                " where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' order by A.result;";
 
                 //メレの合計取得用（品名マスタ、担当者マスタ、成績一覧情報、成績一覧入力データ結合）
                 sql_mere = "select A.profit, A.money, A.wholesale_price from list_result2 A inner join item_m B on A.item_code = B.item_code inner join list_result C on A.grade_number = C.result " +
                     "inner join staff_m D on C.staff_code = D.staff_code" +
-                    " where D.staff_name = '" + staff + "' and A.assessment_date like'%" + date + "%' and A.item_code = '" + 35 + "' order by A.grade_number, A.record_number;";
+                    " where D.staff_code = '" + staff + "' and cast(A.assessment_date as text) like'%" + date1 + "%' and A.item_code = '" + 35 + "' order by A.grade_number, A.record_number;";
             }
 
             cmd = new NpgsqlCommand(sql_str2, conn4);
@@ -474,6 +485,8 @@ namespace Flawless_ex
             #endregion
             conn4.Close();
         }
+
+
         #region "担当者選択コンボボックス"
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -642,5 +655,6 @@ namespace Flawless_ex
                 screan = true;
             }
         }
+
     }
 }
