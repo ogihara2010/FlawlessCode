@@ -177,7 +177,7 @@ namespace Flawless_ex
                 #region "入力パラメーター"
                 if (!string.IsNullOrWhiteSpace(textBox1.Text))
                 {
-                    shopname = " and B.shop_name like '%" + this.textBox1.Text + "%'";
+                    shopname = " and B.company_name like '%" + this.textBox1.Text + "%'";
                 }
                 else
                 {
@@ -185,7 +185,7 @@ namespace Flawless_ex
                 }
                 if (!string.IsNullOrWhiteSpace(textBox2.Text))
                 {
-                    shopnamekana = " and B.shop_name_kana like '%" + this.textBox2.Text + "%'";
+                    shopnamekana = " and B.company_kana like '%" + this.textBox2.Text + "%'";
                 }
                 else
                 {
@@ -426,7 +426,7 @@ namespace Flawless_ex
                     {
                         for (int i = 0; i < fNumber.Count; i++)
                         {
-                            string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
+                            string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.company_name, B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
                                     "where B.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + " and A.document_number = '" + fNumber[i] + "' and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
                                       method + amountA + amountB + ";";
 
@@ -441,8 +441,8 @@ namespace Flawless_ex
                     }
                     else
                     {
-                        string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
-                                "where B.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
+                        string sql = "select A.document_number, A.settlement_date, A.delivery_date, B.company_name, B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total, A.notfnumber from statement_data A inner join client_m B ON (A.code = B.code )" +
+                                " where B.type = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + documentNumber + antiqueNumber + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "')" +
                                   method + amountA + amountB + " order by A.notfnumber ;";
 
                         adapter = new NpgsqlDataAdapter(sql, conn);
@@ -468,7 +468,7 @@ namespace Flawless_ex
                     {
                         for (int i = 0; i < CNumber.Count; i++)
                         {
-                            string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total from delivery_m A inner join client_m B ON (A.code = B.code )" +
+                            string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.company_name,B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total from delivery_m A inner join client_m B ON (A.code = B.code )" +
                                    "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + " and A.control_number = '" + CNumber[i] + "' and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " +
                                       method + amountA + amountB + " order by control_number;";
 
@@ -483,7 +483,7 @@ namespace Flawless_ex
                     }
                     else
                     {
-                          string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total from delivery_m A inner join client_m B ON (A.code = B.code )" +
+                          string sql = "select A.control_number, A.settlement_date, A.delivery_date, B.company_name,B.shop_name, B.name, B.phone_number, B.address, B.antique_number, A.total from delivery_m A inner join client_m B ON (A.code = B.code )" +
                                     "where A.types1 = 0 " + shopname + shopnamekana + name + address + addresskana + phoneNumber + controlNumber + antiqueNumber + " and ( A.settlement_date >= '" + Date1 + "' and A.settlement_date <= '" + Date2 + "') " +
                                        method + amountA + amountB + " order by control_number;";
 
