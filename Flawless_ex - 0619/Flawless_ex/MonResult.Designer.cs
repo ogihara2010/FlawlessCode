@@ -28,16 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.search1 = new System.Windows.Forms.Button();
             this.return3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -85,7 +82,8 @@
             this.monthLabel = new System.Windows.Forms.Label();
             this.yearLabel = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.groupBox1.SuspendLayout();
+            this.companyCheckBox = new System.Windows.Forms.CheckBox();
+            this.individualCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -140,9 +138,9 @@
             this.label3.Location = new System.Drawing.Point(11, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 19);
+            this.label3.Size = new System.Drawing.Size(82, 19);
             this.label3.TabIndex = 14;
-            this.label3.Text = "担当者：";
+            this.label3.Text = "担当者 ：";
             // 
             // label4
             // 
@@ -153,45 +151,6 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 19);
             this.label4.TabIndex = 16;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.radioButton1.Location = new System.Drawing.Point(11, 16);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(58, 20);
-            this.radioButton1.TabIndex = 17;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "法人";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.radioButton2.Location = new System.Drawing.Point(11, 37);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(58, 20);
-            this.radioButton2.TabIndex = 18;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "個人";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.LavenderBlush;
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Location = new System.Drawing.Point(64, 8);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(79, 70);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
             // 
             // label5
             // 
@@ -210,7 +169,7 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("MS UI Gothic", 14F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(122, 42);
+            this.comboBox1.Location = new System.Drawing.Point(97, 13);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(215, 27);
@@ -237,23 +196,23 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.LightCyan;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("MS UI Gothic", 15.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.Location = new System.Drawing.Point(22, 121);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
@@ -641,6 +600,7 @@
             // 
             this.MerePurChaseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MerePurChaseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.MerePurChaseTextBox.ForeColor = System.Drawing.Color.Blue;
             this.MerePurChaseTextBox.Location = new System.Drawing.Point(472, 41);
             this.MerePurChaseTextBox.Name = "MerePurChaseTextBox";
             this.MerePurChaseTextBox.ReadOnly = true;
@@ -652,6 +612,7 @@
             // 
             this.MereWholesaleTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MereWholesaleTextBox.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.MereWholesaleTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.MereWholesaleTextBox.Location = new System.Drawing.Point(472, 79);
             this.MereWholesaleTextBox.Name = "MereWholesaleTextBox";
             this.MereWholesaleTextBox.ReadOnly = true;
@@ -663,6 +624,7 @@
             // 
             this.MereProfitTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MereProfitTextBox.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.MereProfitTextBox.ForeColor = System.Drawing.Color.Red;
             this.MereProfitTextBox.Location = new System.Drawing.Point(472, 117);
             this.MereProfitTextBox.Name = "MereProfitTextBox";
             this.MereProfitTextBox.ReadOnly = true;
@@ -778,10 +740,11 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.LavenderBlush;
             this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Location = new System.Drawing.Point(43, 29);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(327, 52);
+            this.panel2.Size = new System.Drawing.Size(333, 52);
             this.panel2.TabIndex = 41;
             // 
             // panel3
@@ -804,18 +767,18 @@
             this.monthComboBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.monthComboBox.FormattingEnabled = true;
             this.monthComboBox.Items.AddRange(new object[] {
-            "１",
-            "２",
-            "３",
-            "４",
-            "５",
-            "６",
-            "７",
-            "８",
-            "９",
-            "１０",
-            "１１",
-            "１２"});
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"});
             this.monthComboBox.Location = new System.Drawing.Point(240, 9);
             this.monthComboBox.Name = "monthComboBox";
             this.monthComboBox.Size = new System.Drawing.Size(70, 27);
@@ -858,13 +821,36 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.LavenderBlush;
-            this.panel4.Controls.Add(this.groupBox1);
+            this.panel4.Controls.Add(this.individualCheckBox);
             this.panel4.Controls.Add(this.label5);
+            this.panel4.Controls.Add(this.companyCheckBox);
             this.panel4.Location = new System.Drawing.Point(1113, 11);
             this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(155, 89);
             this.panel4.TabIndex = 41;
+            // 
+            // companyCheckBox
+            // 
+            this.companyCheckBox.AutoSize = true;
+            this.companyCheckBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.companyCheckBox.Location = new System.Drawing.Point(76, 13);
+            this.companyCheckBox.Name = "companyCheckBox";
+            this.companyCheckBox.Size = new System.Drawing.Size(66, 23);
+            this.companyCheckBox.TabIndex = 42;
+            this.companyCheckBox.Text = "法人";
+            this.companyCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // individualCheckBox
+            // 
+            this.individualCheckBox.AutoSize = true;
+            this.individualCheckBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.individualCheckBox.Location = new System.Drawing.Point(76, 47);
+            this.individualCheckBox.Name = "individualCheckBox";
+            this.individualCheckBox.Size = new System.Drawing.Size(66, 23);
+            this.individualCheckBox.TabIndex = 42;
+            this.individualCheckBox.Text = "個人";
+            this.individualCheckBox.UseVisualStyleBackColor = true;
             // 
             // MonResult
             // 
@@ -879,7 +865,6 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.return3);
             this.Controls.Add(this.search1);
@@ -892,8 +877,6 @@
             this.Text = "月間成績表一覧";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MonResult_FormClosed);
             this.Load += new System.EventHandler(this.MonResult_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -917,9 +900,6 @@
         private System.Windows.Forms.Button return3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button2;
@@ -967,5 +947,7 @@
         private System.Windows.Forms.TextBox MerePurChaseTextBox;
         private System.Windows.Forms.TextBox MereWholesaleTextBox;
         private System.Windows.Forms.TextBox MereProfitTextBox;
+        private System.Windows.Forms.CheckBox companyCheckBox;
+        private System.Windows.Forms.CheckBox individualCheckBox;
     }
 }

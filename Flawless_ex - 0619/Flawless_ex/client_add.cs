@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
+using System.Text.RegularExpressions;
 
 namespace Flawless_ex
 {
@@ -52,7 +53,7 @@ namespace Flawless_ex
         int grade;
 
         private FileServer fileServer = new FileServer();
-
+        InputControl inputControl = new InputControl();
 
         public client_add(Statement statement, int id, int type, string Access_auth, string Pass)
         {
@@ -67,39 +68,30 @@ namespace Flawless_ex
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
-            screan = false;
             this.Close();
-            this.data = client_Search.data;
-            statement.AddOwnedForm(client_Search);
-            client_Search.Show();
         }
 
         private void Button6_Click(object sender, EventArgs e)
         {
-            client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
-            screan = false;
             this.Close();
-            this.data = client_Search.data;
-            client_Search.Show();
         }
         #region "法人　登録"
         private void Button5_Click(object sender, EventArgs e)
         {
             #region"必須項目"
-            if (string.IsNullOrEmpty(textBox2.Text))
+            if (string.IsNullOrEmpty(companyNameTextBox.Text))
             {
                 MessageBox.Show("会社名を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox3.Text))
+            if (string.IsNullOrEmpty(companyKanaTextBox.Text))
             {
                 MessageBox.Show("会社名のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox23.Text))
+            if (string.IsNullOrEmpty(antiqueNumberTextBox.Text))
             {
                 MessageBox.Show("古物番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -117,93 +109,131 @@ namespace Flawless_ex
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox5.Text))
+            if (string.IsNullOrEmpty(addressTextBox.Text))
             {
                 MessageBox.Show("住所を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox6.Text))
+            if (string.IsNullOrEmpty(addressKanaTextBox.Text))
             {
                 MessageBox.Show("住所のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox9.Text))
+            if (string.IsNullOrEmpty(telTextBox.Text))
             {
                 MessageBox.Show("電話番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox12.Text))
+            if (string.IsNullOrEmpty(nameTextBox.Text))
             {
                 MessageBox.Show("担当者名義を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox24.Text))
+            if (string.IsNullOrEmpty(photoIDTextBox.Text))
             {
                 MessageBox.Show("身分証明書を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox21.Text))
+            if (string.IsNullOrEmpty(registerCopyTextBox.Text))
             {
                 MessageBox.Show("登記簿謄本を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox22.Text))
+            if (string.IsNullOrEmpty(antiqueLicenseTextBox.Text))
             {
                 MessageBox.Show("古物商許可証を選択してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             #endregion
+            //会社名カナ、店舗名カナ、住所カナ、口座名義カナ
+            #region"カタカナ入力欄の確認"
+            if (!string.IsNullOrEmpty(companyKanaTextBox.Text))
+            {
+                if (!Regex.IsMatch(companyKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("会社名カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            if (!string.IsNullOrEmpty(shopKanaTextBox.Text))
+            {
+                if (!Regex.IsMatch(shopKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("店舗名カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            if (!string.IsNullOrEmpty(addressKanaTextBox.Text))
+            {
+                if (!Regex.IsMatch(addressKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("住所カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            if (!string.IsNullOrEmpty(accountKanaTextBox.Text))
+            {
+                if (!Regex.IsMatch(accountKanaTextBox.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("口座名義カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            #endregion
 
-            string RegistrationDate = this.deliveryDateBox.Text;
-            string CompanyName = this.textBox2.Text;
-            string CompanyNameKana = this.textBox3.Text;
+            //string RegistrationDate = this.deliveryDateBox.Text;
+            DateTime registrationDate = DateTime.Parse(deliveryDateBox.Value.ToShortDateString());
+
+            string CompanyName = this.companyNameTextBox.Text;
+            string CompanyNameKana = this.companyKanaTextBox.Text;
             
             string PostalUPCoreNumber = PostalUpCordTextBox.Text;
             string PostalDownCordNumber = PostalDownCordTextBox.Text;
             
-            string Address = this.textBox5.Text;
-            string AddressKana = this.textBox6.Text;
-            string ShopName = this.textBox7.Text;
-            string ShopNameKana = this.textBox8.Text;
-            string PhoneNumber = this.textBox9.Text;
-            string FaxNumber = this.textBox10.Text;
-            string Position = this.textBox11.Text;
-            string ClientStaffName = this.textBox12.Text;
-            string EmailAddress = this.textBox13.Text;
-            string BankName = this.textBox14.Text;
-            string DepositType = this.textBox15.Text;
-            string AccountName = this.textBox16.Text;
-            string URLinfor = this.textBox17.Text;
-            string BranchName = this.textBox18.Text;
-            string AccountNumber = this.textBox19.Text;
-            string AccountNameKana = this.textBox20.Text;
-            string RegisterCopy = fileServer.UploadImage(textBox21.Text, FileServer.Filetype.RegisterCopy);
-            string Antiquelicense = fileServer.UploadImage(this.textBox22.Text, FileServer.Filetype.Antiquelicense);
-            int AntiqueNumber = int.Parse(this.textBox23.Text);
-            string ID = fileServer.UploadImage(this.textBox24.Text, FileServer.Filetype.ID);
+            string Address = this.addressTextBox.Text;
+            string AddressKana = this.addressKanaTextBox.Text;
+            string ShopName = this.shopNameTextBox.Text;
+            string ShopNameKana = this.shopKanaTextBox.Text;
+            string PhoneNumber = this.telTextBox.Text;
+            string FaxNumber = this.faxTextBox.Text;
+            string Position = this.positionTextBox.Text;
+            string ClientStaffName = this.nameTextBox.Text;
+            string EmailAddress = this.mailTextBox.Text;
+            string BankName = this.bankNameTextBox.Text;
+            string DepositType = this.depositTypeTextBox.Text;
+            string AccountName = this.accountNameTextBox.Text;
+            string URLinfor = this.urlTextBox.Text;
+            string BranchName = this.branchNameTextBox.Text;
+            string AccountNumber = this.accountNumberTextBox.Text;
+            string AccountNameKana = this.accountKanaTextBox.Text;
+            string RegisterCopy = fileServer.UploadImage(registerCopyTextBox.Text, FileServer.Filetype.RegisterCopy);
+            string Antiquelicense = fileServer.UploadImage(this.antiqueLicenseTextBox.Text, FileServer.Filetype.Antiquelicense);
+            decimal AntiqueNumber = decimal.Parse(this.antiqueNumberTextBox.Text);
+            string ID = fileServer.UploadImage(this.photoIDTextBox.Text, FileServer.Filetype.ID);
 
-            string PeriodStay = periodStayDateTimePicker.Text;
-            
-            string SealCertification = fileServer.UploadImage(this.textBox26.Text, FileServer.Filetype.SealCertification);
-            string TaxCertification = fileServer.UploadImage(this.textBox27.Text, FileServer.Filetype.TaxCertification);
-            string Remarks = this.textBox28.Text;
-            string ResidenceCard = fileServer.UploadImage(this.textBox29.Text, FileServer.Filetype.ResidenceCard);
-            string AolFinancialShareholder = fileServer.UploadImage(textBox25.Text, FileServer.Filetype.AolFinancialShareholder);
+            //string PeriodStay = periodStayDateTimePicker.Text;
+            DateTime? periodStay = DateTime.Parse(periodStayDateTimePicker.Value.ToShortTimeString());
+
+            string SealCertification = fileServer.UploadImage(this.sealCertificationTextBox.Text, FileServer.Filetype.SealCertification);
+            string TaxCertification = fileServer.UploadImage(this.taxCertificationTextBox.Text, FileServer.Filetype.TaxCertification);
+            string Remarks = this.remarksTextBox.Text;
+            string ResidenceCard = fileServer.UploadImage(this.residenceCardTextBox.Text, FileServer.Filetype.ResidenceCard);
+            string AolFinancialShareholder = fileServer.UploadImage(aolFinancialShareholderTextBox.Text, FileServer.Filetype.AolFinancialShareholder);
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
 
 
-            if (string.IsNullOrEmpty(ResidenceCard))
-            {
-                PeriodStay = "";
-            }
+            //if (string.IsNullOrEmpty(textBox21.Text)) 
+            //{
+            //    periodStay = null;
+            //}
 
             NpgsqlConnection conn = new NpgsqlConnection();
             NpgsqlDataAdapter adapter;
@@ -230,11 +260,11 @@ namespace Flawless_ex
                 " address, address_kana, phone_number, fax_number, position, name, email_address, url_infor, bank_name, branch_name, deposit_type," +
                 " account_number, account_name, account_name_kana, remarks, id, register_date, antique_license, tax_certificate, residence_card, period_stay," +
                 " seal_certification, invalid, aol_financial_shareholder, register_copy, insert_name, postal_code1, postal_code2, code)" +
-                " VALUES (" + 0 + " , '" + RegistrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' ," +
+                " VALUES (" + 0 + " , '" + registrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' ," +
                 " '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' , '" + Address + "' , '" + AddressKana + "' ," +
                 " '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName + "' , '" + EmailAddress + "', '" + URLinfor + "'," +
                 " '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' ," +
-                " '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "'," +
+                " '" + Remarks + "' , '" + ID + "' , '" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + periodStay + "'," +
                 "'" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "','" + RegisterCopy + "'," + staff_id + ",'" + PostalUPCoreNumber + "'," +
                 "'" + PostalDownCordNumber + "','" + ClientCode + "');";
 
@@ -244,31 +274,29 @@ namespace Flawless_ex
             type = 0;
             staff_name = ClientStaffName;
             address = Address;
-            Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1,
-                phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
+            statement.ClientCode = ClientCode;
+            statement.count = 1;
+            statement.type = 0;
+            //Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1,
+            //    phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
         }
         #endregion
+
         #region "個人　登録"
         private void Button18_Click(object sender, EventArgs e)
         {
             #region"必須項目"
-            if (string.IsNullOrEmpty(textBox56.Text))
+            if (string.IsNullOrEmpty(nameTextBox1.Text))
             {
                 MessageBox.Show("氏名を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox55.Text))
+            if (string.IsNullOrEmpty(nameKanaTextBox1.Text))
             {
                 MessageBox.Show("氏名のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(textBox50.Text))
-            {
-                MessageBox.Show("生年月日を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -284,40 +312,67 @@ namespace Flawless_ex
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox53.Text))
+            if (string.IsNullOrEmpty(addressTextBox1.Text))
             {
                 MessageBox.Show("住所を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox52.Text))
+            if (string.IsNullOrEmpty(addressKanaTextBox1.Text))
             {
                 MessageBox.Show("住所のカタカナを入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox49.Text))
+            if (string.IsNullOrEmpty(telTextBox1.Text))
             {
                 MessageBox.Show("電話番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox41.Text))
+            if (string.IsNullOrEmpty(occupationTextBox1.Text))
             {
                 MessageBox.Show("職業を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox34.Text))
+            if (string.IsNullOrEmpty(idNumberTextBox1.Text))
             {
                 MessageBox.Show("身分証番号を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(textBox35.Text))
+            if (string.IsNullOrEmpty(photoIDTextBox1.Text))
             {
                 MessageBox.Show("顔つき身分証を登録してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+            #endregion
+
+            #region"カタカナ入力欄の確認"
+            if (!string.IsNullOrEmpty(nameKanaTextBox1.Text))
+            {
+                if (!Regex.IsMatch(nameKanaTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("氏名カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            if (!string.IsNullOrEmpty(accountKanaTextBox1.Text))
+            {
+                if (!Regex.IsMatch(accountKanaTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("口座名義カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            if (!string.IsNullOrEmpty(addressKanaTextBox1.Text))
+            {
+                if (!Regex.IsMatch(addressKanaTextBox1.Text, @"^[\p{IsKatakana}\u31F0-\u31FF\u3099-\u309C\uFF65-\uFF9F]+$"))
+                {
+                    MessageBox.Show("住所カナにカタカナを入力して下さい。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             #endregion
 
@@ -328,44 +383,53 @@ namespace Flawless_ex
                 return;
             }
 
-            string RegistrationDate = this.dateTimePicker1.Text;
-            string Name = this.textBox56.Text;
-            string NameKana = this.textBox55.Text;
+            //string RegistrationDate = this.dateTimePicker1.Text;
+            DateTime? registrationDate = DateTime.Parse(dateTimePicker1.Value.ToShortDateString());
 
-            string Birthday = this.textBox50.Text;
+            string Name = this.nameTextBox1.Text;
+            string NameKana = this.nameKanaTextBox1.Text;
+
+            DateTime Birthday = DateTime.Parse(birthdayDateTimePicker.Value.ToShortDateString());
+            //string Birthday = this.textBox50.Text;
 
             string PostalCodeUpNumber = this.PostalUpCordTextBox2.Text;
             string PostalCodeDownNumber = PostalDownCordTextBox2.Text;
             
-            string Address = this.textBox53.Text;
-            string AddressKana = this.textBox52.Text;
-            string PhoneNumber = this.textBox49.Text;
-            string FaxNumber = this.textBox48.Text;
-            string Occupation = this.textBox41.Text;
-            string EmailAddress = this.textBox45.Text;
-            string BankName = this.textBox44.Text;
-            string DepositType = this.textBox43.Text;
-            string AccountName = this.textBox42.Text;
-            string BranchName = this.textBox40.Text;
-            string AccountNumber = this.textBox39.Text;
-            string AccountNameKana = this.textBox38.Text;
-            string RegisterCopy = fileServer.UploadImage(this.textBox37.Text, FileServer.Filetype.RegisterCopy);
-            string Antiquelicense = fileServer.UploadImage(this.textBox36.Text, FileServer.Filetype.Antiquelicense);
-            string PhotoID = this.textBox35.Text;
-            string ID = fileServer.UploadImage(this.textBox34.Text, FileServer.Filetype.ID);
+            string Address = this.addressTextBox1.Text;
+            string AddressKana = this.addressKanaTextBox1.Text;
+            string PhoneNumber = this.telTextBox1.Text;
+            string FaxNumber = this.faxTextBox1.Text;
+            string Occupation = this.occupationTextBox1.Text;
+            string EmailAddress = this.mailTextBox1.Text;
+            string BankName = this.bankNameTextBox1.Text;
+            string DepositType = this.depositTypeTextBox1.Text;
+            string AccountName = this.accountNameTextBox1.Text;
+            string BranchName = this.branchNameTextBox1.Text;
+            string AccountNumber = this.accountNumberTextBox1.Text;
+            string AccountNameKana = this.accountKanaTextBox1.Text;
+            string RegisterCopy = fileServer.UploadImage(this.registerCopyTextBox1.Text, FileServer.Filetype.RegisterCopy);
+            string Antiquelicense = fileServer.UploadImage(this.antiqueLicenseTextBox1.Text, FileServer.Filetype.Antiquelicense);
+            decimal ID = decimal.Parse(idNumberTextBox1.Text);
+            string PhotoID = fileServer.UploadImage(this.photoIDTextBox1.Text, FileServer.Filetype.ID);
 
-            string PeriodStay = periodStayDateTimePicker1.Text;
-            
-            string SealCertification = SealCertification = fileServer.UploadImage(this.textBox32.Text, FileServer.Filetype.SealCertification);
-            string TaxCertification = TaxCertification = fileServer.UploadImage(this.textBox31.Text, FileServer.Filetype.TaxCertification);
+            //string PeriodStay = periodStayDateTimePicker1.Text;
+            DateTime? periodStay = DateTime.Parse(periodStayDateTimePicker1.Value.ToShortDateString());
+
+            string SealCertification = SealCertification = fileServer.UploadImage(this.sealCertificationTextBox1.Text, FileServer.Filetype.SealCertification);
+            string TaxCertification = TaxCertification = fileServer.UploadImage(this.taxCertificationTextBox1.Text, FileServer.Filetype.TaxCertification);
             string Remarks = this.textBox58.Text;
-            string ResidenceCard = fileServer.UploadImage(this.textBox30.Text, FileServer.Filetype.ResidenceCard);
-            string AolFinancialShareholder = fileServer.UploadImage(textBox33.Text, FileServer.Filetype.AolFinancialShareholder);
+            string ResidenceCard = fileServer.UploadImage(this.residenceCardTextBox1.Text, FileServer.Filetype.ResidenceCard);
+            string AolFinancialShareholder = fileServer.UploadImage(aolFinancialShareholderTextBox1.Text, FileServer.Filetype.AolFinancialShareholder);
 
-            if (string.IsNullOrEmpty(ResidenceCard))
-            {
-                PeriodStay = "";
-            }
+            //if (string.IsNullOrEmpty(textBox37.Text))
+            //{
+            //    registrationDate = null;
+            //}
+
+            //if (string.IsNullOrEmpty(textBox30.Text))
+            //{
+            //    periodStay = null;
+            //}
 
             DateTime dat = DateTime.Now;
             string b = dat.ToString("yyyy/MM/dd");
@@ -394,10 +458,10 @@ namespace Flawless_ex
             string sql_str = "Insert into client_m (type, registration_date, name, name_kana, birthday, address, address_kana, phone_number, fax_number, email_address, occupation," +
                 " bank_name, branch_name, deposit_type, account_number, account_name, account_name_kana, id_number, remarks, register_copy, antique_license, id, tax_certificate, residence_card," +
                 " period_stay, seal_certification, invalid, aol_financial_shareholder, postal_code1, postal_code2, code, insert_name, register_date )" +
-                " VALUES (" + 1 + " , '" + RegistrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + Birthday + "' , '" + Address + "' , '" + AddressKana + "' ," +
+                " VALUES (" + 1 + " , '" + registrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + Birthday + "' , '" + Address + "' , '" + AddressKana + "' ," +
                 " '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation + "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , " +
                 "'" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "'," +
-                "'" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + PeriodStay + "','" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "'," +
+                "'" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + periodStay + "','" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "'," +
                 "'" + PostalCodeUpNumber + "','" + PostalCodeDownNumber + "','" + ClientCode + "','" + staff_id + "','" + b + "');";
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -407,6 +471,8 @@ namespace Flawless_ex
             staff_name = Name;
             address = Address;
             statement.ClientCode = ClientCode;
+            statement.count = 1;
+            statement.type = 1;
             //Statement statement = new Statement(mainMenu, staff_id, type, staff_name, address, access_auth, Total, pass, document, control, data, name1, phoneNumber1, addresskana1, code1, item1, date1, date2, method1, amountA, amountB, antiqueNumber, documentNumber, address1, grade);
             this.Close();
             statement.Show();
@@ -415,256 +481,199 @@ namespace Flawless_ex
 
         private void Client_add_Load(object sender, EventArgs e)
         {
-            this.textBox50.Text = "　年　月　日";
+            
         }
-        
+
+        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
+            {
+                //MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+            }
+        }
+
         #region"個人　値の検証"
         private void textBox55_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox55.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox55.Text = stringBuilder.ToString();
-            textBox55.Select(textBox55.Text.Length, 0);
+            nameKanaTextBox1.Text = inputControl.Kana(nameKanaTextBox1.Text);
+            nameKanaTextBox1.Select(nameKanaTextBox1.Text.Length, 0);
         }
 
         private void textBox52_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox52.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox52.Text = stringBuilder.ToString();
-            textBox52.Select(textBox52.Text.Length, 0);
+            addressKanaTextBox1.Text = inputControl.Kana(addressKanaTextBox1.Text);
+            addressKanaTextBox1.Select(addressKanaTextBox1.Text.Length, 0);
         }
 
         private void textBox38_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox38.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox38.Text = stringBuilder.ToString();
-            textBox38.Select(textBox38.Text.Length, 0);
+            accountKanaTextBox1.Text = inputControl.Kana(accountKanaTextBox1.Text);
+            accountKanaTextBox1.Select(accountKanaTextBox1.Text.Length, 0);
         }
-
-        private void PostalUpCordTextBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
-
-        private void PostalDownCordTextBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
-
         #endregion
         #region"法人　値の検証"
-        private void PostalUpCordTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
-
-        private void PostalDownCordTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if ((e.KeyChar < '0' || e.KeyChar > '9') && !Char.IsControl(e.KeyChar))
-            {
-                MessageBox.Show("半角の数値しか入力できません。", "数値エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-            }
-        }
-
+        
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox3.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox3.Text = stringBuilder.ToString();
-            textBox3.Select(textBox3.Text.Length, 0);
+            companyKanaTextBox.Text = inputControl.Kana(companyKanaTextBox.Text);
+            companyKanaTextBox.Select(companyKanaTextBox.Text.Length, 0);
         }
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox8.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox8.Text = stringBuilder.ToString();
-            textBox8.Select(textBox8.Text.Length, 0);
+            shopKanaTextBox.Text = inputControl.Kana(shopKanaTextBox.Text);
+            shopKanaTextBox.Select(shopKanaTextBox.Text.Length, 0);
         }
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox6.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox6.Text = stringBuilder.ToString();
-            textBox6.Select(textBox6.Text.Length, 0);
+            addressKanaTextBox.Text = inputControl.Kana(addressKanaTextBox.Text);
+            addressKanaTextBox.Select(addressKanaTextBox.Text.Length, 0);
         }
 
         private void textBox20_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox20.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox20.Text = stringBuilder.ToString();
-            textBox20.Select(textBox20.Text.Length, 0);
+            accountKanaTextBox.Text = inputControl.Kana(accountKanaTextBox.Text);
+            accountKanaTextBox.Select(accountKanaTextBox.Text.Length, 0);
         }
         #endregion
+
         #region"法人　画像確認"
         private void textBox24_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox24.Text))
+            if (!string.IsNullOrEmpty(photoIDTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox24.Text;
+                pictureBox1.ImageLocation = photoIDTextBox.Text;
             }
         }
 
         private void textBox21_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox21.Text))
+            if (!string.IsNullOrEmpty(registerCopyTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox21.Text;
+                pictureBox1.ImageLocation = registerCopyTextBox.Text;
             }
         }
 
         private void textBox22_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox22.Text))
+            if (!string.IsNullOrEmpty(antiqueLicenseTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox22.Text;
+                pictureBox1.ImageLocation = antiqueLicenseTextBox.Text;
             }
         }
 
         private void textBox25_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox25.Text))
+            if (!string.IsNullOrEmpty(aolFinancialShareholderTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox25.Text;
+                pictureBox1.ImageLocation = aolFinancialShareholderTextBox.Text;
             }
         }
 
         private void textBox27_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox27.Text))
+            if (!string.IsNullOrEmpty(taxCertificationTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox27.Text;
+                pictureBox1.ImageLocation = taxCertificationTextBox.Text;
             }
         }
 
         private void textBox29_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox29.Text))
+            if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox29.Text;
+                pictureBox1.ImageLocation = residenceCardTextBox.Text;
             }
         }
 
         private void textBox26_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox26.Text))
+            if (!string.IsNullOrEmpty(sealCertificationTextBox.Text))
             {
-                pictureBox1.ImageLocation = textBox26.Text;
+                pictureBox1.ImageLocation = sealCertificationTextBox.Text;
             }
         }
         #endregion
         #region"個人　画像確認"
         private void textBox37_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox37.Text))
+            if (!string.IsNullOrEmpty(registerCopyTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox37.Text;
+                pictureBox2.ImageLocation = registerCopyTextBox1.Text;
             }
         }
 
         private void textBox36_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox36.Text))
+            if (!string.IsNullOrEmpty(antiqueLicenseTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox36.Text;
+                pictureBox2.ImageLocation = antiqueLicenseTextBox1.Text;
             }
         }
 
         private void textBox35_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox35.Text))
+            if (!string.IsNullOrEmpty(photoIDTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox35.Text;
+                pictureBox2.ImageLocation = photoIDTextBox1.Text;
             }
         }
 
         private void textBox33_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox33.Text))
+            if (!string.IsNullOrEmpty(aolFinancialShareholderTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox33.Text;
+                pictureBox2.ImageLocation = aolFinancialShareholderTextBox1.Text;
             }
         }
 
         private void textBox31_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox31.Text))
+            if (!string.IsNullOrEmpty(taxCertificationTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox31.Text;
+                pictureBox2.ImageLocation = taxCertificationTextBox1.Text;
             }
         }
 
         private void textBox30_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox30.Text))
+            if (!string.IsNullOrEmpty(residenceCardTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox30.Text;
+                pictureBox2.ImageLocation = residenceCardTextBox1.Text;
             }
         }
 
         private void textBox32_DoubleClick(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox32.Text))
+            if (!string.IsNullOrEmpty(sealCertificationTextBox1.Text))
             {
-                pictureBox2.ImageLocation = textBox32.Text;
+                pictureBox2.ImageLocation = sealCertificationTextBox1.Text;
             }
         }
         #endregion
 
-        //法人　メールアドレス
+        //メールアドレス
         private void textBox13_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox13.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox13.Text = stringBuilder.ToString();
-            textBox13.Select(textBox13.Text.Length, 0);
+            //mailTextBox.Text = inputControl.Kana(mailTextBox.Text);
+            //mailTextBox.Select(mailTextBox.Text.Length, 0);
+        }
+        private void mailTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            //mailTextBox1.Text = inputControl.Kana(mailTextBox1.Text);
+            //mailTextBox1.Select(mailTextBox1.Text.Length, 0);
         }
 
         //法人　URL
         private void textBox17_TextChanged(object sender, EventArgs e)
         {
-            kana = Microsoft.VisualBasic.Strings.StrConv(textBox17.Text, Microsoft.VisualBasic.VbStrConv.Katakana | Microsoft.VisualBasic.VbStrConv.Narrow, 0x411);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append(kana);
-
-            textBox17.Text = stringBuilder.ToString();
-            textBox17.Select(textBox17.Text.Length, 0);
+            //urlTextBox.Text = inputControl.Kana(urlTextBox.Text);
+            //urlTextBox.Select(urlTextBox.Text.Length, 0);
         }
 
-
+        #region"画像選択"
         //画像選択（法人）
         private void IdentificationButton_Click(object sender, EventArgs e)
         {
@@ -679,7 +688,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox24.Text = path;
+                photoIDTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -700,7 +709,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox22.Text = path;
+                antiqueLicenseTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -721,7 +730,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox21.Text = path;
+                registerCopyTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -742,7 +751,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox27.Text = path;
+                taxCertificationTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -763,7 +772,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox25.Text = path;
+                aolFinancialShareholderTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -784,7 +793,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox29.Text = path;
+                residenceCardTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -805,7 +814,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox26.Text = path;
+                sealCertificationTextBox.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -827,7 +836,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox37.Text = path;
+                registerCopyTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -848,7 +857,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox36.Text = path;
+                antiqueLicenseTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -869,7 +878,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox35.Text = path;
+                photoIDTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -890,7 +899,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox31.Text = path;
+                taxCertificationTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -911,7 +920,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox33.Text = path;
+                aolFinancialShareholderTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -932,7 +941,7 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox30.Text = path;
+                residenceCardTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
@@ -953,12 +962,21 @@ namespace Flawless_ex
             if (dialog == DialogResult.OK)
             {
                 path = op.FileName;
-                textBox32.Text = path;
+                sealCertificationTextBox1.Text = path;
             }
             else if (dialog == DialogResult.Cancel)
             {
                 return;
             }
         }
+        #endregion
+
+        private void client_add_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            client_search client_Search = new client_search(statement, staff_id, type, staff_name, address, Total, control, document, access_auth, pass);
+            this.data = client_Search.data;
+            client_Search.ShowDialog();
+        }
+
     }
 }

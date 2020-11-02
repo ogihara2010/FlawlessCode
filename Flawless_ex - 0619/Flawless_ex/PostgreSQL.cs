@@ -13,8 +13,9 @@ namespace Flawless_ex
         {
             NpgsqlConnection conn = new NpgsqlConnection();
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;";
-            conn.ConnectionString = @"Server = 192.168.152.158; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //Wireless Lan adapter wi-fi
-            //conn.ConnectionString = @"Server = 192.168.56.1; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //イーサネットアダプター
+            conn.ConnectionString = @"Server = 192.168.152.81; Port = 5432; User Id = postgres; Password = postgres; Database = mastertest;";           //FP-042 のパソコン
+            //conn.ConnectionString = @"Server = 192.168.152.158; Port = 5432; User Id = postgres; Password = postgres; Database = master;";              //Wireless Lan adapter wi-fi
+            //conn.ConnectionString = @"Server = 192.168.56.1; Port = 5432; User Id = postgres; Password = postgres; Database = master;";               //イーサネットアダプター
             //conn.ConnectionString = @"Server = 192.168.11.30; Port = 5432; User Id = postgres; Password = postgres; Database = master;";
             return conn;
         }

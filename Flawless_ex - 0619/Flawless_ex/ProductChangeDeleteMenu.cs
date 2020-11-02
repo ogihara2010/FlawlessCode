@@ -23,6 +23,9 @@ namespace Flawless_ex
         public string Pass;
         public int MainCode;
         public string reason;
+        string mName;           //画面遷移した時の大分類名
+        string mNameAfter;      //変更した大分類名
+
 
         public ProductChangeDeleteMenu(ItemMaster nameMenu, MasterMaintenanceMenu master, int code, int staff_code, string access_auth, string pass, int maincode)
         {
@@ -40,7 +43,7 @@ namespace Flawless_ex
         {
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            
             productCodeTextBox.Text = puroductCode.ToString();
 
             string sql_item = "select * from item_m where item_code ='" + puroductCode + "';";
@@ -66,6 +69,9 @@ namespace Flawless_ex
 
             mCode = (int)row["main_category_code"];
 
+            DataRow row1 = maindt.Rows[0];
+            mName = row1["main_category_name"].ToString();
+
             mainCategoryComboBox.DataSource = maindt;
             mainCategoryComboBox.DisplayMember = "main_category_name";
             mainCategoryComboBox.ValueMember = "main_category_code";
@@ -79,17 +85,18 @@ namespace Flawless_ex
 
         private void removeButton_Click(object sender, EventArgs e)//無効
         {
+            if (string.IsNullOrEmpty(reasonText.Text))
+            {
+                MessageBox.Show("理由を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             DialogResult result = MessageBox.Show("無効にしますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No)
             {
                 return;
             }
 
-            if (string.IsNullOrEmpty(reasonText.Text))
-            {
-                MessageBox.Show("理由を入力してください", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
             // Yes かつ 理由あり
             DataTable item_mdt = new DataTable();
 
@@ -108,11 +115,11 @@ namespace Flawless_ex
             //履歴
             reason = reasonText.Text;
             DateTime dat = DateTime.Now;
-            string sql_remove_invalid = "insert into revisions values(" + 2 + ", '" + dat + "'," + staff_code + ", '" + "有効" + "', '" + "無効" + "','" + reason + "');";
+            string sql_remove_invalid = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                " values(" + 2 + ", '" + dat + "'," + staff_code + ", '" + "有効" + "', '" + "無効" + "','" + reason + "', '" + puroductCode + "');";
             cmd = new NpgsqlCommand(sql_remove_invalid, conn);
-            cmd.ExecuteReader();
+            cmd.ExecuteNonQuery();
             
-
             conn.Close();
             MessageBox.Show("選択した品名を無効にしました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk); ;
             this.Close();
@@ -120,12 +127,6 @@ namespace Flawless_ex
 
         private void updateButton_Click(object sender, EventArgs e)     //更新時
         {
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-            {
-                return;
-            }
-
             if (string.IsNullOrEmpty(productNameTextBox.Text))
             {
                 MessageBox.Show("品名を入力してください。", "品名未入力", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -138,84 +139,103 @@ namespace Flawless_ex
                 return;
             }
 
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
             DateTime dat = DateTime.Now;
             string iname = productNameTextBox.Text;//品名
             int mcode = (int)mainCategoryComboBox.SelectedValue;//大分類コード
+            mNameAfter = mainCategoryComboBox.Text;             //大分類名
+
             DataTable dt = new DataTable();
             reason = reasonText.Text;
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+            
             conn.Open();
 
             //大分類コード履歴と品名履歴
             if ((MainCode != mcode) && (productNameTextBox.Text != item_name))
             {
                 //大分類・品名両方変更
-                 string sql_item_mCode_revisions = "insert into revisions values(" + 2 + ",'" + dat + "'," + staff_code + "," + mCode + ", " + mcode + ",'" + reason + "');";
-                 cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
-                 cmd.ExecuteReader();                                
-                 string sql_itemName = "insert into revisions values(" + 2 + ",'" + dat + "'," + staff_code + "','" + item_name + "', '" + iname + "', '" + reason + "');";
-                 cmd = new NpgsqlCommand(sql_itemName, conn);
-                 cmd.ExecuteReader();
-                
+                string sql_item_mCode_revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    "values(" + 2 + ",'" + dat + "'," + staff_code + ",'" + mName + "', '" + mNameAfter + "','" + reason + "', '" + puroductCode + "');";
+                cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
+                cmd.ExecuteNonQuery();
+
+                string sql_itemName = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    "values(" + 2 + ",'" + dat + "'," + staff_code + ",'" + item_name + "', '" + iname + "', '" + reason + "','" + puroductCode + "');";
+                cmd = new NpgsqlCommand(sql_itemName, conn);
+                cmd.ExecuteNonQuery();
+
                 MessageBox.Show("大分類名・品名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else if ((MainCode == mcode) && (productNameTextBox.Text != item_name))
             {
-                //品名のみ変更 or 再入力
-                DialogResult dialogResult = MessageBox.Show("大分類名が変更されておりません" + "\r\n" + "大分類名を変更しないでもよろしいですか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    MessageBox.Show("品名のみ変更します", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    
-                    string sql_itemName = "insert into revisions values(" + 2 + ",'" + dat + "'," + staff_code + ",'" + item_name + "', '" + iname + "','" + reason + "');";
-                    cmd = new NpgsqlCommand(sql_itemName, conn);
-                    cmd.ExecuteReader();
-                    MessageBox.Show("品名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    
-                }
+                ////品名のみ変更 or 再入力
+                //DialogResult dialogResult = MessageBox.Show("大分類名が変更されておりません" + "\r\n" + "大分類名を変更しないでもよろしいですか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //if (dialogResult == DialogResult.Yes)
+                //{
+                //MessageBox.Show("品名のみ変更します", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                if (dialogResult == DialogResult.No)
-                {
-                    MessageBox.Show("大分類名を変更してください", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    conn.Close();
-                    return;
-                }
+                string sql_itemName = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    " values(" + 2 + ",'" + dat + "'," + staff_code + ",'" + item_name + "', '" + iname + "','" + reason + "', '" + puroductCode + "');";
+                cmd = new NpgsqlCommand(sql_itemName, conn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("品名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                //}
+
+                //if (dialogResult == DialogResult.No)
+                //{
+                //    MessageBox.Show("大分類名を変更してください", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    conn.Close();
+                //    return;
+                //}
             }
             else if ((MainCode != mcode) && (productNameTextBox.Text == item_name))
             {
                 //大分類名のみ変更
-                DialogResult dialogResult = MessageBox.Show("品名が変更されておりません" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    MessageBox.Show("大分類名のみ変更します", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    //例：ダイヤ->地金                    
-                    string sql_item_mCode_revisions = "insert into revisions values(" + 2 + ",'" + dat + "'," + staff_code + "," + mCode + ", " + mcode + ",'" + reason + "');";
-                    cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
-                    cmd.ExecuteReader();
-                    MessageBox.Show("大分類名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);                    
-                }
-                if (dialogResult == DialogResult.No)
-                {
-                    MessageBox.Show("品名を変更してください", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    conn.Close();
-                    return;
-                }
+                //DialogResult dialogResult = MessageBox.Show("品名が変更されておりません" + "\r\n" + "品名を変更しないでもよろしいですか？", "入力エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                //if (dialogResult == DialogResult.Yes)
+                //{
+                //    MessageBox.Show("大分類名のみ変更します", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                //例：ダイヤ->地金                    
+                string sql_item_mCode_revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    " values(" + 2 + ",'" + dat + "','" + staff_code + "','" + mName + "', '" + mNameAfter + "','" + reason + "','" + puroductCode + "');";
+                cmd = new NpgsqlCommand(sql_item_mCode_revisions, conn);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("大分類名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                
+                //}
+                ////if (dialogResult == DialogResult.No)
+                ////{
+                //    MessageBox.Show("品名を変更してください", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    conn.Close();
+                //    return;
+                //}
             }
             else
             {
                 MessageBox.Show("変更・無効画面に戻ります", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 conn.Close();
                 return;
-            }            
-                string sql_item_m = "update item_m set main_category_code = " + mcode + ", item_name = '" + iname + "',reason = '" + reason + "' where item_code =" + puroductCode + "";
+            }
+
+            using (transaction = conn.BeginTransaction())
+            {
+                string sql_item_m = "update item_m set main_category_code = " + mcode + ", item_name = '" + iname + "' where item_code =" + puroductCode + "";
                 cmd = new NpgsqlCommand(sql_item_m, conn);
-                //cmd.ExecuteNonQuery();
-                //transaction.Commit();
-            
-            MessageBox.Show("品名マスタ画面に戻ります", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+
+            MessageBox.Show("品名マスタ画面に戻ります", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             conn.Close();
             this.Close();

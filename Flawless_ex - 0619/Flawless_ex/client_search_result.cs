@@ -68,6 +68,8 @@ namespace Flawless_ex
                 dataGridView1.Columns[2].HeaderText = "担当者名";
                 dataGridView1.Columns[3].HeaderText = "住所";
                 dataGridView1.Columns["code"].Visible = false;
+                dataGridView1.Columns["company_kana"].Visible = false;
+                dataGridView1.Columns["shop_name_kana"].Visible = false;
             }
             else if (type == 1)
             {
@@ -78,7 +80,7 @@ namespace Flawless_ex
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        dt.Rows[i]["antique_license"] = "あり";
+                        dt.Rows[i]["antique_license"] = "登録済み";
                     }
 
                     dataGridView1.DataSource = dt;
@@ -86,12 +88,14 @@ namespace Flawless_ex
                     dataGridView1.Columns[1].HeaderText = "住所";
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
                     dataGridView1.Columns["code"].Visible = false;
+                    dataGridView1.Columns["name_kana"].Visible = false;
+                    dataGridView1.Columns["address_kana"].Visible = false;
                 }
                 else if (check == 1)
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        dt.Rows[i]["antique_license"] = "なし";
+                        dt.Rows[i]["antique_license"] = "未登録";
                     }
 
                     dataGridView1.DataSource = dt;
@@ -99,6 +103,8 @@ namespace Flawless_ex
                     dataGridView1.Columns[1].HeaderText = "住所";
                     dataGridView1.Columns[2].HeaderText = "古物商許可証";
                     dataGridView1.Columns["code"].Visible = false;
+                    dataGridView1.Columns["name_kana"].Visible = false;
+                    dataGridView1.Columns["address_kana"].Visible = false;
                 }
 
             }

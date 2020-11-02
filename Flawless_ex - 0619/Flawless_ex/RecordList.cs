@@ -68,6 +68,9 @@ namespace Flawless_ex
         bool registerError = false;                    //登録内容に不備があったとき true
         bool clientInfor = false;                   //お客様情報ボタンクリックしたら true
         bool monthResult = false;                   //月間成績一覧ボタンをクリックしたら true
+
+        bool First = true;
+
         #region"各行の datetimepicker"
         DateTime? date1;
         DateTime? date2;
@@ -323,7 +326,6 @@ namespace Flawless_ex
         DataTable DATA13 = new DataTable();
         #endregion
         
-
         public RecordList(Statement statement, int staff_id, string Staff_Name, int type, string slipnumber, int Grade, int antique, int id, string access_auth, string pass, bool namechange, bool carryover, bool monthCatalog)
         {
             InitializeComponent();
@@ -400,17 +402,17 @@ namespace Flawless_ex
                     OccupationOrShopNameLabel.Text = "店舗名";
                     AddressOrClientStaffNameLabel.Text = "担当者名";                    
                     AddressOrClientStaffNameTextBox.Size = new Size(200, 60);
-                    NameOrCompanyNameTextBox.Size = new Size(200, 60);
+                    NameOrCompanyNameTextBox.Size = new Size(250, 60);
 
-                    NameOrCompanyNameTextBox.Location = new Point(110, 79);
+                    NameOrCompanyNameTextBox.Location = new Point(120, 79);
 
-                    OccupationOrShopNameLabel.Location = new Point(254, 85);
+                    OccupationOrShopNameLabel.Location = new Point(400, 85);
                     
-                    OccupationOrShopNameTextBox.Location = new Point(315, 79);
+                    OccupationOrShopNameTextBox.Location = new Point(500, 79);
                     
-                    AddressOrClientStaffNameLabel.Location = new Point(500, 85);
+                    AddressOrClientStaffNameLabel.Location = new Point(690, 85);
                     
-                    AddressOrClientStaffNameTextBox.Location = new Point(550, 79);
+                    AddressOrClientStaffNameTextBox.Location = new Point(800, 79);
                     BirthdayLabel.Visible = false;
                     BirthdayTextBox.Visible = false;
 
@@ -656,352 +658,6 @@ namespace Flawless_ex
             setDateTimePicker12(date12);
             date13 = null;
             setDateTimePicker13(date13);
-            #endregion
-
-            #region"計算書以外から成績入力に画面遷移したとき"
-            if (grade != 0)
-            {
-                string Sql_Str2 = "select * from list_result2 A inner join main_category_m B on A.main_category_code = B.main_category_code inner join item_m C on A.item_code = C.item_code" +
-                    " where grade_number = '" + grade + "' order by record_number;";
-                adapter = new NpgsqlDataAdapter(Sql_Str2, conn);
-                adapter.Fill(data);
-
-                if (data.Rows.Count != 0)
-                {
-                    for (int i = 0; i < record; i++)
-                    {
-                        DataRow row = data.Rows[i];
-                        switch (i)
-                        {
-                            #region"１行目"
-                            case 0:
-                                itemMainCategoryTextBox1.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox1.Text = row["item_name"].ToString();
-                                remark1.Text = row["remarks"].ToString();
-                                MainCategoryCode1 = (int)row["main_category_code"];
-                                ItemCategoryCode1 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox1.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox1.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker1.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox1_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox1.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox1.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"２行目"
-                            case 1:
-                                itemMainCategoryTextBox2.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox2.Text = row["item_name"].ToString();
-                                remark2.Text = row["remarks"].ToString();
-                                MainCategoryCode2 = (int)row["main_category_code"];
-                                ItemCategoryCode2 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox2.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox2.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker2.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox2_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox2.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox2.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"３行目"
-                            case 2:
-                                itemMainCategoryTextBox3.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox3.Text = row["item_name"].ToString();
-                                remark3.Text = row["remarks"].ToString();
-                                MainCategoryCode3 = (int)row["main_category_code"];
-                                ItemCategoryCode3 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox3.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox3.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker3.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox3_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox3.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox3.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"４行目"
-                            case 3:
-                                itemMainCategoryTextBox4.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox4.Text = row["item_name"].ToString();
-                                remark4.Text = row["remarks"].ToString();
-                                MainCategoryCode4 = (int)row["main_category_code"];
-                                ItemCategoryCode4 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox4.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox4.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker4.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox4_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox4.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox4.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"５行目"
-                            case 4:
-                                itemMainCategoryTextBox5.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox5.Text = row["item_name"].ToString();
-                                remark5.Text = row["remarks"].ToString();
-                                MainCategoryCode5 = (int)row["main_category_code"];
-                                ItemCategoryCode5 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox5.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox5.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker5.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox5_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox5.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox5.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"６行目"
-                            case 5:
-                                itemMainCategoryTextBox6.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox6.Text = row["item_name"].ToString();
-                                remark6.Text = row["remarks"].ToString();
-                                MainCategoryCode6 = (int)row["main_category_code"];
-                                ItemCategoryCode6 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox6.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox6.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker6.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox6_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox6.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox6.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"７行目"
-                            case 6:
-                                itemMainCategoryTextBox7.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox7.Text = row["item_name"].ToString();
-                                remark7.Text = row["remarks"].ToString();
-                                MainCategoryCode7 = (int)row["main_category_code"];
-                                ItemCategoryCode7 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox7.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox7.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker7.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox7_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox7.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox7.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"８行目"
-                            case 7:
-                                itemMainCategoryTextBox8.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox8.Text = row["item_name"].ToString();
-                                remark8.Text = row["remarks"].ToString();
-                                MainCategoryCode8 = (int)row["main_category_code"];
-                                ItemCategoryCode8 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox8.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox8.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker8.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox8_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox8.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox8.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"９行目"
-                            case 8:
-                                itemMainCategoryTextBox9.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox9.Text = row["item_name"].ToString();
-                                remark9.Text = row["remarks"].ToString();
-                                MainCategoryCode9 = (int)row["main_category_code"];
-                                ItemCategoryCode9 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox9.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox9.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker9.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox9_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox9.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox9.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"１０行目"
-                            case 9:
-                                itemMainCategoryTextBox10.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox10.Text = row["item_name"].ToString();
-                                remark10.Text = row["remarks"].ToString();
-                                MainCategoryCode10 = (int)row["main_category_code"];
-                                ItemCategoryCode10 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox10.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox10.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker10.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox10_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox10.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox10.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"１１行目"
-                            case 10:
-                                itemMainCategoryTextBox11.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox11.Text = row["item_name"].ToString();
-                                remark11.Text = row["remarks"].ToString();
-                                MainCategoryCode11 = (int)row["main_category_code"];
-                                ItemCategoryCode11 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox11.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox11.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker11.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox11_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox11.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox11.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"１２行目"
-                            case 11:
-                                itemMainCategoryTextBox12.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox12.Text = row["item_name"].ToString();
-                                remark12.Text = row["remarks"].ToString();
-                                MainCategoryCode12 = (int)row["main_category_code"];
-                                ItemCategoryCode12 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox12.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox12.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker12.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox12_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox12.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox12.Checked = true;
-                                }
-                                break;
-                            #endregion
-                            #region"１３行目"
-                            case 12:
-                                itemMainCategoryTextBox13.Text = row["main_category_name"].ToString();
-                                itemCategoryTextBox13.Text = row["item_name"].ToString();
-                                remark13.Text = row["remarks"].ToString();
-                                MainCategoryCode13 = (int)row["main_category_code"];
-                                ItemCategoryCode13 = (int)row["item_code"];
-                                //卸値。売却先、売却日
-                                if ((decimal)row["wholesale_price"] != 0)
-                                {
-                                    WholesalePriceTextBox13.Text = row["wholesale_price"].ToString();
-                                    BuyerTextBox13.Text = row["buyer"].ToString();
-                                    BuyDateTimePicker13.Value = DateTime.Parse(row["sale_date"].ToString());
-                                    WholesalePriceTextBox13_Leave(sender, e);
-                                }
-                                if ((int)row["carry_over_month"] == 1)
-                                {
-                                    NextMonthCheckBox13.Checked = true;
-                                }
-                                if ((int)row["item_name_change"] == 1)
-                                {
-                                    ItemNameChangeCheckBox13.Checked = true;
-                                }
-                                break;
-                                #endregion
-                        }
-                    }
-                }
-            }
             #endregion
 
             #region"大分類ごとの買取金額"
@@ -1419,6 +1075,355 @@ namespace Flawless_ex
                         PurChase = PurChaseMetal + PurChaseDiamond + PurChaseBrand + PurChaseProduct + PurChaseOther;
                         OtherPurchaseTextBox.Text = string.Format("{0:C}", PurChaseOther);
                         break;
+                }
+            }
+            #endregion
+
+
+            #region"計算書以外から成績入力に画面遷移したとき"
+            if (grade != 0)
+            {
+                First = false;
+
+                string Sql_Str2 = "select * from list_result2 A inner join main_category_m B on A.main_category_code = B.main_category_code inner join item_m C on A.item_code = C.item_code" +
+                    " where grade_number = '" + grade + "' order by record_number;";
+                adapter = new NpgsqlDataAdapter(Sql_Str2, conn);
+                adapter.Fill(data);
+
+                if (data.Rows.Count != 0)
+                {
+                    for (int i = 0; i < record; i++)
+                    {
+                        DataRow row = data.Rows[i];
+                        switch (i)
+                        {
+                            #region"１行目"
+                            case 0:
+                                itemMainCategoryTextBox1.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox1.Text = row["item_name"].ToString();
+                                remark1.Text = row["remarks"].ToString();
+                                MainCategoryCode1 = (int)row["main_category_code"];
+                                ItemCategoryCode1 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox1.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox1.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker1.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox1_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox1.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox1.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"２行目"
+                            case 1:
+                                itemMainCategoryTextBox2.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox2.Text = row["item_name"].ToString();
+                                remark2.Text = row["remarks"].ToString();
+                                MainCategoryCode2 = (int)row["main_category_code"];
+                                ItemCategoryCode2 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox2.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox2.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker2.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox2_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox2.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox2.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"３行目"
+                            case 2:
+                                itemMainCategoryTextBox3.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox3.Text = row["item_name"].ToString();
+                                remark3.Text = row["remarks"].ToString();
+                                MainCategoryCode3 = (int)row["main_category_code"];
+                                ItemCategoryCode3 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox3.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox3.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker3.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox3_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox3.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox3.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"４行目"
+                            case 3:
+                                itemMainCategoryTextBox4.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox4.Text = row["item_name"].ToString();
+                                remark4.Text = row["remarks"].ToString();
+                                MainCategoryCode4 = (int)row["main_category_code"];
+                                ItemCategoryCode4 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox4.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox4.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker4.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox4_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox4.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox4.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"５行目"
+                            case 4:
+                                itemMainCategoryTextBox5.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox5.Text = row["item_name"].ToString();
+                                remark5.Text = row["remarks"].ToString();
+                                MainCategoryCode5 = (int)row["main_category_code"];
+                                ItemCategoryCode5 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox5.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox5.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker5.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox5_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox5.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox5.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"６行目"
+                            case 5:
+                                itemMainCategoryTextBox6.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox6.Text = row["item_name"].ToString();
+                                remark6.Text = row["remarks"].ToString();
+                                MainCategoryCode6 = (int)row["main_category_code"];
+                                ItemCategoryCode6 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox6.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox6.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker6.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox6_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox6.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox6.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"７行目"
+                            case 6:
+                                itemMainCategoryTextBox7.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox7.Text = row["item_name"].ToString();
+                                remark7.Text = row["remarks"].ToString();
+                                MainCategoryCode7 = (int)row["main_category_code"];
+                                ItemCategoryCode7 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox7.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox7.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker7.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox7_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox7.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox7.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"８行目"
+                            case 7:
+                                itemMainCategoryTextBox8.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox8.Text = row["item_name"].ToString();
+                                remark8.Text = row["remarks"].ToString();
+                                MainCategoryCode8 = (int)row["main_category_code"];
+                                ItemCategoryCode8 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox8.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox8.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker8.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox8_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox8.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox8.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"９行目"
+                            case 8:
+                                itemMainCategoryTextBox9.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox9.Text = row["item_name"].ToString();
+                                remark9.Text = row["remarks"].ToString();
+                                MainCategoryCode9 = (int)row["main_category_code"];
+                                ItemCategoryCode9 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox9.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox9.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker9.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox9_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox9.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox9.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１０行目"
+                            case 9:
+                                itemMainCategoryTextBox10.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox10.Text = row["item_name"].ToString();
+                                remark10.Text = row["remarks"].ToString();
+                                MainCategoryCode10 = (int)row["main_category_code"];
+                                ItemCategoryCode10 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox10.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox10.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker10.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox10_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox10.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox10.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１１行目"
+                            case 10:
+                                itemMainCategoryTextBox11.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox11.Text = row["item_name"].ToString();
+                                remark11.Text = row["remarks"].ToString();
+                                MainCategoryCode11 = (int)row["main_category_code"];
+                                ItemCategoryCode11 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox11.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox11.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker11.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox11_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox11.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox11.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１２行目"
+                            case 11:
+                                itemMainCategoryTextBox12.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox12.Text = row["item_name"].ToString();
+                                remark12.Text = row["remarks"].ToString();
+                                MainCategoryCode12 = (int)row["main_category_code"];
+                                ItemCategoryCode12 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox12.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox12.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker12.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox12_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox12.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox12.Checked = true;
+                                }
+                                break;
+                            #endregion
+                            #region"１３行目"
+                            case 12:
+                                itemMainCategoryTextBox13.Text = row["main_category_name"].ToString();
+                                itemCategoryTextBox13.Text = row["item_name"].ToString();
+                                remark13.Text = row["remarks"].ToString();
+                                MainCategoryCode13 = (int)row["main_category_code"];
+                                ItemCategoryCode13 = (int)row["item_code"];
+                                //卸値。売却先、売却日
+                                if ((decimal)row["wholesale_price"] != 0)
+                                {
+                                    WholesalePriceTextBox13.Text = row["wholesale_price"].ToString();
+                                    BuyerTextBox13.Text = row["buyer"].ToString();
+                                    BuyDateTimePicker13.Value = DateTime.Parse(row["sale_date"].ToString());
+                                    WholesalePriceTextBox13_Leave(sender, e);
+                                }
+                                if ((int)row["carry_over_month"] == 1)
+                                {
+                                    NextMonthCheckBox13.Checked = true;
+                                }
+                                if ((int)row["item_name_change"] == 1)
+                                {
+                                    ItemNameChangeCheckBox13.Checked = true;
+                                }
+                                break;
+                                #endregion
+                        }
+                    }
                 }
             }
             #endregion
@@ -4224,6 +4229,7 @@ namespace Flawless_ex
             ProFitOther = WholeSaleOther - PurChaseOther;
             OtherProfitTextBox.Text = string.Format("{0:C}", ProFitOther);
         }
+
         #endregion
 
         #region"左下表と右下表の利益の合計表示（\マーク設定済み）TextChangedイベント"

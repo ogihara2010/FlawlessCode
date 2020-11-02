@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Flawless_ex
 {
@@ -58,6 +60,10 @@ namespace Flawless_ex
         string occupation;
         int Type;
         int PreviewRow;
+        string YearChange;
+        string MonthChange;
+        List<DateTime> dateList = new List<DateTime>();
+        
 
         #region"計算書"
         List<DataTable> dataTables = new List<DataTable>();             //計算書の表の datatable
@@ -152,6 +158,8 @@ namespace Flawless_ex
 
         private void DataSearchResults_Load(object sender, EventArgs e)
         {
+            dt = ReplaceData(dt);
+
             #region "計算書"
             if (data == "S")
             {                
@@ -171,7 +179,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[5].HeaderText = "担当者名・個人名";
                     dataGridView1.Columns[6].HeaderText = "電話番号";
                     dataGridView1.Columns[7].HeaderText = "住所";
-                    dataGridView1.Columns[8].HeaderText = "品名";
+                    dataGridView1.Columns[8].HeaderText = "古物番号";
                     dataGridView1.Columns[9].HeaderText = "金額";
                     #endregion
 
@@ -214,7 +222,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[4].HeaderText = "氏名";
                     dataGridView1.Columns[5].HeaderText = "電話番号";
                     dataGridView1.Columns[6].HeaderText = "住所";
-                    dataGridView1.Columns[7].HeaderText = "品名";
+                    dataGridView1.Columns[7].HeaderText = "古物番号";
                     dataGridView1.Columns[8].HeaderText = "金額";
                     #endregion
 
@@ -258,7 +266,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[5].HeaderText = "担当者名・個人名";
                     dataGridView1.Columns[6].HeaderText = "電話番号";
                     dataGridView1.Columns[7].HeaderText = "住所";
-                    dataGridView1.Columns[8].HeaderText = "品名";
+                    dataGridView1.Columns[8].HeaderText = "古物番号";
                     dataGridView1.Columns[9].HeaderText = "金額";
                     #endregion
 
@@ -296,7 +304,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[4].HeaderText = "氏名";
                     dataGridView1.Columns[5].HeaderText = "電話番号";
                     dataGridView1.Columns[6].HeaderText = "住所";
-                    dataGridView1.Columns[7].HeaderText = "品名";
+                    dataGridView1.Columns[7].HeaderText = "古物番号";
                     dataGridView1.Columns[8].HeaderText = "金額";
                     #endregion
                     #region"読み取り専用"
@@ -320,12 +328,52 @@ namespace Flawless_ex
             #endregion
 
         }
+
+        private DataTable ReplaceData(DataTable dt)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                YearChange = row["delivery_date"].ToString().Replace("年", "/");
+                MonthChange = YearChange.Replace("月", "/");
+                dateList.Add(DateTime.Parse(MonthChange.Replace("日", "")));
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.AsEnumerable().Select(row => row["delivery_date"] = dateList[i].ToString("yyyy/MM/dd")).ToList();
+            }
+            return dt;
+        }
         
         #region "詳細表示"
         private void Button1_Click(object sender, EventArgs e)
         {
-            pageNumber = 0;
+            int checkCount = 0;
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (!Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value))
+                {
+                    checkCount++;
+                }
+            }
+
+            if (checkCount == dataGridView1.Rows.Count)
+            {
+                MessageBox.Show("計算書・納品書を選択してください", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+                    pageNumber = 0;
             repeat = 0;
+            DNumber.Clear();
+            statementDataTable.Clear();
+            clientDataTable.Clear();
+            previewRow.Clear();
+            dataTables.Clear();
+
+            CNumber.Clear();
+            deliveryCalcTable.Clear();
+            deliveryClientTable.Clear();
+            deliveryTable.Clear();
 
             PrintDocument pd = new PrintDocument();
             pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
@@ -938,6 +986,7 @@ namespace Flawless_ex
 
                     DataRow rowStatementPreview;
                     rowStatementPreview = dataTables[pageNumber].Rows[0];
+                    //int pageRow = dataTables[pageNumber].Rows.Count;
 
                     //１行目の表の中身
                     string ItemNamePreview = rowStatementPreview["item_name"].ToString();
@@ -949,6 +998,7 @@ namespace Flawless_ex
                     string RemarkPreview = rowStatementPreview["remarks"].ToString();
 
                     for (int i = 1; i <= previewRow[pageNumber]; i++)
+                    //for (int i = 1; i <= pageRow; i++)
                     {
                         #region"１行目（ヘッダー）"
                         e.Graphics.DrawString("品目", font3, brush, new RectangleF(x1, y1, width, height), stringFormat);

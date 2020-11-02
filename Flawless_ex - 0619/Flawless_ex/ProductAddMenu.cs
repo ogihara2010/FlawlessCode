@@ -56,7 +56,6 @@ namespace Flawless_ex
 
                 PostgreSQL postgre = new PostgreSQL();
                 conn = postgre.connection();
-                //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
                 conn.Open();
 
                 using (transaction = conn.BeginTransaction())
@@ -99,7 +98,6 @@ namespace Flawless_ex
             string sql_main_name = "select* from main_category_m where invalid = 0 order by main_category_code";
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
             conn.Open();
 

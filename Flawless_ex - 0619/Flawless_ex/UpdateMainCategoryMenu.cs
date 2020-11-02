@@ -42,7 +42,7 @@ namespace Flawless_ex
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
 
-            string sql_str = "select* from main_category_m where main_category_code = " + mainCode + "";
+            string sql_str = "select * from main_category_m where main_category_code = " + mainCode + "";
 
             conn.Open();
 
@@ -85,6 +85,7 @@ namespace Flawless_ex
                 MessageBox.Show("大分類マスタ一覧に戻ります", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
+
             //大分類名・理由入力済みかつYes
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
@@ -100,8 +101,9 @@ namespace Flawless_ex
             
             //無効履歴
             DateTime dat = DateTime.Now;
-            reason = reasonText.Text;            
-            string sql_mCategoryRevisions = "insert into revisions values(" + 3 + ",'" + dat + "'," + staff_code + ",'" + "有効" + "', '" + "無効" + "','" + reason + "');";
+            reason = reasonText.Text;
+            string sql_mCategoryRevisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                " values(" + 3 + ",'" + dat + "'," + staff_code + ",'" + "有効" + "', '" + "無効" + "','" + reason + "', '" + mainCode + "');";
             cmd = new NpgsqlCommand(sql_mCategoryRevisions, conn);
             reader = cmd.ExecuteReader();
             
@@ -144,24 +146,20 @@ namespace Flawless_ex
                 conn.Open();
 
                 string sql_str = "update main_category_m set main_category_name = '" + mainName + "' where main_category_code = " + mainCode + ";";
-                string sql_str2 = "update main_category_m set reason = '" + reason + "' where main_category_code = " + mainCode + ";";
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
-                adapter2 = new NpgsqlDataAdapter(sql_str2, conn);
                 builder = new NpgsqlCommandBuilder(adapter);
 
                 adapter.Fill(dt);
                 adapter.Update(dt);
-                adapter2.Fill(dt);
-                adapter2.Update(dt);
                 MessageBox.Show("大分類名を変更しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
 
                 //履歴
                 DateTime dat = DateTime.Now;
                 //大分類履歴
-                string sql_mCategroy_name_revisions = "insert into revisions values(" + 3 + ",'" + dat + "'," + staff_code + ", '" + mName + "','" + mainName + "', '" + reason + "');";
+                string sql_mCategroy_name_revisions = "insert into revisions (data, upd_date, insert_code, before_data, after_data, reason, upd_code)" +
+                    " values(" + 3 + ",'" + dat + "'," + staff_code + ", '" + mName + "','" + mainName + "', '" + reason + "', '" + mainCode + "');";
                 cmd = new NpgsqlCommand(sql_mCategroy_name_revisions, conn);
-                reader = cmd.ExecuteReader();
-                reader.Close();
+                cmd.ExecuteNonQuery();
 
                 conn.Close();
                 this.Close();

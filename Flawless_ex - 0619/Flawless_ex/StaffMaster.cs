@@ -54,7 +54,7 @@ namespace Flawless_ex
             conn = postgre.connection();
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-            string sql_str = "select staff_code, staff_name, main_category_name from staff_m inner join main_category_m on staff_m.main_category_code = main_category_m.main_category_code where staff_m.invalid = 0 order by staff_code;";
+            string sql_str = "select staff_code, staff_name, main_category_name from staff_m A inner join main_category_m B on A.main_category_code = B.main_category_code where A.invalid = 0 order by staff_code;";
             conn.Open();
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -63,6 +63,14 @@ namespace Flawless_ex
             dataGridView1.Columns[0].HeaderText = "担当者コード";
             dataGridView1.Columns[1].HeaderText = "担当者名";
             dataGridView1.Columns[2].HeaderText = "大分類";
+
+            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dataGridView1.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             conn.Close();
         }

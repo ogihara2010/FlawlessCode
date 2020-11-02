@@ -101,8 +101,8 @@ namespace Flawless_ex
                     }
                 }
 
-
-                string sql_str = "insert into main_category_m values(" + mainCode + ",'" + mainName + "', '" + dat + "',0," + staff_code + ")";
+                string sql_str = "insert into main_category_m (main_category_code, main_category_name, registration_date, invalid, insert_name)" +
+                    " values(" + mainCode + ",'" + mainName + "', '" + dat + "',0," + staff_code + ")";
 
                 adapter = new NpgsqlDataAdapter(sql_str, conn);
                 builder = new NpgsqlCommandBuilder(adapter);

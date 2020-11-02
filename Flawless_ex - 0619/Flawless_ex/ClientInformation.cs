@@ -100,7 +100,7 @@ namespace Flawless_ex
                 {
                     while (reader.Read())
                     {
-                        RegistrationDateTextBox.Text = reader["registration_date"].ToString();
+                        RegistrationDateTextBox.Text = ((DateTime)reader["registration_date"]).ToString("yyyy/MM/dd");
                         CompanyNameTextBox.Text = reader["company_name"].ToString();
                         ComPanyKanaTextBox.Text = reader["company_kana"].ToString();
                         ShopNameTextBox.Text = reader["shop_name"].ToString();
@@ -128,8 +128,6 @@ namespace Flawless_ex
                         IdTextBox.Text = reader["id"].ToString();
                         RegisterCopyTextBox.Text = reader["register_copy"].ToString();
 
-                        RegisterDateTextBox.Text = reader["register_date"].ToString();
-                        
                         AntiqueLicenseTextBox.Text = reader["antique_license"].ToString();
                         AolFinancialShareholderTextBox.Text = reader["aol_financial_shareholder"].ToString();
                         TaxCertificateTextBox.Text = reader["tax_certificate"].ToString();
@@ -137,6 +135,11 @@ namespace Flawless_ex
                         PeriodStayTextBox.Text = reader["period_stay"].ToString();
                         SealCetificationTextBox.Text = reader["seal_certification"].ToString();
                     }
+                }
+
+                if (string.IsNullOrEmpty(ResidenceCardTextBox.Text))
+                {
+                    PeriodStayTextBox.Text = "";
                 }
             }
             //個人のとき
@@ -146,13 +149,13 @@ namespace Flawless_ex
                 tabControl1.TabPages.Remove(tabPage1);
                 IdTextBox2.Text = ID_Number.ToString();
 
-                SQL = "select * from client_m where where code = '" + ClientCode + "';";
+                SQL = "select * from client_m where code = '" + ClientCode + "';";
                 cmd = new NpgsqlCommand(SQL, conn);
                 using (reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        RegistrationDateTextBox2.Text = reader["registration_date"].ToString();
+                        RegistrationDateTextBox2.Text = ((DateTime)reader["registration_date"]).ToString("yyyy/MM/dd");
                         NameTextBox2.Text = reader["name"].ToString();
                         NameKanaTextBox2.Text = reader["name_kana"].ToString();
                         BirthdayTextBox2.Text = reader["birthday"].ToString();
@@ -181,8 +184,17 @@ namespace Flawless_ex
                         ResidenceCardTextBox2.Text = reader["residence_card"].ToString();
                         PeriodStayTextBox2.Text = reader["period_stay"].ToString();
                         SealCetificationTextBox2.Text = reader["seal_certification"].ToString();
-                        RemarksTextBox.Text = reader["remarks"].ToString();
+                        textBox1.Text = reader["remarks"].ToString();
                     }
+                }
+                if (string.IsNullOrEmpty(RegisterCopyTextBox2.Text))
+                {
+                    RegistrationDateTextBox2.Text = "";
+                }
+
+                if (string.IsNullOrEmpty(ResidenceCardTextBox2.Text))
+                {
+                    PeriodStayTextBox2.Text = "";
                 }
             }
 

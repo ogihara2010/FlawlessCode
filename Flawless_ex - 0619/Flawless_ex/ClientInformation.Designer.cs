@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.RegistrationLabel = new System.Windows.Forms.Label();
-            this.RegistrationDateTextBox = new System.Windows.Forms.TextBox();
             this.CompanyNameTextBox = new System.Windows.Forms.TextBox();
             this.CompanyNameLabel = new System.Windows.Forms.Label();
             this.SealCetificationTextBox = new System.Windows.Forms.TextBox();
@@ -46,7 +44,6 @@
             this.AntiqueLicenseLabel = new System.Windows.Forms.Label();
             this.AntiqueLicenseTextBox = new System.Windows.Forms.TextBox();
             this.RegisterDateLabel = new System.Windows.Forms.Label();
-            this.RegisterDateTextBox = new System.Windows.Forms.TextBox();
             this.RegisterCopyTextBox = new System.Windows.Forms.TextBox();
             this.RegisterCopyLabel = new System.Windows.Forms.Label();
             this.IdLabel = new System.Windows.Forms.Label();
@@ -89,6 +86,7 @@
             this.ShopNameLabel = new System.Windows.Forms.Label();
             this.CompanyKanaLabel = new System.Windows.Forms.Label();
             this.ComPanyKanaTextBox = new System.Windows.Forms.TextBox();
+            this.RegistrationDateTextBox = new System.Windows.Forms.TextBox();
             this.RemarkLabel = new System.Windows.Forms.Label();
             this.RemarksTextBox = new System.Windows.Forms.TextBox();
             this.ReturnButton = new System.Windows.Forms.Button();
@@ -176,24 +174,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.Controls.Add(this.RegistrationLabel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.RegistrationDateTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.CompanyNameTextBox, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.CompanyNameLabel, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.SealCetificationTextBox, 3, 14);
-            this.tableLayoutPanel1.Controls.Add(this.SealCertificateLabel, 2, 14);
-            this.tableLayoutPanel1.Controls.Add(this.PeriodStayLabel, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.PeriodStayTextBox, 1, 14);
-            this.tableLayoutPanel1.Controls.Add(this.ResidenceCardTextBox, 3, 13);
-            this.tableLayoutPanel1.Controls.Add(this.ResidenceCardLabel, 2, 13);
-            this.tableLayoutPanel1.Controls.Add(this.TaxCertificateLabel, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.TaxCertificateTextBox, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.AolFinancialShareholderTextBox, 3, 12);
-            this.tableLayoutPanel1.Controls.Add(this.AolLabel, 2, 12);
-            this.tableLayoutPanel1.Controls.Add(this.AntiqueLicenseLabel, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.AntiqueLicenseTextBox, 1, 12);
-            this.tableLayoutPanel1.Controls.Add(this.RegisterDateLabel, 2, 11);
-            this.tableLayoutPanel1.Controls.Add(this.RegisterDateTextBox, 3, 11);
             this.tableLayoutPanel1.Controls.Add(this.RegisterCopyTextBox, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.RegisterCopyLabel, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.IdLabel, 2, 10);
@@ -236,6 +218,20 @@
             this.tableLayoutPanel1.Controls.Add(this.ShopNameLabel, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.CompanyKanaLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ComPanyKanaTextBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.RegisterDateLabel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.RegistrationDateTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AntiqueLicenseLabel, 2, 11);
+            this.tableLayoutPanel1.Controls.Add(this.AntiqueLicenseTextBox, 3, 11);
+            this.tableLayoutPanel1.Controls.Add(this.AolLabel, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.AolFinancialShareholderTextBox, 1, 12);
+            this.tableLayoutPanel1.Controls.Add(this.TaxCertificateLabel, 2, 12);
+            this.tableLayoutPanel1.Controls.Add(this.TaxCertificateTextBox, 3, 12);
+            this.tableLayoutPanel1.Controls.Add(this.ResidenceCardLabel, 0, 13);
+            this.tableLayoutPanel1.Controls.Add(this.ResidenceCardTextBox, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.PeriodStayLabel, 2, 13);
+            this.tableLayoutPanel1.Controls.Add(this.PeriodStayTextBox, 3, 13);
+            this.tableLayoutPanel1.Controls.Add(this.SealCertificateLabel, 0, 14);
+            this.tableLayoutPanel1.Controls.Add(this.SealCetificationTextBox, 1, 14);
             this.tableLayoutPanel1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(19, 29);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -257,28 +253,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.666667F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(959, 653);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // RegistrationLabel
-            // 
-            this.RegistrationLabel.AutoSize = true;
-            this.RegistrationLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RegistrationLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegistrationLabel.Location = new System.Drawing.Point(3, 0);
-            this.RegistrationLabel.Name = "RegistrationLabel";
-            this.RegistrationLabel.Size = new System.Drawing.Size(185, 43);
-            this.RegistrationLabel.TabIndex = 0;
-            this.RegistrationLabel.Text = "顧客情報登録日";
-            this.RegistrationLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // RegistrationDateTextBox
-            // 
-            this.RegistrationDateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RegistrationDateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegistrationDateTextBox.Location = new System.Drawing.Point(194, 3);
-            this.RegistrationDateTextBox.Name = "RegistrationDateTextBox";
-            this.RegistrationDateTextBox.ReadOnly = true;
-            this.RegistrationDateTextBox.Size = new System.Drawing.Size(281, 26);
-            this.RegistrationDateTextBox.TabIndex = 1;
             // 
             // CompanyNameTextBox
             // 
@@ -306,10 +280,10 @@
             // 
             this.SealCetificationTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SealCetificationTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SealCetificationTextBox.Location = new System.Drawing.Point(672, 605);
+            this.SealCetificationTextBox.Location = new System.Drawing.Point(194, 605);
             this.SealCetificationTextBox.Name = "SealCetificationTextBox";
             this.SealCetificationTextBox.ReadOnly = true;
-            this.SealCetificationTextBox.Size = new System.Drawing.Size(284, 29);
+            this.SealCetificationTextBox.Size = new System.Drawing.Size(281, 29);
             this.SealCetificationTextBox.TabIndex = 1;
             this.SealCetificationTextBox.DoubleClick += new System.EventHandler(this.SealCetificationTextBox_DoubleClick);
             // 
@@ -318,7 +292,7 @@
             this.SealCertificateLabel.AutoSize = true;
             this.SealCertificateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SealCertificateLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.SealCertificateLabel.Location = new System.Drawing.Point(481, 602);
+            this.SealCertificateLabel.Location = new System.Drawing.Point(3, 602);
             this.SealCertificateLabel.Name = "SealCertificateLabel";
             this.SealCertificateLabel.Size = new System.Drawing.Size(185, 51);
             this.SealCertificateLabel.TabIndex = 0;
@@ -330,9 +304,9 @@
             this.PeriodStayLabel.AutoSize = true;
             this.PeriodStayLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PeriodStayLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PeriodStayLabel.Location = new System.Drawing.Point(3, 602);
+            this.PeriodStayLabel.Location = new System.Drawing.Point(481, 559);
             this.PeriodStayLabel.Name = "PeriodStayLabel";
-            this.PeriodStayLabel.Size = new System.Drawing.Size(185, 51);
+            this.PeriodStayLabel.Size = new System.Drawing.Size(185, 43);
             this.PeriodStayLabel.TabIndex = 0;
             this.PeriodStayLabel.Text = "在留期限";
             this.PeriodStayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -341,20 +315,20 @@
             // 
             this.PeriodStayTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PeriodStayTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.PeriodStayTextBox.Location = new System.Drawing.Point(194, 605);
+            this.PeriodStayTextBox.Location = new System.Drawing.Point(672, 562);
             this.PeriodStayTextBox.Name = "PeriodStayTextBox";
             this.PeriodStayTextBox.ReadOnly = true;
-            this.PeriodStayTextBox.Size = new System.Drawing.Size(281, 29);
+            this.PeriodStayTextBox.Size = new System.Drawing.Size(284, 29);
             this.PeriodStayTextBox.TabIndex = 1;
             // 
             // ResidenceCardTextBox
             // 
             this.ResidenceCardTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ResidenceCardTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ResidenceCardTextBox.Location = new System.Drawing.Point(672, 562);
+            this.ResidenceCardTextBox.Location = new System.Drawing.Point(194, 562);
             this.ResidenceCardTextBox.Name = "ResidenceCardTextBox";
             this.ResidenceCardTextBox.ReadOnly = true;
-            this.ResidenceCardTextBox.Size = new System.Drawing.Size(284, 29);
+            this.ResidenceCardTextBox.Size = new System.Drawing.Size(281, 29);
             this.ResidenceCardTextBox.TabIndex = 1;
             this.ResidenceCardTextBox.DoubleClick += new System.EventHandler(this.ResidenceCardTextBox_DoubleClick);
             // 
@@ -363,7 +337,7 @@
             this.ResidenceCardLabel.AutoSize = true;
             this.ResidenceCardLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ResidenceCardLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ResidenceCardLabel.Location = new System.Drawing.Point(481, 559);
+            this.ResidenceCardLabel.Location = new System.Drawing.Point(3, 559);
             this.ResidenceCardLabel.Name = "ResidenceCardLabel";
             this.ResidenceCardLabel.Size = new System.Drawing.Size(185, 43);
             this.ResidenceCardLabel.TabIndex = 0;
@@ -375,7 +349,7 @@
             this.TaxCertificateLabel.AutoSize = true;
             this.TaxCertificateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaxCertificateLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TaxCertificateLabel.Location = new System.Drawing.Point(3, 559);
+            this.TaxCertificateLabel.Location = new System.Drawing.Point(481, 516);
             this.TaxCertificateLabel.Name = "TaxCertificateLabel";
             this.TaxCertificateLabel.Size = new System.Drawing.Size(185, 43);
             this.TaxCertificateLabel.TabIndex = 0;
@@ -386,10 +360,10 @@
             // 
             this.TaxCertificateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TaxCertificateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.TaxCertificateTextBox.Location = new System.Drawing.Point(194, 562);
+            this.TaxCertificateTextBox.Location = new System.Drawing.Point(672, 519);
             this.TaxCertificateTextBox.Name = "TaxCertificateTextBox";
             this.TaxCertificateTextBox.ReadOnly = true;
-            this.TaxCertificateTextBox.Size = new System.Drawing.Size(281, 29);
+            this.TaxCertificateTextBox.Size = new System.Drawing.Size(284, 29);
             this.TaxCertificateTextBox.TabIndex = 1;
             this.TaxCertificateTextBox.DoubleClick += new System.EventHandler(this.TaxCertificateTextBox_DoubleClick);
             // 
@@ -397,10 +371,10 @@
             // 
             this.AolFinancialShareholderTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AolFinancialShareholderTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AolFinancialShareholderTextBox.Location = new System.Drawing.Point(672, 519);
+            this.AolFinancialShareholderTextBox.Location = new System.Drawing.Point(194, 519);
             this.AolFinancialShareholderTextBox.Name = "AolFinancialShareholderTextBox";
             this.AolFinancialShareholderTextBox.ReadOnly = true;
-            this.AolFinancialShareholderTextBox.Size = new System.Drawing.Size(284, 29);
+            this.AolFinancialShareholderTextBox.Size = new System.Drawing.Size(281, 29);
             this.AolFinancialShareholderTextBox.TabIndex = 1;
             this.AolFinancialShareholderTextBox.DoubleClick += new System.EventHandler(this.AolFinancialShareholderTextBox_DoubleClick);
             // 
@@ -409,7 +383,7 @@
             this.AolLabel.AutoSize = true;
             this.AolLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AolLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AolLabel.Location = new System.Drawing.Point(481, 516);
+            this.AolLabel.Location = new System.Drawing.Point(3, 516);
             this.AolLabel.Name = "AolLabel";
             this.AolLabel.Size = new System.Drawing.Size(185, 43);
             this.AolLabel.TabIndex = 0;
@@ -421,7 +395,7 @@
             this.AntiqueLicenseLabel.AutoSize = true;
             this.AntiqueLicenseLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueLicenseLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueLicenseLabel.Location = new System.Drawing.Point(3, 516);
+            this.AntiqueLicenseLabel.Location = new System.Drawing.Point(481, 473);
             this.AntiqueLicenseLabel.Name = "AntiqueLicenseLabel";
             this.AntiqueLicenseLabel.Size = new System.Drawing.Size(185, 43);
             this.AntiqueLicenseLabel.TabIndex = 0;
@@ -432,10 +406,10 @@
             // 
             this.AntiqueLicenseTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AntiqueLicenseTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.AntiqueLicenseTextBox.Location = new System.Drawing.Point(194, 519);
+            this.AntiqueLicenseTextBox.Location = new System.Drawing.Point(672, 476);
             this.AntiqueLicenseTextBox.Name = "AntiqueLicenseTextBox";
             this.AntiqueLicenseTextBox.ReadOnly = true;
-            this.AntiqueLicenseTextBox.Size = new System.Drawing.Size(281, 29);
+            this.AntiqueLicenseTextBox.Size = new System.Drawing.Size(284, 29);
             this.AntiqueLicenseTextBox.TabIndex = 1;
             this.AntiqueLicenseTextBox.DoubleClick += new System.EventHandler(this.AntiqueLicenseTextBox_DoubleClick);
             // 
@@ -444,22 +418,12 @@
             this.RegisterDateLabel.AutoSize = true;
             this.RegisterDateLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.RegisterDateLabel.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterDateLabel.Location = new System.Drawing.Point(481, 473);
+            this.RegisterDateLabel.Location = new System.Drawing.Point(3, 0);
             this.RegisterDateLabel.Name = "RegisterDateLabel";
             this.RegisterDateLabel.Size = new System.Drawing.Size(185, 43);
             this.RegisterDateLabel.TabIndex = 0;
             this.RegisterDateLabel.Text = "登記簿謄本登録日";
             this.RegisterDateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // RegisterDateTextBox
-            // 
-            this.RegisterDateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RegisterDateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.RegisterDateTextBox.Location = new System.Drawing.Point(672, 476);
-            this.RegisterDateTextBox.Name = "RegisterDateTextBox";
-            this.RegisterDateTextBox.ReadOnly = true;
-            this.RegisterDateTextBox.Size = new System.Drawing.Size(284, 29);
-            this.RegisterDateTextBox.TabIndex = 1;
             // 
             // RegisterCopyTextBox
             // 
@@ -925,6 +889,16 @@
             this.ComPanyKanaTextBox.Size = new System.Drawing.Size(281, 26);
             this.ComPanyKanaTextBox.TabIndex = 1;
             // 
+            // RegistrationDateTextBox
+            // 
+            this.RegistrationDateTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RegistrationDateTextBox.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.RegistrationDateTextBox.Location = new System.Drawing.Point(194, 3);
+            this.RegistrationDateTextBox.Name = "RegistrationDateTextBox";
+            this.RegistrationDateTextBox.ReadOnly = true;
+            this.RegistrationDateTextBox.Size = new System.Drawing.Size(281, 26);
+            this.RegistrationDateTextBox.TabIndex = 1;
+            // 
             // RemarkLabel
             // 
             this.RemarkLabel.AutoSize = true;
@@ -1196,7 +1170,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(174, 39);
             this.label1.TabIndex = 0;
-            this.label1.Text = "顧客情報登録日";
+            this.label1.Text = "登記簿謄本登録日";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -1875,7 +1849,6 @@
         private System.Windows.Forms.Label SealCertificateLabel;
         private System.Windows.Forms.Label IdLabel;
         private System.Windows.Forms.Label AolLabel;
-        private System.Windows.Forms.Label RegistrationLabel;
         private System.Windows.Forms.Label RegisterCopyLabel;
         private System.Windows.Forms.Label CompanyNameLabel;
         private System.Windows.Forms.Label CompanyKanaLabel;
@@ -1916,7 +1889,6 @@
         private System.Windows.Forms.TextBox TelTextBox;
         private System.Windows.Forms.TextBox UrlTextBox;
         private System.Windows.Forms.TextBox AccountNameTextBox;
-        private System.Windows.Forms.TextBox RegisterDateTextBox;
         private System.Windows.Forms.TextBox PeriodStayTextBox;
         private System.Windows.Forms.TextBox FaxTextBox;
         private System.Windows.Forms.TextBox BankNameTextBox;

@@ -120,6 +120,10 @@ namespace Flawless_ex
 
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
+            dt.Clear();
+            dt2.Clear();
+            dt6.Clear();
+
             Font font = new Font("MS Pゴシック", 10.5f);
             Font font1 = new Font("メイリオ", 36f);
             Brush brush = new SolidBrush(Color.Black);
@@ -135,12 +139,14 @@ namespace Flawless_ex
             adapter = new NpgsqlDataAdapter(sql_str, conn);
             adapter.Fill(dt);
 
+            conn.Open();
+
             DataRow row;
             row = dt.Rows[0];
             string method = row["payment_method"].ToString();
             string orderDate = row["order_date"].ToString();
             string deliveryDate = row["delivery_date"].ToString();
-            string settlementDate = row["settlement_date"].ToString();
+            string settlementDate = ((DateTime)row["settlement_date"]).ToString("yyyy/MM/dd");
             string bank = row["account_payble"].ToString();
             string vat = row["vat"].ToString();
             string vat_rate = row["vat_rate"].ToString();
@@ -154,6 +160,7 @@ namespace Flawless_ex
             string TotalCount = row["total_count"].ToString();
             int types = (int)row["types1"];
             string kind = row["type"].ToString();
+            int ClientCode = (int)row["code"];
 
             #endregion
 
@@ -387,26 +394,24 @@ namespace Flawless_ex
             #region "顧客情報"
             if (types == 0)
             {
-                NpgsqlConnection connA = new NpgsqlConnection();
-                NpgsqlDataAdapter adapterA;
-                connA = postgre.connection();
-                //connA.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
+                //NpgsqlConnection connA = new NpgsqlConnection();
+                //NpgsqlDataAdapter adapterA;
+                //connA = postgre.connection();
+                ////connA.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_antique = "select * from delivery_m where staff_code =" + staff_id + ";";
-                adapterA = new NpgsqlDataAdapter(sql_antique, connA);
-                adapterA.Fill(dt);
+                //string sql_antique = "select * from delivery_m where staff_code =" + staff_id + ";";
+                //adapterA = new NpgsqlDataAdapter(sql_antique, connA);
+                //adapterA.Fill(dt);
 
-                DataRow rowA;
-                rowA = dt.Rows[0];
-                string AntiqueNumber = rowA["antique_number"].ToString();
+                //DataRow rowA;
+                //rowA = dt.Rows[0];
+                //string AntiqueNumber = rowA["antique_number"].ToString();
 
-                NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
-                conn6 = postgre.connection();
                 //conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_corporate where invalid = 0 and type =" + types + " and antique_number = " + AntiqueNumber + ";";
-                adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
+                string sql_str6 = "select * from client_m where code = '" + ClientCode + "';";
+                adapter6 = new NpgsqlDataAdapter(sql_str6, conn);
                 adapter6.Fill(dt6);
 
                 DataRow row6;
@@ -425,26 +430,11 @@ namespace Flawless_ex
             }
             if (types == 1)
             {
-                NpgsqlConnection connI = new NpgsqlConnection();
-                NpgsqlDataAdapter adapterI;
-                connI = postgre.connection();
-                //connI.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
-
-                string sql_id = "select * from delivery_m where staff_code =" + staff_id + ";";
-                adapterI = new NpgsqlDataAdapter(sql_id, connI);
-                adapterI.Fill(dt);
-
-                DataRow rowI;
-                rowI = dt.Rows[0];
-                string ID = rowI["id_number"].ToString();
-
-                NpgsqlConnection conn6 = new NpgsqlConnection();
                 NpgsqlDataAdapter adapter6;
-                conn6 = postgre.connection();
                 //conn6.ConnectionString = @"Server = 192.168.152.43; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
 
-                string sql_str6 = "select * from client_m_individual where invalid = 0 and type = " + types + " and id_number = " + ID + ";";
-                adapter6 = new NpgsqlDataAdapter(sql_str6, conn6);
+                string sql_str6 = "select * from client_m where code = '" + ClientCode + "';";
+                adapter6 = new NpgsqlDataAdapter(sql_str6, conn);
                 adapter6.Fill(dt6);
 
                 DataRow row6;
@@ -461,7 +451,6 @@ namespace Flawless_ex
                 e.Graphics.DrawString("(FAX)" + faxNumber, font, brush, new PointF(520, 120));
                 #endregion
             }
-
 
             #endregion
             #endregion

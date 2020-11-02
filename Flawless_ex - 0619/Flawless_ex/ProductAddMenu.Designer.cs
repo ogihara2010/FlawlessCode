@@ -48,7 +48,7 @@
             this.label1.Location = new System.Drawing.Point(1, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(307, 96);
+            this.label1.Size = new System.Drawing.Size(229, 58);
             this.label1.TabIndex = 0;
             this.label1.Text = "品名コード";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -58,10 +58,10 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(1, 96);
+            this.label2.Location = new System.Drawing.Point(1, 58);
             this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(307, 96);
+            this.label2.Size = new System.Drawing.Size(229, 58);
             this.label2.TabIndex = 1;
             this.label2.Text = "品名";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -70,23 +70,22 @@
             // 
             this.productNameTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.productNameTextBox.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.productNameTextBox.Location = new System.Drawing.Point(310, 98);
+            this.productNameTextBox.Location = new System.Drawing.Point(232, 60);
             this.productNameTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.productNameTextBox.Multiline = true;
             this.productNameTextBox.Name = "productNameTextBox";
             this.productNameTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.productNameTextBox.Size = new System.Drawing.Size(719, 92);
+            this.productNameTextBox.Size = new System.Drawing.Size(539, 55);
             this.productNameTextBox.TabIndex = 5;
             // 
             // returnButton
             // 
             this.returnButton.AutoSize = true;
-            this.returnButton.BackColor = System.Drawing.Color.LightCyan;
+            this.returnButton.BackColor = System.Drawing.Color.LavenderBlush;
             this.returnButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.returnButton.Location = new System.Drawing.Point(25, 336);
+            this.returnButton.Location = new System.Drawing.Point(19, 215);
             this.returnButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.returnButton.Name = "returnButton";
-            this.returnButton.Size = new System.Drawing.Size(258, 106);
+            this.returnButton.Size = new System.Drawing.Size(194, 85);
             this.returnButton.TabIndex = 6;
             this.returnButton.Text = "戻る";
             this.returnButton.UseVisualStyleBackColor = false;
@@ -97,10 +96,10 @@
             this.addButton.AutoSize = true;
             this.addButton.BackColor = System.Drawing.Color.LightCyan;
             this.addButton.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.addButton.Location = new System.Drawing.Point(802, 336);
+            this.addButton.Location = new System.Drawing.Point(602, 215);
             this.addButton.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(252, 106);
+            this.addButton.Size = new System.Drawing.Size(189, 85);
             this.addButton.TabIndex = 7;
             this.addButton.Text = "登録";
             this.addButton.UseVisualStyleBackColor = false;
@@ -111,10 +110,10 @@
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 27.9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(1, 192);
+            this.label5.Location = new System.Drawing.Point(1, 116);
             this.label5.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(307, 98);
+            this.label5.Size = new System.Drawing.Size(229, 59);
             this.label5.TabIndex = 9;
             this.label5.Text = "大分類名";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -125,22 +124,21 @@
             this.mainCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.mainCategoryComboBox.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.mainCategoryComboBox.FormattingEnabled = true;
-            this.mainCategoryComboBox.Location = new System.Drawing.Point(310, 194);
+            this.mainCategoryComboBox.Location = new System.Drawing.Point(232, 118);
             this.mainCategoryComboBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.mainCategoryComboBox.Name = "mainCategoryComboBox";
-            this.mainCategoryComboBox.Size = new System.Drawing.Size(719, 68);
+            this.mainCategoryComboBox.Size = new System.Drawing.Size(539, 56);
             this.mainCategoryComboBox.TabIndex = 10;
             // 
             // itemCodeTextBox
             // 
             this.itemCodeTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.itemCodeTextBox.Font = new System.Drawing.Font("MS UI Gothic", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.itemCodeTextBox.Location = new System.Drawing.Point(310, 2);
+            this.itemCodeTextBox.Location = new System.Drawing.Point(232, 2);
             this.itemCodeTextBox.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
-            this.itemCodeTextBox.Multiline = true;
             this.itemCodeTextBox.Name = "itemCodeTextBox";
             this.itemCodeTextBox.ReadOnly = true;
-            this.itemCodeTextBox.Size = new System.Drawing.Size(719, 92);
+            this.itemCodeTextBox.Size = new System.Drawing.Size(539, 55);
             this.itemCodeTextBox.TabIndex = 12;
             this.itemCodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -156,24 +154,24 @@
             this.tableLayoutPanel1.Controls.Add(this.productNameTextBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(25, 15);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(19, 12);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1030, 290);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 175);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
             // ProductAddMenu
             // 
             this.AcceptButton = this.addButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
-            this.ClientSize = new System.Drawing.Size(1085, 471);
+            this.ClientSize = new System.Drawing.Size(805, 321);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.addButton);
