@@ -140,7 +140,7 @@ namespace Flawless_ex
 
                                 string sql2 = "select company_name, shop_name, name, address, code, company_kana, shop_name_kana from client_m " +
                         "where invalid = 0 and (type = 0 and company_name like '%" + clientName + "%' and shop_name like '%" + shopName + "%' and address like '%" + address + "%') " +
-                        "order by company_kana, shop_name_kane";                              //住所部分一致検索
+                        "order by company_kana, shop_name_kana";                              //住所部分一致検索
                                 conn.Open();
 
                                 adapter = new NpgsqlDataAdapter(sql2, conn);

@@ -128,9 +128,11 @@ namespace Flawless_ex
             //    this.check = client_Search.check;
             //}
             //else { }
-            this.Close();
+            //this.Close();
+            this.Dispose();
             statement.AddOwnedForm(client_Search);
             client_Search.ShowDialog();
+            //client_Search.Show(statement);
         }
 
         private void selectionButton_Click(object sender, EventArgs e)//選択

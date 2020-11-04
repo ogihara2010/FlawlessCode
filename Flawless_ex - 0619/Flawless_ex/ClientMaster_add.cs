@@ -23,9 +23,12 @@ namespace Flawless_ex
         public bool screan = true;
         public string Pass;
         public string kana;
+        NpgsqlDataReader dataReader;
+        NpgsqlTransaction transaction;
 
         private FileServer fileServer = new FileServer();
         InputControl InputControl = new InputControl();
+        int ClientCode;
 
         public ClientMaster_add(MasterMaintenanceMenu master, int staff_code, string access_auth, int type, string pass)
         {
@@ -214,7 +217,7 @@ namespace Flawless_ex
             string AccountNameKana = this.accountNameKanaTextBox.Text;
             string RegisterCopy = fileServer.UploadImage(registerCopyTextBox.Text,FileServer.Filetype.RegisterCopy);
             string Antiquelicense = fileServer.UploadImage(this.antiqueLicenseTextBox.Text,FileServer.Filetype.Antiquelicense);
-            decimal AntiqueNumber = decimal.Parse(this.antiqueNumberTextBox.Text);
+            string AntiqueNumber = antiqueNumberTextBox.Text;
             string ID = fileServer.UploadImage(this.photoIDTextBox.Text,FileServer.Filetype.ID);
 
             DateTime? periodStay = DateTime.Parse(periodStayCompanyDateTimePicker.Value.ToShortTimeString());
@@ -248,31 +251,25 @@ namespace Flawless_ex
             
             conn.Open();
 
-            int ClientCode = 0;
-
-            string sql = "select code from client_m order by code;";
-            cmd = new NpgsqlCommand(sql, conn);
-            using (reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    ClientCode = (int)reader["code"];
-                }
-            }
-            ClientCode++;
-
-            string sql_str = "Insert into client_m (type, registration_date, company_name, company_kana, shop_name, shop_name_kana, antique_number," +
+            string sql_str = "update client_m set (type, registration_date, company_name, company_kana, shop_name, shop_name_kana, antique_number," +
                 " address, address_kana, phone_number, fax_number, position, name, email_address, url_infor, bank_name, branch_name, deposit_type," +
                 " account_number, account_name, account_name_kana, remarks, id, register_date, antique_license, tax_certificate, residence_card, period_stay," +
-                " seal_certification, invalid, aol_financial_shareholder, register_copy, insert_name, postal_code1, postal_code2, code) " +
-                "VALUES (" + 0 + " , '" + registrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' , '" + ShopName + "' ,  '" + ShopNameKana + " ', '" + AntiqueNumber + "' ," +
+                " seal_certification, invalid, aol_financial_shareholder, register_copy, insert_name, postal_code1, postal_code2) " +
+                " = (" + 0 + " , '" + registrationDate + "' , '" + CompanyName + "' ,'" + CompanyNameKana + "' , '" + ShopName + "' ,  '" + ShopNameKana + "', '" + AntiqueNumber + "' ," +
                 " '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + Position + "' , '" + ClientStaffName + "' , '" + EmailAddress + "', '" + URLinfor + "', " +
                 "'" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + Remarks + "' , '" + ID + "' , " +
                 "'" + b + "','" + Antiquelicense + "','" + TaxCertification + "','" + ResidenceCard + "','" + periodStay + "','" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "'," +
-                "'" + RegisterCopy + "'," + staff_code + "," + PostalCode1 + ",'" + PostalCode2 + "', '" + ClientCode + "');";
+                "'" + RegisterCopy + "'," + staff_code + "," + PostalCode1 + ",'" + PostalCode2 + "') where code = '" + ClientCode + "';";
 
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            adapter.Fill(dt);
+            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+            //adapter.Fill(dt);
+            using (transaction = conn.BeginTransaction())
+            {
+                cmd = new NpgsqlCommand(sql_str, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
+            }
+
             MessageBox.Show("法人の顧客を登録しました。", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) ;
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
             screan = false;
@@ -448,7 +445,7 @@ namespace Flawless_ex
             string AccountNameKana = this.accountKanaTextBox1.Text;
             string RegisterCopy = fileServer.UploadImage(this.registerCopyTextBox1.Text,FileServer.Filetype.RegisterCopy);
             string Antiquelicense = fileServer.UploadImage(this.antiqueLicenseTextBox1.Text,FileServer.Filetype.Antiquelicense);
-            decimal ID = decimal.Parse(idNumberTextBox1.Text);
+            string ID = idNumberTextBox1.Text;
             string PhotoID = fileServer.UploadImage(photoIDTextBox1.Text,FileServer.Filetype.ID);
 
             DateTime? periodStay = DateTime.Parse(periodStayIndividualDateTimePicker.Value.ToShortDateString());
@@ -482,31 +479,24 @@ namespace Flawless_ex
 
             conn.Open();
 
-            int ClientCode = 0;
+            string sql_str = "update client_m set (type, registration_date, name, name_kana, birthday, address, address_kana, phone_number, fax_number, email_address, occupation, " +
+                "bank_name, branch_name, deposit_type, account_number, account_name, account_name_kana, id_number, remarks, register_copy, antique_license, id, tax_certificate, residence_card, period_stay," +
+                " seal_certification, invalid, aol_financial_shareholder, register_date, insert_name, postal_code1, postal_code2) " +
+                " = (" + 1 + " , '" + registrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + birthday + "' , '" + Address + "' , '" + AddressKana + "' , '" + PhoneNumber + "' ," +
+                " '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation + "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' , '" + AccountNumber + "' , '" + AccountName + "' ," +
+                " '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "', '" + Antiquelicense + "' ,'" + PhotoID + "' , '" + TaxCertification + "','" + ResidenceCard + "','" + periodStay + "'," +
+                "'" + SealCertification + "'," + 0 + ",'" + AolFinancialShareholder + "','" + b + "'," + staff_code + "," + PostalCode1 + ",'" + PostalCode2 + "') where code = '" + ClientCode + "';";
 
-            string sql = "select code from client_m order by code;";
-            cmd = new NpgsqlCommand(sql, conn);
-            using (reader = cmd.ExecuteReader())
+            //adapter = new NpgsqlDataAdapter(sql_str, conn);
+            //adapter.Fill(dt);
+
+            using (transaction = conn.BeginTransaction())
             {
-                while (reader.Read())
-                {
-                    ClientCode = (int)reader["code"];
-                }
+                cmd = new NpgsqlCommand(sql_str, conn);
+                cmd.ExecuteNonQuery();
+                transaction.Commit();
             }
-            ClientCode++;
 
-
-            string sql_str = "Insert into client_m (type, registration_date, name, name_kana, birthday, address, address_kana, phone_number, fax_number, email_address, occupation, " +
-                "bank_name, branch_name, deposit_type, account_number, account_name, account_name_kana, id_number, remarks, register_copy, id, tax_certificate, residence_card, period_stay," +
-                " seal_certification, invalid, aol_financial_shareholder, register_date, insert_name, postal_code1, postal_code2, code) " +
-                "VALUES (" + 1 + " , '" + registrationDate + "' , '" + Name + "' ,'" + NameKana + "' , '" + birthday + "' , '" + Address + "' , " +
-                "'" + AddressKana + "' , '" + PhoneNumber + "' , '" + FaxNumber + "' , '" + EmailAddress + "', '" + Occupation + "' , '" + BankName + "' , '" + BranchName + "' , '" + DepositType + "' ," +
-                " '" + AccountNumber + "' , '" + AccountName + "' , '" + AccountNameKana + "' , '" + ID + "' , '" + Remarks + "','" + RegisterCopy + "' , '" + Antiquelicense + "','" + PhotoID + "' ," +
-                " '" + TaxCertification + "','" + ResidenceCard + "','" + periodStay + "','" + SealCertification + "'," +
-              0 + ",'" + AolFinancialShareholder + "','" + b + "'," + staff_code + "," + PostalCode1 + ",'" + PostalCode2 + "', '" + ClientCode + "');";
-
-            adapter = new NpgsqlDataAdapter(sql_str, conn);
-            adapter.Fill(dt);
             MessageBox.Show("個人の顧客を登録しました。", "登録完了", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             ClientMaster clientmaster = new ClientMaster(master, staff_code, access_auth, Pass);
             screan = false;
@@ -531,6 +521,39 @@ namespace Flawless_ex
                 this.ActiveControl = this.nameTextBox1;
             }
             else { }
+
+            PostgreSQL postgreSQL = new PostgreSQL();
+            NpgsqlConnection conn = postgreSQL.connection();
+            conn.Open();
+            string sql = "select code from client_m order by code;";
+            NpgsqlCommand cmd = new NpgsqlCommand(sql, conn);
+            using (dataReader = cmd.ExecuteReader())
+            {
+                while (dataReader.Read())
+                {
+                    ClientCode = (int)dataReader["code"];
+                }
+            }
+
+            ClientCode++;
+
+            sql = "insert into client_m (code) values (" + ClientCode + ");";
+            cmd = new NpgsqlCommand(sql, conn);
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            //string sql = "select code from client_m order by code;";
+            //cmd = new NpgsqlCommand(sql, conn);
+            //using (reader = cmd.ExecuteReader())
+            //{
+            //    while (reader.Read())
+            //    {
+            //        ClientCode = (int)reader["code"];
+            //    }
+            //}
+            //ClientCode++;
+
+
         }
 
         private void ClientMaster_add_FormClosed(object sender, FormClosedEventArgs e)
