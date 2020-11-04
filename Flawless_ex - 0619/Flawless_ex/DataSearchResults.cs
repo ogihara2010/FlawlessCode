@@ -130,17 +130,6 @@ namespace Flawless_ex
             this.type = type;
             dt.Clear();
             dt = table;
-            //this.name1 = name1;
-            //this.phoneNumber1 = phoneNumber1;
-            //this.address1 = address1;
-            //this.addresskana1 = addresskana1;
-            //this.code1 = code1;
-            //this.item1 = item1;
-            //this.date1 = date1;
-            //this.date2 = date2;
-            //this.method1 = method1;
-            //this.amountA = amountA;
-            //this.amountB = amountB;
             this.antiqueNumber = antiqueNumber;
             this.documentNumber = documentNumber;
             staff_id = id;
@@ -718,6 +707,7 @@ namespace Flawless_ex
                     Font font = new Font("MS Pゴシック", 10.5f, 0, GraphicsUnit.Pixel);
                     Font font1 = new Font("MS Pゴシック", 20f, FontStyle.Bold);
                     Font font3 = new Font("MS Pゴシック", 14f, 0, GraphicsUnit.Pixel);
+                    Font DNumberFont = new Font("MS Pゴシック", 15f, FontStyle.Bold);
 
                     //下線付きテキスト
                     Font font2 = new Font("MS Pゴシック", 14f, FontStyle.Underline, GraphicsUnit.Pixel);    //真ん中で使用
@@ -825,6 +815,14 @@ namespace Flawless_ex
                     companyName = row1["company_name"].ToString();
                     shopName = row1["shop_name"].ToString();
                     name = row1["name"].ToString();
+                    if (string.IsNullOrEmpty(name))
+                    {
+                        name = "";
+                    }
+                    else
+                    {
+                        name = name + "様";
+                    }
                     tel = row1["phone_number"].ToString();
                     fax = row1["fax_number"].ToString();
                     Address = row1["address"].ToString();
@@ -838,8 +836,8 @@ namespace Flawless_ex
                     e.Graphics.DrawString("計算書（お客様控え）", font1, brush, new PointF(280, 30));
 
                     //伝票番号
-                    e.Graphics.DrawString(DNumber[pageNumber], font, brush, new PointF(680, 40));
-                    e.Graphics.DrawString(DNumber[pageNumber], font, brush, new PointF(680, 600));
+                    e.Graphics.DrawString(DNumber[pageNumber], DNumberFont, brush, new PointF(640, 30));
+                    e.Graphics.DrawString(DNumber[pageNumber], DNumberFont, brush, new PointF(640, 580));
 
                     //右上
                     e.Graphics.DrawString("株式会社 Flawless", font, brush, new PointF(550, 80));
@@ -890,7 +888,7 @@ namespace Flawless_ex
 
                         e.Graphics.DrawString("：" + companyName, font, brush, new PointF(x1 + d, 80));
                         e.Graphics.DrawString("：" + shopName, font, brush, new PointF(x1 + d, 100));
-                        e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 120));
+                        e.Graphics.DrawString("：" + name , font, brush, new PointF(x1 + d, 120));
                         e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 140));
                         e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 160));
                     }
@@ -903,7 +901,7 @@ namespace Flawless_ex
                             e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 100));
                             e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 120));
 
-                            e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 80));
+                            e.Graphics.DrawString("：" + name , font, brush, new PointF(x1 + d, 80));
                             e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 100));
                             e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 120));
                         }
@@ -917,7 +915,7 @@ namespace Flawless_ex
                             e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 160)); ;
                             e.Graphics.DrawString("職業", font, brush, new PointF(x1, 180));
 
-                            e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 80));
+                            e.Graphics.DrawString("：" + name , font, brush, new PointF(x1 + d, 80));
                             e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 100));
                             e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 120));
                             e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 140));
@@ -927,17 +925,16 @@ namespace Flawless_ex
                     }
                     #endregion
                     #endregion
-
                     #region"ページ下のお客様情報"
                     //法人の場合
 
                     if (Type == 0)
                     {
-                        e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 950));
-                        e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 970));
-                        e.Graphics.DrawString("担当者名", font, brush, new PointF(x1, 990));
-                        e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1010));
-                        e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1030));
+                        e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 970));
+                        e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 990));
+                        e.Graphics.DrawString("担当者名", font, brush, new PointF(x1, 1010));
+                        e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1030));
+                        e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1050));
 
                         e.Graphics.DrawString("：" + companyName, font, brush, new PointF(x1 + d, 970));
                         e.Graphics.DrawString("：" + shopName, font, brush, new PointF(x1 + d, 990));
@@ -952,30 +949,30 @@ namespace Flawless_ex
 
                         if (!string.IsNullOrEmpty(antiqueLicense))     //個人事業主の場合
                         {
-                            e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 950));
-                            e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 970));
-                            e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 990));
+                            e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 970));
+                            e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 990));
+                            e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1010));
 
-                            e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 950));
-                            e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 970));
-                            e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 990));
+                            e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 970));
+                            e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 990));
+                            e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1010));
                         }
                         else
                         {
                             //個人の場合
-                            e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 950));
-                            e.Graphics.DrawString("住所", font, brush, new PointF(x1, 970));
-                            e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 990));
-                            e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1010));
-                            e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 1030));
-                            e.Graphics.DrawString("職業", font, brush, new PointF(x1, 1050));
+                            e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 970));
+                            e.Graphics.DrawString("住所", font, brush, new PointF(x1, 990));
+                            e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1010));
+                            e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1030));
+                            e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 1050));
+                            e.Graphics.DrawString("職業", font, brush, new PointF(x1, 1070));
 
-                            e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 950));
-                            e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 970));
-                            e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 990));
-                            e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1010));
-                            e.Graphics.DrawString("：" + birthday, font, brush, new PointF(x1 + d, 1030)); ;
-                            e.Graphics.DrawString("：" + occupation, font, brush, new PointF(x1 + d, 1050));
+                            e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 970));
+                            e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 990));
+                            e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 1010));
+                            e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1030));
+                            e.Graphics.DrawString("：" + birthday, font, brush, new PointF(x1 + d, 1050)); ;
+                            e.Graphics.DrawString("：" + occupation, font, brush, new PointF(x1 + d, 1070));
                         }
                     }
                     #endregion
@@ -1838,6 +1835,7 @@ namespace Flawless_ex
                     else
                     {
                         e.HasMorePages = false;
+                        pageNumber = 0;
                     }
 
                 }
@@ -2396,6 +2394,7 @@ namespace Flawless_ex
                     else
                     {
                         e.HasMorePages = false;
+                        pageNumber = 0;
                     }
                 }
             }
@@ -2407,6 +2406,30 @@ namespace Flawless_ex
         private void DataSearchResults_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Close();
+        }
+
+        private void detailsButton_Click(object sender, EventArgs e)
+        {
+            int checkCount = 0;
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (!Convert.ToBoolean(dataGridView1.Rows[i].Cells[0].Value))
+                {
+                    checkCount++;
+                }
+            }
+
+            if (checkCount > 1)
+            {
+                MessageBox.Show("複数の詳細表示は出来ません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (data == "S")
+            {
+
+            }
         }
     }
 }

@@ -32,9 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataSearchResults));
             this.returnButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.previewButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.detailsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,19 +53,19 @@
             this.returnButton.UseVisualStyleBackColor = false;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
-            // button1
+            // previewButton
             // 
-            this.button1.AutoSize = true;
-            this.button1.BackColor = System.Drawing.Color.LightCyan;
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 21.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1326, 603);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(196, 75);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "詳細表示";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.previewButton.AutoSize = true;
+            this.previewButton.BackColor = System.Drawing.Color.LightCyan;
+            this.previewButton.Font = new System.Drawing.Font("MS UI Gothic", 21.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.previewButton.Location = new System.Drawing.Point(1311, 603);
+            this.previewButton.Margin = new System.Windows.Forms.Padding(2);
+            this.previewButton.Name = "previewButton";
+            this.previewButton.Size = new System.Drawing.Size(211, 75);
+            this.previewButton.TabIndex = 1;
+            this.previewButton.Text = "プレビュー表示";
+            this.previewButton.UseVisualStyleBackColor = false;
+            this.previewButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // dataGridView1
             // 
@@ -111,6 +112,18 @@
             this.printPreviewDialog1.Name = "printPreviewDialog1";
             this.printPreviewDialog1.Visible = false;
             // 
+            // detailsButton
+            // 
+            this.detailsButton.BackColor = System.Drawing.Color.LightCyan;
+            this.detailsButton.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.detailsButton.Location = new System.Drawing.Point(1029, 603);
+            this.detailsButton.Name = "detailsButton";
+            this.detailsButton.Size = new System.Drawing.Size(186, 75);
+            this.detailsButton.TabIndex = 4;
+            this.detailsButton.Text = "詳細表示";
+            this.detailsButton.UseVisualStyleBackColor = false;
+            this.detailsButton.Click += new System.EventHandler(this.detailsButton_Click);
+            // 
             // DataSearchResults
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -118,8 +131,9 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(1567, 700);
+            this.Controls.Add(this.detailsButton);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.previewButton);
             this.Controls.Add(this.returnButton);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DataSearchResults";
@@ -136,8 +150,9 @@
         #endregion
 
         private System.Windows.Forms.Button returnButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button previewButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.Button detailsButton;
     }
 }

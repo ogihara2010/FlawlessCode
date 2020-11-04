@@ -249,7 +249,7 @@ namespace Flawless_ex
             string CompanyNameKana_old = row1["company_kana"].ToString();
             string ShopName_old = row1["shop_name"].ToString();
             string ShopNameKana_old = row1["shop_name_kana"].ToString();
-            decimal Antique_old = (decimal)row1["antique_number"];
+            string Antique_old = row1["antique_number"].ToString();
             string PhoneNumber_old = row1["phone_number"].ToString();
             string FaxNumber_old = row1["fax_number"].ToString();
             string URL_old = row1["url_infor"].ToString();
@@ -265,7 +265,7 @@ namespace Flawless_ex
             string RegisterCopy_old = row1["register_copy"].ToString();
             string Antiquelicense_old = row1["antique_license"].ToString();
             string ID_old = row1["id"].ToString();
-            string PeriodStay_old = row1["period_stay"].ToString();
+            string PeriodStay_old = ((DateTime)row1["period_stay"]).ToString("yyyy/MM/dd");
             string SealCertification_old = row1["seal_certification"].ToString();
             string TaxCertification_old = row1["tax_certificate"].ToString();
             string Remarks_old = row1["remarks"].ToString();
@@ -370,7 +370,7 @@ namespace Flawless_ex
             }
             #endregion
 
-            decimal AntiqueNumber = decimal.Parse(this.antiqueNumberTextBox.Text);
+            string AntiqueNumber = antiqueNumberTextBox.Text;
             string Remarks = this.remarksTextBox.Text;
             string PeriodStay = periodStayCompanyDateTimePicker.Value.ToString("yyyy/MM/dd");
             DateTime dat = DateTime.Now;
@@ -381,9 +381,9 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
 
 
-            string sql_str = "UPDATE client_m SET type = " + 0 + " ,registration_date = '" + RegistrationDate + "' ,company_name =  '" + CompanyName + "' ,company_kana = '" + CompanyNameKana + "' ,shop_name =  '" + ShopName + "' ,shop_name_kana = '" + ShopNameKana + " ',address =  '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,position = '" + Position + "' , name = '" + ClientStaffName +
+            string sql_str = "UPDATE client_m SET type = " + 0 + " ,registration_date = '" + RegistrationDate + "' ,company_name =  '" + CompanyName + "' ,company_kana = '" + CompanyNameKana + "' ,shop_name =  '" + ShopName + "' ,shop_name_kana = '" + ShopNameKana + "',address =  '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,position = '" + Position + "' , name = '" + ClientStaffName +
                 "' ,email_address = '" + EmailAddress + "',url_infor = '" + URLinfor + "',bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name_kana = '" + AccountNameKana + "' ,account_name = '" + AccountName + "' ,remarks = '" + Remarks + "' ,id = '" + ID + "' ,register_date = '" + b + "',antique_license = '" + Antiquelicense + "',tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification +
-                "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 + "' where antique_number = " + AntiqueNumber + "; ";
+                "',invalid = " + 0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_copy = '" + RegisterCopy + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason1 + "' where code = " + ClientCode + "; ";
 
             conn = postgre.connection();
             //conn.ConnectionString = @"Server = localhost; Port = 5432; User Id = postgres; Password = postgres; Database = master;"; //変更予定
@@ -807,7 +807,7 @@ namespace Flawless_ex
                 string RegistrationDate1;
                 string CompanyName;
                 string CompanyNameKana;
-                int PostalCode1;
+                string PostalCode1;
                 string PostalCode2;
                 string Address;
                 string AddressKana;
@@ -827,7 +827,7 @@ namespace Flawless_ex
                 string AccountNameKana;
                 string RegisterCopy;
                 string Antiquelicense;
-                decimal AntiqueNumber;
+                string AntiqueNumber;
                 string ID;
                 string PeriodStay;
                 string SealCertification;
@@ -841,7 +841,7 @@ namespace Flawless_ex
                 CompanyName = row["company_name"].ToString();
                 CompanyNameKana = row["company_kana"].ToString();
 
-                PostalCode1 = int.Parse(row["postal_code1"].ToString());
+                PostalCode1 = row["postal_code1"].ToString();
                 PostalCode2 = row["postal_code2"].ToString();
                 
                 Address = row["address"].ToString();
@@ -864,7 +864,7 @@ namespace Flawless_ex
                 RegisterCopy = row["register_copy"].ToString();
                 
                 Antiquelicense = row["antique_license"].ToString();
-                AntiqueNumber = (decimal)row["antique_number"];
+                AntiqueNumber = row["antique_number"].ToString();
                 ID = row["id"].ToString();
                 PeriodStay = row["period_stay"].ToString();
                 SealCertification = row["seal_certification"].ToString();
@@ -878,8 +878,8 @@ namespace Flawless_ex
 
                 this.companyNameTextBox.Text = CompanyName;
                 this.companyKanaTextBox.Text = CompanyNameKana;
-                this.postalUpCodeTextBox.Text = PostalCode1.ToString();
-                this.postalDownCodeTextBox.Text = PostalCode2.ToString();                
+                this.postalUpCodeTextBox.Text = PostalCode1;
+                this.postalDownCodeTextBox.Text = PostalCode2;                
                 this.addressTextBox.Text = Address;
                 this.addressKanaTextBox.Text = AddressKana;
                 this.shopNameTextBox.Text = ShopName;
@@ -923,7 +923,7 @@ namespace Flawless_ex
                 string Name;
                 string NameKana;
                 string Birthday;
-                int PostalCode1;
+                string PostalCode1;
                 string PostalCode2;
                 string Address;
                 string AddressKana;
@@ -950,7 +950,7 @@ namespace Flawless_ex
                 #endregion
                 #region"データベース"
                 RegistrationDate2 = row["registration_date"].ToString();
-                PostalCode1 = int.Parse(row["postal_code1"].ToString());
+                PostalCode1 = row["postal_code1"].ToString();
                 PostalCode2 = row["postal_code2"].ToString();
                 Address = row["address"].ToString();
                 AddressKana = row["address_kana"].ToString();
@@ -971,7 +971,7 @@ namespace Flawless_ex
                 AccountNameKana = row["account_name_kana"].ToString();
                 RegisterCopy = row["register_copy"].ToString();
                 Antiquelicense = row["antique_license"].ToString();
-                PhotoID = row["photo_id"].ToString();
+                PhotoID = row["id"].ToString();
                 ID = row["id_number"].ToString();
                 PeriodStay = row["period_stay"].ToString();
                 SealCertification = row["seal_certification"].ToString();
@@ -1019,6 +1019,7 @@ namespace Flawless_ex
             }
             conn.Close();
         }
+
         #region "個人 更新"
         private void Button5_Click(object sender, EventArgs e)
         {
@@ -1083,16 +1084,6 @@ namespace Flawless_ex
                 MessageBox.Show("電話番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            else if (string.IsNullOrEmpty(registerCopyTextBox1.Text))
-            {
-                MessageBox.Show("登記簿謄本を選んで下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (string.IsNullOrEmpty(antiqueLicenseTextBox1.Text))
-            {
-                MessageBox.Show("古物商許可証を選んで下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             else if (string.IsNullOrEmpty(idNumberTextBox1.Text))
             {
                 MessageBox.Show("身分証番号を入力して下さい。", "入力確認", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1120,7 +1111,7 @@ namespace Flawless_ex
                         return;
                     }
                 }
-
+                
                 //if (!string.IsNullOrEmpty(textBox30.Text) && string.IsNullOrEmpty(textBox47.Text))
                 //{
                 //    MessageBox.Show("在留期限を入力して下さい。");
@@ -1205,10 +1196,10 @@ namespace Flawless_ex
             string AccountNameKana_old = row1["account_name_kana"].ToString();
             string RegisterCopy_old = row1["register_copy"].ToString();
             string Antiquelicense_old = row1["antique_license"].ToString();
-            string PhotoID_old = row1["photo_id"].ToString();
-            decimal ID_old = (decimal)row1["id_number"];
-            
-            string PeriodStay_old = row1["period_stay"].ToString();
+            string PhotoID_old = row1["id"].ToString();
+            string ID_old = row1["id_number"].ToString();
+
+            string PeriodStay_old = ((DateTime)row1["period_stay"]).ToString("yyyy/MM/dd");
             
             string SealCertification_old = row1["seal_certification"].ToString();
             string TaxCertification_old = row1["tax_certificate"].ToString();
@@ -1312,7 +1303,7 @@ namespace Flawless_ex
             }
             #endregion
 
-            decimal ID = decimal.Parse(idNumberTextBox1.Text);
+            string ID = idNumberTextBox1.Text;
             string PeriodStay = periodStayindividualDateTimePicker.Value.ToString("yyyy/MM/dd");
             string Remarks = this.remarksTextBox1.Text;
 
@@ -1324,7 +1315,7 @@ namespace Flawless_ex
             NpgsqlDataAdapter adapter;
 
             string sql_str = "UPDATE client_m SET type = " + 1 + " , registration_date = '" + RegistrationDate + "' , name = '" + Name + "' ,name_kana = '" + NameKana + "' ,birthday = '" + Birthday + "' ,address = '" + Address + "' ,address_kana = '" + AddressKana + "' ,phone_number = '" + PhoneNumber + "' ,fax_number = '" + FaxNumber + "' ,email_address = '" + EmailAddress + "',occupation = '" + Occupation +
-               "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '" + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "',photo_id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
+               "' ,bank_name = '" + BankName + "' ,branch_name = '" + BranchName + "' ,deposit_type = '" + DepositType + "' ,account_number = '" + AccountNumber + "' ,account_name = '" + AccountName + "' ,account_name_kana = '" + AccountNameKana + "' ,remarks = '" + Remarks + "',register_copy = '" + RegisterCopy + "' ,antique_license = '" + Antiquelicense + "', id = '" + PhotoID + "' ,tax_certificate = '" + TaxCertification + "',residence_card = '" + ResidenceCard + "',period_stay = '" + PeriodStay + "',seal_certification = '" + SealCertification + "',invalid = " +
               0 + ",aol_financial_shareholder = '" + AolFinancialShareholder + "',register_date = '" + b + "',insert_name = " + staff_code + ",postal_code1 = " + PostalCode1 + ",postal_code2 = '" + PostalCode2 + "',reason = '" + reason2 + "'where code = " + ClientCode + ";";
 
             adapter = new NpgsqlDataAdapter(sql_str, conn);
@@ -2161,7 +2152,7 @@ namespace Flawless_ex
 
         private void textBox8_TextChanged(object sender, EventArgs e)
         {
-            shopNameTextBox.Text = InputControl.Kana(shopNameTextBox.Text);
+            shopKanaTextBox.Text = InputControl.Kana(shopKanaTextBox.Text);
             shopKanaTextBox.Select(shopKanaTextBox.Text.Length, 0);
         }
 

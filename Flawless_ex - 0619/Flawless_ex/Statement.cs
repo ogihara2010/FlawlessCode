@@ -368,22 +368,21 @@ namespace Flawless_ex
 
         private void Statement_Load(object sender, EventArgs e)
         {
-            #region "ボタン"
+            #region "計算書のタブのみ表示"
             //if (data == "S")
             //{
-            //    #region "計算書のタブのみ表示"
             //    tabControl1.SelectedTab = SettlementDayBox;
             //    tabControl1.TabPages.Remove(tabPage2);
-            //    #endregion
-
             //}
+            //#endregion
+            //#region "納品書のタブのみ表示"
             //else if (data == "D")
             //{
-            //    #region "納品書のタブのみ表示"
             //    tabControl1.SelectedTab = tabPage2;
             //    tabControl1.TabPages.Remove(SettlementDayBox);
-            //    #endregion
             //}
+            #endregion
+            #region "ボタン"
             if (Grade != 0)
             {
                 this.label10.Visible = false;
@@ -2317,6 +2316,10 @@ namespace Flawless_ex
             #region"成績入力から計算書への遷移時"
             if (Grade != 0)
             {
+                //タブページの切り取り
+                tabControl1.SelectedTab = SettlementDayBox;
+                tabControl1.TabPages.Remove(tabPage2);
+
                 //該当する計算書の顧客番号取得
                 sql = "select * from statement_data where document_number = '" + document + "';";
                 cmd = new NpgsqlCommand(sql, conn);
@@ -2425,9 +2428,9 @@ namespace Flawless_ex
                 dataGridView1.RowHeadersVisible = false;
                 dataGridView1.RowsAdded -= DataGridView1_RowsAdded;
                 dataGridView1.CellFormatting -= dataGridView1_CellFormatting;
-                dataGridView1.ReadOnly = true;
 
-                RemoveButton.Enabled = false;
+                //dataGridView1.ReadOnly = true;
+                //RemoveButton.Enabled = false;
 
                 sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from statement_calc_data A inner join main_category_m B on B.main_category_code = A.main_category_code inner join item_m C on A.item_code = C.item_code" +
                     " where document_number = '" + document + "' order by record_number;";
@@ -2435,47 +2438,57 @@ namespace Flawless_ex
                 adapter.Fill(dtStatement);
 
                 dataGridView1.DataSource = dtStatement;
+
+                DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
+                dataGridView1.Columns.Insert(0, column);
+
                 #region"ヘッダー名"
-                dataGridView1.Columns[0].HeaderText = "大分類";
-                dataGridView1.Columns[1].HeaderText = "品名";
-                dataGridView1.Columns[2].HeaderText = "品物詳細";
-                dataGridView1.Columns[3].HeaderText = "重量";
-                dataGridView1.Columns[4].HeaderText = "単価";
-                dataGridView1.Columns[5].HeaderText = "数量";
-                dataGridView1.Columns[6].HeaderText = "金額";
-                dataGridView1.Columns[7].HeaderText = "備考";
+                dataGridView1.Columns[1].HeaderText = "大分類";
+                dataGridView1.Columns[2].HeaderText = "品名";
+                dataGridView1.Columns[3].HeaderText = "品物詳細";
+                dataGridView1.Columns[4].HeaderText = "重量";
+                dataGridView1.Columns[5].HeaderText = "単価";
+                dataGridView1.Columns[6].HeaderText = "数量";
+                dataGridView1.Columns[7].HeaderText = "金額";
+                dataGridView1.Columns[8].HeaderText = "備考";
                 #endregion
-
                 #region"フォーマット処理"
-                dataGridView1.Columns[3].DefaultCellStyle.Format = "n1";
-                dataGridView1.Columns[4].DefaultCellStyle.Format = "n0";
+                dataGridView1.Columns[4].DefaultCellStyle.Format = "n1";
                 dataGridView1.Columns[5].DefaultCellStyle.Format = "n0";
-                dataGridView1.Columns[6].DefaultCellStyle.Format = "c0";
+                dataGridView1.Columns[6].DefaultCellStyle.Format = "n0";
+                dataGridView1.Columns[7].DefaultCellStyle.Format = "c0";
                 #endregion
-
                 #region"datagridview の列幅"
-                dataGridView1.Columns[0].Width = 120;
+                dataGridView1.Columns[0].Width = 45;
                 dataGridView1.Columns[1].Width = 120;
-                dataGridView1.Columns[2].Width = 250;
-                dataGridView1.Columns[3].Width = 80;
-                dataGridView1.Columns[4].Width = 200;
-                dataGridView1.Columns[5].Width = 60;
-                dataGridView1.Columns[6].Width = 200;
-                dataGridView1.Columns[7].Width = 300;
+                dataGridView1.Columns[2].Width = 120;
+                dataGridView1.Columns[3].Width = 250;
+                dataGridView1.Columns[4].Width = 80;
+                dataGridView1.Columns[5].Width = 200;
+                dataGridView1.Columns[6].Width = 60;
+                dataGridView1.Columns[7].Width = 200;
+                dataGridView1.Columns[8].Width = 300;
                 #endregion
-
                 #region"文字の右寄せ"
-                dataGridView1.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dataGridView1.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dataGridView1.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dataGridView1.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView1.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 #endregion
+
+                dataGridView1.AllowUserToAddRows = true;
+                dataGridView1.RowHeadersVisible = true;
+                dataGridView1.RowsAdded += DataGridView1_RowsAdded;
+                dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             }
             #endregion
 
             #region"成績入力で納品書検索をした際"
             if (control != 0)
             {
+                tabControl1.SelectedTab = tabPage2;
+                tabControl1.TabPages.Remove(SettlementDayBox);
+
                 tabControl1.SelectedIndex = 1;
                 client_Button.Text = "顧客変更";
                 client_searchButton1.Text = "顧客変更";
@@ -2651,9 +2664,9 @@ namespace Flawless_ex
                 dataGridView2.RowHeadersVisible = false;
                 dataGridView2.RowsAdded -= dataGridView2_RowsAdded;
                 dataGridView2.CellFormatting -= dataGridView2_CellFormatting;
-                dataGridView2.ReadOnly = true;
 
-                RemoveButton1.Enabled = false;
+                //dataGridView2.ReadOnly = true;
+                //RemoveButton1.Enabled = false;
 
                 sql = "select B.main_category_name, C.item_name, A.detail, A.weight, A.unit_price, A.count, A.amount, A.remarks from delivery_calc A inner join main_category_m B on B.main_category_code = A.main_category_code " +
                     "inner join item_m C on A.item_code = C.item_code where control_number = '" + control + "' order by record_number;";
@@ -2661,41 +2674,46 @@ namespace Flawless_ex
                 adapter.Fill(dtDelivery);
 
                 dataGridView2.DataSource = dtDelivery;
+                DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
+                dataGridView2.Columns.Insert(0, column);
                 #region"ヘッダー名"
-                dataGridView2.Columns[0].HeaderText = "大分類";
-                dataGridView2.Columns[1].HeaderText = "品名";
-                dataGridView2.Columns[2].HeaderText = "品物詳細";
-                dataGridView2.Columns[3].HeaderText = "重量";
-                dataGridView2.Columns[4].HeaderText = "単価";
-                dataGridView2.Columns[5].HeaderText = "数量";
-                dataGridView2.Columns[6].HeaderText = "金額";
-                dataGridView2.Columns[7].HeaderText = "備考";
+                dataGridView2.Columns[1].HeaderText = "大分類";
+                dataGridView2.Columns[2].HeaderText = "品名";
+                dataGridView2.Columns[3].HeaderText = "品物詳細";
+                dataGridView2.Columns[4].HeaderText = "重量";
+                dataGridView2.Columns[5].HeaderText = "単価";
+                dataGridView2.Columns[6].HeaderText = "数量";
+                dataGridView2.Columns[7].HeaderText = "金額";
+                dataGridView2.Columns[8].HeaderText = "備考";
                 #endregion
-
                 #region"フォーマット処理"
-                dataGridView2.Columns[3].DefaultCellStyle.Format = "n1";
-                dataGridView2.Columns[4].DefaultCellStyle.Format = "n0";
+                dataGridView2.Columns[4].DefaultCellStyle.Format = "n1";
                 dataGridView2.Columns[5].DefaultCellStyle.Format = "n0";
-                dataGridView2.Columns[6].DefaultCellStyle.Format = "c0";
+                dataGridView2.Columns[6].DefaultCellStyle.Format = "n0";
+                dataGridView2.Columns[7].DefaultCellStyle.Format = "c0";
                 #endregion
-
                 #region"datagridview の列幅"
-                dataGridView2.Columns[0].Width = 120;
+                dataGridView2.Columns[0].Width = 45;
                 dataGridView2.Columns[1].Width = 120;
-                dataGridView2.Columns[2].Width = 250;
-                dataGridView2.Columns[3].Width = 80;
-                dataGridView2.Columns[4].Width = 200;
-                dataGridView2.Columns[5].Width = 60;
-                dataGridView2.Columns[6].Width = 200;
-                dataGridView2.Columns[7].Width = 300;
+                dataGridView2.Columns[2].Width = 120;
+                dataGridView2.Columns[3].Width = 250;
+                dataGridView2.Columns[4].Width = 80;
+                dataGridView2.Columns[5].Width = 200;
+                dataGridView2.Columns[6].Width = 60;
+                dataGridView2.Columns[7].Width = 200;
+                dataGridView2.Columns[8].Width = 300;
                 #endregion
-
                 #region"文字の右寄せ"
-                dataGridView2.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dataGridView2.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dataGridView2.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 dataGridView2.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                dataGridView2.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 #endregion
+
+                dataGridView2.AllowUserToAddRows = true;
+                dataGridView2.RowHeadersVisible = true;
+                dataGridView2.RowsAdded += dataGridView2_RowsAdded;
+                dataGridView2.CellFormatting += dataGridView2_CellFormatting;
 
                 #endregion
             }
@@ -15119,7 +15137,6 @@ namespace Flawless_ex
 
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
-
             //標準テキスト
             Font font = new Font("MS Pゴシック", 10.5f, 0, GraphicsUnit.Pixel);
             Font font1 = new Font("MS Pゴシック", 20f, FontStyle.Bold);
@@ -15221,6 +15238,14 @@ namespace Flawless_ex
             string companyName = row1["company_name"].ToString();
             string shopName = row1["shop_name"].ToString();
             string name = row1["name"].ToString();
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "";
+            }
+            else
+            {
+                name = name + "様";
+            }
             string tel = row1["phone_number"].ToString();
             string fax = row1["fax_number"].ToString();
             string Address = row1["address"].ToString();
@@ -15286,7 +15311,7 @@ namespace Flawless_ex
 
                 e.Graphics.DrawString("：" + companyName, font, brush, new PointF(x1 + d, 80));
                 e.Graphics.DrawString("：" + shopName, font, brush, new PointF(x1 + d, 100));
-                e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 120));
+                e.Graphics.DrawString("：" + name , font, brush, new PointF(x1 + d, 120));
                 e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 140));
                 e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 160));
             }
@@ -15299,7 +15324,7 @@ namespace Flawless_ex
                     e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 100));
                     e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 120));
 
-                    e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 80));
+                    e.Graphics.DrawString("：" + name , font, brush, new PointF(x1 + d, 80));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 100));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 120));
                 }
@@ -15313,7 +15338,7 @@ namespace Flawless_ex
                     e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 160)); ;
                     e.Graphics.DrawString("職業", font, brush, new PointF(x1, 180));
 
-                    e.Graphics.DrawString("：" + name + "様", font, brush, new PointF(x1 + d, 80));
+                    e.Graphics.DrawString("：" + name , font, brush, new PointF(x1 + d, 80));
                     e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 100));
                     e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 120));
                     e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 140));
@@ -15323,17 +15348,16 @@ namespace Flawless_ex
             }
             #endregion
             #endregion
-
             #region"ページ下のお客様情報"
             //法人の場合
 
             if (Type == 0)
             {
-                e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 950));
-                e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 970));
-                e.Graphics.DrawString("担当者名", font, brush, new PointF(x1, 990));
-                e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1010));
-                e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1030));
+                e.Graphics.DrawString("会社名", font, brush, new PointF(x1, 970));
+                e.Graphics.DrawString("店舗名", font, brush, new PointF(x1, 990));
+                e.Graphics.DrawString("担当者名", font, brush, new PointF(x1, 1010));
+                e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1030));
+                e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1050));
 
                 e.Graphics.DrawString("：" + companyName, font, brush, new PointF(x1 + d, 970));
                 e.Graphics.DrawString("：" + shopName, font, brush, new PointF(x1 + d, 990));
@@ -15348,30 +15372,30 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrEmpty(antiqueLicense))     //個人事業主の場合
                 {
-                    e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 950));
-                    e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 970));
-                    e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 990));
+                    e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 970));
+                    e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 990));
+                    e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1010));
 
-                    e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 950));
-                    e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 970));
-                    e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 990));
+                    e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 970));
+                    e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 990));
+                    e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1010));
                 }
                 else
                 {
                     //個人の場合
-                    e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 950));
-                    e.Graphics.DrawString("住所", font, brush, new PointF(x1, 970));
-                    e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 990));
-                    e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1010));
-                    e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 1030));
-                    e.Graphics.DrawString("職業", font, brush, new PointF(x1, 1050));
+                    e.Graphics.DrawString("氏名", font, brush, new PointF(x1, 970));
+                    e.Graphics.DrawString("住所", font, brush, new PointF(x1, 990));
+                    e.Graphics.DrawString("TEL", font, brush, new PointF(x1, 1010));
+                    e.Graphics.DrawString("FAX", font, brush, new PointF(x1, 1030));
+                    e.Graphics.DrawString("生年月日", font, brush, new PointF(x1, 1050));
+                    e.Graphics.DrawString("職業", font, brush, new PointF(x1, 1070));
 
-                    e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 950));
-                    e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 970));
-                    e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 990));
-                    e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1010));
-                    e.Graphics.DrawString("：" + birthday, font, brush, new PointF(x1 + d, 1030)); ;
-                    e.Graphics.DrawString("：" + occupation, font, brush, new PointF(x1 + d, 1050));
+                    e.Graphics.DrawString("：" + name, font, brush, new PointF(x1 + d, 970));
+                    e.Graphics.DrawString("：" + Address, font, brush, new PointF(x1 + d, 990));
+                    e.Graphics.DrawString("：" + tel, font, brush, new PointF(x1 + d, 1010));
+                    e.Graphics.DrawString("：" + fax, font, brush, new PointF(x1 + d, 1030));
+                    e.Graphics.DrawString("：" + birthday, font, brush, new PointF(x1 + d, 1050)); ;
+                    e.Graphics.DrawString("：" + occupation, font, brush, new PointF(x1 + d, 1070));
                 }
             }
             #endregion

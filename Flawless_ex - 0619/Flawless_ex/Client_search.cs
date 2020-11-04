@@ -43,7 +43,7 @@ namespace Flawless_ex
         string antiqueNumber;
         string documentNumber;
         #endregion
-        bool screan = true;
+        //bool screan = true;
         public client_search(Statement statement, int id, int type, string staff_name, string address, decimal Total, int control, string document, string access_suth, string pass)
         {
             InitializeComponent();
@@ -106,16 +106,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                             #region "住所以外記入"
@@ -131,16 +123,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -163,16 +147,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
 
                             }
                             #endregion
@@ -189,16 +165,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -227,16 +195,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
 
                             }
                             #endregion
@@ -253,16 +213,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -284,16 +236,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                             #region "会社名以外未記入"
@@ -308,17 +252,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    //this.Visible = false;
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -352,16 +287,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
 
                             }
                             #endregion
@@ -378,16 +305,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -410,16 +329,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                             #region "店舗名以外未記入"
@@ -434,17 +345,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                shopName = search_Result.name;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -470,16 +372,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                             #region "担当者以外未記入"
@@ -495,16 +389,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                         }
@@ -524,16 +410,8 @@ namespace Flawless_ex
 
                                 conn.Close();
                                 client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                                this.Close();
-                                screan = false;
-                                if (statement.Visible == true)
-                                {
-                                    search_Result.ShowDialog();
-                                }
-                                else
-                                {
-                                    search_Result.Show();
-                                }
+                                this.Dispose();
+                                search_Result.ShowDialog(statement);
                             }
                             #endregion
                             #region "未記入"
@@ -576,16 +454,8 @@ namespace Flawless_ex
                             conn.Close();
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                         #region "古物商許可証なし"
@@ -602,16 +472,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                     }
@@ -633,16 +495,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                         #region "古物商許可証なし"
@@ -659,16 +513,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                     }
@@ -696,16 +542,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                         #region "古物商許可証なし"
@@ -722,16 +560,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                     }
@@ -752,16 +582,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                         #region "古物商許可証なし"
@@ -777,16 +599,8 @@ namespace Flawless_ex
 
                             conn.Close();
                             client_search_result search_Result = new client_search_result(dt, type, check, statement, staff_id, Total, control, document, access_auth, pass);
-                            this.Close();
-                            screan = false;
-                            if (statement.Visible == true)
-                            {
-                                search_Result.ShowDialog();
-                            }
-                            else
-                            {
-                                search_Result.Show();
-                            }
+                            this.Dispose();
+                            search_Result.ShowDialog(statement);
                         }
                         #endregion
                     }
@@ -799,10 +613,10 @@ namespace Flawless_ex
         private void Button1_Click(object sender, EventArgs e)
         {
             client_add client_Add = new client_add(statement, staff_id, type, access_auth, pass);
-            screan = false;
-            this.Close();
+            //this.Close();
+            this.Dispose();
             this.data = client_Add.data;
-            client_Add.ShowDialog();
+            client_Add.ShowDialog(statement);
         }
     }
 }

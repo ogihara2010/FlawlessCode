@@ -886,13 +886,13 @@
             this.label41.AutoSize = true;
             this.label41.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label41.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label41.ForeColor = System.Drawing.Color.Blue;
+            this.label41.ForeColor = System.Drawing.Color.Black;
             this.label41.Location = new System.Drawing.Point(474, 396);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(185, 44);
             this.label41.TabIndex = 114;
-            this.label41.Text = "古物商許可証※";
+            this.label41.Text = "古物商許可証";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label47
@@ -953,13 +953,13 @@
             this.label42.AutoSize = true;
             this.label42.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label42.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label42.ForeColor = System.Drawing.Color.Blue;
+            this.label42.ForeColor = System.Drawing.Color.Black;
             this.label42.Location = new System.Drawing.Point(2, 396);
             this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(185, 44);
             this.label42.TabIndex = 111;
-            this.label42.Text = "登記簿謄本※";
+            this.label42.Text = "登記簿謄本";
             this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel2
