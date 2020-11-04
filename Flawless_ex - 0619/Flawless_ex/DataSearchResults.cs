@@ -1,12 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using Npgsql;
+﻿using Npgsql;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
-using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
+using System.Windows.Forms;
 
 namespace Flawless_ex
 {
@@ -63,7 +62,6 @@ namespace Flawless_ex
         string YearChange;
         string MonthChange;
         List<DateTime> dateList = new List<DateTime>();
-        
 
         #region"計算書"
         List<DataTable> dataTables = new List<DataTable>();             //計算書の表の datatable
@@ -162,7 +160,7 @@ namespace Flawless_ex
 
             #region "計算書"
             if (data == "S")
-            {                
+            {
                 #region "法人"
                 if (type == 0)
                 {
@@ -175,12 +173,13 @@ namespace Flawless_ex
                     dataGridView1.Columns[1].HeaderText = "伝票番号";
                     dataGridView1.Columns[2].HeaderText = "決済日";
                     dataGridView1.Columns[3].HeaderText = "受渡日";
-                    dataGridView1.Columns[4].HeaderText = "店舗名";
-                    dataGridView1.Columns[5].HeaderText = "担当者名・個人名";
-                    dataGridView1.Columns[6].HeaderText = "電話番号";
-                    dataGridView1.Columns[7].HeaderText = "住所";
-                    dataGridView1.Columns[8].HeaderText = "古物番号";
-                    dataGridView1.Columns[9].HeaderText = "金額";
+                    dataGridView1.Columns[4].HeaderText = "会社名";
+                    dataGridView1.Columns[5].HeaderText = "店舗名";
+                    dataGridView1.Columns[6].HeaderText = "担当者名・個人名";
+                    dataGridView1.Columns[7].HeaderText = "電話番号";
+                    dataGridView1.Columns[8].HeaderText = "住所";
+                    dataGridView1.Columns[9].HeaderText = "古物番号";
+                    dataGridView1.Columns[10].HeaderText = "金額";
                     #endregion
 
                     dataGridView1.Columns[10].Visible = false;
@@ -195,6 +194,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[7].ReadOnly = true;
                     dataGridView1.Columns[8].ReadOnly = true;
                     dataGridView1.Columns[9].ReadOnly = true;
+                    dataGridView1.Columns[10].ReadOnly = true;
                     #endregion
 
                     //conn.Close();
@@ -249,7 +249,7 @@ namespace Flawless_ex
             #endregion
             #region "納品書"
             if (data == "D")
-            {                
+            {
                 #region "法人"
                 if (type == 0)
                 {
@@ -262,12 +262,13 @@ namespace Flawless_ex
                     dataGridView1.Columns[1].HeaderText = "管理番号";
                     dataGridView1.Columns[2].HeaderText = "決済日";
                     dataGridView1.Columns[3].HeaderText = "受渡日";
-                    dataGridView1.Columns[4].HeaderText = "店舗名";
-                    dataGridView1.Columns[5].HeaderText = "担当者名・個人名";
-                    dataGridView1.Columns[6].HeaderText = "電話番号";
-                    dataGridView1.Columns[7].HeaderText = "住所";
-                    dataGridView1.Columns[8].HeaderText = "古物番号";
-                    dataGridView1.Columns[9].HeaderText = "金額";
+                    dataGridView1.Columns[4].HeaderText = "会社名";
+                    dataGridView1.Columns[5].HeaderText = "店舗名";
+                    dataGridView1.Columns[6].HeaderText = "担当者名・個人名";
+                    dataGridView1.Columns[7].HeaderText = "電話番号";
+                    dataGridView1.Columns[8].HeaderText = "住所";
+                    dataGridView1.Columns[9].HeaderText = "古物番号";
+                    dataGridView1.Columns[10].HeaderText = "金額";
                     #endregion
 
                     #region"読み取り専用"
@@ -280,6 +281,7 @@ namespace Flawless_ex
                     dataGridView1.Columns[7].ReadOnly = true;
                     dataGridView1.Columns[8].ReadOnly = true;
                     dataGridView1.Columns[9].ReadOnly = true;
+                    dataGridView1.Columns[10].ReadOnly = true;
                     #endregion
 
                     //conn.Close();
@@ -343,7 +345,7 @@ namespace Flawless_ex
             }
             return dt;
         }
-        
+
         #region "詳細表示"
         private void Button1_Click(object sender, EventArgs e)
         {
@@ -362,7 +364,7 @@ namespace Flawless_ex
                 MessageBox.Show("計算書・納品書を選択してください", "確認", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-                    pageNumber = 0;
+            pageNumber = 0;
             repeat = 0;
             DNumber.Clear();
             statementDataTable.Clear();
@@ -456,7 +458,7 @@ namespace Flawless_ex
                         deliveryTable.Add(DeliveryTable);
                         string sql_str = "select * from delivery_m where control_number =" + int.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString()) + ";";
                         adapter = new NpgsqlDataAdapter(sql_str, conn);
-                        adapter.Fill(deliveryTable[repeat - 1]) ;
+                        adapter.Fill(deliveryTable[repeat - 1]);
 
                         cmd = new NpgsqlCommand(sql_str, conn);
                         using (reader = cmd.ExecuteReader())
@@ -474,7 +476,7 @@ namespace Flawless_ex
                         string sql_str2 = "select * from delivery_calc A inner join item_m B on A.item_code = B.item_code" +
                             " where control_number =" + int.Parse(dataGridView1.Rows[i].Cells[1].Value.ToString()) + " order by record_number;";
                         adapter = new NpgsqlDataAdapter(sql_str2, conn);
-                        adapter.Fill(deliveryCalcTable[repeat - 1]) ;
+                        adapter.Fill(deliveryCalcTable[repeat - 1]);
 
                         #region"コメントアウト"
                         //int a = dt2.Rows.Count;
@@ -697,9 +699,9 @@ namespace Flawless_ex
                         #region "顧客情報"
                         DeliveryClientTable = DeliveryClientTable.Clone();
                         deliveryClientTable.Add(DeliveryClientTable);
-                            string sql_str6 = "select * from client_m where code = " + ClientCode + ";";
-                            adapter = new NpgsqlDataAdapter(sql_str6, conn);
-                        adapter.Fill(deliveryClientTable[repeat - 1]) ;
+                        string sql_str6 = "select * from client_m where code = " + ClientCode + ";";
+                        adapter = new NpgsqlDataAdapter(sql_str6, conn);
+                        adapter.Fill(deliveryClientTable[repeat - 1]);
                         #endregion
                         #endregion
                     }
@@ -810,12 +812,12 @@ namespace Flawless_ex
                     totalWeight = ((decimal)row["total_weight"]).ToString("n1");
                     totalCount = ((int)row["total_amount"]).ToString("n0");
 
-                    if (totalWeight == "0.0") 
+                    if (totalWeight == "0.0")
                     {
                         totalWeight = "";
                     }
 
-                    if (totalCount == "0") 
+                    if (totalCount == "0")
                     {
                         totalCount = "";
                     }
@@ -1848,6 +1850,44 @@ namespace Flawless_ex
                     Font font1 = new Font("メイリオ", 36f);
                     Brush brush = new SolidBrush(Color.Black);
 
+                    #region"Format 変換"
+                    StringFormat stringFormat = new StringFormat();
+                    stringFormat.Alignment = StringAlignment.Center;    //中央表示
+
+                    StringFormat stringFormat1 = new StringFormat();
+                    stringFormat1.Alignment = StringAlignment.Far;      //右寄せ
+
+                    StringFormat stringFormat2 = new StringFormat();
+                    stringFormat2.Alignment = StringAlignment.Near;     //左寄せ
+                    #endregion
+
+                    int width = 100;                        //品名の幅
+                    int widthLong = 150;                    //品物詳細の幅
+                    int weightWidth = 80;                   //重量の幅
+                    int priceWidth = 90;                    //単価の幅
+                    int countWidth = 50;                    //数量の幅
+                    int amountWidth = 110;                  //金額の幅
+                    int remarkWidth = 200;                  //備考の幅
+
+                    int x = 20;                             //品名のx座標
+                    int Longx = x + width;                  //品物詳細の幅
+                    int Weightx = Longx + widthLong;        //重量の幅
+                    int pricex = Weightx + weightWidth;     //単価の幅
+                    int countx = pricex + priceWidth;       //数量の幅
+                    int amountx = countx + countWidth;      //金額の幅
+                    int remarkx = amountx + amountWidth;    //備考の幅
+
+                    int center = x + (int)width / 2;
+                    int Longcenter = Longx + (int)widthLong / 2;
+                    int weightcenter = Weightx + (int)weightWidth / 2;
+                    int pricecenter =  pricex + (int)priceWidth / 2;
+                    int countcenter = countx + (int)countWidth / 2;
+                    int amountcenter = amountx + (int)amountWidth / 2;
+                    int remarkcenter = remarkx + (int)remarkWidth / 2;
+
+                    int cellh = 50;
+                    int H;
+
                     #region "納品書 下の部分"
                     DataRow row;
                     row = deliveryTable[pageNumber].Rows[0];
@@ -1859,14 +1899,26 @@ namespace Flawless_ex
                     string vat = row["vat"].ToString();
                     string vat_rate = row["vat_rate"].ToString();
                     string vat_amount = row["vat_amount"].ToString();
-                    string sub_total = row["sub_total"].ToString();
-                    string total = row["total"].ToString();
+                    string sub_total = ((decimal)row["sub_total"]).ToString("c0");
+                    string total = ((decimal)row["total"]).ToString("c0");
                     string customer = row["honorific_title"].ToString();
                     string name = row["name"].ToString();
                     string sealPrint = row["seaal_print"].ToString();
-                    string TotalWeight = row["total_weight"].ToString();
-                    string TotalCount = row["total_count"].ToString();
+                    string TotalWeight = ((decimal)row["total_weight"]).ToString("n1");
+                    string TotalCount = ((int)row["total_count"]).ToString("n0");
                     string kind = row["type"].ToString();
+
+
+                    if (TotalWeight == "0.0")
+                    {
+                        TotalWeight = "";
+                    }
+
+                    if (TotalWeight == "0")
+                    {
+                        TotalWeight = "";
+                    }
+
                     #endregion
 
                     #region "納品書　表の部分"
@@ -1881,294 +1933,38 @@ namespace Flawless_ex
                     string itemName = row5["item_name"].ToString();
                     string detail = row5["detail"].ToString();
 
+                    H = 415;
                     for (int i = 0; i < a; i++)
                     {
                         #region "表の中身"
-                        switch (i)
+
+                        row5 = deliveryCalcTable[pageNumber].Rows[i];
+                        weight = ((decimal)row5["weight"]).ToString("n1");
+                        count = ((int)row5["count"]).ToString("n0");
+                        remark = row5["remarks"].ToString();
+                        unit_price = ((decimal)row5["unit_price"]).ToString("n0");
+                        amount = ((decimal)row5["amount"]).ToString("c0");
+                        itemName = row5["item_name"].ToString();
+                        detail = row5["detail"].ToString();
+
+                        if (weight == "0.0")
                         {
-                            #region "納品書1行目"
-                            case 0:
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 430));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 430));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 430));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 430));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 430));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 430));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 430));
-                                break;
-                            #endregion
-                            #region "納品書2行目"
-                            case 1:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 480));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 480));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 480));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 480));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 480));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 480));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 480));
-                                break;
-                            #endregion
-                            #region "納品書3行目"
-                            case 2:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 530));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 530));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 530));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 530));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 530));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 530));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 530));
-                                break;
-                            #endregion
-                            #region "納品書4行目"
-                            case 3:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 580));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 580));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 580));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 580));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 580));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 580));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 580));
-                                break;
-                            #endregion
-                            #region "納品書5行目"
-                            case 4:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 630));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 630));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 630));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 630));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 630));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 630));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 630));
-                                break;
-
-                            #endregion
-                            #region "納品書6行目"
-                            case 5:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 680));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 680));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 680));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 680));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 680));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 680));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 680));
-                                break;
-                            #endregion
-                            #region "納品書7行目"
-                            case 6:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 730));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 730));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 730));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 730));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 730));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 730));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 730));
-                                break;
-                            #endregion
-                            #region "納品書8行目"
-                            case 7:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 780));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 780));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 780));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 780));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 780));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 780));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 780));
-                                break;
-                            #endregion
-                            #region "納品書9行目"
-                            case 8:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 830));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 830));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 830));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 830));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 830));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 830));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 830));
-                                break;
-                            #endregion
-                            #region "納品書10行目"
-                            case 9:
-                                row5 = deliveryCalcTable[pageNumber].Rows[i];
-                                weight = ((decimal)row5["weight"]).ToString("n1");
-                                count = ((int)row5["count"]).ToString("n0");
-                                remark = row5["remarks"].ToString();
-                                unit_price = ((decimal)row5["unit_price"]).ToString("n0");
-                                amount = ((decimal)row5["amount"]).ToString("c0");
-                                itemName = row5["item_name"].ToString();
-                                detail = row5["detail"].ToString();
-
-                                if (weight == "0.0")
-                                {
-                                    weight = "";
-                                }
-                                if (count == "0")
-                                {
-                                    count = "";
-                                }
-
-                                e.Graphics.DrawString(itemName, font, brush, new PointF(30, 880));
-                                e.Graphics.DrawString(detail, font, brush, new PointF(200, 880));
-                                e.Graphics.DrawString(weight, font, brush, new PointF(330, 880));
-                                e.Graphics.DrawString(count, font, brush, new PointF(490, 880));
-                                e.Graphics.DrawString(unit_price, font, brush, new PointF(390, 880));
-                                e.Graphics.DrawString(amount, font, brush, new PointF(550, 880));
-                                e.Graphics.DrawString(remark, font, brush, new PointF(690, 880));
-                                break;
-                                #endregion
+                            weight = "";
                         }
+                        if (count == "0")
+                        {
+                            count = "";
+                        }
+
+                        e.Graphics.DrawString(itemName, font, brush, new PointF(center, H), stringFormat);
+                        e.Graphics.DrawString(detail, font, brush, new PointF(Longx, H), stringFormat2);
+                        e.Graphics.DrawString(weight, font, brush, new PointF(pricex, H), stringFormat1);
+                        e.Graphics.DrawString(unit_price, font, brush, new PointF(countx, H), stringFormat1);
+                        e.Graphics.DrawString(count, font, brush, new PointF(amountx, H), stringFormat1);
+                        e.Graphics.DrawString(amount, font, brush, new PointF(remarkx, H), stringFormat1);
+                        e.Graphics.DrawString(remark, font, brush, new PointF(remarkx, H), stringFormat2);
+
+                        H += cellh;
                         #endregion
                     }
 
@@ -2196,18 +1992,21 @@ namespace Flawless_ex
                     e.Graphics.DrawString(kind, font, brush, new PointF(540, 270));
                     e.Graphics.DrawString("決済日", font, brush, new PointF(540, 320));
                     e.Graphics.DrawString("印鑑を印刷する", font, brush, new PointF(350, 200));
-                    e.Graphics.DrawString("品名", font, brush, new PointF(60, 380));
-                    e.Graphics.DrawString("品物詳細", font, brush, new PointF(180, 380));
-                    e.Graphics.DrawString("重量", font, brush, new PointF(310, 380));
-                    e.Graphics.DrawString("単価", font, brush, new PointF(390, 380));
-                    e.Graphics.DrawString("数量", font, brush, new PointF(470, 380));
-                    e.Graphics.DrawString("金額", font, brush, new PointF(550, 380));
-                    e.Graphics.DrawString("備考", font, brush, new PointF(690, 380));
-                    e.Graphics.DrawString("総重量", font, brush, new PointF(200, 910));
-                    e.Graphics.DrawString("総数", font, brush, new PointF(390, 910));
-                    e.Graphics.DrawString("お支払方法", font, brush, new PointF(35, 950));
+
+                    e.Graphics.DrawString("品名", font, brush, new PointF(center, 385), stringFormat);
+                    e.Graphics.DrawString("品物詳細", font, brush, new PointF(Longcenter, 385), stringFormat);
+                    e.Graphics.DrawString("重量", font, brush, new PointF(weightcenter, 385), stringFormat);
+                    e.Graphics.DrawString("単価", font, brush, new PointF(pricecenter, 385), stringFormat);
+                    e.Graphics.DrawString("数量", font, brush, new PointF(countcenter, 385), stringFormat);
+                    e.Graphics.DrawString("金額", font, brush, new PointF(amountcenter, 385), stringFormat);
+                    e.Graphics.DrawString("備考", font, brush, new PointF(remarkcenter, 385), stringFormat);
+
+                    e.Graphics.DrawString("総重量", font, brush, new PointF(center, 910), stringFormat);
+                    e.Graphics.DrawString("総数", font, brush, new PointF(weightcenter, 910), stringFormat);
+
+                    e.Graphics.DrawString("お支払方法", font, brush, new PointF(80, 945), stringFormat);
                     e.Graphics.DrawString("振込先", font, brush, new PointF(50, 1050));
-                    e.Graphics.DrawString("小計", font, brush, new PointF(310, 950));
+                    e.Graphics.DrawString("小計", font, brush, new PointF(310, 945));
                     e.Graphics.DrawString("消費税区分", font, brush, new PointF(310, 990));
                     e.Graphics.DrawString("消費税率", font, brush, new PointF(310, 1030));
                     e.Graphics.DrawString("消費税額", font, brush, new PointF(310, 1070));
@@ -2220,15 +2019,15 @@ namespace Flawless_ex
                     e.Graphics.DrawString(orderDate, font, brush, new PointF(620, 220));
                     e.Graphics.DrawString(deliveryDate, font, brush, new PointF(620, 270));
                     e.Graphics.DrawString(settlementDate, font, brush, new PointF(620, 320));
-                    e.Graphics.DrawString(method, font, brush, new PointF(180, 950));
-                    e.Graphics.DrawString(sub_total, font, brush, new PointF(690, 950));
+                    e.Graphics.DrawString(method, font, brush, new PointF(Longcenter, 945), stringFormat);
+                    e.Graphics.DrawString(sub_total, font, brush, new PointF(710, 945), stringFormat);
                     e.Graphics.DrawString(bank, font, brush, new PointF(180, 1050));
-                    e.Graphics.DrawString(vat, font, brush, new PointF(690, 990));
-                    e.Graphics.DrawString(vat_rate + "％", font, brush, new PointF(690, 1030));
-                    e.Graphics.DrawString(vat_amount, font, brush, new PointF(690, 1070));
-                    e.Graphics.DrawString(total, font, brush, new PointF(690, 1110));
-                    e.Graphics.DrawString(TotalWeight, font, brush, new PointF(330, 910));
-                    e.Graphics.DrawString(TotalCount, font, brush, new PointF(480, 910));
+                    e.Graphics.DrawString(vat, font, brush, new PointF(remarkcenter, 990), stringFormat);
+                    e.Graphics.DrawString(vat_rate + "％", font, brush, new PointF(remarkcenter, 1030), stringFormat);
+                    e.Graphics.DrawString(vat_amount, font, brush, new PointF(remarkcenter, 1070), stringFormat);
+                    e.Graphics.DrawString(total, font, brush, new PointF(remarkcenter, 1110), stringFormat);
+                    e.Graphics.DrawString(TotalWeight, font, brush, new PointF(Longcenter, 910), stringFormat);
+                    e.Graphics.DrawString(TotalCount, font, brush, new PointF(pricex + ((int)(priceWidth + countWidth) / 2), 910), stringFormat);
                     if (sealPrint == "する")
                     {
                         e.Graphics.DrawString("✓", font1, brush, new PointF(360, 200));
@@ -2249,131 +2048,58 @@ namespace Flawless_ex
                     e.Graphics.DrawRectangle(p, new Rectangle(600, 300, 170, 50));
                     #endregion
                     #region"枠"
-                    #region "見出し"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 370, 120, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 370, 150, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 370, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 370, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 370, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 370, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 370, 150, 30));
+                    #region "ヘッダ"
+                    H = 370;
+                    e.Graphics.DrawRectangle(p, new Rectangle(x, H, width, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Longx, H, widthLong, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(pricex, H, priceWidth, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(countx, H, countWidth, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(amountx, H, amountWidth, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, 30));
                     #endregion
-                    #region "1行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 400, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 400, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 400, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 400, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 400, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 400, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 400, 150, 50));
-                    #endregion
-                    #region "2行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 450, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 450, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 450, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 450, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 450, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 450, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 450, 150, 50));
-                    #endregion
-                    #region "3行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 500, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 500, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 500, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 500, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 500, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 500, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 500, 150, 50));
-                    #endregion
-                    #region "4行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 550, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 550, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 550, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 550, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 550, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 550, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 550, 150, 50));
-                    #endregion
-                    #region "5行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 600, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 600, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 600, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 600, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 600, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 600, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 600, 150, 50));
-                    #endregion
-                    #region "6行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 650, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 650, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 650, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 650, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 650, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 650, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 650, 150, 50));
-                    #endregion
-                    #region "7行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 700, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 700, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 700, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 700, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 700, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 700, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 700, 150, 50));
-                    #endregion
-                    #region "8行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 750, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 750, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 750, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 750, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 750, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 750, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 750, 150, 50));
-                    #endregion
-                    #region "9行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 800, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 800, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 800, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 800, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 800, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 800, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 800, 150, 50));
-                    #endregion
-                    #region "10行目"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 850, 120, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 850, 150, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 850, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 850, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 850, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 850, 80, 50));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 850, 150, 50));
+                    #region "ヘッダ以下"
+                    H += 30;
+                    for (int i = 0; i < 10; i++)
+                    {
+                        e.Graphics.DrawRectangle(p, new Rectangle(x, H, width, cellh));
+                        e.Graphics.DrawRectangle(p, new Rectangle(Longx, H, widthLong, cellh));
+                        e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth, cellh));
+                        e.Graphics.DrawRectangle(p, new Rectangle(pricex, H, priceWidth, cellh));
+                        e.Graphics.DrawRectangle(p, new Rectangle(countx, H, countWidth, cellh));
+                        e.Graphics.DrawRectangle(p, new Rectangle(amountx, H, amountWidth, cellh));
+                        e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, cellh));
+                        H += cellh;
+                    }
                     #endregion
                     #region "総数"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 900, 270, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 900, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(370, 900, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(450, 900, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 900, 80, 30));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 900, 150, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(x, H, width, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Longx, H, widthLong, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth, 30));
+                    e.Graphics.DrawRectangle(p, new Rectangle(pricex, H, priceWidth + countWidth, 30));
                     #endregion
                     #region　"お支払方法"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 930, 120, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 930, 150, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 930, 240, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(530, 930, 80, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 930, 150, 40));
+                    H += 30;
+                    e.Graphics.DrawRectangle(p, new Rectangle(x, H, width, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Longx, H, widthLong, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth + priceWidth + countWidth + amountWidth, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, 40));
                     #endregion
                     #region "振込先"
-                    e.Graphics.DrawRectangle(p, new Rectangle(20, 970, 120, 160));
-                    e.Graphics.DrawRectangle(p, new Rectangle(140, 970, 150, 160));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 970, 320, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 970, 150, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 1010, 320, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 1010, 150, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 1050, 320, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 1050, 150, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(290, 1090, 320, 40));
-                    e.Graphics.DrawRectangle(p, new Rectangle(610, 1090, 150, 40));
+                    H += 40;
+                    e.Graphics.DrawRectangle(p, new Rectangle(x, H, width, 160));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Longx, H, widthLong, 160));
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth + priceWidth + countWidth + amountWidth, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, 40));
+                    H += 40;
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth + priceWidth + countWidth + amountWidth, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, 40));
+                    H += 40;
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth + priceWidth + countWidth + amountWidth, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, 40));
+                    H += 40;
+                    e.Graphics.DrawRectangle(p, new Rectangle(Weightx, H, weightWidth + priceWidth + countWidth + amountWidth, 40));
+                    e.Graphics.DrawRectangle(p, new Rectangle(remarkx, H, remarkWidth, 40));
                     #endregion
                     #endregion
                     #region "ロゴ"

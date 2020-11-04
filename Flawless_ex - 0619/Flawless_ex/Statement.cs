@@ -17456,10 +17456,23 @@ namespace Flawless_ex
 
             for (int i = 0; i < rowNumber; i++)
             {
-                if (dataGridView1[4, i].Value != null && dataGridView1[4, i].Value.ToString() != "")
+                if (dataGridView1[4, i].Value != null)
                 {
-                    unitWeight = decimal.Parse(dataGridView1[4, i].Value.ToString());
-                    TotalWeight += unitWeight;
+                    if (dataGridView1[4, i].Value.ToString() == "0")
+                    {
+                        dataGridView1[4, i].Value = "";
+                        dataGridView1[6, i].ReadOnly = false;
+                    }
+                    else if (dataGridView1[4, i].Value.ToString() != "")
+                    {
+                        dataGridView1[6, i].ReadOnly = true;
+                        unitWeight = decimal.Parse(dataGridView1[4, i].Value.ToString());
+                        TotalWeight += unitWeight;
+                    }
+                    else if (dataGridView1[4, i].Value.ToString() == "")
+                    {
+                        dataGridView1[6, i].ReadOnly = false;
+                    }
                 }
             }
 
@@ -17471,10 +17484,23 @@ namespace Flawless_ex
 
             for (int i = 0; i < rowNumber; i++)
             {
-                if (dataGridView1[6, i].Value != null && dataGridView1[6, i].Value.ToString() != "")
+                if (dataGridView1[6, i].Value != null)
                 {
-                    unitCount = int.Parse(dataGridView1[6, i].Value.ToString());
-                    TotalCount += unitCount;
+                    if (dataGridView1[6, i].Value.ToString() == "0")
+                    {
+                        dataGridView1[6, i].Value = "";
+                        dataGridView1[4, i].ReadOnly = false;
+                    }
+                    else if (dataGridView1[6, i].Value.ToString() != "")
+                    {
+                        dataGridView1[4, i].ReadOnly = true;
+                        unitCount = int.Parse(dataGridView1[6, i].Value.ToString());
+                        TotalCount += unitCount;
+                    }
+                    else if (dataGridView1[6, i].Value.ToString() == "")
+                    {
+                        dataGridView1[4, i].ReadOnly = false;
+                    }
                 }
             }
 
@@ -17498,8 +17524,7 @@ namespace Flawless_ex
 
             #region"計算列"
             //重量×単価（数量は空白）
-            if (dataGridView1[4, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value == null &&
-                dataGridView1[4, e.RowIndex].Value.ToString() != "" && dataGridView1[5, e.RowIndex].Value.ToString() != "")
+            if (Convert.ToString(dataGridView1[4, e.RowIndex].Value) != "" && Convert.ToString(dataGridView1[5, e.RowIndex].Value) != "" && Convert.ToString(dataGridView1[6, e.RowIndex].Value) == "")
             {
                 weight = decimal.Parse(dataGridView1[4, e.RowIndex].Value.ToString());
                 unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
@@ -17508,8 +17533,7 @@ namespace Flawless_ex
             }
 
             //数量×単価（重量は空白）
-            if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value != null &&
-                dataGridView1[5, e.RowIndex].Value.ToString() != "" && dataGridView1[6, e.RowIndex].Value.ToString() != "")
+            else if (Convert.ToString(dataGridView1[4, e.RowIndex].Value) == "" && Convert.ToString(dataGridView1[5, e.RowIndex].Value) != "" && Convert.ToString(dataGridView1[6, e.RowIndex].Value) != "")
             {
                 unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
                 count = int.Parse(dataGridView1[6, e.RowIndex].Value.ToString());
