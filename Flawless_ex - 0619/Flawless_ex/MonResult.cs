@@ -73,8 +73,6 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlCommand cmd;
 
-        public string scr;
-
         public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade, bool carryOver, bool monthCatalog)
         {
             InitializeComponent();
@@ -92,7 +90,6 @@ namespace Flawless_ex
 
         private void Return3_Click(object sender, EventArgs e)//戻るボタン
         {
-            scr = "MainMenu";
             this.Close();
         }
 
@@ -645,17 +642,8 @@ namespace Flawless_ex
         {
             if (MonthCatalog && screan) 
             {
-
-                if (scr == "MainMenu")
-                {
-                    MainMenu mainmenu = new MainMenu(top, staff_id, Pass, access_auth);
-                    mainmenu.Show();
-                }
-                else
-                {
-                    RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange, CarryOver, MonthCatalog);
-                    recordList.Show();
-                }
+                RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange, CarryOver, MonthCatalog);
+                recordList.Show();
             }
             else if (screan)
             {

@@ -129,7 +129,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 19);
             this.label2.TabIndex = 4;
-            this.label2.Text = "会社名";
+            this.label2.Text = "店舗名";
             // 
             // textBox1
             // 
@@ -149,7 +149,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 19);
             this.label3.TabIndex = 8;
-            this.label3.Text = "会社名カナ";
+            this.label3.Text = "店舗名カナ";
             // 
             // textBox2
             // 
