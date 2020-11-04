@@ -504,12 +504,12 @@ namespace Flawless_ex
 
             if (data != "S" && data != "D" && antiqueNumber == null && documentNumber == null && Grade == 0)
             {
-                string Str = "insert into statement_data (document_number, NotFNumber, staff_code, assessment_date) values ('" + documentNumberTextBox.Text + "','" + number + "', '" + staff_id + "','"+AssessmentDate+"');";
+                string Str = "insert into statement_data (document_number, NotFNumber, staff_code, assessment_date) values ('" + documentNumberTextBox.Text + "','" + number + "', '" + staff_id + "','" + AssessmentDate + "');";
                 cmd = new NpgsqlCommand(Str, conn);
                 cmd.ExecuteNonQuery();
             }
 
-            if ((data != "S" && data != "D" && antiqueNumber == null && documentNumber == null && Grade == 0 && control == 0) && tabControl1.SelectedIndex != 0) 
+            if ((data != "S" && data != "D" && antiqueNumber == null && documentNumber == null && Grade == 0 && control == 0) && tabControl1.SelectedIndex != 0)
             {
                 string Str = "insert into delivery_m (control_number, staff_code) values ('" + Number + "', '" + staff_id + "');";
                 cmd = new NpgsqlCommand(Str, conn);
@@ -2498,7 +2498,7 @@ namespace Flawless_ex
                 //conn.Open();
                 sql = "select * from delivery_m left outer join revisions on upd_code = cast(control_number as text) where control_number = '" + control + "';";
                 cmd = new NpgsqlCommand(sql, conn);
-                
+
                 string clientCode = "";
 
                 using (reader = cmd.ExecuteReader())
@@ -3279,7 +3279,7 @@ namespace Flawless_ex
                 transaction.Commit();
             }
 
-            using(transaction = conn.BeginTransaction())
+            using (transaction = conn.BeginTransaction())
             {
                 Sql = "update client_m set remarks = '" + clientRemarksTextBox.Text + "' where code = '" + ClientCode + "';";
                 cmd = new NpgsqlCommand(Sql, conn);
@@ -3290,7 +3290,7 @@ namespace Flawless_ex
 
             if (!string.IsNullOrEmpty(antiqueLicenceTextBox.Text))
             {
-                AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox.Text,FileServer.Filetype.Antiquelicense);
+                AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox.Text, FileServer.Filetype.Antiquelicense);
 
                 using (transaction = conn.BeginTransaction())
                 {
@@ -3318,26 +3318,26 @@ namespace Flawless_ex
 
                 if (!string.IsNullOrEmpty(articlesTextBox.Text))
                 {
-                    AolFinancialShareholder = fileServer.UploadImage(articlesTextBox.Text,FileServer.Filetype.AolFinancialShareholder);
+                    AolFinancialShareholder = fileServer.UploadImage(articlesTextBox.Text, FileServer.Filetype.AolFinancialShareholder);
 
                     using (transaction = conn.BeginTransaction())
                     {
-                            string SQL_STR = @"update client_m set aol_financial_shareholder='" + AolFinancialShareholder + "' where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
+                        string SQL_STR = @"update client_m set aol_financial_shareholder='" + AolFinancialShareholder + "' where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
                     }
                 }
 
                 if (!string.IsNullOrEmpty(taxCertificateTextBox.Text))
                 {
-                    TaxCertification = fileServer.UploadImage(taxCertificateTextBox.Text,FileServer.Filetype.TaxCertification);
+                    TaxCertification = fileServer.UploadImage(taxCertificateTextBox.Text, FileServer.Filetype.TaxCertification);
                     using (transaction = conn.BeginTransaction())
                     {
-                            string SQL_STR = @"update client_m set tax_certificate='" + TaxCertification + "' where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
+                        string SQL_STR = @"update client_m set tax_certificate='" + TaxCertification + "' where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
                     }
                 }
 
@@ -3346,24 +3346,24 @@ namespace Flawless_ex
                     SealCertification = fileServer.UploadImage(sealCertificationTextBox.Text, FileServer.Filetype.SealCertification);
                     using (transaction = conn.BeginTransaction())
                     {
-                            string SQL_STR = @"update client_m set seal_certification='" + SealCertification + "' where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
-                        
+                        string SQL_STR = @"update client_m set seal_certification='" + SealCertification + "' where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
+
                     }
                 }
 
                 if (!string.IsNullOrEmpty(residenceCardTextBox.Text))
                 {
-                    ResidenceCard = fileServer.UploadImage(residenceCardTextBox.Text,FileServer.Filetype.ResidenceCard);
+                    ResidenceCard = fileServer.UploadImage(residenceCardTextBox.Text, FileServer.Filetype.ResidenceCard);
                     ResidencePeriod = residencePerioddatetimepicker.Value.ToShortDateString();
                     using (transaction = conn.BeginTransaction())
                     {
-                            string SQL_STR = @"update client_m set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where code = '" + ClientCode + "';";
-                            cmd = new NpgsqlCommand(SQL_STR, conn);
-                            cmd.ExecuteNonQuery();
-                            transaction.Commit();
+                        string SQL_STR = @"update client_m set (residence_card, period_stay) =('" + ResidenceCard + "','" + ResidencePeriod + "') where code = '" + ClientCode + "';";
+                        cmd = new NpgsqlCommand(SQL_STR, conn);
+                        cmd.ExecuteNonQuery();
+                        transaction.Commit();
                     }
                 }
             }
@@ -3445,7 +3445,7 @@ namespace Flawless_ex
             RemoveButton.Enabled = false;
 
             previewButton.Enabled = true;
-            RecordListButton.Enabled=true;
+            RecordListButton.Enabled = true;
             button1.Enabled = true;
 
             #region"一時コメントアウト"
@@ -12759,7 +12759,7 @@ namespace Flawless_ex
 
             if (!string.IsNullOrEmpty(antiqueLicenceTextBox2.Text))
             {
-                AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox2.Text,FileServer.Filetype.Antiquelicense);
+                AntiqueLicence = fileServer.UploadImage(antiqueLicenceTextBox2.Text, FileServer.Filetype.Antiquelicense);
 
                 using (transaction = conn.BeginTransaction())
                 {
@@ -15945,7 +15945,7 @@ namespace Flawless_ex
             {
                 totalWeight = "";
             }
-            if(totalCount == "0")
+            if (totalCount == "0")
             {
                 totalCount = "";
             }
@@ -16538,7 +16538,7 @@ namespace Flawless_ex
 
             PostgreSQL postgre = new PostgreSQL();
             conn = postgre.connection();
-            
+
             //２行目追加時
             if (dataGridView1.CurrentCell.RowIndex == 0)
             {
@@ -16883,9 +16883,9 @@ namespace Flawless_ex
                 row = dt5.Rows[0];
                 itemCode = (int)row["item_code"];
 
-                dataGridView1[2,0].Value = itemCode;
+                dataGridView1[2, 0].Value = itemCode;
 
-                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2,0];
+                dataGridViewComboBoxCell = (DataGridViewComboBoxCell)dataGridView1[2, 0];
                 dataGridViewComboBoxCell.DataSource = dt5;
                 dataGridViewComboBoxCell.DisplayMember = "item_name";
                 dataGridViewComboBoxCell.ValueMember = "item_code";
@@ -17480,10 +17480,23 @@ namespace Flawless_ex
 
             for (int i = 0; i < rowNumber; i++)
             {
-                if (dataGridView1[4, i].Value != null && dataGridView1[4, i].Value.ToString() != "")
+                if (dataGridView1[4, i].Value != null)
                 {
-                    unitWeight = decimal.Parse(dataGridView1[4, i].Value.ToString());
-                    TotalWeight += unitWeight;
+                    if (dataGridView1[4, i].Value.ToString() == "0")
+                    {
+                        dataGridView1[4, i].Value = "";
+                        dataGridView1[6, i].ReadOnly = false;
+                    }
+                    else if (dataGridView1[4, i].Value.ToString() != "")
+                    {
+                        dataGridView1[6, i].ReadOnly = true;
+                        unitWeight = decimal.Parse(dataGridView1[4, i].Value.ToString());
+                        TotalWeight += unitWeight;
+                    }
+                    else if (dataGridView1[4, i].Value.ToString() == "")
+                    {
+                        dataGridView1[6, i].ReadOnly = false;
+                    }
                 }
             }
 
@@ -17495,10 +17508,23 @@ namespace Flawless_ex
 
             for (int i = 0; i < rowNumber; i++)
             {
-                if (dataGridView1[6, i].Value != null && dataGridView1[6, i].Value.ToString() != "")
+                if (dataGridView1[6, i].Value != null)
                 {
-                    unitCount = int.Parse(dataGridView1[6, i].Value.ToString());
-                    TotalCount += unitCount;
+                    if (dataGridView1[6, i].Value.ToString() == "0")
+                    {
+                        dataGridView1[6, i].Value = "";
+                        dataGridView1[4, i].ReadOnly = false;
+                    }
+                    else if (dataGridView1[6, i].Value.ToString() != "")
+                    {
+                        dataGridView1[4, i].ReadOnly = true;
+                        unitCount = int.Parse(dataGridView1[6, i].Value.ToString());
+                        TotalCount += unitCount;
+                    }
+                    else if (dataGridView1[6, i].Value.ToString() == "")
+                    {
+                        dataGridView1[4, i].ReadOnly = false;
+                    }
                 }
             }
 
@@ -17522,8 +17548,7 @@ namespace Flawless_ex
 
             #region"計算列"
             //重量×単価（数量は空白）
-            if (dataGridView1[4, e.RowIndex].Value != null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value == null &&
-                dataGridView1[4, e.RowIndex].Value.ToString() != "" && dataGridView1[5, e.RowIndex].Value.ToString() != "")
+            if (Convert.ToString(dataGridView1[4, e.RowIndex].Value) != "" && Convert.ToString(dataGridView1[5, e.RowIndex].Value) != "" && Convert.ToString(dataGridView1[6, e.RowIndex].Value) == "")
             {
                 weight = decimal.Parse(dataGridView1[4, e.RowIndex].Value.ToString());
                 unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
@@ -17532,8 +17557,7 @@ namespace Flawless_ex
             }
 
             //数量×単価（重量は空白）
-            if (dataGridView1[4, e.RowIndex].Value == null && dataGridView1[5, e.RowIndex].Value != null && dataGridView1[6, e.RowIndex].Value != null &&
-                dataGridView1[5, e.RowIndex].Value.ToString() != "" && dataGridView1[6, e.RowIndex].Value.ToString() != "")
+            else if (Convert.ToString(dataGridView1[4, e.RowIndex].Value) == "" && Convert.ToString(dataGridView1[5, e.RowIndex].Value) != "" && Convert.ToString(dataGridView1[6, e.RowIndex].Value) != "")
             {
                 unitprice = decimal.Parse(dataGridView1[5, e.RowIndex].Value.ToString());
                 count = int.Parse(dataGridView1[6, e.RowIndex].Value.ToString());
@@ -17596,7 +17620,7 @@ namespace Flawless_ex
             if (dataGridView2.CurrentCell.RowIndex == 0)
             {
                 dt32.Clear();
-                sql_RowsAdded= "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
+                sql_RowsAdded = "select * from item_m A inner join main_category_m B on A.main_category_code = B.main_category_code where B.main_category_code = '" + itemMainCategoryCode + "';";
                 adapter = new NpgsqlDataAdapter(sql_RowsAdded, conn);
                 adapter.Fill(dt32);
 
@@ -17851,13 +17875,25 @@ namespace Flawless_ex
 
             for (int i = 0; i < rowNumber; i++)
             {
-                if (dataGridView2[4, i].Value != null && dataGridView2[4, i].Value.ToString() != "")
+                if (dataGridView2[4, i].Value != null)
                 {
-                    unitWeight = decimal.Parse(dataGridView2[4, i].Value.ToString());
-                    TotalWeight += unitWeight;
+                    if (dataGridView2[4, i].Value.ToString() == "0")
+                    {
+                        dataGridView2[4, i].Value = "";
+                        dataGridView2[6, i].ReadOnly = false;
+                    }
+                    else if (dataGridView2[4, i].Value.ToString() != "")
+                    {
+                        dataGridView2[6, i].ReadOnly = true;
+                        unitWeight = decimal.Parse(dataGridView2[4, i].Value.ToString());
+                        TotalWeight += unitWeight;
+                    }
+                    else if (dataGridView2[4, i].Value.ToString() == "")
+                    {
+                        dataGridView2[6, i].ReadOnly = false;
+                    }
                 }
             }
-
             totalWeightTextBox1.Text = TotalWeight.ToString("n1");
             #endregion
 
@@ -17866,13 +17902,25 @@ namespace Flawless_ex
 
             for (int i = 0; i < rowNumber; i++)
             {
-                if (dataGridView2[6, i].Value != null && dataGridView2[6, i].Value.ToString() != "")
+                if (dataGridView2[6, i].Value != null)
                 {
-                    unitCount = int.Parse(dataGridView2[6, i].Value.ToString());
-                    TotalCount += unitCount;
+                    if (dataGridView2[6, i].Value.ToString() == "0")
+                    {
+                        dataGridView2[6, i].Value = "";
+                        dataGridView2[4, i].ReadOnly = false;
+                    }
+                    else if (dataGridView2[6, i].Value.ToString() != "")
+                    {
+                        dataGridView2[4, i].ReadOnly = true;
+                        unitCount = int.Parse(dataGridView2[6, i].Value.ToString());
+                        TotalCount += unitCount;
+                    }
+                    else if (dataGridView2[6, i].Value.ToString() == "")
+                    {
+                        dataGridView2[4, i].ReadOnly = false;
+                    }
                 }
             }
-
             totalCountTextBox1.Text = TotalCount.ToString("n0");
             #endregion
 
@@ -17899,14 +17947,13 @@ namespace Flawless_ex
                 subTotal2.Text = TotalMoney.ToString("c0");
                 taxAmount2.Text = "";
             }
-            
+
             sumTextBox2.Text = TotalMoney.ToString("c0");
             #endregion
 
             #region"計算列"
             //重量×単価（数量は空白）
-            if (dataGridView2[4, e.RowIndex].Value != null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value == null &&
-                dataGridView2[4, e.RowIndex].Value.ToString() != "" && dataGridView2[5, e.RowIndex].Value.ToString() != "")
+            if (Convert.ToString(dataGridView2[4, e.RowIndex].Value) != "" && Convert.ToString(dataGridView2[5, e.RowIndex].Value) != "" && Convert.ToString(dataGridView2[6, e.RowIndex].Value) == "")
             {
                 weight = decimal.Parse(dataGridView2[4, e.RowIndex].Value.ToString());
                 unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
@@ -17915,8 +17962,7 @@ namespace Flawless_ex
             }
 
             //数量×単価（重量は空白）
-            if (dataGridView2[4, e.RowIndex].Value == null && dataGridView2[5, e.RowIndex].Value != null && dataGridView2[6, e.RowIndex].Value != null &&
-                dataGridView2[5, e.RowIndex].Value.ToString() != "" && dataGridView2[6, e.RowIndex].Value.ToString() != "")
+            else if (Convert.ToString(dataGridView2[4, e.RowIndex].Value) == "" && Convert.ToString(dataGridView2[5, e.RowIndex].Value) != "" && Convert.ToString(dataGridView2[6, e.RowIndex].Value) != "")
             {
                 unitprice = decimal.Parse(dataGridView2[5, e.RowIndex].Value.ToString());
                 count = int.Parse(dataGridView2[6, e.RowIndex].Value.ToString());
@@ -18077,5 +18123,5 @@ namespace Flawless_ex
                 groupBox1.Hide();
             }
         }
-    }   
+    }
 }

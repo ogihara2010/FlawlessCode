@@ -73,6 +73,8 @@ namespace Flawless_ex
         NpgsqlDataReader reader;
         NpgsqlCommand cmd;
 
+        public string scr;
+
         public MonResult(MainMenu main, int id, string access_auth, string staff_name, int type, string slipNumber, string pass, int grade, bool carryOver, bool monthCatalog)
         {
             InitializeComponent();
@@ -90,6 +92,7 @@ namespace Flawless_ex
 
         private void Return3_Click(object sender, EventArgs e)//戻るボタン
         {
+            scr = "MainMenu";
             this.Close();
         }
 
@@ -150,7 +153,7 @@ namespace Flawless_ex
                 }
             }
             #endregion
-            if (slipNumber == null )
+            if (slipNumber == null)
             {
                 //this.button2.Enabled = false;
                 button2.Visible = false;
@@ -158,7 +161,7 @@ namespace Flawless_ex
             conn.Close();
 
             #region"年のコンボボックス"
-            
+
             DateTime dateTime = DateTime.Now;
             int year = dateTime.Year;
 
@@ -278,7 +281,7 @@ namespace Flawless_ex
                               "inner join type E ON (A.type = E.type) where C.staff_code = '" + staff + "' and cast(B.assessment_date as text) like '%" + date + "%' and A.type = '" + type + "' order by A.result;";
             }
             //個人のラジオボタンにチェック
-            else if (individualCheckBox.Checked == true && companyCheckBox.Checked == false) 
+            else if (individualCheckBox.Checked == true && companyCheckBox.Checked == false)
             {
                 type = 1;
 
@@ -635,15 +638,24 @@ namespace Flawless_ex
             //    adapter.Fill(dt);
             //}
             //conn4.Close();
-            
+
         }
 
         private void MonResult_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (MonthCatalog && screan) 
+            if (MonthCatalog && screan)
             {
-                RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange, CarryOver, MonthCatalog);
-                recordList.Show();
+
+                if (scr == "MainMenu")
+                {
+                    MainMenu mainmenu = new MainMenu(top, staff_id, Pass, access_auth);
+                    mainmenu.Show();
+                }
+                else
+                {
+                    RecordList recordList = new RecordList(statement, staff_id, staff_name, type, slipNumber, Grade, Antique, Id, access_auth, Pass, NameChange, CarryOver, MonthCatalog);
+                    recordList.Show();
+                }
             }
             else if (screan)
             {
